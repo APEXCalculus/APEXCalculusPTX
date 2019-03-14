@@ -1,0 +1,1598 @@
+
+
+<section xml:id="sec_vvf_calc">
+  <title>Calculus and Vector<ndash />Valued Functions</title>
+  <introduction>
+    <p>
+      The previous section introduced us to a new mathematical object,
+      the vector<ndash />valued function.
+      We now apply calculus concepts to these functions.
+      We start with the limit,
+      then work our way through derivatives to integrals.
+    </p>
+  </introduction>
+
+  <subsection>
+    <title>Limits of Vector<ndash />Valued Functions</title>
+    <p>
+      The initial definition of the limit of a vector<ndash />valued function is a bit intimidating,
+      as was the definition of the limit in <xref ref="def_limit">Definition</xref>.
+      The theorem following the definition shows that in practice,
+      taking limits of vector<ndash />valued functions is no more difficult than taking limits of real<ndash />valued functions.
+    </p>
+
+    <definition xml:id="def_vvf_limit">
+      <title>Limits of Vector<ndash />Valued Functions</title>
+      <statement>
+        <p>
+          Let <m>I</m> be an open interval containing <m>c</m>,
+          and let <m>\vec r(t)</m> be a vector<ndash />valued function defined on <m>I</m>,
+          except possibly at <m>c</m>.
+          The <term>limit of <m>\vec r(t)</m>,
+          as <m>t</m> approaches <m>c</m>,
+          is <m>\vec L</m></term>, expressed as
+          <me>
+            \lim_{t\to c} \vec r(t) = \vec L
+          </me>,
+          means that given any <m>\epsilon>0</m>,
+          there exists a <m>\delta>0</m> such that for all <m>t\neq c</m>,
+          if <m>|t-c| \lt \delta</m>,
+          we have <m>\norm{\vec r(t) - \vec L} \lt  \epsilon</m>.
+              <idx><h>vector<ndash />valued function</h><h>limits</h></idx>
+              <idx><h>limit</h><h>of vector<ndash />valued functions</h></idx>
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      Note how the measurement of distance between real numbers is the absolute value of their difference;
+      the measure of distance between vectors is the vector norm,
+      or magnitude, of their difference.
+    </p>
+
+    <theorem xml:id="thm_vvf_limit">
+      <title>Limits of Vector<ndash />Valued Functions</title>
+      <statement>
+        <ol>
+          <li>
+            <p>
+              Let <m>\vec r(t) = \la \,f(t),g(t)\,\ra</m> be a vector<ndash />valued function in
+              <m>\mathbb{R}^2</m> defined on an open interval <m>I</m> containing <m>c</m>.
+              Then
+                <idx><h>vector<ndash />valued function</h><h>limits</h></idx>
+                <idx><h>limit</h><h>of vector<ndash />valued functions</h></idx>
+              <me>
+                \lim_{t\to c} \vec r(t) = \la \lim_{t\to c}f(t)\, , \,\lim_{t\to c} g(t)\ra
+              </me>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Let <m>\vec r(t) = \la \,f(t),g(t),h(t)\,\ra</m> be a vector<ndash />valued function in
+              <m>\mathbb{R}^3</m> defined on an open interval <m>I</m> containing <m>c</m>.
+              Then
+              <me>
+                \lim_{t\to c} \vec r(t) = \la \lim_{t\to c}f(t)\, , \,\lim_{t\to c} g(t)\,, \,\lim_{t\to c} h(t)\ra
+              </me>
+            </p>
+          </li>
+        </ol>
+      </statement>
+    </theorem>
+
+    <p>
+      <xref ref="thm_vvf_limit">Theorem</xref>
+      states that we compute limits component<ndash />wise.
+    </p>
+
+    <example xml:id="ex_vvflimit1">
+      <title>Finding limits of vector<ndash />valued functions</title>
+      <statement>
+        <p>
+          Let <m>\ds\vec r(t) = \la \frac{\sin t}{t},\, t^2-3t+3,\,\cos t\ra</m>.
+          Find <m>\ds \lim_{t\to 0}\vec r(t)</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We apply the theorem and compute limits component<ndash />wise.
+          <md>
+            <mrow>\lim_{t\to0} \vec r(t) \amp = \la \lim_{t\to 0}\frac{\sin t}{t}\, , \, \lim_{t\to 0} t^2-3t+3\, , \, \lim_{t\to 0} \cos t\ra</mrow>
+            <mrow>\amp = \la 1,3,1\ra</mrow>
+          </md>.
+        </p>
+      </solution>
+    </example>
+  </subsection>
+
+  <subsection>
+    <title>Continuity</title>
+    <definition xml:id="def_vvf_continuity">
+      <title>Continuity of Vector<ndash />Valued Functions</title>
+      <statement>
+        <p>
+          Let <m>\vec r(t)</m> be a vector<ndash />valued function defined on an open interval <m>I</m> containing <m>c</m>.
+              <idx><h>vector<ndash />valued function</h><h>continuity</h></idx>
+              <idx><h>continuous function</h><h>vector<ndash />valued</h></idx>
+
+          <ol>
+            <li>
+              <p>
+                <m>\vec r(t)</m> is <em>continuous at <m>c</m></em>
+                if <m>\ds \lim_{t\to c} \vec r(t) = r(c)</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                If <m>\vec r(t)</m> is continuous at all <m>c</m> in <m>I</m>,
+                then <m>\vec r(t)</m> is <em>continuous on <m>I</m>.</em>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      We again have a theorem that lets us evaluate continuity component<ndash />wise.
+    </p>
+
+    <theorem xml:id="thm_vvf_continuity">
+      <title>Continuity of Vector<ndash />Valued Functions</title>
+      <statement>
+        <p>
+          Let <m>\vec r(t)</m> be a vector<ndash />valued function defined on an open interval <m>I</m> containing <m>c</m>.
+          <m>\vec r(t)</m> is continuous at <m>c</m> if, and only if,
+          each of its component functions is continuous at <m>c</m>.
+              <idx><h>vector<ndash />valued function</h><h>continuity</h></idx>
+              <idx><h>continuous function</h><h>vector<ndash />valued</h></idx>
+        </p>
+      </statement>
+    </theorem>
+
+    <example xml:id="ex_vvflimit2">
+      <title>Evaluating continuity of vector<ndash />valued functions</title>
+      <statement>
+        <p>
+          Let <m>\ds\vec r(t) = \la \frac{\sin t}{t},\, t^2-3t+3,\,\cos t\ra</m>.
+          Determine whether <m>\vec r</m> is continuous at <m>t=0</m> and <m>t=1</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          While the second and third components of
+          <m>\vec r(t)</m> are defined at <m>t=0</m>,
+          the first component, <m>(\sin t)/t</m>, is not.
+          Since the first component is not even defined at <m>t=0</m>,
+          <m>\vec r(t)</m> is not defined at <m>t=0</m>,
+          and hence it is not continuous at <m>t=0</m>.
+        </p>
+
+        <p>
+          At <m>t=1</m> each of the component functions is continuous.
+          Therefore <m>\vec r(t)</m> is continuous at <m>t=1</m>.
+        </p>
+      </solution>
+    </example>
+  </subsection>
+
+  <subsection xml:id="fig_vvfderiv_intro">
+    <title>Derivatives</title>
+    <p>
+      Consider a vector<ndash />valued function <m>\vec r</m> defined on an open interval <m>I</m> containing <m>t_0</m> and <m>t_1</m>.
+      We can compute the displacement of <m>\vec r</m> on <m>[t_0,t_1]</m>,
+      as shown in <xref ref="fig_vvfderiv_intro">Figure</xref>(a).
+      Recall that dividing the displacement vector by <m>t_1-t_0</m> gives the average rate of change on <m>[t_0,t_1]</m>,
+      as shown in (b).
+    </p>
+<!--
+<caption>Illustrating displacement, leading to an understanding of the derivative of vector<ndash />valued functions.</caption>
+-->
+    <sidebyside>
+
+      <tabular>
+        <row>
+          <cell><img src="figures/figvvfderiv_intro"/></cell>
+          <cell><img src="figures/figvvfderiv_introb"/></cell>
+        </row>
+        <row>
+          <cell>(a)</cell>
+          <cell>(b)</cell>
+        </row>
+      </tabular>
+
+    </sidebyside>
+
+    <p>
+      The <em>derivative</em> of a vector<ndash />valued function is a measure of the
+      <em>instantaneous</em> rate of change,
+      measured by taking the limit as the length of <m>[t_0,t_1]</m> goes to 0.
+      Instead of thinking of an interval as <m>[t_0,t_1]</m>,
+      we think of it as <m>[c,c+h]</m> for some value of <m>h</m>
+      (hence the interval has length <m>h</m>).
+      The <em>average</em> rate of change is
+      <me>
+        \frac{\vec r(c+h)-\vec r(c)}{h}
+      </me>
+      for any value of <m>h\neq0</m>.
+      We take the limit as <m>h\to0</m> to measure the instantaneous rate of change;
+      this is the derivative of <m>\vec r</m>.
+    </p>
+
+    <definition xml:id="def_vvf_derivative">
+      <title>Derivative of a Vector<ndash />Valued Function</title>
+      <statement>
+        <p>
+          Let <m>\vec r(t)</m> be continuous on an open interval <m>I</m> containing <m>c</m>.
+              <idx><h>vector<ndash />valued function</h><h>derivatives</h></idx>
+              <idx><h>derivative</h><h>vector<ndash />valued functions</h></idx>
+
+          <ol>
+            <li>
+              <p>
+                The derivative of <m>\vec r</m> at <m>t=c</m> is
+                <me>
+                  \vrp (c) = \lim_{h\to 0} \frac{\vec r(c+h) - \vec r(c)}{h}
+                </me>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                The derivative of <m>\vec r</m> is
+                <me>
+                  \vrp (t) = \lim_{h\to 0} \frac{\vec r(t+h) - \vec r(t)}{h}
+                </me>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </definition>
+
+    <aside>
+      <p>
+        Alternate notations for the derivative of <m>\vec r</m> include:
+        <me>
+          \vrp(t) = \frac{d}{dt}\big(\,\vec r(t)\,\big) = \frac{d\vec r}{dt}
+        </me>.
+      </p>
+    </aside>
+    <p>
+      If a vector<ndash />valued function has a derivative for all <m>c</m> in an open interval <m>I</m>,
+      we say that <m>\vec r(t)</m> is
+      <em>differentiable</em> on <m>I</m>.
+    </p>
+
+    <p>
+      Once again we might view this definition as intimidating,
+      but recall that we can evaluate limits component<ndash />wise.
+      The following theorem verifies that this means we can compute derivatives component<ndash />wise as well,
+      making the task not too difficult.
+    </p>
+
+    <theorem xml:id="thm_vvf_deriv">
+      <title>Derivatives of Vector<ndash />Valued Functions</title>
+      <statement>
+        <ol>
+          <li>
+            <p>
+              Let <m>\vec r(t) = \la \, f(t), g(t)\,\ra</m>.
+              Then
+              <me>
+                \vrp(t) = \la\, \fp(t), g'(t)\, \ra
+              </me>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Let <m>\vec r(t) = \la \, f(t), g(t), h(t)\,\ra</m>.
+              Then
+                <idx><h>vector<ndash />valued function</h><h>derivatives</h></idx>
+                <idx><h>derivative</h><h>vector<ndash />valued functions</h></idx>
+              <me>
+                \vrp(t) = \la\, \fp(t), g'(t), h'(t)\, \ra
+              </me>.
+            </p>
+          </li>
+        </ol>
+      </statement>
+    </theorem>
+
+    <example xml:id="ex_vvflimit3">
+      <title>Derivatives of vector<ndash />valued functions</title>
+      <statement>
+        <p>
+          Let <m>\vec r(t) = \la t^2,t\ra</m>.
+
+          <ol>
+            <li>
+              <p>
+                Sketch <m>\vec r(t)</m> and <m>\vrp(t)</m> on the same axes.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Compute <m>\vrp(1)</m> and sketch this vector with its initial point at the origin and at <m>\vec r(1)</m>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li>
+              <p>
+                <xref ref="thm_vvf_deriv">Theorem</xref>
+                allows us to compute derivatives component<ndash />wise, so
+                <me>
+                  \vrp(t) = \la 2t, 1\ra
+                </me>.
+                <m>\vec r(t)</m> and <m>\vrp(t)</m> are graphed together in <xref ref="fig_vvflimit3">Figure</xref>(a).
+                Note how plotting the two of these together,
+                in this way, is not very illuminating.
+                When dealing with real<ndash />valued functions,
+                plotting <m>f(x)</m> with <m>\fp(x)</m> gave us useful information as we were able to compare <m>f</m> and <m>\fp</m> at the same <m>x</m>-values.
+                When dealing with vector<ndash />valued functions,
+                it is hard to tell which points on the graph of <m>\vrp</m> correspond to which points on the graph of <m>\vec r</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                We easily compute <m>\vrp(1) = \la 2,1\ra</m>,
+                which is drawn in <xref ref="fig_vvflimit3">Figure</xref>
+                with its initial point at the origin,
+                as well as at <m>\vec r(1) = \la 1,1\ra</m>.
+                These are sketched in <xref ref="fig_vvflimit3">Figure</xref>(b).
+
+                <figure xml:id="fig_vvflimit3">
+                  <caption>Graphing the derivative of a vector<ndash />valued function in <xref ref="ex_vvflimit3">Example</xref>.</caption>
+                  <sidebyside>
+                    <figure>
+                      <caption>[5pt]
+                      (a)</caption>
+                      <img src="figures/figvvflimit3a"/>
+                    </figure>
+
+                    <figure>
+                      <caption>[5pt]
+                      (b)</caption>
+                      <img src="figures/figvvflimit3"/>
+                    </figure>
+                  </sidebyside>
+
+                </figure>
+
+              </p>
+            </li>
+          </ol>
+        </p>
+      </solution>
+    </example>
+
+    <example xml:id="ex_vvflimit4">
+      <title>Derivatives of vector<ndash />valued functions</title>
+      <statement>
+        <p>
+          Let <m>\vec r(t) = \la \cos t, \sin t, t\ra</m>.
+          Compute <m>\vrp(t)</m> and <m>\vrp(\pi/2)</m>.
+          Sketch <m>\vrp(\pi/2)</m> with its initial point at the origin and at <m>\vec r(\pi/2)</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We compute <m>\vrp</m> as <m>\vrp(t) = \la -\sin t, \cos t, 1\ra</m>.
+          At <m>t= \pi/2</m>, we have <m>\vrp(\pi/2) = \la -1,0,1\ra</m>.
+          <xref ref="fig_vvflimit4">Figure</xref>
+          shows a graph of <m>\vec r(t)</m>,
+          with <m>\vrp(\pi/2)</m> plotted with its initial point at the origin and at <m>\vec r(\pi/2)</m>.
+        </p>
+
+        <figure xml:id="fig_vvflimit4">
+          <caption>Viewing a vector<ndash />valued function and its derivative at one point.</caption>
+          \apexincludemedia{width=125pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=-0.5856992334166129,
+          3Dortho=0.004399999976158142,
+          3Dc2c=0.6354137063026428 0.6317671537399292 0.4439816176891327,
+          3Dcoo=-18.837804794311523 -8.740551948547363 60.22870635986328,
+          3Droo=150.0000027221829,3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figvvflimit4_3D"/>
+        </figure>
+      </solution>
+    </example>
+
+    <p>
+      In <xref ref="ex_vvflimit3">Examples</xref>
+      and <xref ref="ex_vvflimit4"></xref>,
+      sketching a particular derivative with its initial point at the origin did not seem to reveal anything significant.
+      However, when we sketched the vector with its initial point on the corresponding point on the graph,
+      we did see something significant:
+      the vector appeared to be <em>tangent</em> to the graph.
+      We have not yet defined what <q>tangent</q>
+      means in terms of curves in space;
+      in fact, we use the derivative to define this term.
+    </p>
+
+    <definition xml:id="def_vector_tangent">
+      <title>Tangent Vector, Tangent Line</title>
+      <statement>
+        <p>
+          Let <m>\vec r(t)</m> be a differentiable vector<ndash />valued function on an open interval <m>I</m> containing <m>c</m>,
+          where <m>\vrp(c)\neq \vec 0</m>.
+              <idx><h>tangent line</h></idx>
+              <idx><h>vector<ndash />valued function</h><h>tangent line</h></idx>
+
+          <ol>
+            <li>
+              <p>
+                A vector <m>\vec v</m> is <em>tangent to the graph of <m>\vec r(t)</m> at <m>t=c</m></em>
+                if <m>\vec v</m> is parallel to <m>\vrp(c)</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                The <em>tangent line</em>  to the graph of
+                <m>\vec r(t)</m> at <m>t=c</m> is the line through
+                <m>\vec r(c)</m> with direction parallel to <m>\vrp(c)</m>.
+                An equation of the tangent line is
+                <me>
+                  \vec \ell(t) = \vec r(c) + t\,\vrp(c)
+                </me>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </definition>
+
+    <example xml:id="ex_vvfderiv1">
+      <title>Finding tangent lines to curves in space</title>
+      <statement>
+        <p>
+          Let <m>\vec r(t) = \la t,t^2,t^3\ra</m> on <m>[-1.5,1.5]</m>.
+          Find the vector equation of the line tangent to the graph of <m>\vec r</m> at <m>t=-1</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          To find the equation of a line,
+          we need a point on the line and the line's direction.
+          The point is given by <m>\vec r(-1) = \la -1,1,-1\ra</m>.
+          (To be clear, <m>\la -1,1,-1\ra</m> is a
+          <em>vector</em>, not a point,
+          but we use the point <q>pointed to</q> by this vector.)
+        </p>
+
+        <p>
+          The direction comes from <m>\vrp(-1)</m>.
+          We compute, component<ndash />wise,
+          <m>\vrp(t) = \la 1,2t, 3t^2\ra</m>.
+          Thus <m>\vrp(-1) = \la 1,-2,3\ra</m>.
+        </p>
+
+        <figure xml:id="fig_vvfderiv1">
+          <caption>Graphing a curve in space with its tangent line.</caption>
+          \apexincludemedia{width=125pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0.5961816528018784,
+          3Dortho=0.00514203542843461,
+          3Dc2c=0.8352102637290955 0.5152699947357178 0.19214747846126556,
+          3Dcoo=-5.658682346343994 19.23411750793457 0.2712952494621277,
+          3Droo=149.99999927774635,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figvvfderiv1_3D"/>
+        </figure>
+
+        <p>
+          The vector equation of the line is <m>\ell(t) = \la -1,1,-1\ra + t\la 1,-2,3\ra</m>.
+          This line and <m>\vec r(t)</m> are sketched in <xref ref="fig_vvfderiv1">Figure</xref>.
+        </p>
+      </solution>
+    </example>
+
+    <example xml:id="ex_vvfderiv3">
+      <title>Finding tangent lines to curves</title>
+      <statement>
+        <p>
+          Find the equations of the lines tangent to
+          <m>\vec r(t) = \la t^3,t^2\ra</m> at <m>t=-1</m> and <m>t=0</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We find that <m>\vrp(t) = \la 3t^2,2t\ra</m>.
+          At <m>t=-1</m>, we have
+          <me>
+            \vec r(-1) = \la -1,1\ra \text{ and }  \vrp(-1) = \la 3,-2\ra
+          </me>,
+          so the equation of the line tangent to the graph of <m>\vec r(t)</m> at <m>t=-1</m> is
+          <me>
+            \ell(t) = \la -1,1\ra + t\la 3,-2\ra
+          </me>.
+        </p>
+
+        <p>
+          This line is graphed with <m>\vec r(t)</m> in <xref ref="fig_vvfderiv3">Figure</xref>.
+        </p>
+
+        <figure xml:id="fig_vvfderiv3">
+          <caption>Graphing <m>\vec r(t)</m> and its tangent line in <xref ref="ex_vvfderiv3">Example</xref>.</caption>
+          <img src="figures/figvvfderiv3"/>
+        </figure>
+
+        <p>
+          At <m>t=0</m>, we have <m>\vrp(0) = \la 0,0\ra=\vec 0</m>!
+          This implies that the tangent line
+          <q>has no direction.</q>
+          We cannot apply <xref ref="def_vector_tangent">Definition</xref>,
+          hence cannot find the equation of the tangent line.
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      We were unable to compute the equation of the tangent line to
+      <m>\vec r(t)= \la t^3,t^2\ra</m> at <m>t=0</m> because <m>\vrp(0) = \vec 0</m>.
+      The graph in <xref ref="fig_vvfderiv3">Figure</xref>
+      shows that there is a cusp at this point.
+      This leads us to another definition of <em>smooth</em>,
+      previously defined by <xref ref="def_smooth">Definition</xref>
+      in <xref ref="sec_param_eqs">Section</xref>.
+    </p>
+
+    <definition xml:id="def_vector_smooth">
+      <title>Smooth Vector<ndash />Valued Functions</title>
+      <statement>
+        <p>
+          Let <m>\vec r(t)</m> be a differentiable vector<ndash />valued function on an open interval <m>I</m>.
+          <m>\vec r(t)</m> is <term>smooth</term>
+          on <m>I</m> if <m>\vrp(t)\neq \vec 0</m> on <m>I</m>.
+              <idx><h>smooth</h></idx>
+              <idx><h>vector<ndash />valued function</h><h>smooth</h></idx>
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      Having established derivatives of vector<ndash />valued functions,
+      we now explore the relationships between the derivative and other vector operations.
+      The following theorem states how the derivative interacts with vector addition and the various vector products.
+    </p>
+
+    <theorem xml:id="thm_vvf_deriv_prop">
+      <title>Properies of Derivatives of Vector<ndash />Valued Functions</title>
+      <statement>
+        <p>
+          Let <m>\vec r</m> and <m>\vec s</m> be differentiable vector<ndash />valued functions,
+          let <m>f</m> be a differentiable real<ndash />valued function,
+          and let <m>c</m> be a real number.
+              <idx><h>vector<ndash />valued function</h><h>derivatives</h></idx>
+              <idx><h>derivative</h><h>vector<ndash />valued functions</h></idx>
+              <idx><h>dot product</h><h>and derivatives</h></idx>
+              <idx><h>cross product</h><h>and derivatives</h></idx>
+
+          <ol>
+            <li>
+              <p>
+                <m>\ds \frac{d}{dt}\Big(\vec r(t) \pm \vec s(t)\Big) = \vrp(t) \pm \vec s\,'(t)</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\ds \frac{d}{dt}\Big(c\vec r(t)\Big) = c\vrp(t)</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\ds \frac{d}{dt}\Big(f(t)\vec r(t)\Big) = \fp(t)\vec r(t) + f(t)\vrp(t)</m> <em>Product Rule</em>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\ds \frac{d}{dt}\Big(\vec r(t)\cdot \vec s(t) \Big) = \vrp(t)\cdot \vec s(t) + \vec r(t)\cdot \vec s\,'(t)</m> <em>Product Rule</em>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\ds \frac{d}{dt}\Big(\vec r(t)\times \vec s(t) \Big) = \vrp(t)\times \vec s(t) + \vec r(t)\times \vec s\,'(t)</m> <em>Product Rule</em>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\ds \frac{d}{dt}\Big(\vec r\big(f(t)\big)\Big) = \vrp\big(f(t)\big)\fp(t)</m> <em>Chain Rule</em>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </theorem>
+
+    <example xml:id="ex_vvfderiv2">
+      <title>Using derivative properties of vector<ndash />valued functions</title>
+      <statement>
+        <p>
+          Let <m>\vec r(t) = \la t, t^2-1\ra</m> and let
+          <m>\vec u(t)</m> be the unit vector that points in the direction of <m>\vec r(t)</m>.
+
+          <ol>
+            <li>
+              <p>
+                Graph <m>\vec r(t)</m> and
+                <m>\vec u(t)</m> on the same axes, on <m>[-2,2]</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Find <m>\vec u\,'(t)</m> and sketch <m>\vec u\,'(-2)</m>,
+                <m>\vec u\,'(-1)</m> and <m>\vec u\,'(0)</m>.
+                Sketch each with initial point the corresponding point on the graph of <m>\vec u</m>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li>
+              <p>
+                To form the unit vector that points in the direction of <m>\vec r</m>,
+                we need to divide <m>\vec r(t)</m> by its magnitude.
+                <me>
+                  \norm{\vec r(t)} = \sqrt{t^2+(t^2-1)^2}  \Rightarrow  \vec u(t) = \frac{1}{\sqrt{t^2+(t^2-1)^2}}\la t,t^2-1\ra
+                </me>.
+                <m>\vec r(t)</m> and <m>\vec u(t)</m> are graphed in <xref ref="fig_vvfderiv2a">Figure</xref>.
+                Note how the graph of <m>\vec u(t)</m> forms part of a circle;
+                this must be the case, as the length of
+                <m>\vec u(t)</m> is 1 for all <m>t</m>.
+
+                <figure xml:id="fig_vvfderiv2a">
+                  <caption>Graphing <m>\vec r(t)</m> and <m>\vec u(t)</m> in <xref ref="ex_vvfderiv2">Example</xref>.</caption>
+                  <img src="figures/figvvfderiv2a"/>
+                </figure>
+
+              </p>
+            </li>
+
+            <li>
+              <p>
+                To compute <m>\vec u\,'(t)</m>,
+                we use <xref ref="thm_vvf_deriv_prop">Theorem</xref>, writing
+                <me>
+                  \vec u(t) = f(t)\vec r(t),  \text{ where }  f(t) = \frac{1}{\sqrt{t^2+(t^2-1)^2}}=\big(t^2+(t^2-1)^2\big)^{-1/2}
+                </me>.
+                (We <em>could</em> write
+                <me>
+                  \vec u(t) = \la \frac{t}{\sqrt{t^2+(t^2-1)^2}}, \frac{t^2-1}{\sqrt{t^2+(t^2-1)^2}}\ra
+                </me>
+                and then take the derivative.
+                It is a matter of preference;
+                this latter method requires two applications of the Quotient Rule where our method uses the Product and Chain Rules.)
+
+                We find <m>\fp(t)</m> using the Chain Rule:
+                <md>
+                  <mrow>\fp(t) \amp = -\frac12\big(t^2+(t^2-1)^2\big)^{-3/2}\big(2t+2(t^2-1)(2t)\big)</mrow>
+                  <mrow>\amp = -\frac{2t(2t^2-1)}{2\big(\sqrt{t^2+(t^2-1)^2}\,\big)^3}</mrow>
+                </md>
+                We now find <m>\vec u\,'(t)</m> using part 3 of <xref ref="thm_vvf_deriv_prop">Theorem</xref>:
+                <md>
+                  <mrow>\vec u\,'(t) \amp =  \fp(t)\vec u(t) + f(t)\vec u\,'(t)</mrow>
+                  <mrow>\amp =  -\frac{2t(2t^2-1)}{2\big(\sqrt{t^2+(t^2-1)^2}\,\big)^3}\la t,t^2-1\ra + \frac{1}{\sqrt{t^2+(t^2-1)^2}}\la 1,2t\ra</mrow>
+                </md>.
+                This is admittedly very <q>messy;</q>
+                such is usually the case when we deal with unit vectors.
+                We can use this formula to compute <m>\vec u\,(-2)</m>,
+                <m>\vec u\,(-1)</m> and <m>\vec u\,(0)</m>:
+                <md>
+                  <mrow>\vec u\,(-2) \amp = \la-\frac{15}{13 \sqrt{13}},-\frac{10}{13
+                  \sqrt{13}}\ra \approx \la -0.320,-0.213\ra</mrow>
+                  <mrow>\vec u\,(-1) \amp = \la 0,-2\ra</mrow>
+                  <mrow>\vec u\,(0) \amp = \la 1,0\ra</mrow>
+                </md>
+                <figure xml:id="fig_vvfderiv2b">
+                  <caption>Graphing some of the derivatives of <m>\vec u(t)</m> in <xref ref="ex_vvfderiv2">Example</xref>.</caption>
+                  <img src="figures/figvvfderiv2b"/>
+                </figure>
+
+                Each of these is sketched in <xref ref="fig_vvfderiv2b">Figure</xref>.
+                Note how the length of the vector gives an indication of how quickly the circle is being traced at that point.
+                When <m>t=-2</m>, the circle is being drawn relatively slow;
+                when <m>t=-1</m>, the circle is being traced much more quickly.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      It is a basic geometric fact that a line tangent to a circle at a point <m>P</m> is perpendicular to the line passing through the center of the circle and <m>P</m>.
+      This is illustrated in <xref ref="fig_vvfderiv2b">Figure</xref>;
+      each tangent vector is perpendicular to the line that passes through its initial point and the center of the circle.
+      Since the center of the circle is the origin,
+      we can state this another way:
+      <m>\vec u\,'(t)</m> is orthogonal to <m>\vec u(t)</m>.
+    </p>
+
+    <p>
+      Recall that the dot product serves as a test for orthogonality:
+      if <m>\vec u\cdot \vec v = 0</m>,
+      then <m>\vec u</m> is orthogonal to <m>\vec v</m>.
+      Thus in the above example, <m>\vec u(t)\cdot \vec u\,'(t)=0</m>.
+    </p>
+
+    <p>
+      This is true of any vector<ndash />valued function that has a constant length, that is,
+      that traces out part of a circle.
+      It has important implications later on,
+      so we state it as a theorem (and leave its formal proof as an Exercise.)
+    </p>
+
+    <theorem xml:id="thm_vects_of_constant_length">
+      <title>Vector<ndash />Valued Functions of Constant Length</title>
+      <statement>
+        <p>
+          Let <m>\vec r(t)</m> be a differentiable vector<ndash />valued function on an open interval <m>I</m> of constant length.
+          That is, <m>\norm{\vec r(t)} = c</m> for all <m>t</m> in <m>I</m> (equivalently,
+          <m>\vec r(t)\cdot \vec r(t) = c^2</m> for all <m>t</m> in <m>I</m>).
+          Then <m>\vec r(t)\cdot\vrp(t) = 0</m> for all <m>t</m> in <m>I</m>.<idx><h>vector<ndash />valued function</h><h>of constant length</h></idx>
+        </p>
+      </statement>
+    </theorem>
+  </subsection>
+
+  <subsection>
+    <title>Integration</title>
+    <p>
+      Indefinite and definite integrals of vector<ndash />valued functions are also evaluated component<ndash />wise.
+    </p>
+
+    <theorem xml:id="thm_vvf_integration">
+      <title>Indefinite and Definite Integrals of Vector<ndash />Valued Functions</title>
+      <statement>
+        <p>
+          Let <m>\vec r(t) = \la f(t),g(t)\ra</m> be a vector<ndash />valued function in <m>\mathbb{R}^2</m>.
+
+          <ol>
+            <li>
+              <p>
+                <m>\ds \int \vec r(t)\ dt = \la \int f(t)\ dt, \int g(t)\ dt\ra</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\ds \int_a^b \vec r(t)\ dt = \la \int_a^b f(t)\ dt, \int_a^b g(t)\ dt\ra</m>
+              </p>
+            </li>
+          </ol>
+        </p>
+
+        <p>
+          A similar statement holds for vector<ndash />valued functions in <m>\mathbb{R}^3</m>.
+              <idx><h>vector<ndash />valued function</h><h>integration</h></idx>
+              <idx><h>integration</h><h>of vector<ndash />valued functions</h></idx>
+        </p>
+      </statement>
+    </theorem>
+
+    <example xml:id="ex_vvfint1">
+      <title>Evaluating a definite integral of a vector<ndash />valued function</title>
+      <statement>
+        <p>
+          Let <m>\vec r(t) = \la e^{2t},\sin t\ra</m>.
+          Evaluate <m>\ds \int_0^1 \vec r(t) \ dt</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We follow <xref ref="thm_vvf_integration">Theorem</xref>.
+          <md>
+            <mrow>\int_0^1 \vec r(t) \ dt \amp = \int_0^1 \la e^{2t},\sin t\ra \ dt</mrow>
+            <mrow>\amp = \la \int_0^1 e^{2t}\ dt\ , \int_0^1 \sin t \ dt \ra</mrow>
+            <mrow>\amp = \la \frac12e^{2t}\Big|_0^1\ , -\cos t\Big|_0^1\ra</mrow>
+            <mrow>\amp = \la \frac12(e^2-1)\ , -\cos(1)+1\ra</mrow>
+            <mrow>\amp \approx \la 3.19,0.460\ra</mrow>
+          </md>.
+        </p>
+      </solution>
+    </example>
+
+    <example xml:id="ex_vvfint2">
+      <title>Solving an initial value problem</title>
+      <statement>
+        <p>
+          Let <m>\vrp'(t) = \la 2, \cos t, 12t\ra</m>.
+          Find <m>\vec r(t)</m> where:
+
+          <ul>
+            <li>
+              <p>
+                <m>\vec r(0) = \la-7,-1,2\ra</m> and
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\vrp(0) = \la 5,3,0\ra</m>.
+              </p>
+            </li>
+          </ul>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Knowing <m>\vrp'(t) = \la 2,\cos t, 12t\ra</m>,
+          we find <m>\vrp(t)</m> by evaluating the indefinite integral.
+          <md>
+            <mrow>\int \vrp'(t)\ dt \amp = \la \int 2\ dt\ , \int \cos t\ dt\ , \int 12t\ dt\ra</mrow>
+            <mrow>\amp = \la 2t+C_1, \sin t+ C_2, 6t^2 + C_3\ra</mrow>
+            <mrow>\amp = \la 2t,\sin t,6t^2 \ra + \la C_1,C_2,C_3\ra</mrow>
+            <mrow>\amp = \la 2t,\sin t,6t^2 \ra + \vec C</mrow>
+          </md>.
+        </p>
+
+        <p>
+          Note how each indefinite integral creates its own constant which we collect as one constant vector <m>\vec C</m>.
+          Knowing <m>\vrp(0) = \la 5,3,0\ra</m> allows us to solve for <m>\vec C</m>:
+          <md>
+            <mrow>\vrp(t) \amp  = \la 2t,\sin t,6t^2 \ra + \vec C</mrow>
+            <mrow>\vrp(0) \amp =   \la 0,0,0 \ra + \vec C</mrow>
+            <mrow>\la 5,3,0\ra \amp = \vec C</mrow>
+          </md>.
+        </p>
+
+        <p>
+          So <m>\vrp(t) = \la 2t,\sin t,6t^2\ra + \la 5,3,0\ra = \la 2t+5, \sin t + 3, 6t^2\ra</m>.
+          To find <m>\vec r(t)</m>, we integrate once more.
+          <md>
+            <mrow>\int \vrp(t)\ dt \amp = \la \int 2t+5\ dt, \int \sin t + 3\ dt, \int 6t^2\ dt \ra</mrow>
+            <mrow>\amp = \la t^2+5t, -\cos t + 3t, 2t^3\ra + \vec C</mrow>
+          </md>.
+        </p>
+
+        <p>
+          With <m>\vec r(0) = \la -7,-1,2\ra</m>,
+          we solve for <m>\vec C</m>:
+          <md>
+            <mrow>\vec r(t) \amp = \la t^2+5t, -\cos t + 3t, 2t^3\ra + \vec C</mrow>
+            <mrow>\vec r(0) \amp = \la 0,-1,0\ra + \vec C</mrow>
+            <mrow>\la -7,-1,2\ra \amp = \la 0,-1,0\ra + \vec C</mrow>
+            <mrow>\la -7,0,2\ra \amp = \vec C</mrow>
+          </md>.
+        </p>
+
+        <p>
+          So <m>\vec r(t) = \la t^2+5t, -\cos t + 3t, 2t^3\ra + \la -7,0,2\ra = \la t^2+5t-7,-\cos t+3t,2t^3+2\ra</m>.
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      What does the integration of a vector<ndash />valued function <em>mean</em>?
+      There are many applications,
+      but none as direct as <q>the area under the curve</q>
+      that we used in understanding the integral of a real<ndash />valued function.
+    </p>
+
+    <p>
+      A key understanding for us comes from considering the integral of a derivative:
+      <me>
+        \int_a^b \vrp(t)\ dt = \vec r(t)\Big|_a^b = \vec r(b)-\vec r(a)
+      </me>.
+    </p>
+
+    <p>
+      Integrating a <em>rate of change</em>
+      function gives <em>displacement</em>.
+          <idx><h>displacement</h></idx>
+    </p>
+
+    <p>
+      Noting that vector<ndash />valued functions are closely related to parametric equations,
+      we can describe the arc length of the graph of a vector<ndash />valued function as an integral.
+      Given parametric equations <m>x=f(t)</m>,
+      <m>y=g(t)</m>, the arc length on <m>[a,b]</m> of the graph is
+      <me>
+        \text{ Arc Length }  = \int_a^b\sqrt{\fp(t)^2+g'(t)^2}\ dt
+      </me>,
+      as stated in <xref ref="thm_arc_length_parametric">Theorem</xref>
+      in <xref ref="sec_par_calc">Section</xref>.
+      If <m>\vrt = \la f(t), g(t)\ra</m>,
+      note that <m>\sqrt{\fp(t)^2+g'(t)^2} = \norm{\vrp(t)}</m>.
+      Therefore we can express the arc length of the graph of a vector<ndash />valued function as an integral of the magnitude of its derivative.
+    </p>
+
+    <theorem xml:id="thm_vvf_arc_length">
+      <title>Arc Length of a Vector<ndash />Valued Function</title>
+      <statement>
+        <p>
+          Let \vec r(t)<nbsp />be a vector<ndash />valued function where <m>\vrp(t)</m> is continuous on <m>[a,b]</m>.
+          The arc length <m>L</m> of the graph of \vec r(t)<nbsp />is
+              <idx><h>vector<ndash />valued function</h><h>arc length</h></idx>
+              <idx><h>arc length</h></idx>
+          <me>
+            L = \int_a^b \norm{\vrp(t)}\ dt
+          </me>.
+        </p>
+      </statement>
+    </theorem>
+
+    <p>
+      Note that we are actually integrating a scalar<ndash />function here,
+      not a vector<ndash />valued function.
+    </p>
+
+    <p>
+      The next section takes what we have established thus far and applies it to objects in motion.
+      We will let \vec r(t)<nbsp />describe the path of an object in the plane or in space and will discover the information provided by <m>\vrp(t)</m> and <m>\vrp'(t)</m>.
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Terms and Concepts</title>
+    <exercise>
+      <statement>
+        <p>
+          Limits, derivatives and integrals of vector<ndash />valued functions are all evaluated <fillin /><ndash />wise.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          component
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          The definite integral of a rate of change function gives <fillin />.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          displacement
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Why is it generally not useful to graph both
+          <m>\vec r(t)</m> and <m>\vrp(t)</m> on the same axes?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          It is difficult to identify the points on the graphs of
+          <m>\vec r(t)</m> and <m>\vrp(t)</m> that correspond to each other.
+        </p>
+      </answer>
+    </exercise>
+  </subsection>
+
+  <subsection>
+    <title>Problems</title>
+    <p>
+      In the following exercises, evaluate the given limit.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \lim_{t\to 5} \la 2t+1,3t^2-1,\sin t\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\la 11,74,\sin 5\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \lim_{t\to 3} \la e^t,\frac{t^2-9}{t+3}\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\la e^3,0\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \lim_{t\to 0} \la \frac{t}{\sin t}, (1+t)^{\frac1t}\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\la 1,e\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \lim_{h\to 0} \frac{\vec r(t+h)-\vec r(t)}{h}</m>, where
+          <m>\vec r(t) = \la t^2,t,1\ra</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\la2t,1,0\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises,
+      identify the interval(s) on which <m>\vec r(t)</m> is continuous.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec r(t) = \la t^2,1/t\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>(-\infty,0) \bigcup (0,\infty)</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec r(t) = \la \cos t, e^t, \ln t\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>(0,\infty)</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises, find the derivative of the given function.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec r(t) = \la \cos t, e^t, \ln t\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\vrp(t) = \la -\sin t, e^t, 1/t\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \vec r(t) = \la \frac 1t, \frac {2t-1}{3t+1}, \tan t\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\vrp(t) = \la -1/t^2, 5/(3t+1)^2, \sec^2 t\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \vec r(t) = (t^2)\la \sin t, 2t+5\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\vrp(t) = (2t)\la \sin t,2t+5\ra + (t^2) \la \cos t, 2\ra = \la2t\sin t + t^2\cos t, 6t^2+10t\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \vec r(t) = \la t^2+1, t-1\ra\cdot \la \sin t, 2t+5\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\vrp(t) = \la 2t,1\ra \cdot \la \sin t,2t+5\ra + \la t^2+1,t-1\ra\cdot\la \cos t, 2\ra =</m>
+        </p>
+
+        <p>
+          <m>(t^2+1)\cos t+2t\sin t + 4t+3</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \vec r(t) = \la t^2+1, t-1,1\ra\times \la \sin t, 2t+5,1\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\vrp(t) = \la 2t,1,0\ra \times \la \sin t,2t+5,1\ra + \la t^2+1,t-1,1\ra\times\la \cos t, 2,0\ra =</m>
+        </p>
+
+        <p>
+          <m>\la -1, \cos t - 2t, 6t^2+10t+2+\cos t - \sin t - t\cos t \ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises, find <m>\vrp (t)</m>.
+      Sketch <m>\vec r(t)</m> and <m>\vrp(1)</m>,
+      with the initial point of <m>\vrp(1)</m> at <m>\vec r(1)</m>.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \vec r(t) = \la t^2+t, t^2-t\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <sidebyside>
+          <img src="figures/fig11_02_ex_15"/>
+
+          <m>\vrp(t) = \la 2t+1,2t-1\ra</m>
+        </sidebyside>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \vec r(t) = \la t^2-2t+2,t^3-3t^2+2t\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <sidebyside>
+          <img src="figures/fig11_02_ex_16"/>
+
+          <m>\vrp(t) = \la 2t-2,3t^2-6t+2\ra</m>
+        </sidebyside>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \vec r(t) = \la t^2+1,t^3-t\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <sidebyside>
+          <img src="figures/fig11_02_ex_17"/>
+
+          <m>\vrp(t) = \la 2t,3t^2-1\ra</m>
+        </sidebyside>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \vec r(t) = \la t^2-4t+5,,t^3-6t^2+11t-6\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <sidebyside>
+          <img src="figures/fig11_02_ex_18"/>
+
+          <m>\vrp(t) = \la 2t-4,3t^2-12t+11\ra</m>
+        </sidebyside>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises,
+      give the equation of the line tangent to the graph of
+      <m>\vec r(t)</m> at the given <m>t</m> value.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \vec r(t) = \la t^2+t, t^2-t\ra</m> at <m>t=1</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\ell(t) = \la 2,0\ra + t\la 3,1\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \vec r(t) = \la 3\cos t,\sin t\ra</m> at <m>t=\pi/4</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\ell(t) = \la 3\sqrt{2}/2,\sqrt{2}/2\ra + t\la-3\sqrt{2}/2,\sqrt{2}/2\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \vec r(t) = \la 3\cos t,3\sin t,t\ra</m> at <m>t=\pi</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\ell(t) = \la -3,0,\pi\ra + t\la0,-3,1\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \vec r(t) = \la e^t,\tan t,t\ra</m> at <m>t=0</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\ell(t) = \la 1,0,0 \ra + t\la 1,1,1\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises,
+      find the value(s) of <m>t</m> for which <m>\vec r(t)</m> is not smooth.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \vec r(t) = \la \cos t,\sin t - t\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>t=2n\pi</m>, where <m>n</m> is an integer;
+          so <m>t = \ldots-4\pi,-2\pi,0,2\pi,4\pi,\ldots</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \vec r(t) = \la t^2-2t+1,t^3+t^2-5t+3\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>t=1</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \vec r(t) = \la \cos t-\sin t, \sin t - \cos t,\cos(4t)\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\vec r(t)</m> is not smooth at <m>t=3\pi/4+n\pi</m>,
+          where <m>n</m> is an integer
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \vec r(t) = \la t^3-3t+2, -\cos(\pi t),\sin^2(\pi t) \ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>t=\pm 1</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      The following exercises ask you to verify parts of <xref ref="thm_vvf_deriv_prop">Theorem</xref>.
+      In each let <m>f(t) = t^3</m>,
+      <m>\vec r(t) =\la t^2,t-1,1\ra</m> and <m>\vec s(t) = \la \sin t, e^t,t\ra</m>.
+      Compute the various derivatives as indicated.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          Simplify <m>f(t)\vec r(t)</m>, then find its derivative;
+          show this is the same as <m>\fp(t)\vec r(t) + f(t)\vrp(t)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Both derivatives return <m>\la 5t^4,4t^3-3t^2,3t^2\ra</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Simplify <m>\vec r(t)\cdot\vec s(t)</m>, then find its derivative;
+          show this is the same as <m>\vrp(t)\cdot\vec s(t) + \vec r(t)\cdot\vec s\,'(t)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Both derivatives return <m>2\sin t+t^2\cos t + te^t+1</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Simplify <m>\vec r(t)\times\vec s(t)</m>, then find its derivative;
+          show this is the same as <m>\vrp(t)\times\vec s(t) + \vec r(t)\times\vec s\,'(t)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Both derivatives return <m>\la 2t-e^t-1,\cos t-3t^2,(t^2+2t)e^t-(t-1)\cos t-\sin t\ra</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises , evaluate the given definite or indefinite integral.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \int \la t^3,\cos t, te^t\ra\ dt</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\la \frac14t^4,\sin t,te^t-e^t\ra + \vec C</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \int \la \frac{1}{1+t^2},\sec^2 t\ra\ dt</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\la \tan^{-1} t,\tan t\ra + \vec C</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \int_0^{\pi} \la -\sin t,\cos t\ra\ dt</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\la-2,0 \ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds \int_{-2}^{2} \la 2t+1,2t-1\ra\ dt</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\la4,-4 \ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises , solve the given initial value problems.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          Find <m>\vec r(t)</m>, given that
+          <m>\vrp(t) = \la t,\sin t\ra</m> and <m>\vec r(0) = \la 2,2\ra</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\vec r(t) = \la \frac12t^2+2,-\cos t+3\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Find <m>\vec r(t)</m>,
+          given that <m>\vrp(t) = \la 1/(t+1),\tan t\ra</m> and
+        </p>
+
+        <p>
+          <m>\vec r(0) = \la 1,2\ra</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\vec r(t) = \la \ln |t+1| + 1, -\ln |\cos t| + 2\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Find <m>\vec r(t)</m>, given that <m>\vrp'(t) = \la t^2,t,1\ra</m>,
+        </p>
+
+        <p>
+          <m>\vrp(0) = \la 1,2,3\ra</m> and <m>\vec r(0) = \la 4,5,6\ra</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\vec r(t) = \la t^4/12+t+4,\ t^3/6+2t+5,\ t^2/2+3t+6\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Find <m>\vec r(t)</m>,
+          given that <m>\vrp'(t) = \la \cos t,\sin t,e^t\ra</m>,
+        </p>
+
+        <p>
+          <m>\vrp(0) = \la 0,0,0\ra</m> and <m>\vec r(0) = \la 0,0,0\ra</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\vec r(t) = \la-\cos t+1,t-\sin t,e^t-t-1 \ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises , find the arc length of
+      <m>\vec r(t)</m> on the indicated interval.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec r(t) = \la 2\cos t, 2\sin t, 3t \ra</m> on <m>[0,2\pi]</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>2\sqrt{13}\pi</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec r(t) = \la 5\cos t, 3\sin t, 4\sin t \ra</m> on <m>[0,2\pi]</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>10\pi</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec r(t) = \la t^3,t^2,t^3 \ra</m> on <m>[0,1]</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\frac1{54}\left((22)^{3/2}-8\right)</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec r(t) = \la e^{-t}\cos t,e^{-t}\sin t \ra</m> on <m>[0,1]</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\sqrt{2}(1-e^{-1})</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Prove <xref ref="thm_vects_of_constant_length">Theorem</xref>;
+          that is, show if <m>\vec r(t)</m> has constant length and is differentiable,
+          then <m>\vec r(t)\cdot \vrp(t)=0</m>. (Hint:
+          use the Product Rule to compute <m>\frac{d}{dt}\big(\vec r(t)\cdot\vec r(t)\big)</m>.)
+        </p>
+      </statement>
+      <answer>
+        <p>
+          As <m>\vec r(t)</m> has constant length,
+          <m>\vec r(t)\cdot\vec r(t)=c^2</m> for some constant <m>c</m>.
+          Thus
+          <md>
+            <mrow>\vec r(t)\cdot\vec r(t) \amp = c^2</mrow>
+            <mrow>\frac{d}{dt}\big(\vec r(t)\cdot\vec r(t)\big) \amp = \frac{d}{dt}\big(c^2\big)</mrow>
+            <mrow>\vrp(t)\cdot \vec r(t)+\vec r(t)\cdot \vrp(t) \amp = 0</mrow>
+            <mrow>2\vec r(t)\cdot \vrp(t) \amp =0</mrow>
+            <mrow>\vec r(t)\cdot \vrp(t) \amp =0</mrow>
+          </md>.
+        </p>
+      </answer>
+    </exercise>
+  </subsection>
+
+</section>
+

@@ -1,0 +1,1550 @@
+
+
+<section xml:id="sec_dot_product">
+  <title>The Dot Product</title>
+  <introduction>
+    <p>
+      The previous section introduced vectors and described how to add them together and how to multiply them by scalars.
+      This section introduces <em>a</em>
+      multiplication on vectors called the <em>dot product</em>.
+    </p>
+
+    <definition xml:id="def_dot_product">
+      <title>Dot Product</title>
+      <statement>
+        <ol>
+          <li>
+            <p>
+              Let <m>\vec u = \la u_1,u_2\ra</m> and
+              <m>\vec v = \la v_1,v_2\ra</m>  in <m>\mathbb{R}^2</m>.
+              The <em>dot product</em> of <m>\vec u</m> and <m>\vec v</m>,
+              denoted \dotp uv, is 
+                <idx><h>dot product</h><h>definition</h></idx>
+                <idx><h>vectors</h><h>dot product</h></idx>
+              <me>
+                \dotp uv = u_1v_1+u_2v_2
+              </me>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Let <m>\vec u = \la u_1,u_2,u_3\ra</m> and
+              <m>\vec v = \la v_1,v_2,v_3\ra</m>  in <m>\mathbb{R}^3</m>.
+              The <em>dot product</em> of <m>\vec u</m> and <m>\vec v</m>,
+              denoted \dotp uv, is
+              <me>
+                \dotp uv = u_1v_1+u_2v_2+u_3v_3
+              </me>.
+            </p>
+          </li>
+        </ol>
+      </statement>
+    </definition>
+
+    <p>
+      Note how this product of vectors returns a
+      <em>scalar</em>, not another vector.
+      We practice evaluating a dot product in the following example,
+      then we will discuss why this product is useful.
+    </p>
+
+    <example xml:id="ex_dotp1">
+      <title>Evaluating dot products</title>
+      <statement>
+        <ol>
+          <li>
+            <p>
+              Let <m>\vec u=\la 1,2\ra</m>,
+              <m>\vec v=\la 3,-1\ra</m> in <m>\mathbb{R}^2</m>.
+              Find \dotp uv.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Let <m>\vec x = \la 2,-2,5\ra</m> and
+              <m>\vec y = \la -1, 0, 3\ra</m> in <m>\mathbb{R}^3</m>.
+              Find \dotp xy.
+            </p>
+          </li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li>
+              <p>
+                Using <xref ref="def_dot_product">Definition</xref>, we have
+                <me>
+                  \dotp uv = 1(3)+2(-1) = 1
+                </me>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Using the definition, we have
+                <me>
+                  \dotp xy = 2(-1)  -2(0) + 5(3) = 13
+                </me>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      The dot product, as shown by the preceding example,
+      is very simple to evaluate.
+      It is only the sum of products.
+      While the definition gives no hint as to why we would care about this operation,
+      there is an amazing connection between the dot product and angles formed by the vectors.
+      Before stating this connection,
+      we give a theorem stating some of the properties of the dot product.
+    </p>
+
+    <theorem xml:id="thm_dot_product_properties">
+      <title>Properties of the Dot Product</title>
+      <statement>
+        <p>
+          Let <m>\vec u</m>,
+          <m>\vec v</m> and <m>\vec w</m> be vectors in <m>\mathbb{R}^2</m> or
+          <m>\mathbb{R}^3</m> and let <m>c</m> be a scalar.
+              <idx><h>dot product</h><h>properties</h></idx>
+              <idx><h>vectors</h><h>dot product</h></idx>
+
+          <ol>
+            <li>
+              <p>
+                <m>\dotp uv = \dotp vu</m>{Commutative Property}
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\vec u\cdot(\vec v+\vec w) = \dotp uv + \dotp uw</m>{Distributive Property}
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>c(\dotp uv) = (c\vec u)\cdot \vec v = \vec u \cdot (c\vec v)</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\dotp 0v = 0</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\dotp vv=\norm{\vec v}^2</m>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </theorem>
+
+    <p>
+      The last statement of the theorem makes a handy connection between the magnitude of a vector and the dot product with itself.
+      Our definition and theorem give properties of the dot product,
+      but we are still likely wondering
+      <q>What does the dot product <em>mean</em>?</q>
+      It is helpful to understand that the dot product of a vector with itself is connected to its magnitude.
+    </p>
+
+    <p>
+      The next theorem extends this understanding by connecting the dot product to magnitudes and angles.
+      Given vectors <m>\vec u</m> and <m>\vec v</m> in the plane,
+      an angle <m>\theta</m> is clearly formed when <m>\vec u</m> and <m>\vec v</m> are drawn with the same initial point as illustrated in <xref ref="fig_dotpangle">Figure</xref>(a). (We always take <m>\theta</m> to be the angle in <m>[0,\pi]</m> as two angles are actually created.)
+    </p>
+
+    <figure xml:id="fig_dotpangle">
+      <caption>Illustrating the angle formed by two vectors with the same initial point.</caption>
+      <sidebyside>
+        <figure>
+          <caption>(a)</caption>
+          <img src="figures/figdotpangle"/>
+        </figure>
+
+        <figure>
+          <caption>(b)</caption>
+          \apexincludemedia{width=125pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.0045,
+          3Dc2c=.54 .61 .58,
+          3Dcoo=0 0 40,
+          3Droo=170,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figdotpangle3D_3D"/>
+        </figure>
+      </sidebyside>
+
+    </figure>
+
+    <p>
+      The same is also true of 2 vectors in space:
+      given <m>\vec u</m> and <m>\vec v</m> in
+      <m>\mathbb{R}^3</m> with the same initial point,
+      there is a plane that contains both <m>\vec u</m> and <m>\vec v</m>.
+      (When <m>\vec u</m> and <m>\vec v</m> are co-linear,
+      there are infinite planes that contain both vectors.)
+      In that plane,
+      we can again find an angle <m>\theta</m> between them
+      (and again, <m>0\leq \theta\leq \pi</m>).
+      This is illustrated in <xref ref="fig_dotpangle">Figure</xref>(b).
+    </p>
+
+    <p>
+      The following theorem connects this angle <m>\theta</m> to the dot product of <m>\vec u</m> and <m>\vec v</m>.
+    </p>
+
+    <theorem xml:id="thm_dot_product">
+      <title>The Dot Product and Angles</title>
+      <statement>
+        <p>
+          Let <m>\vec u</m> and <m>\vec v</m> be vectors in
+          <m>\mathbb{R}^2</m> or <m>\mathbb{R}^3</m>.
+          Then
+          <me>
+            \dotp uv = \norm{\vec u}\,\norm{\vec v} \cos\theta
+          </me>,
+          where <m>\theta</m>, <m>0\leq\theta\leq \pi</m>,
+          is the angle between <m>\vec u</m> and <m>\vec v</m>.
+              <idx><h>dot product</h><h>properties</h></idx>
+              <idx><h>vectors</h><h>dot product</h></idx>
+        </p>
+      </statement>
+    </theorem>
+
+    <p>
+      When <m>\theta</m> is an acute angle (i.e., <m>0\leq \theta \lt \pi/2</m>),
+      <m>\cos \theta</m> is positive;
+      when <m>\theta = \pi/2</m>, <m>\cos \theta = 0</m>;
+      when <m>\theta</m> is an obtuse angle (<m>\pi/2\lt \theta \leq \pi</m>),
+      <m>\cos \theta</m> is negative.
+      Thus the sign of the dot product gives a general indication of the angle between the vectors,
+      illustrated in <xref ref="fig_dotpsign">Figure</xref>.
+    </p>
+
+    <p>
+      <img src="figures/figdotpanglesign"/>
+      \captionof{figure}{Illustrating the relationship between the angle between vectors and the sign of their dot product.} We <em>can</em>
+      use <xref ref="thm_dot_product">Theorem</xref> to compute the dot product,
+      but generally this theorem is used to find the angle between known vectors
+      (since the dot product is generally easy to compute).
+      To this end, we rewrite the theorem's equation as
+      <me>
+        \cos \theta = \frac{\dotp uv}{\norm{\vec u}\norm{\vec v}}  \Leftrightarrow  \theta = \cos^{-1}\left(\frac{\dotp uv}{\norm{\vec u}\norm{\vec v}}\right)
+      </me>.
+    </p>
+
+    <p>
+      We practice using this theorem in the following example.
+    </p>
+
+    <figure xml:id="fig_dotp2">
+      <caption>Vectors used in <xref ref="ex_dotp2">Example</xref>.</caption>
+      <img src="figures/figdotp2"/>
+    </figure>
+
+    <example xml:id="ex_dotp2">
+      <title>Using the dot product to find angles</title>
+      <statement>
+        <p>
+          Let <m>\vec u = \la 3,1\ra</m>,
+          <m>\vec v = \la -2,6\ra</m> and <m>\vec w = \la -4,3\ra</m>,
+          as shown in <xref ref="fig_dotp2">Figure</xref>.
+          Find the angles <m>\alpha</m>,
+          <m>\beta</m> and <m>\theta</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We start by computing the magnitude of each vector.
+          <me>
+            \norm{\vec u} = \sqrt{10}; \norm{\vec v} = 2\sqrt{10}; \norm{\vec w} = 5
+          </me>.
+        </p>
+
+        <p>
+          We now apply <xref ref="thm_dot_product">Theorem</xref> to find the angles.
+          <md>
+            <mrow>\alpha \amp = \cos^{-1}\left(\frac{\dotp uv}{(\sqrt{10})(2\sqrt{10})}\right)</mrow>
+            <mrow>\amp = \cos^{-1}(0) = \frac{\pi}2 = 90^\circ</mrow>
+          </md>.
+          <md>
+            <mrow>\beta \amp = \cos^{-1}\left(\frac{\dotp vw}{(2\sqrt{10})(5)}\right)</mrow>
+            <mrow>\amp = \cos^{-1}\left(\frac{26}{10\sqrt{10}}\right)</mrow>
+            <mrow>\amp \approx 0.6055 \approx 34.7^\circ.</mrow>
+            <mrow>\theta \amp = \cos^{-1}\left(\frac{\dotp uw}{(\sqrt{10})(5)}\right)</mrow>
+            <mrow>\amp = \cos^{-1}\left(\frac{-9}{5\sqrt{10}}\right)</mrow>
+            <mrow>\amp \approx 2.1763 \approx 124.7^\circ</mrow>
+          </md>
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      We see from our computation that <m>\alpha + \beta = \theta</m>,
+      as indicated by <xref ref="fig_dotp2">Figure</xref>.
+      While we knew this should be the case,
+      it is nice to see that this non-intuitive formula indeed returns the results we expected.
+    </p>
+
+    <p>
+      We do a similar example next in the context of vectors in space.
+    </p>
+
+    <figure xml:id="fig_dotp3">
+      <caption>Vectors used in <xref ref="ex_dotp3">Example</xref>.</caption>
+      \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+      3Droll=0,
+      3Dortho=0.0045,
+      3Dc2c=.89 .4 .23,
+      3Dcoo=10 50 46,
+      3Droo=200,
+      3Dlights=Headlamp,add3Djscript=asylabels.js}
+      <img src="figures/figdotp3_3D"/>
+    </figure>
+
+    <example xml:id="ex_dotp3">
+      <title>Using the dot product to find angles</title>
+      <statement>
+        <p>
+          Let <m>\vec u = \la 1,1,1\ra</m>,
+          <m>\vec v = \la -1,3,-2\ra</m> and <m>\vec w = \la -5,1,4\ra</m>,
+          as illustrated in <xref ref="fig_dotp3">Figure</xref>.
+          Find the angle between each pair of vectors.
+        </p>
+      </statement>
+      <solution>
+        <ol>
+          <li>
+            <p>
+              Between <m>\vec u</m> and <m>\vec v</m>:
+              <md>
+                <mrow>\theta \amp = \cos^{-1}\left(\frac{\dotp uv}{\norm{\vec u}\norm{\vec v}}\right)</mrow>
+                <mrow>\amp = \cos^{-1}\left(\frac{0}{\sqrt{3}\sqrt{14}}\right)</mrow>
+                <mrow>\amp = \frac{\pi}2</mrow>
+              </md>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Between <m>\vec u</m> and <m>\vec w</m>:
+              <md>
+                <mrow>\theta \amp = \cos^{-1}\left(\frac{\dotp uw}{\norm{\vec u}\norm{\vec w}}\right)</mrow>
+                <mrow>\amp = \cos^{-1}\left(\frac{0}{\sqrt{3}\sqrt{42}}\right)</mrow>
+                <mrow>\amp = \frac{\pi}2</mrow>
+              </md>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Between <m>\vec v</m> and <m>\vec w</m>:
+              <md>
+                <mrow>\theta \amp = \cos^{-1}\left(\frac{\dotp vw}{\norm{\vec v}\norm{\vec w}}\right)</mrow>
+                <mrow>\amp = \cos^{-1}\left(\frac{0}{\sqrt{14}\sqrt{42}}\right)</mrow>
+                <mrow>\amp = \frac{\pi}2</mrow>
+              </md>.
+            </p>
+          </li>
+        </ol>
+
+        <p>
+          While our work shows that each angle is <m>\pi/2</m>, i.e., <m>90^\circ</m>,
+          none of these angles looks to be a right angle in <xref ref="fig_dotp3">Figure</xref>.
+          Such is the case when drawing three<ndash />dimensional objects on the page.
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      All three angles between these vectors was <m>\pi/2</m>,
+      or <m>90^\circ</m>.
+      We know from geometry and everyday life that
+      <m>90^\circ</m> angles are <q>nice</q>
+      for a variety of reasons,
+      so it should seem significant that these angles are all <m>\pi/2</m>.
+      Notice the common feature in each calculation (and also the calculation of <m>\alpha</m> in <xref ref="ex_dotp2">Example</xref>):
+      the dot products of each pair of angles was 0.
+      We use this as a basis for a definition of the term <em>orthogonal</em>,
+      which is essentially synonymous to <em>perpendicular</em>.
+    </p>
+
+    <definition xml:id="def_orthogonal">
+      <title>Orthogonal</title>
+      <statement>
+        <p>
+          Vectors <m>\vec u</m> and <m>\vec v</m> are <term>orthogonal</term>
+          if their dot product is 0.
+              <idx><h>orthogonal</h></idx>
+              <idx><h>perpendicular|see{orthogonal}</h></idx>
+              <idx><h>vectors</h><h>orthogonal</h></idx>
+        </p>
+      </statement>
+    </definition>
+
+    <aside>
+      <p>
+        <em>Note:</em> The term <em>perpendicular</em>
+        originally referred to lines.
+        As mathematics progressed,
+        the concept of <q>being at right angles to</q>
+        was applied to other objects,
+        such as vectors and planes, and the term
+        <em>orthogonal</em> was introduced.
+        It is especially used when discussing objects that are hard,
+        or impossible, to visualize:
+        two vectors in 5-dimensional space are orthogonal if their dot product is 0.
+        It is not wrong to say they are <em>perpendicular</em>,
+        but common convention gives preference to the word <em>orthogonal</em>.
+      </p>
+    </aside>
+
+    <example xml:id="ex_dotp8">
+      <title>Finding orthogonal vectors</title>
+      <statement>
+        <p>
+          Let <m>\vec u = \la 3,5\ra</m> and <m>\vec v = \la 1,2,3\ra</m>.
+
+          <ol>
+            <li>
+              <p>
+                Find two vectors in <m>\mathbb{R}^2</m> that are orthogonal to <m>\vec u</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Find two non<ndash />parallel vectors in
+                <m>\mathbb{R}^3</m> that are orthogonal to <m>\vec v</m>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li>
+              <p>
+                Recall that a line perpendicular to a line with slope <m>m</m> has slope <m>-1/m</m>,
+                the <q>opposite reciprocal slope.</q>
+                We can think of the slope of <m>\vec u</m> as <m>5/3</m>,
+                its <q>rise over run.</q> A vector orthogonal to <m>\vec u</m> will have slope <m>-3/5</m>.
+                There are many such choices, though all parallel:
+                <me>
+                  \la -5,3\ra  \text{ or }  \la 5,-3\ra  \text{ or }   \la -10,6\ra \text{ or }   \la 15,-9\ra,\text{ etc. }
+                </me>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                There are infinite directions in space orthogonal to any given direction,
+                so there are an infinite number of non<ndash />parallel vectors orthogonal to <m>\vec v</m>.
+                Since there are so many, we have great leeway in finding some.
+
+                One way is to arbitrarily pick values for the first two components,
+                leaving the third unknown.
+                For instance, let <m>\vec v_1 = \la 2,7,z\ra</m>.
+                If <m>\vec v_1</m> is to be orthogonal to <m>\vec v</m>,
+                then <m>\vec v_1\cdot\vec v = 0</m>, so
+                <me>
+                  2+14+3z=0  \Rightarrow z = \frac{-16}{3}
+                </me>.
+                So <m>\vec v_1 = \la 2, 7, -16/3\ra</m> is orthogonal to <m>\vec v</m>.
+                We can apply a similar technique by leaving the first or second component unknown.
+
+                Another method of finding a vector orthogonal to <m>\vec v</m> mirrors what we did in part 1.
+                Let <m>\vec v_2 = \la-2,1,0\ra</m>.
+                Here we switched the first two components of <m>\vec v</m>,
+                changing the sign of one of them
+                (similar to the <q>opposite reciprocal</q> concept before).
+                Letting the third component be 0 effectively ignores the third component of <m>\vec v</m>,
+                and it is easy to see that
+                <me>
+                  \vec v_2\cdot\vec v = \la -2,1,0\ra\cdot\la 1,2,3\ra = 0
+                </me>.
+                Clearly <m>\vec v_1</m> and <m>\vec v_2</m> are not parallel.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      An important construction is illustrated in <xref ref="fig_dotpproj">Figure</xref>,
+      where vectors <m>\vec u</m> and <m>\vec v</m> are sketched.
+      In part (a),
+      a dotted line is drawn from the tip of <m>\vec u</m> to the line containing <m>\vec v</m>,
+      where the dotted line is orthogonal to <m>\vec v</m>.
+      In part (b),
+      the dotted line is replaced with the vector <m>\vec z</m> and <m>\vec w</m> is formed,
+      parallel to <m>\vec v</m>.
+      It is clear by the diagram that <m>\vec u = \vec w+\vec z</m>.
+      What is important about this construction is this:
+      <m>\vec u</m> is <em>decomposed</em>
+      as the sum of two vectors,
+      one of which is parallel to <m>\vec v</m> and one that is perpendicular to <m>\vec v</m>.
+      It is hard to overstate the importance of this construction
+      (as we'll see in upcoming examples).
+    </p>
+
+    <p>
+      The vectors <m>\vec w</m>,
+      <m>\vec z</m> and <m>\vec u</m> as shown in <xref ref="fig_dotpproj">Figure</xref> (b) form a right triangle,
+      where the angle between <m>\vec v</m> and <m>\vec u</m> is labeled <m>\theta</m>.
+      We can find <m>\vec w</m> in terms of <m>\vec v</m> and <m>\vec u</m>.
+    </p>
+
+    <p>
+      Using trigonometry, we can state that
+      <men xml:id="eq_proj1">
+        \norm{\vec w} = \norm{\vec u}\cos \theta
+      </men>.
+    </p>
+
+    <figure xml:id="fig_dotpproj">
+      <caption>Developing the construction of the <em>orthogonal projection</em>.</caption>
+      <sidebyside>
+        <figure>
+          <caption>(a)</caption>
+          <img src="figures/figdotpproja"/>
+        </figure>
+
+        <figure>
+          <caption>(b)</caption>
+          <img src="figures/figdotpprojb"/>
+        </figure>
+      </sidebyside>
+
+    </figure>
+
+    <p>
+      We also know that <m>\vec w</m> is parallel to to <m>\vec v</m> ; that is,
+      the direction of <m>\vec w</m> is the direction of <m>\vec v</m>,
+      described by the unit vector <m>\frac{1}{\norm{\vec v}}\vec v</m>.
+      The vector <m>\vec w</m> is the vector in the direction
+      <m>\frac{1}{\norm{\vec v}}\vec v</m> with magnitude <m>\norm{\vec u}\cos \theta</m>:
+      <md>
+        <mrow>\vec w \amp = \Big(\norm{\vec u}\cos\theta \Big)\frac{1}{\norm{\vec v}}\vec v.</mrow>
+        <intertext>Replace <m>\cos\theta</m> using <xref ref="thm_dot_product">Theorem</xref>:</intertext>
+        <mrow>\amp = \left(\norm{\vec u}\frac{\dotp uv}{\norm{\vec u}\norm{\vec v}}\right)\frac{1}{\norm{\vec v}} \vec v</mrow>
+        <mrow>\amp = \frac{\dotp uv}{\norm{\vec v}^2}\vec v.</mrow>
+        <intertext>Now apply <xref ref="thm_dot_product_properties">Theorem</xref>.</intertext>
+        <mrow>\amp = \frac{\dotp uv}{\dotp vv}\vec v</mrow>
+      </md>.
+    </p>
+
+    <p>
+      Since this construction is so important,
+      it is given a special name.
+    </p>
+
+    <definition xml:id="def_orthogonal_projection">
+      <title>Orthogonal Projection</title>
+      <statement>
+        <p>
+          Let <m>\vec u</m> and <m>\vec v</m> be given.
+          The <term>orthogonal projection of <m>\vec u</m> onto <m>\vec v</m></term>,
+          denoted <m>\proj uv</m>, is
+              <idx><h>orthogonal projection</h></idx>
+              <idx><h>vectors</h><h>orthogonal projection</h></idx>
+          <me>
+            \proj uv = \frac{\dotp uv}{\dotp vv}\vec v
+          </me>.
+        </p>
+      </statement>
+    </definition>
+
+    <example xml:id="ex_dotp4">
+      <title>Computing the orthogonal projection</title>
+      <statement>
+        <ol>
+          <li>
+            <p>
+              Let <m>\vec u= \la -2,1\ra</m> and <m>\vec v=\la 3,1\ra</m>.
+              Find <m>\proj uv</m>,
+              and sketch all three vectors with initial points at the origin.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Let <m>\vec w = \la 2,1,3\ra</m> and <m>\vec x = \la 1,1,1\ra</m>.
+              Find <m>\proj wx</m>,
+              and sketch all three vectors with initial points at the origin.
+            </p>
+          </li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li>
+              <p>
+                Applying <xref ref="def_orthogonal_projection">Definition</xref>, we have
+                <md>
+                  <mrow>\proj uv \amp = \frac{\dotp uv}{\dotp vv}\vec v</mrow>
+                  <mrow>\amp = \frac{-5}{10}\la 3,1\ra</mrow>
+                  <mrow>\amp = \la -\frac32,-\frac12\ra</mrow>
+                </md>.
+                Vectors <m>\vec u</m>, <m>\vec v</m> and
+                <m>\proj uv</m> are sketched in <xref ref="fig_dotp4">Figure</xref>(a).
+                Note how the projection is parallel to <m>\vec v</m>;
+                that is, it lies on the same line through the origin as <m>\vec v</m>,
+                although it points in the opposite direction.
+                That is because the angle between <m>\vec u</m> and <m>\vec v</m> is obtuse (i.e., greater than <m>90^\circ</m>).
+
+                <figure xml:id="fig_dotp4">
+                  <caption>Graphing the vectors used in <xref ref="ex_dotp4">Example</xref>.</caption>
+                  <sidebyside>
+                    <figure>
+                      <caption>(a)</caption>
+                      <img src="figures/figdotp4a"/>
+                    </figure>
+
+                    <figure>
+                      <caption>(b)</caption>
+                      \apexincludemedia{width=100pt,3Dmenu,activate=onclick,deactivate=onclick,
+                      3Droll=0,
+                      3Dortho=0.0046,
+                      3Dc2c=.9 .12 .42,
+                      3Dcoo=0 50 30,
+                      3Droo=250,
+                      3Dlights=Headlamp,add3Djscript=asylabels.js}
+                      <img src="figures/figdotp4b_3D"/>
+                    </figure>
+
+                    <figure>
+                      <caption>(c)</caption>
+                      \apexincludemedia{width=100pt,3Dmenu,activate=onclick,deactivate=onclick,
+                      3Droll=0,
+                      3Dortho=0.0046,
+                      3Dc2c=.29 .77 .56,
+                      3Dcoo=50 0 40,
+                      3Droo=250,
+                      3Dlights=Headlamp,add3Djscript=asylabels.js}
+                      <img src="figures/figdotp4c_3D"/>
+                    </figure>
+                  </sidebyside>
+
+                </figure>
+
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Apply the definition:
+                <md>
+                  <mrow>\proj wx \amp = \frac{\dotp wx}{\dotp xx}\vec x</mrow>
+                  <mrow>\amp = \frac{6}{3}\la 1,1,1\ra</mrow>
+                  <mrow>\amp = \la 2,2,2\ra</mrow>
+                </md>.
+                These vectors are sketched in <xref ref="fig_dotp4">Figure</xref>(b),
+                and again in part (c) from a different perspective.
+                Because of the nature of graphing these vectors,
+                the sketch in part (b) makes it difficult  to recognize that the drawn projection has the geometric properties it should.
+                The graph shown in part (c) illustrates these properties better.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </solution>
+    </example>
+
+    <figure xml:id="fig_dotpprojc">
+      <caption>Illustrating the orthogonal projection.</caption>
+      <img src="figures/figdotpprojc"/>
+    </figure>
+
+    <p>
+      Consider <xref ref="fig_dotpprojc">Figure</xref>
+      where the concept of the orthogonal projection is again illustrated.
+      It is clear that
+      <men xml:id="eq_orthogproj">
+        \vec u = \proj uv + \vec z
+      </men>.
+    </p>
+
+    <p>
+      As we know what <m>\vec u</m> and <m>\proj uv</m> are,
+      we can solve for <m>\vec z</m> and state that
+      <me>
+        \vec z = \vec u - \proj uv
+      </me>.
+    </p>
+
+    <p>
+      This leads us to rewrite Equation <xref ref="eq_orthogproj" /> in a seemingly silly way:
+      <me>
+        \vec u = \proj uv + (\vec u - \proj uv)
+      </me>.
+    </p>
+
+    <p>
+      This is not nonsense, as pointed out in the following Key Idea.
+      (Notation note: the expression <q><m>\parallel \vec y</m> </q>
+      means <q>is parallel to <m>\vec y</m>.</q>
+      We can use this notation to state
+      <q><m>\vec x\parallel\vec y</m> </q> which means
+      <q><m>\vec x</m> is parallel to <m>\vec y</m>.</q>
+      The expression <q><m>\perp \vec y</m> </q>
+      means <q>is orthogonal to <m>\vec y</m>,</q> and is used similarly.)
+    </p>
+
+    <insight xml:id="idea_orthog_proj">
+      <title>Orthogonal Decomposition of Vectors</title>
+      <p>
+        Let <m>\vec u</m> and <m>\vec v</m> be given.
+        Then <m>\vec u</m> can be written as the sum of two vectors,
+        one of which is parallel to <m>\vec v</m>,
+        and one of which is orthogonal to <m>\vec v</m>:
+            <idx><h>orthogonal decomposition of vectors</h></idx>
+            <idx><h>orthogonal</h><h>decomposition</h></idx>
+            <idx><h>vectors</h><h>orthogonal decomposition</h></idx>
+        <me>
+          \vec u = \underbrace{\proj uv}_{\parallel\ \vec v}\ +\  (\underbrace{\vec u-\proj uv}_{\perp\ \vec v})
+        </me>.
+      </p>
+    </insight>
+
+    <p>
+      We illustrate the use of this equality in the following example.
+    </p>
+
+    <example xml:id="ex_dotp5">
+      <title>Orthogonal decomposition of vectors</title>
+      <statement>
+        <ol>
+          <li>
+            <p>
+              Let <m>\vec u = \la -2,1\ra</m> and
+              <m>\vec v = \la 3,1\ra</m> as in <xref ref="ex_dotp4">Example</xref>.
+              Decompose <m>\vec u</m> as the sum of a vector parallel to <m>\vec v</m> and a vector orthogonal to <m>\vec v</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Let <m>\vec w =\la 2,1,3\ra</m> and
+              <m>\vec x =\la 1,1,1\ra</m> as in <xref ref="ex_dotp4">Example</xref>.
+              Decompose <m>\vec w</m> as the sum of a vector parallel to <m>\vec x</m> and a vector orthogonal to <m>\vec x</m>.
+            </p>
+          </li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li>
+              <p>
+                In <xref ref="ex_dotp4">Example</xref>,
+                we found that <m>\proj uv = \la -1.5,-0.5\ra</m>.
+                Let
+                <me>
+                  \vec z = \vec u - \proj uv = \la -2,1\ra - \la -1.5,-0.5\ra = \la-0.5, 1.5\ra
+                </me>.
+                Is <m>\vec z</m> orthogonal to <m>\vec v</m> ? (I.e, is
+                <m>\vec z \perp\vec v</m><nbsp />?) We check for orthogonality with the dot product:
+                <me>
+                  \dotp zv = \la -0.5,1.5\ra \cdot \la 3,1\ra =0
+                </me>.
+                Since the dot product is 0, we know <m>\vec z \perp \vec v</m>.
+                Thus:
+                <md>
+                  <mrow>\vec u \amp = \proj uv\ +\ (\vec u - \proj uv)</mrow>
+                  <mrow>\la -2,1\ra \amp = \underbrace{\la -1.5,-0.5\ra}_{\parallel\ \vec v}\ +\ \underbrace{\la -0.5,1.5\ra}_{\perp \ \vec v}</mrow>
+                </md>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                We found in <xref ref="ex_dotp4">Example</xref>
+                that <m>\proj wx = \la 2,2,2\ra</m>.
+                Applying the Key Idea, we have:
+                <me>
+                  \vec z = \vec w - \proj wx = \la 2,1,3\ra  - \la 2,2,2\ra = \la 0,-1,1\ra
+                </me>.
+                We check to see if <m>\vec z \perp \vec x</m>:
+                <me>
+                  \dotp zx = \la 0,-1,1\ra \cdot \la 1,1,1\ra = 0
+                </me>.
+                Since the dot product is 0, we know the two vectors are orthogonal.
+                We now write <m>\vec w</m> as the sum of two vectors,
+                one parallel and one orthogonal to <m>\vec x</m>:
+                <md>
+                  <mrow>\vec w \amp = \proj wx\ +\ (\vec w - \proj wx)</mrow>
+                  <mrow>\la 2,1,3\ra \amp = \underbrace{\la 2,2,2\ra}_{\parallel\ \vec x}\ +\ \underbrace{\la 0,-1,1\ra}_{\perp \ \vec x}</mrow>
+                </md>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      We give an example of where this decomposition is useful.
+    </p>
+
+    <example xml:id="ex_dotp6">
+      <title>Orthogonally decomposing a force vector</title>
+      <statement>
+        <p>
+          Consider <xref ref="fig_dotp6">Figure</xref>(a),
+          showing a box weighing 50lb on a ramp that rises 5ft over a span of 20ft.
+          Find the components of force,
+          and their magnitudes,
+          acting on the box (as sketched in part (b) of the figure):
+        </p>
+
+        <figure xml:id="fig_dotp6">
+          <caption>Sketching the ramp and box in <xref ref="ex_dotp6">Example</xref>. Note: <em>The vectors are not drawn to scale.</em></caption>
+          <sidebyside>
+            <figure>
+              <caption>(a)</caption>
+              <img src="figures/figdotp6"/>
+            </figure>
+
+            <figure>
+              <caption>(b)</caption>
+              <img src="figures/figdotp6b"/>
+            </figure>
+          </sidebyside>
+
+        </figure>
+
+        <ol>
+          <li>
+            <p>
+              in the direction of the ramp, and
+            </p>
+          </li>
+
+          <li>
+            <p>
+              orthogonal to the ramp.
+            </p>
+          </li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          As the ramp rises 5ft over a horizontal distance of 20ft,
+          we can represent the direction of the ramp with the vector <m>\vec r= \la 20,5\ra</m>.
+          Gravity pulls down with a force of 50lb,
+          which we represent with <m>\vec g = \la 0,-50\ra</m>.
+
+          <ol>
+            <li>
+              <p>
+                To find the force of gravity in the direction of the ramp,
+                we compute <m>\proj gr</m>:
+                <md>
+                  <mrow>\proj gr \amp = \frac{\dotp gr}{\dotp rr}\vec r</mrow>
+                  <mrow>\amp =  \frac{-250}{425}\la 20,5\ra</mrow>
+                  <mrow>\amp = \la -\frac{200}{17},-\frac{50}{17}\ra \approx \la -11.76,-2.94\ra</mrow>
+                </md>.
+                The magnitude of <m>\proj gr</m> is <m>\norm{\proj gr} = 50/\sqrt{17} \approx 12.13\text{ lb }</m>.
+                Though the box weighs 50lb,
+                a force of about 12lb is enough to keep the box from sliding down the ramp.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                To find the component <m>\vec z</m> of gravity orthogonal to the ramp,
+                we use <xref ref="idea_orthog_proj">Key Idea</xref>.
+                <md>
+                  <mrow>\vec z \amp = \vec g - \proj gr</mrow>
+                  <mrow>\amp = \la \frac{200}{17},-\frac{800}{17}\ra \approx \la 11.76,-47.06\ra</mrow>
+                </md>.
+                The magnitude of this force is <m>\norm{\vec z} \approx 48.51</m>lb.
+                In physics and engineering,
+                knowing this force is important when computing things like static frictional force.
+                (For instance,
+                we could easily compute if the static frictional force alone was enough to keep the box from sliding down the ramp.)
+              </p>
+            </li>
+          </ol>
+        </p>
+      </solution>
+    </example>
+  </introduction>
+
+  <subsection>
+    <title>Application to Work</title>
+    <p>
+      In physics, the application of a force <m>F</m> to move an object in a straight line a distance <m>d</m> produces <em>work</em>;
+      the amount of work <m>W</m> is <m>W=Fd</m>,
+      (where <m>F</m> is in the direction of travel).
+      The orthogonal projection allows us to compute work when the force is not in the direction of travel.
+    </p>
+
+    <figure xml:id="fig_dotpwork">
+      <caption>Finding work when the force and direction of travel are given as vectors.</caption>
+      <img src="figures/figdotpwork"/>
+    </figure>
+
+    <p>
+      Consider <xref ref="fig_dotpwork">Figure</xref>,
+      where a force <m>\vec F</m> is being applied to an object moving in the direction of <m>\vec d</m>.
+      (The distance the object travels is the magnitude of <m>\vec d</m>.)
+      The work done is the amount of force in the direction of <m>\vec d</m>,
+      <m>\norm{\proj Fd}</m>, times <m>\vnorm d</m>:
+      <md>
+        <mrow>\norm{\proj Fd}\cdot\vnorm d \amp = \snorm{\frac{\dotp Fd}{\dotp dd}\vec d}\cdot \vnorm d</mrow>
+        <mrow>\amp = \left|\frac{\dotp Fd}{\vnorm d^2}\right|\cdot \vnorm d\cdot\vnorm d</mrow>
+        <mrow>\amp = \frac{\left|\dotp Fd\right|}{\vnorm d^2}\vnorm d^2</mrow>
+        <mrow>\amp = \left|\dotp Fd\right|</mrow>
+      </md>.
+    </p>
+
+    <p>
+      The expression <m>\dotp Fd</m> will be positive if the angle between <m>\vec F</m> and <m>\vec d</m> is acute;
+      when the angle is obtuse
+      (hence <m>\dotp Fd</m> is negative),
+      the force is causing motion in the opposite direction of <m>\vec d</m>,
+      resulting in <q>negative work.</q>
+      We want to capture this sign,
+      so we drop the absolute value and find that <m>W = \dotp Fd</m>.
+    </p>
+
+    <definition xml:id="def_work">
+      <title>Work</title>
+      <statement>
+        <p>
+          Let <m>\vec F</m> be a constant force that moves an object in a straight line from point <m>P</m> to point <m>Q</m>.
+          Let <m>\vec d = \vv{PQ}</m>.
+          The <term>work</term> <m>W</m> done by <m>\vec F</m> along <m>\vec d</m> is <m>W = \dotp Fd</m>.
+              <idx><h>work</h></idx>
+        </p>
+      </statement>
+    </definition>
+
+    <example xml:id="ex_dotp7">
+      <title>Computing work</title>
+      <statement>
+        <p>
+          A man slides a box along a ramp that rises 3ft over a distance of 15ft by applying 50lb of force as shown in <xref ref="fig_dotp7">Figure</xref>.
+          Compute the work done.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The figure indicates that the force applied makes a
+          <m>30^\circ</m> angle with the horizontal,
+          so <m>\vec F = 50\la \cos 30^\circ,\sin 30^\circ\ra \approx \la 43.3,25\ra</m>.
+          The ramp is represented by <m>\vec d  = \la 15,3\ra</m>.
+          The work done is simply
+          <me>
+            \dotp Fd = 50\la \cos 30^\circ,\sin 30^\circ\ra \cdot \la 15,3\ra \approx 724.5 \text{ ft--lb } 
+          </me>.
+        </p>
+
+        <figure xml:id="fig_dotp7">
+          <caption>Computing work when sliding a box up a ramp in <xref ref="ex_dotp7">Example</xref>.</caption>
+          <img src="figures/figdotp7"/>
+        </figure>
+
+        <p>
+          Note how we did not actually compute the distance the object traveled,
+          nor the magnitude of the force in the direction of travel;
+          this is all inherently computed by the dot product!
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      The dot product is a powerful way of evaluating computations that depend on angles without actually using angles.
+      The next section explores another
+      <q>product</q> on vectors,
+      the <em>cross product.</em> Once again,
+      angles play an important role,
+      though in a much different way.
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Terms and Concepts</title>
+    <exercise>
+      <statement>
+        <p>
+          The dot product of two vectors is a <fillin />, not a vector.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Scalar
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          How are the concepts of the dot product and vector magnitude related?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          The magnitude of a vectors is the square root of the dot product of a vector with itself; that is,
+          <m>\norm{\vec v} = \sqrt{\vec v\cdot \vec v}</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          How can one quickly tell if the angle between two vectors is acute or obtuse?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          By considering the sign of the dot product of the two vectors.
+          If the dot product is positive, the angle is acute;
+          if the dot product is negative, the angle is obtuse.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Give a synonym for <q>orthogonal.</q>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <q>Perpendicular</q> is one answer.
+        </p>
+      </answer>
+    </exercise>
+  </subsection>
+
+  <subsection>
+    <title>Problems</title>
+    <p>
+      In the following exercises, find the dot product of the given vectors.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec u = \la 2,-4\ra</m>, <m>\vec v = \la 3,7\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>-22</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec u = \la 5,3\ra</m>, <m>\vec v = \la 6,1\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>33</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec u = \la 1,-1,2\ra</m>,
+          <m>\vec v = \la 2,5,3\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>3</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec u = \la 3,5,-1\ra</m>,
+          <m>\vec v = \la 4,-1,7\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>0</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec u = \la 1,1\ra</m>, <m>\vec v = \la 1,2,3\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          not defined
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec u = \la 1,2,3\ra</m>,
+          <m>\vec v = \la 0,0,0\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>0</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Create your own vectors <m>\vec u</m>,
+          <m>\vec v</m> and <m>\vec w</m> in
+          <m>\mathbb{R}^2</m> and show that <m>\vec u\cdot (\vec v+\vec w) = \vec u\cdot \vec v + \vec u\cdot \vec w</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Answers will vary.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Create your own vectors <m>\vec u</m> and <m>\vec v</m> in
+          <m>\mathbb{R}^3</m> and scalar <m>c</m> and show that <m>c(\vec u\cdot \vec v) = \vec u\cdot (c\vec v)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Answers will vary.
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises,
+      find the measure of the angle between the two vectors in both radians and degrees.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec u = \la 1,1\ra</m>, <m>\vec v = \la 1,2\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\theta = 0.3218 \approx 18.43^\circ</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec u = \la -2,1\ra</m>, <m>\vec v = \la 3,5\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\theta = 1.6476 \approx 94.4^\circ</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec u = \la 8,1,-4\ra</m>,
+          <m>\vec v = \la 2,2,0\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\theta = \pi/4 = 45^\circ</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec u = \la 1,7,2\ra</m>,
+          <m>\vec v = \la 4,-2,5\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\theta = \pi/2 = 90^\circ</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises, a vector <m>\vec v</m> is given.
+      Give two vectors that are orthogonal to <m>\vec v</m>.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec v = \la 4,7\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Answers will vary; two possible answers are
+          <m>\la -7,4\ra</m> and <m>\la 14,-8\ra</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec v = \la -3,5\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Answers will vary; two possible answers are
+          <m>\la 5,3\ra</m> and <m>\la -15,-9\ra</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec v = \la 1,1,1\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Answers will vary; two possible answers are
+          <m>\la 1,0,-1\ra</m> and <m>\la 4,5,-9\ra</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec v = \la 1,-2,3\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Answers will vary; two possible answers are
+          <m>\la 2,1,0\ra</m> and <m>\la 1,1,1/3\ra</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises, vectors <m>\vec u</m> and <m>\vec v</m> are given.
+      Find <m>\proj uv</m>,
+      the orthogonal projection of <m>\vec u</m> onto <m>\vec v</m>,
+      and sketch all three vectors on the same axes.
+    </p>
+
+    <exercise xml:id="ex_10_03_ex_21">
+      <statement>
+        <p>
+          <m>\vec u = \la 1,2\ra</m>, <m>\vec v = \la -1,3\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\proj uv = \la -1/2,3/2\ra</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec u = \la 5,5\ra</m>, <m>\vec v = \la 1,3\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\proj uv = \la 2,6\ra</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec u = \la -3,2\ra</m>, <m>\vec v = \la 1,1\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\proj uv = \la -1/2,-1/2\ra</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec u = \la -3,2\ra</m>, <m>\vec v = \la 2,3\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\proj uv = \la 0,0\ra</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec u = \la 1,5,1\ra</m>,
+          <m>\vec v = \la 1,2,3\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\proj uv = \la 1,2,3\ra</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise xml:id="ex_10_03_ex_24">
+      <statement>
+        <p>
+          <m>\vec u = \la 3,-1,2\ra</m>,
+          <m>\vec v = \la 2,2,1\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\proj uv = \la 4/3, 4/3, 2/3\ra</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises, vectors <m>\vec u</m> and <m>\vec v</m> are given.
+      Write <m>\vec u</m> as the sum of two vectors,
+      one of which is parallel to <m>\vec v</m> and one of which is perpendicular to <m>\vec v</m>.
+      Note: these are the same pairs of vectors as found in <xref ref="ex_10_03_ex_21">Exercises</xref>
+      <mdash /> <xref ref="ex_10_03_ex_24"></xref>.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec u = \la 1,2\ra</m>, <m>\vec v = \la -1,3\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\vec u = \la -1/2,3/2\ra + \la 3/2,1/2\ra</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec u = \la 5,5\ra</m>, <m>\vec v = \la 1,3\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\vec u = \la 2,6\ra + \la 3,-1\ra</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec u = \la -3,2\ra</m>, <m>\vec v = \la 1,1\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\vec u = \la -1/2,-1/2\ra + \la -5/2,5/2\ra</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec u = \la -3,2\ra</m>, <m>\vec v = \la 2,3\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\vec u = \la 0,0\ra + \la -3,2\ra</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec u = \la 1,5,1\ra</m>,
+          <m>\vec v = \la 1,2,3\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\vec u = \la 1,2,3\ra + \la 0,3,-2\ra</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec u = \la 3,-1,2\ra</m>,
+          <m>\vec v = \la 2,2,1\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\vec u = \la 4/3,4/3,2/3\ra + \la 5/3,-7/3,4/3\ra</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          A 10lb box sits on a ramp that rises 4ft over a distance of 20ft.
+          How much force is required to keep the box from sliding down the ramp?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          1.96lb
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          A 10lb box sits on a 15ft ramp that makes a
+          <m>30^\circ</m> angle with the horizontal.
+          How much force is required to keep the box from sliding down the ramp?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          5lb
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          How much work is performed in moving a box horizontally 10ft with a force of 20lb applied at an angle of <m>45^\circ</m> to the horizontal?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>141.42</m>ft<ndash />lb
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          How much work is performed in moving a box horizontally 10ft with a force of 20lb applied at an angle of <m>10^\circ</m> to the horizontal?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>196.96</m>ft<ndash />lb
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          How much work is performed in moving a box up the length of a ramp that rises 2ft over a distance of 10ft,
+          with a force of 50lb applied horizontally?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>500</m>ft<ndash />lb
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          How much work is performed in moving a box up the length of a ramp that rises 2ft over a distance of 10ft,
+          with a force of 50lb applied at an angle of <m>45^\circ</m> to the horizontal?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>424.26</m>ft<ndash />lb
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          How much work is performed in moving a box up the length of a 10ft ramp that makes a <m>5^\circ</m> angle with the horizontal,
+          with 50lb of force applied in the direction of the ramp?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>500</m>ft<ndash />lb
+        </p>
+      </answer>
+    </exercise>
+  </subsection>
+
+</section>
+
