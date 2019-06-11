@@ -1,0 +1,1287 @@
+
+
+<section xml:id="sec_line_int_vf">
+  <title>Line Integrals over Vector Fields</title>
+  <introduction>
+    <p>
+      Suppose a particle moves along a curve <m>C</m> under the influence of an electromagnetic force described by a vector field <m>\vec F</m>.
+      Since a force is inducing motion, work is performed.
+      How can we calculate how much work is performed?
+    </p>
+
+    <p>
+      Recall that when moving in a straight line,
+      if <m>\vec F</m> represents a constant force and <m>\vec d</m> represents the direction and length of travel,
+      then work is simply <m>W = \vec F\cdot \vec d</m>.
+      However, we generally want to be able to calculate work even if <m>\vec F</m> is not constant and <m>C</m> is not a straight line.
+    </p>
+
+    <p>
+      As we have practiced many times before,
+      we can calculate work by first approximating,
+      then refining our approximation through a limit that leads to integration.
+    </p>
+
+    <p>
+      Assume as we did in <xref ref="sec_line_int_intro">Section</xref>
+      that <m>C</m> can be parametrized by the arc length parameter <m>s</m>.
+      Over a short piece of the curve with length <m>ds</m>,
+      the curve is approximately straight and our force is approximately constant.
+      The straight<ndash />line direction of this short length of curve is given by <m>\vec T</m>,
+      the unit tangent vector;
+      let <m>\vec d = \vec T\ ds</m>,
+      which gives the direction and magnitude of a small section of <m>C</m>.
+      Thus work over this small section of <m>C</m> is <m>\vec F \cdot \vec d = \vec F\cdot \vec T\ ds</m>.
+    </p>
+
+    <p>
+      Summing up all the work over these small segments gives an approximation of the work performed.
+      By taking the limit as <m>ds</m> goes to zero,
+      and hence the number of segments approaches infinity,
+      we can obtain the exact amount of work.
+      Following the logic presented at the beginning of this chapter in the Integration Review,
+      we see that
+      <me>
+        W = \int_C \vec F\cdot \vec T\ ds
+      </me>,
+      a line integral.
+    </p>
+
+    <p>
+      This line integral is beautiful in its simplicity,
+      yet is not so useful in making actual computations
+      (largely because the arc length parameter is so difficult to work with).
+      To compute actual work,
+      we need to parametrize <m>C</m> with another parameter <m>t</m> via a vector<ndash />valued function <m>\vec r(t)</m>.
+      As stated in <xref ref="sec_line_int_intro">Section</xref>,
+      <m>ds = \norm{\vrp(t)}\ dt</m>,
+      and recall that <m>\vec T = \vrp(t)/\norm{\vrp(t)}</m>.
+      Thus
+      <men xml:id="eq_line_integral">
+        W = \int_C \vec F\cdot\vec T\ ds = \int_C \vec F\cdot \frac{\vrp(t)}{\norm{\vrp(t)}}\norm{\vrp(t)}\ dt = \int_C\vec F\cdot \vrp(t)\ dt = \int_C \vec F\cdot d\vec r
+      </men>,
+      where the final integral uses the differential <m>d\vec r</m> for <m>\vrp(t)\,dt</m>.
+    </p>
+
+    <p>
+      These integrals are known as <em>line integrals over vector fields</em>.
+      By contrast,
+      the line integrals we dealt with in <xref ref="sec_line_int_intro">Section</xref>
+      are sometimes referred to as <em>line integrals over scalar fields</em>.
+          <idx><h>line integral</h><h>over scalar field</h></idx>
+      Just as a vector field is defined by a function that returns a vector,
+      a scalar field is a function that returns a scalar,
+      such as <m>z = f(x,y)</m>.
+      We waited until now to introduce this terminology so we could contrast the concept with vector fields.
+    </p>
+
+    <p>
+      We formally define this line integral,
+      then give examples and applications.
+    </p>
+
+    <definition xml:id="def_line_integral2">
+      <title>Line Integral Over A Vector Field</title>
+      <statement>
+        <p>
+          Let <m>\vec F</m> be a vector field with continuous components defined on a smooth curve <m>C</m>,
+          parametrized by <m>\vrt</m>,
+          and let <m>\vec T</m> be the unit tangent vector of <m>\vrt</m>.
+          The <term>line integral over <m>\vec F</m> along <m>C</m></term>
+          is<idx><h>line integral</h><h>over vector field</h></idx>
+          <me>
+            \int_C \vec F\cdot d\vec r = \int_C \vec F\cdot\vec T\ ds
+          </me>.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      In <xref ref="def_line_integral2">Definition</xref>,
+      note how the dot product <m>\vec F \cdot \vec T</m> is just a scalar.
+      Therefore, this new line integral is really just a special kind of line integral found in <xref ref="sec_line_int_intro">Section</xref>;
+      letting <m>f(s) = \vec F(s)\cdot \vec T(s)</m>,
+      the right<ndash />hand side simply becomes <m>\int_C f(s)\ ds</m>,
+      and we can use the techniques of that section to evaluate the integral.
+      We combine those techniques,
+      along with parts of Equation <xref ref="eq_line_integral" />,
+      to clearly state how to evaluate a line integral over a vector field in the following Key Idea.
+    </p>
+
+    <insight xml:id="idea_line2">
+      <title>Evaluating a Line Integral Over A Vector Field</title>
+      <p>
+        Let <m>\vec F</m> be a vector field with continuous components defined on a smooth curve <m>C</m>,
+        parametrized by <m>\vrt</m>, <m>a\leq t\leq b</m>,
+        where <m>\vec r</m> is continuously differentiable.
+        Then<idx><h>vector field</h><h>over vector field</h></idx>
+        <me>
+          \int_C\vec F\cdot\vec T\ ds = \int_C \vec F\cdot d\vec r =\int_a^b \vec F\big(\vec r(t)\big) \cdot \vrp(t)\ dt
+        </me>.
+      </p>
+    </insight>
+
+    <p>
+      An important concept implicit in this Key Idea:
+      we can use any continuously differentiable parametrization <m>\vrt</m> of <m>C</m> that preserves the orientation of <m>C</m>:
+      there isn't a <q>right</q> one.
+      In practice, choose one that seems easy to work with.
+    </p>
+
+    <p>
+      <em>Notation note:</em> the above Definition and Key Idea implicitly evaluate <m>\vec F</m> along the curve <m>C</m>,
+      which is parametrized by <m>\vrt</m>.
+      For instance,
+      if <m>\vec F = \langle x+y, x-y\rangle</m> and <m>\vrt = \langle t^2,\cos t\rangle</m>,
+      then evaluating <m>\vec F</m> along <m>C</m> means substituting the <m>x</m>- and <m>y</m>-components of <m>\vrt</m> in for <m>x</m> and <m>y</m>,
+      respectively, in <m>\vec F</m>.
+      Therefore, along <m>C</m>,
+      <m>\vec F = \langle x+y,x-y\rangle = \la t^2+\cos t, t^2-\cos t\ra</m>.
+      Since we are substituting the <em>output</em>
+      of <m>\vrt</m> for the <em>input</em> of <m>\vec F</m>,
+      we write this as <m>\vec F\big(\vrt\big)</m>.
+      This is a slight abuse of notation as technically the input of <m>\vec F</m> is to be a <em>point</em>,
+      not a <em>vector</em>, but this shorthand is useful.
+    </p>
+
+    <p>
+      We use an example to practice evaluating line integrals over vector fields.
+    </p>
+
+    <example xml:id="ex_livf1">
+      <title>Evaluating a line integral over a vector field: computing work</title>
+      <statement>
+        <p>
+          Two particles move from <m>(0,0)</m> to <m>(1,1)</m> under the influence of the force field <m>\vec F = \langle x, x+y\rangle</m>.
+          One particle follows <m>C_1</m>, the line <m>y=x</m>;
+          the other follows <m>C_2</m>,
+          the curve <m>y=x^4</m>, as shown in <xref ref="fig_livf1">Figure</xref>.
+          Force is measured in newtons and distance is measured in meters.
+          Find the work performed by each particle.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          To compute work, we need to parametrize each path.
+          We use <m>\vec r_1(t) = \langle t,t\rangle</m> to parametrize <m>y=x</m>,
+          and let <m>\vec r_2(t) =\langle t,t^4\rangle</m> parametrize <m>y=x^4</m>;
+          for each, <m>0\leq t\leq 1</m>.
+        </p>
+
+        <p>
+          Along the straight<ndash />line path,
+          <m>\vec F\big(\vec r_1(t)\big) = \langle x, x+y\rangle = \langle t, t+t\rangle = \langle t,2t\rangle</m>.
+          We find <m>\vrp_1(t) =\langle 1,2\rangle</m>.
+          The integral that computes work is:
+          <md>
+            <mrow>\int_{C_1} \vec F\cdot d\vec r \amp = \int_0^1 \langle t,2t\rangle\cdot\la 1,1\ra\ dt</mrow>
+            <mrow>\amp = \int_0^1 3t\ dt</mrow>
+            <mrow>\amp = \frac32t^2\Big|_0^1 = 1.5 \text{ joules } </mrow>
+          </md>.
+        </p>
+
+        <p>
+          Along the curve <m>y = x^4</m>,
+          <m>\vec F\big(\vec r_2(t)\big) = \la x, x+y\ra = \la t, t+t^4\ra</m>.
+          We find <m>\vrp_2(t) = \la 1, 4t^3\ra</m>.
+          The work performed along this path is
+          <md>
+            <mrow>\int_{C_2} \vec F\cdot d\vec r \amp = \int_0^1 \la t,t+t^4\ra\cdot\la 1,4t^3\ra\ dt</mrow>
+            <mrow>\amp = \int_0^1 \big(t + 4t^4+ 4t^7\big)\ dt</mrow>
+            <mrow>\amp = \big(\frac12t^2 + \frac45t^5 + \frac12t^8\big)\Big|_0^1 =  1.8 \text{ joules } </mrow>
+          </md>.
+        </p>
+
+        <figure xml:id="fig_livf1">
+          <caption>Paths through a vector field in <xref ref="ex_livf1">Example</xref>.</caption>
+          <img src="figures/figlivf1"/>
+        </figure>
+
+        <p>
+          Note how differing amounts of work are performed along the different paths.
+          This should not be too surprising:
+          the force is variable, one path is longer than the other, etc.
+        </p>
+      </solution>
+    </example>
+
+    <example xml:id="ex_livf2">
+      <title>Evaluating a line integral over a vector field: computing work</title>
+      <statement>
+        <p>
+          Two particles move from <m>(-1,1)</m> to <m>(1,1)</m> under the influence of a force field <m>\vec F = \la y, x\ra</m>.
+          One moves along the curve <m>C_1</m>,
+          the parabola defined by <m>y = 2x^2-1</m>.
+          The other particle moves along the curve <m>C_2</m>,
+          the bottom half of the circle defined by <m>x^2+(y-1)^2=1</m>,
+          as shown in <xref ref="fig_livf2">Figure</xref>.
+          Force is measured in pounds and distances are measured in feet.
+          Find the work performed by moving each particle along its path.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We start by parametrizing <m>C_1</m>:
+          the parametrization <m>\vec r_1(t) = \la t, 2t^2-1\ra</m> is straightforward,
+          giving <m>\vrp_1 = \la 1,4t\ra</m>.
+          On <m>C_1</m>,
+          <m>\vec F\big(\vec r_1(t)\big) = \la y,x\ra = \la 2t^2-1,t\ra</m>.
+        </p>
+
+        <figure xml:id="fig_livf2">
+          <caption>Paths through a vector field in <xref ref="ex_livf2">Example</xref>.</caption>
+          <img src="figures/figlivf2"/>
+        </figure>
+
+        <p>
+          Computing the work along <m>C_1</m>, we have:
+          <md>
+            <mrow>\int_{C_1} \vec F\cdot d\vec r_1 \amp  = \int_{-1}^1 \la 2t^2-1,t\ra\cdot\la 1,4t\ra\ dt</mrow>
+            <mrow>\amp = \int_{-1}^1 \big(2t^2-1+4t^2\big)\ dt = 2 \text{ ft-lbs } </mrow>
+          </md>.
+        </p>
+
+        <p>
+          For <m>C_2</m>,
+          it is probably simplest to parametrize the half circle using sine and cosine.
+          Recall that <m>\vec r(t) = \la \cos t, \sin t\ra</m> is a parametrization of the unit circle on <m>0\leq t\leq 2\pi</m>;
+          we add 1 to the second component to shift the circle up one unit,
+          then restrict the domain to
+          <m>\pi\leq t\leq 2\pi</m> to obtain only the lower half,
+          giving <m>\vec r_2(t) = \la \cos t, \sin t+1\ra</m>,
+          <m>\pi\leq t\leq 2\pi</m>,
+          and hence <m>\vrp_2(t) = \la -\sin t, \cos t\ra</m> and <m>\vec F\big(\vec r_2(t)\big) = \la y,x\ra = \la \sin t+1,\cos t\ra</m>.
+        </p>
+
+        <p>
+          Computing the work along <m>C_2</m>, we have:
+          <md>
+            <mrow>\int_{C_2} \vec F\cdot d\vec r_2 \amp  = \int_{\pi}^{2\pi} \la \sin t+1,\cos t\ra\cdot\la -\sin t,\cos t\ra\ dt</mrow>
+            <mrow>\amp = \int_{\pi}^{2\pi} \big(-\sin^2t-\sin t+\cos^2t\big)\ dt = 2 \text{ ft-lbs } </mrow>
+          </md>.
+        </p>
+
+        <p>
+          Note how the work along <m>C_1</m> and <m>C_2</m> in this example is the same.
+          We'll address why later in this section when
+          <em>conservative fields</em>
+          and <em>path independence</em> are discussed.
+        </p>
+      </solution>
+    </example>
+  </introduction>
+
+  <subsection>
+    <title>Properties of Line Integrals Over Vector Fields</title>
+    <p>
+      Line integrals over vector fields share the same properties as line integrals over scalar fields,
+      with one important distinction.
+      The orientation of the curve <m>C</m> matters with line integrals over vector fields,
+      whereas it did not matter with line integrals over scalar fields.
+    </p>
+
+    <p>
+      It is relatively easy to see why.
+      Let <m>C</m> be the unit circle.
+      The area under a surface over <m>C</m> is the same whether we traverse the circle in a clockwise or counterclockwise fashion,
+      hence the line integral over a scalar field on <m>C</m> is the same irrespective of orientation.
+      On the other hand, if we are computing work done by a force field,
+      direction of travel definitely matters.
+      Opposite directions create opposite signs when computing dot products,
+      so traversing the circle in opposite directions will create line integrals that differ by a factor of <m>-1</m>.
+    </p>
+
+    <theorem xml:id="thm_line_int_properties_vector">
+      <title>Properties of Line Integrals Over Vector Fields</title>
+      <statement>
+        <ol>
+          <li>
+            <p>
+              Let <m>\vec F</m> and <m>\vec G</m> be  vector fields with continuous components defined on a smooth curve <m>C</m>,
+              parametrized by <m>\vrt</m>, and let <m>k_1</m> and <m>k_2</m> be scalars.
+              Then<idx><h>line integral</h><h>properties over a vector field</h></idx>
+              <me>
+                \ds \int_C\big(k_1\vec F+k_2\vec G\big)\cdot d\vec r = k_1\int_C\vec F\cdot d\vec r +k_2\int_C\vec G\cdot d\vec r
+              </me>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Let <m>C</m> be piecewise smooth,
+              composed of smooth components <m>C_1</m> and <m>C_2</m>.
+              Then
+              <me>
+                \int_C\vec F\cdot d\vec r = \int_{C_1}\vec F\cdot d\vec r + \int_{C_2}\vec F\cdot d\vec r
+              </me>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Let <m>C^*</m> be the curve <m>C</m> with opposite orientation,
+              parametrized by <m>\vec r\,^*</m>.
+              Then
+              <me>
+                \int_C\vec F\cdot d\vec r = -\int_{C^*}\vec F\cdot d\vec r\,^*
+              </me>.
+            </p>
+          </li>
+        </ol>
+      </statement>
+    </theorem>
+
+    <p>
+      We demonstrate using these properties in the following example.
+    </p>
+
+    <example xml:id="ex_livf3">
+      <title>Using properties of line integrals over vector fields</title>
+      <statement>
+        <p>
+          Let <m>\vec F = \la 3(y-1/2),1\ra</m> and let <m>C</m> be the path that starts at <m>(0,0)</m>,
+          goes to <m>(1,1)</m> along the curve <m>y=x^3</m>,
+          then returns to <m>(0,0)</m> along the line <m>y=x</m>,
+          as shown in <xref ref="fig_livf3">Figure</xref>.
+          Evaluate <m>\oint_C \vec F\cdot d\vec r</m>.
+        </p>
+
+        <figure xml:id="fig_livf3">
+          <caption>The vector field and curve in <xref ref="ex_livf3">Example</xref>.</caption>
+          <img src="figures/figlivf3"/>
+        </figure>
+      </statement>
+      <solution>
+        <p>
+          As <m>C</m> is piecewise smooth,
+          we break it into two components <m>C_1</m> and <m>C_2</m>,
+          where <m>C_1</m> follows the curve <m>y=x^3</m> and <m>C_2</m> follows the curve <m>y=x</m>.
+        </p>
+
+        <p>
+          We parametrize <m>C_1</m> with
+          <m>\vec r_1(t) = \la t, t^3\ra</m> on <m>0\leq t\leq 1</m>,
+          with <m>\vrp_1(t) = \la 1,3t^2\ra</m>.
+          We will use <m>\vec F\big(\vec r_1(t)\big) = \la 3(t^3-1/2),1\ra</m>.
+        </p>
+
+        <p>
+          While we always have unlimited ways in which to parametrize a curve,
+          there are 2 <q>direct</q> methods to choose from when parametrizing <m>C_2</m>.
+          The parametrization <m>\vec r_2(t)=\la t,t\ra</m>,
+          <m>0\leq t\leq 1</m> traces the correct line segment but with the wrong orientation.
+          Using Property 3 of <xref ref="thm_line_int_properties_vector">Theorem</xref>,
+          we can use this parametrization and negate the result.
+        </p>
+
+        <p>
+          Another choice is to use the techniques of <xref ref="sec_lines">Section</xref>
+          to create the line with the orientation we desire.
+          We wish to start at <m>( 1,1)</m> and travel in the
+          <m>\vec d = \la -1,-1\ra</m> direction for one length of <m>\vec d</m>,
+          giving equation <m>\vec \ell(t) = \la 1,1\ra + t\la -1,-1\ra = \la 1-t,1-t\ra</m> on <m>0\leq t\leq 1</m>.
+        </p>
+
+        <p>
+          Either choice is fine; we choose
+          <m>\vec r_2(t)</m> to practice using line integral properties.
+          We find <m>\vrp_2(t) = \la 1,1\ra</m> and <m>\vec F\big(\vec r_2(t)\big) = \la 3(t-1/2),1\ra</m>.
+        </p>
+
+        <p>
+          Evaluating the line integral (note how we subtract the integral over <m>C_2</m> as the orientation of <m>\vec r_2(t)</m> is opposite):
+          <md>
+            <mrow>\oint_C \vec F\cdot d\vec r \amp = \int_{C_1}\vec F\cdot d\vec r_1 - \int_{C_2}\vec F\cdot d\vec r_2</mrow>
+            <mrow>\amp = \int_0^1 \la 3(t^3-1/2),1\ra\cdot \la 1,3t^2\ra dt- \int_0^1 \la 3(t-1/2),1\ra\cdot\la 1,1\ra dt</mrow>
+            <mrow>\amp = \int_0^1\Big(3t^3+3t^2-3/2\Big)\ dt - \int_0^1 \Big(3t-1/2\Big)\ dt</mrow>
+            <mrow>\amp = \big(1/4 \big) - \big(1\big)</mrow>
+            <mrow>\amp =  -3/4</mrow>
+          </md>.
+        </p>
+
+        <p>
+          If we interpret this integral as computing work,
+          the negative work implies that the motion is mostly <em>against</em>
+          the direction of the force,
+          which seems plausible when we look at <xref ref="fig_livf3">Figure</xref>.
+        </p>
+      </solution>
+    </example>
+
+    <example xml:id="ex_livf4">
+      <title>Evaluating a line integral over a vector field in space</title>
+      <statement>
+        <p>
+          Let <m>\vec F = \la -y, x, 1\ra</m>,
+          and let <m>C</m> be the portion of the helix given by <m>\vrt = \langle \cos t,\sin t, t/(2\pi)\rangle</m> on <m>[0,2\pi]</m>,
+          as shown in <xref ref="fig_livf4">Figure</xref>.
+          Evaluate <m>\int_C\vec F\cdot d\vec r</m>.
+        </p>
+
+        <figure xml:id="fig_livf4">
+          <caption>The graph of <m>\vec r(t)</m> in <xref ref="ex_livf4">Example</xref>.</caption>
+          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.005022394936531782,
+          3Dc2c=0.7812440395355225 0.4906015396118164 0.38596370816230774,
+          3Dcoo=12.9679536819458 12.412303924560547 19.615886688232422,
+          3Droo=399.99998637870164,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figlivf4_3D"/>
+        </figure>
+      </statement>
+      <solution>
+        <p>
+          A parametrization is already given for <m>C</m>,
+          so we just need to find <m>\vec F\big(\vec r(t)\big)</m> and \vec r '(t).
+        </p>
+
+        <p>
+          We have <m>\vec F\big(\vec r(t)\big) = \la -\sin t, \cos t, 1\ra</m> and <m>\vrp(t) = \la -\sin t, \cos t, 1/(2\pi)\ra</m>.
+          Thus
+          <md>
+            <mrow>\int_C \vec F\cdot d\vec r \amp = \int_0^{2\pi} \la -\sin t, \cos t, 1\ra\cdot \la -\sin t, \cos t, 1/(2\pi)\ra dt</mrow>
+            <mrow>\amp = \int_0^{2\pi} \Big(\sin^2t+\cos^2t + \frac1{2\pi}\big)dt</mrow>
+            <mrow>\amp = 2\pi + 1 \approx 7.28</mrow>
+          </md>.
+        </p>
+      </solution>
+    </example>
+  </subsection>
+
+  <subsection>
+    <title>The Fundamental Theorem of Line Integrals</title>
+    <p>
+      We are preparing to make important statements about the value of certain line integrals over special vector fields.
+      Before we can do that,
+      we need to define some terms that describe the domains over which a vector field is defined.
+          <idx><h>line integral</h><h>Fundamental Theorem</h></idx>
+          <idx><h>Fundamental Theorem of Line Integrals</h></idx>
+    </p>
+
+    <p>
+      A region in the plane is <em>connected</em>
+          <idx><h>connected</h></idx>
+      if any two points in the region can be joined by a piecewise smooth curve that lies entirely in the region.
+      In <xref ref="fig_simply_connected_plane">Figure</xref>,
+      sets <m>R_1</m> and <m>R_2</m> are connected;
+      set <m>R_3</m> is not connected,
+      though it is composed of two connected subregions.
+    </p>
+
+    <p>
+      A region is <em>simply connected</em>
+          <idx><h>simply connected</h></idx>
+          <idx><h>connected</h><h>simply</h></idx>
+      if every simple closed curve that lies entirely in the region can be continuously deformed (shrunk) to a single point without leaving the region. (A curve is <em>simple</em>
+          <idx><h>simple curve</h></idx>
+      if it does not cross itself.) In <xref ref="fig_simply_connected_plane">Figure</xref>,
+      only set <m>R_1</m> is simply connected.
+      Region <m>R_2</m> is not simply connected as any closed curve that goes around the <q>hole</q>
+      in <m>R_2</m> cannot be continuously shrunk to a single point.
+      As <m>R_3</m> is not even connected,
+      it cannot be simply connected,
+      though again it consists of two simply connected subregions.
+    </p>
+
+    <p>
+      We have applied these terms to regions of the plane,
+      but they can be extended intuitively to domains in space
+      (and hyperspace).
+      In <xref ref="fig_simply_connected_space">Figure</xref>(a),
+      the domain bounded by the sphere
+      (at left)
+      and the domain with a subsphere removed
+      (at right)
+      are both simply connected.
+      Any simple closed path that lies entirely within these domains can be continuously deformed into a single point.
+      In <xref ref="fig_simply_connected_space">Figure</xref>(b),
+      neither domain is simply connected.
+      A left, the ball has a hole that extends its length and the pictured closed path cannot be deformed to a point.
+      At right, two paths are illustrated on the torus that cannot be shrunk to a point.
+    </p>
+
+    <p>
+      We will use the terms connected and simply connected in subsequent definitions and theorems.
+    </p>
+
+    <figure xml:id="fig_simply_connected_plane">
+      <caption><m>R_1</m> is simply connected; <m>R_2</m> is connected, but not simply connected; <m>R_3</m> is not connected.</caption>
+      <img src="figures/figsimply_connected_c"/>
+    </figure>
+
+    <figure xml:id="fig_simply_connected_space">
+      <caption>The domains in (a) are simply connected, while the domains in (b) are not.</caption>
+      <sidebyside>
+        <figure>
+          <caption>(a)</caption>
+          \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.009668752551078796,
+          3Dc2c=-0.040020350366830826 -0.8586178421974182 0.511051595211029,
+          3Dcoo=0.47741085290908813 38.61087417602539 -23.2408390045166,
+          3Droo=149.999998390057,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figsimply_connected_1_3D"/>
+        </figure>
+
+        <figure>
+          <caption>(b)</caption>
+          \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.009668752551078796,
+          3Dc2c=-0.040020350366830826 -0.8586178421974182 0.511051595211029,
+          3Dcoo=0.47741085290908813 38.61087417602539 -23.2408390045166,
+          3Droo=149.999998390057,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figsimply_connected_2_3D"/>
+        </figure>
+      </sidebyside>
+
+    </figure>
+
+    <p>
+      Recall how in <xref ref="ex_livf2">Example</xref>
+      particles moved from <m>A = (-1,1)</m> to
+      <m>B = (1,1)</m> along two different paths,
+      wherein the same amount of work was performed along each path.
+      It turns out that regardless of the choice of path from <m>A</m> to <m>B</m>,
+      the amount of work performed under the field <m>\vec F = \la y, x\ra</m> is the same.
+      Since our expectation is that differing amounts of work are performed along different paths,
+      we give such special fields a name.
+    </p>
+
+    <definition xml:id="def_conservative">
+      <title>Conservative Field, Path Independent</title>
+      <statement>
+        <p>
+          Let <m>\vec F</m> be a vector field defined on an open,
+          connected domain <m>D</m> in the plane or in space containing points <m>A</m> and <m>B</m>.
+          If the line integral <m>\int_C \vec F\cdot d\vec r</m><nbsp /> has the same value for all choices of paths <m>C</m> starting at <m>A</m> and ending at <m>B</m>, then
+              <idx><h>conservative field</h></idx>
+              <idx><h>vector field</h><h>conservative</h></idx>
+              <idx><h>path independent</h></idx>
+              <idx><h>line integral</h><h>path independent</h></idx>
+
+          <ul>
+            <li>
+              <p>
+                <m>\vec F</m> is a <em>conservative field</em> and
+              </p>
+            </li>
+
+            <li>
+              <p>
+                The line integral <m>\int_C \vec F\cdot d\vec r</m> is
+                <em>path independent</em> and can be written as
+                <me>
+                  \int_C \vec F\cdot d\vec r = \int_A^B \vec F\cdot \ d\vec r
+                </me>.
+              </p>
+            </li>
+          </ul>
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      When <m>\vec F</m> is a conservative field,
+      the line integral from points <m>A</m> to <m>B</m> is sometimes written as
+      <m>\int_A^B\vec F\cdot d\vec r</m> to emphasize the independence of its value from the choice of path;
+      all that matters are the beginning and ending points of the path.
+    </p>
+
+    <p>
+      How can we tell if a field is conservative?
+      To show a field <m>\vec F</m> is conservative using the definition,
+      we need to show that <em>all</em>
+      line integrals from points <m>A</m> to <m>B</m> have the same value.
+      It is equivalent to show that <em>all</em>
+      line integrals over closed paths <m>C</m> are 0.
+      Each of these tasks are generally nontrivial.
+    </p>
+
+    <p>
+      There is a simpler method.
+      Consider the surface defined by <m>z = f(x,y) = xy</m>.
+      We can compute the gradient of this function:
+      <m>\nabla f = \la f_x, f_y\ra = \la y, x\ra</m>.
+      Note that this is the field from <xref ref="ex_livf2">Example</xref>,
+      which we have claimed is conservative.
+      We will soon give a theorem that states that a field <m>\vec F</m> is conservative if,
+      and only if,
+      it is the gradient of some scalar function <m>f</m>.
+      To show <m>\vec F</m> is conservative,
+      we need to determine whether or not
+      <m>\vec F = \nabla f</m> for some function <m>f</m>. (We'll later see that there is a yet simpler method).
+      To recognize the special relationship between <m>\vec F</m> and <m>f</m> in this situation,
+      <m>f</m> is given a name.
+    </p>
+
+    <definition xml:id="def_potential">
+      <title>Potential Function</title>
+      <statement>
+        <p>
+          Let <m>f</m> be a differentiable function defined on a domain <m>D</m> in the plane or in space (i.e.,
+          <m>z = f(x,y)</m> or <m>w = f(x,y,z)</m>) and let
+          <m>\vec F = \nabla f</m>, the gradient of <m>f</m>.
+          Then <m>f</m> is a <term>potential function</term> of <m>\vec F</m>.
+              <idx><h>potential function</h></idx>
+              <idx><h>vector field</h><h>potential function of</h></idx>
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      We now state the Fundamental Theorem of Line Integrals,
+      which connects conservative fields and path independence to fields with potential functions.
+    </p>
+
+    <theorem xml:id="thm_FTofLineIntegrals">
+      <title>Fundamental Theorem of Line Integrals</title>
+      <statement>
+        <p>
+          Let <m>\vec F</m> be a vector field whose components are continuous on a connected domain <m>D</m> in the plane or in space,
+          let <m>A</m> and <m>B</m> be any points in <m>D</m>,
+          and let <m>C</m> be any path in <m>D</m> starting at <m>A</m> and ending at <m>B</m>.
+              <idx><h>line integral</h><h>Fundamental Theorem</h></idx>
+              <idx><h>Fundamental Theorem of Line Integrals</h></idx>
+              <idx><h>conservative field</h></idx>
+              <idx><h>vector field</h><h>conservative</h></idx>
+              <idx><h>path independent</h></idx>
+              <idx><h>line integral</h><h>path independent</h></idx>
+
+          <ol>
+            <li>
+              <p>
+                <m>\vec F</m> is conservative if and only if there exists a differentiable function <m>f</m> such that <m>\vec F = \nabla f</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                If <m>\vec F</m> is conservative, then
+                <me>
+                  \int_C\vec F\cdot d\vec r = \int_A^B \vec F\cdot d\vec r = f(B) - f(A)
+                </me>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </theorem>
+
+    <p>
+      Once again considering <xref ref="ex_livf2">Example</xref>,
+      we have <m>A = (-1,1)</m>,
+      <m>B = (1,1)</m> and <m>\vec F = \la y,x\ra</m>.
+      In that example,
+      we evaluated two line integrals from <m>A</m> to <m>B</m> and found the value of each was 2.
+      Note that <m>f(x,y) = xy</m> is a potential function for <m>\vec F</m>.
+      Following the Fundamental Theorem of Line Integrals,
+      consider <m>f(B) - f(A)</m>:
+      <me>
+        f(B) - f(A) = f(1,1) - f(-1,1) = 1 - (-1) = 2
+      </me>,
+      the same value given by the line integrals.
+    </p>
+
+    <p>
+      We practice using this theorem again in the next example.
+    </p>
+
+    <example xml:id="ex_livf5">
+      <title>Using the Fundamental Theorem of Line Integrals</title>
+      <statement>
+        <p>
+          Let <m>\vec F = \la 3x^2y+2x,
+          x^3+1\ra</m>, <m>A = (0,1)</m> and <m>B = (1,4)</m>.
+          Use the first part of the Fundamental Theorem of Line Integrals to show that <m>\vec F</m> is conservative,
+          then choose any path from <m>A</m> to <m>B</m> and confirm the second part of the theorem.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          To show <m>\vec F</m> is conservative,
+          we need to find <m>z = f(x,y)</m> such that <m>\vec F = \nabla f = \la f_x, f_y\ra</m>.
+          That is, we need to find <m>f</m> such that
+          <m>f_x = 3x^2y+2x</m> and <m>f_y = x^3+1</m>.
+          As all we know about <m>f</m> are its partial derivatives,
+          we recover <m>f</m> by integration:
+          <me>
+            \int \frac{\partial f}{\partial x}\ dx = f(x,y) + C(y)
+          </me>.
+        </p>
+
+        <p>
+          Note how the constant of integration is more than
+          <q>just a constant</q>:
+          it is anything that acts as a constant when taking a derivative with respect to <m>x</m>.
+          Any function that is a function of <m>y</m>
+          (containing no <m>x</m>'s)
+          acts as a constant when deriving with respect to <m>x</m>.
+        </p>
+
+        <p>
+          Integrating <m>f_x</m> in this example gives:
+          <me>
+            \int \frac{\partial f}{\partial x}\ dx = \int (3x^2y+2x)\ dx = x^3y+x^2 + C(y)
+          </me>.
+        </p>
+
+        <p>
+          Likewise, integrating <m>f_y</m> with respect to <m>y</m> gives:
+          <me>
+            \int \frac{\partial f}{\partial y}\ dy = \int( x^3+1)\ dy = x^3y+ y + C(x)
+          </me>.
+        </p>
+
+        <p>
+          These two results should be equal with appropriate choices of <m>C(x)</m> and <m>C(y)</m>:
+          <me>
+            x^3y+x^2 + C(y) = x^3y+ y + C(x) \Rightarrow C(x) = x^2  \text{ and }  C(y) = y
+          </me>.
+        </p>
+
+        <p>
+          We find <m>f(x,y) = x^3y+x^2+y</m>,
+          a potential function of <m>\vec F</m>. (If <m>\vec F</m> were not conservative,
+          no choice of <m>C(x)</m> and <m>C(y)</m> would give equality.)
+        </p>
+
+        <p>
+          By the Fundamental Theorem of Line Integrals,
+          regardless of the path from <m>A</m> to <m>B</m>,
+          <md>
+            <mrow>\int_A^B\vec F\cdot d\vec r \amp = f(B) - f(A)</mrow>
+            <mrow>\amp = f(1,4) - f(0,1)</mrow>
+            <mrow>\amp = 9 - 1 = 8</mrow>
+          </md>.
+        </p>
+
+        <p>
+          To illustrate the validity of the Fundamental Theorem,
+          we pick a path from <m>A</m> to <m>B</m>.
+          The line between these two points would be simple to construct;
+          we choose a slightly more complicated path by choosing the parabola <m>y = x^2+2x+1</m>.
+          This leads to the parametrization <m>\vrt = \la t, t^2+2t+1\ra</m>,
+          <m>0\leq t\leq 1</m>, with <m>\vrp(t) = \la t, 2t+2\ra</m>.
+          Thus
+          <md>
+            <mrow>\int_C \vec F\cdot d\vec r \amp = \int_C\vec F\big(\vrt\big)\cdot\vrp(t)\ dt</mrow>
+            <mrow>\amp = \int_0^1\la 3(t)(t^2+2t+1)+2t, t^3+1\ra\cdot\la t,2t+2\ra\ dt</mrow>
+            <mrow>\amp = \int_0^1 \big(5t^4+8t^3+3t^2+4t+2\big)\ dt</mrow>
+            <mrow>\amp = \big(t^5+2t^4+t^3+2t^2+2t\big)\Big|_0^1</mrow>
+            <mrow>\amp = 8</mrow>
+          </md>,
+          which matches our previous result.
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      The Fundamental Theorem of Line Integrals states that we can determine whether or not <m>\vec F</m> is conservative by determining whether or not <m>\vec F</m> has a potential function.
+      This can be difficult.
+      A simpler method exists if the domain of <m>\vec F</m> is simply connected
+      (not just connected as needed in the Fundamental Theorem of Line Integrals),
+      which is a reasonable requirement.
+      We state this simpler method as a theorem.
+    </p>
+
+    <theorem xml:id="thm_conservative_field_curl">
+      <title>Curl of Conservative Fields</title>
+      <statement>
+        <p>
+          Let <m>\vec F</m> be a vector field whose components are continuous on a simply connected domain <m>D</m> in the plane or in space.
+          Then <m>\vec F</m> is conservative if and only if
+          <m>\curl \vec F = 0</m> or <m>\vec 0</m>, respectively.
+              <idx><h>curl</h><h>of conservative fields</h></idx>
+              <idx><h>conservative field</h></idx>
+        </p>
+      </statement>
+    </theorem>
+
+    <p>
+      In <xref ref="ex_livf5">Example</xref>,
+      we showed that <m>\vec F =\langle 3x^2y+2x,x^3+1\rangle</m> is conservative by finding a potential function for <m>\vec F</m>.
+      Using the above theorem,
+      we can show that <m>\vec F</m> is conservative much more easily by computing its curl:
+      <me>
+        \curl \vec F = N_x - M_y = 3x^2 - 3x^2 = 0
+      </me>.
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Terms and Concepts</title>
+    <exercise>
+      <statement>
+        <p>
+          T/F: In practice,
+          the evaluation of line integrals over vector fields involves computing the magnitude of a vector<ndash />valued function.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          False.
+          It is true for line integrals over scalar fields, though.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Let <m>\vec F(x,y)</m> be a vector field in the plane and let
+          <m>\vec r(t)</m> be a two<ndash />dimensional vector<ndash />valued function.
+          Why is <q><m>\vec F\big(\vec r(t)\big)</m></q>
+          an <q>abuse of notation</q>?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          The input of <m>\vec F</m> should be a point in the plane,
+          not a two dimensional vector.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          T/F: The orientation of a curve <m>C</m> matters when computing a line integral over a vector field.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          True.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          T/F: The orientation of a curve <m>C</m> matters when computing a line integral over a scalar field.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          False.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Under <q>reasonable conditions,</q>
+          if <m>\curl \vec F = \vec 0</m>,
+          what can we conclude about the vector field <m>\vec F</m>?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          We can conclude that <m>\vec F</m> is conservative.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Let <m>\vec F</m> be a conservative field and let <m>C</m> be a closed curve.
+          Why are we able to conclude that <m>\oint _C \vec F\cdot d\vec r = 0</m>?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          By the Fundamental Theorem of Line Integrals,
+          since <m>\vec F</m> is conservative,
+          <m>\oint_C \vec F\cdot d\vec r = f(B) - f(A)</m>,
+          where <m>f</m> is a potential function for <m>\vec F</m> and <m>A</m> and <m>B</m> are the initial and terminal points of <m>C</m>,
+          respectively.
+          Since <m>C</m> is a closed curve, <m>A = B</m>,
+          and hence <m>f(B) - f(A) = 0</m>.
+        </p>
+      </answer>
+    </exercise>
+  </subsection>
+
+  <subsection>
+    <title>Problems</title>
+    <p>
+      In the following exercises,
+      a vector field <m>\vec F</m> and a curve <m>C</m> are given.
+      Evaluate <m>\ds\int_C\vec F\cdot d\vec r</m>.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle y, y^2\rangle</m>;
+          <m>C</m> is the line segment from <m>(0,0)</m> to <m>(3,1)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>11/6</m>. (One parametrization for <m>C</m> is
+          <m>\vec r(t) = \langle 3t,t\rangle</m> on <m>0\leq t\leq 1</m>.)
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle x,x+y\rangle</m>;
+          <m>C</m> is the portion of the parabola <m>y=x^2</m> from <m>(0,0)</m> to <m>(1,1)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>5/3</m>. (One parametrization for <m>C</m> is
+          <m>\vec r(t) = \langle t,t^2\rangle</m> on <m>0\leq t\leq 1</m>.)
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle y,x\rangle</m>;
+          <m>C</m> is the top half of the unit circle,
+          beginning at <m>(1,0)</m> and ending at <m>(-1,0)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>0</m>. (One parametrization for <m>C</m> is
+          <m>\vec r(t) = \langle \cos t,\sin t\rangle</m> on <m>0\leq t\leq \pi</m>.)
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle xy,x\rangle</m>;
+          <m>C</m> is the portion of the curve <m>y=x^3</m> on <m>-1\leq x\leq 1</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>2/5</m>. (One parametrization for <m>C</m> is
+          <m>\vec r(t) = \langle t,t^3\rangle</m> on <m>-1\leq t\leq 1</m>.)
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle z,x^2,y\rangle</m>;
+          <m>C</m> is the line segment from <m>(1,2,3)</m> to <m>(4,3,2)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>12</m>. (One parametrization for <m>C</m> is
+          <m>\vec r(t) = \langle 1,2,3\rangle+t\langle 3,1,-1\rangle</m> on <m>0\leq t\leq 1</m>.)
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle y+z,x+z,x+y\rangle</m>;
+          <m>C</m> is the helix <m>\vec r(t) = \langle \cos t,\sin t,t/(2\pi)\rangle</m> on <m>0\leq t\leq 2\pi</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>1</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises,
+      find the work performed by the force field <m>\vec F</m> moving a particle along the path <m>C</m>.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle y,x^2\rangle</m> N; <m>C</m> is the segment of the line <m>y=x</m> from <m>(0,0)</m> to <m>(1,1)</m>,
+          where distances are measured in meters.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>5/6</m> joules. (One parametrization for <m>C</m> is
+          <m>\vec r(t) = \langle t,t\rangle</m> on <m>0\leq t\leq 1</m>.)
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle y,x^2\rangle</m> N; <m>C</m> is the portion of
+          <m>y=\sqrt x</m> from <m>(0,0)</m> to <m>(1,1)</m>,
+          where distances are measured in meters.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>13/15</m> joules. (One parametrization for <m>C</m> is
+          <m>\vec r(t) = \langle t,\sqrt t\rangle</m> on <m>0\leq t\leq 1</m>.)
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle 2xy,x^2,1\rangle</m> lbs;
+          <m>C</m> is the path from <m>(0,0,0)</m> to <m>(2,4,8)</m> via
+          <m>\vec r(t) = \langle t, t^2, t^3\rangle</m> on <m>0\leq t\leq 2</m>,
+          where distance are measured in feet.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>24</m> ft-lbs.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle 2xy,x^2,1\rangle</m> lbs;
+          <m>C</m> is the path from <m>(0,0,0)</m> to <m>(2,4,8)</m> via
+          <m>\vec r(t) = \langle t,2t, 4t\rangle</m> on <m>0\leq t\leq 2</m>,
+          where distance are measured in feet.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>24</m> ft-lbs.
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises,
+      a conservative vector field <m>\vec F</m> and a curve <m>C</m> are given.
+
+      <ol>
+        <li>
+          <p>
+            Find a potential function <m>f</m> for <m>\vec F</m>.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Compute <m>\curl \vec F</m>.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Evaluate <m>\ds\int_C \vec F\cdot d\vec r</m> directly,
+            i.e., using <xref ref="idea_line2">Key Idea</xref>.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Evaluate <m>\ds\int_C \vec F\cdot d\vec r</m> using the Fundamental Theorem of Line Integrals.
+          </p>
+        </li>
+      </ol>
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle y+1,x\rangle</m>,
+          <m>C</m> is the line segment from <m>(0,1)</m> to <m>(1,0)</m>.
+        </p>
+      </statement>
+      <answer>
+        <ol>
+          <li>
+            <p>
+              <m>f(x,y) = xy+x</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\curl \vec F = 0</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>1</m>. (One parametrization for <m>C</m> is
+              <m>\vec r(t) = \langle t,t-1\rangle</m> on <m>0\leq t\leq 1</m>.)
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>1</m> (with <m>A = (0,1)</m> and
+              <m>B = (1,0)</m>, <m>f(B) - f(A) = 1</m>.)
+            </p>
+          </li>
+        </ol>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle 2x+y, 2y+x\rangle</m>,
+          <m>C</m> is curve parametrized by
+          <m>\vec r(t) = \langle t^2-t, t^3-t\rangle</m> on <m>0\leq t\leq 1</m>.
+        </p>
+      </statement>
+      <answer>
+        <ol>
+          <li>
+            <p>
+              <m>f(x,y) = x^2+xy+y^2</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\curl \vec F = 0</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>0</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>0</m> (with <m>A = (0,0)</m> and
+              <m>B = (0,0)</m>, <m>f(B) - f(A) = 0</m>.)
+            </p>
+          </li>
+        </ol>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle 2xyz,x^2z,x^2y\rangle</m>,
+          <m>C</m> is curve parametrized by
+          <m>\vec r(t) = \langle 2t+1,3t-1,t\rangle</m> on <m>0\leq t\leq 2</m>.
+        </p>
+      </statement>
+      <answer>
+        <ol>
+          <li>
+            <p>
+              <m>f(x,y) = x^2yz</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\curl \vec F = \vec 0</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>250</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>250</m> (with <m>A = (1,-1,0)</m> and <m>B = (5,5,2)</m>,
+              <m>f(B) - f(A) = 250</m>.)
+            </p>
+          </li>
+        </ol>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle 2x, 2y, 2z\rangle</m>,
+          <m>C</m> is curve parametrized by
+          <m>\vec r(t) = \langle \cos t,\sin t, \sin (2t)\rangle</m> on <m>0\leq t\leq 2\pi</m>.
+        </p>
+      </statement>
+      <answer>
+        <ol>
+          <li>
+            <p>
+              <m>f(x,y) = x^2+y^2+z^2</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\curl \vec F = \vec 0</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>0</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>0</m> (with <m>A = (1,0,0)</m> and
+              <m>B = (1,0,0)</m>, <m>f(B) - f(A) = 0</m>.)
+            </p>
+          </li>
+        </ol>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Prove part of <xref ref="thm_conservative_field_curl">Theorem</xref>:
+          let <m>\vec F =\langle M,N,P\rangle</m> be a conservative vector field.
+          Show that <m>\curl \vec F = 0</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Since <m>\vec F</m> is conservative,
+          it is the gradient of some potential function.
+          That is, <m>\nabla f = \langle f_x,f_y,f_z\rangle = \vec F = \langle M, N, P\rangle</m>.
+          In particular, <m>M = f_x</m>,
+          <m>N = f_y</m> and <m>P=f_z</m>.
+        </p>
+
+        <p>
+          Note that <m>\curl \vec F = \langle P_y - N_z, M_z-P_x, N_x-M_y \rangle = \langle f_{zy} - f_{yz}, f_{xz} - f_{zx}, f_{yx} - f_{xy}\rangle</m>, which,
+          by <xref ref="thm_mixed_partial">Theorem</xref>,
+          is <m>\langle 0,0,0\rangle</m>.
+        </p>
+      </answer>
+    </exercise>
+  </subsection>
+</section>
+

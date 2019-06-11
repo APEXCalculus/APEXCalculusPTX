@@ -1,0 +1,1618 @@
+
+
+<section xml:id="sec_directional_derivative">
+  <title>Directional Derivatives</title>
+  <introduction>
+    <p>
+      Partial derivatives give us an understanding of how a surface changes when we move in the <m>x</m> and <m>y</m> directions.
+      We made the comparison to standing in a rolling meadow and heading due east:
+      the amount of rise/fall in doing so is comparable to <m>f_x</m>.
+      Likewise, the rise/fall in moving due north is comparable to <m>f_y</m>.
+      The steeper the slope, the greater in magnitude <m>f_y</m>.
+    </p>
+
+    <p>
+      But what if we didn't move due north or east?
+      What if we needed to move northeast and wanted to measure the amount of rise/fall?
+      Partial derivatives alone cannot measure this.
+      This section investigates <em>directional derivatives</em>,
+      which do measure this rate of change.
+    </p>
+
+    <p>
+      We begin with a definition.
+    </p>
+
+    <definition xml:id="def_direct_deriv">
+      <title>Directional Derivatives</title>
+      <statement>
+        <p>
+          Let <m>z=f(x,y)</m> be continuous on a set <m>S</m> and let <m>\vec u = \la u_1,u_2\ra</m> be a unit vector.
+          For all points <m>(x,y)</m>,
+          the <term>directional derivative of <m>f</m> at <m>(x,y)</m> in the direction of <m>\vec u</m></term>
+          is <idx><h>derivative</h><h>directional</h></idx>
+              <idx><h>directional derivative</h></idx>
+          <me>
+            D_{\vec u\,}f(x,y) = \lim_{h\to 0} \frac{f(x+hu_1,y+hu_2) - f(x,y)}h
+          </me>.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      The partial derivatives <m>f_x</m> and <m>f_y</m> are defined with similar limits,
+      but only <m>x</m> or <m>y</m> varies with <m>h</m>, not both.
+      Here both <m>x</m> and <m>y</m> vary with a weighted <m>h</m>,
+      determined by a particular unit vector <m>\vec u</m>.
+      This may look a bit intimidating but in reality it is not too difficult to deal with;
+      it often just requires extra algebra.
+      However, the following theorem reduces this algebraic load.
+    </p>
+
+    <theorem xml:id="thm_direct_deriv1">
+      <title>Directional Derivatives</title>
+      <statement>
+        <p>
+          Let <m>z=f(x,y)</m> be differentiable on a set <m>S</m> containing <m>(x_0,y_0)</m>,
+          and let <m>\vec u = \la u_1,u_2\ra</m> be a unit vector.
+          The directional derivative of <m>f</m> at
+          <m>(x_0,y_0)</m> in the direction of <m>\vec u</m> is <idx><h>derivative</h><h>directional</h></idx>
+              <idx><h>directional derivative</h></idx>
+          <me>
+            D_{\vec u\,}f(x_0,y_0)=f_x(x_0,y_0)u_1 + f_y(x_0,y_0)u_2
+          </me>.
+        </p>
+      </statement>
+    </theorem>
+
+    <example xml:id="ex_direct1">
+      <title>Computing directional derivatives</title>
+      <statement>
+        <p>
+          Let <m>z= 14-x^2-y^2</m> and let <m>P=(1,2)</m>.
+          Find the directional derivative of <m>f</m>,
+          at <m>P</m>, in the following directions:
+
+          <ol>
+            <li>
+              <p>
+                toward the point <m>Q=(3,4)</m>,
+              </p>
+            </li>
+
+            <li>
+              <p>
+                in the direction of <m>\la 2,-1\ra</m>, and
+              </p>
+            </li>
+
+            <li>
+              <p>
+                toward the origin.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+      <solution>
+        <figure xml:id="fig_direct1">
+          <caption>Understanding the directional derivative in <xref ref="ex_direct1">Example</xref>.</caption>
+          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=-0.45935076561172045,
+          3Dortho=0.00494238780811429,
+          3Dc2c=0.8379672765731812 0.26980355381965637 0.4743594527244568,
+          3Dcoo=-27.334510803222656 46.63825988769531 23.82315444946289,
+          3Droo=130.00000000067573,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figdirect1_3D"/>
+        </figure>
+
+        <p>
+          The surface is plotted in <xref ref="fig_direct1">Figure</xref>,
+          where the point <m>P=(1,2)</m> is indicated in the <m>x,y</m>-plane as well as the point <m>(1,2,9)</m> which lies on the surface of <m>f</m>.
+          We find that <m>f_x(x,y) = -2x</m> and <m>f_x(1,2) = -2</m>;
+          <m>f_y(x,y) = -2y</m> and <m>f_y(1,2) = -4</m>.
+
+          <ol>
+            <li>
+              <p>
+                Let <m>\vec u_1</m> be the unit vector that points from the point <m>(1,2)</m> to the point <m>Q=(3,4)</m>,
+                as shown in the figure.
+                The vector <m>\vv{PQ} = \la 2,2\ra</m>;
+                the unit vector in this direction is <m>\vec u_1=\la 1/\sqrt{2}, 1/\sqrt{2}\ra</m>.
+                Thus the directional derivative of <m>f</m> at <m>(1,2)</m> in the direction of <m>\vec u_1</m> is
+                <me>
+                  D_{\vec u_1}f(1,2) = -2(1/\sqrt{2}) +(-4)(1/\sqrt{2}) = -6/\sqrt{2}\approx -4.24
+                </me>.
+                Thus the instantaneous rate of change in moving from the point <m>(1,2,9)</m> on the surface in the direction of <m>\vec u_1</m>
+                (which points toward the point <m>Q</m>)
+                is about <m>-4.24</m>.
+                Moving in this direction moves one steeply downward.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                We seek the directional derivative in the direction of <m>\la 2,-1\ra</m>.
+                The unit vector in this direction is <m>\vec u_2 = \la 2/\sqrt{5},-1/\sqrt{5}\ra</m>.
+                Thus the directional derivative of <m>f</m> at <m>(1,2)</m> in the direction of <m>\vec u_2</m> is
+                <me>
+                  D_{\vec u_2}f(1,2) = -2(2/\sqrt{5})+(-4)(-1/\sqrt{5}) = 0
+                </me>.
+                Starting on the surface of <m>f</m> at <m>(1,2)</m> and moving in the direction of <m>\la 2,-1\ra</m>
+                (or <m>\vec u_2</m>)
+                results in no instantaneous change in <m>z</m>-value.
+                This is analogous to standing on the side of a hill and choosing a direction to walk that does not change the elevation.
+                One neither walks up nor down,
+                rather just <q>along the side</q> of the hill.
+                Finding these directions of <q>no elevation change</q> is important.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                At <m>P=(1,2)</m>,
+                the direction towards the origin is given by the vector <m>\la -1,-2\ra</m>;
+                the unit vector in this direction is <m>\vec u_3=\la -1/\sqrt{5},-2/\sqrt{5}\ra</m>.
+                The directional derivative of <m>f</m> at <m>P</m> in the direction of the origin is
+                <me>
+                  D_{\vec u_3}f(1,2) = -2(-1/\sqrt{5}) + (-4)(-2/\sqrt{5}) = 10/\sqrt{5} \approx 4.47
+                </me>.
+                Moving towards the origin means
+                <q>walking uphill</q> quite steeply,
+                with an initial slope of about <m>4.47</m>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      As we study directional derivatives,
+      it will help to make an important connection between the unit vector
+      <m>\vec u = \la u_1,u_2\ra</m> that describes the direction and the partial derivatives <m>f_x</m> and <m>f_y</m>.
+      We start with a definition and follow this with a Key Idea.
+    </p>
+
+    <definition xml:id="def_gradient">
+      <title>Gradient</title>
+      <statement>
+        <p>
+          Let <m>z=f(x,y)</m> be differentiable on a set <m>S</m> that contains the point <m>(x_0,y_0)</m>.
+              <idx><h>gradient</h></idx>
+          <ol>
+            <li>
+              <p>
+                The <em>gradient of <m>f</m></em>
+                is <m>\nabla f(x,y) = \la f_x(x,y),f_y(x,y)\ra</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                The <em>gradient of <m>f</m> at
+                <m>(x_0,y_0)</m> is <m>\nabla f(x_0,y_0) = \la f_x(x_0,y_0),f_y(x_0,y_0)\ra</m>.</em>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </definition>
+
+    <aside>
+      <p>
+        <em>Note:</em> The symbol <q><m>\nabla</m></q> is named <q>nabla,</q>
+        derived from the Greek name of a Jewish harp.
+        Oddly enough, in mathematics the expression
+        <m>\nabla f</m> is pronounced <q>del <m>f</m>.</q>
+      </p>
+    </aside>
+    <p>
+      To simplify notation,
+      we often express the gradient as <m>\nabla f = \la f_x, f_y\ra</m>.
+      The gradient allows us to compute directional derivatives in terms of a dot product.
+    </p>
+
+    <insight xml:id="idea_gradient_direct">
+      <title>The Gradient and Directional Derivatives</title>
+      <p>
+        The directional derivative of
+        <m>z=f(x,y)</m> in the direction of <m>\vec u</m> is 
+            <idx><h>gradient</h></idx>
+            <idx><h>directional derivative</h></idx>
+            <idx><h>derivative</h><h>directional</h></idx>
+        <me>
+          D_{\vec u\,}f = \nabla f\cdot \vec u
+        </me>.
+      </p>
+    </insight>
+
+    <p>
+      The properties of the dot product previously studied allow us to investigate the properties of the directional derivative.
+      Given that the directional derivative gives the instantaneous rate of change of <m>z</m> when moving in the direction of <m>\vec u</m>,
+      three questions naturally arise:
+
+      <ol>
+        <li>
+          <p>
+            In what direction(s) is the change in <m>z</m> the greatest (i.e., the
+            <q>steepest uphill</q>)?
+          </p>
+        </li>
+
+        <li>
+          <p>
+            In what direction(s) is the change in <m>z</m> the least (i.e., the
+            <q>steepest downhill</q>)?
+          </p>
+        </li>
+
+        <li>
+          <p>
+            In what direction(s) is there no change in <m>z</m>?
+          </p>
+        </li>
+      </ol>
+    </p>
+
+    <p>
+      Using the key property of the dot product, we have
+      <men xml:id="eq_gradient">
+        \nabla f\cdot \vec u = \norm{\nabla f}\,\vnorm u \cos \theta = \norm{\nabla f}\cos \theta
+      </men>,
+      where <m>\theta</m> is the angle between the gradient and <m>\vec u</m>.
+      (Since <m>\vec u</m> is a unit vector, <m>\vnorm{u} = 1</m>.)
+      This equation allows us to answer the three questions stated previously.
+
+      <ol>
+        <li>
+          <p>
+            <xref ref="eq_gradient">Equation</xref>
+            is maximized when <m>\cos \theta =1</m>,
+            i.e., when the gradient and <m>\vec u</m> have the same direction.
+            We conclude the gradient points in the direction of greatest <m>z</m> change.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            <xref ref="eq_gradient">Equation</xref>
+            is minimized when <m>\cos \theta = -1</m>,
+            i.e., when the gradient and <m>\vec u</m> have opposite directions.
+            We conclude the gradient points in the opposite direction of the least <m>z</m> change.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            <xref ref="eq_gradient">Equation</xref>
+            is 0 when <m>\cos \theta = 0</m>,
+            i.e., when the gradient and <m>\vec u</m> are orthogonal to each other.
+            We conclude the gradient is orthogonal to directions of no <m>z</m> change.
+          </p>
+        </li>
+      </ol>
+    </p>
+
+    <p>
+      This result is rather amazing.
+      Once again imagine standing in a rolling meadow and face the direction that leads you steepest uphill.
+      Then the direction that leads steepest downhill is directly behind you,
+      and side<ndash />stepping either left or right (i.e., moving perpendicularly to the direction you face) does not change your elevation at all.
+    </p>
+
+    <p>
+      Recall that a level curve is defined as a curve in the <m>x</m>-<m>y</m> plane along which the <m>z</m>-values of a function do not change.
+      Let a surface <m>z=f(x,y)</m> be given,
+      and let's represent one such level curve as a vector<ndash />valued function,
+      <m>\vrt = \la x(t), y(t)\ra</m>.
+      As the output of <m>f</m> does not change along this curve,
+      <m>f\big(x(t),y(t)\big) = c</m> for all <m>t</m>,
+      for some constant <m>c</m>.
+    </p>
+
+    <p>
+      Since <m>f</m> is constant for all <m>t</m>, <m>\frac{df}{dt} = 0</m>.
+      By the Multivariable Chain Rule, we also know
+      <md>
+        <mrow>\frac{df}{dt} \amp = f_x(x,y)x'(t) + f_y(x,y)y'(t)</mrow>
+        <mrow>\amp = \la f_x(x,y),f_y(x,y)\ra \cdot \la x'(t),y'(t)\ra</mrow>
+        <mrow>\amp = \nabla f \cdot \vrp(t)</mrow>
+        <mrow>\amp =0</mrow>
+      </md>.
+    </p>
+
+    <p>
+      This last equality states <m>\nabla f \cdot \vrp(t) = 0</m>:
+      the gradient is orthogonal to the derivative of <m>\vec r</m>,
+      meaning the gradient is orthogonal to the graph of <m>\vec r</m>.
+      Our conclusion: at any point on a surface,
+      the gradient at that point is orthogonal to the level curve that passes through that point.
+    </p>
+
+    <p>
+      We restate these ideas in a theorem,
+      then use them in an example.
+    </p>
+
+    <theorem xml:id="thm_gradient">
+      <title>The Gradient and Directional Derivatives</title>
+      <statement>
+        <p>
+          Let <m>z=f(x,y)</m> be differentiable on a set <m>S</m> with gradient <m>\nabla f</m>,
+          let <m>P=(x_0,y_0)</m> be a point in <m>S</m> and let <m>\vec u</m> be a unit vector.
+
+          <ol>
+            <li>
+              <p>
+                The maximum value of <m>D_{\vec u\,}f(x_0,y_0)</m> is <m>\norm{\nabla f(x_0,y_0)}</m>;
+                the direction of maximal <m>z</m> increase is <m>\nabla f(x_0,y_0)</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                The minimum value of <m>D_{\vec u\,}f(x_0,y_0)</m> is <m>-\norm{\nabla f(x_0,y_0)}</m>;
+                the direction of minimal <m>z</m> increase is <m>-\nabla f(x_0,y_0)</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                At <m>P</m>,
+                <m>\nabla f(x_0,y_0)</m> is orthogonal to the level curve passing through <m>\big(x_0,y_0,f(x_0,y_0)\big)</m>.
+                  <idx><h>gradient</h></idx>
+                  <idx><h>directional derivative</h></idx>
+                  <idx><h>derivative</h><h>directional</h></idx>
+                  <idx><h>level curves</h></idx>
+                  <idx><h>gradient</h><h>and level curves</h></idx>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </theorem>
+
+    <example xml:id="ex_direct2">
+      <title>Finding directions of maximal and minimal increase</title>
+      <statement>
+        <p>
+          Let <m>f(x,y) = \sin x\cos y</m> and let <m>P=(\pi/3,\pi/3)</m>.
+          Find the directions of maximal/minimal increase,
+          and find a direction where the instantaneous rate of <m>z</m> change is 0.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We begin by finding the gradient.
+          <m>f_x = \cos x\cos y</m> and <m>f_y = -\sin x\sin y</m>, thus
+          <me>
+            \nabla f = \la \cos x\cos y,-\sin x\sin y\ra  \text{ and, at \(P\), }   \nabla f\left(\frac{\pi}3,\frac{\pi}3\right) = \la\frac14,-\frac34\ra
+          </me>.
+        </p>
+
+        <p>
+          Thus the direction of maximal increase is <m>\la 1/4, -3/4\ra</m>.
+          In this direction,
+          the instantaneous rate of <m>z</m> change is <m>||\la 1/4,-3/4\ra|| = \sqrt{10}/4 \approx 0.79</m>.
+        </p>
+
+        <p>
+          <xref ref="fig_direct2">Figure</xref>
+          shows the surface plotted from two different perspectives.
+          In each, the gradient is drawn at <m>P</m> with a dashed line
+          (because of the nature of this surface,
+          the gradient points <q>into</q> the surface).
+          Let <m>\vec u = \la u_1, u_2\ra</m> be the unit vector in the direction of <m>\nabla f</m> at <m>P</m>.
+          Each graph of the figure also contains the vector <m>\la u_1, u_2, ||\nabla f\,||\ra</m>.
+          This vector has a <q>run</q> of 1
+          (because in the <m>x</m>-<m>y</m> plane it moves 1 unit)
+          and a <q>rise</q> of <m>||\nabla f\,||</m>,
+          hence we can think of it as a vector with slope of
+          <m>||\nabla f\,||</m> in the direction of <m>\nabla f</m>,
+          helping us visualize how <q>steep</q>
+          the surface is in its steepest direction.
+        </p>
+
+        <figure xml:id="fig_direct2">
+          <caption>Graphing the surface and important directions in <xref ref="ex_direct2">Example</xref>.</caption>
+          <sidebyside>
+            <figure>
+              <caption>(a)</caption>
+              \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+              3Droll=0,
+              3Dortho=0.0051408205181360245,
+              3Dc2c=0.6666666865348816 0.6666666865348816 0.3333333432674408,
+              3Dcoo=-1.1194640398025513 -3.250971794128418 8.740827560424805,
+              3Droo=150,
+              3Dlights=Headlamp,add3Djscript=asylabels.js}
+              <img src="figures/figdirect2_3D"/>
+            </figure>
+
+            <figure>
+              <caption>(b)</caption>
+              \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+              3Droll=0,
+              3Dortho=0.008940433152019978,
+              3Dc2c=0.6666666865348816 0.6666666865348816 0.3333333134651184,
+              3Dcoo=-6.498621940612793 -16.487354278564453 45.97212600708008,
+              3Droo=149.9999987284343,
+              3Dlights=Headlamp,add3Djscript=asylabels.js}
+              <img src="figures/figdirect2b_3D"/>
+            </figure>
+          </sidebyside>
+
+        </figure>
+
+        <p>
+          The direction of minimal increase is <m>\la -1/4,3/4\ra</m>;
+          in this direction the instantaneous rate of <m>z</m> change is <m>-\sqrt{10}/4 \approx -0.79</m>.
+        </p>
+
+        <p>
+          Any direction orthogonal to
+          <m>\nabla f</m> is a direction of no <m>z</m> change.
+          We have two choices: the direction of
+          <m>\la 3,1\ra</m> and the direction of <m>\la -3,-1\ra</m>.
+          The unit vector in the direction of
+          <m>\la 3,1\ra</m> is shown in each graph of the figure as well.
+          The level curve at <m>z=\sqrt{3}/4</m> is drawn:
+          recall that along this curve the <m>z</m>-values do not change.
+          Since <m>\la 3,1\ra</m> is a direction of no <m>z</m>-change,
+          this vector is tangent to the level curve at <m>P</m>.
+        </p>
+      </solution>
+    </example>
+
+    <example xml:id="ex_direct9">
+      <title>Understanding when $\nabla f = \vec 0$</title>
+      <statement>
+        <p>
+          Let <m>f(x,y) = -x^2+2x-y^2+2y+1</m>.
+          Find the directional derivative of <m>f</m> in any direction at <m>P=(1,1)</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We find <m>\nabla f = \la -2x+2, -2y+2\ra</m>.
+          At <m>P</m>, we have <m>\nabla f(1,1) = \la 0,0\ra</m>.
+          According to <xref ref="thm_gradient">Theorem</xref>,
+          this is the direction of maximal increase.
+          However, <m>\la 0,0\ra</m> is directionless;
+          it has no displacement.
+          And regardless of the unit vector <m>\vec u</m> chosen,
+          <m>D_{\vec u\,}f = 0</m>.
+        </p>
+
+        <p>
+          <xref ref="fig_direct9">Figure</xref>
+          helps us understand what this means.
+          We can see that <m>P</m> lies at the top of a paraboloid.
+          In all directions, the instantaneous rate of change is 0.
+        </p>
+
+        <p>
+          So what is the direction of maximal increase?
+          It is fine to give an answer of <m>\vec 0 = \la 0,0\ra</m>,
+          as this indicates that all directional derivatives are 0.
+        </p>
+
+        <figure xml:id="fig_direct9">
+          <caption>At the top of a paraboloid, all directional derivatives are 0.</caption>
+          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0.641848137510025,
+          3Dortho=0.00471429293975234,
+          3Dc2c=0.8800624012947083 0.28546664118766785 0.3794717788696289,
+          3Dcoo=-34.139766693115234 45.736881256103516 38.29633712768555,
+          3Droo=200.00000572048617,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figdirect9_3D"/>
+        </figure>
+      </solution>
+    </example>
+
+    <p>
+      The fact that the gradient of a surface always points in the direction of steepest increase/decrease is very useful,
+      as illustrated in the following example.
+    </p>
+
+    <example xml:id="ex_direct3">
+      <title>The flow of water downhill</title>
+      <statement>
+        <p>
+          Consider the surface given by <m>f(x,y)= 20-x^2-2y^2</m>.
+          Water is poured on the surface at <m>(1,1/4)</m>.
+          What path does it take as it flows downhill?
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Let <m>\vrt = \la x(t),
+          y(t)\ra</m> be the vector<ndash />valued function describing the path of the water in the <m>x</m>-<m>y</m> plane;
+          we seek <m>x(t)</m> and <m>y(t)</m>.
+          We know that water will always flow downhill in the steepest direction;
+          therefore, at any point on its path,
+          it will be moving in the direction of <m>-\nabla f</m>.
+          (We ignore the physical effects of momentum on the water.)
+          Thus <m>\vrp(t)</m> will be parallel to <m>\nabla f</m>,
+          and there is some constant <m>c</m> such that <m>c\nabla f = \vrp(t) = \la x'(t),
+          y'(t)\ra</m>.
+        </p>
+
+        <p>
+          We find <m>\nabla f = \la -2x, -4y\ra</m> and write <m>x'(t)</m> as
+          <m>\frac{dx}{dt}</m> and <m>y'(t)</m> as <m>\frac{dy}{dt}</m>.
+          Then
+          <md>
+            <mrow>c\nabla f \amp = \la x'(t), y'(t)\ra</mrow>
+            <mrow>\la -2cx, -4cy \ra \amp  = \la \frac{dx}{dt}, \frac{dy}{dt}\ra</mrow>
+          </md>.
+        </p>
+
+        <p>
+          This implies
+          <me>
+            -2cx = \frac{dx}{dt}  \text{ and }    -4cy =\frac{dy}{dt}, \text{ i.e., }
+          </me>
+          <me>
+            c = -\frac{1}{2x}\frac{dx}{dt}  \text{ and }    c =-\frac{1}{4y}\frac{dy}{dt}
+          </me>.
+        </p>
+
+        <p>
+          As <m>c</m> equals both expressions, we have
+          <me>
+            \frac{1}{2x}\frac{dx}{dt} =\frac{1}{4y}\frac{dy}{dt}
+          </me>.
+        </p>
+
+        <p>
+          To find an explicit relationship between <m>x</m> and <m>y</m>,
+          we can integrate both sides with respect to <m>t</m>.
+          Recall from our study of differentials that <m>\ds \frac{dx}{dt}dt = dx</m>.
+          Thus:
+          <md>
+            <mrow>\int \frac{1}{2x}\frac{dx}{dt}\ dt \amp =\int \frac{1}{4y}\frac{dy}{dt}\ dt</mrow>
+            <mrow>\int \frac{1}{2x}\ dx \amp =\int\frac{1}{4y}\ dy</mrow>
+            <mrow>\frac 12\ln|x| \amp = \frac14\ln|y| +C_1</mrow>
+            <mrow>2\ln|x| \amp = \ln|y| +C_1</mrow>
+            <mrow>\ln |x^2| \amp = \ln|y|+C_1</mrow>
+            <intertext>Now raise both sides as a power of <m>e</m>:</intertext>
+            <mrow>x^2 \amp = e^{\ln |y|+C_1}</mrow>
+            <mrow>x^2 \amp = e^{\ln |y|}e^{C_1}\qquad \text{(Note that \(e^{C_1}\) is just a constant.)}</mrow>
+            <mrow>x^2 \amp = yC_2</mrow>
+            <mrow>\frac1{C_2}x^2 \amp =y   \qquad \text{ (Note that \(1/C_2\) is just a constant.) }</mrow>
+            <mrow>Cx^2 \amp = y</mrow>
+          </md>.
+        </p>
+
+        <p>
+          As the water started at the point <m>(1,1/4)</m>,
+          we can solve for <m>C</m>:
+          <me>
+            C(1)^2 = \frac14  \Rightarrow  C = \frac14
+          </me>.
+        </p>
+
+        <figure xml:id="fig_direct3">
+          <caption>A graph of the surface described in <xref ref="ex_direct3">Example</xref> along with the path in the <m>x</m>-<m>y</m> plane with the level curves.</caption>
+          <sidebyside>
+            <figure>
+              <caption>(a)</caption>
+              \apexincludemedia{width=125pt,3Dmenu,activate=onclick,deactivate=onclick,
+              3Droll=0.03187335123623557,
+              3Dortho=0.004501350689679384,
+              3Dc2c=0.37703937292099 0.8674991130828857 0.3244788944721222,
+              3Dcoo=31.472492218017578 -33.2381477355957 46.63370132446289,
+              3Droo=150.00001038122664,
+              3Dlights=Headlamp,add3Djscript=asylabels.js}
+              <img src="figures/figdirect3_3D"/>
+            </figure>
+
+            <figure>
+              <caption>(b)</caption>
+              <img src="figures/figdirect3b"/>
+            </figure>
+          </sidebyside>
+
+        </figure>
+
+        <p>
+          Thus the water follows the curve <m>y=x^2/4</m> in the <m>x</m>-<m>y</m> plane.
+          The surface and the path of the water is graphed in <xref ref="fig_direct3">Figure</xref>(a).
+          In part (b) of the figure,
+          the level curves of the surface are plotted in the <m>x</m>-<m>y</m> plane,
+          along with the curve <m>y=x^2/4</m>.
+          Notice how the path intersects the level curves at right angles.
+          As the path follows the gradient downhill,
+          this reinforces the fact that the gradient is orthogonal to level curves.
+        </p>
+      </solution>
+    </example>
+  </introduction>
+
+  <subsection>
+    <title>Functions of Three Variables</title>
+    <p>
+      The concepts of directional derivatives and the gradient are easily extended to three
+      (and more)
+      variables.
+      We combine the concepts behind <xref ref="def_direct_deriv">Definitions</xref>
+      and <xref ref="def_gradient"></xref>
+      and <xref ref="thm_direct_deriv1">Theorem</xref> into one set of definitions.
+    </p>
+
+    <definition xml:id="def_direct_deriv3">
+      <title>Directional Derivatives and Gradient with Three Variables</title>
+      <statement>
+        <p>
+          Let <m>w=F(x,y,z)</m> be differentiable on a set <m>D</m> and let <m>\vec u</m> be a unit vector in <m>\mathbb{R}^3</m>.
+              <idx><h>gradient</h></idx>
+              <idx><h>directional derivative</h></idx>
+              <idx><h>derivative</h><h>directional</h></idx>
+
+          <ol>
+            <li>
+              <p>
+                The <em>gradient</em> of <m>F</m> is <m>\nabla F = \la F_x,F_y,F_z\ra</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                The <em>directional derivative of <m>F</m> in the direction of <m>\vec u</m></em> is
+                <me>
+                  D_{\vec u\,}F=\nabla F\cdot \vec u
+                </me>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      The same properties of the gradient given in <xref ref="thm_gradient">Theorem</xref>,
+      when <m>f</m> is a function of two variables,
+      hold for <m>F</m>, a function of three variables.
+    </p>
+
+    <theorem xml:id="thm_gradient3">
+      <title>The Gradient and Directional Derivatives with Three Variables</title>
+      <statement>
+        <p>
+          Let <m>w=F(x,y,z)</m> be differentiable on a set <m>D</m>,
+          let <m>\nabla F</m> be the gradient of <m>F</m>,
+          and let <m>\vec u</m> be a unit vector.
+              <idx><h>gradient</h></idx>
+              <idx><h>directional derivative</h></idx>
+              <idx><h>derivative</h><h>directional</h></idx>
+
+          <ol>
+            <li>
+              <p>
+                The maximum value of <m>D_{\vec u\,}F</m> is <m>\norm{\nabla F}</m>,
+                obtained when the angle between
+                <m>\nabla F</m> and <m>\vec u</m> is 0, i.e., the direction of maximal increase is <m>\nabla F</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                The minimum value of <m>D_{\vec u\,}F</m> is <m>-\norm{\nabla F}</m>,
+                obtained when the angle between
+                <m>\nabla F</m> and <m>\vec u</m> is <m>\pi</m>,
+                i.e., the direction of minimal increase is <m>-\nabla F</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>D_{\vec u\,}F = 0</m> when
+                <m>\nabla F</m> and <m>\vec u</m> are orthogonal.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </theorem>
+
+    <p>
+      We interpret the third statement of the theorem as
+      <q>the gradient is orthogonal to level surfaces,</q>
+      the three<ndash />variable analogue to level curves.
+    </p>
+
+    <example xml:id="ex_direct5">
+      <title>Finding directional derivatives with functions of three variables</title>
+      <statement>
+        <p>
+          If a point source <m>S</m> is radiating energy,
+          the intensity <m>I</m> at a given point <m>P</m> in space is inversely proportional to the square of the distance between <m>S</m> and <m>P</m>.
+          That is, when <m>S=(0,0,0)</m>,
+          <m>\ds I(x,y,z) = \frac{k}{x^2+y^2+z^2}</m> for some constant <m>k</m>.
+        </p>
+
+        <p>
+          Let <m>k=1</m>,
+          let <m>\vec u = \la 2/3, 2/3, 1/3\ra</m> be a unit vector,
+          and let <m>P = (2,5,3)</m>.
+          Measure distances in inches.
+          Find the directional derivative of <m>I</m> at <m>P</m> in the direction of <m>\vec u</m>,
+          and find the direction of greatest intensity increase at <m>P</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We need the gradient <m>\nabla I</m>,
+          meaning we need <m>I_x</m>, <m>I_y</m> and <m>I_z</m>.
+          Each partial derivative requires a simple application of the Quotient Rule, giving
+          <md>
+            <mrow>\nabla I \amp = \la \frac{-2x}{(x^2+y^2+z^2)^2},\frac{-2y}{(x^2+y^2+z^2)^2},\frac{-2z}{(x^2+y^2+z^2)^2}\ra</mrow>
+            <mrow>\nabla I(2,5,3) \amp = \la \frac{-4}{1444},\frac{-10}{1444},\frac{-6}{1444}\ra \approx \la -0.003,-0.007,-0.004\ra</mrow>
+            <mrow>D_{\vec u\,}I \amp = \nabla I(2,5,3)\cdot \vec u</mrow>
+            <mrow>\amp = -\frac{17}{2166} \approx -0.0078</mrow>
+          </md>.
+        </p>
+
+        <p>
+          The directional derivative tells us that moving in the direction of <m>\vec u</m> from <m>P</m> results in a decrease in intensity of about <m>-0.008</m> units per inch.
+          (The intensity is decreasing as <m>\vec u</m> moves one farther from the origin than <m>P</m>.)
+        </p>
+
+        <p>
+          The gradient gives the direction of greatest intensity increase.
+          Notice that
+          <md>
+            <mrow>\nabla I(2,5,3) \amp = \la \frac{-4}{1444},\frac{-10}{1444},\frac{-6}{1444}\ra</mrow>
+            <mrow>\amp = \frac{2}{1444}\la -2,-5,-3\ra</mrow>
+          </md>.
+        </p>
+
+        <p>
+          That is, the gradient at <m>(2,5,3)</m> is pointing in the direction of <m>\la -2,-5,-3\ra</m>,
+          that is, towards the origin.
+          That should make intuitive sense:
+          the greatest increase in intensity is found by moving towards to source of the energy.
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      The directional derivative allows us to find the instantaneous rate of <m>z</m> change in any direction at a point.
+      We can use these instantaneous rates of change to define lines and planes that are
+      <em>tangent</em> to a surface at a point,
+      which is the topic of the next section.
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Terms and Concepts</title>
+    <exercise>
+      <statement>
+        <p>
+          What is the difference between a directional derivative and a partial derivative?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          A partial derivative is essentially a special case of a directional derivative;
+          it is the directional derivative in the direction of <m>x</m> or <m>y</m>,
+          i.e., <m>\la 1,0\ra</m> or <m>\la 0,1\ra</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          For what <m>\vec u</m> is <m>D_{\vec u\,} f = f_x</m>?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\vec u = \la 1,0\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          For what <m>\vec u</m> is <m>D_{\vec u\,} f = f_y</m>?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\vec u = \la 0,1\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          The gradient is <fillin /> to level curves.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          orthogonal
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          The gradient points in the direction of <fillin /> increase.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          maximal, or greatest
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          It is generally more informative to view the directional derivative not as the result of a limit,
+          but rather as the result of a <fillin /> product.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          dot
+        </p>
+      </answer>
+    </exercise>
+  </subsection>
+
+  <subsection>
+    <title>Problems</title>
+    <p>
+      In the following exercises, a function <m>z=f(x,y)</m> is given.
+      Find <m>\nabla f</m>.
+    </p>
+
+    <exercise xml:id="x12_05_ex_07">
+      <statement>
+        <p>
+          <m>f(x,y) = -x^2y+xy^2+xy</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\nabla f = \la -2xy+y^2+y, -x^2+2xy+x\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds f(x,y) = \sin x\cos y</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\nabla f = \la \cos x\cos y, -\sin x\sin y\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds f(x,y) = \frac{1}{x^2+y^2+1}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\nabla f = \la \frac{-2x}{(x^2+y^2+1)^2}, \frac{-2y}{(x^2+y^2+1)^2}\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise xml:id="x12_05_ex_10">
+      <statement>
+        <p>
+          <m>\ds f(x,y) = -4x+3y</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\nabla f = \la -4,3\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds f(x,y) = x^2+2y^2-xy-7x</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\nabla f = \la 2x-y-7,4y-x\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise xml:id="x12_05_ex_22">
+      <statement>
+        <p>
+          <m>\ds f(x,y) = x^2y^3-2x</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\nabla f = \la 2xy^3-2,3x^2y^2\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises,
+      a function <m>z=f(x,y)</m> and a point <m>P</m> are given.
+      Find the directional derivative of <m>f</m> in the indicated directions.
+      Note: these are the same functions as in <xref ref="x12_05_ex_07">Exercises</xref>
+      through <xref ref="x12_05_ex_22"></xref>.
+    </p>
+
+    <exercise xml:id="x12_05_ex_11">
+      <statement>
+        <p>
+          <m>f(x,y) = -x^2y+xy^2+xy</m>, <m>P= (2,1)</m>
+
+          <ol>
+            <li>
+              <p>
+                In the direction of <m>\vec v = \la 3,4\ra</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                In the direction toward the point <m>Q = (1,-1)</m>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\nabla f = \la -2xy+y^2+y, -x^2+2xy+x\ra</m>;
+          <m>\nabla f(2,1) = \la -2,2\ra</m>.
+          Be sure to change all directions to unit vectors.
+
+          <ol>
+            <li>
+              <p>
+                <m>2/5</m> (<m>\vec u = \la 3/5,4/5\ra</m>)
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>-2/\sqrt{5}</m> (<m>\vec u = \la -1/\sqrt{5},-2/\sqrt{5}\ra</m>)
+              </p>
+            </li>
+          </ol>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds f(x,y) = \sin x\cos y</m>,
+          <m>\ds P = \left(\frac{\pi}{4},\frac{\pi}{3}\right)</m>
+
+          <ol>
+            <li>
+              <p>
+                In the direction of <m>\vec v=\la 1,1\ra</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                In the direction toward the point <m>Q = (0,0)</m>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\nabla f = \la \cos x\cos y, -\sin x\sin y\ra</m>;
+          <m>\nabla f(\frac{\pi}{4},\frac{\pi}{3}) = \la \frac{1}{2\sqrt{2}},-\frac12\sqrt{\frac32}\ra</m>.
+          Be sure to change all directions to unit vectors.
+
+          <ol>
+            <li>
+              <p>
+                <m>\frac14(1-\sqrt{3})</m> (<m>\vec u = \la 1/\sqrt{2},1/\sqrt{2}\ra</m>)
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\frac{4\sqrt{3}-1}{10\sqrt{2}}</m> (<m>\vec u = \la -3/5,-4/5\ra</m>)
+              </p>
+            </li>
+          </ol>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds f(x,y) = \frac{1}{x^2+y^2+1}</m>, <m>P = (1,1)</m>.
+
+          <ol>
+            <li>
+              <p>
+                In the direction of <m>\vec v = \la 1,-1\ra</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                In the direction toward the point <m>Q = (-2,-2)</m>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\nabla f = \la \frac{-2x}{(x^2+y^2+1)^2}, \frac{-2y}{(x^2+y^2+1)^2}\ra</m>;
+          <m>\nabla f(1,1) = \la -2/9,-2/9\ra</m>.
+          Be sure to change all directions to unit vectors.
+
+          <ol>
+            <li>
+              <p>
+                0 (<m>\vec u = \la 1/\sqrt{2},-1/\sqrt{2}\ra</m>)
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>2\sqrt{2}/9</m> (<m>\vec u = \la -1/\sqrt{2},-1/\sqrt{2}\ra</m>)
+              </p>
+            </li>
+          </ol>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise xml:id="x12_05_ex_14">
+      <statement>
+        <p>
+          <m>\ds f(x,y) = -4x+3y</m>, <m>P = (5,2)</m>
+
+          <ol>
+            <li>
+              <p>
+                In the direction of <m>\vec v = \la 3,1\ra</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                In the direction toward the point <m>Q = (2,7)</m>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\nabla f = \la -4,3\ra</m>;
+          <m>\nabla f(5,2) = \la -4,3\ra</m>.
+          Be sure to change all directions into unit vectors.
+
+          <ol>
+            <li>
+              <p>
+                <m>-9/\sqrt{10}</m> (<m>\vec u = \la 3/\sqrt{10},1/\sqrt{10}\ra</m>)
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>27/\sqrt{34}</m> (<m>\vec u = \la -3/\sqrt{34},5/\sqrt{34}\ra</m>)
+              </p>
+            </li>
+          </ol>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds f(x,y) = x^2+2y^2-xy-7x</m>, <m>P = (4,1)</m>
+
+          <ol>
+            <li>
+              <p>
+                In the direction of <m>\vec v = \la -2,5\ra</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                In the direction toward the point <m>Q = (4,0)</m>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\nabla f = \la 2x-y-7,4y-x\ra</m>;
+          <m>\nabla f(4,1) = \la 0,0\ra</m>.
+
+          <ol>
+            <li>
+              <p>
+                0
+              </p>
+            </li>
+
+            <li>
+              <p>
+                0
+              </p>
+            </li>
+          </ol>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise xml:id="x12_05_ex_23">
+      <statement>
+        <p>
+          <m>\ds f(x,y) = x^2y^3-2x</m>, <m>P = (1,1)</m>
+
+          <ol>
+            <li>
+              <p>
+                In the direction of <m>\vec v = \la 3,3\ra</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                In the direction toward the point <m>Q = (1,2)</m>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\nabla f = \la 2xy^3-2,3x^2y^2\ra</m>;
+          <m>\nabla f(1,1) = \la 0,3\ra</m> Be sure to change all directions to unit vectors.
+
+          <ol>
+            <li>
+              <p>
+                <m>3/\sqrt{2}</m>; (<m>\vec u = \la 1/\sqrt{2},1/\sqrt{2}\ra</m>)
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>3</m>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises,
+      a function <m>z=f(x,y)</m> and a point <m>P</m> are given.
+
+      <ol>
+        <li>
+          <title>(a)</title>
+          <p>
+            Find the direction of maximal increase of <m>f</m> at <m>P</m>.
+          </p>
+        </li>
+
+        <li>
+          <title>(b)</title>
+          <p>
+            What is the maximal value of <m>D_{\vec u\,}f</m> at <m>P</m>?
+          </p>
+        </li>
+
+        <li>
+          <title>(c)</title>
+          <p>
+            Find the direction of minimal increase of <m>f</m> at <m>P</m>.
+          </p>
+        </li>
+
+        <li>
+          <title>(d)</title>
+          <p>
+            Give a direction <m>\vec u</m> such that <m>D_{\vec u\,}f=0</m> at <m>P</m>.
+          </p>
+        </li>
+      </ol>
+    </p>
+
+    <p>
+      Note: these are the same functions and points as in <xref ref="x12_05_ex_11">Exercises</xref>
+      through <xref ref="x12_05_ex_23"></xref>.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>f(x,y) = -x^2y+xy^2+xy</m>, <m>P= (2,1)</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\nabla f = \la -2xy+y^2+y, -x^2+2xy+x\ra</m>
+
+          <ol>
+            <li>
+              <p>
+                <m>\nabla f(2,1) = \la -2,2\ra</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\norm{\nabla f(2,1)} = \norm{\la -2,2\ra} = \sqrt{8}</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\la 2,-2\ra</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\la 1/\sqrt{2},1/\sqrt{2}\ra</m>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds f(x,y) = \sin x\cos y</m>,
+          <m>\ds P = \left(\frac{\pi}{4},\frac{\pi}{3}\right)</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\nabla f = \la \cos x\cos y, -\sin x\sin y\ra</m>
+
+          <ol>
+            <li>
+              <p>
+                <m>\nabla f(\frac{\pi}{4},\frac{\pi}{3}) = \la \frac{1}{2\sqrt{2}},-\frac12\sqrt{\frac32}\ra</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\norm{\nabla f(\frac{\pi}{4},\frac{\pi}{3})} = \norm{\la \frac{1}{2\sqrt{2}},-\frac12\sqrt{\frac32}\ra} = 1/\sqrt{2}</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\la -\frac{1}{2\sqrt{2}},\frac12\sqrt{\frac32}\ra</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\la \frac12\sqrt{\frac32},\frac{1}{2\sqrt{2}}\ra</m>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds f(x,y) = \frac{1}{x^2+y^2+1}</m>, <m>P = (1,1)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\nabla f = \la \frac{-2x}{(x^2+y^2+1)^2}, \frac{-2y}{(x^2+y^2+1)^2}\ra</m>
+
+          <ol>
+            <li>
+              <p>
+                <m>\nabla f(1,1) = \la -2/9,-2/9\ra</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\norm{\nabla f(1,1)} = \norm{\la -2/9,-2/9\ra}=2\sqrt{2}/9</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\la 2/9,2/9\ra</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\la 1/\sqrt{2},-1/\sqrt{2}\ra</m>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds f(x,y) = -4x+3y</m>, <m>P = (5,4)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\nabla f = \la -4,3\ra</m>
+
+          <ol>
+            <li>
+              <p>
+                <m>\nabla f(5,4) = \la -4,3\ra</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\norm{\nabla f(5,4)} = \norm{\la -4,3\ra}=5</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\la 4,-3\ra</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\la 3/5,4/5\ra</m>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds f(x,y) = x^2+2y^2-xy-7x</m>, <m>P = (4,1)</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\nabla f = \la 2x-y-7,4y-x\ra</m>
+
+          <ol>
+            <li>
+              <p>
+                <m>\nabla f(4,1) = \la 0,0\ra</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                0
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\la 0,0\ra</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                All directions give a directional derivative of 0.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds f(x,y) = x^2y^3-2x</m>, <m>P = (1,1)</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\nabla f = \la 2xy^3-2,3x^2y^2\ra</m>
+
+          <ol>
+            <li>
+              <p>
+                <m>\nabla f(1,1) = \la 0,3\ra</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                3
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\la 0,-3\ra</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\vec u = \la 1,0\ra</m>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises, a function <m>w=F(x,y,z)</m>,
+      a vector <m>\vec v</m> and a point <m>P</m> are given.
+
+      <ol>
+        <li>
+          <title>(a)</title>
+          <p>
+            Find <m>\nabla F(x,y,z)</m>.
+          </p>
+        </li>
+
+        <li>
+          <title>(b)</title>
+          <p>
+            Find <m>D_{\vec u\,}F</m> at <m>P</m>,
+            where <m>\vec u</m> is the unit vector in the direction of <m>\vec v</m>.
+          </p>
+        </li>
+      </ol>
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds F(x,y,z) = 3x^2z^3+4xy-3z^2</m>,
+          <m>\vec v = \la 1,1,1\ra</m>, <m>P = (3,2,1)</m>
+        </p>
+      </statement>
+      <answer>
+        <ol>
+          <li>
+            <p>
+              <m>\nabla F(x,y,z) = \la 6xz^3+4y, 4x, 9x^2z^2-6z\ra</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>113/\sqrt{3}</m>
+            </p>
+          </li>
+        </ol>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds F(x,y,z) = \sin(x)\cos(y)e^z</m>,
+          <m>\vec v = \la 2,2,1\ra</m>, <m>P = (0,0,0)</m>
+        </p>
+      </statement>
+      <answer>
+        <ol>
+          <li>
+            <p>
+              <m>\nabla F(x,y,z) = \la \cos x\cos ye^z, -\sin x\sin ye^z, \sin x\cos ye^z\ra</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>2/3</m>
+            </p>
+          </li>
+        </ol>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds F(x,y,z) = x^2y^2-y^2z^2</m>,
+          <m>\vec v = \la -1,7,3\ra</m>, <m>P = (1,0,-1)</m>
+        </p>
+      </statement>
+      <answer>
+        <ol>
+          <li>
+            <p>
+              <m>\nabla F(x,y,z) = \la 2xy^2, 2y(x^2-z^2), -2y^2z\ra</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>0</m>
+            </p>
+          </li>
+        </ol>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds F(x,y,z) = \frac{2}{x^2+y^2+z^2}</m>,
+          <m>\vec v = \la 1,1,-2\ra</m>, <m>P = (1,1,1)</m>
+        </p>
+      </statement>
+      <answer>
+        <ol>
+          <li>
+            <p>
+              <m>\nabla F(x,y,z) = \la -\frac{4x}{(x^2+y^2+z^2)^2},-\frac{4y}{(x^2+y^2+z^2)^2},-\frac{4z}{(x^2+y^2+z^2)^2}\ra</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>0</m>
+            </p>
+          </li>
+        </ol>
+      </answer>
+    </exercise>
+  </subsection>
+</section>
+

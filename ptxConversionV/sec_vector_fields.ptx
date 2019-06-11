@@ -1,0 +1,1090 @@
+
+
+<section xml:id="sec_vector_fields">
+  <title>Vector Fields</title>
+  <introduction>
+    <p>
+      We have studied functions of two and three variables,
+      where the input of such functions is a point
+      (either a point in the plane or in space)
+      and the output is a number.
+    </p>
+
+    <p>
+      We could also create functions where the input is a point (again,
+      either in the plane or in space),
+      but the output is a <em>vector</em>.
+      For instance, we could create the following function:
+      <m>\vec F(x,y) = \langle x+y, x-y\rangle</m>,
+      where <m>\vec F(2,3) = \langle 5,-1\rangle</m>.
+      We are to think of <m>\vec F</m> assigning the vector
+      <m>\langle 5,-1\rangle</m> to the point <m>(2,3)</m>;
+      in some sense,
+      the vector <m>\langle 5,-1\rangle</m> lies at the point <m>(2,3)</m>.
+    </p>
+
+    <p>
+      Such functions are extremely useful in any context where magnitude and direction are important.
+      For instance,
+      we could create a function <m>\vec F</m> that represents the electromagnetic force exerted at a point by a electromagnetic field,
+      or the velocity of air as it moves across an airfoil.
+    </p>
+
+    <p>
+      Because these functions are so important,
+      we need to formally define them.
+    </p>
+
+    <definition xml:id="def_vector_field">
+      <title>Vector Field</title>
+      <statement>
+        <ol>
+          <li>
+            <p>
+              A <em>vector field in the plane</em>
+              is a function <m>\vec F(x,y)</m> whose domain is a subset of
+              <m>\mathbb{R}^2</m> and whose output is a two<ndash />dimensional vector:
+                <idx><h>vector field</h></idx>
+              <me>
+                \vec F(x,y) = \langle M(x,y), N(x,y)\rangle
+              </me>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              A <em>vector field in space</em>
+              is a function <m>\vec F(x,y,z)</m> whose domain is a subset of
+              <m>\mathbb{R}^3</m> and whose output is a three<ndash />dimensional vector:
+              <me>
+                \vec F(x,y,z) = \langle M(x,y,z), N(x,y,z), P(x,y,z)\rangle
+              </me>.
+            </p>
+          </li>
+        </ol>
+      </statement>
+    </definition>
+
+    <p>
+      This definition may seem odd at first,
+      as a special type of function is called a <q>field.</q> However,
+      as the function determines a <q>field of vectors</q>,
+      we can say the field is <em>defined by</em> the function,
+      and thus the field <em>is</em> a function.
+    </p>
+
+    <figure xml:id="fig_vectorfieldintro">
+      <caption>Demonstrating methods of graphing vector fields.</caption>
+      <sidebyside>
+        <figure>
+          <caption>[-5pt]
+          (a)</caption>
+          <img src="figures/figvectorfieldintro_a"/>
+        </figure>
+
+        <figure>
+          <caption>[-5pt]
+          (b)</caption>
+          <img src="figures/figvectorfieldintro_b"/>
+        </figure>
+      </sidebyside>
+
+    </figure>
+
+    <p>
+      Visualizing vector fields helps cement this connection.
+      When graphing a vector field in the plane,
+      the general idea is to draw the vector
+      <m>\vec F(x,y)</m> at the point <m>(x,y)</m>.
+      For instance,
+      using <m>\vec F(x,y) = \langle x+y,x-y\rangle</m> as before,
+      at <m>(1,1)</m> we would draw <m>\langle 2,0\rangle</m>.
+    </p>
+
+    <p>
+      In <xref ref="fig_vectorfieldintro">Figure</xref>(a),
+      one can see that the vector <m>\langle 2,0\rangle</m> is drawn
+      <em>starting from</em> the point <m>(1,1)</m>.
+      A total of 8 vectors are drawn,
+      with the <m>x</m>- and <m>y</m>-values of <m>-1,0,1</m>.
+      In many ways, the resulting graph is a mess;
+      it is hard to tell what this field <q>looks like.</q>
+    </p>
+
+    <p>
+      In <xref ref="fig_vectorfieldintro">Figure</xref>(b),
+      the same field is redrawn with each vector <m>\vec F(x,y)</m> drawn
+      <em>centered on</em> the point <m>(x,y)</m>.
+      This makes for a better looking image,
+      though the long vectors can cause confusion:
+      when one vector intersects another,
+      the image looks cluttered.
+    </p>
+
+    <p>
+      A common way to address this problem is limit the length of each arrow,
+      and represent long vectors with thick arrows,
+      as done in <xref ref="fig_vectorfieldintrob">Figure</xref>(a).
+      Usually we do not use a graph of a vector field to determine exactly the magnitude of a particular vector.
+      Rather, we are more concerned with the relative magnitudes of vectors:
+      which are bigger than others?
+      Thus limiting the length of the vectors is not problematic.
+    </p>
+
+    <figure xml:id="fig_vectorfieldintrob">
+      <caption>Demonstrating methods of graphing vector fields.</caption>
+      <sidebyside>
+        <figure>
+          <caption>[-5pt]
+          (a)</caption>
+          <img src="figures/figvectorfieldintro_c"/>
+        </figure>
+
+        <figure>
+          <caption>[-5pt]
+          (b)</caption>
+          <img src="figures/figvectorfieldintro_d"/>
+        </figure>
+      </sidebyside>
+
+    </figure>
+
+    <p>
+      Drawing arrows with variable thickness is best done with technology;
+      search the documentation of your favorite graphing program for terms like <q>vector fields</q>
+      or <q>slope fields</q> to learn how.
+      Technology obviously allows us to plot many vectors in a vector field nicely;
+      in <xref ref="fig_vectorfieldintrob">Figure</xref>(b),
+      we see the same vector field drawn with many vectors,
+      and finally get a clear picture of how this vector field behaves.
+      (If this vector field represented the velocity of air moving across a flat surface,
+      we could see that the air tends to move either to the upper<ndash />right or lower<ndash />left,
+      and moves very slowly near the origin.)
+    </p>
+
+    <p>
+      We can similarly plot vector fields in space,
+      as shown in <xref ref="fig_vectorfieldintroc">Figure</xref>,
+      though it is not often done.
+      The plots get very busy very quickly,
+      as there are lots of arrows drawn in a small amount of space.
+      In <xref ref="fig_vectorfieldintroc">Figure</xref>
+      the field <m>\vec F = \langle -y,x,z\rangle</m> is graphed.
+      If one could view the graph from above,
+      one could see the arrows point in a circle about the <m>z</m>-axis.
+      One should also note how the arrows far from the origin are larger than those close to the origin.
+    </p>
+
+    <p>
+      It is good practice to try to visualize certain vector fields in one's head.
+      For instance,
+      consider a point mass at the origin and the vector field that represents the gravitational force exerted by the mass at any point in the room.
+      The field would consist of arrows pointing toward the origin,
+      increasing in size as they near the origin
+      (as the gravitational pull is strongest near the point mass).
+    </p>
+
+    <figure xml:id="fig_vectorfieldintroc">
+      <caption>Graphing a vector field in space.</caption>
+      \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+      3Droll=0,
+      3Dortho=0.004676746670156717,
+      3Dc2c=0.7426115870475769 -0.4871146082878113 0.45961663126945496,
+      3Dcoo=40.4605598449707 -31.11708641052246 21.908815383911133,
+      3Droo=141.89772583942957,
+      3Dlights=Headlamp,add3Djscript=asylabels.js}
+      <img src="figures/figvectorfieldintro_f_3D"/>
+    </figure>
+  </introduction>
+
+  <subsection>
+    <title>Vector Field Notation and Del Operator</title>
+    <p>
+      <xref ref="def_vector_field">Definition</xref>
+      defines a vector field <m>\vec F</m> using the notation
+      <me>
+        \vec F(x,y) = \langle M(x,y), N(x,y)\rangle \text{ and }  \vec F(x,y,z) = \langle M(x,y,z), N(x,y,z),P(x,y,z)\rangle
+      </me>.
+    </p>
+
+    <p>
+      That is, the components of <m>\vec F</m> are each functions of <m>x</m> and <m>y</m>
+      (and also <m>z</m> in space).
+      As done in other contexts, we will drop the <q>of <m>x</m>,
+      <m>y</m> and <m>z</m></q> portions of the notation and refer to vector fields in the plane and in space as
+      <me>
+        \vec F = \langle M, N\rangle  \text{ and }   \vec F  = \langle M,N,P\rangle
+      </me>,
+      respectively, as this shorthand is quite convenient.
+    </p>
+
+    <p>
+      Another item of notation will become useful:
+      the <q>del operator.</q> 
+          <idx><h>del operator</h></idx>
+      Recall in <xref ref="sec_directional_derivative">Section</xref>
+      how we used the symbol <m>\nabla</m>
+      (pronounced <q>del</q>)
+      to represent the gradient of a function of two variables.
+      That is, if <m>z = f(x,y)</m>,
+      then <q>del <m>f</m> </q> <m>= \nabla f = \langle f_x, f_y\rangle</m>.
+    </p>
+
+    <p>
+      We now define <m>\nabla</m> to be the <q>del operator.</q>
+      It is a vector whose components are partial derivative operations.
+    </p>
+
+    <p>
+      In the plane,
+      <m>\ds\nabla = \left\langle \frac{\partial}{\partial x}, \frac{\partial}{\partial y}\right\rangle</m>;
+      in space, <m>\ds\nabla = \left\langle \frac{\partial}{\partial x}, \frac{\partial}{\partial y},\frac{\partial}{\partial z}\right\rangle</m>.
+    </p>
+
+    <p>
+      With this definition of <m>\nabla</m>,
+      we can better understand the gradient <m>\nabla f</m>.
+      As <m>f</m> returns a scalar,
+      the properties of scalar and vector multiplication gives
+      <me>
+        \nabla f = \left\langle \frac{\partial}{\partial x}, \frac{\partial}{\partial y}\right\rangle f = \left\langle \frac{\partial}{\partial x}\,f, \frac{\partial}{\partial y}\,f\right\rangle = \langle f_x, f_y\rangle
+      </me>.
+    </p>
+
+    <p>
+      Now apply the del operator <m>\nabla</m> to vector fields.
+      Let <m>\vec F = \langle x+\sin y,y^2+z,x^2\rangle</m>.
+      We can use vector operations and find the dot product of <m>\nabla</m> and <m>\vec F</m>:
+      <md>
+        <mrow>\nabla \cdot \vec F \amp = \left\langle \frac{\partial}{\partial x}, \frac{\partial}{\partial y},\frac{\partial}{\partial z}\right\rangle\cdot  \langle x+\sin y,y^2+z,x^2\rangle</mrow>
+        <mrow>\amp = \frac{\partial}{\partial x}(x+\sin y)+ \frac{\partial}{\partial y}(y^2+z) + \frac{\partial}{\partial z}(x^2)</mrow>
+        <mrow>\amp =1+2y</mrow>
+      </md>.
+    </p>
+
+    <p>
+      We can also compute their cross products:
+      <md>
+        <mrow>{\nabla\times \vec F }\amp = {\left\langle \frac{\partial}{\partial y}\big(x^2\big)-\frac{\partial}{\partial z}\big(y^2+z\big),\frac{\partial}{\partial z}\big(x+\sin y\big)-\frac{\partial}{\partial x}\big(x^2\big),\frac{\partial}{\partial x}\big(y^2+z\big)-\frac{\partial}{\partial y}\big(x+\sin y\big)\right\rangle }</mrow>
+        <mrow>\amp =\langle -1,-2x,-\cos y\rangle</mrow>
+      </md>.
+    </p>
+
+    <p>
+      We do not yet know why we would want to compute the above.
+      However, as we next learn about properties of vector fields,
+      we will see how these dot and cross products with the del operator are quite useful.
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Divergence and Curl</title>
+    <p>
+      Two properties of vector fields will prove themselves to be very important:
+      divergence and curl.
+      Each is a special <q>derivative</q> of a vector field;
+      that is, each measures an instantaneous rate of change of a vector field.
+    </p>
+
+    <p>
+      If the vector field represents the velocity of a fluid or gas,
+      then the <em>divergence</em>
+          <idx><h>divergence</h></idx>
+          <idx><h>vector field</h><h>divergence of</h></idx>
+      of the field is a measure of the
+      <q>compressibility</q> of the fluid.
+      If the divergence is negative at a point,
+      it means that the fluid is compressing:
+      more fluid is going into the point than is going out.
+      If the divergence is positive,
+      it means the fluid is expanding:
+      more fluid is going out at that point than going in.
+      A divergence of zero means the same amount of fluid is going in as is going out.
+      If the divergence is zero at all points,
+      we say the field is <em>incompressible</em>.
+          <idx><h>incompressible vector field</h></idx>
+    </p>
+
+    <p>
+      It turns out that the proper measure of divergence is simply <m>\nabla \cdot \vec F</m>,
+      as stated in the following definition.
+    </p>
+
+    <definition xml:id="def_divergence">
+      <title>Divergence of a Vector Field</title>
+      <statement>
+        <p>
+          The <term>divergence</term> of a vector field <m>\vec F</m> is
+              <idx><h>divergence</h></idx>
+              <idx><h>vector field</h><h>divergence of</h></idx>
+          <me>
+            \divv \vec F = \nabla \cdot \vec F
+          </me>.
+          <ul>
+            <li>
+              <p>
+                In the plane, with <m>\vec F = \langle M,N\rangle</m>,
+                <m>\divv \vec F = M_x+N_y</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                In space, with <m>\vec F = \langle M,N,P\rangle</m>,
+                <m>\divv \vec F = M_x+N_y+P_z</m>.
+              </p>
+            </li>
+          </ul>
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      <em>Curl</em><idx><h>vector field</h><h>curl of</h></idx>
+          <idx><h>curl</h></idx>
+      is a measure of the spinning action of the field.
+      Let <m>\vec F</m> represent the flow of water over a flat surface.
+      If a small round cork were held in place at a point in the water,
+      would the water cause the cork to spin?
+      No spin corresponds to zero curl;
+      counterclockwise spin corresponds to positive curl and clockwise spin corresponds to negative curl.
+    </p>
+
+    <p>
+      In space, things are a bit more complicated.
+      Again let <m>\vec F</m> represent the flow of water,
+      and imagine suspending a tennis ball in one location in this flow.
+      The water may cause the ball to spin along an axis.
+      If so, the curl of the vector field is a <em>vector</em>
+      (not a <em>scalar</em>, as before),
+      parallel to the axis of rotation,
+      following a right hand rule:
+      when the thumb of one's right hand points in the direction of the curl,
+      the ball will spin in the direction of the curling fingers of the hand.
+    </p>
+
+    <p>
+      In space, it turns out the proper measure of curl is <m>\nabla \times \vec F</m>,
+      as stated in the following definition.
+      To find the curl of a planar vector field <m>\vec F = \langle M,N\rangle</m>,
+      embed it into space as <m>\vec F = \langle M, N, 0\rangle</m> and apply the cross product definition.
+      Since <m>M</m> and <m>N</m> are functions of just <m>x</m> and <m>y</m>
+      (and not <m>z</m>),
+      all partial derivatives with respect to <m>z</m> become 0 and the result is simply <m>\langle 0,0,N_x-M_y\rangle</m>.
+      The third component is the measure of curl of a planar vector field.
+    </p>
+
+    <definition xml:id="def_curl">
+      <title>Curl of a Vector Field</title>
+      <statement>
+        <ul>
+          <li>
+            <p>
+              Let <m>\vec F = \langle M,N\rangle</m> be a vector field in the plane.
+              The <em>curl</em> of <m>\vec F</m> is <m>\curl \vec F = N_x - M_y</m>.
+                <idx><h>curl</h></idx>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Let <m>\vec F = \langle M,N,P\rangle</m> be a vector field in space.
+              The <em>curl</em> of <m>\vec F</m> is <m>\curl \vec F = \nabla \times \vec F = \langle P_y-N_z,M_z-P_x,N_x - M_y\rangle</m>.
+            </p>
+          </li>
+        </ul>
+      </statement>
+    </definition>
+
+    <p>
+      We adopt the convention of referring to curl as <m>\nabla \times \vec F</m>,
+      regardless of whether <m>\vec F</m> is a vector field in two or three dimensions.
+    </p>
+
+    <p>
+      We now practice computing these quantities.
+    </p>
+
+    <example xml:id="ex_vectorfield1">
+      <title>Computing divergence and curl of planar vector fields</title>
+      <statement>
+        <p>
+          For each of the planar vector fields given below,
+          view its graph and try to visually determine if its divergence and curl are 0.
+          Then compute the divergence and curl.
+
+          <ol>
+            <li>
+              <p>
+                <m>\vec F = \langle y,0\rangle</m> (see <xref ref="fig_vectorfield1a">Figure</xref>(a))
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\vec F = \langle -y,x\rangle</m> (see <xref ref="fig_vectorfield1a">Figure</xref>(b))
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\vec F = \langle x,y\rangle</m> (see <xref ref="fig_vectorfield1b">Figure</xref>(a))
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\vec F = \langle \cos y, \sin x\rangle</m> (see <xref ref="fig_vectorfield1b">Figure</xref>(b))
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li>
+              <p>
+                The arrow sizes are constant along any horizontal line,
+                so if one were to draw a small box anywhere on the graph,
+                it would seem that the same amount of fluid would enter the box as exit.
+                Therefore it seems the divergence is zero; it is, as
+                <me>
+                  \divv\vec F = \nabla \cdot \vec F = M_x + N_y = \frac{\partial}{\partial x}(y) + \frac{\partial}{\partial y}(0) = 0
+                </me>.
+                <figure xml:id="fig_vectorfield1a">
+                  <caption>The vector fields in parts (a) and (b) in <xref ref="ex_vectorfield1">Example</xref>.</caption>
+                  <sidebyside>
+                    <figure>
+                      <caption>[-5pt] (a)</caption>
+                      <img src="figures/figvectorfield1_a"/>
+                    </figure>
+
+                    <figure>
+                      <caption>[-5pt] (b)</caption>
+                      <img src="figures/figvectorfield1_b"/>
+                    </figure>
+                  </sidebyside>
+
+                </figure>
+
+                At any point on the <m>x</m>-axis,
+                arrows above it move to the right and arrows below it move to the left,
+                indicating that a cork placed on the axis would spin clockwise.
+                A cork placed anywhere above the <m>x</m>-axis would have water above it moving to the right faster than the water below it,
+                also creating a clockwise spin.
+                A clockwise spin also appears to be created at points below the <m>x</m>-axis.
+                Thus it seems the curl should be negative
+                (and not zero).
+                Indeed, it is:
+                <me>
+                  \curl \vec F = \nabla\times\vec F = N_x-M_y = \frac{\partial}{\partial x}(0) - \frac{\partial}{\partial y}(y) = -1
+                </me>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                It appears that all vectors that lie on a circle of radius <m>r</m>,
+                centered at the  origin, have the same length
+                (and indeed this is true).
+                That implies that the divergence should be zero:
+                draw any box on the graph,
+                and any fluid coming in will lie along a circle that takes the same amount of fluid out.
+                Indeed, the divergence is zero, as
+                <me>
+                  \divv\vec F = \nabla \cdot \vec F = M_x + N_y = \frac{\partial}{\partial x}(-y) + \frac{\partial}{\partial y}(x) = 0
+                </me>.
+                Clearly this field moves objects in a circle,
+                but would it induce a cork to spin?
+                It appears that yes, it would:
+                place a cork anywhere in the flow,
+                and the point of the cork closest to the origin would feel less flow than the point on the cork farthest from the origin,
+                which would induce a counterclockwise flow.
+                Indeed, the curl is positive:
+                <me>
+                  \curl \vec F = \nabla\times\vec F = N_x-M_y = \frac{\partial}{\partial x}(x) - \frac{\partial}{\partial y}(-y) = 1-(-1) = 2
+                </me>.
+                Since the curl is constant,
+                we conclude the induced spin is the same no matter where one is in this field.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                At the origin,
+                there are many arrows pointing out but no arrows pointing in.
+                We conclude that at the origin,
+                the divergence must be positive
+                (and not zero).
+                If one were to draw a box anywhere in the field,
+                the edges farther from the origin would have larger arrows passing through them than the edges close to the origin,
+                indicating that more is going from a point than going in.
+                This indicates a positive
+                (and not zero)
+                divergence.
+                This is correct:
+                <me>
+                  \divv\vec F = \nabla \cdot \vec F = M_x + N_y = \frac{\partial}{\partial x}(x) + \frac{\partial}{\partial y}(y) = 1+1=2
+                </me>.
+                One may find this curl to be harder to determine visually than previous examples.
+                One might note that any arrow that induces a clockwise spin on a cork will have an equally sized arrow inducing a counterclockwise spin on the other side,
+                indicating no spin and no curl.
+                This is correct, as
+                <me>
+                  \curl \vec F = \nabla\times\vec F = N_x-M_y = \frac{\partial}{\partial x}(y) - \frac{\partial}{\partial y}(x) = 0
+                </me>.
+                <figure xml:id="fig_vectorfield1b">
+                  <caption>The vector fields in parts (c) and (d) in <xref ref="ex_vectorfield1">Example</xref>.</caption>
+                  <sidebyside>
+                    <figure>
+                      <caption>[-5pt] (a)</caption>
+                      <img src="figures/figvectorfield1_c"/>
+                    </figure>
+
+                    <figure>
+                      <caption>[-5pt] (b)</caption>
+                      <img src="figures/figvectorfield1_d"/>
+                    </figure>
+                  </sidebyside>
+
+                </figure>
+
+              </p>
+            </li>
+
+            <li>
+              <p>
+                One might find this divergence hard to determine visually as large arrows appear in close proximity to small arrows,
+                each pointing in different directions.
+                Instead of trying to rationalize a guess,
+                we compute the divergence:
+                <me>
+                  \divv\vec F = \nabla \cdot \vec F = M_x + N_y = \frac{\partial}{\partial x}(\cos y) + \frac{\partial}{\partial y}(\sin x) = 0
+                </me>.
+                Perhaps surprisingly, the divergence is 0.
+                Will all the loops of different directions in the field,
+                one is apt to reason the curl is variable.
+                Indeed, it is:
+                <me>
+                  \curl \vec F = \nabla\times\vec F = N_x-M_y = \frac{\partial}{\partial x}(\sin x) - \frac{\partial}{\partial y}(\cos y) = \cos x + \sin y
+                </me>.
+                Depending on the values of <m>x</m> and <m>y</m>,
+                the curl may be positive, negative, or zero.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </solution>
+    </example>
+
+    <example xml:id="ex_vectorfield2">
+      <title>Computing divergence and curl of vector fields in space</title>
+      <statement>
+        <p>
+          Compute the divergence and curl of each of the following vector fields.
+
+          <ol>
+            <li>
+              <p>
+                <m>\vec F = \langle x^2+y+z, -x-z, x+y\rangle</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\vec F = \langle e^{xy}, \sin(x+z),x^2+y\rangle</m>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We compute the divergence and curl of each field following the definitions.
+
+          <ol>
+            <li>
+              <p>
+                <m>\divv \vec F = \nabla \cdot \vec F = M_x+N_y+P_z = 2x+0+0= 2x</m>.
+                <m>\begin{aligned}\curl\vec F = \nabla \times \vec F \amp = \langle P_y-N_z,M_z-P_x,N_x - M_y\rangle\\ \amp = \langle 1 - (-1), 1-1,-1-(1)\rangle = \langle 2,0,-2\rangle. \end{aligned}</m> For this particular field,
+                no matter the location in space,
+                a spin is induced with axis parallel to <m>\langle 2,0,-2\rangle</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\divv \vec F = \nabla \cdot \vec F = M_x+N_y+P_z = ye^{xy}+0+0= ye^{xy}</m>.
+                <m>\begin{aligned}\curl\vec F = \nabla \times \vec F \amp = \langle P_y-N_z,M_z-P_x,N_x - M_y\rangle\\ \amp = \langle 1-\cos(x+z), -2x, \cos(x+z) - xe^{xy}\rangle. \end{aligned}</m>
+              </p>
+            </li>
+          </ol>
+        </p>
+      </solution>
+    </example>
+
+    <example xml:id="ex_vectorfield3">
+      <title>Creating a field representing gravitational force</title>
+      <statement>
+        <p>
+          The force of gravity between two objects is inversely proportional to the square of the distance between the objects.
+          Locate a point mass at the origin.
+          Create a vector field <m>\vec F</m> that represents the gravitational pull of the point mass at any point <m>(x,y,z)</m>.
+          Find the divergence and curl of this field.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The point mass pulls toward the origin, so at <m>(x,y,z)</m>,
+          the force will pull in the direction of <m>\langle -x, -y, -z\rangle</m>.
+          To get the proper magnitude,
+          it will be useful to find the unit vector in this direction.
+          Dividing by its magnitude, we have
+          <me>
+            \vec u = \left\langle \frac{-x}{\sqrt{x^2+y^2+z^2}}, \frac{-y}{\sqrt{x^2+y^2+z^2}},\frac{-z}{\sqrt{x^2+y^2+z^2}}\right\rangle
+          </me>.
+        </p>
+
+        <p>
+          The magnitude of the force is inversely proportional to the square of the distance between the two points.
+          Letting <m>k</m> be the constant of proportionality,
+          we have the magnitude as <m>\ds\frac{k}{x^2+y^2+z^2}</m>.
+          Multiplying this magnitude by the unit vector above,
+          we have the desired vector field:
+          <me>
+            \vec F = \left\langle \frac{-kx}{(x^2+y^2+z^2)^{3/2}}, \frac{-ky}{(x^2+y^2+z^2)^{3/2}},\frac{-kz}{(x^2+y^2+z^2)^{3/2}}\right\rangle
+          </me>.
+        </p>
+
+        <p>
+          We leave it to the reader to confirm that
+          <m>\divv \vec F = 0</m> and <m>\curl \vec F = \vec 0</m>.
+        </p>
+
+        <p>
+          The analogous planar vector field is given in <xref ref="fig_vectorfield3">Figure</xref>.
+          Note how all arrows point to the origin,
+          and the magnitude gets very small when
+          <q>far</q> from the origin.
+        </p>
+      </solution>
+    </example>
+
+    <figure xml:id="fig_vectorfield3">
+      <caption>A vector field representing a planar gravitational force.</caption>
+      <img src="figures/figvectorfield3"/>
+    </figure>
+
+    <p>
+      A function <m>z=f(x,y)</m> naturally induces a vector field,
+      <m>\vec F = \nabla f = \langle f_x,f_y\rangle</m>.
+      Given what we learned of the gradient in <xref ref="sec_directional_derivative">Section</xref>,
+      we know that the vectors of <m>\vec F</m> point in the direction of greatest increase of <m>f</m>.
+      Because of this, <m>f</m> is said to be the
+      <em>potential function</em>
+          <idx><h>potential function</h></idx>
+          <idx><h>vector field</h><h>potential function of</h></idx>
+      of <m>\vec F</m>.
+      Vector fields that are the gradient of potential functions will play an important role in the next section.
+    </p>
+
+    <example xml:id="ex_vectorfield4">
+      <title>A vector field that is the gradient of a potential function</title>
+      <statement>
+        <p>
+          Let <m>f(x,y) = 3-x^2-2y^2</m> and let <m>\vec F = \nabla f</m>.
+          Graph <m>\vec F</m>, and find the divergence and curl of <m>\vec F</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Given <m>f</m>,
+          we find <m>\vec F = \nabla f = \langle -2x,-4y\rangle</m>.
+          A graph of <m>\vec F</m> is given in <xref ref="fig_vectorfield4">Figure</xref>(a).
+          In part (b) of the figure,
+          the vector field is given along with a graph of the surface itself;
+          one can see how each vector is pointing in the direction of
+          <q>steepest uphill</q>,
+          which, in this case, is not simply just
+          <q>toward the origin.</q>
+        </p>
+
+        <figure xml:id="fig_vectorfield4">
+          <caption>A graph of a function <m>z=f(x,y)</m> and the vector field <m>\vec F = \nabla f</m> in <xref ref="ex_vectorfield4">Example</xref>.</caption>
+          <sidebyside>
+            <figure>
+              <caption>[-5pt]
+              (a)</caption>
+              <img src="figures/figvectorfield4"/>
+            </figure>
+
+            <figure>
+              <caption>(b)</caption>
+              \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+              3Droll=0,
+              3Dortho=0.004781691357493401,
+              3Dc2c=0.7686017751693726 -0.47064894437789917 0.4332907199859619,
+              3Dcoo=0.000002273424570375937 -0.0000013264116205391474 56.08348083496094,
+              3Droo=117.22547128132403,
+              3Dlights=Headlamp,add3Djscript=asylabels.js}
+              <img src="figures/figvectorfield4b_3D"/>
+            </figure>
+          </sidebyside>
+
+        </figure>
+
+        <p>
+          We leave it to the reader to confirm that
+          <m>\divv \vec F = -6</m> and <m>\curl \vec F = 0</m>.
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      There are some important concepts visited in this section that will be revisited in subsequent sections and again at the very end of this chapter.
+      One is: given a vector field <m>\vec F</m>,
+      both <m>\divv\vec F</m> and
+      <m>\curl\vec F</m> are measures of rates of change of <m>\vec F</m>.
+      The divergence measures how much the field spreads (diverges) at a point,
+      and the curl measures how much the field twists (curls) at a point.
+      Another important concept is this:
+      given <m>z=f(x,y)</m>, the gradient
+      <m>\nabla f</m> is also a measure of a rate of change of <m>f</m>.
+      We will see how the integrals of these rates of change produce meaningful results.
+    </p>
+
+    <p>
+      This section introduces the concept of a vector field.
+      The next section <q>applies calculus</q> to vector fields.
+      A common application is this:
+      let <m>\vec F</m> be a vector field representing a force
+      (hence it is called a <q>force field,</q>
+      though this name has a decidedly comic-book feel)
+      and let a particle move along a curve <m>C</m> under the influence of this force.
+      What work is performed by the field on this particle?
+      The solution lies in correctly applying the concepts of line integrals in the context of vector fields.
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Terms and Concepts</title>
+    <exercise>
+      <statement>
+        <p>
+          Give two quantities that can be represented by a vector field in the plane or in space.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Answers will vary.
+          Appropriate answers include velocities of moving particles (air,
+          water, etc.);
+          gravitational or electromagnetic forces.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          In your own words,
+          describe what it means for a vector field to have a negative divergence at a point.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Specific answers will vary,
+          though should relate to the idea that
+          <q>more of the vector field is moving into that point than out of that point.</q>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          In your own words,
+          describe what it means for a vector field to have a negative curl at a point.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Specific answers will vary,
+          though should relate to the idea that the vector field is spinning clockwise at that point.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          The divergence of a vector field <m>\vec F</m> at a particular point is 0.
+          Does this mean that <m>\vec F</m> is incompressible?
+          Why/why not?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          No; to be incompressible,
+          the divergence needs to be 0 everywhere, not just at one point.
+        </p>
+      </answer>
+    </exercise>
+  </subsection>
+
+  <subsection>
+    <title>Problems</title>
+    <p>
+      In the following exercises,
+      sketch the given vector field over the rectangle with opposite corners <m>(-2,-2)</m> and <m>(2,2)</m>,
+      sketching one vector for every point with integer coordinates (i.e., at <m>(0,0)</m>,
+      <m>(1,2)</m>, etc.).
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle x,0\rangle</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Correct answers should look similar to
+        </p>
+
+        <p>
+          <img src="figures/fig14_02_ex_05"/>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle 0,x\rangle</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Correct answers should look similar to
+        </p>
+
+        <p>
+          <img src="figures/fig14_02_ex_06"/>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle 1,-1\rangle</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Correct answers should look similar to
+        </p>
+
+        <p>
+          <img src="figures/fig14_02_ex_07"/>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle y^2,1\rangle</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Correct answers should look similar to
+        </p>
+
+        <p>
+          <img src="figures/fig14_02_ex_08"/>
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises,
+      find the divergence and curl of the given vector field.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle x,y^2\rangle</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\divv \vec F = 1+2y</m>
+        </p>
+
+        <p>
+          <m>\curl \vec F = 0</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle -y^2,x\rangle</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\divv \vec F = 0</m>
+        </p>
+
+        <p>
+          <m>\curl \vec F = 1+2y</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle \cos (xy), \sin (xy)\rangle</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\divv \vec F = x\cos(xy)-y\sin(xy)</m>
+        </p>
+
+        <p>
+          <m>\curl \vec F = y\cos(xy)+x\sin(xy)</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\vec F = \la \frac{-2x}{(x^2+y^2)^2},\frac{-2y}{(x^2+y^2)^2}\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\divv \vec F = \frac{4}{(x^2+y^2)^2}</m>
+        </p>
+
+        <p>
+          <m>\curl \vec F = 0</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\vec F = \la x+y,y+z,x+z\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\divv \vec F = 3</m>
+        </p>
+
+        <p>
+          <m>\curl \vec F = \la -1,-1,-1\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\vec F = \la x^2+z^2,x^2+y^2,y^2+z^2\ra</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\divv \vec F = 2x+2y+2z</m>
+        </p>
+
+        <p>
+          <m>\curl \vec F = \la 2y,2z,2x\ra</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \nabla f</m>, where <m>f(x,y) = \frac12x^2+\frac13y^3</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\divv \vec F = 1+2y</m>
+        </p>
+
+        <p>
+          <m>\curl\vec F = 0</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \nabla f</m>, where <m>f(x,y) = x^2y</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\divv \vec F = 2y</m>
+        </p>
+
+        <p>
+          <m>\curl\vec F = 0</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \nabla f</m>, where <m>f(x,y,z) = x^2y+\sin z</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\divv \vec F = 2y-\sin z</m>
+        </p>
+
+        <p>
+          <m>\curl\vec F = \vec 0</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \nabla f</m>, where <m>\ds f(x,y,z) = \frac1{x^2+y^2+z^2}</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\divv \vec F = \frac{2}{(x^2+y^2+z^2)^2}</m>
+        </p>
+
+        <p>
+          <m>\curl\vec F = \vec 0</m>
+        </p>
+      </answer>
+    </exercise>
+  </subsection>
+
+</section>
+

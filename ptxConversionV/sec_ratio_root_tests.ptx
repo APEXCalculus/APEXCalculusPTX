@@ -1,0 +1,766 @@
+
+
+<section xml:id="sec_ratio_root_tests">
+  <title>Ratio and Root Tests</title>
+  <introduction>
+    <p>
+      The <m>n^\text{ th }</m><ndash />Term Test of <xref ref="thm_series_nth_term">Theorem</xref>
+      states that in order for a series <m>\ds \sum_{n=1}^\infty a_n</m> to converge,
+      <m>\ds\lim_{n\to\infty}a_n = 0</m>.
+      That is, the terms of <m>\{a_n\}</m> must get very small.
+      Not only must the terms approach 0, they must approach 0 <q>fast enough</q>:
+      while <m>\ds \lim_{n\to\infty}1/n=0</m>,
+      the Harmonic Series <m>\ds\sum_{n=1}^\infty \frac1n</m> diverges as the terms of <m>\{1/n\}</m> do not approach 0 <q>fast enough.</q>
+    </p>
+
+    <p>
+      The comparison tests of the previous section determine convergence by comparing terms of a series to terms of another series whose convergence is known.
+      This section introduces the Ratio and Root Tests,
+      which determine convergence by analyzing the terms of a series to see if they approach 0 <q>fast enough.</q>
+    </p>
+  </introduction>
+
+  <subsection>
+    <title>Ratio Test</title>
+    <theorem xml:id="thm_ratio_test">
+      <title>Ratio Test</title>
+      <statement>
+        <p>
+          Let <m>\{a_n\}</m> be a positive sequence where <m>\ds \lim_{n\to\infty}\frac{a_{n+1}}{a_n} = L</m>.
+              <idx><h>series</h><h>Ratio Comparison Test</h></idx>
+              <idx><h>Ratio Comparison Test</h><h>for series</h></idx>
+              <idx><h>convergence</h><h>Ratio Comparison Test</h></idx>
+              <idx><h>divergence</h><h>Ratio Comparison Test</h></idx>
+
+          <ol>
+            <li>
+              <p>
+                If <m>L\lt 1</m>, then <m>\ds\sum_{n=1}^\infty a_n</m> converges.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                If <m>L>1</m> or <m>L=\infty</m>,
+                then <m>\ds\sum_{n=1}^\infty a_n</m> diverges.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                If <m>L=1</m>, the Ratio Test is inconclusive.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </theorem>
+
+    <aside>
+      <p>
+        <em>Note:</em> <xref ref="thm_series_behavior">Theorem</xref>
+        allows us to apply the Ratio Test to series where <m>\{a_n\}</m> is positive for all but a finite number of terms.
+      </p>
+    </aside>
+    <p>
+      The principle of the Ratio Test is this:
+      if <m>\ds\lim_{n\to\infty}\frac{a_{n+1}}{a_n} = L\lt 1</m>,
+      then for large <m>n</m>,
+      each term of <m>\{a_n\}</m> is significantly smaller than its previous term which is enough to ensure convergence.
+    </p>
+
+    <example xml:id="ex_ratio1">
+      <title>Applying the Ratio Test</title>
+      <statement>
+        <p>
+          Use the Ratio Test to determine the convergence of the following series:
+        </p>
+
+        <p>
+          <m>\ds 1.\ \sum_{n=1}^\infty \frac{2^n}{n!}\qquad\qquad 2.\ \sum_{n=1}^\infty \frac{3^n}{n^3} \qquad\qquad 3.\ \sum_{n=1}^\infty \frac{1}{n^2+1}</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li>
+              <p>
+                <m>\ds \sum_{n=1}^\infty \frac{2^n}{n!}</m>:
+                <md>
+                  <mrow>\lim_{n\to\infty}\frac{2^{n+1}/(n+1)!}{2^n/n!} \amp = \lim_{n\to\infty} \frac{2^{n+1}n!}{2^n(n+1)!}</mrow>
+                  <mrow>\amp = \lim_{n\to\infty} \frac{2}{n+1}</mrow>
+                  <mrow>\amp =0</mrow>
+                </md>.
+                Since the limit is <m>0\lt 1</m>,
+                by the Ratio Test <m>\ds\sum_{n=1}^\infty \frac{2^n}{n!}</m> converges.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\ds\sum_{n=1}^\infty \frac{3^n}{n^3}</m>:
+                <md>
+                  <mrow>\lim_{n\to\infty} \frac{3^{n+1}/(n+1)^3}{3^n/n^3} \amp = \lim_{n\to\infty}\frac{3^{n+1}n^3}{3^n(n+1)^3}</mrow>
+                  <mrow>\amp = \lim_{n\to\infty} \frac{3n^3}{(n+1)^3}</mrow>
+                  <mrow>\amp = 3</mrow>
+                </md>.
+                Since the limit is <m>3>1</m>,
+                by the Ratio Test <m>\ds\sum_{n=1}^\infty \frac{3^n}{n^3}</m> diverges.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\ds\sum_{n=1}^\infty \frac{1}{n^2+1}</m>:
+                <md>
+                  <mrow>\lim_{n\to\infty} \frac{1/\big((n+1)^2+1\big)}{1/(n^2+1)} \amp = \lim_{n\to\infty} \frac{n^2+1}{(n+1)^2+1}</mrow>
+                  <mrow>\amp = 1</mrow>
+                </md>.
+                Since the limit is 1, the Ratio Test is inconclusive.
+                We can easily show this series converges using the Direct or Limit Comparison Tests,
+                with each comparing to the series <m>\ds \sum_{n=1}^\infty \frac{1}{n^2}</m>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      The Ratio Test is not effective when the terms of a series <em>only</em>
+      contain algebraic functions (e.g., polynomials).
+      It is most effective when the terms contain some factorials or exponentials.
+      The previous example also reinforces our developing intuition:
+      factorials dominate exponentials,
+      which dominate algebraic functions,
+      which dominate logarithmic functions.
+      In Part 1 of the example,
+      the factorial in the denominator dominated the exponential in the numerator,
+      causing the series to converge.
+      In Part 2, the exponential in the numerator dominated the algebraic function in the denominator,
+      causing the series to diverge.
+    </p>
+
+    <p>
+      While we have used factorials in previous sections,
+      we have not explored them closely and one is likely to not yet have a strong intuitive sense for how they behave.
+      The following example gives more practice with factorials.
+    </p>
+
+    <example xml:id="ex_ratio2">
+      <title>Applying the Ratio Test</title>
+      <statement>
+        <p>
+          Determine the convergence of <m>\ds\sum_{n=1}^\infty \frac{n!n!}{(2n)!}</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Before we begin,
+          be sure to note the difference between <m>(2n)!</m> and <m>2n!</m>.
+          When <m>n=4</m>,
+          the former is <m>8!=8\cdot7\cdot\ldots\cdot 2\cdot1=40,320</m>,
+          whereas the latter is <m>2(4\cdot3\cdot2\cdot1) = 48</m>.
+        </p>
+
+        <p>
+          Applying the Ratio Test:
+          <md>
+            <mrow>\lim_{n\to\infty} \frac{(n+1)!(n+1)!/\big(2(n+1)\big)!}{n!n!/(2n)!} \amp = \lim_{n\to\infty}\frac{(n+1)!(n+1)!(2n)!}{n!n!(2n+2)!}</mrow>
+            <intertext>Noting that <m>(2n+2)! = (2n+2)\cdot(2n+1)\cdot(2n)!</m>, we have</intertext>
+            <mrow>\amp = \lim_{n\to\infty}\frac{(n+1)(n+1)}{(2n+2)(2n+1)}</mrow>
+            <mrow>\amp = 1/4</mrow>
+          </md>.
+        </p>
+
+        <p>
+          Since the limit is <m>1/4\lt 1</m>,
+          by the Ratio Test we conclude <m>\ds \sum_{n=1}^\infty \frac{n!n!}{(2n)!}</m> converges.
+        </p>
+      </solution>
+    </example>
+  </subsection>
+
+  <subsection>
+    <title>Root Test</title>
+    <p>
+      The final test we introduce is the Root Test,
+      which works particularly well on series where each term is raised to a power,
+      and does not work well with terms containing factorials.
+    </p>
+
+    <theorem xml:id="thm_root_test">
+      <title>Root Test</title>
+      <statement>
+        <p>
+          Let <m>\{a_n\}</m> be a positive sequence,
+          and let <m>\ds \lim_{n\to \infty} (a_n)^{1/n} = L</m>.
+              <idx><h>series</h><h>Root Comparison Test</h></idx>
+              <idx><h>Root Comparison Test</h><h>for series</h></idx>
+              <idx><h>convergence</h><h>Root Comparison Test</h></idx>
+              <idx><h>divergence</h><h>Root Comparison Test</h></idx>
+
+          <ol>
+            <li>
+              <p>
+                If <m>L\lt 1</m>, then <m>\ds\sum_{n=1}^\infty a_n</m> converges.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                If <m>L>1</m> or <m>L=\infty</m>,
+                then <m>\ds\sum_{n=1}^\infty a_n</m> diverges.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                If <m>L=1</m>, the Root Test is inconclusive.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </theorem>
+
+    <example xml:id="ex_root1">
+      <title>Applying the Root Test</title>
+      <statement>
+        <p>
+          Determine the convergence of the following series using the Root Test:
+        </p>
+
+        <p>
+          <m>\ds1. \ \sum_{n=1}^\infty \left(\frac{3n+1}{5n-2}\right)^n\qquad\qquad 2.\ \sum_{n=1}^\infty\frac{n^4}{(\ln n)^n}\qquad\qquad 3.\ \sum_{n=1}^\infty \frac{2^n}{n^2}</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          <ol>
+            <li>
+              <p>
+                <m>\ds\lim_{n\to\infty} \left(\left(\frac{3n+1}{5n-2}\right)^n\right)^{1/n} = \lim_{n\to\infty} \frac{3n+1}{5n-2} = \frac 35</m>.
+                Since the limit is less than 1, we conclude the series converges.
+                Note: it is difficult to apply the Ratio Test to this series.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\ds\lim_{n\to\infty} \left(\frac{n^4}{(\ln n)^n}\right)^{1/n} = \lim_{n\to\infty} \frac {\big(n^{1/n}\big)^4}{\ln n}</m>.
+                As <m>n</m> grows, the numerator approaches 1
+                (apply L'H&#xf4;pital's Rule)
+                and the denominator grows to infinity.
+                Thus
+                <me>
+                  \lim_{n\to\infty} \frac{\big(n^{1/n}\big)^4}{\ln n} = 0
+                </me>.
+                Since the limit is less than 1, we conclude the series converges.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\ds \lim_{n\to\infty} \left(\frac{2^n}{n^2}\right)^{1/n} = \lim_{n\to\infty} \frac{2}{\big(n^{1/n}\big)^2} = 2</m>.
+                Since this is greater than 1, we conclude the series diverges.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </solution>
+    </example>
+
+    <aside>
+      <p>
+        <em>Note:</em> <xref ref="thm_series_behavior">Theorem</xref>
+        allows us to apply the Root Test to series where <m>\{a_n\}</m> is positive for all but a finite number of terms.
+      </p>
+    </aside>
+    <p>
+      Each of the tests we have encountered so far has required that we analyze series from
+      <em>positive</em> sequences.
+      The next section relaxes this restriction by considering
+      <em>alternating series</em>,
+      where the underlying sequence has terms that alternate between being positive and negative.
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Terms and Concepts</title>
+    <exercise>
+      <statement>
+        <p>
+          The Ratio Test is not effective when the terms of a sequence only contain <fillin /><nbsp />functions.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          algebraic, or polynomial.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          The Ratio Test is most effective when the terms of a sequence contains <fillin /><nbsp />and/or <fillin /><nbsp />functions.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          factorial and/or exponential
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          What three convergence tests do not work well with terms containing factorials?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Integral Test, Limit Comparison Test, and Root Test
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          The Root Test works particularly well on series where each term is <fillin /><nbsp />to a <fillin />.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          raised to a power
+        </p>
+      </answer>
+    </exercise>
+  </subsection>
+
+  <subsection>
+    <title>Problems</title>
+    <p>
+      In the following exercises,
+      determine the convergence of the given series using the Ratio Test.
+      If the Ratio Test is inconclusive,
+      state so and determine convergence with another test.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=0}^\infty \frac{2n}{n!}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Converges
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=0}^\infty \frac{5^n-3n}{4^n}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Diverges
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=0}^\infty \frac{n!10^n}{(2n)!}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Converges
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \frac{5^n+n^4}{7^n+n^2}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Converges
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \frac{1}{n}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          The Ratio Test is inconclusive;
+          the <m>p</m>-Series Test states it diverges.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \frac{1}{3n^3+7}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          The Ratio Test is inconclusive;
+          the Direct Comparison Test with <m>1/n^3</m> shows it converges.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \frac{10\cdot5^n}{7^n-3}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Converges
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty n\cdot\left(\frac35\right)^n</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Converges
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \frac{2\cdot4\cdot6\cdot8\cdots 2n}{3\cdot6\cdot9\cdot12\cdots 3n}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Converges; note the summation can be rewritten as <m>\ds\sum_{n=1}^\infty \frac{2^nn!}{3^nn!}</m>,
+          to which the Ratio Test or Geometric Series Test can be applied.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \frac{n!}{5\cdot10\cdot15\cdots (5n)}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Converges; rewrite the summation as
+          <m>\ds\sum_{n=1}^\infty \frac{n!}{5^nn!}</m> then apply the Ratio Test or the Geometric Series Test.
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises,
+      determine the convergence of the given series using the Root Test.
+      If the Root Test is inconclusive,
+      state so and determine convergence with another test.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \left(\frac{2n+5}{3n+11}\right)^n</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Converges
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \left(\frac{.9n^2-n-3}{n^2+n+3}\right)^n</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Converges
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \frac{2^nn^2}{3^n}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Converges
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \frac{1}{n^n}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Converges
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \frac{3^n}{n^22^{n+1}}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Diverges
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \frac{4^{n+7}}{7^n}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Converges
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \left(\frac{n^2-n}{n^2+n}\right)^n</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Diverges.
+          The Root Test is inconclusive,
+          but the <m>n^\text{ th }</m>-Term Test shows divergence.
+          (The terms of the sequence approach <m>e^{-2}</m>,
+          not 0, as <m>n\to\infty</m>.)
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \left(\frac1n-\frac{1}{n^2}\right)^n</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Converges
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \frac1{\big(\ln n\big)^n}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Converges
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \frac{n^2}{\big(\ln n\big)^n}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Converges
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises, determine the convergence of the given series.
+      State the test used; more than one test may be appropriate.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \frac{n^2+4n-2}{n^3+4n^2-3n+7}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Diverges; Limit Comparison Test with <m>1/n</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \frac{n^44^n}{n!}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Converges; Ratio Test
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \frac{n^2}{3^n+n}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Converges; Ratio Test or Limit Comparison Test with <m>1/3^n</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \frac{3^n}{n^n}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Converges; Root Test
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \frac{n}{\sqrt{n^2+4n+1}}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Diverges; <m>n^\text{ th }</m>-Term Test or Limit Comparison Test with 1.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \frac{n!n!n!}{(3n)!}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Converges; Ratio Test
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \frac{1}{\ln n}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Diverges; Direct Comparison Test with <m>1/n</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \left(\frac{n+2}{n+1}\right)^n</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Diverges; <m>n^\text{ th }</m>-Term Test (<m>n^\text{ th }</m> term approaches <m>e</m>.)
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \frac{n^3}{\big(\ln n\big)^n}</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Converges; Root Test
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\ds\sum_{n=1}^\infty \left(\frac1n-\frac1{n+2}\right)</m>
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Converges; Limit Comparison Test with <m>1/n^2</m>
+          (get common denominator first).
+          It is also a Telescoping Series.
+        </p>
+      </answer>
+    </exercise>
+  </subsection>
+</section>
+
