@@ -1,0 +1,2590 @@
+
+
+<section xml:id="sec_stokes_divergence">
+  <title>The Divergence Theorem and Stokes' Theorem</title>
+  <subsection>
+    <title>The Divergence Theorem</title>
+    <p>
+      <xref ref="thm_divergence1">Theorem</xref>
+      gives the Divergence Theorem in the plane,
+      which states that the flux of a vector field across a closed <em>curve</em>
+      equals the sum of the divergences over the region enclosed by the curve.
+      Recall that the flux was measured via a line integral,
+      and the sum of the divergences was measured through a double integral.
+    </p>
+
+    <p>
+      We now consider the three-dimensional version of the Divergence Theorem.
+      It states, in words, that the flux across a closed <em>surface</em>
+      equals the sum of the divergences over the domain enclosed by the surface.
+      Since we are in space
+      (versus the plane),
+      we measure flux via a surface integral,
+      and the sums of divergences will be measured through a triple integral.
+    </p>
+
+    <theorem xml:id="thm_divergence2">
+      <title>The Divergence Theorem (in space)</title>
+      <statement>
+        <p>
+          Let <m>D</m> be a closed domain in space whose boundary is an orientable,
+          piecewise smooth surface \mathcal{S}<nbsp />with outer unit normal vector <m>\vec n</m>,
+          and let <m>\vec F</m> be a vector field whose components are differentiable on <m>D</m>.
+          Then<idx><h>Divergence Theorem</h><h>in space</h></idx>
+          <me>
+            \iint_\surfaceS \vec F\cdot\vec n\ dS =\iiint_D \divv \vec F\ dV
+          </me>.
+        </p>
+      </statement>
+    </theorem>
+
+    <aside>
+      <p>
+        <em>Note:</em> the term <q>outer unit normal vector</q>
+        used in <xref ref="thm_divergence2">Theorem</xref>
+        means <m>\vec n</m> points to the outside of \mathcal{S}.
+            <idx><h>outer unit normal vector</h></idx>
+      </p>
+    </aside>
+
+    <example xml:id="ex_divthm_space2">
+      <title>Using the Divergence Theorem in space</title>
+      <statement>
+        <p>
+          Let <m>D</m> be the domain in space bounded by the planes <m>z=0</m> and <m>z=2x</m>,
+          along with the cylinder <m>x=1-y^2</m>,
+          as graphed in <xref ref="fig_divthm_space2">Figure</xref>,
+          let \mathcal{S}<nbsp />be the boundary of <m>D</m>,
+          and let <m>\vec F = \langle x+y,y^2, 2z\rangle</m>.
+        </p>
+
+        <figure xml:id="fig_divthm_space2">
+          <caption>The surfaces used in  <xref ref="ex_divthm_space2">Example</xref>.</caption>
+          \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.004853160120546818,
+          3Dc2c=0.7607786655426025 0.5903141498565674 0.2697128355503082,
+          3Dcoo=-4.848384857177734 2.0102698802948 61.921504974365234,
+          3Droo=399.9999594035934,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figdivthm_space2_3D"/>
+        </figure>
+
+        <p>
+          Verify the Divergence Theorem by finding the total outward flux of <m>\vec F</m> across \mathcal{S}, and show this is equal to <m>\iiint_D \divv\vec F\ dV</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The surface \mathcal{S}<nbsp />is piecewise smooth,
+          comprising surfaces <m>\surfaceS_1</m>,
+          which is part of the plane <m>z=2x</m>,
+          surface <m>\surfaceS_2</m>, which is part of the cylinder <m>x=1-y^2</m>,
+          and surface <m>\surfaceS_3</m>,
+          which is part of the plane <m>z=0</m>.
+          To find the total outward flux across \mathcal{S}, we need to compute the outward flux across each of these three surfaces.
+        </p>
+
+        <p>
+          We leave it to the reader to confirm that surfaces <m>\surfaceS_1</m>,
+          <m>\surfaceS_2</m> and <m>\surfaceS_3</m> can be parameterized by <m>\vec r_1</m>,
+          <m>\vec r_2</m> and <m>\vec r_3</m> respectively as
+          <md>
+            <mrow>\vec r_1(u,v) \amp = \la v(1-u^2), u, 2v(1-u^2)\ra,</mrow>
+            <mrow>\vec r_2(u,v) \amp = \la (1-u^2), u, 2v(1-u^2)\ra,</mrow>
+            <mrow>\vec r_3(u,v) \amp = \la v(1-u^2), u, 0\ra</mrow>
+          </md>,
+          where <m>-1\leq u\leq 1</m> and
+          <m>0\leq v\leq 1</m> for all three functions.
+        </p>
+
+        <p>
+          We compute a unit normal vector <m>\vec n</m> for each as <m>\frac{\vec r_u\times\vec r_v}{\snorm{\vec r_u\times\vec r_v}}</m>,
+          though recall that as we are integrating <m>\vec F\cdot \vec n\ dS</m>,
+          we actually only use <m>\vec r_u\times\vec r_v</m>.
+          Finally, in previous flux computations,
+          it did not matter which direction <m>\vec n</m> pointed as long as we made note of its direction.
+          When using the Divergence Theorem,
+          we need <m>\vec n</m> to point to the outside of the closed surface,
+          so in practice this means we'll either use
+          <m>\vec r_u\times\vec r_v</m> or <m>\vec r_v\times\vec r_u</m>,
+          depending on which points outside of the closed surface \mathcal{S}.
+        </p>
+
+        <p>
+          We leave it to the reader to confirm the following cross products and integrations are correct.
+        </p>
+
+        <p>
+          For <m>\surfaceS_1</m>,
+          we need to use <m>\vec r_{1v}\times\vec r_{1u} = \langle 2(u^2-1),0,1-u^2\rangle</m>.
+          (Note the <m>z</m>-component is nonnegative as <m>u\leq 1</m>,
+          therefore this vector always points up,
+          meaning <em>to the outside</em>, of \mathcal{S}.)
+          The flux across <m>\surfaceS_1</m> is:
+          <md>
+            <mrow>\text{ Flux across \(\surfaceS_1\): }  \amp = \iint_{\surfaceS_1} \vec F\cdot \vec n_1\ dS</mrow>
+            <mrow>\amp = \int_0^1\int_{-1}^1 \vec F\big(\vec r_1(u,v)\big)\cdot \big(\vec r_{1v}\times\vec r_{1u}\big)\ du\ dv</mrow>
+            <mrow>\amp = \int_0^1\int_{-1}^1 \la v(1-u^2)+u, u^2,4v(1-u^2)\ra \cdot \la 2(u^2-1),0,1-u^2\ra\ du\ dv</mrow>
+            <mrow>\amp = \int_0^1\int_{-1}^1 \big(2u^4v+2u^3-4u^2v-2u+2v\big)\ du\ dv</mrow>
+            <mrow>\amp = \frac{16}{15}</mrow>
+          </md>.
+        </p>
+
+        <p>
+          For <m>\surfaceS_2</m>,
+          we use <m>\vec r_{2u}\times\vec r_{2v} = \langle 2(1-u^2), 4u(1-u^2),0\rangle</m>.
+          (Note the <m>x</m>-component is always nonnegative,
+          meaning this vector points outside \mathcal{S}.)
+          The flux across <m>\surfaceS_2</m> is:
+          <md>
+            <mrow>\text{ Flux across \(\surfaceS_2\): }  \amp = \iint_{\surfaceS_2} \vec F\cdot \vec n_2\ dS</mrow>
+            <mrow>\amp = \int_0^1\int_{-1}^1 \vec F\big(\vec r_2(u,v)\big)\cdot \big(\vec r_{2u}\times\vec r_{2v}\big)\ du\ dv</mrow>
+            <mrow>\amp = \int_0^1\int_{-1}^1 \la 1-u^2+u, u^2, 4v(1-u^2)\ra \cdot \la 2(1-u^2), 4u(1-u^2),0\ra\ du\ dv</mrow>
+            <mrow>\amp = \int_0^1\int_{-1}^1 \big(4u^5-2u^4-2u^3+4u^2-2u-2\big)\ du\ dv</mrow>
+            <mrow>\amp = \frac{32}{15}</mrow>
+          </md>.
+        </p>
+
+        <p>
+          For <m>\surfaceS_3</m>,
+          we use <m>\vec r_{3u}\times\vec r_{3v} = \langle 0,0,u^2-1\rangle</m>.
+          (Note the <m>z</m>-component is never positive,
+          meaning this vector points down, outside of \mathcal{S}.)
+          The flux across <m>\surfaceS_3</m> is:
+          <md>
+            <mrow>\text{ Flux across \(\surfaceS_3\): }  \amp = \iint_{\surfaceS_3} \vec F\cdot \vec n_3\ dS</mrow>
+            <mrow>\amp = \int_0^1\int_{-1}^1 \vec F\big(\vec r_3(u,v)\big)\cdot \big(\vec r_{3u}\times\vec r_{3v}\big)\ du\ dv</mrow>
+            <mrow>\amp = \int_0^1\int_{-1}^1 \la v(1-u^2)+u,u^2,0\ra \cdot \la 0,0,u^2-1\ra\ du\ dv</mrow>
+            <mrow>\amp = \int_0^1\int_{-1}^1 0\ du\ dv</mrow>
+            <mrow>\amp = 0</mrow>
+          </md>.
+        </p>
+
+        <p>
+          Thus the total outward flux,
+          measured by surface integrals across all three component surfaces of \mathcal{S}, is <m>16/15+32/15+0 = 48/15 = 16/5 = 3.2</m>.
+          We now find the total outward flux by integrating <m>\divv \vec F</m> over <m>D</m>.
+        </p>
+
+        <p>
+          Following the steps outlined in <xref ref="sec_triple_int">Section</xref>,
+          we see the bounds of <m>x</m>,
+          <m>y</m> and <m>z</m> can be set as (thinking <q>surface to surface,
+          curve to curve, point to point</q>):
+          <me>
+            0\leq z\leq 2x; 0\leq x\leq 1-y^2; -1\leq y\leq 1
+          </me>.
+        </p>
+
+        <p>
+          With <m>\divv \vec F = 1+2y+2 = 2y+3</m>,
+          we find the total outward flux of <m>\vec F</m> over \mathcal{S}<nbsp />as:
+          <me>
+            \text{ Flux = }  \iiint_D\divv \vec F\ dV = \int_{-1}^1\int_0^{1-y^2}\int_0^{2x}\big(2y+3\big)\ dz\ dx\ dy = 16/5
+          </me>,
+          the same result we obtained previously.
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      In <xref ref="ex_divthm_space2">Example</xref>
+      we see that the total outward flux of a vector field across a closed surface can be found two different ways because of the Divergence Theorem.
+      One computation took far less work to obtain.
+      In that particular case,
+      since \mathcal{S}<nbsp />was comprised of three separate surfaces,
+      it was far simpler to compute one triple integral than three surface integrals
+      (each of which required partial derivatives and a cross product).
+      In practice, if outward flux needs to be measured,
+      one would choose only one method.
+      We will use both methods in this section simply to reinforce the truth of the Divergence Theorem.
+    </p>
+
+    <p>
+      We practice again in the following example.
+    </p>
+
+    <example xml:id="ex_divthm_space1">
+      <title>Using the Divergence Theorem in space</title>
+      <statement>
+        <p>
+          Let \mathcal{S}<nbsp />be the surface formed by the paraboloid <m>z=1-x^2-y^2</m>,
+          <m>z\geq 0</m>,
+          and the unit disk centered at the origin in the <m>x</m>-<m>y</m> plane,
+          graphed in <xref ref="fig_divthm_space1">Figure</xref>,
+          and let <m>\vec F = \langle 0,0,z\rangle</m>.
+          (This surface and vector field were used in <xref ref="ex_surfflux2">Example</xref>.)
+        </p>
+
+        <figure xml:id="fig_divthm_space1">
+          <caption>The surfaces used in  <xref ref="ex_divthm_space1">Example</xref>.</caption>
+          \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.004853160120546818,
+          3Dc2c=0.7607786655426025 0.5903141498565674 0.2697128355503082,
+          3Dcoo=-4.848384857177734 2.0102698802948 61.921504974365234,
+          3Droo=399.9999594035934,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figsurfflux2_3D"/>
+        </figure>
+
+        <p>
+          Verify the Divergence Theorem;
+          find the total outward flux across \mathcal{S}<nbsp />and evaluate the triple integral of <m>\divv \vec F</m>,
+          showing that these two quantities are equal.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We find the flux across \mathcal{S}<nbsp />first.
+          As \mathcal{S}<nbsp />is piecewise<ndash />smooth,
+          we decompose it into smooth components <m>\surfaceS_1</m>,
+          the disk,
+          and <m>\surfaceS_2</m>, the paraboloid,
+          and find the flux across each.
+        </p>
+
+        <p>
+          In <xref ref="ex_surfflux2">Example</xref>,
+          we found the flux across <m>\surfaceS_1</m> is 0.
+          We also found that the flux across <m>\surfaceS_2</m> is <m>\pi/2</m>.
+          (In that example,
+          the normal vector had a positive <m>z</m> component hence was an outer normal.)
+          Thus the total outward flux is <m>0+\pi/2 = \pi/2</m>.
+        </p>
+
+        <p>
+          We now compute <m>\iiint_D \divv \vec F\ dV</m>.
+          We can describe <m>D</m> as the domain bounded by (think <q>surface to surface,
+          curve to curve, point to point</q>):
+          <me>
+            0\leq z\leq 1-x^2-y^2,  -\sqrt{1-x^2}\leq y\leq \sqrt{1-x^2}, -1\leq x\leq 1
+          </me>.
+        </p>
+
+        <p>
+          This description of <m>D</m> is not very easy to integrate.
+          With polar, we can do better.
+          Let <m>R</m> represent the unit disk,
+          which can be described in polar simply as <m>r</m>,
+          where <m>0\leq r\leq 1</m> and <m>0\leq \theta\leq 2\pi</m>.
+          With <m>x=r\cos \theta</m> and <m>y=r\sin\theta</m>,
+          the surface <m>\surfaceS_2</m> becomes
+          <me>
+            z=1-x^2-y^2 \Rightarrow 1-(r\cos\theta)^2-(r\sin\theta)^2 \Rightarrow 1-r^2
+          </me>.
+        </p>
+
+        <p>
+          Thus <m>D</m> can be described as the domain bounded by:
+          <me>
+            0\leq z\leq 1-r^2, 0\leq r\leq 1, 0\leq \theta\leq 2\pi
+          </me>.
+        </p>
+
+        <p>
+          With <m>\divv \vec F = 1</m>,
+          we can integrate, recalling that <m>dV = r\ dz\ dr\ d\theta</m>:
+          <me>
+            \iiint_D\divv \vec F\ dV = \int_0^{2\pi}\int_0^1\int_0^{1-r^2} r\ dz\ dr\ d\theta = \frac{\pi}2
+          </me>,
+          which matches our flux computation above.
+        </p>
+      </solution>
+    </example>
+
+    <example xml:id="ex_divthm_space3">
+      <title>A <q>paradox</q> of the Divergence Theorem and Gauss's Law</title>
+      <statement>
+        <p>
+          The magnitude of many physical quantities
+          (such as light intensity or electromagnetic and gravitational forces)
+          follow an <q>inverse square law</q>:
+          the magnitude of the quantity at a point is inversely proportional to the square of the distance to the source of the quantity.
+              <idx><h>Gauss's Law</h></idx>
+        </p>
+
+        <p>
+          Let a point light source be placed at the origin and let <m>\vec F</m> be the vector field which describes the intensity and direction of the emanating light.
+          At a point <m>(x,y,z)</m>,
+          the unit vector describing the direction of the light passing through that point is <m>\langle x,y,z\rangle/\sqrt{x^2+y^2+z^2}</m>.
+          As the intensity of light follows the inverse square law,
+          the magnitude of <m>\vec F</m> at <m>(x,y,z)</m> is
+          <m>k/(x^2+y^2+z^2)</m> for some constant <m>k</m>.
+          Taken together,
+          <me>
+            \vec F(x,y,z) = \frac{k}{(x^2+y^2+z^2)^{3/2}}\langle x,y,z\rangle
+          </me>.
+        </p>
+
+        <p>
+          Consider the cube, centered at the origin,
+          with sides of length <m>2a</m> for some <m>a>0</m> (hence corners of the cube lie at <m>(a,a,a)</m>,
+          <m>(-a,-a,-a)</m>,
+          etc., as shown in <xref ref="fig_divthm_space3">Figure</xref>).
+          Find the flux across the six faces of the cube and compare this to <m>\iint_D \divv\vec F\ dV</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Let <m>\surfaceS_1</m> be the <q>top</q> face of the cube,
+          which can be parametrized by <m>\vec r(u,v) = \langle u,v,a\rangle</m> for
+          <m>-a\leq u\leq a</m>, <m>-a\leq v\leq a</m>.
+          We leave it to the reader to confirm that <m>\vec r_u\times \vec r_v = \langle 0,0,1\rangle</m>,
+          which points outside of the cube.
+        </p>
+
+        <figure xml:id="fig_divthm_space3">
+          <caption>The cube used in  <xref ref="ex_divthm_space3">Example</xref>.</caption>
+          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.004477982874959707,
+          3Dc2c=0.7997961044311523 0.5269954204559326 0.28740552067756653,
+          3Dcoo=9.648120880126953 3.759108543395996 12.013349533081055,
+          3Droo=399.9999533297849,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figdivthm_space3_3D"/>
+        </figure>
+
+        <p>
+          The flux across this face is:
+          <md>
+            <mrow>\text{ Flux }  \amp = \iint_{\surfaceS_1} \vec F\cdot \vec n\ dS</mrow>
+            <mrow>\amp = \int_{-a}^a\int_{-a}^a \vec F\big(\vec r(u,v)\big)\cdot \big(\vec r_u\times \vec r_v\big)\ du\ dv</mrow>
+            <mrow>\amp = \int_{-a}^a\int_{-a}^a \frac{k\ a}{(u^2+v^2+a^2)^{3/2}}\ du\ dv.</mrow>
+            <intertext>This double integral is <em>not</em> trivial to compute, requiring multiple trigonometric substitutions. This example is not meant to stress integration techniques, so we leave it to the reader to confirm the result is</intertext>
+            <mrow>\amp = \frac{2k\pi}3</mrow>
+          </md>.
+        </p>
+
+        <p>
+          Note how the result is independent of <m>a</m>;
+          no matter the size of the cube,
+          the flux through the top surface is always <m>2k\pi/3</m>.
+        </p>
+
+        <p>
+          An argument of symmetry shows that the flux through each of the six faces is <m>2k\pi/3</m>,
+          thus the total flux through the faces of the cube is <m>6\times2k\pi/3 = 4k\pi</m>.
+        </p>
+
+        <p>
+          It takes a bit of algebra, but we can show that <m>\divv\vec F = 0</m>.
+          Thus the Divergence Theorem would seem to imply that the total flux through the faces of the cube should be
+          <me>
+            \text{ Flux } =\iiint_D \divv \vec F\ dV = \iiint_D 0\ dV = 0
+          </me>,
+          but clearly this does not match the result from above.
+          What went wrong?
+        </p>
+
+        <p>
+          Revisit the statement of the Divergence Theorem.
+          One of the conditions is that the components of <m>\vec F</m> must be differentiable on the domain enclosed by the surface.
+          In our case, <m>\vec F</m> is <em>not</em>
+          differentiable at the origin <mdash /> it is not even defined!
+          As <m>\vec F</m> does not satisfy the conditions of the Divergence Theorem,
+          it does not apply,
+          and we cannot expect <m>\iint_\surfaceS \vec F\cdot\vec n\ dA = \iiint_D \divv\vec F\ dV</m>.
+        </p>
+
+        <p>
+          Since <m>\vec F</m> is differentiable everywhere except the origin,
+          the Divergence Theorem does apply over any domain that does not include the origin.
+          Let <m>\surfaceS_2</m> be any surface that encloses the cube used before,
+          and let <m>\hat D</m> be the domain <em>between</em>
+          the cube and <m>\surfaceS_2</m>;
+          note how <m>\hat D</m> does not include the origin and so the Divergence Theorem does apply over this domain.
+          The total outward flux over <m>\hat D</m> is thus <m>\iint_{\hat D}\divv \vec F\ dV = 0</m>,
+          which means the amount of flux coming out of
+          <m>\surfaceS_2</m> is the same as the amount of flux coming out of the cube.
+          The conclusion: the flux across <em>any</em>
+          surface enclosing the origin will be <m>4k\pi</m>.
+        </p>
+
+        <p>
+          This has an important consequence in electrodynamics.
+          Let <m>q</m> be a point charge at the origin.
+          The electric field generated by this point charge is
+          <me>
+            \vec E = \frac{q}{4\pi \epsilon_0}\frac{\la x,y,z\ra}{(x^2+y^2+z^2)^{3/2}}
+          </me>,
+          i.e., it is <m>\vec F</m> with <m>k = q/(4\pi \epsilon_0)</m>,
+          where <m>\epsilon_0</m> is a physical constant
+          (the <q>permittivity of free space</q>).
+          Gauss's Law states that the outward flux of <m>\vec E</m> across any surface enclosing the origin is <m>q/\epsilon_0</m>.
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      Our interest in the Divergence Theorem is twofold.
+      First, it's truth alone is interesting:
+      to study the behavior of a vector field across a closed surface,
+      one can examine properties of that field within the surface.
+      Secondly, it offers an alternative way of computing flux.
+      When there are multiple methods of computing a desired quantity,
+      one has power to select the easiest computation as illustrated next.
+    </p>
+
+    <example xml:id="ex_divthm_space4">
+      <title>Using the Divergence Theorem to compute flux</title>
+      <statement>
+        <p>
+          Let \mathcal{S}<nbsp />be the cube bounded by the planes <m>x=\pm 1</m>,
+          <m>y=\pm 1</m>, <m>z=\pm 1</m>,
+          and let <m>\vec F = \langle x^2y,2yz,x^2z^3\rangle</m>.
+          Compute the outward flux of <m>\vec F</m> over \mathcal{S}.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We compute <m>\divv \vec F = 2xy+2z+3x^2z^2</m>.
+          By the Divergence Theorem,
+          the outward flux is the triple integral over the domain <m>D</m> enclosed by \mathcal{S}:
+          <me>
+            \text{ Outward flux: }  \int_{-1}^1\int_{-1}^1\int_{-1}^1(2xy+2z+3x^2z^2)\ dz\ dy\ dx = \frac83
+          </me>.
+        </p>
+
+        <p>
+          The direct flux computation requires six surface integrals,
+          one for each face of the cube.
+          The Divergence Theorem offers a much more simple computation.
+        </p>
+      </solution>
+    </example>
+  </subsection>
+
+  <subsection>
+    <title>Stokes' Theorem</title>
+    <p>
+      Just as the spatial Divergence Theorem of this section is an extension of the planar Divergence Theorem, Stokes' Theorem is the spatial extension of Green's Theorem.
+      Recall that Green's Theorem states that the circulation of a vector field around a closed curve in the plane is equal to the sum of the curl of the field over the region enclosed by the curve.
+      Stokes' Theorem effectively makes the same statement:
+      given a closed curve that lies on a surface \mathcal{S}, the circulation of a vector field around that curve is the same as the sum of
+      <q>the curl of the field</q>
+      across the enclosed surface.
+      We use quotes around <q>the curl of the field</q>
+      to signify that this statement is not quite correct,
+      as we do not sum <m>\curl \vec F</m>,
+      but <m>\curl \vec F\cdot\vec n</m>,
+      where <m>\vec n</m> is a unit vector normal to \mathcal{S}. That is,
+      we sum the portion of <m>\curl \vec F</m> that is orthogonal to \mathcal{S}<nbsp />at a point.
+    </p>
+
+    <p>
+      Green's Theorem dictated that the curve was to be traversed counterclockwise when measuring circulation.
+      Stokes' Theorem will follow a right hand rule:
+      when the thumb of one's right hand points in the direction of <m>\vec n</m>,
+      the path <m>C</m> will be traversed in the direction of the curling fingers of the hand
+      (this is equivalent to traversing counterclockwise in the plane).
+    </p>
+
+    <theorem xml:id="thm_stokes_thm">
+      <title>Stokes' Theorem</title>
+      <statement>
+        <p>
+          Let \mathcal{S}<nbsp />be a piecewise smooth,
+          orientable surface whose boundary is a piecewise smooth curve <m>C</m>,
+          let <m>\vec n</m> be a unit vector normal to \mathcal{S}, let <m>C</m> be traversed with respect to <m>\vec n</m> according to the right hand rule,
+          and let the components of <m>\vec F</m> have continuous first partial derivatives over \mathcal{S}. Then
+              <idx><h>Stokes' Theorem</h></idx>
+          <me>
+            \oint_C \vec F\cdot \ d\vec r = \iint_\surfaceS (\curl\vec F)\cdot \vec n\ dS
+          </me>.
+        </p>
+      </statement>
+    </theorem>
+
+    <p>
+      In general, the best approach to evaluating the surface integral in Stokes' Theorem is to parametrize the surface \mathcal{S}<nbsp />with a function <m>\vec r(u,v)</m>.
+      We can find a unit normal vector <m>\vec n</m> as
+      <me>
+        \vec n = \frac{\vec r_u\times\vec r_v}{\snorm{\vec r_u\times\vec r_v}}
+      </me>.
+    </p>
+
+    <p>
+      Since <m>dS = \snorm{\vec r_u\times\vec r_v}\ dA</m>,
+      the surface integral in practice is evaluated as
+      <me>
+        \iint_\surfaceS (\curl \vec F)\cdot (\vec r_u\times\vec r_v)\ dA
+      </me>,
+      where <m>\vec r_u\times\vec r_v</m> may be replaced by
+      <m>\vec r_v\times\vec r_u</m> to properly match the direction of this vector with the orientation of the parameterization of <m>C</m>.
+    </p>
+
+    <example xml:id="ex_stokes1">
+      <title>Verifying Stokes' Theorem</title>
+      <statement>
+        <p>
+          Considering the planar surface <m>f(x,y) = 7-2x-2y</m>,
+          let <m>C</m> be the curve in space that lies on this surface above the circle of radius 1 and centered at <m>(1,1)</m> in the <m>x</m>-<m>y</m> plane,
+          let \mathcal{S}<nbsp />be the planar region enclosed by <m>C</m>,
+          as illustrated in <xref ref="fig_stokes1">Figure</xref>,
+          and let <m>\vec F = \langle x+y,2y, y^2\rangle</m>.
+          Verify Stoke's Theorem by showing <m>\oint_C \vec F\cdot \ d\vec r = \iint_\surfaceS (\curl\vec F)\cdot \vec n\ dS</m>.
+        </p>
+
+        <figure xml:id="fig_stokes1">
+          <caption>As given in <xref ref="ex_stokes1">Example</xref>, the surface \surfaceS<nbsp />is the portion of the plane bounded by the curve.</caption>
+          \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.004444748163223267,
+          3Dc2c=0.5374560356140137 0.806864321231842 0.24517536163330078,
+          3Dcoo=45.07202911376953 32.75735855102539 55.02788543701172,
+          3Droo=399.9999566444115,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figstokes1_3D"/>
+        </figure>
+      </statement>
+      <solution>
+        <p>
+          We begin by parameterizing <m>C</m> and then find the circulation.
+          A unit circle centered at <m>(1,1)</m> can be parametrized with <m>x=\cos t+1</m>,
+          <m>y=\sin t+1</m> on <m>0\leq t\leq 2\pi</m>;
+          to put this curve on the surface <m>f</m>,
+          make the <m>z</m> component equal <m>f(x,y)</m>:
+          <m>z = 7-2(\cos t+1)-2(\sin t+1) = 3-2\cos t - 2\sin t</m>.
+          All together,
+          we parametrize <m>C</m> with <m>\vec r(t) = \la \cos t+1, \sin t+1, 3-2\cos t-2\sin t\ra</m>.
+        </p>
+
+        <p>
+          The circulation of <m>\vec F</m> around <m>C</m> is
+          <md>
+            <mrow>\oint_C\vec F\cdot \ d\vec r \amp = \int_0^{2\pi}\vec F\big(\vec r(t)\big)\cdot \vrp(t)\ dt</mrow>
+            <mrow>\amp = \int_0^{2\pi}\big(2\sin^3t-2\cos t\sin^2t+3\sin^2t-3\cos t\sin t\big)\ dt</mrow>
+            <mrow>\amp = 3\pi</mrow>
+          </md>.
+        </p>
+
+        <p>
+          We now parametrize \mathcal{S}. (We reuse the letter <q>r</q>
+          for our surface as this is our custom.) Based on the parametrization of <m>C</m> above,
+          we describe \mathcal{S}<nbsp />with <m>\vec r(u,v) = \la v\cos u+1, v\sin u+1, 3-2v\cos u-2v\sin u\ra</m>,
+          where <m>0\leq u\leq 2\pi</m> and <m>0\leq v\leq 1</m>.
+        </p>
+
+        <p>
+          We leave it to the reader to confirm that <m>\vec r_u\times \vec r_v = \langle 2v,2v,v\rangle</m>.
+          As <m>0\leq v\leq 1</m>,
+          this vector always has a non-negative <m>z</m>-component,
+          which the right<ndash />hand rule requires given the orientation of <m>C</m> used above.
+          We also leave it to the reader to confirm <m>\curl\vec F = \langle 2y,0,-1\rangle</m>.
+        </p>
+
+        <p>
+          The surface integral of Stokes' Theorem is thus
+          <md>
+            <mrow>\iint_\surfaceS (\curl\vec F)\cdot \vec n\ dS \amp = \iint_\surfaceS (\curl\vec F)\cdot (\vec r_u\times \vec r_v)\ dA</mrow>
+            <mrow>\amp = \int_0^1\int_0^{2\pi} \langle 2v\sin u+2,0,-1\rangle\cdot\langle 2v,2v,v\rangle\ du\ dv</mrow>
+            <mrow>\amp = 3\pi</mrow>
+          </md>,
+          which matches our previous result.
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      One of the interesting results of Stokes' Theorem is that if two surfaces <m>\surfaceS_1</m> and
+      <m>\surfaceS_2</m> share the same boundary,
+      then <m>\iint_{\surfaceS_1} (\curl \vec F)\cdot \vec n\ dS = \iint_{\surfaceS_2} (\curl \vec F)\cdot \vec n\ dS</m>.
+      That is, the value of these two surface integrals is somehow independent of the interior of the surface.
+      We demonstrate this principle in the next example.
+    </p>
+
+    <example xml:id="ex_stokes2">
+      <title>Stokes' Theorem and surfaces that share a boundary</title>
+      <statement>
+        <p>
+          Let <m>C</m> be the curve given in <xref ref="ex_stokes1">Example</xref>
+          and note that it lies on the surface <m>z = 6-x^2-y^2</m>.
+          Let \mathcal{S}<nbsp />be the region of this surface bounded by <m>C</m>,
+          and let <m>\vec F = \langle x+y,2y,y^2\rangle</m> as in the previous example.
+          Compute <m>\iint_\surfaceS (\curl\vec F)\cdot \vec n\ dS</m> to show it equals the result found in the previous example.
+        </p>
+
+        <figure xml:id="fig_stokes2">
+          <caption>As given in <xref ref="ex_stokes2">Example</xref>, the surface \surfaceS<nbsp />is the portion of the plane bounded by the curve.</caption>
+          <sidebyside>
+            <figure>
+              <caption>(a)</caption>
+              \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
+              3Droll=0,
+              3Dortho=0.004444750025868416,
+              3Dc2c=0.5374560356140137 0.806864321231842 0.24517536163330078,
+              3Dcoo=48.335105895996094 37.655845642089844 31.75312042236328,
+              3Droo=399.9999566444115,
+              3Dlights=Headlamp,add3Djscript=asylabels.js}
+              <img src="figures/figstokes2_3D"/>
+            </figure>
+
+            <figure>
+              <caption>(b)</caption>
+              \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
+              3Droll=0,
+              3Dortho=0.004444750025868416,
+              3Dc2c=0.5374560356140137 0.806864321231842 0.24517536163330078,
+              3Dcoo=48.335105895996094 37.655845642089844 31.75312042236328,
+              3Droo=399.9999566444115,
+              3Dlights=Headlamp,add3Djscript=asylabels.js}
+              <img src="figures/figstokes3_3D"/>
+            </figure>
+          </sidebyside>
+
+        </figure>
+      </statement>
+      <solution>
+        <p>
+          We begin by demonstrating that <m>C</m> lies on the surface <m>z=6-x^2-y^2</m>.
+          We can parametrize the <m>x</m> and <m>y</m> components of <m>C</m> with <m>x=\cos t+1</m>,
+          <m>y=\sin t+1</m> as before.
+          Lifting these components to the surface <m>f</m> gives the <m>z</m> component as <m>z = 6-x^2-y^2 = 6-(\cos t+1)^2-(\sin t+1)^2 = 3-2\cos t-2\sin t</m>,
+          which is the same <m>z</m> component as found in <xref ref="ex_stokes1">Example</xref>.
+          Thus the curve <m>C</m> lies on the surface <m>z=6-x^2-y^2</m>,
+          as illustrated in <xref ref="fig_stokes2">Figure</xref>.
+        </p>
+
+        <p>
+          Since <m>C</m> and <m>\vec F</m> are the same as in the previous example,
+          we already know that <m>\oint_C\vec F\cdot\ d\vec r = 3\pi</m>.
+          We confirm that this is also the value of <m>\iint_\surfaceS (\curl\vec F)\cdot \vec n\ dS</m>.
+        </p>
+
+        <p>
+          We parametrize \mathcal{S}<nbsp />with
+          <me>
+            \vec r(u,v) = \langle v\cos u+1,v\sin u+1, 6-(v\cos u+1)^2-(v\sin u+1)^2\rangle
+          </me>,
+          where <m>0\leq u\leq 2\pi</m> and <m>0\leq v\leq 1</m>,
+          and leave it to the reader to confirm that
+          <me>
+            \vec r_u\times \vec r_v = \la 2v\big(v\cos u+1\big), 2v\big(v\sin u+1\big),v\ra
+          </me>,
+          which also conforms to the right<ndash />hand rule with regard to the orientation of <m>C</m>.
+          With <m>\curl \vec F = \langle 2y,0,-1\rangle</m> as before, we have
+          <md>
+            \iint_\surfaceS (\curl\vec F)\cdot \vec n\ dS = \\ \int_0^1\int_0^{2\pi} \la 2v\sin u+2,0,-1\ra\cdot \la 2v\big(v\cos u+1\big), 2v\big(v\sin u+1\big),v\ra\ du\ dv =\\ 3\pi.
+          </md>
+        </p>
+
+        <p>
+          Even though the surfaces used in this example and in <xref ref="ex_stokes1">Example</xref> are very different,
+          because they share the same boundary, Stokes' Theorem guarantees they have equal <q>sum of curls</q>
+          across their respective surfaces.
+        </p>
+      </solution>
+    </example>
+  </subsection>
+
+  <subsection>
+    <title>A Common Thread of Calculus</title>
+    <p>
+      We have threefold interest in each of the major theorems of this chapter:
+      the Fundamental Theorem of Line Integrals, Green's, Stokes' and the Divergence Theorems.
+      First, we find the beauty of their truth interesting.
+      Second, each provides two methods of computing a desired quantity,
+      sometimes offering a simpler method of computation.
+    </p>
+
+    <p>
+      There is yet one more reason of interest in the major theorems of this chapter.
+      These important theorems also all share an important principle with the Fundamental Theorem of Calculus,
+      introduced in <xref ref="chapter_integration">Chapter</xref>.
+    </p>
+
+    <p>
+      Revisit this fundamental theorem,
+      adopting the notation used heavily in this chapter.
+      Let <m>I</m> be the interval <m>[a,b]</m> and let <m>y=F(x)</m> be differentiable on <m>I</m>,
+      with <m>F\,'(x) = f(x)</m>.
+      The Fundamental Theorem of Calculus states that
+      <me>
+        \int_I f(x)\ dx = F(b) - F(a)
+      </me>.
+    </p>
+
+    <p>
+      That is, the sum of the rates of change of a function <m>F</m> over an interval <m>I</m> can also be calculated with a certain sum of <m>F</m> itself on the boundary of <m>I</m>
+      (in this case, at the points <m>x=a</m> and <m>x=b</m>).
+    </p>
+
+    <p>
+      Each of the named theorems above can be expressed in similar terms.
+      Consider the Fundamental Theorem of Line Integrals:
+      given a function <m>z=f(x,y)</m>,
+      the gradient <m>\nabla f</m> is a type of rate of change of <m>f</m>.
+      Given a curve <m>C</m> with initial and terminal points <m>A</m> and <m>B</m>,
+      respectively,
+      this fundamental theorem states that
+      <me>
+        \int_C \nabla f\ ds = f(B) - f(A)
+      </me>,
+      where again the sum of a rate of change of <m>f</m> along a curve <m>C</m> can also be evaluated by a certain sum of <m>f</m> at the boundary of <m>C</m> (i.e., the points <m>A</m> and <m>B</m>).
+    </p>
+
+    <p>
+      Green's Theorem is essentially a special case of Stokes' Theorem,
+      so we consider just Stokes' Theorem here.
+      Recalling that the curl of a vector field <m>\vec F</m> is a measure of a rate of change of <m>\vec F</m>, Stokes' Theorem states that over a surface \mathcal{S}<nbsp />bounded by a closed curve <m>C</m>,
+      <me>
+        \iint_\surfaceS \big(\curl \vec F\big)\cdot \vec n\ dS = \oint_C \vec F\cdot d\vec r
+      </me>,
+      i.e., the sum of a rate of change of <m>\vec F</m> can be calculated with a certain sum of <m>\vec F</m> itself over the boundary of \mathcal{S}. In this case,
+      the latter sum is also an infinite sum, requiring an integral.
+    </p>
+
+    <p>
+      Finally, the Divergence Theorems state that the sum of divergences of a vector field
+      (another measure of a rate of change of <m>\vec F</m>)
+      over a region can also be computed with a certain sum of <m>\vec F</m> over the boundary of that region.
+      When the region is planar, the latter sum of <m>\vec F</m> is an integral;
+      when the region is spatial,
+      the latter sum of <m>\vec F</m> is a double integral.
+    </p>
+
+    <p>
+      The common thread among these theorems:
+      the sum of a rate of change of a function over a region can be computed as another sum of the function itself on the boundary of the region.
+      While very general, this is a very powerful and important statement.
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Terms and Concepts</title>
+    <exercise>
+      <statement>
+        <p>
+          What are the differences between the Divergence Theorems of <xref ref="sec_greensthm">Section</xref> and this section?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Answers will vary; in <xref ref="sec_greensthm">Section</xref>,
+          the Divergence Theorem connects outward flux over a closed curve in the plane to the divergence of the vector field,
+          whereas in this section the Divergence Theorem connects outward flux over a closed surface in space to the divergence of the vector field.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          What property of a vector field does the Divergence Theorem relate to flux?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Divergence.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          What property of a vector field does Stokes' Theorem relate to circulation?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Curl.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Stokes' Theorem is the spatial version of what other theorem?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Green's Theorem.
+        </p>
+      </answer>
+    </exercise>
+  </subsection>
+
+  <subsection>
+    <title>Problems</title>
+    <p>
+      In the following exercises,
+      a closed surface \mathcal{S}<nbsp />enclosing a domain <m>D</m> and a vector field <m>\vec F</m> are given.
+      Verify the Divergence Theorem on \mathcal{S}; that is,
+      show <m>\iint_\surfaceS \vec F\cdot \vec n\ dS = \iiint_D\divv \vec F\ dV</m>.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          \mathcal{S}<nbsp />is the surface bounding the domain <m>D</m> enclosed by the plane
+          <m>z=2-x/2-2y/3</m> and the coordinate planes in the first octant;
+          <m>\vec F = \langle x^2,y^2,x\rangle</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=90pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.7375360131263733 -0.6143473982810974 0.2803889811038971, 3Dcoo=32.48771286010742 72.419189453125 49.87675094604492, 3Droo=200.00000360071368, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_07_ex_05_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Outward flux across the plane <m>z=2-x/2-2y/3</m> is 14;
+          across the plane <m>z=0</m> the outward flux is <m>-8</m>;
+          across the planes <m>x=0</m> and <m>y=0</m> the outward flux is 0.
+        </p>
+
+        <p>
+          Total outward flux: <m>14</m>.
+        </p>
+
+        <p>
+          <m>\iint_D\divv\vec F\ dV = \int_0^{4}\int_0^{3-3x/4}\int_0^{2-x/2-2y/3}(2x+2y)\ dz\ dy\ dx = 14</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          \mathcal{S}<nbsp />is the surface bounding the domain <m>D</m> enclosed by the cylinder
+          <m>x^2+y^2=1</m> and the planes <m>z=-3</m> and <m>z=3</m>;
+          <m>\vec F = \langle -x,y,z\rangle</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=90pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.7375360131263733 -0.6143473982810974 0.2803889811038971, 3Dcoo=32.48771286010742 72.419189453125 49.87675094604492, 3Droo=200.00000360071368, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_07_ex_06_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Outward flux across the cylinder <m>x^2+y^2=1</m> is 0;
+          across the plane <m>z=3</m> the outward flux is <m>3\pi</m>;
+          across the plane <m>z=-3</m> the outward flux is <m>3\pi</m>.
+        </p>
+
+        <p>
+          Total outward flux: <m>6\pi</m>.
+        </p>
+
+        <p>
+          <m>\iint_D\divv\vec F\ dV = \int_0^{2\pi}\int_0^{1}\int_{-3}^{3}r\ dz\ dr\ d\theta = 6\pi</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          \mathcal{S}<nbsp />is the surface bounding the domain <m>D</m> enclosed by
+          <m>z=xy(3-x)(3-y)</m> and the plane <m>z=0</m>;
+          <m>\vec F = \langle 3x,4y,5z+1\rangle</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=90pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.7375360131263733 -0.6143473982810974 0.2803889811038971, 3Dcoo=32.48771286010742 72.419189453125 49.87675094604492, 3Droo=200.00000360071368, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_07_ex_07_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Outward flux across the surface <m>z=xy(3-x)(3-y)</m> is 252;
+          across the plane <m>z=0</m> the outward flux is <m>-9</m>.
+        </p>
+
+        <p>
+          Total outward flux: <m>243</m>.
+        </p>
+
+        <p>
+          <m>\iint_D\divv\vec F\ dV = \int_0^{3}\int_0^{3}\int_{0}^{xy(3-x)(3-y)}12\ dz\ dy\ dx = 243</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          \mathcal{S}<nbsp />is the surface composed of <m>\surfaceS_1</m>,
+          the paraboloid <m>z=4-x^2-y^2</m> for <m>z\geq 0</m>,
+          and <m>\surfaceS_2</m>, the disk of radius 2 centered at the origin;
+          <m>\vec F = \langle x,y,z^2\rangle</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=90pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.7375360131263733 -0.6143473982810974 0.2803889811038971, 3Dcoo=32.48771286010742 72.419189453125 49.87675094604492, 3Droo=200.00000360071368, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_07_ex_08_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Outward flux across the paraboloid is <m>112\pi/3</m>;
+          across the disk the outward flux is 0.
+        </p>
+
+        <p>
+          Total outward flux: <m>112\pi/3</m>.
+        </p>
+
+        <p>
+          <m>\iint_D\divv\vec F\ dV = \int_0^{2\pi}\int_0^2\int_0^{4-r^2}(2z+2)r\ dz\ dr\ d\theta = 112\pi/3</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises,
+      a closed curve <m>C</m> that is the boundary of a surface \mathcal{S}<nbsp />is given along with a vector field <m>\vec F</m>.
+      Verify Stokes' Theorem on <m>C</m>;
+      that is, show <m>\oint_C \vec F\cdot d\vec r = \iint_\surfaceS\big(\curl \vec F\,\big)\cdot\vec n\ dS</m>.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the curve parametrized by
+          <m>\vec r(t) = \langle \cos t, \sin t, 1\rangle</m> and <m>\surfaceS</m> is the portion of
+          <m>z=x^2+y^2</m> enclosed by <m>C</m>;
+          <m>\vec F = \langle z,-x,y\rangle</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=90pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.7375360131263733 -0.6143473982810974 0.2803889811038971, 3Dcoo=32.48771286010742 72.419189453125 49.87675094604492, 3Droo=200.00000360071368, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_07_ex_09_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Circulation on <m>C</m>: <m>\oint_C \vec F\cdot d\vec r = \pi</m>
+        </p>
+
+        <p>
+          <m>\iint_\surfaceS\big(\curl \vec F\big)\cdot\vec n\ dS = \pi</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the curve parametrized by
+          <m>\vec r(t) = \langle \cos t, \sin t, e^{-1}\rangle</m> and <m>\surfaceS</m> is the portion of
+          <m>z=e^{-x^2-y^2}</m> enclosed by <m>C</m>;
+          <m>\vec F = \langle -y,x,1\rangle</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=120pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.7375360131263733 -0.6143473982810974 0.2803889811038971, 3Dcoo=32.48771286010742 72.419189453125 49.87675094604492, 3Droo=200.00000360071368, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_07_ex_10_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Circulation on <m>C</m>: <m>\oint_C \vec F\cdot d\vec r = \pi</m>
+        </p>
+
+        <p>
+          <m>\iint_\surfaceS\big(\curl \vec F\big)\cdot\vec n\ dS = \pi</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the curve that follows the triangle with vertices at <m>(0,0,2)</m>,
+          <m>(4,0,0)</m> and <m>(0,3,0)</m>,
+          traversing the the vertices in that order and returning to <m>(0,0,2)</m>,
+          and <m>\surfaceS</m> is the portion of the plane
+          <m>z=2-x/2-2y/3</m> enclosed by <m>C</m>;
+          <m>\vec F = \langle y,-z,y\rangle</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=90pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.7375360131263733 -0.6143473982810974 0.2803889811038971, 3Dcoo=32.48771286010742 72.419189453125 49.87675094604492, 3Droo=200.00000360071368, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_07_ex_11_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Circulation on <m>C</m>: The flow along the line from <m>(0,0,2)</m> to <m>(4,0,0)</m> is 0;
+          from <m>(4,0,0)</m> to <m>(0,3,0)</m> it is <m>-6</m>,
+          and from <m>(0,3,0)</m> to <m>(0,0,2)</m> it is 6.
+          The total circulation is <m>0+(-6)+6=0</m>.
+        </p>
+
+        <p>
+          <m>\iint_\surfaceS\big(\curl \vec F\big)\cdot\vec n\ dS = \iint_\surfaceS 0 \ dS = 0</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the curve whose <m>x</m> and <m>y</m> coordinates follow the parabola <m>y=1-x^2</m> from <m>x=1</m> to <m>x=-1</m>,
+          then follow the line from <m>(-1,0)</m> back to <m>(1,0)</m>,
+          where the <m>z</m> coordinates of <m>C</m> are determined by <m>f(x,y) = 2x^2+y^2</m>,
+          and <m>\surfaceS</m> is the portion of
+          <m>z=2x^2+y^2</m> enclosed by <m>C</m>;
+          <m>\vec F = \langle y^2+z,x,x^2-y\rangle</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=90pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.7375360131263733 -0.6143473982810974 0.2803889811038971, 3Dcoo=32.48771286010742 72.419189453125 49.87675094604492, 3Droo=200.00000360071368, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_07_ex_12_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Circulation on <m>C</m>: The flow along the parabola is <m>-32/15</m>;
+          the flow along the line is <m>4/3</m>.
+          The total circulation is <m>4/3-32/15 = -4/5</m>.
+        </p>
+
+        <p>
+          <m>\iint_\surfaceS\big(\curl \vec F\big)\cdot\vec n\ dS = -4/5</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises,
+      a closed surface <m>\surfaceS</m> and a vector field <m>\vec F</m> are given.
+      Find the outward flux of <m>\vec F</m> over \mathcal{S}<nbsp />either through direct computation or through the Divergence Theorem.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          \mathcal{S}<nbsp />is the surface formed by the intersections of <m>z=0</m> and <m>z=(x^2-1)(y^2-1)</m>;
+          <m>\vec F = \langle x^2+1,yz,xz^2\rangle</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=90pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.7375360131263733 -0.6143473982810974 0.2803889811038971, 3Dcoo=32.48771286010742 72.419189453125 49.87675094604492, 3Droo=200.00000360071368, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_07_ex_13_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>128/225</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          \mathcal{S}<nbsp />is the surface formed by the intersections of the planes <m>z=\frac12(3-x)</m>,
+          <m>x=1</m>,
+          <m>y=0</m>, <m>y=2</m> and <m>z=0</m>;
+          <m>\vec F = \langle x,y^2,z\rangle</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=90pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.7375360131263733 -0.6143473982810974 0.2803889811038971, 3Dcoo=32.48771286010742 72.419189453125 49.87675094604492, 3Droo=200.00000360071368, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_05_ex_09_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>8</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          \mathcal{S}<nbsp />is the surface formed by the intersections of the planes <m>z=2y</m>,
+          <m>y=4-x^2</m> and <m>z=0</m>;
+          <m>\vec F = \langle xz,0,xz\rangle</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=90pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.7375360131263733 -0.6143473982810974 0.2803889811038971, 3Dcoo=32.48771286010742 72.419189453125 49.87675094604492, 3Droo=200.00000360071368, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_05_ex_11_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>8192/105\approx 78.019</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          \mathcal{S}<nbsp />is the surface formed by the intersections of the cylinder <m>z=1-x^2</m> and the planes <m>y=-2</m>,
+          <m>y=2</m> and <m>z=0</m>;
+          <m>\vec F = \langle 0,y^3,0\rangle</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=90pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.7375360131263733 -0.6143473982810974 0.2803889811038971, 3Dcoo=32.48771286010742 72.419189453125 49.87675094604492, 3Droo=200.00000360071368, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_07_ex_16_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>64/3</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises,
+      a closed curve <m>C</m> that is the boundary of a surface \mathcal{S}<nbsp />is given along with a vector field <m>\vec F</m>.
+      Find the circulation of <m>\vec F</m> around <m>C</m> either through direct computation or through Stokes' Theorem.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the curve whose <m>x</m>- and <m>y</m>-values are determined by the three sides of a triangle with vertices at <m>(-1,0)</m>,
+          <m>(1,0)</m> and <m>(0,1)</m>, traversed in that order,
+          and the <m>z</m>-values are determined by the function <m>z=xy</m>;
+          <m>\vec F = \langle z-y^2,x,z\rangle</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=90pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.7375360131263733 -0.6143473982810974 0.2803889811038971, 3Dcoo=32.48771286010742 72.419189453125 49.87675094604492, 3Droo=200.00000360071368, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_07_ex_17_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>5/3</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the curve whose <m>x</m>- and <m>y</m>-values are given by
+          <m>\vec r(t) = \langle 2\cos t,2\sin t\rangle</m> and the <m>z</m>-values are determined by the function <m>z=x^2+y^3-3y+1</m>;
+          <m>\vec F = \langle -y,x,z\rangle</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=90pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.7375360131263733 -0.6143473982810974 0.2803889811038971, 3Dcoo=32.48771286010742 72.419189453125 49.87675094604492, 3Droo=200.00000360071368, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_07_ex_18_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>8\pi</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the curve whose <m>x</m>- and <m>y</m>-values are given by
+          <m>\vec r(t) = \langle \cos t,3\sin t\rangle</m> and the <m>z</m>-values are determined by the function <m>z=5-2x-y</m>;
+          <m>\vec F = \langle -\frac13y,3x,\frac23y-3x\rangle</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=90pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.7375360131263733 -0.6143473982810974 0.2803889811038971, 3Dcoo=32.48771286010742 72.419189453125 49.87675094604492, 3Droo=200.00000360071368, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_07_ex_19_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>23\pi</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the curve whose <m>x</m>- and <m>y</m>-values are sides of the square with vertices at <m>(1,1)</m>,
+          <m>(-1,1)</m>,
+          <m>(-1,-1)</m> and <m>(1,-1)</m>, traversed in that order,
+          and the <m>z</m>-values are determined by the function <m>z=10-5x-2y</m>;
+          <m>\vec F = \langle 5y^2,2y^2,y^2\rangle</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=90pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.7375360131263733 -0.6143473982810974 0.2803889811038971, 3Dcoo=32.48771286010742 72.419189453125 49.87675094604492, 3Droo=200.00000360071368, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_07_ex_20_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>0</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      The following exercises<nbsp />are designed to challenge your understanding and require no computation.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          Let \mathcal{S}<nbsp />be any closed surface enclosing a domain <m>D</m>.
+          Consider <m>\vec F_1 = \langle x,0,0\rangle</m> and <m>\vec F_2=\langle y,y^2,z-2yz\rangle</m>.
+        </p>
+
+        <p>
+          These fields are clearly very different.
+          Why is it that the total outward flux of each field across \mathcal{S}<nbsp />is the same?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Each field has a divergence of 1;
+          by the Divergence Theorem,
+          the total outward flux across \mathcal{S}<nbsp />is <m>\iint_D 1\ dS</m> for each field.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <ol>
+          <li>
+            <p>
+              Green's Theorem can be used to find the area of a region enclosed by a curve by evaluating a line integral with the appropriate choice of vector field <m>\vec F</m>.
+              What condition on <m>\vec F</m> makes this possible?
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Likewise, Stokes' Theorem can be used to find the surface area of a region enclosed by a curve in space by evaluating a line integral with the appropriate choice of vector field <m>\vec F</m>.
+              What condition on <m>\vec F</m> makes this possible?
+            </p>
+          </li>
+        </ol>
+      </statement>
+      <answer>
+        <ol>
+          <li>
+            <p>
+              <m>\curl\vec F = 1</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\curl\vec F\cdot \vec n = 1</m>,
+              where <m>\vec n</m> is a unit vector normal to <m>\surfaceS</m>.
+            </p>
+          </li>
+        </ol>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          The Divergence Theorem establishes equality between a particular double integral and a particular triple integral.
+          What types of circumstances would lead one to choose to evaluate the triple integral over the double integral?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Answers will vary.
+          Often the closed surface \mathcal{S}<nbsp />is composed of several smooth surfaces.
+          To measure total outward flux,
+          this may require evaluating multiple double integrals.
+          Each double integral requires the parametrization of a surface and the computation of the cross product of partial derivatives.
+          One triple integral may require less work,
+          especially as the divergence of a vector field is generally easy to compute.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Stokes' Theorem establishes equality between a particular line integral and a particular double integral.
+          What types of circumstances would lead one to choose to evaluate the double integral over the line integral?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Answers will vary.
+          Often the closed curve <m>C</m> is composed of several smooth curves.
+          To measure the total circulation,
+          one may have to evaluate line integrals along each curve.
+          Each line integral requires the parameterization of its curve.
+          It may be less work to evaluate one single double (i.e., surface) integral.
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      \appendix {
+    </p>
+
+    <p>
+      \immediate\write\answrite{\noexpand\noexpand}\immediate\closeout\answrite \renewcommand{\subsection*{Terms and Concepts}} \renewcommand{\subsection*{Problems}} \renewcommand{\subsection*{Review}} Chapter \thechapter  {Solutions To Selected Problems}\openin\exsetread=\jobname.answers   \read\exsetread to \exsettemp \read\exsetread to \exsettemp {\loop \read\exsetread to \exsettemp \ifeof \exsetread \exsetmorefalse \else \exsetmoretrue \fi \ifexsetmore   \repeat} \closein\exsetread \openin\exsetread=\jobname.answers  \read\exsetread to \exsettemp    \makebox[60pt][l]{\printexercisename \jobname.answers }  
+      <em>\exsettemp\theenumi { <mdash /> }\theenumi  \read\exsetread to \exsettemp \exsettemp</em>
+      {\loop \read\exsetread to \exsettemp \ifeof \exsetread \exsetmorefalse \else \exsetmoretrue \fi \ifexsetmore \exsettemp \repeat}  \closein\exsetread \rmfamily
+    </p>
+
+    <p>
+      \qendheader \newgeometry{inner=72pt,
+      outer=36pt,textheight=10in, marginparwidth=150pt, marginparsep=32pt, }
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>PLACEHOLDER</title>
+    <p>
+      \cleardoublepage
+    </p>
+
+    <p>
+      \cleardoublepage
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Differentiation Rules</title>
+    <ol cols="4">
+      <li>
+        <p>
+          \deriv{cx}{c}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{u\pm v}{u'\pm v'}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{u\cdot v}{uv'+ u'v}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\frac uv}{\frac{vu'-uv'}{v^2}}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{u(v)}{u'(v)v'}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{c}{0}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{x}{1}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{x^n}{nx^{n-1}}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{e^x}{e^x}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{a^x}{\ln a\cdot a^x}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\ln x}{\frac{1}{x}}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\log_a x}{\frac{1}{\ln a}\cdot \frac1x}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\sin x}{\cos x}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\cos x}{-\sin x}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\csc x}{-\csc x\cot x}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\sec x}{\sec x\tan x}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\tan x}{\sec^2 x}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\cot x}{-\csc^2 x}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\sin^{-1}x}{\frac{1}{\sqrt{1-x^2}}}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\cos^{-1}x}{\frac{-1}{\sqrt{1-x^2}}}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\csc^{-1}x}{\frac{-1}{|x|\sqrt{x^2-1}}}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\sec^{-1}x}{\frac{1}{|x|\sqrt{x^2-1}}}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\tan^{-1}x}{\frac{1}{1+x^2}}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\cot^{-1}x}{\frac{-1}{1+x^2}}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\cosh x}{\sinh x}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\sinh x}{\cosh x}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\tanh x}{\sech^2 x}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\sech x}{-\sech x\tanh x}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\csch x}{-\csch x\coth x}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\coth x}{-\csch^2 x}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\cosh^{-1}x}{\frac1{\sqrt{x^2-1}}}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\sinh^{-1}x}{\frac1{\sqrt{x^2+1}}}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\sech^{-1}x}{\frac{-1}{x\sqrt{1-x^2}}}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\csch^{-1}x}{\frac{-1}{|x|\sqrt{1+x^2}}}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\tanh^{-1}x}{\frac1{1-x^2}}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \deriv{\coth^{-1}x}{\frac1{1-x^2}}
+        </p>
+      </li>
+    </ol>
+  </subsection>
+
+  <subsection>
+    <title>Integration Rules</title>
+    <ol cols="3">
+      <li>
+        <p>
+          \myint{c\cdot f(x)}{c\int f(x)<nbsp />dx}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{f(x)\pm g(x)} <m>\ds \int f(x)\ dx \pm \int g(x)\ dx</m>
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{0}C
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{1}{x+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{x^n}{\frac{1}{n+1}x^{n+1}+C, n\neq -1}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{e^x}{e^x+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\ln x}{x\ln x -x +C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{a^x}{\frac{1}{\ln a}\cdot a^x+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\frac{1}{x}}{\ln |x| + C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\cos x}{\sin x+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\sin x}{-\cos x+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\tan x}{-\ln |\cos x|+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\sec x}{\ln |\sec x+\tan x|+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\csc x}{-\ln |\csc x+\cot x|+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\cot x}{\ln |\sin x|+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\sec^2 x}{\tan x+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\csc^2x}{-\cot x+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\sec x\tan x}{\sec x+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\csc x\cot x}{-\csc x+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\cos^2x}{\frac12x+\frac14\sin\big(2x\big)+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\sin^2x}{\frac12x-\frac14\sin\big(2x\big)+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\frac{1}{x^2+a^2}}{\frac1a\tan^{-1}\left(\frac xa\right)+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\frac{1}{\sqrt{a^2-x^2}}}{\sin^{-1}\left(\frac xa\right)+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\frac{1}{x\sqrt{x^2-a^2}}}{\frac1a\sec^{-1}\left(\frac{|x|}{a}\right)+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\cosh x}{\sinh x+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\sinh x}{\cosh x+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\tanh x}{\ln(\cosh x)+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\coth x}{\ln |\sinh x|+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\frac{1}{\sqrt{x^2-a^2}}}{\ln\big|x+\sqrt{x^2-a^2}\big|+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\frac{1}{\sqrt{x^2+a^2}}}{\ln\big|x+\sqrt{x^2+a^2}\big|+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\frac{1}{a^2-x^2}}{\frac1{2a}\ln\left|\frac{a+x}{a-x}\right|+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\frac{1}{x\sqrt{a^2-x^2}}}{\frac1a\ln\left(\frac{x}{a+\sqrt{a^2-x^2}}\right)+C}
+        </p>
+      </li>
+
+      <li>
+        <p>
+          \myint{\frac{1}{x\sqrt{x^2+a^2}}}{\frac1a\ln\left|\frac{x}{a+\sqrt{x^2+a^2}}\right|+C}
+        </p>
+      </li>
+    </ol>
+
+    <p>
+      \begin{minipage}
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>The Unit Circle</title>
+    <image>
+
+<latex-image>
+<![CDATA[\begin{tikzpicture}[scale=3]
+\draw [<->,>=latex] (-1.5,0) -- (1.4,0) node [right] { \(x\)};
+\draw [<->,>=latex] (0,-1.3) -- (0,1.3) node [above] { \(y\)};
+\foreach \x / \y / \z / \w / &icaron;n {
+0/0/{1,0}/right/white,
+30/{\pi/6}/{\frac{\sqrt{3}}2,\frac 12}/above right/none,
+45/{\pi/4}/{\frac{\sqrt{2}}2,\frac{\sqrt{2}}2}/above right/none,
+60/{\pi/3}/{\frac{1}2,\frac{\sqrt{3}}2}/{above right}/none,
+90/ {\pi/2}/{0,1}/above/white,
+120/{2\pi/3}/{-\frac{1}2,\frac{\sqrt{3}}2}/above left/none, 
+135/{3\pi/4}/{-\frac{\sqrt{2}}2,\frac{\sqrt{2}}2}/above left/none, 
+150/ {5\pi/6}/{-\frac{\sqrt{3}}2,\frac{1}2}/above left/none,
+180/ {\pi}/{-1,0}/left/white, 
+210/{7\pi/6}/{-\frac{\sqrt{3}}2,-\frac{1}2}/below left/none, 
+225/{5\pi/4}/{-\frac{\sqrt{2}}2,-\frac{\sqrt{2}}2}/below left/none, 
+240/{4\pi/3}/{-\frac{1}2,-\frac{\sqrt{3}}2}/below left/none,
+270/{3\pi/2}/{0,-1}/below/white, 
+300/{5\pi/3}/{\frac{1}2,-\frac{\sqrt{3}}2}/below right/none, 
+315/{7\pi/4}/{\frac{\sqrt{2}}2,-\frac{\sqrt{2}}2}/below right/none, 
+330/{11\pi/6}/{\frac{\sqrt{3}}2,-\frac{1}2}/below right/none
+}
+{
+\draw (\x:.65cm) node [fill=\v] { \x\(^\circ\)};
+\draw (\x:.85cm) node [fill=\v] { \(\y\)};
+\draw (\x:1cm) node [\w,fill=\v] { \(\left(\z\right)\)};
+\draw [fill=black] (\x:1) circle (.5pt);
+}
+
+\draw [thick] (0,0) circle (1);\end{tikzpicture}]]>
+</latex-image>
+    </image>
+
+    <p>
+      \end{minipage} \begin{minipage}
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Definitions of the Trigonometric Functions</title>
+    <p>
+      <em> Unit Circle Definition</em>
+    </p>
+
+    <sidebyside>
+
+      <image>
+
+<latex-image>
+<![CDATA[\begin{tikzpicture}[>=latex,scale=1.5,thick]
+\draw [<->](-1.3,0)--(1.3,0) node [right] {\(x\)};
+\draw [<->] (0,-1.3) -- (0,1.3) node [above] {\(y\)};
+\draw (0,0) circle (1);
+\draw [fill= black] (-.6,.8) circle (1pt);
+\draw (0,0) -- (-.6,.8) node [above left] {\((x,y)\)};
+\draw [->] (.5,0) arc (0:127:.5);
+\draw [dashed,thin] (-.6,.8) -- (-.6,0) node [pos=.5,left] {\(y\)};
+\draw (-.3,0) node [below] {\(x\)};
+\draw (.45,.45) node {\(\theta\)};\end{tikzpicture}]]>
+</latex-image>
+      </image>
+
+      <tabular>
+        <row>
+          <cell><m>\sin \theta = y</m></cell>
+          <cell><m>\cos \theta = x</m></cell>
+        </row>
+        <row>
+          <cell></cell>
+        </row>
+        <row>
+          <cell><m>\ds\csc \theta = \frac1y</m></cell>
+          <cell><m>\ds\sec \theta = \frac1x</m></cell>
+        </row>
+        <row>
+          <cell></cell>
+        </row>
+        <row>
+          <cell><m>\ds\tan \theta = \frac yx</m></cell>
+          <cell><m>\ds\cot \theta = \frac xy</m></cell>
+        </row>
+      </tabular>
+
+    </sidebyside>
+
+    <p>
+      <em> Right Triangle Definition</em>
+    </p>
+
+    <sidebyside>
+
+      <image>
+
+<latex-image>
+<![CDATA[\begin{tikzpicture}[thick]
+\draw (0,0) -- (2.5,0) node [below,pos=.5] {Adjacent} -- (2.5,2) node [pos=.5,rotate=-90,shift={(0pt,7pt)}] {Opposite} -- (0,0) node [pos=.5,above,rotate=38.7] {Hypotenuse} node [shift={(20pt,8pt)}] {\(\theta\)};
+\draw[->,>=latex] (1,0) arc (0:38.7:1);
+\draw (2.2,0) -- (2.2,.3) -- (2.5,.3);\end{tikzpicture}]]>
+</latex-image>
+      </image>
+
+      <tabular>
+        <row>
+          <cell><m>\ds\sin \theta = \frac{\text{O} }{\text{H} }</m></cell>
+          <cell><m>\ds\csc \theta = \frac{\text{H} }{\text{O} }</m></cell>
+        </row>
+        <row>
+          <cell></cell>
+        </row>
+        <row>
+          <cell><m>\ds\cos \theta = \frac{\text{A} }{\text{H} }</m></cell>
+          <cell><m>\ds\sec \theta = \frac{\text{H} }{\text{A} }</m></cell>
+        </row>
+        <row>
+          <cell></cell>
+        </row>
+        <row>
+          <cell><m>\ds\tan \theta = \frac{\text{O} }{\text{A} }</m></cell>
+          <cell><m>\ds\cot \theta = \frac{\text{A} }{\text{O} }</m></cell>
+        </row>
+      </tabular>
+
+    </sidebyside>
+
+    <p>
+      \end{minipage}
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Common Trigonometric Identities</title>
+    <sidebyside>
+      <em>Pythagorean Identities</em>
+
+      <m>\ds \sin ^2x+\cos ^2x= 1</m>
+
+      <m>\ds \tan^2x+ 1 = \sec^2 x</m>
+
+      <m>\ds 1 + \cot^2x=\csc^2 x</m>
+      <em>Cofunction Identities</em>
+
+      <sidebyside>
+        <m>\ds \sin\left(\frac{\pi}{2}-x\right) = \cos x</m>
+
+        <m>\ds \cos\left(\frac{\pi}{2}-x\right) = \sin x</m>
+
+        <m>\ds \tan\left(\frac{\pi}{2}-x\right) = \cot x</m>
+        <m>\ds \csc\left(\frac{\pi}{2}-x\right) = \sec x</m>
+
+        <m>\ds \sec\left(\frac{\pi}{2}-x\right) = \csc x</m>
+
+        <m>\ds \cot\left(\frac{\pi}{2}-x\right) = \tan x</m>
+      </sidebyside>
+
+      <em>Double Angle Formulas</em>
+
+      <m>\sin 2x = 2\sin x\cos x</m> 
+
+      <m>\cos 2x = \cos^2x - \sin^2 x</m>
+
+      <m>= 2\cos^2x-1</m>
+
+      <m>= 1-2\sin^2x</m>
+
+      <m>\ds\tan 2x = \frac{2\tan x}{1-\tan^2 x}</m>
+      <em>Sum to Product Formulas</em>
+
+      <m>\ds \sin x+\sin y = 2\sin \left(\frac{x+y}2\right)\cos\left(\frac{x-y}2\right)</m>
+
+      <m>\ds \sin x-\sin y = 2\sin \left(\frac{x-y}2\right)\cos\left(\frac{x+y}2\right)</m>
+
+      <m>\ds \cos x+\cos y = 2\cos \left(\frac{x+y}2\right)\cos\left(\frac{x-y}2\right)</m>
+
+      <m>\ds \cos x-\cos y = -2\sin \left(\frac{x+y}2\right)\sin\left(\frac{x-y}2\right)</m>
+      <em>Power<ndash />Reducing Formulas</em>
+
+      <m>\ds \sin^2 x = \frac{1-\cos 2x}{2}</m>
+
+      <m>\ds \cos^2 x = \frac{1+\cos 2x}{2}</m>
+
+      <m>\ds \tan^2x = \frac{1-\cos 2x}{1+\cos 2x}</m>
+      <em>Even/Odd Identities</em>
+
+      <m>\sin(-x) = -\sin x</m>
+
+      <m>\cos (-x) = \cos x</m>
+
+      <m>\tan (-x) = -\tan x</m>
+
+      <m>\csc(-x) = -\csc x</m>
+
+      <m>\sec (-x) = \sec x</m>
+
+      <m>\cot (-x) = -\cot x</m>
+      <em>Product to Sum Formulas</em>
+
+      <m>\ds \sin x\sin y = \frac12 \big(\cos(x-y) - \cos (x+y)\big)</m>
+
+      <m>\ds \cos x\cos y = \frac12\big(\cos (x-y) +\cos (x+y)\big)</m>
+
+      <m>\ds \sin x\cos y = \frac12 \big(\sin(x+y) + \sin (x-y)\big)</m>
+      <em>Angle Sum/Difference Formulas</em>
+
+      <m>\sin (x\pm y) = \sin x\cos y \pm \cos x\sin y</m>
+
+      <m>\cos (x\pm y) = \cos x\cos y \mp \sin x\sin y</m>
+
+      <m>\ds \tan (x\pm y) = \frac{\tan x\pm \tan y}{1\mp \tan x\tan y}</m>
+    </sidebyside>
+  </subsection>
+
+  <subsection>
+    <title>Areas and Volumes</title>
+    <sidebyside>
+      <em>Triangles</em>
+
+      <m>h=a\sin \theta</m>
+
+      Area = <m>\frac12bh</m>
+
+      Law of Cosines:
+
+      <m>c^2=a^2+b^2-2ab\cos \theta</m>
+
+      <image>
+
+<latex-image>
+<![CDATA[\begin{tikzpicture}[x=30pt,y=30pt,thick]
+\draw (0,0) -- node [below,pos=.5]  { \(b\)} (3,0) node [shift={(-15pt,8pt)}] {\(\theta\)} -- node [pos=.5,right] { \(a\)} (2,1.5) -- node [pos=.5,above left] { \(c\)} (0,0);
+\draw (2.7,0) arc (180:125:.3);
+\draw [dashed] (2,1.5) -- (2,0) node [pos=.5,left] {\(h\)};
+\draw (2,.2) -- (1.8,.2) -- (1.8,0);\end{tikzpicture}]]>
+</latex-image>
+      </image>
+
+    </sidebyside>
+
+    <sidebyside>
+      <em>Right Circular Cone</em>
+
+      Volume = <m>\frac 13 \pi r^2h</m> 
+
+      Surface Area =
+
+      <m>\pi r\sqrt{r^2+h^2} +\pi r^2</m>
+
+      <image>
+
+<latex-image>
+<![CDATA[\begin{tikzpicture}[x=13pt,y=15pt,thick]
+\begin{scope}[xscale=2]
+\draw (-1,0) arc (-180:0:1);
+\draw [dashed] (1,0) arc (0:180:1);
+\draw (-1,.1) -- (0,3) -- (1,.15);
+\draw [dashed] (0,3) -- node [pos=.5,left] { \(h\)} (0,0);
+\draw [dashed] (0,0) -- (1,0) node [pos=.5,above] { \(r\)};
+\end{scope}
+\draw [fill=black] (0,0) circle (1pt);\end{tikzpicture}]]>
+</latex-image>
+      </image>
+
+    </sidebyside>
+
+    <sidebyside>
+      <em>Parallelograms</em>
+
+      Area = <m>bh</m>
+
+      <image>
+
+<latex-image>
+<![CDATA[\begin{tikzpicture}[x=30pt,y=25pt,thick]
+\draw (0,0) -- node [below,pos=.5]  { \(b\)} (2,0) -- (3,1.5) -- (1,1.5) -- (0,0);
+\draw [dashed] (1,1.5) -- (1,0) node [pos=.5,right] {\(h\)};
+\draw (.8,0) -- (.8,.2) -- (1,.2);\end{tikzpicture}]]>
+</latex-image>
+      </image>
+
+    </sidebyside>
+
+    <sidebyside>
+      <em>Right Circular Cylinder</em>
+
+      Volume = <m>\pi r^2h</m> 
+
+      Surface Area =
+
+      <m>2\pi rh  +2\pi r^2</m>
+
+      <image>
+
+<latex-image>
+<![CDATA[\begin{tikzpicture}[x=13pt,y=14pt,thick]
+\begin{scope}[xscale=2]
+\draw (-1,0) arc (-180:0:1);
+\draw [dashed] (1,0) arc (0:180:1);
+\draw (0,2.5) circle (1);
+\draw (-1,0) -- (-1,2.5) (1,0)-- (1,2.5) node [right,pos=.5] {\(h\)};
+\draw (0,2.5) -- (1,2.5) node [above,pos=.5] {\(r\)};
+\end{scope}
+\draw [fill=black] (0,2.5) circle (1pt);\end{tikzpicture}]]>
+</latex-image>
+      </image>
+
+    </sidebyside>
+
+    <sidebyside>
+      <em>Trapezoids</em>
+
+      Area = <m>\frac12(a+b)h</m>
+
+      <image>
+
+<latex-image>
+<![CDATA[\begin{tikzpicture}[x=30pt,y=25pt,thick]
+\draw (0,0) -- node [below,pos=.7]  { \(b\)} (3,0) -- (2.5,1.5) -- node [above,pos=.5] {\(a\)} (1.5,1.5) -- (0,0);
+\draw [dashed] (1.5,1.5) -- (1.5,0) node [pos=.5,right] {\(h\)};
+\draw (1.3,0) -- (1.3,.2) -- (1.5,.2);\end{tikzpicture}]]>
+</latex-image>
+      </image>
+
+    </sidebyside>
+
+    <sidebyside>
+      <em>Sphere</em>
+
+      Volume = <m>\frac43\pi r^3</m> 
+
+      Surface Area =<m>4\pi r^2</m>
+
+      <image>
+
+<latex-image>
+<![CDATA[\begin{tikzpicture}[x=13pt,y=13pt,thick]
+\begin{scope}[xscale=2]
+\draw (-1,0) arc (-180:0:1);
+\draw [dashed] (1,0) arc (0:180:1);
+\end{scope}
+\draw (0,0) circle (2);
+\draw [dashed] (0,0) -- (2,0) node [pos=.5,above] {\(r\)};
+\draw [fill=black] (0,0) circle (1pt);\end{tikzpicture}]]>
+</latex-image>
+      </image>
+
+    </sidebyside>
+
+    <sidebyside>
+      <em>Circles</em>
+
+      Area = <m>\pi r^2</m>
+
+      Circumference = <m>2\pi r</m>
+
+      <image>
+
+<latex-image>
+<![CDATA[\begin{tikzpicture}[x=30pt,y=30pt,thick]
+\draw (0,0) circle (1);
+\draw [dashed] (0,0) -- (1,0) node [pos=.5,above] {\(r\)};
+\draw [fill=black] (0,0) circle (1pt);\end{tikzpicture}]]>
+</latex-image>
+      </image>
+
+    </sidebyside>
+
+    <sidebyside>
+      <em>General Cone</em>
+
+      Area of Base = <m>A</m>
+
+      Volume = <m>\frac13Ah</m>
+
+      <image>
+
+<latex-image>
+<![CDATA[\begin{tikzpicture}[x=13pt,y=10pt,thick]
+\begin{scope}
+\clip (0,0) rectangle (4,-2.5);
+\draw [smooth] plot coordinates {(0,0) (1,1.5) (2,1.5) (4,0) (3,-1) (2,-1.5) (1,-2) (0,0)};
+\end{scope}
+\begin{scope}
+\clip (0,0) rectangle (4,2.5);
+\draw [smooth,dashed] plot coordinates {(0,0) (1,1.5) (2,1.5) (4,0) (3,-1) (2,-1.5) (1,-2) (0,0)};
+\end{scope}
+\draw (0,0) -- (2,4)--(4,0);
+\draw [dashed] (2,0)--(2,4) node [pos=.5,right] {\(h\)}; 
+\draw [fill=black](2,0) circle (1pt);
+\draw (1.5,-.75) node {\(A\)};\end{tikzpicture}]]>
+</latex-image>
+      </image>
+
+    </sidebyside>
+
+    <sidebyside>
+      <em>Sectors of Circles</em>
+
+      <m>\theta</m> in radians 
+
+      Area = <m>\frac12\theta r^2</m>
+
+      <m>s=r\theta</m>
+
+      <image>
+
+<latex-image>
+<![CDATA[\begin{tikzpicture}[x=30pt,y=30pt,thick]
+\draw (2,0) arc (0:50:2) -- (0,0);
+\draw [] (0,0) -- (2,0) node [pos=.5,below] {\(r\)};
+\draw [fill=black] (0,0) circle (1pt);
+\draw (1.95,1.0) node {\(s\)};
+\draw (0,0) node [shift={(15pt,8pt)}] {\(\theta\)};\end{tikzpicture}]]>
+</latex-image>
+      </image>
+
+    </sidebyside>
+
+    <sidebyside>
+      <em>General Right Cylinder</em>
+
+      Area of Base = <m>A</m>
+
+      Volume = <m>Ah</m>
+
+      <image>
+
+<latex-image>
+<![CDATA[\begin{tikzpicture}[x=13pt,y=10pt,thick]
+\begin{scope}
+\clip (0,0) rectangle (4,-2.5);
+\draw [smooth] plot coordinates {(0,0) (1,1.5) (2,1.5) (4,0) (3,-1) (2,-1.5) (1,-2) (0,0)};
+\end{scope}
+\begin{scope}
+\clip (0,0) rectangle (4,2.5);
+\draw [smooth,dashed] plot coordinates {(0,0) (1,1.5) (2,1.5) (4,0) (3,-1) (2,-1.5) (1,-2) (0,0)};
+\end{scope}
+\begin{scope}[shift={(0,4)}]
+\draw [smooth] plot coordinates {(0,0) (1,1.5) (2,1.5) (4,0) (3,-1) (2,-1.5) (1,-2) (0,0)};
+\end{scope}
+\draw (0,0) -- (0,4) (4,0) -- (4,4) node [pos=.5,right] {\(h\)};
+\draw (2,0) node {\(A\)};\end{tikzpicture}]]>
+</latex-image>
+      </image>
+
+    </sidebyside>
+
+    <p>
+      <em> Algebra</em>
+    </p>
+
+    <p>
+      <em> Factors and Zeros of Polynomials</em>
+    </p>
+
+    <p>
+      Let <m>p(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0</m> be a polynomial.
+      If <m>p(a)=0</m>,
+      then <m>a</m> is a <m>zero</m> of the polynomial and a solution of the equation <m>p(x)=0</m>.
+      Furthermore, <m>(x-a)</m> is a <m>factor</m> of the polynomial.
+    </p>
+
+    <p>
+      <em> Fundamental Theorem of Algebra</em>
+    </p>
+
+    <p>
+      An <m>n</m>th degree polynomial has <m>n</m>
+      (not necessarily distinct)
+      zeros.
+      Although all of these zeros may be imaginary,
+      a real polynomial of odd degree must have at least one real zero.
+    </p>
+
+    <p>
+      <em> Quadratic Formula</em>
+    </p>
+
+    <p>
+      If <m>p(x) = ax^2 + bx + c</m>,
+      and <m>0 \le b^2 - 4ac</m>,
+      then the real zeros of <m>p</m> are <m>x=(-b\pm \sqrt{b^2-4ac})/2a</m>
+    </p>
+
+    <p>
+      <em> Special Factors</em>
+    </p>
+
+    <p>
+      <m>\begin{array}{ll} x^2 - a^2 = (x-a)(x+a) \qquad \qquad \qquad \amp x^3 - a^3 = (x-a)(x^2+ax+a^2)\\ x^3 + a^3 = (x+a)(x^2-ax+a^2) \qquad \qquad \qquad \amp x^4 - a^4 = (x^2-a^2)(x^2+a^2) \end{array}</m>
+    </p>
+
+    <p>
+      <m>\begin{array}{l} (x+y)^n =x^n + nx^{n-1}y+\frac{n(n-1)}{2!}x^{n-2}y^2+\cdots +nxy^{n-1}+y^n\\ (x-y)^n =x^n - nx^{n-1}y+\frac{n(n-1)}{2!}x^{n-2}y^2-\cdots \pm nxy^{n-1}\mp y^n \end{array}</m>
+    </p>
+
+    <p>
+      <em> Binomial Theorem</em>
+    </p>
+
+    <p>
+      <m>\begin{array}{ll} (x+y)^2 = x^2 + 2xy + y^2 \qquad \amp (x-y)^2 = x^2 -2xy +y^2\\ (x+y)^3 = x^3 + 3x^2y + 3xy^2 + y^3 \qquad \amp (x-y)^3 = x^3 -3x^2y + 3xy^2 -y^3\\ (x+y)^4 = x^4 + 4x^3y + 6x^2y^2 + 4xy^3 + y^4 \qquad \amp (x-y)^4 = x^4 - 4x^3y + 6x^2y^2 - 4xy^3 + y^4 \end{array}</m>
+    </p>
+
+    <p>
+      <em> Rational Zero Theorem</em>
+    </p>
+
+    <p>
+      If <m>p(x) = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0</m> has integer coefficients,
+      then every <m>rational</m> <m>zero</m> of <m>p</m> is of the form <m>x=r/s</m>,
+      where <m>r</m> is a factor of <m>a_0</m> and <m>s</m> is a factor of <m>a_n</m>.
+    </p>
+
+    <p>
+      <em> Factoring by Grouping</em>
+    </p>
+
+    <p>
+      <m>ac x^3 + adx^2 + bcx + bd = ax^2(cx+d)+b(cx+d)=(ax^2+b)(cx+d)</m>
+    </p>
+
+    <p>
+      <em> Arithmetic Operations</em>
+    </p>
+
+    <p>
+      <m>\begin{array}{lll} ab+ac=a(b+c) \qquad \qquad \amp \displaystyle \frac{a}{b}+\frac{c}{d} = \frac{ad+bc}{bd} \qquad \qquad \amp \displaystyle \frac{a+b}{c} = \frac{a}{c} + \frac{b}{c}\\ \\ \displaystyle\frac{\left(\displaystyle\frac{a}{b}\right)}{\left(\displaystyle\frac{c}{d}\right)}=\left(\frac{a}{b}\right)\left(\frac{d}{c}\right)=\frac{ad}{bc} \amp \displaystyle \frac{\left(\displaystyle\frac{a}{b}\right)}{c} =\displaystyle \frac{a}{bc} \amp \displaystyle \frac{a}{\left(\displaystyle\frac{b}{c}\right)} =\displaystyle \frac{ac}{b}\\ \\ a\left(\displaystyle\frac{b}{c}\right)= \displaystyle \frac{ab}{c}\amp \displaystyle\frac{a-b}{c-d}=\frac{b-a}{d-c}\amp \displaystyle\frac{ab+ac}{a}=b+c \end{array}</m>
+    </p>
+
+    <p>
+      <em> Exponents and Radicals</em>
+    </p>
+
+    <p>
+      <m>\begin{array}{llllll} a^0=1, \; \; a \ne 0 \amp (ab)^x=a^xb^x \amp a^xa^y = a^{x+y} \amp \sqrt{a}=a^{1/2} \amp \displaystyle \frac{a^x}{a^y}=a^{x-y} \amp \sqrt[n]{a}=a^{1/n}\\ \left(\displaystyle\frac{a}{b}\right)^x=\displaystyle\frac{a^x}{b^x} \amp \sqrt[n]{a^m}=a^{m/n} \amp a^{-x}=\displaystyle\frac{1}{a^x} \amp \sqrt[n]{ab}=\sqrt[n]{a}\sqrt[n]{b} \amp (a^x)^y=a^{xy} \amp \displaystyle\sqrt[n]{\frac{a}{b}}=\frac{\sqrt[n]{a}}{\sqrt[n]{b}} \end{array}</m>
+    </p>
+
+    <p>
+      <em> Additional Formulas</em>
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Summation Formulas:</title>
+    <tabular>
+      <row>
+        <cell><m>\ds \sum^n_{i=1}{c} = cn</m> <nbsp /></cell>
+        <cell><m>\ds\sum^n_{i=1}{i} = \frac{n(n+1)}{2}</m></cell>
+      </row>
+      <row>
+        <cell><m>\ds\sum^n_{i=1}{i^2} = \frac{n(n+1)(2n+1)}{6}</m></cell>
+        <cell><m>\ds\sum^n_{i=1}{i^3}= \left(\frac{n(n+1)}{2}\right)^2</m></cell>
+      </row>
+    </tabular>
+  </subsection>
+
+  <subsection>
+    <title>Trapezoidal Rule:</title>
+    <p>
+      <m>\ds \int_a^b{f(x)}\ dx \approx \frac{\Delta x}{2}\big[f(x_1)+2f(x_2) + 2f(x_3) + \cdots + 2f(x_{n}) + f(x_{n+1})\big]</m>
+    </p>
+
+    <p>
+      with <m>\displaystyle \text{ Error } \leq \frac{(b-a)^3}{12n^2}\big[ \max \big| f\,''(x) \big|\big]</m>
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Simpson's Rule:</title>
+    <p>
+      <m>\ds\int_a^b{f(x)}\ dx \approx \frac{\Delta x}{3}\big[f(x_1)+4f(x_2) + 2f(x_3) + 4f(x_4) + \cdots + 2f(x_{n-1}) + 4f(x_{n}) + f(x_{n+1})\big]</m>
+    </p>
+
+    <p>
+      with <m>\displaystyle \text{ Error } \leq \frac{(b-a)^5}{180n^4}\big[ \max \big| f\,^{(4)}(x) \big|\big]</m>
+    </p>
+
+    <sidebyside>
+      <em> Arc Length:</em>
+
+      <m>\displaystyle
+      L = \int_a^b{\sqrt{1+ f\,'(x)^2}}dx</m>
+      <em> Surface of Revolution:</em>
+
+      <m>\displaystyle
+      S = 2\pi \int_a^b{f(x) \sqrt{1+ f\,'(x)^2}}dx</m>
+
+      { (where <m>f(x)\geq 0</m>)}
+
+      <m>\displaystyle
+      S = 2\pi \int_a^b{x \sqrt{1+ f\,'(x)^2}}dx</m>
+
+      { (where <m>a,b \geq 0</m>)}
+      <em> Work Done by a Variable Force:</em>
+
+      <m>\displaystyle
+      W = \int_a^b{F(x)}dx</m>
+      <em> Force Exerted by a Fluid:</em>
+
+      <m>\displaystyle
+      F = \int_a^b{w\,d(y)\,\ell(y)}dy</m>
+    </sidebyside>
+  </subsection>
+
+  <subsection>
+    <title>Taylor Series Expansion for <m>f(x)</m>:</title>
+    <p>
+      <m>\displaystyle p_n(x) = f(c) + f\,'(c)(x-c) + \frac{f\,''(c)}{2!}(x-c)^2 + \frac{f\,'''(c)}{3!}(x-c)^3 + \cdots + \frac{f\,^{(n)}(c)}{n!}(x-c)^n + \cdots</m>
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Maclaurin Series Expansion for <m>f(x)</m>, where <m>c=0</m>:</title>
+    <p>
+      <m>\displaystyle p_n(x) = f(0) + f\,'(0)x + \frac{f\,''(0)}{2!}x^2 + \frac{f\,'''(0)}{3!}x^3 + \cdots + \frac{f\,^{(n)}(0)}{n!}x^n+\cdots</m>
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Summary of Tests for Series:</title>
+    <tabular>
+      <row bottom="minor">
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+      </row>
+      <row>
+        <cell>Test</cell>
+        <cell>Series</cell>
+        <cell>Condition(s) of Convergence</cell>
+        <cell>Condition(s) of Divergence</cell>
+        <cell>Comment</cell>
+      </row>
+      <row bottom="minor">
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+      </row>
+      <row>
+        <cell><m>n</m>th-Term</cell>
+        <cell><m>\displaystyle{\sum^\infty_{n=1}{a_n}}</m></cell>
+        <cell></cell>
+        <cell><m>\displaystyle{\lim_{n \to \infty} a_n \neq 0}</m></cell>
+        <cell>This test cannot be used to show convergence.</cell>
+      </row>
+      <row bottom="minor">
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+      </row>
+      <row>
+        <cell>Geometric Series</cell>
+        <cell><m>\displaystyle{\sum^\infty_{n=0}{r^n}}</m></cell>
+        <cell><m>\left| r \right| \lt  1</m></cell>
+        <cell><m>\left| r \right| \geq 1</m></cell>
+        <cell><m>\displaystyle{\text{ Sum }  = \frac{1}{1-r}}</m></cell>
+      </row>
+      <row bottom="minor">
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+      </row>
+      <row>
+        <cell>Telescoping Series</cell>
+        <cell><m>\displaystyle{\sum^\infty_{n=1}{(b_n-b_{n+a})}}</m></cell>
+        <cell><m>\displaystyle{\lim_{n \to \infty} b_n = L}</m></cell>
+        <cell></cell>
+        <cell><m>\displaystyle\text{ Sum } = \left(\sum^a_{n=1}b_n\right) -L</m></cell>
+      </row>
+      <row bottom="minor">
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+      </row>
+      <row>
+        <cell><m>p</m>-Series</cell>
+        <cell><m>\displaystyle{\sum^\infty_{n=1}{\frac{1}{(an+b)^p}}}</m></cell>
+        <cell><m>p>1</m></cell>
+        <cell><m>p\leq 1</m></cell>
+        <cell></cell>
+      </row>
+      <row bottom="minor">
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+      </row>
+      <row>
+        <cell>Integral Test</cell>
+        <cell><m>\displaystyle{\sum^\infty_{n=0}{a_n}}</m></cell>
+        <cell><m>\displaystyle \int_1^\infty a(n)\ dn</m></cell>
+      </row>
+      <row>
+        <cell>is convergent</cell>
+        <cell><m>\displaystyle \int_1^\infty a(n)\ dn</m></cell>
+      </row>
+      <row>
+        <cell>is divergent</cell>
+        <cell><m>a_n = a(n)</m> must be continuous</cell>
+      </row>
+      <row bottom="minor">
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+      </row>
+      <row>
+        <cell>Direct Comparison</cell>
+        <cell><m>\displaystyle{\sum^\infty_{n=0}{a_n}}</m></cell>
+        <cell><m>\displaystyle \sum_{n=0}^\infty b_n</m></cell>
+      </row>
+      <row>
+        <cell>converges and</cell>
+      </row>
+      <row>
+        <cell><m>0\leq a_n\leq b_n</m></cell>
+        <cell><m>\displaystyle \sum_{n=0}^\infty b_n</m></cell>
+      </row>
+      <row>
+        <cell>diverges and</cell>
+      </row>
+      <row>
+        <cell><m>0\leq b_n\leq a_n</m></cell>
+        <cell></cell>
+      </row>
+      <row bottom="minor">
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+      </row>
+      <row>
+        <cell>Limit Comparison</cell>
+        <cell><m>\displaystyle{\sum^\infty_{n=0}{a_n}}</m></cell>
+        <cell><m>\displaystyle \sum_{n=0}^\infty b_n</m></cell>
+      </row>
+      <row>
+        <cell>converges and</cell>
+      </row>
+      <row>
+        <cell><m>\displaystyle \lim_{n\to\infty} a_n/b_n  \geq 0</m></cell>
+        <cell><m>\displaystyle \sum_{n=0}^\infty b_n</m></cell>
+      </row>
+      <row>
+        <cell>diverges and</cell>
+      </row>
+      <row>
+        <cell><m>\displaystyle \lim_{n\to\infty} a_n/b_n > 0</m></cell>
+        <cell>Also diverges if</cell>
+      </row>
+      <row>
+        <cell><m>\displaystyle \lim_{n\to\infty} a_n/b_n=\infty</m></cell>
+      </row>
+      <row bottom="minor">
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+      </row>
+      <row>
+        <cell>Ratio Test</cell>
+        <cell><m>\displaystyle{\sum^\infty_{n=0}{a_n}}</m></cell>
+        <cell><m>\displaystyle \lim_{n\to\infty} \frac{a_{n+1}}{a_n}  \lt  1</m></cell>
+        <cell><m>\displaystyle \lim_{n\to\infty} \frac{a_{n+1}}{a_n} > 1</m></cell>
+        <cell><m>\{a_n\}</m> must be positive</cell>
+      </row>
+      <row>
+        <cell>Also diverges if</cell>
+      </row>
+      <row>
+        <cell><m>\displaystyle \lim_{n\to\infty} a_{n+1}/a_n=\infty</m></cell>
+      </row>
+      <row bottom="minor">
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+      </row>
+      <row>
+        <cell>Root Test</cell>
+        <cell><m>\displaystyle{\sum^\infty_{n=0}{a_n}}</m></cell>
+        <cell><m>\displaystyle \lim_{n\to\infty} \big(a_n\big)^{1/n}  \lt  1</m></cell>
+        <cell><m>\displaystyle \lim_{n\to\infty} \big(a_n\big)^{1/n} > 1</m></cell>
+        <cell><m>\{a_n\}</m> must be positive</cell>
+      </row>
+      <row>
+        <cell>Also diverges if</cell>
+      </row>
+      <row>
+        <cell><m>\displaystyle \lim_{n\to\infty} \big(a_n\big)^{1/n}=\infty</m></cell>
+      </row>
+      <row bottom="minor">
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+        <cell></cell>
+      </row>
+    </tabular>
+  </subsection>
+</section>
+

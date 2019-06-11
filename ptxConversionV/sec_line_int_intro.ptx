@@ -1,0 +1,1128 @@
+
+
+<section xml:id="sec_line_int_intro">
+  <title>Introduction to Line Integrals</title>
+  <introduction>
+    <p>
+      We first used integration to find
+      <q>area under a curve.</q> In this section,
+      we learn to do this (again), but in a different context.
+    </p>
+
+    <p>
+      Consider the surface and curve shown in <xref ref="fig_lineint0">Figure</xref>(a).
+      The surface is given by <m>f(x,y)=1-\cos(x)\sin(y)</m>.
+      The dashed curve lies in the <m>x</m>-<m>y</m> plane and is the familiar <m>y=x^2</m> parabola from <m>-1\leq x\leq1</m>;
+      we'll call this curve <m>C</m>.
+      The curve drawn with a solid line in the graph is the curve in space that lies on our surface with <m>x</m> and <m>y</m> values that lie on <m>C</m>.
+    </p>
+
+    <p>
+      The question we want to answer is this:
+      what is the area that lies below the curve drawn with the solid line?
+      In other words,
+      what is the area of the region above <m>C</m> and under the the surface <m>f</m>?
+      This region is shown in <xref ref="fig_lineint0">Figure</xref>(b).
+    </p>
+
+    <p>
+      We suspect the answer can be found using an integral,
+      but before trying to figure out what that integral is,
+      let us first try to approximate its value.
+    </p>
+
+    <figure xml:id="fig_lineint0">
+      <caption>Finding area under a curve in space.</caption>
+      <sidebyside>
+        <figure>
+          <caption>(a)</caption>
+          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.005003686994314194,
+          3Dc2c=0.29708048701286316 0.8962657451629639 0.329318642616272,
+          3Dcoo=28.221464157104492 62.0896110534668 72.89360809326172,
+          3Droo=149.99999640034895,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figline_integral_intro1_3D"/>
+        </figure>
+
+        <figure>
+          <caption>(b)</caption>
+          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.005003686994314194,
+          3Dc2c=0.29708048701286316 0.8962657451629639 0.329318642616272,
+          3Dcoo=28.221464157104492 62.0896110534668 72.89360809326172,
+          3Droo=149.99999640034895,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figline_integral_intro1b_3D"/>
+        </figure>
+
+        <figure>
+          <caption>(c)</caption>
+          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.005003686994314194,
+          3Dc2c=0.29708048701286316 0.8962657451629639 0.329318642616272,
+          3Dcoo=28.221464157104492 62.0896110534668 72.89360809326172,
+          3Droo=149.99999640034895,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figline_integral_intro1c_3D"/>
+        </figure>
+      </sidebyside>
+
+    </figure>
+
+    <p>
+      In <xref ref="fig_lineint0">Figure</xref>(c),
+      four rectangles have been drawn over the curve <m>C</m>.
+      The bottom corners of each rectangle lie on <m>C</m>,
+      and each rectangle has a height given by the function <m>f(x,y)</m> for some <m>(x,y)</m> pair along <m>C</m> between the rectangle's bottom corners.
+    </p>
+
+    <p>
+      As we know how to find the area of each rectangle,
+      we are able to approximate the area above <m>C</m> and under <m>f</m>.
+      Clearly, our approximation will be
+      <em>an approximation</em>.
+      The heights of the rectangles do not match exactly with the surface <m>f</m>,
+      nor does the base of each rectangle follow perfectly the path of <m>C</m>.
+    </p>
+
+    <p>
+      In typical calculus fashion,
+      our approximation can be improved by using more rectangles.
+      The sum of the areas of these rectangles gives an approximate value of the true area above <m>C</m> and under <m>f</m>.
+      As the area of each rectangle is
+      <q>height <times /> width</q>, we assert that the
+      <me>
+        \text{ area above \(C\) } \approx \sum (\text{ heights } \times\text{ widths } )
+      </me>.
+    </p>
+
+    <p>
+      When first learning of the integral,
+      and approximating areas with <q>heights <times /> widths</q>,
+      the width was a small change in <m>x</m>: <m>dx</m>.
+      That will not suffice in this context.
+      Rather, each width of a rectangle is actually approximating the arc length of a small portion of <m>C</m>.
+      In <xref ref="sec_curvature">Section</xref>,
+      we used <m>s</m> to represent the arc<ndash />length parameter of a curve.
+      A small amount of arc length will thus be represented by <m>ds</m>.
+    </p>
+
+    <p>
+      The height of each rectangle will be determined in some way by the surface <m>f</m>.
+      If we parametrize <m>C</m> by <m>s</m>,
+      an <m>s</m>-value corresponds to an <m>(x,y)</m> pair that lies on the parabola <m>C</m>.
+      Since <m>f</m> is a function of <m>x</m> and <m>y</m>,
+      and <m>x</m> and <m>y</m> are functions of <m>s</m>,
+      we can say that <m>f</m> is a function of <m>s</m>.
+      Given a value <m>s</m>, we can compute <m>f(s)</m> and find a height.
+      Thus
+      <md>
+        <mrow>\text{ area under \(f\) and above \(C\) } \amp \approx \sum (\text{ heights } \times\text{ widths } );</mrow>
+        <mrow>\text{ area under \(f\) and above \(C\) }               \amp =\lim_{||\Delta s||\to0}\sum f(c_i)\Delta s_i</mrow>
+        <mrow>\amp =\int_Cf(s)\ ds</mrow>
+      </md>.
+    </p>
+
+    <p>
+      Here we have introduce a new notation,
+      the integral symbol with a subscript of <m>C</m>.
+      It is reminiscent of our usage of <m>\iint_R</m>.
+      Using the train of thought found in the Integration Review preceding this section,
+      we interpret <q><m>\int_C f(s)\ ds</m></q>
+      as meaning <q>sum up, along a curve <m>C</m>,
+      function values <m>f(s)\times</m>small arc lengths.</q>
+      It is understood here that <m>s</m> represents the arc<ndash />length parameter.
+    </p>
+
+    <p>
+      All this leads us to a definition.
+      The integral found in <xref ref="eq_line0">Equation</xref>
+      is called a <em>line integral</em>.
+      We formally define it below, but note that the definition is very abstract.
+      On one hand,
+      one is apt to say <q>the definition makes sense,</q> while on the other,
+      one is equally apt to say <q>but I don't know what I'm supposed to do with this definition.</q>
+      We'll address that after the definition,
+      and actually find an answer to the area problem we posed at the beginning of this section.
+    </p>
+
+    <definition xml:id="def_line_integral1">
+      <title>Line Integral Over A Scalar Field</title>
+      <statement>
+        <p>
+          Let <m>C</m> be a smooth curve parametrized by <m>s</m>,
+          the arc<ndash />length parameter,
+          and let <m>f</m> be a continuous function of <m>s</m>.
+          A <term>line integral</term> is an integral of the form
+          <me>
+            \int_C f(s)\ ds = \lim_{||\Delta s||\to 0}\sum_{i=1}^n f(c_i)\Delta s_i
+          </me>,
+          where <m>s_1\lt s_2\lt \ldots\lt s_n</m> is any partition of the <m>s</m>-interval over which <m>C</m> is defined,
+          <m>c_i</m> is any value in the <m>i\,^\text{ th }</m> subinterval,
+          <m>\Delta s_i</m> is the width of the <m>i\,^\text{ th }</m> subinterval,
+          and <m>||\Delta s||</m> is the length of the longest subinterval in the partition.
+              <idx><h>line integral</h><h>over scalar field</h></idx>
+        </p>
+      </statement>
+    </definition>
+
+    <aside>
+      <p>
+        <em>Note:</em> <xref ref="def_line_integral1">Definition</xref>
+        uses the term <em>scalar field</em>
+        which has not yet been defined.
+        Its meaning is discussed in the paragraph preceding <xref ref="def_line_integral2">Definition</xref>
+        when it is compared to a <em>vector field</em>.
+      </p>
+    </aside>
+    <p>
+      When <m>C</m> is a <em>closed</em> curve,
+      i.e., a curve that ends at the same point at which it starts, we use
+      <me>
+        \oint_C f(s)\ ds  \text{ instead of }  \int_Cf(s)\ ds
+      </me>.
+    </p>
+
+    <p>
+      The definition of the line integral does not specify whether <m>C</m> is a curve in the plane or space
+      (or hyperspace),
+      as the definition holds regardless.
+      For now, we'll assume <m>C</m> lies in the <m>x</m>-<m>y</m> plane.
+    </p>
+
+    <p>
+      This definition of the line integral doesn't really say anything new.
+      If <m>C</m> is a curve and <m>s</m> is the arc<ndash />length parameter of <m>C</m> on <m>a\leq s\leq b</m>, then
+      <me>
+        \int_Cf(s)\ ds = \int_a^bf(s)\ ds
+      </me>.
+    </p>
+
+    <p>
+      The real difference with this integral from the standard
+      <q><m>\int_a^bf(x)\ dx</m></q>
+      we used in the past is that of context.
+      Our previous integrals naturally summed up values over an interval on the <m>x</m>-axis,
+      whereas now we are summing up values over a curve.
+      <em>If</em> we can parametrize the curve with the arc<ndash />length parameter,
+      we can evaluate the line integral just as before.
+      Unfortunately,
+      parametrizing a curve in terms of the arc<ndash />length parameter is usually very difficult,
+      so we must develop a method of evaluating line integrals using a different parametrization.
+    </p>
+
+    <p>
+      Given a curve <m>C</m>, find any parametrization of <m>C</m>:
+      <m>x = g(t)</m> and <m>y=h(t)</m>,
+      for continuous functions <m>g</m> and <m>h</m>,
+      where <m>a\leq t\leq b</m>.
+      We can represent this parametrization with a vector<ndash />valued function,
+      <m>\vrt = \langle g(t),h(t)\rangle</m>.
+    </p>
+
+    <p>
+      In <xref ref="sec_curvature">Section</xref>,
+      we defined the arc<ndash />length parameter in <xref ref="eq_vvfarc">Equation</xref> as
+      <me>
+        s(t) = \int_0^t \norm{\vec r\,'(u)}\ du
+      </me>.
+    </p>
+
+    <p>
+      By the Fundamental Theorem of Calculus,
+      <m>ds = \norm{\vec r\,'(t)}\ dt</m>.
+      We can substitute the right hand side of this equation for <m>ds</m> in the line integral definition.
+    </p>
+
+    <p>
+      We can view <m>f</m> as being a function of <m>x</m> and <m>y</m> since it is a function of <m>s</m>.
+      Thus <m>f(s) =f(x,y) =f\big(g(t),h(t)\big)</m>.
+      This gives us a concrete way to evaluate a line integral:
+      <me>
+        \int_C f(s)\ ds = \int_a^bf\big(g(t),h(t)\big)\norm{\vec r\,'(t)}\ dt
+      </me>.
+    </p>
+
+    <p>
+      We restate this as a theorem,
+      along with its three<ndash />dimensional analogue,
+      followed by an example where we finally evaluate an integral and find an area.
+    </p>
+
+    <theorem xml:id="thm_line1">
+      <title>Evaluating a Line Integral Over A Scalar Field</title>
+      <statement>
+        <ul>
+          <li>
+            <p>
+              Let <m>C</m> be a curve parametrized by <m>\vrt =\langle g(t),
+              h(t)\rangle</m>,
+              <m>a\leq t\leq b</m>,
+              where <m>g</m> and <m>h</m> are continuously differentiable,
+              and let <m>z=f(x,y)</m>, where <m>f</m> is continuous over <m>C</m>.
+              Then<idx><h>line integral</h><h>over scalar field</h></idx>
+              <me>
+                \int_Cf(s)\ ds = \int_a^bf\big(g(t),h(t)\big)\norm{\vec r\,'(t)}\ dt
+              </me>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Let <m>C</m> be a curve parametrized by
+              <m>\vrt =\langle g(t),
+              h(t),k(t)\rangle</m>, <m>a\leq t\leq b</m>,
+              where <m>g</m>,
+              <m>h</m> and <m>k</m> are continuously differentiable,
+              and let <m>w=f(x,y,z)</m>, where <m>f</m> is continuous over <m>C</m>.
+              Then
+              <me>
+                \int_Cf(s)\ ds = \int_a^bf\big(g(t),h(t),k(t)\big)\norm{\vec r\,'(t)}\ dt
+              </me>.
+            </p>
+          </li>
+        </ul>
+      </statement>
+    </theorem>
+
+    <p>
+      To be clear,
+      the first point of <xref ref="thm_line1">Theorem</xref>
+      can be used to find the area under a surface
+      <m>z=f(x,y)</m> and above a curve <m>C</m>.
+      We will later give an understanding of the line integral when <m>C</m> is a curve in space.
+    </p>
+
+    <p>
+      Let's do an example where we actually compute an area.
+    </p>
+
+    <example xml:id="ex_linescalarfield2">
+      <title>Evaluating a line integral: area under a surface over a curve.</title>
+      <statement>
+        <p>
+          Find the area under the surface
+          <m>f(x,y) =\cos(x)+\sin(y)+2</m> over the curve <m>C</m>,
+          which is the segment of the line <m>y=2x+1</m> on <m>-1\leq x\leq 1</m>,
+          as shown in <xref ref="fig_linescalarfield2">Figure</xref>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Our first step is to represent <m>C</m> with a vector<ndash />valued function.
+          Since <m>C</m> is a simple line,
+          and we have a explicit relationship between <m>y</m> and <m>x</m> (namely,
+          that <m>y</m> is <m>2x+1</m>),
+          we can let <m>x = t</m>, <m>y = 2t+1</m>,
+          and write <m>\vrt = \langle t, 2t+1\rangle</m> for <m>-1\leq t\leq 1</m>.
+        </p>
+
+        <p>
+          We find the values of <m>f</m> over <m>C</m> as <m>f(x,y) = f(t,2t+1) = \cos(t)+\sin(2t+1) + 2</m>.
+          We also need <m>\norm{\vec r\,'(t)}</m>;
+          with <m>\vrp(t) = \langle 1,2\rangle</m>,
+          we have <m>\norm{\vrp(t)} = \sqrt{5}</m>.
+          Thus <m>ds = \sqrt{5}\ dt</m>.
+        </p>
+
+        <figure xml:id="fig_linescalarfield2">
+          <caption>Finding area under a curve in <xref ref="ex_linescalarfield2">Example</xref>.</caption>
+          <sidebyside>
+            <figure>
+              <caption>(a)</caption>
+              \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+              3Droll=0,
+              3Dortho=0.004519370850175619,
+              3Dc2c=0.7659074664115906 0.5764991044998169 0.28466543555259705,
+              3Dcoo=36.11199951171875 39.69871139526367 85.62228393554688,
+              3Droo=149.9999948024772,
+              3Dlights=Headlamp,add3Djscript=asylabels.js}
+              <img src="figures/figlinescalarfield2_3D"/>
+            </figure>
+
+            <figure>
+              <caption>(b)</caption>
+              \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+              3Droll=0,
+              3Dortho=0.004519370850175619,
+              3Dc2c=0.7659074664115906 0.5764991044998169 0.28466543555259705,
+              3Dcoo=36.11199951171875 39.69871139526367 85.62228393554688,
+              3Droo=149.9999948024772,
+              3Dlights=Headlamp,add3Djscript=asylabels.js}
+              <img src="figures/figlinescalarfield2b_3D"/>
+            </figure>
+          </sidebyside>
+
+        </figure>
+
+        <p>
+          The area we seek is
+          <md>
+            <mrow>\int_Cf(s)\ ds \amp = \int_{-1}^1 \big(\cos(t)+\sin(2t+1) + 2\big)\sqrt{5}\ dt</mrow>
+            <mrow>\amp = \left.\sqrt{5}\big(\sin(t) - \frac12\cos(2t+1)+2t\big)\right|_{-1}^1</mrow>
+            <mrow>\amp \approx 14.418\ \text{ units } ^2</mrow>
+          </md>.
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      We will practice setting up and evaluating a line integral in another example,
+      then find the area described at the beginning of this section.
+    </p>
+
+    <example xml:id="ex_linescalarfield3">
+      <title>Evaluating a line integral: area under a surface over a curve.</title>
+      <statement>
+        <p>
+          Find the area over the unit circle in the <m>x</m>-<m>y</m> plane and under the surface <m>f(x,y) = x^2-y^2+3</m>,
+          shown in <xref ref="fig_linescalarfield3">Figure</xref>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The curve <m>C</m> is the unit circle,
+          which we will describe with the parametrization
+          <m>\vrt = \langle \cos t, \sin t\rangle</m> for <m>0\leq t\leq 2\pi</m>.
+          We find <m>\norm{\vrp(t)} = 1</m>, so <m>ds = 1 dt</m>.
+        </p>
+
+        <figure xml:id="fig_linescalarfield3">
+          <caption>Finding area under a curve in <xref ref="ex_linescalarfield3">Example</xref>.</caption>
+          <sidebyside>
+            <figure>
+              <caption>(a)</caption>
+              \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+              3Droll=0,
+              3Dortho=0.004519370850175619,
+              3Dc2c=0.7659074664115906 0.5764991044998169 0.28466543555259705,
+              3Dcoo=36.11199951171875 39.69871139526367 85.62228393554688,
+              3Droo=149.9999948024772,
+              3Dlights=Headlamp,add3Djscript=asylabels.js}
+              <img src="figures/figlinescalarfield3_3D"/>
+            </figure>
+
+            <figure>
+              <caption>(b)</caption>
+              \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+              3Droll=0,
+              3Dortho=0.004519370850175619,
+              3Dc2c=0.7659074664115906 0.5764991044998169 0.28466543555259705,
+              3Dcoo=36.11199951171875 39.69871139526367 85.62228393554688,
+              3Droo=149.9999948024772,
+              3Dlights=Headlamp,add3Djscript=asylabels.js}
+              <img src="figures/figlinescalarfield3b_3D"/>
+            </figure>
+          </sidebyside>
+
+        </figure>
+
+        <p>
+          We find the values of <m>f</m> over <m>C</m> as <m>f(x,y) = f(\cos t, \sin t) = \cos^2t-\sin^2t+3</m>.
+          Thus the area we seek is (note the use of the <m>\oint f(s) ds</m> notation):
+          <md>
+            <mrow>\oint_C f(s)\ ds \amp = \int_0^{2\pi}\big(\cos^2t-\sin^2t+3\big)\ dt</mrow>
+            <mrow>\amp = 6\pi</mrow>
+          </md>.
+        </p>
+
+        <p>
+          (Note: we may have approximated this answer from the start.
+          The unit circle has a circumference of <m>2\pi</m>,
+          and we may have guessed that due to the apparent symmetry of our surface,
+          the average height of the surface is 3.)
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      We now consider the example that introduced this section.
+    </p>
+
+    <example xml:id="ex_linescalarfield5">
+      <title>Evaluating a line integral: area under a surface over a curve.</title>
+      <statement>
+        <p>
+          Find the area under <m>f(x,y) = 1-\cos(x)\sin(y)</m> and over the parabola <m>y = x^2</m>,
+          from <m>-1\leq x\leq 1</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We parametrize our curve <m>C</m> as
+          <m>\vrt = \langle t,t^2\rangle</m> for <m>-1\leq t\leq 1</m>;
+          we find <m>\norm{\vrp(t)} = \sqrt{1+4t^2}</m>,
+          so <m>ds = \sqrt{1+4t^2}\ dt</m>.
+        </p>
+
+        <p>
+          Replacing <m>x</m> and <m>y</m> with their respective functions of <m>t</m>,
+          we have <m>f(x,y) = f(t,t^2) = 1-\cos(t)\sin(t^2)</m>.
+          Thus the area under <m>f</m> and over <m>C</m> is found to be
+          <md>
+            <mrow>\int_C f(s)\ ds \amp = \int_{-1}^1 \Big(1-\cos(t)\sin\big(t^2\big)\Big)\sqrt{1+t^2}\ dt.</mrow>
+            <intertext>This integral is impossible to evaluate using the techniques developed in this text. We resort to a numerical approximation; accurate to two places after the decimal, we find the area is</intertext>
+            <mrow>\amp = 2.17</mrow>
+          </md>.
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      We give one more example of finding area.
+    </p>
+
+    <example xml:id="ex_linescalarfield4">
+      <title>Evaluating a line integral: area under a curve in space.</title>
+      <statement>
+        <p>
+          Find the area above the <m>x</m>-<m>y</m> plane and below the helix parametrized by <m>\vrt = \langle \cos t,2\sin t,t/\pi\rangle</m>,
+          for <m>0\leq t\leq 2\pi</m>,
+          as shown in <xref ref="fig_linescalarfield4">Figure</xref>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Note how this is problem is different than the previous examples:
+          here, the height is not given by a surface, but by the curve itself.
+        </p>
+
+        <p>
+          We use the given vector-valued function \vec r(t)<nbsp />to determine the curve <m>C</m> in the <m>x</m>-<m>y</m> plane by simply using the first two components of \vec r(t):
+          <m>\vec c(t) = \langle \cos t,2\sin t\rangle</m>.
+          Thus <m>ds = \norm{\vec c\,'(t)}\,dt = \sqrt{\sin^2t + 4\cos^2t}\,dt</m>.
+        </p>
+
+        <p>
+          The height is not found by evaluating a surface over <m>C</m>,
+          but rather it is given directly by the third component of \vec r(t):
+          <m>t/\pi</m>.
+          Thus
+          <me>
+            \oint_C f(s)\ ds = \int_0^{2\pi} \frac{t}{\pi}\sqrt{\sin^2t + 4\cos^2t}\,dt \approx 9.69
+          </me>,
+          where the approximation was obtained using numerical methods.
+        </p>
+
+        <figure xml:id="fig_linescalarfield4">
+          <caption>Finding area under a curve in <xref ref="ex_linescalarfield4">Example</xref>.</caption>
+          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.004994507879018784,
+          3Dc2c=0.6830801963806152 0.5863659381866455 0.43540385365486145,
+          3Dcoo=1.7807315587997437 0.9528753757476807 54.982017517089844,
+          3Droo=141.8977232410902,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figlinescalarfield4_3D"/>
+        </figure>
+      </solution>
+    </example>
+
+    <p>
+      Note how in each of the previous examples we are effectively finding
+      <q>area under a curve</q>,
+      just as we did when first learning of integration.
+      We have used the phrase <q>area <em>over</em>
+      a curve <m>C</m> and under a surface,</q>
+      but that is because of the important role <m>C</m> plays in the integral.
+      The figures show how the curve <m>C</m> defines another curve on the surface <m>z=f(x,y)</m>,
+      and we are finding the area under that curve.
+    </p>
+  </introduction>
+
+  <subsection>
+    <title>Properties of Line Integrals</title>
+    <p>
+      Many properties of line integrals can be inferred from general integration properties.
+      For instance, if <m>k</m> is a scalar,
+      then <m>\int_C k\,f(s)ds = k\int_Cf(s)ds</m>.
+    </p>
+
+    <p>
+      One property in particular of line integrals is worth noting.
+      If <m>C</m> is a curve composed of subcurves <m>C_1</m> and <m>C_2</m>,
+      where they share only one point in common (see <xref ref="fig_line_int_prop">Figure</xref>(a)),
+      then the line integral over <m>C</m> is the sum of the line integrals over <m>C_1</m> and <m>C_2</m>:
+      <me>
+        \int_Cf(s)\ ds = \int_{C_1}f(s)\ ds+\int_{C_2}f(s)\ ds
+      </me>.
+    </p>
+
+    <figure xml:id="fig_line_int_prop">
+      <caption>Illustrating properties of line integrals.</caption>
+      <sidebyside>
+        <figure>
+          <caption>(a)</caption>
+          <img src="figures/figline_integral_curve_a"/>
+        </figure>
+
+        <figure>
+          <caption>(b)</caption>
+          <img src="figures/figline_integral_curve_b"/>
+        </figure>
+      </sidebyside>
+
+    </figure>
+
+    <p>
+      This property allows us to evaluate line integrals over some curves <m>C</m> that are not smooth.
+      Note how in <xref ref="fig_line_int_prop">Figure</xref>(b) the curve is not smooth at <m>D</m>,
+      so by our definition of the line integral we cannot evaluate <m>\int_C f(s)ds</m>.
+      However, one can evaluate line integrals over <m>C_1</m> and <m>C_2</m> and their sum will be the desired quantity.
+    </p>
+
+    <p>
+      A curve <m>C</m> that is composed of two or more smooth curves is said to be
+      <em>piecewise smooth</em>.
+      In this chapter,
+      any statement that is made about smooth curves also holds for piecewise smooth curves.
+          <idx><h>smooth curve</h><h>piecewise</h></idx>
+          <idx><h>piecewise smooth curve</h></idx>
+    </p>
+
+    <p>
+      We state these properties as a theorem.
+    </p>
+
+    <theorem xml:id="thm_line_int_properties_scalar">
+      <title>Properties of Line Integrals Over Scalar Fields</title>
+      <statement>
+        <ol>
+          <li>
+            <p>
+              Let <m>C</m> be a smooth curve parametrized by the arc<ndash />length parameter <m>s</m>,
+              let <m>f</m> and <m>g</m> be continuous functions of <m>s</m>,
+              and let <m>k_1</m> and <m>k_2</m> be scalars.
+              Then <idx><h>line integral</h><h>properties over a scalar field</h></idx>
+              <me>
+                \ds \int_C\big(k_1f(s)+k_2g(s)\big)\ ds = k_1\int_Cf(s)\ ds +k_2\int_Cg(s)\ ds
+              </me>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Let <m>C</m> be piecewise smooth,
+              composed of smooth components <m>C_1</m> and <m>C_2</m>.
+              Then
+              <me>
+                \int_Cf(s)\ ds = \int_{C_1}f(s)\ ds + \int_{C_2}f(s)\ ds
+              </me>.
+            </p>
+          </li>
+        </ol>
+      </statement>
+    </theorem>
+  </subsection>
+
+  <subsection>
+    <title>Mass and Center of Mass</title>
+    <p>
+      We first learned integration as a method to find area under a curve,
+      then later used integration to compute a variety of other quantities,
+      such as arc length, volume, force, etc.
+      In this section,
+      we also introduced line integrals as a method to find area under a curve,
+      and now we explore one more application.
+    </p>
+
+    <p>
+      Let a curve <m>C</m>
+      (either in the plane or in space)
+      represent a thin wire with variable density <m>\delta(s)</m>.
+      We can approximate the mass of the wire by dividing the wire (i.e., the curve) into small segments of length
+      <m>\Delta s_i</m> and assume the density is constant across these small segments.
+      The mass of each segment is density of the segment <times /> its length;
+      by summing up the approximate mass of each segment we can approximate the total mass:
+      <me>
+        \text{ Total Mass of Wire }  = \sum \delta(s_i)\Delta s_i
+      </me>.
+    </p>
+
+    <p>
+      By taking the limit as the length of the segments approaches 0, we have the definition of the line integral as seen in <xref ref="def_line_integral1">Definition</xref>.
+      When learning of the line integral,
+      we let <m>f(s)</m> represent a height;
+      now we let <m>f(s) = \delta(s)</m> represent a density.
+    </p>
+
+    <p>
+      We can extend this understanding of computing mass to also compute the center of mass of a thin wire.
+      (As a reminder,
+      the center of mass can be a useful piece of information as objects rotate about that center.)
+      We give the relevant formulas in the next definition, followed by an example.
+      Note the similarities between this definition and <xref ref="def_mass_3d">Definition</xref>,
+      which gives similar properties of solids in space.
+    </p>
+
+    <definition xml:id="def_mass_of_thin_wire">
+      <title>Mass, Center of Mass of Thin Wire</title>
+      <statement>
+        <p>
+          Let a thin wire lie along a smooth curve <m>C</m> with continuous density function <m>\delta(s)</m>,
+          where <m>s</m> is the arc length parameter.
+              <idx><h>mass</h><h>center of</h></idx>
+              <idx><h>mass</h></idx>
+
+          <ol>
+            <li>
+              <p>
+                The <em>mass</em> of the thin wire is <m>\ds M = \int_C \delta(s)\ ds</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                The <em>moment about the <m>y</m>-<m>z</m> plane</em>
+                is <m>\ds M_{yz} = \int_C x\delta(s)\ ds</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                The <em>moment about the <m>x</m>-<m>z</m> plane</em>
+                is <m>\ds M_{xz} = \int_C y\delta(s)\ ds</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                The <em>moment about the <m>x</m>-<m>y</m> plane</em>
+                is <m>\ds M_{xy} = \int_C z\delta(s)\ ds</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                The <em>center of mass</em> of the wire is
+                <me>
+                  (\overline{x},\overline{y},\overline{z}) = \left(\frac{M_{yz}}M, \frac{M_{xz}}M,\frac{M_{xy}}M\right)
+                </me>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </definition>
+
+    <example xml:id="ex_linescalarfield6">
+      <title>Evaluating a line integral: calculating mass.</title>
+      <statement>
+        <p>
+          A thin wire follows the path
+          <m>\vrt = \langle 1+\cos t,1+\sin t, 1+ \sin(2t)\rangle</m>,
+          <m>0\leq t\leq 2\pi</m>.
+          The density of the wire is determined by its position in space:
+          <m>\delta(x,y,z) = y+z</m> gm/cm.
+          The wire is shown in <xref ref="fig_linescalarfield6">Figure</xref>,
+          where a light color indicates low density and a dark color represents high density.
+          Find the mass and center of mass of the wire.
+        </p>
+
+        <figure xml:id="fig_linescalarfield6">
+          <caption>Finding the mass of a thin wire in <xref ref="ex_linescalarfield6">Example</xref>.</caption>
+          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.0045836810022592545,
+          3Dc2c=0.8566989302635193 -0.4622343182563782 0.22892449796199799,
+          3Dcoo=85.21116638183594 55.206966400146484 50.90880584716797,
+          3Droo=141.89772711774134,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figlinescalarfield6_3D"/>
+        </figure>
+      </statement>
+      <solution>
+        <p>
+          We compute the density of the wire as
+          <me>
+            \delta(x,y,z) = \delta\big(1+\cos t,1+\sin t, 1+\sin(2t)\big) = 2+\sin t+\sin(2t)
+          </me>.
+        </p>
+
+        <p>
+          We compute <m>ds</m> as
+          <me>
+            ds = \norm{\vrp(t)}\ dt = \sqrt{\sin^2t+\cos^2t+4\cos^2(2t)}\ dt = \sqrt{1+4\cos^2(2t)}\ dt
+          </me>.
+        </p>
+
+        <p>
+          Thus the mass is
+          <me>
+            M = \oint_C \delta(s)\ ds = \int_0^{2\pi} \big(2+\sin t+\sin(2t)\big)\sqrt{1+4\cos^2(2t)}\ dt \approx 21.08\text{ gm } 
+          </me>.
+        </p>
+
+        <p>
+          We compute the moments about the coordinate planes:
+          <md>
+            <mrow>M_{yz} \amp = \oint_C x\delta(s)\ ds = \int_0^{2\pi}(1+\cos t)\big(2+\sin t+\sin(2t)\big)\sqrt{1+4\cos^2(2t)}\ dt \approx 21.08.</mrow>
+            <mrow>M_{xz} \amp = \oint_C y\delta(s)\ ds = \int_0^{2\pi}(1+\sin t)\big(2+\sin t+\sin(2t)\big)\sqrt{1+4\cos^2(2t)}\ dt \approx 26.35</mrow>
+            <mrow>M_{xy} \amp = \oint_C z\delta(s)\ ds = \int_0^{2\pi}\big(1+\sin(2 t)\big)\big(2+\sin t+\sin(2t)\big)\sqrt{1+4\cos^2(2t)}\ dt \approx 25.40</mrow>
+          </md>
+        </p>
+
+        <p>
+          Thus the center of mass of the wire is located at
+          <me>
+            (\overline{x},\overline{y},\overline{z}) = \left(\frac{M_{yz}}M, \frac{M_{xz}}M,\frac{M_{xy}}M\right) \approx (1,1.25,1.20)
+          </me>,
+          as indicated by the dot in <xref ref="fig_linescalarfield6">Figure</xref>.
+          Note how in this example,
+          the curve <m>C</m> is <q>centered</q>
+          about the point <m>(1,1,1)</m>,
+          though the variable density of the wire pulls the center of mass out along the <m>y</m> and <m>z</m> axes.
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      We end this section with a callback to the Integration Review that preceded this section.
+      A line integral looks like: <m>\int_C f(s)\ ds</m>.
+      As stated before the definition of the line integral,
+      this means <q>sum up, along a curve <m>C</m>,
+      function values <m>f(s)</m> <times /> small arc lengths.</q>
+      When <m>f(s)</m> represents a height,
+      we have <q>height <times /> length = area.</q>
+      When <m>f(s)</m> is a density (and we use
+      <m>\delta(s)</m> by convention), we have <q>density
+      (mass per unit length)
+      <times /> length = mass.</q>
+    </p>
+
+    <p>
+      In the next section, we investigate a new mathematical object,
+      the <em>vector field</em>.
+      The remaining sections of this chapter are devoted to understanding integration in the context of vector fields.
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Terms and Concepts</title>
+    <exercise>
+      <statement>
+        <p>
+          Explain how a line integral can be used to find the area under a curve.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          When <m>C</m> is a curve in the plane and <m>f</m> is a surface defined over <m>C</m>,
+          then <m>\int_C f(s)\ ds</m> describes the area under the spatial curve that lies on <m>f</m>,
+          over <m>C</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          How does the evaluation of a line integral given as
+          <m>\int_C f(s)\ ds</m> differ from a line integral given as <m>\oint_C f(s)\ ds</m>?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          The evaluation is the same.
+          The <m>\oint</m> notation signifies that the curve <m>C</m> is a closed curve,
+          though the evaluation is the same.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Why are most line integrals evaluated using <xref ref="thm_line1">Key Idea</xref> instead of <q>directly</q>
+          as <m>\int_C f(s)\ ds</m>?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          The variable <m>s</m> denotes the arc-length parameter,
+          which is generally difficult to use.
+          The Key Idea allows one to parametrize a curve using another,
+          ideally easier-to-use, parameter.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Sketch a closed,
+          piecewise smooth curve composed of three subcurves.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Answers will vary.
+        </p>
+      </answer>
+    </exercise>
+  </subsection>
+
+  <subsection>
+    <title>Problems</title>
+    <p>
+      In the following exercises,
+      a planar curve <m>C</m> is given along with a surface <m>f</m> that is defined over <m>C</m>.
+      Evaluate the line integral <m>\ds \int_Cf(s)\ ds</m>.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the line segment joining the points <m>(-2,-1)</m> and <m>(1,2)</m>;
+          the surface is <m>f(x,y)=x^2+y^2+2</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>12\sqrt{2}</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the segment of <m>y=3x+2</m> on <m>[1,2]</m>;
+          the surface is <m>f(x,y)=5x+2y</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>41\sqrt{10}/2</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the circle with radius 2 centered at the point <m>(4,2)</m>;
+          the surface is <m>f(x,y)=3x-y</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>40\pi</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the curve given by <m>\vec r(t) = \langle \cos t+t\sin t, \sin t-t\cos t\rangle</m> on <m>[0,2\pi]</m>;
+          the surface is <m>f(x,y)=5</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>10\pi^2</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the piecewise curve composed of the line segments that connect <m>(0,1)</m> to <m>(1,1)</m>,
+          then connect <m>(1,1)</m> to <m>(1,0)</m>;
+          the surface is <m>f(x,y)=x+y^2</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Over the first subcurve of <m>C</m>,
+          the line integral has a value of <m>3/2</m>;
+          over the second subcurve, the line integral has a value of <m>4/3</m>.
+          The total value of the line integral is thus <m>17/6</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the piecewise curve composed of the line segment joining the points <m>(0,0)</m> and <m>(1,1)</m>,
+          along with the quarter<ndash />circle parametrized by <m>\langle \cos t,-\sin t+1\rangle</m> on
+          <m>[0,\pi/2]</m>(which starts at the point <m>(1,1)</m> and ends at <m>(0,0)</m>;
+          the surface is <m>f(x,y)=x^2+y^2</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Over the first subcurve of <m>C</m>,
+          the line integral has a value of <m>2\sqrt{2}/3</m>;
+          over the second subcurve, the line integral has a value of <m>\pi-2</m>.
+          The total value of the line integral is thus <m>\pi+2\sqrt{2}/3-2</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises,
+      a planar curve <m>C</m> is given along with a surface <m>f</m> that is defined over <m>C</m>.
+      Set up the line integral <m>\ds \int_Cf(s)\ ds</m>,
+      then approximate its value using technology.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the portion of the parabola <m>y=2x^2+x+1</m> on <m>[0,1]</m>;
+          the surface is <m>f(x,y)=x^2+2y</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\int_0^1(5t^2+_2t+2)\sqrt{(4t+1)^2+1}\ dt \approx 17.071</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the portion of the curve <m>y=\sin x</m> on <m>[0,\pi]</m>;
+          the surface is <m>f(x,y)=x</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\int_0^\pi t\sqrt{1+\cos^2t}\ dt \approx 6.001</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the ellipse given by <m>\vec r(t) = \langle 2\cos t,\sin t\rangle</m> on <m>[0,2\pi]</m>;
+          the surface is <m>f(x,y)=10-x^2-y^2</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\oint_0^{2\pi} \big(10-4\cos^2t-\sin^2t\big)\sqrt{\cos^2t+4\sin^2t}\ dt \approx 74.986</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the portion of <m>y=x^3</m> on <m>[-1,1]</m>;
+          the surface is <m>f(x,y)=2x+3y+5</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\int_{-1}^{1} \big(3t^3+2t+5\big)\sqrt{9t^4+1}\ dt \approx 15.479</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises, a parametrized curve <m>C</m> in space is given.
+      Find the area above the <m>x</m>-<m>y</m> plane that is under <m>C</m>.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m>: <m>\vec r(t) = \langle 5t,t,t^2\rangle</m> for <m>1\leq t\leq 2</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>7\sqrt{26}/3</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m>: <m>\vec r(t) = \langle \cos t,\sin t, \sin(2t)+1\rangle</m> for <m>0\leq t\leq 2\pi</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>2\pi</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m>: <m>\vec r(t) = \langle 3\cos t,3\sin t, t^2\rangle</m> for <m>0\leq t\leq 2\pi</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>8\pi^3</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m>: <m>\vec r(t) = \langle 3t,4t,
+          t\rangle</m> for <m>0\leq t\leq 1</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>5/2</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises,
+      a parametrized curve <m>C</m> is given that represents a thin wire with density <m>\delta</m>.
+      Find the mass and center of mass of the thin wire.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m>: <m>\vec r(t) = \langle \cos t,\sin t, t\rangle</m> for <m>0\leq t\leq 4\pi</m>;
+          <m>\delta(x,y,z) = z</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>M=8\sqrt{2}\pi^2</m>; center of mass is <m>(0,-1/(2\pi), 8\pi/3)</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m>: <m>\vec r(t) = \langle t-t^2,t^2-t^3,t^3-t^4\rangle</m> for <m>0\leq t\leq 1</m>;
+          <m>\delta(x,y,z) = x+2y+2z</m>.
+          Use technology to approximate the value of each integral.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>M\approx 0.237</m>;
+          center of mass is approximately <m>(0.173, 0.099,0.065)</m>.
+        </p>
+      </answer>
+    </exercise>
+  </subsection>
+</section>
+

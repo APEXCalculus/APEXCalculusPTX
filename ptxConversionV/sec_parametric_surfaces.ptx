@@ -1,0 +1,1594 @@
+
+
+<section xml:id="sec_parametric_surfaces">
+  <title>Parametrized Surfaces and Surface Area</title>
+  <introduction>
+    <p>
+      Thus far we have focused mostly on 2-dimensional vector fields,
+      measuring flow and flux along/across curves in the plane.
+      Both Green's Theorem and the Divergence Theorem make connections between planar regions and their boundaries.
+      We now move our attention to 3-dimensional vector fields,
+      considering both curves and surfaces in space.
+    </p>
+
+    <p>
+      We are accustomed to describing surfaces as functions of two variables,
+      usually written as <m>z=f(x,y)</m>.
+      For our coming needs,
+      this method of describing surfaces will prove to be insufficient.
+      Instead, we will <em>parametrize</em> our surfaces,
+      describing them as the set of terminal points of some vector<ndash />valued function <m>\vec r(u,v) =\langle f(u,v),g(u,v),h(u,v)\rangle</m>.
+      The bulk of this section is spent practicing the skill of describing a surface \mathcal{S}<nbsp />using a vector<ndash />valued function.
+      Once this skill is developed,
+      we'll show how to find the surface area <m>S</m> of a parametrically<ndash />defined surface \mathcal{S}, a skill needed in the remaining sections of this chapter.
+    </p>
+    <aside>
+      <p>
+        <em>Note:</em> We use the letter <m>S</m> to denote Surface Area.
+        This section begins a study into surfaces,
+        and it is natural to label a surface with the letter <q>S</q>.
+        We distinguish a surface from its surface area by using a calligraphic S to denote a surface: \mathcal{S}. When writing this letter by hand,
+        it may be useful to add serifs to the letter, such as:
+      </p>
+
+      <image>
+
+<latex-image>
+<![CDATA[\begin{tikzpicture}[x={(.55ex,0)},y={(0,.55ex)}]
+\draw[smooth, line width=.6pt] (0.9667,0.545) -- (0.8273,0.6541) -- (0.6696,0.7624) -- (0.5,0.866) -- (0.3254,0.961) -- (0.1528,1.043) -- (-0.01133,1.11) -- (-0.1607,1.156) -- (-0.2899,1.181) -- (-0.3945,1.181) -- (-0.471,1.155) -- (-0.5173,1.103) -- (-0.5326,1.025) -- (-0.5173,0.9226) -- (-0.4734,0.7971) -- (-0.4038,0.6515) -- (-0.3127,0.4894) -- (-0.2051,0.3147) -- (-0.08684,0.1318) -- (0.03595,-0.05447) -- (0.1569,-0.2394) -- (0.2696,-0.418) -- (0.3682,-0.5859) -- (0.4473,-0.7388) -- (0.5024,-0.873) -- (0.5299,-0.9855) -- (0.5274,-1.074) -- (0.494,-1.137) -- (0.4299,-1.173) -- (0.3366,-1.184) -- (0.2172,-1.169) -- (0.07558,-1.132) -- (-0.08312,-1.073) -- (-0.253,-0.9971) -- (-0.4276,-0.9068) -- (-0.6001,-0.8063) -- (-0.7635,-0.6994) -- (-0.9113,-0.5902);
+\draw[ line width=.6pt] (-1.18431, -0.959643)--(-0.638322, -0.220787)
+(0.693671, 0.175596)--(1.23965, 0.914452);\end{tikzpicture}]]>
+</latex-image>
+      </image>
+
+    </aside>
+
+    <definition xml:id="def_parametrized_surface">
+      <title>Parametrized Surface</title>
+      <statement>
+        <p>
+          Let <m>\vec r(u,v) = \langle\, f(u,v),g(u,v),h(u,v)\rangle</m> be a vector<ndash />valued function that is continuous and one to one on the interior of its domain <m>R</m> in the <m>u</m>-<m>v</m> plane.
+          The set of all terminal points of <m>\vec r</m> (i.e., the <term>range</term>
+          of <m>\vec r</m> ) is the <term>surface</term>
+          \mathcal{S}, and <m>\vec r</m> along with its domain <m>R</m> form a
+          <term>parametrization</term> of \mathcal{S}.
+        </p>
+
+        <p>
+          This parametrization is <term>smooth</term>
+          on <m>R</m> if <m>\vec r_u</m> and <m>\vec r_v</m> are continuous and
+          <m>\vec r_u\times \vec r_v</m> is never <m>\vec 0</m> on the interior of <m>R</m>.
+              <idx><h>surface</h></idx>
+              <idx><h>parametric equations</h><h>of a surface</h></idx>
+              <idx><h>parametrized surface</h></idx>
+              <idx><h>smooth</h><h>surface</h></idx>
+              <idx><h>surface</h><h>smooth</h></idx>
+        </p>
+      </statement>
+    </definition>
+
+    <aside>
+      <p>
+        <em>Note:</em> A function is <em>one to one</em>
+        on its domain if the function never repeats an output value over the domain.
+        In the case of <m>\vec r(u,v)</m>,
+        <m>\vec r</m> is one to one if <m>\vec r(u_1,v_1) \neq \vec r(u_2,v_2)</m> for all points
+        <m>(u_1,v_1) \neq (u_2,v_2)</m> in the domain of <m>\vec r</m>.
+            <idx><h>one to one</h></idx>
+      </p>
+    </aside>
+    <p>
+      Given a point <m>(u_0,v_0)</m> in the domain of a vector<ndash />valued function <m>\vec r</m>,
+      the vectors <m>\vec r_u(u_0,v_0)</m> and
+      <m>\vec r_v(u_0,v_0)</m> are tangent to the surface \mathcal{S}<nbsp />at
+      <m>\vec r(u_0,v_0)</m> (a proof of this is developed later in this section).
+      The definition of smoothness dictates that <m>\vec r_u\times \vec r_v \neq \vec 0</m>;
+      this ensures that neither <m>\vec r_u</m> nor <m>\vec r_v</m> are <m>\vec 0</m>,
+      nor are they ever parallel.
+      Therefore smoothness guarantees that <m>\vec r_u</m> and
+      <m>\vec r_v</m> determine a plane that is tangent to \mathcal{S}.
+    </p>
+
+    <p>
+      A surface \mathcal{S}<nbsp />is said to be <em>orientable</em>
+          <idx><h>orientable</h></idx>
+      if a field of normal vectors can be defined on \mathcal{S}<nbsp />that vary continuously along \mathcal{S}. This definition may be hard to understand;
+      it may help to know that orientable surfaces are often called <q>two sided.</q>
+      A sphere is an orientable surface,
+      and one can easily envision an <q>inside</q>
+      and <q>outside</q> of the sphere.
+      A paraboloid is orientable,
+      where again one can generally envision
+      <q>inside</q> and <q>outside</q> sides
+      (or <q>top</q> and <q>bottom</q> sides)
+      to this surface.
+      Just about every surface that one can imagine is orientable,
+      and we'll assume all surfaces we deal with in this text are orientable.
+    </p>
+
+    <p>
+      It is enlightening to examine a classic non-orientable surface:
+      the M&#xf6;bius band,
+          <idx><h>M&#xf6;bius band</h></idx>
+      shown in <xref ref="fig_mobius">Figure</xref>.
+      Vectors normal to the surface are given,
+      starting at the point indicated in the figure.
+      These normal vectors <q>vary continuously</q>
+      as they move along the surface.
+      Letting each vector indicate the
+      <q>top</q> side of the band,
+      we can easily see near any vector which side is the <q>top</q>.
+    </p>
+
+    <p>
+      However, if as we progress along the band,
+      we recognize that we are labeling
+      <q>both sides</q> of the band as the top;
+      in fact, there are not two <q>sides</q> to this band, but one.
+      The M&#xf6;bius band is a non-orientable surface.
+    </p>
+
+    <figure xml:id="fig_mobius">
+      <caption>A M&#xf6;bius band, a non-orientable surface.</caption>
+      \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+      3Droll=0,
+      3Dortho=0.009369944222271442,
+      3Dc2c=0.8152862191200256 -0.5019875168800354 0.28864675760269165,
+      3Dcoo=11.086544036865234 -8.5783109664917 -7.167413711547852,
+      3Droo=399.99997970940404,
+      3Dlights=Headlamp,add3Djscript=asylabels.js}
+      <img src="figures/mobius_strip_3D"/>
+    </figure>
+
+    <p>
+      We now practice parameterizing surfaces.
+    </p>
+
+    <example xml:id="ex_parsurf1">
+      <title>Parameterizing a surface over a rectangle</title>
+      <statement>
+        <p>
+          Parametrize the surface <m>z=x^2+2y^2</m> over the rectangular region <m>R</m> defined by
+          <m>-3\leq x\leq 3</m>, <m>-1\leq y\leq 1</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          There is a straightforward way to parametrize a surface of the form
+          <m>z=f(x,y)</m> over a rectangular domain.
+          We let <m>x=u</m> and <m>y=v</m>,
+          and let <m>\vec r(u,v) = \langle u,v, f(u,v)\rangle</m>.
+          In this instance,
+          we have <m>\vec r(u,v) = \langle u,v,u^2+2v^2\rangle</m>,
+          for <m>-3\leq u\leq 3</m>, <m>-1\leq v\leq 1</m>.
+          This surface is graphed in <xref ref="fig_parsurf1">Figure</xref>.
+        </p>
+
+        <figure xml:id="fig_parsurf1">
+          <caption>The surface parametrized in <xref ref="ex_parsurf1">Example</xref>.</caption>
+          \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.005000247620046139,
+          3Dc2c=0.6257953643798828 0.642341136932373 0.44246822595596313,
+          3Dcoo=-11.887701988220215 -11.637335777282715 52.40430450439453,
+          3Droo=399.9999800778292,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figparsurf1_3D"/>
+        </figure>
+      </solution>
+    </example>
+
+    <example xml:id="ex_parsurf2">
+      <title>Parameterizing a surface over a circular disk</title>
+      <statement>
+        <p>
+          Parametrize the surface <m>z=x^2+2y^2</m> over the circular region <m>R</m> enclosed by the circle of radius 2 that is centered at the origin.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We can parametrize the circular boundary of <m>R</m> with the vector<ndash />valued function <m>\la 2\cos u,2\sin u\ra</m>,
+          where <m>0\leq u\leq 2\pi</m>.
+          We can obtain the interior of <m>R</m> by scaling this function by a variable amount,
+          i.e., by multiplying by <m>v</m>:
+          <m>\la 2v\cos u,2v\sin u\ra</m>,
+          where <m>0\leq v\leq 1</m>.
+        </p>
+
+        <p>
+          It is important to understand the role of <m>v</m> in the above function.
+          When <m>v=1</m>,
+          we get the boundary of <m>R</m>, a circle of radius 2.
+          When <m>v=0</m>, we simply get the point <m>(0,0)</m>,
+          the center of <m>R</m>
+          (which can be thought of as a circle with radius of 0).
+          When <m>v=1/2</m>,
+          we get the circle of radius <m>1</m> that is centered at the origin,
+          which is the circle <em>halfway</em>
+          between the boundary and the center.
+          As <m>v</m> varies from 0 to 1, we create a series of concentric circles that fill out all of <m>R</m>.
+        </p>
+
+        <figure xml:id="fig_parsurf2">
+          <caption>The surface parametrized in <xref ref="ex_parsurf2">Example</xref>.</caption>
+          \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.005000247620046139,
+          3Dc2c=0.6257953643798828 0.642341136932373 0.44246822595596313,
+          3Dcoo=-11.887701988220215 -11.637335777282715 52.40430450439453,
+          3Droo=399.9999800778292,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figparsurf2_3D"/>
+        </figure>
+
+        <p>
+          Thus far, we have determined the <m>x</m> and <m>y</m> components of our parametrization of the surface:
+          <m>x=2v\cos u</m> and <m>y=2v\sin u</m>.
+          We find the <m>z</m> component simply by using <m>z = f(x,y) = x^2+2y^2</m>:
+          <me>
+            z = (2v\cos u)^2+2(2v\sin u)^2 = 4v^2\cos^2u+8v^2\sin^2u
+          </me>.
+        </p>
+
+        <p>
+          Thus <m>\vec r(u,v) = \langle 2v\cos u,2v\sin u,4v^2\cos^2u+8v^2\sin^2u\rangle</m>,
+          <m>0\leq u\leq 2\pi</m>, <m>0\leq v\leq 1</m>,
+          which is graphed in <xref ref="fig_parsurf2">Figure</xref>.
+          The way that this graphic was generated highlights how the surface was parametrized.
+          When viewing from above, one can see lines emanating from the origin;
+          they represent different values of <m>u</m> as <m>u</m> sweeps from an angle of 0 up to <m>2\pi</m>.
+          One can also see concentric circles,
+          each corresponding to a different value of <m>v</m>.
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      <xref ref="ex_parsurf1">Examples</xref>
+      and <xref ref="ex_parsurf2"></xref>
+      demonstrate an important principle when parameterizing surfaces given in the form
+      <m>z=f(x,y)</m> over a region <m>R</m>:
+      if one can determine <m>x</m> and <m>y</m> in terms of <m>u</m> and <m>v</m>,
+      then <m>z</m> follows directly as <m>z=f(x,y)</m>.
+    </p>
+
+    <p>
+      In the following two examples,
+      we parametrize the same surface over triangular regions.
+      Each will use <m>v</m> as a <q>scaling factor</q>
+      as done in <xref ref="ex_parsurf2">Example</xref>.
+    </p>
+
+    <example xml:id="ex_parsurf3">
+      <title>Parameterizing a surface over a triangle</title>
+      <statement>
+        <p>
+          Parametrize the surface <m>z=x^2+2y^2</m> over the triangular region <m>R</m> enclosed by the coordinate axes and the line <m>y=2-2x/3</m>,
+          as shown in <xref ref="fig_parsurf3">Figure</xref>(a).
+        </p>
+      </statement>
+      <solution>
+        <p>
+          We may begin by letting <m>x=u</m>,
+          <m>0\leq u\leq 3</m>, and <m>y = 2-2u/3</m>.
+          This gives only the line on the
+          <q>upper</q> side of the triangle.
+          To get all of the region <m>R</m>,
+          we can once again scale <m>y</m> by a variable factor,
+          <m>v</m>.
+        </p>
+
+        <p>
+          Still letting <m>x = u</m>,
+          <m>0\leq u\leq 3</m>, we let
+          <m>y = v(2-2u/3)</m>, <m>0\leq v\leq 1</m>.
+          When <m>v=0</m>,
+          all <m>y</m>-values are 0, and we get the portion of the <m>x</m>-axis between <m>x=0</m> and <m>x=3</m>.
+          When <m>v=1</m>, we get the upper side of the triangle.
+          When <m>v=1/2</m>, we get the line <m>y=1/2(2-2u/3) = 1-u/3</m>,
+          which is the line <q>halfway up</q> the triangle,
+          shown in the figure with a dashed line.
+        </p>
+
+        <figure xml:id="fig_parsurf3">
+          <caption>Part (a) shows a graph of the region <m>R</m>, and part (b) shows the surface over <m>R</m>, as defined in <xref ref="ex_parsurf3">Example</xref>.</caption>
+          <sidebyside>
+            <figure>
+              <caption>[-5pt]
+              (a)</caption>
+              <img src="figures/figparsurf3a"/>
+            </figure>
+
+            <figure>
+              <caption>(b)</caption>
+              \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
+              3Droll=0,
+              3Dortho=0.005000247620046139,
+              3Dc2c=0.6257953643798828 0.642341136932373 0.44246822595596313,
+              3Dcoo=-11.887701988220215 -11.637335777282715 52.40430450439453,
+              3Droo=399.9999800778292,
+              3Dlights=Headlamp,add3Djscript=asylabels.js}
+              <img src="figures/figparsurf3_3D"/>
+            </figure>
+          </sidebyside>
+
+        </figure>
+
+        <p>
+          Letting <m>z = f(x,y) = x^2+2y^2</m>,
+          we have <m>\vec r(u,v) = \langle u, v(2-2u/3),
+          u^2+2\big(v(2-2u/3)\big)^2\rangle</m>,
+          <m>0\leq u\leq 3</m>, <m>0\leq v\leq 1</m>.
+          This surface is graphed in <xref ref="fig_parsurf3">Figure</xref>(b).
+          Again, when one looks from above,
+          we can see the scaling effects of <m>v</m>:
+          the series of lines that run to the point <m>(3,0)</m> each represent a different value of <m>v</m>.
+        </p>
+
+        <p>
+          Another common way to parametrize the surface is to begin with <m>y=u</m>,
+          <m>0\leq u\leq 2</m>.
+          Solving the equation of the line <m>y=2-2x/3</m> for <m>x</m>,
+          we have <m>x = 3-3y/2</m>,
+          leading to using <m>x=v(3-3u/2)</m>, <m>0\leq v\leq 1</m>.
+          With <m>z=x^2+2y^2</m>,
+          we have <m>\vec r(u,v) = \langle v(3-3u/2),u, \big(v(3-3u/2)\big)^2+2v^2\rangle</m>,
+          <m>0\leq u\leq 2</m>, <m>0\leq v\leq 1</m>.
+        </p>
+      </solution>
+    </example>
+
+    <example xml:id="ex_parsurf4">
+      <title>Parameterizing a surface over a triangle</title>
+      <statement>
+        <p>
+          Parametrize the surface <m>z=x^2+2y^2</m> over the triangular region <m>R</m> enclosed by the lines <m>y=3-2x/3</m>,
+          <m>y=1</m> and <m>x=0</m> as shown in <xref ref="fig_parsurf4">Figure</xref>(a).
+        </p>
+      </statement>
+      <solution>
+        <p>
+          While the region <m>R</m> in this example is very similar to the region <m>R</m> in the previous example,
+          and our method of parameterizing the surface is fundamentally the same,
+          it will feel as though our answer is much different than before.
+        </p>
+
+        <p>
+          We begin with letting <m>x=u</m>, <m>0\leq u\leq 3</m>.
+          We may be tempted to let <m>y = v(3-2u/3)</m>,
+          <m>0\leq v\leq 1</m>, but this is incorrect.
+          When <m>v = 1</m>,
+          we obtain the upper line of the triangle as desired.
+          However, when <m>v=0</m>,
+          the <m>y</m>-value is 0, which does not lie in the region <m>R</m>.
+        </p>
+
+        <p>
+          We will describe the general method of proceeding following this example.
+          For now, consider <m>y = 1+v(2-2u/3)</m>, <m>0\leq v\leq 1</m>.
+          Note that when <m>v=1</m>,
+          we have <m>y=3-2u/3</m>, the upper line of the boundary of <m>R</m>.
+          Also, when <m>v=0</m>, we have <m>y=1</m>,
+          which is the lower boundary of <m>R</m>.
+          With <m>z=x^2+2y^2</m>,
+          we determine <m>\vec r(u,v) = \langle u, 1+v(2-2u/3),
+          u^2+2\big(1+v(2-2u/3)\big)^2\rangle</m>,
+          <m>0\leq u\leq 3</m>, <m>0\leq v\leq 1</m>.
+        </p>
+
+        <p>
+          The surface is graphed in <xref ref="fig_parsurf4">Figure</xref>(b).
+        </p>
+
+        <figure xml:id="fig_parsurf4">
+          <caption>Part (a) shows a graph of the region <m>R</m>, and part (b) shows the surface over <m>R</m>, as defined in <xref ref="ex_parsurf4">Example</xref>.</caption>
+          <sidebyside>
+            <figure>
+              <caption>[-5pt]
+              (a)</caption>
+              <img src="figures/figparsurf4a"/>
+            </figure>
+
+            <figure>
+              <caption>(b)</caption>
+              \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
+              3Droll=0,
+              3Dortho=0.005000247620046139,
+              3Dc2c=0.6257953643798828 0.642341136932373 0.44246822595596313,
+              3Dcoo=-11.887701988220215 -11.637335777282715 52.40430450439453,
+              3Droo=399.9999800778292,
+              3Dlights=Headlamp,add3Djscript=asylabels.js}
+              <img src="figures/figparsurf4_3D"/>
+            </figure>
+          </sidebyside>
+
+        </figure>
+      </solution>
+    </example>
+
+    <p>
+      Given a surface of the form <m>z=f(x,y)</m>,
+      one can often determine a parametrization of the surface over a region <m>R</m> in a manner similar to determining bounds of integration over a region <m>R</m>.
+      Using the techniques of <xref ref="sec_iterated_integrals">Section</xref>,
+      suppose a region <m>R</m> can be described by <m>a\leq x\leq b</m>,
+      <m>g_1(x) \leq y\leq g_2(x)</m>,
+      i.e., the area of <m>R</m> can be found using the iterated integral
+      <me>
+        \int_a^b\int_{g_1(x)}^{g_2(x)}\ dy\ dx
+      </me>.
+    </p>
+
+    <p>
+      When parameterizing the surface,
+      we can let <m>x=u</m>, <m>a\leq u\leq b</m>,
+      and we can let <m>y = g_1(u)+v\big(g_2(u)-g_1(u)\big)</m>,
+      <m>0\leq v\leq 1</m>.
+      The parametrization of <m>x</m> is straightforward,
+      but look closely at how <m>y</m> is determined.
+      When <m>v=0</m>, <m>y=g_1(u) = g_1(x)</m>.
+      When <m>v=1</m>, <m>y= g_2(u)=g_2(x)</m>.
+    </p>
+
+    <p>
+      As a specific example,
+      consider the triangular region <m>R</m> from <xref ref="ex_parsurf4">Example</xref>,
+      shown in <xref ref="fig_parsurf4">Figure</xref>(a).
+      Using the techniques of <xref ref="sec_iterated_integrals">Section</xref>,
+      we can find the area of <m>R</m> as
+      <me>
+        \int_0^3\int_1^{3-2x/3} dy\ dx
+      </me>.
+    </p>
+
+    <p>
+      Following the above discussion,
+      we can set <m>x=u</m>, where <m>0\leq u\leq 3</m>,
+      and set <m>y = 1+ v\big(3-2u/3-1\big) = 1+v(2-2u/3)</m>,
+      <m>0\leq v\leq 1</m>, as used in that example.
+    </p>
+
+    <p>
+      One can do a similar thing if <m>R</m> is bounded by <m>c\leq y\leq d</m>,
+      <m>h_1(y)\leq x\leq h_2(y)</m>,
+      but for the sake of simplicity we leave it to the reader to flesh out those details.
+      The principles outlined above are given in the following Key Idea for reference.
+    </p>
+
+    <insight xml:id="idea_parameterizing_surfaces">
+      <title>Parameterizing Surfaces</title>
+      <p>
+        Let a surface \mathcal{S}<nbsp />be the graph of a function <m>z=f(x,y)</m>,
+        where the domain of <m>f</m> is a closed,
+        bounded region <m>R</m> in the <m>x</m>-<m>y</m> plane.
+        Let <m>R</m> be bounded by <m>a\leq x\leq b</m>,
+        <m>g_1(x)\leq y\leq g_2(x)</m>,
+        i.e., the area of <m>R</m> can be found using the iterated integral <m>\int_a^b\int_{g_1(x)}^{g_2(x)}\ dy\ dx</m>,
+        and let <m>h(u,v) = g_1(u)+v\big(g_2(u)-g_1(u)\big)</m>.
+      </p>
+
+      <p>
+        \mathcal{S}<nbsp />can be parametrized as
+        <me>
+          \vec r(u,v) = \la u, h(u,v), f\big(u,h(u,v)\big)\ra, a\leq u\leq b,\ 0\leq v\leq 1
+        </me>.
+      </p>
+    </insight>
+
+    <example xml:id="ex_parsurf5">
+      <title>Parameterizing a cylindrical surface</title>
+      <statement>
+        <p>
+          Find a parametrization of the cylinder <m>x^2 + z^2/4=1</m>,
+          where <m>-1\leq y\leq 2</m>,
+          as shown in <xref ref="fig_parsurf5">Figure</xref>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          The equation <m>x^2+z^2/4=1</m> can be envisioned to describe an ellipse in the <m>x</m>-<m>z</m> plane;
+          as the equation lacks a <m>y</m>-term,
+          the equation describes a cylinder
+          (recall <xref ref="def_cylinder">Definition</xref>)
+          that extends without bound parallel to the <m>y</m>-axis.
+          This ellipse has a vertical major axis of length 4, a horizontal minor axis of length 2, and is centered at the origin.
+          We can parametrize this ellipse using sines and cosines;
+          our parametrization can begin with
+          <me>
+            \vec r(u,v) = \la \cos u, \text{ ??? } , 2\sin u\ra, 0\leq u\leq 2\pi
+          </me>,
+          where we still need to determine the <m>y</m> component.
+        </p>
+
+        <figure xml:id="fig_parsurf5">
+          <caption>The cylinder parametrized in <xref ref="ex_parsurf5">Example</xref>.</caption>
+          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.004427968058735132,
+          3Dc2c=0.8313615918159485 0.5262497067451477 0.17860320210456848,
+          3Dcoo=1.6293458938598633 13.199743270874023 -3.546671152114868,
+          3Droo=399.9999708739728,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figparsurf5_3D"/>
+        </figure>
+
+        <p>
+          While the cylinder <m>x^2+z^2/4=1</m> is satisfied by any <m>y</m> value,
+          the problem states that all <m>y</m> values are to be between <m>y=-1</m> and <m>y=2</m>.
+          Since the value of <m>y</m> does not depend at all on the values of <m>x</m> or <m>z</m>,
+          we can use another variable, <m>v</m>, to describe <m>y</m>.
+          Our final answer is
+          <me>
+            \vec r(u,v) = \la \cos u, v, 2\sin u\ra,  0\leq u\leq 2\pi, -1\leq v\leq 2
+          </me>.
+        </p>
+      </solution>
+    </example>
+
+    <example xml:id="ex_parsurf6">
+      <title>Parameterizing an elliptic cone</title>
+      <statement>
+        <p>
+          Find a parametrization of the elliptic cone <m>z^2 = \frac{x^2}{4}+\frac{y^2}{9}</m>,
+          where <m>-2\leq z\leq 3</m>,
+          as shown in <xref ref="fig_parsurf6a">Figure</xref>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          One way to parametrize this cone is to recognize that given a <m>z</m> value,
+          the cross section of the cone at that <m>z</m> value is an ellipse with equation <m>\frac{x^2}{(2z)^2} + \frac{y^2}{(3z)^2}=1</m>.
+          We can let <m>z=v</m>, for
+          <m>-2\leq v\leq 3</m> and then parametrize the above ellipses using sines,
+          cosines and <m>v</m>.
+        </p>
+
+        <figure xml:id="fig_parsurf6a">
+          <caption>The elliptic cone as described in  <xref ref="ex_parsurf6">Example</xref>.</caption>
+          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.00452691363170743,
+          3Dc2c=0.625795304775238 0.642341136932373 0.44246816635131836,
+          3Dcoo=0.0026521924883127213 4.370458126068115 12.347787857055664,
+          3Droo=399.9999637774216,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figparsurf6a_3D"/>
+        </figure>
+
+        <p>
+          We can parametrize the <m>x</m> component of our surface with
+          <m>x=2z\cos u</m> and the <m>y</m> component with <m>y=3z\sin u</m>,
+          where <m>0\leq u\leq 2\pi</m>.
+          Putting all components together, we have
+          <me>
+            \vec r(u,v) = \la 2v\cos u, 3v\sin u, v\ra, 0\leq u\leq 2\pi, -2\leq v\leq 3
+          </me>.
+        </p>
+
+        <p>
+          When <m>v</m> takes on negative values,
+          the radii of the cross<ndash />sectional ellipses become <q>negative,</q>
+          which can lead to some surprising results.
+          Consider <xref ref="fig_parsurf6b">Figure</xref>,
+          where the cone is graphed for <m>0\leq u\leq \pi</m>.
+          Because <m>v</m> is negative below the <m>x</m>-<m>y</m> plane,
+          the radii of the cross<ndash />sectional ellipses are negative,
+          and the opposite side of the cone is sketched below the <m>x</m>-<m>y</m> plane.
+        </p>
+
+        <figure xml:id="fig_parsurf6b">
+          <caption>The elliptic cone as described in  <xref ref="ex_parsurf6">Example</xref> with restricted domain.</caption>
+          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.00452691363170743,
+          3Dc2c=0.625795304775238 0.642341136932373 0.44246816635131836,
+          3Dcoo=0.0026521924883127213 4.370458126068115 12.347787857055664,
+          3Droo=399.9999637774216,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figparsurf6b_3D"/>
+        </figure>
+      </solution>
+    </example>
+
+    <example xml:id="ex_parsurf7">
+      <title>Parameterizing an ellipsoid</title>
+      <statement>
+        <p>
+          Find a parametrization of the ellipsoid
+          <m>\frac{x^2}{25}+y^2+\frac{z^2}{4}=1</m> as shown in <xref ref="fig_parsurf7">Figure</xref>(a).
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Recall <xref ref="idea_unit_vectors">Key Idea</xref>
+          from <xref ref="sec_vector_intro">Section</xref>,
+          which states that all unit vectors in space have the form
+          <m>\langle \sin\theta\cos\varphi,\sin\theta\sin\varphi,\cos\theta\rangle</m> for some angles <m>\theta</m> and <m>\varphi</m>.
+          If we choose our angles appropriately,
+          this allows us to draw the unit sphere.
+          To get an ellipsoid,
+          we need only scale each component of the sphere appropriately.
+        </p>
+
+        <p>
+          The <m>x</m>-radius of the given ellipsoid is 5, the <m>y</m>-radius is 1 and the <m>z</m>-radius is 2.
+          Substituting <m>u</m> for <m>\theta</m> and <m>v</m> for <m>\varphi</m>,
+          we have <m>\vec r(u,v) = \langle 5\sin u\cos v, \sin u\sin v,2\cos u\rangle</m>,
+          where we still need to determine the ranges of <m>u</m> and <m>v</m>.
+        </p>
+
+        <p>
+          Note how the <m>x</m> and <m>y</m> components of <m>\vec r</m> have <m>\cos v</m> and <m>\sin v</m> terms,
+          respectively.
+          This hints at the fact that ellipses are drawn parallel to the <m>x</m>-<m>y</m> plane as <m>v</m> varies,
+          which implies we should have <m>v</m> range from <m>0</m> to <m>2\pi</m>.
+        </p>
+
+        <p>
+          One may be tempted to let <m>0\leq u\leq 2\pi</m> as well,
+          but note how the <m>z</m> component is <m>2\cos u</m>.
+          We only need <m>\cos u</m> to take on values between <m>-1</m> and <m>1</m> once,
+          therefore we can restrict <m>u</m> to <m>0\leq u\leq \pi</m>.
+        </p>
+
+        <figure xml:id="fig_parsurf7">
+          <caption>An ellipsoid in (a), drawn again in (b) with its domain restricted, as described in  <xref ref="ex_parsurf7">Example</xref>.</caption>
+          <sidebyside>
+            <figure>
+              <caption>(a)</caption>
+              \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
+              3Droll=0,
+              3Dortho=0.00452691363170743,
+              3Dc2c=0.625795304775238 0.642341136932373 0.44246816635131836,
+              3Dcoo=0.0026521924883127213 4.370458126068115 12.347787857055664,
+              3Droo=399.9999637774216,
+              3Dlights=Headlamp,add3Djscript=asylabels.js}
+              <img src="figures/figparsurf7a_3D"/>
+            </figure>
+
+            <figure>
+              <caption>(b)</caption>
+              \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
+              3Droll=0,
+              3Dortho=0.00452691363170743,
+              3Dc2c=0.625795304775238 0.642341136932373 0.44246816635131836,
+              3Dcoo=0.0026521924883127213 4.370458126068115 12.347787857055664,
+              3Droo=399.9999637774216,
+              3Dlights=Headlamp,add3Djscript=asylabels.js}
+              <img src="figures/figparsurf7b_3D"/>
+            </figure>
+          </sidebyside>
+
+        </figure>
+
+        <p>
+          The final parametrization is thus
+          <me>
+            \vec r(u,v) = \langle 5\sin u\cos v, \sin u\sin v,2\cos u\rangle,  0\leq u\leq\pi, 0\leq v\leq 2\pi
+          </me>.
+        </p>
+
+        <p>
+          In <xref ref="fig_parsurf7">Figure</xref>(b),
+          the ellipsoid is graphed on <m>\frac{\pi}{4}\leq u\leq \frac{2\pi}{3}</m>,
+          <m>\frac{\pi}4\leq v\leq \frac{3\pi}2</m> to demonstrate how each variable affects the surface.
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      Parametrization is a powerful way to represent surfaces.
+      One of the advantages of the methods of parametrization described in this section is that the domain of
+      <m>\vec r(u,v)</m> is always a rectangle;
+      that is, the bounds on <m>u</m> and <m>v</m> are constants.
+      This will make some of our future computations easier to evaluate.
+    </p>
+
+    <p>
+      Just as we could parametrize curves in more than one way,
+      there will always be multiple ways to parametrize a surface.
+      Some ways will be more <q>natural</q> than others,
+      but these other ways are not incorrect.
+      Because technology is often readily available,
+      it is often a good idea to check one's work by graphing a parametrization of a surface to check if it indeed represents what it was intended to.
+    </p>
+  </introduction>
+
+  <subsection>
+    <title>Surface Area</title>
+    <p>
+      It will become important in the following sections to be able to compute the surface area of a surface \mathcal{S}<nbsp />given a smooth parametrization <m>\vec r(u,v)</m>,
+      <m>a\leq u\leq b</m>, <m>c\leq v\leq d</m>.
+      Following the principles given in the integration review at the beginning of this chapter,
+      we can say that<idx><h>surface area</h><h>of parametrized surface</h></idx>
+      <me>
+        \text{ Surface Area of \surfaceS } =S = \iint_{\surfaceS}\ dS
+      </me>,
+      where <m>dS</m> represents a small amount of surface area.
+      That is, to compute total surface area <m>S</m>,
+      add up lots of small amounts of surface area <m>dS</m> across the entire surface \mathcal{S}. The key to finding surface area is knowing how to compute <m>dS</m>.
+      We begin by approximating.
+    </p>
+
+    <p>
+      In <xref ref="sec_surface_area">Section</xref>
+      we used the area of a plane to approximate the surface area of a small portion of a surface.
+      We will do the same here.
+    </p>
+
+    <p>
+      Let <m>R</m> be the region of the <m>u</m>-<m>v</m> plane bounded by <m>a\leq u\leq b</m>,
+      <m>c\leq v\leq d</m> as shown in <xref ref="fig_parsurfarea">Figure</xref>(a).
+      Partition <m>R</m> into rectangles of width
+      <m>\Delta u = \frac{b-a}n</m> and height <m>\Delta v = \frac{d-c}n</m>,
+      for some <m>n</m>.
+      Let <m>p=(u_0,v_0)</m> be the lower left corner of some rectangle in the partition,
+      and let <m>m</m> and <m>q</m> be neighboring corners as shown.
+    </p>
+
+    <p>
+      The point <m>p</m> maps to a point
+      <m>P = \vec r(u_0,v_0)</m> on the surface \mathcal{S}, and the rectangle with corners <m>p</m>,
+      <m>m</m> and <m>q</m> maps to some region
+      (probably not rectangular)
+      on the surface as shown in <xref ref="fig_parsurfarea">Figure</xref>(b),
+      where <m>M = \vec r(m)</m> and <m>Q = \vec r(q)</m>.
+      We wish to approximate the surface area of this mapped region.
+    </p>
+
+    <p>
+      Let <m>\vec u = M-P</m> and <m>\vec v = Q-P</m>.
+      These two vectors form a parallelogram,
+      illustrated in <xref ref="fig_parsurfarea">Figure</xref>(c),
+      whose area <em>approximates</em>
+      the surface area we seek.
+      In this particular illustration,
+      we can see that parallelogram does not particularly match well the region we wish to approximate,
+      but that is acceptable;
+      by increasing the number of partitions of <m>R</m>,
+      <m>\Delta u</m> and <m>\Delta v</m> shrink and our approximations will become better.
+    </p>
+
+    <figure xml:id="fig_parsurfarea">
+      <caption>Illustrating the process of finding surface area by approximating with planes.</caption>
+      <sidebyside>
+        <figure>
+          <caption>[-5pt]
+          (a)</caption>
+          <img src="figures/figparsurfareaC"/>
+        </figure>
+
+        <figure>
+          <caption>(b)</caption>
+          \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.004750744439661503,
+          3Dc2c=0.6291605234146118 0.6371588706970215 0.4451805353164673,
+          3Dcoo=84.20735168457031 80.18836212158203 107.64490509033203,
+          3Droo=133.06991885752157,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figparsurfareaA_3D"/>
+        </figure>
+
+        <figure>
+          <caption>(c)</caption>
+          \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.003687552874907851,
+          3Dc2c=0.5666888952255249 0.6642887592315674 0.48742610216140747,
+          3Dcoo=145.19125366210938 160.48304748535156 209.22018432617188,
+          3Droo=135.59128411404498,
+          3Dlights=Headlamp,add3Djscript=asylabels.js}
+          <img src="figures/figparsurfareaB_3D"/>
+        </figure>
+      </sidebyside>
+
+    </figure>
+
+    <p>
+      From <xref ref="sec_cross_product">Section</xref>
+      we know the area of this parallelogram is <m>\snorm{\vec u\times \vec v}</m>.
+      If we repeat this approximation process for each rectangle in the partition of <m>R</m>,
+      we can sum the areas of all the parallelograms to get an approximation of the surface area <m>S</m>:
+      <me>
+        \text{ Surface area of \surfaceS }  =S \approx \sum_{j=1}^n\sum_{i=1}^n \snorm{\vec u_{i,j}\times \vec v_{i,j}}
+      </me>,
+      where <m>\vec u_{i,j} = \vec r(u_i+\Delta u,v_j) - \vec r(u_i,v_j)</m> and <m>\vec v_{i,j} = \vec r(u_i,v_j+\Delta v)-\vec r(u_i,v_j)</m>.
+    </p>
+
+    <p>
+      From our previous calculus experience,
+      we expect that taking a limit as
+      <m>n\to \infty</m> will result in the exact surface area.
+      However, the current form of the above double sum makes it difficult to realize what the result of that limit is.
+      The following rewriting of the double summation will be helpful:
+      <md>
+        <mrow>\amp \sum_{j=1}^n\sum_{i=1}^n \snorm{\vec u_{i,j}\times \vec v_{i,j}}=</mrow>
+        <mrow>\amp \sum_{j=1}^n\sum_{i=1}^n \snorm{\big(\vec r(u_i+\Delta u,v_j) - \vec r(u_i,v_j)\big) \times \big(\vec r(u_i,v_j+\Delta v)-\vec r(u_i,v_j)\big)}=</mrow>
+        <mrow>\amp \sum_{j=1}^n\sum_{i=1}^n \snorm{\frac{\vec r(u_i+\Delta u,v_j) - \vec r(u_i,v_j)}{\Delta u} \times \frac{\vec r(u_i,v_j+\Delta v)-\vec r(u_i,v_j)}{\Delta v}}\Delta u\Delta v</mrow>
+      </md>.
+    </p>
+
+    <p>
+      We now take the limit as <m>n\to\infty</m>,
+      forcing <m>\Delta u</m> and <m>\Delta v</m> to 0.
+      As <m>\Delta u\to 0</m>,
+      <me>
+        \frac{\vec r(u_i+\Delta u,v_j) - \vec r(u_i,v_j)}{\Delta u} \to \vec r_u(u_i,v_j) \text{ and }
+      </me>
+      <me>
+        \frac{\vec r(u_i,v_j+\Delta v)-\vec r(u_i,v_j)}{\Delta v} \to \vec r_v(u_i,v_j)
+      </me>.
+    </p>
+
+    <p>
+      (This limit process also demonstrates that <m>\vec r_u(u,v)</m> and
+      <m>\vec r_v(u,v)</m> are tangent to the surface \mathcal{S}<nbsp />at <m>\vec r(u,v)</m>.
+      We don't need this fact now, but it will be important in the next section.)
+    </p>
+
+    <p>
+      Thus, in the limit, the double sum leads to a double integral:
+      <me>
+        \lim_{n\to\infty} \sum_{j=1}^n\sum_{i=1}^n \snorm{\vec u_{i,j}\times \vec v_{i,j}}= \int_c^d\int_a^b \snorm{\vec r_u\times\vec r_v}\ du\ dv
+      </me>.
+    </p>
+
+    <theorem xml:id="thm_par_surface_area">
+      <title>Surface Area of Parametrically Defined Surfaces</title>
+      <statement>
+        <p>
+          Let <m>\vec r(u,v)</m> be a smooth parametrization of a surface \mathcal{S}<nbsp />over a closed,
+          bounded region <m>R</m> of the <m>u</m>-<m>v</m> plane.
+              <idx><h>surface area</h><h>of parametrized surface</h></idx>
+          <ul>
+            <li>
+              <p>
+                The surface area differential <m>dS</m> is:
+                <m>dS = \snorm{\vec r_u\times \vec r_v}\ dA</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                The surface area <m>S</m> of \mathcal{S}<nbsp />is
+                <me>
+                  S = \iint_\surfaceS\ dS = \iint_R \snorm{\vec r_u\times \vec r_v}\ dA
+                </me>.
+              </p>
+            </li>
+          </ul>
+        </p>
+      </statement>
+    </theorem>
+
+    <example xml:id="ex_parsurfarea1">
+      <title>Finding the surface area of a parametrized surface</title>
+      <statement>
+        <p>
+          Using the parametrization found in <xref ref="ex_parsurf2">Example</xref>,
+          find the surface area of <m>z=x^2+2y^2</m> over the circular disk of radius 2, centered at the origin.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          In <xref ref="ex_parsurf2">Example</xref>,
+          we parametrized the surface as <m>\vec r(u,v) = \la 2v\cos u, 2v\sin u, 4v^2\cos^2u+8v^2\sin^2u\ra</m>,
+          for <m>0\leq u\leq 2\pi</m>, <m>0\leq v\leq 1</m>.
+          To find the surface area using <xref ref="thm_par_surface_area">Theorem</xref>,
+          we need <m>\snorm{\vec r_u\times\vec r_v}</m>.
+          We find:
+          <md>
+            <mrow>\vec r_u \amp = \la -2v\sin u, 2v\cos u, 8v^2\cos u\sin u\ra</mrow>
+            <mrow>\vec r_v \amp = \la 2\cos u, 2\sin v, 8v\cos^2 u+16v\sin^2u\ra</mrow>
+            <mrow>\vec r_u\times\vec r_v \amp = \la 16v^2\cos u, 32v^2\sin u, -4v\ra</mrow>
+            <mrow>\snorm{\vec r_u\times\vec r_v} \amp = \sqrt{256v^4\cos^2u+1024v^4\sin^2u+16v^2}</mrow>
+          </md>.
+        </p>
+
+        <p>
+          Thus the surface area is
+          <md>
+            <mrow>S = \iint_\surfaceS \ dS \amp = \iint_R\snorm{\vec r_u\times \vec r_v}\ dA</mrow>
+            <mrow>\amp  = \int_0^1\int_0^{2\pi} \sqrt{256v^4\cos^2u+1024v^4\sin^2u+16v^2}\ du\ dv \approx 53.59</mrow>
+          </md>.
+        </p>
+
+        <p>
+          There is a lot of tedious work in the above calculations and the final integral is nontrivial.
+          The use of a computer-algebra system is highly recommended.
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      In <xref ref="sec_line_int_intro">Section</xref>,
+      we recalled the arc length differential <m>ds=\snorm{\vrp(t)}dt</m>.
+      In subsequent sections, we used that differential,
+      but in most applications the <q><m>\snorm{\vrp(t)}</m></q>
+      part of the differential canceled out of the integrand
+      (to our benefit,
+      as integrating the square roots of functions is generally difficult).
+      We will find a similar thing happens when we use the surface area differential <m>dS</m> in the following sections.
+      That is, our main goal is not to be able to compute surface area;
+      rather, surface area is a tool to obtain other quantities that are more important and useful.
+      In our applications, we will use <m>dS</m>,
+      but most of the time the <q><m>\snorm{\vec r_u\times \vec r_v}</m></q>
+      part will cancel out of the integrand,
+      making the subsequent integration easier to compute.
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Terms and Concepts</title>
+    <exercise>
+      <statement>
+        <p>
+          In your own words, describe what an orientable surface is.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Answers will vary,
+          though generally should meaningfully include terms like <q>two sided</q>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Give an example of a non-orientable surface.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Many possible answers exist;
+          the one given by the book is the M&#xf6;bius band.
+        </p>
+      </answer>
+    </exercise>
+  </subsection>
+
+  <subsection>
+    <title>Problems</title>
+    <p>
+      In the following exercises,
+      parametrize the surface defined by the function
+      <m>z=f(x,y)</m> over each of the given regions <m>R</m> of the <m>x</m>-<m>y</m> plane.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>z = 3x^2y</m>;
+
+          <ol>
+            <li>
+              <p>
+                <m>R</m> is the rectangle bounded by
+                <m>-1\leq x\leq 1</m> and <m>0\leq y\leq 2</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>R</m> is the circle of radius 3, centered at <m>(1,2)</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>R</m> is the triangle with vertices <m>(0,0)</m>,
+                <m>(1,0)</m> and <m>(0,2)</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>R</m> is the region bounded by the <m>x</m>-axis and the graph of <m>y = 1-x^2</m>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+      <answer>
+        <ol>
+          <li>
+            <p>
+              <m>\vec r(u,v) = \langle u, v, 3u^2v\rangle</m> on
+              <m>-1\leq u\leq 1</m>, <m>0\leq v\leq 2</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\vec r(u,v) = \langle 3v\cos u+1, 3v\sin u+2, 3(3v\cos u+1)^2(3v\sin u+2)\rangle</m>,
+              on <m>0\leq u\leq 2\pi</m>, <m>0\leq v\leq 1</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\vec r(u,v) = \langle u, v(2-2u), 3u^2v(2-2u)\rangle</m> on <m>0\leq u, v\leq 1</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\vec r(u,v) = \langle u, v(1-u^2), 3u^2v(1-u^2)\rangle</m> on
+              <m>-1\leq u\leq 1</m>, <m>0\leq v\leq 1</m>.
+            </p>
+          </li>
+        </ol>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>z = 4x+2y^2</m>;
+
+          <ol>
+            <li>
+              <p>
+                <m>R</m> is the rectangle bounded by
+                <m>1\leq x\leq 4</m> and <m>5\leq y\leq 7</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>R</m> is the ellipse with major axis of length 8 parallel to the <m>x</m>-axis,
+                and minor axis of length 6 parallel to the <m>y</m>-axis,
+                centered at the origin.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>R</m> is the triangle with vertices <m>(0,0)</m>,
+                <m>(2,2)</m> and <m>(0,4)</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>R</m> is the annulus bounded between the circles,
+                centered at the origin, with radius 2 and radius 5.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+      <answer>
+        <ol>
+          <li>
+            <p>
+              <m>\vec r(u,v) = \langle u, v, 4u+2u^2\rangle</m> on
+              <m>1\leq u\leq 4</m>, <m>5\leq v\leq 7</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\vec r(u,v) = \langle 4v\cos u, 3v\sin u, 16v\cos u+2(3v\sin u)^2\rangle</m>,
+              on <m>0\leq u\leq 2\pi</m>, <m>0\leq v\leq 1</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\vec r(u,v) = \langle u, u+v(4-2u), 4u+2\big(u+v(4-2u)\big)^2\rangle</m> on
+              <m>0\leq u\leq 2</m>, <m>0\leq v\leq 1</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\vec r(u,v) = \langle v\cos u, v\sin u, 4v\cos u + 2(v\sin u)^2\rangle</m> on
+              <m>0\leq u\leq 2\pi</m>, <m>2\leq v\leq 5</m>.
+            </p>
+          </li>
+        </ol>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises,
+      a surface <m>\surfaceS</m> in space is described that cannot be defined in terms of a function <m>z=f(x,y)</m>.
+      Give a parametrization of \mathcal{S}.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          \mathcal{S}<nbsp />is the rectangle in space with corners at <m>(0,0,0)</m>,
+          <m>(0,2,0)</m>,
+          <m>(0,2,1)</m> and <m>(0,0,1)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\vec r(u,v) = \langle 0, u, v\rangle</m> with
+          <m>0\leq u\leq 2</m>, <m>0\leq v\leq 1</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          \mathcal{S}<nbsp />is the triangle in space with corners at <m>(1,0,0)</m>,
+          <m>(1,0,1)</m> and <m>(0,0,1)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\vec r(u,v) = \langle u, 0, 1-u+vu\rangle</m> with
+          <m>0\leq u\leq 1</m>, <m>0\leq v\leq 1</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          \mathcal{S}<nbsp />is the ellipsoid <m>\ds\frac{x^2}{9} + \frac{y^2}{4}+\frac{z^2}{16} = 1</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\vec r(u,v) = \langle 3\sin u\cos v, 2\sin u\sin v, 4\cos u\rangle</m> with
+          <m>0\leq u\leq \pi</m>, <m>0\leq v\leq 2\pi</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          \mathcal{S}<nbsp />is the elliptic cone <m>\ds y^2= x^2+\frac{z^2}{16}</m>,
+          for <m>-1 \leq y \leq 5</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Answers may vary;
+          one solution is <m>\vec r(u,v) = \langle v\cos u, v, 4v\sin u\rangle</m> with
+          <m>0\leq u\leq 2\pi</m>, <m>-1\leq v\leq 5</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises, a domain <m>D</m> in space is given.
+      Parametrize each of the bounding surfaces of <m>D</m>.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>D</m> is the domain bounded by the planes <m>z = \frac12(3-x)</m>,
+          <m>x=1</m>,
+          <m>y=0</m>, <m>y=2</m> and <m>z=0</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=120pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.0049995239824056625, 3Dc2c=0.6666666865348816 0.6666666865348816 0.3333333134651184, 3Dcoo=-9.639361381530762 -8.587801933288574 36.453922271728516, 3Droo=149.9999987284343, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_05_ex_09_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Answers may vary.
+        </p>
+
+        <p>
+          For <m>z = \frac12(3-x)</m>:
+          <m>\vec r(u,v) = \langle u, v , \frac12(3-u)\rangle</m>,
+          with <m>1\leq u\leq 3</m> and <m>0\leq v\leq 2</m>.
+        </p>
+
+        <p>
+          For <m>x=1</m>: <m>\vec r(u,v) = \langle 0,u,v\rangle</m>,
+          with <m>0\leq u\leq 2</m>, <m>0\leq v\leq 1</m>
+        </p>
+
+        <p>
+          For <m>y=0</m>: <m>\vec r(u,v) = \langle u,0,v/2(3-u)\rangle</m>,
+          with <m>1\leq u\leq 3</m>, <m>0\leq v\leq 1</m>
+        </p>
+
+        <p>
+          For <m>y=2</m>: <m>\vec r(u,v) = \langle u,2,v/2(3-u)\rangle</m>,
+          with <m>1\leq u\leq 3</m>, <m>0\leq v\leq 1</m>
+        </p>
+
+        <p>
+          For <m>z=0</m>: <m>\vec r(u,v) = \langle u,v,0\rangle</m>,
+          with <m>1\leq u\leq 3</m>, <m>0\leq v\leq 2</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>D</m> is the domain bounded by the planes <m>z=2x+4y-4</m>,
+          <m>x=2</m>, <m>y=1</m> and <m>z=0</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=120pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.7375360131263733 -0.6143473982810974 0.2803889811038971, 3Dcoo=32.48771286010742 72.419189453125 49.87675094604492, 3Droo=200.00000360071368, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_05_ex_10_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Answers may vary.
+        </p>
+
+        <p>
+          For <m>z=2x+4y-4</m>:
+          <m>\vec r(u,v) = \langle u, 1-u/2+uv/2, 2u+4(1-u/2+uv/2)-4\rangle</m>,
+          with <m>0\leq u\leq 2</m>, <m>0\leq v\leq 1</m>.
+        </p>
+
+        <p>
+          For <m>x=2</m>: <m>\vec r(u,v) = \langle 2,u,4uv\rangle</m>,
+          with <m>0\leq u\leq 1</m>, <m>0\leq v\leq 1</m>
+        </p>
+
+        <p>
+          For <m>y=1</m>: <m>\vec r(u,v) = \langle u,1,2uv\rangle</m>,
+          with <m>0\leq u\leq 2</m>, <m>0\leq v\leq 1</m>
+        </p>
+
+        <p>
+          For <m>z=0</m>:
+          <m>\vec r(u,v) = \langle u, 1-u/2+uv/2,0\rangle</m>,
+          with <m>0\leq u\leq 2</m>, <m>0\leq v\leq 1</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>D</m> is the domain bounded by <m>z=2y</m>,
+          <m>y=4-x^2</m> and <m>z=0</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=120pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.8651782274246216 -0.4135543704032898 0.28361836075782776, 3Dcoo=1.8630493879318237 57.10300827026367 66.36750793457031, 3Droo=149.99999560908606, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_05_ex_11_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Answers may vary.
+        </p>
+
+        <p>
+          For <m>z=2y: \vec r(u,v) = \langle u, v(4-u^2), 2v(4-u^2)\rangle</m> with
+          <m>-2\leq u\leq 2</m> and <m>0\leq v\leq 1</m>.
+        </p>
+
+        <p>
+          For <m>y=4-x^2: \vec r(u,v) = \langle u, 4-u^2, 2v(4-u^2)\rangle</m> with
+          <m>-2\leq u\leq 2</m> and <m>0\leq v\leq 1</m>.
+        </p>
+
+        <p>
+          For <m>z=0</m>:
+          <m>\vec r(u,v) = \langle u, v(4-u^2), 0\rangle</m> with
+          <m>-2\leq u\leq 2</m> and <m>0\leq v\leq 1</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>D</m> is the domain bounded by <m>y=1-z^2</m>,
+          <m>y=1-x^2</m>, <m>x=0</m>, <m>y=0</m> and <m>z=0</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=120pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.6666666865348816 0.6666666865348816 0.3333333134651184, 3Dcoo=-11.596293449401855 -12.679614067077637 48.551517486572266, 3Droo=149.9999987284343, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_05_ex_12_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Answers may vary.
+        </p>
+
+        <p>
+          For <m>y=1-z^2</m>:
+          <m>\vec r(u,v) = \langle u, v(1-u^2), \sqrt{1-v(1-u^2)}\rangle</m> with
+          <m>0\leq u\leq 1</m> and <m>0\leq v\leq 1</m>.
+        </p>
+
+        <p>
+          For <m>y=1-x^2</m>:
+          <m>\vec r(u,v) = \langle u, 1-u^2, uv\rangle</m> with
+          <m>0\leq u\leq 1</m> and <m>0\leq v\leq 1</m>.
+        </p>
+
+        <p>
+          For <m>x=0</m>:
+          <m>\vec r(u,v) = \langle 0, v(1-u^2),u\rangle</m> with
+          <m>0\leq u\leq 1</m> and <m>0\leq v\leq 1</m>.
+        </p>
+
+        <p>
+          For <m>y=0</m>: <m>\vec r(u,v) = \langle u, 0,v\rangle</m> with
+          <m>0\leq u\leq 1</m> and <m>0\leq v\leq 1</m>.
+        </p>
+
+        <p>
+          For <m>z=0</m>:
+          <m>\vec r(u,v) = \langle u, v(1-u^2), 0rangle</m> with
+          <m>0\leq u\leq 1</m> and <m>0\leq v\leq 1</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>D</m> is the domain bounded by the cylinder
+          <m>x+y^2/9=1</m> and the planes <m>z=1</m> and <m>z=3</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=120pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.6666666865348816 0.6666666865348816 0.3333333134651184, 3Dcoo=-11.596293449401855 -12.679614067077637 48.551517486572266, 3Droo=149.9999987284343, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_05_ex_21_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Answers may vary.
+        </p>
+
+        <p>
+          For <m>x+y^2/9=1</m>:
+          <m>\vec r(u,v) = \langle \cos u, 3\sin u, v\rangle</m> with
+          <m>0\leq u\leq 2\pi</m> and <m>1\leq v\leq 3</m>.
+        </p>
+
+        <p>
+          For <m>z=1</m>:
+          <m>\vec r(u,v) = \langle v\cos u, 3v\sin u, 1\rangle</m> with
+          <m>0\leq u\leq 2\pi</m> and <m>0\leq v\leq 1</m>.
+        </p>
+
+        <p>
+          For <m>z=3</m>:
+          <m>\vec r(u,v) = \langle v\cos u, 3v\sin u, 3\rangle</m> with
+          <m>0\leq u\leq 2\pi</m> and <m>0\leq v\leq 1</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>D</m> is the domain bounded by the cone
+          <m>x^2+y^2=(z-1)^2</m> and the plane <m>z=0</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=120pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.6666666865348816 0.6666666865348816 0.3333333134651184, 3Dcoo=-11.596293449401855 -12.679614067077637 48.551517486572266, 3Droo=149.9999987284343, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_05_ex_22_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Answers may vary.
+        </p>
+
+        <p>
+          For <m>x^2+y^2=(z-1)^2</m>:
+          <m>\vec r(u,v) = \langle v\cos u, v\sin u, 1-v\rangle</m> with
+          <m>0\leq u\leq 2\pi</m> and <m>0\leq v\leq 1</m>.
+        </p>
+
+        <p>
+          For <m>z=0</m>:
+          <m>\vec r(u,v) = \langle v\cos u, v\sin u, 0\rangle</m> with
+          <m>0\leq u\leq 2\pi</m> and <m>0\leq v\leq 1</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>D</m> is the domain bounded by the cylinder <m>z=1-x^2</m> and the planes <m>y=-1</m>,
+          <m>y=2</m> and <m>z=0</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=120pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.6666666865348816 0.6666666865348816 0.3333333134651184, 3Dcoo=-11.596293449401855 -12.679614067077637 48.551517486572266, 3Droo=149.9999987284343, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_05_ex_23_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Answers may vary.
+        </p>
+
+        <p>
+          For <m>z=1-x^2</m>: <m>\vec r(u,v) = \langle u,v,1-u^2\rangle</m> with
+          <m>-1\leq u\leq 1</m> and <m>-1\leq v\leq 2</m>.
+        </p>
+
+        <p>
+          For <m>y=-1</m>:
+          <m>\vec r(u,v) = \langle u,-1,v(1-u^2)\rangle</m> with
+          <m>-1\leq u\leq 1</m> and <m>0\leq v\leq 1</m>.
+        </p>
+
+        <p>
+          For <m>y=2</m>:
+          <m>\vec r(u,v) = \langle u,2,v(1-u^2)\rangle</m> with
+          <m>-1\leq u\leq 1</m> and <m>0\leq v\leq 1</m>.
+        </p>
+
+        <p>
+          For <m>z=0</m>: <m>\vec r(u,v) = \langle u,v,0\rangle</m> with
+          <m>-1\leq u\leq 1</m> and <m>-1\leq v\leq 2</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>D</m> is the domain bounded by the paraboloid
+          <m>z=4-x^2-4y^2</m> and the plane <m>z=0</m>.
+        </p>
+
+        <p>
+          { \apexincludemedia{width=120pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.6666666865348816 0.6666666865348816 0.3333333134651184, 3Dcoo=-11.596293449401855 -12.679614067077637 48.551517486572266, 3Droo=149.9999987284343, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_05_ex_24_3D"/> }
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Answers may vary.
+        </p>
+
+        <p>
+          For <m>z=4-x^2-4y^2</m>:
+          <m>\vec r(u,v) = \langle 2v\cos u,v\sin u,4-(2v\cos u)^2-4(v\sin u)^2\rangle</m> with
+          <m>0\leq u\leq 2\pi</m> and <m>0\leq v\leq 1</m>.
+        </p>
+
+        <p>
+          For <m>z=0</m>:
+          <m>\vec r(u,v) = \langle 2v\cos u,v\sin u,0\rangle</m> with
+          <m>0\leq u\leq 2\pi</m> and <m>0\leq v\leq 1</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises,
+      find the surface area <m>S</m> of the given surface \mathcal{S}. (The associated integrals are computable without the assistance of technology.)
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          \mathcal{S}<nbsp />is the plane <m>z=2x+3y</m> over the rectangle
+          <m>-1\leq x\leq 1</m>, <m>2\leq v \leq 3</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>S = 2\sqrt{14}</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          \mathcal{S}<nbsp />is the plane <m>z=x+2y</m> over the triangle with vertices at <m>(0,0)</m>,
+          <m>(1,0)</m> and <m>(0,1)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>S = \sqrt{6}/2</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          \mathcal{S}<nbsp />is the plane <m>z=x+y</m> over the circular disk,
+          centered at the origin, with radius 2.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>S = 4\sqrt{3}\pi</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          \mathcal{S}<nbsp />is the plane <m>z=x+y</m> over the annulus bounded by the circles,
+          centered at the origin, with radius 1 and radius 2.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>S = 3\sqrt{3}\pi</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises,
+      set up the double integral that finds the surface area <m>S</m> of the given surface \mathcal{S}, then use technology to approximate its value.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          \mathcal{S}<nbsp />is the paraboloid
+          <m>z=x^2+y^2</m> over the circular disk of radius 3 centered at the origin.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>S =\int_0^3\int_0^{2\pi}\sqrt{v^2+4v^4}\ du\ dv= (37\sqrt{37}-1)\pi/6 \approx 117.319</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          \mathcal{S}<nbsp />is the paraboloid
+          <m>z=x^2+y^2</m> over the triangle with vertices at <m>(0,0)</m>,
+          <m>(0,1)</m> and <m>(1,1)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>S = \int_0^1\int_0^1\sqrt{v^2+4u^2v^2+4v^4}\ du\ dv \approx 0.931</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          \mathcal{S}<nbsp />is the plane <m>z=5x-y</m> over the region enclosed by the parabola <m>y=1-x^2</m> and the <m>x</m>-axis.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>S =\int_0^1\int_{-1}^{1}\sqrt{(5u^2-2uv-5)^2+u^4+(1-u^2)^2}\ du\ dv \approx 7.084</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          \mathcal{S}<nbsp />is the hyperbolic paraboloid
+          <m>z=x^2-y^2</m> over the circular disk of radius 1 centered at the origin.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>S =\int_0^1\int_{0}^{2\pi}\sqrt{v^2+4v^4}\ du\ dv = (5\sqrt{5}-1)\pi/6 \approx 5.330</m>.
+        </p>
+      </answer>
+    </exercise>
+  </subsection>
+
+</section>
+

@@ -1,0 +1,1091 @@
+
+
+<section xml:id="sec_greensthm">
+  <title>Flow, Flux, Green's Theorem and the Divergence Theorem</title>
+  <subsection>
+    <title>Flow and Flux</title>
+    <p>
+      Line integrals over vector fields have the natural interpretation of computing work when <m>\vec F</m> represents a force field.
+      It is also common to use vector fields to represent velocities.
+      In these cases, the line integral
+      <m>\int_C \vec F\cdot d\vec r</m> is said to represent <em>flow</em>.
+          <idx><h>flow</h></idx>
+          <idx><h>flux</h></idx>
+          <idx><h>circulation</h></idx>
+    </p>
+
+    <figure xml:id="fig_flowfluxintro">
+      <caption>Illustrating the principles of flow and flux.</caption>
+      <img src="figures/figflowfluxintro"/>
+    </figure>
+
+    <p>
+      Let the vector field <m>\vec F = \la 1,0\ra</m> represent the velocity of water as it moves across a smooth surface,
+      depicted in <xref ref="fig_flowfluxintro">Figure</xref>.
+      A line integral over <m>C</m> will compute
+      <q>how much water is moving
+      <em>along</em> the path <m>C</m>.</q>
+    </p>
+
+    <p>
+      In the figure,
+      <q>all</q> of the water above <m>C_1</m> is moving along that curve,
+      whereas <q>none</q> of the water above <m>C_2</m> is moving along that curve
+      (the curve and the flow of water are at right angles to each other).
+      Because <m>C_3</m> has nonzero horizontal and vertical components,
+      <q>some</q> of the water above that curve is moving along the curve.
+    </p>
+
+    <p>
+      When <m>C</m> is a closed curve,
+      we call flow <em>circulation</em>,
+      represented by <m>\oint_C \vec F\cdot d\vec r</m>.
+    </p>
+
+    <p>
+      The <q>opposite</q> of flow is <em>flux</em>,
+      a measure of <q>how much water is moving
+      <em>across</em> the path <m>C</m>.</q>
+      If a curve represents a filter in flowing water,
+      flux measures how much water will pass through the filter.
+      Considering again <xref ref="fig_flowfluxintro">Figure</xref>,
+      we see that a screen along <m>C_1</m> will not filter any water as no water passes across that curve.
+      Because of the nature of this field,
+      <m>C_2</m> and <m>C_3</m> each filter the same amount of water per second.
+    </p>
+
+    <p>
+      The terms <q>flow</q> and <q>flux</q>
+      are used apart from velocity fields, too.
+      Flow is measured by <m>\int_C \vec F\cdot d\vec r</m>,
+      which is the same as <m>\int_C \vec F\cdot\vec T\ ds</m> by <xref ref="def_line_integral2">Definition</xref>.
+      That is, flow is a summation of the amount of <m>\vec F</m> that is
+      <em>tangent</em> to the curve <m>C</m>.
+    </p>
+
+    <p>
+      By contrast,
+      flux is a summation of the amount of <m>\vec F</m> that is <em>orthogonal</em>
+      to the direction of travel.
+      To capture this orthogonal amount of <m>\vec F</m>,
+      we use <m>\int_C \vec F \cdot \vec n\ ds</m> to measure flux,
+      where <m>\vec n</m> is a unit vector orthogonal to the curve <m>C</m>.
+      (Later, we'll measure flux across surfaces, too.
+      For example,
+      in physics it is useful to measure the amount of a magnetic field that passes through a surface.)
+    </p>
+
+    <p>
+      How is <m>\vec n</m> determined?
+      We'll later see that if <m>C</m> is a closed curve,
+      we'll want <m>\vec n</m> to point to the outside of the curve
+      (measuring how much is <q>going out</q>).
+      We'll also adopt the convention that closed curves should be traversed counterclockwise.
+    </p>
+
+    <p>
+      (If <m>C</m> is a complicated closed curve,
+      it can be difficult to determine what
+      <q>counterclockwise</q> means.
+      Consider <xref ref="fig_fluxcounterclockwise">Figure</xref>.
+      Seeing the curve as a whole, we know which way
+      <q>counterclockwise</q> is.
+      If we zoom in on point <m>A</m>,
+      one might incorrectly choose to traverse the path in the wrong direction.
+      So we offer this definition:
+      <em>a closed curve is being traversed counterclockwise if the outside is to the right of the path and the inside is to the left.</em>)
+    </p>
+
+    <figure xml:id="fig_fluxcounterclockwise">
+      <caption>Determining <q>counterclockwise</q> is not always simple without a good definition.</caption>
+      <img src="figures/figfluxcounterclockwise"/>
+    </figure>
+
+    <p>
+      When a curve <m>C</m> is traversed counterclockwise by <m>\vrt = \la f(t),
+      g(t)\ra</m>,
+      we rotate <m>\vec T</m> clockwise 90<m>^\circ</m> to obtain <m>\vec n</m>:
+      <me>
+        \vec T = \frac{\la \fp(t),g'(t)\ra}{\norm{\vrp(t)}}  \Rightarrow  \vec n = \frac{\la g'(t),-\fp(t)\ra}{\norm{\vrp(t)}}
+      </me>.
+    </p>
+
+    <p>
+      Letting <m>\vec F = \la M, N\ra</m>, we calculate flux as:
+      <md>
+        <mrow>\int_C \vec F\cdot \vec n\ ds \amp = \int_C \vec F\cdot \frac{\la g'(t),-\fp(t)\ra}{\norm{\vrp(t)}} \norm{\vrp(t)}\ dt</mrow>
+        <mrow>\amp = \int_C \la M, N\ra \cdot \la g'(t),-\fp(t)\ra\ dt</mrow>
+        <mrow>\amp = \int_C \Big(M\,g'(t) - N\,\fp(t)\Big)dt</mrow>
+        <mrow>\amp = \int_C M\,g'(t)\ dt - \int_C N\,\fp(t)\ dt.</mrow>
+        <intertext>As the <m>x</m> and <m>y</m> components of <m>\vrt</m> are <m>f(t)</m> and <m>g(t)</m> respectively, the differentials of <m>x</m> and <m>y</m> are <m>dx = \fp(t)dt</m> and <m>dy=g'(t)dt</m>. We can then write the above integrals as:</intertext>
+        <mrow>\amp = \int_C M\ dy - \int_C N\ dx.</mrow>
+        <intertext>This is often written as one integral (not incorrectly, though somewhat confusingly, as this one integral has two <q><m>d</m> 's</q>):</intertext>
+        <mrow>\amp =\int_CM\ dy -N\ dx</mrow>
+      </md>.
+    </p>
+
+    <p>
+      We summarize the above in the following definition.
+    </p>
+
+    <definition xml:id="def_flowflux">
+      <title>Flow, Flux</title>
+      <statement>
+        <p>
+          Let <m>\vec F=\la M,N\ra</m> be a vector field with continuous components defined on a smooth curve <m>C</m>,
+          parametrized by <m>\vrt =\la f(t),g(t)\ra</m>,
+          let <m>\vec T</m> be the unit tangent vector of <m>\vrt</m>,
+          and let <m>\vec n</m> be the clockwise 90<m>^\circ</m>degree rotation of <m>\vec T</m>.
+              <idx><h>flow</h></idx>
+              <idx><h>flux</h></idx>
+
+          <ul>
+            <li>
+              <p>
+                The <em>flow</em> of <m>\vec F</m> along <m>C</m> is
+                <me>
+                  \int_C \vec F\cdot\vec T\ ds=\int_C \vec F\cdot d\vec r
+                </me>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                The <em>flux</em> of <m>\vec F</m> across <m>C</m> is
+                <me>
+                  \int_C \vec F\cdot \vec n\ ds =  \int_C M\ dy -N\ dx = \int_C\Big(M\,g'(t) - N\,\fp(t)\Big)dt
+                </me>.
+              </p>
+            </li>
+          </ul>
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      This definition of flow also holds for curves in space,
+      though it does not make sense to measure
+      <q>flux across a curve</q> in space.
+    </p>
+
+    <p>
+      Measuring flow is essentially the same as finding work performed by a force as done in the previous examples.
+      Therefore we practice finding only flux in the following example.
+    </p>
+
+    <example xml:id="ex_flux1">
+      <title>Finding flux across curves in the plane</title>
+      <statement>
+        <p>
+          Curves <m>C_1</m> and <m>C_2</m> each start at <m>(1,0)</m> and end at <m>(0,1)</m>,
+          where <m>C_1</m> follows the line <m>y=1-x</m> and <m>C_2</m> follows the unit circle,
+          as shown in <xref ref="fig_flux1">Figure</xref>.
+          Find the flux across both curves for the vector fields
+          <m>\vec F_1 = \la y, -x+1\ra</m> and <m>\vec F_2 = \la -x, 2y-x\ra</m>.
+        </p>
+      </statement>
+      <solution>
+        <figure xml:id="fig_flux1">
+          <caption>Illustrating the curves and vector fields in <xref ref="ex_flux1">Example</xref>. In (a) the vector field is <m>\vec F_1</m>, and in (b) the vector field is <m>\vec F_2</m>.</caption>
+          <sidebyside>
+            <figure>
+              <caption>(a)</caption>
+              <img src="figures/figflux1a"/>
+            </figure>
+
+            <figure>
+              <caption>(b)</caption>
+              <img src="figures/figflux1b"/>
+            </figure>
+          </sidebyside>
+
+        </figure>
+
+        <p>
+          We begin by finding parametrizations of <m>C_1</m> and <m>C_2</m>.
+          As done in <xref ref="ex_livf3">Example</xref>,
+          parametrize <m>C_1</m> by creating the line that starts at <m>(1,0)</m> and moves in the <m>\la -1,1\ra</m> direction:
+          <m>\vec r_1(t) = \la 1,0\ra + t\la -1,1\ra = \la 1-t, t\ra</m>,
+          for <m>0\leq t\leq 1</m>.
+          We parametrize <m>C_2</m> with the familiar
+          <m>\vec r_2(t) = \la \cos t,\sin t\ra</m> on <m>0\leq t\leq \pi/2</m>.
+          For reference later, we give each function and its derivative below:
+          <me>
+            \vec r_1(t) = \la 1-t, t\ra,  \vrp_1(t) = \la -1,1\ra
+          </me>.
+          <me>
+            \vec r_2(t) = \la \cos t, \sin t\ra,  \vrp_2(t) = \la -\sin t ,\cos t\ra
+          </me>.
+        </p>
+
+        <p>
+          When <m>\vec F = \vec F_1 = \la y, -x+1\ra</m> (as shown in <xref ref="fig_flux1">Figure</xref>(a)),
+          over <m>C_1</m> we have <m>M = y =t</m> and <m>N = -x+1 = -(1-t)+1 = t</m>.
+          Using <xref ref="def_flowflux">Definition</xref>, we compute the flux:
+          <md>
+            <mrow>\int_{C_1} \vec F\cdot \vec n\ ds \amp  = \int_{C_1} \Big(M\,g'(t) - N\,\fp(t)\Big)\ dt</mrow>
+            <mrow>\amp = \int_0^1 \Big( t(1) - t(-1)\Big)\ dt</mrow>
+            <mrow>\amp = \int_0^1 2t\ dt</mrow>
+            <mrow>\amp = 1</mrow>
+          </md>.
+        </p>
+
+        <p>
+          Over <m>C_2</m>,
+          we have <m>M = y = \sin t</m> and <m>N = -x+1 = 1-\cos t</m>.
+          Thus the flux across <m>C_2</m> is:
+          <md>
+            <mrow>\int_{C_1} \vec F\cdot \vec n\ ds \amp  = \int_{C_1} \Big(M\,g'(t) - N\,\fp(t)\Big)\ dt</mrow>
+            <mrow>\amp = \int_0^{\pi/2}\Big((\sin t)(\cos t) - (1-\cos t)(-\sin t)\Big)\ dt</mrow>
+            <mrow>\amp = \int_0^{\pi/2} \sin t\ dt</mrow>
+            <mrow>\amp =1</mrow>
+          </md>.
+        </p>
+
+        <p>
+          Notice how the flux was the same across both curves.
+          This won't hold true when we change the vector field.
+        </p>
+
+        <p>
+          When <m>\vec F = \vec F_2 = \la -x,2y-x\ra</m> (as shown in <xref ref="fig_flux1">Figure</xref>(b)),
+          over <m>C_1</m> we have <m>M = -x = t-1</m> and <m>N = 2y-x = 2t-(1-t) = 3t-1</m>.
+          Computing the flux across <m>C_1</m>:
+          <md>
+            <mrow>\int_{C_1} \vec F\cdot \vec n\ ds \amp  = \int_{C_1} \Big(M\,g'(t) - N\,\fp(t)\Big)\ dt</mrow>
+            <mrow>\amp = \int_0^1 \Big( (t-1)(1) - (3t-1)(-1)\Big)\ dt</mrow>
+            <mrow>\amp = \int_0^1 (4t-2)\ dt</mrow>
+            <mrow>\amp = 0</mrow>
+          </md>.
+        </p>
+
+        <p>
+          Over <m>C_2</m>,
+          we have <m>M = -x = -\cos t</m> and <m>N = 2y-x = 2\sin t-\cos t</m>.
+          Thus the flux across <m>C_2</m> is:
+          <md>
+            <mrow>\int_{C_1} \vec F\cdot \vec n\ ds \amp  = \int_{C_1} \Big(M\,g'(t) - N\,\fp(t)\Big)\ dt</mrow>
+            <mrow>\amp = \int_0^{\pi/2}\Big((-\cos t)(\cos t) - (2\sin t-\cos t)(-\sin t)\Big)\ dt</mrow>
+            <mrow>\amp = \int_0^{\pi/2} \big(2\sin^2 t-\sin t\cos t-\cos^2t\big)\ dt</mrow>
+            <mrow>\amp =\pi/4 - 1/2\approx 0.285</mrow>
+          </md>.
+        </p>
+
+        <p>
+          We analyze the results of this example below.
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      In <xref ref="ex_flux1">Example</xref>,
+      we saw that the flux across the two curves was the same when the vector field was <m>\vec F_1 = \la y, -x+1\ra</m>.
+      This is not a coincidence.
+      We show why they are equal in <xref ref="ex_div2">Example</xref>.
+      In short, the reason is this:
+      the divergence of <m>\vec F_1</m> is 0, and when <m>\divv \vec F = 0</m>,
+      the flux across any two paths with common beginning and ending points will be the same.
+    </p>
+
+    <p>
+      We also saw in the example that the flux across <m>C_1</m> was 0 when the field was <m>\vec F_2 = \la -x, 2y-x\ra</m>.
+      Flux measures <q>how much</q> of the field crosses the path from left to right
+      (following the conventions established before).
+      Positive flux means most of the field is crossing from left to right;
+      negative flux means most of the field is crossing from right to left;
+      zero flux means the same amount crosses from each side.
+      When we consider <xref ref="fig_flux1">Figure</xref>(b),
+      it seems plausible that the same amount of
+      <m>\vec F_2</m> was crossing <m>C_1</m> from left to right as from right to left.
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Green's Theorem</title>
+    <p>
+      There is an important connection between the circulation around a closed region <m>R</m> and the curl of the vector field inside of <m>R</m>,
+      as well as a connection between the flux across the boundary of <m>R</m> and the divergence of the field inside <m>R</m>.
+      These connections are described by Green's Theorem and the Divergence Theorem,
+      respectively.
+      We'll explore each in turn.
+          <idx><h>Green's Theorem</h></idx>
+    </p>
+
+    <p>
+      Green's Theorem states <q>the counterclockwise circulation around a closed region <m>R</m> is equal to the sum of the curls over <m>R</m>.</q>
+    </p>
+
+    <theorem xml:id="thm_greens">
+      <title>Green's Theorem</title>
+      <statement>
+        <p>
+          Let <m>R</m> be a closed,
+          bounded region of the plane whose boundary <m>C</m> is composed of finitely many smooth curves,
+          let <m>\vec r(t)</m> be a counterclockwise parametrization of <m>C</m>,
+          and let <m>\vec F =\la M,N\ra</m> where <m>N_x</m> and <m>M_y</m> are continuous over <m>R</m>.
+          Then
+              <idx><h>Green's Theorem</h></idx>
+          <me>
+            \oint_C \vec F\cdot d\vec r = \iint_R\curl \vec F\ dA
+          </me>.
+        </p>
+      </statement>
+    </theorem>
+
+    <p>
+      We'll explore Green's Theorem through an example.
+    </p>
+
+    <example xml:id="ex_green1">
+      <title>Confirming Green's Theorem</title>
+      <statement>
+        <p>
+          Let <m>\vec F =\la -y,x^2+1\ra</m> and let <m>R</m> be the region of the plane bounded by the triangle with vertices <m>(-1,0)</m>,
+          <m>(1,0)</m> and <m>(0,2)</m>,
+          shown in <xref ref="fig_green1">Figure</xref>.
+          Verify Green's Theorem; that is,
+          find the circulation of <m>\vec F</m> around the boundary of <m>R</m> and show that is equal to the double integral of <m>\curl \vec F</m> over <m>R</m>.
+        </p>
+
+        <figure xml:id="fig_green1">
+          <caption>The vector field and planar region used in <xref ref="ex_green1">Example</xref>.</caption>
+          <img src="figures/figgreen1"/>
+        </figure>
+      </statement>
+      <solution>
+        <p>
+          The curve <m>C</m> that bounds <m>R</m> is composed of 3 lines.
+          While we need to traverse the boundary of <m>R</m> in a counterclockwise fashion,
+          we may start anywhere we choose.
+          We arbitrarily choose to start at <m>(-1,0)</m>,
+          move to <m>(1,0)</m>,
+          etc., with each line parametrized by <m>\vec r_1(t)</m>,
+          <m>\vec r_2(t)</m> and <m>\vec r_3(t)</m>, respectively.
+        </p>
+
+        <p>
+          We leave it to the reader to confirm that the following parametrizations of the three lines are accurate:
+        </p>
+
+        <tabular>
+          <row>
+            <cell><m>\vec r_1(t) = \la 2t-1,0\ra</m>,</cell>
+            <cell>for <m>0\leq t\leq 1</m>,</cell>
+            <cell>with <m>\vrp_1(t) = \la 2,0\ra</m>,</cell>
+          </row>
+          <row>
+            <cell><m>\vec r_2(t) = \la 1-t,2t\ra</m>,</cell>
+            <cell>for <m>0\leq t\leq 1</m>,</cell>
+            <cell>with <m>\vrp_2(t) = \la -1,2\ra</m>, and</cell>
+          </row>
+          <row>
+            <cell><m>\vec r_3(t) = \la -t,2-2t\ra</m>,</cell>
+            <cell>for <m>0\leq t\leq 1</m>,</cell>
+            <cell>with <m>\vrp_3(t) = \la -1,-2\ra</m>.</cell>
+          </row>
+        </tabular>
+
+        <p>
+          The circulation around <m>C</m> is found by summing the flow along each of the sides of the triangle.
+          We again leave it to the reader to confirm the following computations:
+          <md>
+            <mrow>\int_{C_1}\vec F\cdot d\vec r_1 \amp = \int_0^1 \la 0,(2t-1)^2+1\ra\cdot \la 2,0\ra dt = 0,</mrow>
+            <mrow>\int_{C_2}\vec F\cdot d\vec r_2 \amp = \int_0^1 \la -2t,(1-t)^2+1\ra\cdot \la -1,2\ra dt = 11/3, \text{ and }</mrow>
+            <mrow>\int_{C_3}\vec F\cdot d\vec r_3 \amp = \int_0^1 \la 2t-2,t^2+1\ra\cdot \la -1,-2\ra dt = -5/3</mrow>
+          </md>.
+        </p>
+
+        <p>
+          The circulation is the sum of the flows: <m>2</m>.
+        </p>
+
+        <p>
+          We confirm Green's Theorem by computing <m>\iint_R \curl \vec F\ dA</m>.
+          We find <m>\curl \vec F = 2x+1</m>.
+          The region <m>R</m> is bounded by the lines <m>y = 2x+2</m>,
+          <m>y=-2x+2</m> and <m>y=0</m>.
+          Integrating with the order <m>dx\, dy</m> is most straightforward,
+          leading to
+          <me>
+            \int_0^2\int_{y/2-1}^{1-y/2} (2x+1)\ dx\ dy = \int_0^2 (2-y)\ dy = 2
+          </me>,
+          which matches our previous measurement of circulation.
+        </p>
+      </solution>
+    </example>
+
+    <example xml:id="ex_green2">
+      <title>Using Green's Theorem</title>
+      <statement>
+        <p>
+          Let <m>\vec F = \la \sin x,\cos y\ra</m> and let <m>R</m> be the region enclosed by the curve <m>C</m> parametrized by
+          <m>\vec r(t) = \la 2\cos t+ \frac1{10}\cos(10t),2\sin t+\frac1{10}\sin(10t)\ra</m> on <m>0\leq t\leq 2\pi</m>,
+          as shown in <xref ref="fig_green2">Figure</xref>.
+          Find the circulation around <m>C</m>.
+        </p>
+
+        <figure xml:id="fig_green2">
+          <caption>The vector field and planar region used in <xref ref="ex_green2">Example</xref>.</caption>
+          <img src="figures/figgreen2"/>
+        </figure>
+      </statement>
+      <solution>
+        <p>
+          Computing the circulation directly using the line integral looks difficult,
+          as the integrand will include terms like
+          <q><m>\sin\big(2\cos t + \frac1{10}\cos(10t)\big)</m>.</q>
+        </p>
+
+        <p>
+          Green's Theorem states that <m>\oint_C\vec F\cdot d\vec r = \iint_R \curl\vec F\ dA</m>;
+          since <m>\curl \vec F = 0</m> in this example,
+          the double integral is simply 0 and hence the circulation is 0.
+        </p>
+
+        <p>
+          Since <m>\curl \vec F = 0</m>,
+          we can conclude that the circulation is 0 in two ways.
+          One method is to employ Green's Theorem as done above.
+          The second way is to recognize that <m>\vec F</m> is a conservative field,
+          hence there is a function <m>z=f(x,y)</m> wherein <m>\vec F = \nabla f</m>.
+          Let <m>A</m> be any point on the curve <m>C</m>;
+          since <m>C</m> is closed,
+          we can say that <m>C</m> <q>begins</q>
+          and <q>ends</q> at <m>A</m>.
+          By the Fundamental Theorem of Line Integrals,
+          <m>\oint_C \vec F\ d\vec r = f(A)-f(A) = 0</m>.
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      One can use Green's Theorem to find the area of an enclosed region by integrating along its boundary.
+      Let <m>C</m> be a closed curve,
+      enclosing the region <m>R</m>,
+      parametrized by <m>\vec r(t) = \la f(t),g(t)\ra</m>.
+      We know the area of <m>R</m> is computed by the double integral <m>\iint_R \ dA</m>,
+      where the integrand is <m>1</m>.
+      By creating a field <m>\vec F</m> where <m>\curl \vec F =1</m>,
+      we can employ Green's Theorem to compute the area of <m>R</m> as <m>\oint_C \vec F\cdot d\vec r</m>.
+    </p>
+
+    <p>
+      One is free to choose any field <m>\vec F</m> to use as long as <m>\curl\vec F = 1</m>.
+      Common choices are <m>\vec F = \la 0,x\ra</m>,
+      <m>\vec F = \la -y,0\ra</m> and <m>\vec F = \la -y/2,x/2\ra</m>.
+      We demonstrate this below.
+    </p>
+
+    <example xml:id="ex_green3">
+      <title>Using Green's Theorem to find area</title>
+      <statement>
+        <p>
+          Let <m>C</m> be the closed curve parametrized by
+          <m>\vrt = \la t-t^3,t^2\ra</m> on <m>-1\leq t\leq 1</m>,
+          enclosing the region <m>R</m>,
+          as shown in <xref ref="fig_green3">Figure</xref>.
+          Find the area of <m>R</m>.
+        </p>
+
+        <figure xml:id="fig_green3">
+          <caption>The region <m>R</m>, whose area is found in <xref ref="ex_green3">Example</xref>.</caption>
+          <img src="figures/figgreen3"/>
+        </figure>
+      </statement>
+      <solution>
+        <p>
+          We can choose any field <m>\vec F</m>,
+          as long as <m>\curl \vec F = 1</m>.
+          We choose <m>\vec F = \la -y,0\ra</m>.
+          We also confirm
+          (left to the reader)
+          that <m>\vrt</m> traverses the region <m>R</m> in a counterclockwise fashion.
+          Thus
+          <md>
+            <mrow>\text{ Area of \(R\) }  \amp = \iint_R\ dA</mrow>
+            <mrow>\amp = \oint_C \vec F\cdot d\vec r</mrow>
+            <mrow>\amp = \int_{-1}^1 \la -t^2,0\ra\cdot \la 1-3t^2,2t\ra\ dt</mrow>
+            <mrow>\amp = \int_{-1}^1 (-t^2)(1-3t^2)\ dt</mrow>
+            <mrow>\amp = \frac8{15}</mrow>
+          </md>.
+        </p>
+      </solution>
+    </example>
+  </subsection>
+
+  <subsection>
+    <title>The Divergence Theorem</title>
+    <p>
+      Green's Theorem makes a connection between the circulation around a closed region <m>R</m> and the sum of the curls over <m>R</m>.
+      The Divergence Theorem makes a somewhat
+      <q>opposite</q> connection:
+      the total flux across the boundary of <m>R</m> is equal to the sum of the divergences over <m>R</m>.
+    </p>
+
+    <theorem xml:id="thm_divergence1">
+      <title>The Divergence Theorem (in the plane)</title>
+      <statement>
+        <p>
+          Let <m>R</m> be a closed,
+          bounded region of the plane whose boundary <m>C</m> is composed of finitely many smooth curves,
+          let <m>\vec r(t)</m> be a counterclockwise parametrization of <m>C</m>,
+          and let <m>\vec F =\la M,N\ra</m> where <m>M_x</m> and <m>N_y</m> are continuous over <m>R</m>.
+          Then<idx><h>Divergence Theorem</h><h>in the plane</h></idx>
+          <me>
+            \oint_C \vec F\cdot \vec n\ ds = \iint_R\divv \vec F\ dA
+          </me>.
+        </p>
+      </statement>
+    </theorem>
+
+    <example xml:id="ex_div1">
+      <title>Confirming the Divergence Theorem</title>
+      <statement>
+        <p>
+          Let <m>\vec F = \la x-y,x+y\ra</m>,
+          let <m>C</m> be the circle of radius 2 centered at the origin and define <m>R</m> to be the interior of that circle,
+          as shown in <xref ref="fig_div1">Figure</xref>.
+          Verify the Divergence Theorem;
+          that is, find the flux across <m>C</m> and show it is equal to the double integral of <m>\divv \vec F</m> over <m>R</m>.
+        </p>
+
+        <figure xml:id="fig_div1">
+          <caption>The region <m>R</m> used in <xref ref="ex_div1">Example</xref>.</caption>
+          <img src="figures/figdiv1"/>
+        </figure>
+      </statement>
+      <solution>
+        <p>
+          We parametrize the circle in the usual way, with <m>\vrt =</m>
+        </p>
+
+        <p>
+          <m>\la 2\cos t,2\sin t\ra</m>, <m>0\leq t\leq 2\pi</m>.
+          The flux across <m>C</m> is
+          <md>
+            <mrow>\oint_C \vec F\cdot \vec n\ ds \amp = \oint_C\big(M\gp(t)-N\fp(t)\big)\ dt</mrow>
+            <mrow>\amp = \int_0^{2\pi} \big((2\cos t-2\sin t)(2\cos t) - (2\cos t+2\sin t)(-2\sin t)\big)\ dt</mrow>
+            <mrow>\amp = \int_0^{2\pi} 4\ dt = 8\pi</mrow>
+          </md>.
+        </p>
+
+        <p>
+          We compute the divergence of <m>\vec F</m> as <m>\divv \vec F = M_x+N_y = 2</m>.
+          Since the divergence is constant,
+          we can compute the following double integral easily:
+          <me>
+            \iint_R \divv \vec F\ dA = \iint_R 2\ dA = 2\iint_R\ dA = 2(\text{ area of \(R\) } ) = 8\pi
+          </me>,
+          which matches our previous result.
+        </p>
+      </solution>
+    </example>
+
+    <example xml:id="ex_div2">
+      <title>Flux when $\divv \vec F = 0$</title>
+      <statement>
+        <p>
+          Let <m>\vec F</m> be any field where <m>\divv \vec F = 0</m>,
+          and let <m>C_1</m> and <m>C_2</m> be any two nonintersecting paths,
+          except that each begin at point <m>A</m> and end at point <m>B</m>
+          (see <xref ref="fig_div2">Figure</xref>).
+          Show why the flux across <m>C_1</m> and <m>C_2</m> is the same.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          By referencing <xref ref="fig_div2">Figure</xref>,
+          we see we can make a closed path <m>C</m> that combines <m>C_1</m> with <m>C_2</m>,
+          where <m>C_2</m> is traversed with its opposite orientation.
+          We label the enclosed region <m>R</m>.
+          Since <m>\divv \vec F = 0</m>,
+          the Divergence Theorem states that
+          <me>
+            \oint_C \vec F\cdot \vec n\ ds = \iint_R \divv \vec F\ dA = \iint_R 0\ dA = 0
+          </me>.
+        </p>
+
+        <p>
+          Using the properties and notation given in <xref ref="thm_line_int_properties_vector">Theorem</xref>,
+          consider:
+        </p>
+
+        <figure xml:id="fig_div2">
+          <caption>As used in <xref ref="ex_div2">Example</xref>, the vector field has a divergence of 0 and the two paths only intersect at their initial and terminal points.</caption>
+          <img src="figures/figdiv3"/>
+        </figure>
+        <md>
+          <mrow>0 \amp = \oint_C \vec F\cdot \vec n\ ds</mrow>
+          <mrow>\amp = \int_{C_1} \vec F\cdot \vec n\ ds +\int_{C_2^*} \vec F\cdot \vec n\ ds</mrow>
+          <intertext>(where <m>C_2^*</m> is the path <m>C_2</m> traversed with opposite orientation)</intertext>
+          <mrow>\amp = \int_{C_1} \vec F\cdot \vec n\ ds -\int_{C_2} \vec F\cdot \vec n\ ds.</mrow>
+          <mrow>\int_{C_2} \vec F\cdot \vec n\ ds\amp = \int_{C_1} \vec F\cdot \vec n\ ds</mrow>
+        </md>.
+        <p>
+          Thus the flux across each path is equal.
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      In this section, we have investigated flow and flux,
+      quantities that measure interactions between a vector field and a planar curve.
+      We can also measure flow along spatial curves,
+      though as mentioned before,
+      it does not make sense to measure flux across spatial curves.
+    </p>
+
+    <p>
+      It does, however,
+      make sense to measure the amount of a vector field that passes across a surface in space <mdash /> i.e, the flux across a surface.
+      We will study this,
+      though in the next section we first learn about a more powerful way to describe surfaces than using functions of the form <m>z=f(x,y)</m>.
+    </p>
+  </subsection>
+
+  <subsection>
+    <title>Terms and Concepts</title>
+    <exercise>
+      <statement>
+        <p>
+          Let <m>\vec F</m> be a vector field and let <m>C</m> be a curve.
+          <em>Flow</em> is a measure of the amount of <m>\vec F</m> going <fillin /> <m>C</m>;
+          <em>flux</em> is a measure of the amount of <m>\vec F</m> going <fillin /> <m>C</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          along, across
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          What is circulation?
+        </p>
+      </statement>
+      <answer>
+        <p>
+          It is the measure of flow around the entirety of a closed curve <m>C</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Green's Theorem states, informally,
+          that the circulation around a closed curve that bounds a region <m>R</m> is equal to the sum of <fillin /> across <m>R</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          the curl of <m>\vec F</m>, or <m>\curl \vec F</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          The Divergence Theorem states, informally,
+          that the outward flux across a closed curve that bounds a region <m>R</m> is equal to the sum of <fillin /> across <m>R</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          the divergence of <m>\vec F</m>, or <m>\divv \vec F</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Let <m>\vec F</m> be a vector field and let <m>C_1</m> and <m>C_2</m> be any nonintersecting paths except that each starts at point <m>A</m> and ends at point <m>B</m>.
+          If <fillin /><m>=0</m>,
+          then <m>\int_{C_1} \vec F\cdot \vec T\ ds = \int_{C_2} \vec F\cdot \vec T\ ds</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\curl \vec F</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          Let <m>\vec F</m> be a vector field and let <m>C_1</m> and <m>C_2</m> be any nonintersecting paths except that each starts at point <m>A</m> and ends at point <m>B</m>.
+          If <fillin /><m>=0</m>,
+          then <m>\int_{C_1} \vec F\cdot \vec n\ ds = \int_{C_2} \vec F\cdot \vec n\ ds</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>\divv \vec F</m>
+        </p>
+      </answer>
+    </exercise>
+  </subsection>
+
+  <subsection>
+    <title>Problems</title>
+    <p>
+      In the following exercises,
+      a vector field <m>\vec F</m> and a curve <m>C</m> are given.
+      Evaluate <m>\int_C \vec F\cdot\vec n\ ds</m>,
+      the flux of <m>\vec F</m> over <m>C</m>.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle x+y,x-y\rangle</m>;
+          <m>C</m> is the curve with initial and terminal points <m>(3,-2)</m> and <m>(3,2)</m>,
+          respectively,
+          parametrized by <m>\vec r(t) = \langle 3t^2,2t\rangle</m> on <m>-1\leq t\leq 1</m>.
+        </p>
+      </statement>
+      <answer>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle x+y,x-y\rangle</m>;
+          <m>C</m> is the curve with initial and terminal points <m>(3,-2)</m> and <m>(3,2)</m>,
+          respectively,
+          parametrized by <m>\vec r(t) = \langle 3,t\rangle</m> on <m>-2\leq t\leq 2</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>12</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle x^2,y+1\rangle</m>;
+          <m>C</m> is line segment from <m>(0,0)</m> to <m>(2,4)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>-2/3</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle x^2,y+1\rangle</m>;
+          <m>C</m> is the portion of the parabola <m>y=x^2</m> from <m>(0,0)</m> to <m>(2,4)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>10/3</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle y,0\rangle</m>;
+          <m>C</m> is the line segment from <m>(0,0)</m> to <m>(0,1)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>1/2</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle y,0\rangle</m>;
+          <m>C</m> is the line segment from <m>(0,0)</m> to <m>(1,1)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          <m>1/2</m>
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises,
+      a vector field <m>\vec F</m> and a closed curve <m>C</m>,
+      enclosing a region <m>R</m>, are given.
+      Verify Green's Theorem by evaluating <m>\oint_C\vec F\cdot d\vec r</m> and
+      <m>\iint_R \curl \vec F\ dA</m>, showing they are equal.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle x-y,x+y\rangle</m>;
+          <m>C</m> is the closed curve composed of the parabola <m>y=x^2</m> on
+          <m>0\leq x\leq 2</m> followed by the line segment from <m>(2,4)</m> to <m>(0,0)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          The line integral <m>\oint_C\vec F\cdot d\vec r</m>,
+          over the parabola, is <m>38/3</m>;
+          over the line, it is <m>-10</m>.
+          The total line integral is thus <m>38/3-10 = 8/3</m>.
+          The double integral of <m>\curl \vec F = 2</m> over <m>R</m> also has value <m>8/3</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle -y,x\rangle</m>;
+          <m>C</m> is the unit circle.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Both the line integral and double integral have value of <m>2\pi</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle 0,x^2\rangle</m>;
+          <m>C</m> the triangle with corners at <m>(0,0)</m>,
+          <m>(2,0)</m> and <m>(1,1)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Three line integrals need to be computed to compute <m>\oint_C \vec F\cdot d\vec r</m>.
+          It does not matter which corner one starts from first,
+          but be sure to proceed around the triangle in a counterclockwise fashion.
+        </p>
+
+        <p>
+          From <m>(0,0)</m> to <m>(2,0)</m>,
+          the line integral has a value of 0.
+          From <m>(2,0)</m> to <m>(1,1)</m> the integral has a value of <m>7/3</m>.
+          From <m>(1,1)</m> to <m>(0,0)</m> the line integral has a value of <m>-1/3</m>.
+          Total value is 2.
+        </p>
+
+        <p>
+          The double integral of <m>\curl\vec F</m> over <m>R</m> also has value 2.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle x+y,2x\rangle</m>;
+          <m>C</m> the curve that starts at <m>(0,1)</m>,
+          follows the parabola <m>y=(x-1)^2</m> to <m>(3,4)</m>,
+          then follows a line back to <m>(0,1)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Two line integrals need to be computed to compute <m>\oint_C \vec F\cdot d\vec r</m>.
+          Along the parabola, the line integral has value <m>25.5</m>.
+          Along the line, the line integral has value <m>-21</m>.
+          Together, the total value is <m>4.5</m>
+        </p>
+
+        <p>
+          The double integral of <m>\curl\vec F</m> over <m>R</m> also has value <m>4.5</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises,
+      a closed curve <m>C</m> enclosing a region <m>R</m> is given.
+      Find the area of <m>R</m> by computing
+      <m>\oint_C \vec F\cdot d\vec r</m> for an appropriate choice of vector field <m>\vec F</m>.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the ellipse parametrized by
+          <m>\vec r(t) = \langle 4\cos t,3\sin t\rangle</m> on <m>0\leq t\leq 2\pi</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Any choice of <m>\vec F</m> is appropriate as long as <m>\curl \vec F = 1</m>.
+          When <m>\vec F = \langle -y/2,x/2\rangle</m>,
+          the integrand of the line integral is simply 6.
+          The area of <m>R</m> is <m>12\pi</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the curve parametrized by
+          <m>\vec r(t) = \langle \cos t,\sin (2t)\rangle</m> on <m>-\pi/2\leq t\leq \pi/2</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Any choice of <m>\vec F</m> is appropriate as long as <m>\curl \vec F = 1</m>.
+          The choices of <m>\vec F = \langle -y,0\rangle</m> and
+          <m>\langle 0,x\rangle</m> each lead to reasonable integrands.
+          The area of <m>R</m> is <m>4/3</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the curve parametrized by
+          <m>\vec r(t) = \langle \cos t,\sin (2t)\rangle</m> on <m>0\leq t\leq 2</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Any choice of <m>\vec F</m> is appropriate as long as <m>\curl \vec F = 1</m>.
+          The choices of <m>\vec F = \langle -y,0\rangle</m>,
+          <m>\langle 0,x\rangle</m> and
+          <m>\langle -y/2,x/2\rangle</m> each lead to reasonable integrands.
+          The area of <m>R</m> is <m>16/15</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>C</m> is the curve parametrized by
+          <m>\vec r(t) = \langle 2\cos t+\frac1{10}\cos(10t),2\sin t+\frac1{10}\sin (10t)\rangle</m> on <m>0\leq t\leq 2\pi</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Any choice of <m>\vec F</m> is appropriate as long as <m>\curl \vec F = 1</m>.
+          The choice of <m>\vec F = \langle -y/2,x/2\rangle</m> leads to a reasonable integrand after simplification.
+          The area of <m>R</m> is <m>41\pi/10</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <p>
+      In the following exercises,
+      a vector field <m>\vec F</m> and a closed curve <m>C</m>,
+      enclosing a region <m>R</m>, are given.
+      Verify the Divergence Theorem by evaluating <m>\oint_C\vec F\cdot \vec n\ ds</m> and
+      <m>\iint_R \divv \vec F\ dA</m>, showing they are equal.
+    </p>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle x-y,x+y\rangle</m>;
+          <m>C</m> is the closed curve composed of the parabola <m>y=x^2</m> on
+          <m>0\leq x\leq 2</m> followed by the line segment from <m>(2,4)</m> to <m>(0,0)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          The line integral <m>\oint_C\vec F\cdot \vec n\ ds</m>,
+          over the parabola, is <m>-22/3</m>;
+          over the line, it is <m>10</m>.
+          The total line integral is thus <m>-22/3+10 = 8/3</m>.
+          The double integral of <m>\divv \vec F = 2</m> over <m>R</m> also has value <m>8/3</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle -y,x\rangle</m>;
+          <m>C</m> is the unit circle.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Both the line integral and double integral have value of <m>0</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle 0,y^2\rangle</m>;
+          <m>C</m> the triangle with corners at <m>(0,0)</m>,
+          <m>(2,0)</m> and <m>(1,1)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Three line integrals need to be computed to compute <m>\oint_C \vec F\cdot \vec n\ ds</m>.
+          It does not matter which corner one starts from first,
+          but be sure to proceed around the triangle in a counterclockwise fashion.
+        </p>
+
+        <p>
+          From <m>(0,0)</m> to <m>(2,0)</m>,
+          the line integral has a value of 0.
+          From <m>(2,0)</m> to <m>(1,1)</m> the integral has a value of <m>1/3</m>.
+          From <m>(1,1)</m> to <m>(0,0)</m> the line integral has a value of <m>1/3</m>.
+          Total value is <m>2/3</m>.
+        </p>
+
+        <p>
+          The double integral of <m>\divv\vec F</m> over <m>R</m> also has value <m>2/3</m>.
+        </p>
+      </answer>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          <m>\vec F = \langle x^2/2,y^2/2\rangle</m>;
+          <m>C</m> the curve that starts at <m>(0,1)</m>,
+          follows the parabola <m>y=(x-1)^2</m> to <m>(3,4)</m>,
+          then follows a line back to <m>(0,1)</m>.
+        </p>
+      </statement>
+      <answer>
+        <p>
+          Two line integrals need to be computed to compute <m>\oint_C \vec F\cdot \vec n\ ds</m>.
+          Along the parabola, the line integral has value <m>159/20</m>.
+          Along the line, the line integral has value <m>6</m>.
+          Together, the total value is <m>279/20</m>.
+        </p>
+
+        <p>
+          The double integral of <m>\divv\vec F</m> over <m>R</m> also has value <m>279/20</m>.
+        </p>
+      </answer>
+    </exercise>
+  </subsection>
+</section>
+
