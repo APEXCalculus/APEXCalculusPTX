@@ -1,1056 +1,1285 @@
-
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <section xml:id="sec_prod_quot_rules">
   <title>The Product and Quotient Rules</title>
-  <introduction>
+  <!--<introduction> Violates DTD to have introduction with no subsections -->
+  <p>
+    <xref ref="sec_basic_diff_rules">Section</xref> showed that,
+    in some ways, derivatives behave nicely.
+    The <xref ref="constant-multiple-derivative-rule" autoname="title" /> and <xref ref="sum-difference-derivative-rule" autoname="title" /> established that the derivative of <m>f(x) = 5x^2+\sin(x)</m> was not complicated.
+    We neglected computing the derivative of things like
+    <m>g(x) = 5x^2\sin(x)</m> and <m>h(x) = \frac{5x^2}{\sin(x) }</m> on purpose;
+    their derivatives are <em>not</em> as straightforward.
+    (If you had to guess what their respective derivatives are,
+    you would probably guess wrong.)
+    For these, we need the Product and Quotient Rules, respectively,
+    which are defined in this section.
+    We begin with the Product Rule.
+  </p>
+
+  <theorem xml:id="thm_ProductRule">
+    <title>Product Rule</title>
+    <statement>
+      <p>
+        Let <m>f</m> and <m>g</m> be differentiable functions on an open interval <m>I</m>.
+
+        <index>
+          <main>Power Rule</main><sub>differentiation</sub>
+        </index>
+
+        <index>
+          <main>derivative</main><sub>Product Rule</sub>
+        </index>
+
+        Then <m>fg</m> is a differentiable function on <m>I</m>, and
+        <me>
+          \lzoo{x}{f(x)g(x)} = \fp(x)g(x) + f(x)g'(x)
+        </me>.
+      </p>
+    </statement>
+  </theorem>
+
+  <warning>
     <p>
-      The previous section showed that,
-      in some ways, derivatives behave nicely.
-      The Constant Multiple and Sum/Difference Rules established that the derivative of <m>f(x) = 5x^2+\sin x</m> was not complicated.
-      We neglected computing the derivative of things like
-      <m>g(x) = 5x^2\sin x</m> and <m>h(x) = \frac{5x^2}{\sin x}</m> on purpose;
-      their derivatives are <em>not</em> as straightforward.
-      (If you had to guess what their respective derivatives are,
-      you would probably guess wrong.)
-      For these, we need the Product and Quotient Rules, respectively,
-      which are defined in this section.
+      <m>\lzoo{x}{f(x)g(x)}\neq \fp(x)g'(x)</m>!
+      While this would be simpler than the <xref ref="thm_ProductRule" autoname="title" />, it is wrong.
+    </p>
+  </warning>
+
+  <p>
+    We practice using this new rule in an example,
+    followed by an example that demonstrates why this theorem is true.
+  </p>
+
+  <example xml:id="ex_prod1">
+    <title>Using the Product Rule</title>
+    <statement>
+      <p>
+        Use the Product Rule to compute the derivative of <m>y=5x^2\sin(x)</m>.
+        Evaluate the derivative at <m>x=\pi/2</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        To make our use of the <xref ref="thm_ProductRule" autoname="title" /> explicit,
+        let's set <m>f(x) = 5x^2</m> and <m>g(x) = \sin(x)</m>.
+        We easily compute/recall that
+        <m>\fp(x) = 10x</m> and <m>g'(x) = \cos(x)</m>.
+        Employing the rule, we have
+        <md>
+          <mrow>\lzoo{x}{5x^2\sin(x)} \amp= \lzoo{x}{5x^2}\sin(x) + 5x^2\lzoo{x}{\sin(x)}</mrow>
+          <mrow>\amp= 10x\sin(x) + 5x^2\cos(x)</mrow>
+        </md>.
+      </p>
+
+      <p>
+        At <m>x=\pi/2</m>, we have
+        <me>
+            y'(\pi/2) = 10\cdot\frac{\pi}2 \sin\left(\frac{\pi}{2}\right) + 5\left(\frac{\pi}{2}\right)^2\cos\left(\frac{\pi}2\right) = 5\pi
+        </me>.
+      </p>
+
+      <p>
+        We graph <m>y</m> and its tangent line at <m>x=\pi/2</m>,
+        which has a slope of <m>5\pi</m>,
+        in <xref ref="fig_5xsquaredsinx">Figure</xref>.
+        While this does not <em>prove</em>
+        that the Product Rule is the correct way to handle derivatives of products,
+        it helps validate its truth.
+      </p>
+
+      <figure xml:id="fig_5xsquaredsinx">
+        <caption>A graph of <m>y = 5x^2\sin(x)</m> and its tangent line at <m>x=\pi/2</m>.</caption>
+          <!-- START figures/fig_5xsquaredsinx.tex -->
+        <image xml:id="img_5xsquaredsinx" width="47%">
+          <description></description>
+          <latex-image>
+          <![CDATA[
+          \begin{tikzpicture}
+          \begin{axis}[xmin=-0.1,xmax=3.5,
+          ymin=-1.1,ymax=21,
+          xtick={1.57,3.14},
+          xticklabels={$\frac{\pi}2$,$\pi$},]
+          \addplot+[domain=0:3.14,samples=100] {5*(x^2)*sin(x*180/3.14)};
+          \addplot [tangentline,domain=0.75:2] {15.7*(x-1.57)+12.34};
+          \addplot[soliddot] coordinates{(1.57,12.34)};
+          \end{axis}
+          \end{tikzpicture}
+          ]]>
+          </latex-image>
+        </image>
+          <!-- figures/fig_5xsquaredsinx.tex END -->
+      </figure>
+    </solution>
+  </example>
+
+  <p>
+    We now investigate why the <xref ref="thm_ProductRule" autoname="title" /> is true.
+  </p>
+
+  <proof statement="thm_ProductRule">
+    <p>
+      We can use the definition of the derivative to prove <xref ref="thm_ProductRule">Theorem</xref>.
     </p>
 
     <p>
-      We begin with the Product Rule.
-    </p>
-
-    <theorem xml:id="thm_ProductRule">
-      <title>Product Rule</title>
-      <statement>
-        <p>
-          Let <m>f</m> and <m>g</m> be differentiable functions on an open interval <m>I</m>.
-              <idx><h>Power Rule</h><h>differentiation</h></idx>
-              <idx><h>derivative</h><h>Product Rule</h></idx>
-          Then <m>fg</m> is a differentiable function on <m>I</m>, and
-          <me>
-            \frac{d}{dx}\Big(f(x)g(x)\Big) = f(x)g'(x) + \fp(x)g(x)
-          </me>.
-        </p>
-      </statement>
-    </theorem>
-
-    <p>
-      <em>Important:</em> <m>\ds\frac{d}{dx}\Big(f(x)g(x)\Big) \neq \fp(x)g'(x)</m>!
-      While this answer is simpler than the Product Rule, it is wrong.
-    </p>
-
-    <p>
-      We practice using this new rule in an example,
-      followed by an example that demonstrates why this theorem is true.
-    </p>
-
-    <example xml:id="ex_prod1">
-      <title>Using the Product Rule</title>
-      <statement>
-        <p>
-          Use the Product Rule to compute the derivative of <m>y=5x^2\sin x</m>.
-          Evaluate the derivative at <m>x=\pi/2</m>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          To make our use of the Product Rule explicit,
-          let's set <m>f(x) = 5x^2</m> and <m>g(x) = \sin x</m>.
-          We easily compute/recall that
-          <m>\fp(x) = 10x</m> and <m>g'(x) = \cos x</m>.
-          Employing the rule, we have
-          <me>
-            \frac{d}{dx}\Big(5x^2\sin x\Big) = 5x^2\cos x + 10x\sin x
-          </me>.
-        </p>
-
-        <p>
-          At <m>x=\pi/2</m>, we have
-          <me>
-            y'(\pi/2) = 5\left(\frac{\pi}{2}\right)^2\cos \left(\frac{\pi}2\right) + 10\frac{\pi}2 \sin\left(\frac{\pi}{2}\right) = 5\pi
-          </me>.
-        </p>
-
-        <p>
-          We graph <m>y</m> and its tangent line at <m>x=\pi/2</m>,
-          which has a slope of <m>5\pi</m>,
-          in <xref ref="fig_5xsquaredsinx">Figure</xref>.
-          While this does not <em>prove</em>
-          that the Product Rule is the correct way to handle derivatives of products,
-          it helps validate its truth.
-        </p>
-
-        <figure xml:id="fig_5xsquaredsinx">
-          <caption>A graph of <m>y = 5x^2\sin x</m> and its tangent line at <m>x=\pi/2</m>.</caption>
-          <img src="figures/fig5xsquaredsinx"/>
-        </figure>
-      </solution>
-    </example>
-
-    <p>
-      We now investigate why the Product Rule is true.
-    </p>
-
-    <example xml:id="ex_prove_product">
-      <title>A proof of the Product Rule</title>
-      <statement>
-        <p>
-          Use the definition of the derivative to prove <xref ref="thm_ProductRule">Theorem</xref>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          By the limit definition, we have
-          <me>
-            \frac{d}{dx}\Big(f(x)g(x)\Big) =\lim_{h\to0} \frac{f(x+h)g(x+h)-f(x)g(x)}{h}
-          </me>.
-        </p>
-
-        <p>
-          We now do something a bit unexpected;
-          add 0 to the numerator
-          (so that nothing is changed)
-          in the form of <m>-f(x+h)g(x)+f(x+h)g(x)</m>,
-          then do some regrouping as shown.
-          <md>
-            <mrow>\frac{d}{dx}\Big(f(x)g(x)\Big) \amp =\lim_{h\to0} \frac{f(x+h)g(x+h)-f(x)g(x)}{h}   (now add 0 to the numerator)</mrow>
-            <mrow>\amp =  \lim_{h\to0} \frac{f(x+h)g(x+h)-f(x+h)g(x)+f(x+h)g(x)-f(x)g(x)}{h}   (regroup)</mrow>
-            <mrow>\amp =  \lim_{h\to0} \frac{\Big(f(x+h)g(x+h)-f(x+h)g(x)\Big)+\Big(f(x+h)g(x)-f(x)g(x)\Big)}{h}</mrow>
-            <mrow>\amp =  \lim_{h\to0} \frac{f(x+h)g(x+h)-f(x+h)g(x)}{h}+\lim_{h\to0}\frac{f(x+h)g(x)-f(x)g(x)}{h} (factor)</mrow>
-            <mrow>\amp =\lim_{h\to0} f(x+h)\frac{g(x+h)-g(x)}{h}+\lim_{h\to0}\frac{f(x+h)-f(x)}{h}g(x) (apply limits)</mrow>
-            <mrow>\amp =f(x)g'(x) + \fp(x)g(x)</mrow>
-          </md>.
-        </p>
-      </solution>
-    </example>
-
-    <p>
-      It is often true that we can recognize that a theorem is true through its proof yet somehow doubt its applicability to real problems.
-      In the following example,
-      we compute the derivative of a product of functions in two ways to verify that the Product Rule is indeed <q>right.</q>
-    </p>
-
-    <example xml:id="ex_prod2">
-      <title>Exploring alternate derivative methods</title>
-      <statement>
-        <p>
-          Let <m>y = (x^2+3x+1)(2x^2-3x+1)</m>.
-          Find <m>y'</m> two ways: first,
-          by expanding the given product and then taking the derivative,
-          and second, by applying the Product Rule.
-          Verify that both methods give the same answer.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          We first expand the expression for <m>y</m>;
-          a little algebra shows that <m>y = 2x^4+3x^3-6x^2+1</m>.
-          It is easy to compute <m>y'</m>:
-          <me>
-            y' = 8x^3+9x^2-12x
-          </me>.
-        </p>
-
-        <p>
-          Now apply the Product Rule.
-          <md>
-            <mrow>y' \amp = (x^2+3x+1)(4x-3)+(2x+3)(2x^2-3x+1)</mrow>
-            <mrow>\amp = \big(4x^3+9x^2-5x-3\big) + \big(4x^3-7x+3\big)</mrow>
-            <mrow>\amp  = 8x^3+9x^2-12x</mrow>
-          </md>.
-        </p>
-
-        <p>
-          The uninformed usually assume that
-          <q>the derivative of the product is the product of the derivatives.</q>
-          Thus we are tempted to say that <m>y' = (2x+3)(4x-3) = 8x^2+6x-9</m>.
-          Obviously this is not correct.
-        </p>
-      </solution>
-    </example>
-
-    <example xml:id="ex_prod10">
-      <title>Using the Product Rule with a product of three functions</title>
-      <statement>
-        <p>
-          Let <m>y = x^3\ln x\cos x</m>.
-          Find <m>y'</m>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          We have a product of three functions while the Product Rule only specifies how to handle a product of two functions.
-          Our method of handling this problem is to simply group the latter two functions together,
-          and consider <m>y = x^3\big(\ln x\cos x\big)</m>.
-          Following the Product Rule, we have
-          <md>
-            <mrow>\yp \amp = (x^3)\big(\ln x\cos x\big)' + 3x^2\big(\ln x\cos x\big)</mrow>
-            <intertext>To evaluate <m>\big(\ln x\cos x\big)'</m>, we apply the Product Rule again:</intertext>
-            <mrow>\amp = (x^3)\big(\ln x(-\sin x) + \frac1x\cos x\big)+ 3x^2\big(\ln x\cos x\big)</mrow>
-            <mrow>\amp = x^3\ln x(-\sin x) + x^3\frac1x\cos x+ 3x^2\ln x\cos x</mrow>
-          </md>
-        </p>
-
-        <p>
-          Recognize the pattern in our answer above:
-          when applying the Product Rule to a product of three functions,
-          there are three terms added together in the final derivative.
-          Each term contains only one derivative of one of the original functions,
-          and each function's derivative shows up in only one term.
-          It is straightforward to extend this pattern to finding the derivative of a product of 4 or more functions.
-        </p>
-      </solution>
-    </example>
-
-    <p>
-      We consider one more example before discussing another derivative rule.
-    </p>
-
-    <example xml:id="ex_deriv_ln">
-      <title>Using the Product Rule</title>
-      <statement>
-        <p>
-          Find the derivatives of the following functions.
-
-          <ol>
-            <li>
-              <p>
-                <m>f(x) = x\ln x</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>g(x) = x\ln x - x</m>.
-              </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-      <solution>
-        <p>
-          Recalling that the derivative of <m>\ln x</m> is <m>1/x</m>,
-          we use the Product Rule to find our answers.
-
-          <ol>
-            <li>
-              <p>
-                <m>\ds \frac{d}{dx}\Big(x\ln x\Big) = x\cdot 1/x + 1\cdot \ln x = 1+\ln x</m>.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                Using the result from above, we compute
-                <me>
-                  \ds \frac{d}{dx}\Big(x\ln x-x\Big) = 1+\ln x-1 = \ln x
-                </me>.
-              </p>
-            </li>
-          </ol>
-        </p>
-
-        <p>
-          This seems significant;
-          if the natural log function <m>\ln x</m> is an important function
-          (it is),
-          it seems worthwhile to know a function whose derivative is <m>\ln x</m>.
-          We have found one.
-          (We leave it to the reader to find another;
-          a correct answer will be <em>very</em> similar to this one.)
-        </p>
-      </solution>
-    </example>
-
-    <p>
-      We have learned how to compute the derivatives of sums,
-      differences, and products of functions.
-      We now learn how to find the derivative of a quotient of functions.
-    </p>
-
-    <theorem xml:id="thm_QuotientRule">
-      <title>Quotient Rule</title>
-      <statement>
-        <p>
-          Let <m>f</m> and <m>g</m> be differentiable functions defined on an open interval <m>I</m>,
-          where <m>g(x) \neq 0</m> on <m>I</m>.
-              <idx><h>derivative</h><h>Quotient Rule</h></idx>
-              <idx><h>Quotient Rule</h></idx>
-          Then <m>f/g</m> is differentiable on <m>I</m>, and
-          <me>
-            \frac{d}{dx}\left(\frac{f(x)}{g(x)}\right) = \frac{g(x)\fp(x) - f(x)g'(x)}{g(x)^2}
-          </me>.
-        </p>
-      </statement>
-    </theorem>
-
-    <p>
-      The Quotient Rule is not hard to use,
-      although it might be a bit tricky to remember.
-      A useful mnemonic works as follows.
-      Consider a fraction's numerator and denominator as <q>HI</q>
-      and <q>LO</q>, respectively.
-      Then
+      By the limit definition, we have
       <me>
-        \frac{d}{dx}\left(\frac{\text{ HI } }{\text{ LO } }\right) = \frac{\text{ LO\(\cdot\) dHI -- HI\(\cdot\) dLO } }{\text{ LOLO } }
-      </me>,
-      read <q>low dee high minus high dee low,
-      over low low.</q> Said fast,
-      that phrase can roll off the tongue,
-      making it easy to memorize.
-      The <q>dee high</q> and <q>dee low</q>
-      parts refer to the derivatives of the numerator and denominator,
-      respectively.
-    </p>
-
-    <p>
-      Let's practice using the Quotient Rule.
-    </p>
-
-    <example xml:id="ex_quot1">
-      <title>Using the Quotient Rule</title>
-      <statement>
-        <p>
-          Let <m>\ds f(x) = \frac{5x^2}{\sin x}</m>.
-          Find <m>\fp(x)</m>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          Directly applying the Quotient Rule gives:
-          <md>
-            <mrow>\frac{d}{dx}\left(\frac{5x^2}{\sin x}\right) \amp = \frac{\sin x\cdot 10x - 5x^2\cdot \cos x}{\sin^2x}</mrow>
-            <mrow>\amp =  \frac{10x\sin x - 5x^2\cos x}{\sin^2 x}</mrow>
-          </md>.
-        </p>
-      </solution>
-    </example>
-
-    <p>
-      The Quotient Rule allows us to fill in holes in our understanding of derivatives of the common trigonometric functions.
-      We start with finding the derivative of the tangent function.
-    </p>
-
-    <example xml:id="ex_der_tan">
-      <title>Using the Quotient Rule to find $\frac{d}{dx}\big(\tan x\big)$.</title>
-      <statement>
-        <p>
-          Find the derivative of <m>y=\tan x</m>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          At first, one might feel unequipped to answer this question.
-          But recall that <m>\tan x = \sin x/\cos x</m>,
-          so we can apply the Quotient Rule.
-          <md>
-            <mrow>\frac{d}{dx}\Big(\tan x\Big) \amp = \frac{d}{dx}\left(\frac{\sin x}{\cos x}\right)</mrow>
-            <mrow>\amp =  \frac{\cos x \cos x - \sin x (-\sin x)}{\cos^2 x}</mrow>
-            <mrow>\amp = \frac{\cos^2x+\sin^2x}{\cos^2x}</mrow>
-            <mrow>\amp = \frac{1}{\cos^2x}</mrow>
-            <mrow>\amp = \sec ^2 x</mrow>
-          </md>.
-        </p>
-
-        <p>
-          This is a beautiful result.
-          To confirm its truth,
-          we can find the equation of the tangent line to <m>y=\tan x</m> at <m>x=\pi/4</m>.
-          The slope is <m>\sec^2(\pi/4) = 2</m>;
-          <m>y=\tan x</m>, along with its tangent line,
-          is graphed in <xref ref="fig_tanx">Figure</xref>.
-        </p>
-
-        <figure xml:id="fig_tanx">
-          <caption>A graph of <m>y=\tan x</m> along with its tangent line at <m>x=\pi/4</m>.</caption>
-          <img src="figures/figtanx"/>
-        </figure>
-      </solution>
-    </example>
-
-    <p>
-      We include this result in the following theorem about the derivatives of the trigonometric functions.
-      Recall we found the derivative of
-      <m>y=\sin x</m> in <xref ref="ex_deriv_sinx">Example</xref>
-      and stated the derivative of the cosine function in <xref ref="thm_deriv_common">Theorem</xref>.
-      The derivatives of the cotangent,
-      cosecant and secant functions can all be computed directly using <xref ref="thm_deriv_common">Theorem</xref> and the Quotient Rule.
-    </p>
-
-    <theorem xml:id="thm_deriv_trig">
-      <title>Derivatives of Trigonometric Functions</title>
-      <statement>
-        <ol cols="2">
-          <li>
-            <p>
-              <m>\ds \frac{d}{dx}\big(\sin x\big) = \cos x</m><idx><h>derivative</h><h>trigonometric functions</h></idx>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>\ds \frac{d}{dx}\big(\tan x\big) = \sec^2 x</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>\ds \frac{d}{dx}\big(\sec x\big) = \sec x\tan x</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>\ds \frac{d}{dx}\big(\cos x\big) = -\sin x</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>\ds \frac{d}{dx}\big(\cot x\big) = -\csc^2 x</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>\ds \frac{d}{dx}\big(\csc x\big) = -\csc x\cot x</m>
-            </p>
-          </li>
-        </ol>
-      </statement>
-    </theorem>
-
-    <p>
-      To remember the above,
-      it may be helpful to keep in mind that the derivatives of the trigonometric functions that start with <q>c</q>
-      have a minus sign in them.
-    </p>
-
-    <example xml:id="ex_prod_quot">
-      <title>Exploring alternate derivative methods</title>
-      <statement>
-        <p>
-          In <xref ref="ex_quot1">Example</xref>
-          the derivative of <m>\ds f(x) = \frac{5x^2}{\sin x}</m> was found using the Quotient Rule.
-          Rewriting <m>f</m> as <m>f(x) = 5x^2\csc x</m>,
-          find <m>\fp</m> using <xref ref="thm_deriv_trig">Theorem</xref>
-          and verify the two answers are the same.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          We found in <xref ref="ex_quot1">Example</xref>
-          that the <m>\ds \fp(x) = \frac{10x\sin x - 5x^2\cos x}{\sin^2 x}</m>.
-          We now find <m>\fp</m> using the Product Rule,
-          considering <m>f</m> as <m>f(x) = 5x^2\csc x</m>.
-          <md>
-            <mrow>\fp(x) \amp = \frac{d}{dx}\Big(5x^2\csc x\Big)</mrow>
-            <mrow>\amp =  $5x^2(-\csc x\cot x) + 10x\csc x$ \text{ (now rewrite trig functions) }</mrow>
-            <mrow>\amp = 5x^2\cdot \frac{-1}{\sin x}\cdot \frac{\cos x}{\sin x} + \frac{10x}{\sin x}</mrow>
-            <mrow>\amp =  $\ds\frac{-5x^2\cos x}{\sin ^2x}+\frac{10x}{\sin x}$ \text{ (get common denominator) }</mrow>
-            <mrow>\amp = \frac{10x\sin x - 5x^2\cos x}{\sin^2x}</mrow>
-          </md>
-        </p>
-
-        <p>
-          Finding <m>\fp</m> using either method returned the same result.
-          At first, the answers looked different,
-          but some algebra verified they are the same.
-          In general, there is not one final form that we seek;
-          the immediate result from the Product Rule is fine.
-          Work to <q>simplify</q> your results into a form that is most readable and useful to you.
-        </p>
-      </solution>
-    </example>
-
-    <p>
-      The Quotient Rule gives other useful results,
-      as shown in the next example.
-    </p>
-
-    <example xml:id="ex_deriv_power">
-      <title>Using the Quotient Rule to expand the Power Rule</title>
-      <statement>
-        <p>
-          Find the derivatives of the following functions.
-
-          <ol>
-            <li>
-              <p>
-                <m>\ds f(x) = \frac{1}{x}</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\ds f(x)= \frac{1}{x^n}</m>,
-                where <m>n>0</m> is an integer.
-              </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-      <solution>
-        <p>
-          We employ the Quotient Rule.
-
-          <ol>
-            <li>
-              <p>
-                <m>\ds \fp(x) = \frac{x\cdot 0 - 1\cdot 1}{x^2} = -\frac{1}{x^2}</m>.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\ds \fp(x) = \frac{x^n\cdot 0 - 1\cdot nx^{n-1}}{(x^n)^2} = -\frac{nx^{n-1}}{x^{2n}} = -\frac{n}{x^{n+1}}</m>.
-              </p>
-            </li>
-          </ol>
-        </p>
-      </solution>
-    </example>
-
-    <p>
-      The derivative of <m>\ds y=\frac{1}{x^n}</m> turned out to be rather nice.
-      It gets better.
-      Consider:
-      <md>
-        <mrow>\frac{d}{dx}\left(\frac{1}{x^n}\right) \amp = $\ds\frac{d}{dx}\Big(x^{-n}\Big)$ \text{ (apply result from <xref ref="ex_deriv_power">Example</xref>) }</mrow>
-        <mrow>\amp = $\ds-\frac{n}{x^{n+1}}$\text{ (rewrite algebraically) }</mrow>
-        <mrow>\amp = -nx^{-(n+1)}</mrow>
-        <mrow>\amp = -nx^{-n-1}</mrow>
-      </md>.
-    </p>
-
-    <p>
-      This is reminiscent of the Power Rule:
-      multiply by the power, then subtract 1 from the power.
-      We now add to our previous Power Rule,
-      which had the restriction of <m>n>0</m>.
-    </p>
-
-    <theorem xml:id="thm_PowerRule">
-      <title>Power Rule with Integer Exponents</title>
-      <statement>
-        <p>
-          Let <m>f(x) = x^n</m>, where <m>n\neq 0</m> is an integer.
-              <idx><h>derivative</h><h>Power Rule</h></idx>
-              <idx><h>Power Rule</h><h>differentiation</h></idx>
-          Then
-          <me>
-            \fp(x) = n\cdot x^{n-1}
-          </me>.
-        </p>
-      </statement>
-    </theorem>
-
-    <p>
-      Taking the derivative of many functions is relatively straightforward.
-      It is clear
-      (with practice)
-      what rules apply and in what order they should be applied.
-      Other functions present multiple paths;
-      different rules may be applied depending on how the function is treated.
-      One of the beautiful things about calculus is that there is not <q>the</q> right way;
-      each path, when applied correctly,
-      leads to the same result, the derivative.
-      We demonstrate this concept in an example.
-    </p>
-
-    <example xml:id="ex_multiple_deriv">
-      <title>Exploring alternate derivative methods</title>
-      <statement>
-        <p>
-          Let <m>\ds f(x) = \frac{x^2-3x+1}{x}</m>.
-          Find <m>\fp(x)</m> in each of the following ways:
-
-          <ol>
-            <li>
-              <p>
-                By applying the Quotient Rule,
-              </p>
-            </li>
-
-            <li>
-              <p>
-                by viewing <m>f</m> as <m>f(x) = \big(x^2-3x+1\big)\cdot x^{-1}</m> and applying the Product and Power Rules, and
-              </p>
-            </li>
-
-            <li>
-              <p>
-                by <q>simplifying</q> first through division.
-              </p>
-            </li>
-          </ol>
-        </p>
-
-        <p>
-          Verify that all three methods give the same result.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          <ol>
-            <li>
-              <p>
-                Applying the Quotient Rule gives:
-                <me>
-                  \fp(x) = \frac{x\cdot\big(2x-3\big)-\big(x^2-3x+1\big)\cdot 1}{x^2} = \frac{x^2-1}{x^2} = 1-\frac{1}{x^2}
-                </me>.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                By rewriting <m>f</m>,
-                we can apply the Product and Power Rules as follows:
-                <md>
-                  <mrow>\fp(x) \amp =    \big(x^2-3x+1\big)\cdot (-1)x^{-2} + \big(2x-3\big)\cdot x^{-1}</mrow>
-                  <mrow>\amp =  -\frac{x^2-3x+1}{x^2}+\frac{2x-3}{x}</mrow>
-                  <mrow>\amp = -\frac{x^2-3x+1}{x^2}+\frac{2x^2-3x}{x^2}</mrow>
-                  <mrow>\amp = \frac{x^2-1}{x^2} = 1-\frac{1}{x^2}</mrow>
-                </md>,
-                the same result as above.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                As <m>x\neq 0</m>, we can divide through by <m>x</m> first,
-                giving <m>\ds f(x) = x-3+\frac{1}x</m>.
-                Now apply the Power Rule.
-                <me>
-                  \fp(x) = 1-\frac{1}{x^2}
-                </me>,
-                the same result as before.
-              </p>
-            </li>
-          </ol>
-        </p>
-      </solution>
-    </example>
-
-    <p>
-      <xref ref="ex_multiple_deriv">Example</xref>
-      demonstrates three methods of finding f '. One is hard pressed to argue for a <q>best method</q>
-      as all three gave the same result without too much difficulty,
-      although it is clear that using the Product Rule required more steps.
-      Ultimately, the important principle to take away from this is:
-      reduce the answer to a form that seems
-      <q>simple</q> and easy to interpret.
-      In that example, we saw different expressions for f ', including: {
-      <me>
-        1-\frac{1}{x^2} = \frac{x\cdot\big(2x-3\big)-\big(x^2-3x+1\big)\cdot 1}{x^2} =   \big(x^2-3x+1\big)\cdot (-1)x^{-2} + \big(2x-3\big)\cdot x^{-1}
+        \lzoo{x}{f(x)g(x)} =\lim_{h\to0} \frac{f(x+h)g(x+h)-f(x)g(x)}{h}
       </me>.
     </p>
 
     <p>
-      } They are equal; they are all correct;
-      only the first is <q>clear.</q>
-      Work to make answers clear.
+      We now do something a bit unexpected;
+      add <m>0</m> to the numerator
+      (so that nothing is changed)
+      in the form of <m>{}-f(x)g(x+h)+f(x)g(x+h)</m>,
+      then do some regrouping as shown.<fn>
+      Adding <m>0</m> in some clever form is a common mathematical proof technique.
+      </fn><md>
+        <mrow>\amp\lzoo{x}{f(x)g(x)} = \lim_{h\to0} \frac{f(x+h)g(x+h)-f(x)g(x)}{h}</mrow>
+        <mrow>\amp \text{ (now add 0 to the numerator) }</mrow>
+        <mrow>\amp = \lim_{h\to0} \frac{f(x+h)g(x+h)-f(x)g(x+h)+f(x)g(x+h)-f(x)g(x)}{h}</mrow>
+        <mrow>\amp \text{ (regroup) }</mrow>
+        <mrow>\amp = \lim_{h\to0} \frac{\left[f(x+h)g(x+h)-f(x)g(x+h)\right]+\left[f(x)g(x+h)-f(x)g(x)\right]}{h}</mrow>
+        <mrow>\amp \text{ (split fraction)}</mrow>
+        <mrow>\amp = \lim_{h\to0} \frac{f(x+h)g(x+h)-f(x)g(x+h)}{h}+\lim_{h\to0}\frac{f(x)g(x+h)-f(x)g(x)}{h}</mrow>
+        <mrow>\amp \text{ (factor) }</mrow>
+        <mrow>\amp = \lim_{h\to0} \left(\frac{f(x+h)-f(x)}{h}g(x+h)\right)+\lim_{h\to0}\left(f(x)\frac{g(x+h)-g(x)}{h}\right)</mrow>
+        <mrow>\amp \text{ (apply limit properties) }</mrow>
+        <mrow>\amp = \lim_{h\to0} \frac{f(x+h)-f(x)}{h}\cdot \lim_{h\to0}g(x+h)+f(x)\cdot\lim_{h\to0}\frac{g(x+h)-g(x)}{h}</mrow>
+        <mrow>\amp \text{ (apply limits) }</mrow>
+        <mrow>\amp =\fp(x)g(x) + f(x)g'(x)</mrow>
+        <mrow>\amp \text{ (by definition of the derivative)}</mrow>
+      </md>.
+      We have proven the product rule as desired. (In the last step,
+      we also relied on the fact that since <m>g</m> is differentiable,
+      it is also continuous, which guarantees that <m>\lim\limits_{h\to0}g(x+h)=g(x)</m>.)
     </p>
+  </proof>
 
-    <p>
-      In the next section we continue to learn rules that allow us to more easily compute derivatives than using the limit definition directly.
-      We have to memorize the derivatives of a certain set of functions,
-      such as <q>the derivative of <m>\sin x</m> is <m>\cos x</m>.</q>
-      The Sum/Difference, Constant Multiple, Power, Product and Quotient Rules show us how to find the derivatives of certain combinations of these functions.
-      The next section shows how to find the derivatives when we
-      <em>compose</em> these functions together.
-    </p>
-  </introduction>
+  <p>
+    It is often true that we can recognize that a theorem is true through its proof yet somehow doubt its applicability to real problems.
+    In the following example,
+    we compute the derivative of a product of functions in two ways to verify that the <xref ref="thm_ProductRule" autoname="title" /> is indeed <q>right.</q>
+  </p>
 
-  <subsection>
-    <title>Terms and Concepts</title>
-    <exercise>
-      <statement>
-        <p>
-          T/F: The Product Rule states that <m>\ds \frac{d}{dx}\big(x^2\sin x\big) = 2x\cos x</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          F
-        </p>
-      </answer>
-    </exercise>
+  <example xml:id="ex_prod2">
+    <title>Exploring alternate derivative methods</title>
+    <statement>
+      <p>
+        Let <m>y = (x^2+3x+1)(2x^2-3x+1)</m>.
+        Find <m>y'</m> two ways: first,
+        by expanding the given product and then taking the derivative,
+        and second,
+        by applying the <xref ref="thm_ProductRule" autoname="title" />.
+        Verify that both methods give the same answer.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        We first expand the expression for <m>y</m>;
+        a little algebra shows that <m>y = 2x^4+3x^3-6x^2+1</m>.
+        It is easy to compute <m>y'</m>:
+        <me>
+          y' = 8x^3+9x^2-12x
+        </me>.
+      </p>
 
-    <exercise>
-      <statement>
-        <p>
-          T/F: The Quotient Rule states that <m>\ds \frac{d}{dx}\left(\frac{x^2}{\sin x}\right) = \frac{\cos x}{2x}</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          F
-        </p>
-      </answer>
-    </exercise>
+      <p>
+        Instead, let's apply the <xref ref="thm_ProductRule" autoname="title" /> to the original factored form:
+        <md>
+          <mrow>y' \amp = \lzoo{x}{x^2+3x+1}(2x^2-3x+1)+(x^2+3x+1)\lzoo{x}{2x^2-3x+1}</mrow>
+          <mrow>\amp = (2x+3)(2x^2-3x+1)+(x^2+3x+1)(4x-3)</mrow>
+          <mrow>\amp = \left(4x^3-7x+3\right)+\left(4x^3+9x^2-5x-3\right)</mrow>
+          <mrow>\amp  = 8x^3+9x^2-12x</mrow>
+        </md>.
+      </p>
 
-    <exercise>
-      <statement>
-        <p>
-          T/F: The derivatives of the trigonometric functions that start with <q>c</q>
-          have minus signs in them.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          T
-        </p>
-      </answer>
-    </exercise>
+      <p>
+        The uninformed usually assume that
+        <q>the derivative of the product is the product of the derivatives.</q>
+        Thus we are tempted to say that <m>y' = (2x+3)(4x-3) = 8x^2+6x-9</m>.
+        Obviously this is not correct.
+      </p>
+    </solution>
+  </example>
 
-    <exercise>
-      <statement>
-        <p>
-          What derivative rule is used to extend the Power Rule to include negative integer exponents?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Quotient Rule
-        </p>
-      </answer>
-    </exercise>
+  <example xml:id="ex_prod10">
+    <title>Using the Product Rule with a product of three functions</title>
+    <statement>
+      <p>
+        Let <m>y = x^3\ln(x) \cos(x)</m>.
+        Find <m>y'</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        We have a product of three functions while the <xref ref="thm_ProductRule" autoname="title" /> only specifies how to handle a product of two functions.
+        Our method of handling this problem is to simply group the latter two functions together,
+        and consider <m>y = x^3\cdot\left[\ln(x) \cos(x) \right]</m>.
+        Following the <xref ref="thm_ProductRule" autoname="title" />, we have
+        <md>
+          <mrow>\yp \amp = \lzoo{x}{x^3}\ln(x) \cos(x) + (x^3)\lzoo{x}{\ln(x) \cos(x)}</mrow>
+          <intertext>To evaluate <m>\lzoo{x}{\ln(x) \cos(x)}</m>, we apply the Product Rule again:</intertext>
+          <mrow>\yp \amp = 3x^2\left[\ln(x) \cos(x) \right] + (x^3)\left[\frac1x\cos(x) + \ln(x) (-\sin(x) )\right]</mrow>
+          <mrow>\amp = 3x^2\ln(x) \cos(x) + x^3\frac{1}{x}\cos(x) + x^3\ln(x) (-\sin(x) )</mrow>
+        </md>.
+      </p>
 
-    <exercise>
-      <statement>
-        <p>
-          T/F: Regardless of the function,
-          there is always exactly one right way of computing its derivative.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          F
-        </p>
-      </answer>
-    </exercise>
+      <p>
+        Recognize the pattern in our answer above:
+        when applying the <xref ref="thm_ProductRule" autoname="title" /> to a product of three functions,
+        there are three terms added together in the final derivative.
+        Each term contains only one derivative of one of the original functions,
+        and each function's derivative shows up in only one term.
+        It is straightforward to extend this pattern to finding the derivative of a product of four or more functions.
+      </p>
 
-    <exercise>
-      <statement>
-        <p>
-          In your own words,
-          explain what it means to make your answers <q>clear.</q>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Answers will vary.
-        </p>
-      </answer>
-    </exercise>
-  </subsection>
+      <p>
+        Ultimately though, we would simplify our final computation to:
+        <me>
+          \yp=3x^2\ln(x)\cos(x) + x^2\cos(x) + -x^3\ln(x)\sin(x)
+        </me>
+        If you check this answer with a <init>CAS</init>,
+        it may factor and give the answer:
+        <me>
+          \yp=-x^2\left[x\ln(x)\sin(x) + \cos(x) + 3\ln(x)\cos(x)\right]
+        </me>
+      </p>
+    </solution>
+  </example>
 
-  <subsection>
-    <title>Problems</title>
-    <p>
-      In the following exercises:
+  <p>
+    We consider one more example before discussing another derivative rule.
+  </p>
 
-      <ol>
-        <li>
-          <title>(a)</title>
-          <p>
-            Use the Product Rule to differentiate the function.
-          </p>
-        </li>
+  <example xml:id="ex_deriv_ln">
+    <title>Using the Product Rule</title>
+    <statement>
+      <p>
+        Find the derivatives of the following functions.
 
-        <li>
-          <title>(b)</title>
-          <p>
-            Manipulate the function algebraically and differentiate without the Product Rule.
-          </p>
-        </li>
-
-        <li>
-          <title>(c)</title>
-          <p>
-            Show that the answers from (a) and (b) are equivalent.
-          </p>
-        </li>
-      </ol>
-    </p>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = x(x^2+3x)</m>
-        </p>
-      </statement>
-      <answer>
         <ol>
           <li>
             <p>
-              <m>\fp(x) = (x^2+3x) + x(2x+3)</m>
+              <m>f(x) = x\ln(x)</m>
             </p>
           </li>
 
           <li>
             <p>
-              <m>\fp(x) = 3x^2 + 6x</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              They are equal.
+              <m>g(x) = x\ln(x) - x</m>.
             </p>
           </li>
         </ol>
-      </answer>
-    </exercise>
+      </p>
+    </statement>
+    <solution>
+      <p>
+        Recalling that the derivative of <m>\ln(x)</m> is <m>1/x</m>,
+        we use the <xref ref="thm_ProductRule" autoname="title" /> to find our answers.
+      </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>g(x) = 2x^2(5x^3)</m>
-        </p>
-      </statement>
-      <answer>
+      <p>
         <ol>
           <li>
             <p>
-              <m>g'(x) = 4x(5x^3)+2x^2(15x^2)</m>
+              Applying the <xref ref="thm_ProductRule" autoname="title" />:
+              <md>
+                <mrow>\lzoo{x}{x\ln(x)}\amp= 1\cdot \ln(x) + x\cdot 1/x</mrow>
+                <mrow>\amp = \ln(x) + 1/mrow>
+              </md>.
             </p>
           </li>
 
           <li>
             <p>
-              <m>g'(x) = 50x^4</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              They are equal.
+              Using the result from above, we compute
+              <md>
+                <mrow>\lzoo{x}{x\ln(x) -x}\amp= \ln(x) + 1 - 1</mrow>
+                <mrow>\amp= \ln(x)</mrow>
+              </md>.
             </p>
           </li>
         </ol>
-      </answer>
-    </exercise>
+      </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>h(s) = (2s-1)(s+4)</m>
-        </p>
-      </statement>
-      <answer>
+      <p>
+        This seems significant;
+        if the natural log function <m>\ln(x)</m> is an important function
+        (it is),
+        it seems worthwhile to know a function whose derivative is <m>\ln(x)</m>.
+        We have found one.
+        (We leave it to the reader to find another;
+        a correct answer will be <em>very</em> similar to this one.)
+      </p>
+    </solution>
+  </example>
+
+  <p>
+    We have learned how to compute the derivatives of sums,
+    differences, and products of functions.
+    We now learn how to find the derivative of a quotient of functions.
+  </p>
+
+  <theorem xml:id="thm_QuotientRule">
+    <title>Quotient Rule</title>
+    <statement>
+      <p>
+        Let <m>f</m> and <m>g</m> be differentiable functions defined on an open interval <m>I</m>,
+        where <m>g(x) \neq 0</m> on <m>I</m>.
+
+        <index>
+          <main>derivative</main><sub>Quotient Rule</sub>
+        </index>
+
+        <index>
+          <main>Quotient Rule</main>
+        </index>
+
+        Then <m>f/g</m> is differentiable on <m>I</m>, and
+        <me>
+          \lzoo{x}{\frac{f(x)}{g(x)}} = \frac{g(x)\fp(x) - f(x)g'(x)}{g(x)^2}
+        </me>.
+      </p>
+    </statement>
+  </theorem>
+
+  <p>
+    The <xref ref="thm_QuotientRule" autoname="title" /> is not hard to use,
+    although it might be a bit tricky to remember.
+    A useful mnemonic works as follows.
+    Consider a fraction's numerator and denominator as <q>HI</q>
+    and <q>LO</q>, respectively.
+    Then
+    <me>
+      \lzoo{x}{\frac{\text{ HI } }{\text{ LO } }} = \frac{\text{ LO}\cdot\text{dHI}-\text{HI}\cdot\text{dLO }}{\text{ LOLO } }
+    </me>,
+    read <q>low dee high minus high dee low,
+    over low low.</q> Said fast,
+    that phrase can roll off the tongue,
+    making it easy to memorize.
+    The <q>dee high</q> and <q>dee low</q>
+    parts refer to the derivatives of the numerator and denominator,
+    respectively.
+  </p>
+
+  <p>
+    Let's practice using the Quotient Rule.
+  </p>
+
+  <example xml:id="ex_quot1">
+    <title>Using the Quotient Rule</title>
+    <statement>
+      <p>
+        Let <m>f(x) = \frac{5x^2}{\sin(x) }</m>.
+        Find <m>\fp(x)</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        Directly applying the <xref ref="thm_QuotientRule" autoname="title" /> gives:
+        <md>
+          <mrow>\lzoo{x}{frac{5x^2}{\sin(x) }} \amp = \frac{\sin(x) \cdot \lzoo{x}{5x^2} - 5x^2\cdot \lzoo{x}{\sin(x)} }{\sin^2(x) }</mrow>
+          <mrow>\amp =    \frac{10x\sin(x) - 5x^2\cos(x) }{\sin^2(x) }</mrow>
+        </md>.
+      </p>
+    </solution>
+  </example>
+
+  <p>
+    The <xref ref="thm_QuotientRule" autoname="title" /> allows us to fill in holes in our understanding of derivatives of the common trigonometric functions.
+    We start with finding the derivative of the tangent function.
+  </p>
+
+  <example xml:id="ex_der_tan">
+    <title>Using the Quotient Rule to find <m>\lzoo{x}{\tan(x)}</m></title>
+    <statement>
+      <p>
+        Find the derivative of <m>y=\tan(x)</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        At first, one might feel unequipped to answer this question.
+        But recall that <m>\tan(x) = \sin(x) /\cos(x)</m>,
+        so we can apply the <xref ref="thm_QuotientRule" autoname="title" />.
+        <md>
+          <mrow>\lzoo{x}{\tan(x)}\amp = \lzoo{x}{\frac{\sin(x) }{\cos(x) }}</mrow>
+          <mrow>\amp = \frac{\cos(x) \lzoo{x}{\sin(x)} - \sin(x)\lzoo{x}{\cos(x)}}{\cos^2(x) }</mrow>
+          <mrow>\amp = \frac{\cos(x) \cos(x) - \sin(x) (-\sin(x) )}{\cos^2(x) }</mrow>
+          <mrow>\amp = \frac{\cos^2(x) +\sin^2(x) }{\cos^2(x) }</mrow>
+          <mrow>\amp = \frac{1}{\cos^2(x) }</mrow>
+          <mrow>\amp = \sec^2(x)</mrow>
+        </md>.
+      </p>
+
+      <p>
+        This is a beautiful result.
+        To confirm its truth,
+        we can find the equation of the tangent line to <m>y=\tan(x)</m> at <m>x=\pi/4</m>.
+        The slope is <m>\sec^2(\pi/4) = 2</m>;
+        <m>y=\tan(x)</m>, along with its tangent line,
+        is graphed in <xref ref="fig_tanx">Figure</xref>.
+      </p>
+
+      <figure xml:id="fig_tanx">
+        <caption>A graph of <m>y=\tan(x)</m> along with its tangent line at <m>x=\pi/4</m>.</caption>
+          <!-- START figures/fig_tanx.tex -->
+        <image xml:id="img_tanx" width="47%">
+          <description></description>
+          <latex-image>
+          <![CDATA[
+          \begin{tikzpicture}
+          \begin{axis}[xmin=-1.65,xmax=1.7,
+          ymin=-11,ymax=11,
+          xtick={-1.57,-.785,.785,1.57},
+          xticklabels={$-\frac{\pi}{2}$,$-\frac{\pi}{4}$,$\frac{\pi}{4}$,$\frac{\pi}{2}$},]
+          \addplot+[samples=100,domain=-11:11] ({atan(x)*pi/180},{x});
+          \addplot [tangentline,domain=-1.0:1.5] {2*(x-pi/4)+1};
+          \addplot [soliddot] coordinates{(0.785,1)};
+          \end{axis}
+          \end{tikzpicture}
+          ]]>
+          </latex-image>
+        </image>
+          <!-- figures/fig_tanx.tex END -->
+      </figure>
+    </solution>
+  </example>
+
+  <p>
+    We include this result in the following theorem about the derivatives of the trigonometric functions.
+    Recall we found the derivative of
+    <m>y=\sin(x)</m> in <xref ref="ex_deriv_sinx">Example</xref>
+    and stated the derivative of the cosine function in <xref ref="thm_deriv_common">Theorem</xref>.
+    The derivatives of the cotangent,
+    cosecant and secant functions can all be computed directly using <xref ref="thm_deriv_common">Theorem</xref>
+    and the <xref ref="thm_QuotientRule" autoname="title" />.
+  </p>
+
+  <theorem xml:id="thm_deriv_trig">
+    <title>Derivatives of Trigonometric Functions</title>
+    <statement>
+      <p>
+        <ol cols="2">
+          <li>
+            <p>
+              <m>\displaystyle \lzoo{x}{\sin(x)} = \cos(x)</m>
+
+              <index>
+                <main>derivative</main><sub>trigonometric functions</sub>
+              </index>
+
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\displaystyle \lzoo{x}{\cos(x)} = -\sin(x)</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\displaystyle \lzoo{x}{\tan(x)} = \sec^2(x)</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\displaystyle \lzoo{x}{\cot(x)} = -\csc^2(x)</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\displaystyle \lzoo{x}{\sec(x)} = \sec(x) \tan(x)</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\displaystyle \lzoo{x}{\csc(x)} = -\csc(x) \cot(x)</m>
+            </p>
+          </li>
+        </ol>
+      </p>
+    </statement>
+  </theorem>
+
+  <p>
+    To remember the above,
+    it may be helpful to keep in mind that the derivatives of the trigonometric functions that start with <q>c</q>
+    have a minus sign in them.
+  </p>
+
+  <example xml:id="ex_prod_quot">
+    <title>Exploring alternate derivative methods</title>
+    <statement>
+      <p>
+        In <xref ref="ex_quot1">Example</xref>
+        the derivative of <m>f(x) = \frac{5x^2}{\sin(x) }</m> was found using the <xref ref="thm_QuotientRule" autoname="title" />.
+        Rewriting <m>f</m> as <m>f(x) = 5x^2\csc(x)</m>,
+        find <m>\fp</m> using <xref ref="thm_deriv_trig">Theorem</xref>
+        and verify the two answers are the same.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        We found in <xref ref="ex_quot1">Example</xref>
+        that <m>\fp(x) = \frac{10x\sin(x) - 5x^2\cos(x) }{\sin^2(x) }</m>.
+        We now find <m>\fp</m> using the <xref ref="thm_ProductRule" autoname="title" />, considering <m>f</m> as <m>f(x) = 5x^2\csc(x)</m>.
+        <md>
+          <mrow>\fp(x) \amp = \lzoo{x}{5x^2\csc(x)}</mrow>
+          <mrow>\amp = 5x^2\lzoo{x}{\csc(x)} + \lzoo{x}{5x^2}\csc(x)</mrow>
+          <mrow>\amp = 5x^2\left(-\csc(x) \cot(x) \right) + 10x\csc(x) \amp\amp\text{ (now rewrite trig functions) }</mrow>
+          <mrow>\amp = 5x^2\cdot \frac{-1}{\sin(x) }\cdot \frac{\cos(x) }{\sin(x) } + \frac{10x}{\sin(x) }</mrow>
+          <mrow>\amp = \frac{-5x^2\cos(x) }{\sin^2(x) }+\frac{10x}{\sin(x) } \amp\amp\text{ (get common denominator) }</mrow>
+          <mrow>\amp = \frac{10x\sin(x) - 5x^2\cos(x) }{\sin^2(x) }</mrow>
+        </md>.
+      </p>
+
+      <p>
+        Finding <m>\fp</m> using either method returned the same result.
+        At first, the answers looked different,
+        but some algebra verified they are the same.
+        In general, there is not one final form that we seek;
+        the immediate result from the Product Rule is fine.
+        Work to <q>simplify</q> your results into a form that is most readable and useful to you.
+      </p>
+    </solution>
+  </example>
+
+  <p>
+    The <xref ref="thm_QuotientRule" autoname="title" /> gives other useful results,
+    as shown in the next example.
+  </p>
+
+  <example xml:id="ex_deriv_power">
+    <title>Using the Quotient Rule to expand the Power Rule</title>
+    <statement>
+      <p>
+        Find the derivatives of the following functions.
+
         <ol>
           <li>
             <p>
-              <m>h'(s) = 2(s+4) + (2s-1)(1)</m>
+              <m>f(x) = \dfrac{1}{x}</m>
             </p>
           </li>
 
           <li>
             <p>
-              <m>h'(s) = 4s + 7</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              They are equal.
+              <m>f(x)= \dfrac{1}{x^n}</m>, where <m>n>0</m> is an integer.
             </p>
           </li>
         </ol>
-      </answer>
-    </exercise>
+      </p>
+    </statement>
+    <solution>
+      <p>
+        We employ the <xref ref="thm_QuotientRule" autoname="title" />.
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x)= (x^2+5)(3-x^3)</m>
-        </p>
-      </statement>
-      <answer>
         <ol>
           <li>
             <p>
-              <m>\fp(x) = 2x(3-x^3)+(x^2+5)(-3x^2)</m>
+              <md>
+                <mrow>\fp(x)\amp = \frac{x\cdot 0 - 1\cdot 1}{x^2}</mrow>
+                <mrow>\amp = -\frac{1}{x^2}</mrow>
+              </md>
             </p>
           </li>
 
           <li>
             <p>
-              <m>\fp(x) = -5x^4-15x^2+6x</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              They are equal.
+              <md>
+                <mrow>\fp(x)\amp = \frac{x^n\cdot 0 - 1\cdot nx^{n-1}}{(x^n)^2}</mrow>
+                <mrow>\amp = -\frac{nx^{n-1}}{x^{2n}}</mrow>
+                <mrow>\amp = -\frac{n}{x^{n+1}}</mrow>
+              </md>.
             </p>
           </li>
         </ol>
-      </answer>
-    </exercise>
+      </p>
+    </solution>
+  </example>
 
-    <p>
-      In the following exercises:
+  <p>
+    The derivative of <m>y=\frac{1}{x^n}</m> turned out to be rather nice.
+    It gets better.
+    Consider:
+    <md>
+      <mrow>\lzoo{x}{\frac{1}{x^n}} \amp = \lzoo{x}{x^{-n}} \amp\amp\text{ (apply result from } <xref ref="ex_deriv_power">Example</xref>\text{)}</mrow>
+      <mrow>\amp = -\frac{n}{x^{n+1}} \amp\amp \text{ (rewrite algebraically) }</mrow>
+      <mrow>\amp = -nx^{-(n+1)}\amp</mrow>
+      <mrow>\amp = -nx^{-n-1}\amp</mrow>
+    </md>.
+  </p>
 
-      <ol>
-        <li>
-          <title>(a)</title>
-          <p>
-            Use the Quotient Rule to differentiate the function.
-          </p>
-        </li>
+  <p>
+    This is reminiscent of the <xref ref="power-derivative-rule" autoname="title" />:
+    multiply by the power, then subtract <m>1</m> from the power.
+    We now add to our previous Power Rule,
+    which had the restriction of <m>n>0</m>.
+  </p>
 
-        <li>
-          <title>(b)</title>
-          <p>
-            Manipulate the function algebraically and differentiate without the Quotient Rule.
-          </p>
-        </li>
+  <theorem xml:id="thm_PowerRule">
+    <title>Power Rule with Integer Exponents</title>
+    <statement>
+      <p>
+        Let <m>f(x) = x^n</m>, where <m>n\neq 0</m> is an integer.
 
-        <li>
-          <title>(c)</title>
-          <p>
-            Show that the answers from (a) and (b) are equivalent.
-          </p>
-        </li>
-      </ol>
-    </p>
+        <index>
+          <main>derivative</main><sub>Power Rule</sub>
+        </index>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds f(x)= \frac{x^2+3}{x}</m>
-        </p>
-      </statement>
-      <answer>
+        <index>
+          <main>Power Rule</main><sub>differentiation</sub>
+        </index>
+
+        Then
+        <me>
+          \fp(x) = n\cdot x^{n-1}
+        </me>.
+      </p>
+    </statement>
+  </theorem>
+
+  <p>
+    Taking the derivative of many functions is relatively straightforward.
+    It is clear
+    (with practice)
+    what rules apply and in what order they should be applied.
+    Other functions present multiple paths;
+    different rules may be applied depending on how the function is treated.
+    One of the beautiful things about calculus is that there is not <q>the</q> right way;
+    each path, when applied correctly,
+    leads to the same result, the derivative.
+    We demonstrate this concept in an example.
+  </p>
+
+  <example xml:id="ex_multiple_deriv">
+    <title>Exploring alternate derivative methods</title>
+    <statement>
+      <p>
+        Let <m>f(x) = \frac{x^2-3x+1}{x}</m>.
+        Find <m>\fp(x)</m> in each of the following ways:
+
         <ol>
           <li>
             <p>
-              <m>\fp(x) = \frac{x(2x)-(x^2+3)1}{x^2}</m>
+              By applying the <xref ref="thm_QuotientRule" autoname="title" />,
             </p>
           </li>
 
           <li>
             <p>
-              <m>\fp(x) = 1-\frac{3}{x^2}</m>
+              by viewing <m>f</m> as <m>f(x) = \left(x^2-3x+1\right)\cdot x^{-1}</m> and applying the <xref ref="thm_ProductRule" autoname="title" /> and <xref ref="thm_PowerRule" autoname="title" />, and
             </p>
           </li>
 
           <li>
             <p>
-              They are equal.
+              by <q>simplifying</q> first through division.
             </p>
           </li>
         </ol>
-      </answer>
-    </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds g(x)= \frac{x^3-2x^2}{2x^2}</m>
-        </p>
-      </statement>
-      <answer>
+        Verify that all three methods give the same result.
+      </p>
+    </statement>
+    <solution>
+      <p>
         <ol>
           <li>
             <p>
-              <m>g'(x) = \frac{2x^2(3x^2-4x)-(x^3-2x^2)(4x)}{4x^4}</m>
+              Applying the <xref ref="thm_QuotientRule" autoname="title" /> gives:
+              <md>
+                <mrow>\fp(x) \amp =\frac{x\cdot\lzoo{x}{x^2-3x+1}-\left(x^2-3x+1\right)\lzoo{x}{x}}{x^2}</mrow>
+                <mrow>\amp = \frac{x\cdot(2x-3)-\left(x^2-3x+1\right)\cdot 1}{x^2}</mrow>
+                <mrow>\amp = \frac{x^2-1}{x^2}</mrow>
+                <mrow>\amp = 1-\frac{1}{x^2}</mrow>
+              </md>.
             </p>
           </li>
 
           <li>
             <p>
-              <m>g'(x) = 1/2</m>
+              By rewriting <m>f</m>,
+              we can apply the <xref ref="thm_ProductRule" autoname="title" /> and <xref ref="thm_PowerRule" autoname="title" /> as follows:
+              <md>
+                <mrow>\fp(x) \amp = \left(x^2-3x+1\right)\lzoo{x}{x^{-1}} + \lzoo{x}{x^2-3x+1} x^{-1}</mrow>
+                <mrow>\amp = \left(x^2-3x+1\right)\cdot (-1)x^{-2} + (2x-3)\cdot x^{-1}</mrow>
+                <mrow>\amp = -\frac{x^2-3x+1}{x^2}+\frac{2x-3}{x}</mrow>
+                <mrow>\amp = -\frac{x^2-3x+1}{x^2}+\frac{2x^2-3x}{x^2}</mrow>
+                <mrow>\amp = \frac{x^2-1}{x^2} = 1-\frac{1}{x^2}</mrow>
+              </md>,
+              the same result as above.
             </p>
           </li>
 
           <li>
             <p>
-              They are equal.
+              As <m>x\neq 0</m>, we can divide through by <m>x</m> first,
+              giving <m>f(x) = x-3+x^{-1}</m>.
+              Now apply the <xref ref="thm_PowerRule" autoname="title" />.
+              <me>
+                \fp(x) = 1-\frac{1}{x^2}
+              </me>,
+              the same result as before.
             </p>
           </li>
         </ol>
-      </answer>
-    </exercise>
+      </p>
+    </solution>
+  </example>
 
-    <exercise>
-      <statement>
+  <p>
+    <xref ref="ex_multiple_deriv">Example</xref>
+    demonstrates three methods of finding <m>\fp</m>.
+    One is hard pressed to argue for a <q>best method</q>
+    as all three gave the same result without too much difficulty,
+    although it is clear that using the <xref ref="thm_ProductRule" autoname="title" /> required more steps.
+    Ultimately, the important principle to take away from this is:
+    reduce the answer to a form that seems
+    <q>simple</q> and easy to interpret.
+    In that example,
+    we saw different expressions for <m>\fp</m>, including:
+    <md>
+      <mrow>\amp 1-\frac{1}{x^2}</mrow>
+      <mrow>\amp \frac{x\cdot(2x-3)-\left(x^2-3x+1\right)\cdot 1}{x^2}</mrow>
+      <mrow>\amp \left(x^2-3x+1\right)\cdot (-1)x^{-2} + (2x-3)\cdot x^{-1}</mrow>
+    </md>.
+  </p>
+
+  <p>
+    They are equal; they are all correct;
+    only the first is <q>simple.</q>
+    Work to make answers simple.
+  </p>
+
+  <p>
+    In the next section we continue to learn rules that allow us to more easily compute derivatives than using the limit definition directly.
+    We have to memorize the derivatives of a certain set of functions,
+    such as <q>the derivative of <m>\sin(x)</m> is <m>\cos(x)</m>.</q>
+    The <xref ref="sum-difference-derivative-rule" autoname="title" />,
+    <xref ref="constant-multiple-derivative-rule" autoname="title" />,
+    <xref ref="thm_PowerRule" autoname="title">Power Rule</xref>,
+    <xref ref="thm_ProductRule" autoname="title" /> and <xref ref="thm_QuotientRule" autoname="title" /> show us how to find the derivatives of certain combinations of these functions.
+    The next section shows how to find the derivatives when we <em>compose</em>
+    these functions together.
+  </p>
+
+  <!-- </introduction> Violates DTD to have introduction with no subsections -->
+  <exercises>
+    <exercisegroup>
+
+      <introduction>
         <p>
-          <m>\ds h(s)= \frac{3}{4s^3}</m>
+          Terms and Concepts
         </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              <m>h'(s) = \frac{4s^3(0) - 3(12s^2)}{16s^6}</m>
-            </p>
-          </li>
+      </introduction>
 
-          <li>
-            <p>
-              <m>h'(s) = -9/4s^{-4}</m>
-            </p>
-          </li>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+            <pg-code>
+              $t=PopUp(['?','True','False'],1);
+              $f=PopUp(['?','True','False'],2);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                True or False?
+                The Product Rule states that <m>\lzoo{x}{x^2\sin(x)}= 2x\cos(x)</m>.
+                <var name="$f" form="popup"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-          <li>
-            <p>
-              They are equal.
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+            <pg-code>
+              $t=PopUp(['?','True','False'],1);
+              $f=PopUp(['?','True','False'],2);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                True or False?
+                The Quotient Rule states that <m>\lzoo{x}{\frac{x^2}{\sin(x) }} = \frac{\cos(x) }{2x}</m>.
+                <var name="$f" form="popup"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+            <pg-code>
+              $t=PopUp(['?','True','False'],1);
+              $f=PopUp(['?','True','False'],2);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                True or False?
+                The derivatives of the trigonometric functions that start with <q>c</q>
+                have minus signs in them.
+                <var name="$t" form="popup"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+            <pg-code>
+              $rules=PopUp(['?','Constant Rule','Constant Multiple Rule','Sum/Difference Rule','Product Rule','Quotient Rule'],5);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                What derivative rule is used to extend the Power Rule to include negative integer exponents?
+                <var name="$rules" form="popup"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+            <pg-code>
+              $t=PopUp(['?','True','False'],1);
+              $f=PopUp(['?','True','False'],2);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                True or False?
+                Regardless of the function,
+                there is always exactly one right way of computing its derivative.
+                <var name="$f" form="popup"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <statement>
+              <p>
+                In your own words,
+                explain what it means to make your answers <q>clear.</q>
+              </p>
+
+              <p>
+                <var form="essay" />
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Answers will vary.
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
         <p>
-          <m>\ds f(t)= \frac{t^2-1}{t+1}</m>
+          In the following exercises:
+
+          <ol>
+            <li>
+              <p>
+                Use the Product Rule to differentiate the function.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Manipulate the function algebraically and differentiate without the Product Rule.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Show that the answers from (a) and (b) are equivalent.
+              </p>
+            </li>
+          </ol>
         </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              <m>\fp(t) = \frac{(t+1)(2t) - (t^2-1)(1)}{(t+1)^2}</m>
-            </p>
-          </li>
+      </introduction>
 
-          <li>
-            <p>
-              <m>f(t) = t-1</m> when <m>t\neq -1</m>, so <m>\fp(t) = 1</m>.
-            </p>
-          </li>
+      <exercise>
+        <webwork seed="1">
+            <statement>
+              <p>
+                Let <m>f(x) = x\left(x^2+3x\right)</m>.
+              </p>
 
-          <li>
-            <p>
-              They are equal.
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
+              <p>
+                <ol label="a">
+                  <li>
+                    <p>
+                      Use the Product Rule to differentiate the function.
+                    </p>
+                  </li>
 
-    <p>
-      In the following exercises, compute the derivative of the given function.
-    </p>
+                  <li>
+                    <p>
+                      Manipulate the function algebraically and differentiate without the Product Rule.
+                    </p>
+                  </li>
 
-    <exercise>
-      <statement>
+                  <li>
+                    <p>
+                      Show that the answers from (a) and (b) are equivalent.
+                    </p>
+                  </li>
+                </ol>
+              </p>
+
+              <p>
+                <var form="essay" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <statement>
+              <p>
+                Let <m>g(x) = 2x^2\left(5x^3\right)</m>.
+              </p>
+
+              <p>
+                <ol label="a">
+                  <li>
+                    <p>
+                      Use the Product Rule to differentiate the function.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Manipulate the function algebraically and differentiate without the Product Rule.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Show that the answers from (a) and (b) are equivalent.
+                    </p>
+                  </li>
+                </ol>
+              </p>
+
+              <p>
+                <var form="essay" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <statement>
+              <p>
+                Let <m>h(s) = (2s-1)(s+4)</m>.
+              </p>
+
+              <p>
+                <ol label="a">
+                  <li>
+                    <p>
+                      Use the Product Rule to differentiate the function.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Manipulate the function algebraically and differentiate without the Product Rule.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Show that the answers from (a) and (b) are equivalent.
+                    </p>
+                  </li>
+                </ol>
+              </p>
+
+              <p>
+                <var form="essay" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <statement>
+              <p>
+                Let <m>f(x)= \left(x^2+5\right)\left(3-x^3\right)</m>.
+              </p>
+
+              <p>
+                <ol label="a">
+                  <li>
+                    <p>
+                      Use the Product Rule to differentiate the function.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Manipulate the function algebraically and differentiate without the Product Rule.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Show that the answers from (a) and (b) are equivalent.
+                    </p>
+                  </li>
+                </ol>
+              </p>
+
+              <p>
+                <var form="essay" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+
+    <exercisegroup>
+
+      <introduction>
         <p>
-          <m>f(x) = x\sin x</m>
+          In the following exercises:
+
+          <ol>
+            <li>
+              <p>
+                Use the Quotient Rule to differentiate the function.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Manipulate the function algebraically and differentiate without the Quotient Rule.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Show that the answers from (a) and (b) are equivalent.
+              </p>
+            </li>
+          </ol>
         </p>
-      </statement>
-      <answer>
+      </introduction>
+
+      <exercise>
+        <webwork seed="1">
+            <statement>
+              <p>
+                Let <m>f(x)= \dfrac{x^2+3}{x}</m>.
+              </p>
+
+              <p>
+                <ol label="a">
+                  <li>
+                    <p>
+                      Use the Quotient Rule to differentiate the function.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Manipulate the function algebraically and differentiate without the Quotient Rule.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Show that the answers from (a) and (b) are equivalent.
+                    </p>
+                  </li>
+                </ol>
+              </p>
+
+              <p>
+                <var form="essay" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <statement>
+              <p>
+                Let <m>g(x)= \dfrac{x^3-2x^2}{2x^2}</m>.
+              </p>
+
+              <p>
+                <ol label="a">
+                  <li>
+                    <p>
+                      Use the Quotient Rule to differentiate the function.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Manipulate the function algebraically and differentiate without the Quotient Rule.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Show that the answers from (a) and (b) are equivalent.
+                    </p>
+                  </li>
+                </ol>
+              </p>
+
+              <p>
+                <var form="essay" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <statement>
+              <p>
+                Let <m>h(s)= \dfrac{3}{4s^3}</m>.
+              </p>
+
+              <p>
+                <ol label="a">
+                  <li>
+                    <p>
+                      Use the Quotient Rule to differentiate the function.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Manipulate the function algebraically and differentiate without the Quotient Rule.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Show that the answers from (a) and (b) are equivalent.
+                    </p>
+                  </li>
+                </ol>
+              </p>
+
+              <p>
+                <var form="essay" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <statement>
+              <p>
+                Let <m>f(t)= \dfrac{t^2-1}{t+1}</m>.
+              </p>
+
+              <p>
+                <ol label="a">
+                  <li>
+                    <p>
+                      Use the Quotient Rule to differentiate the function.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Manipulate the function algebraically and differentiate without the Quotient Rule.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Show that the answers from (a) and (b) are equivalent.
+                    </p>
+                  </li>
+                </ol>
+              </p>
+
+              <p>
+                <var form="essay" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+
+    <exercisegroup>
+
+      <introduction>
         <p>
-          <m>\fp(x) = \sin x + x\cos x</m>
+          In the following exercises, compute the derivative of the given function.
         </p>
-      </answer>
-    </exercise>
+      </introduction>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+              
+              
+              
+            <pg-code>
+              $f = 'f';
+              $x = 'x';
+              Context()->variables->are($x => 'Real');
+              $formula = Formula("$x sin($x)");
+              $deriv = $formula->D("$x");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m><var name="$f" />(<var name="$x" />) = <var name="$formula" /></m>
+              </p>
+
+              <p>
+                <m><var name="$f" />'(<var name="$x" />) = </m><var name="$deriv" width="15" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
     <exercise>
       <statement>
@@ -1078,57 +1307,113 @@
       </answer>
     </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds f(t) = \frac{1}{t^2}(\csc t-4)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\fp(t) = \frac{-2}{t^3}(\csc t-4) + \frac{1}{t^2}(-\csc t\cot t)</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+              
+              
+              
+            <pg-code>
+              $f = 'f';
+              $x = 't';
+              Context()->variables->are($x => 'Real');
+              $formula = Formula("1/$x^2*(csc($x)-4)");
+              $deriv = $formula->D("$x");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m><var name="$f" />(<var name="$x" />) = <var name="$formula" /></m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds g(x) = \frac{x+7}{x-5}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>g'(x) = \frac{-12}{(x-5)^2}</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <m><var name="$f" />'(<var name="$x" />) = </m><var name="$deriv" width="15" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds g(t) = \frac{t^5}{\cos t-2t^2}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>g'(t) = \frac{(\cos t-2t^2)(5t^4)-(t^5)(-\sin t-4t)}{(\cos t-2t^2)^2}</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+              
+              
+              
+            <pg-code>
+              $f = 'g';
+              $x = 'x';
+              Context()->variables->are($x => 'Real');
+              $formula = Formula("($x+7)/($x-5)");
+              $deriv = Formula("-12/(x-5)^2");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m><var name="$f" />(<var name="$x" />) = <var name="$formula" /></m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>h(x) =\cot x - e^x</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>h'(x) = -\csc^2x-e^x</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <m><var name="$f" />'(<var name="$x" />) = </m><var name="$deriv" width="15" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+              
+              
+              
+            <pg-code>
+              $f = 'g';
+              $x = 't';
+              Context()->variables->are($x => 'Real');
+              $formula = Formula("$x^5/(cos($x)-2 $x^2)");
+              $deriv = $formula->D("$x");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m><var name="$f" />(<var name="$x" />) = <var name="$formula" /></m>
+              </p>
+
+              <p>
+                <m><var name="$f" />'(<var name="$x" />) = </m><var name="$deriv" width="15" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+              
+              
+              
+            <pg-code>
+              $f = 'h';
+              $x = 'x';
+              Context()->variables->are($x => 'Real');
+              $formula = Formula("cot($x) - e^$x");
+              $deriv = $formula->D("$x")->reduce;
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m><var name="$f" />(<var name="$x" />) = <var name="$formula" /></m>
+              </p>
+
+              <p>
+                <m><var name="$f" />'(<var name="$x" />) = </m><var name="$deriv" width="15" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
     <exercise>
       <statement>
@@ -1143,96 +1428,167 @@
       </answer>
     </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>h(t) =7t^2+6t-2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>h'(t) = 14t+6</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+              
+              
+              
+            <pg-code>
+              $f = 'h';
+              $x = 'x';
+              Context()->variables->are($x => 'Real');
+              $formula = Formula("cot($x) - e^$x");
+              $deriv = $formula->D("$x")->reduce;
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m><var name="$f" />(<var name="$x" />) = <var name="$formula" /></m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds f(x)= \frac{x^4+2x^3}{x+2}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\fp(x) = \frac{(x+2)(4x^3+6x^2)-(x^4+2x^3)(1)}{(x+2)^2}</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <m><var name="$f" />'(<var name="$x" />) = </m><var name="$deriv" width="15" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \big(3x^2+8x+7\big)e^x</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\fp(x) = \big(6x+8\big)e^x + \big(3x^2+8x+7\big)e^x</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+              
+              
+              
+            <pg-code>
+              $f = 'h';
+              $x = 't';
+              Context()->variables->are($x => 'Real');
+              $formula = Formula("7$x^2+6$x-2");
+              $deriv = Formula("14$x+6");#$formula->D("$x")->reduce;
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m><var name="$f" />(<var name="$x" />) = <var name="$formula" /></m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds g(t) = \frac{t^5-t^3}{e^t}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>g\,'(t) = \frac{e^t(5t^4-3t^2)-(t^5-t^3)e^t}{(e^t)^2}</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <m><var name="$f" />'(<var name="$x" />) = </m><var name="$deriv" width="15" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds f(x) = (16x^3+24x^2+3x)\frac{7x-1}{16x^3+24x^2+3x}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\fp(x) = 7</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+              
+              
+              
+            <pg-code>
+              $f = 'f';
+              $x = 'x';
+              Context()->variables->are($x => 'Real');
+              $formula = Formula("($x^4+2$x^3)/($x+2)");
+              $deriv = $formula->D("$x")->reduce;
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m><var name="$f" />(<var name="$x" />) = <var name="$formula" /></m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(t) = t^5(\sec t + e^t)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\fp(t) = 5t^4(\sec t+ e^t) + t^5(\sec t\tan t + e^t)</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <m><var name="$f" />'(<var name="$x" />) = </m><var name="$deriv" width="15" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds f(x) = \frac{\sin x}{\cos x+3}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\fp(x) = \frac{\sin ^2(x)+\cos ^2(x)+3 \cos (x)}{(\cos (x)+3)^2}</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+              
+              
+              
+            <pg-code>
+              $f = 'f';
+              $x = 'x';
+              Context()->variables->are($x => 'Real');
+              $formula = Formula("(16$x^4+24$x^2+3)*((7$x-1)/(16$x^4+24$x^2+3))");
+              $deriv = Formula("7");#$formula->D("$x")->reduce;
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m><var name="$f" />(<var name="$x" />) = <var name="$formula" /></m>
+              </p>
+
+              <p>
+                <m><var name="$f" />'(<var name="$x" />) = </m><var name="$deriv" width="15" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+              
+              
+              
+            <pg-code>
+              $f = 'f';
+              $x = 't';
+              Context()->variables->are($x => 'Real');
+              $formula = Formula("$x^5(sec($x) + e^$x)");
+              $deriv = Formula("5$x^4*(sec($x)+e^$x)+t^5*(sec($x)*tan($x)+e^$x)");#$formula->D("$x")->reduce;
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m><var name="$f" />(<var name="$x" />) = <var name="$formula" /></m>
+              </p>
+
+              <p>
+                <m><var name="$f" />'(<var name="$x" />) = </m><var name="$deriv" width="15" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+              
+              
+              
+            <pg-code>
+              $f = 'f';
+              $x = 'x';
+              Context()->variables->are($x => 'Real');
+              $formula = Formula("sin($x)/(cos($x)+3)");
+              $deriv = Formula("(1+3*cos($x))/(cos($x)+3)^2");#$formula->D("$x")->reduce;
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m><var name="$f" />(<var name="$x" />) = <var name="$formula" /></m>
+              </p>
+
+              <p>
+                <m><var name="$f" />'(<var name="$x" />) = </m><var name="$deriv" width="15" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
     <exercise>
       <statement>
@@ -1260,320 +1616,748 @@
       </answer>
     </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>g(x) = e^2\big(\sin (\pi/4) - 1\big)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>g'(x) = 0</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+              
+              
+              
+            <pg-code>
+              $f = 'g';
+              $x = 'x';
+              Context()->variables->are($x => 'Real');
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $formula = Formula("e^2*(sin(pi/4) - 1)");
+              $deriv = Formula("0");#$formula->D("$x")->reduce;
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m><var name="$f" />(<var name="$x" />) = <var name="$formula" /></m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>g(t) = 4t^3e^t - \sin t\cos t</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>g'(t) = 12t^2e^t + 4t^3e^t - \cos^2t + \sin^2t</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <m><var name="$f" />'(<var name="$x" />) = </m><var name="$deriv" width="15" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds h(t) = \frac{t^2\sin t+3}{t^2\cos t+2}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>h\,'(t) = \frac{(t^2\cos t+2)(2t\sin t+t^2\cos t)-(t^2\sin t+3)(2t\cos t-t^2\sin t)}{(t^2\cos t+2)^2}</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+              
+              
+              
+            <pg-code>
+              $f = 'g';
+              $x = 't';
+              Context()->variables->are($x => 'Real');
+              $formula = Formula("4$x^3e^$x - sin($x)*cos($x)");
+              $deriv = Formula("12$x^2e^$x + 4$x^3e^$x - cos^2($x) + sin^2($x)");#$formula->D("$x")->reduce;
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m><var name="$f" />(<var name="$x" />) = <var name="$formula" /></m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = x^2e^x\tan x</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\fp(x) = 2xe^x\tan x = x^2e^x\tan x + x^2e^x\sec^2x</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <m><var name="$f" />'(<var name="$x" />) = </m><var name="$deriv" width="15" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>g(x) = 2x\sin x \sec x</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>g'(x) = 2\sin x\sec x+2x\cos x \sec x + 2x\sin x\sec x\tan x = 2\tan x+2x+2x\tan^2x = 2\tan x+2x\sec^2x</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+              
+              
+              
+            <pg-code>
+              $f = 'h';
+              $x = 't';
+              Context()->variables->are($x => 'Real');
+              $formula = Formula("($x^2*sin($x)+3)/($x^2*cos($x)+2)");
+              $deriv = $formula->D("$x")->reduce;
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m><var name="$f" />(<var name="$x" />) = <var name="$formula" /></m>
+              </p>
 
-    <p>
-      In the following exercises,
-      find the equations of the tangent and normal lines to the graph of <m>g</m> at the indicated point.
-    </p>
+              <p>
+                <m><var name="$f" />'(<var name="$x" />) = </m><var name="$deriv" width="15" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>g(s) = e^s(s^2+2)</m> at <m>(0,2)</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Tangent line: <m>y = 2x+2</m>
-        </p>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+              
+              
+              
+            <pg-code>
+              $f = 'f';
+              $x = 'x';
+              Context()->variables->are($x => 'Real');
+              $formula = Formula("$x^2*e^$x*tan($x)");
+              $deriv = Formula("2$x*e^$x*tan($x) + $x^2*e^$x*tan($x) + $x^2*e^$x*sec^2($x)");#$formula->D("$x")->reduce;
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m><var name="$f" />(<var name="$x" />) = <var name="$formula" /></m>
+              </p>
 
-        <p>
-          Normal line: <m>y = -1/2x+2</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <m><var name="$f" />'(<var name="$x" />) = </m><var name="$deriv" width="15" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>g(t) = t\sin t</m> at <m>(\frac{3\pi}{2},-\frac{3\pi}{2})</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Tangent line:
-          <m>y = -(x-\frac{3\pi}{2}) - \frac{3\pi}{2} = -x</m>
-        </p>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+              
+              
+              
+            <pg-code>
+              $f = 'g';
+              $x = 'x';
+              Context()->variables->are($x => 'Real');
+              $formula = Formula("2$x*sin($x)*sec($x)");
+              $deriv = Formula("2*tan($x)+2*$x*sec^2($x)");#$formula->D("$x")->reduce;
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m><var name="$f" />(<var name="$x" />) = <var name="$formula" /></m>
+              </p>
 
-        <p>
-          Normal line:
-          <m>y = (x-\frac{3\pi}{2}) - \frac{3\pi}{2} = x-3\pi</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <m><var name="$f" />'(<var name="$x" />) = </m><var name="$deriv" width="15" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds g(x) = \frac{x^2}{x-1}</m> at <m>(2,4)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Tangent line: <m>y = 4</m>
-        </p>
+    </exercisegroup>
 
-        <p>
-          Normal line: <m>x=2</m>
-        </p>
-      </answer>
-    </exercise>
+    <exercisegroup>
 
-    <exercise>
-      <statement>
+      <introduction>
         <p>
-          <m>\ds g(\theta) = \frac{\cos \theta - 8\theta}{\theta+1}</m> at <m>(0,1)</m>
+          In the following exercises,
+          find the equations of the tangent and normal lines to the graph of <m>g</m> at the indicated point.
         </p>
-      </statement>
-      <answer>
-        <p>
-          Tangent line: <m>y = -9x+1</m>
-        </p>
+      </introduction>
 
-        <p>
-          Normal line: <m>y = 1/9x+1</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+              
+              
+              
+              
+            <pg-code>
+              $f = 'g';
+              $formula = Formula("e^x(x^2+2)");
+              Context()->flags->set(reduceConstants=>0);
+              Context()->variables->add(y=>'Real');
+              parser::Assignment->Allow;
+              $t=Formula("y=2x+2");
+              $n=Formula("y=-(1/2)x+2");
+              Context("Point");
+              $point=Point("(0,2)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Let <m><var name="$f" />(x) = <var name="$formula" /></m>.
+                Find the equations of the tangent line and normal line at <m><var name="$point" /></m>.
+              </p>
 
-    <p>
-      In the following exercises,
-      find the <m>x</m><ndash />values where the graph of the function has a horizontal tangent line.
-    </p>
+              <p>
+                Tangent line equation: <var name="$t" width="20" />
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = 6x^2-18x-24</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>x=3/2</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                Normal line equation: <var name="$n" width="20" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = x\sin x</m> on <m>[-1,1]</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>x=0</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+              
+              
+              
+              
+            <pg-code>
+              $f = 'g';
+              $formula = Formula("x sin(x)");
+              Context()->flags->set(reduceConstants=>0);
+              Context()->variables->add(y=>'Real');
+              parser::Assignment->Allow;
+              $t=Formula("y=-x");
+              $n=Compute("y=x-3pi");
+              Context("Point");
+              Context()->flags->set(reduceConstants=>0);
+              $point='\left(\frac{3\pi}{2},-\frac{3\pi}{2}\right)';
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Let <m><var name="$f" />(x) = <var name="$formula" /></m>.
+                Find the equations of the tangent line and normal line at <m><var name="$point" /></m>.
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds f(x) = \frac{x}{x+1}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\fp(x)</m> is never 0.
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                Tangent line equation: <var name="$t" width="20" />
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds f(x) = \frac{x^2}{x+1}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>x= -2,0</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                Normal line equation: <var name="$n" width="20" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <p>
-      In the following exercises, find the requested derivative.
-    </p>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+              
+              
+              
+              
+            <pg-code>
+              $f = 'g';
+              $formula = Formula("x^2/(x-1)");
+              Context()->flags->set(reduceConstants=>0);
+              Context()->variables->add(y=>'Real');
+              parser::Assignment->Allow;
+              $t=Formula("y=4");
+              $n=Formula("x=2");
+              Context("Point");
+              $point=Point("(2,4)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Let <m><var name="$f" />(x) = <var name="$formula" /></m>.
+                Find the equations of the tangent line and normal line at <m><var name="$point" /></m>.
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = x\sin x</m>; find <m>\fpp(x)</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\fpp(x) = 2\cos x - x\sin x</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                Tangent line equation: <var name="$t" width="20" />
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = x\sin x</m>; find <m>f\,^{(4)}(x)</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>f^{(4)}(x) = -4\cos x+ x\sin x</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                Normal line equation: <var name="$n" width="20" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \csc x</m>; find <m>\fpp(x)</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\fpp(x) = \cot^2x\csc x + \csc^3 x</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+              
+              
+              
+              
+            <pg-code>
+              $f = 'g';
+              $formula = Formula("(cos(x)-8x)/(x+1)");
+              Context()->flags->set(reduceConstants=>0);
+              Context()->variables->add(y=>'Real');
+              parser::Assignment->Allow;
+              $t=Formula("y=-9x+1");
+              $n=Formula("y=1/9x+1");
+              Context("Point");
+              $point=Point("(0,1)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Let <m><var name="$f" />(x) = <var name="$formula" /></m>.
+                Find the equations of the tangent line and normal line at <m><var name="$point" /></m>.
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = (x^3-5x+2)(x^2+x-7)</m>;
-          find <m>f\,^{(8)}(x)</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>f^{(8)} = 0</m>
-        </p>
-      </answer>
-    </exercise>
-  </subsection>
+              <p>
+                Tangent line equation: <var name="$t" width="20" />
+              </p>
 
-  <subsection>
-    <title>Review</title>
-    <p>
-      In the following exercises,
-      use the graph of <m>f(x)</m> to sketch <m>\fp(x)</m>.
-    </p>
+              <p>
+                Normal line equation: <var name="$n" width="20" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <sidebyside>
-          <img src="figures/fig02_04_ex_42"/>
-        </sidebyside>
-      </statement>
-      <answer>
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
         <p>
-          <img src="figures/fig02_04_ex_42a"/>
+          In the following exercises,
+          find the <m>x</m>-values where the graph of the function has a horizontal tangent line.
         </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <exercise>
-      <statement>
-        <sidebyside>
-          <img src="figures/fig02_04_ex_43"/>
-        </sidebyside>
-      </statement>
-      <answer>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+            <pg-code>
+              $points = List("3/2");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Let <m>f(x) = 6x^2-18x-24</m>.
+                List all <m>x</m>-values where the graph of the function has a horizontal tangent line.
+                (Use commas to separate more than one <m>x</m>-value.
+                If there are no such<m>x</m>-values,
+                answer with <c>NONE</c>.)
+              </p>
+
+              <p>
+                <var name="$points" width="15" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+            <pg-code>
+              $points = List("0");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Let <m>f(x) = x\sin(x)</m> on <m>[-1,1]</m>.
+                List all <m>x</m>-values where the graph of the function has a horizontal tangent line.
+                (Use commas to separate more than one <m>x</m>-value.
+                If there are no such<m>x</m>-values,
+                answer with <c>NONE</c>.)
+              </p>
+
+              <p>
+                <var name="$points" width="15" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+            <pg-code>
+              $points = Compute("NONE");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Let <m>f(x) = \frac{x}{x+1}</m>.
+                List all <m>x</m>-values where the graph of the function has a horizontal tangent line.
+                (Use commas to separate more than one <m>x</m>-value.
+                If there are no such<m>x</m>-values,
+                answer with <c>NONE</c>.)
+              </p>
+
+              <p>
+                <var name="$points" width="15" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+            <pg-code>
+              $points = List("-2,0");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Let <m>f(x) = \frac{x^2}{x+1}</m>.
+                List all <m>x</m>-values where the graph of the function has a horizontal tangent line.
+                (Use commas to separate more than one <m>x</m>-value.
+                If there are no such<m>x</m>-values,
+                answer with <c>NONE</c>.)
+              </p>
+
+              <p>
+                <var name="$points" width="15" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
         <p>
-          <img src="figures/fig02_04_ex_43a"/>
+          In the following exercises, find the requested higher order derivative.
         </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <exercise>
-      <statement>
-        <sidebyside>
-          <img src="figures/fig02_04_ex_44"/>
-        </sidebyside>
-      </statement>
-      <answer>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+            <pg-code>
+              $answer=Formula("2cos(x)-x*sin(x)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = x\sin(x)</m>
+              </p>
+
+              <p>
+                <m>\fpp(x)=</m><var name="$answer" width="20" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+            <pg-code>
+              $answer=Formula("-4cos(x)+x*sin(x)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = x\sin(x)</m>
+              </p>
+
+              <p>
+                <m>f^{(4)}(x)=</m><var name="$answer" width="20" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+            <pg-code>
+              $answer=Formula("cot^2(x)*csc(x)+csc^3(x)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = \csc(x)</m>
+              </p>
+
+              <p>
+                <m>\fpp(x)=</m><var name="$answer" width="20" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+              
+            <pg-code>
+              $answer=Formula("0");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = (x^3-5x+2)(x^2+x-7)</m>
+              </p>
+
+              <p>
+                <m>f^{(8)}(x)=</m><var name="$answer" width="20" />
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
         <p>
-          <img src="figures/fig02_04_ex_44a"/>
+          In the following exercises,
+          use the graph of <m>f(x)</m> to sketch <m>\fp(x)</m>.
         </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <exercise>
-      <statement>
-        <sidebyside>
-          <img src="figures/fig02_04_ex_45"/>
-        </sidebyside>
-      </statement>
-      <answer>
-        <p>
-          <img src="figures/fig02_04_ex_45a"/>
-        </p>
-      </answer>
-    </exercise>
-  </subsection>
+      <exercise>
+        <statement>
+            <!-- START figures/fig_02_04_ex_42.tex -->
+          <image xml:id="img_02_04_ex_42" width="47%">
+            <description></description>
+            <latex-image>
+            <![CDATA[
+            \begin{tikzpicture}
+            \begin{axis}[xmin=-3.5,xmax=3.5,
+            ymin=-6.5,ymax=6.5,
+            ]
+            \addplot+[domain=-3.5:2.75] {2*x+1};
+            \end{axis}
+            \end{tikzpicture}
+            ]]>
+            </latex-image>
+          </image>
+            <!-- figures/fig_02_04_ex_42.tex END -->
+        </statement>
+        <answer>
 
+          <image width="47%">
+            <description></description>
+            <latex-image>
+            <![CDATA[
+            \begin{tikzpicture}
+            \begin{axis}[xmin=-3.5,xmax=3.5,
+            ymin=-6.5,ymax=6.5,
+            ]
+            \addplot+[domain=-3.5:3.5] {2};
+            \end{axis}
+            \end{tikzpicture}
+            ]]>
+            </latex-image>
+          </image>
+
+        </answer>
+        <solution>
+
+          <image width="47%">
+            <description></description>
+            <latex-image>
+            <![CDATA[
+            \begin{tikzpicture}
+            \begin{axis}[xmin=-3.5,xmax=3.5,
+            ymin=-6.5,ymax=6.5,
+            ]
+            \addplot+[domain=-3.5:3.5] {2};
+            \end{axis}
+            \end{tikzpicture}
+            ]]>
+            </latex-image>
+          </image>
+
+        </solution>
+      </exercise>
+
+      <exercise>
+        <statement>
+            <!-- START figures/fig_02_04_ex_43.tex -->
+          <image xml:id="img_02_04_ex_43" width="47%">
+            <description></description>
+            <latex-image>
+            <![CDATA[
+            \begin{tikzpicture}
+            \begin{axis}[xmin=-3.5,xmax=3.5,
+            ymin=-6.5,ymax=6.5,
+            ]
+            \addplot+[] coordinates {(-3.5,-4.5) (-1,3) (3.5,-1.5)};
+            \end{axis}
+            \end{tikzpicture}
+            ]]>
+            </latex-image>
+          </image>
+            <!-- figures/fig_02_04_ex_43.tex END -->
+        </statement>
+        <answer>
+
+          <image width="47%">
+            <description></description>
+            <latex-image>
+            <![CDATA[
+            \begin{tikzpicture}
+            \begin{axis}[xmin=-3.5,xmax=3.5,
+            ymin=-6.5,ymax=6.5,
+            ]
+            \addplot[firstcurvestyle,leftarrow,domain=-3.5:-1] {3};
+            \addplot[firstcurvestyle,rightarrow,domain=-1:3.5] {-1};
+            \addplot[hollowdot] coordinates {(-1,3) (-1,-1)};
+            \end{axis}
+            \end{tikzpicture}
+            ]]>
+            </latex-image>
+          </image>
+
+        </answer>
+        <solution>
+
+          <image width="47%">
+            <description></description>
+            <latex-image>
+            <![CDATA[
+            \begin{tikzpicture}
+            \begin{axis}[xmin=-3.5,xmax=3.5,
+            ymin=-6.5,ymax=6.5,
+            ]
+            \addplot[firstcurvestyle,leftarrow,domain=-3.5:-1] {3};
+            \addplot[firstcurvestyle,rightarrow,domain=-1:3.5] {-1};
+            \addplot[hollowdot] coordinates {(-1,3) (-1,-1)};
+            \end{axis}
+            \end{tikzpicture}
+            ]]>
+            </latex-image>
+          </image>
+
+        </solution>
+      </exercise>
+
+      <exercise>
+        <statement>
+            <!-- START figures/fig_02_04_ex_44.tex -->
+          <image xml:id="img_02_04_ex_44" width="47%">
+            <description></description>
+            <latex-image>
+            <![CDATA[
+            \begin{tikzpicture}
+            \begin{axis}[xmin=-2.5,xmax=5.5,
+            ymin=-6.5,ymax=6.5,
+            ]
+            \addplot+[domain=-1.9:5.3,samples=60] {x^3/3-2*x^2+x+5};
+            \end{axis}
+            \end{tikzpicture}
+            ]]>
+            </latex-image>
+          </image>
+            <!-- figures/fig_02_04_ex_44.tex END -->
+        </statement>
+        <answer>
+
+          <image width="47%">
+            <description></description>
+            <latex-image>
+            <![CDATA[
+            \begin{tikzpicture}
+            \begin{axis}[xmin=-2.5,xmax=5.5,
+            ymin=-6.5,ymax=6.5,
+            ]
+            \addplot+[domain=-1:5] {x^2-4*x+1};
+            \end{axis}
+            \end{tikzpicture}
+            ]]>
+            </latex-image>
+          </image>
+
+        </answer>
+        <solution>
+
+          <image width="47%">
+            <description></description>
+            <latex-image>
+            <![CDATA[
+            \begin{tikzpicture}
+            \begin{axis}[xmin=-2.5,xmax=5.5,
+            ymin=-6.5,ymax=6.5,
+            ]
+            \addplot+[domain=-1:5] {x^2-4*x+1};
+            \end{axis}
+            \end{tikzpicture}
+            ]]>
+            </latex-image>
+          </image>
+
+        </solution>
+      </exercise>
+
+      <exercise>
+        <statement>
+            <!-- START figures/fig_02_04_ex_45.tex -->
+          <image xml:id="img_02_04_ex_45" width="47%">
+            <description></description>
+            <latex-image>
+            <![CDATA[
+            \begin{tikzpicture}
+            \begin{axis}[xmin=-5.5,xmax=5.5,
+            ymin=-11,ymax=11,
+            ]
+            \addplot[firstcurvestyle,domain=-2.7:1.5] ({-e^x-1},{e^(-x)-4});
+            \addplot[firstcurvestyle,domain=-2.63:1.87] ({e^x-1},{-e^(-x)+3});
+            \addplot[asymptote,leftarrow] coordinates {(-5.5,-4) (5.5,-4)};
+            \addplot[asymptote,rightarrow] coordinates {(-5.5,3) (5.5,3)};
+            \addplot[asymptote] coordinates {(-1,-11) (-1,11)};
+            \end{axis}
+            \end{tikzpicture}
+            ]]>
+            </latex-image>
+          </image>
+            <!-- figures/fig_02_04_ex_45.tex END -->
+        </statement>
+        <answer>
+
+          <image width="47%">
+            <description></description>
+            <latex-image>
+            <![CDATA[
+            \begin{tikzpicture}
+            \begin{axis}[xmin=-5.5,xmax=5.5,
+            ymin=-11,ymax=11,
+            ]
+            \addplot[firstcurvestyle,domain=-1.19:1.5] ({-e^x-1},{e^(-2*x)});
+            \addplot[firstcurvestyle,domain=-1.19:1.87] ({e^x-1},{e^(-2*x)});
+            \addplot[asymptote] coordinates {(-1,-11) (-1,11)};
+            \end{axis}
+            \end{tikzpicture}
+            ]]>
+            </latex-image>
+          </image>
+
+        </answer>
+        <solution>
+
+          <image width="47%">
+            <description></description>
+            <latex-image>
+            <![CDATA[
+            \begin{tikzpicture}
+            \begin{axis}[xmin=-5.5,xmax=5.5,
+            ymin=-11,ymax=11,
+            ]
+            \addplot[firstcurvestyle,domain=-1.19:1.5] ({-e^x-1},{e^(-2*x)});
+            \addplot[firstcurvestyle,domain=-1.19:1.87] ({e^x-1},{e^(-2*x)});
+            \addplot[asymptote] coordinates {(-1,-11) (-1,11)};
+            \end{axis}
+            \end{tikzpicture}
+            ]]>
+            </latex-image>
+          </image>
+
+        </solution>
+      </exercise>
+
+    </exercisegroup>
+  </exercises>
 </section>
 
