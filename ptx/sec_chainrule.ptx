@@ -1,4 +1,4 @@
-
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <section xml:id="sec_chainrule">
   <title>The Chain Rule</title>
@@ -9,9 +9,10 @@
       functions.
       The operations of addition, subtraction, multiplication
       (including by a constant)
-      and division led to the Sum and Difference rules,
-      the Constant Multiple Rule,
-      the Power Rule, the Product Rule and the Quotient Rule.
+      and division led to the <xref ref="sum-difference-derivative-rule" autoname="title" />,
+      the <xref ref="constant-multiple-derivative-rule" autoname="title" />,
+      the <xref ref="thm_PowerRule" autoname="title">Power Rule</xref>,
+      the <xref ref="thm_ProductRule" autoname="title" /> and the <xref ref="thm_QuotientRule" autoname="title" />.
       To complete the list of differentiation rules,
       we look at the last way two
       (or more)
@@ -23,11 +24,43 @@
     <p>
       One example of a composition of functions is <m>f(x) = \cos(x^2)</m>.
       We currently do not know how to compute this derivative.
-      If forced to guess, one would likely guess <m>\fp(x) = -\sin(2x)</m>,
-      where we recognize <m>-\sin x</m> as the derivative of <m>\cos x</m> and <m>2x</m> as the derivative of <m>x^2</m>.
+      If forced to guess, one might guess <m>\fp(x) = -\sin(2x)</m>,
+      where we recognize <m>-\sin(x)</m> as the derivative of <m>\cos(x)</m> and <m>2x</m> as the derivative of <m>x^2</m>.
       However, this is not the case;
       <m>\fp(x)\neq -\sin(2x)</m>.
-      In <xref ref="ex_chain7">Example</xref> we'll see the correct answer,
+      One way to see this is to examine the graph of
+      <m>y=\cos\mathopen{}\left(x^2\right)\mathclose{}</m> in <xref ref="fig_chain">Figure</xref>
+      and its tangent line at <m>x=\pi/2</m>.
+      Clearly the slope of the tangent line there is nonzero,
+      but <m>-2\sin(2\cdot\pi/2)=0</m>.
+      So it can't be correct to say that <m>y'=-\sin(2x)</m>.
+    </p>
+
+    <figure xml:id="fig_chain">
+      <caption>A graph of <m>y=\cos(x^2)</m> and a tangent line at <m>\pi/2</m></caption>
+      <image xml:id="img_chain" width="47%">
+        <description></description>
+        <latex-image>
+        <![CDATA[
+        \begin{tikzpicture}
+        \begin{axis}[ymin=-1.5,ymax=1.5,
+        xmin=-.2,xmax=3.5,
+        clip=false,
+        ]
+        \addplot+[domain=-0.2:3.5,samples=100] {cos(deg(x^2))};
+        \addplot[tangentline,domain=1:1.93] {-sin(deg((pi/2)^2))*2*pi/2*(x-pi/2)+cos(deg((pi/2)^2))};
+        \addplot[soliddot] coordinates {(1.571,-0.781)};
+        \end{axis}
+        \end{tikzpicture}
+        ]]>
+        </latex-image>
+      </image>
+
+    </figure>
+
+    <p>
+      In <xref ref="ex_chain7">Example</xref>
+      we'll see the correct way to compute the derivative of <m>\sin\mathopen{}\left(x^2\right)\mathclose{}</m>,
       which employs the new rule this section introduces, the <em>Chain Rule</em>.
     </p>
 
@@ -63,32 +96,23 @@
         <p>
           In order to use the rules we already have,
           we must first expand each function as
-          <m>F_1(x) = 1 - 2x + x^2</m>,
-          <m>F_2(x) = 1 - 3x + 3x^2 - x^3</m> and <m>F_3(x) = 1 - 4x + 6x^2 - 4x^3 + x^4</m>.
-        </p>
-
-        <p>
+          <md>
+            <mrow>F_1(x)\amp = 1 - 2x + x^2</mrow>
+            <mrow>F_2(x)\amp = 1 - 3x + 3x^2 - x^3</mrow>
+            <mrow>F_3(x)\amp = 1 - 4x + 6x^2 - 4x^3 + x^4</mrow>
+          </md>
           It is not hard to see that:
-        </p>
-
-        <p>
-          <m>F_1'(x) = -2 + 2x</m>,
-        </p>
-
-        <p>
-          <m>F_2'(x) = -3 + 6x - 3x^2</m> and
-        </p>
-
-        <p>
-          <m>F_3'(x) = -4 + 12x - 12x^2 + 4x^3</m>.
-        </p>
-
-        <p>
-          An interesting fact is that these can be rewritten as
-          <me>
-            F_1'(x) = -2(1-x),  F_2'(x) = -3(1-x)^2\ \textrm{ and }  \ 
-            F_3'(x) = -4(1-x)^3
-          </me>.
+          <md>
+            <mrow>F_1'(x)\amp = -2 + 2x</mrow>
+            <mrow>F_2'(x)\amp = -3 + 6x - 3x^2</mrow>
+            <mrow>F_3'(x)\amp = -4 + 12x - 12x^2 + 4x^3</mrow>
+          </md>
+          An interesting fact is that these can be rewritten as:
+          <md>
+            <mrow>F_1'(x)\amp = -2(1-x)</mrow>
+            <mrow>F_2'(x)\amp = -3(1-x)^2</mrow>
+            <mrow>F_3'(x)\amp = -4(1-x)^3</mrow>
+          </md>
         </p>
 
         <p>
@@ -101,9 +125,9 @@
           Recognize that each of these functions is a composition,
           letting <m>g(x) = 1-x</m>:
           <md>
-            <mrow>F_1(x) = f_1(g(x)),\amp  \text{ where }  f_1(x) = x^2,</mrow>
-            <mrow>F_2(x) = f_2(g(x)),\amp  \text{ where }  f_2(x) = x^3,</mrow>
-            <mrow>F_3(x) = f_3(g(x)),\amp  \text{ where }  f_3(x) = x^4</mrow>
+            <mrow>F_1(x)\amp = f_1(g(x)),\amp\amp  \text{ where }  f_1(x) = x^2,</mrow>
+            <mrow>F_2(x)\amp = f_2(g(x)),\amp\amp  \text{ where }  f_2(x) = x^3,</mrow>
+            <mrow>F_3(x)\amp = f_3(g(x)),\amp\amp  \text{ where }  f_3(x) = x^4</mrow>
           </md>.
         </p>
 
@@ -121,13 +145,13 @@
       consider <m>f(x) = \sqrt{x}</m> and <m>g(x) = -x^2-1</m>.
       The domain of <m>f</m> excludes all negative numbers,
       but the range of <m>g</m> is only negative numbers.
-      Therefore the composition <m>f\big(g(x)\big) = \sqrt{-x^2-1}</m> is not defined for any <m>x</m>,
+      Therefore the composition <m>f(g(x)) = \sqrt{-x^2-1}</m> is not defined for any <m>x</m>,
       and hence is not differentiable.
     </p>
 
     <p>
-      The following definition takes care to ensure this problem does not arise.
-      We'll focus more on the derivative result than on the domain/range conditions.
+      The statement of <xref xml:id="thm_chain_rule">Theorem</xref> takes care to ensure this problem does not arise,
+but our focus is more on the derivative result than on the domain/range conditions.
     </p>
 
     <theorem xml:id="thm_chain_rule">
@@ -137,6 +161,7 @@
           Let <m>g</m> be a differentiable function on an interval <m>I</m>,
           let the range of <m>g</m> be a subset of the interval <m>J</m>,
           and let <m>f</m> be a differentiable function on <m>J</m>.
+
               <idx><h>derivative</h><h>Chain Rule</h></idx>
               <idx><h>Chain Rule</h></idx>
           Then <m>y=f(g(x))</m> is a differentiable function on <m>I</m>, and
@@ -146,6 +171,18 @@
         </p>
       </statement>
     </theorem>
+
+    <p>
+      Here is the Chain Rule in words:
+    </p>
+
+    <blockquote>
+      <p>
+        The derivative of the outside function,
+        evaluated at the inside function,
+        multiplied by the derivative of the inside function.
+      </p>
+    </blockquote>
 
     <p>
       To help understand the Chain Rule,
@@ -168,58 +205,65 @@
         </p>
 
         <p>
-          <em><m>F_1(x) = (1-x)^2</m>:</em>
-        </p>
+          <dl>
+            <li>
+              <title><m>F_1(x) = (1-x)^2</m></title>
+              <p>
+                We found that
+                <me>
+                  y=(1-x)^2 = f(g(x))
+                </me>,
+                where <m>f(x) = x^2</m> and <m>g(x) = 1-x</m>.
+                To find <m>y'</m>,
+                we apply the <xref ref="thm_chain_rule" autoname="title" />.
+                We need to note that <m>\fp(x)=2x</m> and <m>g'(x)=-1</m>.
+              </p>
 
-        <p>
-          We found that
-          <me>
-            y=(1-x)^2 = f(g(x)), \text{ where }  f(x) = x^2\ \text{ and } \ g(x) = 1-x
-          </me>.
-        </p>
+              <p>
+                Part of the <xref ref="thm_chain_rule" autoname="title" /> uses <m>\fp(g(x))</m>.
+                This means substitute <m>g(x)</m> for <m>x</m> in the equation for <m>\fp(x)</m>.
+                That is, <m>\fp(x) = 2(1-x)</m>.
+                Finishing out the <xref ref="thm_chain_rule" autoname="title" /> we have
+                <md>
+                  <mrow>y' \amp = \fp(g(x))\cdot g'(x)</mrow>
+                  <mrow>\amp = 2(1-x)\cdot (-1)</mrow>
+                  <mrow>\amp = -2(1-x)</mrow>
+                  <mrow>\amp = 2x-2</mrow>
+                </md>.
+              </p>
+            </li>
 
-        <p>
-          To find <m>y'</m>, we apply the Chain Rule.
-          We need <m>\fp(x)=2x</m> and <m>g'(x)=-1</m>.
-        </p>
+            <li>
+              <title><m>F_2(x) = (1-x)^3</m></title>
+              <p>
+                Let <m>y = (1-x)^3 = f(g(x))</m>,
+                where <m>f(x) = x^3</m> and <m>g(x) = (1-x)</m>.
+                We have <m>\fp(x) = 3x^2</m>,
+                so <m>\fp(g(x)) = 3(1-x)^2</m>.
+                The <xref ref="thm_chain_rule" autoname="title" /> then states
+                <md>
+                  <mrow>y' \amp = \fp(g(x))\cdot g'(x)</mrow>
+                  <mrow>\amp = 3(1-x)^2\cdot (-1)</mrow>
+                  <mrow>\amp = -3(1-x)^2</mrow>
+                </md>.
+              </p>
+            </li>
 
-        <p>
-          Part of the Chain Rule uses <m>\fp(g(x))</m>.
-          This means substitute <m>g(x)</m> for <m>x</m> in the equation for <m>\fp(x)</m>.
-          That is, <m>\fp(x) = 2(1-x)</m>.
-          Finishing out the Chain Rule we have
-          <me>
-            y' = \fp(g(x))\cdot g'(x) = 2(1-x)\cdot (-1) = -2(1-x)= 2x-2
-          </me>.
-        </p>
-
-        <p>
-          <m>F_2(x) = (1-x)^3</m>:
-        </p>
-
-        <p>
-          Let <m>y = (1-x)^3 = f(g(x))</m>,
-          where <m>f(x) = x^3</m> and <m>g(x) = (1-x)</m>.
-          We have <m>\fp(x) = 3x^2</m>,
-          so <m>\fp(g(x)) = 3(1-x)^2</m>.
-          The Chain Rule then states
-          <me>
-            y' = \fp(g(x))\cdot g'(x) = 3(1-x)^2\cdot(-1) = -3(1-x)^2
-          </me>.
-        </p>
-
-        <p>
-          <m>F_3(x) = (1-x)^4</m>:
-        </p>
-
-        <p>
-          Finally, when <m>y = (1-x)^4</m>,
-          we have <m>f(x)= x^4</m> and <m>g(x) = (1-x)</m>.
-          Thus <m>\fp(x) = 4x^3</m> and <m>\fp(g(x)) = 4(1-x)^3</m>.
-          Thus
-          <me>
-            y' = \fp(g(x))\cdot g'(x) = 4(1-x)^3\cdot (-1) = -4(1-x)^3
-          </me>.
+            <li>
+              <title><m>F_3(x) = (1-x)^4</m></title>
+              <p>
+                Finally, when <m>y = (1-x)^4</m>,
+                we have <m>f(x)= x^4</m> and <m>g(x) = (1-x)</m>.
+                Thus <m>\fp(x) = 4x^3</m> and <m>\fp(g(x)) = 4(1-x)^3</m>.
+                Thus
+                <md>
+                  <mrow>y' \amp = \fp(g(x))\cdot g'(x)</mrow>
+                  <mrow>\amp = 4(1-x)^3\cdot (-1)</mrow>
+                  <mrow>\amp = -4(1-x)^3</mrow>
+                </md>.
+              </p>
+            </li>
+          </dl>
         </p>
       </solution>
     </example>
@@ -236,36 +280,37 @@
       <statement>
         <p>
           Let <m>g(x)</m> be a differentiable function and let <m>n\neq 0</m> be an integer.
+
               <idx><h>derivative</h><h>Generalized Power Rule</h></idx>
               <idx><h>Generalized Power Rule</h></idx>
           Then
           <me>
-            \frac{d}{dx}\Big(g(x)^n\Big) = n\cdot \big(g(x)\big)^{n-1}\cdot g'(x)
+            \lzoo{x}{g(x)^n} = n\cdot\left(g(x)\right)^{n-1}\cdot g'(x)
           </me>.
         </p>
       </statement>
     </theorem>
 
     <p>
-      This allows us to quickly find the derivative of functions like <m>y = (3x^2-5x+7+\sin x)^{20}</m>.
+      This allows us to quickly find the derivative of functions like <m>y = (3x^2-5x+7+\sin(x) )^{20}</m>.
       While it may look intimidating,
       the Generalized Power Rule states that
       <me>
-        y' = 20(3x^2-5x+7+\sin x)^{19}\cdot (6x-5+\cos x)
+        y' = 20(3x^2-5x+7+\sin(x) )^{19}\cdot (6x-5+\cos(x) )
       </me>.
     </p>
 
     <p>
-      Treat the derivative<ndash />taking process step<ndash />by<ndash />step.
+      Treat the derivative-taking process step-by-step.
       In the example just given,
-      first multiply by 20, then rewrite the inside of the parentheses,
-      raising it all to the 19<m>^{\text{ th } }</m> power.
+      first multiply by <m>20</m>, then rewrite the inside of the parentheses,
+      raising it all to the <m>19</m>th power.
       Then think about the derivative of the expression inside the parentheses,
       and multiply by that.
     </p>
 
     <p>
-      We now consider more examples that employ the Chain Rule.
+      We now consider more examples that employ the <xref ref="thm_chain_rule" autoname="title" />.
     </p>
 
     <example xml:id="ex_chain3">
@@ -273,55 +318,64 @@
       <statement>
         <p>
           Find the derivatives of the following functions:
+
+          <ol cols="3">
+            <li>
+              <p>
+                <m>y = \sin(2x)</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>y= \ln(4x^3-2x^2)</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>y = e^{-x^2}</m>
+              </p>
+            </li>
+          </ol>
         </p>
-
-        <ol cols="3">
-          <li>
-            <p>
-              <m>y = \sin{2x}</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>y= \ln (4x^3-2x^2)</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>y = e^{-x^2}</m>
-            </p>
-          </li>
-        </ol>
       </statement>
       <solution>
         <p>
           <ol>
             <li>
               <p>
-                Consider <m>y = \sin 2x</m>.
+                Consider <m>y = \sin(2x)</m>.
                 Recognize that this is a composition of functions,
-                where <m>f(x) = \sin x</m> and <m>g(x) = 2x</m>.
+                where <m>f(x) = \sin(x)</m> and <m>g(x) = 2x</m>.
                 Thus
-                <me>
-                  y' = \fp(g(x))\cdot g'(x) = \cos (2x)\cdot 2 = 2\cos 2x
-                </me>.
+                <md>
+                  <mrow>y' \amp = \fp(g(x))\cdot g'(x)</mrow>
+                  <mrow>\amp = \cos(2x)\cdot \lzoo{x}{2x}</mrow>
+                  <mrow>\amp = \cos(2x)\cdot 2</mrow>
+                  <mrow>\amp = 2\cos(2x)</mrow>
+                </md>.
               </p>
             </li>
 
             <li>
               <p>
-                Recognize that <m>y = \ln (4x^3-2x^2)</m> is the composition of
-                <m>f(x) = \ln x</m> and <m>g(x) = 4x^3-2x^2</m>.
+                Recognize that <m>y = \ln\mathopen{}\left(4x^3-2x^2\right)\mathclose{}</m> is the composition of
+                <m>f(x) = \ln(x)</m> and <m>g(x) = 4x^3-2x^2</m>.
                 Also, recall that
                 <me>
-                  \frac{d}{dx}\Big(\ln x\Big) = \frac{1}{x}
+                  \lzoo{x}{\ln(x)} = \frac{1}{x}
                 </me>.
                 This leads us to:
-                <me>
-                  y' = \frac{1}{4x^3-2x^2} \cdot (12x^2-4x) = \frac{12x^2-4x}{4x^3-2x^2}= \frac{4x(3x-1)}{2x(2x^2-x)} = \frac{2(3x-1)}{2x^2-x}
-                </me>.
+                <md>
+                  <mrow>y' \amp = \frac{1}{4x^3-2x^2} \cdot \lzoo{x}{4x^3-2x^2}</mrow>
+                  <mrow>\amp = \frac{1}{4x^3-2x^2} \cdot \left(12x^2-4x\right)</mrow>
+                  <mrow>\amp  = \frac{12x^2-4x}{4x^3-2x^2}</mrow>
+                  <mrow>\amp = \frac{4x(3x-1)}{2x(2x^2-x)}</mrow>
+                  <mrow>\amp = \frac{2(3x-1)}{2x^2-x}</mrow>
+                </md>.
+                Note that <m>\ln\mathopen{}\left(4x^3-2x^2\right)\mathclose{}=\ln\mathopen{}\left(4x^2(x-1/2)\right)\mathclose{}</m> was only defined for <m>x\gt1/2</m>,
+                so the result of <m>y'=\frac{2(3x-1)}{2x^2-x}</m> is only valid for <m>x\gt1/2</m> as well.
               </p>
             </li>
 
@@ -330,9 +384,11 @@
                 Recognize  that <m>y = e^{-x^2}</m> is the composition of
                 <m>f(x) = e^x</m> and <m>g(x) = -x^2</m>.
                 Remembering that <m>\fp(x) = e^x</m>, we have
-                <me>
-                  y' = e^{-x^2}\cdot (-2x) = (-2x)e^{-x^2}
-                </me>.
+                <md>
+                  <mrow>y' \amp = e^{-x^2}\cdot \lzoo{x}{-x^2}</mrow>
+                  <mrow>\amp = e^{-x^2}\cdot (-2x)</mrow>
+                  <mrow>\amp = -2xe^{-x^2}</mrow>
+                </md>.
               </p>
             </li>
           </ol>
@@ -344,7 +400,7 @@
       <title>Using the Chain Rule to find a tangent line</title>
       <statement>
         <p>
-          Let <m>f(x) = \cos x^2</m>.
+          Let <m>f(x) = \cos(x^2)</m>.
           Find the equation of the line tangent to the graph of <m>f</m> at <m>x=1</m>.
         </p>
       </statement>
@@ -352,15 +408,16 @@
         <p>
           The tangent line goes through the point
           <m>(1,f(1)) \approx (1,0.54)</m> with slope <m>\fp(1)</m>.
-          To find <m>\fp</m>, we need the Chain Rule.
+          To find <m>\fp</m>,
+          we need the <xref ref="thm_chain_rule" autoname="title" />.
         </p>
 
         <p>
-          <m>\fp(x) = -\sin(x^2) \cdot(2x) = -2x\sin x^2</m>.
-          Evaluated at <m>x=1</m>, we have <m>\fp(1) = -2\sin 1\approx -1.68</m>.
-          Thus the equation of the tangent line is
+          <m>\fp(x) = -\sin(x^2) \cdot(2x) = -2x\sin(x^2)</m>.
+          Evaluated at <m>x=1</m>, we have <m>\fp(1) = -2\sin(1) \approx -1.68</m>.
+          Thus the equation of the tangent line is approximated by
           <me>
-            y = -1.68(x-1)+0.54 
+            y \approx -1.68(x-1)+0.54
           </me>.
         </p>
 
@@ -369,26 +426,42 @@
         </p>
 
         <figure xml:id="fig_chain7">
-          <caption><m>f(x) = \cos x^2</m> sketched along with its tangent line at <m>x=1</m>.</caption>
-          <img src="figures/figchain7"/>
+          <caption><m>f(x) = \cos(x^2)</m> sketched along with its tangent line at <m>x=1</m>.</caption>
+          <!-- START figures/fig_chain7.tex -->
+          <image xml:id="img_chain7">
+            <description></description>
+            <latex-image>
+            <![CDATA[
+            \begin{tikzpicture}
+            \begin{axis}[xmin=-3.1,xmax=3.1,
+            ymin=-1.1,ymax=1.1,]
+            \addplot+[domain=-3:3,samples=200] ({x},{cos(deg(x^2))});% {};
+            \addplot [tangentline,domain=.7:1.3] {-1.68*(x-1)+0.54};
+            \addplot [soliddot] coordinates{(1,0.54)};
+            \end{axis}
+            \end{tikzpicture}
+            ]]>
+            </latex-image>
+          </image>
+          <!-- figures/fig_chain7.tex END -->
         </figure>
       </solution>
     </example>
 
     <p>
-      The Chain Rule is used often in taking derivatives.
+      The <xref ref="thm_chain_rule" autoname="title" /> is used often in taking derivatives.
       Because of this,
       one can become familiar with the basic process and learn patterns that facilitate finding derivatives quickly.
       For instance,
       <me>
-        \frac{d}{dx}\Big(\ln (\text{ anything } )\Big) = \frac{1}{\text{ anything } }\cdot (\text{ anything } )' = \frac{(\text{ anything } )'}{\text{ anything } }
+        \lzoo{x}{\ln(\text{anything})} = \frac{1}{\text{anything}}\cdot\lzoo{x}{\text{anything}}  = \frac{\lzoo{x}{\text{anything}}}{\text{anything}}
       </me>.
     </p>
 
     <p>
       A concrete example of this is
       <me>
-        \frac{d}{dx}\Big(\ln(3x^{15}-\cos x+e^x)\Big) = \frac{45x^{14}+\sin x+e^x}{3x^{15}-\cos x+e^x}
+        \lzoo{x}{\ln(3x^{15}-\cos(x) +e^x)} = \frac{45x^{14}+\sin(x) +e^x}{3x^{15}-\cos(x) +e^x}
       </me>.
     </p>
 
@@ -404,48 +477,48 @@
       we use <m>u</m> as a generic function of <m>x</m>.
       We then say
       <me>
-        \frac{d}{dx}\Big(\ln u\Big) = \frac{u'}{u}
+        \lzoo{\ln(u)} = \frac{u'}{u}
       </me>.
     </p>
 
     <p>
-      The following is a short list of how the Chain Rule can be quickly applied to familiar functions.
+      The following is a short list of how the <xref ref="thm_chain_rule" autoname="title" /> can be quickly applied to familiar functions.
+
+      <ol cols="2">
+        <li>
+          <p>
+            <m>\ds\lzoo{x}{u^n} = n\cdot u^{n-1}\cdot u'</m>.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            <m>\ds\lzoo{x}{e^u} = e^u \cdot u'</m>.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            <m>\ds\lzoo{x}{\sin(u)} = \cos(u) \cdot u'</m>.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            <m>\ds\lzoo{x}{\cos(u)} = -\sin(u)\cdot u'</m>.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            <m>\ds\lzoo{x}{\tan(u)} = \sec^2(u) \cdot u'</m>.
+          </p>
+        </li>
+      </ol>
     </p>
 
-    <ol cols="2">
-      <li>
-        <p>
-          <m>\ds\frac{d}{dx}\Big(u^n\Big) = n\cdot u^{n-1}\cdot u'</m>.
-        </p>
-      </li>
-
-      <li>
-        <p>
-          <m>\ds\frac{d}{dx}\Big(e^u\Big) = u'\cdot e^u</m>.
-        </p>
-      </li>
-
-      <li>
-        <p>
-          <m>\ds\frac{d}{dx}\Big(\sin u\Big) = u'\cdot \cos u</m>.
-        </p>
-      </li>
-
-      <li>
-        <p>
-          <m>\ds\frac{d}{dx}\Big(\cos u\Big) = -u'\cdot \sin u</m>.
-        </p>
-      </li>
-
-      <li>
-        <p>
-          <m>\ds\frac{d}{dx}\Big(\tan u\Big) = u'\cdot \sec^2 u</m>.
-        </p>
-      </li>
-    </ol>
-
     <p>
-      Of course, the Chain Rule can be applied in conjunction with any of the other rules we have already learned.
+      Of course, the <xref ref="thm_chain_rule" autoname="title" /> can be applied in conjunction with any of the other rules we have already learned.
       We practice this next.
     </p>
 
@@ -454,11 +527,20 @@
       <statement>
         <p>
           Find the derivatives of the following functions.
-        </p>
 
-        <p>
-          1. <m>f(x) = x^5 \sin{2x^3}</m> 2.
-          <m>\ds f(x) = \frac{5x^3}{e^{-x^2}}</m>.
+          <ol cols="2">
+            <li>
+              <p>
+                <m>f(x) = x^5 \sin(2x^3)</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>f(x) = \dfrac{5x^3}{e^{-x^2}}</m>
+              </p>
+            </li>
+          </ol>
         </p>
       </statement>
       <solution>
@@ -466,23 +548,29 @@
           <ol>
             <li>
               <p>
-                We must use the Product and Chain Rules.
+                We must use the <xref ref="thm_ProductRule" autoname="title" /> and <xref ref="thm_chain_rule" autoname="title" />.
                 Do not think that you must be able to <q>see</q>
                 the whole answer immediately;
-                rather, just proceed step<ndash />by<ndash />step.
-                <me>
-                  \fp(x) = x^5\big(6x^2\cos 2x^3\big) + 5x^4\big(\sin 2x^3\big)= 6x^7\cos2x^3+5x^4\sin 2x^3
-                </me>.
+                rather, just proceed step-by-step.
+                <md>
+                  <mrow>\fp(x) \amp = x^5 \cdot \lzoo{x}{\sin\mathopen{}\left(2x^3\right)\mathclose{}} + \sin\mathopen{}\left(2x^3\right)\mathclose{}\cdot \lzoo{x}{x^5}</mrow>
+                  <mrow>\amp = x^5\left(\cos\mathopen{}\left(2x^3\right)\mathclose{}\cdot \lzoo{x}{2x^3} \right) + 5x^4\left(\sin\mathopen{}\left(2x^3\right)\mathclose{} \right)</mrow>
+                  <mrow>\amp = x^5\big(6x^2\cos\left(2x^3\right) \big) + 5x^4\big(\sin\left(2x^3\right) \big)</mrow>
+                  <mrow>\amp = 6x^7\cos\mathopen{}\left(2x^3\right)\mathclose{}+5x^4\sin\mathopen{}\left(2x^3\right)\mathclose{}</mrow>
+                </md>.
               </p>
             </li>
 
             <li>
               <p>
-                We must employ the Quotient Rule along with the Chain Rule.
-                Again, proceed step<ndash />by<ndash />step.
+                We must employ the <xref ref="thm_QuotientRule" autoname="title" /> along with the <xref ref="thm_chain_rule" autoname="title" />.
+                Again, proceed step-by-step.
                 <md>
-                  <mrow>\fp(x) = \frac{e^{-x^2}\big(15x^2\big) - 5x^3\big((-2x)e^{-x^2}\big)}{\big(e^{-x^2}\big)^2} \amp =\frac{e^{-x^2}\big(10x^4+15x^2\big)}{e^{-2x^2}}</mrow>
-                  <mrow>\amp = e^{x^2}\big(10x^4+15x^2\big)</mrow>
+                  <mrow>\fp(x) \amp= \frac{e^{-x^2}\cdot \lzoo{x}{5x^3} - 5x^3\cdot \lzoo{x}{e^{-x^2}}}{\left(e^{-x^2}\right)^2}</mrow>
+                  <mrow>\amp= \frac{e^{-x^2}\cdot 15x^2 - 5x^3\cdot e^{-x^2}\cdot \lzoo{x}{-x^2}}{\left(e^{-x^2}\right)^2}</mrow>
+                  <mrow>\amp= \frac{e^{-x^2}\left(15x^2\right) - 5x^3\left((-2x)e^{-x^2}\right)}{\left(e^{-x^2}\right)^2}</mrow>
+                  <mrow>\amp =\frac{e^{-x^2}\left(10x^4+15x^2\right)}{e^{-2x^2}}</mrow>
+                  <mrow>\amp = e^{x^2}\left(10x^4+15x^2\right)</mrow>
                 </md>.
               </p>
             </li>
@@ -494,8 +582,9 @@
     <p>
       A key to correctly working these problems is to break the problem down into smaller,
       more manageable pieces.
-      For instance, when using the Product and Chain Rules together,
-      just consider the first part of the Product Rule at first:
+      For instance,
+      when using the <xref ref="thm_ProductRule" autoname="title" /> and <xref ref="thm_chain_rule" autoname="title" /> together,
+      just consider the first part of the <xref ref="thm_ProductRule" autoname="title" /> at first:
       <m>f(x)g'(x)</m>.
       Just rewrite <m>f(x)</m>, then find <m>g'(x)</m>.
       Then move on to the <m>\fp(x)g(x)</m> part.
@@ -503,13 +592,13 @@
     </p>
 
     <p>
-      Likewise, using the Quotient Rule,
+      Likewise, using the <xref ref="thm_QuotientRule" autoname="title" />,
       approach the numerator in two steps and handle the denominator after completing that.
       Only simplify afterward.
     </p>
 
     <p>
-      We can also employ the Chain Rule itself several times,
+      We can also employ the <xref ref="thm_chain_rule" autoname="title" /> itself several times,
       as shown in the next example.
     </p>
 
@@ -523,30 +612,31 @@
       <solution>
         <p>
           Recognize that we have the
-          <m>g(x)=\tan(6x^3-7x)</m> function <q>inside</q>
+          <m>g(x)=\tan\mathopen{}\left(6x^3-7x\right)\mathclose{}</m> function <q>inside</q>
           the <m>f(x)=x^5</m> function;
-          that is, we have <m>y = \big(\tan(6x^3-7x)\big)^5</m>.
-          We begin using the Generalized Power Rule;
+          that is, we have <m>y = \left(\tan\mathopen{}\left(6x^3-7x\right)\mathclose{}\right)^5</m>.
+          We begin using the <xref ref="thm_gen_power_rule" autoname="title" />;
           in this first step, we do not fully compute the derivative.
-          Rather, we are approaching this step<ndash />by<ndash />step.
+          Rather, we are approaching this step-by-step.
           <me>
-            y' = 5\big(\tan(6x^3-7x)\big)^4\cdot g'(x)
+            y' = 5\left(\tan\mathopen{}\left(6x^3-7x\right)\mathclose{}\right)^4\cdot g'(x)
           </me>.
         </p>
 
         <p>
           We now find <m>g'(x)</m>.
-          We again need the Chain Rule;
-          <me>
-            g'(x) = \sec^2(6x^3-7x)\cdot(18x^2-7)
-          </me>.
+          We again need the <xref ref="thm_chain_rule" autoname="title" />;
+          <md>
+            <mrow>g'(x) \amp = \sec^2\mathopen{}\left(6x^3-7x\right)\mathclose{}\cdot \lzoo{x}{6x^3-7x}.</mrow>
+            <mrow>\amp = \sec^2\mathopen{}\left(6x^3-7x\right)\mathclose{}\cdot\left(18x^2-7\right)</mrow>
+          </md>.
         </p>
 
         <p>
           Combine this with what we found above to give
           <md>
-            <mrow>y' \amp = 5\big(\tan(6x^3-7x)\big)^4\cdot\sec^2(6x^3-7x)\cdot(18x^2-7)</mrow>
-            <mrow>\amp = (90x^2-35)\sec^2(6x^3-7x)\tan^4(6x^3-7x)</mrow>
+            <mrow>y' \amp = 5\left(\tan\mathopen{}\left(6x^3-7x\right)\mathclose{}\right)^4\cdot\sec^2\mathopen{}\left(6x^3-7x\right)\mathclose{}\cdot\left(18x^2-7\right)</mrow>
+            <mrow>\amp = \left(90x^2-35\right)\sec^2\mathopen{}\left(6x^3-7x\right)\mathclose{}\tan^4\mathopen{}\left(6x^3-7x\right)\mathclose{}</mrow>
           </md>.
         </p>
 
@@ -556,7 +646,7 @@
           It is very difficult to graph,
           as the tangent function has many vertical asymptotes and <m>6x^3-7x</m> grows so very fast.
           The important thing to learn from this is that the derivative can be found.
-          In fact, it is not <q>hard;</q>
+          In fact, it is not <q>hard</q>;
           one can take several simple steps and should be careful to keep track of how to apply each of these steps.
         </p>
       </solution>
@@ -571,28 +661,27 @@
       <title>Using the Product, Quotient and Chain Rules</title>
       <statement>
         <p>
-          Find the derivative of <m>\ds f(x) = \frac{x\cos(x^{-2})-\sin^2(e^{4x})}{\ln(x^2+5x^4)}</m>.
+          Find the derivative of <m>f(x) = \frac{x\cos(x^{-2})-\sin^2(e^{4x})}{\ln(x^2+5x^4)}</m>.
         </p>
       </statement>
       <solution>
         <p>
           This function likely has no practical use outside of demonstrating derivative skills.
           The answer is given below without simplification.
-          It employs the Quotient Rule, the Product Rule,
-          and the Chain Rule three times.
+          It employs the <xref ref="thm_QuotientRule" autoname="title" />,
+          the <xref ref="thm_ProductRule" autoname="title" />,
+          and the <xref ref="thm_chain_rule" autoname="title" /> three times.
+          <md>
+            <mrow>\amp\fp(x)</mrow>
+            <mrow>\amp=\Bigg(\ln\mathopen{}\left(x^2+5x^4\right)\mathclose{}\cdot\bigg[\Big(x\cdot\left(-\sin\mathopen{}\left(x^{-2}\right)\mathclose{}\right)\cdot\left(-2x^{-3}\right)</mrow>
+            <mrow>\amp\qquad{}+1\cdot \cos\mathopen{}\left(x^{-2}\right)\Big)-2\sin\mathopen{}\left(e^{4x}\right)\mathclose{}\cdot\cos\mathopen{}\left(e^{4x}\right)\mathclose{}\cdot\left(4e^{4x}\right)\bigg]</mrow>
+            <mrow>\amp\qquad\qquad\qquad{}-\left(x\cos\mathopen{}\left(x^{-2}\right)\mathclose{}-\sin^2\mathopen{}\left(e^{4x}\right)\mathclose{}\right)\cdot\frac{2x+20x^3}{x^2+5x^4}\Bigg)</mrow>
+            <mrow>\amp\phantom{{}={}}\left/\left(\ln\mathopen{}\left(x^2+5x^4\right)\mathclose{}\right)^2\right.</mrow>
+          </md>.
         </p>
 
         <p>
-          <m>\fp(x) =</m>
-          <me>
-            \frac{\left(\begin{array}{l}\ln(x^2+5x^4)\cdot\Big[\big(x\cdot(-\sin(x^{-2}))\cdot(-2x^{-3})+1\cdot \cos(x^{-2})\big)-2\sin(e^{4x})\cdot\cos(e^{4x})\cdot(4e^{4x})\Big]\\
-            \qquad-\Big(x\cos(x^{-2})-\sin^2(e^{4x})\Big)\cdot\frac{2x+20x^3}{x^2+5x^4}
-            \end{array} \right)}{\big(\ln(x^2+5x^4)\big)^2}
-          </me>.
-        </p>
-
-        <p>
-          The reader is highly encouraged to look at each term and recognize why it is there. (I.e., the Quotient Rule is used;
+          The reader is highly encouraged to look at each term and recognize why it is there. (I.e., the <xref ref="thm_QuotientRule" autoname="title" /> is used;
           in the numerator, identify the <q>LOdHI</q> term,
           etc.) This example demonstrates that derivatives can be computed systematically,
           no matter how arbitrarily complicated the function is.
@@ -601,7 +690,7 @@
     </example>
 
     <p>
-      The Chain Rule also has theoretic value.
+      The <xref ref="thm_chain_rule" autoname="title" /> also has theoretic value.
       That is, it can be used to find the derivatives of functions that we have not yet learned as we do in the following example.
     </p>
 
@@ -617,30 +706,31 @@
           We only know how to find the derivative of one exponential function,
           <m>y = e^x</m>.
           We can accomplish our goal by rewriting <m>2</m> in terms of <m>e</m>.
-          Recalling that <m>e^x</m> and <m>\ln x</m> are inverse functions,
+          Recalling that <m>e^x</m> and <m>\ln(x)</m> are inverse functions,
           we can write
+          <m>2=e^{\ln 2}</m> and so
           <me>
-            2=e^{\ln 2}  \text{ and so }  y=2^x = \big(e^{\ln 2}\big)^x = e^{x(\ln 2)}
-          </me>.
+            y=2^x = \left(e^{\ln 2}\right)^x = e^{x(\ln(2))}
+          </me>,
         </p>
-
+        using the <q>power to a power</q> property of exponents.
         <p>
           The function is now the composition <m>y=f(g(x))</m>,
-          with <m>f(x) = e^x</m> and <m>g(x) = x(\ln 2)</m>.
+          with <m>f(x) = e^x</m> and <m>g(x) = x(\ln(2))</m>.
           Since <m>\fp(x) = e^x</m> and
-          <m>g'(x) = \ln 2</m>, the Chain Rule gives
+          <m>g'(x) = \ln(2)</m>, the <xref ref="thm_chain_rule" autoname="title" /> gives
           <me>
-            y' = e^{x (\ln 2)} \cdot \ln 2
+            y' = e^{x (\ln(2))} \cdot \ln 2
           </me>.
         </p>
 
         <p>
-          Recall that the <m>e^{x(\ln 2)}</m> term on the right hand side is just <m>2^x</m>,
+          Recall that the <m>e^{x(\ln(2))}</m> term on the right hand side is just <m>2^x</m>,
           our original function.
           Thus, the derivative contains the original function itself.
           We have
           <me>
-            y' = y \cdot \ln 2 = 2^x\cdot \ln 2
+            y' = y \cdot \ln(2) = 2^x\cdot \ln(2)
           </me>.
         </p>
 
@@ -664,10 +754,12 @@
       <statement>
         <p>
           Let <m>f(x)=a^x</m>, for <m>a>0, a\neq 1</m>.
+
               <idx><h>derivative</h><h>exponential functions</h></idx>
+
           Then <m>f</m> is differentiable for all real numbers (i.e., differentiable everywhere) and
           <me>
-            \fp(x) = \ln a\cdot a^x
+            \fp(x) = \ln(a) \cdot a^x
           </me>.
         </p>
       </statement>
@@ -677,8 +769,9 @@
   <subsection>
     <title>Alternate Chain Rule Notation</title>
     <p>
-      It is instructive to understand what the Chain Rule <q>looks like</q>
-      using <q><m>\frac{dy}{dx}</m></q>
+      It is instructive to understand what the <xref ref="thm_chain_rule" autoname="title" />
+      <q>looks like</q> using
+      <q><m>\lz{y}{x}</m></q>
       notation instead of <m>y'</m> notation.
       Suppose that <m>y=f(u)</m> is a function of <m>u</m>,
       where <m>u=g(x)</m> is a function of <m>x</m>,
@@ -686,12 +779,13 @@
       Then, through the composition <m>f \circ g</m>,
       we can think of <m>y</m> as a function of <m>x</m>, as <m>y=f(g(x))</m>.
       Thus the derivative of <m>y</m> with respect to <m>x</m> makes sense;
-      we can talk about <m>\frac{dy}{dx}</m>.
-      This leads to an interesting progression of notation:<idx><h>Chain Rule</h><h>notation</h></idx><idx><h>derivative</h><h>Chain Rule</h></idx>
+      we can talk about <m>\lz{y}{x}</m>.
+      This leads to an interesting progression of notation:
+<idx><h>Chain Rule</h><h>notation</h></idx><idx><h>derivative</h><h>Chain Rule</h></idx>
       <md>
         <mrow>y' \amp = \fp(g(x))\cdot g'(x)</mrow>
-        <mrow>\frac{dy}{dx} \amp = $\ds y'(u) \cdot u'(x)$ \mbox{ (since \(y=f(u)\) and \(u=g(x)\))}</mrow>
-        <mrow>\frac{dy}{dx} \amp = $\ds \frac{dy}{du} \cdot \frac{du}{dx}$  \mbox{ (using ``fractional'' notation for the derivative)}</mrow>
+        <mrow>\lz{y}{x} \amp = y'(u) \cdot u'(x)\amp\amp \text{ since } y=f(u) \text{ and }u=g(x)</mrow>
+        <mrow>\lz{y}{x} \amp = \lz{y}{u} \cdot \lz{u}{x}\amp\amp  \text{(using “fractional notation” for the derivative)}</mrow>
       </md>
     </p>
 
@@ -707,142 +801,356 @@
     <p>
       It is important to realize that we
       <em>are not</em> canceling these terms;
-      the derivative notation of <m>\frac{dy}{du}</m> is one symbol.
+      the derivative notation of <m>\lz{y}{u}</m> is one symbol.
       It is equally important to realize that this notation was chosen precisely because of this behavior.
-      It makes applying the Chain Rule easy with multiple variables.
+      It makes applying the <xref ref="thm_chain_rule" autoname="title" /> easy with multiple variables.
       For instance,
       <me>
-        \frac{dy}{dt} = \frac{dy}{d\bigcirc} \cdot \frac{d\bigcirc}{d\triangle} \cdot \frac{d\triangle}{dt}
+        \lz{y}{t} = \lz{y}{\bigcirc} \cdot \lz{\bigcirc}{\triangle} \cdot \lz{\triangle}{t}
       </me>.
       where <m>\bigcirc</m> and <m>\triangle</m> are any variables you'd like to use.
     </p>
 
     <p>
-      One of the most common ways of
-      <q>visualizing</q> the Chain Rule is to consider a set of gears,
+      One of the most common ways of <q>visualizing</q>
+      the <xref ref="thm_chain_rule" autoname="title" /> is to consider a set of gears,
       as shown in <xref ref="fig_chainrulegears">Figure</xref>.
-      The gears have 36, 18, and 6 teeth, respectively.
+      The gears have <m>36</m>, <m>18</m>,
+      and <m>6</m> teeth, respectively.
       That means for every revolution of the <m>x</m> gear,
       the <m>u</m> gear revolves twice.
       That is, the rate at which the <m>u</m> gear makes a revolution is twice as fast as the rate at which the <m>x</m> gear makes a revolution.
-      Using the terminology of calculus,
-      the rate of <m>u</m>-change,
-      with respect to <m>x</m>, is <m>\frac{du}{dx} = 2</m>.
     </p>
 
-    <figure xml:id="fig_chainrulegears">
-      <caption>A series of gears to demonstrate the Chain Rule. Note how <m>\frac{dy}{dx} = \frac{dy}{du}\cdot\frac{du}{dx}</m></caption>
-      <img src="figures/figchainrulegears"/>
-    </figure>
+    <sidebyside widths="47% 47%">
+
+      <paragraphs>
+        <p>
+          Using the terminology of calculus,
+          the rate of <m>u</m>-change, with respect to <m>x</m>,
+          is <m>\lz{u}{x} = 2</m>.
+        </p>
+
+        <p>
+          Likewise, every revolution of <m>u</m> causes <m>3</m> revolutions of <m>y</m>:
+          <m>\lz{y}{u} = 3</m>.
+          How does <m>y</m> change with respect to <m>x</m>?
+          For each revolution of <m>x</m>,
+          <m>y</m> revolves <m>6</m> times; that is,
+          <me>
+            \frac{dy}{dx} = \frac{dy}{du}\cdot \frac{du}{dx} = 2\cdot 3 = 6
+          </me>.
+        </p>
+
+        <p>
+          We can then extend the <xref ref="thm_chain_rule" autoname="title" /> with more variables by adding more gears to the picture.
+        </p>
+      </paragraphs>
+
+      <figure xml:id="fig_chainrulegears">
+        <caption>A series of gears to demonstrate the Chain Rule. Note how <m>\lz{y}{x} = \lz{y}{u}\cdot\lz{u}{x}</m></caption>
+        <!-- START figures/fig_chainrule_gears.tex -->
+        <image xml:id="img_chainrulegears">
+          <description></description>
+          <latex-image>
+          <![CDATA[
+          \begin{tikzpicture}[>=latex]
+
+          \begin{scope}[shift={(0,-200pt)}]
+          \begin{scope}
+          \foreach \x in {0,1,2,...,35}
+          {%
+          \draw [rotate around={{\x*10}:(0,0)}] (60pt,0)--(65pt,0) arc (0:{4.}:65pt);
+          \draw [rotate around={{\x*10+4.}:(0,0)}] (65pt,0) -- (60pt,0) arc (0:6:60pt);
+          }
+          \draw [->] (40pt,0) arc (0:170:40pt);
+          \draw (0,0) node {$x$};
+          \end{scope}
+
+          \begin{scope}[shift={(4.5pt,-99pt)}]
+          \foreach \x in {0,1,2,...,17}
+          {%
+          \draw [rotate around={{\x*20}:(0,0)}] (30pt,0)--(35pt,0) arc (0:{9}:35pt);
+          \draw [rotate around={{\x*20+9}:(0,0)}] (35pt,0) -- (30pt,0) arc (0:11:30pt);
+          }
+          \draw [->] (0,25pt) arc (90:-80:25pt);
+          \draw (0,0) node {$u$};
+          \draw (45pt,-30pt) node {\small$\ds \frac{dy}{du} = 3$};
+          \draw (-50pt,30pt) node {\small $\ds \frac{du}{dx} = 2$};
+          \draw (60pt,40pt) node {\small $\ds \frac{dy}{dx} = 6$};
+          \end{scope}
+
+          \begin{scope}[shift={(53.5pt,-100pt)}]
+          \foreach \x in {0,1,2,...,5}
+          {%
+          \draw [rotate around={{\x*60}:(0,0)}] (10pt,0)--(15pt,0) arc (0:{29}:15pt);
+          \draw [rotate around={{\x*60+29}:(0,0)}] (15pt,0) -- (10pt,0) arc (0:31:10pt);
+          }
+          \draw [->] (0,-20pt) arc (-90:70:20pt);
+          \draw (0,0) node {$y$};
+          \end{scope}
+          \end{scope}
+          \end{tikzpicture}
+          ]]>
+          </latex-image>
+        </image>
+        <!-- figures/fig_chainrule_gears.tex END -->
+      </figure>
+    </sidebyside>
 
     <p>
-      Likewise, every revolution of <m>u</m> causes 3 revolutions of <m>y</m>:
-      <m>\frac{dy}{du} = 3</m>.
-      How does <m>y</m> change with respect to <m>x</m>?
-      For each revolution of <m>x</m>,
-      <m>y</m> revolves 6 times; that is,
-      <me>
-        \frac{dy}{dx} = \frac{dy}{du}\cdot \frac{du}{dx} = 2\cdot 3 = 6
-      </me>.
-    </p>
-
-    <p>
-      We can then extend the Chain Rule with more variables by adding more gears to the picture.
-    </p>
-
-    <p>
-      It is difficult to overstate the importance of the Chain Rule.
+      It is difficult to overstate the importance of the <xref ref="thm_chain_rule" autoname="title" />.
       So often the functions that we deal with are compositions of two or more functions,
       requiring us to use this rule to compute derivatives.
       It is also often used in real life when actual functions are unknown.
       Through measurement, we can calculate (or,
-      approximate) <m>\frac{dy}{du}</m> and <m>\frac{du}{dx}</m>.
-      With our knowledge of the Chain Rule,
-      we can find <m>\frac{dy}{dx}</m>.
+      approximate) <m>\lz{y}{u}</m> and <m>\lz{u}{x}</m>.
+      With our knowledge of the <xref ref="thm_chain_rule" autoname="title" />,
+      we can find <m>\lz{y}{x}</m>.
     </p>
 
     <p>
-      In the next section,
-      we use the Chain Rule to justify another differentiation technique.
+      In <xref ref="sec_imp_deriv">Section</xref>,
+      we use the <xref ref="thm_chain_rule" autoname="title" /> to justify another differentiation technique.
       There are many curves that we can draw in the plane that fail the
       <q>vertical line test.</q> For instance,
       consider <m>x^2+y^2=1</m>, which describes the unit circle.
       We may still be interested in finding slopes of tangent lines to the circle at various points.
-      The next section shows how we can find <m>\frac{dy}{dx}</m> without first
+      <xref ref="sec_imp_deriv">Section</xref>
+      shows how we can find <m>\lz{y}{x}</m> without first
       <q>solving for <m>y</m>.</q>
       While we can in this instance,
       in many other instances solving for <m>y</m> is impossible.
       In these situations,
-      <em>implicit differentiation</em> is indispensable.
+      <term>implicit differentiation</term> is indispensable.
     </p>
   </subsection>
 
-  <subsection>
-    <title>Terms and Concepts</title>
-    <exercise>
-      <statement>
-        <p>
-          T/F: The Chain Rule describes how to evaluate the derivative of a composition of functions.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          T
-        </p>
-      </answer>
-    </exercise>
+  <exercises>
+    <exercisegroup>
 
-    <exercise>
-      <statement>
+      <introduction>
         <p>
-          T/F: The Generalized Power Rule states that <m>\ds \frac{d}{dx}\Big( g(x)^n\Big) = n\big(g(x)\big)^{n-1}</m>.
+          Terms and Concepts
         </p>
-      </statement>
-      <answer>
-        <p>
-          F
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <exercise>
-      <statement>
-        <p>
-          T/F: <m>\ds \frac{d}{dx}\big(\ln (x^2)\big) = \frac{1}{x^2}</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          F
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              $tf=PopUp(['?','True','False'],1);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                True or False?
+                The Chain Rule describes how to evaluate the derivative of a composition of functions.
+                <var name="$tf" form="popup"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          T/F: <m>\ds \frac{d}{dx}\big(3^x\big) \approx 1.1\cdot3^x</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          T
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              $tf=PopUp(['?','True','False'],2);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                True or False?
+                The Generalized Power Rule states that <m>\lzoo{x}{g(x)^n} = n\left(g(x)\right)^{n-1}</m>.
+                <var name="$tf" form="popup"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              $tf=PopUp(['?','True','False'],2);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                True or False?
+                <m>\lzoo{x}{\ln\mathopen{}\left(x^2\right)\mathclose{}} = \frac{1}{x^2}</m>.
+                <var name="$tf" form="popup"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              $tf=PopUp(['?','True','False'],1);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                True or False?
+                <m>\lzoo{x}{3^x}\approx 1.1\cdot3^x</m>.
+                <var name="$tf" form="popup"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              $tf=PopUp(['?','True','False'],1);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                True or False?
+                <m>\lz{x}{y} = \lz{x}{t}\cdot\lz{t}{y}</m>.
+                <var name="$tf" form="popup"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              $tf=PopUp(['?','True','False'],1);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                True or False?
+                Taking the derivative of <m>f(x) = x^2\sin(5x)</m> requires the use of both the Product and Chain Rules.
+                <var name="$tf" form="popup"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+
+    <exercisegroup>
+
+      <introduction>
         <p>
-          T/F: <m>\ds \frac{dx}{dy} = \frac{dx}{dt}\cdot \frac{dt}{dy}</m>
+          In the following exercises, compute the derivative of the given function.
         </p>
-      </statement>
-      <answer>
-        <p>
-          T
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
+
+      <exercise xml:id="exer_02_05_06">
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              $fp=Formula("10(4x^3-x)^9(12x^2-1)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = \left(4x^3-x\right)^{10}</m>
+              </p>
+
+              <p>
+                <m>f'(x) = </m><var name="$fp" width="20"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\fp(x) = 10(4x^3-x)^9\cdot(12x^2-1)</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              Context()->variables->are(t=>'Real');
+              $fp=Formula("15(3t-2)^4");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(t) = (3t-2)^{5}</m>
+              </p>
+
+              <p>
+                <m>f'(t) = </m><var name="$fp" width="20"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\fp(t) = 15(3t-2)^4</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              Context()->variables->are(theta=>['Real',TeX=>'\theta']);
+              $fp=Formula("3(sin(theta)+cos(theta))^2(cos(theta)-sin(theta))");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>g(\theta)=(\sin(\theta)+\cos(\theta))^3</m>
+              </p>
+
+              <p>
+                (<m>\theta</m> is <c>theta</c>)
+              </p>
+
+              <p>
+                <m>g'(\theta) = </m><var name="$fp" width="40"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>g'(\theta)=3(\sin(\theta)+\cos(\theta))^2(\cos(\theta)-\sin(\theta))</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise xml:id="exer_02_05_09">
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              Context()->variables->are(t=>'Real');
+              $fp=Formula("(6t+1)e^(3t^2+t-1)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>h(t) = e^{3t^2+t-1}</m>
+              </p>
+
+              <p>
+                <m>h'(t) = </m><var name="$fp" width="20"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>h'(t) = (6t+1)e^{3t^2+t-1}</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+<!-- TODO: Make this a WW problem -->
 
     <exercise>
       <statement>
@@ -856,78 +1164,8 @@
         </p>
       </answer>
     </exercise>
-  </subsection>
 
-  <subsection>
-    <title>Problems</title>
-    <p>
-      In the following exercises, compute the derivative of the given function.
-    </p>
-
-    <exercise xml:id="exer_02_05_06">
-      <statement>
-        <p>
-          <m>f(x) = (4x^3-x)^{10}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\fp(x) = 10(4x^3-x)^9\cdot(12x^2-1) = (120x^2-10)(4x^3-x)^9</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>f(t) = (3t-2)^{5}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\fp(t) = 15(3t-2)^4</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>g(\theta) = (\sin \theta+\cos \theta)^3</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>g'(\theta) = 3(\sin \theta+\cos \theta)^2(\cos \theta-\sin\theta)</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise xml:id="exer_02_05_09">
-      <statement>
-        <p>
-          <m>h(t) = e^{3t^2+t-1}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>h'(t) = (6t+1)e^{3t^2+t-1}</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \big(\ln x + x^2\big)^3</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\fp(x) = 3\big(\ln x+x^2\big)2(\frac1x+2x)</m>
-        </p>
-      </answer>
-    </exercise>
+<!-- TODO: Make this a WW problem -->
 
     <exercise>
       <statement>
@@ -942,44 +1180,79 @@
       </answer>
     </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \big(x+\frac{1}{x}\big)^4</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\fp(x) = 4\big(x+\frac1x\big)^3\big(1-\frac{1}{x^2}\big)</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              $fp=Formula("4(x+1/x)^3(1-1/x^2)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = \left(x+\frac{1}{x}\right)^4</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \cos (3x)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\fp(x) = -3\sin(3x)</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <m>f'(x) = </m><var name="$fp" width="20"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\fp(x) = 4\left(x+\frac{1}{x}\right)^3\left(1-\frac{1}{x^2}\right)</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>g(x) = \tan (5x)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>g'(x) = 5\sec^2(5x)</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              $fp=Formula("-3sin(3x)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = \cos(3x)</m>
+              </p>
+
+              <p>
+                <m>f'(x) = </m><var name="$fp" width="20"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\fp(x) = -3\sin(3x)</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              $fp=Formula("5sec^2(5x)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>g(x) = \tan(5x)</m>
+              </p>
+
+              <p>
+                <m>g'(x) = </m><var name="$fp" width="20"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>g'(x) = 5\sec^2(5x)</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <!-- TODO: Make this a WW problem -->
 
     <exercise>
       <statement>
@@ -994,6 +1267,8 @@
       </answer>
     </exercise>
 
+<!-- TODO: Make this a WW problem -->
+
     <exercise>
       <statement>
         <p>
@@ -1007,174 +1282,333 @@
       </answer>
     </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>h(t) = \sin^4(2t)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>h'(t) = 8\sin^3(2t)\cos(2t)</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              Context()->variables->are(t=>'Real');
+              $fp=Formula("8 sin^3(2t) cos(2t)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>h(t) = \sin^4(2t)</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>p(t) = \cos^3(t^2+3t+1)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>p'(t) = -3\cos^2(t^2+3t+1)\sin(t^2+3t+1)(2t+3)</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <m>h'(t) = </m><var name="$fp" width="20"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>h'(t) = 8\sin^3(2t)\cos(2t)</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \ln (\cos x)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\fp(x) = -\tan x</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              Context()->variables->are(t=>'Real');
+              $fp=Formula("-3 cos^2(t^2+3t+1) sin(t^2+3t+1) (2t+3)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>p(t) = \cos^3\mathopen{}\left(t^2+3t+1\right)\mathclose{}</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \ln (x^2)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\fp(x) = 2/x</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <m>p'(t) = </m><var name="$fp" width="40"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>p'(t) = -3\cos^2\mathopen{}\left(t^2+3t+1\right)\mathclose{}\sin\mathopen{}\left(t^2+3t+1\right)\mathclose{}(2t+3)</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = 2\ln (x)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\fp(x) = 2/x</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              $fp=Formula("-tan(x)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x)=\ln\mathopen{}\left(\cos(x)\right)\mathclose{}</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>g(r) = 4^r</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>g'(r) = \ln 4\cdot 4^r</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <m>f'(x)=</m><var name="$fp" width="20"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\fp(x) = -\tan(x)</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>g(t) = 5^{\cos t}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>g'(t) = -\ln 5\cdot 5^{\cos t}\sin t</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+               $fp=Formula("2/x");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = \ln\mathopen{}\left(x^2\right)\mathclose{}</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>g(t) = 15^2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>g'(t) = 0</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <m>f'(x)=</m><var name="$fp" width="20"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\fp(x) = 2/x</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds m(w) = \frac{3^w}{2^w}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>m'(w) = \ln (3/2) (3/2)^w</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+               $fp=Formula("2/x");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = 2\ln(x)</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds h(t) = \frac{2^t+3}{3^t+2}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\fp(x) = \frac{(3^t+2)\big((\ln 2) 2^t\big)-(2^t+3)\big((\ln 3)3^t\big)}{(3^t+2)^2}</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <m>f'(x)=</m><var name="$fp" width="20"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\fp(x) = 2/x</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds m(w) = \frac{3^w+1}{2^w}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>m'(w) = \frac{2^w\big(\ln 3\cdot 3^w-\ln 2\cdot (3^w+1)\big)}{2^{2w}}</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              Context()->variables->are(r=>'Real');
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $fp=Formula("ln(4) 4^r");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>g(r) = 4^r</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds f(x) = \frac{3^{x^2}+x}{2^{x^2}}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\fp(x) = \frac{2^{x^2}(\ln 3\cdot 3^{x^2}2x+1) - (3^{x^2}+x)(\ln 2\cdot 2^{x^2}2x)}{2^{2x^2}}</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <m>g'(r)=</m><var name="$fp" width="20"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>g'(r) = \ln(4) \cdot 4^r</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = x^2\sin(5x)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\fp(x) = 5x^2\cos(5x) + 2x\sin(5x)</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              Context()->variables->are(t=>'Real');
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $fp=Formula("-ln(5)*5^(cos(t))*sin(t)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>g(t)=5^{\cos(t)}</m>
+              </p>
+
+              <p>
+                <m>g'(t)=</m><var name="$fp" width="20"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>g'(t) =-\ln(5)\cdot5^{\cos(t)}\sin(t)</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              Context()->variables->are(t=>'Real');
+              $fp=Formula("0");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>g(t) = 15^2</m>
+              </p>
+
+              <p>
+                <m>g'(t)=</m><var name="$fp" width="20"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>g'(t) = 0</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              Context()->variables->are(w=>'Real');
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $fp=Formula("ln(3/2) (3/2)^w");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>m(w) = \dfrac{3^w}{2^w}</m>
+              </p>
+
+              <p>
+                <m>m'(w)=</m><var name="$fp" width="20"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>m'(w) = \ln(3/2) (3/2)^w</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              Context()->variables->are(t=>'Real');
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $fp=Formula("((3^t+2)ln(2)2^t-(2^t+3)(ln(3)3^t))/(3^t+2)^2");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>h(t) = \dfrac{2^t+3}{3^t+2}</m>
+              </p>
+
+              <p>
+                <m>h'(t)=</m><var name="$fp" width="40"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\fp(x) = \dfrac{\left(3^t+2\right)\ln(2)2^t-\left(2^t+3\right)\ln(3)3^t}{\left(3^t+2\right)^2}</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              Context()->variables->are(w=>'Real');
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $fp=Formula("(2^w(ln(3)3^w-ln(2)(3^w+1)))/(2^(2w))");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>m(w) = \dfrac{3^w+1}{2^w}</m>
+              </p>
+
+              <p>
+                <m>m'(w)=</m><var name="$fp" width="40"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>m'(w) = \dfrac{2^w\left(\ln(3) \cdot 3^w-\ln(2) \cdot (3^w+1)\right)}{2^{2w}}</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $fp=Formula("(2^(x^2)(ln(3)3^(x^2)2x+1) - (3^(x^2)+x)ln(2)2^(x^2)2x)/2^(2x^2)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = \dfrac{3^{x^2}+x}{2^{x^2}}</m>
+              </p>
+
+              <p>
+                <m>f'(x)=</m><var name="$fp" width="60"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\fp(x) = \dfrac{2^{x^2}\left(\ln(3) \cdot 3^{x^2}2x+1\right) - \left(3^{x^2}+x\right)\ln(2) \cdot 2^{x^2}2x}{2^{2x^2}}</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              $fp=Formula("5x^2cos(5x) + 2xsin(5x)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = x^2\sin(5x)</m>
+              </p>
+
+              <p>
+                <m>f'(x)=</m><var name="$fp" width="20"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\fp(x) = 5x^2\cos(5x) + 2x\sin(5x)</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+<!-- TODO: Make this a WW problem -->
 
     <exercise>
       <statement>
@@ -1189,18 +1623,30 @@
       </answer>
     </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>g(t) = \cos(t^2+3t)\sin(5t-7)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>g'(t) = 5\cos(t^2+3t)\cos(5t-7)- (2t+3)\sin(t^2+3t)\sin(5t-7)</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              Context()->variables->are(t=>'Real');
+              $fp=Formula("5cos(t^2+3t)cos(5t-7)- (2t+3)sin(t^2+3t)sin(5t-7)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>g(t)=\cos\mathopen{}\left(t^2+3t\right)\mathclose{}\sin(5t-7)</m>
+              </p>
+
+              <p>
+                <m>g'(t)=</m><var name="$fp" width="40"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>g'(t) = 5\cos\mathopen{}\left(t^2+3t\right)\mathclose{}\cos(5t-7)- (2t+3)\sin\mathopen{}\left(t^2+3t\right)\mathclose{}\sin(5t-7)</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
 
     <exercise>
       <statement>
@@ -1215,18 +1661,30 @@
       </answer>
     </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>g(t) = \cos(\frac1t)e^{5t^2}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>g'(t) = 10t\cos(\frac1t)e^{5t^2}+\frac{1}{t^2}\sin(\frac1t)e^{5t^2}</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              Context()->variables->are(t=>'Real');
+              $fp=Formula("10t cos(1/t)e^(5t^2)+1/t^2sin(1/t)e^(5t^2)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>g(t)=\cos\mathopen{}\left(\frac{1}{t}\right)\mathclose{}e^{5t^2}</m>
+              </p>
+
+              <p>
+                <m>g'(t)=</m><var name="$fp" width="40"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>g'(t) = 10t\cos\mathopen{}\left(\frac{1}{t}\right)\mathclose{}e^{5t^2}+\frac{1}{t^2}\sin\mathopen{}\left(\frac{1}{t}\right)\mathclose{}e^{5t^2}</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
 
     <exercise>
       <statement>
@@ -1254,218 +1712,340 @@
       </answer>
     </exercise>
 
-    <p>
-      In the following exercises,
-      find the equations of tangent and normal lines to the graph of the function at the given point.
-      Note: the functions here are the same as in <xref ref="exer_02_05_06">Exercises</xref>
-      through <xref ref="exer_02_05_09"></xref>.
-    </p>
+    </exercisegroup>
+    <exercisegroup>
 
-    <exercise>
-      <statement>
+      <introduction>
         <p>
-          <m>f(x) = (4x^3-x)^{10}</m> at <m>x=0</m>
+          In the following exercises,
+          find the equations of tangent and normal lines to the graph of the function at the given point.
+          Note: the functions here are the same as in <xref ref="exer_02_05_06">Exercises</xref>
+          through <xref ref="exer_02_05_09"></xref>.
         </p>
-      </statement>
-      <answer>
-        <p>
-          Tangent line: <m>y=0</m>
-        </p>
+      </introduction>
 
-        <p>
-          Normal line: <m>x=0</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>f(t) = (3t-2)^5</m> at <m>t=1</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Tangent line: <m>y=15(t-1)+1</m>
-        </p>
-
-        <p>
-          Normal line: <m>y=-1/15(t-1)+1</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>g(\theta) = (\sin\theta+\cos\theta)^3</m> at <m>\theta = \pi/2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Tangent line: <m>y=-3(\theta - \pi/2)+1</m>
-        </p>
-
-        <p>
-          Normal line: <m>y=1/3(\theta - \pi/2)+1</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>h(t) = e^{3t^2+t-1}</m> at <m>t=-1</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Tangent line: <m>y=-5e(t+1)+e</m>
-        </p>
-
-        <p>
-          Normal line: <m>y=1/(5e)(t+1)+e</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          Compute <m>\ds \frac{d}{dx}\big(\ln (kx)\big)</m> two ways:
-
-          <ol>
-            <li>
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              Context("Numeric")->variables->add(y=>'Real');
+              parser::Assignment->Allow;
+              $t=Formula("y=0");
+              $n=Formula("x=0");
+            </pg-code>
+            </setup>
+            <statement>
               <p>
-                Using the Chain Rule, and
+                <m>f(x) = \left(4x^3-x\right)^{10}</m>
               </p>
-            </li>
 
-            <li>
               <p>
-                by first using the logarithm rule <m>\ln (ab) = \ln a + \ln b</m>,
-                then taking the derivative.
+                At <m>x=0</m>,
+                the tangent line has equation <var name="$t" width="20" />.
               </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          In both cases the derivative is the same: <m>1/x</m>.
-        </p>
-      </answer>
-    </exercise>
+
+              <p>
+                At <m>x=0</m>,
+                the normal line has equation <var name="$n" width="20" />.
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              Context("Numeric")->variables->add(y=>'Real');
+              parser::Assignment->Allow;
+              Context()->flags->set(reduceConstants=>0);
+              $t=Formula("y=15(x-1)+1");
+              $n=Formula("y=-1/15(x-1)+1");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = (3x-2)^5</m>
+              </p>
+
+              <p>
+                At <m>x=1</m>,
+                the tangent line has equation <var name="$t" width="20" />.
+              </p>
+
+              <p>
+                At <m>x=1</m>,
+                the normal line has equation <var name="$n" width="20" />.
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              Context("Numeric")->variables->add(y=>'Real');
+              parser::Assignment->Allow;
+              Context()->flags->set(reduceConstants=>0);
+              $t=Formula("y=-3(x - pi/2)+1");
+              $n=Formula("y=1/3(x - pi/2)+1");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>g(x) = (\sin(x)+\cos(x))^3</m>
+              </p>
+
+              <p>
+                At <m>x=\pi/2</m>,
+                the tangent line has equation <var name="$t" width="20" />.
+              </p>
+
+              <p>
+                At <m>x=\pi/2</m>,
+                the normal line has equation <var name="$n" width="20" />.
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              Context("Numeric")->variables->add(y=>'Real');
+              parser::Assignment->Allow;
+              Context()->flags->set(reduceConstants=>0);
+              $t=Formula("y=-5e(x+1)+e");
+              $n=Formula("y=1/(5e)(x+1)+e");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>h(x) = e^{3x^2+x-1}</m>
+              </p>
+
+              <p>
+                At <m>x=-1</m>,
+                the tangent line has equation <var name="$t" width="20" />.
+              </p>
+
+              <p>
+                At <m>x=-1</m>,
+                the normal line has equation <var name="$n" width="20" />.
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
 
     <exercise>
-      <statement>
-        <p>
-          Compute <m>\ds \frac{d}{dx}\big(\ln (x^k)\big)</m> two ways:
-
-          <ol>
-            <li>
-              <p>
-                Using the Chain Rule, and
-              </p>
-            </li>
-
-            <li>
-              <p>
-                by first using the logarithm rule <m>\ln (a^p) = p\ln a</m>,
-                then taking the derivative.
-              </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          In both cases the derivative is the same: <m>k/x</m>.
-        </p>
-      </answer>
-    </exercise>
-  </subsection>
-
-  <subsection>
-    <title>Review</title>
-    <exercise>
-      <statement>
-        <p>
-          The <q>wind chill factor</q> is a measurement of how cold it <q>feels</q>
-          during cold, windy weather.
-          Let <m>W(w)</m> be the wind chill factor, in degrees Fahrenheit,
-          when it is <m>25^\circ</m>F outside with a wind of <m>w</m> mph.
-
-          <ol>
-            <li>
-              <p>
-                What are the units of <m>W'(w)</m>?
-              </p>
-            </li>
-
-            <li>
-              <p>
-                What would you expect the sign of <m>W'(10)</m> to be?
-              </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
+      <webwork seed="1">
+          <statement>
             <p>
-              <m>^\circ</m> F/mph
-            </p>
-          </li>
+              Compute <m>\lzoo{x}{\ln(kx)}</m> two ways:
 
-          <li>
-            <p>
-              The sign would be negative; when the wind is blowing at 10 mph,
-              any increase in wind speed will make it feel colder,
-              i.e., a lower number on the Fahrenheit scale.
+              <ol label="a">
+                <li>
+                  <p>
+                    Using the Chain Rule:
+                  </p>
+
+                  <p>
+                    <var form="essay" />
+                  </p>
+                </li>
+
+                <li>
+                  <p>
+                    And by first using the logarithm rule <m>\ln(ab) = \ln(a) + \ln(b)</m>,
+                    then taking the derivative:
+                  </p>
+
+                  <p>
+                    <var form="essay" />
+                  </p>
+                </li>
+              </ol>
             </p>
-          </li>
-        </ol>
-      </answer>
+          </statement>
+          <solution>
+            <p>
+              In both cases the derivative is the same: <m>1/x</m>.
+            </p>
+          </solution>
+      </webwork>
     </exercise>
 
     <exercise>
-      <statement>
-        <p>
-          Find the derivatives of the following functions.
-
-          <ol>
-            <li>
-              <p>
-                <m>f(x) = x^2e^x\cot x</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>g(x) = 2^x3^x4^x</m>
-              </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
+      <webwork seed="1">
+          <statement>
             <p>
-              <m>2xe^x\cot x + x^2e^x\cot x - x^2e^x\csc^2 x</m>
-            </p>
-          </li>
+              Compute <m>\lzoo{x}{\ln\mathopen{}\left(x^k\right)\mathclose{}}</m> two ways:
 
-          <li>
-            <p>
-              <m>\ln(48)48^x</m>
+              <ol label="a">
+                <li>
+                  <p>
+                    Using the Chain Rule:
+                  </p>
+
+                  <p>
+                    <var form="essay" />
+                  </p>
+                </li>
+
+                <li>
+                  <p>
+                    And by first using the logarithm rule <m>\ln\mathopen{}\left(a^p\right)\mathclose{} = p\ln(a)</m>
+                    (for positive <m>a</m>),
+                    then taking the derivative:
+                  </p>
+
+                  <p>
+                    <var form="essay" />
+                  </p>
+                </li>
+              </ol>
             </p>
-          </li>
-        </ol>
-      </answer>
+          </statement>
+          <solution>
+            <p>
+              In both cases the derivative is the same: <m>1/x</m>.
+            </p>
+          </solution>
+      </webwork>
     </exercise>
-  </subsection>
+
+    <exercisegroup>
+
+      <introduction>
+        <p>
+          Review
+        </p>
+      </introduction>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              $sign=PopUp(['?','positive','negative'],2);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                The <q>wind chill factor</q> is a measurement of how cold it <q>feels</q>
+                during cold, windy weather.
+                Let <m>W(w)</m> be the wind chill factor, in degrees Fahrenheit,
+                when it is <m>25^\circ</m>F outside with a wind of <m>w</m> mph.
+              </p>
+
+              <p>
+                <ol label="a">
+                  <li>
+                    <p>
+                      What are the units of <m>W'(w)</m>?
+                    </p>
+
+                    <p>
+                      <var form="essay" />
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      What would you expect the sign of <m>W'(10)</m> to be?
+                    </p>
+
+                    <p>
+                      <var name="$sign" form="popup" />
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <ol label="a">
+                  <li>
+                    <p>
+                      <m>^\circ</m>F/mph
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      The sign would be negative; when the wind is blowing at 10 mph,
+                      any increase in wind speed will make it feel colder,
+                      i.e., a lower number on the Fahrenheit scale.
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+            <pg-code>
+              Context()->flags->set(reduceConstants=>0);
+              $fp=Formula("2xe^xcot(x) + x^2e^xcot(x) - x^2e^xcsc^2(x)");
+              $gp=Formula("ln(24)24^x");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Find the derivatives of the following functions.
+              </p>
+
+              <p>
+                <ol label="a">
+                  <li>
+                    <p>
+                      <m>f(x) = x^2e^x\cot(x)</m>
+                    </p>
+
+                    <p>
+                      <m>f'(x) = </m><var name="$fp" width="40" />
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>g(x) = 2^x3^x4^x</m>
+                    </p>
+
+                    <p>
+                      <m>g'(x) = </m><var name="$gp" width="40" />
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <ol>
+                  <li>
+                    <p>
+                      <m>2xe^x\cot(x) + x^2e^x\cot(x) - x^2e^x\csc^2(x)</m>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ln(24)24^x</m>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+  </exercises>
 </section>
 
