@@ -1,960 +1,919 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="sec_def_int">
   <title>The Definite Integral</title>
-  <introduction>
-    <p>
-      We start with an easy problem.
-      An object travels in a straight line at a constant velocity of 
-      <quantity><mag>5</mag><unit base="foot"/><per base="second"/></quantity>
-      for 10 seconds.
-      How far away from its starting point is the object?
-    </p>
+  <p>
+    We start with an easy problem.
+    An object travels in a straight line at a constant velocity of
+    <quantity><mag>5</mag><unit base="foot"/><per base="second"/></quantity>
+    for 10 seconds.
+    How far away from its starting point is the object?
+  </p>
 
-    <p>
-      We approach this problem with the familiar
-      <q><m>\text{Distance } = \text{ Rate } \times \text{ Time}</m></q> equation.
-      In this case, the distance traveled is
-      <quantity><mag>5</mag><unit base="foot"/><per base="second"/></quantity>
-      <times />
-      <quantity><mag>10</mag><unit base="second"/></quantity>
-      <m>= 50</m> feet.
-    </p>
+  <p>
+    We approach this problem with the familiar
+    <q><m>\text{Distance } = \text{ Rate } \times \text{ Time}</m></q> equation.
+    In this case, the distance traveled is
+    <quantity><mag>5</mag><unit base="foot"/><per base="second"/></quantity>
+    <times />
+    <quantity><mag>10</mag><unit base="second"/></quantity>
+    <m>= 50</m> feet.
+  </p>
 
-    <p>
-      It is interesting to note that this solution of 50 feet can be represented graphically.
-      Consider <xref ref="fig_defint1">Figure</xref>,
-      where the constant velocity of
-      <quantity><mag>5</mag><unit base="foot"/><per base="second"/></quantity>
-      is graphed on the axes.
-      Shading the area under the line from <m>t=0</m> to <m>t=10</m> gives a rectangle with an area of 50 square units;
-      when one considers the units of the axes,
-      we can say this area represents 
-      <quantity><mag>50</mag><unit base="foot"/></quantity>.
-    </p>
+  <p>
+    It is interesting to note that this solution of 50 feet can be represented graphically.
+    Consider <xref ref="fig_defint1">Figure</xref>,
+    where the constant velocity of
+    <quantity><mag>5</mag><unit base="foot"/><per base="second"/></quantity>
+    is graphed on the axes.
+    Shading the area under the line from <m>t=0</m> to <m>t=10</m> gives a rectangle with an area of 50 square units;
+    when one considers the units of the axes,
+    we can say this area represents
+    <quantity><mag>50</mag><unit base="foot"/></quantity>.
+  </p>
 
-    <!-- <todo>Add some sort of style guidelines for areas.</todo> -->
+  <!-- <todo>Add some sort of style guidelines for areas.</todo> -->
 
-    <figure xml:id="fig_defint1">
-      <caption>The area under a constant velocity function corresponds to distance traveled.</caption>
-      <image xml:id="img_defint1" width="47%">
+  <figure xml:id="fig_defint1">
+    <caption>The area under a constant velocity function corresponds to distance traveled.</caption>
+    <image xml:id="img_defint1" width="47%">
+      <description></description>
+      <latex-image>
+      \begin{tikzpicture}
+      \begin{axis}[%
+      x label style={at={(axis description cs:0.85,0.05)},anchor=north},
+      y label style={at={(axis description cs:0,.85)},rotate=90,anchor=south},
+      xlabel={$t$ (s)},
+      ylabel={$y$ (ft/s)},
+			               ytick={5},
+			               ymin=-.9,ymax=5.9,
+			               xmin=-.9,xmax=10.9]
+      \addplot+[-,domain=0:10] {5};
+      \addplot [{\coloronefill},fill={\coloronefill},domain=0:10,area style] {5} |- (axis cs:0,0) --cycle;
+      \end{axis}
+      \end{tikzpicture}
+      </latex-image>
+    </image>
+  </figure>
+
+  <p>
+    Now consider a slightly harder situation (and not particularly realistic):
+    an object travels in a straight line with a constant velocity of
+    <quantity><mag>5</mag><unit base="foot"/><per base="second"/></quantity>
+    for 10 seconds,
+    then instantly reverses course at a rate of
+    <quantity><mag>2</mag><unit base="foot"/><per base="second"/></quantity>
+    for 4 seconds.
+    (Since the object is traveling in the opposite direction when reversing course,
+    we say the velocity is a constant
+    <quantity><mag>-2</mag><unit base="foot"/><per base="second"/></quantity>.)
+    How far away from the starting point is the object <mdash/> what is its <em>displacement</em>?
+  </p>
+
+  <p>
+    Here we use <q><m>\text{Distance } = \text{ Rate}_1\, \times \text{ Time}_1\, + \text{ Rate}_2\, \times \text{ Time}_2</m>,</q> which is
+    <me>
+      \text{ Distance }  = 5\cdot10 + (-2)\cdot 4 = 42\text{ ft. }
+    </me>
+  </p>
+
+  <p>
+    Hence the object is 42 feet from its starting location.
+  </p>
+
+  <p>
+    We can again depict this situation graphically.
+    In <xref ref="fig_defint2">Figure</xref>
+    we have the velocities graphed as straight lines on <m>[0,10]</m> and <m>[10,14]</m>,
+    respectively.
+    The displacement of the object is
+  </p>
+
+  <blockquote>
+    <p><q>Area above the <m>t</m>-axis <m>-</m>Area below the <m>t</m>-axis,</q></p>
+  </blockquote>
+
+  <p>
+    which is easy to calculate as <m>50-8=42</m> feet.
+  </p>
+
+  <figure xml:id="fig_defint2">
+    <caption>The total displacement is the area above the <m>t</m><ndash/>axis minus the area below the <m>t</m><ndash/>axis.</caption>
+    <image xml:id="img_defint2" width="47%">
+      <description></description>
+      <latex-image>
+      \begin{tikzpicture}
+      \begin{axis}[%
+      axis on top,
+      x label style={at={(axis description cs:0.85,0.3)},anchor=south},
+      y label style={at={(axis description cs:0,.85)},rotate=90,anchor=south},
+      xlabel={$t$ (s)},
+      ylabel={$y$ (ft/s)},
+			               ytick={-2,5},
+			               minor x tick num=4,
+      ymin=-2.9,ymax=5.9,
+      xmin=-.9,xmax=15.9]
+      \addplot+[-,domain=0:10] {5};
+      \addplot [{\coloronefill},fill={\coloronefill},domain=0:10,area style] {5} \closedcycle;
+      \addplot [{\coloronefill},fill={\coloronefill},domain=10:14,area style] {-2} \closedcycle;
+      \addplot [thick, {\colorone},domain=10:14] {-2};
+      \end{axis}
+      \end{tikzpicture}
+      </latex-image>
+    </image>
+  </figure>
+
+  <p>
+    Now consider a more difficult problem.
+  </p>
+
+  <example xml:id="ex_defint3">
+    <title>Finding position using velocity</title>
+    <statement>
+      <p>
+        The velocity of an object moving straight up/down under the acceleration of gravity is given as <m>v(t) = -32t+48</m>,
+        where time <m>t</m> is given in seconds and velocity is in
+        <quantity><mag></mag><unit base="foot"/><per base="second"/></quantity>.
+        When <m>t=0</m>, the object had a height of
+        <quantity><mag>0</mag><unit base="foot"/></quantity>.
+      </p>
+
+      <p>
+        <ol>
+          <li>
+            <p>
+              What was the initial velocity of the object?
+            </p>
+          </li>
+
+          <li>
+            <p>
+              What was the maximum height of the object?
+            </p>
+          </li>
+
+          <li>
+            <p>
+              What was the height of the object at time <m>t=2</m>?
+            </p>
+          </li>
+        </ol>
+      </p>
+    </statement>
+    <solution>
+      <p>
+        It is straightforward to find the initial velocity; at time <m>t=0</m>,
+        <md>
+          <mrow>v(0) \amp =-32\cdot 0+48</mrow>
+          <mrow>\amp = 48</mrow>
+        </md>
+        The initial velocity was
+        <quantity><mag>48</mag><unit base="foot"/><per base="second"/></quantity>.
+      </p>
+
+      <p>
+        To answer questions about the height of the object,
+        we need to find the object's position function <m>s(t)</m>.
+        This is an initial value problem,
+        which we studied in the previous section.
+        We are told the initial height is <m>0</m>, <ie/>, <m>s(0) = 0</m>.
+        We know <m>s'(t) = v(t) = -32t+48</m>.
+        To find <m>s</m>, we find the indefinite integral of <m>v(t)</m>:
+        <md>
+          <mrow>s(t) \amp =\int v(t)\ dt</mrow>
+          <mrow>\amp = \int (-32t+48)\ dt</mrow>
+          <mrow>\amp = -16t^2+48t+C</mrow>
+        </md>.
+      </p>
+
+      <p>
+        Since <m>s(0) = 0</m>,
+        we conclude that <m>C=0</m> and <m>s(t) = -16t^2+48t</m>.
+      </p>
+
+      <p>
+        To find the maximum height of the object,
+        we need to find the maximum of <m>s</m>.
+        Recalling our work finding extreme values,
+        we find the critical points of <m>s</m> by setting its derivative
+        (the velocity function)
+        equal to <m>0</m> and solving for <m>t</m>:
+        <md>
+          <mrow>0 \amp = -32t+48</mrow>
+          <mrow>t \amp =48/32</mrow>
+          <mrow>\amp = 1.5\text{ s }</mrow>
+        </md>.
+      </p>
+
+      <p>
+        (Notice how we ended up just finding when the velocity was 0ft/s!) The first derivative test shows this is a maximum,
+        so the maximum height of the object is found at
+        <me>
+          s(1.5) = -16(1.5)^2+48(1.5)=36\text{ ft }
+        </me>.
+      </p>
+
+      <p>
+        The height at time <m>t=2</m> is now straightforward to compute:
+        <md>
+          <mrow>s(2) \amp =-16(2)^2+48(2)</mrow>
+          <mrow>\amp = 32</mrow>
+        </md>.
+        The height is <quantity><mag>32</mag><unit base="foot"/></quantity> after <m>2</m> seconds.
+      </p>
+
+      <p>
+        While we have answered all three questions
+        (using derivatives and antiderivatives),
+        let's look at them again graphically,
+        using the concepts of area that we explored earlier.
+      </p>
+
+      <p>
+        <xref ref="fig_defint3">Figure</xref>
+        shows a graph of <m>v(t)</m> on axes from <m>t=0</m> to <m>t=3</m>.
+        It is again straightforward to find <m>v(0)</m>.
+        How can we use the graph to find the maximum height of the object?
+      </p>
+
+      <figure xml:id="fig_defint3">
+        <caption>A graph of <m>v(t)=-32t+48</m>; the shaded areas help determine displacement.</caption>
+        <image xml:id="img_defint3" width="47%">
+          <description></description>
+          <latex-image>
+          \begin{tikzpicture}
+          \begin{axis}[axis on top,
+          ymin=-55,ymax=55,
+          xmin=-.5,xmax=3.2,
+          x label style={at={(axis description cs:0.85,0.3)},anchor=south},
+          y label style={at={(axis description cs:0,.85)},rotate=90,anchor=south},
+          xlabel={$t$ (s)},
+          ylabel={$y$ (ft/s)},]
+          \addplot+[-,domain=0:3] {-32*x+48};
+          \addplot [{\coloronefill},fill={\coloronefill},domain=0:3,area style] {-32*x+48} \closedcycle;
+          \end{axis}
+          \end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
+
+      <p>
+        Recall how in our previous work that the displacement of the object
+        (in this case, its height)
+        was found as the area under the velocity curve, as shaded in the figure.
+        Moreover, the area between the curve and the <m>t</m>-axis that is below the <m>t</m>-axis counted as <q>negative</q> area.
+        That is, it represents the object coming back toward its starting position.
+        So to find the maximum distance from the starting point <mdash/> the maximum height <mdash/> we find the area under the velocity line that is above the <m>t</m>-axis,
+        i.e., from <m>t=0</m> to <m>t=1.5</m>.
+        This region is a triangle; its area is
+        <md>
+          <mrow>\text{ Area } \amp = \frac12\text{ Base }  \times \text{ Height }</mrow>
+          <mrow>\amp =\frac12\times 1.5\text{ s } \times 48\text{ ft/s }</mrow>
+          <mrow>\amp = 36\text{ ft }</mrow>
+        </md>
+        which matches our previous calculation of the maximum height.
+      </p>
+
+      <p>
+        Finally, to find the height of the object at time <m>t=2</m> we calculate the total <q>signed area</q>
+        (where some area is negative)
+        under the velocity function from <m>t=0</m> to <m>t=2</m>.
+        This signed area is equal to <m>s(2)</m>,
+        the displacement (i.e., signed distance) from the starting position at <m>t=0</m> to the position at time <m>t=2</m>.
+        That is,
+      </p>
+
+      <p>
+        Displacement = Area above the <m>t</m>-axis <m>-</m> Area below <m>t</m>-axis.
+      </p>
+
+      <p>
+        The regions are triangles, and we find
+        <md>
+          <mrow>\text{ Displacement } \amp = \frac12(1.5\text{s} )(48\text{ ft/s } ) - \frac12(.5\text{s} )(16\text{ ft/s } )</mrow>
+          <mrow>\amp = 32\text{ ft }</mrow>
+        </md>.
+      </p>
+
+      <p>
+        This also matches our previous calculation of the height at <m>t=2</m>.
+      </p>
+
+      <p>
+        Notice how we answered each question in this example in two ways.
+        Our first method was to manipulate equations using our understanding of antiderivatives and derivatives.
+        Our second method was geometric:
+        we answered questions looking at a graph and finding the areas of certain regions of this graph.
+      </p>
+    </solution>
+  </example>
+
+  <p>
+    The above example does not <em>prove</em>
+    a relationship between area under a velocity function and displacement,
+    but it does imply a relationship exists.
+    <xref ref="sec_FTC">Section</xref>
+    will fully establish fact that the area under a velocity function is displacement.
+  </p>
+
+  <p>
+    Given a graph of a function <m>y=f(x)</m>,
+    we will find that there is great use in computing the area between the curve <m>y=f(x)</m> and the <m>x</m>-axis.
+    Because of this, we need to define some terms.
+  </p>
+
+  <definition xml:id="def_def_int">
+    <title>The Definite Integral, Total Signed Area</title>
+    <statement>
+      <p>
+        Let <m>y=f(x)</m> be defined on a closed interval <m>[a,b]</m>.
+        The <term>total signed area from <m>x=a</m> to <m>x=b</m> under <m>f</m></term> is:
+            <idx><h>integration</h><h>definite</h></idx>
+            <idx><h>definite integral</h></idx>
+            <idx><h>signed area</h></idx>
+            <idx><h>total signed area</h></idx>
+            <idx><h>integration</h><h>notation</h></idx>
+            <idx><h>integration</h><h>area</h></idx>
+      </p>
+
+      <p>
+        (area under <m>f</m> and above the <m>x</m>-axis on <m>[a,b]</m>) <m>-</m>
+        (area above <m>f</m> and under the <m>x</m>-axis on <m>[a,b]</m>).
+      </p>
+
+      <p>
+        The <term>definite integral of <m>f</m> on <m>[a,b]</m></term>
+        is the total signed area of <m>f</m> on <m>[a,b]</m>, denoted
+        <me>
+          \int_a^b f(x)\ dx
+        </me>,
+        where <m>a</m> and <m>b</m> are the
+        <term>bounds of integration.</term>
+      </p>
+    </statement>
+  </definition>
+
+  <p>
+    By our definition, the definite integral gives the
+    <q>signed area under <m>f</m>.</q>
+    We usually drop the word <q>signed</q>
+    when talking about the definite integral,
+    and simply say the definite integral gives
+    <q>the area under <m>f</m> </q> or, more commonly,
+    <q>the area under the curve.</q>
+  </p>
+
+  <p>
+    The previous section introduced the indefinite integral,
+    which related to antiderivatives.
+    We have now defined the definite integral,
+    which relates to areas under a function.
+    The two are very much related,
+    as we'll see when we learn the Fundamental Theorem of Calculus in <xref ref="sec_FTC">Section</xref>.
+    Recall that earlier we said that the
+    <q><m>\int</m></q> symbol was an <q>elongated S</q>
+    that represented finding a <q>sum.</q>
+    In the context of the definite integral,
+    this notation makes a bit more sense,
+    as we are adding up areas under the function <m>f</m>.
+  </p>
+
+  <p>
+    We practice using this notation.
+  </p>
+
+  <example xml:id="ex_defint4">
+    <title>Evaluating definite integrals</title>
+    <statement>
+      <p>
+        Consider the function <m>f</m> given in <xref ref="fig_defint4">Figure</xref>.
+      </p>
+
+      <figure xml:id="fig_defint4">
+        <caption>A graph of <m>f(x)</m> in <xref ref="ex_defint4">Example</xref>.</caption>
+        <image xml:id="img_defint4" width="47%">
+          <description></description>
+          <latex-image>
+          \begin{tikzpicture}
+          \begin{axis}[axis on top,
+          ymin=-1.1,ymax=1.1,%
+          xmin=-.5,xmax=5.5]
+          \addplot [-] coordinates {(0,0) (1,1) (5,-1)};
+          \addplot [{\coloronefill},fill={\coloronefill},area style] coordinates {(0,0) (1,1) (5,-1)} \closedcycle;
+          \end{axis}
+          \end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
+
+      <p>
+        Find:
+      </p>
+
+      <p>
+        <ol cols="2">
+          <li>
+            <p>
+              <m>\ds \int_0^3 f(x)\ dx</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\ds \int_3^5 f(x)\ dx</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\ds \int_0^5 f(x)\ dx</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\ds \int_0^3 5f(x)\ dx</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\ds \int_1^1 f(x) \ dx</m>
+            </p>
+          </li>
+        </ol>
+      </p>
+    </statement>
+    <solution>
+      <p>
+        <ol>
+          <li>
+            <p>
+              <m>\int_0^3 f(x)\ dx</m> is the area under <m>f</m> on the interval <m>[0,3]</m>.
+              This region is a triangle,
+              so the area is <m>\int_0^3 f(x)\ dx=\frac12(3)(1) = 1.5</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\int_3^5 f(x)\ dx</m> represents the area of the triangle found under the <m>x</m>-axis on <m>[3,5]</m>.
+              The area is <m>\frac12(2)(1) = 1</m>;
+              since it is found <em>under</em>
+              the <m>x</m>-axis,
+              this is <q>negative area.</q> Therefore <m>\int_3^5 f(x)\ dx = -1</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\int_0^5f(x)\ dx</m> is the total signed area under <m>f</m> on <m>[0,5]</m>.
+              This is <m>1.5 + (-1) = 0.5</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\int_0^35f(x)\ dx</m> is the area under <m>5f</m> on <m>[0,3]</m>.
+              This is sketched in <xref ref="fig_defint4a">Figure</xref>.
+              Again, the region is a triangle,
+              with height 5 times that of the height of the original triangle.
+              Thus the area is <m>\int_0^35f(x)\ dx = \frac12(15)(1) = 7.5</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\int_1^1f(x)\ dx</m> is the area under <m>f</m> on the
+              <q>interval</q> <m>[1,1]</m>.
+              This describes a line segment,
+              not a region; it has no width.
+              Therefore the area is 0.
+            </p>
+          </li>
+        </ol>
+      </p>
+      <figure xml:id="fig_defint4a">
+      <caption>A graph of <m>5f</m> in <xref ref="ex_defint4">Example</xref>. (Yes, it looks just like the graph of <m>f</m> in <xref ref="fig_defint4">Figure</xref>, just with a different <m>y</m>-scale.)</caption>
+      <image xml:id="img_defint4a" width="47%">
         <description></description>
         <latex-image>
-        
-        \begin{tikzpicture}
-        \begin{axis}[%
-        x label style={at={(axis description cs:0.85,0.05)},anchor=north},
-        y label style={at={(axis description cs:0,.85)},rotate=90,anchor=south},
-        xlabel={$t$ (s)},
-        ylabel={$y$ (ft/s)},
-			                ytick={5},
-			                ymin=-.9,ymax=5.9,
-			                xmin=-.9,xmax=10.9]
-
-        \addplot+[-,domain=0:10] {5};
-        \addplot [{\coloronefill},fill={\coloronefill},domain=0:10,area style] {5} |- (axis cs:0,0) --cycle;
-        \end{axis}
-        \end{tikzpicture}
-        
-        </latex-image>
-      </image>
-    </figure>
-
-    <p>
-      Now consider a slightly harder situation (and not particularly realistic):
-      an object travels in a straight line with a constant velocity of
-      <quantity><mag>5</mag><unit base="foot"/><per base="second"/></quantity>
-      for 10 seconds,
-      then instantly reverses course at a rate of
-      <quantity><mag>2</mag><unit base="foot"/><per base="second"/></quantity>
-      for 4 seconds.
-      (Since the object is traveling in the opposite direction when reversing course,
-      we say the velocity is a constant 
-      <quantity><mag>-2</mag><unit base="foot"/><per base="second"/></quantity>.)
-      How far away from the starting point is the object <mdash/> what is its <em>displacement</em>?
-    </p>
-
-    <p>
-      Here we use <q><m>\text{Distance } = \text{ Rate}_1\, \times \text{ Time}_1\, + \text{ Rate}_2\, \times \text{ Time}_2</m>,</q> which is
-      <me>
-        \text{ Distance }  = 5\cdot10 + (-2)\cdot 4 = 42\text{ ft. }
-      </me>
-    </p>
-
-    <p>
-      Hence the object is 42 feet from its starting location.
-    </p>
-
-    <p>
-      We can again depict this situation graphically.
-      In <xref ref="fig_defint2">Figure</xref>
-      we have the velocities graphed as straight lines on <m>[0,10]</m> and <m>[10,14]</m>,
-      respectively.
-      The displacement of the object is
-    </p>
-
-    <blockquote>
-      <q>Area above the <m>t</m>-axis <m>-</m>Area below the <m>t</m>-axis,</q>
-    </blockquote>
-
-    <p>
-      which is easy to calculate as <m>50-8=42</m> feet.
-    </p>
-
-    <figure xml:id="fig_defint2">
-      <caption>The total displacement is the area above the <m>t</m><ndash/>axis minus the area below the <m>t</m><ndash/>axis.</caption>
-      <image xml:id="img_defint2" width="47%">
-        <description></description>
-        <latex-image>
-        
-        \begin{tikzpicture}
-        \begin{axis}[%
-        axis on top,
-        x label style={at={(axis description cs:0.85,0.3)},anchor=south},
-        y label style={at={(axis description cs:0,.85)},rotate=90,anchor=south},
-        xlabel={$t$ (s)},
-        ylabel={$y$ (ft/s)},
-			                ytick={-2,5},
-			                minor x tick num=4,
-        ymin=-2.9,ymax=5.9,
-        xmin=-.9,xmax=15.9]
-
-        \addplot+[-,domain=0:10] {5};
-        \addplot [{\coloronefill},fill={\coloronefill},domain=0:10,area style] {5} \closedcycle;
-
-        \addplot [{\coloronefill},fill={\coloronefill},domain=10:14,area style] {-2} \closedcycle;
-        \addplot [thick, {\colorone},domain=10:14] {-2};
-        \end{axis}
-        \end{tikzpicture}
-        
-        </latex-image>
-      </image>
-    </figure>
-
-    <p>
-      Now consider a more difficult problem.
-    </p>
-
-    <example xml:id="ex_defint3">
-      <title>Finding position using velocity</title>
-      <statement>
-        <p>
-          The velocity of an object moving straight up/down under the acceleration of gravity is given as <m>v(t) = -32t+48</m>,
-          where time <m>t</m> is given in seconds and velocity is in
-          <quantity><mag></mag><unit base="foot"/><per base="second"/></quantity>.
-          When <m>t=0</m>, the object had a height of
-          <quantity><mag>0</mag><unit base="foot"/></quantity>.
-        </p>
-
-        <p>
-          <ol>
-            <li>
-              <p>
-                What was the initial velocity of the object?
-              </p>
-            </li>
-
-            <li>
-              <p>
-                What was the maximum height of the object?
-              </p>
-            </li>
-
-            <li>
-              <p>
-                What was the height of the object at time <m>t=2</m>?
-              </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-      <solution>
-        <p>
-          It is straightforward to find the initial velocity; at time <m>t=0</m>,
-          <md>
-            <mrow>v(0) \amp =-32\cdot 0+48</mrow>
-            <mrow>\amp = 48</mrow>
-          </md>
-          The initial velocity was
-          <quantity><mag>48</mag><unit base="foot"/><per base="second"/></quantity>.
-        </p>
-
-        <p>
-          To answer questions about the height of the object,
-          we need to find the object's position function <m>s(t)</m>.
-          This is an initial value problem,
-          which we studied in the previous section.
-          We are told the initial height is <m>0</m>, <ie/>, <m>s(0) = 0</m>.
-          We know <m>s'(t) = v(t) = -32t+48</m>.
-          To find <m>s</m>, we find the indefinite integral of <m>v(t)</m>:
-          <md>
-            <mrow>s(t) \amp =\int v(t)\ dt</mrow>
-            <mrow>\amp = \int (-32t+48)\ dt</mrow>
-            <mrow>\amp = -16t^2+48t+C</mrow>
-          </md>.
-        </p>
-
-        <p>
-          Since <m>s(0) = 0</m>,
-          we conclude that <m>C=0</m> and <m>s(t) = -16t^2+48t</m>.
-        </p>
-
-        <p>
-          To find the maximum height of the object,
-          we need to find the maximum of <m>s</m>.
-          Recalling our work finding extreme values,
-          we find the critical points of <m>s</m> by setting its derivative
-          (the velocity function)
-          equal to <m>0</m> and solving for <m>t</m>:
-          <md>
-            <mrow>0 \amp = -32t+48</mrow>
-            <mrow>t \amp =48/32</mrow>
-            <mrow>\amp = 1.5\text{ s }</mrow>
-          </md>.
-        </p>
-
-        <p>
-          (Notice how we ended up just finding when the velocity was 0ft/s!) The first derivative test shows this is a maximum,
-          so the maximum height of the object is found at
-          <me>
-            s(1.5) = -16(1.5)^2+48(1.5)=36\text{ ft }
-          </me>.
-        </p>
-
-        <p>
-          The height at time <m>t=2</m> is now straightforward to compute:
-          <md>
-            <mrow>s(2) \amp =-16(2)^2+48(2)</mrow>
-            <mrow>\amp = 32</mrow>
-          </md>.
-          The height is <quantity><mag>32</mag><unit base="foot"/></quantity> after <m>2</m> seconds.
-        </p>
-
-        <p>
-          While we have answered all three questions
-          (using derivatives and antiderivatives),
-          let's look at them again graphically,
-          using the concepts of area that we explored earlier.
-        </p>
-
-        <p>
-          <xref ref="fig_defint3">Figure</xref>
-          shows a graph of <m>v(t)</m> on axes from <m>t=0</m> to <m>t=3</m>.
-          It is again straightforward to find <m>v(0)</m>.
-          How can we use the graph to find the maximum height of the object?
-        </p>
-
-        <figure xml:id="fig_defint3">
-          <caption>A graph of <m>v(t)=-32t+48</m>; the shaded areas help determine displacement.</caption>
-          <image xml:id="img_defint3" width="47%">
-            <description></description>
-            <latex-image>
-            
-            \begin{tikzpicture}
-            \begin{axis}[axis on top,
-            ymin=-55,ymax=55,
-            xmin=-.5,xmax=3.2,
-            x label style={at={(axis description cs:0.85,0.3)},anchor=south},
-            y label style={at={(axis description cs:0,.85)},rotate=90,anchor=south},
-            xlabel={$t$ (s)},
-            ylabel={$y$ (ft/s)},]
-
-            \addplot+[-,domain=0:3] {-32*x+48};
-            \addplot [{\coloronefill},fill={\coloronefill},domain=0:3,area style] {-32*x+48} \closedcycle; 
-            \end{axis}
-            \end{tikzpicture}
-            
-            </latex-image>
-          </image>
-        </figure>
-
-        <p>
-          Recall how in our previous work that the displacement of the object
-          (in this case, its height)
-          was found as the area under the velocity curve, as shaded in the figure.
-          Moreover, the area between the curve and the <m>t</m>-axis that is below the <m>t</m>-axis counted as <q>negative</q> area.
-          That is, it represents the object coming back toward its starting position.
-          So to find the maximum distance from the starting point <mdash/> the maximum height <mdash/> we find the area under the velocity line that is above the <m>t</m>-axis,
-          i.e., from <m>t=0</m> to <m>t=1.5</m>.
-          This region is a triangle; its area is
-          <md>
-            <mrow>\text{ Area } \amp = \frac12\text{ Base }  \times \text{ Height }</mrow>
-            <mrow>\amp =\frac12\times 1.5\text{ s } \times 48\text{ ft/s }</mrow>
-            <mrow>\amp = 36\text{ ft }</mrow>
-          </md>
-          which matches our previous calculation of the maximum height.
-        </p>
-
-        <p>
-          Finally, to find the height of the object at time <m>t=2</m> we calculate the total <q>signed area</q>
-          (where some area is negative)
-          under the velocity function from <m>t=0</m> to <m>t=2</m>.
-          This signed area is equal to <m>s(2)</m>,
-          the displacement (i.e., signed distance) from the starting position at <m>t=0</m> to the position at time <m>t=2</m>.
-          That is,
-        </p>
-
-        <p>
-          Displacement = Area above the <m>t</m>-axis <m>-</m> Area below <m>t</m>-axis.
-        </p>
-
-        <p>
-          The regions are triangles, and we find
-          <md>
-            <mrow>\text{ Displacement } \amp = \frac12(1.5\text{s} )(48\text{ ft/s } ) - \frac12(.5\text{s} )(16\text{ ft/s } )</mrow>
-            <mrow>\amp = 32\text{ ft }</mrow>
-          </md>.
-        </p>
-
-        <p>
-          This also matches our previous calculation of the height at <m>t=2</m>.
-        </p>
-
-        <p>
-          Notice how we answered each question in this example in two ways.
-          Our first method was to manipulate equations using our understanding of antiderivatives and derivatives.
-          Our second method was geometric:
-          we answered questions looking at a graph and finding the areas of certain regions of this graph.
-        </p>
-      </solution>
-    </example>
-
-    <p>
-      The above example does not <em>prove</em>
-      a relationship between area under a velocity function and displacement,
-      but it does imply a relationship exists.
-      <xref ref="sec_FTC">Section</xref>
-      will fully establish fact that the area under a velocity function is displacement.
-    </p>
-
-    <p>
-      Given a graph of a function <m>y=f(x)</m>,
-      we will find that there is great use in computing the area between the curve <m>y=f(x)</m> and the <m>x</m>-axis.
-      Because of this, we need to define some terms.
-    </p>
-
-    <definition xml:id="def_def_int">
-      <title>The Definite Integral, Total Signed Area</title>
-      <statement>
-        <p>
-          Let <m>y=f(x)</m> be defined on a closed interval <m>[a,b]</m>.
-          The <term>total signed area from <m>x=a</m> to <m>x=b</m> under <m>f</m></term> is:
-              <idx><h>integration</h><h>definite</h></idx>
-              <idx><h>definite integral</h></idx>
-              <idx><h>signed area</h></idx>
-              <idx><h>total signed area</h></idx>
-              <idx><h>integration</h><h>notation</h></idx>
-              <idx><h>integration</h><h>area</h></idx>
-        </p>
-
-        <p>
-          (area under <m>f</m> and above the <m>x</m>-axis on <m>[a,b]</m>) <m>-</m>
-          (area above <m>f</m> and under the <m>x</m>-axis on <m>[a,b]</m>).
-        </p>
-
-        <p>
-          The <term>definite integral of <m>f</m> on <m>[a,b]</m></term>
-          is the total signed area of <m>f</m> on <m>[a,b]</m>, denoted
-          <me>
-            \int_a^b f(x)\ dx
-          </me>,
-          where <m>a</m> and <m>b</m> are the
-          <term>bounds of integration.</term>
-        </p>
-      </statement>
-    </definition>
-
-    <p>
-      By our definition, the definite integral gives the
-      <q>signed area under <m>f</m>.</q>
-      We usually drop the word <q>signed</q>
-      when talking about the definite integral,
-      and simply say the definite integral gives
-      <q>the area under <m>f</m> </q> or, more commonly,
-      <q>the area under the curve.</q>
-    </p>
-
-    <p>
-      The previous section introduced the indefinite integral,
-      which related to antiderivatives.
-      We have now defined the definite integral,
-      which relates to areas under a function.
-      The two are very much related,
-      as we'll see when we learn the Fundamental Theorem of Calculus in <xref ref="sec_FTC">Section</xref>.
-      Recall that earlier we said that the
-      <q><m>\int</m></q> symbol was an <q>elongated S</q>
-      that represented finding a <q>sum.</q>
-      In the context of the definite integral,
-      this notation makes a bit more sense,
-      as we are adding up areas under the function <m>f</m>.
-    </p>
-
-    <p>
-      We practice using this notation.
-    </p>
-
-    <example xml:id="ex_defint4">
-      <title>Evaluating definite integrals</title>
-      <statement>
-        <p>
-          Consider the function <m>f</m> given in <xref ref="fig_defint4">Figure</xref>.
-        </p>
-
-        <figure xml:id="fig_defint4">
-          <caption>A graph of <m>f(x)</m> in <xref ref="ex_defint4">Example</xref>.</caption>
-          <image xml:id="img_defint4" width="47%">
-            <description></description>
-            <latex-image>
-            
-            \begin{tikzpicture}
-            \begin{axis}[axis on top,
-            ymin=-1.1,ymax=1.1,%
-            xmin=-.5,xmax=5.5]
-
-            \addplot [-] coordinates {(0,0) (1,1) (5,-1)};
-            \addplot [{\coloronefill},fill={\coloronefill},area style] coordinates {(0,0) (1,1) (5,-1)} \closedcycle;
-
-            \end{axis}
-
-            \end{tikzpicture}
-            
-            </latex-image>
-          </image>
-        </figure>
-
-        <p>
-          Find:
-        </p>
-
-        <p>
-          <ol cols="2">
-            <li>
-              <p>
-                <m>\ds \int_0^3 f(x)\ dx</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\ds \int_3^5 f(x)\ dx</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\ds \int_0^5 f(x)\ dx</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\ds \int_0^3 5f(x)\ dx</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\ds \int_1^1 f(x) \ dx</m>
-              </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-      <solution>
-        <p>
-          <ol>
-            <li>
-              <p>
-                <m>\int_0^3 f(x)\ dx</m> is the area under <m>f</m> on the interval <m>[0,3]</m>.
-                This region is a triangle,
-                so the area is <m>\int_0^3 f(x)\ dx=\frac12(3)(1) = 1.5</m>.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\int_3^5 f(x)\ dx</m> represents the area of the triangle found under the <m>x</m>-axis on <m>[3,5]</m>.
-                The area is <m>\frac12(2)(1) = 1</m>;
-                since it is found <em>under</em>
-                the <m>x</m>-axis,
-                this is <q>negative area.</q> Therefore <m>\int_3^5 f(x)\ dx = -1</m>.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\int_0^5f(x)\ dx</m> is the total signed area under <m>f</m> on <m>[0,5]</m>.
-                This is <m>1.5 + (-1) = 0.5</m>.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\int_0^35f(x)\ dx</m> is the area under <m>5f</m> on <m>[0,3]</m>.
-                This is sketched in <xref ref="fig_defint4a">Figure</xref>.
-                Again, the region is a triangle,
-                with height 5 times that of the height of the original triangle.
-                Thus the area is <m>\int_0^35f(x)\ dx = \frac12(15)(1) = 7.5</m>.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\int_1^1f(x)\ dx</m> is the area under <m>f</m> on the
-                <q>interval</q> <m>[1,1]</m>.
-                This describes a line segment,
-                not a region; it has no width.
-                Therefore the area is 0.
-              </p>
-            </li>
-          </ol>
-        </p>
-                <figure xml:id="fig_defint4a">
-                <caption>A graph of <m>5f</m> in <xref ref="ex_defint4">Example</xref>. (Yes, it looks just like the graph of <m>f</m> in <xref ref="fig_defint4">Figure</xref>, just with a different <m>y</m>-scale.)</caption>
-                <image xml:id="img_defint4a" width="47%">
-                  <description></description>
-                  <latex-image>
-                  
-                  \begin{tikzpicture}
-                  \begin{axis}[axis on top,
-                  ymin=-5.5,ymax=5.5,
-                  xmin=-.5,xmax=5.5]
-                  \addplot+[-] coordinates {(0,0) (1,5) (5,-5)};
-                  \addplot [{\coloronefill},fill={\coloronefill},area style] coordinates {(0,0) (1,5) (5,-5)} \closedcycle;
-                  \end{axis}
-
-                  \end{tikzpicture}
-                  
-                  </latex-image>
-                </image>
-              </figure>
-      </solution>
-    </example>
-
-    <p>
-      This example illustrates some of the properties of the definite integral,
-      given here.
-    </p>
-
-    <theorem xml:id="thm_defintprop">
-      <title>Properties of the Definite Integral</title>
-      <statement>
-        <p>
-          Let <m>f</m> and <m>g</m> be defined on a closed interval <m>I</m> that contains the values <m>a</m>,
-          <m>b</m> and <m>c</m>, and let <m>k</m> be a constant.
-          The following hold:
-
-          <idx>
-            <h>integration</h><h>definite!properties</h>
-          </idx>
-
-          <idx>
-            <h>definite integral</h><h>properties</h>
-          </idx>
-
-        </p>
-
-        <p>
-          <ol>
-            <li>
-              <p>
-                <m>\ds \int_a^a f(x)\ dx = 0</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\ds \int_a^b f(x)\ dx + \int_b^c f(x)\ dx = \int_a^cf(x)\ dx</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\ds \int_a^bf(x)\ dx = -\int_b^a f(x)\ dx</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\ds \int_a^b\big(f(x)\pm g(x)\big)\ dx = \int_a^bf(x)\ dx \pm \int_a^bg(x)\ dx</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\ds \int_a^bk\cdot f(x)\ dx = k\cdot\int_a^bf(x)\ dx</m>
-              </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-    </theorem>
-
-    <p>
-      We give a brief justification of <xref ref="thm_defintprop">Theorem</xref> here.
-    </p>
-
-    <p>
-      <ol>
-        <li>
-          <p>
-            As demonstrated in <xref ref="ex_defint4">Example</xref>,
-            there is no <q>area under the curve</q>
-            when the region has no width;
-            hence this definite integral is 0.
-          </p>
-        </li>
-
-        <li>
-          <p>
-            This states that total area is the sum of the areas of subregions.
-            It is easily considered when we let <m>a\lt b\lt c</m>.
-            We can break the interval <m>[a,c]</m> into two subintervals,
-            <m>[a,b]</m> and <m>[b,c]</m>.
-            The total area over <m>[a,c]</m> is the area over <m>[a,b]</m> plus the area over <m>[b,c]</m>.
-
-            It is important to note that this still holds true even if <m>a\lt b\lt c</m> is not true.
-            We discuss this in the next point.
-          </p>
-        </li>
-
-        <li>
-          <p>
-            This property can be viewed a merely a convention to make other properties work well.
-            (Later we will see how this property has a justification all its own,
-            not necessarily in support of other properties.)
-            Suppose <m>b\lt a\lt c</m>.
-            The discussion from the previous point clearly justifies
-            <men xml:id="eq_defint1">
-              \int_b^a f(x)\ dx + \int_a^c f(x)\ dx = \int_b^c f(x)\ dx
-            </men>.
-            However, we still claim that, as originally stated,
-            <men xml:id="eq_defint2">
-              \int_a^b f(x)\ dx + \int_b^c f(x)\ dx = \int_a^c f(x)\ dx
-            </men>.
-            How do Equations <xref ref="eq_defint1"/> and <xref ref="eq_defint2"/> relate?
-            Start with Equation <xref ref="eq_defint1"/>:
-            <md>
-              <mrow>\int_b^a f(x)\ dx + \int_a^c f(x)\ dx \amp = \int_b^c f(x)\ dx</mrow>
-              <mrow>\int_a^c f(x)\ dx \amp = -\int_b^a f(x)\ dx + \int_b^c f(x)\ dx</mrow>
-            </md>
-            Property <m>(3)</m> justifies changing the sign and switching the bounds of integration on the <m>\ds -\int_b^a f(x)\ dx</m> term;
-            when this is done, Equations <xref ref="eq_defint1"/> and <xref ref="eq_defint2"/> are equivalent.
-
-            The conclusion is this:
-            by adopting the convention of Property (3), Property (2) holds no matter the order of <m>a</m>,
-            <m>b</m> and <m>c</m>.
-            Again, in the next section we will see another justification for this property.
-          </p>
-        </li>
-
-        <li>
-          <title>4,5.</title>
-          <p>
-            Each of these may be non<ndash/>intuitive.
-            Property (5) states that when one scales a function by,
-            for instance, 7, the area of the enclosed region also is scaled by a factor of 7.
-            Both Properties (4) and (5) can be proved using geometry.
-            The details are not complicated but are not discussed here.
-          </p>
-        </li>
-      </ol>
-    </p>
-
-    <example xml:id="ex_defint5">
-      <title>Evaluating definite integrals using <xref ref="thm_defintprop">Theorem</xref>.</title>
-      <statement>
-        <p>
-          Consider the graph of a function <m>f(x)</m> shown in <xref ref="fig_defint5">Figure</xref>.
-        </p>
-
-        <figure xml:id="fig_defint5">
-          <caption>A graph of a function in <xref ref="ex_defint5">Example</xref>.</caption>
-          <image xml:id="img_defint5" width="47%">
-            <description></description>
-            <latex-image>
-            
-            \begin{tikzpicture}
-            \begin{axis}[axis on top,
-            xtick=\empty,
-            extra x ticks={.5,1.5,3},
-            extra x tick labels={$a$,$b$,$\ c$},
-            ytick=\empty,
-            ymin=-1.1,ymax=1.1,
-            xmin=-.2,xmax=3.5]
-            \addplot+[-,domain=0.5:3,samples=50] {(x-.5)*(x-1.5)*(x-3)};
-            \addplot[smooth,{\coloronefill},fill={\coloronefill},area style,domain=0.5:3] {(x-.5)*(x-1.5)*(x-3)} \closedcycle;
-            \end{axis}
-            \end{tikzpicture}
-            
-            </latex-image>
-          </image>
-        </figure>
-
-        <p>
-          Answer the following:
-        </p>
-
-        <p>
-          <ol>
-            <li>
-              <p>
-                Which value is greater:
-                <m>\ds \int_a^b f(x)\ dx</m> or <m>\ds \int_b^c f(x)\ dx</m>?
-              </p>
-            </li>
-
-            <li>
-              <p>
-                Is <m>\ds \int_a^c f(x)\ dx</m> greater or less than 0?
-              </p>
-            </li>
-
-            <li>
-              <p>
-                Which value is greater:
-                <m>\ds \int_a^b f(x)\ dx</m> or <m>\ds \int_c^b f(x)\ dx</m>?
-              </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-      <solution>
-        <p>
-          <ol>
-            <li>
-              <p>
-                <m>\int_a^b f(x)\ dx</m> has a positive value
-                (since the area is above the <m>x</m>-axis)
-                whereas <m>\int_b^c f(x)\ dx</m> has a negative value.
-                Hence <m>\int_a^b f(x)\ dx</m> is bigger.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\int_a^c f(x)\ dx</m> is the total signed area under <m>f</m> between <m>x=a</m> and <m>x=c</m>.
-                Since the region below the <m>x</m>-axis looks to be larger than the region above,
-                we conclude that the definite integral has a value less than 0.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                Note how the second integral has the bounds <q>reversed.</q>
-                Therefore <m>\int_c^b f(x)\ dx=-\int_b^c f(x)\ dx</m> represents a positive number,
-                greater than the area described by the first definite integral.
-                Hence <m>\int_c^b f(x)\ dx</m> is greater.
-              </p>
-            </li>
-          </ol>
-        </p>
-      </solution>
-    </example>
-
-    <p>
-      The area definition of the definite integral allows us to use geometry to compute the definite integral of some simple functions.
-    </p>
-
-    <example xml:id="ex_defint8">
-      <title>Evaluating definite integrals using geometry</title>
-      <statement>
-        <p>
-          Evaluate the following definite integrals:
-          <me>
-            1. \ \int_{-2}^5 (2x-4)\ dx \qquad 2.\ \int_{-3}^3 \sqrt{9-x^2}\ dx
-          </me>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          <ol>
-            <li>
-              <p>
-                It is useful to sketch the function in the integrand,
-                as shown in <xref ref="fig_defint8a">Figure</xref>.
-                We see we need to compute the areas of two regions,
-                which we have labeled <m>R_1</m> and <m>R_2</m>.
-                Both are triangles, so the area computation is straightforward:
-                <me>
-                  R_1: \frac12(4)(8) = 16 \qquad R_2: \frac12(3)6 = 9
-                </me>.
-                Region <m>R_1</m> lies under the <m>x</m><ndash/>axis,
-                hence it is counted as negative area
-                (we can think of the triangle's height as being <q><m>-8</m></q>),
-                so
-                <me>
-                  \int_{-2}^5(2x-4)\ dx = -16+9 = -7
-                </me>.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                Recognize that the integrand of this definite integral describes a half circle,
-                as sketched in <xref ref="fig_defint8b">Figure</xref>,
-                with radius 3.
-                Thus the area is:
-                <me>
-                  \int_{-3}^3 \sqrt{9-x^2}\ dx = \frac12\pi r^2 = \frac 92\pi
-                </me>.
-              </p>       
-            </li>
-          </ol>
-        </p>
-         
-              <sidebyside widths="47% 47%">
-                <figure xml:id="fig_defint8a">
-                  <caption><m>f(x) = 2x-4</m></caption>
-                  <image xml:id="img_defint8a">
-                    <description></description>
-                    <latex-image>
-                    
-                    \begin{tikzpicture}
-                    \begin{axis}[axis on top,
-                    ymin=-11,ymax=11,%
-                    xmin=-3.5,xmax=5.5]
-                    \addplot+[-,domain=-2:5] {2*x-4};
-                    \addplot [{\coloronefill},fill={\coloronefill},area style,domain=-2:5] {2*x-4} \closedcycle;
-                    \addplot[soliddot] coordinates{(-2,-8)} node[right]{\small $(-2,-8)$};
-                    \addplot[soliddot] coordinates{(5,6)} node[left]{\small $(5,6)$}; 
-                    \draw (axis cs:-1,-2) node {\scriptsize $R_1$};
-                    \draw (axis cs:4.2,2) node {\scriptsize $R_2$};
-
-                    \end{axis}
-
-                    \end{tikzpicture}
-                    
-                    </latex-image>
-                  </image>
-                </figure>
-
-                <figure xml:id="fig_defint8b">
-                  <caption><m>f(x) = \sqrt{9-x^2}</m></caption>
-                  <image xml:id="img_defint8b">
-                    <description></description>
-                    <latex-image>
-                    
-                    \begin{tikzpicture}
-                    \begin{axis}[axis on top,
-                    xtick={-3,3},
-                    extra y ticks={1,2,3,4},
-                    extra y tick labels=\empty,
-                    ytick={5},
-                    ymin=-.5,ymax=5.5,
-                    xmin=-3.5,xmax=3.5]
-
-                    \addplot+[-,domain=0:180,samples=50] ({3*cos (x)},{3*sin(x)});
-                    \addplot [smooth,{\coloronefill},fill={\coloronefill},area style,domain=0:180] ({3*cos (x)},{3*sin(x)}) \closedcycle;
-                    \end{axis}
-                    \end{tikzpicture}
-                    
-                    </latex-image>
-                  </image>
-                </figure>
-              </sidebyside>
-      </solution>
-    </example>
-
-    <example xml:id="ex_defint6">
-      <title>Understanding motion given velocity</title>
-      <statement>
-        <p>
-          Consider the graph of a velocity function of an object moving in a straight line,
-          given in <xref ref="fig_defint6">Figure</xref>,
-          where the numbers in the given regions gives the area of that region.
-          Assume that the definite integral of a velocity function gives displacement.
-          Find the maximum speed of the object and its maximum displacement from its starting position.
-        </p>
-
-        <figure xml:id="fig_defint6">
-          <caption>A graph of a velocity in <xref ref="ex_defint6">Example</xref>.</caption>
-          <image xml:id="img_defint6" width="47%">
-            <description></description>
-            <latex-image>
-            
-            \begin{tikzpicture}
-            \begin{axis}[axis on top,
-            x label style={at={(axis description cs:0.85,0.35)},anchor=south},
-            y label style={at={(axis description cs:-.05,.85)},rotate=90,anchor=south},
-            xlabel={$t$ (s)},
-            ylabel={$y$ (ft/s)},
-            xtick=\empty,
-            extra x ticks={2,6,8},
-            extra x tick labels={$\ a$,$b\ $,$\ c$},
-            ytick={-5,5,10,15},
-            ymin=-9,ymax=17,
-            xmin=-.5,xmax=8.5]
-
-            \addplot+[-,domain=0:8, samples=50] {15/64*x*(x-2)*(x-6)*(x-8)};
-            \addplot [smooth,{\coloronefill},fill={\coloronefill},area style,domain=0:8] {15/64*x*(x-2)*(x-6)*(x-8)} \closedcycle;
-
-            \draw (axis cs:.9,-4) node {\scriptsize $11$};
-            \draw (axis cs:7.1,-4) node {\scriptsize $11$};
-            \draw (axis cs:4,8) node {\scriptsize $38$};
-            \end{axis}
-            \end{tikzpicture}
-            
-            </latex-image>
-          </image>
-        </figure>
-      </statement>
-      <solution>
-        <p>
-          Since the graph gives velocity,
-          finding the maximum speed is simple:
-          it looks to be 15ft/s.
-        </p>
-
-        <p>
-          At time <m>t=0</m>, the displacement is 0;
-          the object is at its starting position.
-          At time <m>t=a</m>, the object has moved backward 11 feet.
-          Between times <m>t=a</m> and <m>t=b</m>,
-          the object moves forward 38 feet,
-          bringing it into a position 27 feet forward of its starting position.
-          From <m>t=b</m> to <m>t=c</m> the object is moving backwards again,
-          hence its maximum displacement is 27 feet from its starting position.
-        </p>
-      </solution>
-    </example>
-
-    <p>
-      In our examples,
-      we have either found the areas of regions that have nice geometric shapes
-      (such as rectangles, triangles and circles)
-      or the areas were given to us.
-      Consider <xref ref="fig_defint7">Figure</xref>,
-      where a region below <m>y=x^2</m> is shaded.
-      What is its area?
-      The function <m>y=x^2</m> is relatively simple,
-      yet the shape it defines has an area that is not simple to find geometrically.
-    </p>
-
-    <figure xml:id="fig_defint7">
-      <caption>What is the area below <m>y=x^2</m> on <m>[0,3]</m>? The region is not a usual geometric shape.</caption>
-      <image xml:id="img_defint7" width="47%">
-        <description></description>
-        <latex-image>
-        
         \begin{tikzpicture}
         \begin{axis}[axis on top,
-        xtick={1,2,3},
-        ymin=-1,ymax=11,
-        xmin=-1,xmax=3.5]
-        \addplot+[-,domain=0:3] {x^2};
-        \addplot [{\coloronefill},fill={\coloronefill},area style,domain=0:3] {x^2} \closedcycle;
+        ymin=-5.5,ymax=5.5,
+        xmin=-.5,xmax=5.5]
+        \addplot+[-] coordinates {(0,0) (1,5) (5,-5)};
+        \addplot [{\coloronefill},fill={\coloronefill},area style] coordinates {(0,0) (1,5) (5,-5)} \closedcycle;
         \end{axis}
         \end{tikzpicture}
-        
         </latex-image>
       </image>
     </figure>
+    </solution>
+  </example>
 
-    <p>
-      In <xref ref="sec_riemann">Section</xref>
-      we will explore how to find the areas of such regions.
-    </p>
-  </introduction>
+  <p>
+    This example illustrates some of the properties of the definite integral,
+    given here.
+  </p>
+
+  <theorem xml:id="thm_defintprop">
+    <title>Properties of the Definite Integral</title>
+    <statement>
+      <p>
+        Let <m>f</m> and <m>g</m> be defined on a closed interval <m>I</m> that contains the values <m>a</m>,
+        <m>b</m> and <m>c</m>, and let <m>k</m> be a constant.
+        The following hold:
+        <idx>
+          <h>integration</h><h>definite!properties</h>
+        </idx>
+        <idx>
+          <h>definite integral</h><h>properties</h>
+        </idx>
+      </p>
+
+      <p>
+        <ol>
+          <li>
+            <p>
+              <m>\ds \int_a^a f(x)\ dx = 0</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\ds \int_a^b f(x)\ dx + \int_b^c f(x)\ dx = \int_a^cf(x)\ dx</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\ds \int_a^bf(x)\ dx = -\int_b^a f(x)\ dx</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\ds \int_a^b\big(f(x)\pm g(x)\big)\ dx = \int_a^bf(x)\ dx \pm \int_a^bg(x)\ dx</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\ds \int_a^bk\cdot f(x)\ dx = k\cdot\int_a^bf(x)\ dx</m>
+            </p>
+          </li>
+        </ol>
+      </p>
+    </statement>
+  </theorem>
+
+  <p>
+    We give a brief justification of <xref ref="thm_defintprop">Theorem</xref> here.
+  </p>
+
+  <p>
+    <dl>
+      <li>
+        <title>1.</title>
+        <p>
+          As demonstrated in <xref ref="ex_defint4">Example</xref>,
+          there is no <q>area under the curve</q>
+          when the region has no width;
+          hence this definite integral is 0.
+        </p>
+      </li>
+
+      <li><title>2.</title>
+        <p>
+          This states that total area is the sum of the areas of subregions.
+          It is easily considered when we let <m>a\lt b\lt c</m>.
+          We can break the interval <m>[a,c]</m> into two subintervals,
+          <m>[a,b]</m> and <m>[b,c]</m>.
+          The total area over <m>[a,c]</m> is the area over <m>[a,b]</m> plus the area over <m>[b,c]</m>.
+          It is important to note that this still holds true even if <m>a\lt b\lt c</m> is not true.
+          We discuss this in the next point.
+        </p>
+      </li>
+
+      <li><title>3.</title>
+        <p>
+          This property can be viewed a merely a convention to make other properties work well.
+          (Later we will see how this property has a justification all its own,
+          not necessarily in support of other properties.)
+          Suppose <m>b\lt a\lt c</m>.
+          The discussion from the previous point clearly justifies
+          <men xml:id="eq_defint1">
+            \int_b^a f(x)\ dx + \int_a^c f(x)\ dx = \int_b^c f(x)\ dx
+          </men>.
+          However, we still claim that, as originally stated,
+          <men xml:id="eq_defint2">
+            \int_a^b f(x)\ dx + \int_b^c f(x)\ dx = \int_a^c f(x)\ dx
+          </men>.
+          How do Equations <xref ref="eq_defint1"/> and <xref ref="eq_defint2"/> relate?
+          Start with Equation <xref ref="eq_defint1"/>:
+          <md>
+            <mrow>\int_b^a f(x)\ dx + \int_a^c f(x)\ dx \amp = \int_b^c f(x)\ dx</mrow>
+            <mrow>\int_a^c f(x)\ dx \amp = -\int_b^a f(x)\ dx + \int_b^c f(x)\ dx</mrow>
+          </md>
+          Property <m>(3)</m> justifies changing the sign and switching the bounds of integration on the <m>\ds -\int_b^a f(x)\ dx</m> term;
+          when this is done, Equations <xref ref="eq_defint1"/> and <xref ref="eq_defint2"/> are equivalent.
+          The conclusion is this:
+          by adopting the convention of Property (3), Property (2) holds no matter the order of <m>a</m>,
+          <m>b</m> and <m>c</m>.
+          Again, in the next section we will see another justification for this property.
+        </p>
+      </li>
+
+      <li>
+        <title>4,5.</title>
+        <p>
+          Each of these may be non<ndash/>intuitive.
+          Property (5) states that when one scales a function by,
+          for instance, 7, the area of the enclosed region also is scaled by a factor of 7.
+          Both Properties (4) and (5) can be proved using geometry.
+          The details are not complicated but are not discussed here.
+        </p>
+      </li>
+    </dl>
+  </p>
+
+  <example xml:id="ex_defint5">
+    <title>Evaluating definite integrals using <xref ref="thm_defintprop">Theorem</xref>.</title>
+    <statement>
+      <p>
+        Consider the graph of a function <m>f(x)</m> shown in <xref ref="fig_defint5">Figure</xref>.
+      </p>
+
+      <figure xml:id="fig_defint5">
+        <caption>A graph of a function in <xref ref="ex_defint5">Example</xref>.</caption>
+        <image xml:id="img_defint5" width="47%">
+          <description></description>
+          <latex-image>
+          \begin{tikzpicture}
+          \begin{axis}[axis on top,
+          xtick=\empty,
+          extra x ticks={.5,1.5,3},
+          extra x tick labels={$a$,$b$,$\ c$},
+          ytick=\empty,
+          ymin=-1.1,ymax=1.1,
+          xmin=-.2,xmax=3.5]
+          \addplot+[-,domain=0.5:3,samples=50] {(x-.5)*(x-1.5)*(x-3)};
+          \addplot[smooth,{\coloronefill},fill={\coloronefill},area style,domain=0.5:3] {(x-.5)*(x-1.5)*(x-3)} \closedcycle;
+          \end{axis}
+          \end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
+
+      <p>
+        Answer the following:
+      </p>
+
+      <p>
+        <ol>
+          <li>
+            <p>
+              Which value is greater:
+              <m>\ds \int_a^b f(x)\ dx</m> or <m>\ds \int_b^c f(x)\ dx</m>?
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Is <m>\ds \int_a^c f(x)\ dx</m> greater or less than 0?
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Which value is greater:
+              <m>\ds \int_a^b f(x)\ dx</m> or <m>\ds \int_c^b f(x)\ dx</m>?
+            </p>
+          </li>
+        </ol>
+      </p>
+    </statement>
+    <solution>
+      <p>
+        <ol>
+          <li>
+            <p>
+              <m>\int_a^b f(x)\ dx</m> has a positive value
+              (since the area is above the <m>x</m>-axis)
+              whereas <m>\int_b^c f(x)\ dx</m> has a negative value.
+              Hence <m>\int_a^b f(x)\ dx</m> is bigger.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\int_a^c f(x)\ dx</m> is the total signed area under <m>f</m> between <m>x=a</m> and <m>x=c</m>.
+              Since the region below the <m>x</m>-axis looks to be larger than the region above,
+              we conclude that the definite integral has a value less than 0.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Note how the second integral has the bounds <q>reversed.</q>
+              Therefore <m>\int_c^b f(x)\ dx=-\int_b^c f(x)\ dx</m> represents a positive number,
+              greater than the area described by the first definite integral.
+              Hence <m>\int_c^b f(x)\ dx</m> is greater.
+            </p>
+          </li>
+        </ol>
+      </p>
+    </solution>
+  </example>
+
+  <p>
+    The area definition of the definite integral allows us to use geometry to compute the definite integral of some simple functions.
+  </p>
+
+  <example xml:id="ex_defint8">
+    <title>Evaluating definite integrals using geometry</title>
+    <statement>
+      <p>
+        Evaluate the following definite integrals:
+        <me>
+          1. \ \int_{-2}^5 (2x-4)\ dx \qquad 2.\ \int_{-3}^3 \sqrt{9-x^2}\ dx
+        </me>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        <ol>
+          <li>
+            <p>
+              It is useful to sketch the function in the integrand,
+              as shown in <xref ref="fig_defint8a">Figure</xref>.
+              We see we need to compute the areas of two regions,
+              which we have labeled <m>R_1</m> and <m>R_2</m>.
+              Both are triangles, so the area computation is straightforward:
+              <me>
+                R_1: \frac12(4)(8) = 16 \qquad R_2: \frac12(3)6 = 9
+              </me>.
+              Region <m>R_1</m> lies under the <m>x</m><ndash/>axis,
+              hence it is counted as negative area
+              (we can think of the triangle's height as being <q><m>-8</m></q>),
+              so
+              <me>
+                \int_{-2}^5(2x-4)\ dx = -16+9 = -7
+              </me>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Recognize that the integrand of this definite integral describes a half circle,
+              as sketched in <xref ref="fig_defint8b">Figure</xref>,
+              with radius 3.
+              Thus the area is:
+              <me>
+                \int_{-3}^3 \sqrt{9-x^2}\ dx = \frac12\pi r^2 = \frac 92\pi
+              </me>.
+            </p>
+          </li>
+        </ol>
+      </p>
+      <sidebyside widths="47% 47%">
+        <figure xml:id="fig_defint8a">
+          <caption><m>f(x) = 2x-4</m></caption>
+          <image xml:id="img_defint8a">
+            <description></description>
+            <latex-image>
+            \begin{tikzpicture}
+            \begin{axis}[axis on top,
+            ymin=-11,ymax=11,%
+            xmin=-3.5,xmax=5.5]
+            \addplot+[-,domain=-2:5] {2*x-4};
+            \addplot [{\coloronefill},fill={\coloronefill},area style,domain=-2:5] {2*x-4} \closedcycle;
+            \addplot[soliddot] coordinates{(-2,-8)} node[right]{\small $(-2,-8)$};
+            \addplot[soliddot] coordinates{(5,6)} node[left]{\small $(5,6)$};
+            \draw (axis cs:-1,-2) node {\scriptsize $R_1$};
+            \draw (axis cs:4.2,2) node {\scriptsize $R_2$};
+            \end{axis}
+            \end{tikzpicture}
+            </latex-image>
+          </image>
+        </figure>
+        <figure xml:id="fig_defint8b">
+          <caption><m>f(x) = \sqrt{9-x^2}</m></caption>
+          <image xml:id="img_defint8b">
+            <description></description>
+            <latex-image>
+            \begin{tikzpicture}
+            \begin{axis}[axis on top,
+            xtick={-3,3},
+            extra y ticks={1,2,3,4},
+            extra y tick labels=\empty,
+            ytick={5},
+            ymin=-.5,ymax=5.5,
+            xmin=-3.5,xmax=3.5]
+            \addplot+[-,domain=0:180,samples=50] ({3*cos (x)},{3*sin(x)});
+            \addplot [smooth,{\coloronefill},fill={\coloronefill},area style,domain=0:180] ({3*cos (x)},{3*sin(x)}) \closedcycle;
+            \end{axis}
+            \end{tikzpicture}
+            </latex-image>
+          </image>
+        </figure>
+      </sidebyside>
+    </solution>
+  </example>
+
+  <example xml:id="ex_defint6">
+    <title>Understanding motion given velocity</title>
+    <statement>
+      <p>
+        Consider the graph of a velocity function of an object moving in a straight line,
+        given in <xref ref="fig_defint6">Figure</xref>,
+        where the numbers in the given regions gives the area of that region.
+        Assume that the definite integral of a velocity function gives displacement.
+        Find the maximum speed of the object and its maximum displacement from its starting position.
+      </p>
+
+      <figure xml:id="fig_defint6">
+        <caption>A graph of a velocity in <xref ref="ex_defint6">Example</xref>.</caption>
+        <image xml:id="img_defint6" width="47%">
+          <description></description>
+          <latex-image>
+          \begin{tikzpicture}
+          \begin{axis}[axis on top,
+          x label style={at={(axis description cs:0.85,0.35)},anchor=south},
+          y label style={at={(axis description cs:-.05,.85)},rotate=90,anchor=south},
+          xlabel={$t$ (s)},
+          ylabel={$y$ (ft/s)},
+          xtick=\empty,
+          extra x ticks={2,6,8},
+          extra x tick labels={$\ a$,$b\ $,$\ c$},
+          ytick={-5,5,10,15},
+          ymin=-9,ymax=17,
+          xmin=-.5,xmax=8.5]
+          \addplot+[-,domain=0:8, samples=50] {15/64*x*(x-2)*(x-6)*(x-8)};
+          \addplot [smooth,{\coloronefill},fill={\coloronefill},area style,domain=0:8] {15/64*x*(x-2)*(x-6)*(x-8)} \closedcycle;
+          \draw (axis cs:.9,-4) node {\scriptsize $11$};
+          \draw (axis cs:7.1,-4) node {\scriptsize $11$};
+          \draw (axis cs:4,8) node {\scriptsize $38$};
+          \end{axis}
+          \end{tikzpicture}
+          </latex-image>
+        </image>
+      </figure>
+    </statement>
+    <solution>
+      <p>
+        Since the graph gives velocity,
+        finding the maximum speed is simple:
+        it looks to be 15ft/s.
+      </p>
+
+      <p>
+        At time <m>t=0</m>, the displacement is 0;
+        the object is at its starting position.
+        At time <m>t=a</m>, the object has moved backward 11 feet.
+        Between times <m>t=a</m> and <m>t=b</m>,
+        the object moves forward 38 feet,
+        bringing it into a position 27 feet forward of its starting position.
+        From <m>t=b</m> to <m>t=c</m> the object is moving backwards again,
+        hence its maximum displacement is 27 feet from its starting position.
+      </p>
+    </solution>
+  </example>
+
+  <p>
+    In our examples,
+    we have either found the areas of regions that have nice geometric shapes
+    (such as rectangles, triangles and circles)
+    or the areas were given to us.
+    Consider <xref ref="fig_defint7">Figure</xref>,
+    where a region below <m>y=x^2</m> is shaded.
+    What is its area?
+    The function <m>y=x^2</m> is relatively simple,
+    yet the shape it defines has an area that is not simple to find geometrically.
+  </p>
+
+  <figure xml:id="fig_defint7">
+    <caption>What is the area below <m>y=x^2</m> on <m>[0,3]</m>? The region is not a usual geometric shape.</caption>
+    <image xml:id="img_defint7" width="47%">
+      <description></description>
+      <latex-image>
+      \begin{tikzpicture}
+      \begin{axis}[axis on top,
+      xtick={1,2,3},
+      ymin=-1,ymax=11,
+      xmin=-1,xmax=3.5]
+      \addplot+[-,domain=0:3] {x^2};
+      \addplot [{\coloronefill},fill={\coloronefill},area style,domain=0:3] {x^2} \closedcycle;
+      \end{axis}
+      \end{tikzpicture}
+      </latex-image>
+    </image>
+  </figure>
+
+  <p>
+    In <xref ref="sec_riemann">Section</xref>
+    we will explore how to find the areas of such regions.
+  </p>
 
   <exercises>
     <exercisegroup>
@@ -1016,7 +975,7 @@
       <exercise>
         <webwork seed="1">
             <setup>
- 
+
             <pg-code>
 <!-- FUNGUS: Come back to this when I figure out how to enter a definite integral as a solution -->
               $a = Formula("0");
@@ -1049,7 +1008,7 @@
 
     </exercisegroup>
     <exercisegroup>
-
+<!--ToDo: these TikZ graphs aren't going to make it into a WW problem. how to fix?-->
       <introduction>
         <p>
           In the following exercises, a graph of a function <m>f(x)</m> is given.
@@ -1076,7 +1035,7 @@
                 <image xml:id="img_05_02_ex_05" width="47%">
                   <description></description>
                   <latex-image>
-                  
+
                   \begin{tikzpicture}
                   \begin{axis}[%
                   axis on top,%
@@ -1099,7 +1058,7 @@
                   \end{axis}
 
                   \end{tikzpicture}
-                  
+
                   </latex-image>
                 </image>
                 <p>
@@ -1162,7 +1121,7 @@
               <image xml:id="img_05_02_ex_06" width="47%">
                 <description></description>
                 <latex-image>
-                
+
                 \begin{tikzpicture}
                 \begin{axis}[%
                 axis on top,%
@@ -1187,7 +1146,7 @@
                 \end{axis}
 
                 \end{tikzpicture}
-                
+
                 </latex-image>
               </image>
               <p>
@@ -1250,7 +1209,7 @@
               <image xml:id="img_05_02_ex_07" width="47%">
                 <description></description>
                 <latex-image>
-                
+
                 \begin{tikzpicture}
                 \begin{axis}[%
                 axis on top,%
@@ -1276,7 +1235,7 @@
                 \end{axis}
 
                 \end{tikzpicture}
-                
+
                 </latex-image>
               </image>
 
@@ -1340,7 +1299,7 @@
               <image xml:id="img_05_02_ex_08" width="47%">
                 <description></description>
                 <latex-image>
-                
+
                 \begin{tikzpicture}
                 \begin{axis}[%
                 axis on top,%
@@ -1363,7 +1322,7 @@
                 \end{axis}
 
                 \end{tikzpicture}
-                
+
                 </latex-image>
               </image>
               <p>
@@ -1412,7 +1371,7 @@
       <exercise>
         <webwork seed="1">
             <setup>
- 
+
             <pg-code>
               $r = Formula("2");
               $a = Formula("1/4*pi*$r^2");
@@ -1425,7 +1384,7 @@
               <image xml:id="img_05_02_ex_09" width="47%">
                 <description></description>
                 <latex-image>
-                
+
                 \begin{tikzpicture}
                 \begin{axis}[%
                 axis on top,%
@@ -1448,10 +1407,10 @@
                 \end{axis}
 
                 \end{tikzpicture}
-                
+
                 </latex-image>
               </image>
-      
+
               <p>
                 <ol cols="2">
                   <li>
@@ -1484,66 +1443,86 @@
       </exercise>
 
 <!--ToDo: WW code for this exercise-->
+<!--ToDo: check image styling for this exercise-->
     <exercise>
       <statement>
         <sidebyside>
-          <img src="figures/fig05_02_ex_30"/>
+          <image>
+            <latex-image>
+              \begin{tikzpicture}
+                \begin{axis}[axis y line=middle,
+                  axis x line=middle,
+                  name=myplot,axis on top,%
+            			ytick={1,2,3},
+            			ymin=-.5,ymax=3.5,%
+			            xmin=-1,xmax=10.9%
+                  ]
 
-          <ol cols="2">
-            <li>
-              <p>
-                <m>\ds \int_0^5 f(x)\ dx</m>
-              </p>
-            </li>
+                  \addplot+[domain=0:10] ({x}, {3});
+                  \draw (axis cs:5,3.4) node {\scriptsize $f(x) = 3$};
+                \end{axis}
 
-            <li>
-              <p>
-                <m>\ds \int_3^7 f(x)\ dx</m>
-              </p>
-            </li>
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+          <p>
+            <ol cols="2">
+              <li>
+                <p>
+                  <m>\ds \int_0^5 f(x)\ dx</m>
+                </p>
+              </li>
 
-            <li>
-              <p>
-                <m>\ds \int_0^0 f(x)\ dx</m>
-              </p>
-            </li>
+              <li>
+                <p>
+                  <m>\ds \int_3^7 f(x)\ dx</m>
+                </p>
+              </li>
 
-            <li>
-              <p>
-                <m>\ds \int_a^b f(x)\ dx</m>, where
+              <li>
+                <p>
+                  <m>\ds \int_0^0 f(x)\ dx</m>
+                </p>
+              </li>
 
-                <m>0\leq a\leq b\leq 10</m>
-              </p>
-            </li>
-          </ol>
+              <li>
+                <p>
+                  <m>\ds \int_a^b f(x)\ dx</m>, where
+                  <m>0\leq a\leq b\leq 10</m>
+                </p>
+              </li>
+            </ol>
+          </p>
         </sidebyside>
       </statement>
       <answer>
-        <ol>
-          <li>
-            <p>
-              <m>15</m>
-            </p>
-          </li>
+        <p>
+          <ol>
+            <li>
+              <p>
+                <m>15</m>
+              </p>
+            </li>
 
-          <li>
-            <p>
-              <m>12</m>
-            </p>
-          </li>
+            <li>
+              <p>
+                <m>12</m>
+              </p>
+            </li>
 
-          <li>
-            <p>
-              <m>0</m>
-            </p>
-          </li>
+            <li>
+              <p>
+                <m>0</m>
+              </p>
+            </li>
 
-          <li>
-            <p>
-              <m>3(b-a)</m>
-            </p>
-          </li>
-        </ol>
+            <li>
+              <p>
+                <m>3(b-a)</m>
+              </p>
+            </li>
+          </ol>
+        </p>
       </answer>
     </exercise>
 
@@ -1573,7 +1552,7 @@
               <image xml:id="img_05_02_ex_10" width="47%">
                 <description></description>
                 <latex-image>
-                
+
                 \begin{tikzpicture}
                 \begin{axis}[%
                 axis on top,%
@@ -1599,10 +1578,10 @@
                 \end{axis}
 
                 \end{tikzpicture}
-                
+
                 </latex-image>
               </image>
-          
+
               <p>
                 <ol cols="2">
                   <li>
@@ -1649,7 +1628,7 @@
               <image xml:id="img_05_02_ex_11" width="47%">
                 <description></description>
                 <latex-image>
-                
+
                 \begin{tikzpicture}
                 \begin{axis}[%
                 axis on top,%
@@ -1675,10 +1654,10 @@
                 \end{axis}
 
                 \end{tikzpicture}
-                
+
                 </latex-image>
               </image>
-    
+
               <p>
                 <ol cols="2">
                   <li>
@@ -1725,7 +1704,7 @@
               <image xml:id="img_05_02_ex_12" width="47%">
                 <description></description>
                 <latex-image>
-                
+
                 \begin{tikzpicture}
                 \begin{axis}[%
                 axis on top,%
@@ -1752,10 +1731,10 @@
                 \end{axis}
 
                 \end{tikzpicture}
-                
+
                 </latex-image>
               </image>
-          
+
               <p>
                 <ol cols="2">
                   <li>
@@ -1802,7 +1781,7 @@
               <image xml:id="img_05_02_ex_13" width="47%">
                 <description></description>
                 <latex-image>
-                
+
                 \begin{tikzpicture}
                 \begin{axis}[%
                 axis on top,%
@@ -1830,10 +1809,10 @@
                 \end{axis}
 
                 \end{tikzpicture}
-                
+
                 </latex-image>
               </image>
-          
+
               <p>
                 <ol cols="2">
                   <li>
@@ -1893,7 +1872,7 @@
               <image xml:id="img_05_02_ex_14" width="47%">
                 <description></description>
                 <latex-image>
-                
+
                 \begin{tikzpicture}
                 \begin{axis}[%
                 axis on top,%
@@ -1916,7 +1895,7 @@
                 \node [right] at (myplot.right of origin) {\scriptsize $t$ (s)};
                 \node [above] at (myplot.above origin) {\scriptsize $y$ (ft/s)};
                 \end{tikzpicture}
-                
+
                 </latex-image>
               </image>
 
@@ -1974,7 +1953,7 @@
               <image xml:id="img_05_02_ex_15" width="47%">
                 <description></description>
                 <latex-image>
-                
+
                 \begin{tikzpicture}
                 \begin{axis}[%
                 axis on top,%
@@ -2000,7 +1979,7 @@
                 \node [right] at (myplot.right of origin) {\scriptsize $t$ (s)};
                 \node [above] at (myplot.above origin) {\scriptsize $y$ (ft/s)};
                 \end{tikzpicture}
-                
+
                 </latex-image>
               </image>
 
@@ -2445,7 +2424,7 @@
         <webwork seed="1">
             <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
             <setup>
- 
+
             <pg-code>
               $F = FormulaUpToConstant("1/4*x^4-2/3*x^3+7/2*x^2-9x");
             </pg-code>
@@ -2466,7 +2445,7 @@
         <webwork seed="1">
             <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
             <setup>
- 
+
             <pg-code>
               $F = FormulaUpToConstant("-cos(x) - sin(x) + tan(x)");
             </pg-code>
@@ -2487,7 +2466,7 @@
         <webwork seed="1">
             <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
             <setup>
- 
+
             <pg-code>
               Context()->variables->add(t=>"Real");
               $F = FormulaUpToConstant("3/4*t^(4/3) - 1/t + 2^t/ln(2)");
@@ -2509,7 +2488,7 @@
         <webwork seed="1">
             <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
             <setup>
- 
+
             <pg-code>
               $F = FormulaUpToConstant("ln(abs(x)) + csc(x)");
             </pg-code>
