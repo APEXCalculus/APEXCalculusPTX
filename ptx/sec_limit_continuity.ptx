@@ -684,340 +684,493 @@
     </solution>
   </example>
 
-  <p>
-    A common way of thinking of a continuous function is that
-    <q>its graph can be sketched without lifting your pencil.</q> That is,
-    its graph forms a <q>continuous</q> curve,
-    without holes, breaks or jumps.
-    This pseudo-definition glosses over some of the finer points of continuity.
-    There are some very strange continuous functions that one would be hard pressed to actually sketch by hand.
-  </p>
-  <p>
-    However, this intuitive notion of continuity does help us understand another important concept as follows.
-    Suppose <m>f</m> is defined on <m>[1,2]</m>, and <m>f(1) = -10</m> and <m>f(2) = 5</m>.
-    If <m>f</m> is continuous on <m>[1,2]</m> (i.e., its graph can be sketched as a continuous curve
-    from <m>(1,-10)</m> to <m>(2,5)</m>) then we know intuitively that somewhere on the interval <m>[1,2]</m>
-    <m>f</m> must be equal to <m>-9</m>, and <m>-8</m>, and <m>-7,-6,\ldots,0,1/2</m>, etc.
-    In short, <m>f</m> takes on all <em>intermediate</em>
-    values between <m>-10</m> and <m>5</m>.
-    It may take on more values;
-    <m>f</m> may actually equal <m>6</m> at some time, for instance,
-    but we are guaranteed all values between <m>-10</m> and <m>5</m>.
-  </p>
 
-  <figure xml:id="fig_intermediate_value">
-    <caption>Illustration of the Intermediate Value Theorem: the output <m>3</m> is in between <m>-10</m> and <m>5</m>, and therefore any continuous function on <m>[1,2]</m> with <m>f(1) = -10</m> and <m>f(2) = 5</m> will achieve the output <m>3</m> somewhere in <m>[1,2]</m>.</caption>
-    <image xml:id="img_intermediate_value" width="47%">
-      <description></description>
-      <latex-image>
-      
-      \begin{tikzpicture}
-      \begin{axis}[xmin=0.5,xmax=2.5,
-      ymin=-15,ymax=10,
-      minor ytick={-15,-14,...,10}]
-      \addplot+[-,smooth] coordinates {(1,-10) (1.5,-7) (1.8,3) (2,5)};
-      \addplot+[-,smooth] coordinates {(1,-10) (1.2,6) (1.5,3) (2,5)};
-      \addplot+[-,smooth] coordinates {(1,-10) (1.1,-12) (1.2,-5) (1.3,-7) (1.4,0) (1.5,-3) (1.6,3) (1.7,0) (1.8,5) (1.9,3) (2,5)};
-      \addplot[soliddot] coordinates {(1,-10) (2,5)};
-      \addplot[guideline] coordinates {(1,-10) (0.5,-10)};
-      \addplot[guideline] coordinates {(2,5) (0.5,5)};
-      \addplot[guideline] coordinates {(1.8,0) (1.8,3) (0.5,3)};
-      \addplot[guideline] coordinates {(1.5,0) (1.5,3) (0.5,3)};
-      \addplot[guideline] coordinates {(1.6,0) (1.6,3) (0.5,3)};
-      \end{axis}
-      \end{tikzpicture}
-      
-      </latex-image>
-    </image>
+  <paragraphs>
+    <title>Classification of discontinuities</title>
 
-  </figure>
+    <p>
+      We now know what it means for a function to be continuous,
+      so of course we can easily say what it means for a function
+      to be <em>discontinuous</em>; namely, not continuous.
+      However, to better understand continuity it is worth our
+      time to discuss the different ways in which a function can
+      fail to be discontinuous.
+      By definition, a function <m>f</m> is continuous at a point
+      <m>a</m> in its domain if <m>\lim\limits_{x\to a}f(x) = f(a)</m>.
+      If this equality fails to hold, then $f$ is not continuous.
+      We note, however, that there are a number of different things
+      that can go wrong with this equality.
+    </p>
 
-  <p>
-    While this notion seems intuitive,
-    it is not trivial to prove and its importance is profound.
-    Therefore the concept is stated in the form of a theorem.
-  </p>
+    <p>
+      <ol>
+        <li>
+          <p>
+            <m>\lim\limits_{x\to a}f(x)=L</m> exists,
+            but <m>L\neq f(a)</m>, or <m>f(a)</m> is undefined.
+            Such a discontinuity is called a
+            <term>removable discontinuity</term>
+            <idx><h>discontinuity</h><h>removable</h></idx>.
+          </p>
 
-  <theorem xml:id="thm_IVT">
-    <title>Intermediate Value Theorem</title>
-    <statement>
-      <p>
-        Let <m>f</m> be a continuous function on <m>[a,b]</m> and,
-        without loss of generality, let <m>f(a) \lt f(b)</m>.
-        Then for every value <m>y</m>,
-        where <m>f(a) \lt y \lt f(b)</m>,
-        there is at least one value <m>c</m> in <m>(a,b)</m> such that <m>f(c) = y</m>.
+          <p>
+            A removable discontinuity can be pictured as a
+            <q>hole</q> in the graph of <m>f</m>.
+            The term <q>removable</q> refers to the fact that
+            by simply redefining <m>f(a)</m> to equal <m>L</m>
+            (that is, changing the value of <m>f</m> at a single
+            point), we can create a new function that is
+            continuous at <m>x=a</m>, and agrees with <m>f</m>
+            at all <m>x\neq a</m>.
+          </p>
+        </li>
 
-        <idx><h>Intermediate Value Theorem</h></idx>
-        <idx><h>theorem</h><h>Intermediate Value</h></idx>
+<!-- \mfigure[width=0.95\marginparwidth]{.8}{The graph of a function with a removable discontinuity at $x=0$}{fig:disc_rem}{figures/fig_disc_rem} -->
 
-      </p>
-    </statement>
-  </theorem>
 
-  <p>
-    One important application of the <xref ref="thm_IVT" text="title"/> is root finding.
-    Given a function <m>f</m>,
-    we are often interested in finding values of <m>x</m> where <m>f(x) = 0</m>.
-    These roots may be very difficult to find exactly.
-    Good approximations can be found through successive applications of this theorem.
-    Suppose through direct computation we find that
-    <m>f(a) \lt 0</m> and <m>f(b)\gt 0</m>, where <m>a\lt b</m>.
-    The <xref ref="thm_IVT" text="title"/> states that there is at least one <m>c</m> in <m>(a,b)</m> such that <m>f(c) = 0</m>.
-    The theorem does not give us any clue as to where to find such a value in the interval <m>(a,b)</m>,
-    just that at least one such value exists.
-  </p>
+        <li>
+          <p>
+            <m>\lim\limits_{x\to a^+}f(x) = L</m> and
+            <m>\lim\limits_{x\to a^-}f(x)=M</m> exist,
+            but <m>L\neq M</m>.
+            In this case the left and right hand limits both exist,
+            but since they are not equal, the limit of <m>f</m> as
+            <m>x\to a</m> does not exist.
+            Such a discontinuity is called a
+            <term>jump discontinuity</term>.
+            <idx><h>discontinuity</h><h>jump</h></idx>
+          </p>
 
-  <p>
-    There is a technique that produces a good approximation of <m>c</m>.
-    Let <m>d</m> be the midpoint of the interval <m>[a,b]</m>,
-    with <m>f(a) \lt 0</m> and
-    <m>f(b) \gt 0</m> and consider <m>f(d)</m>.
-    There are three possibilities:
+          <p>
+            The phrase <q>jump discontinuity</q> is meant to
+            represent the fact that visually,
+            the graph of <m>f</m> <q>jumps</q> from one value
+            to another as we cross the value <m>x=a</m>.
+          </p>
 
-    <ol>
-      <li>
+<!-- \mfigure[width=0.95\marginparwidth]{.6}{The graph of a function with a jump discontinuity at $x=1$}{fig:disc_jump}{figures/fig_disc_jump} -->
+
+        <li>
+          <p>
+            The function <m>f</m> is <em>unbounded</em>
+            near <m>x=a</m>. This means that the value of
+            <m>f</m> becomes arbitrarily large (or large and
+            negative) as <m>x</m> approaches <m>a</m>.
+            Such a discontinuity is called an
+            <term>infinite discontinuity</term>.
+            <idx><h>discontinuity</h><h>infinite</h></idx>
+          </p>
+
+          <p>
+            Infinite discontinuities are most easily understood
+            in terms of <em>infinite limits</em>, which are
+            discussed in <xref ref="sec_limits_infty">Section</xref>.
+          </p>
+        </li>
+      </ol>
+    </p>
+
+    <figure xml:id="fig_discontinuities">
+      <caption>Illustrating three common types of discontinuity.</caption>
+      <sidebyside widths="33% 33% 33%">
+        <figure xml:id="fig_removable_disc">
+          <caption>The graph of a function with a removable
+            discontinuity at <m>x=2</m>.</caption>
+          <image>
+            <description></description>
+            <latex-image>
+            \begin{tikzpicture}
+              \begin{axis}[ymin=-.1,ymax=3.5,
+              xmin=-0.1,xmax=4.3,
+              axis equal]
+              \addplot+[domain=0:1.95]{0.1*x^2+x};
+              \addplot [firstcurvestyle,domain=2.05:4]{0.1*x^2+x};
+              \addplot[soliddot] coordinates{(2,1)};
+              \addplot[hollowdot] coordinates{(2,2.4)};
+              \end{axis}
+            \end{tikzpicture}
+            </latex-image>
+          </image>
+        </figure>
+
+        <figure xml:id="fig_jump_disc">
+          <caption>The graph of a function with a jump
+            discontinuity at <m>x=2</m>.</caption>
+          <image>
+            <description></description>
+            <latex-image>
+              \begin{tikzpicture}
+              \begin{axis}[ymin=-.1,ymax=3.5,
+              xmin=-0.1,xmax=4.3,
+              axis equal]
+              \addplot+[domain=0:1.95]{0.1*x^2+x};
+              \addplot [firstcurvestyle,domain=2.05:4]{x-1};
+              \addplot[soliddot] coordinates{(2,1)};
+              \addplot[hollowdot] coordinates{(2,2.4)};
+              \end{axis}
+            \end{tikzpicture}
+            </latex-image>
+          </image>
+        </figure>
+
+        <figure xml:id="fig_inf_disc">
+          <caption>The graph of a function with an infinite
+            discontinuity at <m>x=2</m>.</caption>
+          <image>
+            <description></description>
+            <latex-image>
+              \begin{tikzpicture}
+              \begin{axis}[xmin=-.1,xmax=4.3,
+              ymin=-1,ymax=110,]
+              \addplot[firstcurvestyle,domain=0:1.9] {1/(x-2)^2};
+              \addplot[firstcurvestyle,domain=2.1:4] {1/(x-2)^2};
+              \addplot[asymptote,rightarrow] coordinates {(2,1) (2,100)};
+              \end{axis}
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+        </figure>
+      </sidebyside>
+    </figure>
+  </paragraphs>
+
+  <paragraphs>
+    <title>Consequences of continuity</title>
+    <p>
+      A common way of thinking of a continuous function is that
+      <q>its graph can be sketched without lifting your pencil.</q> That is,
+      its graph forms a <q>continuous</q> curve,
+      without holes, breaks or jumps.
+      This pseudo-definition glosses over some of the finer points of continuity.
+      There are some very strange continuous functions that one would be hard pressed to actually sketch by hand.
+    </p>
+
+    <p>
+      However, this intuitive notion of continuity does help us understand another important concept as follows.
+      Suppose <m>f</m> is defined on <m>[1,2]</m>, and <m>f(1) = -10</m> and <m>f(2) = 5</m>.
+      If <m>f</m> is continuous on <m>[1,2]</m> (i.e., its graph can be sketched as a continuous curve
+      from <m>(1,-10)</m> to <m>(2,5)</m>) then we know intuitively that somewhere on the interval <m>[1,2]</m>
+      <m>f</m> must be equal to <m>-9</m>, and <m>-8</m>, and <m>-7,-6,\ldots,0,1/2</m>, etc.
+      In short, <m>f</m> takes on all <em>intermediate</em>
+      values between <m>-10</m> and <m>5</m>.
+      It may take on more values;
+      <m>f</m> may actually equal <m>6</m> at some time, for instance,
+      but we are guaranteed all values between <m>-10</m> and <m>5</m>.
+    </p>
+
+    <figure xml:id="fig_intermediate_value">
+      <caption>Illustration of the Intermediate Value Theorem: the output <m>3</m> is in between <m>-10</m> and <m>5</m>, and therefore any continuous function on <m>[1,2]</m> with <m>f(1) = -10</m> and <m>f(2) = 5</m> will achieve the output <m>3</m> somewhere in <m>[1,2]</m>.</caption>
+      <image xml:id="img_intermediate_value" width="47%">
+        <description></description>
+        <latex-image>
+
+        \begin{tikzpicture}
+        \begin{axis}[xmin=0.5,xmax=2.5,
+        ymin=-15,ymax=10,
+        minor ytick={-15,-14,...,10}]
+        \addplot+[-,smooth] coordinates {(1,-10) (1.5,-7) (1.8,3) (2,5)};
+        \addplot+[-,smooth] coordinates {(1,-10) (1.2,6) (1.5,3) (2,5)};
+        \addplot+[-,smooth] coordinates {(1,-10) (1.1,-12) (1.2,-5) (1.3,-7) (1.4,0) (1.5,-3) (1.6,3) (1.7,0) (1.8,5) (1.9,3) (2,5)};
+        \addplot[soliddot] coordinates {(1,-10) (2,5)};
+        \addplot[guideline] coordinates {(1,-10) (0.5,-10)};
+        \addplot[guideline] coordinates {(2,5) (0.5,5)};
+        \addplot[guideline] coordinates {(1.8,0) (1.8,3) (0.5,3)};
+        \addplot[guideline] coordinates {(1.5,0) (1.5,3) (0.5,3)};
+        \addplot[guideline] coordinates {(1.6,0) (1.6,3) (0.5,3)};
+        \end{axis}
+        \end{tikzpicture}
+
+        </latex-image>
+      </image>
+    </figure>
+
+    <p>
+      While this notion seems intuitive,
+      it is not trivial to prove and its importance is profound.
+      Therefore the concept is stated in the form of a theorem.
+    </p>
+
+    <theorem xml:id="thm_IVT">
+      <title>Intermediate Value Theorem</title>
+      <statement>
         <p>
-          <m>f(d) = 0</m>: We got lucky and stumbled on the actual value.
-          We stop as we found a root.
-        </p>
-      </li>
+          Let <m>f</m> be a continuous function on <m>[a,b]</m> and,
+          without loss of generality, let <m>f(a) \lt f(b)</m>.
+          Then for every value <m>y</m>,
+          where <m>f(a) \lt y \lt f(b)</m>,
+          there is at least one value <m>c</m> in <m>(a,b)</m> such that <m>f(c) = y</m>.
 
-      <li>
+          <idx><h>Intermediate Value Theorem</h></idx>
+          <idx><h>theorem</h><h>Intermediate Value</h></idx>
+
+        </p>
+      </statement>
+    </theorem>
+
+    <p>
+      One important application of the <xref ref="thm_IVT" text="title"/> is root finding.
+      Given a function <m>f</m>,
+      we are often interested in finding values of <m>x</m> where <m>f(x) = 0</m>.
+      These roots may be very difficult to find exactly.
+      Good approximations can be found through successive applications of this theorem.
+      Suppose through direct computation we find that
+      <m>f(a) \lt 0</m> and <m>f(b)\gt 0</m>, where <m>a\lt b</m>.
+      The <xref ref="thm_IVT" text="title"/> states that there is at least one <m>c</m> in <m>(a,b)</m> such that <m>f(c) = 0</m>.
+      The theorem does not give us any clue as to where to find such a value in the interval <m>(a,b)</m>,
+      just that at least one such value exists.
+    </p>
+
+    <p>
+      There is a technique that produces a good approximation of <m>c</m>.
+      Let <m>d</m> be the midpoint of the interval <m>[a,b]</m>,
+      with <m>f(a) \lt 0</m> and
+      <m>f(b) \gt 0</m> and consider <m>f(d)</m>.
+      There are three possibilities:
+
+      <ol>
+        <li>
+          <p>
+            <m>f(d) = 0</m>: We got lucky and stumbled on the actual value.
+            We stop as we found a root.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            <m>f(d) \lt 0</m>: Then we know there is a root of <m>f</m> on the interval <m>[d,b]</m> <mdash/> we have halved the size of our interval,
+            hence are closer to a good approximation of the root.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            <m>f(d) \gt 0</m>: Then we know there is a root of <m>f</m> on the interval <m>[a,d]</m> <mdash/> again,we have halved the size of our interval,
+            hence are closer to a good approximation of the root.
+          </p>
+        </li>
+      </ol>
+    </p>
+
+    <p>
+      Successively applying this technique is called the
+      <term>Bisection Method</term>
+
+      <idx><h>Bisection Method</h></idx>
+
+      of root finding.
+      We continue until the interval is sufficiently small.
+      We demonstrate this in the following example.
+    </p>
+
+    <example xml:id="ex_bisect_method">
+      <title>Using the Bisection Method</title>
+      <statement>
         <p>
-          <m>f(d) \lt 0</m>: Then we know there is a root of <m>f</m> on the interval <m>[d,b]</m> <mdash/> we have halved the size of our interval,
-          hence are closer to a good approximation of the root.
+          Approximate the root of <m>f(x) = x-\cos(x)</m>,
+          accurate to three places after the decimal.
         </p>
-      </li>
-
-      <li>
+      </statement>
+      <solution>
         <p>
-          <m>f(d) \gt 0</m>: Then we know there is a root of <m>f</m> on the interval <m>[a,d]</m> <mdash/> again,we have halved the size of our interval,
-          hence are closer to a good approximation of the root.
+          Consider the graph of <m>f(x) = x-\cos(x)</m>,
+          shown in <xref ref="fig_xminuscosx">Figure</xref>.
+          It is clear that the graph crosses the <m>x</m>-axis somewhere near <m>x=0.8</m>.
+          To start the Bisection Method,
+          pick an interval that contains <m>0.8</m>.
+          We choose <m>[0.7,0.9]</m>.
+          Note that all we care about are signs of <m>f(x)</m>,
+          not their actual value, so this is all we display.
         </p>
-      </li>
-    </ol>
-  </p>
 
-  <p>
-    Successively applying this technique is called the
-    <term>Bisection Method</term>
+        <figure xml:id="fig_xminuscosx">
+          <caption>Graphing a root of <m>f(x) = x-\cos(x)</m>.</caption>
+            <!-- START figures/fig_xminuscosx.tex -->
+          <image xml:id="img_xminuscosx" width="47%">
+            <description></description>
+            <latex-image>
+            
+            \begin{tikzpicture}
+            \begin{axis}[minor xtick={0,0.1,...,1},
+            xmin=-.05,xmax=1.07,
+            ymin=-1.1,ymax=.7]
+            \addplot+[domain=0:1] {x - cos(deg(x))};
+            \addplot[guideline] coordinates {(0.7,0) (0.7,-0.0648)};
+            \addplot[guideline] coordinates {(0.9,0) (0.9,0.278)};
+            \end{axis}
+            \end{tikzpicture}
+            
+            </latex-image>
+          </image>
+            <!-- figures/fig_xminuscosx.tex END -->
+        </figure>
 
-    <idx><h>Bisection Method</h></idx>
+        <p>
+          <dl>
+            <li>
+              <title>Iteration 1:</title>
+              <p>
+                <m>f(0.7) \lt 0</m>, <m>f(0.9) \gt 0</m>, and <m>f(0.8) \gt 0</m>.
+                So replace <m>0.9</m> with <m>0.8</m> and repeat.
+              </p>
+            </li>
 
-    of root finding.
-    We continue until the interval is sufficiently small.
-    We demonstrate this in the following example.
-  </p>
+            <li>
+              <title>Iteration 2:</title>
+              <p>
+                <m>f(0.7)\lt 0</m>, <m>f(0.8) \gt 0</m>,
+                and at the midpoint, <m>0.75</m>,
+                we have <m>f(0.75) \gt 0</m>.
+                So replace <m>0.8</m> with <m>0.75</m> and repeat.
+                Note that we don't need to continue to check the endpoints,
+                just the midpoint.
+                Thus we put the rest of the iterations in <xref ref="table_rootfinding">Table</xref>.
+              </p>
+            </li>
+          </dl>
+        </p>
 
-  <example xml:id="ex_bisect_method">
-    <title>Using the Bisection Method</title>
-    <statement>
-      <p>
-        Approximate the root of <m>f(x) = x-\cos(x)</m>,
-        accurate to three places after the decimal.
-      </p>
-    </statement>
-    <solution>
-      <p>
-        Consider the graph of <m>f(x) = x-\cos(x)</m>,
-        shown in <xref ref="fig_xminuscosx">Figure</xref>.
-        It is clear that the graph crosses the <m>x</m>-axis somewhere near <m>x=0.8</m>.
-        To start the Bisection Method,
-        pick an interval that contains <m>0.8</m>.
-        We choose <m>[0.7,0.9]</m>.
-        Note that all we care about are signs of <m>f(x)</m>,
-        not their actual value, so this is all we display.
-      </p>
+        <table xml:id="table_rootfinding">
+          <title>Iterations of the Bisection Method of Root Finding</title>
+          <tabular>
+            <row>
+              <cell>Iteration #</cell>
+              <cell>Interval</cell>
+              <cell>Midpoint Sign</cell>
+            </row>
+            <row bottom="minor">
+              <cell></cell>
+              <cell></cell>
+              <cell></cell>
+            </row>
+            <row>
+              <cell><m>1</m></cell>
+              <cell><m>[\highlight{0.7},0.9]</m></cell>
+              <cell><m>f(0.8) \gt 0</m></cell>
+            </row>
+            <row>
+              <cell><m>2</m></cell>
+              <cell><m>[\highlight{0.7},0.8]</m></cell>
+              <cell><m>f(0.75) \gt 0</m></cell>
+            </row>
+            <row>
+              <cell><m>3</m></cell>
+              <cell><m>[\highlight{0.7},\highlight{0.75}]</m></cell>
+              <cell><m>f(0.725)\lt 0</m></cell>
+            </row>
+            <row>
+              <cell><m>4</m></cell>
+              <cell><m>[0.725,\highlight{0.75}]</m></cell>
+              <cell><m>f(0.7375)\lt 0</m></cell>
+            </row>
+            <row>
+              <cell><m>5</m></cell>
+              <cell><m>[\highlight{0.7375},\highlight{0.75}]</m></cell>
+              <cell><m>f(0.7438)\gt </m></cell>
+            </row>
+            <row>
+              <cell><m>6</m></cell>
+              <cell><m>[\highlight{0.7375},0.7438]</m></cell>
+              <cell><m>f(0.7407)\gt 0</m></cell>
+            </row>
+            <row>
+              <cell><m>7</m></cell>
+              <cell><m>[\highlight{0.7375},0.7407]</m></cell>
+              <cell><m>f(0.7391)\gt 0</m></cell>
+            </row>
+            <row>
+              <cell><m>8</m></cell>
+              <cell><m>[\highlight{0.7375},\highlight{0.7391}]</m></cell>
+              <cell><m>f(0.7383)\lt 0</m></cell>
+            </row>
+            <row>
+              <cell><m>9</m></cell>
+              <cell><m>[0.7383,\highlight{0.7391}]</m></cell>
+              <cell><m>f(0.7387)\lt 0</m></cell>
+            </row>
+            <row>
+              <cell><m>10</m></cell>
+              <cell><m>[0.7387,\highlight{0.7391}]</m></cell>
+              <cell><m>f(0.7389)\lt 0</m></cell>
+            </row>
+            <row>
+              <cell><m>11</m></cell>
+              <cell><m>[0.7389,\highlight{0.7391}]</m></cell>
+              <cell><m>f(0.7390)\lt 0</m></cell>
+            </row>
+            <row>
+              <cell><m>12</m></cell>
+              <cell><m>[0.7390,\highlight{0.7391}]</m></cell>
+              <cell></cell>
+            </row>
+            <row>
+              <cell></cell>
+            </row>
+          </tabular>
 
-      <figure xml:id="fig_xminuscosx">
-        <caption>Graphing a root of <m>f(x) = x-\cos(x)</m>.</caption>
-          <!-- START figures/fig_xminuscosx.tex -->
-        <image xml:id="img_xminuscosx" width="47%">
-          <description></description>
-          <latex-image>
-          
-          \begin{tikzpicture}
-          \begin{axis}[minor xtick={0,0.1,...,1},
-          xmin=-.05,xmax=1.07,
-          ymin=-1.1,ymax=.7]
-          \addplot+[domain=0:1] {x - cos(deg(x))};
-          \addplot[guideline] coordinates {(0.7,0) (0.7,-0.0648)};
-          \addplot[guideline] coordinates {(0.9,0) (0.9,0.278)};
-          \end{axis}
-          \end{tikzpicture}
-          
-          </latex-image>
-        </image>
-          <!-- figures/fig_xminuscosx.tex END -->
-      </figure>
+        </table>
 
-      <p>
-        <dl>
-          <li>
-            <title>Iteration 1:</title>
-            <p>
-              <m>f(0.7) \lt 0</m>, <m>f(0.9) \gt 0</m>, and <m>f(0.8) \gt 0</m>.
-              So replace <m>0.9</m> with <m>0.8</m> and repeat.
-            </p>
-          </li>
+        <p>
+          Notice that in the 12th iteration we have the endpoints of the interval each starting with <m>0.739</m>.
+          Thus we have narrowed the zero down to an accuracy of the first three places after the decimal.
+          Using a computer, we have
+          <me>
+            f(0.7390) = -0.00014,  f(0.7391) = 0.000024
+          </me>.
+        </p>
 
-          <li>
-            <title>Iteration 2:</title>
-            <p>
-              <m>f(0.7)\lt 0</m>, <m>f(0.8) \gt 0</m>,
-              and at the midpoint, <m>0.75</m>,
-              we have <m>f(0.75) \gt 0</m>.
-              So replace <m>0.8</m> with <m>0.75</m> and repeat.
-              Note that we don't need to continue to check the endpoints,
-              just the midpoint.
-              Thus we put the rest of the iterations in <xref ref="table_rootfinding">Table</xref>.
-            </p>
-          </li>
-        </dl>
-      </p>
+        <p>
+          Either endpoint of the interval gives a good approximation of where <m>f</m> is <m>0</m>.
+          The <xref ref="thm_IVT"/> states that the actual zero is still within this interval.
+          While we do not know its exact value,
+          we know it starts with <m>0.739</m>.
+        </p>
 
-      <table xml:id="table_rootfinding">
-        <title>Iterations of the Bisection Method of Root Finding</title>
-        <tabular>
-          <row>
-            <cell>Iteration #</cell>
-            <cell>Interval</cell>
-            <cell>Midpoint Sign</cell>
-          </row>
-          <row bottom="minor">
-            <cell></cell>
-            <cell></cell>
-            <cell></cell>
-          </row>
-          <row>
-            <cell><m>1</m></cell>
-            <cell><m>[\highlight{0.7},0.9]</m></cell>
-            <cell><m>f(0.8) \gt 0</m></cell>
-          </row>
-          <row>
-            <cell><m>2</m></cell>
-            <cell><m>[\highlight{0.7},0.8]</m></cell>
-            <cell><m>f(0.75) \gt 0</m></cell>
-          </row>
-          <row>
-            <cell><m>3</m></cell>
-            <cell><m>[\highlight{0.7},\highlight{0.75}]</m></cell>
-            <cell><m>f(0.725)\lt 0</m></cell>
-          </row>
-          <row>
-            <cell><m>4</m></cell>
-            <cell><m>[0.725,\highlight{0.75}]</m></cell>
-            <cell><m>f(0.7375)\lt 0</m></cell>
-          </row>
-          <row>
-            <cell><m>5</m></cell>
-            <cell><m>[\highlight{0.7375},\highlight{0.75}]</m></cell>
-            <cell><m>f(0.7438)\gt </m></cell>
-          </row>
-          <row>
-            <cell><m>6</m></cell>
-            <cell><m>[\highlight{0.7375},0.7438]</m></cell>
-            <cell><m>f(0.7407)\gt 0</m></cell>
-          </row>
-          <row>
-            <cell><m>7</m></cell>
-            <cell><m>[\highlight{0.7375},0.7407]</m></cell>
-            <cell><m>f(0.7391)\gt 0</m></cell>
-          </row>
-          <row>
-            <cell><m>8</m></cell>
-            <cell><m>[\highlight{0.7375},\highlight{0.7391}]</m></cell>
-            <cell><m>f(0.7383)\lt 0</m></cell>
-          </row>
-          <row>
-            <cell><m>9</m></cell>
-            <cell><m>[0.7383,\highlight{0.7391}]</m></cell>
-            <cell><m>f(0.7387)\lt 0</m></cell>
-          </row>
-          <row>
-            <cell><m>10</m></cell>
-            <cell><m>[0.7387,\highlight{0.7391}]</m></cell>
-            <cell><m>f(0.7389)\lt 0</m></cell>
-          </row>
-          <row>
-            <cell><m>11</m></cell>
-            <cell><m>[0.7389,\highlight{0.7391}]</m></cell>
-            <cell><m>f(0.7390)\lt 0</m></cell>
-          </row>
-          <row>
-            <cell><m>12</m></cell>
-            <cell><m>[0.7390,\highlight{0.7391}]</m></cell>
-            <cell></cell>
-          </row>
-          <row>
-            <cell></cell>
-          </row>
-        </tabular>
+        <p>
+          This type of exercise is rarely done by hand.
+          Rather, it is simple to program a computer to run such an algorithm and stop when the endpoints differ by a preset small amount.
+          One of the authors did write such a program and found the zero of <m>f</m> to be
+          <m>0.7390851332</m> , accurate to <m>10</m> places after the decimal.
+          While it took a few minutes to write the program,
+          it took less than a thousandth of a second for the program to run the necessary <m>35</m> iterations.
+          In less than <m>8</m> hundredths of a second,
+          the zero was calculated to <m>100</m> decimal places
+          (with less than <m>200</m> iterations).
+        </p>
+      </solution>
+    </example>
 
-      </table>
+    <!--TODO: Is the above a place to demonstrate an algorithm like this in Sage? -->
 
-      <p>
-        Notice that in the 12th iteration we have the endpoints of the interval each starting with <m>0.739</m>.
-        Thus we have narrowed the zero down to an accuracy of the first three places after the decimal.
-        Using a computer, we have
-        <me>
-          f(0.7390) = -0.00014,  f(0.7391) = 0.000024
-        </me>.
-      </p>
+    <p>
+      It is a simple matter to extend the Bisection Method to solve problems similar to <q>Find <m>x</m>,
+      where <m>f(x) = 0</m>.</q> For instance,
+      we can find <m>x</m>, where <m>f(x) = 1</m>.
+      It actually works very well to define a new function <m>g</m> where <m>g(x) = f(x) - 1</m>.
+      Then use the Bisection Method to solve <m>g(x)=0</m>.
+    </p>
 
-      <p>
-        Either endpoint of the interval gives a good approximation of where <m>f</m> is <m>0</m>.
-        The <xref ref="thm_IVT"/> states that the actual zero is still within this interval.
-        While we do not know its exact value,
-        we know it starts with <m>0.739</m>.
-      </p>
+    <p>
+      Similarly, given two functions <m>f</m> and <m>g</m>,
+      we can use the Bisection Method to solve <m>f(x) = g(x)</m>.
+      Once again, create a new function <m>h</m> where
+      <m>h(x) = f(x)-g(x)</m> and solve <m>h(x) = 0</m>.
+    </p>
 
-      <p>
-        This type of exercise is rarely done by hand.
-        Rather, it is simple to program a computer to run such an algorithm and stop when the endpoints differ by a preset small amount.
-        One of the authors did write such a program and found the zero of <m>f</m> to be
-        <m>0.7390851332</m> , accurate to <m>10</m> places after the decimal.
-        While it took a few minutes to write the program,
-        it took less than a thousandth of a second for the program to run the necessary <m>35</m> iterations.
-        In less than <m>8</m> hundredths of a second,
-        the zero was calculated to <m>100</m> decimal places
-        (with less than <m>200</m> iterations).
-      </p>
-    </solution>
-  </example>
+    <p>
+      In <xref ref="sec_newton">Section</xref>
+      another equation solving method will be introduced, called Newton's Method.
+      In many cases, Newton's Method is much faster.
+      It relies on more advanced mathematics, though,
+      so we will wait before introducing it.
+    </p>
 
-  <!--TODO: Is the above a place to demonstrate an algorithm like this in Sage? -->
-
-  <p>
-    It is a simple matter to extend the Bisection Method to solve problems similar to <q>Find <m>x</m>,
-    where <m>f(x) = 0</m>.</q> For instance,
-    we can find <m>x</m>, where <m>f(x) = 1</m>.
-    It actually works very well to define a new function <m>g</m> where <m>g(x) = f(x) - 1</m>.
-    Then use the Bisection Method to solve <m>g(x)=0</m>.
-  </p>
-
-  <p>
-    Similarly, given two functions <m>f</m> and <m>g</m>,
-    we can use the Bisection Method to solve <m>f(x) = g(x)</m>.
-    Once again, create a new function <m>h</m> where
-    <m>h(x) = f(x)-g(x)</m> and solve <m>h(x) = 0</m>.
-  </p>
-
-  <p>
-    In <xref ref="sec_newton">Section</xref>
-    another equation solving method will be introduced, called Newton's Method.
-    In many cases, Newton's Method is much faster.
-    It relies on more advanced mathematics, though,
-    so we will wait before introducing it.
-  </p>
-
-  <p>
-    This section formally defined what it means to be a continuous function.
-    <q>Most</q> functions that we deal with are continuous,
-    so often it feels odd to have to formally define this concept.
-    Regardless, it is important, and forms the basis of the next chapter.
-  </p>
+    <p>
+      This section formally defined what it means to be a continuous function.
+      <q>Most</q> functions that we deal with are continuous,
+      so often it feels odd to have to formally define this concept.
+      Regardless, it is important, and forms the basis of the next chapter.
+    </p>
+  </paragraphs>
   <!--<p>In the next section we examine one more aspect of limits: limits that involve infinity.  </p>-->
   <!--</introduction>-->
   <exercises>
