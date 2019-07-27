@@ -2,7 +2,8 @@
 <!-- TODO: introduce units tags as appropriate -->
 <section xml:id="sec_derivative">
   <title>Instantaneous Rates of Change: The Derivative</title>
-  <introduction>
+  <subsection xml:id="sec-deriv-intro">
+    <title>Introduction</title>
     <p>
       A common amusement park ride lifts riders to a height then allows them to freefall a certain distance before safely stopping them.
       Suppose such a ride drops riders from a height of <m>150</m> feet.
@@ -17,7 +18,7 @@
       Using this formula, it is easy to verify that, without intervention,
       the riders will hit the ground when <m>f(t)=0</m> so at <m>t=2.5\sqrt{1.5} \approx 3.06</m> seconds.
       Suppose the designers of the ride decide to begin slowing the riders' fall after <m>2</m>   seconds (corresponding to a height of <m>f(2)=</m>
-      <quantity><mag>86</mag><unit base="feet"/></quantity>).
+      <quantity><mag>86</mag><unit base="foot"/></quantity>).
       How fast will the riders be traveling at that time?
     </p>
 
@@ -116,7 +117,7 @@
       <p>
         We can approximate the value of this limit numerically with small values of <m>h</m> as seen in <xref ref="table_falling">Table</xref>.
         It looks as though the velocity is approaching
-        <quantity><mag>-64</mag><unit base="feet"/><per base="second"/></quantity>.
+        <quantity><mag>-64</mag><unit base="foot"/><per base="second"/></quantity>.
       </p>
 
       <table xml:id="table_falling">
@@ -124,7 +125,7 @@
         <tabular>
           <row bottom="medium">
             <cell><m>h</m></cell>
-            <cell>Average Velocity (<quantity><mag/><unit base="feet"/><per base="second"/></quantity>)</cell>
+            <cell>Average Velocity (<quantity><mag/><unit base="foot"/><per base="second"/></quantity>)</cell>
           </row>
           <row>
             <cell><m>1</m></cell>
@@ -188,14 +189,14 @@
 
             \begin{tikzpicture}
             \begin{axis}[xmin=-.5,xmax=3.49,
-            ymin=-50,ymax=160,
+            ymin=-20,ymax=180,
             xlabel={$t$}]]
             \addplot+[domain=0:3.06] {-16*x^2+150};
             \addplot+[secantline,domain=1.5:3.2] {-80*(x-2)+86};
             \addplot[soliddot] coordinates {(2,86) (3,6)};
             \end{axis}
             \end{tikzpicture}
-        
+
             </latex-image>
           </image>
         <!-- figures/fig_derivfalling.tex END -->
@@ -207,7 +208,7 @@
           <!-- START figures/fig_derivfalling2.tex -->
             <description></description>
             <latex-image>
-      
+
             \begin{tikzpicture}
             \begin{axis}[xmin=1.8,xmax=3.4,
             ymin=0,ymax=129,
@@ -218,7 +219,7 @@
             \addplot[soliddot] coordinates{(2,86) (3,6)};
             \end{axis}
             \end{tikzpicture}
-      
+
             </latex-image>
           </image>
           <!-- figures/fig_derivfalling2.tex END -->
@@ -232,10 +233,10 @@
           <!-- START figures/fig_derivfalling3.tex -->
             <description></description>
             <latex-image>
-          
+
             \begin{tikzpicture}
             \begin{axis}[xmin=1.4,xmax=2.6,
-            ymin=0,ymax=129,
+            ymin=0,ymax=130,
             xlabel={$t$},
             xdiscontinuity]
             \addplot+[domain=0:3.06] {-16*x^2+150};
@@ -243,7 +244,7 @@
             \addplot[soliddot] coordinates{(2,86)};
             \end{axis}
             \end{tikzpicture}
-          
+
             </latex-image>
           </image>
           <!-- figures/fig_derivfalling3.tex END -->
@@ -255,10 +256,10 @@
           <image xml:id="img_derivfalling4">
             <description></description>
             <latex-image>
-          
+
             \begin{tikzpicture}
             \begin{axis}[xmin=1.4,xmax=2.6,
-            ymin=0,ymax=129,
+            ymin=0,ymax=140,
             xlabel={$t$},
             xdiscontinuity]
             \addplot+[domain=0:3.06] {-16*x^2+150};
@@ -449,7 +450,7 @@
               \addplot[&lt;-&gt;,soliddot] coordinates{(1,1) (3,35)};
               \end{axis}
               \end{tikzpicture}
-            
+
               </latex-image>
             </image>
             <!-- figures/fig_tangent1.tex END -->
@@ -530,11 +531,11 @@
               xmin=-0.1,xmax=4.3,
               axis equal]
               \addplot+[domain=0.9:1.2]{3*x^2+5*x-7};
-              \addplot+[normalline,domain=2.2:3.5] {(-1/23)*(x-3)+35};
-              \addplot[soliddot] coordinates{(1,1) (3,35)};
+              \addplot[normalline,domain=2.2:3.5] {(-1/11)*(x-1)+1};
+              \addplot[soliddot] coordinates{(1,1)};
               \end{axis}
               \end{tikzpicture}
-      
+
               </latex-image>
             </image>
             <!-- figures/fig_normal1.tex END -->
@@ -688,7 +689,7 @@
               \addplot [soliddot] coordinates{(0,0)};
               \end{axis}
               \end{tikzpicture}
-      
+
               </latex-image>
             </image>
             <!-- figures/fig_tangentsinx.tex END -->
@@ -777,7 +778,7 @@
           Let <m>y = f(x)</m>.
           The following notations all represent the derivative of <m>f</m>:
           <me>
-            \fp(x)\ =\ y'\ =\ \frac{dy}{dx}\ =\ \frac{df}{dx}\ =\ \frac{d}{dx}(f)\ =\ 
+            \fp(x)\ =\ y'\ =\ \frac{dy}{dx}\ =\ \frac{df}{dx}\ =\ \frac{d}{dx}(f)\ =\
             \frac{d}{dx}(y)
           </me>.
         </p>
@@ -825,7 +826,7 @@
           So <m>\fp(x) = 6x+5</m>.
           Recall earlier we found that
           <m>\fp(1) = 11</m> and <m>\fp(3) = 23</m>.
-          Note our new computation of <m>\fp(x)</m> affirm these facts.
+          Note our new computation of <m>\fp(x)</m> affirms these facts.
         </p>
       </solution>
     </example>
@@ -845,7 +846,7 @@
             <mrow>\fp(x)     \amp = \lim_{h\to 0} \frac{f(x+h)-f(x)}{h}</mrow>
             <mrow>\amp =    \lim_{h\to 0} \frac{\frac{1}{x+h+1}-\frac{1}{x+1}}{h}</mrow>
             <intertext>Now find common denominator then subtract; pull <m>1/h</m> out front to   facilitate reading.</intertext>
-            <mrow>\amp = \lim_{h\to 0} \frac{1}{h}\cdot\left(\frac{x+1}{(x+1)(x+h+1)} - 
+            <mrow>\amp = \lim_{h\to 0} \frac{1}{h}\cdot\left(\frac{x+1}{(x+1)(x+h+1)} -
             \frac{x+h+1}{(x+1)(x+h+1)}\right)</mrow>
             <intertext>Now simplify algebraically.</intertext>
             <mrow>\amp = \lim_{h\to 0} \frac 1h\cdot\left(\frac{x+1-(x+h+1)}{(x+1)(x+h+1)}\right)  </mrow>
@@ -881,18 +882,18 @@
           we can find the actual tangent line to <m>f(x) = \sin(x)</m> at <m>x=0</m>,
           whereas we settled for an approximation in <xref ref="ex_der_num_approx">Example</xref>.
           <md>
-          <mrow>\fp(x) \amp = \lim_{h\to 0} \frac{\sin(x+h)-\sin(x)}{h} \amp  \amp 
+          <mrow>\fp(x) \amp = \lim_{h\to 0} \frac{\sin(x+h)-\sin(x)}{h} \amp  \amp
           \text{Derivative definition}</mrow>
           <mrow>\amp = \lim_{h\to 0} \frac{\sin(x)\cos(h)+\cos(x)\sin(h)-\sin(x)}{h} \amp \amp
           \text{Angle addition identity}</mrow>
-          <mrow>\amp = \lim_{h\to 0} \frac{\sin(x)(\cos(h)-1) + \cos(x)\sin(h)}{h} \amp  \amp 
+          <mrow>\amp = \lim_{h\to 0} \frac{\sin(x)(\cos(h)-1) + \cos(x)\sin(h)}{h} \amp  \amp
           \text{Regrouped and factored}</mrow>
           <mrow>\amp = \lim_{h\to 0} \left(\frac{\sin(x)(\cos(h)-1)}{h} + \frac{\cos(x)\sin(h)}{h}
           \right) \amp  \amp  \text{Split into two fractions}</mrow>
             <mrow>\amp = \lim_{h\to 0} \sin(x) \cdot \lim_{h\to 0}\frac{\cos(h)-1}{h}</mrow>
           <mrow>\amp\quad{}+\lim_{h\to 0}\cos(x)\cdot  \lim_{h\to 0}\frac{\sin(h)}{h} \amp  \amp
           \text{Product/sum limit rules}</mrow>
-          <mrow>\amp = \sin(x)\cdot 0 + \cos(x) \cdot 1 \amp \amp  \text{Applied } 
+          <mrow>\amp = \sin(x)\cdot 0 + \cos(x) \cdot 1 \amp \amp  \text{Applied }
           <xref ref="thm_special_limits">Theorem </xref></mrow>
             <mrow>\amp = \cos(x)\ \text{!}</mrow>
           </md>
@@ -937,7 +938,7 @@
           <caption>The absolute value function, <m>f(x) = \abs{x}</m>. Notice how the slope of
           the lines (and hence the tangent lines) abruptly changes at <m>x=0</m>.</caption>
           <!-- START figures/fig_absolutevalue.tex -->
-          <image xml:id="img_absolutevalue">
+          <image xml:id="img_absolutevalue" width="47%">
             <description></description>
             <latex-image>
 
@@ -947,7 +948,7 @@
             \addplot+[domain=-1:1]{abs(x)};
             \end{axis}
             \end{tikzpicture}
-    
+
             </latex-image>
           </image>
           <!-- figures/fig_absolutevalue.tex END -->
@@ -1031,7 +1032,7 @@
         <figure xml:id="fig_absolutevalueprime">
           <caption>A graph of the derivative of <m>f(x) = \abs{x}</m>.</caption>
           <!-- START figures/fig_absolutevalueprime.tex -->
-          <image xml:id="img_absolutevalueprime">
+          <image xml:id="img_absolutevalueprime" width="47%">
             <description></description>
             <latex-image>
 
@@ -1043,7 +1044,7 @@
             \addplot[hollowdot] coordinates{(0,-1) (0,1)};
             \end{axis}
             \end{tikzpicture}
-    
+
             </latex-image>
           </image>
           <!-- figures/fig_absolutevalueprime.tex END -->
@@ -1073,10 +1074,10 @@
           <caption>A graph of <m>f(x)</m> as defined in
           <xref ref="ex_diff_piecewise">Example</xref>.</caption>
           <!-- START figures/fig_piecewisesinx1.tex -->
-          <image xml:id="img_piecewisesinx1">
+          <image xml:id="img_piecewisesinx1" width="47%">
             <description></description>
             <latex-image>
-          
+
             \begin{tikzpicture}[declare function = {func(\x) = (\x &lt; 1.5708) * (sin(x*180/pi)) + (\x &gt;= 1.5708) * (1);}]
             \begin{axis}[ymin=-.4,ymax=1.4,
             xmin=-.1,xmax=2.1,
@@ -1085,7 +1086,7 @@
             \addplot+[domain=-.1:2,samples=100]{func(x)};
             \end{axis}
             \end{tikzpicture}
-          
+
             </latex-image>
           </image>
           <!-- figures/fig_piecewisesinx1.tex END -->
@@ -1167,10 +1168,10 @@
           <caption>A graph of <m>\fp(x)</m> in <xref ref="ex_diff_piecewise">Example</xref>.
           </caption>
           <!-- START figures/fig_piecewisecosx1.tex -->
-          <image xml:id="img_piecewisecosx1">
+          <image xml:id="img_piecewisecosx1" width="47%">
             <description></description>
             <latex-image>
-          
+
             \begin{tikzpicture}[declare function = {func(\x) = (\x &lt; 1.5708) * (cos(x*180/pi)) + (\x &gt;= 1.5708) * (0);}]
             \begin{axis}[ymin=-.4,ymax=1.4,
             xmin=-.1,xmax=2.1,
@@ -1179,7 +1180,7 @@
             \addplot+[domain=-.1:2,samples=100]{func(x)};
             \end{axis}
             \end{tikzpicture}
-    
+
             </latex-image>
           </image>
           <!-- figures/fig_piecewisecosx1.tex END -->
@@ -1200,7 +1201,7 @@
       it is difficult to tell when <m>f</m> switches from one piece to the other;
       there is no <q>corner.</q>
     </p>
-  </introduction>
+  </subsection>
 
   <subsection>
     <title>Differentiablity on Closed Intervals</title>
@@ -1337,7 +1338,7 @@
             \draw (axis cs:.7,.35) node {\scriptsize$y=x^{3/2}$};
             \end{axis}
             \end{tikzpicture}
-          
+
             </latex-image>
           </image>
         </figure>
@@ -1437,11 +1438,6 @@
                 <var form="essay"/>
               </p>
             </statement>
-            <solution>
-              <p>
-                Answers will vary.
-              </p>
-            </solution>
         </webwork>
       </exercise>
 
@@ -1458,11 +1454,6 @@
                 <var form="essay"/>
               </p>
             </statement>
-            <solution>
-              <p>
-                Answers will vary.
-              </p>
-            </solution>
         </webwork>
       </exercise>
 
@@ -1478,11 +1469,6 @@
                 <var form="essay"/>
               </p>
             </statement>
-            <solution>
-              <p>
-                Answers will vary.
-              </p>
-            </solution>
         </webwork>
       </exercise>
 
@@ -1598,11 +1584,6 @@
               <var form="essay"/>
             </p>
           </statement>
-          <solution>
-            <p>
-              <m>h'(x) = 3x^2</m>
-            </p>
-          </solution>
         </webwork>
       </exercise>
 
@@ -2159,7 +2140,7 @@
             \addplot+[domain=-2.1:5.1,&lt;-&gt;] {-.5*x+2};
             \end{axis}
             \end{tikzpicture}
-    
+
             </latex-image>
           </image>
         </statement>
@@ -2178,7 +2159,7 @@
             \addplot+[domain=-5.6:1.6,samples=40] {.5*(x+2)^2-3};
             \end{axis}
             \end{tikzpicture}
-    
+
             </latex-image>
           </image>
         </statement>
@@ -2197,7 +2178,7 @@
             \addplot+[domain=-2.45:2.45,samples=40] {(x-2)*x*(x+2)};
             \end{axis}
             \end{tikzpicture}
-    
+
             </latex-image>
           </image>
         </statement>
@@ -2218,7 +2199,7 @@
             \addplot+[domain=-6.8:6.8,samples=101] {cos(deg(x))};
             \end{axis}
             \end{tikzpicture}
-    
+
             </latex-image>
           </image>
         </statement>

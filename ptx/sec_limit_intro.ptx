@@ -32,14 +32,18 @@
         <caption><m>\sin(x)/x</m>.</caption>
         <image xml:id="img_sinx_over_x_full">
           <latex-image>
-          
-          \begin{tikzpicture}[declare function = {func(\x) = (\x != 0) * (sin(x*180/pi)/x) + (\x == 0) * (1);}]
-          \begin{axis}[]
+
+          \begin{tikzpicture}[
+          declare function = {func(\x) = (\x != 0) * (sin(x*180/pi)/x) + (\x == 0) * (1);}]
+          \begin{axis}[
+          ymin=-0.25, ymax=1.2,
+          xmin=-7, xmax=7
+          ]
           \addplot+[domain=-7:7,samples=50] {func(x)};
           \addplot[hollowdot] coordinates {(0,1)};
           \end{axis}
           \end{tikzpicture}
-          
+
           </latex-image>
         </image>
 
@@ -50,7 +54,7 @@
         <!-- START figures/sinx_over_x_1.tex -->
         <image xml:id="img_zoom_sinx_over_x">
           <latex-image>
-          
+
           \begin{tikzpicture}
           \begin{axis}[xmin=.3, xmax=1.6,
           ymin=.4, ymax=1.1,
@@ -63,7 +67,7 @@
           \addplot+[domain=0.5:1.5] {sin(x*180/pi)/x};
           \end{axis}
           \end{tikzpicture}
-          
+
           </latex-image>
         </image>
         <!-- figures/sinx_over_x_1.tex END -->
@@ -97,7 +101,7 @@
             <!-- START figures/sinx_over_x_2.tex -->
       <image xml:id="img_sinx_over_x_2" width="47%">
         <latex-image>
-        
+
         \begin{tikzpicture}[declare function = {func(\x) = (\x != 0) * (sin(x*180/pi)/x) + (\x == 0) * (1);}]
         \begin{axis}[xmin=-1.1,xmax=1.2,
         ymin=.75,ymax=1.05,
@@ -109,7 +113,7 @@
         \addplot[hollowdot] coordinates {(0,1)};
         \end{axis}
         \end{tikzpicture}
-        
+
         </latex-image>
       </image>
             <!-- figures/sinx_over_x_2.tex END -->
@@ -160,7 +164,7 @@
       Consider again <m>\lim_{x\to 1}\sin(x)/x</m>.
       To approximate this limit numerically,
       we can create a table of <m>x</m> and <m>f(x)</m> values where <m>x</m> is <q>near</q> <m>1</m>.
-      This is done in <xref ref="table_sinx_1">Table</xref>.
+      This is done in <xref ref="table_sinx_1">Figure</xref>.
     </p>
 
     <p>
@@ -214,7 +218,7 @@
     <p>
       Now approximate <m>\lim_{x\to 0} \sin(x)/x</m> numerically.
       We already approximated the value of this limit as <m>1</m> graphically in <xref ref="fig_sinx_over_x">Figure</xref>.
-      <xref ref="table_sinx_2">Table</xref>
+      <xref ref="table_sinx_2">Figure</xref>
       shows the value of <m>\sin(x)/x</m> for values of <m>x</m> near <m>0</m>.
       Ten places after the decimal point are shown to highlight how close to <m>1</m> the value of
       <m>\sin(x)/x</m> gets as <m>x</m> takes on values very near <m>0</m>.
@@ -297,7 +301,7 @@
           To numerically approximate the limit,
           create a table of values where the <m>x</m> values are near <m>3</m>.
           This is done in <xref ref="fig_limit1">Figure</xref>
-          and <xref ref="table_limit1">Table</xref>, respectively.
+          and <xref ref="table_limit1">Figure</xref>, respectively.
         </p>
 
         <sidebyside widths="47% 47%">
@@ -306,7 +310,7 @@
             <!-- START figures/fig_limit1.tex -->
             <image xml:id="img_limit1">
               <latex-image>
-              
+
               \begin{tikzpicture}
               \begin{axis}[xmin=2.3,xmax=3.7,
               ymin=0.2,ymax=.35,
@@ -320,7 +324,7 @@
 
               \end{axis}
               \end{tikzpicture}
-              
+
               </latex-image>
             </image>
             <!-- figures/fig_limit1.tex END -->
@@ -448,22 +452,23 @@
           as indicated in the graph with the open circle.
         </p>
 
-        <sidebyside widths="47% 47%">
+        <sidebyside widths="47% 47%" valign="bottom">
           <figure xml:id="fig_limit2">
             <caption>Graphically approximating a limit in <xref ref="ex_limit2">Example</xref>.</caption>
             <!-- START figures/fig_limit2.tex -->
             <image xml:id="img_limit2">
               <latex-image>
-              
-              \begin{tikzpicture}[declare function = {func(\x) = (\x &lt; 0) * (x+1) + (\x &gt; 0) * (-x^2+1);}]
-              \begin{axis}[xmin=-1.1,xmax=1.1,
+
+              \begin{tikzpicture}[
+              declare function = {func(\x) = (\x &lt; 0) * (x+1) + (\x &gt; 0) * (-x^2+1);}]
+              \begin{axis}[xmin=-1.1,xmax=1.2,
               ymin=-.1,ymax=1.1,
               ]
               \addplot+[domain=-1:1] {func(x)};
               \addplot[hollowdot] coordinates {(0,1)};
               \end{axis}
               \end{tikzpicture}
-              
+
               </latex-image>
             </image>
             <!-- figures/fig_limit2.tex END -->
@@ -507,7 +512,7 @@
         </sidebyside>
 
         <p>
-          <xref ref="table_limit2">Table</xref>
+          <xref ref="table_limit2">Figure</xref>
           shows values of <m>f(x)</m> for values of <m>x</m> near <m>0</m>.
           It is clear that as <m>x</m> takes on values very near <m>0</m>,
           <m>f(x)</m> takes on values very near <m>1</m>.
@@ -570,8 +575,9 @@
       </statement>
       <solution>
         <p>
-          A graph of <m>f(x)</m> around <m>x=1</m> and a table are given in <xref ref="fig_nolimit1">Figure</xref>
-          and <xref ref="table_nolimit1">Table</xref>, respectively.
+          A graph of <m>f(x)</m> around <m>x=1</m> and a table are given in
+          Figures <xref ref="fig_nolimit1"/> and
+          <xref ref="table_nolimit1"/>, respectively.
           It is clear that as <m>x</m> approaches <m>1</m>,
           <m>f(x)</m> does not seem to approach a single number.
           Instead, it seems as though <m>f(x)</m> approaches two different numbers.
@@ -587,16 +593,16 @@
           values as <m>x</m> approaches <m>1</m>.
         </p>
 
-        <sidebyside widths="47% 47%">
+        <sidebyside widths="47% 47%" valign="bottom">
           <figure xml:id="fig_nolimit1">
             <caption>Observing no limit as <m>x\to 1</m> in <xref ref="ex_no_limit1">Example</xref>.</caption>
             <!-- START figures/fig_nolimit1.tex -->
             <image xml:id="img_nolimit1">
               <latex-image>
-              
+
               \begin{tikzpicture}
               \begin{axis}[xmin=-.1,xmax=2.1,
-              ymin=-.1,ymax=3.2,
+              ymin=-.1,ymax=3.3,
               ]
               \addplot[firstcurvestyle,leftarrow, domain=0:1] {x^2 - 2*x + 3};
               \addplot[firstcurvestyle,rightarrow, domain=1:2] {x};
@@ -604,7 +610,7 @@
               \addplot[hollowdot] coordinates {(1,1)};
               \end{axis}
               \end{tikzpicture}
-              
+
               </latex-image>
             </image>
             <!-- figures/fig_nolimit1.tex END -->
@@ -659,12 +665,12 @@
       <solution>
         <p>
           A graph and table of <m>f(x) = 1/(x-1)^2</m> are given in <xref ref="fig_nolimit2">Figure</xref>
-          and <xref ref="table_nolimit2">Table</xref>, respectively.
+          and <xref ref="table_nolimit2">Figure</xref>, respectively.
           Both show that as <m>x</m> approaches <m>1</m>,
           <m>f(x)</m> grows larger and larger.
         </p>
 
-        <sidebyside widths="47% 47%">
+        <sidebyside widths="47% 47%" valign="bottom">
           <figure xml:id="fig_nolimit2">
             <caption>Observing no limit as <m>x\to 1</m> in <xref ref="ex_no_limit2">Example</xref>.</caption>
             <!-- START figures/fig_nolimit2.tex -->
@@ -680,7 +686,7 @@
               \addplot[asymptote,rightarrow] coordinates {(1,1) (1,100)};
               \end{axis}
               \end{tikzpicture}
-              
+
               </latex-image>
             </image>
             <!-- figures/fig_nolimit2.tex END -->
@@ -774,10 +780,10 @@
             <caption/><!-- START figures/fig_nolimit3a.tex -->
             <image xml:id="img_nolimit3a">
               <latex-image>
-              
+
               \begin{tikzpicture}
               \begin{axis}[xmin=-1.1,xmax=1.1,
-              ymin=-1.1,ymax=1.1,
+              ymin=-1.1,ymax=1.2,
               ]
               \addplot[firstcurvestyle,leftarrow,
               domain=-1.018591636:-0.318309886, % 1/(15/48 pi) to 1/(48/48 pi)
@@ -822,7 +828,7 @@
               ] {sin(1/x * 180 / pi)};
               \end{axis}
               \end{tikzpicture}
-              
+
               </latex-image>
             </image>
             <!-- figures/fig_nolimit3a.tex END -->
@@ -832,7 +838,7 @@
             <caption/><!-- START figures/fig_nolimit3b.tex -->
             <image xml:id="img_nolimit3b">
               <latex-image>
-              
+
               \begin{tikzpicture}
               \begin{axis}[xmin=-.11,xmax=.11,
               ymin=-1.1,ymax=1.1
@@ -888,7 +894,7 @@
               %        ] {sin(1/x * 180 / pi)};
               \end{axis}
               \end{tikzpicture}
-              
+
               </latex-image>
             </image>
             <!-- figures/fig_nolimit3b.tex END -->
@@ -1006,7 +1012,7 @@
       <!-- START figures/fig_diff_quot1.tex -->
       <image xml:id="img_diffquot1" width="47%">
         <latex-image>
-        
+
         \begin{tikzpicture}
         \begin{axis}[xmin=-1,xmax=6.5,
         ymin=-1,ymax=25,
@@ -1016,7 +1022,7 @@
         \addplot[soliddot] coordinates {(1,10) (5,20)};
         \end{axis}
         \end{tikzpicture}
-        
+
         </latex-image>
       </image>
       <!-- figures/fig_diff_quot1.tex END -->
@@ -1069,7 +1075,7 @@
         <!-- START figures/fig_diff_quot_smallha.tex -->
         <image xml:id="img_diff_quot_smallha">
           <latex-image>
-          
+
           \begin{tikzpicture}
           \begin{axis}[xmin=-1,xmax=6.5,
           ymin=-1,ymax=25,
@@ -1079,7 +1085,7 @@
           \addplot[soliddot] coordinates {(1,10) (3,21)};
           \end{axis}
           \end{tikzpicture}
-          
+
           </latex-image>
         </image>
         <!-- figures/fig_diff_quot_smallha.tex END -->
@@ -1090,7 +1096,7 @@
         <!-- START figures/fig_diff_quot_smallhb.tex -->
         <image xml:id="img_diff_quot_smallhb">
           <latex-image>
-          
+
           \begin{tikzpicture}
           \begin{axis}[xmin=-1,xmax=6.5,
           ymin=-1,ymax=25,
@@ -1100,7 +1106,7 @@
           \addplot[soliddot] coordinates {(1,10) (2,17)};
           \end{axis}
           \end{tikzpicture}
-          
+
           </latex-image>
         </image>
         <!-- figures/fig_diff_quot_smallhb.tex END -->
@@ -1111,7 +1117,7 @@
         <!-- START figures/fig_diff_quot_smallhc.tex -->
         <image xml:id="img_diff_quot_smallhc">
           <latex-image>
-          
+
           \begin{tikzpicture}
           \begin{axis}[xmin=-1,xmax=6.5,
           ymin=-1,ymax=25,
@@ -1121,7 +1127,7 @@
           \addplot[soliddot] coordinates {(1,10) (1.5,13.875)};
           \end{axis}
           \end{tikzpicture}
-          
+
           </latex-image>
         </image>
         <!-- figures/fig_diff_quot_smallhc.tex END -->
@@ -1135,7 +1141,7 @@
       While we could graph the difference quotient
       (where the <m>x</m>-axis would represent <m>h</m> values and the <m>y</m>-axis would represent values of the difference quotient)
       we settle for making a table.
-      See <xref ref="table_diff_quot_smallh">Table</xref>.
+      See <xref ref="table_diff_quot_smallh">Figure</xref>.
       The table gives us reason to assume the value of the limit is about <m>8.5</m>.
     </p>
 
@@ -1217,11 +1223,6 @@
                 <var form="essay"/>
               </p>
             </statement>
-            <solution>
-              <p>
-                Answers will vary.
-              </p>
-            </solution>
         </webwork>
       </exercise>
 
@@ -1266,7 +1267,8 @@
             </statement>
             <solution>
               <p>
-                False
+                False: the limit considers values of <m>x</m> <em>near</em> to <m>5</m>,
+                but not <em>equal</em> to 5.
               </p>
             </solution>
         </webwork>
@@ -1304,11 +1306,6 @@
               <var form="essay"/>
             </p>
           </statement>
-          <solution>
-            <p>
-              Answers will vary.
-            </p>
-          </solution>
         </webwork>
       </exercise>
 
@@ -1370,7 +1367,7 @@
                 For a numerical approximation, make a table:
               </p>
 
-              
+
                 <tabular>
                   <row bottom="medium">
                     <cell><m>x</m></cell>
@@ -1713,7 +1710,7 @@
                 For a numerical approximation, make a table:
               </p>
 
-              
+
                 <tabular>
                   <row bottom="medium">
                     <cell><m>x</m></cell>
@@ -1831,7 +1828,7 @@
                 For a numerical approximation, make a table:
               </p>
 
-              
+
                 <tabular>
                   <row bottom="medium">
                     <cell><m>x</m></cell>
@@ -1947,7 +1944,7 @@
                 For a numerical approximation, make a table:
               </p>
 
-              
+
                 <tabular>
                   <row bottom="medium">
                     <cell><m>x</m></cell>
@@ -2065,7 +2062,7 @@
                 For a numerical approximation, make a table:
               </p>
 
-              
+
                 <tabular>
                   <row bottom="medium">
                     <cell><m>x</m></cell>
@@ -2183,7 +2180,7 @@
                 For a numerical approximation, make a table:
               </p>
 
-              
+
                 <tabular>
                   <row bottom="medium">
                     <cell><m>x</m></cell>
@@ -2296,7 +2293,7 @@
                 For a numerical approximation, make a table:
               </p>
 
-              
+
                 <tabular>
                   <row bottom="medium">
                     <cell><m>x</m></cell>
@@ -2679,7 +2676,7 @@
           using <m>h = \pm 0.1, \pm 0.01</m>.
         </p>
       </introduction>
-
+      <!--ToDo: these do not render well if HTML is compiled without interactivity turned on-->
       <exercise>
         <webwork seed="1">
             <setup>
