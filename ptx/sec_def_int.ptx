@@ -20,12 +20,14 @@
   </p>
 
   <p>
-    It is interesting to note that this solution of 50 feet can be represented graphically.
+    It is interesting to note that this solution of 50 feet can be represented
+    graphically.
     Consider <xref ref="fig_defint1">Figure</xref>,
     where the constant velocity of
     <quantity><mag>5</mag><unit base="foot"/><per base="second"/></quantity>
     is graphed on the axes.
-    Shading the area under the line from <m>t=0</m> to <m>t=10</m> gives a rectangle with an area of 50 square units;
+    Shading the area under the line from <m>t=0</m> to <m>t=10</m> gives a
+    rectangle with an area of 50 square units;
     when one considers the units of the axes,
     we can say this area represents
     <quantity><mag>50</mag><unit base="foot"/></quantity>.
@@ -34,21 +36,24 @@
   <!-- <todo>Add some sort of style guidelines for areas.</todo> -->
 
   <figure xml:id="fig_defint1">
-    <caption>The area under a constant velocity function corresponds to distance traveled.</caption>
+    <caption>The area under a constant velocity function corresponds to
+      distance traveled.</caption>
     <image xml:id="img_defint1" width="47%">
       <description></description>
       <latex-image>
       \begin{tikzpicture}
-      \begin{axis}[%
+      \begin{axis}[
+      axis on top,
       x label style={at={(axis description cs:0.85,0.05)},anchor=north},
       y label style={at={(axis description cs:0,.85)},rotate=90,anchor=south},
       xlabel={$t$ (s)},
       ylabel={$y$ (ft/s)},
-			               ytick={5},
-			               ymin=-.9,ymax=5.9,
-			               xmin=-.9,xmax=10.9]
-      \addplot+[-,domain=0:10] {5};
-      \addplot [{\coloronefill},fill={\coloronefill},domain=0:10,area style] {5} |- (axis cs:0,0) --cycle;
+      ytick={5},
+      ymin=-.9,ymax=5.9,
+      xmin=-.9,xmax=10.9
+      ]
+      \addplot [firstcurvestyle,areastyle,domain=0:10] {5} \closedcycle;
+      \addplot [firstcurvestyle,-,domain=0:10] {5};
       \end{axis}
       \end{tikzpicture}
       </latex-image>
@@ -66,7 +71,8 @@
     (Since the object is traveling in the opposite direction when reversing course,
     we say the velocity is a constant
     <quantity><mag>-2</mag><unit base="foot"/><per base="second"/></quantity>.)
-    How far away from the starting point is the object <mdash/> what is its <em>displacement</em>?
+    How far away from the starting point is the object <mdash/> what is its
+    <em>displacement</em>?
   </p>
 
   <p>
@@ -83,7 +89,8 @@
   <p>
     We can again depict this situation graphically.
     In <xref ref="fig_defint2">Figure</xref>
-    we have the velocities graphed as straight lines on <m>[0,10]</m> and <m>[10,14]</m>,
+    we have the velocities graphed as straight lines on <m>[0,10]</m> and
+    <m>[10,14]</m>,
     respectively.
     The displacement of the object is
   </p>
@@ -97,25 +104,27 @@
   </p>
 
   <figure xml:id="fig_defint2">
-    <caption>The total displacement is the area above the <m>t</m><ndash/>axis minus the area below the <m>t</m><ndash/>axis.</caption>
+    <caption>The total displacement is the area above the <m>t</m><ndash/>axis
+    minus the area below the <m>t</m><ndash/>axis.</caption>
     <image xml:id="img_defint2" width="47%">
       <description></description>
       <latex-image>
       \begin{tikzpicture}
-      \begin{axis}[%
+      \begin{axis}[
       axis on top,
       x label style={at={(axis description cs:0.85,0.3)},anchor=south},
       y label style={at={(axis description cs:0,.85)},rotate=90,anchor=south},
       xlabel={$t$ (s)},
       ylabel={$y$ (ft/s)},
-			               ytick={-2,5},
-			               minor x tick num=4,
+      ytick={-2,5},
+      minor x tick num=4,
       ymin=-2.9,ymax=5.9,
-      xmin=-.9,xmax=15.9]
-      \addplot+[-,domain=0:10] {5};
-      \addplot [{\coloronefill},fill={\coloronefill},domain=0:10,area style] {5} \closedcycle;
-      \addplot [{\coloronefill},fill={\coloronefill},domain=10:14,area style] {-2} \closedcycle;
-      \addplot [thick, {\colorone},domain=10:14] {-2};
+      xmin=-.9,xmax=15.9
+      ]
+      \addplot [firstcurvestyle,areastyle,domain=0:10] {5} \closedcycle;
+      \addplot [firstcurvestyle,-,domain=0:10] {5};
+      \addplot [secondcurvestyle,areastyle,domain=10:14] {-2} \closedcycle;
+      \addplot [secondcurvestyle,-,domain=10:14] {-2};
       \end{axis}
       \end{tikzpicture}
       </latex-image>
@@ -130,7 +139,8 @@
     <title>Finding position using velocity</title>
     <statement>
       <p>
-        The velocity of an object moving straight up/down under the acceleration of gravity is given as <m>v(t) = -32t+48</m>,
+        The velocity of an object moving straight up/down under the acceleration
+        of gravity is given as <m>v(t) = -32t+48</m>,
         where time <m>t</m> is given in seconds and velocity is in
         <quantity><mag></mag><unit base="foot"/><per base="second"/></quantity>.
         When <m>t=0</m>, the object had a height of
@@ -205,7 +215,8 @@
       </p>
 
       <p>
-        (Notice how we ended up just finding when the velocity was 0ft/s!) The first derivative test shows this is a maximum,
+        (Notice how we ended up just finding when the velocity was 0ft/s!)
+        The first derivative test shows this is a maximum,
         so the maximum height of the object is found at
         <me>
           s(1.5) = -16(1.5)^2+48(1.5)=36\text{ ft }
@@ -218,7 +229,8 @@
           <mrow>s(2) \amp =-16(2)^2+48(2)</mrow>
           <mrow>\amp = 32</mrow>
         </md>.
-        The height is <quantity><mag>32</mag><unit base="foot"/></quantity> after <m>2</m> seconds.
+        The height is <quantity><mag>32</mag><unit base="foot"/></quantity>
+        after <m>2</m> seconds.
       </p>
 
       <p>
@@ -236,20 +248,23 @@
       </p>
 
       <figure xml:id="fig_defint3">
-        <caption>A graph of <m>v(t)=-32t+48</m>; the shaded areas help determine displacement.</caption>
+        <caption>A graph of <m>v(t)=-32t+48</m>; the shaded areas help
+        determine displacement.</caption>
         <image xml:id="img_defint3" width="47%">
           <description></description>
           <latex-image>
           \begin{tikzpicture}
-          \begin{axis}[axis on top,
+          \begin{axis}[
+          axis on top,
           ymin=-55,ymax=55,
           xmin=-.5,xmax=3.2,
           x label style={at={(axis description cs:0.85,0.3)},anchor=south},
           y label style={at={(axis description cs:0,.85)},rotate=90,anchor=south},
           xlabel={$t$ (s)},
-          ylabel={$y$ (ft/s)},]
-          \addplot+[-,domain=0:3] {-32*x+48};
-          \addplot [{\coloronefill},fill={\coloronefill},domain=0:3,area style] {-32*x+48} \closedcycle;
+          ylabel={$y$ (ft/s)},
+          ]
+          \addplot [firstcurvestyle,areastyle,domain=0:3] {-32*x+48} \closedcycle;
+          \addplot [firstcurvestyle,-,domain=0:3] {-32*x+48};
           \end{axis}
           \end{tikzpicture}
           </latex-image>
@@ -260,9 +275,12 @@
         Recall how in our previous work that the displacement of the object
         (in this case, its height)
         was found as the area under the velocity curve, as shaded in the figure.
-        Moreover, the area between the curve and the <m>t</m>-axis that is below the <m>t</m>-axis counted as <q>negative</q> area.
+        Moreover, the area between the curve and the <m>t</m>-axis that is
+        below the <m>t</m>-axis counted as <q>negative</q> area.
         That is, it represents the object coming back toward its starting position.
-        So to find the maximum distance from the starting point <mdash/> the maximum height <mdash/> we find the area under the velocity line that is above the <m>t</m>-axis,
+        So to find the maximum distance from the starting point <mdash/> the
+        maximum height <mdash/> we find the area under the velocity line that
+        is above the <m>t</m>-axis,
         i.e., from <m>t=0</m> to <m>t=1.5</m>.
         This region is a triangle; its area is
         <md>
@@ -274,16 +292,19 @@
       </p>
 
       <p>
-        Finally, to find the height of the object at time <m>t=2</m> we calculate the total <q>signed area</q>
+        Finally, to find the height of the object at time <m>t=2</m> we
+        calculate the total <q>signed area</q>
         (where some area is negative)
         under the velocity function from <m>t=0</m> to <m>t=2</m>.
         This signed area is equal to <m>s(2)</m>,
-        the displacement (i.e., signed distance) from the starting position at <m>t=0</m> to the position at time <m>t=2</m>.
+        the displacement (i.e., signed distance) from the starting position at
+        <m>t=0</m> to the position at time <m>t=2</m>.
         That is,
       </p>
 
       <p>
-        Displacement = Area above the <m>t</m>-axis <m>-</m> Area below <m>t</m>-axis.
+        Displacement = Area above the <m>t</m>-axis <m>-</m> Area below
+        <m>t</m>-axis.
       </p>
 
       <p>
@@ -300,9 +321,11 @@
 
       <p>
         Notice how we answered each question in this example in two ways.
-        Our first method was to manipulate equations using our understanding of antiderivatives and derivatives.
+        Our first method was to manipulate equations using our understanding of
+        antiderivatives and derivatives.
         Our second method was geometric:
-        we answered questions looking at a graph and finding the areas of certain regions of this graph.
+        we answered questions looking at a graph and finding the areas of
+        certain regions of this graph.
       </p>
     </solution>
   </example>
@@ -312,12 +335,14 @@
     a relationship between area under a velocity function and displacement,
     but it does imply a relationship exists.
     <xref ref="sec_FTC">Section</xref>
-    will fully establish fact that the area under a velocity function is displacement.
+    will fully establish fact that the area under a velocity function is
+    displacement.
   </p>
 
   <p>
     Given a graph of a function <m>y=f(x)</m>,
-    we will find that there is great use in computing the area between the curve <m>y=f(x)</m> and the <m>x</m>-axis.
+    we will find that there is great use in computing the area between the
+    curve <m>y=f(x)</m> and the <m>x</m>-axis.
     Because of this, we need to define some terms.
   </p>
 
@@ -326,7 +351,8 @@
     <statement>
       <p>
         Let <m>y=f(x)</m> be defined on a closed interval <m>[a,b]</m>.
-        The <term>total signed area from <m>x=a</m> to <m>x=b</m> under <m>f</m></term> is:
+        The <term>total signed area from <m>x=a</m> to <m>x=b</m> under
+        <m>f</m></term> is:
             <idx><h>integration</h><h>definite</h></idx>
             <idx><h>definite integral</h></idx>
             <idx><h>signed area</h></idx>
@@ -368,7 +394,8 @@
     We have now defined the definite integral,
     which relates to areas under a function.
     The two are very much related,
-    as we'll see when we learn the Fundamental Theorem of Calculus in <xref ref="sec_FTC">Section</xref>.
+    as we'll see when we learn the Fundamental Theorem of Calculus in
+    <xref ref="sec_FTC">Section</xref>.
     Recall that earlier we said that the
     <q><m>\int</m></q> symbol was an <q>elongated S</q>
     that represented finding a <q>sum.</q>
@@ -394,11 +421,13 @@
           <description></description>
           <latex-image>
           \begin{tikzpicture}
-          \begin{axis}[axis on top,
-          ymin=-1.1,ymax=1.1,%
-          xmin=-.5,xmax=5.5]
-          \addplot [-] coordinates {(0,0) (1,1) (5,-1)};
-          \addplot [{\coloronefill},fill={\coloronefill},area style] coordinates {(0,0) (1,1) (5,-1)} \closedcycle;
+          \begin{axis}[
+          axis on top,
+          ymin=-1.1,ymax=1.1,
+          xmin=-.5,xmax=5.5
+          ]
+          \addplot [firstcurvestyle,areastyle] coordinates {(0,0) (1,1) (5,-1)} \closedcycle;
+          \addplot [firstcurvestyle,-] coordinates {(0,0) (1,1) (5,-1)};
           \end{axis}
           \end{tikzpicture}
           </latex-image>
@@ -448,7 +477,8 @@
         <ol>
           <li>
             <p>
-              <m>\int_0^3 f(x)\ dx</m> is the area under <m>f</m> on the interval <m>[0,3]</m>.
+              <m>\int_0^3 f(x)\ dx</m> is the area under <m>f</m> on the
+              interval <m>[0,3]</m>.
               This region is a triangle,
               so the area is <m>\int_0^3 f(x)\ dx=\frac12(3)(1) = 1.5</m>.
             </p>
@@ -456,7 +486,8 @@
 
           <li>
             <p>
-              <m>\int_3^5 f(x)\ dx</m> represents the area of the triangle found under the <m>x</m>-axis on <m>[3,5]</m>.
+              <m>\int_3^5 f(x)\ dx</m> represents the area of the triangle
+              found under the <m>x</m>-axis on <m>[3,5]</m>.
               The area is <m>\frac12(2)(1) = 1</m>;
               since it is found <em>under</em>
               the <m>x</m>-axis,
@@ -466,7 +497,8 @@
 
           <li>
             <p>
-              <m>\int_0^5f(x)\ dx</m> is the total signed area under <m>f</m> on <m>[0,5]</m>.
+              <m>\int_0^5f(x)\ dx</m> is the total signed area under <m>f</m>
+              on <m>[0,5]</m>.
               This is <m>1.5 + (-1) = 0.5</m>.
             </p>
           </li>
@@ -493,18 +525,21 @@
         </ol>
       </p>
       <figure xml:id="fig_defint4a">
-      <caption>A graph of <m>5f</m> in <xref ref="ex_defint4">Example</xref>. (Yes, it looks just like the graph of <m>f</m> in <xref ref="fig_defint4">Figure</xref>, just with a different <m>y</m>-scale.)</caption>
+      <caption>A graph of <m>5f</m> in <xref ref="ex_defint4">Example</xref>.
+      (Yes, it looks just like the graph of <m>f</m> in <xref ref="fig_defint4">Figure</xref>, just with a different <m>y</m>-scale.)</caption>
       <image xml:id="img_defint4a" width="47%">
         <description></description>
         <latex-image>
-        \begin{tikzpicture}
-        \begin{axis}[axis on top,
-        ymin=-5.5,ymax=5.5,
-        xmin=-.5,xmax=5.5]
-        \addplot+[-] coordinates {(0,0) (1,5) (5,-5)};
-        \addplot [{\coloronefill},fill={\coloronefill},area style] coordinates {(0,0) (1,5) (5,-5)} \closedcycle;
-        \end{axis}
-        \end{tikzpicture}
+                \begin{tikzpicture}
+                \begin{axis}[
+                axis on top,
+                ymin=-5.5,ymax=5.5,
+                xmin=-.5,xmax=5.5
+                ]
+                \addplot [firstcurvestyle,areastyle] coordinates {(0,0) (1,5) (5,-5)} \closedcycle;
+                \addplot [firstcurvestyle,-] coordinates {(0,0) (1,5) (5,-5)};
+                \end{axis}
+                \end{tikzpicture}
         </latex-image>
       </image>
     </figure>
@@ -520,7 +555,8 @@
     <title>Properties of the Definite Integral</title>
     <statement>
       <p>
-        Let <m>f</m> and <m>g</m> be defined on a closed interval <m>I</m> that contains the values <m>a</m>,
+        Let <m>f</m> and <m>g</m> be defined on a closed interval <m>I</m> that
+        contains the values <m>a</m>,
         <m>b</m> and <m>c</m>, and let <m>k</m> be a constant.
         The following hold:
         <idx>
@@ -589,15 +625,18 @@
           It is easily considered when we let <m>a\lt b\lt c</m>.
           We can break the interval <m>[a,c]</m> into two subintervals,
           <m>[a,b]</m> and <m>[b,c]</m>.
-          The total area over <m>[a,c]</m> is the area over <m>[a,b]</m> plus the area over <m>[b,c]</m>.
-          It is important to note that this still holds true even if <m>a\lt b\lt c</m> is not true.
+          The total area over <m>[a,c]</m> is the area over <m>[a,b]</m> plus
+          the area over <m>[b,c]</m>.
+          It is important to note that this still holds true even if
+          <m>a\lt b\lt c</m> is not true.
           We discuss this in the next point.
         </p>
       </li>
 
       <li><title>3.</title>
         <p>
-          This property can be viewed a merely a convention to make other properties work well.
+          This property can be viewed a merely a convention to make other
+          properties work well.
           (Later we will see how this property has a justification all its own,
           not necessarily in support of other properties.)
           Suppose <m>b\lt a\lt c</m>.
@@ -609,18 +648,23 @@
           <men xml:id="eq_defint2">
             \int_a^b f(x)\ dx + \int_b^c f(x)\ dx = \int_a^c f(x)\ dx
           </men>.
-          How do Equations <xref ref="eq_defint1"/> and <xref ref="eq_defint2"/> relate?
+          How do Equations <xref ref="eq_defint1"/> and <xref ref="eq_defint2"/>
+          relate?
           Start with Equation <xref ref="eq_defint1"/>:
           <md>
             <mrow>\int_b^a f(x)\ dx + \int_a^c f(x)\ dx \amp = \int_b^c f(x)\ dx</mrow>
             <mrow>\int_a^c f(x)\ dx \amp = -\int_b^a f(x)\ dx + \int_b^c f(x)\ dx</mrow>
           </md>
-          Property <m>(3)</m> justifies changing the sign and switching the bounds of integration on the <m>\ds -\int_b^a f(x)\ dx</m> term;
-          when this is done, Equations <xref ref="eq_defint1"/> and <xref ref="eq_defint2"/> are equivalent.
+          Property <m>(3)</m> justifies changing the sign and switching the
+          bounds of integration on the <m>\ds -\int_b^a f(x)\ dx</m> term;
+          when this is done, Equations <xref ref="eq_defint1"/> and
+          <xref ref="eq_defint2"/> are equivalent.
           The conclusion is this:
-          by adopting the convention of Property (3), Property (2) holds no matter the order of <m>a</m>,
+          by adopting the convention of Property (3), Property (2) holds no
+          matter the order of <m>a</m>,
           <m>b</m> and <m>c</m>.
-          Again, in the next section we will see another justification for this property.
+          Again, in the next section we will see another justification for this
+          property.
         </p>
       </li>
 
@@ -629,7 +673,8 @@
         <p>
           Each of these may be non<ndash/>intuitive.
           Property (5) states that when one scales a function by,
-          for instance, 7, the area of the enclosed region also is scaled by a factor of 7.
+          for instance, 7, the area of the enclosed region also is scaled by a
+          factor of 7.
           Both Properties (4) and (5) can be proved using geometry.
           The details are not complicated but are not discussed here.
         </p>
@@ -641,7 +686,8 @@
     <title>Evaluating definite integrals using <xref ref="thm_defintprop">Theorem</xref>.</title>
     <statement>
       <p>
-        Consider the graph of a function <m>f(x)</m> shown in <xref ref="fig_defint5">Figure</xref>.
+        Consider the graph of a function <m>f(x)</m> shown in
+        <xref ref="fig_defint5">Figure</xref>.
       </p>
 
       <figure xml:id="fig_defint5">
@@ -650,15 +696,17 @@
           <description></description>
           <latex-image>
           \begin{tikzpicture}
-          \begin{axis}[axis on top,
+          \begin{axis}[
+          axis on top,
           xtick=\empty,
           extra x ticks={.5,1.5,3},
           extra x tick labels={$a$,$b$,$\ c$},
           ytick=\empty,
           ymin=-1.1,ymax=1.1,
-          xmin=-.2,xmax=3.5]
-          \addplot+[-,domain=0.5:3,samples=50] {(x-.5)*(x-1.5)*(x-3)};
-          \addplot[smooth,{\coloronefill},fill={\coloronefill},area style,domain=0.5:3] {(x-.5)*(x-1.5)*(x-3)} \closedcycle;
+          xmin=-.2,xmax=3.5
+          ]
+          \addplot [firstcurvestyle,areastyle,domain=0.5:3] {(x-.5)*(x-1.5)*(x-3)} \closedcycle;
+          \addplot [firstcurvestyle,-,domain=0.5:3,samples=40] {(x-.5)*(x-1.5)*(x-3)};
           \end{axis}
           \end{tikzpicture}
           </latex-image>
@@ -707,8 +755,10 @@
 
           <li>
             <p>
-              <m>\int_a^c f(x)\ dx</m> is the total signed area under <m>f</m> between <m>x=a</m> and <m>x=c</m>.
-              Since the region below the <m>x</m>-axis looks to be larger than the region above,
+              <m>\int_a^c f(x)\ dx</m> is the total signed area under <m>f</m>
+              between <m>x=a</m> and <m>x=c</m>.
+              Since the region below the <m>x</m>-axis looks to be larger than
+              the region above,
               we conclude that the definite integral has a value less than 0.
             </p>
           </li>
@@ -716,7 +766,8 @@
           <li>
             <p>
               Note how the second integral has the bounds <q>reversed.</q>
-              Therefore <m>\int_c^b f(x)\ dx=-\int_b^c f(x)\ dx</m> represents a positive number,
+              Therefore <m>\int_c^b f(x)\ dx=-\int_b^c f(x)\ dx</m> represents
+              a positive number,
               greater than the area described by the first definite integral.
               Hence <m>\int_c^b f(x)\ dx</m> is greater.
             </p>
@@ -727,7 +778,8 @@
   </example>
 
   <p>
-    The area definition of the definite integral allows us to use geometry to compute the definite integral of some simple functions.
+    The area definition of the definite integral allows us to use geometry to
+    compute the definite integral of some simple functions.
   </p>
 
   <example xml:id="ex_defint8">
@@ -765,7 +817,8 @@
 
           <li>
             <p>
-              Recognize that the integrand of this definite integral describes a half circle,
+              Recognize that the integrand of this definite integral describes
+              a half circle,
               as sketched in <xref ref="fig_defint8b">Figure</xref>,
               with radius 3.
               Thus the area is:
@@ -776,48 +829,51 @@
           </li>
         </ol>
       </p>
-      <sidebyside widths="47% 47%">
-        <figure xml:id="fig_defint8a">
-          <caption><m>f(x) = 2x-4</m></caption>
-          <image xml:id="img_defint8a">
-            <description></description>
-            <latex-image>
-            \begin{tikzpicture}
-            \begin{axis}[axis on top,
-            ymin=-11,ymax=11,%
-            xmin=-3.5,xmax=5.5]
-            \addplot+[-,domain=-2:5] {2*x-4};
-            \addplot [{\coloronefill},fill={\coloronefill},area style,domain=-2:5] {2*x-4} \closedcycle;
-            \addplot[soliddot] coordinates{(-2,-8)} node[right]{\small $(-2,-8)$};
-            \addplot[soliddot] coordinates{(5,6)} node[left]{\small $(5,6)$};
-            \draw (axis cs:-1,-2) node {\scriptsize $R_1$};
-            \draw (axis cs:4.2,2) node {\scriptsize $R_2$};
-            \end{axis}
-            \end{tikzpicture}
-            </latex-image>
-          </image>
-        </figure>
-        <figure xml:id="fig_defint8b">
-          <caption><m>f(x) = \sqrt{9-x^2}</m></caption>
-          <image xml:id="img_defint8b">
-            <description></description>
-            <latex-image>
-            \begin{tikzpicture}
-            \begin{axis}[axis on top,
-            xtick={-3,3},
-            extra y ticks={1,2,3,4},
-            extra y tick labels=\empty,
-            ytick={5},
-            ymin=-.5,ymax=5.5,
-            xmin=-3.5,xmax=3.5]
-            \addplot+[-,domain=0:180,samples=50] ({3*cos (x)},{3*sin(x)});
-            \addplot [smooth,{\coloronefill},fill={\coloronefill},area style,domain=0:180] ({3*cos (x)},{3*sin(x)}) \closedcycle;
-            \end{axis}
-            \end{tikzpicture}
-            </latex-image>
-          </image>
-        </figure>
-      </sidebyside>
+            <sidebyside widths="47% 47%">
+              <figure xml:id="fig_defint8a">
+                <caption><m>f(x) = 2x-4</m></caption>
+                <image xml:id="img_defint8a">
+                  <description></description>
+                  <latex-image>
+                  \begin{tikzpicture}
+                  \begin{axis}[
+                  axis on top,
+                  ymin=-11,ymax=11,
+                  xmin=-3.5,xmax=5.5
+                  ]
+                  \addplot [firstcurvestyle,areastyle,domain=-2:5] {2*x-4} \closedcycle;
+                  \addplot [firstcurvestyle,-,domain=-2:5] {2*x-4};
+                  \addplot [soliddot] coordinates {(-2,-8)} node[right] {\small $(-2,-8)$};
+                  \addplot [soliddot] coordinates {(5,6)} node[left] {\small $(5,6)$};
+                  \draw (axis cs:-1,-2) node {\scriptsize $R_1$};
+                  \draw (axis cs:4.2,2) node {\scriptsize $R_2$};
+                  \end{axis}
+                  \end{tikzpicture}
+                  </latex-image>
+                </image>
+              </figure>
+              <figure xml:id="fig_defint8b">
+                <caption><m>f(x) = \sqrt{9-x^2}</m></caption>
+                <image xml:id="img_defint8b">
+                  <description></description>
+                  <latex-image>
+                  \begin{tikzpicture}
+                  \begin{axis}[
+                  axis on top,
+                  xtick={-3,3},
+                  extra y ticks={1,2,3,4},
+                  extra y tick labels=\empty,
+                  ytick={5},
+                  ymin=-.5,ymax=5.5,
+                  xmin=-3.5,xmax=3.5]
+                  \addplot [firstcurvestyle,areastyle,domain=0:180] ({3*cos (x)},{3*sin(x)}) \closedcycle;
+                  \addplot [firstcurvestyle,-,domain=0:180,samples=40] ({3*cos (x)},{3*sin(x)});
+                  \end{axis}
+                  \end{tikzpicture}
+                  </latex-image>
+                </image>
+              </figure>
+            </sidebyside>
     </solution>
   </example>
 
@@ -825,11 +881,13 @@
     <title>Understanding motion given velocity</title>
     <statement>
       <p>
-        Consider the graph of a velocity function of an object moving in a straight line,
+        Consider the graph of a velocity function of an object moving in a
+        straight line,
         given in <xref ref="fig_defint6">Figure</xref>,
         where the numbers in the given regions gives the area of that region.
         Assume that the definite integral of a velocity function gives displacement.
-        Find the maximum speed of the object and its maximum displacement from its starting position.
+        Find the maximum speed of the object and its maximum displacement from
+        its starting position.
       </p>
 
       <figure xml:id="fig_defint6">
@@ -838,7 +896,8 @@
           <description></description>
           <latex-image>
           \begin{tikzpicture}
-          \begin{axis}[axis on top,
+          \begin{axis}[
+          axis on top,
           x label style={at={(axis description cs:0.85,0.35)},anchor=south},
           y label style={at={(axis description cs:-.05,.85)},rotate=90,anchor=south},
           xlabel={$t$ (s)},
@@ -848,9 +907,10 @@
           extra x tick labels={$\ a$,$b\ $,$\ c$},
           ytick={-5,5,10,15},
           ymin=-9,ymax=17,
-          xmin=-.5,xmax=8.5]
-          \addplot+[-,domain=0:8, samples=50] {15/64*x*(x-2)*(x-6)*(x-8)};
-          \addplot [smooth,{\coloronefill},fill={\coloronefill},area style,domain=0:8] {15/64*x*(x-2)*(x-6)*(x-8)} \closedcycle;
+          xmin=-.5,xmax=8.5
+          ]
+          \addplot [firstcurvestyle,areastyle,domain=0:8,samples=40] {15/64*x*(x-2)*(x-6)*(x-8)} \closedcycle;
+          \addplot [firstcurvestyle,-,domain=0:8,samples=70] {15/64*x*(x-2)*(x-6)*(x-8)};
           \draw (axis cs:.9,-4) node {\scriptsize $11$};
           \draw (axis cs:7.1,-4) node {\scriptsize $11$};
           \draw (axis cs:4,8) node {\scriptsize $38$};
@@ -893,17 +953,20 @@
   </p>
 
   <figure xml:id="fig_defint7">
-    <caption>What is the area below <m>y=x^2</m> on <m>[0,3]</m>? The region is not a usual geometric shape.</caption>
+    <caption>What is the area below <m>y=x^2</m> on <m>[0,3]</m>? The region is
+    not a usual geometric shape.</caption>
     <image xml:id="img_defint7" width="47%">
       <description></description>
       <latex-image>
       \begin{tikzpicture}
-      \begin{axis}[axis on top,
+      \begin{axis}[
+      axis on top,
       xtick={1,2,3},
       ymin=-1,ymax=11,
-      xmin=-1,xmax=3.5]
-      \addplot+[-,domain=0:3] {x^2};
-      \addplot [{\coloronefill},fill={\coloronefill},area style,domain=0:3] {x^2} \closedcycle;
+      xmin=-1,xmax=3.5
+      ]
+      \addplot [firstcurvestyle,areastyle,domain=0:3] {x^2} \closedcycle;
+      \addplot [firstcurvestyle,-,domain=0:3] {x^2};
       \end{axis}
       \end{tikzpicture}
       </latex-image>
@@ -978,11 +1041,18 @@
 
             <pg-code>
 <!-- FUNGUS: Come back to this when I figure out how to enter a definite integral as a solution -->
+              Context("Numeric")->flags->set(
+              formatStudentAnswer => parsed,
+              reduceConstants => 0,
+              reduceConstantFunctions => 0,);
+              <!-- Context()->variables->add(x => "Real"); -->
+              <!-- Context()->variables->set(t => {limits => [0,2]}); -->
+
+              Parser::Number::NoDecimals;
+
               $a = Formula("0");
               $b = Formula("2");
-              Context()->variables->add(dx=>"Real");
               $f = Formula("2x+3");
-              $A = Formula("$f dx");
             </pg-code>
             </setup>
             <statement>
@@ -991,11 +1061,21 @@
               </p>
 
               <p>
-                <m>\ds \int_0^1(2x+3)\ dx + \int_1^2 (2x+3)\ dx</m>.
+                <m>\ds I = \int_0^1(2x+3)\ dx + \int_1^2 (2x+3)\ dx</m>.
               </p>
 
               <p>
-                $integral
+                <m>I = \int_a^b f(x)\ dx</m>, where:
+              </p>
+
+              <p>
+                <m>a=</m><var name="$a" width="5"/>
+              </p>
+              <p>
+                <m>b=</m><var name="$b" width="5"/>
+              </p>
+              <p>
+                <m>f(x)=</m><var name="$f" width="15"/>
               </p>
             </statement>
             <solution>
@@ -1037,21 +1117,13 @@
                   <latex-image>
 
                   \begin{tikzpicture}
-                  \begin{axis}[%
-                  axis on top,%
-                  %x=.37\marginparwidth,
-                  %y=.37\marginparwidth,
-                  %			xtick={1,2,3,4},%
-                  %			extra x ticks={.33},
-                  %			extra x tick labels={$1/3$},
-                  %			ytick={5},
-                  %%extra y ticks={-5,-3,...,7},%
-                  ymin=-4.5,ymax=4.5,%
-                  xmin=-.9,xmax=4.5%
+
+                  \begin{axis}[
+                  ymin=-4.5,ymax=4.5,
+                  xmin=-.9,xmax=4.5
                   ]
 
-                  %\addplot [{\coloronefill},fill={\coloronefill},domain=0:10,area style] {5} |- (axis cs:0,0) --cycle;
-                  \addplot [thick, {\colorone},domain=0:4] {-2*x+4};
+                  \addplot+ [-,domain=0:4] {-2*x+4};
 
                   \draw (axis cs:2,2.5) node {\scriptsize $y = -2x+4$};
 
@@ -1123,23 +1195,16 @@
                 <latex-image>
 
                 \begin{tikzpicture}
-                \begin{axis}[%
-                axis on top,%
-                %x=.37\marginparwidth,
-                %y=.37\marginparwidth,
-                xtick={1,2,3,4,5},%
-                %			extra x ticks={.33},
-                %			extra x tick labels={$1/3$},
-                %			ytick={5},
-                %%extra y ticks={-5,-3,...,7},%
-                ymin=-2.2,ymax=2.2,%
-                xmin=-.9,xmax=5.5%
+
+                \begin{axis}[
+                xtick={1,2,3,4,5},
+                ymin=-2.2,ymax=2.2,
+                xmin=-.9,xmax=5.5
                 ]
 
-                %\addplot [{\coloronefill},fill={\coloronefill},domain=0:10,area style] {5} |- (axis cs:0,0) --cycle;
-                \addplot [thick, {\colorone},domain=0:2] {-2};
-                \addplot [thick, {\colorone},domain=2:3] {2*x-6};
-                \addplot [thick, {\colorone},domain=3:5] {x-3};
+                \addplot+ [-,domain=0:2] {-2};
+                \addplot [firstcurvestyle,-,domain=2:3] {2*x-6};
+                \addplot [firstcurvestyle,-,domain=3:5] {x-3};
 
                 \draw (axis cs:3.2,-1.5) node {\scriptsize $y = f(x)$};
 
@@ -1211,24 +1276,17 @@
                 <latex-image>
 
                 \begin{tikzpicture}
-                \begin{axis}[%
-                axis on top,%
-                %x=.37\marginparwidth,
-                %y=.37\marginparwidth,
-                xtick={1,2,3,4,5},%
-                %			extra x ticks={.33},
-                %			extra x tick labels={$1/3$},
-                %			ytick={5},
-                %%extra y ticks={-5,-3,...,7},%
-                ymin=-.5,ymax=4.5,%
-                xmin=-.9,xmax=4.5%
+
+                \begin{axis}[
+                xtick={1,2,3,4,5},
+                ymin=-.5,ymax=4.5,
+                xmin=-.9,xmax=4.5
                 ]
 
-                %\addplot [{\coloronefill},fill={\coloronefill},domain=0:10,area style] {5} |- (axis cs:0,0) --cycle;
-                \addplot [thick, {\colorone},domain=0:1] {4*x};
-                \addplot [thick, {\colorone},domain=1:2] {-4*(x-2)};
-                \addplot [thick, {\colorone},domain=2:3] {2*(x-2)};
-                \addplot [thick, {\colorone},domain=3:4] {-2*(x-4)};
+                \addplot+ [-,domain=0:1] {4*x};
+                \addplot [firstcurvestyle,-,domain=1:2] {-4*(x-2)};
+                \addplot [firstcurvestyle,-,domain=2:3] {2*(x-2)};
+                \addplot [firstcurvestyle,-,domain=3:4] {-2*(x-4)};
 
                 \draw (axis cs:3,2.5) node {\scriptsize $y = f(x)$};
 
@@ -1301,21 +1359,15 @@
                 <latex-image>
 
                 \begin{tikzpicture}
-                \begin{axis}[%
-                axis on top,%
-                %x=.37\marginparwidth,
-                %y=.37\marginparwidth,
-                xtick={1,2,3,4,5},%
-                %			extra x ticks={.33},
-                %			extra x tick labels={$1/3$},
+
+                \begin{axis}[
+                xtick={1,2,3,4,5},
                 ytick={-1,1,2,3},
-                %%extra y ticks={-5,-3,...,7},%
-                ymin=-1.5,ymax=3.5,%
-                xmin=-.9,xmax=4.5%
+                ymin=-1.5,ymax=3.5,
+                xmin=-.9,xmax=4.5
                 ]
 
-                %\addplot [{\coloronefill},fill={\coloronefill},domain=0:10,area style] {5} |- (axis cs:0,0) --cycle;
-                \addplot [thick, {\colorone},domain=0:4] {x-1};
+                \addplot+ [-,domain=0:4] {x-1};
 
                 \draw (axis cs:2,2.5) node {\scriptsize $y = x-1$};
 
@@ -1386,21 +1438,15 @@
                 <latex-image>
 
                 \begin{tikzpicture}
-                \begin{axis}[%
-                axis on top,%
-                %x=.37\marginparwidth,
-                %y=.37\marginparwidth,
-                xtick={1,2,3,4},%
-                %			extra x ticks={.33},
-                %			extra x tick labels={$1/3$},
+
+                \begin{axis}[
+                xtick={1,2,3,4},
                 ytick={1,2,3},
-                %%extra y ticks={-5,-3,...,7},%
-                ymin=-.5,ymax=3.5,%
-                xmin=-.9,xmax=4.5%
+                ymin=-.5,ymax=3.5,
+                xmin=-.9,xmax=4.5
                 ]
 
-                %\addplot [{\coloronefill},fill={\coloronefill},domain=0:10,area style] {5} |- (axis cs:0,0) --cycle;
-                \addplot [thick, {\colorone},smooth,samples=40,domain=0:3.14159] ({2*cos(deg(x))+2}, {2*sin(deg(x))});
+                \addplot+ [-,samples=40,domain=0:3.14159] ({2*cos(deg(x))+2}, {2*sin(deg(x))});
 
                 \draw (axis cs:3,2.4) node {\scriptsize $f(x) = \sqrt{4-(x-2)^2}$};
 
@@ -1450,12 +1496,14 @@
           <image>
             <latex-image>
               \begin{tikzpicture}
-                \begin{axis}[axis y line=middle,
+                \begin{axis}[
+                  axis y line=middle,
                   axis x line=middle,
-                  name=myplot,axis on top,%
-            			ytick={1,2,3},
-            			ymin=-.5,ymax=3.5,%
-			            xmin=-1,xmax=10.9%
+                  name=myplot,
+                  axis on top,%
+                  ytick={1,2,3},
+                  ymin=-.5,ymax=3.5,%
+		  xmin=-1,xmax=10.9%
                   ]
 
                   \addplot+[domain=0:10] ({x}, {3});
@@ -1554,21 +1602,16 @@
                 <latex-image>
 
                 \begin{tikzpicture}
-                \begin{axis}[%
-                axis on top,%
-                %x=.37\marginparwidth,
-                %y=.37\marginparwidth,
-                xtick={1,2,3},%
-                %			extra x ticks={.33},
-                %			extra x tick labels={$1/3$},
-                %			ytick={1,2,3},
-                %%extra y ticks={-5,-3,...,7},%
-                ymin=-105,ymax=55,%
-                xmin=-.9,xmax=3.5%
+
+                \begin{axis}[
+                axis on top,
+                xtick={1,2,3},
+                ymin=-105,ymax=55,
+                xmin=-.9,xmax=3.5
                 ]
 
-                \addplot [{\coloronefill},fill={\coloronefill},domain=0:3,area style,smooth] {60*x*(1-x)*(x-2)*(x-2)*(x-3)} |- (axis cs:0,0) --cycle;
-                \addplot [thick, {\colorone},smooth,samples=40,domain=0:3] {60*x*(1-x)*(x-2)*(x-2)*(x-3)};
+                \addplot [firstcurvestyle,areastyle,domain=0:3,samples=40] {60*x*(1-x)*(x-2)*(x-2)*(x-3)} \closedcycle;
+                \addplot [firstcurvestyle,-,domain=0:3,samples=90] {60*x*(1-x)*(x-2)*(x-2)*(x-3)};
 
                 \draw (axis cs:1.5,30) node {\scriptsize $y=f(x)$};
                 \draw (axis cs:.45,-10) node {\scriptsize $59$};
@@ -1630,26 +1673,20 @@
                 <latex-image>
 
                 \begin{tikzpicture}
-                \begin{axis}[%
-                axis on top,%
-                %x=.37\marginparwidth,
-                %y=.37\marginparwidth,
-                xtick={1,2,3,4},%
-                %			extra x ticks={.33},
-                %			extra x tick labels={$1/3$},
-                %			ytick={1,2,3},
-                %%extra y ticks={-5,-3,...,7},%
-                ymin=-1.5,ymax=1.5,%
-                xmin=-.9,xmax=4.5%
+
+                \begin{axis}[
+                axis on top,
+                xtick={1,2,3,4},
+                ymin=-1.5,ymax=1.5,
+                xmin=-.9,xmax=4.5
                 ]
 
-                \addplot [{\coloronefill},fill={\coloronefill},domain=0:4,area style,smooth] {sin(deg(3.14159*x/2))} |- (axis cs:0,0) --cycle;
-                \addplot [thick, {\colorone},smooth,samples=40,domain=0:4] {sin(deg(3.14159*x/2))};
+                \addplot [firstcurvestyle,areastyle,domain=0:4] {sin(deg(3.14159*x/2))} \closedcycle;
+                \addplot [firstcurvestyle,-,domain=0:4,samples=50] {sin(deg(3.14159*x/2))};
 
                 \draw (axis cs:3,0.75) node {\scriptsize $f(x)=\sin(\pi x/2)$};
                 \draw (axis cs:1,.6) node {\scriptsize $4/\pi$};
                 \draw (axis cs:3,-.6) node {\scriptsize $4/\pi$};
-                %\draw (axis cs:2.6,10) node {\scriptsize $21$};
 
                 \end{axis}
 
@@ -1706,23 +1743,17 @@
                 <latex-image>
 
                 \begin{tikzpicture}
-                \begin{axis}[%
-                axis on top,%
-                %x=.37\marginparwidth,
-                %y=.37\marginparwidth,
-                xtick={-2,-1,1,2},%
-                %			extra x ticks={.33},
-                %			extra x tick labels={$1/3$},
-                %			ytick={1,2,3},
-                %%extra y ticks={-5,-3,...,7},%
-                ymin=-5.5,ymax=11,%
-                xmin=-2.5,xmax=2.5%
+
+                \begin{axis}[
+                axis on top,
+                xtick={-2,-1,1,2},
+                ymin=-5.5,ymax=11,
+                xmin=-2.5,xmax=2.5
                 ]
 
-                \addplot [{\coloronefill},fill={\coloronefill},domain=-2:2,area style] {3*x^2-3} |- (axis cs:-2,0) --cycle;
-                \addplot [thick, {\colorone},smooth,samples=40,domain=-2:2] {3*x^2-3};
+                \addplot [firstcurvestyle,areastyle,domain=-2:2] {3*x^2-3} \closedcycle;
+                \addplot [firstcurvestyle,-,domain=-2:2,samples=40] {3*x^2-3};
 
-                %\draw (axis cs:-.9,8) node {\scriptsize $f(x)=3x^2-3$};
                 \draw (axis cs:1.5,10) node {\scriptsize $f(x)=3x^2-3$};
                 \draw (axis cs:-1.5,1) node {\scriptsize $4$};
                 \draw (axis cs:1.5,1) node {\scriptsize $4$};
@@ -1783,28 +1814,22 @@
                 <latex-image>
 
                 \begin{tikzpicture}
-                \begin{axis}[%
-                axis on top,%
-                %x=.37\marginparwidth,
-                %y=.37\marginparwidth,
-                xtick={1,2},%
-                %			extra x ticks={.33},
-                %			extra x tick labels={$1/3$},
-                %			ytick={1,2,3},
-                %%extra y ticks={-5,-3,...,7},%
-                ymin=-.1,ymax=4.2,%
-                xmin=-.2,xmax=2.1%
+
+                \begin{axis}[
+                axis on top,
+                xtick={1,2},
+                ymin=-.1,ymax=4.2,
+                xmin=-.2,xmax=2.1
                 ]
 
-                \addplot [{\coloronefill},fill={\coloronefill},domain=0:2,area style] {x^2} |- (axis cs:0,0) --cycle;
-                \addplot [thick, {\colorone},smooth,samples=40,domain=0:2] {x^2};
+                \addplot [firstcurvestyle,areastyle,domain=0:2] {x^2} \closedcycle;
+                \addplot [firstcurvestyle,-,domain=0:2] {x^2};
 
-                \draw [thick,{\colorone},dashed] (axis cs:1,0) -- (axis cs:1,1);
+                \draw [thick,firstcolor,dashed] (axis cs:1,0) -- (axis cs:1,1);
 
                 \draw (axis cs:1,3) node {\scriptsize $f(x)=x^2$};
                 \draw (axis cs:.7,.2) node {\scriptsize $1/3$};
                 \draw (axis cs:1.5,.2) node {\scriptsize $7/3$};
-                %\draw (axis cs:.3,-1) node {\scriptsize $-4$};
 
                 \end{axis}
 
@@ -1874,21 +1899,14 @@
                 <latex-image>
 
                 \begin{tikzpicture}
-                \begin{axis}[%
-                axis on top,%
-                %x=.37\marginparwidth,
-                %y=.37\marginparwidth,
-                xtick={1,2,3},%
-                %			extra x ticks={.33},
-                %			extra x tick labels={$1/3$},
-                %			ytick={1,2,3},
-                %%extra y ticks={-5,-3,...,7},%
-                ymin=-1.1,ymax=2.2,%
-                xmin=-.2,xmax=3.1%
+
+                \begin{axis}[
+                xtick={1,2,3},
+                ymin=-1.1,ymax=2.2,
+                xmin=-.2,xmax=3.1
                 ]
 
-                %\addplot [{\coloronefill},fill={\coloronefill},domain=0:2,area style] {x^2} |- (axis cs:0,0) --cycle;
-                \addplot [thick, {\colorone},domain=0:3] {-x+2};
+                \addplot+ [-,domain=0:3] {-x+2};
 
                 \end{axis}
 
@@ -1955,24 +1973,18 @@
                 <latex-image>
 
                 \begin{tikzpicture}
-                \begin{axis}[%
-                axis on top,%
-                %x=.37\marginparwidth,
-                %y=.37\marginparwidth,
-                xtick={1,2,3,4,5},%
-                %			extra x ticks={.33},
-                %			extra x tick labels={$1/3$},
-                %			ytick={1,2,3},
-                %%extra y ticks={-5,-3,...,7},%
-                ymin=-.5,ymax=3.2,%
-                xmin=-.2,xmax=5.3%
+
+                \begin{axis}[
+                axis on top,
+                xtick={1,2,3,4,5},
+                ymin=-.5,ymax=3.2,
+                xmin=-.2,xmax=5.3
                 ]
 
-                %\addplot [{\coloronefill},fill={\coloronefill},domain=0:2,area style] {x^2} |- (axis cs:0,0) --cycle;
-                \addplot [thick, {\colorone},domain=0:1] {3};
-                \addplot [thick, {\colorone},domain=1:2] {-3*(x-2)};
-                \addplot [thick, {\colorone},domain=2:3] {2*(x-2)};
-                \addplot [thick, {\colorone},domain=3:5] {2};
+                \addplot+ [-,domain=0:1] {3};
+                \addplot [firstcurvestyle,-,domain=1:2] {-3*(x-2)};
+                \addplot [firstcurvestyle,-,domain=2:3] {2*(x-2)};
+                \addplot [firstcurvestyle,-,domain=3:5] {2};
 
                 \end{axis}
 

@@ -26,7 +26,9 @@
         <latex-image>
 
         \begin{tikzpicture}
-        \begin{axis}[axis on top,
+
+        \begin{axis}[
+        axis on top,
         xtick=\empty,
         extra x ticks={1,2.5,3},
         extra x tick labels={$a$,$x$,$b$},
@@ -35,8 +37,9 @@
         ymin=-.5,ymax=2,
         xmin=-.5,xmax=3.5
         ]
-        \addplot+[domain=0:3.25] {.5*sin(deg(x))+1};
-        \addplot [{\coloronefill},fill={\coloronefill},area style,domain=1:2.5] {.5*sin(deg(x))+1}\closedcycle;
+
+        \addplot [firstcurvestyle,areastyle,domain=1:2.5] {.5*sin(deg(x))+1} \closedcycle;
+        \addplot [firstcurvestyle,-,domain=0:3.25,samples=30] {.5*sin(deg(x))+1};
 
         \end{axis}
         \end{tikzpicture}
@@ -63,7 +66,10 @@
             <latex-image>
 
             \begin{tikzpicture}
-            \begin{axis}[xtick=\empty,
+
+            \begin{axis}[
+            axis on top,
+            xtick=\empty,
             extra x ticks={1,2.5},
             extra x tick labels={$1$,$x$},
             %ytick=\empty,
@@ -71,8 +77,9 @@
             ymin=-2,ymax=8,
             xmin=-1,xmax=3.5
             ]
-            \addplot+[domain=-1:3.25] {2*x};
-            \addplot [{\coloronefill},fill={\coloronefill},area style,domain=1:2.5] {2*x} \closedcycle; 
+
+            \addplot [firstcurvestyle,areastyle,domain=1:2.5] {2*x} \closedcycle; 
+            \addplot [firstcurvestyle,-,domain=-1:3.25] {2*x};
 
             \end{axis}
 
@@ -99,20 +106,24 @@
             <latex-image>
 
             \begin{tikzpicture}
-            \begin{axis}[ xtick=\empty,
+
+            \begin{axis}[
+            axis on top,
+            xtick=\empty,
             extra x ticks={1,2.5},
             extra x tick labels={$1$,$x$},
-            %ytick=\empty,
             xlabel=$t$,
-            ymin=-2,ymax=8,%
-            xmin=-1,xmax=3.5%
+            ymin=-2,ymax=8,
+            xmin=-1,xmax=3.5
             ]
-            \addplot+[domain=-1:3.25] {2*x};
-            \addplot [{\coloronefill},fill={\coloronefill},area style,domain=1:2.5] {2*x} \closedcycle;
-            \addplot[lineseg, domain=0:2]({1},{x}) node[pos=0.5, right]{$2$};
-            \addplot[lineseg, domain=0:1]({x},{0}) node[pos=0.5, above]{$1$};
-            \addplot[lineseg,&lt;-&gt;, domain=0:2.5]({x},{-1}) node[pos=0.5, below]{$x$};
-            \addplot[lineseg, domain=0:5]({2.5},{x}) node[pos=0.5, right]{$2x$};
+
+            \addplot [firstcurvestyle,areastyle,domain=1:2.5] {2*x} \closedcycle;
+            \addplot [firstcurvestyle,-,domain=-1:3.25] {2*x};
+            
+            \addplot [lineseg,domain=0:2]({1},{x}) node [pos=0.5, right] {$2$};
+            \addplot [lineseg,domain=0:1]({x},{0}) node [pos=0.5, above] {$1$};
+            \addplot [lineseg,&lt;-&gt;, domain=0:2.5] ({x},{-1}) node [pos=0.5, below] {$x$};
+            \addplot [lineseg,domain=0:5]({2.5},{x}) node [pos=0.5, right] {$2x$};
 
             \end{axis}
 
@@ -152,11 +163,14 @@
             <latex-image>
 
             \begin{tikzpicture}
-            \begin{axis}[ymin=-2,ymax=8,
+
+            \begin{axis}[
+            ymin=-2,ymax=8,
             xmin=-1,xmax=3.5
             ]
-            \addplot+[domain=-1:3.25] {2*x};
-            \addplot+[domain=-1:3.25] {x^2-1};
+
+            \addplot+ [-,domain=-1:3.25] {2*x};
+            \addplot+ [-,domain=-1:3.25] {x^2-1};
 
             \end{axis}
 
@@ -537,16 +551,20 @@
               <latex-image>
               
               \begin{tikzpicture}
-              \begin{axis}[ xtick=\empty,
+
+              \begin{axis}[
+              axis on top,
+              xtick=\empty,
               extra x ticks={0.625,1},
               extra x tick labels={$5/8$,$1$},
-              %ytick=\empty,
               xlabel=$t$,
-              ymin=-15,ymax=25,%
-              xmin=-1,xmax=1.5%
+              ymin=-15,ymax=25,
+              xmin=-1,xmax=1.5
               ]
-              \addplot+[domain=-.5:1.5] {-32*x+20};
-              \addplot [{\coloronefill},fill={\coloronefill},area style,domain=0:1] {-32*x+20} \closedcycle;
+
+              \addplot [firstcurvestyle,areastyle,domain=0:1] {-32*x+20} \closedcycle;
+              \addplot [firstcurvestyle,-,domain=-.5:1.5] {-32*x+20};
+
               \node at (axis cs:.3125,5) {\scriptsize $A_1$};
               \node at (axis cs:.8125,-3) {\scriptsize $A_2$};
 
@@ -565,18 +583,23 @@
               <latex-image>
               
               \begin{tikzpicture}
-              \begin{axis}[ xtick=\empty,
+
+              \begin{axis}[
+              axis on top,
+              xtick=\empty,
               extra x ticks={0.625,1},
               extra x tick labels={$5/8$,$1$},
-              %ytick=\empty,
               xlabel=$t$,
-              ymin=-15,ymax=25,%
-              xmin=-1,xmax=1.5%
+              ymin=-15,ymax=25,
+              xmin=-1,xmax=1.5
               ]
-              \addplot+[-,domain=-.5:5/8] {-32*x+20};
-              \addplot+[-,domain=5/8:1.5, firstcurvestyle] {32*x-20};
-              \addplot [{\coloronefill},fill={\coloronefill},area style,domain=0:5/8] {-32*x+20} \closedcycle;
-              \addplot [{\coloronefill},fill={\coloronefill},area style,domain=5/8:1] {32*x-20} \closedcycle;
+
+              \addplot [firstcurvestyle,areastyle,domain=0:5/8] {-32*x+20} \closedcycle;
+              \addplot [firstcurvestyle,areastyle,domain=5/8:1] {32*x-20} \closedcycle;
+
+              \addplot [firstcurvestyle,-,domain=-.5:5/8] {-32*x+20};
+              \addplot [firstcurvestyle,-,domain=5/8:1.5] {32*x-20};
+
               \node at (axis cs:.3125,5) {\scriptsize $A_1$};
               \node at (axis cs:.8125,3) {\scriptsize $A_3$};
 
@@ -732,24 +755,22 @@
             <latex-image>
             
             \begin{tikzpicture}
-            \begin{axis}[%
-            axis on top,%
-            %x=.37\marginparwidth,
-            %y=.37\marginparwidth,
-            xtick=\empty,%
+
+            \begin{axis}[
+            axis on top,
+            xtick=\empty,
             extra x ticks={.5,3},
             extra x tick labels={$a$,$b$},
             ytick=\empty,
-            %%extra y ticks={-5,-3,...,7},%
-            %			minor x tick num=4,
-            ymin=-.5,ymax=2,%
-            xmin=-.5,xmax=3.5%
+            ymin=-.5,ymax=2,
+            xmin=-.5,xmax=3.5
             ]
 
-            \addplot [{\coloronefill},domain=.5:3,stack plots=y] {.25*(x-2)^2+.2};
-            \addplot [{\coloronefill},thick,fill={\coloronefill},area style,domain=.5:3,stack plots=y] {.25*sin(deg(2*x))+1.25-(.25*(x-2)^2+.2)} \closedcycle;
-            \addplot [smooth,thick, {\colorone},domain=-.25:3.25] {.25*sin(deg(2*x))+1.25} node [shift={(5pt,7pt)} ,black] {\scriptsize $f(x)$};
-            \addplot [smooth,thick, {\colorone},domain=-.25:3.25] {.25*(x-2)^2+.2}node [shift={(5pt,7pt)} ,black] {\scriptsize $g(x)$};
+            \addplot [firstcolor,domain=.5:3,stack plots=y] {.25*(x-2)^2+.2};
+            \addplot [firstcurvestyle,areastyle,domain=.5:3,stack plots=y] {.25*sin(deg(2*x))+1.25-(.25*(x-2)^2+.2)} \closedcycle;
+
+            \addplot [firstcurvestyle,-,domain=-.25:3.25,samples=40] {.25*sin(deg(2*x))+1.25} node [shift={(5pt,7pt)},black] {\scriptsize $f(x)$};
+            \addplot [firstcurvestyle,-,domain=-.25:3.25] {.25*(x-2)^2+.2} node [shift={(5pt,7pt)},black] {\scriptsize $g(x)$};
 
             \end{axis}
 
@@ -766,24 +787,22 @@
             <latex-image>
             
             \begin{tikzpicture}
-            \begin{axis}[%
-            axis on top,%
-            %x=.37\marginparwidth,
-            %y=.37\marginparwidth,
-            xtick=\empty,%
+
+            \begin{axis}[
+            axis on top,
+            xtick=\empty,
             extra x ticks={.5,3},
             extra x tick labels={$a$,$b$},
             ytick=\empty,
-            %%extra y ticks={-5,-3,...,7},%
-            %			minor x tick num=4,
-            ymin=-.5,ymax=2,%
-            xmin=-.5,xmax=3.5%
+            ymin=-.5,ymax=2,
+            xmin=-.5,xmax=3.5
             ]
 
-            \addplot [{\coloronefill},fill={\coloronefill},area style,domain=.5:3] {.25*sin(deg(2*x))+1.25} \closedcycle;
-            \addplot [{\colortwofill},fill={\colortwofill},domain=.5:3,fill opacity=.5] {.25*(x-2)^2+.2} \closedcycle;
-            \addplot [smooth,thick, {\colorone},domain=-.25:3.25] {.25*sin(deg(2*x))+1.25} node [shift={(5pt,7pt)} ,black] {\scriptsize $f(x)$};
-            \addplot [smooth,thick, {\colorone},domain=-.25:3.25] {.25*(x-2)^2+.2}node [shift={(5pt,7pt)} ,black] {\scriptsize $g(x)$};
+            \addplot [firstcurvestyle,areastyle,area style,domain=.5:3] {.25*sin(deg(2*x))+1.25} \closedcycle;
+            \addplot [secondcurvestyle,areastyle,domain=.5:3] {.25*(x-2)^2+.2} \closedcycle;
+
+            \addplot [firstcurvestyle,-,domain=-.25:3.25,samples=40] {.25*sin(deg(2*x))+1.25} node [shift={(5pt,7pt)},black] {\scriptsize $f(x)$};
+            \addplot [secondcurvestyle,-,domain=-.25:3.25] {.25*(x-2)^2+.2}node [shift={(5pt,7pt)},black] {\scriptsize $g(x)$};
 
             \end{axis}
 
@@ -846,16 +865,18 @@
             <latex-image>
             
             \begin{tikzpicture}
-            \begin{axis}[axis on top,
+
+            \begin{axis}[
+            axis on top,
             xtick={-2,-1,1,2,3,4},
             ytick={5,10,15},
             ymin=-10,ymax=16,
             xmin=-2.5,xmax=4.5
             ]
 
-            \addplot+[name path=F,domain={-2:4}] {x^2+x-5} node[pos=1, left]{\scriptsize $y=x^2+x-5$};
-            \addplot+[name path=G,domain={-2:4}] {3*x-2}node[pos=0.7, above left]{\scriptsize $y=3x-2$};
-            \addplot[color=gray!50]fill between[of=F and G, soft clip={domain=-1:3}];
+            \addplot+ [-,name path=F,domain={-2:4},samples=40] {x^2+x-5} node [pos=1, left] {\scriptsize $y=x^2+x-5$};
+            \addplot+ [-,name path=G,domain={-2:4}] {3*x-2} node [pos=0.7, above left] {\scriptsize $y=3x-2$};
+            \addplot [gray!50] fill between [of=F and G, soft clip={domain=-1:3}];
 
             \end{axis}
 
@@ -901,21 +922,16 @@
         <latex-image>
         
         \begin{tikzpicture}
-        \begin{axis}[%
-        axis on top,%
-        %x=.37\marginparwidth,
-        %y=.37\marginparwidth,
-        xtick={1,2,3,4},%
-        %			extra x ticks={.5,3},
-        %			extra x tick labels={$a$,$b$},
+
+        \begin{axis}[
+        axis on top,
+        xtick={1,2,3,4},
         ytick=\empty,
-        %%extra y ticks={-5,-3,...,7},%
-        %			minor x tick num=4,
-        ymin=-.5,ymax=1.75,%
-        xmin=-.5,xmax=4.5%
+        ymin=-.5,ymax=1.75,
+        xmin=-.5,xmax=4.5
         ]
 
-        \addplot [smooth,thick, {\colorone},domain=-.5:4.5] {.3*cos(deg(x))+1};
+        \addplot+ [-,domain=-.5:4.5,samples=40] {.3*cos(deg(x))+1};
 
         \end{axis}
 
@@ -963,23 +979,20 @@
             <latex-image>
             
             \begin{tikzpicture}
-            \begin{axis}[%
-            axis on top,%
-            %x=.37\marginparwidth,
-            %y=.37\marginparwidth,
-            xtick={1,2,3,4},%
-            %			extra x ticks={.5,3},
-            %			extra x tick labels={$a$,$b$},
+
+            \begin{axis}[
+            axis on top,
+            xtick={1,2,3,4},
             ytick=\empty,
-            %%extra y ticks={-5,-3,...,7},%
-            %			minor x tick num=4,
-            ymin=-.5,ymax=1.75,%
-            xmin=-.5,xmax=4.5%
+            ymin=-.5,ymax=1.75,
+            xmin=-.5,xmax=4.5
             ]
 
-            \addplot [{\coloronefill},thick,fill={\coloronefill},domain=1:4] {.3*cos(deg(x))+1} \closedcycle;
-            \addplot [smooth,thick, {\colorone},domain=-.5:4.5] {.3*cos(deg(x))+1};
-            \draw [thick,draw={\colortwo}] (axis cs: 1,0) rectangle (axis cs:4,1.35);
+            \addplot [firstcurvestyle,areastyle,domain=1:4] {.3*cos(deg(x))+1} \closedcycle;
+            \addplot [firstcurvestyle,-,domain=-.5:4.5,samples=40] {.3*cos(deg(x))+1};
+
+            \draw [thick,secondcolor] (axis cs: 1,0) rectangle (axis cs:4,1.35);
+            
             \end{axis}
 
             \end{tikzpicture}
@@ -995,23 +1008,20 @@
             <latex-image>
             
             \begin{tikzpicture}
-            \begin{axis}[%
-            axis on top,%
-            %x=.37\marginparwidth,
-            %y=.37\marginparwidth,
-            xtick={1,2,3,4},%
-            %			extra x ticks={.5,3},
-            %			extra x tick labels={$a$,$b$},
+
+            \begin{axis}[
+            axis on top,
+            xtick={1,2,3,4},
             ytick=\empty,
-            %%extra y ticks={-5,-3,...,7},%
-            %			minor x tick num=4,
-            ymin=-.5,ymax=1.75,%
-            xmin=-.5,xmax=4.5%
+            ymin=-.5,ymax=1.75,
+            xmin=-.5,xmax=4.5
             ]
 
-            \addplot [{\coloronefill},thick,fill={\coloronefill},domain=1:4] {.3*cos(deg(x))+1} \closedcycle;
-            \addplot [smooth,thick, {\colorone},domain=-.5:4.5] {.3*cos(deg(x))+1};
-            \draw [thick,draw={\colortwo}] (axis cs: 1,0) rectangle (axis cs:4,.65);
+            \addplot [firstcurvestyle,areastyle,domain=1:4] {.3*cos(deg(x))+1} \closedcycle;
+            \addplot [firstcurvestyle,-,domain=-.5:4.5,samples=40] {.3*cos(deg(x))+1};
+
+            \draw [thick,secondcolor] (axis cs: 1,0) rectangle (axis cs:4,.65);
+
             \end{axis}
 
             \end{tikzpicture}
@@ -1027,23 +1037,20 @@
             <latex-image>
             
             \begin{tikzpicture}
-            \begin{axis}[%
-            axis on top,%
-            %x=.37\marginparwidth,
-            %y=.37\marginparwidth,
-            xtick={1,2,3,4},%
-            %			extra x ticks={.5,3},
-            %			extra x tick labels={$a$,$b$},
+
+            \begin{axis}[
+            axis on top,
+            xtick={1,2,3,4},
             ytick=\empty,
-            %%extra y ticks={-5,-3,...,7},%
-            %			minor x tick num=4,
-            ymin=-.5,ymax=1.75,%
-            xmin=-.5,xmax=4.5%
+            ymin=-.5,ymax=1.75,
+            xmin=-.5,xmax=4.5
             ]
 
-            \addplot [{\coloronefill},thick,fill={\coloronefill},domain=1:4] {.3*cos(deg(x))+1} \closedcycle;
-            \addplot [smooth,thick, {\colorone},domain=-.5:4.5] {.3*cos(deg(x))+1};
-            \draw [thick,draw={\colortwo}] (axis cs: 1,0) rectangle (axis cs:4,.84);
+            \addplot [firstcurvestyle,areastyle,domain=1:4] {.3*cos(deg(x))+1} \closedcycle;
+            \addplot [firstcurvestyle,-,domain=-.5:4.5,samples=50] {.3*cos(deg(x))+1};
+            
+            \draw [thick,secondcolor] (axis cs: 1,0) rectangle (axis cs:4,.84);
+            
             \end{axis}
 
             \end{tikzpicture}
@@ -1125,25 +1132,24 @@
             <latex-image>
             
             \begin{tikzpicture}
-            \begin{axis}[%
-            axis on top,%
-            %x=.37\marginparwidth,
-            %y=.37\marginparwidth,
-            xtick={1,2},%
+
+            \begin{axis}[
+            axis on top,
+            xtick={1,2},
             extra x ticks={.69,3.14},
             extra x tick labels={$c$,$\pi$},
             ytick={1},
-            %
-            extra y ticks={.637},%
+            extra y ticks={.637},
             extra y tick labels={$\sin(0.69) $},
-            %			minor x tick num=4,
-            ymin=-.25,ymax=1.25,%
-            xmin=-.5,xmax=3.5%
+            ymin=-.25,ymax=1.25,
+            xmin=-.5,xmax=3.5
             ]
 
-            \addplot [{\coloronefill},thick,fill={\coloronefill},domain=0:3.14] {sin(deg(x))} \closedcycle;
-            \addplot [smooth,thick, {\colorone},domain=-.5:3.5] {sin(deg(x))};
-            \draw [thick,draw={\colortwo}] (axis cs: 0,0) rectangle (axis cs:3.14,.637);
+            \addplot [firstcurvestyle,areastyle,domain=0:3.14] {sin(deg(x))};
+            \addplot [firstcurvestyle,-,domain=-.5:3.5,samples=40] {sin(deg(x))};
+
+            \draw [thick,secondcolor] (axis cs: 0,0) rectangle (axis cs:3.14,.637);
+
             \end{axis}
 
             \end{tikzpicture}
@@ -1189,25 +1195,23 @@
           <latex-image>
           
           \begin{tikzpicture}
-          \begin{axis}[%
-          axis on top,%
-          %x=.37\marginparwidth,
-          %y=.37\marginparwidth,
-          xtick=\empty,%
+
+          \begin{axis}[
+          axis on top,
+          xtick=\empty,
           extra x ticks={1,4,1.63},
           extra x tick labels={$a$,$b$,$c$},
           ytick=\empty,
-          %
-          extra y ticks={1.75},%
+          extra y ticks={1.75},
           extra y tick labels={$f(c)$},
-          %			minor x tick num=4,
-          ymin=-1,ymax=3.5,%
-          xmin=-.5,xmax=4.25%
+          ymin=-1,ymax=3.5,
+          xmin=-.5,xmax=4.25
           ]
 
-          \addplot [{\coloronefill},thick,fill={\coloronefill},domain=1:4] {(x-2.5)^2+1} \closedcycle;
-          \addplot [smooth,thick, {\colorone},domain=-.5:4.25] {(x-2.5)^2+1};
-          \draw [thick,draw={\colortwo}] (axis cs: 1,0) rectangle (axis cs:4,1.75);
+          \addplot [firstcurvestyle,areastyle,domain=1:4] {(x-2.5)^2+1} \closedcycle;
+          \addplot [firstcurvestyle,-,domain=-.5:4.25,samples=40] {(x-2.5)^2+1};
+
+          \draw [thick,secondcolor] (axis cs: 1,0) rectangle (axis cs:4,1.75);
           \draw (axis cs:3.35,3) node {\scriptsize $y=f(x)$};
           \end{axis}
 
@@ -1221,25 +1225,22 @@
           <latex-image>
           
           \begin{tikzpicture}
-          \begin{axis}[%
-          axis on top,%
-          %x=.37\marginparwidth,
-          %y=.37\marginparwidth,
-          xtick=\empty,%
+
+          \begin{axis}[
+          axis on top,
+          xtick=\empty,
           extra x ticks={1,4,1.63},
           extra x tick labels={$a$,$b$,$c$},
           ytick=\empty,
-          %
-          extra y ticks={1.75},%
+          extra y ticks={1.75},
           extra y tick labels={$f(c)$},
-          %			minor x tick num=4,
-          ymin=-1,ymax=3.5,%
-          xmin=-.5,xmax=4.25%
+          ymin=-1,ymax=3.5,
+          xmin=-.5,xmax=4.25
           ]
 
-          \addplot [{\coloronefill},thick,fill={\coloronefill},domain=1:4] {(x-2.5)^2-.75} \closedcycle;
-          \addplot [smooth,thick, {\colorone},domain=.75:4.25] {(x-2.5)^2-.75};
-          %\draw [thick,draw={\colortwo}] (axis cs: 1,0) rectangle (axis cs:4,1.75);
+          \addplot [firstcurvestyle,areastyle,domain=1:4] {(x-2.5)^2-.75} \closedcycle;
+          \addplot [firstcurvestyle,-,domain=.75:4.25,samples=40] {(x-2.5)^2-.75};
+
           \draw (axis cs:3.2,2.5) node {\scriptsize $y=f(x)-f(c)$};
           \end{axis}
 
