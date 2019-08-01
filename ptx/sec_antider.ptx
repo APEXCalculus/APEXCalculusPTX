@@ -1,12 +1,11 @@
-
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <section xml:id="sec_antider">
   <title>Antiderivatives and Indefinite Integration</title>
-  <introduction>
     <p>
       Given a function <m>y=f(x)</m>,
-      a <em>differential equation</em>
-      is one that incorporates <m>y</m>, <m>x</m>,
+      a <term>differential equation</term>
+      is an equation that incorporates <m>y</m>, <m>x</m>,
       and the derivatives of <m>y</m>.
       For instance, a simple differential equation is:
       <me>
@@ -15,7 +14,8 @@
     </p>
 
     <p>
-      Solving a differential equation amounts to finding a function <m>y</m> that satisfies the given equation.
+      Solving a differential equation amounts to finding a function <m>y</m>
+      that satisfies the given equation.
       Take a moment and consider that equation;
       can you find a function <m>y</m> such that <m>y' = 2x</m>?
     </p>
@@ -29,12 +29,14 @@
     </p>
 
     <p>
-      Hopefully one was able to come up with at least one solution:
+      Hopefully you were able to come up with at least one solution:
       <m>y = x^2</m>.
-      <q>Finding another</q> may have seemed impossible until one realizes that a function like <m>y=x^2+1</m> also has a derivative of <m>2x</m>.
+      <q>Finding another</q> may have seemed impossible until one realizes that
+      a function like <m>y=x^2+1</m> also has a derivative of <m>2x</m>.
       Once that discovery is made, finding
       <q>yet another</q> is not difficult;
-      the function <m>y = x^2 + 123,456,789</m> also has a derivative of <m>2x</m>.
+      the function <m>y = x^2 + 123{,}456{,}789</m> also has a derivative of
+      <m>2x</m>.
       The differential equation <m>y' = 2x</m> has many solutions.
       This leads us to some definitions.
     </p>
@@ -44,7 +46,8 @@
       <statement>
         <p>
           Let a function <m>f(x)</m> be given.
-          An <term>antiderivative</term> of <m>f(x)</m> is a function <m>F(x)</m> such that <m>\Fp(x) = f(x)</m>.
+          An <term>antiderivative</term> of <m>f(x)</m> is a function <m>F(x)</m>
+          such that <m>\Fp(x) = f(x)</m>.
               <idx><h>antiderivative</h></idx>
               <idx><h>indefinite integral</h></idx>
               <idx><h>integration</h><h>indefinite</h></idx>
@@ -54,7 +57,7 @@
           The set of all antiderivatives of <m>f(x)</m> is the
           <term>indefinite integral of <m>f</m></term>, denoted by
           <me>
-            \int f(x) \ dx
+            \int f(x) \,dx
           </me>.
         </p>
       </statement>
@@ -69,7 +72,8 @@
     </p>
 
     <p>
-      Knowing one antiderivative of <m>f</m> allows us to find infinitely more,
+      When <m>f</m> is continuous,
+      knowing one antiderivative of <m>f</m> allows us to find infinitely more,
       simply by adding a constant.
       Not only does this give us <em>more</em> antiderivatives,
       it gives us <em>all</em> of them.
@@ -79,7 +83,8 @@
       <title>Antiderivative Forms</title>
       <statement>
         <p>
-          Let <m>F(x)</m> and <m>G(x)</m> be antiderivatives of <m>f(x)</m> on an interval <m>I</m>.
+          Let <m>F(x)</m> and <m>G(x)</m> be antiderivatives of a continuous
+          function <m>f(x)</m> on an interval <m>I</m>.
           Then there exists a constant <m>C</m> such that, on <m>I</m>,
           <me>
             G(x) = F(x) + C
@@ -89,12 +94,13 @@
     </theorem>
 
     <p>
-      Given a function <m>f</m> defined on an interval <m>I</m> and one of its antiderivatives <m>F</m>,
+      Given a continuous function <m>f</m> defined on an interval <m>I</m> and
+      one of its antiderivatives <m>F</m>,
       we know <em>all</em> antiderivatives of <m>f</m> on <m>I</m> have the form
       <m>F(x) + C</m> for some constant <m>C</m>.
       Using <xref ref="def_antider">Definition</xref>, we can say that
       <me>
-        \int f(x) \ dx = F(x) + C
+        \int f(x) \,dx = F(x) + C
       </me>.
     </p>
 
@@ -102,10 +108,53 @@
       Let's analyze this indefinite integral notation.
           <idx><h>integration</h><h>notation</h></idx>
     </p>
+    <!-- START figures/fig_anti1.tex -->
+    <figure xml:id="fig_anti1">
+      <caption/>
+
+      <!-- Todo: Fix this weird image -->
+
+      <image width="100%">
+        <description></description>
+        <latex-image>
+
+        \begin{tikzpicture}[&gt;=latex]
+
+        \node[] (integral)
+        {$\displaystyle\int$};
+        \node[above left of=integral, anchor=south east] (l1) {Integration Symbol};
+        \draw[-&gt;] (l1) edge [out=-90, in=180] (integral);
+        \node[right of=integral] (integrand)
+        {$\displaystyle f(x)$};
+        \node[below of=integrand, anchor=north east] (l2) {Integration Symbol};
+        \draw[-&gt;] (l2) edge [out=0, in=-90] (integrand);
+        \node[right of=integrand] (differential)
+        {$\displaystyle dx$};
+        \node[above of=differential, anchor=south west] (l3) {Differential of $x$};
+        \draw[-&gt;] (l3) edge [out=-90, in=90] (differential);
+        \node[right of=differential] (equals)
+        {$\displaystyle =$};
+        \node[right of=equals] (antiderivative)
+        {$\displaystyle F(x)$};
+        \node[below of=antiderivative, anchor=north west] (l4) {One Antiderivative};
+        \draw[-&gt;] (l4) edge [out=180, in=-90] (antiderivative);
+        \node[right of=antiderivative] (plus)
+        {$\displaystyle {+}$};
+        \node[right of=plus] (constant)
+        {$\displaystyle C$};
+        \node[above right of=constant, anchor=south west] (l5) {Constant of Integration};
+        \draw[-&gt;] (l5) edge [out=-90, in=0] (constant);
+        }
+
+        \end{tikzpicture}
+
+        </latex-image>
+      </image>
+
+    </figure>
 
     <p>
-      <img src="figures/figanti1"/>
-      \captionof{figure}{Understanding the indefinite integral notation.} <xref ref="fig_anti1">Figure</xref>
+      <xref ref="fig_anti1">Figure</xref>
       shows the typical notation of the indefinite integral.
       The integration symbol, <m>\int</m>,
       is in reality an <q>elongated S,</q>
@@ -115,7 +164,8 @@
     </p>
 
     <p>
-      The function we want to find an antiderivative of is called the <em>integrand</em>.
+      The function we want to find an antiderivative of is called the
+      <em>integrand</em>.
       It contains the differential of the variable we are integrating with respect to.
       The <m>\int</m> symbol and the differential <m>dx</m> are not <q>bookends</q>
       with a function sandwiched in between;
@@ -126,6 +176,14 @@
     </p>
 
     <p>
+      Another important aspect of the <m>dx</m> is that it tells us which
+      variable we're taking the antiderivative with respect to,
+      much like how <m>\lzo{x}</m> would mean to take the derivative with
+      respect to <m>x</m>,
+      while <m>\lzo{t}</m> would be the derivative with respect to <m>t</m>.
+    </p>
+
+    <p>
       Let's practice using this notation.
     </p>
 
@@ -133,22 +191,23 @@
       <title>Evaluating indefinite integrals</title>
       <statement>
         <p>
-          Evaluate <m>\displaystyle \int \sin x\ dx</m>.
+          Evaluate <m> \int \sin(x) \,dx</m>.
         </p>
       </statement>
       <solution>
         <p>
-          We are asked to find all functions <m>F(x)</m> such that <m>\Fp(x) = \sin x</m>.
+          We are asked to find all functions <m>F(x)</m> such that
+          <m>\Fp(x) = \sin(x)</m>.
           Some thought will lead us to one solution:
-          <m>F(x) = -\cos x</m>, because <m>\frac{d}{dx}(-\cos x) = \sin x</m>.
+          <m>F(x) = -\cos(x)</m>, because <m>\lzoo{x}{-\cos(x)} = \sin(x)</m>.
         </p>
 
         <p>
-          The indefinite integral of <m>\sin x</m> is thus <m>-\cos x</m>,
+          The indefinite integral of <m>\sin(x)</m> is thus <m>-\cos(x)</m>,
           plus a constant of integration.
           So:
           <me>
-            \int \sin x \ dx = -\cos x + C
+            \int \sin(x) \,dx = -\cos(x) + C
           </me>.
         </p>
       </solution>
@@ -165,18 +224,18 @@
       is really solving a <em>differential</em> question.
       The integral
       <me>
-        \int \sin x\ dx
+        \int \sin(x) \,dx
       </me>
-      presents us with a differential, <m>dy = \sin x\ dx</m>.
+      presents us with a differential, <m>dy = \sin(x) \ dx</m>.
       It is asking: <q>What is <m>y</m>?</q>
       We found lots of solutions,
-      all of the form <m>y = -\cos x+C</m>.
+      all of the form <m>y = -\cos(x) +C</m>.
     </p>
 
     <p>
-      Letting <m>dy = \sin x\ dx</m>, rewrite
+      Letting <m>dy = \sin(x)\,dx</m>, rewrite
       <me>
-        \int \sin x \ dx  \text{ as }  \int  dy
+        \int \sin(x) \,dx  \text{ as }  \int\,dy
       </me>.
     </p>
 
@@ -186,11 +245,12 @@
       The answer is <q>Functions of the form <m>y+C</m>,
       where <m>C</m> is a constant.</q> What is <m>y</m>?
       We have lots of choices, all differing by a constant;
-      the simplest choice is <m>y = -\cos x</m>.
+      the simplest choice is <m>y = -\cos(x)</m>.
     </p>
 
     <p>
-      Understanding all of this is more important later as we try to find antiderivatives of more complicated functions.
+      Understanding all of this is more important later as we try to find
+      antiderivatives of more complicated functions.
       In this section,
       we will simply explore the rules of indefinite integration,
       and one can succeed for now with answering
@@ -206,14 +266,14 @@
       <title>Evaluating indefinite integrals</title>
       <statement>
         <p>
-          Evaluate <m>\ds \int (3x^2 + 4x+5)\ dx</m>.
+          Evaluate <m>\int\left(3x^2 + 4x+5\right)\,dx</m>.
         </p>
       </statement>
       <solution>
         <p>
           We seek a function <m>F(x)</m> whose derivative is <m>3x^2+4x+5</m>.
           When taking derivatives,
-          we can consider functions term<ndash />by<ndash />term,
+          we can consider functions term-by-term,
           so we can likely do that here.
         </p>
 
@@ -240,7 +300,7 @@
         <p>
           Our answer appears to be
           <me>
-            \int (3x^2+4x+5)\ dx = x^3+C_1+2x^2+C_2+5x+C_3
+            \int\left(3x^2+4x+5\right)\,dx = x^3+C_1+2x^2+C_2+5x+C_3
           </me>.
         </p>
 
@@ -249,13 +309,14 @@
           combine them as one constant,
           giving the final answer of
           <me>
-            \int (3x^2+4x+5)\ dx = x^3+2x^2+5x+C
+            \int\left(3x^2+4x+5\right)\,dx = x^3+2x^2+5x+C
           </me>.
         </p>
 
         <p>
           It is easy to verify our answer;
-          take the derivative of <m>x^3+2x^3+5x+C</m> and see we indeed get <m>3x^2+4x+5</m>.
+          take the derivative of <m>x^3+2x^3+5x+C</m> and see we indeed get
+          <m>3x^2+4x+5</m>.
         </p>
       </solution>
     </example>
@@ -263,14 +324,16 @@
     <p>
       This final step of <q>verifying our answer</q>
       is important both practically and theoretically.
-      In general, taking derivatives is easier than finding antiderivatives so checking our work is easy and vital as we learn.
+      In general, taking derivatives is easier than finding antiderivatives so
+      checking our work is easy and vital as we learn.
     </p>
 
     <p>
-      We also see that taking the derivative of our answer returns the function in the integrand.
+      We also see that taking the derivative of our answer returns the function
+      in the integrand.
       Thus we can say that:
       <me>
-        \frac{d}{dx}\left(\int f(x)\ dx\right) = f(x)
+        \lzoo{x}{\int f(x)\,dx} = f(x)
       </me>.
     </p>
 
@@ -281,221 +344,70 @@
     <p>
       <xref ref="thm_deriv_glossary">Theorem</xref>
       gave a list of the derivatives of common functions we had learned at that point.
-      We restate part of that list here to stress the relationship between derivatives and antiderivatives.
-      This list will also be useful as a glossary of common antiderivatives as we learn.
-    </p>
-
-    <p>
-      \newlength{\bh}
-      \newlength{\bd}
-      \settoheight{\bh}{<m>\frac{d}{dx}</m>}
-      \settodepth{\bd}{<m>\frac{d}{dx}</m>}
+      We restate part of that list here to stress the relationship between
+      derivatives and antiderivatives.
+      This list will also be useful as a glossary of common antiderivatives
+      as we learn.
     </p>
 
     <theorem xml:id="thm_indef_alg">
       <title>Derivatives and Antiderivatives</title>
       <statement>
-        <sidebyside>
-          Common Differentiation Rules
+        <p>
+          Here are the Common Differentiation Rules and their Common Indefinite
+          Integral Rule counterparts.
+        </p>
 
-          <ol>
-            <li>
-              <p>
-                <m>\frac{d}{dx}\big(cf(x) \big) = c\cdot \fp(x)</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\frac{d}{dx}\big(f(x)\pm g(x) \big) =</m>
-
-                <m>\fp(x)\pm g'(x)</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\frac{d}{dx}\big(C \big) = 0</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\frac{d}{dx}\big(x \big) = 1</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\frac{d}{dx}\big(x^n \big) = n\cdot x^{n-1}</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\frac{d}{dx}\big(\sin x \big) = \cos x</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\frac{d}{dx}\big(\cos x \big) = -\sin x</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\frac{d}{dx}\big(\tan x \big) = \sec^2 x</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\frac{d}{dx}\big(\csc x \big) = -\csc x\cot x</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\frac{d}{dx}\big(\sec x \big) = \sec x\tan x</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\frac{d}{dx}\big(\cot x \big) = -\csc^2 x</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\frac{d}{dx}\big(e^ x \big) = e^x</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\frac{d}{dx}\big(a^x \big) = \ln a\cdot a^x</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\frac{d}{dx}\big(\ln x \big) = \frac1 x</m>
-              </p>
-            </li>
-          </ol>
-
-          Common Indefinite Integral Rules
-
-          <ol>
-            <li>
-              <p>
-                <m>\int c\cdot f(x)\ dx = c\cdot \int f(x)\ dx</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\int \big(f(x)\pm g(x)\big)\ dx =</m>
-
-                <m>\int f(x)\ dx\pm \int g(x)\ dx</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\int 0\ dx = C</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\int 1\ dx = \int dx = x+C</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\int x^n\ dx =\frac{1}{n+1}x^{n+1}+ C</m> { (<m>n\neq -1</m>)}
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\int \cos x\ dx = \sin x+C</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\int \sin x\ dx = -\cos x+C</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\int \sec^2 x\ dx = \tan x+C</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\int \csc x\cot x\ dx = -\csc x+C</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\int \sec x\tan x\ dx = \sec x+C</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\int \csc^2 x\ dx = -\cot x+C</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\int e^x\ dx = e^x+C</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\int a^x\ dx = \frac{1}{\ln a}\cdot a^x+C</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\int \frac{1}x\ dx = \ln |x|+C</m>
-              </p>
-            </li>
-          </ol>
-        </sidebyside>
+        <p>
+          <md>
+            <mrow>\amp\lzoo{x}{cf(x)}=c\cdot\fp(x)\amp\amp\int c\cdot f(x)\,dx= c\cdot \int f(x)\,dx</mrow>
+            <mrow>\amp\lzoo{x}{f(x)\pm g(x)} =\fp(x)\pm g'(x)\amp\amp \int \big(f(x)\pm g(x)\big)\,dx =\int f(x)\,dx\pm \int g(x)\,dx</mrow>
+            <mrow>\amp\lzoo{x}{C} = 0\amp\amp \int 0\,dx = C</mrow>
+            <mrow>\amp\lzoo{x}{x} = 1\amp\amp \int 1\,dx = \int dx = x+C</mrow>
+            <mrow>\amp\lzoo{x}{x^n} = n\cdot x^{n-1}\amp\amp \int x^n\,dx =\frac{1}{n+1}x^{n+1}+ C\quad(n\neq -1)</mrow>
+            <mrow>\amp\lzoo{x}{\sin(x)} = \cos(x)\amp\amp \int \cos(x) \,dx = \sin(x) +C</mrow>
+            <mrow>\amp\lzoo{x}{\cos(x)} = -\sin(x)\amp\amp \int \sin(x) \,dx = -\cos(x) +C</mrow>
+            <mrow>\amp\lzoo{x}{\tan(x)} = \sec^2(x)\amp\amp \int \sec^2(x) \,dx = \tan(x) +C</mrow>
+            <mrow>\amp\lzoo{x}{\csc(x)} = -\csc(x) \cot(x)\amp\amp \int \csc(x) \cot(x) \,dx = -\csc(x) +C</mrow>
+            <mrow>\amp\lzoo{x}{\sec(x)} = \sec(x) \tan(x)\amp\amp \int \sec(x) \tan(x) \,dx = \sec(x) +C</mrow>
+            <mrow>\amp\lzoo{x}{\cot(x)} = -\csc^2(x)\amp\amp \int \csc^2(x) \,dx = -\cot(x) +C</mrow>
+            <mrow>\amp\lzoo{x}{e^ x} = e^x\amp\amp \int e^x\,dx = e^x+C</mrow>
+            <mrow>\amp\lzoo{x}{a^x} = \ln(a) \cdot a^x\amp\amp \int a^x\,dx = \frac{1}{\ln(a) }\cdot a^x+C</mrow>
+            <mrow>\amp\lzoo{x}{\ln(x)} = \frac1 x,\ x \gt 0\amp\amp \int \frac{1}x\,dx = \ln\abs{x}+C</mrow>
+          </md>
+        </p>
       </statement>
     </theorem>
 
     <p>
-      We highlight a few important points from <xref ref="thm_indef_alg">Theorem</xref>:
+      We highlight a few important points from <xref ref="thm_indef_alg">Theorem</xref>.
+    </p>
 
+    <p>
       <ul>
         <li>
           <p>
-            Rule <hash />1 states <m>\int c\cdot f(x)\ dx = c\cdot \int f(x)\ dx</m>.
+            <me>
+              \int c\cdot f(x)\,dx = c\cdot \int f(x)\,dx
+            </me>
+          </p>
+
+          <p>
             This is the Constant Multiple Rule:
-              <idx><h>Constant Multiple Rule</h><h>of integration</h></idx>
+
+            <idx>
+              <h>Constant Multiple Rule</h><h>of integration</h>
+            </idx>
+
             we can temporarily ignore constants when finding antiderivatives,
             just as we did when computing derivatives (i.e.,
-            <m>\frac{d}{dx}\big(3x^2\big)</m> is just as easy to compute as <m>\frac{d}{dx}\big(x^2\big)</m>).
-            An example:
+            <m>\lzoo{x}{3x^2}</m> is just as easy to compute as
+            <m>\lzoo{x}{x^2}</m>). An example:
             <me>
-              \int 5\cos x\ dx = 5\cdot\int \cos x\ dx = 5\cdot (\sin x+C) = 5\sin x + C
+              \int 5\cos(x) \,dx = 5\cdot\int \cos(x) \,dx = 5\cdot (\sin(x) +C) = 5\sin(x) + C
             </me>.
-            In the last step we can consider the constant as also being multiplied by 5, but
+            In the last step we can consider the constant as also being
+            multiplied by 5, but
             <q>5 times a constant</q> is still a constant,
             so we just write <q><m>C</m> </q>.
           </p>
@@ -503,12 +415,29 @@
 
         <li>
           <p>
-            Rule <hash />2 is the Sum/Difference Rule:<idx><h>integration</h><h>Sum/Difference Rule</h></idx><idx><h>Sum/Difference Rule</h><h>of integration</h></idx> we can split integrals apart when the integrand contains terms that are added/subtracted,
+            <me>
+              \int \big(f(x)\pm g(x)\big)\,dx =\int f(x)\,dx\pm \int g(x)\,dx
+            </me>
+          </p>
+
+          <p>
+            This is the Sum/Difference Rule:
+
+            <idx>
+              <h>integration</h><h>Sum/Difference Rule</h>
+            </idx>
+
+            <idx>
+              <h>Sum/Difference Rule</h><h>of integration</h>
+            </idx>
+
+            we can split integrals apart when the integrand contains terms
+            that are added/subtracted,
             as we did in <xref ref="ex_anti3">Example</xref>.
             So:
             <md>
-              <mrow>\int(3x^2+4x+5)\ dx \amp = \int 3x^2\ dx + \int 4x\ dx + \int 5\ dx</mrow>
-              <mrow>\amp = 3\int x^2\ dx + 4\int x\ dx + \int 5 \ dx</mrow>
+              <mrow>\int(3x^2+4x+5)\ dx \amp = \int 3x^2\ dx + \int 4x\,dx + \int 5\,dx</mrow>
+              <mrow>\amp = 3\int x^2\ dx + 4\int x\,dx + \int 5 \,dx</mrow>
               <mrow>\amp = 3\cdot \frac13x^3 + 4\cdot \frac12x^2+5x+C</mrow>
               <mrow>\amp = x^3+2x^2+5x+C</mrow>
             </md>
@@ -519,18 +448,31 @@
 
         <li>
           <p>
-            Rule <hash />5 is the Power Rule of indefinite integration.
-              <idx><h>integration</h><h>Power Rule</h></idx>
-              <idx><h>Power Rule</h><h>integration</h></idx>
-          There are two important things to keep in mind:
+            <me>
+              \int x^n\,dx =\frac{1}{n+1}x^{n+1}+ C\quad(n\neq -1)
+            </me>
+          </p>
+
+          <p>
+            This is the Power Rule of indefinite integration.
+
+            <idx>
+              <h>integration</h><h>Power Rule</h>
+            </idx>
+
+            <idx>
+              <h>Power Rule</h><h>integration</h>
+            </idx>
+
+            There are two important things to keep in mind:
 
             <ol>
               <li>
                 <p>
                   Notice the restriction that <m>n\neq -1</m>.
-                  This is important: <m>\int \frac{1}{x}\ dx \neq</m>
+                  This is important: <m>\int \frac{1}{x}\,dx \neq</m>
                   <q><m>\frac{1}{0}x^0+C</m></q>;
-                  rather, see Rule <hash />14.
+                  rather, see the last rule from the list.
                 </p>
               </li>
 
@@ -539,16 +481,22 @@
                   We are presenting antidifferentiation as the
                   <q>inverse operation</q> of differentiation.
                   Here is a useful quote to remember:
+                </p>
 
-                  <blockquote>
-                    <q>Inverse operations do the opposite things in the opposite order.</q>
-                  </blockquote>
+                <blockquote>
+                  <p>
+                    <q>Inverse operations do the opposite things in the opposite
+                      order.</q>
+                  </p>
+                </blockquote>
 
+                <p>
                   When taking a derivative using the Power Rule,
                   we <em>first</em> <em>multiply</em> by the power,
-                  then <em>second</em> <em>subtract</em> 1 from the power.
-                  To find the antiderivative, do the opposite things in the opposite order:
-                  <em>first</em> <em>add</em> one to the power,
+                  then <em>second</em> <em>subtract</em> <m>1</m> from the power.
+                  To find the antiderivative, do the opposite things in the
+                  opposite order:
+                  <em>first</em> <em>add</em> <m>1</m> to the power,
                   then <em>second</em> <em>divide</em> by the power.
                 </p>
               </li>
@@ -558,16 +506,22 @@
 
         <li>
           <p>
-            Note that Rule <hash />14 incorporates the absolute value of <m>x</m>.
+            <me>
+              \int \frac{1}x\,dx = \ln\abs{x}+C
+            </me>
+          </p>
+
+          <p>
+            Note that this rule uses the absolute value of <m>x</m>.
             The exercises will work the reader through why this is the case;
             for now, know the absolute value is important and cannot be ignored.
           </p>
         </li>
       </ul>
     </p>
-  </introduction>
 
-  <subsection>
+
+  <paragraphs>
     <title>Initial Value Problems</title>
     <p>
       In <xref ref="sec_basic_diff_rules">Section</xref>
@@ -575,17 +529,19 @@
       and the derivative of a velocity function describes acceleration.
           <idx><h>initial value problem</h></idx>
       We can now go <q>the other way:</q>
-      the antiderivative of an acceleration function gives a velocity function, etc.
-      While there is just one derivative of a given function,
+      the antiderivative of an acceleration function gives a velocity function,
+      <etc/>. While there is just one derivative of a given function,
       there are infinitely many antiderivatives.
       Therefore we cannot ask <q>What is <em>the</em>
-      velocity of an object whose acceleration is <m>-32</m>ft/s<m>^2</m>?</q>,
-      since there is more than one answer.
+      velocity of an object whose acceleration is
+      <quantity>
+        <mag>-32</mag><unit base="foot"/><per base="second" exp="2"/>
+      </quantity>?</q>, since there is more than one answer.
     </p>
 
     <p>
-      We can find <em>the</em> answer if we provide more information with the question,
-      as done in the following example.
+      We can find <em>the</em> answer if we provide more information with the
+      question, as done in the following example.
       Often the additional information comes in the form of an <em>initial value</em>,
       a value of the function that one knows beforehand.
     </p>
@@ -594,9 +550,14 @@
       <title>Solving initial value problems</title>
       <statement>
         <p>
-          The acceleration due to gravity of a falling object is <m>-32</m> ft/s<m>^2</m>.
-          At time <m>t=3</m>,
-          a falling object had a velocity of <m>-10</m> ft/s.
+          The acceleration due to gravity of a falling object is
+          <quantity>
+            <mag>-32</mag><unit base="foot"/><per base="second" exp="2"/>
+          </quantity>.
+          At time <m>t=3</m>, a falling object had a velocity of
+          <quantity>
+            <mag>-10</mag><unit base="foot"/><per base="second"/>
+          </quantity>.
           Find the equation of the object's velocity.
         </p>
       </statement>
@@ -625,7 +586,7 @@
           we know that <m>v(t)</m> is an antiderivative of <m>v'(t)=-32</m>.
           So we begin by finding the indefinite integral of <m>-32</m>:
           <me>
-            \int (-32)\ dt = -32t+C=v(t)
+            \int (-32)\,dt = -32t+C=v(t)
           </me>.
         </p>
 
@@ -642,8 +603,9 @@
         <p>
           Thus <m>v(t)= -32t+86</m>.
           We can use this equation to understand the motion of the object:
-          when <m>t=0</m>,
-          the object had a velocity of <m>v(0) = 86</m> ft/s.
+          when <m>t=0</m>, the object had a velocity of <m>v(0) = 86</m><quantity>
+            <unit base="foot"/><per base="second"/>
+          </quantity>.
           Since the velocity is positive,
           the object was moving upward.
         </p>
@@ -652,12 +614,14 @@
           When did the object begin moving down?
           Immediately after <m>v(t) = 0</m>:
           <me>
-            -32t+86 = 0  \Rightarrow  t = \frac{43}{16}  \approx 2.69\text{s}
+            -32t+86 = 0  \implies  t = \frac{43}{16}  \approx 2.69\text{s}
           </me>.
         </p>
 
         <p>
-          Recognize that we are able to determine quite a bit about the path of the object knowing just its acceleration and its velocity at a single point in time.
+          Recognize that we are able to determine quite a bit about the path of
+          the object knowing just its acceleration and its velocity at a single
+          point in time.
         </p>
       </solution>
     </example>
@@ -666,7 +630,7 @@
       <title>Solving initial value problems</title>
       <statement>
         <p>
-          Find <m>f(t)</m>, given that <m>\fpp(t) = \cos t</m>,
+          Find <m>f(t)</m>, given that <m>\fpp(t) = \cos(t)</m>,
           <m>\fp(0) = 3</m> and <m>f(0) = 5</m>.
         </p>
       </statement>
@@ -674,157 +638,213 @@
         <p>
           We start by finding <m>\fp(t)</m>,
           which is an antiderivative of <m>\fpp(t)</m>:
-          <me>
-            \int \fpp(t)\ dt = \int \cos t\ dt = \sin t + C = \fp(t)
-          </me>.
+          <md>
+            <mrow>\int \fpp(t)\,dt \amp = \int \cos(t) \,dt</mrow>
+            <mrow>\amp = \sin(t) + C</mrow>
+            <mrow>\amp = \fp(t)</mrow>
+          </md>.
         </p>
 
         <p>
-          So <m>\fp(t) = \sin t+C</m> for the correct value of <m>C</m>.
+          So <m>\fp(t) = \sin(t) +C</m> for the correct value of <m>C</m>.
           We are given that <m>\fp(0) = 3</m>, so:
-          <me>
-            \fp(0) = 3  \Rightarrow  \sin 0+C = 3  \Rightarrow  C=3
-          </me>.
+          <md>
+            <mrow>\sin(0) +C \amp = 3</mrow>
+            <mrow>C \amp = 3</mrow>
+          </md>.
         </p>
 
         <p>
-          Using the initial value, we have found <m>\fp(t) = \sin t+ 3</m>.
-        </p>
-
-        <p>
+          Using the initial value, we have found <m>\fp(t) = \sin(t) + 3</m>.
           We now find <m>f(t)</m> by integrating again.
+          We will use a different integration constant since we have already
+          defined <m>C</m> to equal <m>3</m> above.
           <me>
-            f(t)=\int \fp(t) \ dt = \int (\sin t+3)\ dt = -\cos t + 3t + C
+            f(t)=\int \fp(t) \,dt = \int (\sin(t) +3)\,dt = -\cos(t) + 3t + D
           </me>.
         </p>
 
         <p>
           We are given that <m>f(0) = 5</m>, so
           <md>
-            <mrow>-\cos 0 + 3(0) + C \amp = 5</mrow>
+            <mrow>-\cos(0) + 3(0) + D \amp = 5</mrow>
             <mrow>-1 + C \amp = 5</mrow>
             <mrow>C \amp = 6</mrow>
           </md>
         </p>
 
         <p>
-          Thus <m>f(t) = -\cos t + 3t + 6</m>.
+          Thus <m>f(t) = -\cos(t) + 3t + 6</m>.
         </p>
       </solution>
     </example>
 
     <p>
       This section introduced antiderivatives and the indefinite integral.
-      We found they are needed when finding a function given information about its derivative(s).
-      For instance,
+      We found they are needed when finding a function given information about
+      its derivative(s). For instance,
       we found a velocity function given an acceleration function.
     </p>
 
     <p>
       In the next section,
-      we will see how position and velocity are unexpectedly related by the areas of certain regions on a graph of the velocity function.
+      we will see how position and velocity are unexpectedly related by the
+      areas of certain regions on a graph of the velocity function.
       Then, in <xref ref="sec_FTC">Section</xref>,
       we will see how areas and antiderivatives are closely tied together.
       This connection is incredibly important,
-      as indicated by the name of the theorem that describes it: The Fundamental Theorem of Calculus.
+      as indicated by the name of the theorem that describes it:
+      The Fundamental Theorem of Calculus.
     </p>
-  </subsection>
+  </paragraphs>
 
-  <subsection>
-    <title>Terms and Concepts</title>
-    <exercise>
-      <statement>
-        <p>
-          Define the term <q>antiderivative</q> in your own words.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Answers will vary.
-        </p>
-      </answer>
-    </exercise>
+  <exercises>
+    <exercisegroup>
 
-    <exercise>
-      <statement>
+      <introduction>
         <p>
-          Is it more accurate to refer to <q>the</q>
-          antiderivative of <m>f(x)</m> or <q>an</q>
-          antiderivative of <m>f(x)</m>?
+          Terms and Concepts
         </p>
-      </statement>
-      <answer>
-        <p>
-          <q>an</q>
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <exercise>
-      <statement>
-        <p>
-          Use your own words to define the indefinite integral of <m>f(x)</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Answers will vary.
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          Fill in the blanks:
-          <q>Inverse operations do the <fillin /> things in the <fillin /> order.</q>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          opposite; opposite
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Define the term <q>antiderivative</q> in your own words.
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          What is an <q>initial value problem</q>?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Answers will vary.
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var form="essay"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          The derivative of a position function is a <fillin /> function.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          velocity
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          The antiderivative of an acceleration function is a <fillin /> function.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          velocity
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              $A = PopUp(['?','the','an'],2);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Is it more accurate to refer to <q>the</q>
+                antiderivative of <m>f(x)</m> or <q>an</q>
+                antiderivative of <m>f(x)</m>?
+              </p>
+
+              <p>
+                <var name="$A" form="popup"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Use your own words to define the indefinite integral of <m>f(x)</m>.
+              </p>
+
+              <p>
+                <var form="essay"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $A = PopUp(['?','same','opposite'],2);
+              $B = PopUp(['?','same','reverse'],2);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Fill in the blanks:
+                <q>Inverse operations do the <fillin/><var name="$A" form="popup"/>
+                things in the <fillin/> <var name="$B" form="popup"/> order.</q>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                What is an <q>initial value problem</q>?
+              </p>
+
+              <p>
+                <var form="essay"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- FUNGUS: Fill in the blank questions for 6 and 7 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                The derivative of a position function is a <fillin/> function.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                velocity
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                The antiderivative of an acceleration function is a <fillin/>
+                function.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                velocity
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
 
     <exercise>
       <statement>
@@ -840,519 +860,807 @@
         </p>
       </answer>
     </exercise>
-  </subsection>
 
-  <subsection>
-    <title>Problems</title>
-    <p>
-      In the following exercises, evaluate the given indefinite integral.
-    </p>
+    </exercisegroup>
+    <exercisegroup>
 
-    <exercise>
-      <statement>
+      <introduction>
         <p>
-          <m>\ds \int 3x^3\ dx</m>
+          In the following exercises, evaluate the given indefinite integral.
         </p>
-      </statement>
-      <answer>
-        <p>
-          <m>3/4x^4+C</m>
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int x^8\ dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>1/9x^9+C</m>
-        </p>
-      </answer>
-    </exercise>
+<!-- Exercise 8 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int (10x^2-2)\ dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>10/3x^3-2x+C</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int dt</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>t+C</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int 1\ ds</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>s+C</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int \frac{1}{3t^2}\ dt</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>-1/(3t)+C</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int \frac{3}{t^2}\ dt</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>-3/(t)+C</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int \frac{1}{\sqrt{x}}\ dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>2\sqrt{x}+C</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int \sec^2\theta\ d\theta</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\tan \theta+C</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int \sin\theta\ d\theta</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>-\cos \theta+C</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int (\sec x\tan x + \csc x\cot x)\ dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\sec x - \csc x+C</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int 5e^\theta\ d\theta</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>5e^\theta+C</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int 3^t\ dt</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>3^t/\ln 3+C</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int \frac{5^t}{2}\ dt</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\frac{5^t}{2\ln 5}+C</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int (2t+3)^2\ dt</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>4/3t^3+6t^2+9t+C</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int (t^2+3)(t^3-2t)\ dt</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>t^6/6+t^4/4-3t^2+C</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int x^2x^3\ dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>x^6/6+C</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int e^\pi\ dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>e^\pi x+C</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int a\ dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>ax+C</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          This problem investigates why <xref ref="thm_indef_alg">Theorem</xref>
-          states that <m>\ds \int \frac1x\ dx = \ln |x| + C</m>.
-
-          <ol>
-            <li>
+            <pg-code>
+              $F = FormulaUpToConstant("3/4*x^4");
+            </pg-code>
+            </setup>
+            <statement>
               <p>
-                What is the domain of <m>y = \ln x</m>?
+                <m>\ds \int 3x^3\ dx</m>
               </p>
-            </li>
 
-            <li>
               <p>
-                Find <m>\frac{d}{dx}\big(\ln x\big)</m>.
+                <var name="$F" width="40"/>
               </p>
-            </li>
+            </statement>
+        </webwork>
+      </exercise>
 
-            <li>
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              $F = FormulaUpToConstant("x^9/9");
+            </pg-code>
+            </setup>
+            <statement>
               <p>
-                What is the domain of <m>y = \ln (-x)</m>?
+                <m>\ds \int x^8\ dx</m>
               </p>
-            </li>
 
-            <li>
               <p>
-                Find <m>\frac{d}{dx}\big(\ln (-x)\big)</m>.
+                <var name="$F" width="40"/>
               </p>
-            </li>
+            </statement>
+        </webwork>
+      </exercise>
 
-            <li>
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              $F = FormulaUpToConstant("10/3*x^3-2x");
+            </pg-code>
+            </setup>
+            <statement>
               <p>
-                You should find that <m>1/x</m> has two types of antiderivatives,
-                depending on whether <m>x>0</m> or <m>x\lt 0</m>.
-                In one expression, give a formula for
-                <m>\ds \int \frac{1}{x}\ dx</m> that takes these different domains into account,
-                and explain your answer.
+                <m>\ds \int (10x^2-2)\ dx</m>
               </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 11 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              Context()->variables->add(t=>"Real");
+              $F = FormulaUpToConstant("t");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int dt</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              Context()->variables->add(s=>"Real");
+              $F = FormulaUpToConstant("s");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int 1\ ds</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              Context()->variables->add(t=>"Real");
+              $F = FormulaUpToConstant("-1/(3t)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int \frac{1}{3t^2}\ dt</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 14 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              Context()->variables->add(t=>"Real");
+              $F = FormulaUpToConstant("-3/t");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int \frac{3}{t^2}\ dt</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              $F = FormulaUpToConstant("2*sqrt(x)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int \frac{1}{\sqrt{x}}\ dx</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              Context()->variables->add(theta=>"Real");
+              $F = FormulaUpToConstant("tan(theta)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int \sec^2(\theta) \ d\theta</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 17 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              Context()->variables->add(theta=>"Real");
+              $F = FormulaUpToConstant("-cos(theta)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int \sin(\theta) \ d\theta</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              $F = FormulaUpToConstant("1/cos(x) - 1/sin(x)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int (\sec(x) \tan(x) + \csc(x) \cot(x) )\ dx</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              Context()->variables->add(t=>"Real");
+            <!-- This works, but it renders theta as "theta" not the Greek letter -->
+            <!-- Using t instead-->
+              $F = FormulaUpToConstant("5e^t");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int 5e^t\ dt</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 20 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              Context()->variables->add(t=>"Real");
+              $F = FormulaUpToConstant("3^t/ln(3)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int 3^t\ dt</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              Context()->variables->add(t=>"Real");
+              $F = FormulaUpToConstant("5^t/(2*ln(5))");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int \frac{5^t}{2}\ dt</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              Context()->variables->add(t=>"Real");
+              $F = FormulaUpToConstant("(2t+3)^3/6");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int (2t+3)^2\ dt</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 23 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              Context()->variables->add(t=>"Real");
+              $F = FormulaUpToConstant("t^6/6+t^4/4-3t^2");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int (t^2+3)(t^3-2t)\ dt</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              $F = FormulaUpToConstant("x^6/6");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int x^2x^3\ dx</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              $F = FormulaUpToConstant("e^pi*x");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int e^\pi\ dx</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 26 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              Context()->variables->add(a=>"Real");
+              $F = FormulaUpToConstant("a*x");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int a\ dx</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+
+    <exercise>
+      <webwork seed="1">
+          <setup>
+
+            <pg-code>
+              Context("Inequalities");
+              $a = Interval(0,inf);
+              $c = Interval(-inf,0);
+            <!-- It'd be nice if x>0 and x<0 were recognized for the above two, respectively -->
+            <!-- Added context inequalities. This should allow both interval and inequality answers -->
+              $b = Formula("1/x");
+              $d = Formula("-1/x");
+            </pg-code>
+          </setup>
+          <statement>
             <p>
-              <m>x>0</m>
+              This problem investigates why <xref ref="thm_indef_alg">Theorem</xref>
+              states that <m>\ds \int \frac1x\,dx = \ln\abs{x} + C</m>.
             </p>
-          </li>
 
-          <li>
             <p>
-              <m>1/x</m>
+              <ol>
+                <li>
+                  <p>
+                    What is the domain of <m>y = \ln(x)</m>?
+                  </p>
+
+                  <p>
+                    <var name="$a" width="20"/>
+                  </p>
+                </li>
+
+                <li>
+                  <p>
+                    Find <m>\lzoo{x}{\ln(x) }</m>.
+                  </p>
+
+                  <p>
+                    <var name="$b" width="20"/>
+                  </p>
+                </li>
+
+                <li>
+                  <p>
+                    What is the domain of <m>y = \ln(-x)</m>?
+                  </p>
+
+                  <p>
+                    <var name="$c" width="20"/>
+                  </p>
+                </li>
+
+                <li>
+                  <p>
+                    Find <m>\lzoo{x}{\ln(-x)}</m>.
+                  </p>
+
+                  <p>
+                    <var name="$d" width="20"/>
+                  </p>
+                </li>
+
+                <li>
+                  <p>
+                    You should find that <m>1/x</m> has two types of antiderivatives,
+                    depending on whether <m>x \gt 0</m> or <m>x\lt 0</m>.
+                    In one expression, give a formula for
+                    <m>\ds \int \frac{1}{x}\ dx</m> that takes these different domains into account,
+                    and explain your answer.
+                  </p>
+
+                  <p>
+                    <var form="essay"/>
+                  </p>
+                </li>
+              </ol>
             </p>
-          </li>
-
-          <li>
-            <p>
-              <m>x\lt 0</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>1/x</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>\ln |x|+C</m>.
-              Explanations will vary.
-            </p>
-          </li>
-        </ol>
-      </answer>
+          </statement>
+      </webwork>
     </exercise>
 
-    <p>
-      In the following exercises,
-      find <m>f(x)</m> described by the given initial value problem.
-    </p>
+    <exercisegroup>
 
-    <exercise>
-      <statement>
+      <introduction>
         <p>
-          <m>\fp(x) = \sin x</m> and <m>f(0)= 2</m>
+          In the following exercises,
+          find <m>f(x)</m> described by the given initial value problem.
         </p>
-      </statement>
-      <answer>
-        <p>
-          <m>-\cos x+3</m>
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
+<!-- Exercise 28 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\fp(x) = 5e^x</m> and <m>f(0)= 10</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>5e^x+5</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              $F = Formula("-cos(x) + 3");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\fp(x) = \sin(x)</m> and <m>f(0)= 2</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\fp(x) = 4x^3-3x^2</m> and <m>f(-1)= 9</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>x^4-x^3+7</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <m>f(x) = </m><var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\fp(x) = \sec^2 x</m> and <m>f(\pi/4)= 5</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\tan x + 4</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\fp(x) = 7^x</m> and <m>f(2)= 1</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>7^x/\ln 7 + 1-49/\ln 7</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              $F = Formula("5e^x+5");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\fp(x) = 5e^x</m> and <m>f(0)= 10</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\fpp(x) = 5</m> and <m>\fp(0)= 7</m>, <m>f(0) = 3</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>5/2x^2+7x+3</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <m>f(x) = </m><var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 30 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\fpp(x) = 7x</m> and <m>\fp(1)= -1</m>, <m>f(1) = 10</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\frac{7 x^3}{6}-\frac{9 x}{2}+\frac{40}{3}</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              $F = Formula("x^4 - x^3 + 7");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\fp(x) = 4x^3-3x^2</m> and <m>f(-1)= 9</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\fpp(x) = 5e^x</m> and <m>\fp(0)= 3</m>, <m>f(0) = 5</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>5e^x-2x</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <m>f(x) = </m><var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\fpp(\theta) = \sin \theta</m> and <m>\fp(\pi)= 2</m>,
-          <m>f(\pi) = 4</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\theta-\sin (\theta)-\pi +4</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\fpp(x) = 24x^2+2^x-\cos x</m> and <m>\fp(0)= 5</m>,
-          <m>f(0) = 0</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>2x^4+\cos x+\frac{2^x}{(\ln 2)^2}+(5-\frac1{\ln 2})x -1 - \frac{1}{(\ln 2)^2}</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              $F = Formula("tan(x) + 4");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\fp(x) = \sec^2(x)</m> and <m>f(\pi/4)= 5</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\fpp(x) = 0</m> and <m>\fp(1)= 3</m>, <m>f(1) = 1</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>3x-2</m>
-        </p>
-      </answer>
-    </exercise>
-  </subsection>
+              <p>
+                <m>f(x) = </m><var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 32 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-  <subsection>
-    <title>Review</title>
-    <exercise>
-      <statement>
-        <p>
-          Use information gained from the first and second derivatives to sketch <m>\ds f(x) = \frac{1}{e^x+1}</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          No answer provided.
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              $F = Formula("7^x/ln(7) + 1-49/ln(7)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\fp(x) = 7^x</m> and <m>f(2)= 1</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          Given <m>y = x^2e^x\cos x</m>, find <m>dy</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>dy = (2xe^x\cos x+ x^2e^x\cos x- x^2e^x\sin x)dx</m>
-        </p>
-      </answer>
-    </exercise>
-  </subsection>
+              <p>
+                <m>f(x) = </m><var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $F = Formula("5/2*x^2+7x+3");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\fpp(x) = 5</m> and <m>\fp(0)= 7</m>, <m>f(0) = 3</m>
+              </p>
+
+              <p>
+                <m>f(x) = </m><var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 34 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $F = Formula("7x^3/6-9x/2+40/3");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\fpp(x) = 7x</m> and <m>\fp(1)= -1</m>, <m>f(1) = 10</m>
+              </p>
+
+              <p>
+                <m>f(x) = </m><var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $F = Formula("5e^x-2x");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\fpp(x) = 5e^x</m> and <m>\fp(0)= 3</m>, <m>f(0) = 5</m>
+              </p>
+
+              <p>
+                <m>f(x) = </m><var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 36 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              Context()->variables->add(theta=>"Real");
+              $F = Formula("theta - sin(theta) - pi + 4");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\fpp(\theta) = \sin(\theta)</m> and <m>\fp(\pi)= 2</m>,
+                <m>f(\pi) = 4</m>
+              </p>
+
+              <p>
+                <m>f(\theta) = </m><var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              Context()->constants->add(a=>Compute("1/ln(2)"));
+              $F = Formula("2x^4+2^x*a^2+cos(x)+(5-a)*x - 1 - a^2");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\fpp(x) = 24x^2+2^x-\cos(x)</m> and <m>\fp(0)= 5</m>,
+                <m>f(0) = 0</m>
+              </p>
+
+              <p>
+                <m>f(x) = </m><var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 38 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $F = Formula("3x-2");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\fpp(x) = 0</m> and <m>\fp(1)= 3</m>, <m>f(1) = 1</m>
+              </p>
+
+              <p>
+                <m>f(x) = </m><var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
+        <p>
+          Review
+        </p>
+      </introduction>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+<!--The original problem tells students to graph the function. Seems difficult on WeBWorK -->
+            <pg-code>
+              $a = Interval(-inf,inf);
+              $b = Compute("0");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                For the function <m>\ds f(x) = \frac{1}{e^x+1}</m>:
+              </p>
+
+              <p>
+                The function is decreasing on the interval <var name="$a" width="20"/>.
+              </p>
+
+              <p>
+                The function has an inflection point at <m>x = </m><var name="$b" width="20"/>.
+              </p>
+              <p>
+                On paper, use your answers above to sketch the graph of <m>f</m>.
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              Context()->variables->add(dx=>"Real");
+              $f = Formula("x^2*e^x*cos(x)");
+              $df = $f->D('x');
+              $dy = Formula("$df dx");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Given <m>y = x^2e^x\cos(x)</m>, find <m>dy</m>.
+              </p>
+
+              <p>
+                <m>dy = </m><var name="$dy" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+  </exercises>
 </section>
-

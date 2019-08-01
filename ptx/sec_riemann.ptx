@@ -1,10 +1,9 @@
-
-
+<?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="sec_riemann">
   <title>Riemann Sums</title>
   <introduction>
     <p>
-      In the previous section we defined the definite integral of a function on <m>[a,b]</m> to be the signed area between the curve and the <m>x</m><ndash />axis.
+      In the previous section we defined the definite integral of a function on <m>[a,b]</m> to be the signed area between the curve and the <m>x</m><ndash/>axis.
       Some areas were simple to compute;
       we ended the section with a region whose area was not simple to compute.
       In this section we develop a technique to find such areas.
@@ -21,20 +20,72 @@
     <p>
       Consider the region given in <xref ref="fig_rie1a">Figure</xref>,
       which is the area under <m>y=4x-x^2</m> on <m>[0,4]</m>.
-      What is the signed area of this region <mdash /> i.e., what is <m>\int_0^4(4x-x^2)\ dx</m>?
+      What is the signed area of this region <mdash/> i.e., what is <m>\int_0^4(4x-x^2)\ dx</m>?
     </p>
 
     <figure xml:id="fig_rie1a">
       <caption>A graph of <m>f(x) = 4x-x^2</m>. What is the area of the shaded region?</caption>
-      <img src="figures/figrie1a"/>
+      <!-- START figures/fig_rie1a.tex -->
+      <image xml:id="img_rie1a" width="47%">
+        <description></description>
+        <latex-image>
+
+        \begin{tikzpicture}
+
+        \begin{axis}[
+        axis on top,
+        xtick={1,2,3,4},
+        ytick={1,2,3,4},
+        ymin=-1,ymax=5,
+        xmin=-.5,xmax=4.5
+        ]
+
+        \addplot [firstcurvestyle,areastyle,domain=0:4] {4*x-x^2};
+        \addplot [firstcurvestyle,-,domain=-0.2:4.2,samples=45] {4*x-x^2};
+
+        \end{axis}
+        \end{tikzpicture}
+
+        </latex-image>
+      </image>
+      <!-- figures/fig_rie1a.tex END -->
     </figure>
 
     <p>
       We start by approximating.
       We can surround the region with a rectangle with height and width of 4 and find the area is approximately 16 square units.
-      This is obviously an <em>over<ndash />approximation</em>;
+      This is obviously an <em>over<ndash/>approximation</em>;
       we are including area in the rectangle that is not under the parabola.
     </p>
+
+    <figure xml:id="fig_rie1a2">
+      <caption>Approximating area under a curve with one rectangle</caption>
+      <image xml:id="img_rie1a2" width="47%">
+        <description></description>
+        <latex-image>
+
+        \begin{tikzpicture}
+
+        \begin{axis}[
+        axis on top,
+        xtick={1,2,3,4},
+        ytick={1,2,3,4},
+        ymin=-1,ymax=5,
+        xmin=-.5,xmax=4.5
+        ]
+
+        \addplot [firstcurvestyle,areastyle,domain=0:4] {4*x-x^2} \closedcycle;
+        \addplot [firstcurvestyle,-,domain=-.2:4.2,samples=40] {4*x-x^2} node [pos=1, left] {\scriptsize $y=4x-x^2$};
+
+        \draw [thick,secondcolor] (axis cs:0,0) rectangle (axis cs:4,4);
+
+        \end{axis}
+        \end{tikzpicture}
+
+        </latex-image>
+      </image>
+
+    </figure>
 
     <p>
       We have an approximation of the area, using one rectangle.
@@ -44,7 +95,7 @@
     </p>
 
     <p>
-      Let's use 4 rectangles with an equal width of 1.
+      Let's use four rectangles with an equal width of 1.
       This <em>partitions</em> the interval <m>[0,4]</m> into 4 <em>subintervals</em>,
       <m>[0,1]</m>, <m>[1,2]</m>, <m>[2,3]</m> and <m>[3,4]</m>.
       On each subinterval we will draw a rectangle.
@@ -55,7 +106,7 @@
       the <em>Left Hand Rule</em>,
       the <em>Right Hand Rule</em>,
       and the <em>Midpoint Rule</em>.
-      The <em>Left Hand Rule</em> says to evaluate the function at the left<ndash />hand endpoint of the subinterval and make the rectangle that height.
+      The <em>Left Hand Rule</em> says to evaluate the function at the left<ndash/>hand endpoint of the subinterval and make the rectangle that height.
       In <xref ref="fig_rie1b">Figure</xref>,
       the rectangle drawn on the interval <m>[2,3]</m> has height determined by the Left Hand Rule;
       it has a height of <m>f(2)</m>. (The rectangle is labeled <q>LHR.</q>)
@@ -66,7 +117,45 @@
 
     <figure xml:id="fig_rie1b">
       <caption>Approximating <m>\int_0^4(4x-x^2)\ dx</m> using rectangles. The heights of the rectangles are determined using different rules.</caption>
-      <img src="figures/figrie1b"/>
+      <!-- START figures/fig_rie1b.tex -->
+      <image xml:id="img_rie1b" width="47%">
+        <description></description>
+        <latex-image>
+
+        \begin{tikzpicture}
+
+        \begin{axis}[
+        axis on top,
+        xtick={1,2,3,4},
+        ytick={1,2,3,4},
+        ymin=-1,ymax=5,
+        xmin=-.5,xmax=4.5
+        ]
+
+        \addplot [firstcurvestyle,areastyle,domain=0:4] {4*x-x^2};
+        \addplot [firstcurvestyle,-,domain=0:4,samples=40] {4*x-x^2};
+
+        \draw [thick,secondcolor] (axis cs:0,0) rectangle (axis cs:1,3);
+        \draw [thick,secondcolor] (axis cs:1,0) rectangle (axis cs:2,3.75);
+        \draw [thick,secondcolor] (axis cs:2,0) rectangle (axis cs:3,4);
+        \draw [thick,secondcolor] (axis cs:3,0) rectangle (axis cs:4,1.666);
+
+        \draw [fill=black] (axis cs:1,3) circle (1pt);
+        \draw [fill=black] (axis cs:1.5,3.75) circle (1pt);
+        \draw [fill=black] (axis cs:2,4) circle (1pt);
+        \draw [fill=black] (axis cs:3.53,1.666) circle (1pt);
+
+        \draw (axis cs:.5,.3) node {\scriptsize RHR};
+        \draw (axis cs:1.5,.3) node {\scriptsize MPR};
+        \draw (axis cs:2.5,.3) node {\scriptsize LHR};
+        \draw (axis cs:3.5,.3) node {\scriptsize other};
+        \end{axis}
+
+        \end{tikzpicture}
+
+        </latex-image>
+      </image>
+      <!-- figures/fig_rie1b.tex END -->
     </figure>
 
     <p>
@@ -112,71 +201,190 @@
       <solution>
         <p>
           We break the interval <m>[0,4]</m> into four subintervals as before.
-          In <xref ref="fig_rie2">Figure</xref>(a) we see 4 rectangles drawn on
+          In <xref ref="fig_rie2a">Figure</xref>
+          we see 4 rectangles drawn on
           <m>f(x) = 4x-x^2</m> using the Left Hand Rule.
           (The areas of the rectangles are given in each figure.)
         </p>
 
-        <figure xml:id="fig_rie2">
-          <caption>Approximating <m>\int_0^4(4x-x^2)\ dx</m> in <xref ref="ex_rie2">Example</xref>. In (a), the Left Hand Rule is used; in (b), the Right Hand Rule is used; in (c), the Midpoint Rule is used.</caption>
-          <sidebyside>
-            <figure>
-              <caption>(a)</caption>
-              <img src="figures/figrie2a"/>
-            </figure>
-
-            <figure>
-              <caption>(b)</caption>
-              <img src="figures/figrie2b"/>
-            </figure>
-
-            <figure>
-              <caption>(c)</caption>
-              <img src="figures/figrie2c"/>
-            </figure>
-          </sidebyside>
-
-        </figure>
-
         <p>
           Note how in the first subinterval,
           <m>[0,1]</m>, the rectangle has height <m>f(0)=0</m>.
-          We add up the areas of each rectangle (height<times /> width) for our Left Hand Rule approximation:
+          We add up the areas of each rectangle (height<times/> width) for our Left Hand Rule approximation:
           <md>
-            <mrow>f(0)\cdot 1 + f(1)\cdot 1+ f(2)\cdot 1+f(3)\cdot 1 \amp =</mrow>
-            <mrow>0+3+4+3\amp = 10</mrow>
+            <mrow>\amp f(0)\cdot 1 + f(1)\cdot 1+ f(2)\cdot 1+f(3)\cdot 1</mrow>
+            <mrow>=\amp 0+3+4+3 = 10</mrow>
           </md>.
         </p>
 
         <p>
-          <xref ref="fig_rie2">Figure</xref>(b) shows 4 rectangles drawn under <m>f</m> using the Right Hand Rule;
+          <xref ref="fig_rie2b">Figure</xref>
+          shows 4 rectangles drawn under <m>f</m> using the Right Hand Rule;
           note how the <m>[3,4]</m> subinterval has a rectangle of height 0.
         </p>
 
         <p>
           In this example,
-          these rectangle seem to be the mirror image of those found in part (a) of the Figure.
+          these rectangles seem to be the mirror image of those found in <xref ref="fig_rie2a">Figure</xref>.
           This is because of the symmetry of our shaded region.
           Our approximation gives the same answer as before,
           though calculated a different way:
           <md>
-            <mrow>f(1)\cdot 1 + f(2)\cdot 1+ f(3)\cdot 1+f(4)\cdot 1 \amp =</mrow>
-            <mrow>3+4+3+0\amp = 10</mrow>
+            <mrow>\amp f(1)\cdot 1 + f(2)\cdot 1+ f(3)\cdot 1+f(4)\cdot 1</mrow>
+            <mrow>\amp =3+4+3+0= 10</mrow>
           </md>.
         </p>
 
         <p>
-          <xref ref="fig_rie2">Figure</xref>(c) shows 4 rectangles drawn under <m>f</m> using the Midpoint Rule.
+          <xref ref="fig_rie2c">Figure</xref>
+          shows 4 rectangles drawn under <m>f</m> using the Midpoint Rule.
+        </p>
+
+        <p>
           This gives an approximation of <m>\int_0^4(4x-x^2)\ dx</m> as:
           <md>
-            <mrow>f(0.5)\cdot 1 + f(1.5)\cdot 1+ f(2.5)\cdot 1+f(3.5)\cdot 1 \amp =</mrow>
-            <mrow>1.75+3.75+3.75+1.75\amp = 11</mrow>
+            <mrow>f(0.5)\cdot 1 + f(1.5)\cdot 1+ f(2.5)\cdot 1+f(3.5)\cdot 1</mrow>
+            <mrow>\amp =1.75+3.75+3.75+1.75 = 11</mrow>
           </md>.
         </p>
 
         <p>
           Our three methods provide two approximations of <m>\int_0^4(4x-x^2)\ dx</m>: 10 and 11.
         </p>
+        <figure xml:id="fig_rie2">
+          <caption>Approximating <m>\int_0^4(4x-x^2)\ dx</m> in <xref ref="ex_rie2">Example</xref>:</caption>
+          <sidebyside widths="33% 33% 33%">
+          <figure xml:id="fig_rie2a">
+          <caption>using the Left Hand Rule.</caption>
+          <!-- START figures/fig_rie2a.tex -->
+          <image xml:id="img_rie2a" width="47%">
+            <description></description>
+            <latex-image>
+
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            axis on top,
+            xtick={1,2,3,4},
+            ytick={1,2,3,4},
+            ymin=-1,ymax=5,
+            xmin=-.5,xmax=4.5
+            ]
+
+            \addplot [firstcurvestyle,areastyle,domain=0:4] {4*x-x^2};
+            \addplot [firstcurvestyle,-,domain=0:4,samples=40] {4*x-x^2};
+
+            \draw [thick,secondcolor] (axis cs:0,0) rectangle (axis cs:1,0);
+            \draw [thick,secondcolor] (axis cs:1,0) rectangle (axis cs:2,3);
+            \draw [thick,secondcolor] (axis cs:2,0) rectangle (axis cs:3,4);
+            \draw [thick,secondcolor] (axis cs:3,0) rectangle (axis cs:4,3);
+
+            \draw [fill=black] (axis cs:0,0) circle (1pt);
+            \draw [fill=black] (axis cs:1,3) circle (1pt);
+            \draw [fill=black] (axis cs:2,4) circle (1pt);
+            \draw [fill=black] (axis cs:3,3) circle (1pt);
+
+            \draw (axis cs:.5,.3) node {$0$};
+            \draw (axis cs:1.5,1.5) node {$3$};
+            \draw (axis cs:2.5,2) node {$4$};
+            \draw (axis cs:3.5,1.5) node {$3$};
+            \end{axis}
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
+          <!-- figures/fig_rie2a.tex END -->
+        </figure>
+
+        <figure xml:id="fig_rie2b">
+          <caption>using the Right Hand Rule.</caption>
+          <!-- START figures/fig_rie2b.tex -->
+          <image xml:id="img_rie2b" width="47%">
+            <description></description>
+            <latex-image>
+
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            axis on top,
+            xtick={1,2,3,4},
+            ytick={1,2,3,4},
+            ymin=-1,ymax=5,
+            xmin=-.5,xmax=4.5
+            ]
+
+            \addplot [firstcurvestyle,areastyle,domain=0:4] {4*x-x^2};
+            \addplot [firstcurvestyle,-,domain=0:4,samples=40] {4*x-x^2};
+
+            \draw [thick,secondcolor] (axis cs:0,0) rectangle (axis cs:1,3);
+            \draw [thick,secondcolor] (axis cs:1,0) rectangle (axis cs:2,4);
+            \draw [thick,secondcolor] (axis cs:2,0) rectangle (axis cs:3,3);
+            \draw [thick,secondcolor] (axis cs:3,0) rectangle (axis cs:4,0);
+
+            \draw [fill=black] (axis cs:4,0) circle (1pt);
+            \draw [fill=black] (axis cs:1,3) circle (1pt);
+            \draw [fill=black] (axis cs:2,4) circle (1pt);
+            \draw [fill=black] (axis cs:3,3) circle (1pt);
+
+            \draw (axis cs:.5,1.5) node {$3$};
+            \draw (axis cs:1.5,2) node {$4$};
+            \draw (axis cs:2.5,1.5) node {$3$};
+            \draw (axis cs:3.5,.3) node {$0$};
+            \end{axis}
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
+          <!-- figures/fig_rie2b.tex END -->
+        </figure>
+
+        <figure xml:id="fig_rie2c">
+          <caption>using the Midpoint Rule.</caption>
+          <!-- START figures/fig_rie2c.tex -->
+          <image xml:id="img_rie2c" width="47%">
+            <description></description>
+            <latex-image>
+
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            axis on top,
+            xtick={1,2,3,4},
+            ytick={1,2,3,4},
+            ymin=-1,ymax=5,
+            xmin=-.5,xmax=4.5
+            ]
+
+            \addplot [firstcurvestyle,areastyle,domain=0:4] {4*x-x^2};
+            \addplot [firstcurvestyle,-,domain=0:4,samples=40] {4*x-x^2};
+
+            \draw [thick,secondcolor] (axis cs:0,0) rectangle (axis cs:1,1.75);
+            \draw [thick,secondcolor] (axis cs:1,0) rectangle (axis cs:2,3.75);
+            \draw [thick,secondcolor] (axis cs:2,0) rectangle (axis cs:3,3.75);
+            \draw [thick,secondcolor] (axis cs:3,0) rectangle (axis cs:4,1.75);
+
+            \draw [fill=black] (axis cs:.5,1.75) circle (1pt);
+            \draw [fill=black] (axis cs:1.5,3.75) circle (1pt);
+            \draw [fill=black] (axis cs:2.5,3.75) circle (1pt);
+            \draw [fill=black] (axis cs:3.5,1.75) circle (1pt);
+
+            \draw (axis cs:.5,.875) node {\small$1.75$};
+            \draw (axis cs:1.5,1.875) node {\small$3.75$};
+            \draw (axis cs:2.5,1.875) node {\small$3.75$};
+            \draw (axis cs:3.5,.875) node {\small$1.75$};
+            \end{axis}
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
+          <!-- figures/fig_rie2c.tex END -->
+        </figure>
+
+          </sidebyside>
+        </figure>
       </solution>
     </example>
   </introduction>
@@ -196,22 +404,25 @@
     <p>
       Suppose we wish to add up a list of numbers <m>a_1</m>,
       <m>a_2</m>,
-      <m>a_3</m>, <ellipsis />, <m>a_9</m>.
+      <m>a_3</m>, <ellipsis/>, <m>a_9</m>.
       Instead of writing
       <me>
         a_1+a_2+a_3+a_4+a_5+a_6+a_7+a_8+a_9
       </me>,
-      we use summation notation and write
-    </p>
-
-    <p>
-      <img src="figures/figrie_notation"/>
-      \captionof{figure}{Understanding summation notation.} The upper case sigma represents the term <q>sum.</q>
-      The index of summation in this example is <m>i</m>;
-      any symbol can be used.
+      we use summation notation and write <m>\sum_{i=1}^9 a_i</m>.
+<!--ToDo: original has a diagram for this, named fig_rie_notation. Why not include here?-->
+      The upper case sigma,
+      <m>Sigma</m> represents the term ``sum.'' The index (counter) of summation in this example is $i$; any symbol can be used.
       By convention, the index takes on only the integer values between
       (and including)
       the lower and upper bounds.
+      To the right of <m>\Sigma</m>,
+      the expression <m>a_i</m> is called the summand.
+      It tells us what we are summing.
+      This is summarized in <xref ref="eq_sigmanotation">Equation</xref>.
+      <men xml:id="eq_sigmanotation">
+        \sum_{\underbrace{i=1}_{i \text{-index of summation}}}^{\overbrace{9}^\text{upper bound}} \underbrace{a_i}_\text{summand}
+      </men>
     </p>
 
     <p>
@@ -227,9 +438,14 @@
           So <m>a_1 = 1</m>, <m>a_2 = 3</m>,
           <m>a_3 = 5</m>, etc. (The output is the positive odd integers).
           Evaluate the following summations:
-          <me>
-            1.\ \sum_{i=1}^6 a_i \qquad\qquad\qquad 2.\ \sum_{i=3}^7 (3a_i-4)\qquad\qquad \qquad 3.\ \sum_{i=1}^4 (a_i)^2
-          </me>
+
+          <ol>
+            <li><m>\ds \sum_{i=1}^6 a_i </m></li>
+
+            <li><m>\ds \sum_{i=3}^7 (3a_i-4) </m></li>
+
+            <li><m>\ds \sum_{i=1}^4 (a_i)^2 </m></li>
+          </ol>
         </p>
       </statement>
       <solution>
@@ -281,54 +497,54 @@
     <theorem xml:id="thm_summation">
       <title>Properties of Summations</title>
       <statement>
-        <sidebyside>
-          <idx><h>summation</h><h>properties</h></idx>
+          <p>
+            <idx><h>summation</h><h>properties</h></idx>
 
-          <ol cols="2">
-            <li>
-              <p>
-                <m>\ds \sum_{i=1}^n c = c\cdot n</m>,
-                where <m>c</m> is a constant.
-              </p>
-            </li>
+            <ol cols="2">
+              <li>
+                <p>
+                  <m>\ds \sum_{i=1}^n c = c\cdot n</m>,
+                  where <m>c</m> is a constant.
+                </p>
+              </li>
 
-            <li>
-              <p>
-                <m>\ds \sum_{i=m}^n (a_i\pm b_i) = \sum_{i=m}^n a_i \pm \sum_{i=m}^n b_i</m>
-              </p>
-            </li>
+              <li>
+                <p>
+                  <m>\ds \sum_{i=m}^n (a_i\pm b_i) = \sum_{i=m}^n a_i \pm \sum_{i=m}^n b_i</m>
+                </p>
+              </li>
 
-            <li>
-              <p>
-                <m>\ds \sum_{i=m}^n c\cdot a_i = c\cdot\sum_{i=m}^n a_i</m>
-              </p>
-            </li>
+              <li>
+                <p>
+                  <m>\ds \sum_{i=m}^n c\cdot a_i = c\cdot\sum_{i=m}^n a_i</m>
+                </p>
+              </li>
 
-            <li>
-              <p>
-                <m>\ds \sum_{i=m}^j a_i + \sum_{i=j+1}^n a_i = \sum_{i=m}^n a_i</m>
-              </p>
-            </li>
+              <li>
+                <p>
+                  <m>\ds \sum_{i=m}^j a_i + \sum_{i=j+1}^n a_i = \sum_{i=m}^n a_i</m>
+                </p>
+              </li>
 
-            <li>
-              <p>
-                <m>\ds \sum_{i=1}^n i = \frac{n(n+1)}2</m>
-              </p>
-            </li>
+              <li>
+                <p>
+                  <m>\ds \sum_{i=1}^n i = \frac{n(n+1)}2</m>
+                </p>
+              </li>
 
-            <li>
-              <p>
-                <m>\ds \sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}6</m>
-              </p>
-            </li>
+              <li>
+                <p>
+                  <m>\ds \sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}6</m>
+                </p>
+              </li>
 
-            <li>
-              <p>
-                <m>\ds \sum_{i=1}^n i^3 = \left(\frac{n(n+1)}2\right)^2</m>
-              </p>
-            </li>
-          </ol>
-        </sidebyside>
+              <li>
+                <p>
+                  <m>\ds \sum_{i=1}^n i^3 = \left(\frac{n(n+1)}2\right)^2</m>
+                </p>
+              </li>
+            </ol>
+          </p>
       </statement>
     </theorem>
 
@@ -344,12 +560,14 @@
         </p>
       </statement>
       <solution>
-        <md>
-          <mrow>\sum_{i=1}^6 (2i-1) \amp  = \sum_{i=1}^6 2i - \sum_{i=1}^6 (1)</mrow>
-          <mrow>\amp =  \left(2\sum_{i=1}^6 i \right)- 6</mrow>
-          <mrow>\amp = 2\frac{6(6+1)}{2} - 6</mrow>
-          <mrow>\amp = 42-6 = 36</mrow>
-        </md>
+        <p>
+          <md>
+            <mrow>\sum_{i=1}^6 (2i-1) \amp  = \sum_{i=1}^6 2i - \sum_{i=1}^6 (1)</mrow>
+            <mrow>\amp =  \left(2\sum_{i=1}^6 i \right)- 6</mrow>
+            <mrow>\amp = 2\frac{6(6+1)}{2} - 6</mrow>
+            <mrow>\amp = 42-6 = 36</mrow>
+          </md>
+        </p>
         <p>
           We obtained the same answer without writing out all six terms.
           When dealing with small sizes of <m>n</m>,
@@ -372,7 +590,33 @@
 
     <figure xml:id="fig_rie5">
       <caption>Dividing <m>[0,4]</m> into 16 equally spaced subintervals.</caption>
-      <img src="figures/figrie5"/>
+      <image xml:id="img_rie5" width="47%">
+        <description></description>
+        <latex-image>
+
+        \begin{tikzpicture}
+
+        \draw [&lt;-&gt;] (-.5,0) -- (4.5,0);
+
+        \foreach \x in {0,.25,...,4} {
+            \draw (\x,-.1) -- (\x,.1);
+          }
+        \draw (0,-.25) node {\scriptsize $0$};
+        \draw (1,-.25) node {\scriptsize $1$};
+        \draw (2,-.25) node {\scriptsize $2$};
+        \draw (3,-.25) node {\scriptsize $3$};
+        \draw (4,-.25) node {\scriptsize $4$};
+
+        \draw (0,-.55) node {\scriptsize $x_1$};
+        \draw (1,-.55) node {\scriptsize $x_5$};
+        \draw (2,-.55) node {\scriptsize $x_9$};
+        \draw (3,-.55) node {\scriptsize $x_{13}$};
+        \draw (4,-.55) node {\scriptsize $x_{17}$};
+
+        \end{tikzpicture}
+
+        </latex-image>
+      </image>
     </figure>
 
     <p>
@@ -388,9 +632,26 @@
       Consider:
     </p>
 
-    <p>
-      <img src="figures/figrie5a"/>
-    </p>
+    <image xml:id="img_rie5a" width="47%">
+      <description></description>
+      <latex-image>
+
+      \begin{tikzpicture}
+      \draw (1.5,1) node {$\displaystyle x_i = x_1 + (i-1)\Delta x$};
+
+      \draw [firstcolor] (1,0) node [text width=32pt,align=center] (a) {\scriptsize \centering starting\\[-5pt] value};
+      \draw [firstcolor,-&gt;] (a) -- (.95,.75);
+
+      \draw [firstcolor] (2,2.25) node [text width=60pt,align=center] (b) {\scriptsize \centering number of subintervals\\[-5pt] between $x_1$ and $x_i$};
+      \draw [firstcolor,-&gt;] (b) -- (1.95,1.25);
+
+      \draw [firstcolor] (3,0) node [text width=60pt,align=center] (c) {\scriptsize \centering subinterval\\[-5pt] size};
+      \draw [firstcolor,-&gt;] (c) -- (2.75,.75);
+
+      \end{tikzpicture}
+
+      </latex-image>
+    </image>
 
     <p>
       So <m>x_{10} = x_1 + 9(4/16) = 2.25</m>.
@@ -413,22 +674,22 @@
       Given any subdivision of <m>[0,4]</m>,
       the first subinterval is <m>[x_1,x_2]</m>;
       the second is <m>[x_2,x_3]</m>;
-      the <m>i^\text{ th }</m> subinterval is <m>[x_i,x_{i+1}]</m>.
+      the <m>i</m>th subinterval is <m>[x_i,x_{i+1}]</m>.
     </p>
 
     <p>
       When using the Left Hand Rule,
-      the height of the <m>i^\text{ th }</m> rectangle will be <m>f(x_i)</m>.
+      the height of the <m>i</m>th rectangle will be <m>f(x_i)</m>.
     </p>
 
     <p>
       When using the Right Hand Rule,
-      the height of the <m>i^\text{ th }</m> rectangle will be <m>f(x_{i+1})</m>.
+      the height of the <m>i</m>th rectangle will be <m>f(x_{i+1})</m>.
     </p>
 
     <p>
       When using the Midpoint Rule,
-      the height of the <m>i^\text{ th }</m> rectangle will be <m>\ds f\left(\frac{x_i+x_{i+1}}2\right)</m>.
+      the height of the <m>i</m>th rectangle will be <m>\ds f\left(\frac{x_i+x_{i+1}}2\right)</m>.
     </p>
 
     <p>
@@ -437,15 +698,28 @@
     </p>
 
     <p>
-      <em>Left Hand Rule:</em> <m>\ds \sum_{i=1}^{16} f(x_i)\Delta x</m>
-    </p>
+      <dl>
+        <li>
+          <title>Left Hand Rule</title>
+          <p>
+            <m>\ds \sum_{i=1}^{16} f(x_i)\Delta x</m>
+          </p>
+        </li>
 
-    <p>
-      <em>Right Hand Rule:</em> <m>\ds \sum_{i=1}^{16} f(x_{i+1})\Delta x</m>
-    </p>
+        <li>
+          <title>Right Hand Rule</title>
+          <p>
+            <m>\ds \sum_{i=1}^{16} f(x_{i+1})\Delta x</m>
+          </p>
+        </li>
 
-    <p>
-      <em>Midpoint Rule:</em> <m>\ds \sum_{i=1}^{16} f\left(\frac{x_i+x_{i+1}}2\right)\Delta x</m>
+        <li>
+          <title>Midpoint Rule</title>
+          <p>
+            <m>\ds \sum_{i=1}^{16} f\left(\frac{x_i+x_{i+1}}2\right)\Delta x</m>
+          </p>
+        </li>
+      </dl>
           <idx><h>Left Hand Rule</h></idx>
           <idx><h>Right Hand Rule</h></idx>
           <idx><h>Midpoint Rule</h></idx>
@@ -484,42 +758,73 @@
 
         <p>
           Using the summation formulas, consider:
-          <md>
-            <mrow>\int_0^4 (4x-x^2)\ dx \amp \approx \sum_{i=1}^{16} f(x_{i+1})\Delta x</mrow>
-            <mrow>\amp = \sum_{i=1}^{16} f(i\Delta x) \Delta x</mrow>
-            <mrow>\amp = \sum_{i=1}^{16} \big(4i\Delta x - (i\Delta x)^2\big)\Delta x</mrow>
-            <mrow>\amp = \sum_{i=1}^{16} (4i\Delta x^2 - i^2\Delta x^3)</mrow>
-            <mrow>\amp = (4\Delta x^2)\sum_{i=1}^{16} i - \Delta x^3 \sum_{i=1}^{16} i^2</mrow>
-            <mrow>\amp = (4\Delta x^2)\frac{16\cdot 17}{2} - \Delta x^3 \frac{16(17)(33)}6  \text{ \((\Delta x = 0.25)\) }</mrow>
-            <mrow>\amp =10.625</mrow>
-          </md>
+          <mdn>
+            <mrow number="no">\int_0^4 (4x-x^2)\ dx \amp \approx \sum_{i=1}^{16} f(x_{i+1})\Delta x</mrow>
+            <mrow number="no">\amp = \sum_{i=1}^{16} f(i\Delta x) \Delta x</mrow>
+            <mrow number="no">\amp = \sum_{i=1}^{16} \big(4i\Delta x - (i\Delta x)^2\big)\Delta x</mrow>
+            <mrow number="no">\amp = \sum_{i=1}^{16} (4i\Delta x^2 - i^2\Delta x^3)</mrow>
+            <mrow xml:id="eq_rie7">\amp = (4\Delta x^2)\sum_{i=1}^{16} i - \Delta x^3 \sum_{i=1}^{16} i^2</mrow>
+            <mrow number="no">\amp = (4\Delta x^2)\frac{16\cdot 17}{2} - \Delta x^3 \frac{16(17)(33)}6</mrow>
+            <mrow number="no">\amp =	4\cdot 0.25^2\cdot 136-0.25^3\cdot 1496</mrow>
+            <mrow number="no">\amp =10.625</mrow>
+          </mdn>
         </p>
 
         <p>
           We were able to sum up the areas of 16 rectangles with very little computation.
           In <xref ref="fig_rie7">Figure</xref>
           the function and the 16 rectangles are graphed.
-          While some rectangles over<ndash />approximate the area,
-          other under<ndash />approximate the area
+          While some rectangles over<ndash/>approximate the area,
+          other under<ndash/>approximate the area
           (by about the same amount).
           Thus our approximate area of 10.625 is likely a fairly good approximation.
         </p>
 
         <p>
-          Notice Equation <xref ref="eq_rie7" />;
-          by changing the 16's to 1,000's
+          Notice Equation <xref ref="eq_rie7"/>;
+          by replacing 16 by 1,000
           (and appropriately changing the value of <m>\Delta x</m>),
           we can use that equation to sum up 1000 rectangles!
         </p>
 
         <figure xml:id="fig_rie7">
           <caption>Approximating <m>\int_0^4(4x-x^2)\ dx</m> with the Right Hand Rule and 16 evenly spaced subintervals.</caption>
-          <img src="figures/figrie7"/>
+          <!-- START figures/fig_rie7.tex -->
+          <image xml:id="img_rie7" width="47%">
+            <description></description>
+            <latex-image>
+
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            axis on top,
+            xtick={1,2,3,4},
+            ytick={1,2,3,4},
+            ymin=-1,ymax=5,
+            xmin=-.5,xmax=4.5
+            ]
+
+            \addplot [firstcurvestyle,areastyle,domain=0:4] {4*x-x^2};
+            \addplot [firstcurvestyle,-,domain=0:4,samples=40] {4*x-x^2};
+
+            \foreach \x / \y in {0.25 / 0.9375, 0.5 / 1.75, 0.75 / 2.4375, 1. / 3., 1.25 / 3.4375,
+              1.5 / 3.75, 1.75 / 3.9375, 2. / 4., 2.25 / 3.9375, 2.5 / 3.75,
+              2.75 /3.4375, 3. / 3., 3.25 / 2.4375, 3.5 / 1.75, 3.75 / 0.9375, 4. / 0.}
+            {\addplot [thick,secondcolor] coordinates {(\x-.25,0) (\x-.25,\y) (\x,\y) (\x,0) (\x-.25,0)};
+            }
+
+            \end{axis}
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
+          <!-- figures/fig_rie7.tex END -->
         </figure>
 
         <p>
           We do so here,
-          skipping from the original summand to the equivalent of Equation <xref ref="eq_rie7" /> to save space.
+          skipping from the original summand to the equivalent of Equation <xref ref="eq_rie7"/> to save space.
           Note that <m>\Delta x = 4/1000 = 0.004</m>.
           <md>
             <mrow>\int_0^4 (4x-x^2)\ dx \amp \approx \sum_{i=1}^{1000} f(x_{i+1})\Delta x</mrow>
@@ -531,9 +836,6 @@
 
         <p>
           Using many, many rectangles, we have a likely good approximation of
-        </p>
-
-        <p>
           <m>\int_0^4 (4x-x^2)\dx</m>.
           That is,
           <me>
@@ -547,7 +849,9 @@
       Before the above example,
       we stated what the summations for the Left Hand, Right Hand and Midpoint Rules looked like.
       Each had the same basic structure, which was:
+    </p>
 
+    <p>
       <ol>
         <li>
           <p>
@@ -569,11 +873,11 @@
     <p>
       One could partition an interval <m>[a,b]</m> with subintervals that do not have the same size.
       We refer to the length of the
-      <m>i^\text{ th }</m> subinterval as <m>\Delta x_i</m>.
+      <m>i</m>th subinterval as <m>\Delta x_i</m>.
       Also, one could determine each rectangle's height by evaluating <m>f</m> at <em>any</em>
-      point <m>c_i</m> in the <m>i^\text{ th }</m> subinterval.
-      Thus the height of the <m>i^\text{ th }</m> subinterval would be <m>f(c_i)</m>,
-      and the area of the <m>i^\text{ th }</m> rectangle would be <m>f(c_i)\Delta x_i</m>.
+      point <m>c_i</m> in the <m>i</m>th subinterval.
+      Thus the height of the <m>i</m>th subinterval would be <m>f(c_i)</m>,
+      and the area of the <m>i</m>th rectangle would be <m>f(c_i)\Delta x_i</m>.
       These ideas are formally defined below.
     </p>
 
@@ -590,7 +894,7 @@
         </p>
 
         <p>
-          The length of the <m>i^\text{ th }</m> subinterval,
+          The length of the <m>i</m>th subinterval,
           <m>[x_i,x_{i+1}]</m>, is <m>\Delta x_i = x_{i+1}-x_i</m>.
           If <m>[a,b]</m> is partitioned into subintervals of equal length,
           we let <m>\Delta x</m> represent the length of each subinterval.
@@ -598,7 +902,7 @@
 
         <p>
           The <term>size of the partition</term>,
-          denoted <m>||\Delta x||</m>,
+          denoted <m>\lVert\Delta x\rVert</m>,
           is the length of the largest subinterval of the partition.
               <idx><h>partition</h></idx>
               <idx><h>partition</h><h>size of</h></idx>
@@ -618,8 +922,9 @@
         <p>
           Let <m>f</m> be defined on a closed interval <m>[a,b]</m>,
           let <m>\Delta x</m> be a partition of <m>[a,b]</m>
+          as given in <xref ref="def_partition">Definition</xref>,
               <idx><h>Riemann Sum</h></idx>
-          and let <m>c_i</m> denote any value in the <m>i^\text{ th }</m> subinterval.
+          and let <m>c_i</m> denote any value in the <m>i</m>th subinterval.
         </p>
 
         <p>
@@ -641,7 +946,38 @@
 
     <figure xml:id="fig_riedef">
       <caption>An example of a general Riemann sum to approximate <m>\int_0^4(4x-x^2)\ dx</m>.</caption>
-      <img src="figures/figriedef"/>
+      <!-- START figures/fig_riedef.tex -->
+      <image xml:id="img_riedef" width="47%">
+        <description></description>
+        <latex-image>
+
+        \begin{tikzpicture}
+
+        \begin{axis}[
+        axis on top,
+        xtick={1,2,3,4},
+        ytick={1,2,3,4},
+        ymin=-1,ymax=5,
+        xmin=-.5,xmax=4.5
+        ]
+
+        \addplot [firstcurvestyle,areastyle,domain=0:4] {4*x-x^2};
+        \addplot [firstcurvestyle,-,domain=0:4,samples=40] {4*x-x^2};
+
+        \draw [thick,secondcolor] (axis cs:0,0) rectangle (axis cs:2,.9375);
+        \draw [thick,secondcolor] (axis cs:2,0) rectangle (axis cs:3.5,2.79);
+        \draw [thick,secondcolor] (axis cs:3.5,0) rectangle (axis cs:4,.76);
+        \draw [fill=black] (axis cs:.25,.9375) circle (1pt);
+        \draw [fill=black] (axis cs:3.1,2.79) circle (1pt);
+        \draw [fill=black] (axis cs:3.8,.76) circle (1pt);
+
+        \end{axis}
+
+        \end{tikzpicture}
+
+        </latex-image>
+      </image>
+      <!-- figures/fig_riedef.tex END -->
     </figure>
 
     <p>
@@ -655,7 +991,9 @@
       <title>Riemann Sum Concepts</title>
       <p>
         Consider <m>\ds \int_a^b f(x) \ dx \approx \sum_{i=1}^n f(c_i)\Delta x_i</m>.
+      </p>
 
+      <p>
         <ol>
           <li>
             <p>
@@ -666,7 +1004,7 @@
 
           <li>
             <p>
-              The <m>i^\text{ th }</m> term of an equally spaced partition is <m>x_i = a + (i-1)\Delta x</m>.
+              The <m>i</m>th term of an equally spaced partition is <m>x_i = a + (i-1)\Delta x</m>.
               (Thus <m>x_1=a</m> and <m>x_{n+1} = b</m>.)
             </p>
           </li>
@@ -739,7 +1077,36 @@
 
         <figure xml:id="fig_rie8">
           <caption>Approximating <m>\int_{-2}^3 (5x+2)\ dx</m> using the Midpoint Rule and 10 evenly spaced subintervals in <xref ref="ex_rie8">Example</xref>.</caption>
-          <img src="figures/figrie8"/>
+          <!-- START figures/fig_rie8.tex -->
+          <image xml:id="img_rie8" width="47%">
+            <description></description>
+            <latex-image>
+
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            axis on top,
+            xtick={-2,-1,1,2,3},
+            ytick={10,17,-8},
+            ymin=-9,ymax=19,
+            xmin=-2.5,xmax=3.5
+            ]
+
+            \addplot [firstcurvestyle,areastyle,domain=-2:3] {5*x+2} \closedcycle;
+            \addplot [firstcurvestyle,-,domain=-2:3] {5*x+2};
+
+            \foreach \x / \y in {-1.75 / -6.75, -1.25 / -4.25, -0.75 / -1.75, -0.25 / 0.75,
+            0.25 /3.25, 0.75 / 5.75, 1.25 / 8.25, 1.75 / 10.75, 2.25 / 13.25,
+            2.75 /15.75}
+            {\addplot [thick,secondcolor] coordinates {(\x-.25,0) (\x-.25,\y) (\x+.25,\y) (\x+.25,0) (\x-.25,0)};
+            }
+            \end{axis}
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
+          <!-- figures/fig_rie8.tex END -->
         </figure>
 
         <p>
@@ -806,8 +1173,8 @@
             <mrow>\amp =  \sum_{i=1}^n \left[4\frac{4i}n-\left(\frac{4i}n\right)^2\right]\Delta x</mrow>
             <mrow>\amp =  \sum_{i=1}^n \left(\frac{16\Delta x}{n}\right)i - \sum_{i=1}^n \left(\frac{16\Delta x}{n^2}\right)i^2</mrow>
             <mrow>\amp =  \left(\frac{16\Delta x}{n}\right)\sum_{i=1}^n i - \left(\frac{16\Delta x}{n^2}\right)\sum_{i=1}^n i^2</mrow>
-            <mrow>\amp = \left(\frac{16\Delta x}{n}\right)\cdot \frac{n(n+1)}{2} - \left(\frac{16\Delta x}{n^2}\right)\frac{n(n+1)(2n+1)}{6}  \left(\scriptsize  recall $\Delta x = 4/n$\right)</mrow>
-            <mrow>\amp =\frac{32(n+1)}{n} - \frac{32(n+1)(2n+1)}{3n^2}  \text{ \scriptsize (now simplify) }</mrow>
+            <mrow>\amp = \left(\frac{16\Delta x}{n}\right)\cdot \frac{n(n+1)}{2} - \left(\frac{16\Delta x}{n^2}\right)\frac{n(n+1)(2n+1)}{6}  (\text{ recall } \Delta x = 4/n)</mrow>
+            <mrow>\amp =\frac{32(n+1)}{n} - \frac{32(n+1)(2n+1)}{3n^2}  \text{ (now simplify) }</mrow>
             <mrow>\amp = \frac{32}{3}\left(1-\frac{1}{n^2}\right)</mrow>
           </md>
         </p>
@@ -845,7 +1212,7 @@
         </p>
 
         <p>
-          Both common sense and high<ndash />level mathematics tell us that as <m>n</m> gets large,
+          Both common sense and high<ndash/>level mathematics tell us that as <m>n</m> gets large,
           the approximation gets better.
           In fact, if we take the <em>limit</em>
           as <m>n\rightarrow \infty</m>,
@@ -860,9 +1227,9 @@
 
         <p>
           This is a fantastic result.
-          By considering <m>n</m> equally<ndash />spaced subintervals,
+          By considering <m>n</m> equally<ndash/>spaced subintervals,
           we obtained a formula for an approximation of the definite integral that involved our variable <m>n</m>.
-          As <m>n</m> grows large <mdash /> without bound <mdash /> the error shrinks to zero and we obtain the exact area.
+          As <m>n</m> grows large <mdash/> without bound <mdash/> the error shrinks to zero and we obtain the exact area.
         </p>
       </solution>
     </example>
@@ -922,7 +1289,33 @@
 
         <figure xml:id="fig_rie9">
           <caption>Approximating <m>\int_{-1}^5 x^3\ dx</m> using the Right Hand Rule and 10 evenly spaced subintervals.</caption>
-          <img src="figures/figrie9"/>
+          <!-- START figures/fig_rie9.tex -->
+          <image xml:id="img_rie9" width="47%">
+            <description></description>
+            <latex-image>
+
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            axis on top,
+            xtick={-1,1,2,3,4,5},
+            ymin=-2,ymax=130,
+            xmin=-1.5,xmax=5.5
+            ]
+
+            \addplot [firstcurvestyle,areastyle,domain=-1:5] {x^3} \closedcycle;
+            \addplot [firstcurvestyle,-,domain=-1:5] {x^3};
+
+            \foreach \x / \y in {-0.4 / -0.064, 0.2 / 0.008, 0.8 / 0.512, 1.4 / 2.744, 2. / 8., 2.6 /17.576, 3.2 / 32.768, 3.8 / 54.872, 4.4 / 85.184, 5. / 125.}
+            {\addplot [thick,secondcolor] coordinates {(\x-.6,0) (\x-.6,\y) (\x,\y) (\x,0) (\x-.6,0)};
+            }
+            \end{axis}
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
+          <!-- figures/fig_rie9.tex END -->
         </figure>
 
         <p>
@@ -941,10 +1334,10 @@
       We have used limits to evaluate given definite integrals.
       Will this always work?
       We will show,
-      given not<ndash />very<ndash />restrictive conditions,
+      given not<ndash/>very<ndash/>restrictive conditions,
       that yes, it will always work.
     </p>
-
+<!--ToDo: add GeoGebra applet with adjustable number of rectangles to demonstrate limit process-->
     <p>
       The previous two examples demonstrated how an expression such as
       <me>
@@ -965,7 +1358,9 @@
 
     <p>
       Given a definite integral <m>\int_a^b f(x)\ dx</m>, let:
+    </p>
 
+    <p>
       <ul>
         <li>
           <p>
@@ -992,10 +1387,9 @@
 
     <p>
       Recall the definition of a limit as <m>n\to\infty</m>:
-      <m>\ds\lim_{n\to\infty}S_L(n) = K</m> if,
-      given any <m>\epsilon>0</m>, there exists <m>N>0</m> such that
+		<m>\lim\limits_{n\to\infty}S_L(n) = K</m> if, given any <m>\varepsilon \gt 0</m>, there exists <m>N \gt 0</m> such that
       <me>
-        \left|S_L(n)-K\right| \lt  \epsilon  \text{ when }  n\geq N
+        \abs{S_L(n)-K} \lt  \varepsilon  \text{ when }  n\geq N
       </me>.
     </p>
 
@@ -1004,7 +1398,7 @@
       It also goes two steps further.
       The theorem states that the height of each rectangle doesn't have to be determined following a specific rule,
       but could be <m>f(c_i)</m>,
-      where <m>c_i</m> is any point in the <m>i^\text{ th }</m> subinterval,
+      where <m>c_i</m> is any point in the <m>i</m>th subinterval,
       as discussed before Riemann Sums were defined in <xref ref="def_rie_sum">Definition</xref>.
     </p>
 
@@ -1012,18 +1406,18 @@
       The theorem goes on to state that the rectangles do not need to be of the same width.
       Using the notation of <xref ref="def_partition">Definition</xref>,
       let <m>\Delta x_i</m> denote the length of the
-      <m>i^\text{ th }</m> subinterval in a partition of <m>[a,b]</m> and let
-      <m>||\Delta x||</m> represent the length of the largest subinterval in the partition:
-      that is, <m>||\Delta x||</m> is the largest of all the <m>\Delta x_i</m>'s.
-      If <m>||\Delta x||</m> is small,
+      <m>i</m>th subinterval in a partition of <m>[a,b]</m> and let
+      <m>\norm{\Delta x}</m> represent the length of the largest subinterval in the partition:
+      that is, <m>\norm{\Delta x}</m> is the largest of all the <m>\Delta x_i</m>'s.
+      If <m>\norm{\Delta x}</m> is small,
       then <m>[a,b]</m> must be partitioned into many subintervals,
       since all subintervals must have small lengths.
-      <q>Taking the limit as <m>||\Delta x||</m> goes to zero</q>
+      <q>Taking the limit as <m>\norm{\Delta x}</m> goes to zero</q>
       implies that the number <m>n</m> of subintervals in the partition is growing to infinity,
       as the largest subinterval length is becoming arbitrarily small.
       We then interpret the expression
       <me>
-        \lim_{||\Delta x||\to 0}\sum_{i=1}^nf(c_i)\Delta x_i
+        \lim_{\norm{\Delta x}\to 0}\sum_{i=1}^nf(c_i)\Delta x_i
       </me>
       as <q>the limit of the sum of the areas of rectangles,
       where the width of each rectangle can be different but getting small,
@@ -1039,8 +1433,19 @@
           <m>S_R(n)</m>,
           <m>S_M(n)</m>, <m>\Delta x</m>,
           <m>\Delta x_i</m> and <m>c_i</m> be defined as before.
-          Then:<idx><h>Riemann Sum</h><h>and definite integral</h></idx><idx><h>integration</h><h>definite!Riemann Sums</h></idx>
+          Then:
 
+          <idx>
+            <h>Riemann Sum</h><h>and definite integral</h>
+          </idx>
+
+          <idx>
+            <h>integration</h><h>definite!Riemann Sums</h>
+          </idx>
+
+        </p>
+
+        <p>
           <ol>
             <li>
               <p>
@@ -1056,7 +1461,7 @@
 
             <li>
               <p>
-                <m>\ds \lim_{\|\Delta x\|\to 0} \sum_{i=1}^n f(c_i)\Delta x_i = \int_a^b f(x)\ dx</m>.
+                <m>\ds \lim_{\norm{\Delta x}\to 0} \sum_{i=1}^n f(c_i)\Delta x_i = \int_a^b f(x)\ dx</m>.
               </p>
             </li>
           </ol>
@@ -1066,7 +1471,9 @@
 
     <p>
       We summarize what we have learned over the past few sections here.
+    </p>
 
+    <p>
       <ul>
         <li>
           <p>
@@ -1113,108 +1520,209 @@
     </p>
   </subsection>
 
-  <subsection>
-    <title>Terms and Concepts</title>
-    <exercise>
-      <statement>
-        <p>
-          A fundamental calculus technique is to use <fillin /> to refine approximations to get an exact answer.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          limits
-        </p>
-      </answer>
-    </exercise>
+  <exercises>
+    <exercisegroup>
 
-    <exercise>
-      <statement>
+      <introduction>
         <p>
-          What is the upper bound in the summation
+          Terms and Concepts
         </p>
+      </introduction>
 
-        <p>
-          <m>\ds \sum_{i=7}^{14} (48i-201)</m>?
-        </p>
-      </statement>
-      <answer>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          This section approximates definite integrals using what geometric shape?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Rectangles.
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+            <!-- FUNGUS: Another fill in the blank -->
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                A fundamental calculus technique is to use <fillin/> to refine approximations to get an exact answer.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                limits
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+<!-- Exercise 2 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          T/F: A sum using the Right Hand Rule is an example of a Riemann Sum.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          T
-        </p>
-      </answer>
-    </exercise>
-  </subsection>
+            <pg-code>
+              $ub = 14;
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                What is the upper bound in the summation <m>\ds \sum_{i=7}^{14} (48i-201)</m>?
+              </p>
 
-  <subsection>
-    <title>Problems</title>
-    <p>
-      In the following exercises,
-      write out each term of the summation and compute the sum.
-    </p>
+              <p>
+                <var name="$ub" width="10"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 3 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \sum_{i=2}^{4} i^2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>2^2+3^2+4^2 = 29</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+            <!-- FUNGUS: Here too -->
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                This section approximates definite integrals using what geometric shape?
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Rectangles.
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+<!-- Exercise 4 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \sum_{i=-1}^{3} (4i-2)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>-6-2+2+6+10=10</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              $true=PopUp(['?','True','False'],1);
+              $false=PopUp(['?','True','False'],2);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                T/F: A sum using the Right Hand Rule is an example of a Riemann Sum.
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \sum_{i=-2}^{2} \sin (\pi i/2)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>0-1+0+1+0 = 0</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var name="$true" form="popup"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
+        <p>
+          In the following exercises,
+          write out each term of the summation and compute the sum.
+        </p>
+      </introduction>
+<!-- Exercise 5 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              @l = (2..4);
+              @l2 = ();
+              $sum = 0;
+              foreach $i (@l) {
+                  $n = $i**2;
+                  $sum += $n;
+                  push @l2, $n;
+              }
+              $list = List(@l2);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \sum_{i=2}^{4} i^2</m>
+              </p>
+
+              <p>
+                Terms: <var name="$list" width="20"/>
+              </p>
+
+              <p>
+                Sum: <var name="$sum" width="20"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 6 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              @l = (-1..3);
+              @l2 = ();
+              $sum = 0;
+              foreach $i (@l) {
+                  $n = 4*$i-2;
+                  $sum += $n;
+                  push @l2, $n;
+              }
+              $list = List(@l2);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \sum_{i=-1}^{3} (4i-2)</m>
+              </p>
+
+              <p>
+                Terms: <var name="$list" width="20"/>
+              </p>
+
+              <p>
+                Sum: <var name="$sum" width="20"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 7 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              @l = (-2..2);
+              @l2 = ();
+              $sum = 0;
+              foreach $i (@l) {
+                  $n = sin(pi*$i/2);
+                  $sum += $n;
+                  push @l2, $n;
+              }
+              $list = List(@l2);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \sum_{i=-2}^{2} \sin(\pi i/2)</m>
+              </p>
+
+              <p>
+                Terms: <var name="$list" width="20"/>
+              </p>
+
+              <p>
+                Sum: <var name="$sum" width="20"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>0-1+0+1+0 = 0</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+<!--ToDo: WW code for this problem-->
     <exercise>
       <statement>
         <p>
@@ -1228,119 +1736,255 @@
       </answer>
     </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \sum_{i=1}^{5} \frac1i</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>1+1/2+1/3+1/4+1/5 = 137/60</m>
-        </p>
-      </answer>
-    </exercise>
+<!-- Exercise 8 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \sum_{i=1}^{6} (-1)^ii</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>-1+2-3+4-5+6=3</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              @l = (1..5);
+              @l2 = ();
+              $sum = 0;
+              foreach $i (@l) {
+                  $n = 1/$i;
+                  $sum += $n;
+                  push @l2, $n;
+              }
+              $list = List(@l2);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \sum_{i=1}^{5} \frac1i</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \sum_{i=1}^{4} \left(\frac{1}{i} - \frac{1}{i+1}\right)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>1/2+1/6+1/12+1/20=4/5</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                Terms: <var name="$list" width="20"/>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \sum_{i=0}^{5} (-1)^i\cos (\pi i)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>1+1+1+1+1+1=6</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                Sum: <var name="$sum" width="20"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>1+1/2+1/3+1/4+1/5 = 137/60</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+<!-- Exercise 9 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <p>
-      In the following exercises, write each sum in summation notation.
-    </p>
+            <pg-code>
+              @l = (1..6);
+              @l2 = ();
+              $sum = 0;
+              foreach $i (@l) {
+                  $n = (-1)**$i * $i;
+                  $sum += $n;
+                  push @l2, $n;
+              }
+              $list = List(@l2);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \sum_{i=1}^{6} (-1)^ii</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>3+6+9+12+15</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Answers may vary; <m>\sum_{i=1}^5 3i</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                Terms: <var name="$list" width="20"/>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>-1+0+3+8+15+24+35+48+63</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Answers may vary; <m>\sum_{i=0}^8 (i^2-1)</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                Sum: <var name="$sum" width="20"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>-1+2-3+4-5+6=3</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+<!-- Exercise 10 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \frac12+\frac23+\frac34+\frac45</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Answers may vary; <m>\sum_{i=1}^4 \frac{i}{i+1}</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              @l = (1..4);
+              @l2 = ();
+              $sum = 0;
+              foreach $i (@l) {
+                  $n = 1/$i - 1/($i + 1);
+                  $sum += $n;
+                  push @l2, $n;
+              }
+              $list = List(@l2);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \sum_{i=1}^{4} \left(\frac{1}{i} - \frac{1}{i+1}\right)</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds 1-e+e^2-e^3+e^4</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Answers may vary; <m>\sum_{i=0}^4 (-1)^ie^i</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                Terms: <var name="$list" width="20"/>
+              </p>
 
-    <p>
-      In the following exercises,
-      evaluate the summation using <xref ref="thm_summation">Theorem</xref>.
-    </p>
+              <p>
+                Sum: <var name="$sum" width="20"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>1/2+1/6+1/12+1/20=4/5</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+<!-- Exercise 11 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
+            <pg-code>
+              @l = (0..5);
+              @l2 = ();
+              $sum = 0;
+              foreach $i (@l) {
+                  $n = (-1)**$i * cos(pi*$i);
+                  $sum += $n;
+                  push @l2, $n;
+              }
+              $list = List(@l2);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \sum_{i=0}^{5} (-1)^i\cos(\pi i)</m>
+              </p>
+
+              <p>
+                Terms: <var name="$list" width="20"/>
+              </p>
+
+              <p>
+                Sum: <var name="$sum" width="20"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>1+1+1+1+1+1=6</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
+        <p>
+          In the following exercises, write each sum in summation notation.
+        </p>
+      </introduction>
+<!-- Exercise 12 -->
+<!-- FUNGUS: How to enter in summation notation? -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>3+6+9+12+15</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Answers may vary; <m>\sum_{i=1}^5 3i</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>-1+0+3+8+15+24+35+48+63</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Answers may vary; <m>\sum_{i=0}^8 (i^2-1)</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \frac12+\frac23+\frac34+\frac45</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Answers may vary; <m>\sum_{i=1}^4 \frac{i}{i+1}</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds 1-e+e^2-e^3+e^4</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Answers may vary; <m>\sum_{i=0}^4 (-1)^ie^i</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
+        <p>
+          In the following exercises,
+          evaluate the summation using <xref ref="thm_summation">Theorem</xref>.
+        </p>
+      </introduction>
+<!--ToDo: WW code for this problem-->
     <exercise>
       <statement>
         <p>
@@ -1354,575 +1998,1013 @@
       </answer>
     </exercise>
 
-    <exercise>
-      <statement>
+<!-- Exercise 16 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              @l = (1..25);
+              $sum = 0;
+              foreach $i (@l) {
+                  $sum += $i;
+              }
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \sum_{i=1}^{25} i</m>
+              </p>
+
+              <p>
+                <var name="$sum" width="20"/>
+              </p>
+   <!-- 325 -->
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 17 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              @l = (1..10);
+              $sum = 0;
+              foreach $i (@l) {
+                  $sum += 3*$i**2 - 2*$i;
+              }
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \sum_{i=1}^{10} (3i^2-2i)</m>
+              </p>
+
+              <p>
+                <var name="$sum" width="20"/>
+              </p>
+   <!-- 1045 -->
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 18 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              @l = (1..15);
+              $sum = 0;
+              foreach $i (@l) {
+                  $sum += 2*$i**3 - 10;
+              }
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \sum_{i=1}^{15} (2i^3-10)</m>
+              </p>
+
+              <p>
+                <var name="$sum" width="20"/>
+              </p>
+   <!-- 28650 -->
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 19 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              @l = (1..10);
+              $sum = 0;
+              foreach $i (@l) {
+                  $sum += -4*$i**3 + 10*$i**2 - 7*$i + 11;
+              }
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \sum_{i=1}^{10} (-4i^3+10i^2-7i+11)</m>
+              </p>
+
+              <p>
+                <var name="$sum" width="20"/>
+              </p>
+   <!-- -8525 -->
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 20 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              @l = (1..10);
+              $sum = 0;
+              foreach $i (@l) {
+                  $sum += $i**3 - 3*$i**2 + 2*$i + 7;
+              }
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \sum_{i=1}^{10} (i^3-3i^2+2i+7)</m>
+              </p>
+
+              <p>
+                <var name="$sum" width="20"/>
+              </p>
+   <!-- 2050 -->
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 21 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $sum = 0;
+              foreach $i (1..100) {
+                  $sum += $i;
+              }
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>1+2+3+ \ldots + 99+100</m>
+              </p>
+
+              <p>
+                <var name="$sum" width="20"/>
+              </p>
+   <!-- 5050 -->
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 22 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $sum = 0;
+              foreach $i (1..20) {
+                  $sum += $i**2;
+              }
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>1+4+9+ \ldots +361+400</m>
+              </p>
+
+              <p>
+                <var name="$sum" width="20"/>
+              </p>
+   <!-- 2870 -->
+            </statement>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
         <p>
-          <m>\ds \sum_{i=1}^{25} i</m>
+          <xref ref="thm_summation">Theorem</xref> states
         </p>
-      </statement>
-      <answer>
-      </answer>
-    </exercise>
 
-    <exercise>
-      <statement>
         <p>
-          <m>\ds \sum_{i=1}^{10} (3i^2-2i)</m>
+          <m>\ds \sum_{i=1}^na_i = \sum_{i=1}^k a_i + \sum_{i=k+1}^n a_i</m><nbsp/>, so
         </p>
-      </statement>
-      <answer>
-      </answer>
-    </exercise>
 
-    <exercise>
-      <statement>
         <p>
-          <m>\ds \sum_{i=1}^{15} (2i^3-10)</m>
+          <m>\ds \sum_{i=k+1}^na_i = \sum_{i=1}^n a_i - \sum_{i=1}^k a_i</m><nbsp/>.
         </p>
-      </statement>
-      <answer>
-      </answer>
-    </exercise>
 
-    <exercise>
-      <statement>
         <p>
-          <m>\ds \sum_{i=1}^{10} (-4i^3+10i^2-7i+11)</m>
+          Use this fact,
+          along with other parts of <xref ref="thm_summation">Theorem</xref>,
+          to evaluate the summations given in the following exercises.
         </p>
-      </statement>
-      <answer>
+      </introduction>
+<!-- Exercise 23 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $sum = 0;
+              foreach $i (11..20) {
+                  $sum += $i;
+              }
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \sum_{i=11}^{20} i</m>
+              </p>
+
+              <p>
+                <var name="$sum" width="20"/>
+              </p>
+   <!-- 155 -->
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 24 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $sum = 0;
+              foreach $i (16..25) {
+                  $sum += $i**3;
+              }
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \sum_{i=16}^{25} i^3</m>
+              </p>
+
+              <p>
+                <var name="$sum" width="20"/>
+              </p>
+   <!-- 91225 -->
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 25 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $sum = 0;
+              foreach $i (7..12) {
+                  $sum += 4;
+              }
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \sum_{i=7}^{12} 4</m>
+              </p>
+
+              <p>
+                <var name="$sum" width="20"/>
+              </p>
+   <!-- 24 -->
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 26 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $sum = 0;
+              foreach $i (5..10) {
+                  $sum += 4*$i**3;
+              }
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \sum_{i=5}^{10} 4i^3</m>
+              </p>
+
+              <p>
+                <var name="$sum" width="20"/>
+              </p>
+   <!-- 11700 -->
+            </statement>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
         <p>
-          <m>-8525</m>
+          In the following exercises, a definite integral
         </p>
-      </answer>
-    </exercise>
 
-    <exercise>
-      <statement>
         <p>
-          <m>\ds \sum_{i=1}^{10} (i^3-3i^2+2i+7)</m>
+          <m>\ds \int_a^b f(x) \ dx</m> is given.
         </p>
-      </statement>
-      <answer>
+
         <p>
-          <m>2050</m>
-        </p>
-      </answer>
-    </exercise>
+          <ol>
+            <li>
+              <p>
+                Graph <m>f(x)</m> on <m>[a,b]</m>.
+              </p>
+            </li>
 
-    <exercise>
-      <statement>
+            <li>
+              <p>
+                Add to the sketch rectangles using the provided rule.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Approximate <m>\ds \int_a^b f(x) \ dx</m> by summing the areas of the rectangles.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </introduction>
+<!-- Exercise 27 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $n = 6;
+              $a = -3;
+              $b = 3;
+              $f = Formula("x^2");
+              $delta_x = ($b - $a)/$n;
+              $left = 0;
+              $right = 0;
+              $mid = 0;
+              @l = ();
+            <!-- for loop fails but works in perl online, use two foreach instead -->
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              foreach $i (@l) {
+                $left += $f->eval(x=>$i);
+                $right += $f->eval(x=>($i+$delta_x));
+                $mid += $f->eval(x=>($i + $delta_x/2));
+              }
+              $left = $left * $delta_x;
+              $right = $right * $delta_x;
+              $mid = $mid * $delta_x;
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int_{-3}^3 x^2\ dx</m>,
+                with 6 rectangles using the Left Hand Rule.
+              </p>
+
+              <p>
+                Sum of areas: <var name="$left" width="10"/>
+              </p>
+   <!-- 19 -->
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 28 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $n = 4;
+              $a = 0;
+              $b = 2;
+              $f = Formula("5-x^2");
+              $delta_x = ($b - $a)/$n;
+              $left = 0;
+              $right = 0;
+              $mid = 0;
+              @l = ();
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              foreach $i (@l) {
+                $left += $f->eval(x=>$i);
+                $right += $f->eval(x=>($i+$delta_x));
+                $mid += $f->eval(x=>($i + $delta_x/2));
+              }
+              $left = $left * $delta_x;
+              $right = $right * $delta_x;
+              $mid = $mid * $delta_x;
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int_{0}^2 (5-x^2)\ dx</m>,
+                with 4 rectangles using the Midpoint Rule.
+              </p>
+
+              <p>
+                Sum of areas: <var name="$mid" width="10"/>
+              </p>
+   <!-- 59/8 -->
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 29 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $n = 6;
+              $a = 0;
+              $b = pi;
+              $f = Formula("sin(x)");
+              $delta_x = ($b - $a)/$n;
+              $left = 0;
+              $right = 0;
+              $mid = 0;
+              @l = ();
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              foreach $i (@l) {
+                $left += $f->eval(x=>$i);
+                $right += $f->eval(x=>($i+$delta_x));
+                $mid += $f->eval(x=>($i + $delta_x/2));
+              }
+              $left = $left * $delta_x;
+              $right = $right * $delta_x;
+              $mid = $mid * $delta_x;
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int_{0}^\pi \sin(x) \ dx</m>,
+                with 6 rectangles using the Right Hand Rule.
+              </p>
+
+              <p>
+                Sum of areas: <var name="$right" width="10"/>
+              </p>
+   <!-- pi/3 + pi/(2*sqrt(3)), 1.954 -->
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 30 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $n = 5;
+              $a = 0;
+              $b = 3;
+              $f = Formula("2^x");
+              $delta_x = ($b - $a)/$n;
+              $left = 0;
+              $right = 0;
+              $mid = 0;
+              @l = ();
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              foreach $i (@l) {
+                $left += $f->eval(x=>$i);
+                $right += $f->eval(x=>($i+$delta_x));
+                $mid += $f->eval(x=>($i + $delta_x/2));
+              }
+              $left = $left * $delta_x;
+              $right = $right * $delta_x;
+              $mid = $mid * $delta_x;
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int_{0}^3 2^x\ dx</m>,
+                with 5 rectangles using the Left Hand Rule.
+              </p>
+
+              <p>
+                Sum of areas: <var name="$left" width="10"/>
+              </p>
+   <!-- 8.144 -->
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 31 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $n = 3;
+              $a = 1;
+              $b = 2;
+              $f = Formula("ln(x)");
+              $delta_x = ($b - $a)/$n;
+              $left = 0;
+              $right = 0;
+              $mid = 0;
+              @l = ();
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              foreach $i (@l) {
+                $left += $f->eval(x=>$i);
+                $right += $f->eval(x=>($i+$delta_x));
+                $mid += $f->eval(x=>($i + $delta_x/2));
+              }
+              $left = $left * $delta_x;
+              $right = $right * $delta_x;
+              $mid = $mid * $delta_x;
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int_{1}^2 \ln(x) \ dx</m>,
+                with 3 rectangles using the Midpoint Rule.
+              </p>
+
+              <p>
+                Sum of areas: <var name="$mid" width="10"/>
+              </p>
+   <!-- 0.388584 -->
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 32 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $n = 4;
+              $a = 1;
+              $b = 9;
+              $f = Formula("1/x");
+              $delta_x = ($b - $a)/$n;
+              $left = 0;
+              $right = 0;
+              $mid = 0;
+              @l = ();
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              foreach $i (@l) {
+                $left += $f->eval(x=>$i);
+                $right += $f->eval(x=>($i+$delta_x));
+                $mid += $f->eval(x=>($i + $delta_x/2));
+              }
+              $left = $left * $delta_x;
+              $right = $right * $delta_x;
+              $mid = $mid * $delta_x;
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int_{1}^9 \frac1x\ dx</m>,
+                with 4 rectangles using the Right Hand Rule.
+              </p>
+
+              <p>
+                Sum of areas: <var name="$right" width="10"/>
+              </p>
+   <!-- 496/315, 1.5746 -->
+            </statement>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
         <p>
-          <m>1+2+3+ \ldots + 99+100</m>
+          In the following exercises, a definite integral
         </p>
-      </statement>
-      <answer>
+
         <p>
-          <m>5050</m>
+          <m>\ds \int_a^b f(x) \ dx</m> is given.
+          As demonstrated in <xref ref="ex_rie9">Examples</xref>
+          and <xref ref="ex_rie10"/>, do the following.
         </p>
-      </answer>
-    </exercise>
 
-    <exercise>
-      <statement>
         <p>
-          <m>1+4+9+ \ldots +361+400</m>
+          <ol>
+            <li>
+              <p>
+                Find a formula to approximate
+                <m>\ds \int_a^bf(x)\ dx</m> using <m>n</m> subintervals and the provided rule.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Evaluate the formula using <m>n=10</m>,
+                <m>100</m> and <m>1,000</m>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Find the limit of the formula, as <m>n\to \infty</m>,
+                to find the exact value of <m>\ds \int_a^bf(x)\ dx</m>.
+              </p>
+            </li>
+          </ol>
         </p>
-      </statement>
-      <answer>
+      </introduction>
+<!-- Exercise 33 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              Context()->variables->add(n=>"Real");
+              $f = Formula("(n+1)^2/(4*n^2)");
+              $sum10 = $f->eval(n=>10);
+              $sum100 = $f->eval(n=>100);
+              $sum1000 = $f->eval(n=>1000);
+              $exact = Formula("1/4");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int_{0}^1 x^3\ dx</m>,
+                using the Right Hand Rule.
+              </p>
+
+              <p>
+                Sum in terms of n: <var name="$f" width="30"/>
+              </p>
+
+              <p>
+                n = 10: <var name="$sum10" width="20"/>
+              </p>
+   <!-- 121/400 -->
+              <p>
+                n = 100: <var name="$sum100" width="20"/>
+              </p>
+   <!-- 10201/40000 -->
+              <p>
+                n = 1000: <var name="$sum1000" width="20"/>
+              </p>
+   <!-- 1002001/4000000 -->
+              <p>
+                Area in limit: <var name="$exact" width="20"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 34 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              Context()->variables->add(n=>"Real");
+              $f = Formula("(2*n^2+4)/n^2");
+              $sum10 = $f->eval(n=>10);
+              $sum100 = $f->eval(n=>100);
+              $sum1000 = $f->eval(n=>1000);
+              $exact = Formula("2");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int_{-1}^1 3x^2\ dx</m>, using the Left Hand Rule.
+              </p>
+
+              <p>
+                Sum in terms of n: <var name="$f" width="30"/>
+              </p>
+
+              <p>
+                n = 10: <var name="$sum10" width="20"/>
+              </p>
+   <!-- 51/25 -->
+              <p>
+                n = 100: <var name="$sum100" width="20"/>
+              </p>
+   <!-- 5001/2500 -->
+              <p>
+                n = 1000: <var name="$sum1000" width="20"/>
+              </p>
+   <!-- 500001/250000 -->
+              <p>
+                Area in limit: <var name="$exact" width="20"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 35 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              Context()->variables->add(n=>"Real");
+              $f = Formula("8");
+              $sum10 = $f->eval(n=>10);
+              $sum100 = $f->eval(n=>100);
+              $sum1000 = $f->eval(n=>1000);
+              $exact = Formula("8");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int_{-1}^3 (3x-1)\ dx</m>, using the Midpoint Rule.
+              </p>
+
+              <p>
+                Sum in terms of n: <var name="$f" width="30"/>
+              </p>
+
+              <p>
+                n = 10: <var name="$sum10" width="20"/>
+              </p>
+   <!-- 8 -->
+              <p>
+                n = 100: <var name="$sum100" width="20"/>
+              </p>
+   <!-- 8 -->
+              <p>
+                n = 1000: <var name="$sum1000" width="20"/>
+              </p>
+   <!-- 8 -->
+              <p>
+                Area in limit: <var name="$exact" width="20"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 36 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              Context()->variables->add(n=>"Real");
+              $f = Formula("3/n^2*(11n^2-15n+3)");
+              $sum10 = $f->eval(n=>10);
+              $sum100 = $f->eval(n=>100);
+              $sum1000 = $f->eval(n=>1000);
+              $exact = Formula("33");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int_{1}^4 (2x^2-3)\ dx</m>, using the Left Hand Rule.
+              </p>
+
+              <p>
+                Sum in terms of n: <var name="$f" width="30"/>
+              </p>
+
+              <p>
+                n = 10: <var name="$sum10" width="20"/>
+              </p>
+   <!-- 28.59 -->
+              <p>
+                n = 100: <var name="$sum100" width="20"/>
+              </p>
+   <!-- 32.55 -->
+              <p>
+                n = 1000: <var name="$sum1000" width="20"/>
+              </p>
+   <!-- 32.96 -->
+              <p>
+                Area in limit: <var name="$exact" width="20"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 37 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              Context()->variables->add(n=>"Real");
+              $f = Formula("100-200/n");
+              $sum10 = $f->eval(n=>10);
+              $sum100 = $f->eval(n=>100);
+              $sum1000 = $f->eval(n=>1000);
+              $exact = Formula("100");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int_{-10}^{10} (5-x)\ dx</m>,
+                using the Right Hand Rule.
+              </p>
+
+              <p>
+                Sum in terms of n: <var name="$f" width="30"/>
+              </p>
+
+              <p>
+                n = 10: <var name="$sum10" width="20"/>
+              </p>
+   <!-- 80.00 -->
+              <p>
+                n = 100: <var name="$sum100" width="20"/>
+              </p>
+   <!-- 98.00 -->
+              <p>
+                n = 1000: <var name="$sum1000" width="20"/>
+              </p>
+   <!-- 99.80 -->
+              <p>
+                Area in limit: <var name="$exact" width="20"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 38 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              Context()->variables->add(n=>"Real");
+              $f = Formula("-1/12*(1-1/n^2)");
+              $sum10 = $f->eval(n=>10);
+              $sum100 = $f->eval(n=>100);
+              $sum1000 = $f->eval(n=>1000);
+              $exact = Formula("-1/12");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int_{0}^{1} (x^3-x^2)\ dx</m>,
+                using the Right Hand Rule.
+              </p>
+
+              <p>
+                Sum in terms of n: <var name="$f" width="30"/>
+              </p>
+
+              <p>
+                n = 10: <var name="$sum10" width="20"/>
+              </p>
+   <!-- -33/400 -->
+              <p>
+                n = 100: <var name="$sum100" width="20"/>
+              </p>
+   <!-- -3333/40000 -->
+              <p>
+                n = 1000: <var name="$sum1000" width="20"/>
+              </p>
+   <!-- -333333/4000000 -->
+              <p>
+                Area in limit: <var name="$exact" width="20"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
         <p>
-          <m>2870</m>
+          Review
         </p>
-      </answer>
-    </exercise>
 
-    <p>
-      { <xref ref="thm_summation">Theorem</xref> states
-    </p>
-
-    <p>
-      <m>\ds \sum_{i=1}^na_i = \sum_{i=1}^k a_i + \sum_{i=k+1}^n a_i</m><nbsp />, so
-    </p>
-
-    <p>
-      <m>\ds \sum_{i=k+1}^na_i = \sum_{i=1}^n a_i - \sum_{i=1}^k a_i</m><nbsp />.
-    </p>
-
-    <p>
-      Use this fact,
-      along with other parts of <xref ref="thm_summation">Theorem</xref>,
-      to evaluate the summations given in Exercises}
-      {.}
-    </p>
-
-    <exercise>
-      <statement>
         <p>
-          <m>\ds \sum_{i=11}^{20} i</m>
+          In the following exercises,
+          find the general antiderivative of the given function.
         </p>
-      </statement>
-      <answer>
-        <p>
-          <m>155</m>
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
+<!-- Exercise 39 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \sum_{i=16}^{25} i^3</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>91,225</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              $F = FormulaUpToConstant("5*tan(x)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = 5\sec^2(x)</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \sum_{i=7}^{12} 4</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>24</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \sum_{i=5}^{10} 4i^3</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>11,700</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
 
-    <p>
-      In the following exercises, a definite integral
-    </p>
+            <pg-code>
+              $F = FormulaUpToConstant("7*ln(abs(x))");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds f(x) = \frac7x</m>
+              </p>
 
-    <p>
-      <m>\ds \int_a^b f(x) \ dx</m> is given.
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-      <ol>
-        <li>
-          <title>(a)</title>
-          <p>
-            Graph <m>f(x)</m> on <m>[a,b]</m>.
-          </p>
-        </li>
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
 
-        <li>
-          <title>(b)</title>
-          <p>
-            Add to the sketch rectangles using the provided rule.
-          </p>
-        </li>
+            <pg-code>
+              Context()->variables->add(t=>"Real");
+              $F = FormulaUpToConstant("4/6*t^6-5/4*t^4+8t");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds g(t) = 4t^5-5t^3+8</m>
+              </p>
 
-        <li>
-          <title>(c)</title>
-          <p>
-            Approximate <m>\ds \int_a^b f(x) \ dx</m> by summing the areas of the rectangles.
-          </p>
-        </li>
-      </ol>
-    </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int_{-3}^3 x^2\ dx</m>,
-          with 6 rectangles using the Left Hand Rule.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>19</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int_{0}^2 (5-x^2)\ dx</m>,
-          with 4 rectangles using the Midpoint Rule.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>59/8</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              Context()->variables->add(t=>"Real");
+              $F = FormulaUpToConstant("5*8^t/ln(8)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds g(t) = 5\cdot 8^t</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int_{0}^\pi \sin x\ dx</m>,
-          with 6 rectangles using the Right Hand Rule.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\pi/3+\pi/(2\sqrt{3}) \approx 1.954</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int_{0}^3 2^x\ dx</m>,
-          with 5 rectangles using the Left Hand Rule.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>8.144</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int_{1}^2 \ln x\ dx</m>,
-          with 3 rectangles using the Midpoint Rule.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>0.388584</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              Context()->variables->add(t=>"Real");
+              $F = FormulaUpToConstant("sin(t)-cos(t)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds g(t) = \cos(t) + \sin(t)</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int_{1}^9 \frac1x\ dx</m>,
-          with 4 rectangles using the Right Hand Rule.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>496/315\approx 1.5746</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <p>
-      In the following exercises, a definite integral
-    </p>
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
 
-    <p>
-      <m>\ds \int_a^b f(x) \ dx</m> is given.
-      As demonstrated in <xref ref="ex_rie9">Examples</xref>
-      and <xref ref="ex_rie10"></xref>, do the following.
+            <pg-code>
+              $F = FormulaUpToConstant("2*sqrt(x)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds f(x) = \frac{1}{\sqrt{x}}</m>
+              </p>
 
-      <ol>
-        <li>
-          <title>(a)</title>
-          <p>
-            Find a formula to approximate
-            <m>\ds \int_a^bf(x)\ dx</m> using <m>n</m> subintervals and the provided rule.
-          </p>
-        </li>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-        <li>
-          <title>(b)</title>
-          <p>
-            Evaluate the formula using <m>n=10</m>,
-            <m>100</m> and <m>1,000</m>.
-          </p>
-        </li>
-
-        <li>
-          <title>(c)</title>
-          <p>
-            Find the limit of the formula, as <m>n\to \infty</m>,
-            to find the exact value of <m>\ds \int_a^bf(x)\ dx</m>.
-          </p>
-        </li>
-      </ol>
-    </p>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int_{0}^1 x^3\ dx</m>,
-          using the Right Hand Rule.
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              Exact expressions will vary;
-              <m>\frac{(1+n)^2}{4n^2}</m>.
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>121/400</m>, <m>10201/40000</m>, <m>1002001/4000000</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>1/4</m>
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int_{-1}^1 3x^2\ dx</m>, using the Left Hand Rule.
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              Exact expressions will vary; <m>2+4/n^2</m>.
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>51/25</m>, <m>5001/2500</m>, <m>500001/250000</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>2</m>
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int_{-1}^3 (3x-1)\ dx</m>, using the Midpoint Rule.
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              8.
-            </p>
-          </li>
-
-          <li>
-            <p>
-              8, 8, 8
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>8</m>
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int_{1}^4 (2x^2-3)\ dx</m>, using the Left Hand Rule.
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              Exact expressions will vary;
-              <m>20/3-96/(3n)+64/(3n^2)</m>.
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>92/25</m>, <m>3968/625</m>, <m>103667/15625</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>20/3</m>
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int_{-10}^{10} (5-x)\ dx</m>,
-          using the Right Hand Rule.
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              Exact expressions will vary; <m>100-200/n</m>.
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>80</m>, <m>98</m>, <m>499/5</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>100</m>
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int_{0}^{1} (x^3-x^2)\ dx</m>,
-          using the Right Hand Rule.
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              Exact expressions will vary;
-              <m>-1/12(1-1/n^2)</m>.
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>-33/400</m>, <m>-3333/40000</m>, <m>-333333/4000000</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>-1/12</m>
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
-  </subsection>
-
-  <subsection>
-    <title>Review</title>
-    <p>
-      In the following exercises, find an antiderivative of the given function.
-    </p>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = 5\sec^2 x</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>F(x) = 5\tan x+ 4</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds f(x) = \frac7x</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>F(x) = 7\ln|x| + 14</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds g(t) = 4t^5-5t^3+8</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>G(t) = 4/6t^6-5/4t^4+8t+9</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds g(t) = 5\cdot 8^t</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>G(t) = 5\cdot 8^t/\ln 8 + 900</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds g(t) = \cos t + \sin t</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>G(t) = \sin t-\cos t -78</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds f(x) = \frac{1}{\sqrt{x}}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>F(x) = 2\sqrt{x} -\pi</m>
-        </p>
-      </answer>
-    </exercise>
-  </subsection>
-
+    </exercisegroup>
+  </exercises>
 </section>
-
