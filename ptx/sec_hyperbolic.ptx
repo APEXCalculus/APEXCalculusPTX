@@ -1,5 +1,4 @@
-
-
+<?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="sec_hyperbolic">
   <title>Hyperbolic Functions</title>
   <introduction>
@@ -29,11 +28,82 @@
 
     <figure xml:id="fig_hfcircle">
       <caption>Using trigonometric functions to define points on a circle and hyperbolic functions to define points on a hyperbola. The area of the shaded regions are included in them.</caption>
-      <img src="figures/fighf_circlearea"/>
+      <sidebyside widths="47% 47%">
 
-      <img src="figures/fighf_hyperbolaarea"/>
+        <figure xml:id="fig_hf_circlearea">
+          <caption/>
+        <!-- START figures/fig_hf_circlearea.tex -->
+          <image xml:id="img_hf_circlearea">
+            <description></description>
+            <latex-image>
+            
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            axis equal image,
+            axis on top,
+            extra x tick labels={$a$,$b$},
+            ytick={-1,1},
+            ymin=-1.1,ymax=1.1,
+            xmin=-1.1,xmax=1.1
+            ]
+
+            \addplot [firstcurvestyle,areastyle,domain=0:45] ({cos(x)},{sin(x)}) -- (axis cs:0,0) -- cycle;
+            \addplot [firstcurvestyle,-,domain=0:360,samples=80] ({cos(x)},{sin(x)});
+
+            \filldraw (axis cs:.707,.707) circle (1pt) node [shift={(6pt,11pt)}] {\scriptsize ($\cos(\theta) $,$\sin(\theta) $)};
+
+            \draw (axis cs:.6,.25) node {\scriptsize $\ds\frac{\theta}{2}$};
+            \draw (axis cs:-.75,1) node {\scriptsize $x^2+y^2=1$};
+
+            \end{axis}
+
+            \end{tikzpicture}
+            
+            </latex-image>
+          </image>
+        <!-- figures/fig_hf_circlearea.tex END -->
+        </figure>
+
+        <figure xml:id="fig_hf_hyperbolaarea">
+          <caption/>
+        <!-- START figures/fig_hf_hyperbolaarea.tex -->
+          <image xml:id="img_hf_hyperbolaarea">
+            <description></description>
+            <latex-image>
+            
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            axis on top,
+            ymin=-3.1,ymax=3.1,
+            xmin=-3.1,xmax=3.1
+            ]
+
+            \addplot [firstcurvestyle,areastyle,domain=0:1.6] ({cosh(x)},{sinh(x)}) -- (axis cs:0,0) -- cycle;
+
+            \addplot [firstcurvestyle,-,domain=-2:2,samples=40] ({cosh(x)},{sinh(x)});
+            \addplot [firstcurvestyle,-,domain=-2:2,samples=40] ({-cosh(x)},{sinh(x)});
+
+            \filldraw (axis cs:2.577,2.376) circle (1pt) node [left] {\scriptsize ($\cosh(\theta) $,$\sinh(\theta) $)};
+
+            \draw (axis cs:.73,.32) node {\scriptsize $\frac{\theta}{2}$};
+            \draw (axis cs:-1.75,2.75) node {\scriptsize $x^2-y^2=1$};
+
+            \end{axis}
+
+            \end{tikzpicture}
+            
+            </latex-image>
+          </image>
+        <!-- figures/fig_hf_hyperbolaarea.tex END -->
+        </figure>
+      </sidebyside>
     </figure>
+  </introduction>
 
+  <subsection xml:id="sec-hyp-def">
+    <title>The Hyperbolic Functions and their Properties</title>
     <p>
       We begin with their definition.
     </p>
@@ -41,70 +111,51 @@
     <definition xml:id="def_hyperbolic_functions">
       <title>Hyperbolic Functions</title>
       <statement>
-        <ol cols="2">
-          <li>
-            <p>
-              <m>\ds \cosh x = \frac{e^x+e^{-x}}2</m><idx><h>hyperbolic function</h><h>definition</h></idx>
-            </p>
-          </li>
+        <p>
+          <ol cols="2">
+            <li>
+              <p>
+                <m>\ds \cosh(x) = \frac{e^x+e^{-x}}2</m>
 
-          <li>
-            <p>
-              <m>\ds \sinh x = \frac{e^x-e^{-x}}2</m>
-            </p>
-          </li>
+                <idx><h>hyperbolic function</h><h>definition</h></idx>
 
-          <li>
-            <p>
-              <m>\ds \tanh x = \frac{\sinh x}{\cosh x}</m>
-            </p>
-          </li>
+              </p>
+            </li>
 
-          <li>
-            <p>
-              <m>\ds \sech x = \frac{1}{\cosh x}</m>
-            </p>
-          </li>
+            <li>
+              <p>
+                <m>\ds \sinh(x) = \frac{e^x-e^{-x}}2</m>
+              </p>
+            </li>
 
-          <li>
-            <p>
-              <m>\ds \csch x = \frac{1}{\sinh x}</m>
-            </p>
-          </li>
+            <li>
+              <p>
+                <m>\ds \tanh(x) = \frac{\sinh(x) }{\cosh(x) }</m>
+              </p>
+            </li>
 
-          <li>
-            <p>
-              <m>\ds \coth x = \frac{\cosh x}{\sinh x}</m>
-            </p>
-          </li>
-        </ol>
+            <li>
+              <p>
+                <m>\ds \sech(x) = \frac{1}{\cosh(x) }</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\ds \csch(x) = \frac{1}{\sinh(x) }</m>
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <m>\ds \coth(x) = \frac{\cosh(x) }{\sinh(x) }</m>
+              </p>
+            </li>
+          </ol>
+        </p>
       </statement>
     </definition>
 
-    <p>
-      These hyperbolic functions are graphed in <xref ref="fig_hyperbolic">Figure</xref>.
-      In the graphs of <m>\cosh x</m> and <m>\sinh x</m>,
-      graphs of <m>e^x/2</m> and
-      <m>e^{-x}/2</m> are included with dashed lines.
-      As <m>x</m> gets <q>large,</q>
-      <m>\cosh x</m> and <m>\sinh x</m> each act like <m>e^x/2</m>;
-      when <m>x</m> is a large negative number,
-      <m>\cosh x</m> acts like <m>e^{-x}/2</m> whereas <m>\sinh x</m> acts like <m>-e^{-x}/2</m>.
-    </p>
-
-    <p>
-      Notice the domains of <m>\tanh x</m> and <m>\sech x</m> are <m>(-\infty,\infty)</m>,
-      whereas both <m>\coth x</m> and <m>\csch x</m> have vertical asymptotes at <m>x=0</m>.
-      Also note the ranges of these functions,
-      especially <m>\tanh x</m>:
-      as <m>x\to\infty</m>,
-      both <m>\sinh x</m> and <m>\cosh x</m> approach <m>e^{x}/2</m>,
-      hence <m>\tanh x</m> approaches <m>1</m>.
-    </p>
-
-    <p>
-      The following example explores some of the properties of these functions that bear remarkable resemblance to the properties of their trigonometric counterparts.
-    </p>
     <aside>
       <p>
         <em>Pronunciation Note:</em>
@@ -122,22 +173,176 @@
         <q>tanh</q> rhymes with <q>ranch.</q>
       </p>
     </aside>
-
-    <tabular>
-      <row>
-        <cell><img src="figures/fighf_cosh"/></cell>
-        <cell>\ <nbsp /></cell>
-        <cell><img src="figures/fighf_sinh"/></cell>
-      </row>
-      <row>
-        <cell><img src="figures/fighf_tanh_coth"/></cell>
-        <cell></cell>
-        <cell><img src="figures/fighf_sech_csch"/></cell>
-      </row>
-    </tabular>
+    <p>
+      These hyperbolic functions are graphed in <xref ref="fig_hyperbolic1">Figure</xref>
+      and <xref ref="fig_hyperbolic2">Figure</xref>.
+    </p>
 
     <p>
-      \captionof{figure}{Graphs of the hyperbolic functions.}
+      In the graph of <m>\cosh(x)</m> in <xref ref="fig_hf_cosh">Figure</xref>,
+      the graphs of <m>e^x/2</m> and
+      <m>e^{-x}/2</m> are included with dashed lines.
+      In the graph of <m>\sinh(x)</m> in <xref ref="fig_hf_sinh">Figure</xref>,
+      the graphs of <m>e^x/2</m> and
+      <m>-
+      e^{-x}/2</m> are included with dashed lines.
+      As <m>x</m> gets <q>large,</q>
+      <m>\cosh(x)</m> and <m>\sinh(x)</m> each act like <m>e^x/2</m>;
+      when <m>x</m> is a large negative number,
+      <m>\cosh(x)</m> acts like <m>e^{-x}/2</m> whereas
+      <m>\sinh(x)</m> acts like <m>-e^{-x}/2</m>.
+    </p>
+
+    <figure xml:id="fig_hyperbolic1">
+      <caption>Graphs of <m>\sinh(x)</m> and <m>\cosh(x)</m>.</caption>
+      <sidebyside widths="47% 47%">
+
+        <!-- START figures/fig_hf_cosh.tex -->
+        <figure xml:id="fig_hf_cosh">
+          <caption/>
+
+          <image xml:id="img_hf_cosh">
+            <description></description>
+            <latex-image>
+            
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            axis on top,
+            ymin=-11,ymax=11,
+            xmin=-3.5,xmax=3.5,
+            scaled ticks=false
+            ]
+
+            \addplot+ [domain=-3.1:3.1] {cosh(x)} node [pos=0.9, above left] {\scriptsize $f(x)=\cosh(x)$};
+            \addplot+ [domain=-3:3] {e^x/2} node [pos=0, above right] {\scriptsize $e^x/2$};
+            \addplot [secondcurvestyle,domain=-3:3] {e^(-x)/2} node [pos=0.9, above right] {\scriptsize $e^{-x}/2$};
+
+            \end{axis}
+
+            \end{tikzpicture}
+            
+            </latex-image>
+          </image>
+
+        </figure>
+        <!-- figures/fig_hf_cosh.tex END -->
+        <!-- START figures/fig_hf_sinh.tex -->
+        <figure xml:id="fig_hf_sinh">
+          <caption/>
+
+          <image xml:id="img_hf_sinh">
+            <description></description>
+            <latex-image>
+            
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            axis on top,
+            ymin=-11,ymax=11,
+            xmin=-3.5,xmax=3.5,
+            scaled ticks=false
+            ]
+
+            \addplot+ [domain=-3.1:3.1] {0.5*(e^x-e^(-x))} node [pos=0.9, above left] {\scriptsize $f(x)=\sinh(x)$};
+            \addplot+ [domain=-3:3] {0.5*(e^x)} node [pos=0, above right] {\scriptsize $e^x/2$};
+            \addplot+ [secondcurvestyle,domain=-3:3] {-0.5*(e^(-x)} node [pos=0.9, above right] {\scriptsize $-e^{-x}/2$};
+
+            \end{axis}
+
+            \end{tikzpicture}
+            
+            </latex-image>
+          </image>
+        <!-- figures/fig_hf_sinh.tex END -->
+        </figure>
+      </sidebyside>
+    </figure>
+
+    <p>
+      In Figure <xref ref="fig_hyperbolic2">Figure</xref>,
+      notice the domains of <m>\tanh(x)</m> and
+      <m>\sech(x)</m> are <m>(-\infty,\infty)</m>,
+      whereas both <m>\coth(x)</m> and
+      <m>\csch(x)</m> have vertical asymptotes at <m>x=0</m>.
+      Also note the ranges of these functions,
+      especially <m>\tanh(x)</m>:
+      as <m>x\to\infty</m>, both <m>\sinh(x)</m> and
+      <m>\cosh(x)</m> approach <m>e^{-x}/2</m>,
+      hence <m>\tanh(x)</m> approaches <m>1</m>.
+    </p>
+
+    <figure xml:id="fig_hyperbolic2">
+      <caption>Graphs of <m>\tanh(x), \coth(x), \csch(x)</m> and <m>\cosh(x)</m>.</caption>
+      <sidebyside widths="47% 47%">
+
+        <figure xml:id="fig_hf_tanh_coth">
+          <caption/>
+        <!-- START figures/fig_hf_tanh_coth.tex -->
+          <image xml:id="img_hf_tanh_coth">
+            <description></description>
+            <latex-image>
+            
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            axis on top,
+            ymin=-3.5,ymax=3.5,
+            xmin=-3.5,xmax=3.5,
+            scaled ticks=false
+            ]
+
+            \addplot+ [domain=-3:3] {(e^x-e^(-x))/(e^x+e^(-x))} node [pos=0.60,pin={120:$\scriptsize \tanh(x)$},inner sep=0pt] {};
+
+            \addplot+ [solid,domain=-3:-.33] {(e^x+e^(-x))/(e^x-e^(-x))};
+            \addplot [secondcurvestyle,solid,domain=.33:3,samples=30] {(e^x+e^(-x))/(e^x-e^(-x))} node [pos=0.5,pin={45:$\scriptsize \coth(x)$},inner sep=0pt] {};
+            \addplot+ [lineseg,dotted,domain=-3:3] {1};
+            \addplot+ [lineseg,dotted,domain=-3:3] {-1};
+
+            \end{axis}
+
+            \end{tikzpicture}
+            
+            </latex-image>
+          </image>
+
+        </figure>
+        <!-- figures/fig_hf_tanh_coth.tex END -->
+        <!-- START figures/fig_hf_sech_csch.tex -->
+        <figure xml:id="fig_hf_sech_csch">
+          <caption/>
+
+          <image xml:id="img_hf_sech_csch">
+            <description></description>
+            <latex-image>
+            
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            axis on top,
+            ymin=-3.5,ymax=3.5,
+            xmin=-3.5,xmax=3.5,
+            scaled ticks=false
+            ]
+
+            \addplot+ [domain=-3:3] {(2/(e^x+e^(-x))} node [pos=0.50,pin={120:$\scriptsize \sech(x)$},inner sep=0pt] {};
+            \addplot+ [solid,domain=-3:-.33] {2/(e^x-e^(-x))};
+            \addplot+ [secondcurvestyle,solid,domain=.33:3,samples=30] {2/(e^x-e^(-x))} node [pos=0.5,pin={45:$\scriptsize \csch(x)$},inner sep=0pt] {};
+
+            \end{axis}
+
+            \end{tikzpicture}
+            
+            </latex-image>
+          </image>
+
+        </figure>
+        <!-- figures/fig_hf_sech_csch.tex END -->
+      </sidebyside>
+    </figure>
+
+    <p>
+      The following example explores some of the properties of these functions that bear remarkable resemblance to the properties of their trigonometric counterparts.
     </p>
 
     <example xml:id="ex_hf1">
@@ -148,80 +353,120 @@
           to rewrite the following expressions.
         </p>
 
-        <ol cols="2">
-          <li>
-            <p>
-              <m>\cosh^2 x-\sinh^2x</m>
-            </p>
-          </li>
+        <p>
+          <ol cols="2">
+            <li>
+              <p>
+                <m>\cosh^2(x) -\sinh^2(x)</m>
+              </p>
+            </li>
 
-          <li>
-            <p>
-              <m>\tanh^2 x+\sech^2 x</m>
-            </p>
-          </li>
+            <li>
+              <p>
+                <m>\tanh^2(x) +\sech^2(x)</m>
+              </p>
+            </li>
 
-          <li>
-            <p>
-              <m>2\cosh x\sinh x</m>
-            </p>
-          </li>
+            <li>
+              <p>
+                <m>2\cosh(x) \sinh(x)</m>
+              </p>
+            </li>
 
-          <li>
-            <p>
-              <m>\frac{d}{dx}\big(\cosh x\big)</m>
-            </p>
-          </li>
+            <li>
+              <p>
+                <m>\frac{d}{dx}\big(\cosh(x) \big)</m>
+              </p>
+            </li>
 
-          <li>
-            <p>
-              <m>\frac{d}{dx}\big(\sinh x\big)</m>
-            </p>
-          </li>
+            <li>
+              <p>
+                <m>\frac{d}{dx}\big(\sinh(x) \big)</m>
+              </p>
+            </li>
 
-          <li>
-            <p>
-              <m>\frac{d}{dx}\big(\tanh x\big)</m>
-            </p>
-          </li>
-        </ol>
+            <li>
+              <p>
+                <m>\frac{d}{dx}\big(\tanh(x) \big)</m>
+              </p>
+            </li>
+          </ol>
+        </p>
       </statement>
       <solution>
         <p>
           <ol>
-            <li>
+            <li xml:id="ex_hf1a">
+
               <p>
-                <m>\begin{aligned}\cosh^2x-\sinh^2x \amp = \left(\frac{e^x+e^{-x}}2\right)^2 -\left(\frac{e^x-e^{-x}}2\right)^2\\ \amp = \frac{e^{2x}+2e^xe^{-x} + e^{-2x}}4 - \frac{e^{2x}-2e^xe^{-x} + e^{-2x}}4\\ \amp = \frac44=1. \end{aligned}</m> So <m>\cosh^2 x-\sinh^2x=1</m>.
+                By <xref ref="def_hyperbolic_functions">Definition</xref>
+                <md>
+                  <mrow>\cosh^2(x) -\sinh^2(x) \amp = \left(\frac{e^x+e^{-x}}2\right)^2 -\left(\frac{e^x-e^{-x}}2\right)^2</mrow>
+                  <mrow>\amp = \frac{e^{2x}+2e^xe^{-x} + e^{-2x}}4 - \frac{e^{2x}-2e^xe^{-x} + e^{-2x}}4</mrow>
+                  <mrow>\amp = \frac44=1</mrow>
+                </md>.
+                So <m>\cosh^2(x) -\sinh^2(x) =1</m>.
               </p>
             </li>
 
             <li>
               <p>
-                <m>\begin{aligned}\tanh^2 x+\sech^2 x \amp =\frac{\sinh^2x}{\cosh^2 x} + \frac{1}{\cosh^2 x} \\ \amp = \frac{\sinh^2x+1}{\cosh^2 x}\qquad \text{ Now use identity from \#1. } \\ \amp = \frac{\cosh^2 x}{\cosh^2 x} = 1. \end{aligned}</m> So <m>\tanh^2 x+\sech^2 x=1</m>.
+                Again, use <xref ref="def_hyperbolic_functions">Definition</xref>
+                <md>
+                  <mrow>\tanh^2(x) +\sech^2(x) \amp =\frac{\sinh^2(x) }{\cosh^2(x) } + \frac{1}{\cosh^2(x) }</mrow>
+                  <mrow>\amp= \frac{\sinh^2(x) +1}{\cosh^2(x) }\qquad \text{ Now use identity from } <xref ref="ex_hf1a">Part</xref></mrow>
+                  <mrow>\amp = \frac{\cosh^2(x) }{\cosh^2(x) } = 1</mrow>
+                </md>.
+                So <m>\tanh^2(x) +\sech^2(x) =1</m>.
               </p>
             </li>
 
             <li>
               <p>
-                <m>\begin{aligned}2\cosh x\sinh x \amp = 2\left(\frac{e^x+e^{-x}}2\right)\left(\frac{e^x-e^{-x}}2\right) \\ \amp = 2 \cdot\frac{e^{2x} - e^{-2x}}4\\ \amp = \frac{e^{2x} - e^{-2x}}2 = \sinh (2x). \end{aligned}</m> Thus <m>2\cosh x\sinh x = \sinh (2x)</m>.
+                Again, use <xref ref="def_hyperbolic_functions">Definition</xref>
+                <md>
+                  <mrow>2\cosh(x) \sinh(x) \amp = 2\left(\frac{e^x+e^{-x}}2\right)\left(\frac{e^x-e^{-x}}2\right)</mrow>
+                  <mrow>\amp = 2 \cdot\frac{e^{2x} - e^{-2x}}4</mrow>
+                  <mrow>\amp = \frac{e^{2x} - e^{-2x}}2 = \sinh(2x)</mrow>
+                </md>.
+                Thus <m>2\cosh(x) \sinh(x) = \sinh(2x)</m>.
               </p>
             </li>
 
             <li>
               <p>
-                <m>\begin{aligned}\frac{d}{dx}\big(\cosh x\big) \amp = \frac{d}{dx}\left(\frac{e^x+e^{-x}}2\right) \\ \amp = \frac{e^x-e^{-x}}2\\ \amp = \sinh x. \end{aligned}</m> So <m>\frac{d}{dx}\big(\cosh x\big) = \sinh x</m>.
+                Again, use <xref ref="def_hyperbolic_functions">Definition</xref>
+                <md>
+                  <mrow>\frac{d}{dx}\big(\cosh(x) \big) \amp = \frac{d}{dx}\left(\frac{e^x+e^{-x}}2\right)</mrow>
+                  <mrow>\amp = \frac{e^x-e^{-x}}2</mrow>
+                  <mrow>\amp = \sinh(x)</mrow>
+                </md>
+                So <m>\frac{d}{dx}\big(\cosh(x) \big) = \sinh(x)</m>.
               </p>
             </li>
 
             <li>
               <p>
-                <m>\begin{aligned}\frac{d}{dx}\big(\sinh x\big) \amp = \frac{d}{dx}\left(\frac{e^x-e^{-x}}2\right) \\ \amp = \frac{e^x+e^{-x}}2\\ \amp = \cosh x. \end{aligned}</m> So <m>\frac{d}{dx}\big(\sinh x\big) = \cosh x</m>.
+                Apply derivatives to <xref ref="def_hyperbolic_functions">Definition</xref>:
+                <md>
+                  <mrow>\frac{d}{dx}\big(\sinh(x) \big) \amp = \frac{d}{dx}\left(\frac{e^x-e^{-x}}2\right)</mrow>
+                  <mrow>\amp = \frac{e^x+e^{-x}}2</mrow>
+                  <mrow>\amp = \cosh(x)</mrow>
+                </md>.
+                So <m>\frac{d}{dx}\big(\sinh(x) \big) = \cosh(x)</m>.
               </p>
             </li>
 
             <li>
               <p>
-                <m>\begin{aligned}\frac{d}{dx}\big(\tanh x\big) \amp = \frac{d}{dx}\left(\frac{\sinh x}{\cosh x}\right) \\ \amp = \frac{\cosh x \cosh x - \sinh x \sinh x}{\cosh^2 x}\\ \amp = \frac{1}{\cosh^2 x}\\ \amp = \sech^2 x. \end{aligned}</m> So <m>\frac{d}{dx}\big(\tanh x\big) = \sech^2 x</m>.
+                Apply derivatives to <xref ref="def_hyperbolic_functions">Definition</xref>:
+                <md>
+                  <mrow>\frac{d}{dx}\big(\tanh(x) \big) \amp = \frac{d}{dx}\left(\frac{\sinh(x) }{\cosh(x) }\right)</mrow>
+                  <mrow>\amp = \frac{\cosh(x) \cosh(x) - \sinh(x) \sinh(x) }{\cosh^2(x) }</mrow>
+                  <mrow>\amp = \frac{1}{\cosh^2(x) }</mrow>
+                  <mrow>\amp = \sech^2(x)</mrow>
+                </md>.
+                So <m>\frac{d}{dx}\big(\tanh(x) \big) = \sech^2(x)</m>.
               </p>
             </li>
           </ol>
@@ -234,128 +479,140 @@
       Each can be verified by referring back to <xref ref="def_hyperbolic_functions">Definition</xref>.
     </p>
 
-    <sidebyside>
+    <insight xml:id="idea_hyperbolic_identities">
+      <title>Useful Hyperbolic Function Properties</title>
+      <!-- ToDo: I'd like these to be in a sidebyside like the current pdf, but that doesn't seem to be supported. For now I've commented out the sbs. -->
+ <!--</sidebyside>-->
+      <!-- ToDo: lists aren't allowed inside an insight. Do we rework this somehow, or hope for a schema change?-->
+      <list>
+        <title>Basic Identities</title>
+        <ol>
+          <li>
+            <p>
+              <m>\cosh^2(x) -\sinh^2(x) =1</m>
 
-      <insight xml:id="idea_hyperbolic_identities">
-        <title>Useful Hyperbolic Function Properties</title>
-        <sidebyside>
-          <term>Basic Identities</term>
+              <idx><h>hyperbolic function</h><h>identities</h></idx>
 
-          <ol>
-            <li>
-              <p>
-                <m>\cosh^2x-\sinh^2x=1</m><idx><h>hyperbolic function</h><h>identities</h></idx><idx><h>hyperbolic function</h><h>derivatives</h></idx><idx><h>hyperbolic function</h><h>integrals</h></idx><idx><h>derivative</h><h>hyperbolic funct.</h></idx><idx><h>integration</h><h>hyperbolic funct.</h></idx>
-              </p>
-            </li>
+              <idx><h>hyperbolic function</h><h>derivatives</h></idx>
 
-            <li>
-              <p>
-                <m>\tanh^2x+\sech^2x=1</m>
-              </p>
-            </li>
+              <idx><h>hyperbolic function</h><h>integrals</h></idx>
 
-            <li>
-              <p>
-                <m>\coth^2x-\csch^2x = 1</m>
-              </p>
-            </li>
+              <idx><h>derivative</h><h>hyperbolic funct.</h></idx>
 
-            <li>
-              <p>
-                <m>\cosh 2x=\cosh^2x+\sinh^2x</m>
-              </p>
-            </li>
+              <idx><h>integration</h><h>hyperbolic funct.</h></idx>
 
-            <li>
-              <p>
-                <m>\sinh 2x = 2\sinh x\cosh x</m>
-              </p>
-            </li>
+            </p>
+          </li>
 
-            <li>
-              <p>
-                <m>\ds\cosh^2x = \frac{\cosh 2x+1}{2}</m>
-              </p>
-            </li>
+          <li>
+            <p>
+              <m>\tanh^2(x) +\sech^2(x) =1</m>
+            </p>
+          </li>
 
-            <li>
-              <p>
-                <m>\ds \sinh^2x=\frac{\cosh 2x-1}{2}</m>
-              </p>
-            </li>
-          </ol>
+          <li>
+            <p>
+              <m>\coth^2(x) -\csch^2(x) = 1</m>
+            </p>
+          </li>
 
-          <term>Derivatives</term>
+          <li>
+            <p>
+              <m>\cosh(2x) =\cosh^2(x) +\sinh^2(x)</m>
+            </p>
+          </li>
 
-          <ol>
-            <li>
-              <p>
-                <m>\frac{d}{dx}\big(\cosh x\big) = \sinh x</m>
-              </p>
-            </li>
+          <li>
+            <p>
+              <m>\sinh(2x) = 2\sinh(x) \cosh(x)</m>
+            </p>
+          </li>
 
-            <li>
-              <p>
-                <m>\frac{d}{dx}\big(\sinh x\big) = \cosh x</m>
-              </p>
-            </li>
+          <li>
+            <p>
+              <m>\ds\cosh^2(x) = \frac{\cosh(2x) +1}{2}</m>
+            </p>
+          </li>
 
-            <li>
-              <p>
-                <m>\frac{d}{dx}\big(\tanh x\big) = \sech^2 x</m>
-              </p>
-            </li>
+          <li>
+            <p>
+              <m>\ds \sinh^2(x) =\frac{\cosh(2x) -1}{2}</m>
+            </p>
+          </li>
+        </ol>
+      </list>
 
-            <li>
-              <p>
-                <m>\frac{d}{dx}\big(\sech x\big) = -\sech x\tanh x</m>
-              </p>
-            </li>
+      <list>
+        <title>Derivatives</title>
+        <ol>
+          <li>
+            <p>
+              <m>\frac{d}{dx}\big(\cosh(x) \big) = \sinh(x)</m>
+            </p>
+          </li>
 
-            <li>
-              <p>
-                <m>\frac{d}{dx}\big(\csch x\big) = -\csch x\coth x</m>
-              </p>
-            </li>
+          <li>
+            <p>
+              <m>\frac{d}{dx}\big(\sinh(x) \big) = \cosh(x)</m>
+            </p>
+          </li>
 
-            <li>
-              <p>
-                <m>\frac{d}{dx}\big(\coth x\big) = -\csch^2x</m>
-              </p>
-            </li>
-          </ol>
+          <li>
+            <p>
+              <m>\frac{d}{dx}\big(\tanh(x) \big) = \sech^2(x)</m>
+            </p>
+          </li>
 
-          <term>Integrals</term>
+          <li>
+            <p>
+              <m>\frac{d}{dx}\big(\sech(x) \big) = -\sech(x) \tanh(x)</m>
+            </p>
+          </li>
 
-          <ol>
-            <li>
-              <p>
-                <m>\ds\int \cosh x\, dx = \sinh x+C</m>
-              </p>
-            </li>
+          <li>
+            <p>
+              <m>\frac{d}{dx}\big(\csch(x) \big) = -\csch(x) \coth(x)</m>
+            </p>
+          </li>
 
-            <li>
-              <p>
-                <m>\ds\int \sinh x\, dx = \cosh x+C</m>
-              </p>
-            </li>
+          <li>
+            <p>
+              <m>\frac{d}{dx}\big(\coth(x) \big) = -\csch^2(x)</m>
+            </p>
+          </li>
+        </ol>
+      </list>
 
-            <li>
-              <p>
-                <m>\ds\int \tanh x\, dx = \ln(\cosh x) +C</m>
-              </p>
-            </li>
+      <list>
+        <title>Integrals</title>
+        <ol>
+          <li>
+            <p>
+              <m>\ds\int \cosh(x) \, dx = \sinh(x) +C</m>
+            </p>
+          </li>
 
-            <li>
-              <p>
-                <m>\ds\int \coth x\, dx = \ln|\sinh x\,|+C</m>
-              </p>
-            </li>
-          </ol>
-        </sidebyside>
-      </insight>
+          <li>
+            <p>
+              <m>\ds\int \sinh(x) \, dx = \cosh(x) +C</m>
+            </p>
+          </li>
 
-    </sidebyside>
+          <li>
+            <p>
+              <m>\ds\int \tanh(x) \, dx = \ln(\cosh(x) ) +C</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\ds\int \coth(x) \, dx = \ln\abs{\sinh(x) \,}+C</m>
+            </p>
+          </li>
+        </ol>
+      </list>
+ <!--</sidebyside>-->
+    </insight>
 
     <p>
       We practice using <xref ref="idea_hyperbolic_identities">Key Idea</xref>.
@@ -368,25 +625,27 @@
           Evaluate the following derivatives and integrals.
         </p>
 
-        <ol cols="2">
-          <li>
-            <p>
-              <m>\ds\frac{d}{dx}\big(\cosh 2x\big)</m>
-            </p>
-          </li>
+        <p>
+          <ol cols="2">
+            <li>
+              <p>
+                <m>\ds\frac{d}{dx}\big(\cosh(2x) \big)</m>
+              </p>
+            </li>
 
-          <li>
-            <p>
-              <m>\ds\int \sech^2(7t-3)\, dt</m>
-            </p>
-          </li>
+            <li>
+              <p>
+                <m>\ds\int \sech^2(7t-3)\ dt</m>
+              </p>
+            </li>
 
-          <li>
-            <p>
-              <m>\ds \int_0^{\ln 2} \cosh x\, dx</m>
-            </p>
-          </li>
-        </ol>
+            <li>
+              <p>
+                <m>\ds \int_0^{\ln(2) } \cosh(x) \, dx</m>
+              </p>
+            </li>
+          </ol>
+        </p>
       </statement>
       <solution>
         <p>
@@ -394,16 +653,18 @@
             <li>
               <p>
                 Using the Chain Rule directly,
-                we have <m>\frac{d}{dx} \big(\cosh 2x\big) = 2\sinh 2x</m>.
+                we have <m>\frac{d}{dx} \big(\cosh(2x) \big) = 2\sinh(2x)</m>.
+
                 Just to demonstrate that it works,
                 let's also use the Basic Identity found in <xref ref="idea_hyperbolic_identities">Key Idea</xref>:
-                <m>\cosh 2x = \cosh^2x+\sinh^2x</m>.
+                <m>\cosh(2x) = \cosh^2(x) +\sinh^2(x)</m>.
                 <md>
-                  <mrow>\frac{d}{dx}\big(\cosh 2x\big) = \frac{d}{dx}\big(\cosh^2x+\sinh^2x\big) \amp = 2\cosh x\sinh x+ 2\sinh x\cosh x</mrow>
-                  <mrow>\amp = 4\cosh x\sinh x</mrow>
+                  <mrow>\frac{d}{dx}\big(\cosh(2x) \big) \amp = \frac{d}{dx}\big(\cosh^2(x) +\sinh^2(x) \big)</mrow>
+                  <mrow>\amp = 2\cosh(x) \sinh(x) + 2\sinh(x) \cosh(x)</mrow>
+                  <mrow>\amp = 4\cosh(x) \sinh(x) </mrow>
                 </md>.
                 Using another Basic Identity,
-                we can see that <m>4\cosh x\sinh x = 2\sinh 2x</m>.
+                we can see that <m>4\cosh(x) \sinh(x) = 2\sinh(2x)</m>.
                 We get the same answer either way.
               </p>
             </li>
@@ -412,209 +673,369 @@
               <p>
                 We employ substitution, with <m>u = 7t-3</m> and <m>du = 7dt</m>.
                 Applying <xref ref="idea_linearsub">Key Ideas</xref>
-                and <xref ref="idea_hyperbolic_identities"></xref> we have:
+                and <xref ref="idea_hyperbolic_identities"/> we have:
                 <me>
-                  \int \sech^2 (7t-3)\, dt = \frac17\tanh (7t-3) + C
+                  \int \sech^2(7t-3)\ dt = \frac17\tanh(7t-3) + C
                 </me>.
               </p>
             </li>
 
             <li>
               <p>
-                <me>
-                  \int_0^{\ln 2} \cosh x\, dx = \sinh x\Big|_0^{\ln 2} = \sinh (\ln 2) - \sinh 0 = \sinh(\ln 2)
-                </me>.
-                We can simplify this last expression as <m>\sinh x</m> is based on exponentials:
-                <me>
-                  \sinh(\ln 2) = \frac{e^{\ln 2}-e^{-\ln 2}}2 = \frac{2-1/2}{2} = \frac34
-                </me>.
+                <md>
+                  <mrow>\int_0^{\ln(2) } \cosh(x) \, dx \amp = \sinh(x) \Big|_0^{\ln(2) }</mrow>
+                  <mrow>\amp = \sinh(\ln(2) ) - \sinh(0)</mrow>
+                  <mrow>\amp  = \sinh(\ln(2) )</mrow>
+                </md>.
+                We can simplify this last expression as
+                <m>\sinh(x)</m> is based on exponentials:
+                <md>
+                  <mrow>\sinh(\ln(2) ) \amp = \frac{e^{\ln(2) }-e^{-\ln(2) }}2</mrow>
+                  <mrow>\amp = \frac{2-1/2}{2}</mrow>
+                  <mrow>\amp = \frac34</mrow>
+                </md>.
               </p>
             </li>
           </ol>
         </p>
       </solution>
     </example>
-  </introduction>
+  </subsection>
 
-  <subsection xml:id="fig_hfinverse2">
+  <subsection>
     <title>Inverse Hyperbolic Functions</title>
     <p>
-      Just as the inverse trigonometric functions are useful in certain integrations,
+      Just as the inverse trigonometric functions are useful in certain applications,
       the inverse hyperbolic functions are useful with others.
-      <xref ref="fig_hfinverse2">Figure</xref>
-      shows the restrictions on the domains to make each function one-to-one and the resulting domains and ranges of their inverse functions.
-      Their graphs are shown in <xref ref="fig_hfinverse1">Figure</xref>.
-          <idx><h>hyperbolic function</h><h>inverse</h></idx>
+      <xref ref="fig_hfarccosh">Figure</xref>
+      shows restriction on the domain of
+      <m>\cosh(x)</m> to make the function one-to-one and the resulting domain and range of its inverse function.
+      Since <m>\sinh(x)</m> is already one-to-one,
+      no domain restriction is needed as shown in <xref ref="fig_hfarcsinh"> Figure </xref>.
+      Since <m>\sech(x)</m> is not one to one,
+      it also needs a restricted domain in order to be invertible.
+      <xref ref="fig_hfarcsecharccsch">Figure</xref>
+      shows the graph of <m>\sech^{-1}(x)</m>.
+      You should carefully compare the graph of this function to the graph given in <xref ref="fig_hf_sech_csch">Figure </xref>
+      to see how this inverse was constructed.
+      The rest of the hyperbolic functions area already one-to-one and need no domain restrictions.
+      Their graphs are also shown in <xref ref="fig_hfinverse1">Figure</xref>.
+
+      <idx><h>hyperbolic function</h><h>inverse</h></idx>
+
     </p>
 
     <p>
       Because the hyperbolic functions are defined in terms of exponential functions,
       their inverses can be expressed in terms of logarithms as shown in <xref ref="idea_hyperbolic_log">Key Idea</xref>.
       It is often more convenient to refer to
-      <m>\sinh^{-1}x</m> than to <m>\ln\big(x+\sqrt{x^2+1}\big)</m>,
+      <m>\sinh^{-1}(x)</m> than to <m>\ln\big(x+\sqrt{x^2+1}\big)</m>,
       especially when one is working on theory and does not need to compute actual values.
       On the other hand, when computations are needed,
       technology is often helpful but many hand-held calculators lack a <em>convenient</em>
-      <m>\sinh^{-1}x</m> button.
+      <m>\sinh^{-1}(x)</m> button.
       (Often it can be accessed under a menu system, but not conveniently.)
       In such a situation, the logarithmic representation is useful.
       The reader is not encouraged to memorize these,
       but rather know they exist and know how to use them when needed.
     </p>
-<!--
-<caption>Domains and ranges of the hyperbolic and inverse hyperbolic functions.</caption>
--->
-    <sidebyside>
 
-      <tabular>
-        <row>
-          <cell>Function</cell>
-          <cell>Domain</cell>
-          <cell>Range</cell>
-        </row>
-        <row bottom="minor">
-          <cell></cell>
-          <cell></cell>
-          <cell></cell>
-        </row>
-        <row>
-          <cell><m>\cosh x</m></cell>
-          <cell><m>[0,\infty)</m></cell>
-          <cell><m>[1,\infty)</m></cell>
-        </row>
-        <row>
-          <cell><m>\sinh x</m></cell>
-          <cell><m>(-\infty,\infty)</m></cell>
-          <cell><m>(-\infty,\infty)</m></cell>
-        </row>
-        <row>
-          <cell><m>\tanh x</m></cell>
-          <cell><m>(-\infty,\infty)</m></cell>
-          <cell><m>(-1,1)</m></cell>
-        </row>
-        <row>
-          <cell><m>\sech x</m></cell>
-          <cell><m>[0,\infty)</m></cell>
-          <cell><m>(0,1]</m></cell>
-        </row>
-        <row>
-          <cell><m>\csch x</m></cell>
-          <cell><m>(-\infty,0) \cup (0,\infty)</m></cell>
-          <cell><m>(-\infty,0) \cup (0,\infty)</m></cell>
-        </row>
-        <row>
-          <cell><m>\coth x</m></cell>
-          <cell><m>(-\infty,0) \cup (0,\infty)</m></cell>
-          <cell><m>(-\infty,-1) \cup (1,\infty)</m></cell>
-        </row>
-      </tabular>
+    <figure xml:id="fig_hfinverse2">
+      <caption>Domains and ranges of the hyperbolic and inverse hyperbolic functions.</caption>
+      <sidebyside widths="47% 47%">
 
-      <tabular>
-        <row>
-          <cell>Function</cell>
-          <cell>Domain</cell>
-          <cell>Range</cell>
-        </row>
-        <row bottom="minor">
-          <cell></cell>
-          <cell></cell>
-          <cell></cell>
-        </row>
-        <row>
-          <cell><m>\cosh^{-1} x</m></cell>
-          <cell><m>[1,\infty)</m></cell>
-          <cell><m>[0,\infty)</m></cell>
-        </row>
-        <row>
-          <cell><m>\sinh^{-1} x</m></cell>
-          <cell><m>(-\infty,\infty)</m></cell>
-          <cell><m>(-\infty,\infty)</m></cell>
-        </row>
-        <row>
-          <cell><m>\tanh^{-1} x</m></cell>
-          <cell><m>(-1,1)</m></cell>
-          <cell><m>(-\infty,\infty)</m></cell>
-        </row>
-        <row>
-          <cell><m>\sech^{-1} x</m></cell>
-          <cell><m>(0,1]</m></cell>
-          <cell><m>[0,\infty)</m></cell>
-        </row>
-        <row>
-          <cell><m>\csch^{-1} x</m></cell>
-          <cell><m>(-\infty,0) \cup (0,\infty)</m></cell>
-          <cell><m>(-\infty,0) \cup (0,\infty)</m></cell>
-        </row>
-        <row>
-          <cell><m>\coth^{-1} x</m></cell>
-          <cell><m>(-\infty,-1) \cup (1,\infty)</m></cell>
-          <cell><m>(-\infty,0) \cup (0,\infty)</m></cell>
-        </row>
-      </tabular>
+        <tabular>
+          <row>
+            <cell>Function</cell>
+            <cell>Domain</cell>
+            <cell>Range</cell>
+          </row>
+          <row bottom="minor">
+            <cell></cell>
+            <cell></cell>
+            <cell></cell>
+          </row>
+          <row>
+            <cell><m>\cosh(x)</m></cell>
+            <cell><m>[0,\infty)</m></cell>
+            <cell><m>[1,\infty)</m></cell>
+          </row>
+          <row>
+            <cell><m>\sinh(x)</m></cell>
+            <cell><m>(-\infty,\infty)</m></cell>
+            <cell><m>(-\infty,\infty)</m></cell>
+          </row>
+          <row>
+            <cell><m>\tanh(x)</m></cell>
+            <cell><m>(-\infty,\infty)</m></cell>
+            <cell><m>(-1,1)</m></cell>
+          </row>
+          <row>
+            <cell><m>\sech(x)</m></cell>
+            <cell><m>[0,\infty)</m></cell>
+            <cell><m>(0,1]</m></cell>
+          </row>
+          <row>
+            <cell><m>\csch(x)</m></cell>
+            <cell><m>(-\infty,0) \cup (0,\infty)</m></cell>
+            <cell><m>(-\infty,0) \cup (0,\infty)</m></cell>
+          </row>
+          <row>
+            <cell><m>\coth(x)</m></cell>
+            <cell><m>(-\infty,0) \cup (0,\infty)</m></cell>
+            <cell><m>(-\infty,-1) \cup (1,\infty)</m></cell>
+          </row>
+        </tabular>
 
-    </sidebyside>
-<!--
-<caption>Graphs of the hyperbolic functions and their inverses.</caption>
--->
-    <sidebyside>
+        <tabular>
+          <row>
+            <cell>Function</cell>
+            <cell>Domain</cell>
+            <cell>Range</cell>
+          </row>
+          <row bottom="minor">
+            <cell></cell>
+            <cell></cell>
+            <cell></cell>
+          </row>
+          <row>
+            <cell><m>\cosh^{-1}(x)</m></cell>
+            <cell><m>[1,\infty)</m></cell>
+            <cell><m>[0,\infty)</m></cell>
+          </row>
+          <row>
+            <cell><m>\sinh^{-1}(x)</m></cell>
+            <cell><m>(-\infty,\infty)</m></cell>
+            <cell><m>(-\infty,\infty)</m></cell>
+          </row>
+          <row>
+            <cell><m>\tanh^{-1}(x)</m></cell>
+            <cell><m>(-1,1)</m></cell>
+            <cell><m>(-\infty,\infty)</m></cell>
+          </row>
+          <row>
+            <cell><m>\sech^{-1}(x)</m></cell>
+            <cell><m>(0,1]</m></cell>
+            <cell><m>[0,\infty)</m></cell>
+          </row>
+          <row>
+            <cell><m>\csch^{-1}(x)</m></cell>
+            <cell><m>(-\infty,0) \cup (0,\infty)</m></cell>
+            <cell><m>(-\infty,0) \cup (0,\infty)</m></cell>
+          </row>
+          <row>
+            <cell><m>\coth^{-1}(x)</m></cell>
+            <cell><m>(-\infty,-1) \cup (1,\infty)</m></cell>
+            <cell><m>(-\infty,0) \cup (0,\infty)</m></cell>
+          </row>
+        </tabular>
 
-      <tabular>
-        <row>
-          <cell><img src="figures/fighfarccosh"/></cell>
-          <cell><nbsp /><nbsp /></cell>
-          <cell><img src="figures/fighfarcsinh"/></cell>
-        </row>
-        <row>
-          <cell><img src="figures/fighfarctanharccoth"/></cell>
-          <cell></cell>
-          <cell><img src="figures/fighfarcsecharccsch"/></cell>
-        </row>
-      </tabular>
+      </sidebyside>
+    </figure>
 
-      <insight xml:id="idea_hyperbolic_log">
-        <title>Logarithmic definitions of Inverse Hyperbolic Functions</title>
-        <sidebyside>
-          <ol cols="2">
-            <li>
-              <p>
-                <m>\ds\cosh^{-1}x=\ln\big(x+\sqrt{x^2-1}\big);\ x\geq1</m><idx><h>hyperbolic function</h><h>inverse!logarithmic def.</h></idx>
-              </p>
-            </li>
+    <figure xml:id="fig_hfinverse1">
+      <caption>Graphs of the hyperbolic sine and cosine (with restricted domain) and their inverses.</caption>
+      <sbsgroup>
+      <sidebyside widths="47% 47%">
+      
+        <figure xml:id="fig_hfarccosh">
+          <caption/>
+          <!-- START figures/fig_hfarccosh.tex -->
+          <image xml:id="img_hfarccosh">
+            <description></description>
+            <latex-image>
+            
+            \begin{tikzpicture}
 
-            <li>
-              <p>
-                <m>\ds\tanh^{-1}x = \frac12\ln\left(\frac{1+x}{1-x}\right);\ |x|\lt 1</m>
-              </p>
-            </li>
+            \begin{axis}[
+            axis on top,
+            ymin=-.9,ymax=10.9,
+            xmin=-.9,xmax=10.9,
+            scaled ticks=false
+            ]
 
-            <li>
-              <p>
-                <m>\ds \sech^{-1}x = \ln\left(\frac{1+\sqrt{1-x^2}}x\right);\ 0\lt x\leq1</m>
-              </p>
-            </li>
+            \addplot+ [-,domain=0:3] {cosh(x)};
+            \addplot+ [-,domain=0:3,swapaxes] (cosh(x),x);
 
-            <li>
-              <p>
-                <m>\ds\sinh^{-1}x = \ln\big(x+\sqrt{x^2+1}\big)</m>
-              </p>
-            </li>
+            \addplot [dashed,domain=-.5:10] {x};
 
-            <li>
-              <p>
-                <m>\ds\coth^{-1}x = \frac12\ln\left(\frac{x+1}{x-1}\right);\ |x|>1</m>
-              </p>
-            </li>
+            \draw (axis cs:8,4) node {\scriptsize $y=\cosh^{-1}(x) $};
+            \draw (axis cs:5.6,10) node {\scriptsize $y=\cosh(x) $};
 
-            <li>
-              <p>
-                <m>\ds\csch^{-1}x = \ln\left(\frac1x+\frac{\sqrt{1+x^2}}{|x|}\right);\ x\neq0</m>
-              </p>
-            </li>
-          </ol>
-        </sidebyside>
-      </insight>
+            \end{axis}
 
-    </sidebyside>
+            \end{tikzpicture}
+            
+            </latex-image>
+          </image>
+
+        </figure>
+          <!-- figures/fig_hfarccosh.tex END -->
+          <!-- START figures/fig_hfarcsinh.tex -->
+        <figure xml:id="fig_hfarcsinh">
+          <caption/>
+
+          <image xml:id="img_hfarcsinh">
+            <description></description>
+            <latex-image>
+            
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            axis on top,
+            ymin=-10.9,ymax=10.9,
+            xmin=-10.9,xmax=10.9,
+            scaled ticks=false
+            ]
+
+            \addplot+ [-,domain=-3:3] {sinh(x)};
+            \addplot+ [-,domain=-3:3,swapaxes] (sinh(x),x);
+
+            \addplot [dashed,domain=-10:10] {x};
+
+            \draw (axis cs:-6,7) node {\scriptsize $y=\sinh(x) $};
+            \draw (axis cs:6,-5) node {\scriptsize $y=\sinh^{-1}(x) $};
+            \draw[-&gt;,&gt;=stealth] (axis cs:-3,7) -- (axis cs:2,7);
+            \draw[-&gt;,&gt;=stealth] (axis cs:7,-3) -- (axis cs:7,2);
+
+
+            \end{axis}
+
+            \end{tikzpicture}
+            
+            </latex-image>
+          </image>
+          <!-- figures/fig_hfarcsinh.tex END -->
+        </figure>
+      </sidebyside>
+    </figure>
+
+    <figure xml:id="fig_hfinverse2">
+      <caption>Graphs of the inverse hyperbolic tangent, cotangent, cosecant and secant.</caption>
+      <sidebyside widths="47% 47%">
+      
+        <figure xml:id="fig_hfarctanharccoth">
+          <caption/>
+          <!-- START figures/fig_hfarctanharccoth.tex -->
+          <image xml:id="img_hfarctanharccoth">
+            <description></description>
+            <latex-image>
+            
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            axis on top,
+            ytick={-2,2},
+            ymin=-3.2,ymax=3.2,
+            xmin=-3.2,xmax=3.2,
+            scaled ticks=false
+            ]
+
+            \addplot+ [-,domain=-3:3,swapaxes] (tanh(x),x);
+            \addplot+ [solid,-,smooth] coordinates {(1.005,2.997)(1.01,2.65)(1.02,2.31)(1.03,2.11)(1.04,1.97)(1.05,1.86)(1.06,1.77)(1.07,1.69)(1.08,1.63)(1.09,1.57)(1.1,1.52)(1.2,1.2)(1.3,1.02)(1.4,0.896)(1.5,0.805)(1.6,0.733)(1.7,0.675)(1.8,0.626)(1.9,0.585)(2.,0.549)(2.1,0.518)(2.2,0.49)(2.3,0.466)(2.4,0.444)(2.5,0.424)(2.6,0.405)(2.7,0.389)(2.8,0.374)(2.9,0.36)(3.,0.347)};
+            \addplot [secondcurvestyle,-,solid,smooth] coordinates {(-3.,-0.347)(-2.9,-0.36)(-2.8,-0.374)(-2.7,-0.389)(-2.6,-0.405)(-2.5,-0.424)(-2.4,-0.444)(-2.3,-0.466)(-2.2,-0.49)(-2.1,-0.518)(-2.,-0.549)(-1.9,-0.585)(-1.8,-0.626)(-1.7,-0.675)(-1.6,-0.733)(-1.5,-0.805)(-1.4,-0.896)(-1.3,-1.02)(-1.2,-1.2)(-1.1,-1.52)(-1.09,-1.57)(-1.08,-1.63)(-1.07,-1.69)(-1.06,-1.77)(-1.05,-1.86)(-1.04,-1.97)(-1.03,-2.11)(-1.02,-2.31)(-1.01,-2.65)(-1.005,-2.997)};
+
+            \draw (axis cs:2.2,1.5) node {\tiny $y=\coth^{-1}(x) $};
+            \draw (axis cs:2.2,-1.5) node {\tiny $y=\tanh^{-1}(x) $};
+            \draw [-&gt;,&gt;=stealth] (axis cs:1.8,-1.3) -- (axis cs:.2,-.2);
+
+            \addplot [asymptote] coordinates {(-1,-5) (-1,5)};
+            \addplot [asymptote] coordinates {(1,-5) (1,5)};
+
+            \end{axis}
+
+            \end{tikzpicture}
+            
+            </latex-image>
+          </image>
+
+        </figure>
+          <!-- figures/fig_hfarctanharccoth.tex END -->
+        <figure xml:id="fig_hfarcsecharccsch">
+          <caption/>
+          <!-- START figures/fig_hfarcsecharccsch.tex -->
+          <image xml:id="img_hfarcsecharccsch">
+            <description></description>
+            <latex-image>
+            
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            axis on top,
+            ytick={-3,-2,-1,1,2,3},
+            ymin=-3.5,ymax=3.5,
+            xmin=-3.5,xmax=3.5,
+            scaled ticks=false
+            ]
+
+            \addplot+ [-,smooth] coordinates {(0.1,2.993)(0.2,2.292)(0.3,1.874)(0.4,1.567)(0.5,1.317)
+            (0.55,1.205)(0.6,1.099)(0.65,0.9961)(0.7,0.8956)(0.75,0.7954)(0.8,0.6931)(0.85,0.5857)(0.9,0.4671)(0.95,0.323)(1.,0)};
+
+            \addplot+ [-,solid,smooth] coordinates {(-3.,-0.3275)(-2.9,-0.3383)(-2.8,-0.35)(-2.7,-0.3624)(-2.6,-0.3757)(-2.5,-0.39)(-2.4,-0.4055)(-2.3,-0.4221)(-2.2,-0.4402)(-2.1,-0.4598)(-2.,-0.4812)(-1.9,-0.5046)(-1.8,-0.5303)(-1.7,-0.5587)(-1.6,-0.5901)(-1.5,-0.6251)(-1.4,-0.6643)(-1.3,-0.7085)(-1.2,-0.7585)(-1.1,-0.8156)(-1.,-0.8814)(-0.9,-0.9578)(-0.8,-1.048)(-0.7,-1.154)(-0.6,-1.284)(-0.5,-1.444)(-0.4,-1.647)(-0.3,-1.919)(-0.2,-2.312)(-0.1,-2.998)};
+            \addplot+ [secondcurvestyle,solid,-,smooth] coordinates {(0.1,2.998)(0.2,2.312)(0.3,1.919)(0.4,1.647)(0.5,1.444)(0.6,1.284)(0.7,1.154)(0.8,1.048)(0.9,0.9578)(1.,0.8814)(1.1,0.8156)(1.2,0.7585)(1.3,0.7085)(1.4,0.6643)(1.5,0.6251)(1.6,0.5901)(1.7,0.5587)(1.8,0.5303)(1.9,0.5046)(2.,0.4812)(2.1,0.4598)(2.2,0.4402)(2.3,0.4221)(2.4,0.4055)(2.5,0.39)(2.6,0.3757)(2.7,0.3624)(2.8,0.35)(2.9,0.3383)(3.,0.3275)};
+
+            \draw (axis cs:-1.2,.5) node {\tiny $y=\sech^{-1}(x) $};
+            \draw (axis cs:-2.2,-1.6) node {\tiny $y=\csch^{-1}(x) $};
+            \draw [-&gt;,&gt;=latex] (axis cs:-.2,.5) -- (axis cs:0.7,.5);
+
+            \end{axis}
+
+            \end{tikzpicture}
+            
+            </latex-image>
+          </image>
+
+        </figure>
+        <!-- figures/fig_hfarcsecharccsch.tex END -->
+      </sidebyside>
+      </sbsgroup>
+    </figure>
+
+    <insight xml:id="idea_hyperbolic_log">
+      <title>Logarithmic definitions of Inverse Hyperbolic Functions</title>
+      <p>
+        <ol cols="2">
+          <li>
+            <p>
+              <m>\ds\cosh^{-1}(x) =\ln\big(x+\sqrt{x^2-1}\big);\\ x\geq1</m>
+
+              <idx><h>hyperbolic function</h><h>inverse!logarithmic def.</h></idx>
+
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\ds\tanh^{-1}(x) = \frac12\ln\left(\frac{1+x}{1-x}\right);\\ \abs{x}\lt 1</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\ds \sech^{-1}(x) = \ln\left(\frac{1+\sqrt{1-x^2}}x\right);\\ 0\lt x\leq1</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\ds\sinh^{-1}(x) = \ln\big(x+\sqrt{x^2+1}\big)</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\ds\coth^{-1}(x) = \frac12\ln\left(\frac{x+1}{x-1}\right);\\ \abs{x} \gt 1</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\ds\csch^{-1}(x) = \ln\left(\frac1x+\frac{\sqrt{1+x^2}}{\abs{x}}\right);\\ x\neq0</m>
+            </p>
+          </li>
+        </ol>
+      </p>
+    </insight>
 
     <p>
       The following Key Ideas give the derivatives and integrals relating to the inverse hyperbolic functions.
@@ -625,94 +1046,113 @@
       Note how inverse hyperbolic functions can be used to solve integrals we used Trigonometric Substitution to solve in <xref ref="sec_trig_sub">Section</xref>.
     </p>
 
+    <!-- ToDo: Consider adding an example showing how one of the inverse functions is found using logarithms? -->
+
     <insight xml:id="idea_hyperbolic_inverse_derivatives">
       <title>Derivatives Involving Inverse Hyperbolic Functions</title>
-      <ol cols="2">
-        <li>
-          <p>
-            <m>\ds\frac{d}{dx}\big(\cosh^{-1} x\big) = \frac{1}{\sqrt{x^2-1}};\ x>1</m><idx><h>derivative</h><h>inverse hyper.</h></idx><idx><h>hyperbolic function</h><h>inverse!derivative</h></idx>
-          </p>
-        </li>
+      <p>
+        <ol cols="2">
+          <li>
+            <p>
+              <m>\ds\frac{d}{dx}\big(\cosh^{-1}(x) \big) = \frac{1}{\sqrt{x^2-1}};\\ x \gt 1</m>
 
-        <li>
-          <p>
-            <m>\ds\frac{d}{dx}\big(\sinh^{-1} x\big) = \frac{1}{\sqrt{x^2+1}}</m>
-          </p>
-        </li>
+              <idx><h>derivative</h><h>inverse hyper.</h></idx>
 
-        <li>
-          <p>
-            <m>\ds\frac{d}{dx}\big(\tanh^{-1} x\big) = \frac{1}{1-x^2};\ |x|\lt 1</m>
-          </p>
-        </li>
+              <idx><h>hyperbolic function</h><h>inverse!derivative</h></idx>
 
-        <li>
-          <p>
-            <m>\ds\frac{d}{dx}\big(\sech^{-1} x\big) = \frac{-1}{x\sqrt{1-x^2}}; 0\lt x\lt 1</m>
-          </p>
-        </li>
+            </p>
+          </li>
 
-        <li>
-          <p>
-            <m>\ds\frac{d}{dx}\big(\csch^{-1} x\big) = \frac{-1}{|x|\sqrt{1+x^2}};\ x\neq0</m>
-          </p>
-        </li>
+          <li>
+            <p>
+              <m>\ds\frac{d}{dx}\big(\sinh^{-1}(x) \big) = \frac{1}{\sqrt{x^2+1}}</m>
+            </p>
+          </li>
 
-        <li>
-          <p>
-            <m>\ds\frac{d}{dx}\big(\coth^{-1} x\big) = \frac{1}{1-x^2};\ |x|>1</m>
-          </p>
-        </li>
-      </ol>
+          <li>
+            <p>
+              <m>\ds\frac{d}{dx}\big(\tanh^{-1}(x) \big) = \frac{1}{1-x^2};\\ \abs{x}\lt 1</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\ds\frac{d}{dx}\big(\sech^{-1}(x) \big) = \frac{-1}{x\sqrt{1-x^2}};\\ 0\lt x\lt 1</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\ds\frac{d}{dx}\big(\csch^{-1}(x) \big) = \frac{-1}{\abs{x}\sqrt{1+x^2}};\\ x\neq0</m>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <m>\ds\frac{d}{dx}\big(\coth^{-1}(x) \big) = \frac{1}{1-x^2};\\ \abs{x} \gt 1</m>
+            </p>
+          </li>
+        </ol>
+      </p>
     </insight>
-
-    <p>
-      \end{minipage}
-    </p>
 
     <insight xml:id="idea_hyperbolic_inverse_integrals">
       <title>Integrals Involving Inverse Hyperbolic Functions</title>
-      <ol>
-        <li>
-          <p>
-            <m>\ds\int \frac{1}{\sqrt{x^2-a^2}}\, dx</m> <m>\ds=\qquad \cosh^{-1}\left(\frac xa\right)+C;\ 0\lt a\lt x</m>
-            <m>\ds=\ln\Big|x+\sqrt{x^2-a^2}\Big|+C</m><idx><h>integration</h><h>inverse hyper.</h></idx><idx><h>hyperbolic function</h><h>inverse!integration</h></idx>
-          </p>
-        </li>
+      <p>
+        <ol>
+          <li>
+            <p>
+              <md>
+                <mrow>\int \frac{1}{\sqrt{x^2-a^2}}\, dx \amp= \cosh^{-1}\left(\frac xa\right)+C ;\ 0\lt a\lt x\amp =\ln\abs{x+\sqrt{x^2-a^2}}+C</mrow>
+              </md>
 
-        <li>
-          <p>
-            <m>\ds\int \frac{1}{\sqrt{x^2+a^2}}\, dx</m>
-            <m>\ds=\qquad \sinh^{-1}\left(\frac xa\right)+C;\ a>0</m> <m>\ds=\ln\Big|x+\sqrt{x^2+a^2}\Big|+C</m>
-          </p>
-        </li>
+              <idx><h>integration</h><h>inverse hyper.</h></idx>
 
-        <li>
-          <p>
-            <m>\ds\int \frac{1}{a^2-x^2}\, dx</m>
-            <m>\ds=\qquad \left\{\begin{array}{ccc} \frac1a\tanh^{-1}\left(\frac xa\right)+C \amp \amp x^2\lt a^2 \\ \\ \frac1a\coth^{-1}\left(\frac xa\right)+C \amp \amp a^2\lt x^2 \end{array} \right.</m> <m>\ds=\frac1{2a}\ln\left|\frac{a+x}{a-x}\right|+C</m>
-          </p>
-        </li>
+              <idx><h>hyperbolic function</h><h>inverse!integration</h></idx>
 
-        <li>
-          <p>
-            <m>\ds\int \frac{1}{x\sqrt{a^2-x^2}}\, dx</m>
-            <m>\ds=\qquad -\frac1a\sech^{-1}\left(\frac xa\right)+C;\ 0\lt x\lt a</m> <m>\ds= \frac1a \ln\left(\frac{x}{a+\sqrt{a^2-x^2}}\right)+C</m>
-          </p>
-        </li>
+            </p>
+          </li>
 
-        <li>
-          <p>
-            <m>\ds\int \frac{1}{x\sqrt{x^2+a^2}}\, dx</m>
-            <m>\ds=\qquad -\frac1a\csch^{-1}\left|\frac xa\right| + C;\ x\neq 0,\ a>0</m><m>\ds= \frac1a \ln\left|\frac{x}{a+\sqrt{a^2+x^2}}\right|+C</m>
-          </p>
-        </li>
-      </ol>
+          <li>
+            <p>
+              <md>
+                <mrow>\int \frac{1}{\sqrt{x^2+a^2}}\, dx \amp =\sinh^{-1}\left(\frac xa\right)+C;\ a \gt 0 \amp =\ln\abs{x+\sqrt{x^2+a^2}}+C</mrow>
+              </md>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <md>
+                <mrow>\ds\int \frac{1}{a^2-x^2}\, dx \amp =
+                \begin{cases}
+                \frac1a\tanh^{-1}\left(\frac xa\right)+C \amp x^2\lt a^2\\
+                \frac1a\coth^{-1}\left(\frac xa\right)+C \amp  a^2\lt x^2
+                \end{cases}
+                \amp =\frac1{2a}\ln\abs{\frac{a+x}{a-x}}+C</mrow>
+              </md>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <md>
+                <mrow>\ds\int \frac{1}{x\sqrt{a^2-x^2}}\, dx \amp = -\frac1a\sech^{-1}\left(\frac xa\right)+C;\ 0\lt x\lt a 
+                \amp =\frac1a \ln\left(\frac{x}{a+\sqrt{a^2-x^2}}\right)+C</mrow>
+              </md>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <md>
+                <mrow>\ds\int \frac{1}{x\sqrt{x^2+a^2}}\, dx \amp -\frac1a\csch^{-1}\abs{\frac xa} + C;\ x\neq 0,\ a\gt 0 \amp = \frac1a \ln\abs{\frac{x}{a+\sqrt{a^2+x^2}}}+C</mrow>
+              </md>
+            </p>
+          </li>
+        </ol>
+      </p>
     </insight>
-
-    <p>
-      \end{minipage}
-    </p>
 
     <p>
       We practice using the derivative and integral formulas in the following example.
@@ -725,25 +1165,27 @@
           Evaluate the following.
         </p>
 
-        <ol cols="2">
-          <li>
-            <p>
-              <m>\ds \frac{d}{dx}\left[\cosh^{-1}\left(\frac{3x-2}{5}\right)\right]</m>
-            </p>
-          </li>
+        <p>
+          <ol cols="2">
+            <li>
+              <p>
+                <m>\ds \frac{d}{dx}\left[\cosh^{-1}\left(\frac{3x-2}{5}\right)\right]</m>
+              </p>
+            </li>
 
-          <li>
-            <p>
-              <m>\ds \int\frac{1}{x^2-1}\, dx</m>
-            </p>
-          </li>
+            <li>
+              <p>
+                <m>\ds \int\frac{1}{x^2-1}\, dx</m>
+              </p>
+            </li>
 
-          <li>
-            <p>
-              <m>\ds \int \frac{1}{\sqrt{9x^2+10}}\, dx</m>
-            </p>
-          </li>
-        </ol>
+            <li>
+              <p>
+                <m>\ds \int \frac{1}{\sqrt{9x^2+10}}\, dx</m>
+              </p>
+            </li>
+          </ol>
+        </p>
       </statement>
       <solution>
         <p>
@@ -761,34 +1203,36 @@
               <p>
                 Multiplying the numerator and denominator by <m>(-1)</m> gives:
                 <m>\ds \int \frac{1}{x^2-1}\, dx = \int \frac{-1}{1-x^2}\, dx</m>.
-                The second integral can be solved with a direct application of item <hash />3 from <xref ref="idea_hyperbolic_inverse_integrals">Key Idea</xref>,
+                The second integral can be solved with a direct application of item #3 from <xref ref="idea_hyperbolic_inverse_integrals">Key Idea</xref>,
                 with <m>a=1</m>.
                 Thus
-                <md>
-                  <mrow>\int \frac{1}{x^2-1}\, dx \amp = -\int \frac{1}{1-x^2}\, dx</mrow>
-                  <mrow>\amp = \left\{\begin{array}{ccc} -\tanh^{-1}\left(x\right)+C \amp  \amp  x^2\lt 1</mrow>
-                  <mrow>-\coth^{-1}\left(x\right)+C \amp  \amp  1\lt x^2 \end{array}\right.</mrow>
-                  <mrow>\amp =-\frac12\ln\left|\frac{x+1}{x-1}\right|+C</mrow>
-                  <mrow>\amp =\frac12\ln\left|\frac{x-1}{x+1}\right|+C</mrow>
-                </md>.
+                <mdn>
+                  <mrow number="no">\int \frac{1}{x^2-1}\, dx \amp = -\int \frac{1}{1-x^2}\, dx</mrow>
+                  <mrow number="no">\amp = \left\{\begin{array}{ccc} -\tanh^{-1}\left(x\right)+C \amp  \amp  x^2\lt 1 \\ \\
+                  -\coth^{-1}\left(x\right)+C \amp  \amp  1\lt x^2
+                  \end{array} \right.</mrow>
+                  <mrow number="no">\amp =-\frac12\ln\abs{\frac{x+1}{x-1}}+C</mrow>
+                  <mrow xml:id="eq_hf3">\amp =\frac12\ln\abs{\frac{x-1}{x+1}}+C</mrow>
+                </mdn>.
                 We should note that this exact problem was solved at the beginning of <xref ref="sec_partial_fraction">Section</xref>.
-                In that example the answer was given as <m>\frac12\ln|x-1|-\frac12\ln|x+1|+C</m>.
+                In that example the answer was given as <m>\frac12\ln\abs{x-1}-\frac12\ln\abs{x+1}+C</m>.
                 Note that this is equivalent to the answer given in <xref ref="eq_hf3">Equation</xref>,
-                as <m>\ln(a/b) = \ln a - \ln b</m>.
+                as <m>\ln(a/b) = \ln(a) - \ln(b)</m>.
               </p>
             </li>
 
             <li>
               <p>
                 This requires a substitution,
-                then item <hash />2 of <xref ref="idea_hyperbolic_inverse_integrals">Key Idea</xref> can be applied.
+                then item #2 of <xref ref="idea_hyperbolic_inverse_integrals">Key Idea</xref> can be applied.
+
                 Let <m>u = 3x</m>, hence <m>du = 3dx</m>.
                 We have
                 <md>
-                  <mrow>\int \frac{1}{\sqrt{9x^2+10}}\, dx \amp = \frac13\int\frac{1}{\sqrt{u^2+10}}\, du.</mrow>
+                  <mrow>\int \frac{1}{\sqrt{9x^2+10}}\, dx \amp = \frac13\int\frac{1}{\sqrt{u^2+10}}\ du.</mrow>
                   <intertext>Note <m>a^2=10</m>, hence <m>a = \sqrt{10}</m>. Now apply the integral rule.</intertext>
                   <mrow>\amp = \frac13 \sinh^{-1}\left(\frac{3x}{\sqrt{10}}\right) + C</mrow>
-                  <mrow>\amp = \frac13 \ln \Big|3x+\sqrt{9x^2+10}\Big|+C</mrow>
+                  <mrow>\amp = \frac13 \ln\abs{3x+\sqrt{9x^2+10}}+C</mrow>
                 </md>.
               </p>
             </li>
@@ -823,477 +1267,904 @@
     </p>
   </subsection>
 
-  <subsection>
-    <title>Terms and Concepts</title>
-    <exercise>
-      <statement>
-        <p>
-          In <xref ref="idea_hyperbolic_identities">Key Idea</xref>,
-          the equation <m>\ds \int \tanh x\, dx = \ln (\cosh x)+C</m> is given.
-          Why is <q><m>\ln |\cosh x|</m></q>
-          not used <mdash /> i.e., why are absolute values not necessary?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Because <m>\cosh x</m> is always positive.
-        </p>
-      </answer>
-    </exercise>
+  <exercises>
+    <exercisegroup>
 
-    <exercise>
-      <statement>
+      <introduction>
         <p>
-          The hyperbolic functions are used to define points on the right hand portion of the hyperbola <m>x^2-y^2=1</m>,
-          as shown in <xref ref="fig_hfcircle">Figure</xref>.
-          How can we use the hyperbolic functions to define points on the left hand portion of the hyperbola?
+          Terms and Concepts
         </p>
-      </statement>
-      <answer>
-        <p>
-          The points on the left hand side can be defined as <m>(-\cosh x, \sinh x)</m>.
-        </p>
-      </answer>
-    </exercise>
-  </subsection>
+      </introduction>
+<!-- Exercise 1 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-  <subsection>
-    <title>Problems</title>
-    <p>
-      In the following exercises,
-      verify the given identity using <xref ref="def_hyperbolic_functions">Definition</xref>,
-      as done in <xref ref="ex_hf1">Example</xref>.
-    </p>
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                In <xref ref="idea_hyperbolic_identities">Key Idea</xref>,
+                the equation <m>\ds \int \tanh(x) \, dx = \ln(\cosh(x) )+C</m> is given.
+                Why is <q><m>\ln\abs{\cosh(x) }</m></q>
+                not used <mdash/> i.e., why are absolute values not necessary?
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\coth^2 x-\csch^2x=1</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\begin{aligned}\coth^2x-\csch^2x \amp = \left(\frac{e^x+e^{-x}}{e^x-e^{-x}}\right)^2 - \left(\frac{2}{e^x-e^{-x}}\right)^2 \\ \amp = \frac{(e^{2x} + 2 + e^{-2x}) - (4)}{e^{2x} - 2 + e^{-2x}}\\ \amp = \frac{e^{2x} - 2 + e^{-2x}}{e^{2x} - 2 + e^{-2x}}\\ \amp = 1 \end{aligned}</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var form="essay"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Because <m>\cosh(x)</m> is always positive.
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+<!-- Exercise 2 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\cosh 2x = \cosh^2x+\sinh^2x</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\begin{aligned}\cosh^2x+\sinh^2x \amp = \left(\frac{e^x+e^{-x}}{2}\right)^2 + \left(\frac{e^x-e^{-x}}{2}\right)^2 \\ \amp = \frac{e^{2x} + 2 + e^{-2x}}{4} + \frac{e^{2x} - 2 + e^{-2x}}{4}\\ \amp = \frac{2e^{2x} + 2e^{-2x}}{4}\\ \amp = \frac{e^{2x} + e^{-2x}}{2} \\ \amp = \cosh 2x. \end{aligned}</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                The hyperbolic functions are used to define points on the right hand portion of the hyperbola <m>x^2-y^2=1</m>,
+                as shown in <xref ref="fig_hfcircle">Figure</xref>.
+                How can we use the hyperbolic functions to define points on the left hand portion of the hyperbola?
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds\cosh^2x = \frac{\cosh2x+1}{2}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\begin{aligned}\cosh^2x \amp = \left(\frac{e^x+e^{-x}}{2}\right)^2 \\ \amp = \frac{e^{2x} + 2 + e^{-2x}}{4} \\ \amp = \frac12\frac{(e^{2x} + e^{-2x})+2}{2}\\ \amp = \frac12\left(\frac{e^{2x} + e^{-2x}}{2}+1\right)\\ \amp = \frac{\cosh2x+1}{2}. \end{aligned}</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var form="essay"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                The points on the left hand side can be defined as <m>(-\cosh(x) , \sinh(x) )</m>.
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds\sinh^2x = \frac{\cosh2x-1}{2}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\begin{aligned}\sinh^2x \amp = \left(\frac{e^x-e^{-x}}{2}\right)^2 \\ \amp = \frac{e^{2x} - 2 + e^{-2x}}{4} \\ \amp = \frac12\frac{(e^{2x} + e^{-2x})-2}{2}\\ \amp = \frac12\left(\frac{e^{2x} + e^{-2x}}{2}-1\right)\\ \amp = \frac{\cosh2x-1}{2}. \end{aligned}</m>
-        </p>
-      </answer>
-    </exercise>
+    </exercisegroup>
+    <exercisegroup>
 
-    <exercise>
-      <statement>
+      <introduction>
         <p>
-          <m>\ds\frac{d}{dx}\left[\sech x\right] = -\sech x\tanh x</m>
+          In the following exercises,
+          verify the given identity using <xref ref="def_hyperbolic_functions">Definition</xref>,
+          as done in <xref ref="ex_hf1">Example</xref>.
         </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\begin{aligned}\frac{d}{dx}\left[\sech x\right] \amp = \frac{d}{dx}\left[\frac{2}{e^x+e^{-x}}\right] \\ \amp = \frac{-2(e^x-e^{-x})}{(e^x+e^{-x})^2} \\ \amp = -\frac{2(e^x-e^{-x})}{(e^x+e^{-x})(e^x+e^{-x})} \\ \amp = -\frac{2}{e^x+e^{-x}}\cdot \frac{e^x-e^{-x}}{e^x+e^{-x}}\\ \amp = -\sech x\tanh x \end{aligned}</m>
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
+<!-- Exercise 3 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds\frac{d}{dx}\left[\coth x\right] = -\csch^2x</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\begin{aligned}\frac{d}{dx}\left[\coth x\right] \amp = \frac{d}{dx}\left[\frac{e^x+e^{-x}}{e^x-e^{-x}}\right] \\ \amp = \frac{(e^x-e^{-x})(e^x-e^{-x})-(e^x+e^{-x})(e^x+e^{-x})}{(e^x-e^{-x})^2}\\ \amp = \frac{e^{2x}+e^{-2x} - 2 - (e^{2x}+e^{-2x}+2)}{(e^x-e^{-x})^2}\\ \amp = -\frac{4}{(e^x-e^{-x})^2}\\ \amp =-\csch^2x \end{aligned}</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\coth^2(x) -\csch^2(x) =1</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int \tanh x\, dx = \ln (\cosh x) + C</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\ds \int \tanh x\, dx = \int \frac{\sinh x}{\cosh x}\, dx</m>
-        </p>
+              <p>
+                <var form="essay"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\begin{aligned}\coth^2(x) -\csch^2(x) \amp = \left(\frac{e^x+e^{-x}}{e^x-e^{-x}}\right)^2 - \left(\frac{2}{e^x-e^{-x}}\right)^2 \\
+											\amp = \frac{(e^{2x} + 2 + e^{-2x}) - (4)}{e^{2x} - 2 + e^{-2x}}\\
+											\amp = \frac{e^{2x} - 2 + e^{-2x}}{e^{2x} - 2 + e^{-2x}}\\
+											\amp = 1
+                \end{aligned}</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+<!-- Exercise 4 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-        <p>
-          Let <m>u = \cosh x</m>; <m>du = (\sinh x) dx</m>
-        </p>
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\cosh(2x) = \cosh^2(x) +\sinh^2(x)</m>
+              </p>
 
-        <p>
-          <m>\begin{aligned}\amp = \int \frac{1}{u}\, du \\ \amp = \ln |u| + C \\ \amp = \ln (\cosh x) + C. \end{aligned}</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var form="essay"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\begin{aligned}\cosh^2(x) +\sinh^2(x) \amp = \left(\frac{e^x+e^{-x}}{2}\right)^2 + \left(\frac{e^x-e^{-x}}{2}\right)^2 \\
+											\amp = \frac{e^{2x} + 2 + e^{-2x}}{4} + \frac{e^{2x} - 2 + e^{-2x}}{4}\\
+											\amp = \frac{2e^{2x} + 2e^{-2x}}{4}\\
+											\amp = \frac{e^{2x} + e^{-2x}}{2} \\
+											\amp = \cosh(2x) .
+                \end{aligned}</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+<!-- Exercise 5 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int \coth x\, dx = \ln |\sinh x| + C</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\begin{aligned}\int \coth x\, dx \amp = \int \frac{\cosh x}{\sinh x}\, dx\\ \text{ Let \(u = \sinh x\); \(du = (\cosh x) dx\) } \\ \amp = \int \frac{1}{u}\, du \\ \amp = \ln |u| + C \\ \amp = \ln |\sinh x| + C. \end{aligned}</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds\cosh^2(x) = \frac{\cosh(2x) +1}{2}</m>
+              </p>
 
-    <p>
-      In the following exercises, find the derivative of the given function.
-    </p>
+              <p>
+                <var form="essay"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\begin{aligned}\cosh^2(x) \amp = \left(\frac{e^x+e^{-x}}{2}\right)^2 \\
+											\amp = \frac{e^{2x} + 2 + e^{-2x}}{4} \\
+											\amp = \frac12\frac{(e^{2x} + e^{-2x})+2}{2}\\
+											\amp = \frac12\left(\frac{e^{2x} + e^{-2x}}{2}+1\right)\\
+											\amp = \frac{\cosh(2x) +1}{2}.
+                \end{aligned}</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+<!-- Exercise 6 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \sinh 2x</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>2\cosh 2x</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds\sinh^2(x) = \frac{\cosh(2x) -1}{2}</m>
+              </p>
 
-    <exercise>
+              <p>
+                <var form="essay"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\begin{aligned}\sinh^2(x) \amp = \left(\frac{e^x-e^{-x}}{2}\right)^2 \\
+											\amp = \frac{e^{2x} - 2 + e^{-2x}}{4} \\
+											\amp = \frac12\frac{(e^{2x} + e^{-2x})-2}{2}\\
+											\amp = \frac12\left(\frac{e^{2x} + e^{-2x}}{2}-1\right)\\
+											\amp = \frac{\cosh(2x) -1}{2}.
+                \end{aligned}</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+<!-- Exercise 7 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds\frac{d}{dx}\left[\sech(x) \right] = -\sech(x) \tanh(x)</m>
+              </p>
+
+              <p>
+                <var form="essay"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\begin{aligned}\frac{d}{dx}\left[\sech(x) \right] \amp = \frac{d}{dx}\left[\frac{2}{e^x+e^{-x}}\right] \\
+											\amp = \frac{-2(e^x-e^{-x})}{(e^x+e^{-x})^2} \\
+											\amp = -\frac{2(e^x-e^{-x})}{(e^x+e^{-x})(e^x+e^{-x})} \\
+											\amp = -\frac{2}{e^x+e^{-x}}\cdot \frac{e^x-e^{-x}}{e^x+e^{-x}}\\
+											\amp = -\sech(x) \tanh(x) \end{aligned}</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+<!-- Exercise 8 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds\frac{d}{dx}\left[\coth(x) \right] = -\csch^2(x)</m>
+              </p>
+
+              <p>
+                <var form="essay"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\begin{aligned}\frac{d}{dx}\left[\coth(x) \right] \amp = \frac{d}{dx}\left[\frac{e^x+e^{-x}}{e^x-e^{-x}}\right] \\
+											\amp = \frac{(e^x-e^{-x})(e^x-e^{-x})-(e^x+e^{-x})(e^x+e^{-x})}{(e^x-e^{-x})^2}\\
+											\amp = \frac{e^{2x}+e^{-2x} - 2 - (e^{2x}+e^{-2x}+2)}{(e^x-e^{-x})^2}\\
+											\amp = -\frac{4}{(e^x-e^{-x})^2}\\
+											\amp =-\csch^2(x) \end{aligned}</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+<!-- Exercise 9 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int \tanh(x) \, dx = \ln(\cosh(x) ) + C</m>
+              </p>
+
+              <p>
+                <var form="essay"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\ds	\int \tanh(x) \, dx = \int \frac{\sinh(x) }{\cosh(x) }\, dx</m>
+              </p>
+
+              <p>
+                Let <m>u = \cosh(x)</m>; <m>du = (\sinh(x) ) dx</m>
+              </p>
+
+              <p>
+                <m>\begin{aligned}\amp = \int \frac{1}{u}\ du \\
+											\amp = \ln\abs{u} + C \\
+											\amp = \ln(\cosh(x) ) + C.
+                \end{aligned}</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+<!-- Exercise 10 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int \coth(x) \, dx = \ln\abs{\sinh(x) } + C</m>
+              </p>
+
+              <p>
+                <var form="essay"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\begin{aligned}\int \coth(x) \, dx \amp = \int \frac{\cosh(x) }{\sinh(x) }\, dx\\
+											\text{ Let \(u = \sinh(x) \); \(du = (\cosh(x) ) dx\) }  	\\
+											\amp = \int \frac{1}{u}\ du \\
+											\amp = \ln\abs{u} + C \\
+											\amp = \ln\abs{\sinh(x) } + C.
+                \end{aligned}</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
+        <p>
+          In the following exercises, find the derivative of the given function.
+        </p>
+      </introduction>
+<!-- Exercise 11 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $f = Formula("sinh(2x)");
+              $df = $f->D('x');
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = \sinh(2x)</m>
+              </p>
+
+              <p>
+                <var name="$df" width="20"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- New problem -->
+      <exercise>
+        <webwork>
+          <setup>
+
+            <pg-code>
+              $f = Formula("(cosh(x))^2");
+              $df = $f->D('x');
+            </pg-code>
+          </setup>
       <statement>
         <p>
           <m>f(x) = \cosh ^2x</m>
         </p>
+
+        <p>
+          <var name="$df" width="20"/>
+        </p>
       </statement>
-      <answer>
+      <solution>
         <p>
           Taking the derivative of <m>(\cosh x)^2</m> directly,
           one gets <m>2\cosh x\sinh x</m>;
           using the identity <m>\cosh^2x=\frac12(\cosh2x+1)</m> first,
           one gets <m>\sinh 2x</m>;
-          by <xref ref="idea_hyperbolic_identities">Key Idea</xref>,
+          by known hyperbolic identities,
           these are equal.
         </p>
-      </answer>
+      </solution>
     </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \tanh (x^2)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>2x\sech^2(x^2)</m>
-        </p>
-      </answer>
-    </exercise>
+<!-- Exercise 12 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \ln(\sinh x)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\coth x</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              $f = Formula("tanh(x^2)");
+              $df = $f->D('x');
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = \tanh(x^2)</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \sinh x\cosh x</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\sinh^2x+\cosh^2x</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var name="$df" width="20"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 13 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = x\sinh x-\cosh x</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>x\cosh x</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              $f = Formula("ln(sinh(x))");
+              $df = $f->D('x');
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = \ln(\sinh(x) )</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \sech^{-1} (x^2)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\frac{-2x}{(x^2)\sqrt{1-x^4}}</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var name="$df" width="20"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 14 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \sinh^{-1} (3x)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\frac{3}{\sqrt{9x^2+1}}</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              $f = Formula("sinh(x)*cosh(x)");
+              $df = $f->D('x');
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = \sinh(x) \cosh(x)</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \cosh^{-1} (2x^2)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\frac{4x}{\sqrt{4x^4-1}}</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var name="$df" width="20"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 15 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \tanh^{-1} (x+5)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\frac{1}{1-(x+5)^2}</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              $f = Formula("x*sinh(x)-cosh(x)");
+              $df = $f->D('x');
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = x\sinh(x) -\cosh(x)</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \tanh^{-1} (\cos x)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>-\csc x</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var name="$df" width="20"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 16 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \cosh^{-1} (\sec x)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\sec x</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              $f = Formula("asech(x^2)");
+              $df = $f->D('x');
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = \sech^{-1}(x^2)</m>
+              </p>
 
-    <p>
-      In the following exercises,
-      find the equation of the line tangent to the function at the given <m>x</m>-value.
-    </p>
+              <p>
+                <var name="$df" width="20"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 17 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \sinh x</m> at <m>x=0</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>y=x</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              $f = Formula("asinh(3x)");
+              $df = $f->D('x');
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = \sinh^{-1}(3x)</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \cosh x</m> at <m>x=\ln 2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>y=\frac34(x-\ln 2)+\frac54</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var name="$df" width="20"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 18 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \tanh x</m> at <m>x=-\ln 3</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>y=\frac9{25}(x+\ln 3)-\frac45</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              $f = Formula("acosh(2x^2)");
+              $df = $f->D('x');
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = \cosh^{-1}(2x^2)</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \sech^2 x</m> at <m>x=\ln 3</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>y=-\frac{72}{125}(x-\ln 3)+\frac9{25}</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var name="$df" width="20"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 19 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \sinh^{-1} x</m> at <m>x=0</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>y=x</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              $f = Formula("atanh(x+5)");
+              $df = $f->D('x');
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = \tanh^{-1}(x+5)</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x) = \cosh^{-1} x</m> at <m>x=\sqrt 2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>y=(x-\sqrt{2})+\cosh^{-1}(\sqrt{2}) \approx (x-1.414)+0.881</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var name="$df" width="20"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 20 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <p>
-      In the following exercises, evaluate the given indefinite integral.
-    </p>
+            <pg-code>
+              $f = Formula("atanh(cos(x))");
+              $df = $f->D('x');
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = \tanh^{-1}(\cos(x) )</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int \tanh (2x)\, dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>1/2\ln (\cosh(2x))+C</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var name="$df" width="20"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 21 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int \cosh (3x-7)\, dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>1/3\sinh(3x-7)+C</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              $f = Formula("acosh(sec(x))");
+              $df = $f->D('x');
+            <!-- Solution simplies to sec(x) except x = pi*k -->
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = \cosh^{-1}(\sec(x) )</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int \sinh x\cosh x\, dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>1/2\sinh^2x+C</m> or <m>1/2\cosh^2x+C</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var name="$df" width="20"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int x\cosh x\, dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>x \sinh (x)-\cosh (x)+C</m>
-        </p>
-      </answer>
-    </exercise>
+    </exercisegroup>
+    <exercisegroup>
 
-    <exercise>
-      <statement>
+      <introduction>
         <p>
-          <m>\ds \int x\sinh x\, dx</m>
+          In the following exercises,
+          find the equation of the line tangent to the function at the given <m>x</m>-value.
         </p>
-      </statement>
-      <answer>
-        <p>
-          <m>x \cosh (x)-\sinh (x)+C</m>
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
+<!-- Exercise 22 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
+            <pg-code>
+              $x0 = 0;
+              $f = Formula("sinh(x)");
+              $df = $f->D('x');
+              $m = $df->eval(x=>$x0);
+              $y0 = $f->eval(x=>$x0);
+              $line = Formula("$m*(x - $x0) + $y0");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = \sinh(x)</m> at <m>x=0</m>
+              </p>
+
+              <p>
+                <m>y = </m><var name="$line" width="20"/>
+              </p>
+            </statement>
+            <solution>
+
+            <p>
+              <m>y=x</m>
+            </p>
+
+            </solution>
+        </webwork>
+      </exercise>
+<!-- Exercise 23 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $x0 = ln(2);
+              $f = Formula("cosh(x)");
+              $df = $f->D('x');
+              $m = $df->eval(x=>$x0);
+              $y0 = $f->eval(x=>$x0);
+              $line = Formula("$m*(x - $x0) + $y0");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = \cosh(x)</m> at <m>x=\ln(2)</m>
+              </p>
+
+              <p>
+                <m>y = </m><var name="$line" width="20"/>
+              </p>
+            </statement>
+            <solution>
+
+            <p>
+              <m>y=3/4(x-\ln(2) )+5/4</m>
+            </p>
+
+            </solution>
+        </webwork>
+      </exercise>
+<!-- New problem -->
+      <exercise>
+        <webwork>
+            <setup>
+
+            <pg-code>
+              $x0 = -ln(3);
+              $f = Formula("tanh(x)");
+              $df = $f->D('x');
+              $m = $df->eval(x=>$x0);
+              $y0 = $f->eval(x=>$x0);
+              $line = Formula("$m*(x - $x0) + $y0");
+            </pg-code>
+            </setup>
+
+            <statement>
+              <p>
+                <m>f(x) = \tanh(x)</m> at <m>x=-\ln(3)</m>
+              </p>
+
+              <p>
+                <m>y = </m><var name="$line" width="20"/>
+              </p>
+            </statement>
+            <solution>
+
+            <p>
+              <m>y=\frac9{25}(x+\ln(3))-\frac45</m>
+            </p>
+
+            </solution>
+        </webwork>
+      </exercise>
+
+<!-- Exercise 24 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $x0 = ln(3);
+              $f = Formula("sech(x)^2");
+              $df = $f->D('x');
+              $m = $df->eval(x=>$x0);
+              $y0 = $f->eval(x=>$x0);
+              $line = Formula("$m*(x - $x0) + $y0");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = \sech^2(x)</m> at <m>x=\ln(3)</m>
+              </p>
+
+              <p>
+                <m>y = </m><var name="$line" width="20"/>
+              </p>
+            </statement>
+            <solution>
+
+            <p>
+              <m>y=-72/125(x-\ln(3) )+9/25</m>
+            </p>
+
+            </solution>
+        </webwork>
+      </exercise>
+<!-- Exercise 25 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $x0 = 0;
+              $f = Formula("asinh(x)");
+              $df = $f->D('x');
+              $m = $df->eval(x=>$x0);
+              $y0 = $f->eval(x=>$x0);
+              $line = Formula("$m*(x - $x0) + $y0");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = \sinh^{-1}(x)</m> at <m>x=0</m>
+              </p>
+
+              <p>
+                <m>y = </m><var name="$line" width="20"/>
+              </p>
+            </statement>
+            <solution>
+
+            <p>
+              <m>y=x</m>
+            </p>
+
+            </solution>
+        </webwork>
+      </exercise>
+<!-- Exercise 26 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $x0 = sqrt(2);
+              $f = Formula("acosh(x)");
+              $df = $f->D('x');
+              $m = $df->eval(x=>$x0);
+              $y0 = $f->eval(x=>$x0);
+              $line = Formula("$m*(x - $x0) + $y0");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>f(x) = \cosh^{-1}(x)</m> at <m>x=\sqrt 2</m>
+              </p>
+
+              <p>
+                <m>y = </m><var name="$line" width="20"/>
+              </p>
+            </statement>
+            <solution>
+
+            <p>
+              <m>y=(x-\sqrt{2})+\cosh^{-1}(\sqrt{2}) \approx (x-1.414)+0.881</m>
+            </p>
+
+            </solution>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
+        <p>
+          In the following exercises, evaluate the given indefinite integral.
+        </p>
+      </introduction>
+<!-- Exercise 27 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              $F = FormulaUpToConstant("1/2*ln(cosh(2x))");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int \tanh(2x)\, dx</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 28 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              $F = FormulaUpToConstant("1/3*sinh(3x-7)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int \cosh(3x-7)\, dx</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 29 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              $F = FormulaUpToConstant("1/2*sinh(x)^2");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int \sinh(x) \cosh(x) \, dx</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 30 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              $F = FormulaUpToConstant("x*sinh(x)-cosh(x)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int x\cosh(x) \, dx</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 31 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              $F = FormulaUpToConstant("x*cosh(x)-sinh(x)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int x\sinh(x) \, dx</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- New problem -->
     <exercise>
       <statement>
         <p>
@@ -1306,7 +2177,7 @@
         </p>
       </answer>
     </exercise>
-
+<!-- New problem -->
     <exercise>
       <statement>
         <p>
@@ -1320,181 +2191,309 @@
       </answer>
     </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int \frac{1}{9-x^2}\, dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\left\{\begin{array}{ccc} \frac13\tanh^{-1}\left(\frac x3\right)+C \amp \amp x^2\lt 9 \\ \\ \frac13\coth^{-1}\left(\frac x3\right)+C \amp \amp 9\lt x^2 \end{array} \right. = \frac12\ln |x+1| - \frac12\ln |x-1|+C</m>
-        </p>
-      </answer>
-    </exercise>
+<!-- Exercise 32 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int \frac{2x}{\sqrt{x^4-4}}\, dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\cosh^{-1} (x^2/2) + C = \ln (x^2+\sqrt{x^4-4})+C</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              $F = FormulaUpToConstant("1/2*ln(abs(x+1))-1/2*ln(abs(x-1))");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int \frac{1}{9-x^2}\, dx</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int \frac{\sqrt{x}}{\sqrt{1+x^3}}\, dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>2/3\sinh^{-1} x^{3/2} + C = 2/3\ln (x^{3/2}+\sqrt{x^3+1})+C</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+            <solution>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int \frac{1}{x^4-16}\, dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\frac{1}{16}\tan^{-1}(x/2)+\frac{1}{32}\ln |x-2|+\frac1{32}\ln|x+2|+C</m>
-        </p>
-      </answer>
-    </exercise>
+            <p>
+              <m>\left\{\begin{array}{ccc} \frac13\tanh^{-1}\left(\frac x3\right)+C \amp \amp x^2\lt 9 \\ \\
+              \frac13\coth^{-1}\left(\frac x3\right)+C \amp \amp 9\lt x^2
+              \end{array} \right. = \frac12\ln\abs{x+1} - \frac12\ln\abs{x-1}+C</m>
+            </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int \frac{1}{x^2+x}\, dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\ln x- \ln|x+1|+C</m>
-        </p>
-      </answer>
-    </exercise>
+            </solution>
+        </webwork>
+      </exercise>
+<!-- Exercise 33 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int \frac{e^x}{e^{2x}+1}\, dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\tan^{-1}(e^x)+C</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              $F = FormulaUpToConstant("acosh(x^2/2)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int \frac{2x}{\sqrt{x^4-4}}\, dx</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int \sinh^{-1}x \, dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>x\sinh^{-1}x-\sqrt{x^2+1}+C</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 34 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int \tanh^{-1}x \, dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>x\tanh^{-1}x+1/2\ln|x^2-1|+C</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              $F = FormulaUpToConstant("2/3*asinh(x^(3/2))");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int \frac{\sqrt{x}}{\sqrt{1+x^3}}\, dx</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int \sech x \, dx</m> (Hint:
-          multiply by <m>\frac{\cosh x}{\cosh x}</m>;
-          set <m>u = \sinh x</m>.)
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\tan^{-1}(\sinh x)+C</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 35 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
 
-    <p>
-      In the following exercises, evaluate the given definite integral.
-    </p>
+            <pg-code>
+              $F = FormulaUpToConstant("1/16*atan(x/2)+1/32*ln(abs(x-2))+1/32*ln(abs(x+2))");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int \frac{1}{x^4-16}\, dx</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int_{-1}^1 \sinh x \, dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>0</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 36 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int_{-\ln 2}^{\ln 2} \cosh x \, dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>3/2</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+              $F = FormulaUpToConstant("ln(x)-ln(abs(x+1))");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int \frac{1}{x^2+x}\, dx</m>
+              </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds \int_{0}^{1} \tanh^{-1} x \, dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>2</m>
-        </p>
-      </answer>
-    </exercise>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 37 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds\int_0^2 \frac1{\sqrt{x^2+1}}\, dx</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\sinh^{-1} 2 =\ln\big(2+\sqrt{5}\big)\approx 1.444</m>
-        </p>
-      </answer>
-    </exercise>
-  </subsection>
+            <pg-code>
+              $F = FormulaUpToConstant("atan(e^x)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int \frac{e^x}{e^{2x}+1}\, dx</m>
+              </p>
 
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 38 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              $F = FormulaUpToConstant("x*asinh(x)-sqrt(x^2+1)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int \sinh^{-1}(x) \, dx</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 39 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              $F = FormulaUpToConstant("x*atanh(x)+1/2*ln(abs(x^2-1))");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int \tanh^{-1}(x) \, dx</m>
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 40 -->
+      <exercise>
+        <webwork seed="1">
+            <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
+            <setup>
+
+            <pg-code>
+              $F = FormulaUpToConstant("atan(sinh(x))");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int \sech(x) \, dx</m> (Hint:
+                mutiply by <m>\frac{\cosh(x) }{\cosh(x) }</m>;
+                set <m>u = \sinh(x)</m>.)
+              </p>
+
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
+        <p>
+          In the following exercises, evaluate the given definite integral.
+        </p>
+      </introduction>
+<!-- Exercise 41 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $a = -1;
+              $b = 1;
+              $F = Formula("cosh(x)");
+              $r = $F->eval(x=>$b) - $F->eval(x=>$a);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int_{-1}^1 \sinh(x) \, dx</m>
+              </p>
+
+              <p>
+                <var name="$r" width="20"/>
+              </p>
+   <!-- 0 -->
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 42 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $a = -ln(2);
+              $b = ln(2);
+              $F = Formula("sinh(x)");
+              $r = $F->eval(x=>$b) - $F->eval(x=>$a);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int_{-\ln(2) }^{\ln(2) } \cosh(x) \, dx</m>
+              </p>
+
+              <p>
+                <var name="$r" width="20"/>
+              </p>
+   <!-- 3/2 -->
+            </statement>
+        </webwork>
+      </exercise>
+<!-- Exercise 43 -->
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              $a = 0;
+              $b = 1;
+              $F = Formula("tanh(x)");
+              $r = $F->eval(x=>$b) - $F->eval(x=>$a);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int_{0}^{1} \sech^{2}(x) \, dx</m>
+              </p>
+
+              <p>
+                <var name="$r" width="20"/>
+              </p>
+   <!-- tanh(1) -->
+            </statement>
+        </webwork>
+      </exercise>
+<!-- New problem -->
+      <exercise>
+            <setup>
+
+            <pg-code>
+              $a = 0;
+              $b = 2;
+              $F = Formula("asinh(x)");
+              $r = $F->eval(x=>$b) - $F->eval(x=>$a);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds \int_{0}^{2}\frac1{\sqrt{x^2+1}}\, dx</m>
+              </p>
+
+              <p>
+                <var name="$r" width="20"/>
+              </p>
+            </statement>
+  <!-- sinh^{-1} 2 =\ln\big(2+\sqrt{5}\big)\approx 1.444 -->
+      </exercise>
+    </exercisegroup>
+  </exercises>
 </section>
-
