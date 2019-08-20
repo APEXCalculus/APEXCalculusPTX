@@ -47,7 +47,7 @@
       x label style={at={(axis description cs:0.85,0.05)},anchor=north},
       y label style={at={(axis description cs:0,.85)},rotate=90,anchor=south},
       xlabel={$t$ (s)},
-      ylabel={$y$ (ft/s)},
+      ylabel={$v$ (ft/s)},
       ytick={5},
       ymin=-.9,ymax=5.9,
       xmin=-.9,xmax=10.9
@@ -115,7 +115,7 @@
       x label style={at={(axis description cs:0.85,0.3)},anchor=south},
       y label style={at={(axis description cs:0,.85)},rotate=90,anchor=south},
       xlabel={$t$ (s)},
-      ylabel={$y$ (ft/s)},
+      ylabel={$v$ (ft/s)},
       ytick={-2,5},
       minor x tick num=4,
       ymin=-2.9,ymax=5.9,
@@ -261,7 +261,7 @@
           x label style={at={(axis description cs:0.85,0.3)},anchor=south},
           y label style={at={(axis description cs:0,.85)},rotate=90,anchor=south},
           xlabel={$t$ (s)},
-          ylabel={$y$ (ft/s)},
+          ylabel={$v$ (ft/s)},
           ]
           \addplot [firstcurvestyle,areastyle,domain=0:3] {-32*x+48} \closedcycle;
           \addplot [firstcurvestyle,-,domain=0:3] {-32*x+48};
@@ -362,8 +362,8 @@
       </p>
 
       <p>
-        (area under <m>f</m> and above the <m>x</m>-axis on <m>[a,b]</m>) <m>-</m>
-        (area above <m>f</m> and under the <m>x</m>-axis on <m>[a,b]</m>).
+        (area under <m>y=f(x)</m> and above the <m>x</m>-axis on <m>[a,b]</m>) <m>-</m>
+        (area above <m>y=f(x)</m> and under the <m>x</m>-axis on <m>[a,b]</m>).
       </p>
 
       <p>
@@ -679,7 +679,7 @@
   </p>
 
   <example xml:id="ex_defint5">
-    <title>Evaluating definite integrals using <xref ref="thm_defintprop">Theorem</xref>.</title>
+    <title>Evaluating definite integrals using <xref ref="thm_defintprop">Theorem</xref></title>
     <statement>
       <p>
         Consider the graph of a function <m>f(x)</m> shown in
@@ -897,7 +897,7 @@
           x label style={at={(axis description cs:0.85,0.35)},anchor=south},
           y label style={at={(axis description cs:-.05,.85)},rotate=90,anchor=south},
           xlabel={$t$ (s)},
-          ylabel={$y$ (ft/s)},
+          ylabel={$v$ (ft/s)},
           xtick=\empty,
           extra x ticks={2,6,8},
           extra x tick labels={$\ a$,$b\ $,$\ c$},
@@ -1107,29 +1107,32 @@
             </pg-code>
             </setup>
             <statement>
+                <sidebyside width="47%">
+                  <image xml:id="img_05_02_ex_05">
+                    <description></description>
+                    <latex-image>
 
-                <image xml:id="img_05_02_ex_05" width="47%">
-                  <description></description>
-                  <latex-image>
+                    \begin{tikzpicture}
 
-                  \begin{tikzpicture}
+                    \begin{axis}[
+                    ymin=-4.5,ymax=4.5,
+                    xmin=-.9,xmax=4.5
+                    ]
 
-                  \begin{axis}[
-                  ymin=-4.5,ymax=4.5,
-                  xmin=-.9,xmax=4.5
-                  ]
+                    \addplot+ [-,domain=0:4] {-2*x+4};
 
-                  \addplot+ [-,domain=0:4] {-2*x+4};
+                    \draw (axis cs:2,2.5) node {\scriptsize $y = -2x+4$};
 
-                  \draw (axis cs:2,2.5) node {\scriptsize $y = -2x+4$};
+                    \end{axis}
 
-                  \end{axis}
+                    \end{tikzpicture}
 
-                  \end{tikzpicture}
+                    </latex-image>
+                  </image>
+                </sidebyside>
 
-                  </latex-image>
-                </image>
                 <p>
+                  Use the geometry of the graph above to evaluate the following definite integrals:
                   <ol cols="2">
                     <li>
                       <p>
@@ -1186,31 +1189,35 @@
             </pg-code>
             </setup>
             <statement>
-              <image xml:id="img_05_02_ex_06" width="47%">
-                <description></description>
-                <latex-image>
+              <sidebyside width="47%">
+                <image xml:id="img_05_02_ex_06">
+                  <description></description>
+                  <latex-image>
 
-                \begin{tikzpicture}
+                  \begin{tikzpicture}
 
-                \begin{axis}[
-                xtick={1,2,3,4,5},
-                ymin=-2.2,ymax=2.2,
-                xmin=-.9,xmax=5.5
-                ]
+                  \begin{axis}[
+                  xtick={1,2,3,4,5},
+                  ymin=-2.2,ymax=2.2,
+                  xmin=-.9,xmax=5.5
+                  ]
 
-                \addplot+ [-,domain=0:2] {-2};
-                \addplot [firstcurvestyle,-,domain=2:3] {2*x-6};
-                \addplot [firstcurvestyle,-,domain=3:5] {x-3};
+                  \addplot+ [-,domain=0:2] {-2};
+                  \addplot [firstcurvestyle,-,domain=2:3] {2*x-6};
+                  \addplot [firstcurvestyle,-,domain=3:5] {x-3};
 
-                \draw (axis cs:3.2,-1.5) node {\scriptsize $y = f(x)$};
+                  \draw (axis cs:3.2,-1.5) node {\scriptsize $y = f(x)$};
 
-                \end{axis}
+                  \end{axis}
 
-                \end{tikzpicture}
+                  \end{tikzpicture}
 
-                </latex-image>
-              </image>
+                  </latex-image>
+                </image>
+              </sidebyside>
+
               <p>
+                Use the geometry of the graph above to evaluate the following definite integrals:
                 <ol cols="2">
                   <li>
                     <p>
@@ -1267,33 +1274,36 @@
             </pg-code>
             </setup>
             <statement>
-              <image xml:id="img_05_02_ex_07" width="47%">
-                <description></description>
-                <latex-image>
+              <sidebyside width="47%">
+                <image xml:id="img_05_02_ex_07">
+                  <description></description>
+                  <latex-image>
 
-                \begin{tikzpicture}
+                  \begin{tikzpicture}
 
-                \begin{axis}[
-                xtick={1,2,3,4,5},
-                ymin=-.5,ymax=4.5,
-                xmin=-.9,xmax=4.5
-                ]
+                  \begin{axis}[
+                  xtick={1,2,3,4,5},
+                  ymin=-.5,ymax=4.5,
+                  xmin=-.9,xmax=4.5
+                  ]
 
-                \addplot+ [-,domain=0:1] {4*x};
-                \addplot [firstcurvestyle,-,domain=1:2] {-4*(x-2)};
-                \addplot [firstcurvestyle,-,domain=2:3] {2*(x-2)};
-                \addplot [firstcurvestyle,-,domain=3:4] {-2*(x-4)};
+                  \addplot+ [-,domain=0:1] {4*x};
+                  \addplot [firstcurvestyle,-,domain=1:2] {-4*(x-2)};
+                  \addplot [firstcurvestyle,-,domain=2:3] {2*(x-2)};
+                  \addplot [firstcurvestyle,-,domain=3:4] {-2*(x-4)};
 
-                \draw (axis cs:3,2.5) node {\scriptsize $y = f(x)$};
+                  \draw (axis cs:3,2.5) node {\scriptsize $y = f(x)$};
 
-                \end{axis}
+                  \end{axis}
 
-                \end{tikzpicture}
+                  \end{tikzpicture}
 
-                </latex-image>
-              </image>
+                  </latex-image>
+                </image>
+              </sidebyside>
 
               <p>
+                Use the geometry of the graph above to evaluate the following definite integrals:
                 <ol cols="2">
                   <li>
                     <p>
@@ -1350,30 +1360,33 @@
             </pg-code>
             </setup>
             <statement>
-              <image xml:id="img_05_02_ex_08" width="47%">
-                <description></description>
-                <latex-image>
+              <sidebyside width="47%">
+                <image xml:id="img_05_02_ex_08">
+                  <description></description>
+                  <latex-image>
 
-                \begin{tikzpicture}
+                  \begin{tikzpicture}
 
-                \begin{axis}[
-                xtick={1,2,3,4,5},
-                ytick={-1,1,2,3},
-                ymin=-1.5,ymax=3.5,
-                xmin=-.9,xmax=4.5
-                ]
+                  \begin{axis}[
+                  xtick={1,2,3,4,5},
+                  ytick={-1,1,2,3},
+                  ymin=-1.5,ymax=3.5,
+                  xmin=-.9,xmax=4.5
+                  ]
 
-                \addplot+ [-,domain=0:4] {x-1};
+                  \addplot+ [-,domain=0:4] {x-1};
 
-                \draw (axis cs:2,2.5) node {\scriptsize $y = x-1$};
+                  \draw (axis cs:2,2.5) node {\scriptsize $y = x-1$};
 
-                \end{axis}
+                  \end{axis}
 
-                \end{tikzpicture}
+                  \end{tikzpicture}
 
-                </latex-image>
-              </image>
+                  </latex-image>
+                </image>
+              </sidebyside>
               <p>
+                Use the geometry of the graph above to evaluate the following definite integrals:
                 <ol cols="2">
                   <li>
                     <p>
@@ -1429,31 +1442,34 @@
             </pg-code>
             </setup>
             <statement>
-              <image xml:id="img_05_02_ex_09" width="47%">
-                <description></description>
-                <latex-image>
+              <sidebyside width="47%">
+                <image xml:id="img_05_02_ex_09">
+                  <description></description>
+                  <latex-image>
 
-                \begin{tikzpicture}
+                  \begin{tikzpicture}
 
-                \begin{axis}[
-                xtick={1,2,3,4},
-                ytick={1,2,3},
-                ymin=-.5,ymax=3.5,
-                xmin=-.9,xmax=4.5
-                ]
+                  \begin{axis}[
+                  xtick={1,2,3,4},
+                  ytick={1,2,3},
+                  ymin=-.5,ymax=3.5,
+                  xmin=-.9,xmax=4.5
+                  ]
 
-                \addplot+ [-,samples=40,domain=0:3.14159] ({2*cos(deg(x))+2}, {2*sin(deg(x))});
+                  \addplot+ [-,samples=40,domain=0:3.14159] ({2*cos(deg(x))+2}, {2*sin(deg(x))});
 
-                \draw (axis cs:3,2.4) node {\scriptsize $f(x) = \sqrt{4-(x-2)^2}$};
+                  \draw (axis cs:3,2.4) node {\scriptsize $f(x) = \sqrt{4-(x-2)^2}$};
 
-                \end{axis}
+                  \end{axis}
 
-                \end{tikzpicture}
+                  \end{tikzpicture}
 
-                </latex-image>
-              </image>
+                  </latex-image>
+                </image>
+              </sidebyside>
 
               <p>
+                Use the geometry of the graph above to evaluate the following definite integrals:
                 <ol cols="2">
                   <li>
                     <p>
@@ -1502,7 +1518,7 @@
 		  xmin=-1,xmax=10.9%
                   ]
 
-                  \addplot+[domain=0:10] ({x}, {3});
+                  \addplot+[-,domain=0:10] ({x}, {3});
                   \draw (axis cs:5,3.4) node {\scriptsize $f(x) = 3$};
                 \end{axis}
 
@@ -1510,6 +1526,7 @@
             </latex-image>
           </image>
           <p>
+            Use the geometry of the graph above to evaluate the following definite integrals:
             <ol cols="2">
               <li>
                 <p>
@@ -1593,35 +1610,39 @@
             </pg-code>
             </setup>
             <statement>
-              <image xml:id="img_05_02_ex_10" width="47%">
-                <description></description>
-                <latex-image>
+              <sidebyside width="47%">
+                <image xml:id="img_05_02_ex_10">
+                  <description></description>
+                  <latex-image>
 
-                \begin{tikzpicture}
+                  \begin{tikzpicture}
 
-                \begin{axis}[
-                axis on top,
-                xtick={1,2,3},
-                ymin=-105,ymax=55,
-                xmin=-.9,xmax=3.5
-                ]
+                  \begin{axis}[
+                  axis on top,
+                  xtick={1,2,3},
+                  ymin=-105,ymax=55,
+                  xmin=-.9,xmax=3.5
+                  ]
 
-                \addplot [firstcurvestyle,areastyle,domain=0:3,samples=40] {60*x*(1-x)*(x-2)*(x-2)*(x-3)} \closedcycle;
-                \addplot [firstcurvestyle,-,domain=0:3,samples=90] {60*x*(1-x)*(x-2)*(x-2)*(x-3)};
+                  \addplot [firstcurvestyle,areastyle,domain=0:3,samples=40] {60*x*(1-x)*(x-2)*(x-2)*(x-3)} \closedcycle;
+                  \addplot [firstcurvestyle,-,domain=0:3,samples=90] {60*x*(1-x)*(x-2)*(x-2)*(x-3)};
 
-                \draw (axis cs:1.5,30) node {\scriptsize $y=f(x)$};
-                \draw (axis cs:.45,-10) node {\scriptsize $59$};
-                \draw (axis cs:1.4,10) node {\scriptsize $11$};
-                \draw (axis cs:2.6,10) node {\scriptsize $21$};
+                  \draw (axis cs:1.5,30) node {\scriptsize $y=f(x)$};
+                  \draw (axis cs:.45,-10) node {\scriptsize $59$};
+                  \draw (axis cs:1.4,10) node {\scriptsize $11$};
+                  \draw (axis cs:2.6,10) node {\scriptsize $21$};
 
-                \end{axis}
+                  \end{axis}
 
-                \end{tikzpicture}
+                  \end{tikzpicture}
 
-                </latex-image>
-              </image>
+                  </latex-image>
+                </image>
+              </sidebyside>
 
               <p>
+                The numbers inside the shaded regions of the above graph give the area of that region.
+                Evaluate the following definite integrals using this area information.
                 <ol cols="2">
                   <li>
                     <p>
@@ -1664,34 +1685,38 @@
             </pg-code>
             </setup>
             <statement>
-              <image xml:id="img_05_02_ex_11" width="47%">
-                <description></description>
-                <latex-image>
+              <sidebyside width="47%">
+                <image xml:id="img_05_02_ex_11">
+                  <description></description>
+                  <latex-image>
 
-                \begin{tikzpicture}
+                  \begin{tikzpicture}
 
-                \begin{axis}[
-                axis on top,
-                xtick={1,2,3,4},
-                ymin=-1.5,ymax=1.5,
-                xmin=-.9,xmax=4.5
-                ]
+                  \begin{axis}[
+                  axis on top,
+                  xtick={1,2,3,4},
+                  ymin=-1.5,ymax=1.5,
+                  xmin=-.9,xmax=4.5
+                  ]
 
-                \addplot [firstcurvestyle,areastyle,domain=0:4] {sin(deg(3.14159*x/2))} \closedcycle;
-                \addplot [firstcurvestyle,-,domain=0:4,samples=50] {sin(deg(3.14159*x/2))};
+                  \addplot [firstcurvestyle,areastyle,domain=0:4] {sin(deg(3.14159*x/2))} \closedcycle;
+                  \addplot [firstcurvestyle,-,domain=0:4,samples=50] {sin(deg(3.14159*x/2))};
 
-                \draw (axis cs:3,0.75) node {\scriptsize $f(x)=\sin(\pi x/2)$};
-                \draw (axis cs:1,.6) node {\scriptsize $4/\pi$};
-                \draw (axis cs:3,-.6) node {\scriptsize $4/\pi$};
+                  \draw (axis cs:3,0.75) node {\scriptsize $f(x)=\sin(\pi x/2)$};
+                  \draw (axis cs:1,.6) node {\scriptsize $4/\pi$};
+                  \draw (axis cs:3,-.6) node {\scriptsize $4/\pi$};
 
-                \end{axis}
+                  \end{axis}
 
-                \end{tikzpicture}
+                  \end{tikzpicture}
 
-                </latex-image>
-              </image>
+                  </latex-image>
+                </image>
+              </sidebyside>
 
               <p>
+                The numbers inside the shaded regions of the above graph give the area of that region.
+                Evaluate the following definite integrals using this area information.
                 <ol cols="2">
                   <li>
                     <p>
@@ -1734,35 +1759,39 @@
             </pg-code>
             </setup>
             <statement>
-              <image xml:id="img_05_02_ex_12" width="47%">
-                <description></description>
-                <latex-image>
+              <sidebyside width="47%">
+                <image xml:id="img_05_02_ex_12">
+                  <description></description>
+                  <latex-image>
 
-                \begin{tikzpicture}
+                  \begin{tikzpicture}
 
-                \begin{axis}[
-                axis on top,
-                xtick={-2,-1,1,2},
-                ymin=-5.5,ymax=11,
-                xmin=-2.5,xmax=2.5
-                ]
+                  \begin{axis}[
+                  axis on top,
+                  xtick={-2,-1,1,2},
+                  ymin=-5.5,ymax=11,
+                  xmin=-2.5,xmax=2.5
+                  ]
 
-                \addplot [firstcurvestyle,areastyle,domain=-2:2] {3*x^2-3} \closedcycle;
-                \addplot [firstcurvestyle,-,domain=-2:2,samples=40] {3*x^2-3};
+                  \addplot [firstcurvestyle,areastyle,domain=-2:2] {3*x^2-3} \closedcycle;
+                  \addplot [firstcurvestyle,-,domain=-2:2,samples=40] {3*x^2-3};
 
-                \draw (axis cs:1.5,10) node {\scriptsize $f(x)=3x^2-3$};
-                \draw (axis cs:-1.5,1) node {\scriptsize $4$};
-                \draw (axis cs:1.5,1) node {\scriptsize $4$};
-                \draw (axis cs:.3,-1) node {\scriptsize $-4$};
+                  \draw (axis cs:1.5,10) node {\scriptsize $f(x)=3x^2-3$};
+                  \draw (axis cs:-1.5,1) node {\scriptsize $4$};
+                  \draw (axis cs:1.5,1) node {\scriptsize $4$};
+                  \draw (axis cs:.3,-1) node {\scriptsize $-4$};
 
-                \end{axis}
+                  \end{axis}
 
-                \end{tikzpicture}
+                  \end{tikzpicture}
 
-                </latex-image>
-              </image>
+                  </latex-image>
+                </image>
+              </sidebyside>
 
               <p>
+                The numbers inside the shaded regions of the above graph give the area of that region.
+                Evaluate the following definite integrals using this area information.
                 <ol cols="2">
                   <li>
                     <p>
@@ -1805,36 +1834,40 @@
             </pg-code>
             </setup>
             <statement>
-              <image xml:id="img_05_02_ex_13" width="47%">
-                <description></description>
-                <latex-image>
+              <sidebyside width="47%">
+                <image xml:id="img_05_02_ex_13">
+                  <description></description>
+                  <latex-image>
 
-                \begin{tikzpicture}
+                  \begin{tikzpicture}
 
-                \begin{axis}[
-                axis on top,
-                xtick={1,2},
-                ymin=-.1,ymax=4.2,
-                xmin=-.2,xmax=2.1
-                ]
+                  \begin{axis}[
+                  axis on top,
+                  xtick={1,2},
+                  ymin=-.1,ymax=4.2,
+                  xmin=-.2,xmax=2.1
+                  ]
 
-                \addplot [firstcurvestyle,areastyle,domain=0:2] {x^2} \closedcycle;
-                \addplot [firstcurvestyle,-,domain=0:2] {x^2};
+                  \addplot [firstcurvestyle,areastyle,domain=0:2] {x^2} \closedcycle;
+                  \addplot [firstcurvestyle,-,domain=0:2] {x^2};
 
-                \draw [thick,firstcolor,dashed] (axis cs:1,0) -- (axis cs:1,1);
+                  \draw [thick,firstcolor,dashed] (axis cs:1,0) -- (axis cs:1,1);
 
-                \draw (axis cs:1,3) node {\scriptsize $f(x)=x^2$};
-                \draw (axis cs:.7,.2) node {\scriptsize $1/3$};
-                \draw (axis cs:1.5,.2) node {\scriptsize $7/3$};
+                  \draw (axis cs:1,3) node {\scriptsize $f(x)=x^2$};
+                  \draw (axis cs:.7,.2) node {\scriptsize $1/3$};
+                  \draw (axis cs:1.5,.2) node {\scriptsize $7/3$};
 
-                \end{axis}
+                  \end{axis}
 
-                \end{tikzpicture}
+                  \end{tikzpicture}
 
-                </latex-image>
-              </image>
+                  </latex-image>
+                </image>
+              </sidebyside>
 
               <p>
+                The numbers inside the shaded regions of the above graph give the area of that region.
+                Evaluate the following definite integrals using this area information.
                 <ol cols="2">
                   <li>
                     <p>
@@ -1890,30 +1923,34 @@
             </pg-code>
             </setup>
             <statement>
-              <image xml:id="img_05_02_ex_14" width="47%">
-                <description></description>
-                <latex-image>
+              <sidebyside width="47%">
+                <image xml:id="img_05_02_ex_14">
+                  <description></description>
+                  <latex-image>
 
-                \begin{tikzpicture}
+                  \begin{tikzpicture}
 
-                \begin{axis}[
-                xtick={1,2,3},
-                ymin=-1.1,ymax=2.2,
-                xmin=-.2,xmax=3.1
-                ]
+                  \begin{axis}[
+                  xtick={1,2,3},
+                  ymin=-1.1,ymax=2.2,
+                  xmin=-.2,xmax=3.1
+                  ]
 
-                \addplot+ [-,domain=0:3] {-x+2};
+                  \addplot+ [-,domain=0:3] {-x+2};
 
-                \end{axis}
+                  \end{axis}
 
-                \node [right] at (myplot.right of origin) {\scriptsize $t$ (s)};
-                \node [above] at (myplot.above origin) {\scriptsize $y$ (ft/s)};
-                \end{tikzpicture}
+                  \node [right] at (myplot.right of origin) {\scriptsize $t$ (s)};
+                  \node [above] at (myplot.above origin) {\scriptsize $y$ (ft/s)};
+                  \end{tikzpicture}
 
-                </latex-image>
-              </image>
+                  </latex-image>
+                </image>
+              </sidebyside>
 
               <p>
+                The graph of the velocity function of an object moving in a straight line is given above.
+                Use this graph to answer the questions below.
                 <ol>
                   <li>
                     <p>
@@ -1964,34 +2001,38 @@
             </pg-code>
             </setup>
             <statement>
-              <image xml:id="img_05_02_ex_15" width="47%">
-                <description></description>
-                <latex-image>
+              <sidebyside width="47%">
+                <image xml:id="img_05_02_ex_15">
+                  <description></description>
+                  <latex-image>
 
-                \begin{tikzpicture}
+                  \begin{tikzpicture}
 
-                \begin{axis}[
-                axis on top,
-                xtick={1,2,3,4,5},
-                ymin=-.5,ymax=3.2,
-                xmin=-.2,xmax=5.3
-                ]
+                  \begin{axis}[
+                  axis on top,
+                  xtick={1,2,3,4,5},
+                  ymin=-.5,ymax=3.2,
+                  xmin=-.2,xmax=5.3
+                  ]
 
-                \addplot+ [-,domain=0:1] {3};
-                \addplot [firstcurvestyle,-,domain=1:2] {-3*(x-2)};
-                \addplot [firstcurvestyle,-,domain=2:3] {2*(x-2)};
-                \addplot [firstcurvestyle,-,domain=3:5] {2};
+                  \addplot+ [-,domain=0:1] {3};
+                  \addplot [firstcurvestyle,-,domain=1:2] {-3*(x-2)};
+                  \addplot [firstcurvestyle,-,domain=2:3] {2*(x-2)};
+                  \addplot [firstcurvestyle,-,domain=3:5] {2};
 
-                \end{axis}
+                  \end{axis}
 
-                \node [right] at (myplot.right of origin) {\scriptsize $t$ (s)};
-                \node [above] at (myplot.above origin) {\scriptsize $y$ (ft/s)};
-                \end{tikzpicture}
+                  \node [right] at (myplot.right of origin) {\scriptsize $t$ (s)};
+                  \node [above] at (myplot.above origin) {\scriptsize $y$ (ft/s)};
+                  \end{tikzpicture}
 
-                </latex-image>
-              </image>
+                  </latex-image>
+                </image>
+              </sidebyside>
 
               <p>
+                The graph of the velocity function of an object moving in a straight line is given above.
+                Use this graph to answer the questions below.
                 <ol>
                   <li>
                     <p>
@@ -2027,6 +2068,7 @@
             </statement>
         </webwork>
       </exercise>
+    </exercisegroup>
 <!-- Exercise 16 -->
       <exercise>
         <webwork seed="1">
@@ -2167,44 +2209,12 @@
         </webwork>
       </exercise>
 
-    </exercisegroup>
     <exercisegroup>
 
       <introduction>
         <p>
-          In the following exercises, let
-        </p>
-
-        <p>
-          <ul>
-            <li>
-              <p>
-                <m>\ds \int_0^2 f(x)\, dx = 5</m>,
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\ds \int_0^3 f(x) \, dx=7</m>,
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\ds \int_0^2 g(x)\, dx = -3</m>, and
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\ds \int_2^3 g(x)\, dx = 5</m>.
-              </p>
-            </li>
-          </ul>
-        </p>
-
-        <p>
-          Use these values to evaluate the given definite integrals.
+          In the following exercises, the values of several definite integrals are given.
+          Use these values and properties of definite integrals to evaluate the indicated definite integrals.
         </p>
       </introduction>
 <!-- Exercise 18 -->
@@ -2218,6 +2228,33 @@
             </setup>
             <statement>
               <p>
+                The values of several definite integrals are given as follows:
+                <ul>
+                  <li>
+                    <p>
+                      <m>\ds \int_0^2 f(x)\, dx = 5</m>,
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ds \int_0^3 f(x) \, dx=7</m>,
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ds \int_0^2 g(x)\, dx = -3</m>, and
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ds \int_2^3 g(x)\, dx = 5</m>.
+                    </p>
+                  </li>
+                </ul>
+                Using these values, evaluate the integral
                 <m>\ds \int_0^2 \big(f(x)+g(x)\big) \, dx</m>
               </p>
 
@@ -2238,6 +2275,33 @@
             </setup>
             <statement>
               <p>
+                The values of several definite integrals are given as follows:
+                <ul>
+                  <li>
+                    <p>
+                      <m>\ds \int_0^2 f(x)\, dx = 5</m>,
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ds \int_0^3 f(x) \, dx=7</m>,
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ds \int_0^2 g(x)\, dx = -3</m>, and
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ds \int_2^3 g(x)\, dx = 5</m>.
+                    </p>
+                  </li>
+                </ul>
+                Using these values, evaluate the integral
                 <m>\ds \int_0^3 \big(f(x)-g(x)\big) \, dx</m>
               </p>
 
@@ -2258,6 +2322,33 @@
             </setup>
             <statement>
               <p>
+                The values of several definite integrals are given as follows:
+                <ul>
+                  <li>
+                    <p>
+                      <m>\ds \int_0^2 f(x)\, dx = 5</m>,
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ds \int_0^3 f(x) \, dx=7</m>,
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ds \int_0^2 g(x)\, dx = -3</m>, and
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ds \int_2^3 g(x)\, dx = 5</m>.
+                    </p>
+                  </li>
+                </ul>
+                Using these values, evaluate the integral
                 <m>\ds \int_2^3 \big(3f(x)+2g(x)\big) \, dx</m>
               </p>
 
@@ -2279,7 +2370,34 @@
             </setup>
             <statement>
               <p>
-                Find a formula for <m>a</m> in terms of <m>b</m> such that
+                The values of several definite integrals are given as follows:
+                <ul>
+                  <li>
+                    <p>
+                      <m>\ds \int_0^2 f(x)\, dx = 5</m>,
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ds \int_0^3 f(x) \, dx=7</m>,
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ds \int_0^2 g(x)\, dx = -3</m>, and
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ds \int_2^3 g(x)\, dx = 5</m>.
+                    </p>
+                  </li>
+                </ul>
+                Using these values,
+                find a formula for <m>a</m> in terms of <m>b</m> such that
               </p>
 
               <p>
@@ -2298,38 +2416,7 @@
 
       <introduction>
         <p>
-          In the following exercises, let
-        </p>
-
-        <p>
-          <ul>
-            <li>
-              <p>
-                <m>\ds \int_0^3 s(t)\, dt = 10</m>,
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\ds \int_3^5 s(t) \, dt=8</m>,
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\ds \int_3^5 r(t)\, dt = -1</m>, and
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\ds \int_0^5 r(t)\, dt = 11</m>.
-              </p>
-            </li>
-          </ul>
-        </p>
-
-        <p>
+          In the following exercises, the values of several definite integrals are given.
           Use these values to evaluate the given definite integrals.
         </p>
       </introduction>
@@ -2344,6 +2431,33 @@
             </setup>
             <statement>
               <p>
+                The values of several definite integrals are given as follows:
+                <ul>
+                  <li>
+                    <p>
+                      <m>\ds \int_0^3 s(t)\, dt = 10</m>,
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ds \int_3^5 s(t) \, dt=8</m>,
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ds \int_3^5 r(t)\, dt = -1</m>, and
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ds \int_0^5 r(t)\, dt = 11</m>.
+                    </p>
+                  </li>
+                </ul>
+                Using these values, evaluate the integral
                 <m>\ds \int_0^3 \big(s(t) + r(t)\big)\, dt</m>
               </p>
 
@@ -2384,6 +2498,33 @@
             </setup>
             <statement>
               <p>
+                The values of several definite integrals are given as follows:
+                <ul>
+                  <li>
+                    <p>
+                      <m>\ds \int_0^3 s(t)\, dt = 10</m>,
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ds \int_3^5 s(t) \, dt=8</m>,
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ds \int_3^5 r(t)\, dt = -1</m>, and
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ds \int_0^5 r(t)\, dt = 11</m>.
+                    </p>
+                  </li>
+                </ul>
+                Using these values, evaluate the integral
                 <m>\ds \int_3^3 \big(\pi s(t) - 7r(t)\big)\, dt</m>
               </p>
 
@@ -2405,7 +2546,34 @@
             </setup>
             <statement>
               <p>
-                Find a formula for <m>a</m> in terms of <m>b</m> such that
+                The values of several definite integrals are given as follows:
+                <ul>
+                  <li>
+                    <p>
+                      <m>\ds \int_0^3 s(t)\, dt = 10</m>,
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ds \int_3^5 s(t) \, dt=8</m>,
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ds \int_3^5 r(t)\, dt = -1</m>, and
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\ds \int_0^5 r(t)\, dt = 11</m>.
+                    </p>
+                  </li>
+                </ul>
+                Using these values,
+                find a formula for <m>a</m> in terms of <m>b</m> such that
               </p>
 
               <p>
