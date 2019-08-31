@@ -752,10 +752,11 @@
             xmin=-.5,xmax=3.5
             ]
 
-            \addplot [name path=A,firstcurvestyle,-,domain=-.25:3.25,samples=40] {.25*sin(deg(2*x))+1.25} node [shift={(5pt,7pt)},black] {\scriptsize $f(x)$};
-            \addplot [name path=B,firstcurvestyle,-,domain=-.25:3.25] {.25*(x-2)^2+.2} node [shift={(5pt,7pt)},black] {\scriptsize $g(x)$};
+            \addplot [firstcolor,domain=.5:3,stack plots=y] {.25*(x-2)^2+.2};
+            \addplot [firstcurvestyle,areastyle,domain=.5:3,stack plots=y] {.25*sin(deg(2*x))+1.25-(.25*(x-2)^2+.2)} \closedcycle;
 
-            \addplot [firstcurvestyle,areastyle] fill between [of=A and B,soft clip={domain=.5:3}];
+            \addplot [firstcurvestyle,-,domain=-.25:3.25,samples=40] {.25*sin(deg(2*x))+1.25} node [shift={(5pt,7pt)},black] {\scriptsize $f(x)$};
+            \addplot [firstcurvestyle,-,domain=-.25:3.25] {.25*(x-2)^2+.2} node [shift={(5pt,7pt)},black] {\scriptsize $g(x)$};
 
             \end{axis}
 
