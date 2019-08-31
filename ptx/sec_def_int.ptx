@@ -33,7 +33,7 @@
     <quantity><mag>50</mag><unit base="foot"/></quantity>.
   </p>
 
-  <!-- <todo>Add some sort of style guidelines for areas.</todo> -->
+  <!-- <todo>Add some sort of style guidelines for areas. Done?</todo> -->
 
   <figure xml:id="fig_defint1">
     <caption>The area under a constant velocity function corresponds to
@@ -1044,7 +1044,7 @@
 
     </exercisegroup>
     <exercisegroup>
-<!--ToDo: these TikZ graphs aren't going to make it into a WW problem. how to fix?-->
+
       <introduction>
         <p>
           In the following exercises, a graph of a function <m>f(x)</m> is given.
@@ -1058,6 +1058,21 @@
             <setup>
 
             <pg-code>
+              $gr = init_graph(-1,-5,5,5,axes=>[0,0],ticks=>[6,10],size=>[400,400]);
+              $gr->lb('reset');
+              add_functions($gr, "-2x+4 for x in &lt;0,4>" . " using color:blue and weight:2");
+              ($gr->fn)[0]->steps(1000);
+              $gr->lb( new Label(2,2,'y = -2x + 4','black','center','middle'));
+              $gr->lb( new Label(4.75,0.4,'x','black','center','middle'));
+              $gr->lb( new Label(0.2,4.75,'y','black','center','middle'));
+              foreach my $i (1..4) {
+                $gr->lb( new Label($i,-0.25,$i,'black','center','middle'));
+                $gr->lb( new Label(-0.15,$i,$i,'black','center','middle'));
+              }
+              foreach my $i (-4..-1) {
+                $gr->lb( new Label(-0.20,$i,$i,'black','center','middle'));
+              }
+
               $a = Formula("3");
               $b = Formula("4");
               $c = Formula("3");
@@ -1067,29 +1082,30 @@
             </pg-code>
             </setup>
             <statement>
-                <sidebyside width="47%">
-                  <image xml:id="img_05_02_ex_05">
-                    <description></description>
-                    <latex-image>
+              <sidebyside width="47%">
+                <image pg-name="$gr" xml:id="img_05_02_ex_05"/>
+                <!-- <image xml:id="img_05_02_ex_05">
+                  <description></description>
+                  <latex-image>
 
-                    \begin{tikzpicture}
+                  \begin{tikzpicture}
 
-                    \begin{axis}[
-                    ymin=-4.5,ymax=4.5,
-                    xmin=-.9,xmax=4.5
-                    ]
+                  \begin{axis}[
+                  ymin=-4.5,ymax=4.5,
+                  xmin=-.9,xmax=4.5
+                  ]
 
-                    \addplot+ [-,domain=0:4] {-2*x+4};
+                  \addplot+ [-,domain=0:4] {-2*x+4};
 
-                    \draw (axis cs:2,2.5) node {\scriptsize $y = -2x+4$};
+                  \draw (axis cs:2,2.5) node {\scriptsize $y = -2x+4$};
 
-                    \end{axis}
+                  \end{axis}
 
-                    \end{tikzpicture}
+                  \end{tikzpicture}
 
-                    </latex-image>
-                  </image>
-                </sidebyside>
+                  </latex-image>
+                </image> -->
+              </sidebyside>
 
                 <p>
                   Use the geometry of the graph above to evaluate the following definite integrals:
@@ -1116,6 +1132,26 @@
             <setup>
 
             <pg-code>
+              $gr = init_graph(-1,-3,6,3,axes=>[0,0],ticks=>[7,6],size=>[400,400]);
+              $gr->lb('reset');
+              add_functions($gr, "-2 for x in &lt;0,2>" . " using color:blue and weight:2",
+                                 "2x-6 for x in &lt;2,3>" . " using color:blue and weight:2",
+                                 "x-3 for x in &lt;3,5>" . " using color:blue and weight:2");
+              ($gr->fn)[1]->steps(1000);
+              ($gr->fn)[2]->steps(1000);
+              $gr->lb( new Label(3,-1.5,'y = f(x)','black','center','middle'));
+              $gr->lb( new Label(5.8,0.3,'x','black','center','middle'));
+              $gr->lb( new Label(0.2,2.8,'y','black','center','middle'));
+              foreach my $i (1..5) {
+                $gr->lb( new Label($i,-0.25,$i,'black','center','middle'));
+              }
+              foreach my $i (-2..-1) {
+                $gr->lb( new Label(-0.20,$i,$i,'black','center','middle'));
+              }
+              foreach my $i (1..2) {
+                $gr->lb( new Label(-0.20,$i,$i,'black','center','middle'));
+              }
+
               $a = Formula("-4");
               $b = Formula("-5");
               $c = Formula("-3");
@@ -1126,7 +1162,8 @@
             </setup>
             <statement>
               <sidebyside width="47%">
-                <image xml:id="img_05_02_ex_06">
+                <image pg-name="$gr" xml:id="img_05_02_ex_06"/>
+                <!-- <image xml:id="img_05_02_ex_06">
                   <description></description>
                   <latex-image>
 
@@ -1149,7 +1186,7 @@
                   \end{tikzpicture}
 
                   </latex-image>
-                </image>
+                </image> -->
               </sidebyside>
 
               <p>
@@ -1177,6 +1214,24 @@
             <setup>
 
             <pg-code>
+              $gr = init_graph(-1,-1,5,5,axes=>[0,0],ticks=>[6,6],size=>[400,400]);
+              $gr->lb('reset');
+              add_functions($gr, "4x for x in &lt;0,1>" . " using color:blue and weight:2",
+                                 "-4*(x-2) for x in &lt;1,2>" . " using color:blue and weight:2",
+                                 "2*(x-2) for x in &lt;2,3>" . " using color:blue and weight:2",
+                                 "-2*(x-4) for x in &lt;3,4>" . " using color:blue and weight:2");
+              ($gr->fn)[0]->steps(1000);
+              ($gr->fn)[1]->steps(1000);
+              ($gr->fn)[2]->steps(1000);
+              ($gr->fn)[3]->steps(1000);
+              $gr->lb( new Label(3,2.5,'y = f(x)','black','center','middle'));
+              $gr->lb( new Label(4.75,0.4,'x','black','center','middle'));
+              $gr->lb( new Label(0.2,4.75,'y','black','center','middle'));
+              foreach my $i (1..4) {
+                $gr->lb( new Label($i,-0.25,$i,'black','center','middle'));
+                $gr->lb( new Label(-0.15,$i,$i,'black','center','middle'));
+              }
+
               $a = Formula("4");
               $b = Formula("2");
               $c = Formula("4");
@@ -1187,7 +1242,8 @@
             </setup>
             <statement>
               <sidebyside width="47%">
-                <image xml:id="img_05_02_ex_07">
+                <image pg-name="$gr" xml:id="img_05_02_ex_07"/>
+                <!-- <image xml:id="img_05_02_ex_07">
                   <description></description>
                   <latex-image>
 
@@ -1211,7 +1267,7 @@
                   \end{tikzpicture}
 
                   </latex-image>
-                </image>
+                </image> -->
               </sidebyside>
 
               <p>
@@ -1239,6 +1295,22 @@
             <setup>
 
             <pg-code>
+              $gr = init_graph(-1,-2,5,4,axes=>[0,0],ticks=>[6,6],size=>[400,400]);
+              $gr->lb('reset');
+              add_functions($gr, "x-1 for x in &lt;0,4>" . " using color:blue and weight:2");
+              ($gr->fn)[0]->steps(1000);
+              $gr->lb( new Label(2,2.5,'y = x - 1','black','center','middle'));
+              $gr->lb( new Label(4.75,0.4,'x','black','center','middle'));
+              $gr->lb( new Label(0.2,3.75,'y','black','center','middle'));
+              foreach my $i (1..4) {
+                $gr->lb( new Label($i,-0.25,$i,'black','center','middle'));
+              }
+              $gr->lb( new Label(-0.20,-1,-1,'black','center','middle'));
+
+              foreach my $i (1..3) {
+                $gr->lb( new Label(-0.20,$i,$i,'black','center','middle'));
+              }
+
               $a = Formula("-1/2");
               $b = Formula("0");
               $c = Formula("3/2");
@@ -1249,7 +1321,8 @@
             </setup>
             <statement>
               <sidebyside width="47%">
-                <image xml:id="img_05_02_ex_08">
+                <image pg-name="$gr" xml:id="img_05_02_ex_08"/>
+                <!-- <image xml:id="img_05_02_ex_08">
                   <description></description>
                   <latex-image>
 
@@ -1271,8 +1344,9 @@
                   \end{tikzpicture}
 
                   </latex-image>
-                </image>
+                </image> -->
               </sidebyside>
+
               <p>
                 Use the geometry of the graph above to evaluate the following definite integrals:
                 <ol cols="2">
@@ -1298,6 +1372,20 @@
             <setup>
 
             <pg-code>
+              $gr = init_graph(-1,-1,5,4,axes=>[0,0],ticks=>[6,5],size=>[400,400]);
+              $gr->lb('reset');
+              add_functions($gr, "sqrt(4-(x-2)^2) for x in &lt;0,4>" . " using color:blue and weight:2");
+              ($gr->fn)[0]->steps(1000);
+              $gr->lb( new Label(3,2.5,'y = f(x)','black','center','middle'));
+              $gr->lb( new Label(4.75,0.4,'x','black','center','middle'));
+              $gr->lb( new Label(0.2,3.75,'y','black','center','middle'));
+              foreach my $i (1..4) {
+                $gr->lb( new Label($i,-0.25,$i,'black','center','middle'));
+              }
+              foreach my $i (1..3) {
+                $gr->lb( new Label(-0.20,$i,$i,'black','center','middle'));
+              }
+
               $r = Formula("2");
               $a = Formula("1/4*pi*$r^2");
               $b = Formula("1/4*pi*$r^2");
@@ -1307,7 +1395,8 @@
             </setup>
             <statement>
               <sidebyside width="47%">
-                <image xml:id="img_05_02_ex_09">
+                <image pg-name="$gr" xml:id="img_05_02_ex_09"/>
+                <!-- <image xml:id="img_05_02_ex_09">
                   <description></description>
                   <latex-image>
 
@@ -1329,7 +1418,7 @@
                   \end{tikzpicture}
 
                   </latex-image>
-                </image>
+                </image> -->
               </sidebyside>
 
               <p>
@@ -1347,82 +1436,79 @@
             </statement>
         </webwork>
       </exercise>
+<!-- Exercise 10 -->
+      <exercise>
+        <webwork seed="1">
+          <setup>
 
-<!--ToDo: WW code for this exercise-->
-    <exercise>
-      <statement>
-        <sidebyside>
-          <image>
-            <latex-image>
+          <pg-code>
+            $gr = init_graph(-1,-1,11,4,axes=>[0,0],ticks=>[12,5],size=>[400,400]);
+            $gr->lb('reset');
+            add_functions($gr, "3 for x in &lt;0,10>" . " using color:blue and weight:2");
+            ($gr->fn)[0]->steps(1000);
+            $gr->lb( new Label(5,3.5,'y = 3','black','center','middle'));
+            $gr->lb( new Label(10.75,0.15,'x','black','center','middle'));
+            $gr->lb( new Label(0.4,3.9,'y','black','center','middle'));
+            foreach my $i (1..10) {
+              $gr->lb( new Label($i,-0.15,$i,'black','center','middle'));
+            }
+            foreach my $i (1..3) {
+              $gr->lb( new Label(-0.4,$i,$i,'black','center','middle'));
+            }
 
-              \begin{tikzpicture}
+            $a = Formula("15");
+            $b = Formula("12");
+            $c = Formula("0");
+            $d = "3(b-a)";
+          </pg-code>
+          </setup>
+          <statement>
+              <sidebyside width="47%">
+                <image pg-name="$gr" xml:id="img_05_02_ex_10"/>
+                <!-- <image xml:id="img_05_02_ex_10">
+                  <latex-image>
+                  
+                    \begin{tikzpicture}
 
-              \begin{axis}[
-                axis on top,
-                ytick={1,2,3},
-                ymin=-.5,ymax=3.5,
-                xmin=-1,xmax=10.9
-                ]
+                    \begin{axis}[
+                      axis on top,
+                      ytick={1,2,3},
+                      ymin=-.5,ymax=3.5,
+                      xmin=-1,xmax=10.9
+                      ]
 
-              \addplot+[-,domain=0:10] ({x}, {3});
+                    \addplot+[-,domain=0:10] ({x}, {3});
+                    
+                    \draw (axis cs:5,3.4) node {\scriptsize $f(x) = 3$};
 
-              \draw (axis cs:5,3.4) node {\scriptsize $f(x) = 3$};
+                    \end{axis}
 
-              \end{axis}
+                    \end{tikzpicture}
 
-              \end{tikzpicture}
+                  </latex-image>
+                </image> -->
+              </sidebyside>
 
-            </latex-image>
-          </image>
-          <p>
-            Use the geometry of the graph above to evaluate the following definite integrals:
-            <ol cols="2">
-              <li><m> \int_0^5 f(x)\, dx</m></li>
-
-              <li><m> \int_3^7 f(x)\, dx</m></li>
-
-              <li><m> \int_0^0 f(x)\, dx</m></li>
-
-              <li>
-                <p>
-                  <m>\ds \int_a^b f(x)\, dx</m>, where
-                  <m>0\leq a\leq b\leq 10</m>
-                </p>
-              </li>
-            </ol>
-          </p>
-        </sidebyside>
-      </statement>
-      <answer>
-        <p>
-          <ol>
-            <li>
               <p>
-                <m>15</m>
-              </p>
-            </li>
+                Use the geometry of the graph above to evaluate the following definite integrals:
+                <ol cols="2">
+                  <li><m>\int_0^5 f(x)\, dx</m><var name="$a" width="3"/></li>
 
-            <li>
-              <p>
-                <m>12</m>
-              </p>
-            </li>
+                  <li><m>\int_3^7 f(x)\, dx</m><var name="$b" width="3"/></li>
 
-            <li>
-              <p>
-                <m>0</m>
-              </p>
-            </li>
+                  <li><m>\int_0^0 f(x)\, dx</m><var name="$c" width="3"/></li>
 
-            <li>
-              <p>
-                <m>3(b-a)</m>
+                  <li>
+                    <p>
+                      <m>\ds \int_a^b f(x)\, dx</m>, where
+                      <m>0\leq a\leq b\leq 10</m><var name="$d" width="3"/>
+                    </p>
+                  </li>
+                </ol>
               </p>
-            </li>
-          </ol>
-        </p>
-      </answer>
-    </exercise>
+          </statement>
+        </webwork>
+      </exercise>
 
     </exercisegroup>
     <exercisegroup>
@@ -1434,12 +1520,36 @@
           Evaluate the definite integrals using this area information.
         </p>
       </introduction>
-<!-- Exercise 10 -->
+<!-- Exercise 11 -->
       <exercise>
         <webwork seed="1">
             <setup>
 
             <pg-code>
+              $gr = init_graph(-1,-125,4,75,axes=>[0,0],ticks=>[5,8],size=>[400,400]);
+              $gr->lb('reset');
+              $gr->new_color("lightblue", 191,191,255);
+              add_functions($gr, "60*x*(1-x)*(x-2)*(x-2)*(x-3) for x in &lt;0,3>" . " using color:blue and weight:2",
+                                 "0 for x in &lt;0,3>" . " using color:blue and weight:1");
+              ($gr->fn)[0]->steps(1000);
+              $gr->fillRegion([0.5,-50,"lightblue"]);
+              $gr->fillRegion([1.5,10,"lightblue"]);
+              $gr->fillRegion([2.5,10,"lightblue"]);
+              add_functions($gr, "0 for x in &lt;0,3>" . " using color:black and weight:1");
+              $gr->lb( new Label(1.5,30,'y = f(x)','black','center','middle'));
+              $gr->lb( new Label(3.8,5,'x','black','center','middle'));
+              $gr->lb( new Label(0.15,70,'y','black','center','middle'));
+              $gr->lb( new Label(0.5,-12,'59','black','center','middle'));
+              $gr->lb( new Label(1.35,12,'11','black','center','middle'));
+              $gr->lb( new Label(2.6,12,'21','black','center','middle'));
+              foreach my $i (1..3) {
+                $gr->lb( new Label($i,-5,$i,'black','center','middle'));
+              }
+              foreach my $i (1..2) {
+                $gr->lb( new Label(-0.25,$i*-50,$i*-50,'black','center','middle'));
+              }
+              $gr->lb( new Label(-0.15,50,50,'black','center','middle'));
+
               $a = Formula("-59");
               $b = Formula("-48");
               $c = Formula("-27");
@@ -1448,7 +1558,8 @@
             </setup>
             <statement>
               <sidebyside width="47%">
-                <image xml:id="img_05_02_ex_10">
+                <image pg-name="$gr" xml:id="img_05_02_ex_11"/>
+                <!-- <image xml:id="img_05_02_ex_11">
                   <description></description>
                   <latex-image>
 
@@ -1474,7 +1585,7 @@
                   \end{tikzpicture}
 
                   </latex-image>
-                </image>
+                </image> -->
               </sidebyside>
 
               <p>
@@ -1493,12 +1604,33 @@
             </statement>
         </webwork>
       </exercise>
-<!-- Exercise 11 -->
+<!-- Exercise 12 -->
       <exercise>
         <webwork seed="1">
             <setup>
 
             <pg-code>
+              $gr = init_graph(-1,-2,5,2,axes=>[0,0],ticks=>[6,8],size=>[400,400]);
+              $gr->lb('reset');
+              $gr->new_color("lightblue", 191,191,255);
+              add_functions($gr, "sin(3.14159x/2) for x in &lt;0,4>" . " using color:blue and weight:2",
+                                 "0 for x in &lt;0,4>" . " using color:blue and weight:1");
+              ($gr->fn)[0]->steps(1000);
+              $gr->fillRegion([1,0.5,"lightblue"]);
+              $gr->fillRegion([3,-0.5,"lightblue"]);
+              add_functions($gr, "0 for x in &lt;0,4>" . " using color:black and weight:1");
+              $gr->lb( new Label(3,0.75,'f(x) = sin(pi*x / 2)','black','center','middle'));
+              $gr->lb( new Label(4.8,0.1,'x','black','center','middle'));
+              $gr->lb( new Label(0.15,1.9,'y','black','center','middle'));
+              $gr->lb( new Label(1,0.5,'4/pi','black','center','middle'));
+              $gr->lb( new Label(3,-0.5,'4/pi','black','center','middle'));
+              foreach my $i (1..4) {
+                $gr->lb( new Label($i,-0.2,$i,'black','center','middle'));
+              }
+              $gr->lb( new Label(-0.3,-1,-1,'black','center','middle'));
+              $gr->lb( new Label(-0.3,1,1,'black','center','middle'));
+
+              $gr->lb( new Label(-0.15,50,50,'black','center','middle'));
               $a = Formula("4/pi");
               $b = Formula("-4/pi");
               $c = Formula("0");
@@ -1507,7 +1639,8 @@
             </setup>
             <statement>
               <sidebyside width="47%">
-                <image xml:id="img_05_02_ex_11">
+                <image pg-name="$gr" xml:id="img_05_02_ex_12"/>
+                <!-- <image xml:id="img_05_02_ex_12">
                   <description></description>
                   <latex-image>
 
@@ -1532,7 +1665,7 @@
                   \end{tikzpicture}
 
                   </latex-image>
-                </image>
+                </image> -->
               </sidebyside>
 
               <p>
@@ -1551,12 +1684,46 @@
             </statement>
         </webwork>
       </exercise>
-<!-- Exercise 12 -->
+<!-- Exercise 13 -->
       <exercise>
         <webwork seed="1">
             <setup>
 
             <pg-code>
+              $gr = init_graph(-3,-6,3,12,axes=>[0,0],ticks=>[6,9],size=>[400,400]);
+              $gr->lb('reset');
+              $gr->new_color("lightblue", 191,191,255);
+              add_functions($gr, "3x^2-3 for x in &lt;-2,2>" . " using color:blue and weight:2",
+                                 "0 for x in &lt;-2,2>" . " using color:blue and weight:1");
+              ($gr->fn)[0]->steps(1000);
+              $gr->moveTo(-2,0);
+              $gr->lineTo(-2,10,"blue",1);
+              $gr->moveTo(2,0);
+              $gr->lineTo(2,10,"blue",1);
+              $gr->fillRegion([-1.5,1,"lightblue"]);
+              $gr->fillRegion([0,-1,"lightblue"]);
+              $gr->fillRegion([1.5,1,"lightblue"]);
+              $gr->moveTo(-2,0);
+              $gr->lineTo(-2,10,"white",1);
+              $gr->moveTo(2,0);
+              $gr->lineTo(2,10,"white",1);
+              add_functions($gr, "0 for x in &lt;-2,2>" . " using color:black and weight:1");
+              $gr->lb( new Label(1.5,10,'f(x) = 3x^2 - 3','black','center','middle'));
+              $gr->lb( new Label(2.8,0.4,'x','black','center','middle'));
+              $gr->lb( new Label(0.15,11.5,'y','black','center','middle'));
+              $gr->lb( new Label(-1.5,1,'4','black','center','middle'));
+              $gr->lb( new Label(0.5,-1,'-4','black','center','middle'));
+              $gr->lb( new Label(1.5,1,'4','black','center','middle'));
+              foreach my $i (-2..-1) {
+                $gr->lb( new Label($i,-0.4,$i,'black','center','middle'));
+              }
+              foreach my $i (1..2) {
+                $gr->lb( new Label($i,-0.4,$i,'black','center','middle'));
+              }
+              $gr->lb( new Label(-0.2,-5,-5,'black','center','middle'));
+              $gr->lb( new Label(-0.2,5,5,'black','center','middle'));
+              $gr->lb( new Label(-0.2,10,10,'black','center','middle'));
+
               $a = Formula("4");
               $b = Formula("4");
               $c = Formula("-4");
@@ -1565,7 +1732,8 @@
             </setup>
             <statement>
               <sidebyside width="47%">
-                <image xml:id="img_05_02_ex_12">
+                <image pg-name="$gr" xml:id="img_05_02_ex_13"/>
+                <!-- <image xml:id="img_05_02_ex_13">
                   <description></description>
                   <latex-image>
 
@@ -1591,7 +1759,7 @@
                   \end{tikzpicture}
 
                   </latex-image>
-                </image>
+                </image> -->
               </sidebyside>
 
               <p>
@@ -1610,12 +1778,40 @@
             </statement>
         </webwork>
       </exercise>
-<!-- Exercise 13 -->
+<!-- Exercise 14 -->
       <exercise>
         <webwork seed="1">
             <setup>
 
             <pg-code>
+              $gr = init_graph(-1,-1,2.5,5,axes=>[0,0],ticks=>[7,6],size=>[400,400]);
+              $gr->lb('reset');
+              $gr->new_color("lightblue", 191,191,255);
+              add_functions($gr, "x^2 for x in &lt;0,2>" . " using color:blue and weight:2",
+                                 "0 for x in &lt;0,2>" . " using color:blue and weight:1");
+              ($gr->fn)[0]->steps(1000);
+              $gr->moveTo(2,0);
+              $gr->lineTo(2,5,"blue",1);
+              $gr->fillRegion([-1.5,1,"lightblue"]);
+              $gr->fillRegion([0,-1,"lightblue"]);
+              $gr->fillRegion([1.5,1,"lightblue"]);
+              $gr->moveTo(2,0);
+              $gr->lineTo(2,5,"white",1);
+              $gr->moveTo(1,0);
+              $gr->lineTo(1,1,"blue",2,dashed);
+              add_functions($gr, "0 for x in &lt;0,2>" . " using color:black and weight:1");
+              $gr->lb( new Label(1,3,'f(x) = x^2','black','center','middle'));
+              $gr->lb( new Label(2.4,0.2,'x','black','center','middle'));
+              $gr->lb( new Label(0.1,4.8,'y','black','center','middle'));
+              $gr->lb( new Label(1.5,0.25,'7/3','black','center','middle'));
+              $gr->lb( new Label(0.8,0.25,'1/3','black','center','middle'));
+              foreach my $i (1..2) {
+                $gr->lb( new Label($i,-0.2,$i,'black','center','middle'));
+              }
+              foreach my $i (1..4) {
+                $gr->lb( new Label(-0.15,$i,$i,'black','center','middle'));
+              }
+
               $a = Formula("40/3");
               $b = Formula("26/3");
               $c = Formula("8/3");
@@ -1624,7 +1820,8 @@
             </setup>
             <statement>
               <sidebyside width="47%">
-                <image xml:id="img_05_02_ex_13">
+                <image pg-name="$gr" xml:id="img_05_02_ex_14"/>
+                <!-- <image xml:id="img_05_02_ex_14">
                   <description></description>
                   <latex-image>
 
@@ -1640,7 +1837,7 @@
                   \addplot [firstcurvestyle,areastyle,domain=0:2] {x^2} \closedcycle;
                   \addplot [firstcurvestyle,-,domain=0:2] {x^2};
 
-                  \draw [thick,firstcolor,dashed] (axis cs:1,0) -- (axis cs:1,1);
+                  \draw [thick,firstcolor,dashed] (axis cs:1,0) &dash;&dash;  (axis cs:1,1); % add double dash back on this line when uncommenting
 
                   \draw (axis cs:1,3) node {\scriptsize $f(x)=x^2$};
                   \draw (axis cs:.7,.2) node {\scriptsize $1/3$};
@@ -1651,7 +1848,7 @@
                   \end{tikzpicture}
 
                   </latex-image>
-                </image>
+                </image> -->
               </sidebyside>
 
               <p>
@@ -1681,12 +1878,29 @@
           Answer the questions based on that graph.
         </p>
       </introduction>
-<!-- Exercise 14 -->
+<!-- Exercise 15 -->
       <exercise>
         <webwork seed="1">
             <setup>
 
             <pg-code>
+              $gr = init_graph(-1,-2,4,3,axes=>[0,0],ticks=>[5,5],size=>[400,400]);
+              $gr->lb('reset');
+              add_functions($gr, "-x+2 for x in &lt;0,3>" . " using color:blue and weight:2");
+              ($gr->fn)[0]->steps(1000);
+              $gr->lb( new Label(2,1,'y = -x + 2','black','center','middle'));
+              $gr->lb( new Label(3.8,0.1,'x','black','center','middle'));
+              $gr->lb( new Label(0.1,2.85,'y','black','center','middle'));
+              $gr->lb( new Label(3.75,-0.1,'t (s)','black','center','middle'));
+              $gr->lb( new Label(-0.375,2.85,'y (ft/s)','black','center','middle'));
+              foreach my $i (1..3) {
+                $gr->lb( new Label($i,-0.2,$i,'black','center','middle'));
+              }
+              foreach my $i (1..2) {
+                $gr->lb( new Label(-0.20,$i,$i,'black','center','middle'));
+              }
+              $gr->lb( new Label(-0.20,-1,-1,'black','center','middle'));
+
               $mv = Formula("2");
               $mv = NumberWithUnits("$mv ft/s");
               $md = Formula("2");
@@ -1697,7 +1911,8 @@
             </setup>
             <statement>
               <sidebyside width="47%">
-                <image xml:id="img_05_02_ex_14">
+                <image pg-name="$gr" xml:id="img_05_02_ex_15"/>
+                <!-- <image xml:id="img_05_02_ex_15">
                   <description></description>
                   <latex-image>
 
@@ -1718,7 +1933,7 @@
                   \end{tikzpicture}
 
                   </latex-image>
-                </image>
+                </image> -->
               </sidebyside>
 
               <p>
@@ -1759,12 +1974,32 @@
             </statement>
         </webwork>
       </exercise>
-<!-- Exercise 15 -->
+<!-- Exercise 16 -->
       <exercise>
         <webwork seed="1">
             <setup>
 
             <pg-code>
+              $gr = init_graph(-1,-1,6,4,axes=>[0,0],ticks=>[7,5],size=>[400,400]);
+              $gr->lb('reset');
+              add_functions($gr, "3 for x in &lt;0,1>" . " using color:blue and weight:2",
+                                 "-3(x-2) for x in &lt;1,2>" . " using color:blue and weight:2",
+                                 "2(x-2) for x in &lt;2,3>" . " using color:blue and weight:2",
+                                 "2 for x in &lt;3,5>" . " using color:blue and weight:2");
+              ($gr->fn)[1]->steps(1000);
+              ($gr->fn)[2]->steps(1000);
+              $gr->lb( new Label(4,3,'y = f(x)','black','center','middle'));
+              $gr->lb( new Label(5.7,0.1,'x','black','center','middle'));
+              $gr->lb( new Label(0.2,3.85,'y','black','center','middle'));
+              $gr->lb( new Label(5.7,-0.1,'t (s)','black','center','middle'));
+              $gr->lb( new Label(-0.48,3.85,'y (ft/s)','black','center','middle'));
+              foreach my $i (1..5) {
+                $gr->lb( new Label($i,-0.2,$i,'black','center','middle'));
+              }
+              foreach my $i (1..3) {
+                $gr->lb( new Label(-0.20,$i,$i,'black','center','middle'));
+              }
+
               $mv = Formula("3");
               $mv = NumberWithUnits("$mv ft/s");
               $md = Formula("9.5");
@@ -1775,7 +2010,8 @@
             </setup>
             <statement>
               <sidebyside width="47%">
-                <image xml:id="img_05_02_ex_15">
+                <image pg-name="$gr" xml:id="img_05_02_ex_16"/>
+                <!-- <image xml:id="img_05_02_ex_16">
                   <description></description>
                   <latex-image>
 
@@ -1800,7 +2036,7 @@
                   \end{tikzpicture}
 
                   </latex-image>
-                </image>
+                </image> -->
               </sidebyside>
 
               <p>
@@ -1842,7 +2078,7 @@
         </webwork>
       </exercise>
     </exercisegroup>
-<!-- Exercise 16 -->
+<!-- Exercise 17 -->
       <exercise>
         <webwork seed="1">
             <setup>
@@ -1912,7 +2148,7 @@
             </statement>
         </webwork>
       </exercise>
-<!-- Exercise 17 -->
+<!-- Exercise 18 -->
       <exercise>
         <webwork seed="1">
             <setup>
@@ -1990,7 +2226,7 @@
           Use these values and properties of definite integrals to evaluate the indicated definite integrals.
         </p>
       </introduction>
-<!-- Exercise 18 -->
+<!-- Exercise 19-->
       <exercise>
         <webwork seed="1">
             <setup>
@@ -2037,7 +2273,7 @@
             </statement>
         </webwork>
       </exercise>
-<!-- Exercise 19 -->
+<!-- Exercise 20 -->
       <exercise>
         <webwork seed="1">
             <setup>
@@ -2084,7 +2320,7 @@
             </statement>
         </webwork>
       </exercise>
-<!-- Exercise 20 -->
+<!-- Exercise 21 -->
       <exercise>
         <webwork seed="1">
             <setup>
@@ -2131,7 +2367,7 @@
             </statement>
         </webwork>
       </exercise>
-<!-- Exercise 21 -->
+<!-- Exercise 22 -->
       <exercise>
         <webwork seed="1">
             <setup>
@@ -2193,7 +2429,7 @@
           Use these values to evaluate the given definite integrals.
         </p>
       </introduction>
-<!-- Exercise 22 -->
+<!-- Exercise 23 -->
       <exercise>
         <webwork seed="1">
             <setup>
@@ -2240,7 +2476,7 @@
             </statement>
         </webwork>
       </exercise>
-<!-- Exercise 23 -->
+<!-- Exercise 24 -->
       <exercise>
         <webwork seed="1">
             <setup>
@@ -2260,7 +2496,7 @@
             </statement>
         </webwork>
       </exercise>
-<!-- Exercise 24 -->
+<!-- Exercise 25 -->
       <exercise>
         <webwork seed="1">
             <setup>
@@ -2307,7 +2543,7 @@
             </statement>
         </webwork>
       </exercise>
-<!-- Exercise 25 -->
+<!-- Exercise 26 -->
       <exercise>
         <webwork seed="1">
             <setup>
@@ -2368,7 +2604,7 @@
           In the following exercises, evaluate the given indefinite integral.
         </p>
       </introduction>
-
+<!-- Exercise 27 -->
       <exercise>
         <webwork seed="1">
             <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
@@ -2389,7 +2625,7 @@
             </statement>
         </webwork>
       </exercise>
-
+<!-- Exercise 28 -->
       <exercise>
         <webwork seed="1">
             <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
@@ -2410,7 +2646,7 @@
             </statement>
         </webwork>
       </exercise>
-
+<!-- Exercise 29 -->
       <exercise>
         <webwork seed="1">
             <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
@@ -2432,7 +2668,7 @@
             </statement>
         </webwork>
       </exercise>
-
+<!-- Exercise 30 -->
       <exercise>
         <webwork seed="1">
             <pg-macros><macro-file>parserFormulaUpToConstant.pl</macro-file></pg-macros>
