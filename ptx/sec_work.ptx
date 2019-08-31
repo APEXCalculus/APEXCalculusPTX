@@ -1,5 +1,4 @@
-
-
+<?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="sec_work">
   <title>Work</title>
   <introduction>
@@ -10,19 +9,20 @@
     </p>
 
     <p>
-      The SI unit of force is the <em>newton</em>, (kg<m>\cdot</m>m/s<m>^2</m>),
+      The SI unit of force is the <term>newton</term>; one newton is equal to one
+      <quantity><unit prefix="kilo" base="gram"/><unit base="meter"/><per base="second" exp="2"/></quantity>,
       and the SI unit of distance is a meter (m).
-      The fundamental unit of work is one newton<ndash />meter,
-      or a <em>joule</em> (J).
+      The fundamental unit of work is one newton<ndash/>meter,
+      or a <term>joule</term> (J).
       That is, applying a force of one newton for one meter performs one joule of work.
       In Imperial units
       (as used in the United States),
       force is measured in pounds (lb) and distance is measured in feet (ft),
-      hence work is measured in ft<ndash />lb.
+      hence work is measured in ft<ndash/>lb.
     </p>
     <aside>
       <p>
-        <em>Note:</em> <em>Mass</em> and <em>weight</em>
+        <em>Mass</em> and <em>weight</em>
         are closely related, yet different, concepts.
         The mass <m>m</m> of an object is a quantitative measure of that object's resistance to acceleration.
         The weight <m>w</m> of an object is a measurement of the force applied to the object by the acceleration of gravity <m>g</m>.
@@ -39,18 +39,22 @@
     </aside>
     <p>
       When force is constant, the measurement of work is straightforward.
-      For instance, lifting a 200 lb object 5 ft performs
-      <m>200\cdot 5 = 1000</m> ft<ndash />lb of work.
+      For instance, lifting a <quantity><mag>200</mag><unit base="pound"/></quantity>
+      object <quantity><mag>5</mag><unit base="foot"/></quantity> performs
+      <m>200\cdot 5 = 1000</m> ft<ndash/>lb of work.
     </p>
 
     <p>
       What if the force applied is variable?
       For instance,
-      imagine a climber pulling a 200 ft rope up a vertical face.
+      imagine a climber pulling a <quantity><mag>200</mag><unit base="foot"/></quantity> rope up a vertical face.
       The rope becomes lighter as more is pulled in,
       requiring less force and hence the climber performs less work.
     </p>
+  </introduction>
 
+  <subsection xml:id="sec_work_variable_force">
+    <title>Work Done by a Variable Force</title>
     <p>
       In general, let <m>F(x)</m> be a force function on an interval <m>[a,b]</m>.
       We want to measure the amount of work done applying the force <m>F</m> from <m>x=a</m> to <m>x=b</m>.
@@ -59,7 +63,7 @@
       Let <m>c_i</m> be a value in the
       <m>i</m>th subinterval <m>[x_i,x_{i+1}]</m>.
       Then the work done on this interval is approximately <m>W_i\approx F(c_i)\cdot(x_{i+1}-x_i) = F(c_i)\dx_i</m>,
-      a constant force <times /> the distance over which it is applied.
+      a constant force <times/> the distance over which it is applied.
       The total work is
       <me>
         W = \sum_{i=1}^n W_i \approx \sum_{i=1}^n F(c_i)\dx_i
@@ -75,7 +79,7 @@
       <title>Work</title>
       <p>
         Let <m>F(x)</m> be a continuous function on <m>[a,b]</m> describing the amount of force being applied to an object in the direction of travel from distance <m>x=a</m> to distance <m>x=b</m>.
-        The total work <m>W</m> done on <m>[a,b]</m> is 
+        The total work <m>W</m> done on <m>[a,b]</m> is
             <idx><h>integration</h><h>work</h></idx>
             <idx><h>work</h></idx>
         <me>
@@ -88,9 +92,10 @@
       <title>Computing work performed: applying variable force</title>
       <statement>
         <p>
-          A 60m climbing rope is hanging over the side of a tall cliff.
+          A <quantity><mag>60</mag><unit base="meter"/></quantity> climbing rope is hanging over the side of a tall cliff.
           How much work is performed in pulling the rope up to the top,
-          where the rope has a mass of 66g/m?
+          where the rope has a linear mass density of
+          <quantity><mag>66</mag><unit base="gram"/><per base="meter"/></quantity>?
         </p>
       </statement>
       <solution>
@@ -101,15 +106,17 @@
           As long as we are consistent, either approach is fine.
           We adopt for this example the convention that <m>x</m> is the amount of rope pulled in.
           This seems to match intuition better;
-          pulling up the first 10 meters of rope involves <m>x=0</m> to <m>x=10</m> instead of <m>x=60</m> to <m>x=50</m>.
+          pulling up the first <m>10</m> meters of rope involves <m>x=0</m> to <m>x=10</m> instead of <m>x=60</m> to <m>x=50</m>.
         </p>
 
         <p>
           As <m>x</m> is the amount of rope pulled in,
           the amount of rope still hanging is <m>60-x</m>.
-          This length of rope has a mass of 66 g/m, or <m>0.066</m> kg/m.
-          The mass of the rope still hanging is <m>0.066(60-x)</m> kg;
-          multiplying this mass by the acceleration of gravity, 9.8 m/s<m>^2</m>,
+          This length of rope has a mass of <quantity><mag>66</mag><unit base="gram"/><per base="meter"/></quantity> or
+          <quantity><mag>0.066</mag><unit prefix="kilo" base="gram"/><per base="meter"/></quantity>.
+          The mass of the rope still hanging is <m>0.066(60-x)</m> <quantity><unit prefix="kilo" base="gram"/></quantity>;
+          multiplying this mass by the acceleration of gravity,
+          <quantity><mag>9.8</mag><unit base="meter"/><per base="second" exp="2"/></quantity>,
           gives our variable force function
           <me>
             F(x) = (9.8)(0.066)(60-x) = 0.6468(60-x)
@@ -119,14 +126,14 @@
         <p>
           Thus the total work performed in pulling up the rope is
           <me>
-            W = \int_0^{60} 0.6468(60-x)\, dx = 1,164.24\ \text{J} 
+            W = \int_0^{60} 0.6468(60-x)\, dx = 1,164.24 \text{ J }
           </me>.
         </p>
 
         <p>
           By comparison,
-          consider the work done in lifting the entire rope 60 meters.
-          The rope weighs <m>60\times 0.066 \times 9.8 = 38.808</m> N, so the work applying this force for 60 meters is
+          consider the work done in lifting the entire rope <m>60</m> meters.
+          The rope weighs <m>60\times 0.066 \times 9.8 = 38.808</m> N, so the work applying this force for <m>60</m> meters is
           <m>60\times 38.808 = 2,328.48</m> J. This is exactly twice the work calculated before (and we leave it to the reader to understand why.)
         </p>
       </solution>
@@ -136,16 +143,17 @@
       <title>Computing work performed: applying variable force</title>
       <statement>
         <p>
-          Consider again pulling a 60 m rope up a cliff face,
-          where the rope has a mass of 66 g/m.
+          Consider again pulling a <quantity><mag>60</mag><unit base="meter"/></quantity> rope up a cliff face,
+          where the rope has a mass of <quantity><mag>66</mag><unit base="gram"/><per base="meter"/></quantity>.
           At what point is exactly half the work performed?
         </p>
       </statement>
       <solution>
         <p>
           From <xref ref="ex_work1">Example</xref>
-          we know the total work performed is
-          <m>1,164.24</m> J. We want to find a height <m>h</m> such that the work in pulling the rope from a height of <m>x=0</m> to a height of <m>x=h</m> is 582.12, half the total work.
+          we know the total work performed is <m>1,164.24</m> J.
+          We want to find a height <m>h</m> such that the work in pulling the rope from a height of <m>x=0</m>
+          to a height of <m>x=h</m> is <m>582.12</m>, or half the total work.
           Thus we want to solve the equation
           <me>
             \int_0^h 0.6468(60-x)\, dx = 582.12
@@ -162,14 +170,18 @@
         </p>
 
         <p>
-          As the rope is only 60m long,
+          As the rope is only <quantity><mag>60</mag><unit base="meter"/></quantity> long,
           the only sensible answer is <m>h=17.57</m>.
-          Thus about half the work is done pulling up the first 17.5m the other half of the work is done pulling up the remaining 42.43m.
+          Thus about half the work is done pulling up the first
+          <quantity><mag>17.57</mag><unit base="meter"/></quantity>;
+          the other half of the work is done pulling up the remaining
+          <quantity><mag>42.43</mag><unit base="meter"/></quantity>.
         </p>
         <aside>
           <p>
-            <em>Note:</em> In <xref ref="ex_work1_5">Example</xref>,
-            we find that half of the work performed in pulling up a 60 m rope is done in the last 42.43 m.
+            In <xref ref="ex_work1_5">Example</xref>,
+            we find that half of the work performed in pulling up a <quantity><mag>60</mag><unit base="meter"/></quantity>
+            rope is done in the last <quantity><mag>42.43</mag><unit base="meter"/></quantity>.
             Why is it not coincidental that <m>60/\sqrt{2}=42.43</m>?
           </p>
         </aside>
@@ -180,10 +192,14 @@
       <title>Computing work performed: applying variable force</title>
       <statement>
         <p>
-          A box of 100 lb of sand is being pulled up at a uniform rate a distance of 50 ft over 1 minute.
-          The sand is leaking from the box at a rate of 1 lb/s.
-          The box itself weighs 5 lb and is pulled by a rope weighing 0.2 lb/ft.
+          A box of <quantity><mag>100</mag><unit base="pound"/></quantity> of sand is being pulled up at a uniform rate a distance of
+          <quantity><mag>50</mag><unit base="foot"/></quantity> over <m>1</m> minute.
+          The sand is leaking from the box at a rate of <quantity><mag>1</mag><unit base="pound"/><per base="second"/></quantity>.
+          The box itself weighs <quantity><mag>5</mag><unit base="pound"/></quantity> and is pulled by a rope weighing
+          <quantity><mag>0.2</mag><unit base="pound"/><per base="foot"/></quantity>.
+        </p>
 
+        <p>
           <ol>
             <li>
               <p>
@@ -220,25 +236,31 @@
                 for the <em>weight</em> of the rope per foot is given,
                 not its <em>mass</em> per meter as before.) The work performed lifting the rope is
                 <me>
-                  W_r = \int_0^{50} (10-0.2x)\, dx = 250\ \text{ ft--lb } 
+                  W_r = \int_0^{50} (10-0.2x)\, dx = 250\ \text{ ft--lb }
                 </me>.
               </p>
             </li>
 
             <li>
               <p>
-                The sand is leaving the box at a rate of 1 lb/s.
+                The sand is leaving the box at a rate of
+                <quantity><mag>1</mag><unit base="pound"/><per base="second"/></quantity>.
                 As the vertical trip is to take one minute,
-                we know that 60 lb will have left when the box reaches its final height of 50 ft.
+                we know that <quantity><mag>60</mag><unit base="pound"/></quantity>
+                will have left when the box reaches its final height of
+                <quantity><mag>50</mag><unit base="foot"/></quantity>.
                 Again letting <m>x</m> represent the height of the box,
                 we have two points on the line that describes the weight of the sand:
-                when <m>x=0</m>, the sand weight is 100 lb,
+                when <m>x=0</m>, the sand weight is
+                <quantity><mag>100</mag><unit base="pound"/></quantity>,
                 producing the point <m>(0,100)</m>;
-                when <m>x=50</m>, the sand in the box weighs 40 lb,
+                when <m>x=50</m>, the sand in the box weighs
+                <quantity><mag>40</mag><unit base="pound"/></quantity>,
                 producing the point <m>(50,40)</m>.
                 The slope of this line is <m>\frac{100-40}{0-50} = -1.2</m>,
                 giving the equation of the weight of the sand at height <m>x</m> as <m>w(x) = -1.2x+100</m>.
-                The box itself weighs a constant 5 lb,
+                The box itself weighs a constant
+                <quantity><mag>5</mag><unit base="pound"/></quantity>,
                 so the total force function is <m>F_b(x) = -1.2x+105</m>.
                 Integrating from <m>x=0</m> to <m>x=50</m> gives the work performed in lifting box and sand:
                 <me>
@@ -250,7 +272,7 @@
             <li>
               <p>
                 The total work is the sum of <m>W_r</m> and <m>W_b</m>:
-                <m>250+3750=4000</m> ft<ndash />lb.
+                <m>250+3750=4000</m> ft<ndash/>lb.
                 We can also arrive at this via integration:
                 <md>
                   <mrow>W \amp = \int_0^{50} (F_r(x)+F_b(x))\, dx</mrow>
@@ -264,19 +286,25 @@
         </p>
       </solution>
     </example>
+  </subsection>
+
+  <subsection>
+    <title>Hooke's Law and Springs</title>
 
     <p>
-      <em> Hooke's Law and Springs</em>
-    </p>
-
-    <p>
-      Hooke's Law states that the force required to compress or stretch a spring <m>x</m> units from its natural length is proportional to <m>x</m>;
+      Hooke's Law states that the force required to compress or stretch a spring <m>x</m>
+      units from its natural length is proportional to <m>x</m>;
       that is, this force is <m>F(x) = kx</m> for some constant <m>k</m>.
-      For example, if a force of 1 N stretches a given spring 2 cm,
-      then a force of 5 N will stretch the spring 10 cm.
+      For example, if a force of <quantity><mag>1</mag><unit base="newton"/></quantity>
+      stretches a given spring <quantity><mag>2</mag><unit prefix="centi" base="meter"/></quantity>,
+      then a force of <quantity><mag>5</mag><unit base="newton"/></quantity>
+      will stretch the spring <quantity><mag>10</mag><unit prefix="centi" base="meter"/></quantity>.
       Converting the distances to meters,
-      we have that stretching this spring 0.02 m requires a force of
-      <m>F(0.02) = k(0.02) = 1</m> N, hence <m>k = 1/0.02 = 50</m> N/m.
+      we have that stretching this spring <quantity><mag>0.02</mag><unit prefix="centi" base="meter"/></quantity>
+      requires a force of <m>F(0.02) = k(0.02) = 1</m>\
+      <quantity><unit base="newton"/></quantity>,
+      hence <m>k = 1/0.02 = 50</m>
+      <quantity><unit base="newton"/><per base="meter"/></quantity>.
           <idx><h>Hooke's Law</h></idx>
     </p>
 
@@ -284,31 +312,108 @@
       <title>Computing work performed: stretching a spring</title>
       <statement>
         <p>
-          A force of 20 lb stretches a spring from a natural length of 7 inches to a length of 12 inches.
+          A force of <quantity><mag>20</mag><unit base="pound"/></quantity>
+          stretches a spring from a natural length of <m>7</m> inches to a length of <m>12</m> inches.
           How much work was performed in stretching the spring to this length?
         </p>
       </statement>
-      <solution xml:id="fig_spring1">
+      <solution>
         <p>
           In many ways,
           we are not at all concerned with the actual length of the spring,
           only with the amount of its change.
-          Hence, we do not care that 20 lb of force stretches the spring to a length of 12 inches,
-          but rather that a force of 20 lb stretches the spring by 5 in.
+          Hence, we do not care that <quantity><mag>20</mag><unit base="pound"/></quantity>
+          of force stretches the spring to a length of <m>12</m> inches,
+          but rather that a force of
+          <quantity><mag>20</mag><unit base="pound"/></quantity>
+          stretches the spring by <m>5</m> inches.
           This is illustrated in <xref ref="fig_spring1">Figure</xref>;
           we only measure the change in the spring's length,
           not the overall length of the spring.
         </p>
 
+        <!-- START figures/fig_work_spring1.tex -->
+        <figure xml:id="fig_spring1">
+          <caption>Illustrating the important aspects of stretching a spring in computing work in <xref ref="ex_spring1">Example</xref>.</caption>
+          <image xml:id="img_spring1" width="47%">
+            <description></description>
+            <latex-image>
+
+            \begin{tikzpicture}
+
+            \begin{scope}[xscale=.2,yscale=.5,shift={(.5,0)}]
+              \draw [thick,firstcolor] (-1,.5) -- (-.5,.5) -- (0,0);
+
+              \foreach \x in {0,1,...,5}
+              {
+                \begin{scope}[shift={(\x*2,0)}]
+                  \draw [thick,firstcolor] (0,0) -- (1,1) -- (2,0);
+                \end{scope}
+              }
+
+              \begin{scope}[shift={(12,0)}]
+                \draw [thick,firstcolor] (0,0) -- (1,1) -- (1.5,.5) -- (2,.5);
+              \end{scope}
+
+            \end{scope}
+
+            \draw [shift={(.9,0)},thick,left color=firstcolor!70,right color=firstcolor!15,firstcolor] (2,0) rectangle (2.5,.5);
+            \draw [shift={(.9,0)},-&gt;,&gt;=stealth] (2.75,.15)-= node [pos=.5,above] {$F$} (3.25,.15);
+
+            \begin{scope}[shift={(0,-.25)}]
+              \draw [thick] (-.5,0) -- (5.5,0);
+
+              \foreach \x in {0,...,6}
+              {
+              \draw (\x*.4+2.8,.1) -- (\x*.4+2.8,-.1) node [below] {\scriptsize $\x$};
+              }
+            \end{scope}
+
+            \begin{scope}[shift={(0,-1.75)}]
+
+              \begin{scope}[xscale=.343,yscale=.5,shift={(.5,0)}]
+                \draw [thick,firstcolor] (-1,.5) -- (-.5,.5) -- (0,0);
+                \foreach \x in {0,1,...,5}
+                {
+                  \begin{scope}[shift={(\x*2,0)}]
+                    \draw [thick,firstcolor] (0,0) -- (1,1) -- (2,0);
+                  \end{scope}
+                }
+
+                \begin{scope}[shift={(12,0)}]
+                  \draw [thick,firstcolor] (0,0) -- (1,1) -- (1.5,.5) -- (2,.5);
+                \end{scope}
+              \end{scope}
+
+              \begin{scope}[shift={(0,-.25)}]
+                \draw [thick] (-.5,0) -- (5.5,0);
+
+                \foreach \x in {0,...,6}
+                {
+                  \draw (\x*.4+2.8,.1) -- (\x*.4+2.8,-.1) node [below] {\scriptsize $\x$};
+                }
+              \end{scope}
+
+              \draw [shift={(2.9,0)},thick,left color=firstcolor!70,right color=firstcolor!15,firstcolor] (2,0) rectangle (2.5,.5);
+
+            \end{scope}
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
+          <!-- figures/fig_work_spring1.tex END -->
+        </figure>
+
         <p>
-          <img src="figures/figwork_spring1"/> \captionof{figure}{Illustrating the important aspects of stretching a spring in computing work in <xref ref="ex_spring1">Example</xref>.} Converting the units of length to feet, we have
+          Converting the units of length to feet, we have
           <me>
-            F(5/12) = 5/12k = 20\ \text{ lb } 
+            F(5/12) = 5/12k = 20\ \text{ lb }
           </me>.
         </p>
 
         <p>
-          Thus <m>k = 48</m> lb/ft and <m>F(x) = 48x</m>.
+          Thus <m>k = 48</m> <quantity><unit base="pound"/><per base="foot"/></quantity>  and <m>F(x) = 48x</m>.
         </p>
 
         <p>
@@ -321,7 +426,7 @@
         </p>
       </solution>
     </example>
-  </introduction>
+  </subsection>
 
   <subsection>
     <title>Pumping Fluids</title>
@@ -329,14 +434,14 @@
       Another useful example of the application of integration to compute work comes in the pumping of fluids,
       often illustrated in the context of emptying a storage tank by pumping the fluid out the top.
       This situation is different than our previous examples for the forces involved are constant.
-      After all, the force required to move one cubic foot of water (about 62.4 lb) is the same regardless of its location in the tank.
+      After all, the force required to move one cubic foot of water (about <quantity><mag>62.4</mag><unit base="pound"/></quantity> ) is the same regardless of its location in the tank.
       What is variable is the distance that cubic foot of water has to travel;
       water closer to the top travels less distance than water at the bottom,
       producing less work.
     </p>
 
     <table xml:id="fig_weight_density">
-      <caption>Weight and Mass densities</caption>
+      <title>Weight and Mass densities</title>
       <tabular>
         <row>
           <cell>Fluid</cell>
@@ -350,43 +455,43 @@
         </row>
         <row>
           <cell>Concrete</cell>
-          <cell>150</cell>
-          <cell>2400</cell>
+          <cell><m>150</m></cell>
+          <cell><m>2400</m></cell>
         </row>
         <row>
           <cell>Fuel Oil</cell>
-          <cell>55.46</cell>
-          <cell>890.13</cell>
+          <cell><m>55.46</m></cell>
+          <cell><m>890.13</m></cell>
         </row>
         <row>
           <cell>Gasoline</cell>
-          <cell>45.93</cell>
-          <cell>737.22</cell>
+          <cell><m>45.93</m></cell>
+          <cell><m>737.22</m></cell>
         </row>
         <row>
           <cell>Iodine</cell>
-          <cell>307</cell>
-          <cell>4927</cell>
+          <cell><m>307</m></cell>
+          <cell><m>4927</m></cell>
         </row>
         <row>
           <cell>Methanol</cell>
-          <cell>49.3</cell>
-          <cell>791.3</cell>
+          <cell><m>49.3</m></cell>
+          <cell><m>791.3</m></cell>
         </row>
         <row>
           <cell>Mercury</cell>
-          <cell>844</cell>
-          <cell>13546</cell>
+          <cell><m>844</m></cell>
+          <cell><m>13546</m></cell>
         </row>
         <row>
           <cell>Milk</cell>
-          <cell>63.6<ndash />65.4</cell>
-          <cell>1020 <mdash /> 1050</cell>
+          <cell><m>63.6</m><ndash/><m>65.4</m></cell>
+          <cell><m>1020</m><ndash/><m>1050</m></cell>
         </row>
         <row>
           <cell>Water</cell>
-          <cell>62.4</cell>
-          <cell>1000</cell>
+          <cell><m>62.4</m></cell>
+          <cell><m>1000</m></cell>
         </row>
       </tabular>
 
@@ -400,9 +505,12 @@
       <title>Computing work performed: pumping fluids</title>
       <statement>
         <p>
-          A cylindrical storage tank with a radius of 10 ft and a height of 30 ft is filled with water,
-          which weighs approximately 62.4 lb/ft<m>^3</m>.
-          Compute the amount of work performed by pumping the water up to a point 5 feet above the top of the tank.
+          A cylindrical storage tank with a radius of
+          <quantity><mag>10</mag><unit base="foot"/></quantity>
+          and a height of <quantity><mag>30</mag><unit base="foot"/></quantity>
+          is filled with water, which weighs approximately
+          <quantity><mag>62.4</mag><unit base="pound"/><per base="foot" exp="3"/></quantity>.
+          Compute the amount of work performed by pumping the water up to a point <m>5</m> feet above the top of the tank.
         </p>
       </statement>
       <solution>
@@ -413,7 +521,46 @@
 
         <figure xml:id="fig_pump1a">
           <caption>Illustrating a water tank in order to compute the work required to empty it in <xref ref="ex_pump1">Example</xref>.</caption>
-          <img src="figures/figwork_pump1"/>
+          <!-- START figures/fig_work_pump1.tex -->
+          <image xml:id="img_pump1a" width="47%">
+            <description></description>
+            <latex-image>
+
+            \begin{tikzpicture}[x=.1cm,y=.125cm,&gt;=stealth]
+
+            \draw [-&gt;] (0,-2) -- (0,37) node [above] {\scriptsize $y$};
+
+            \draw	(-1,0) node [left] {\scriptsize 0} -- (1,0)
+                  (-1,30) node [left] {\scriptsize 30} -- (1,30)
+                  (-1,35) node [left] {\scriptsize 35} -- (1,35);
+
+            \draw (2,12) -- (4,12) (2,35) -- (4,35)
+                  (3,12) -- node [pos=.5,fill=white,rotate=90] {\scriptsize $35-y_i$} (3,35);
+
+            \begin{scope}[xscale=4,shift={(4.5,0)}]
+
+              \draw (0,30) -- node [pos=.5,above] {\scriptsize $10$} (2.9,29.22);
+              \draw [thick] (3,30) --(3,0) arc (0:-180:3) -- (-3,30);
+              \draw [thick](0,30) circle (3);
+              \draw [thick,dashed] (3,0) arc (0:180:3);
+
+              \foreach \y/\x in {12/{$y_i$},16/{$y_{i+1}$}}
+              {
+                \draw (3,\y) node [right] {\scriptsize\x} arc (0:-180:3);
+                \draw [dashed] (3,\y) arc (0:180:3);
+              }
+
+              \draw (5.1,14) node {\scriptsize $\left.\rule{0pt}{.3cm}\right\}\Delta y_i$};
+              \draw [left color=firstcolor,right color=firstcolor!15,thick] (0,16) circle (3);
+              \draw [left color=firstcolor,right color=firstcolor!15,thick] (-3,16) -- (-3,12)  arc (180:360:3) -- (3,16) arc (360:180:3);
+
+            \end{scope}
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
+          <!-- figures/fig_work_pump1.tex END -->
         </figure>
 
         <p>
@@ -431,22 +578,22 @@
           illustrated in <xref ref="fig_pump1a">Figure</xref>.
           The force required to move this water is equal to its weight which we calculate as volume <times /> density.
           The volume of water in this subinterval is <m>V_i = 10^2\pi \Delta y_i</m>;
-          its density is <m>62.4</m> lb/ft<m>^3</m>.
-          Thus the required force is <m>6240\pi\Delta y_i</m> lb.
+          its density is <quantity><mag>62.4</mag><unit base="pound"/><per base="foot" exp="3"/></quantity>.
+          Thus the required force is <m>6240\pi\Delta y_i</m> <quantity><unit base="pound"/></quantity>.
         </p>
 
         <p>
           We approximate the distance the force is applied by using any <m>y</m>-value contained in the <m>i</m>th subinterval;
           for simplicity, we arbitrarily use <m>y_i</m> for now
           (it will not matter later on).
-          The water will be pumped to a point 5 feet above the top of the tank, that is,
-          to the height of <m>y=35</m> ft.
-          Thus the distance the water at height <m>y_i</m> travels is <m>35-y_i</m> ft.
+          The water will be pumped to a point <m>5</m> feet above the top of the tank, that is,
+          to the height of <m>y=35</m> <quantity><unit base="foot"/></quantity>.
+          Thus the distance the water at height <m>y_i</m> travels is <m>35-y_i</m> <quantity><unit base="foot"/></quantity>.
         </p>
 
         <p>
           In all, the approximate work <m>W_i</m> peformed in moving the water in the
-          <m>i</m>th subinterval to a point 5 feet above the tank is
+          <m>i</m>th subinterval to a point <m>5</m> feet above the tank is
           <me>
             W_i \approx 6240\pi\Delta y_i(35-y_i)
           </me>.
@@ -482,13 +629,45 @@
 
     <figure xml:id="fig_pump1b">
       <caption>A simplified illustration for computing work.</caption>
-      <img src="figures/figwork_pump2"/>
+      <!-- START figures/fig_work_pump2.tex -->
+      <image xml:id="img_pump1b" width="47%">
+        <description></description>
+        <latex-image>
+
+        \begin{tikzpicture}[x=.1cm,y=.125cm,&gt;=stealth]
+
+        \draw [-&gt;] (0,-2) -- (0,37) node [above] {\scriptsize $y$};
+
+        \draw	(-1,0) node [left] {\scriptsize 0} -- (1,0)
+              (-1,30) node [left] {\scriptsize 30} -- (1,30)
+              (-1,35) node [left] {\scriptsize 35} -- (1,35)
+              (-1,14) node [left] {\scriptsize $y$} -- (1,14);
+
+        \draw (2,14) -- (4,14) (2,35)--(4,35)
+			        (3,14) -- node [pos=.5,fill=white,rotate=90] {\scriptsize $35-y$} (3,35);
+
+        \begin{scope}[xscale=4,shift={(4.5,0)}]
+
+          \draw (0,30) -- node [pos=.5,above] {\scriptsize $10$} (2.9,29.22);
+          \draw [thick] (3,30) --(3,0) arc (0:-180:3) -- (-3,30);
+          \draw [thick] (0,30) circle (3);
+          \draw [thick,dashed] (3,0) arc (0:180:3);
+          \draw [left color=firstcolor,right color=firstcolor!15,thick,draw=firstcolor] (0,14) circle (3);
+          \draw [-&gt;] (5.25,16) node [above] {\scriptsize $V(y)=100\pi dy$} -- (2,14);
+
+        \end{scope}
+
+        \end{tikzpicture}
+
+        </latex-image>
+      </image>
+      <!-- figures/fig_work_pump2.tex END -->
     </figure>
 
     <p>
       Instead, we just draw one differential element.
       This helps establish the height a small amount of water must travel along with the force required to move it
-      (where the force is volume <times /> density).
+      (where the force is volume <times/> density).
     </p>
 
     <p>
@@ -500,8 +679,8 @@
       <statement>
         <p>
           A conical water tank has its top at ground level and its base 10 feet below ground.
-          The radius of the cone at ground level is 2 ft.
-          It is filled with water weighing 62.4 lb/ft<m>^3</m> and is to be emptied by pumping the water to a spigot 3 feet above ground level.
+          The radius of the cone at ground level is <quantity><mag>2</mag><unit base="foot"/></quantity>.
+          It is filled with water weighing <quantity><mag>62.4</mag><unit base="pound"/><per base="foot" exp="3"/></quantity>  and is to be emptied by pumping the water to a spigot 3 feet above ground level.
           Find the total amount of work performed in emptying the tank.
         </p>
       </statement>
@@ -517,17 +696,48 @@
 
         <figure xml:id="fig_pump2">
           <caption>A graph of the conical water tank in <xref ref="ex_pump2">Example</xref>.</caption>
-          <img src="figures/figwork_pump3"/>
+          <!-- START figures/fig_work_pump3.tex -->
+          <image xml:id="img_pump2" width="47%">
+            <description></description>
+            <latex-image>
+
+            \begin{tikzpicture}[x=.1cm,y=.125cm,&gt;=stealth]
+
+            \draw [-&gt;] (0,-2) -- (0,37) node [above] {\scriptsize $y$};
+
+            \draw	(-1,0) node [left] {\scriptsize $-10$} -- (1,0)
+                  (-1,30) node [left] {\scriptsize 0} -- (1,30)
+                  (-1,35) node [left] {\scriptsize 3} -- (1,35)
+                  (-1,14) node [left] {\scriptsize $y$} -- (1,14);
+
+            \draw (2,14) -- (4,14)  (2,35)--(4,35)
+		            	(3,14) -- node [pos=.5,fill=white,rotate=90] {\scriptsize $3-y$} (3,35);
+
+            \begin{scope}[xscale=4,shift={(4.5,0)}]
+
+              \draw (0,30) -- node [pos=.5,above] {\scriptsize $2$} (2.9,29.22);
+              \draw [thick](3,30) -- (0,0) -- (-3,30);
+              \draw [thick] (0,30) circle (3);
+              \draw [left color=firstcolor,right color=firstcolor!15,thick,draw=firstcolor] (0,14) circle (1.4);
+              \draw [-&gt;] (3.4,6) node [below,shift={(10pt,0pt)}] {\scriptsize $V(y)=\pi(\frac y5+2)^2 dy$} -- (0,14);
+
+            \end{scope}
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
+          <!-- figures/fig_work_pump3.tex END -->
         </figure>
 
         <p>
           The figure also sketches a differential element,
-          a cross<ndash />sectional circle.
+          a cross<ndash/>sectional circle.
           The radius of this circle is variable, depending on <m>y</m>.
           When <m>y=-10</m>, the circle has radius 0;
           when <m>y=0</m>, the circle has radius 2.
           These two points, <m>(-10,0)</m> and <m>(0,2)</m>,
-          allow us to find the equation of the line that gives the radius of the cross<ndash />sectional circle,
+          allow us to find the equation of the line that gives the radius of the cross<ndash/>sectional circle,
           which is <m>r(y) = 1/5y+2</m>.
           Hence the volume of water at this height is <m>V(y)=\pi(1/5y+2)^2dy</m>,
           where <m>dy</m> represents a very small height of the differential element.
@@ -550,10 +760,10 @@
       <title>Computing work performed: pumping fluids</title>
       <statement>
         <p>
-          A rectangular swimming pool is 20 ft wide and has a 3 ft
-          <q>shallow end</q> and a 6 ft <q>deep end.</q>
-          It is to have its water pumped out to a point 2 ft above the current top of the water.
-          The cross<ndash />sectional dimensions of the water in the pool are given in <xref ref="fig_pump3">Figure</xref>;
+          A rectangular swimming pool is <quantity><mag>20</mag><unit base="foot"/></quantity> wide and has a <quantity><mag>3</mag><unit base="foot"/></quantity>
+          <q>shallow end</q> and a <quantity><mag>6</mag><unit base="foot"/></quantity> <q>deep end.</q>
+          It is to have its water pumped out to a point <quantity><mag>2</mag><unit base="foot"/></quantity> above the current top of the water.
+          The cross<ndash/>sectional dimensions of the water in the pool are given in <xref ref="fig_pump3">Figure</xref>;
           note that the dimensions are for the water, not the pool itself.
           Compute the amount of work performed in draining the pool.
         </p>
@@ -564,32 +774,82 @@
           meaning the top of the water is at <m>y=6</m>.
         </p>
 
-        <figure xml:id="fig_pump3">
-          <caption>The cross<ndash />section of a swimming pool filled with water in <xref ref="ex_pump3">Example</xref>.</caption>
-          <img src="figures/figpump4"/>
-        </figure>
+        <sidebyside widths="47% 47%" valign="bottom">
+          <figure xml:id="fig_pump3">
+            <caption>The cross<ndash/>section of a swimming pool filled with water in <xref ref="ex_pump3">Example</xref>.</caption>
+            <!-- START figures/fig_pump4.tex -->
+            <image xml:id="img_pump3">
+              <description></description>
+              <latex-image>
 
-        <figure xml:id="fig_pump3b">
-          <caption>Orienting the pool and showing differential elements for <xref ref="ex_pump3">Example</xref>.</caption>
-          <img src="figures/figpump4b"/>
-        </figure>
+              \begin{tikzpicture}[x=.18cm,y=.2cm,&gt;=stealth]
+
+              \draw [fill=firstcolor!15,draw=firstcolor!15] (0,0) -- node [below,pos=.5] {\scriptsize 10 ft.} (10,0) -- (15,3) -- node [below,pos=.5] {\scriptsize 10 ft.} (25,3)-- node [right,pos=.5] {\scriptsize 3 ft.} (25,6)--(0,6) -- node [left,pos=.5] {\scriptsize 6 ft.} (0,0);
+
+              \draw [thick] (0,0) -- (10,0) -- (15,3) -- (25,3) -- (25,7) -- node [above,pos=.5] {\scriptsize 25 ft} (0,7) -- cycle;
+
+              \end{tikzpicture}
+
+              </latex-image>
+            </image>
+            <!-- figures/fig_pump4.tex END -->
+          </figure>
+
+          <figure xml:id="fig_pump_3a">
+            <caption>Orienting the pool and showing differential elements for <xref ref="ex_pump3">Example</xref>.</caption>
+            <!-- START figures/fig_pump4b.tex -->
+            <image xml:id="img_pump3a">
+              <description></description>
+              <latex-image>
+
+              \begin{tikzpicture}[x=.18cm,y=.2cm,&gt;=stealth]
+
+              \draw[&gt;=stealth,-&gt;] (-2,-1) -- ( -2,10) node [above] {\scriptsize $y$};
+
+              \foreach \y/\x in {0/0,1.5/$y$,3/3,6/6,8/8}
+              {
+		            \draw (-2.5,\y) node [left] {\scriptsize $\x$} -- (-1.5,\y);
+              }
+
+              \draw [thick] (0,0) -- (10,0) -- (15,3) -- (25,3) -- (25,6) -- (0,6) -- (0,0);
+
+              \draw [thick,firstcolor] (0,5) -- (25,5)
+													              (0,1.5) -- (12.5,1.5);
+
+              \draw [fill=black] (10,0) circle (1.5pt) node [shift={(15pt,-2pt)}] {\scriptsize $(10,0)$}
+									               (15,3) circle (1.5pt) node [shift={(15pt,-6pt)}] {\scriptsize $(15,3)$};
+
+              \draw[&gt;=stealth,-&gt;] (-2,-2) -- (20,-2) node [right] {\scriptsize $x$};
+
+              \foreach \y in {0,10,15}
+              {
+		            \draw (\y,-2.5) node [below] {\scriptsize $\y$} -- (\y,-1.5);
+              }
+
+              \end{tikzpicture}
+
+              </latex-image>
+            </image>
+            <!-- figures/fig_pump4b.tex END -->
+          </figure>
+        </sidebyside>
 
         <p>
-          <xref ref="fig_pump3b">Figure</xref>
+          <xref ref="fig_pump_3a">Figure</xref>
           shows the pool oriented with this <m>y</m>-axis,
           along with 2 differential elements as the pool must be split into two different regions.
         </p>
 
         <p>
           The top region lies in the <m>y</m>-interval of <m>[3,6]</m>,
-          where the length of the differential element is <m>25</m> ft as shown.
-          As the pool is 20 ft wide,
+          where the length of the differential element is <quantity><mag>25</mag><unit base="foot"/></quantity> as shown.
+          As the pool is <quantity><mag>20</mag><unit base="foot"/></quantity> wide,
           this differential element represents a thin slice of water with volume <m>V(y) = 20\cdot25\cdot dy</m>.
           The water is to be pumped to a height of <m>y=8</m>,
           so the height function is <m>h(y) = 8-y</m>.
           The work done in pumping this top region of water is
           <me>
-            W_t = 62.4\int_3^6 500(8-y)\, dy = 327,600 \text{ ft--lb } 
+            W_t = 62.4\int_3^6 500(8-y)\, dy = 327,600 \text{ ft--lb }
           </me>.
         </p>
 
@@ -609,19 +869,19 @@
         </p>
 
         <p>
-          Again, as the pool is 20 ft wide,
+          Again, as the pool is <quantity><mag>20</mag><unit base="foot"/></quantity> wide,
           this differential element represents a thin slice of water with volume <m>V(y) = 20\cdot(5/3y+10)\cdot dy</m>;
           the height function is the same as before at <m>h(y)=8-y</m>.
           The work performed in emptying this part of the pool is
           <me>
-            W_b = 62.4\int_0^3 20(5/3y+10)(8-y)\, dy = 299,520\ \text{ ft--lb } 
+            W_b = 62.4\int_0^3 20(5/3y+10)(8-y)\, dy = 299,520\ \text{ ft--lb }
           </me>.
         </p>
 
         <p>
           The total work in empyting the pool is
           <me>
-            W = W_b+W_t = 327,600+299,520 = 627,120\ \text{ ft--lb } 
+            W = W_b+W_t = 327,600+299,520 = 627,120\ \text{ ft--lb }
           </me>.
         </p>
 
@@ -639,700 +899,771 @@
     </p>
   </subsection>
 
-  <subsection>
-    <title>Terms and Concepts</title>
-    <exercise>
-      <statement>
+  <exercises>
+    <exercisegroup>
+
+      <introduction>
         <p>
-          What are the typical units of work?
+          Terms and Concepts
         </p>
-      </statement>
-      <answer>
-        <p>
-          In SI units, it is one joule,
-          i.e., one Newton<ndash />meter,
-          or kg<m>\cdot</m>m/s<m>^2\cdot</m>m.
-          In Imperial Units, it is ft<ndash />lb.
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          If a man has a mass of 80 kg on Earth,
-          will his mass on the moon be bigger, smaller, or the same?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          The same.
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          If a woman weighs 130 lb on Earth,
-          will her weight on the moon be bigger, smaller, or the same?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Smaller.
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          Fill in the blanks:
-        </p>
-
-        <p>
-          Some integrals in this section are set up by multiplying a variable <fillin /> by a constant distance;
-          others are set up by multiplying a constant force by a variable <fillin />.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          force; distance
-        </p>
-      </answer>
-    </exercise>
-  </subsection>
-
-  <subsection>
-    <title>Problems</title>
-    <exercise>
-      <statement>
-        <p>
-          A 100 ft rope, weighing 0.1 lb/ft,
-          hangs over the edge of a tall building.
-
-          <ol>
-            <li>
-              <p>
-                How much work is done pulling the entire rope to the top of the building?
-              </p>
-            </li>
-
-            <li>
-              <p>
-                How much rope is pulled in when half of the total work is done?
-              </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              500 ft<ndash />lb
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>100-50\sqrt{2} \approx 29.29</m> ft
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A 50 m rope,
-          with a mass density of 0.2 kg/m, hangs over the edge of a tall building.
-
-          <ol>
-            <li>
-              <p>
-                How much work is done pulling the entire rope to the top of the building?
-              </p>
-            </li>
-
-            <li>
-              <p>
-                How much work is done pulling in the first 20 m?
-              </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              2450 J
-            </p>
-          </li>
-
-          <li>
-            <p>
-              1568 J
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A rope of length <m>\ell</m> ft hangs over the edge of tall cliff.
-          (Assume the cliff is taller than the length of the rope.)
-          The rope has a weight density of <m>d</m> lb/ft.
-
-          <ol>
-            <li>
-              <p>
-                How much work is done pulling the entire rope to the top of the cliff?
-              </p>
-            </li>
-
-            <li>
-              <p>
-                What percentage of the total work is done pulling in the first half of the rope?
-              </p>
-            </li>
-
-            <li>
-              <p>
-                How much rope is pulled in when half of the total work is done?
-              </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              <m>\frac12\cdot d\cdot l^2</m> ft<ndash />lb
-            </p>
-          </li>
-
-          <li>
-            <p>
-              75 <percent />
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>\ell(1-\sqrt{2}/2) \approx 0.2929\ell</m>
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A 20 m rope with mass density of 0.5 kg/m hangs over the edge of a 10 m building.
-          How much work is done pulling the rope to the top?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          735 J
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A crane lifts a 2,000 lb load vertically 30 ft with a 1'' cable weighing 1.68 lb/ft.
-
-          <ol>
-            <li>
-              <p>
-                How much work is done lifting the cable alone?
-              </p>
-            </li>
-
-            <li>
-              <p>
-                How much work is done lifting the load alone?
-              </p>
-            </li>
-
-            <li>
-              <p>
-                Could one conclude that the work done lifting the cable is negligible compared to the work done lifting the load?
-              </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              756 ft<ndash />lb
-            </p>
-          </li>
-
-          <li>
-            <p>
-              60,000 ft<ndash />lb
-            </p>
-          </li>
-
-          <li>
-            <p>
-              Yes, for the cable accounts for about 1<percent /> of the total work.
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A 100 lb bag of sand is lifted uniformly 120 ft in one minute.
-          Sand leaks from the bag at a rate of 1/4 lb/s.
-          What is the total work done in lifting the bag?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          11,100 ft<ndash />lb
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A box weighing 2 lb lifts 10 lb of sand vertically 50 ft.
-          A crack in the box allows the sand to leak out such that 9 lb of sand is in the box at the end of the trip.
-          Assume the sand leaked out at a uniform rate.
-          What is the total work done in lifting the box and sand?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          575 ft<ndash />lb
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A force of 1000 lb compresses a spring 3 in.
-          How much work is performed in compressing the spring?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          125 ft<ndash />lb
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A force of 2 N stretches a spring 5 cm.
-          How much work is performed in stretching the spring?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          0.05 J
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A force of 50 lb compresses a spring from a natural length of 18 in to 12 in.
-          How much work is performed in compressing the spring?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          12.5 ft<ndash />lb
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A force of 20 lb stretches a spring from a natural length of 6 in to 8 in.
-          How much work is performed in stretching the spring?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          5/3 ft<ndash />lb
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A force of 7 N stretches a spring from a natural length of 11 cm to 21 cm.
-          How much work is performed in stretching the spring from a length of 16 cm to 21 cm?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          0.2625 = 21/80 J
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A force of <m>f</m> N stretches a spring <m>d</m> m from its natural length.
-          How much work is performed in stretching the spring?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>f\cdot d/2</m> J
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A 20 lb weight is attached to a spring.
-          The weight rests on the spring,
-          compressing the spring from a natural length of 1 ft to 6 in.
-        </p>
-
-        <p>
-          How much work is done in lifting the box 1.5 ft (i.e, the spring will be stretched 1 ft beyond its natural length)?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          45 ft<ndash />lb
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A 20 lb weight is attached to a spring.
-          The weight rests on the spring,
-          compressing the spring from a natural length of 1 ft to 6 in.
-        </p>
-
-        <p>
-          How much work is done in lifting the box 6 in (i.e, bringing the spring back to its natural length)?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          5 ft<ndash />lb
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A 5 m tall cylindrical tank with radius of 2 m is filled with 3 m of gasoline,
-          with a mass density of 737.22 kg/m<m>^3</m>.
-          Compute the total work performed in pumping all the gasoline to the top of the tank.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>953,284</m> J
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A 6 ft cylindrical tank with a radius of 3 ft is filled with water,
-          which has a weight density of 62.4 lb/ft<m>^3</m>.
-          The water is to be pumped to a point 2 ft above the top of the tank.
-
-          <ol>
-            <li>
-              <p>
-                How much work is performed in pumping all the water from the tank?
-              </p>
-            </li>
-
-            <li>
-              <p>
-                How much work is performed in pumping 3 ft of water from the tank?
-              </p>
-            </li>
-
-            <li>
-              <p>
-                At what point is 1/2 of the total work done?
-              </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              52,929.6 ft<ndash />lb
-            </p>
-          </li>
-
-          <li>
-            <p>
-              18,525.3 ft<ndash />lb
-            </p>
-          </li>
-
-          <li>
-            <p>
-              When 3.83 ft of water have been pumped from the tank,
-              leaving about 2.17 ft in the tank.
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A gasoline tanker is filled with gasoline with a weight density of 45.93 lb/ft<m>^3</m>.
-          The dispensing valve at the base is jammed shut,
-          forcing the operator to empty the tank via pumping the gas to a point 1 ft above the top of the tank.
-          Assume the tank is a perfect cylinder, 20 ft long with a diameter of 7.5 ft.
-          How much work is performed in pumping all the gasoline from the tank?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          192,767 ft<ndash />lb.
-          Note that the tank is oriented horizontally.
-          Let the origin be the center of one of the circular ends of the tank.
-          Since the radius is 3.75 ft, the fluid is being pumped to <m>y=4.75</m>;
-          thus the distance the gas travels is <m>h(y)=4.75-y</m>.
-          A differential element of water is a rectangle,
-          with length 20 and width <m>2\sqrt{3.75^2-y^2}</m>.
-          Thus the force required to move that slab of gas is <m>F(y) = 40\cdot45.93\cdot\sqrt{3.75^2-y^2}dy</m>.
-          Total work is <m>\int_{-3.75}^{3.75} 40\cdot45.93\cdot(4.75-y)\sqrt{3.75^2-y^2}\, dy</m>.
-          This can be evaluated without actual integration;
-          split the integral into <m>\int_{-3.75}^{3.75} 40\cdot45.93\cdot(4.75)\sqrt{3.75^2-y^2}\, dy + \int_{-3.75}^{3.75} 40\cdot45.93\cdot(-y)\sqrt{3.75^2-y^2}\, dy</m>.
-          The first integral can be evaluated as measuring half the area of a circle;
-          the latter integral can be shown to be 0 without much difficulty.
-          (Use substitution and realize the bounds are both 0.)
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A fuel oil storage tank is 10 ft deep with trapezoidal sides, 5 ft at the top and 2 ft at the bottom,
-          and is 15 ft wide
-          (see diagram below).
-          Given that fuel oil weighs 55.46 lb/ft<m>^3</m>,
-          find the work performed in pumping all the oil from the tank to a point 3 ft above the top of the tank.
-        </p>
-
-        <image>
-
-<latex-image>
-<![CDATA[\begin{tikzpicture}[x={(1,0)},z={(0,1)},y={(.5,.87)},xscale=.4,yscale=.3]
-\draw [thick] (0,0,0) -- node [above,rotate=90,pos=.5] { 10} (0,0,-10) --  node [below, pos=.5] { 2} (2,0,-10) -- node [right, pos=.5] { 15} (2,5,-10) -- (5,5,0)
-(5,5,0) -- (5,0,0)
-(5,0,0) -- (0,0,0) -- (0,5,0) --  node [above,pos=.5] { 5}(5,5,0)
-(5,0,0) -- (2,0,-10);            
-
-\draw [thick,dashed] (0,0,-10) -- (0,5,-10) -- (2,5,-10)
-(0,5,-10) -- (0,5,0);\end{tikzpicture}]]>
-</latex-image>
-        </image>
-
-      </statement>
-      <answer>
-        <p>
-          212,135 ft<ndash />lb
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A conical water tank is 5 m deep with a top radius of 3 m.
-          (This is similar to <xref ref="ex_pump2">Example</xref>.)
-          The tank is filled with pure water,
-          with a mass density of 1000 kg/m<m>^3</m>.
-
-          <ol>
-            <li>
-              <p>
-                Find the work performed in pumping all the water to the top of the tank.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                Find the work performed in pumping the top 2.5 m of water to the top of the tank.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                Find the work performed in pumping the top half of the water,
-                by volume, to the top of the tank.
-              </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              approx. 577,000 J
-            </p>
-          </li>
-
-          <li>
-            <p>
-              approx. 399,000 J
-            </p>
-          </li>
-
-          <li>
-            <p>
-              approx 110,000 J (By volume,
-              half of the water is between the base of the cone and a height of 3.9685 m.
-              If one rounds this to 4 m, the work is approx 104,000 J.)
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A water tank has the shape of a truncated cone,
-          with dimensions given below,
-          and is filled with water with a weight density of 62.4 lb/ft<m>^3</m>.
-          Find the work performed in pumping all water to a point 1 ft above the top of the tank.
-        </p>
-
-        <image>
-
-<latex-image>
-<![CDATA[\begin{tikzpicture}[xscale=.7,yscale=.5]\draw [thick] (0,0) circle (1)
-(-1,.1) -- (-1.5,-1.9)
-(1,.1) -- (1.5,-1.9);
-\draw (0,0)-- node [above,pos=.5] { 2 ft} (1,0)
-(0,-2) -- node [above,pos=.5] { 5 ft} (1.5,-2)
-(1.7,0) -- (2.3,0)
-(1.7,-2) -- (2.3,-2)
-(2,0) -- node [pos=.5,right] { 10 ft} (2,-2);
-\draw [thick] (-1.5,-2) arc (180:360:1.5);
-\draw [thick,dashed] (-1.5,-2) arc (180:0:1.5);\end{tikzpicture}]]>
-</latex-image>
-        </image>
-
-      </statement>
-      <answer>
-        <p>
-          187,214 ft<ndash />lb
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A water tank has the shape of an inverted pyramid,
-          with dimensions given below,
-          and is filled with water with a mass density of 1000 kg/m<m>^3</m>.
-          Find the work performed in pumping all water to a point 5 m above the top of the tank.
-        </p>
-
-        <image>
-
-<latex-image>
-<![CDATA[\begin{tikzpicture}[xscale=.7,yscale=.7]
-\draw [thick] (0,0) -- node [pos=.5,left]{ 2 m} (1,1) --node [above,pos=.5] { 2 m} (3,1) -- (2,0)--cycle
-(0,0) -- (1.5,-2)
-(3,1) -- (1.5,-2)
-(2,0) -- (1.5,-2);
-\draw [thick,dashed] (1,1) -- (1.5,-2);
-\draw (3,.5) -- (3.6,.5)
-(3,-2) -- (3.6,-2)
-(3.3,.5) -- node [pos=.5,right] { 7 m} (3.3,-2);\end{tikzpicture}]]>
-</latex-image>
-        </image>
-
-      </statement>
-      <answer>
-        <p>
-          617,400 J
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A water tank has the shape of an truncated,
-          inverted pyramid, with dimensions given below,
-          and is filled with water with a mass density of 1000 kg/m<m>^3</m>.
-          Find the work performed in pumping all water to a point 1 m above the top of the tank.
-        </p>
-
-        <image>
-
-<latex-image>
-<![CDATA[\begin{tikzpicture}[xscale=.7,yscale=.7]
-\draw [thick] (0,0) node (A) -- node [pos=.5,left]{ 5 m} (1,1)node (B)  --node [above,pos=.5] { 5 m} (3,1) node (C)  -- (2,0) node (D) --cycle;
-\begin{scope}[scale=.75,shift={(.5,-3)}]
-\draw [thick] (0,0) node (AA)  -- (1,1) node (BB)  -- (3,1) node (CC)  -- node [right,pos=.5] { 2 m} (2,0) node (DD) -- node [pos=.5,below]{ 2 m} (0,0);
-\end{scope}
-\draw [dashed,thick] (BB.center) -- (B.center);
-\draw [thick] (AA.center) -- (A.center)
-(DD.center) -- (D.center)
-(CC.center) -- (C.center);
-\draw (3.2,.5) -- (3.8,.5)
-(3.2,-2) -- (3.8,-2)
-(3.5,.5) -- node [pos=.5,right] { 9 m} (3.5,-2);\end{tikzpicture}]]>
-</latex-image>
-        </image>
-
-      </statement>
-      <answer>
-        <p>
-          4,917,150 J
-        </p>
-      </answer>
-    </exercise>
-  </subsection>
-
+      </introduction>
+      <exercise>
+        <statement>
+          <p>
+            What are the typical units of work?
+          </p>
+        </statement>
+        <answer>
+          <p>
+            In SI units, it is one joule,
+            i.e., one newton<ndash/>meter,
+            or <quantity>
+                <unit prefix="kilo" base="gram"/><unit base="meter"/><per base="second" exp="2"/>
+               </quantity><quantity><unit base="meter"/></quantity>
+            In Imperial Units, it is ft<ndash/>lb.
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            If a man has a mass of
+            <quantity><mag>80</mag><unit prefix="kilo" base="gram"/></quantity>
+            on Earth,
+            will his mass on the moon be bigger, smaller, or the same?
+          </p>
+        </statement>
+        <answer>
+          <p>
+            The same.
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            If a woman weighs <quantity><mag>130</mag><unit base="pound"/></quantity> on Earth,
+            will her weight on the moon be bigger, smaller, or the same?
+          </p>
+        </statement>
+        <answer>
+          <p>
+            Smaller.
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            Fill in the blanks:
+          </p>
+
+          <p>
+            Some integrals in this section are set up by multiplying a variable <fillin /> by a constant distance;
+            others are set up by multiplying a constant force by a variable <fillin />.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            force; distance
+          </p>
+        </answer>
+      </exercise>
+    </exercisegroup>
+    <exercisegroup>
+      <title>Problems</title>
+      <exercise>
+        <statement>
+          <p>
+            A <quantity><mag>100</mag><unit base="foot"/></quantity> rope, weighing
+            <quantity><mag>0.1</mag><unit base="pound"/><per base="foot"/></quantity>,
+            hangs over the edge of a tall building.
+          </p>
+
+          <p>
+            <ol>
+              <li>
+                <p>
+                  How much work is done pulling the entire rope to the top of the building?
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  How much rope is pulled in when half of the total work is done?
+                </p>
+              </li>
+            </ol>
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <ol>
+              <li>
+                <p>
+                  500 ft<ndash/>lb
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  <m>100-50\sqrt{2} \approx 29.29</m> ft
+                </p>
+              </li>
+            </ol>
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A <quantity><mag>50</mag><unit prefix="centi" base="meter"/></quantity> rope,
+            with a mass density of <quantity><mag>0.2</mag><unit prefix="kilo" base="gram"/><per base="meter"/></quantity>,
+            hangs over the edge of a tall building.
+          </p>
+
+          <p>
+            <ol>
+              <li>
+                <p>
+                  How much work is done pulling the entire rope to the top of the building?
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  How much work is done pulling in the first 20 m?
+                </p>
+              </li>
+            </ol>
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <ol>
+              <li>
+                <p>
+                  2450 J
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  1568 J
+                </p>
+              </li>
+            </ol>
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A rope of length <m>\ell</m> <quantity><unit base="foot"/></quantity> hangs over the edge of tall cliff.
+            (Assume the cliff is taller than the length of the rope.)
+            The rope has a weight density of <m>d</m> <quantity><unit base="pound"/><per base="foot"/></quantity>.
+          </p>
+
+          <p>
+            <ol>
+              <li>
+                <p>
+                  How much work is done pulling the entire rope to the top of the cliff?
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  What percentage of the total work is done pulling in the first half of the rope?
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  How much rope is pulled in when half of the total work is done?
+                </p>
+              </li>
+            </ol>
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <ol>
+              <li>
+                <p>
+                  <m>\frac12\cdot d\cdot l^2</m> ft<ndash/>lb
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  75 %
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  <m>\ell(1-\sqrt{2}/2) \approx 0.2929\ell</m>
+                </p>
+              </li>
+            </ol>
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A <quantity><mag>20</mag><unit prefix="centi" base="meter"/></quantity> rope with mass density of <quantity><mag>0.5</mag><unit prefix="kilo" base="gram"/><per base="meter"/></quantity>  hangs over the edge of a <quantity><mag>10</mag><unit prefix="centi" base="meter"/></quantity> building.
+            How much work is done pulling the rope to the top?
+          </p>
+        </statement>
+        <answer>
+          <p>
+            735 J
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A crane lifts a <quantity><mag>2000</mag><unit base="pound"/></quantity>  load vertically <quantity><mag>30</mag><unit base="foot"/></quantity> with a <quantity><mag>1</mag><unit base="inch"/></quantity>  cable weighing <quantity><mag>1.68</mag><unit base="pound"/><per base="foot"/></quantity>.
+          </p>
+
+          <p>
+            <ol>
+              <li>
+                <p>
+                  How much work is done lifting the cable alone?
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  How much work is done lifting the load alone?
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  Could one conclude that the work done lifting the cable is negligible compared to the work done lifting the load?
+                </p>
+              </li>
+            </ol>
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <ol>
+              <li>
+                <p>
+                  756 ft<ndash/>lb
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  60,000 ft<ndash/>lb
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  Yes, for the cable accounts for about 1% of the total work.
+                </p>
+              </li>
+            </ol>
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A<quantity><mag>100</mag><unit base="pound"/></quantity> bag of sand is lifted uniformly <quantity><mag>120</mag><unit base="foot"/></quantity> in one minute.
+            Sand leaks from the bag at a rate of <quantity><mag>1/4</mag><unit base="pound"/><per base="second"/></quantity>.
+            What is the total work done in lifting the bag?
+          </p>
+        </statement>
+        <answer>
+          <p>
+            11,100 ft<ndash/>lb
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A box weighing <quantity><mag>2</mag><unit base="pound"/></quantity> lifts <quantity><mag>10</mag><unit base="pound"/></quantity> of sand vertically <quantity><mag>50</mag><unit base="foot"/></quantity>.
+            A crack in the box allows the sand to leak out such that <quantity><mag>9</mag><unit base="pound"/></quantity> of sand is in the box at the end of the trip.
+            Assume the sand leaked out at a uniform rate.
+            What is the total work done in lifting the box and sand?
+          </p>
+        </statement>
+        <answer>
+          <p>
+            575 ft<ndash/>lb
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A force of <quantity><mag>1000</mag><unit base="pound"/></quantity>  compresses a spring <quantity><mag>3</mag><unit base="inch"/></quantity>.
+            How much work is performed in compressing the spring?
+          </p>
+        </statement>
+        <answer>
+          <p>
+            125 ft<ndash/>lb
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A force of <quantity><mag>2</mag><unit base="newton"/></quantity> stretches a spring <quantity><mag>5</mag><unit prefix="centi" base="meter"/></quantity>.
+            How much work is performed in stretching the spring?
+          </p>
+        </statement>
+        <answer>
+          <p>
+            0.05 J
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A force of <quantity><mag>50</mag><unit base="pound"/></quantity> compresses a spring from a natural length of <quantity><mag>18</mag><unit base="inch"/></quantity> to <quantity><mag>12</mag><unit base="inch"/></quantity>.
+            How much work is performed in compressing the spring?
+          </p>
+        </statement>
+        <answer>
+          <p>
+            12.5 ft<ndash/>lb
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A force of <quantity><mag>20</mag><unit base="pound"/></quantity> stretches a spring from a natural length of <quantity><mag>6</mag><unit base="inch"/></quantity> to <quantity><mag>8</mag><unit base="inch"/></quantity>.
+            How much work is performed in stretching the spring?
+          </p>
+        </statement>
+        <answer>
+          <p>
+            5/3 ft<ndash/>lb
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A force of <quantity><mag>7</mag><unit base="newton"/></quantity> stretches a spring from a natural length of <quantity><mag>11</mag><unit prefix="centi" base="meter"/></quantity> to <quantity><mag>21</mag><unit prefix="centi" base="meter"/></quantity>.
+            How much work is performed in stretching the spring from a length of <quantity><mag>16</mag><unit prefix="centi" base="meter"/></quantity> to <quantity><mag>21</mag><unit prefix="centi" base="meter"/></quantity>?
+          </p>
+        </statement>
+        <answer>
+          <p>
+            0.2625 = 21/80 J
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A force of <m>f</m> <quantity><unit base="newton"/></quantity>
+            stretches a spring <m>d</m> <quantity><unit base="meter"/></quantity> from its natural length.
+            How much work is performed in stretching the spring?
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>f\cdot d/2</m> J
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A <quantity><mag>20</mag><unit base="pound"/></quantity> weight is attached to a spring.
+            The weight rests on the spring,
+            compressing the spring from a natural length of <quantity><mag>1</mag><unit base="foot"/></quantity> to <quantity><mag>6</mag><unit base="inch"/></quantity>.
+          </p>
+
+          <p>
+            How much work is done in lifting the box <quantity><mag>1.5</mag><unit base="foot"/></quantity> (i.e, the spring will be stretched <quantity><mag>1</mag><unit base="foot"/></quantity> beyond its natural length)?
+          </p>
+        </statement>
+        <answer>
+          <p>
+            45 ft<ndash/>lb
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A <quantity><mag>20</mag><unit base="pound"/></quantity> weight is attached to a spring.
+            The weight rests on the spring,
+            compressing the spring from a natural length of <quantity><mag>1</mag><unit base="foot"/></quantity> to <quantity><mag>6</mag><unit base="inch"/></quantity>.
+          </p>
+
+          <p>
+            How much work is done in lifting the box <quantity><mag>6</mag><unit base="inch"/></quantity> (i.e, bringing the spring back to its natural length)?
+          </p>
+        </statement>
+        <answer>
+          <p>
+            5 ft<ndash/>lb
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A <quantity><mag>5</mag><unit prefix="centi" base="meter"/></quantity> tall cylindrical tank with radius of <quantity><mag>2</mag><unit prefix="centi" base="meter"/></quantity> is filled with <quantity><mag>3</mag><unit prefix="centi" base="meter"/></quantity> of gasoline,
+            with a mass density of <quantity><mag>737.22</mag><unit prefix="kilo" base="gram"/><per base="meter" exp="3"/></quantity>.
+            Compute the total work performed in pumping all the gasoline to the top of the tank.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>953,284</m> J
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A <quantity><mag>6</mag><unit base="foot"/></quantity> cylindrical tank with a radius of <quantity><mag>3</mag><unit base="foot"/></quantity> is filled with water,
+            which has a weight density of <quantity><mag>62.4</mag><unit base="pound"/><per base="foot" exp="3"/></quantity>.
+            The water is to be pumped to a point <quantity><mag>2</mag><unit base="foot"/></quantity> above the top of the tank.
+          </p>
+
+          <p>
+            <ol>
+              <li>
+                <p>
+                  How much work is performed in pumping all the water from the tank?
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  How much work is performed in pumping <quantity><mag>3</mag><unit base="foot"/></quantity> of water from the tank?
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  At what point is 1/2 of the total work done?
+                </p>
+              </li>
+            </ol>
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <ol>
+              <li>
+                <p>
+                  52,929.6 ft<ndash/>lb
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  18,525.3 ft<ndash/>lb
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  When <quantity><mag>3.83</mag><unit base="foot"/></quantity> of water have been pumped from the tank,
+                  leaving about <quantity><mag>2.17</mag><unit base="foot"/></quantity> in the tank.
+                </p>
+              </li>
+            </ol>
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A gasoline tanker is filled with gasoline with a weight density of <quantity><mag>45.93</mag><unit base="pound"/><per base="foot" exp="3"/></quantity>.
+            The dispensing valve at the base is jammed shut,
+            forcing the operator to empty the tank via pumping the gas to a point <quantity><mag>1</mag><unit base="foot"/></quantity> above the top of the tank.
+            Assume the tank is a perfect cylinder, <quantity><mag>20</mag><unit base="foot"/></quantity> long with a diameter of <quantity><mag>7.5</mag><unit base="foot"/></quantity>.
+            How much work is performed in pumping all the gasoline from the tank?
+          </p>
+        </statement>
+        <answer>
+          <p>
+            192,767 ft<ndash/>lb.
+            Note that the tank is oriented horizontally.
+            Let the origin be the center of one of the circular ends of the tank.
+            Since the radius is <quantity><mag>3.75</mag><unit base="foot"/></quantity>, the fluid is being pumped to <m>y=4.75</m>;
+            thus the distance the gas travels is <m>h(y)=4.75-y</m>.
+            A differential element of water is a rectangle,
+            with length 20 and width <m>2\sqrt{3.75^2-y^2}</m>.
+            Thus the force required to move that slab of gas is <m>F(y) = 40\cdot45.93\cdot\sqrt{3.75^2-y^2}dy</m>.
+            Total work is <m>\int_{-3.75}^{3.75} 40\cdot45.93\cdot(4.75-y)\sqrt{3.75^2-y^2}\, dy</m>.
+            This can be evaluated without actual integration;
+            split the integral into <m>\int_{-3.75}^{3.75} 40\cdot45.93\cdot(4.75)\sqrt{3.75^2-y^2}\, dy + \int_{-3.75}^{3.75} 40\cdot45.93\cdot(-y)\sqrt{3.75^2-y^2}\, dy</m>.
+            The first integral can be evaluated as measuring half the area of a circle;
+            the latter integral can be shown to be 0 without much difficulty.
+            (Use substitution and realize the bounds are both 0.)
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A fuel oil storage tank is <quantity><mag>10</mag><unit base="foot"/></quantity> deep with trapezoidal sides, <quantity><mag>5</mag><unit base="foot"/></quantity> at the top and <quantity><mag>2</mag><unit base="foot"/></quantity> at the bottom,
+            and is <quantity><mag>15</mag><unit base="foot"/></quantity> wide
+            (see diagram below).
+            Given that fuel oil weighs <quantity><mag>55.46</mag><unit base="pound"/><per base="foot" exp="3"/></quantity>,
+            find the work performed in pumping all the oil from the tank to a point <quantity><mag>3</mag><unit base="foot"/></quantity> above the top of the tank.
+          </p>
+
+          <sidebyside width="47%">
+            <image xml:id="img_pump4b">
+              <description></description>
+              <latex-image>
+
+              \begin{tikzpicture}[x={(1,0)},z={(0,1)},y={(.5,.87)},xscale=.4,yscale=.3]
+
+              \draw [thick] (0,0,0) -- node [above,rotate=90,pos=.5] {10} (0,0,-10) -- node [below, pos=.5] {2} (2,0,-10) -- node [right, pos=.5] {15} (2,5,-10) -- (5,5,0)
+                            (5,5,0) -- (5,0,0)
+                            (5,0,0) -- (0,0,0) -- (0,5,0) -- node [above,pos=.5] { 5}(5,5,0)
+                            (5,0,0) -- (2,0,-10);
+
+              \draw [thick,dashed] (0,0,-10) -- (0,5,-10) -- (2,5,-10)
+                                  (0,5,-10) -- (0,5,0);
+
+              \end{tikzpicture}
+
+              </latex-image>
+            </image>
+          </sidebyside>
+
+        </statement>
+        <answer>
+          <p>
+            212,135 ft<ndash/>lb
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A conical water tank is <quantity><mag>5</mag><unit prefix="centi" base="meter"/></quantity> deep with a top radius of <quantity><mag>3</mag><unit prefix="centi" base="meter"/></quantity>.
+            (This is similar to <xref ref="ex_pump2">Example</xref>.)
+            The tank is filled with pure water,
+            with a mass density of <quantity><mag>1000</mag><unit prefix="kilo" base="gram"/><per base="meter" exp="3"/></quantity>.
+          </p>
+
+          <p>
+            <ol>
+              <li>
+                <p>
+                  Find the work performed in pumping all the water to the top of the tank.
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  Find the work performed in pumping the top <quantity><mag>2.5</mag><unit prefix="centi" base="meter"/></quantity> of water to the top of the tank.
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  Find the work performed in pumping the top half of the water,
+                  by volume, to the top of the tank.
+                </p>
+              </li>
+            </ol>
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <ol>
+              <li>
+                <p>
+                  approx. 577,000 J
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  approx. 399,000 J
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  approx 110,000 J (By volume,
+                  half of the water is between the base of the cone and a height of 3.9685 m.
+                  If one rounds this to <quantity><mag>4</mag><unit prefix="centi" base="meter"/></quantity>, the work is approx 104,000 J.)
+                </p>
+              </li>
+            </ol>
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A water tank has the shape of a truncated cone,
+            with dimensions given below,
+            and is filled with water with a weight density of <quantity><mag>62.4</mag><unit base="pound"/><per base="foot" exp="3"/></quantity>.
+            Find the work performed in pumping all water to a point <quantity><mag>1</mag><unit base="foot"/></quantity> above the top of the tank.
+          </p>
+
+          <sidebyside width="47%">
+            <image xml:id="img_pump4bX">
+              <description></description>
+              <latex-image>
+
+              \begin{tikzpicture}[xscale=.7,yscale=.5]
+
+              \draw [thick] (0,0) circle (1)
+                            (-1,.1) -- (-1.5,-1.9)
+                            (1,.1) -- (1.5,-1.9);
+
+              \draw (0,0)-- node [above,pos=.5] {2 ft} (1,0)
+                    (0,-2) -- node [above,pos=.5] {5 ft} (1.5,-2)
+                    (1.7,0) -- (2.3,0)
+                    (1.7,-2) -- (2.3,-2)
+                    (2,0) -- node [pos=.5,right] {10 ft} (2,-2);
+
+              \draw [thick] (-1.5,-2) arc (180:360:1.5);
+              \draw [thick,dashed] (-1.5,-2) arc (180:0:1.5);
+
+              \end{tikzpicture}
+
+              </latex-image>
+            </image>
+          </sidebyside>
+
+        </statement>
+        <answer>
+          <p>
+            187,214 ft<ndash/>lb
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A water tank has the shape of an inverted pyramid,
+            with dimensions given below,
+            and is filled with water with a mass density of <quantity><mag>1000</mag><unit prefix="kilo" base="gram"/><per base="meter" exp="3"/></quantity>.
+            Find the work performed in pumping all water to a point <quantity><mag>5</mag><unit prefix="centi" base="meter"/></quantity> above the top of the tank.
+          </p>
+
+                <sidebyside width="47%">
+                  <image xml:id="img_pump4bX1">
+                    <description></description>
+                    <latex-image>
+
+                    \begin{tikzpicture}[xscale=.7,yscale=.7]
+
+                    \draw [thick] (0,0) -- node [pos=.5,left]{2 m} (1,1) --node [above,pos=.5] {2 m} (3,1) -- (2,0) -- cycle
+                                  (0,0) -- (1.5,-2)
+                                  (3,1) -- (1.5,-2)
+                                  (2,0) -- (1.5,-2);
+
+                    \draw [thick,dashed] (1,1) -- (1.5,-2);
+
+                    \draw (3,.5) -- (3.6,.5)
+                          (3,-2) -- (3.6,-2)
+                          (3.3,.5) -- node [pos=.5,right] {7 m} (3.3,-2);
+
+                    \end{tikzpicture}
+
+                    </latex-image>
+                  </image>
+                </sidebyside>
+        </statement>
+        <answer>
+          <p>
+            617,400 J
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            A water tank has the shape of an truncated,
+            inverted pyramid, with dimensions given below,
+            and is filled with water with a mass density of <quantity><mag>1000</mag><unit prefix="kilo" base="gram"/><per base="meter" exp="3"/></quantity>.
+            Find the work performed in pumping all water to a point <quantity><mag>1</mag><unit prefix="centi" base="meter"/></quantity> above the top of the tank.
+          </p>
+
+                <sidebyside width="47%">
+                  <image xml:id="img_pump4bX2">
+                    <description></description>
+                    <latex-image>
+
+                    \begin{tikzpicture}[xscale=.7,yscale=.7]
+
+                    \draw [thick] (0,0) node (A) -- node [pos=.5,left] {5 m} (1,1) node (B) -- node [above,pos=.5] {5 m} (3,1) node (C) -- (2,0) node (D) -- cycle;
+
+                    \begin{scope}[scale=.75,shift={(.5,-3)}]
+                      \draw [thick] (0,0) node (AA) -- (1,1) node (BB) -- (3,1) node (CC) -- node [right,pos=.5] {2 m} (2,0) node (DD) -- node [pos=.5,below] {2 m} (0,0);
+                    \end{scope}
+
+                    \draw [dashed,thick] (BB.center) -- (B.center);
+
+                    \draw [thick] (AA.center) -- (A.center)
+                                  (DD.center) -- (D.center)
+                                  (CC.center) -- (C.center);
+
+                    \draw (3.2,.5) -- (3.8,.5)
+                          (3.2,-2) -- (3.8,-2)
+                          (3.5,.5) -- node [pos=.5,right] { 9 m} (3.5,-2);
+
+                    \end{tikzpicture}
+
+                    </latex-image>
+                  </image>
+                </sidebyside>
+
+        </statement>
+        <answer>
+          <p>
+            4,917,150 J
+          </p>
+        </answer>
+      </exercise>
+    </exercisegroup>
+  </exercises>
 </section>
-
