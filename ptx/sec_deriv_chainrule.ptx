@@ -1,743 +1,765 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="sec_chainrule">
   <title>The Chain Rule</title>
-  <introduction>
-<!-- 
+
+  <p>
+    We have covered almost all of the derivative rules that deal with combinations of two
+    (or more)
+    functions.
+    The operations of addition, subtraction, multiplication
+    (including by a constant)
+    and division led to the <xref ref="sum-difference-derivative-rule" text="title"/>,
+    the <xref ref="constant-multiple-derivative-rule" text="title"/>,
+    the <xref ref="thm_PowerRule" text="title">Power Rule</xref>,
+    the <xref ref="thm_ProductRule" text="title"/> and the <xref ref="thm_QuotientRule" text="title"/>.
+    To complete the list of differentiation rules,
+    we look at the last way two
+    (or more)
+    functions can be combined:
+    the process of composition (i.e. one function
+    <q>inside</q> another).
+  </p>
+
+  <figure>
+    <caption>Video introduction to <xref ref="sec_chainrule"/></caption>
     <video xml:id="vid_deriv_chain_intro" youtube="k7wX-kxd7Kw"/>
+  </figure>
+
+  <p>
+    One example of a composition of functions is <m>f(x) = \cos(x^2)</m>.
+    We currently do not know how to compute this derivative.
+    If forced to guess, one might guess <m>\fp(x) = -\sin(2x)</m>,
+    where we recognize <m>-\sin(x)</m> as the derivative of <m>\cos(x)</m> and <m>2x</m> as the derivative of <m>x^2</m>.
+    However, this is not the case;
+    <m>\fp(x)\neq -\sin(2x)</m>.
+    One way to see this is to examine the graph of
+    <m>y=\cos\mathopen{}\left(x^2\right)\mathclose{}</m> in <xref ref="fig_chain">Figure</xref>
+    and its tangent line at <m>x=\pi/2</m>.
+    Clearly the slope of the tangent line there is nonzero,
+    but <m>-2\sin(2\cdot\pi/2)=0</m>.
+    So it can't be correct to say that <m>y'=-\sin(2x)</m>.
+  </p>
+
+  <figure xml:id="fig_chain">
+    <caption>A graph of <m>y=\cos(x^2)</m> and a tangent line at <m>\pi/2</m></caption>
+    <image xml:id="img_chain" width="47%">
+      <description></description>
+      <latex-image>
+
+      \begin{tikzpicture}
+      \begin{axis}[ymin=-1.5,ymax=1.5,
+      xmin=-.2,xmax=3.5,
+      clip=false,
+      ]
+      \addplot+[domain=-0.2:3.5,samples=100] {cos(deg(x^2))};
+      \addplot[tangentline,domain=1:1.93] {-sin(deg((pi/2)^2))*2*pi/2*(x-pi/2)+cos(deg((pi/2)^2))};
+      \addplot[soliddot] coordinates {(1.571,-0.781)};
+      \end{axis}
+      \end{tikzpicture}
+
+      </latex-image>
+    </image>
+
+  </figure>
+
+  <p>
+    In <xref ref="ex_chain7">Example</xref>
+    we'll see the correct way to compute the derivative of <m>\sin\mathopen{}\left(x^2\right)\mathclose{}</m>,
+    which employs the new rule this section introduces, the <em>Chain Rule</em>.
+  </p>
+
+  <p>
+    Before we define this new rule,
+    recall the notation for composition of functions.
+    We write <m>(f \circ g)(x)</m> or <m>f(g(x))</m>,
+    read as <q><m>f</m> of <m>g</m> of <m>x</m>,</q>
+    to denote composing <m>f</m> with <m>g</m>.
+    In shorthand, we simply write
+    <m>f \circ g</m> or <m>f(g)</m> and read it as
+    <q><m>f</m> of <m>g</m>.</q>
+    Before giving the corresponding differentiation rule,
+    we note that the rule extends to multiple compositions like
+    <m>f(g(h(x)))</m> or <m>f(g(h(j(x))))</m>, etc.
+  </p>
+
+  <p>
+    To motivate the rule,
+    let's look at three derivatives we can already compute.
+  </p>
+
+  <example xml:id="ex_chain1">
+    <title>Exploring similar derivatives</title>
+    <statement>
+      <p>
+        Find the derivatives of <m>F_1(x) = (1-x)^2</m>,
+        <m>F_2(x) = (1-x)^3</m>, and <m>F_3(x) = (1-x)^4</m>.
+        (We'll see later why we are using subscripts for different functions and an uppercase <m>F</m>.)
+      </p>
+    </statement>
+    <solution>
+      <p>
+        In order to use the rules we already have,
+        we must first expand each function as
+        <md>
+          <mrow>F_1(x)\amp = 1 - 2x + x^2</mrow>
+          <mrow>F_2(x)\amp = 1 - 3x + 3x^2 - x^3</mrow>
+          <mrow>F_3(x)\amp = 1 - 4x + 6x^2 - 4x^3 + x^4</mrow>
+        </md>
+        It is not hard to see that:
+        <md>
+          <mrow>F_1'(x)\amp = -2 + 2x</mrow>
+          <mrow>F_2'(x)\amp = -3 + 6x - 3x^2</mrow>
+          <mrow>F_3'(x)\amp = -4 + 12x - 12x^2 + 4x^3</mrow>
+        </md>
+        An interesting fact is that these can be rewritten as:
+        <md>
+          <mrow>F_1'(x)\amp = -2(1-x)</mrow>
+          <mrow>F_2'(x)\amp = -3(1-x)^2</mrow>
+          <mrow>F_3'(x)\amp = -4(1-x)^3</mrow>
+        </md>
+      </p>
+
+      <p>
+        A pattern might jump out at you;
+        note how the we end up multiplying by the old power and the new power is reduced by 1.
+        We also always multiply by <m>(-1)</m>.
+      </p>
+
+      <p>
+        Recognize that each of these functions is a composition,
+        letting <m>g(x) = 1-x</m>:
+        <md>
+          <mrow>F_1(x)\amp = f_1(g(x)),\amp\amp  \text{ where }  f_1(x) = x^2,</mrow>
+          <mrow>F_2(x)\amp = f_2(g(x)),\amp\amp  \text{ where }  f_2(x) = x^3,</mrow>
+          <mrow>F_3(x)\amp = f_3(g(x)),\amp\amp  \text{ where }  f_3(x) = x^4</mrow>
+        </md>.
+      </p>
+
+      <p>
+        We'll come back to this example after giving the formal statements of the Chain Rule;
+        for now, we are just illustrating a pattern.
+      </p>
+    </solution>
+  </example>
+
+  <aside>
+    <p>
+      When composing functions,
+      we need to make sure that the new function is actually defined.
+      For instance,
+      consider <m>f(x) = \sqrt{x}</m> and <m>g(x) = -x^2-1</m>.
+      The domain of <m>f</m> excludes all negative numbers,
+      but the range of <m>g</m> is only negative numbers.
+      Therefore the composition <m>f(g(x)) = \sqrt{-x^2-1}</m> is not defined for any <m>x</m>,
+      and hence is not differentiable.
+    </p>
+
+    <p>
+      The statement of <xref ref="thm_chain_rule">Theorem</xref> takes care to ensure
+      this problem does not arise, but our focus is more on the derivative result than
+      on the domain/range conditions.
+    </p>
+  </aside>
+
+  <theorem xml:id="thm_chain_rule">
+    <title>The Chain Rule</title>
+    <statement>
+      <p>
+        Let <m>g</m> be a differentiable function on an interval <m>I</m>,
+        let the range of <m>g</m> be a subset of the interval <m>J</m>,
+        and let <m>f</m> be a differentiable function on <m>J</m>.
+
+            <idx><h>derivative</h><h>Chain Rule</h></idx>
+            <idx><h>Chain Rule</h></idx>
+        Then <m>y=f(g(x))</m> is a differentiable function on <m>I</m>, and
+        <me>
+          y' = \fp(g(x))\cdot g'(x)
+        </me>.
+      </p>
+    </statement>
+  </theorem>
+
+  <figure>
+    <caption>Video presentation of <xref ref="thm_chain_rule"/></caption>
     <video xml:id="vid_deriv_chain_theorem" youtube="1_Lp-ONIMuc"/>
-    <video xml:id="vid_deriv_chain_examples_1" youtube="yW1BbOeDFcM"/>
-    <video xml:id="vid_deriv_chain_examples_2" youtube="2QJLR-Y-Ht8"/>
-    <video xml:id="vid_deriv_chain_examples_3_func" youtube="JeLuSDqqFPA"/>
-    <video xml:id="vid_deriv_chain_gen_power_exp" youtube="LnmwxZ5w30w"/> -->
+  </figure>
 
+  <p>
+    Here is the Chain Rule in words:
+  </p>
+
+  <blockquote>
     <p>
-      We have covered almost all of the derivative rules that deal with combinations of two
-      (or more)
-      functions.
-      The operations of addition, subtraction, multiplication
-      (including by a constant)
-      and division led to the <xref ref="sum-difference-derivative-rule" text="title"/>,
-      the <xref ref="constant-multiple-derivative-rule" text="title"/>,
-      the <xref ref="thm_PowerRule" text="title">Power Rule</xref>,
-      the <xref ref="thm_ProductRule" text="title"/> and the <xref ref="thm_QuotientRule" text="title"/>.
-      To complete the list of differentiation rules,
-      we look at the last way two
-      (or more)
-      functions can be combined:
-      the process of composition (i.e. one function
-      <q>inside</q> another).
+      The derivative of the outside function,
+      evaluated at the inside function,
+      multiplied by the derivative of the inside function.
     </p>
+  </blockquote>
 
-    <p>
-      One example of a composition of functions is <m>f(x) = \cos(x^2)</m>.
-      We currently do not know how to compute this derivative.
-      If forced to guess, one might guess <m>\fp(x) = -\sin(2x)</m>,
-      where we recognize <m>-\sin(x)</m> as the derivative of <m>\cos(x)</m> and <m>2x</m> as the derivative of <m>x^2</m>.
-      However, this is not the case;
-      <m>\fp(x)\neq -\sin(2x)</m>.
-      One way to see this is to examine the graph of
-      <m>y=\cos\mathopen{}\left(x^2\right)\mathclose{}</m> in <xref ref="fig_chain">Figure</xref>
-      and its tangent line at <m>x=\pi/2</m>.
-      Clearly the slope of the tangent line there is nonzero,
-      but <m>-2\sin(2\cdot\pi/2)=0</m>.
-      So it can't be correct to say that <m>y'=-\sin(2x)</m>.
-    </p>
+  <p>
+    To help understand the Chain Rule,
+    we return to <xref ref="ex_chain1">Example</xref>.
+  </p>
 
-    <figure xml:id="fig_chain">
-      <caption>A graph of <m>y=\cos(x^2)</m> and a tangent line at <m>\pi/2</m></caption>
-      <image xml:id="img_chain" width="47%">
-        <description></description>
-        <latex-image>
-
-        \begin{tikzpicture}
-        \begin{axis}[ymin=-1.5,ymax=1.5,
-        xmin=-.2,xmax=3.5,
-        clip=false,
-        ]
-        \addplot+[domain=-0.2:3.5,samples=100] {cos(deg(x^2))};
-        \addplot[tangentline,domain=1:1.93] {-sin(deg((pi/2)^2))*2*pi/2*(x-pi/2)+cos(deg((pi/2)^2))};
-        \addplot[soliddot] coordinates {(1.571,-0.781)};
-        \end{axis}
-        \end{tikzpicture}
-
-        </latex-image>
-      </image>
-
-    </figure>
-
-    <p>
-      In <xref ref="ex_chain7">Example</xref>
-      we'll see the correct way to compute the derivative of <m>\sin\mathopen{}\left(x^2\right)\mathclose{}</m>,
-      which employs the new rule this section introduces, the <em>Chain Rule</em>.
-    </p>
-
-    <p>
-      Before we define this new rule,
-      recall the notation for composition of functions.
-      We write <m>(f \circ g)(x)</m> or <m>f(g(x))</m>,
-      read as <q><m>f</m> of <m>g</m> of <m>x</m>,</q>
-      to denote composing <m>f</m> with <m>g</m>.
-      In shorthand, we simply write
-      <m>f \circ g</m> or <m>f(g)</m> and read it as
-      <q><m>f</m> of <m>g</m>.</q>
-      Before giving the corresponding differentiation rule,
-      we note that the rule extends to multiple compositions like
-      <m>f(g(h(x)))</m> or <m>f(g(h(j(x))))</m>, etc.
-    </p>
-
-    <p>
-      To motivate the rule,
-      let's look at three derivatives we can already compute.
-    </p>
-
-    <example xml:id="ex_chain1">
-      <title>Exploring similar derivatives</title>
-      <statement>
-        <p>
-          Find the derivatives of <m>F_1(x) = (1-x)^2</m>,
-          <m>F_2(x) = (1-x)^3</m>, and <m>F_3(x) = (1-x)^4</m>.
-          (We'll see later why we are using subscripts for different functions and an uppercase <m>F</m>.)
-        </p>
-      </statement>
-      <solution>
-        <p>
-          In order to use the rules we already have,
-          we must first expand each function as
-          <md>
-            <mrow>F_1(x)\amp = 1 - 2x + x^2</mrow>
-            <mrow>F_2(x)\amp = 1 - 3x + 3x^2 - x^3</mrow>
-            <mrow>F_3(x)\amp = 1 - 4x + 6x^2 - 4x^3 + x^4</mrow>
-          </md>
-          It is not hard to see that:
-          <md>
-            <mrow>F_1'(x)\amp = -2 + 2x</mrow>
-            <mrow>F_2'(x)\amp = -3 + 6x - 3x^2</mrow>
-            <mrow>F_3'(x)\amp = -4 + 12x - 12x^2 + 4x^3</mrow>
-          </md>
-          An interesting fact is that these can be rewritten as:
-          <md>
-            <mrow>F_1'(x)\amp = -2(1-x)</mrow>
-            <mrow>F_2'(x)\amp = -3(1-x)^2</mrow>
-            <mrow>F_3'(x)\amp = -4(1-x)^3</mrow>
-          </md>
-        </p>
-
-        <p>
-          A pattern might jump out at you;
-          note how the we end up multiplying by the old power and the new power is reduced by 1.
-          We also always multiply by <m>(-1)</m>.
-        </p>
-
-        <p>
-          Recognize that each of these functions is a composition,
-          letting <m>g(x) = 1-x</m>:
-          <md>
-            <mrow>F_1(x)\amp = f_1(g(x)),\amp\amp  \text{ where }  f_1(x) = x^2,</mrow>
-            <mrow>F_2(x)\amp = f_2(g(x)),\amp\amp  \text{ where }  f_2(x) = x^3,</mrow>
-            <mrow>F_3(x)\amp = f_3(g(x)),\amp\amp  \text{ where }  f_3(x) = x^4</mrow>
-          </md>.
-        </p>
-
-        <p>
-          We'll come back to this example after giving the formal statements of the Chain Rule;
-          for now, we are just illustrating a pattern.
-        </p>
-      </solution>
-    </example>
-
-    <aside>
+  <example xml:id="ex_chain2">
+    <title>Using the Chain Rule</title>
+    <statement>
       <p>
-        When composing functions,
-        we need to make sure that the new function is actually defined.
-        For instance,
-        consider <m>f(x) = \sqrt{x}</m> and <m>g(x) = -x^2-1</m>.
-        The domain of <m>f</m> excludes all negative numbers,
-        but the range of <m>g</m> is only negative numbers.
-        Therefore the composition <m>f(g(x)) = \sqrt{-x^2-1}</m> is not defined for any <m>x</m>,
-        and hence is not differentiable.
+        Use the Chain Rule to find the derivatives of the functions <m>F_1(x)</m>,
+        <m>F_2(x)</m>, and <m>F_3(x)</m>,
+        as given in <xref ref="ex_chain1">Example</xref>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        <xref ref="ex_chain1">Example</xref>
+        ended with the recognition that each of the given functions was actually a composition of functions.
+        To avoid confusion, we ignore most of the subscripts here.
       </p>
 
       <p>
-        The statement of <xref ref="thm_chain_rule">Theorem</xref> takes care to ensure
-        this problem does not arise, but our focus is more on the derivative result than
-        on the domain/range conditions.
+        <dl>
+          <li>
+            <title><m>F_1(x) = (1-x)^2</m></title>
+            <p>
+              We found that
+              <me>
+                y=(1-x)^2 = f(g(x))
+              </me>,
+              where <m>f(x) = x^2</m> and <m>g(x) = 1-x</m>.
+              To find <m>y'</m>,
+              we apply the <xref ref="thm_chain_rule" text="title"/>.
+              We need to note that <m>\fp(x)=2x</m> and <m>g'(x)=-1</m>.
+            </p>
+
+            <p>
+              Part of the <xref ref="thm_chain_rule" text="title"/> uses <m>\fp(g(x))</m>.
+              This means substitute <m>g(x)</m> for <m>x</m> in the equation for <m>\fp(x)</m>.
+              That is, <m>\fp(x) = 2(1-x)</m>.
+              Finishing out the <xref ref="thm_chain_rule" text="title"/> we have
+              <md>
+                <mrow>y' \amp = \fp(g(x))\cdot g'(x)</mrow>
+                <mrow>\amp = 2(1-x)\cdot (-1)</mrow>
+                <mrow>\amp = -2(1-x)</mrow>
+                <mrow>\amp = 2x-2</mrow>
+              </md>.
+            </p>
+          </li>
+
+          <li>
+            <title><m>F_2(x) = (1-x)^3</m></title>
+            <p>
+              Let <m>y = (1-x)^3 = f(g(x))</m>,
+              where <m>f(x) = x^3</m> and <m>g(x) = (1-x)</m>.
+              We have <m>\fp(x) = 3x^2</m>,
+              so <m>\fp(g(x)) = 3(1-x)^2</m>.
+              The <xref ref="thm_chain_rule" text="title"/> then states
+              <md>
+                <mrow>y' \amp = \fp(g(x))\cdot g'(x)</mrow>
+                <mrow>\amp = 3(1-x)^2\cdot (-1)</mrow>
+                <mrow>\amp = -3(1-x)^2</mrow>
+              </md>.
+            </p>
+          </li>
+
+          <li>
+            <title><m>F_3(x) = (1-x)^4</m></title>
+            <p>
+              Finally, when <m>y = (1-x)^4</m>,
+              we have <m>f(x)= x^4</m> and <m>g(x) = (1-x)</m>.
+              Thus <m>\fp(x) = 4x^3</m> and <m>\fp(g(x)) = 4(1-x)^3</m>.
+              Thus
+              <md>
+                <mrow>y' \amp = \fp(g(x))\cdot g'(x)</mrow>
+                <mrow>\amp = 4(1-x)^3\cdot (-1)</mrow>
+                <mrow>\amp = -4(1-x)^3</mrow>
+              </md>.
+            </p>
+          </li>
+        </dl>
       </p>
-    </aside>
+    </solution>
+  </example>
 
-    <theorem xml:id="thm_chain_rule">
-      <title>The Chain Rule</title>
-      <statement>
-        <p>
-          Let <m>g</m> be a differentiable function on an interval <m>I</m>,
-          let the range of <m>g</m> be a subset of the interval <m>J</m>,
-          and let <m>f</m> be a differentiable function on <m>J</m>.
+  <p>
+    <xref ref="ex_chain2">Example</xref>
+    demonstrated a particular pattern:
+    when <m>f(x)=x^n</m>, then <m>y' =n\cdot (g(x))^{n-1}\cdot g'(x)</m>.
+    This is called the Generalized Power Rule.
+  </p>
 
-              <idx><h>derivative</h><h>Chain Rule</h></idx>
-              <idx><h>Chain Rule</h></idx>
-          Then <m>y=f(g(x))</m> is a differentiable function on <m>I</m>, and
-          <me>
-            y' = \fp(g(x))\cdot g'(x)
-          </me>.
-        </p>
-      </statement>
-    </theorem>
-
-    <p>
-      Here is the Chain Rule in words:
-    </p>
-
-    <blockquote>
+  <theorem xml:id="thm_gen_power_rule">
+    <title>Generalized Power Rule</title>
+    <statement>
       <p>
-        The derivative of the outside function,
-        evaluated at the inside function,
-        multiplied by the derivative of the inside function.
+        Let <m>g(x)</m> be a differentiable function and let <m>n\neq 0</m> be an integer.
+
+            <idx><h>derivative</h><h>Generalized Power Rule</h></idx>
+            <idx><h>Generalized Power Rule</h></idx>
+        Then
+        <me>
+          \lzoo{x}{g(x)^n} = n\cdot\left(g(x)\right)^{n-1}\cdot g'(x)
+        </me>.
       </p>
-    </blockquote>
+    </statement>
+  </theorem>
 
-    <p>
-      To help understand the Chain Rule,
-      we return to <xref ref="ex_chain1">Example</xref>.
-    </p>
+  <p>
+    This allows us to quickly find the derivative of functions like <m>y = (3x^2-5x+7+\sin(x) )^{20}</m>.
+    While it may look intimidating,
+    the Generalized Power Rule states that
+    <me>
+      y' = 20(3x^2-5x+7+\sin(x) )^{19}\cdot (6x-5+\cos(x) )
+    </me>.
+  </p>
 
-    <example xml:id="ex_chain2">
-      <title>Using the Chain Rule</title>
-      <statement>
-        <p>
-          Use the Chain Rule to find the derivatives of the following functions,
-          as given in <xref ref="ex_chain1">Example</xref>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          <xref ref="ex_chain1">Example</xref>
-          ended with the recognition that each of the given functions was actually a composition of functions.
-          To avoid confusion, we ignore most of the subscripts here.
-        </p>
+  <p>
+    Treat the derivative-taking process step-by-step.
+    In the example just given,
+    first multiply by <m>20</m>, then rewrite the inside of the parentheses,
+    raising it all to the <m>19</m>th power.
+    Then think about the derivative of the expression inside the parentheses,
+    and multiply by that.
+  </p>
 
-        <p>
-          <dl>
-            <li>
-              <title><m>F_1(x) = (1-x)^2</m></title>
-              <p>
-                We found that
-                <me>
-                  y=(1-x)^2 = f(g(x))
-                </me>,
-                where <m>f(x) = x^2</m> and <m>g(x) = 1-x</m>.
-                To find <m>y'</m>,
-                we apply the <xref ref="thm_chain_rule" text="title"/>.
-                We need to note that <m>\fp(x)=2x</m> and <m>g'(x)=-1</m>.
-              </p>
+  <p>
+    We now consider more examples that employ the <xref ref="thm_chain_rule" text="title"/>.
+  </p>
 
-              <p>
-                Part of the <xref ref="thm_chain_rule" text="title"/> uses <m>\fp(g(x))</m>.
-                This means substitute <m>g(x)</m> for <m>x</m> in the equation for <m>\fp(x)</m>.
-                That is, <m>\fp(x) = 2(1-x)</m>.
-                Finishing out the <xref ref="thm_chain_rule" text="title"/> we have
-                <md>
-                  <mrow>y' \amp = \fp(g(x))\cdot g'(x)</mrow>
-                  <mrow>\amp = 2(1-x)\cdot (-1)</mrow>
-                  <mrow>\amp = -2(1-x)</mrow>
-                  <mrow>\amp = 2x-2</mrow>
-                </md>.
-              </p>
-            </li>
+  <example xml:id="ex_chain3">
+    <title>Using the Chain Rule</title>
+    <statement>
+      <p>
+        Find the derivatives of the following functions:
 
-            <li>
-              <title><m>F_2(x) = (1-x)^3</m></title>
-              <p>
-                Let <m>y = (1-x)^3 = f(g(x))</m>,
-                where <m>f(x) = x^3</m> and <m>g(x) = (1-x)</m>.
-                We have <m>\fp(x) = 3x^2</m>,
-                so <m>\fp(g(x)) = 3(1-x)^2</m>.
-                The <xref ref="thm_chain_rule" text="title"/> then states
-                <md>
-                  <mrow>y' \amp = \fp(g(x))\cdot g'(x)</mrow>
-                  <mrow>\amp = 3(1-x)^2\cdot (-1)</mrow>
-                  <mrow>\amp = -3(1-x)^2</mrow>
-                </md>.
-              </p>
-            </li>
+        <ol cols="3">
+          <li><m>y = \sin(2x)</m>.</li>
 
-            <li>
-              <title><m>F_3(x) = (1-x)^4</m></title>
-              <p>
-                Finally, when <m>y = (1-x)^4</m>,
-                we have <m>f(x)= x^4</m> and <m>g(x) = (1-x)</m>.
-                Thus <m>\fp(x) = 4x^3</m> and <m>\fp(g(x)) = 4(1-x)^3</m>.
-                Thus
-                <md>
-                  <mrow>y' \amp = \fp(g(x))\cdot g'(x)</mrow>
-                  <mrow>\amp = 4(1-x)^3\cdot (-1)</mrow>
-                  <mrow>\amp = -4(1-x)^3</mrow>
-                </md>.
-              </p>
-            </li>
-          </dl>
-        </p>
-      </solution>
-    </example>
+          <li><m>y= \ln(4x^3-2x^2)</m>.</li>
 
-    <p>
-      <xref ref="ex_chain2">Example</xref>
-      demonstrated a particular pattern:
-      when <m>f(x)=x^n</m>, then <m>y' =n\cdot (g(x))^{n-1}\cdot g'(x)</m>.
-      This is called the Generalized Power Rule.
-    </p>
+          <li><m>y = e^{-x^2}</m>.</li>
+        </ol>
+      </p>
+    </statement>
+    <solution>
+      <figure>
+        <caption>Video presentation of <xref ref="ex_chain3"/></caption>
+        <video xml:id="vid_deriv_chain_examples_1" youtube="yW1BbOeDFcM"/>
+      </figure>
 
-    <theorem xml:id="thm_gen_power_rule">
-      <title>Generalized Power Rule</title>
-      <statement>
-        <p>
-          Let <m>g(x)</m> be a differentiable function and let <m>n\neq 0</m> be an integer.
+      <p>
+        <ol>
+          <li>
+            <p>
+              Consider <m>y = \sin(2x)</m>.
+              Recognize that this is a composition of functions,
+              where <m>f(x) = \sin(x)</m> and <m>g(x) = 2x</m>.
+              Thus
+              <md>
+                <mrow>y' \amp = \fp(g(x))\cdot g'(x)</mrow>
+                <mrow>\amp = \cos(2x)\cdot \lzoo{x}{2x}</mrow>
+                <mrow>\amp = \cos(2x)\cdot 2</mrow>
+                <mrow>\amp = 2\cos(2x)</mrow>
+              </md>.
+            </p>
+          </li>
 
-              <idx><h>derivative</h><h>Generalized Power Rule</h></idx>
-              <idx><h>Generalized Power Rule</h></idx>
-          Then
-          <me>
-            \lzoo{x}{g(x)^n} = n\cdot\left(g(x)\right)^{n-1}\cdot g'(x)
-          </me>.
-        </p>
-      </statement>
-    </theorem>
+          <li>
+            <p>
+              Recognize that <m>y = \ln\mathopen{}\left(4x^3-2x^2\right)\mathclose{}</m> is the composition of
+              <m>f(x) = \ln(x)</m> and <m>g(x) = 4x^3-2x^2</m>.
+              Also, recall that
+              <me>
+                \lzoo{x}{\ln(x)} = \frac{1}{x}
+              </me>.
+              This leads us to:
+              <md>
+                <mrow>y' \amp = \frac{1}{4x^3-2x^2} \cdot \lzoo{x}{4x^3-2x^2}</mrow>
+                <mrow>\amp = \frac{1}{4x^3-2x^2} \cdot \left(12x^2-4x\right)</mrow>
+                <mrow>\amp  = \frac{12x^2-4x}{4x^3-2x^2}</mrow>
+                <mrow>\amp = \frac{4x(3x-1)}{2x(2x^2-x)}</mrow>
+                <mrow>\amp = \frac{2(3x-1)}{2x^2-x}</mrow>
+              </md>.
+              Note that <m>\ln\mathopen{}\left(4x^3-2x^2\right)\mathclose{}=\ln\mathopen{}\left(4x^2(x-1/2)\right)\mathclose{}</m> was only defined for <m>x \gt 1/2</m>,
+              so the result of <m>y'=\frac{2(3x-1)}{2x^2-x}</m> is only valid for <m>x \gt 1/2</m> as well.
+            </p>
+          </li>
 
-    <p>
-      This allows us to quickly find the derivative of functions like <m>y = (3x^2-5x+7+\sin(x) )^{20}</m>.
-      While it may look intimidating,
-      the Generalized Power Rule states that
-      <me>
-        y' = 20(3x^2-5x+7+\sin(x) )^{19}\cdot (6x-5+\cos(x) )
-      </me>.
-    </p>
+          <li>
+            <p>
+              Recognize  that <m>y = e^{-x^2}</m> is the composition of
+              <m>f(x) = e^x</m> and <m>g(x) = -x^2</m>.
+              Remembering that <m>\fp(x) = e^x</m>, we have
+              <md>
+                <mrow>y' \amp = e^{-x^2}\cdot \lzoo{x}{-x^2}</mrow>
+                <mrow>\amp = e^{-x^2}\cdot (-2x)</mrow>
+                <mrow>\amp = -2xe^{-x^2}</mrow>
+              </md>.
+            </p>
+          </li>
+        </ol>
+      </p>
+    </solution>
+  </example>
 
-    <p>
-      Treat the derivative-taking process step-by-step.
-      In the example just given,
-      first multiply by <m>20</m>, then rewrite the inside of the parentheses,
-      raising it all to the <m>19</m>th power.
-      Then think about the derivative of the expression inside the parentheses,
-      and multiply by that.
-    </p>
+  <example xml:id="ex_chain7">
+    <title>Using the Chain Rule to find a tangent line</title>
+    <statement>
+      <p>
+        Let <m>f(x) = \cos(x^2)</m>.
+        Find the equation of the line tangent to the graph of <m>f</m> at <m>x=1</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        The tangent line goes through the point
+        <m>(1,f(1)) \approx (1,0.54)</m> with slope <m>\fp(1)</m>.
+        To find <m>\fp</m>,
+        we need the <xref ref="thm_chain_rule" text="title"/>.
+      </p>
 
-    <p>
-      We now consider more examples that employ the <xref ref="thm_chain_rule" text="title"/>.
-    </p>
+      <p>
+        <m>\fp(x) = -\sin(x^2) \cdot(2x) = -2x\sin(x^2)</m>.
+        Evaluated at <m>x=1</m>, we have <m>\fp(1) = -2\sin(1) \approx -1.68</m>.
+        Thus the equation of the tangent line is approximated by
+        <me>
+          y \approx -1.68(x-1)+0.54
+        </me>.
+      </p>
 
-    <example xml:id="ex_chain3">
-      <title>Using the Chain Rule</title>
-      <statement>
-        <p>
-          Find the derivatives of the following functions:
+      <p>
+        The tangent line is sketched along with <m>f</m> in <xref ref="fig_chain7">Figure</xref>.
+      </p>
 
-          <ol cols="3">
-            <li><m>y = \sin(2x)</m>.</li>
+      <figure xml:id="fig_chain7">
+        <caption><m>f(x) = \cos(x^2)</m> sketched along with its tangent line at <m>x=1</m>.</caption>
+        <!-- START figures/fig_chain7.tex -->
+        <image xml:id="img_chain7" width="47%">
+          <description></description>
+          <latex-image>
 
-            <li><m>y= \ln(4x^3-2x^2)</m>.</li>
+          \begin{tikzpicture}
+          \begin{axis}[xmin=-3.1,xmax=3.1,
+          ymin=-1.1,ymax=1.1,]
+          \addplot+[domain=-3:3,samples=200] ({x},{cos(deg(x^2))});% {};
+          \addplot [tangentline,domain=.7:1.3] {-1.68*(x-1)+0.54};
+          \addplot [soliddot] coordinates{(1,0.54)};
+          \end{axis}
+          \end{tikzpicture}
 
-            <li><m>y = e^{-x^2}</m>.</li>
-          </ol>
-        </p>
-      </statement>
-      <solution>
-        <p>
-          <ol>
-            <li>
-              <p>
-                Consider <m>y = \sin(2x)</m>.
-                Recognize that this is a composition of functions,
-                where <m>f(x) = \sin(x)</m> and <m>g(x) = 2x</m>.
-                Thus
-                <md>
-                  <mrow>y' \amp = \fp(g(x))\cdot g'(x)</mrow>
-                  <mrow>\amp = \cos(2x)\cdot \lzoo{x}{2x}</mrow>
-                  <mrow>\amp = \cos(2x)\cdot 2</mrow>
-                  <mrow>\amp = 2\cos(2x)</mrow>
-                </md>.
-              </p>
-            </li>
+          </latex-image>
+        </image>
+        <!-- figures/fig_chain7.tex END -->
+      </figure>
+    </solution>
+  </example>
 
-            <li>
-              <p>
-                Recognize that <m>y = \ln\mathopen{}\left(4x^3-2x^2\right)\mathclose{}</m> is the composition of
-                <m>f(x) = \ln(x)</m> and <m>g(x) = 4x^3-2x^2</m>.
-                Also, recall that
-                <me>
-                  \lzoo{x}{\ln(x)} = \frac{1}{x}
-                </me>.
-                This leads us to:
-                <md>
-                  <mrow>y' \amp = \frac{1}{4x^3-2x^2} \cdot \lzoo{x}{4x^3-2x^2}</mrow>
-                  <mrow>\amp = \frac{1}{4x^3-2x^2} \cdot \left(12x^2-4x\right)</mrow>
-                  <mrow>\amp  = \frac{12x^2-4x}{4x^3-2x^2}</mrow>
-                  <mrow>\amp = \frac{4x(3x-1)}{2x(2x^2-x)}</mrow>
-                  <mrow>\amp = \frac{2(3x-1)}{2x^2-x}</mrow>
-                </md>.
-                Note that <m>\ln\mathopen{}\left(4x^3-2x^2\right)\mathclose{}=\ln\mathopen{}\left(4x^2(x-1/2)\right)\mathclose{}</m> was only defined for <m>x \gt 1/2</m>,
-                so the result of <m>y'=\frac{2(3x-1)}{2x^2-x}</m> is only valid for <m>x \gt 1/2</m> as well.
-              </p>
-            </li>
+  <p>
+    The <xref ref="thm_chain_rule" text="title"/> is used often in taking derivatives.
+    Because of this,
+    one can become familiar with the basic process and learn patterns that facilitate finding derivatives quickly.
+    For instance,
+    <me>
+      \lzoo{x}{\ln(\text{anything})} = \frac{1}{\text{anything}}\cdot\lzoo{x}{\text{anything}}  = \frac{\lzoo{x}{\text{anything}}}{\text{anything}}
+    </me>.
+  </p>
 
-            <li>
-              <p>
-                Recognize  that <m>y = e^{-x^2}</m> is the composition of
-                <m>f(x) = e^x</m> and <m>g(x) = -x^2</m>.
-                Remembering that <m>\fp(x) = e^x</m>, we have
-                <md>
-                  <mrow>y' \amp = e^{-x^2}\cdot \lzoo{x}{-x^2}</mrow>
-                  <mrow>\amp = e^{-x^2}\cdot (-2x)</mrow>
-                  <mrow>\amp = -2xe^{-x^2}</mrow>
-                </md>.
-              </p>
-            </li>
-          </ol>
-        </p>
-      </solution>
-    </example>
+  <p>
+    A concrete example of this is
+    <me>
+      \lzoo{x}{\ln(3x^{15}-\cos(x) +e^x)} = \frac{45x^{14}+\sin(x) +e^x}{3x^{15}-\cos(x) +e^x}
+    </me>.
+  </p>
 
-    <example xml:id="ex_chain7">
-      <title>Using the Chain Rule to find a tangent line</title>
-      <statement>
-        <p>
-          Let <m>f(x) = \cos(x^2)</m>.
-          Find the equation of the line tangent to the graph of <m>f</m> at <m>x=1</m>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          The tangent line goes through the point
-          <m>(1,f(1)) \approx (1,0.54)</m> with slope <m>\fp(1)</m>.
-          To find <m>\fp</m>,
-          we need the <xref ref="thm_chain_rule" text="title"/>.
-        </p>
+  <p>
+    While the derivative may look intimidating at first, look for the pattern.
+    The denominator is the same as what was inside the natural log function;
+    the numerator is simply its derivative.
+  </p>
 
-        <p>
-          <m>\fp(x) = -\sin(x^2) \cdot(2x) = -2x\sin(x^2)</m>.
-          Evaluated at <m>x=1</m>, we have <m>\fp(1) = -2\sin(1) \approx -1.68</m>.
-          Thus the equation of the tangent line is approximated by
-          <me>
-            y \approx -1.68(x-1)+0.54
-          </me>.
-        </p>
+  <p>
+    This pattern recognition process can be applied to lots of functions.
+    In general, instead of writing <q>anything</q>,
+    we use <m>u</m> as a generic function of <m>x</m>.
+    We then say
+    <me>
+      \lzoo{\ln(u)} = \frac{u'}{u}
+    </me>.
+  </p>
 
-        <p>
-          The tangent line is sketched along with <m>f</m> in <xref ref="fig_chain7">Figure</xref>.
-        </p>
+  <p>
+    The following is a short list of how the <xref ref="thm_chain_rule" text="title"/> can be quickly applied to familiar functions.
 
-        <figure xml:id="fig_chain7">
-          <caption><m>f(x) = \cos(x^2)</m> sketched along with its tangent line at <m>x=1</m>.</caption>
-          <!-- START figures/fig_chain7.tex -->
-          <image xml:id="img_chain7" width="47%">
-            <description></description>
-            <latex-image>
+    <ol cols="2">
+      <li><m>\lzoo{x}{u^n} = n\cdot u^{n-1}\cdot u'</m>.</li>
 
-            \begin{tikzpicture}
-            \begin{axis}[xmin=-3.1,xmax=3.1,
-            ymin=-1.1,ymax=1.1,]
-            \addplot+[domain=-3:3,samples=200] ({x},{cos(deg(x^2))});% {};
-            \addplot [tangentline,domain=.7:1.3] {-1.68*(x-1)+0.54};
-            \addplot [soliddot] coordinates{(1,0.54)};
-            \end{axis}
-            \end{tikzpicture}
+      <li><m>\lzoo{x}{e^u} = e^u \cdot u'</m>.</li>
 
-            </latex-image>
-          </image>
-          <!-- figures/fig_chain7.tex END -->
-        </figure>
-      </solution>
-    </example>
+      <li><m>\lzoo{x}{\sin(u)} = \cos(u) \cdot u'</m>.</li>
 
-    <p>
-      The <xref ref="thm_chain_rule" text="title"/> is used often in taking derivatives.
-      Because of this,
-      one can become familiar with the basic process and learn patterns that facilitate finding derivatives quickly.
-      For instance,
-      <me>
-        \lzoo{x}{\ln(\text{anything})} = \frac{1}{\text{anything}}\cdot\lzoo{x}{\text{anything}}  = \frac{\lzoo{x}{\text{anything}}}{\text{anything}}
-      </me>.
-    </p>
+      <li><m>\lzoo{x}{\cos(u)} = -\sin(u)\cdot u'</m>.</li>
 
-    <p>
-      A concrete example of this is
-      <me>
-        \lzoo{x}{\ln(3x^{15}-\cos(x) +e^x)} = \frac{45x^{14}+\sin(x) +e^x}{3x^{15}-\cos(x) +e^x}
-      </me>.
-    </p>
+      <li><m>\lzoo{x}{\tan(u)} = \sec^2(u) \cdot u'</m>.</li>
+    </ol>
+  </p>
 
-    <p>
-      While the derivative may look intimidating at first, look for the pattern.
-      The denominator is the same as what was inside the natural log function;
-      the numerator is simply its derivative.
-    </p>
+  <p>
+    Of course, the <xref ref="thm_chain_rule" text="title"/> can be applied in conjunction with any of the other rules we have already learned.
+    We practice this next.
+  </p>
 
-    <p>
-      This pattern recognition process can be applied to lots of functions.
-      In general, instead of writing <q>anything</q>,
-      we use <m>u</m> as a generic function of <m>x</m>.
-      We then say
-      <me>
-        \lzoo{\ln(u)} = \frac{u'}{u}
-      </me>.
-    </p>
+  <example xml:id="ex_chain4">
+    <title>Using the Product, Quotient and Chain Rules</title>
+    <statement>
+      <p>
+        Find the derivatives of the following functions.
 
-    <p>
-      The following is a short list of how the <xref ref="thm_chain_rule" text="title"/> can be quickly applied to familiar functions.
+        <ol cols="2">
+          <li><m>f(x) = x^5 \sin(2x^3)</m>.</li>
 
-      <ol cols="2">
-        <li><m>\lzoo{x}{u^n} = n\cdot u^{n-1}\cdot u'</m>.</li>
+          <li><m>f(x) = \dfrac{5x^3}{e^{-x^2}}</m>.</li>
+        </ol>
+      </p>
+    </statement>
+    <solution>
+      <figure>
+        <caption>Video presentation of <xref ref="ex_chain4"/></caption>
+        <video xml:id="vid_deriv_chain_examples_2" youtube="2QJLR-Y-Ht8"/>
+      </figure>
 
-        <li><m>\lzoo{x}{e^u} = e^u \cdot u'</m>.</li>
+      <p>
+        <ol>
+          <li>
+            <p>
+              We must use the <xref ref="thm_ProductRule" text="title"/> and <xref ref="thm_chain_rule" text="title"/>.
+              Do not think that you must be able to <q>see</q>
+              the whole answer immediately;
+              rather, just proceed step-by-step.
+              <md>
+                <mrow>\fp(x) \amp = x^5 \cdot \lzoo{x}{\sin\mathopen{}\left(2x^3\right)\mathclose{}} + \sin\mathopen{}\left(2x^3\right)\mathclose{}\cdot \lzoo{x}{x^5}</mrow>
+                <mrow>\amp = x^5\left(\cos\mathopen{}\left(2x^3\right)\mathclose{}\cdot \lzoo{x}{2x^3} \right) + 5x^4\left(\sin\mathopen{}\left(2x^3\right)\mathclose{} \right)</mrow>
+                <mrow>\amp = x^5\big(6x^2\cos\left(2x^3\right) \big) + 5x^4\big(\sin\left(2x^3\right) \big)</mrow>
+                <mrow>\amp = 6x^7\cos\mathopen{}\left(2x^3\right)\mathclose{}+5x^4\sin\mathopen{}\left(2x^3\right)\mathclose{}</mrow>
+              </md>.
+            </p>
+          </li>
 
-        <li><m>\lzoo{x}{\sin(u)} = \cos(u) \cdot u'</m>.</li>
+          <li>
+            <p>
+              We must employ the <xref ref="thm_QuotientRule" text="title"/> along with the <xref ref="thm_chain_rule" text="title"/>.
+              Again, proceed step-by-step.
+              <md>
+                <mrow>\fp(x) \amp= \frac{e^{-x^2}\cdot \lzoo{x}{5x^3} - 5x^3\cdot \lzoo{x}{e^{-x^2}}}{\left(e^{-x^2}\right)^2}</mrow>
+                <mrow>\amp= \frac{e^{-x^2}\cdot 15x^2 - 5x^3\cdot e^{-x^2}\cdot \lzoo{x}{-x^2}}{\left(e^{-x^2}\right)^2}</mrow>
+                <mrow>\amp= \frac{e^{-x^2}\left(15x^2\right) - 5x^3\left((-2x)e^{-x^2}\right)}{\left(e^{-x^2}\right)^2}</mrow>
+                <mrow>\amp =\frac{e^{-x^2}\left(10x^4+15x^2\right)}{e^{-2x^2}}</mrow>
+                <mrow>\amp = e^{x^2}\left(10x^4+15x^2\right)</mrow>
+              </md>.
+            </p>
+          </li>
+        </ol>
+      </p>
+    </solution>
+  </example>
 
-        <li><m>\lzoo{x}{\cos(u)} = -\sin(u)\cdot u'</m>.</li>
+  <p>
+    A key to correctly working these problems is to break the problem down into smaller,
+    more manageable pieces.
+    For instance,
+    when using the <xref ref="thm_ProductRule" text="title"/> and <xref ref="thm_chain_rule" text="title"/> together,
+    just consider the first part of the <xref ref="thm_ProductRule" text="title"/> at first:
+    <m>f(x)g'(x)</m>.
+    Just rewrite <m>f(x)</m>, then find <m>g'(x)</m>.
+    Then move on to the <m>\fp(x)g(x)</m> part.
+    Don't attempt to figure out both parts at once.
+  </p>
 
-        <li><m>\lzoo{x}{\tan(u)} = \sec^2(u) \cdot u'</m>.</li>
-      </ol>
-    </p>
+  <p>
+    Likewise, using the <xref ref="thm_QuotientRule" text="title"/>,
+    approach the numerator in two steps and handle the denominator after completing that.
+    Only simplify afterward.
+  </p>
 
-    <p>
-      Of course, the <xref ref="thm_chain_rule" text="title"/> can be applied in conjunction with any of the other rules we have already learned.
-      We practice this next.
-    </p>
+  <p>
+    We can also employ the <xref ref="thm_chain_rule" text="title"/> itself several times,
+    as shown in the next example.
+  </p>
 
-    <example xml:id="ex_chain4">
-      <title>Using the Product, Quotient and Chain Rules</title>
-      <statement>
-        <p>
-          Find the derivatives of the following functions.
+  <example xml:id="ex_chain6">
+    <title>Using the Chain Rule multiple times</title>
+    <statement>
+      <p>
+        Find the derivative of <m>y = \tan^5(6x^3-7x)</m>.
+      </p>
+    </statement>
+    <solution>
+      <figure>
+        <caption>Video presentation of <xref ref="ex_chain6"/></caption>
+        <video xml:id="vid_deriv_chain_examples_3_func" youtube="JeLuSDqqFPA"/>
+      </figure>
 
-          <ol cols="2">
-            <li><m>f(x) = x^5 \sin(2x^3)</m>.</li>
+      <p>
+        Recognize that we have the
+        <m>g(x)=\tan\mathopen{}\left(6x^3-7x\right)\mathclose{}</m> function <q>inside</q>
+        the <m>f(x)=x^5</m> function;
+        that is, we have <m>y = \left(\tan\mathopen{}\left(6x^3-7x\right)\mathclose{}\right)^5</m>.
+        We begin using the <xref ref="thm_gen_power_rule" text="title"/>;
+        in this first step, we do not fully compute the derivative.
+        Rather, we are approaching this step-by-step.
+        <me>
+          y' = 5\left(\tan\mathopen{}\left(6x^3-7x\right)\mathclose{}\right)^4\cdot g'(x)
+        </me>.
+      </p>
 
-            <li><m>f(x) = \dfrac{5x^3}{e^{-x^2}}</m>.</li>
-          </ol>
-        </p>
-      </statement>
-      <solution>
-        <p>
-          <ol>
-            <li>
-              <p>
-                We must use the <xref ref="thm_ProductRule" text="title"/> and <xref ref="thm_chain_rule" text="title"/>.
-                Do not think that you must be able to <q>see</q>
-                the whole answer immediately;
-                rather, just proceed step-by-step.
-                <md>
-                  <mrow>\fp(x) \amp = x^5 \cdot \lzoo{x}{\sin\mathopen{}\left(2x^3\right)\mathclose{}} + \sin\mathopen{}\left(2x^3\right)\mathclose{}\cdot \lzoo{x}{x^5}</mrow>
-                  <mrow>\amp = x^5\left(\cos\mathopen{}\left(2x^3\right)\mathclose{}\cdot \lzoo{x}{2x^3} \right) + 5x^4\left(\sin\mathopen{}\left(2x^3\right)\mathclose{} \right)</mrow>
-                  <mrow>\amp = x^5\big(6x^2\cos\left(2x^3\right) \big) + 5x^4\big(\sin\left(2x^3\right) \big)</mrow>
-                  <mrow>\amp = 6x^7\cos\mathopen{}\left(2x^3\right)\mathclose{}+5x^4\sin\mathopen{}\left(2x^3\right)\mathclose{}</mrow>
-                </md>.
-              </p>
-            </li>
+      <p>
+        We now find <m>g'(x)</m>.
+        We again need the <xref ref="thm_chain_rule" text="title"/>;
+        <md>
+          <mrow>g'(x) \amp = \sec^2\mathopen{}\left(6x^3-7x\right)\mathclose{}\cdot \lzoo{x}{6x^3-7x}.</mrow>
+          <mrow>\amp = \sec^2\mathopen{}\left(6x^3-7x\right)\mathclose{}\cdot\left(18x^2-7\right)</mrow>
+        </md>.
+      </p>
 
-            <li>
-              <p>
-                We must employ the <xref ref="thm_QuotientRule" text="title"/> along with the <xref ref="thm_chain_rule" text="title"/>.
-                Again, proceed step-by-step.
-                <md>
-                  <mrow>\fp(x) \amp= \frac{e^{-x^2}\cdot \lzoo{x}{5x^3} - 5x^3\cdot \lzoo{x}{e^{-x^2}}}{\left(e^{-x^2}\right)^2}</mrow>
-                  <mrow>\amp= \frac{e^{-x^2}\cdot 15x^2 - 5x^3\cdot e^{-x^2}\cdot \lzoo{x}{-x^2}}{\left(e^{-x^2}\right)^2}</mrow>
-                  <mrow>\amp= \frac{e^{-x^2}\left(15x^2\right) - 5x^3\left((-2x)e^{-x^2}\right)}{\left(e^{-x^2}\right)^2}</mrow>
-                  <mrow>\amp =\frac{e^{-x^2}\left(10x^4+15x^2\right)}{e^{-2x^2}}</mrow>
-                  <mrow>\amp = e^{x^2}\left(10x^4+15x^2\right)</mrow>
-                </md>.
-              </p>
-            </li>
-          </ol>
-        </p>
-      </solution>
-    </example>
+      <p>
+        Combine this with what we found above to give
+        <md>
+          <mrow>y' \amp = 5\left(\tan\mathopen{}\left(6x^3-7x\right)\mathclose{}\right)^4\cdot\sec^2\mathopen{}\left(6x^3-7x\right)\mathclose{}\cdot\left(18x^2-7\right)</mrow>
+          <mrow>\amp = \left(90x^2-35\right)\sec^2\mathopen{}\left(6x^3-7x\right)\mathclose{}\tan^4\mathopen{}\left(6x^3-7x\right)\mathclose{}</mrow>
+        </md>.
+      </p>
 
-    <p>
-      A key to correctly working these problems is to break the problem down into smaller,
-      more manageable pieces.
-      For instance,
-      when using the <xref ref="thm_ProductRule" text="title"/> and <xref ref="thm_chain_rule" text="title"/> together,
-      just consider the first part of the <xref ref="thm_ProductRule" text="title"/> at first:
-      <m>f(x)g'(x)</m>.
-      Just rewrite <m>f(x)</m>, then find <m>g'(x)</m>.
-      Then move on to the <m>\fp(x)g(x)</m> part.
-      Don't attempt to figure out both parts at once.
-    </p>
+      <p>
+        This function is frankly a ridiculous function,
+        possessing no real practical value.
+        It is very difficult to graph,
+        as the tangent function has many vertical asymptotes and <m>6x^3-7x</m> grows so very fast.
+        The important thing to learn from this is that the derivative can be found.
+        In fact, it is not <q>hard</q>;
+        one can take several simple steps and should be careful to keep track of how to apply each of these steps.
+      </p>
+    </solution>
+  </example>
 
-    <p>
-      Likewise, using the <xref ref="thm_QuotientRule" text="title"/>,
-      approach the numerator in two steps and handle the denominator after completing that.
-      Only simplify afterward.
-    </p>
+  <p>
+    It is a traditional mathematical exercise to find the derivatives of arbitrarily complicated functions just to demonstrate that it <em>can be done</em>.
+    Just break everything down into smaller pieces.
+  </p>
 
-    <p>
-      We can also employ the <xref ref="thm_chain_rule" text="title"/> itself several times,
-      as shown in the next example.
-    </p>
+  <example xml:id="ex_chain5">
+    <title>Using the Product, Quotient and Chain Rules</title>
+    <statement>
+      <p>
+        Find the derivative of <m>\displaystyle f(x) = \frac{x\cos(x^{-2})-\sin^2(e^{4x})}{\ln(x^2+5x^4)}</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        This function likely has no practical use outside of demonstrating derivative skills.
+        The answer is given below without simplification.
+        It employs the <xref ref="thm_QuotientRule" text="title"/>,
+        the <xref ref="thm_ProductRule" text="title"/>,
+        and the <xref ref="thm_chain_rule" text="title"/> three times.
+        <md>
+          <mrow>\amp\fp(x)</mrow>
+          <mrow>\amp=\Bigg(\ln\mathopen{}\left(x^2+5x^4\right)\mathclose{}\cdot\bigg[\Big(x\cdot\left(-\sin\mathopen{}\left(x^{-2}\right)\mathclose{}\right)\cdot\left(-2x^{-3}\right)</mrow>
+          <mrow>\amp\qquad{}+1\cdot \cos\mathopen{}\left(x^{-2}\right)\Big)-2\sin\mathopen{}\left(e^{4x}\right)\mathclose{}\cdot\cos\mathopen{}\left(e^{4x}\right)\mathclose{}\cdot\left(4e^{4x}\right)\bigg]</mrow>
+          <mrow>\amp\qquad\qquad\qquad{}-\left(x\cos\mathopen{}\left(x^{-2}\right)\mathclose{}-\sin^2\mathopen{}\left(e^{4x}\right)\mathclose{}\right)\cdot\frac{2x+20x^3}{x^2+5x^4}\Bigg)</mrow>
+          <mrow>\amp\phantom{{}={}}\left/\left(\ln\mathopen{}\left(x^2+5x^4\right)\mathclose{}\right)^2\right.</mrow>
+        </md>.
+      </p>
 
-    <example xml:id="ex_chain6">
-      <title>Using the Chain Rule multiple times</title>
-      <statement>
-        <p>
-          Find the derivative of <m>y = \tan^5(6x^3-7x)</m>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          Recognize that we have the
-          <m>g(x)=\tan\mathopen{}\left(6x^3-7x\right)\mathclose{}</m> function <q>inside</q>
-          the <m>f(x)=x^5</m> function;
-          that is, we have <m>y = \left(\tan\mathopen{}\left(6x^3-7x\right)\mathclose{}\right)^5</m>.
-          We begin using the <xref ref="thm_gen_power_rule" text="title"/>;
-          in this first step, we do not fully compute the derivative.
-          Rather, we are approaching this step-by-step.
-          <me>
-            y' = 5\left(\tan\mathopen{}\left(6x^3-7x\right)\mathclose{}\right)^4\cdot g'(x)
-          </me>.
-        </p>
+      <p>
+        The reader is highly encouraged to look at each term and recognize why it is there. (<ie/>, the <xref ref="thm_QuotientRule" text="title"/> is used;
+        in the numerator, identify the <q>LOdHI</q> term,
+        etc.) This example demonstrates that derivatives can be computed systematically,
+        no matter how arbitrarily complicated the function is.
+      </p>
+    </solution>
+  </example>
 
-        <p>
-          We now find <m>g'(x)</m>.
-          We again need the <xref ref="thm_chain_rule" text="title"/>;
-          <md>
-            <mrow>g'(x) \amp = \sec^2\mathopen{}\left(6x^3-7x\right)\mathclose{}\cdot \lzoo{x}{6x^3-7x}.</mrow>
-            <mrow>\amp = \sec^2\mathopen{}\left(6x^3-7x\right)\mathclose{}\cdot\left(18x^2-7\right)</mrow>
-          </md>.
-        </p>
+  <p>
+    The <xref ref="thm_chain_rule" text="title"/> also has theoretic value.
+    That is, it can be used to find the derivatives of functions that we have not yet learned as we do in the following example.
+  </p>
 
-        <p>
-          Combine this with what we found above to give
-          <md>
-            <mrow>y' \amp = 5\left(\tan\mathopen{}\left(6x^3-7x\right)\mathclose{}\right)^4\cdot\sec^2\mathopen{}\left(6x^3-7x\right)\mathclose{}\cdot\left(18x^2-7\right)</mrow>
-            <mrow>\amp = \left(90x^2-35\right)\sec^2\mathopen{}\left(6x^3-7x\right)\mathclose{}\tan^4\mathopen{}\left(6x^3-7x\right)\mathclose{}</mrow>
-          </md>.
-        </p>
+  <example xml:id="ex_chain8">
+    <title>The Chain Rule and exponential functions</title>
+    <statement>
+      <p>
+        Use the Chain Rule to find the derivative of <m>y= 2^x</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        We only know how to find the derivative of one exponential function,
+        <m>y = e^x</m>.
+        We can accomplish our goal by rewriting <m>2</m> in terms of <m>e</m>.
+        Recalling that <m>e^x</m> and <m>\ln(x)</m> are inverse functions,
+        we can write
+        <m>2=e^{\ln 2}</m> and so
+        <me>
+          y=2^x = \left(e^{\ln 2}\right)^x = e^{x(\ln(2))}
+        </me>,
+        using the <q>power to a power</q> property of exponents.
+      </p>
 
-        <p>
-          This function is frankly a ridiculous function,
-          possessing no real practical value.
-          It is very difficult to graph,
-          as the tangent function has many vertical asymptotes and <m>6x^3-7x</m> grows so very fast.
-          The important thing to learn from this is that the derivative can be found.
-          In fact, it is not <q>hard</q>;
-          one can take several simple steps and should be careful to keep track of how to apply each of these steps.
-        </p>
-      </solution>
-    </example>
+      <p>
+        The function is now the composition <m>y=f(g(x))</m>,
+        with <m>f(x) = e^x</m> and <m>g(x) = x(\ln(2))</m>.
+        Since <m>\fp(x) = e^x</m> and
+        <m>g'(x) = \ln(2)</m>, the <xref ref="thm_chain_rule" text="title"/> gives
+        <me>
+          y' = e^{x (\ln(2))} \cdot \ln 2
+        </me>.
+      </p>
 
-    <p>
-      It is a traditional mathematical exercise to find the derivatives of arbitrarily complicated functions just to demonstrate that it <em>can be done</em>.
-      Just break everything down into smaller pieces.
-    </p>
+      <p>
+        Recall that the <m>e^{x(\ln(2))}</m> term on the right hand side is just <m>2^x</m>,
+        our original function.
+        Thus, the derivative contains the original function itself.
+        We have
+        <me>
+          y' = y \cdot \ln(2) = 2^x\cdot \ln(2)
+        </me>.
+      </p>
 
-    <example xml:id="ex_chain5">
-      <title>Using the Product, Quotient and Chain Rules</title>
-      <statement>
-        <p>
-          Find the derivative of <m>f(x) = \frac{x\cos(x^{-2})-\sin^2(e^{4x})}{\ln(x^2+5x^4)}</m>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          This function likely has no practical use outside of demonstrating derivative skills.
-          The answer is given below without simplification.
-          It employs the <xref ref="thm_QuotientRule" text="title"/>,
-          the <xref ref="thm_ProductRule" text="title"/>,
-          and the <xref ref="thm_chain_rule" text="title"/> three times.
-          <md>
-            <mrow>\amp\fp(x)</mrow>
-            <mrow>\amp=\Bigg(\ln\mathopen{}\left(x^2+5x^4\right)\mathclose{}\cdot\bigg[\Big(x\cdot\left(-\sin\mathopen{}\left(x^{-2}\right)\mathclose{}\right)\cdot\left(-2x^{-3}\right)</mrow>
-            <mrow>\amp\qquad{}+1\cdot \cos\mathopen{}\left(x^{-2}\right)\Big)-2\sin\mathopen{}\left(e^{4x}\right)\mathclose{}\cdot\cos\mathopen{}\left(e^{4x}\right)\mathclose{}\cdot\left(4e^{4x}\right)\bigg]</mrow>
-            <mrow>\amp\qquad\qquad\qquad{}-\left(x\cos\mathopen{}\left(x^{-2}\right)\mathclose{}-\sin^2\mathopen{}\left(e^{4x}\right)\mathclose{}\right)\cdot\frac{2x+20x^3}{x^2+5x^4}\Bigg)</mrow>
-            <mrow>\amp\phantom{{}={}}\left/\left(\ln\mathopen{}\left(x^2+5x^4\right)\mathclose{}\right)^2\right.</mrow>
-          </md>.
-        </p>
+      <p>
+        We can extend this process to use any base <m>a</m>,
+        where <m>a \gt 0</m> and <m>a\neq 1</m>.
+        All we need to do is replace each <q>2</q>
+        in our work with <q><m>a</m>.</q> The Chain Rule,
+        coupled with the derivative rule of <m>e^x</m>,
+        allows us to find the derivatives of all exponential functions.
+      </p>
+    </solution>
+  </example>
 
-        <p>
-          The reader is highly encouraged to look at each term and recognize why it is there. (<ie/>, the <xref ref="thm_QuotientRule" text="title"/> is used;
-          in the numerator, identify the <q>LOdHI</q> term,
-          etc.) This example demonstrates that derivatives can be computed systematically,
-          no matter how arbitrarily complicated the function is.
-        </p>
-      </solution>
-    </example>
+  <p>
+    The comment at the end of previous example is important and is restated formally as a theorem.
+  </p>
 
-    <p>
-      The <xref ref="thm_chain_rule" text="title"/> also has theoretic value.
-      That is, it can be used to find the derivatives of functions that we have not yet learned as we do in the following example.
-    </p>
+  <theorem xml:id="thm_exponentials">
+    <title>Derivatives of Exponential Functions</title>
+    <statement>
+      <p>
+        Let <m>f(x)=a^x</m>, for <m>a \gt 0, a\neq 1</m>.
 
-    <example xml:id="ex_chain8">
-      <title>The Chain Rule and exponential functions</title>
-      <statement>
-        <p>
-          Use the Chain Rule to find the derivative of <m>y= 2^x</m>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          We only know how to find the derivative of one exponential function,
-          <m>y = e^x</m>.
-          We can accomplish our goal by rewriting <m>2</m> in terms of <m>e</m>.
-          Recalling that <m>e^x</m> and <m>\ln(x)</m> are inverse functions,
-          we can write
-          <m>2=e^{\ln 2}</m> and so
-          <me>
-            y=2^x = \left(e^{\ln 2}\right)^x = e^{x(\ln(2))}
-          </me>,
-          using the <q>power to a power</q> property of exponents.
-        </p>
+            <idx><h>derivative</h><h>exponential functions</h></idx>
 
-        <p>
-          The function is now the composition <m>y=f(g(x))</m>,
-          with <m>f(x) = e^x</m> and <m>g(x) = x(\ln(2))</m>.
-          Since <m>\fp(x) = e^x</m> and
-          <m>g'(x) = \ln(2)</m>, the <xref ref="thm_chain_rule" text="title"/> gives
-          <me>
-            y' = e^{x (\ln(2))} \cdot \ln 2
-          </me>.
-        </p>
+        Then <m>f</m> is differentiable for all real numbers (i.e., differentiable everywhere) and
+        <me>
+          \fp(x) = \ln(a) \cdot a^x
+        </me>.
+      </p>
+    </statement>
+  </theorem>
 
-        <p>
-          Recall that the <m>e^{x(\ln(2))}</m> term on the right hand side is just <m>2^x</m>,
-          our original function.
-          Thus, the derivative contains the original function itself.
-          We have
-          <me>
-            y' = y \cdot \ln(2) = 2^x\cdot \ln(2)
-          </me>.
-        </p>
+  <figure>
+    <caption>Derivatives of exponential and general power functions</caption>
+    <video xml:id="vid_deriv_chain_gen_power_exp" youtube="LnmwxZ5w30w"/>
+  </figure>
 
-        <p>
-          We can extend this process to use any base <m>a</m>,
-          where <m>a \gt 0</m> and <m>a\neq 1</m>.
-          All we need to do is replace each <q>2</q>
-          in our work with <q><m>a</m>.</q> The Chain Rule,
-          coupled with the derivative rule of <m>e^x</m>,
-          allows us to find the derivatives of all exponential functions.
-        </p>
-      </solution>
-    </example>
-
-    <p>
-      The comment at the end of previous example is important and is restated formally as a theorem.
-    </p>
-
-    <theorem xml:id="thm_exponentials">
-      <title>Derivatives of Exponential Functions</title>
-      <statement>
-        <p>
-          Let <m>f(x)=a^x</m>, for <m>a \gt 0, a\neq 1</m>.
-
-              <idx><h>derivative</h><h>exponential functions</h></idx>
-
-          Then <m>f</m> is differentiable for all real numbers (i.e., differentiable everywhere) and
-          <me>
-            \fp(x) = \ln(a) \cdot a^x
-          </me>.
-        </p>
-      </statement>
-    </theorem>
-  </introduction>
-
-  <subsection>
+  <paragraphs>
     <title>Alternate Chain Rule Notation</title>
     <p>
       It is instructive to understand what the <xref ref="thm_chain_rule" text="title"/>
@@ -895,7 +917,7 @@
       In these situations,
       <term>implicit differentiation</term> is indispensable.
     </p>
-  </subsection>
+  </paragraphs>
 
   <exercises>
     <exercisegroup>
