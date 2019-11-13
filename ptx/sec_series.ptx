@@ -3,14 +3,14 @@
   <title>Infinite Series</title>
   <introduction>
     <p>
-      Given the sequence <m>\{a_n\} = \{1/2^n\} = 1/2,\ 1/4,\ 1/8,\ \ldots</m>,
+      Given the sequence <m>\{a_n\} = \{1/2^n\} = 1/2,\, 1/4,\, 1/8,\, \ldots</m>,
       consider the following sums:
       <md>
         <mrow> a_1\amp = 1/2 \amp = \amp 1/2</mrow>
         <mrow> a_1+a_2 \amp = 1/2+1/4 \amp = \amp 3/4 </mrow>
         <mrow> a_1+a_2+a_3 \amp = 1/2+1/4+1/8 \amp =\amp 7/8</mrow>
         <mrow> a_1+a_2+a_3+a_4 \amp= 1/2+1/4+1/8+1/16 \amp = \amp 15/16 </mrow>
-      </md>      
+      </md>
     </p>
 
     <p>
@@ -163,7 +163,7 @@
                   <mrow>S_4 \amp = 0</mrow>
                 </md>
                 This pattern repeats;
-                we find that <m>S_n = \begin{cases} 1  \amp  n\ \text{ is odd } \\ 0  \amp  n\  \text{ is even } \end{cases}</m>.
+                we find that <m>S_n = \begin{cases} 1  \amp  n\, \text{ is odd } \\, 0  \amp  n\,  \text{ is even } \end{cases}</m>.
                 As <m>\{S_n\}</m> oscillates,
                 repeating 1, 0, 1, 0, <m>\ldots</m>,
                 we conclude that <m>\lim\limits_{n\to\infty}S_n</m> does not exist,
@@ -308,7 +308,7 @@
             <li xml:id="thm_geom_series_a">
 
               <p>
-                The <m>n^\text{ th }</m> partial sum is:
+                The <m>n</m>th partial sum is:
                 <m>\ds S_n = \frac{1-r^{n+1}}{1-r}</m>.
               </p>
             </li>
@@ -330,72 +330,72 @@
           </ol>
         </p>
       </statement>
+      <proof>
+        <p>
+          We begin by proving the formula for the simplied form for the partial sums.
+          Consider the <m>n</m>th partial sum of the geometric series,
+          <m>S_n=\sum_{i=0}^n r^i</m>:
+          <md>
+            <mrow>S_n \amp = 1+r+r^2+\dots+r^{n-1}+r^n</mrow>
+            <intertext>Multiply both sides by <m>r</m>:</intertext>
+            <mrow>r\cdot S_n \amp = r+r^2+r^3+\dots+r^{n}+r^{n+1}</mrow>
+            <intertext>Now subtract the second line from the first and solve for <m>S_n</m>:</intertext>
+            <mrow>S_n-r\cdot S_n \amp = 1-r^{n+1}</mrow>
+            <mrow>S_n(1-r) \amp = 1-r^{n+1}</mrow>
+            <mrow>S_n \amp = \frac{1-r^{n+1}}{1-r}</mrow>
+          </md>.
+          We have shown <xref ref="thm_geom_series_a">Part</xref>
+          of <xref ref="thm_geom_series" text="title"/>.
+        </p>
+
+        <p>
+          Now, examining the partial sums,
+          we consider four cases to determine when <m>S_n</m> converges:
+
+          <ol>
+            <li>
+              <p>
+                If <m>\abs{r}\lt 1</m>, then
+                <m>r^n \to 0</m> as <m>n \to \infty</m>,
+                so we have <m>\inflim S_n=\frac{1-0}{1-r}=\frac{1}{1-r}</m>,
+                a convergent sequence of partial sums.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                If <m>\abs{r}\gt 1</m>, then <m>r^n \to \pm \infty</m>
+                (depending on the sign of <m>r</m>)
+                as <m>n \to \infty</m>.
+                We also have <m>1-r</m> a constant,
+                so <m>\inflim S_n</m> does not exist
+                (if <m>r \gt 0</m>,
+                the partial sums diverge to <m>\infty</m> and if <m>r \lt 0</m>,
+                the partial sums diverge to <m>-\infty</m>).
+              </p>
+            </li>
+
+            <li>
+              If <m>r=1</m>,
+              then <m>S_n = \frac{1-1^{n+1}}{1-1}</m> is undefined.
+              However, examining <m>S_n = 1+r+r^2+\dots+r^{n-1}+r^n</m> for <m>r=1</m>,
+              we can see that the partial sums simplify to <m>S_n=n+1</m>.
+              Clearly this sequence diverges to <m>\infty</m>.
+            </li>
+
+            <li>
+              If <m>r=-1</m>, then <m>S_n = \frac{1-(-1)^{n+1}}{2}</m>.
+              For even values of <m>n</m>, the partial sums are always <m>1</m>.
+              For odd values of <m>n</m>, the partial sums are always <m>0</m>.
+              So the sequence of partial sums diverges.
+            </li>
+          </ol>
+
+          Therefore, a geometric series converges if and only if <m>\abs{r} \lt 1</m>.
+        </p>
+      </proof>
+
     </theorem>
-
-    <proof>
-      <p>
-        We begin by proving the formula for the simplied form for the partial sums.
-        Consider the <m>n^\text{ th }</m> partial sum of the geometric series,
-        <m>S_n=\sum_{i=0}^n r^i</m>:
-        <md>
-          <mrow>S_n \amp = 1+r+r^2+\dots+r^{n-1}+r^n</mrow>
-          <intertext>Multiply both sides by <m>r</m>:</intertext>
-          <mrow>r\cdot S_n \amp = r+r^2+r^3+\dots+r^{n}+r^{n+1}</mrow>
-          <intertext>Now subtract the second line from the first and solve for <m>S_n</m>:</intertext>
-          <mrow>S_n-r\cdot S_n \amp = 1-r^{n+1}</mrow>
-          <mrow>S_n(1-r) \amp = 1-r^{n+1}</mrow>
-          <mrow>S_n \amp = \frac{1-r^{n+1}}{1-r}</mrow>
-        </md>.
-        We have shown <xref ref="thm_geom_series_a">Part</xref>
-        of <xref ref="thm_geom_series" text="title"/>.
-      </p>
-
-      <p>
-        Now, examining the partial sums,
-        we consider four cases to determine when <m>S_n</m> converges:
-
-        <ol>
-          <li>
-            <p>
-              If <m>\abs{r}\lt 1</m>, then
-              <m>r^n \to 0</m> as <m>n \to \infty</m>,
-              so we have <m>\inflim S_n=\frac{1-0}{1-r}=\frac{1}{1-r}</m>,
-              a convergent sequence of partial sums.
-            </p>
-          </li>
-
-          <li>
-            <p>
-              If <m>\abs{r}\gt 1</m>, then <m>r^n \to \pm \infty</m>
-              (depending on the sign of <m>r</m>)
-              as <m>n \to \infty</m>.
-              We also have <m>1-r</m> a constant,
-              so <m>\inflim S_n</m> does not exist
-              (if <m>r \gt 0</m>,
-              the partial sums diverge to <m>\infty</m> and if <m>r \lt 0</m>,
-              the partial sums diverge to <m>-\infty</m>).
-            </p>
-          </li>
-
-          <li>
-            If <m>r=1</m>,
-            then <m>S_n = \frac{1-1^{n+1}}{1-1}</m> is undefined.
-            However, examining <m>S_n = 1+r+r^2+\dots+r^{n-1}+r^n</m> for <m>r=1</m>,
-            we can see that the partial sums simplify to <m>S_n=n+1</m>.
-            Clearly this sequence diverges to <m>\infty</m>.
-          </li>
-
-          <li>
-            If <m>r=-1</m>, then <m>S_n = \frac{1-(-1)^{n+1}}{2}</m>.
-            For even values of <m>n</m>, the partial sums are always <m>1</m>.
-            For odd values of <m>n</m>, the partial sums are always <m>0</m>.
-            So the sequence of partial sums diverges.
-          </li>
-        </ol>
-
-        Therefore, a geometric series converges if and only if <m>\abs{r} \lt 1</m>.
-      </p>
-    </proof>
 
     <p>
       According to <xref ref="thm_geom_series">Theorem</xref>,
@@ -1480,6 +1480,7 @@
     </p>
 
     <proof>
+      <title>Divergence of the harmonic series</title>
       <p>
         If you just consider the partial sums <m>S_1, S_2, S_3, \dots, S_{1000}, S_{1001}, \dots</m>,
         it is not apparent that the partial sums diverge.
@@ -1604,7 +1605,7 @@
             <solution>
               <p>
                 One sequence is the sequence of terms <m>\{a_\}</m>.
-                The other is the sequence of <m>n^\text{ th }</m> partial sums,
+                The other is the sequence of <m>n</m>th partial sums,
                 <m>\{S_n\} = \{\sum_{i=1}^n a_i\}</m>.
               </p>
             </solution>
@@ -2312,7 +2313,7 @@
             <li>
               <p>
                 Find a formula for <m>S_n</m>,
-                the <m>n^\text{ th }</m> partial sum of the series.
+                the <m>n</m>th partial sum of the series.
               </p>
             </li>
 
@@ -2870,7 +2871,7 @@
                     <p>
                       Show why <m>\ds \infser \frac{1}{2n-1} \gt \infser \frac{1}{2n}</m>.
 
-                      (Compare each <m>n^\text{ th }</m> partial sum.)
+                      (Compare each <m>n</m>th partial sum.)
                     </p>
                   </li>
 
@@ -2901,8 +2902,8 @@
                 <ol>
                   <li>
                     <p>
-                      The <m>n^\text{ th }</m> partial sum of the odd series is <m>1+\frac13+\frac15+\cdots+\frac{1}{2n-1}</m>.
-                      The <m>n^\text{ th }</m> partial sum of the even series is <m>\frac12+\frac14 + \frac16 + \cdots +\frac1{2n}</m>.
+                      The <m>n</m>th partial sum of the odd series is <m>1+\frac13+\frac15+\cdots+\frac{1}{2n-1}</m>.
+                      The <m>n</m>th partial sum of the even series is <m>\frac12+\frac14 + \frac16 + \cdots +\frac1{2n}</m>.
                       Each term of the even series is less than the corresponding term of the odd series,
                       giving us our result.
                     </p>
@@ -2910,8 +2911,8 @@
 
                   <li>
                     <p>
-                      The <m>n^\text{ th }</m> partial sum of the odd series is <m>1+\frac13+\frac15+\cdots+\frac1{2n-1}</m>.
-                      The <m>n^\text{ th }</m> partial sum of 1 plus the even series is <m>1+\frac12+\frac14+\cdots + \frac{1}{2(n-1)}</m>.
+                      The <m>n</m>th partial sum of the odd series is <m>1+\frac13+\frac15+\cdots+\frac1{2n-1}</m>.
+                      The <m>n</m>th partial sum of 1 plus the even series is <m>1+\frac12+\frac14+\cdots + \frac{1}{2(n-1)}</m>.
                       Each term of the even series is now greater than or equal to the corresponding term of the odd series,
                       with equality only on the first term.
                       This gives us the result.
@@ -2922,7 +2923,7 @@
                     <p>
                       If the odd series converges,
                       the work done in (a) shows the even series converges also.
-                      (The sequence of the <m>n^\text{ th }</m> partial sum of the even series is bounded and monotonically increasing.)
+                      (The sequence of the <m>n</m>th partial sum of the even series is bounded and monotonically increasing.)
                       Likewise, (b) shows that if the even series converges,
                       the odd series will, too.
                       Thus if either series converges, the other does.
