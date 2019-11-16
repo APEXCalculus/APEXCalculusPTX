@@ -98,7 +98,7 @@
           A differential equation paired with an initial condition
           (or initial conditions)
           is called an <term>initial value problem.</term>
-              <idx><h>initial value problem</h><h>for differential equations</idx>
+              <idx><h>initial value problem</h><h>for differential equations</h></idx>
               <idx><h>initial condition</h></idx>
         </p>
         <p>
@@ -182,15 +182,36 @@
           and a different function.
           We emphasize the particular solution corresponding to the initial condition <m>y(0)=3/2</m>.
         </p>
+        <figure xml:id="fig_general_particular">
+          <caption>A representation of some of the members of general solution to the differential equation <m>\yp = 2y</m>,
+          including the particular solution to the initial value problem with <m>y(0)=\displaystyle 3/2</m>,
+          from <xref ref="ex_simple_de">Example</xref></caption>
+          <image xml:id="img_general_particular" width="47%">
+            <description></description>
+            <latex-image>
+              \begin{tikzpicture}
+
+              \begin{axis}[
+              ymin=-10.5,ymax=10.75,
+              xmin=-2,xmax=2.15%
+              ]
+
+              \foreach \n in {-6,...,6}
+                {
+                \addplot[secondcurvestyle,-,domain=-2:2,samples=50] {\n/2*exp(2*x)};
+                }
+              \addplot[firstcurvestyle,-,domain=-2:2,samples=50] {3/2*exp(2*x)};
+              \end{axis}
+
+              %\node [right] at (myplot.right of origin) {\scriptsize $x$};
+              %\node [above] at (myplot.above origin) {\scriptsize $y$};
+
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+        </figure>
       </solution>
     </example>
-
-    <figure xml:id="fig_general_particular">
-      <caption>A representation of some of the members of general solution to the differential equation <m>\yp = 2y</m>,
-      including the particular solution to the initial value problem with <m>y(0)=\displaystyle 3/2</m>,
-      from <xref ref="ex_simple_de">Example</xref></caption>
-      <img src="figures/fig20_01_general_particular"/>
-    </figure>
 
     <example xml:id="ex_simple_de2">
       <title>A second-order differential equation</title>
@@ -374,7 +395,29 @@
 
     <figure xml:id="fig_20_01_intersection">
       <caption>Graphically finding an approximate solution to <m>\cos x = x</m>.</caption>
-      <img src="figures/fig20_01_intersection"/>
+      <image xml:id="fig_de_intersection" width="47%">
+        <description></description>
+        <latex-image>
+          \begin{tikzpicture}
+
+          \begin{axis}[
+            minor x tick num=1,
+            %extra x ticks={.25,.75},
+            ymin=-.1,ymax=1.1,%
+            xmin=-.1,xmax=1.1%
+          ]
+
+          \addplot [firstcurvestyle,-,domain=0:1] {cos(deg(x))};
+          \addplot [secondcurvestyle,-] coordinates {(0,0) (1,1)};
+
+          \end{axis}
+
+          %\node [right] at (myplot.right of origin) {\scriptsize $x$};
+          %\node [above] at (myplot.above origin) {\scriptsize $y$};
+
+          \end{tikzpicture}
+        </latex-image>
+      </image>
     </figure>
     <p>
       Consider the first-order differential equation
@@ -464,13 +507,34 @@
           There are also various online tools that can make the drawings.
           The slope field for <m>\yp = x+y</m> is shown in <xref ref="fig_20_01_slopefield1">Figure</xref>.
         </p>
+        <figure xml:id="fig_20_01_slopefield1">
+          <caption>Slope field for <m>\yp = x+y</m> from <xref ref="ex_slope_field">Example</xref>.</caption>
+          <image xml:id="img_slopefield1" width="47%">
+            <description></description>
+            <latex-image>
+              \def\length{sqrt(1+(x+y)^2)}
+              \begin{tikzpicture}
+
+              \begin{axis}[
+                view={0}{90},
+                domain = -2:2,
+                ytick={-2,-1,0,1,2},
+              ]
+
+              \addplot3 [secondcolor,quiver = {u = {1/(\length)}, v = {(x+y)/(\length)},scale arrows=.25},samples=9]{0};
+
+              \end{axis}
+
+              %\node [right] at (myplot.right of origin) {\scriptsize $x$};
+              %\node [above] at (myplot.above origin) {\scriptsize $y$};
+
+              \end{tikzpicture}
+            </latex-image>
+
+          </image>
+        </figure>
       </solution>
     </example>
-
-    <figure xml:id="fig_20_01_slopefield1">
-      <caption>Slope field for <m>\yp = x+y</m> from <xref ref="ex_slope_field">Example</xref>.</caption>
-      <img src="figures/fig20_01_slopefield1"/>
-    </figure>
 
     <example xml:id="ex_IVP_graphical">
       <title>A graphical solution to an initial value problem</title>
@@ -507,18 +571,38 @@
           in either direction.
           A sketch of the solution is shown in <xref ref="fig_20_01_slopefield1solution">Figure</xref>.
         </p>
+        <figure xml:id="fig_20_01_slopefield1solution">
+          <caption>Solution to the initial value problem <m>\yp = x+y</m>, with <m>y(1)=-1</m> from <xref ref="ex_IVP_graphical">Example</xref></caption>
+          <image xml:id="img_slopefield1solution" width="47%">
+            <description></description>
+            <latex-image>
+              \def\length{sqrt(1+(x+y)^2)}
+              \begin{tikzpicture}
+
+              \begin{axis}[
+                view={0}{90},
+                domain = -2:2,
+                xtick={-2,-1,0,1,2},
+                ytick={-2,-1,0,1,2},
+                xmin=-2,xmax=2.3
+              ]
+
+              \addplot3 [secondcolor,quiver = {u = {1/(\length)}, v = {(x+y)/(\length)},scale arrows=.25},samples=9]{0};
+              \addplot [firstcurvestyle,-,domain=-2.5:2.2,samples=51] {-(x+1)+exp(x-1)};
+
+              \fill[black,draw=black] (axis cs:1,-1) circle (1.5pt);
+
+              \end{axis}
+
+              %\node [right] at (myplot.right of origin) {\scriptsize $x$};
+              %\node [above] at (myplot.above origin) {\scriptsize $y$};
+
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+        </figure>
       </solution>
     </example>
-
-    <figure xml:id="fig_20_01_slopefield1solution">
-      <caption>Solution to the initial value problem <m>\yp = x+y</m>, with <m>y(1)=-1</m> from <xref ref="ex_IVP_graphical">Example</xref></caption>
-      <img src="figures/fig20_01_slopefield1solution"/>
-    </figure>
-
-    <figure xml:id="fig_20_01_slopefield2">
-      <caption>Slope field for the logistic differential equation <m>\yp = y(1-y)</m> from <xref ref="ex_logistic_slope_field">Example</xref>.</caption>
-      <img src="figures/fig20_01_slopefield2"/>
-    </figure>
 
     <example xml:id="ex_logistic_slope_field">
       <title>Using a slope field to predict long term behavior</title>
@@ -528,6 +612,36 @@
           shown in <xref ref="fig_20_01_slopefield2">Figure</xref>,
           to predict long term behavior of solutions to the equation.
         </p>
+        <figure xml:id="fig_20_01_slopefield2">
+          <caption>Slope field for the logistic differential equation <m>\yp = y(1-y)</m> from <xref ref="ex_logistic_slope_field">Example</xref>.</caption>
+          <image xml:id="img_slopefield2" width="47%">
+            <description></description>
+            <latex-image>
+              \def\length{sqrt(1+(y*(1-y))^2)}
+              \begin{tikzpicture}
+
+              \begin{axis}[
+                view={0}{90},
+                domain = -1:3,
+                y domain=-.5:1.5,
+                xtick={-1,0,1,2,3},
+                ytick={-.5,0,.5,1},
+                ymin=-0.5,ymax=1.5,
+                xmin=-1,xmax=3,
+                xlabel={$t$}
+              ]
+
+              \addplot3 [secondcolor,quiver = {u = {1/(\length)}, v = {(y*(1-y))/(\length)},scale arrows=.1},samples=20]{0};
+
+              \end{axis}
+
+              %\node [right] at (myplot.right of origin) {\scriptsize $t$};
+              %\node [above] at (myplot.above origin) {\scriptsize $y$};
+
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+        </figure>
       </statement>
       <solution>
         <p>
@@ -573,13 +687,43 @@
           We call this the <em>carrying capacity.</em>
           <idx><h>carrying capacity</h></idx>
         </p>
+        <figure xml:id="fig_20_01_slopefield2solution">
+          <caption>Slope field for the logistic differential equation <m>\yp = y(1-y)</m> from <xref ref="ex_logistic_slope_field">Example</xref>
+          with a few representative solution curves.</caption>
+          <image xml:id="img_slopefield2solution" width="47%">
+            <description></description>
+            <latex-image>
+              \def\length{sqrt(1+(y*(1-y))^2)}
+              \begin{tikzpicture}
+
+              \begin{axis}[
+                view={0}{90},
+                domain = -1:3,
+                y domain=-.5:1.5,
+                xtick={-1,0,1,2,3},
+                ytick={-.5,0,.5,1},
+                xlabel={$t$},
+                ymin=-0.5,ymax=1.5,
+                xmin=-1,xmax=3
+              ]
+
+              \addplot3 [secondcolor,quiver = {u = {1/(\length)}, v = {(y*(1-y))/(\length)},scale arrows=.1},samples=20]{0};
+              \addplot [firstcurvestyle,-,domain = -1:2, samples=50] {1/(1-10*exp(-x)};
+              \addplot [firstcurvestyle,-,domain = -1:3, samples=50] {1/(1+1*exp(-x)};
+              \addplot [firstcurvestyle,-,domain = -1:3, samples=50] {1/(1-.3*exp(-x)};
+
+              \end{axis}
+              %\node [right] at (myplot.right of origin) {\scriptsize $t$};
+              %\node [above] at (myplot.above origin) {\scriptsize $y$};
+
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+        </figure>
       </solution>
     </example>
 
-    <figure xml:id="fig_20_01_slopefield2solution">
-      <caption>Slope field for the logistic differential equation <m>\yp = y(1-y)</m> from <xref ref="ex_logistic_slope_field">Example</xref> with a few representative solution curves.</caption>
-      <img src="figures/fig20_01_slopefield2solution"/>
-    </figure>
+
   </subsection>
 
   <subsection>
@@ -735,13 +879,35 @@
           (connected by line segments)
           are plotted along with the analytical solution to the initial value problem in <xref ref="fig_20_01_euler1">Figure</xref>.
         </p>
+        <figure xml:id="fig_20_01_euler1">
+          <caption>Euler's Method approximation to <m>\yp = x + y</m> with <m>y(1) = -1</m> from <xref ref="ex_euler1">Example</xref>,
+          along with the analytical solution to the initial value problem.</caption>
+          <image xml:id="img-euler1" width="47%">
+            <description></description>
+            <latex-image>
+              \begin{tikzpicture}
+
+              \begin{axis}[
+                xtick={1,1.5,2},
+                ytick={-1,-.5,0},
+                ymin=-1.25,ymax=0.1,
+                xmin=.9,xmax=2.1
+              ]
+
+              \addplot [secondcurvestyle,-,solid,domain=1:2,samples = 51] {-(x+1)+exp(x-1)};
+              \addplot [firstcolor, mark = *] coordinates{ (1,-1) (1.5,-1) (2,-0.75)};
+
+              \end{axis}
+
+              %\node [right] at (myplot.right of origin) {\scriptsize $x$};
+              %\node [above] at (myplot.above origin) {\scriptsize $y$};
+
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+        </figure>
       </solution>
     </example>
-
-    <figure xml:id="fig_20_01_euler1">
-      <caption>Euler's Method approximation to <m>\yp = x + y</m> with <m>y(1) = -1</m> from <xref ref="ex_euler1">Example</xref>, along with the analytical solution to the initial value problem.</caption>
-      <img src="figures/fig20_01_euler1"/>
-    </figure>
 
     <p>
       This approximation doesn't appear terrific,
@@ -786,13 +952,41 @@
           along with the points from <xref ref="ex_euler1">Example</xref> and the analytic solution,
           are plotted in <xref ref="fig_20_01_euler2">Figure</xref>.
         </p>
+        <figure xml:id="fig_20_01_euler2">
+          <caption>Euler's Method approximations to <m>\yp = x + y</m> with <m>y(1) = -1</m> from <xref ref="ex_euler1">Examples</xref>
+          and <xref ref="ex_euler2"></xref>, along with the analytical solution.</caption>
+          <image xml:id="img-euler2" width="47%">
+            <description></description>
+            <latex-image>
+              \begin{tikzpicture}
+
+              \begin{axis}[
+                xtick={1,1.5,2},
+                ytick={-1,-.5,0},
+                ymin=-1.25,ymax=0.1,
+                xmin=.9,xmax=2.35
+              ]
+
+              \addplot [secondcolor,thick,domain=1:2,samples = 51] {-(x+1)+exp(x-1)};
+              \addplot [firstcolor, mark = *] coordinates{ (1,-1) (1.5,-1) (2,-0.75)};
+              \addplot [firstcolor, mark = *,dashed] coordinates{ (1,-1) (1.25,-1) (1.5,-.9375) (1.75,-.7969) (2,-.5586)};
+
+              \node [right] at (axis cs:2,-0.75) {\scriptsize $h = 0.5$};
+              \node [right] at (axis cs:2,-0.5586) {\scriptsize $h = 0.25$};
+
+              \end{axis}
+
+              %\node [right] at (myplot.right of origin) {\scriptsize $x$};
+              %\node [above] at (myplot.above origin) {\scriptsize $y$};
+
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+        </figure>
       </solution>
     </example>
 
-    <figure xml:id="fig_20_01_euler2">
-      <caption>Euler's Method approximations to <m>\yp = x + y</m> with <m>y(1) = -1</m> from <xref ref="ex_euler1">Examples</xref> and <xref ref="ex_euler2"></xref>, along with the analytical solution.</caption>
-      <img src="figures/fig20_01_euler2"/>
-    </figure>
+
 
     <p>
       Using the results from <xref ref="ex_euler1">Examples</xref>
@@ -883,13 +1077,38 @@
           are plotted in <xref ref="fig_20_01_euler3">Figure</xref>.
           Notice how well they seem to match the true solution.
         </p>
+        <figure xml:id="fig_20_01_euler3">
+          <caption>Euler's Method approximation to <m>\yp = y(1-y)</m> with <m>y(0) = 0.25</m> from <xref ref="ex_euler3">Example</xref>,
+          along with the analytical solution.</caption>
+          <image xml:id="img_euler3" width="47%">
+            <description></description>
+            <latex-image>
+              \begin{tikzpicture}
+
+              \begin{axis}[
+                xtick={0,1,2,3,4},
+                ytick={0,0.5,1},
+                xlabel={$t$},
+                ymin=-.1,ymax=1.1,
+                xmin=-.1,xmax=4.1
+              ]
+
+              \addplot [firstcurvestyle,-,domain = 0:4, samples=50] {1/(1+3*exp(-x)};
+              \addplot [firstcolor, mark = *] coordinates{(0,.25)(0.4,.325)(0.8,.41275)(1.2,.50970)(1.6,.60966)(2.0,.70485)(2.4,.78806)(2.8,.85487)(3.2,.90450)(3.6,.93905)(4.0,.96194)};
+
+              \end{axis}
+
+              %\node [right] at (myplot.right of origin) {\scriptsize $t$};
+              %\node [above] at (myplot.above origin) {\scriptsize $y$};
+
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+        </figure>
       </solution>
     </example>
 
-    <figure xml:id="fig_20_01_euler3">
-      <caption>Euler's Method approximation to <m>\yp = y(1-y)</m> with <m>y(0) = 0.25</m> from <xref ref="ex_euler3">Example</xref>, along with the analytical solution.</caption>
-      <img src="figures/fig20_01_euler3"/>
-    </figure>
+
 
     <p>
       The study of differential equations is a natural extension of the study of derivatives and integrals.
@@ -1105,9 +1324,29 @@
           </p>
         </statement>
         <answer>
-          <p>
-            <img src="figures/fig20_01_ex_11ans"/>
-          </p>
+          <sidebyside width="47%">
+            <image xml:id="img_20_01_ex_11ans">
+              <description></description>
+              <latex-image>
+                \begin{tikzpicture}
+
+                \begin{axis}[
+                  view={0}{90},
+                  domain = -2:2,
+                	ytick={-2,-1,0,1,2},
+                ]
+
+                \addplot3 [secondcolor,quiver = {u = {1/(sqrt(1+(y-x)^2))}, v = {(y-x)/(sqrt(1+(y-x)^2))},scale arrows=.25},samples=9]{0};
+
+                \end{axis}
+
+                %\node [right] at (myplot.right of origin) {\scriptsize $x$};
+                %\node [above] at (myplot.above origin) {\scriptsize $y$};
+
+                \end{tikzpicture}
+              </latex-image>
+            </image>
+          </sidebyside>
         </answer>
       </exercise>
       <exercise>
@@ -1117,9 +1356,28 @@
           </p>
         </statement>
         <answer>
-          <p>
-            <img src="figures/fig20_01_ex_12ans"/>
-          </p>
+          <sidebyside width="47%">
+            <image xml:id="img_20_01_ex_12ans">
+              <description></description>
+              <latex-image>
+                \begin{tikzpicture}
+
+                \begin{axis}[
+                  view={0}{90},
+                  domain = -2:2,
+                	ytick={-2,-1,0,1,2},
+                ]
+                \addplot3 [secondcolor,quiver = {u = {1/(sqrt(1+(x/(2*y))^2))}, v = {(x/(2*y))/(sqrt(1+(x/(2*y))^2))},scale arrows=.2},samples=10]{0};
+
+                \end{axis}
+
+                %\node [right] at (myplot.right of origin) {\scriptsize $x$};
+                %\node [above] at (myplot.above origin) {\scriptsize $y$};
+
+                \end{tikzpicture}
+              </latex-image>
+            </image>
+          </sidebyside>
         </answer>
       </exercise>
       <exercise>
@@ -1129,9 +1387,29 @@
           </p>
         </statement>
         <answer>
-          <p>
-            <img src="figures/fig20_01_ex_13ans"/>
-          </p>
+          <sidebyside width="47%">
+            <image xml:id="img_20_01_ex_13ans">
+              <description></description>
+              <latex-image>
+                \begin{tikzpicture}
+
+                \begin{axis}[
+                  view={0}{90},
+                  domain = -2:2,
+                	ytick={-2,-1,0,1,2},
+                ]
+
+                \addplot3 [secondcolor,quiver = {u = {1/(sqrt(1+(sin(deg pi*y))^2))}, v = {(sin(deg pi*y))/(sqrt(1+(sin(deg pi*y))^2))},scale arrows=.15},samples=20]{0};
+
+                \end{axis}
+
+                %\node [right] at (myplot.right of origin) {\scriptsize $x$};
+                %\node [above] at (myplot.above origin) {\scriptsize $y$};
+
+                \end{tikzpicture}
+              </latex-image>
+            </image>
+          </sidebyside>
         </answer>
       </exercise>
       <exercise>
@@ -1141,9 +1419,29 @@
           </p>
         </statement>
         <answer>
-          <p>
-            <img src="figures/fig20_01_ex_30ans"/>
-          </p>
+          <sidebyside width="47%">
+            <image xml:id="img_20_01_ex_30ans">
+              <description></description>
+              <latex-image>
+                \begin{tikzpicture}
+
+                \begin{axis}[
+                  view={0}{90},
+                  domain = -2:2,
+                	ytick={-2,-1,0,1,2},
+                ]
+
+                \addplot3 [secondcolor,quiver = {u = {1/(sqrt(1+(y/4)^2))}, v = {(y/4)/(sqrt(1+(y/4)^2))},scale arrows=.2},samples=10]{0};
+
+                \end{axis}
+
+                %\node [right] at (myplot.right of origin) {\scriptsize $x$};
+                %\node [above] at (myplot.above origin) {\scriptsize $y$};
+
+                \end{tikzpicture}
+              </latex-image>
+            </image>
+          </sidebyside>
         </answer>
       </exercise>
     </exercisegroup>
@@ -1153,32 +1451,117 @@
           Match each slope field in <xref ref="fig_slopefield_exercise"/> with the appropriate differential equation.
         </p>
         <figure xml:id="fig_slopefield_exercise">
+          <caption>Slope fields for <xref first="ex_slopefield_first" last="ex_slopefield_last">Exercises</xref></caption>
           <sbsgroup>
-            <sidebyside widths="40%">
+            <sidebyside widths="40% 40%">
               <figure>
                 <caption/>
-                <img src="figures/fig20_01_ex_14_a"/>
+                <image xml:id="img_slopefield_exercise_a">
+                  <description></description>
+                  <latex-image>
+                    \begin{tikzpicture}
+
+                    \begin{axis}[
+                      view={0}{90},
+                      domain = -2:2,
+                      y domain = -2:2,
+                    	ytick={-3,-2,-1,0,1,2,3},
+                    ]
+
+                    \addplot3 [secondcolor,quiver = {u = {1/(sqrt(1+(x*(1-x))^2))}, v = {(x*(1-x))/(sqrt(1+(x*(1-x))^2))},scale arrows=.1},samples=15]{0};
+
+                    \end{axis}
+
+                    %\node [right] at (myplot.right of origin) {\scriptsize $x$};
+                    %\node [above] at (myplot.above origin) {\scriptsize $y$};
+
+                    \end{tikzpicture}
+                  </latex-image>
+                </image>
               </figure>
               <figure>
                 <caption/>
-                <img src="figures/fig20_01_ex_14_b"/>
+                <image xml:id="img_slopefield_exercise_b">
+                  <description></description>
+                  <latex-image>
+                    \begin{tikzpicture}
+
+                    \begin{axis}[
+                      view={0}{90},
+                      domain = -2:2,
+                      y domain = -2:2,
+                    	ytick={-3,-2,-1,0,1,2,3},
+                    ]
+
+                    \addplot3 [secondcolor,quiver = {u = {1/(sqrt(1+(x*y)^2))}, v = {(x*y)/(sqrt(1+(x*y)^2))},scale arrows=.1},samples=15]{0};
+
+                    \end{axis}
+
+                    %\node [right] at (myplot.right of origin) {\scriptsize $x$};
+                    %\node [above] at (myplot.above origin) {\scriptsize $y$};
+
+                    \end{tikzpicture}
+                  </latex-image>
+                </image>
               </figure>
             </sidebyside>
-            <sidebyside widths="40%">
+            <sidebyside widths="40% 40%">
               <figure>
                 <caption/>
-                <img src="figures/fig20_01_ex_14_c"/>
+                <image xml:id="img_slopefield_exercise_c">
+                  <description></description>
+                  <latex-image>
+                    \begin{tikzpicture}
+
+                    \begin{axis}[
+                      view={0}{90},
+                      domain = -2:2,
+                      y domain = -2:2,
+                    	ytick={-3,-2,-1,0,1,2,3},
+                    ]
+
+                    \addplot3 [secondcolor,quiver = {u = {1/(sqrt(1+(-y)^2))}, v = {(-y)/(sqrt(1+(-y)^2))},scale arrows=.1},samples=15]{0};
+
+                    \end{axis}
+
+                    %\node [right] at (myplot.right of origin) {\scriptsize $x$};
+                    %\node [above] at (myplot.above origin) {\scriptsize $y$};
+
+                    \end{tikzpicture}
+                  </latex-image>
+                </image>
               </figure>
               <figure>
                 <caption/>
-                <img src="figures/fig20_01_ex_14_d"/>
+                <image xml:id="img_slopefield_exercise_d">
+                  <description></description>
+                  <latex-image>
+                    \begin{tikzpicture}
+
+                    \begin{axis}[
+                      view={0}{90},
+                      domain = -2:2,
+                      y domain = -2:2,
+                    	ytick={-3,-2,-1,0,1,2,3},
+                    ]
+
+                    \addplot3 [secondcolor,quiver = {u = {1/(sqrt(1+(-x)^2))}, v = {(-x)/(sqrt(1+(-x)^2))},scale arrows=.1},samples=15]{0};
+
+                    \end{axis}
+
+                    %\node [right] at (myplot.right of origin) {\scriptsize $x$};
+                    %\node [above] at (myplot.above origin) {\scriptsize $y$};
+
+                    \end{tikzpicture}
+                  </latex-image>
+                </image>
               </figure>
             </sidebyside>
           </sbsgroup>
         </figure>
       </introduction>
 
-      <exercise>
+      <exercise xml:id="ex_slopefield_first">
         <statement>
           <p>
             <m>\yp = xy</m>
@@ -1214,7 +1597,7 @@
           </p>
         </answer>
       </exercise>
-      <exercise>
+      <exercise xml:id="ex_slopefield_last">
         <statement>
           <p>
             <m>\yp = x(1-x)</m>
@@ -1242,9 +1625,35 @@
           </p>
         </statement>
         <answer>
-          <p>
-            <img src="figures/fig20_01_ex_18ans"/>
-          </p>
+          <sidebyside width="47%">
+            <image xml:id="img_20_01_ex_18ans">
+              <latex-image>
+                \begin{tikzpicture}
+
+                \begin{axis}[
+                view={0}{90},
+                y domain = -.5:1.5,
+                domain = -.5:5,
+                  minor x tick num=1,
+                  extra x ticks={1,3,5},
+                  ymin=-.1,ymax=1.6,
+                  xmin=-.1,xmax=5.2
+                ]
+
+                \addplot3 [secondcolor,quiver = {u = {1/(sqrt(1+(y/x-y)^2))}, v = {(y/x-y)/(sqrt(1+(y/x-y)^2))},scale arrows=.15},samples=15]{0};
+                \addplot [firstcurvestyle,-,domain=0.5:5.1,samples = 51] {2*x*exp(1/2-x)};
+
+                \fill[black,draw=black] (axis cs:.5,1) circle (1.5pt);
+
+                \end{axis}
+
+                %\node [right] at (myplot.right of origin) {\scriptsize $x$};
+                %\node [above] at (myplot.above origin) {\scriptsize $y$};
+
+                \end{tikzpicture}
+              </latex-image>
+            </image>
+          </sidebyside>
         </answer>
       </exercise>
       <exercise>
@@ -1254,9 +1663,35 @@
           </p>
         </statement>
         <answer>
-          <p>
-            <img src="figures/fig20_01_ex_19ans"/>
-          </p>
+          <sidebyside width="47%">
+            <image xml:id="img_ex20_01_ex_19ans">
+              <description></description>
+              <latex-image>
+                \begin{tikzpicture}
+
+                \begin{axis}[
+                  view={0}{90},
+                  domain = -.5:10,
+                  minor x tick num=1,
+                  extra x ticks={2.5,7.5},
+                  minor y tick num=1,
+                  extra y ticks={2.5,7.5},
+                ]
+
+                \addplot3 [secondcolor,quiver = {u = {1/(sqrt(1+(y*sin(deg x))^2))}, v = {(y*sin(deg x))/(sqrt(1+(y*sin(deg x))^2))},scale arrows=.4},samples=15]{0};
+                \addplot [firstcurvestyle,-,domain=0:10,samples = 100] {exp(1-cos(deg x))};
+
+                \fill[black,draw=black] (axis cs:0,1) circle (1.5pt);
+
+                \end{axis}
+
+                %\node [right] at (myplot.right of origin) {\scriptsize $x$};
+                %\node [above] at (myplot.above origin) {\scriptsize $y$};
+
+                \end{tikzpicture}
+              </latex-image>
+            </image>
+          </sidebyside>
         </answer>
       </exercise>
       <exercise>
@@ -1266,9 +1701,34 @@
           </p>
         </statement>
         <answer>
-          <p>
-            <img src="figures/fig20_01_ex_20ans"/>
-          </p>
+          <sidebyside width="47%">
+            <image xml:id="img_20_01_ex_20ans">
+              <description></description>
+              <latex-image>
+                \begin{tikzpicture}
+
+                \begin{axis}[
+                  view={0}{90},
+                  y domain = -.15:3,
+                  domain = -.15:4,
+                			minor x tick num=1,
+                			extra x ticks={1,3},
+                ]
+
+                \addplot3 [secondcolor,quiver = {u = {1/(sqrt(1+(y^2-3*y+2)^2))}, v = {(y^2-3*y+2)/(sqrt(1+(y^2-3*y+2)^2))},scale arrows=.2},samples=15]{0};
+                \addplot [firstcurvestyle,-] coordinates {(0,2) (4.1,2)};
+
+                \fill[black,draw=black] (axis cs:0,2) circle (1.5pt);
+
+                \end{axis}
+
+                %\node [right] at (myplot.right of origin) {\scriptsize $x$};
+                %\node [above] at (myplot.above origin) {\scriptsize $y$};
+
+                \end{tikzpicture}
+              </latex-image>
+            </image>
+          </sidebyside>
         </answer>
       </exercise>
       <exercise>
@@ -1278,9 +1738,34 @@
           </p>
         </statement>
         <answer>
-          <p>
-            <img src="figures/fig20_01_ex_31ans"/>
-          </p>
+          <sidebyside width="47%">
+            <image xml:id="img_20_01_ex_31ans">
+              <description></description>
+              <latex-image>
+                \begin{tikzpicture}
+
+                \begin{axis}[
+                  view={0}{90},
+                  y domain = -.15:3,
+                  domain = -.15:4,
+                  minor x tick num=1,
+                  extra x ticks={1,3},
+                ]
+
+                \addplot3 [secondcolor,quiver = {u = {1/(sqrt(1+(-x*y/(1+x^2))^2))}, v = {(-x*y/(1+x^2))/(sqrt(1+(-x*y/(1+x^2))^2))},scale arrows=.2},samples=15]{0};
+                \addplot [firstcurvestyle,-,domain=0:4,samples=50] {1/sqrt(1+x^2)};
+
+                \fill[black,draw=black] (axis cs:0,1) circle (1.5pt);
+
+                \end{axis}
+
+                %\node [right] at (myplot.right of origin) {\scriptsize $x$};
+                %\node [above] at (myplot.above origin) {\scriptsize $y$};
+
+                \end{tikzpicture}
+              </latex-image>
+            </image>
+          </sidebyside>
         </answer>
       </exercise>
     </exercisegroup>
@@ -1310,12 +1795,12 @@
         <answer>
           <p>
             <md>
-              <mrow> x_i \amp y_i</mrow>
-              <mrow> 0.00 \amp 1.0000 </mrow>
-              <mrow>  0.25 \amp 1.5000 </mrow>
-              <mrow> 0.50 \amp 2.3125 </mrow>
-              <mrow> 0.75 \amp 3.5938</mrow>
-              <mrow> 1.00 \amp 5.5781 </mrow>
+              <mrow> x_i \amp \quad \amp \quad \amp y_i</mrow>
+              <mrow> 0.00 \amp \quad \amp \quad \amp 1.0000 </mrow>
+              <mrow>  0.25 \amp \quad \amp \quad \amp 1.5000 </mrow>
+              <mrow> 0.50 \amp \quad \amp \quad \amp 2.3125 </mrow>
+              <mrow> 0.75 \amp \quad \amp \quad \amp 3.5938</mrow>
+              <mrow> 1.00 \amp \quad \amp \quad \amp 5.5781 </mrow>
             </md>
           </p>
         </answer>
@@ -1338,13 +1823,13 @@
         <answer>
           <p>
             <md>
-              <mrow> x_i \amp y_i </mrow>
-              <mrow>  0.0 \amp 1.0000 </mrow>
-              <mrow> 0.1 \amp 1.0000 </mrow>
-              <mrow> 0.2 \amp 1.0037 </mrow>
-              <mrow> 0.3 \amp 1.0110 </mrow>
-              <mrow> 0.4 \amp 1.0219 </mrow>
-              <mrow> 0.5 \amp 1.0363 </mrow>
+              <mrow> x_i \amp \quad \amp \quad \amp y_i </mrow>
+              <mrow>  0.0 \amp \quad \amp \quad \amp 1.0000 </mrow>
+              <mrow> 0.1 \amp \quad \amp \quad \amp 1.0000 </mrow>
+              <mrow> 0.2 \amp \quad \amp \quad \amp 1.0037 </mrow>
+              <mrow> 0.3 \amp \quad \amp \quad \amp 1.0110 </mrow>
+              <mrow> 0.4 \amp \quad \amp \quad \amp 1.0219 </mrow>
+              <mrow> 0.5 \amp \quad \amp \quad \amp 1.0363 </mrow>
             </md>
           </p>
         </answer>
@@ -1367,13 +1852,13 @@
         <answer>
           <p>
             <md>
-              <mrow> x_i \amp y_i </mrow>
-              <mrow> 0.0 \amp 2.0000 </mrow>
-              <mrow> 0.2 \amp 2.4000 </mrow>
-              <mrow> 0.4 \amp 2.9197 </mrow>
-              <mrow> 0.6 \amp 3.5816 </mrow>
-              <mrow> 0.8 \amp 4.4108 </mrow>
-              <mrow> 1.0 \amp 5.4364 </mrow>
+              <mrow> x_i \amp \quad \amp \quad \amp y_i </mrow>
+              <mrow> 0.0 \amp \quad \amp \quad \amp 2.0000 </mrow>
+              <mrow> 0.2 \amp \quad \amp \quad \amp 2.4000 </mrow>
+              <mrow> 0.4 \amp \quad \amp \quad \amp 2.9197 </mrow>
+              <mrow> 0.6 \amp \quad \amp \quad \amp 3.5816 </mrow>
+              <mrow> 0.8 \amp \quad \amp \quad \amp 4.4108 </mrow>
+              <mrow> 1.0 \amp \quad \amp \quad \amp 5.4364 </mrow>
             </md>
           </p>
         </answer>
@@ -1396,12 +1881,12 @@
         <answer>
           <p>
             <md>
-              <mrow> x_i \amp y_i </mrow>
-              <mrow> 0.0 \amp 0.0000 </mrow>
-              <mrow> 0.5 \amp 0.5000 </mrow>
-              <mrow>  1.0 \amp 1.8591 </mrow>
-              <mrow> 1.5 \amp 10.5824 </mrow>
-              <mrow> 2.0 \amp 88378.1190 </mrow>
+              <mrow> x_i \amp \quad \amp \quad \amp y_i </mrow>
+              <mrow> 0.0 \amp \quad \amp \quad \amp 0.0000 </mrow>
+              <mrow> 0.5 \amp \quad \amp \quad \amp 0.5000 </mrow>
+              <mrow>  1.0 \amp \quad \amp \quad \amp 1.8591 </mrow>
+              <mrow> 1.5 \amp \quad \amp \quad \amp 10.5824 </mrow>
+              <mrow> 2.0 \amp \quad \amp \quad \amp 88378.1190 </mrow>
             </md>
           </p>
         </answer>
@@ -1415,6 +1900,13 @@
         </p>
         <sidebyside>
           <tabular>
+            <col right="minor"/>
+            <col right="minor"/>
+            <col right="minor"/>
+            <col right="minor"/>
+            <col right="minor"/>
+            <col right="minor"/>
+            <col right="minor"/>
             <row bottom="minor">
               <cell><m> x</m></cell><cell><m> 0.0</m></cell><cell> <m>0.2</m></cell><cell><m>0.4</m></cell><cell> <m>0.6</m> </cell><cell> <m>0.8</m> </cell><cell> <m>1.0</m></cell>
             </row>
@@ -1429,7 +1921,6 @@
             </row>
           </tabular>
         </sidebyside>
-        </p>
       </introduction>
 
       <exercise>
@@ -1445,17 +1936,30 @@
           </p>
         </statement>
         <answer>
-          <p>
-            <md>
-              <mrow> x_i \amp y(x) \amp <m>h=0.2</m> \amp h = 0.1 </mrow>
-              <mrow> 0.0 \amp 1.0000 \amp 1.0000 \amp 1.0000 </mrow>
-              <mrow> 0.2 \amp 1.0204 \amp 1.0000 \amp 1.0100 </mrow>
-              <mrow> 0.4 \amp 1.0870 \amp 1.0400 \amp 1.0623 </mrow>
-              <mrow> 0.6 \amp 1.2195 \amp 1.1265 \amp 1.1687 </mrow>
-              <mrow> 0.8 \amp 1.4706 \amp 1.2788 \amp 1.3601 </mrow>
-              <mrow> 1.0 \amp 2.0000 \amp 1.5405 \amp 1.7129 </mrow>
-            </md>
-          </p>
+          <sidebyside>
+            <tabular>
+              <col right="minor"/>
+              <col right="minor"/>
+              <col right="minor"/>
+              <col right="minor"/>
+              <col right="minor"/>
+              <col right="minor"/>
+              <col right="minor"/>
+              <row bottom="minor">
+                <cell><m> x</m></cell><cell><m> 0.0</m></cell><cell> <m>0.2</m></cell><cell><m>0.4</m></cell><cell> <m>0.6</m> </cell><cell> <m>0.8</m> </cell><cell> <m>1.0</m></cell>
+              </row>
+              <row bottom="minor">
+                <cell><m> y(x)</m></cell><cell>1.0000</cell><cell>1.0204</cell><cell>1.0870</cell><cell>1.2195</cell><cell>1.4706</cell><cell>2.0000</cell>
+              </row>
+              <row bottom="minor">
+                <cell><m>h = 0.2</m></cell><cell>1.0000</cell><cell>1.0000</cell><cell>1.0400</cell><cell>1.1265</cell><cell>1.2788</cell><cell>1.5405</cell>
+              </row>
+              <row>
+                <cell><m>h = 0.1</m></cell><cell>1.0000</cell><cell>1.0100</cell><cell>1.0623</cell><cell>1.1687</cell><cell>1.3601</cell><cell>1.7129</cell>
+              </row>
+            </tabular>
+          </sidebyside>
+
         </answer>
       </exercise>
       <exercise>
@@ -1471,17 +1975,29 @@
           </p>
         </statement>
         <answer>
-          <p>
-            <md>
-              <mrow> x_i \amp y(x) \amp h = 0.2 \amp h = 0.1 </mrow>
-              <mrow> 0.0 \amp 0.5000 \amp 0.5000 \amp 0.5000 </mrow>
-              <mrow> 0.2 \amp 0.5412 \amp 0.5000 \amp 0.5201 </mrow>
-              <mrow> 0.4 \amp 0.6806 \amp 0.5816 \amp 0.6282 </mrow>
-              <mrow> 0.6 \amp 0.9747 \amp 0.7686 \amp 0.8622 </mrow>
-              <mrow> 0.8 \amp 1.5551 \amp 1.1250 \amp 1.3132 </mrow>
-              <mrow> 1.0 \amp 2.7183 \amp 1.7885 \amp 2.1788 </mrow>
-            </md>
-          </p>
+          <sidebyside>
+            <tabular>
+              <col right="minor"/>
+              <col right="minor"/>
+              <col right="minor"/>
+              <col right="minor"/>
+              <col right="minor"/>
+              <col right="minor"/>
+              <col right="minor"/>
+              <row bottom="minor">
+                <cell><m> x</m></cell><cell><m> 0.0</m></cell><cell> <m>0.2</m></cell><cell><m>0.4</m></cell><cell> <m>0.6</m> </cell><cell> <m>0.8</m> </cell><cell> <m>1.0</m></cell>
+              </row>
+              <row bottom="minor">
+                <cell><m> y(x)</m></cell><cell>0.5000</cell><cell>0.5412</cell><cell>0.6806</cell><cell>0.9747</cell><cell>1.5551</cell><cell>2.7183</cell>
+              </row>
+              <row bottom="minor">
+                <cell><m>h = 0.2</m></cell><cell>0.5000</cell><cell>0.5000</cell><cell>0.5816</cell><cell>0.7686</cell><cell>1.1250</cell><cell>1.7885</cell>
+              </row>
+              <row>
+                <cell><m>h = 0.1</m></cell><cell>0.5000</cell><cell>0.5201</cell><cell>0.6282</cell><cell>0.8622</cell><cell>1.3132</cell><cell>2.1788</cell>
+              </row>
+            </tabular>
+          </sidebyside>
         </answer>
       </exercise>
     </exercisegroup>
