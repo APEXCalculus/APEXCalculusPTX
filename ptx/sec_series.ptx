@@ -7,9 +7,9 @@
       consider the following sums:
       <md>
         <mrow> a_1\amp = 1/2 \amp = \amp 1/2</mrow>
-        <mrow> a_1+a_2 \amp = 1/2+1/4 \amp = \amp 3/4 </mrow>
-        <mrow> a_1+a_2+a_3 \amp = 1/2+1/4+1/8 \amp =\amp 7/8</mrow>
-        <mrow> a_1+a_2+a_3+a_4 \amp= 1/2+1/4+1/8+1/16 \amp = \amp 15/16 </mrow>
+        <mrow> a_1\amp +a_2 = 1/2+1/4 \amp = \amp 3/4 </mrow>
+        <mrow> a_1\amp +a_2+a_3 = 1/2+1/4+1/8 \amp =\amp 7/8</mrow>
+        <mrow> a_1\amp +a_2+a_3+a_4 \amp= 1/2+1/4+1/8+1/16 \amp = \amp 15/16 </mrow>
       </md>
     </p>
 
@@ -418,19 +418,19 @@
 
         <p>
           <ol cols="3">
-            <li>
+            <li xml:id="item_ex_ser2_1">
               <p>
                 <m>\ds \sum_{n=2}^\infty \left(\frac34\right)^n</m>
               </p>
             </li>
 
-            <li>
+            <li xml:id="item_ex_ser2_2">
               <p>
                 <m>\ds \infser[0] \left(\frac{-1}{2}\right)^n</m>
               </p>
             </li>
 
-            <li>
+            <li xml:id="item_ex_ser2_3">
               <p>
                 <m>\ds \infser[0] 3^n</m>
               </p>
@@ -456,6 +456,43 @@
                 </me>.
                 This is illustrated in <xref ref="fig_series2a">Figure</xref>.
               </p>
+              <figure xml:id="fig_series2a">
+                <caption>Scatter plots for the series in <xref ref="item_ex_ser2_1"/></caption>
+            <!-- START figures/fig_series2a.tex -->
+                <image xml:id="img_series2a">
+                  <description></description>
+                  <latex-image>
+
+                  \begin{tikzpicture}
+
+                  \begin{axis}[
+                  axis on top,
+                  xtick={2,4,6,8,10},
+                  ymin=-.5,ymax=2.5,
+                  xmin=-1,xmax=11
+                  ]
+
+                  \addplot [only marks,firstcolor,mark size={1.5pt},domain=2:10,samples=9] {(.75)^x};
+                  \addplot [only marks,secondcolor,mark size={1.5pt}] coordinates {(2,0.5625)(3,0.9844)(4,1.301)(5,1.538)(6,1.716)(7,1.85)(8,1.95)(9,2.025)(10,2.081)};
+
+                  \end{axis}
+
+                  \node [right] at (myplot.right of origin) {\scriptsize $n$};
+
+                  \node[shift={(0,-10pt)},draw] at (myplot.south)
+                    {\begin{tikzpicture}
+
+                      \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] {\scriptsize $a_n$};
+                      \fill [secondcolor] (1,0) circle (1.5pt) node [right,black] {\scriptsize $S_n$};
+
+                    \end{tikzpicture}};
+
+                  \end{tikzpicture}
+
+                  </latex-image>
+                </image>
+            <!-- figures/fig_series2a.tex END -->
+              </figure>
             </li>
 
             <li>
@@ -468,6 +505,43 @@
                 The partial sums of this series are plotted in <xref ref="fig_series2b">Figure</xref>.
                 Note how the partial sums are not purely increasing as some of the terms of the sequence <m>\{(-1/2)^n\}</m> are negative.
               </p>
+              <figure xml:id="fig_series2b">
+                <caption>Scatter plots for the series in <xref ref="item_ex_ser2_2"/></caption>
+          <!-- START figures/fig_series2b.tex -->
+                <image xml:id="img_series2b">
+                  <description></description>
+                  <latex-image>
+
+                  \begin{tikzpicture}
+
+                  \begin{axis}[
+                  axis on top,
+                  xtick={2,4,6,8,10},
+                  ymin=-1.1,ymax=1.1,
+                  xmin=-1,xmax=11
+                  ]
+
+                  \addplot [only marks,firstcolor,mark size={1.5pt},domain=0:10,samples=11] {(-.5)^(x)};
+                  \addplot [only marks,secondcolor,mark size={1.5pt}] coordinates {(0,1.)(1,0.5)(2,0.75)(3,0.625)(4,0.6875)(5,0.6563)(6,0.6719)(7,0.6641)(8,0.668)(9,0.666)(10,0.667)};
+
+                  \end{axis}
+
+                  \node [right] at (myplot.right of origin) {\scriptsize $n$};
+
+                  \node[shift={(0,15pt)},draw] at (myplot.south)
+                    {\begin{tikzpicture}
+
+                      \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] {\scriptsize $a_n$};
+                      \fill [secondcolor] (1,0) circle (1.5pt) node [right,black] {\scriptsize $S_n$};
+
+                    \end{tikzpicture}};
+
+                  \end{tikzpicture}
+
+                  </latex-image>
+                </image>
+          <!-- figures/fig_series2b.tex END -->
+              </figure>
             </li>
 
             <li>
@@ -480,123 +554,41 @@
                 to diverge.)
                 This is illustrated in <xref ref="fig_series2c">Figure</xref>.
               </p>
+              <figure xml:id="fig_series2c">
+                <caption>Scatter plots for the series in <xref ref="item_ex_ser2_3"/></caption>
+          <!-- START figures/fig_series2c.tex -->
+                <image xml:id="img_series2c">
+                  <description></description>
+                  <latex-image>
 
-              <figure>
-                <caption>Scatter plots relating to the series in <xref ref="ex_series2">Example</xref>.</caption>
-                <sidebyside widths="33% 33% 33%">
-                  <figure xml:id="fig_series2a">
-                    <caption/>
-                <!-- START figures/fig_series2a.tex -->
-                    <image xml:id="img_series2a">
-                      <description></description>
-                      <latex-image>
+                  \begin{tikzpicture}
 
-                      \begin{tikzpicture}
+                  \begin{axis}[
+                  axis on top,
+                  ymin=-50,%ymax=1.1,
+                  xmin=-1,xmax=7
+                  ]
 
-                      \begin{axis}[
-                      axis on top,
-                      xtick={2,4,6,8,10},
-                      ymin=-.5,ymax=2.5,
-                      xmin=-1,xmax=11
-                      ]
+                  \addplot [only marks,firstcolor,mark size={1.5pt},domain=0:6,samples=7] {3^(x)};
+                  \addplot [only marks,secondcolor,mark size={1.5pt}] coordinates {(0,1)(1,3)(2,12)(3,39)(4,120)(5,363)(6,1092)};
 
-                      \addplot [only marks,firstcolor,mark size={1.5pt},domain=2:10,samples=9] {(.75)^x};
-                      \addplot [only marks,secondcolor,mark size={1.5pt}] coordinates {(2,0.5625)(3,0.9844)(4,1.301)(5,1.538)(6,1.716)(7,1.85)(8,1.95)(9,2.025)(10,2.081)};
+                  \end{axis}
 
-                      \end{axis}
+                  \node [right] at (myplot.right of origin) {\scriptsize $n$};
 
-                      \node [right] at (myplot.right of origin) {\scriptsize $n$};
+                  \node[shift={(0,-20pt)},draw] at (myplot.south)
+                    {\begin{tikzpicture}
 
-                      \node[shift={(0,-10pt)},draw] at (myplot.south)
-                        {\begin{tikzpicture}
+                      \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] {\scriptsize $a_n$};
+                      \fill [secondcolor] (1,0) circle (1.5pt) node [right,black] {\scriptsize $S_n$};
 
-                          \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] {\scriptsize $a_n$};
-                          \fill [secondcolor] (1,0) circle (1.5pt) node [right,black] {\scriptsize $S_n$};
+                    \end{tikzpicture}};
 
-                        \end{tikzpicture}};
+                  \end{tikzpicture}
 
-                      \end{tikzpicture}
-
-                      </latex-image>
-                    </image>
-                <!-- figures/fig_series2a.tex END -->
-                  </figure>
-
-                  <figure xml:id="fig_series2b">
-                    <caption/>
-              <!-- START figures/fig_series2b.tex -->
-                    <image xml:id="img_series2b">
-                      <description></description>
-                      <latex-image>
-
-                      \begin{tikzpicture}
-
-                      \begin{axis}[
-                      axis on top,
-                      xtick={2,4,6,8,10},
-                      ymin=-1.1,ymax=1.1,
-                      xmin=-1,xmax=11
-                      ]
-
-                      \addplot [only marks,firstcolor,mark size={1.5pt},domain=0:10,samples=11] {(-.5)^(x)};
-                      \addplot [only marks,secondcolor,mark size={1.5pt}] coordinates {(0,1.)(1,0.5)(2,0.75)(3,0.625)(4,0.6875)(5,0.6563)(6,0.6719)(7,0.6641)(8,0.668)(9,0.666)(10,0.667)};
-
-                      \end{axis}
-
-                      \node [right] at (myplot.right of origin) {\scriptsize $n$};
-
-                      \node[shift={(0,15pt)},draw] at (myplot.south)
-                        {\begin{tikzpicture}
-
-                          \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] {\scriptsize $a_n$};
-                          \fill [secondcolor] (1,0) circle (1.5pt) node [right,black] {\scriptsize $S_n$};
-
-                        \end{tikzpicture}};
-
-                      \end{tikzpicture}
-
-                      </latex-image>
-                    </image>
-              <!-- figures/fig_series2b.tex END -->
-                  </figure>
-
-                  <figure xml:id="fig_series2c">
-                    <caption/>
-              <!-- START figures/fig_series2c.tex -->
-                    <image xml:id="img_series2c">
-                      <description></description>
-                      <latex-image>
-
-                      \begin{tikzpicture}
-
-                      \begin{axis}[
-                      axis on top,
-                      ymin=-50,%ymax=1.1,
-                      xmin=-1,xmax=7
-                      ]
-
-                      \addplot [only marks,firstcolor,mark size={1.5pt},domain=0:6,samples=7] {3^(x)};
-                      \addplot [only marks,secondcolor,mark size={1.5pt}] coordinates {(0,1)(1,3)(2,12)(3,39)(4,120)(5,363)(6,1092)};
-
-                      \end{axis}
-
-                      \node [right] at (myplot.right of origin) {\scriptsize $n$};
-
-                      \node[shift={(0,-20pt)},draw] at (myplot.south)
-                        {\begin{tikzpicture}
-
-                          \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] {\scriptsize $a_n$};
-                          \fill [secondcolor] (1,0) circle (1.5pt) node [right,black] {\scriptsize $S_n$};
-
-                        \end{tikzpicture}};
-
-                      \end{tikzpicture}
-
-                      </latex-image>
-                    </image>
-                <!-- figures/fig_series2c.tex END -->
-                  </figure>
-                </sidebyside>
+                  </latex-image>
+                </image>
+            <!-- figures/fig_series2c.tex END -->
               </figure>
             </li>
           </ol>
@@ -809,10 +801,10 @@
         <p>
           It will help to write down some of the first few partial sums of this series.
           <md>
-            <mrow>S_1 \amp =	\frac11-\frac12 \amp  \amp  = 1-\frac12</mrow>
-            <mrow>S_2 \amp =	\left(\frac11-\frac12\right) + \left(\frac12-\frac13\right) \amp  \amp  = 1-\frac13</mrow>
-            <mrow>S_3 \amp =	\left(\frac11-\frac12\right) + \left(\frac12-\frac13\right)+\left(\frac13-\frac14\right) \amp  \amp = 1-\frac14</mrow>
-            <mrow>S_4 \amp =	\left(\frac11-\frac12\right) + \left(\frac12-\frac13\right)+\left(\frac13-\frac14\right) +\left(\frac14-\frac15\right)\amp  \amp = 1-\frac15</mrow>
+            <mrow>S_1 \amp =	\frac11-\frac12  = 1-\frac12</mrow>
+            <mrow>S_2 \amp =	\left(\frac11-\frac12\right) + \left(\frac12-\frac13\right)  = 1-\frac13</mrow>
+            <mrow>S_3 \amp =	\left(\frac11-\frac12\right) + \left(\frac12-\frac13\right)+\left(\frac13-\frac14\right)  = 1-\frac14</mrow>
+            <mrow>S_4 \amp =	\left(\frac11-\frac12\right) + \left(\frac12-\frac13\right)+\left(\frac13-\frac14\right) +\left(\frac14-\frac15\right = 1-\frac15</mrow>
           </md>
         </p>
 
@@ -924,20 +916,24 @@
 
                 Expressing the terms of <m>\{S_n\}</m> is now more instructive:
                 <md>
-                  <mrow>S_1 \amp = 1-\frac13 \amp \amp = 1-\frac13</mrow>
-                  <mrow>S_2 \amp = \left(1-\frac13\right) + \left(\frac12-\frac14\right) \amp \amp = 1+\frac12-\frac13-\frac14</mrow>
-                  <mrow>S_3 \amp = \left(1-\frac13\right) + \left(\frac12-\frac14\right)+\left(\frac13-\frac15\right) \amp \amp = 1+\frac12-\frac14-\frac15</mrow>
-                  <mrow>S_4 \amp = \left(1-\frac13\right) + \left(\frac12-\frac14\right)+\left(\frac13-\frac15\right)+\left(\frac14-\frac16\right) \amp \amp = 1+\frac12-\frac15-\frac16</mrow>
-                  <mrow>S_5 \amp = \left(1-\frac13\right) + \left(\frac12-\frac14\right)+\left(\frac13-\frac15\right)+\left(\frac14-\frac16\right)+\left(\frac15-\frac17\right) \amp \amp = 1+\frac12-\frac16-\frac17</mrow>
+                  <mrow>S_1 \amp = 1-\frac13 </mrow>
+                  <mrow>S_2 \amp = \left(1-\frac13\right) + \left(\frac12-\frac14\right)</mrow>
+                  <mrow>    \amp = 1+\frac12-\frac13-\frac14</mrow>
+                  <mrow>S_3 \amp = \left(1-\frac13\right) + \left(\frac12-\frac14\right)+\left(\frac13-\frac15\right)</mrow>
+                  <mrow>    \amp = 1+\frac12-\frac14-\frac15</mrow>
+                  <mrow>S_4 \amp = \left(1-\frac13\right) + \left(\frac12-\frac14\right)+\left(\frac13-\frac15\right)+\left(\frac14-\frac16\right)</mrow>
+                  <mrow>    \amp = 1+\frac12-\frac15-\frac16</mrow>
+                  <mrow>S_5 \amp = \left(1-\frac13\right) + \left(\frac12-\frac14\right)+\left(\frac13-\frac15\right)+\left(\frac14-\frac16\right)+\left(\frac15-\frac17\right)</mrow>
+                  <mrow>    \amp = 1+\frac12-\frac16-\frac17</mrow>
                 </md>
                 We again have a telescoping series.
                 In each partial sum,
                 most of the terms cancel and we obtain the formula <m>\ds S_n = 1+\frac12-\frac1{n+1}-\frac1{n+2}</m>.
                 Taking limits allows us to determine the convergence of the series:
                 <me>
-                  \lim_{n\to\infty}S_n = \lim_{n\to\infty} \left(1+\frac12-\frac1{n+1}-\frac1{n+2}\right) = \frac32, \text{ so }  \infser \frac1{n^2+2n} = \frac32
-                </me>.
-
+                  \lim_{n\to\infty}S_n = \lim_{n\to\infty} \left(1+\frac12-\frac1{n+1}-\frac1{n+2}\right) = \frac32
+                </me>,
+                so <m> \infser \frac1{n^2+2n} = \frac32</m>.
                 This is illustrated in <xref ref="fig_series4a">Figure</xref>.
               </p>
             </li>
@@ -955,9 +951,10 @@
                 but recall the logarithmic identity:
                 <m>\ln(x) +\ln(y) = \ln(xy)</m>.
                 Applying this to <m>S_4</m> gives:
-                <me>
-                  S_4 = \ln\left(2\right)+\ln\left(\frac32\right)+\ln\left(\frac43\right)+\ln\left(\frac54\right) = \ln\left(\frac21\cdot\frac32\cdot\frac43\cdot\frac54\right) = \ln\left(5\right)
-                </me>.
+                <md>
+                  <mrow>S_4 \amp = \ln\left(2\right)+\ln\left(\frac32\right)+\ln\left(\frac43\right)+\ln\left(\frac54\right)</mrow>
+                  <mrow>    \amp = \ln\left(\frac21\cdot\frac32\cdot\frac43\cdot\frac54\right) = \ln\left(5\right)</mrow>
+                </md>.
                 We can conclude that <m>\{S_n\} = \big\{\ln(n+1)\big\}</m>.
                 This sequence  does not converge,
                 as <m>\lim\limits_{n\to\infty}S_n=\infty</m>.
@@ -970,87 +967,88 @@
               </p>
             </li>
           </ol>
-          <figure xml:id="fig_series4">
-            <caption>Scatter plots relating to the series in <xref ref="ex_series4">Example</xref>.</caption>
-            <sidebyside widths="47% 47%">
-
-              <figure xml:id="fig_series4a">
-                <caption/>
-          <!-- START figures/fig_series4a.tex -->
-                <image xml:id="img_series4a">
-                  <description></description>
-                  <latex-image>
-
-                  \begin{tikzpicture}
-
-                  \begin{axis}[
-                  axis on top,
-                  xtick={2,4,6,8,10},
-                  ymin=-.1,ymax=1.6,
-                  xmin=-1,xmax=11
-                  ]
-
-                  \addplot [only marks,firstcolor,mark size={1.5pt},domain=1:10,samples=10] {2/(x^2+2*x)};
-                  \addplot [only marks,secondcolor,mark size={1.5pt},domain=1:10,samples=10] {1.5-1/(x+1)-1/(x+2)};
-
-                  \end{axis}
-
-                  \node [right] at (myplot.right of origin) {\scriptsize $n$};
-
-                  \node[shift={(0,-17pt)},draw] at (myplot.south)
-                    {\begin{tikzpicture}
-
-                      \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] {\scriptsize $a_n$};
-                      \fill [secondcolor] (1,0) circle (1.5pt) node [right,black] {\scriptsize $S_n$};
-
-                    \end{tikzpicture}};
-
-                  \end{tikzpicture}
-
-                  </latex-image>
-                </image>
-          <!-- figures/fig_series4a.tex END -->
-              </figure>
-
-              <figure xml:id="fig_series4b">
-                <caption/>
-          <!-- START figures/fig_series4b.tex -->
-                <image xml:id="img_series4b">
-                  <description></description>
-                  <latex-image>
-
-                  \begin{tikzpicture}
-
-                  \begin{axis}[
-                  axis on top,
-                  ymin=-.5,ymax=5,
-                  xmin=-10,xmax=110
-                  ]
-
-                  \addplot [only marks,firstcolor,mark size={1.5pt},domain=10:100,samples=10] {ln((x+1)/x)};
-                  \addplot [only marks,secondcolor,mark size={1.5pt},domain=10:100,samples=10] {ln(x+1)};
-
-                  \end{axis}
-
-                  \node [right] at (myplot.right of origin) {\scriptsize $n$};
-
-                  \node[shift={(0,-15pt)},draw] at (myplot.south)
-                    {\begin{tikzpicture}
-
-                      \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] {\scriptsize $a_n$};
-                      \fill [secondcolor] (1,0) circle (1.5pt) node [right, black] {\scriptsize $S_n$};
-
-                    \end{tikzpicture}};
-
-                  \end{tikzpicture}
-
-                  </latex-image>
-                </image>
-          <!-- figures/fig_series4b.tex END -->
-              </figure>
-            </sidebyside>
-          </figure>
         </p>
+
+        <figure xml:id="fig_series4">
+          <caption>Scatter plots relating to the series in <xref ref="ex_series4">Example</xref>.</caption>
+          <sidebyside widths="47% 47%">
+
+            <figure xml:id="fig_series4a">
+              <caption/>
+        <!-- START figures/fig_series4a.tex -->
+              <image xml:id="img_series4a">
+                <description></description>
+                <latex-image>
+
+                \begin{tikzpicture}
+
+                \begin{axis}[
+                axis on top,
+                xtick={2,4,6,8,10},
+                ymin=-.1,ymax=1.6,
+                xmin=-1,xmax=11
+                ]
+
+                \addplot [only marks,firstcolor,mark size={1.5pt},domain=1:10,samples=10] {2/(x^2+2*x)};
+                \addplot [only marks,secondcolor,mark size={1.5pt},domain=1:10,samples=10] {1.5-1/(x+1)-1/(x+2)};
+
+                \end{axis}
+
+                \node [right] at (myplot.right of origin) {\scriptsize $n$};
+
+                \node[shift={(0,-17pt)},draw] at (myplot.south)
+                  {\begin{tikzpicture}
+
+                    \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] {\scriptsize $a_n$};
+                    \fill [secondcolor] (1,0) circle (1.5pt) node [right,black] {\scriptsize $S_n$};
+
+                  \end{tikzpicture}};
+
+                \end{tikzpicture}
+
+                </latex-image>
+              </image>
+        <!-- figures/fig_series4a.tex END -->
+            </figure>
+
+            <figure xml:id="fig_series4b">
+              <caption/>
+        <!-- START figures/fig_series4b.tex -->
+              <image xml:id="img_series4b">
+                <description></description>
+                <latex-image>
+
+                \begin{tikzpicture}
+
+                \begin{axis}[
+                axis on top,
+                ymin=-.5,ymax=5,
+                xmin=-10,xmax=110
+                ]
+
+                \addplot [only marks,firstcolor,mark size={1.5pt},domain=10:100,samples=10] {ln((x+1)/x)};
+                \addplot [only marks,secondcolor,mark size={1.5pt},domain=10:100,samples=10] {ln(x+1)};
+
+                \end{axis}
+
+                \node [right] at (myplot.right of origin) {\scriptsize $n$};
+
+                \node[shift={(0,-15pt)},draw] at (myplot.south)
+                  {\begin{tikzpicture}
+
+                    \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] {\scriptsize $a_n$};
+                    \fill [secondcolor] (1,0) circle (1.5pt) node [right, black] {\scriptsize $S_n$};
+
+                  \end{tikzpicture}};
+
+                \end{tikzpicture}
+
+                </latex-image>
+              </image>
+        <!-- figures/fig_series4b.tex END -->
+            </figure>
+          </sidebyside>
+        </figure>
       </solution>
     </example>
 
@@ -1154,7 +1152,7 @@
         </p>
 
         <p>
-          <ol cols="3">
+          <ol>
             <li>
               <p>
                 <m>\ds\infser \frac{(-1)^{n+1}\big(n^2-n\big)}{n^3}</m>
@@ -1549,7 +1547,7 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1569,7 +1567,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1589,7 +1587,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1612,7 +1610,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1632,7 +1630,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1690,7 +1688,7 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1722,7 +1720,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1755,7 +1753,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1787,7 +1785,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1819,7 +1817,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1851,7 +1849,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1883,7 +1881,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1915,7 +1913,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1958,7 +1956,7 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1979,7 +1977,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2000,7 +1998,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2021,7 +2019,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2042,7 +2040,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2063,7 +2061,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2094,7 +2092,7 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2114,7 +2112,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2134,7 +2132,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2154,7 +2152,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2174,7 +2172,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2194,7 +2192,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2216,7 +2214,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2236,7 +2234,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2256,7 +2254,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2280,7 +2278,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2327,7 +2325,7 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2385,7 +2383,7 @@
 
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2417,7 +2415,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2453,7 +2451,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2485,7 +2483,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2517,7 +2515,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2549,7 +2547,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2582,7 +2580,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2616,7 +2614,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2650,7 +2648,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2683,7 +2681,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2715,7 +2713,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2749,7 +2747,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2782,7 +2780,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2816,7 +2814,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2848,7 +2846,7 @@
       </exercise>
 
       <exercise xml:id="x08_02_ex_24">
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -2950,7 +2948,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>

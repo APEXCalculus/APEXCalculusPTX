@@ -170,7 +170,7 @@
         As such, we should determine its interval of convergence.
         Applying the Ratio Test, we have
         <md>
-          <mrow>\lim_{n\to\infty}\abs{(-1)^{n+1}\frac{x^{2(n+1)}}{\big(2(n+1)\big)!}}\Bigg/\abs{(-1)^n\frac{x^{2n}}{(2n)!}} \amp = \lim_{n\to\infty}\abs{\frac{x^{2n+2}}{x^{2n}}}\frac{(2n)!}{(2n+2)!}</mrow>
+          <mrow>\lim_{n\to\infty}\frac{\abs{(-1)^{n+1}\dfrac{x^{2(n+1)}}{\big(2(n+1)\big)!}}}{\abs{(-1)^n\frac{x^{2n}}{(2n)!}}} \amp = \lim_{n\to\infty}\abs{\frac{x^{2n+2}}{x^{2n}}}\frac{(2n)!}{(2n+2)!}</mrow>
           <mrow>\amp = \lim_{n\to\infty} \frac{\abs{x}^2}{(2n+2)(2n+1)}</mrow>
         </md>.
       </p>
@@ -282,7 +282,7 @@
       <p>
         We now determine the interval of convergence, using the Ratio Test.
         <md>
-          <mrow>\lim_{n\to\infty} \abs{(-1)^{n+2}\frac{(x-1)^{n+1}}{n+1}}\Bigg/\abs{(-1)^{n+1}\frac{(x-1)^n}{n}} \amp = \lim_{n\to\infty} \abs{\frac{(x-1)^{n+1}}{(x-1)^n}}\frac{n}{n+1}</mrow>
+          <mrow>\lim_{n\to\infty} \frac{\abs{(-1)^{n+2}\dfrac{(x-1)^{n+1}}{n+1}}}{\abs{(-1)^{n+1}\dfrac{(x-1)^n}{n}}} \amp = \lim_{n\to\infty} \abs{\frac{(x-1)^{n+1}}{(x-1)^n}}\frac{n}{n+1}</mrow>
           <mrow>\amp = \abs{x-1}</mrow>
         </md>.
       </p>
@@ -489,14 +489,18 @@
           <mrow>\fp'(x) \amp = k(k-1)(1+x)^{k-2} \amp  \fp'(0) \amp =k(k-1)</mrow>
           <mrow>\fp''(x) \amp = k(k-1)(k-2)(1+x)^{k-3} \amp  \fp''(0) \amp =k(k-1)(k-2)</mrow>
           <mrow>\amp \vdots \amp  \amp \vdots</mrow>
-          <mrow>f^{(n)}(x) \amp = k(k-1)\cdots\big(k-(n-1)\big)(1+x)^{k-n} \amp  f^{(n)}(0) \amp =k(k-1)\cdots\big(k-(n-1)\big)</mrow>
         </md>
+        For a general <m>n</m>,
+          <me>
+            f^{(n)}(x) \amp = k(k-1)\cdots\big(k-(n-1)\big)(1+x)^{k-n}
+          </me>,
+          giving <m>f^{(n)}(0) \amp =k(k-1)\cdots\big(k-(n-1)\big)</m>.
       </p>
       <p>
         Thus the Maclaurin series for <m>f(x) = (1+x)^k</m> is
         <md>
           <mrow>(1+x)^k\amp =1+ kx + \frac{k(k-1)}{2!}x^2 + \frac{k(k-1)(k-2)}{3!}x^3 + \ldots</mrow>
-          <mrow>\dots + \frac{k(k-1)\cdots\big(k-(n-1)\big)}{n!}(x-c)^n+\ldots</mrow>
+          <mrow>\amp \dots + \frac{k(k-1)\cdots\big(k-(n-1)\big)}{n!}(x-c)^n+\ldots</mrow>
         </md>
       </p>
 
@@ -508,7 +512,7 @@
         </me>,
         we apply the Ratio Test:
         <md>
-          <mrow>\lim_{n\to\infty}\frac{\abs{a_{n+1}}}{\abs{a_n}}\amp =\lim_{n\to\infty} \abs{\frac{k(k-1)\cdots(k-(n-1))(k-n)}{(n+1)!}x^{n+1}}\Bigg/\abs{\frac{k(k-1)\cdots\big(k-(n-1)\big)}{n!}x^n}</mrow>
+          <mrow>\lim_{n\to\infty}\frac{\abs{a_{n+1}}}{\abs{a_n}}\amp =\lim_{n\to\infty} \frac{\abs{\dfrac{k(k-1)\cdots(k-(n-1))(k-n)}{(n+1)!}x^{n+1}}}{\abs{\dfrac{k(k-1)\cdots\big(k-(n-1)\big)}{n!}x^n}}</mrow>
           <mrow>\amp =\lim_{n\to\infty} \abs{\frac{k-n}{n+1}x}</mrow>
           <mrow>\amp = \abs{x}</mrow>
         </md>.
@@ -585,7 +589,7 @@
         <cell><term>Interval of</term></cell>
       </row>
       <row>
-        <cell><term>Convergence</term></cell>
+        <cell></cell><cell></cell><cell><term>Convergence</term></cell>
       </row>
       <row>
         <cell><m>\ds e^x = \infser[0] \frac{x^n}{n!}</m></cell>
@@ -684,14 +688,19 @@
 
       <p>
         Applying <xref ref="thm_series_alg">Theorem</xref>, we find that
+        <me>
+          e^x\cos(x) = \left(1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\cdots\right)\left(1-\frac{x^2}{2!}+\frac{x^4}{4!}+\cdots\right)
+        </me>.
+        Distribute the right hand expression across the left:
         <md>
-          <mrow>e^x\cos(x) \amp = \left(1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\cdots\right)\left(1-\frac{x^2}{2!}+\frac{x^4}{4!}+\cdots\right).</mrow>
-          <intertext>Distribute the right hand expression across the left:</intertext>
-          <mrow>\amp = 1\left(1-\frac{x^2}{2!}+\frac{x^4}{4!}+\cdots\right)+x\left(1-\frac{x^2}{2!}+\frac{x^4}{4!}+\cdots\right)+\frac{x^2}{2!}\left(1-\frac{x^2}{2!}+\frac{x^4}{4!}+\cdots\right)</mrow>
-          <mrow>\amp +\frac{x^3}{3!}\left(1-\frac{x^2}{2!}+\frac{x^4}{4!}+\cdots\right) + \frac{x^4}{4!}\left(1-\frac{x^2}{2!}+\frac{x^4}{4!}+\cdots\right)+\cdots</mrow>
-          <intertext>Distribute again and collect like terms.</intertext>
-          <mrow>\amp = 1 + x -\frac{x^3}{3}-\frac{x^4}{6} - \frac{x^5}{30}+\frac{x^7}{630}+\cdots</mrow>
+          <mrow>e^x\cos(x)\amp = 1\left(1-\frac{x^2}{2!}+\frac{x^4}{4!}+\cdots\right)+x\left(1-\frac{x^2}{2!}+\frac{x^4}{4!}+\cdots\right)</mrow>
+          <mrow> \amp + \frac{x^2}{2!}\left(1-\frac{x^2}{2!}+\frac{x^4}{4!}+\cdots\right)+\frac{x^3}{3!}\left(1-\frac{x^2}{2!}+\frac{x^4}{4!}+\cdots\right)</mrow>
+          <mrow> \amp + \frac{x^4}{4!}\left(1-\frac{x^2}{2!}+\frac{x^4}{4!}+\cdots\right)+\cdots </mrow>
         </md>
+        If we distribute again and collect like terms, we find
+        <me>
+          e^x\cos(x) = 1 + x -\frac{x^3}{3}-\frac{x^4}{6} - \frac{x^5}{30}+\frac{x^7}{630}+\cdots
+        </me>.
       </p>
 
       <p>
@@ -743,9 +752,10 @@
           \ln(x) = \infser(-1)^{n+1}\frac{(x-1)^n}{n} = (x-1)- \frac{(x-1)^2}{2} +\frac{(x-1)^3}{3}-\cdots
         </me>,
         we substitute <m>\sqrt{x}</m> for <m>x</m> to obtain
-        <me>
-          \ln(\sqrt{x}) = \infser(-1)^{n+1}\frac{(\sqrt{x}-1)^n}{n} = (\sqrt{x}-1)- \frac{(\sqrt{x}-1)^2}{2} +\frac{(\sqrt{x}-1)^3}{3}-\cdots
-        </me>.
+        <md>
+          <mrow>\ln(\sqrt{x}) \amp = \infser(-1)^{n+1}\frac{(\sqrt{x}-1)^n}{n}</mrow>
+          <mrow> \amp = (\sqrt{x}-1)- \frac{(\sqrt{x}-1)^2}{2} +\frac{(\sqrt{x}-1)^3}{3}-\cdots</mrow>
+        </md>.
       </p>
 
       <p>
@@ -944,7 +954,7 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -967,7 +977,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1001,7 +1011,7 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1029,7 +1039,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1056,7 +1066,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1085,7 +1095,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1144,7 +1154,7 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1168,7 +1178,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1192,7 +1202,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1222,7 +1232,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1251,7 +1261,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1280,7 +1290,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1331,7 +1341,7 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1381,7 +1391,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1430,7 +1440,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1471,7 +1481,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1530,7 +1540,7 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1555,7 +1565,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1580,7 +1590,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1604,7 +1614,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1647,7 +1657,7 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1667,7 +1677,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1687,7 +1697,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1707,7 +1717,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1739,7 +1749,7 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1759,7 +1769,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1779,7 +1789,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1799,7 +1809,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1819,7 +1829,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1839,7 +1849,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1869,7 +1879,7 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
@@ -1889,7 +1899,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <setup>
 
             <pg-code>
