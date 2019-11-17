@@ -51,7 +51,7 @@
       that is, the positive integers <m>1, 2, 3, \dots</m>
     </p>
   </aside>
-  
+
   <definition xml:id="def_factorial">
     <statement>
       <p>
@@ -85,12 +85,12 @@
       </p>
 
       <p>
-        <ol cols="3">
-          <li><m>\{a_n\} = \left\{\frac{3^n}{n!}\right\}</m></li>
+        <ol>
+          <li xml:id="item_ex_seq1_1"><m>\{a_n\} = \left\{\frac{3^n}{n!}\right\}</m></li>
 
-          <li><m>\{a_n\} = \{4+(-1)^n\}</m></li>
+          <li xml:id="item_ex_seq1_2"><m>\{a_n\} = \{4+(-1)^n\}</m></li>
 
-          <li>
+          <li xml:id="item_ex_seq1_3">
             <m>\{a_n\} = \left\{\frac{(-1)^{n(n+1)/2}}{n^2}\right\}</m>
           </li>
         </ol>
@@ -111,6 +111,37 @@
               and the values of the terms are plotted on the vertical axis.
               To visualize this sequence, see <xref ref="fig_seq1a">Figure</xref>.
             </p>
+            <figure xml:id="fig_seq1a">
+              <caption>Plotting the sequence in <xref ref="item_ex_seq1_1"/></caption>
+        <!-- START figures/fig_seq1a.tex -->
+              <image xml:id="img_seq1a">
+                <description></description>
+                <latex-image>
+
+                \begin{tikzpicture}
+
+                \begin{axis}[
+                axis on top,
+                xtick={1,2,3,4},
+                ytick={1,2,3,4,5},
+                ymin=-.1,ymax=5.5,
+                xmin=-.1,xmax=4.5
+                ]
+
+                \addplot [only marks,firstcolor,mark size={1.75pt}] coordinates {(1,3)(2,4.5)(3,4.5)(4,3.375)};
+
+                \draw (axis cs:2.5,1.5) node {\scriptsize $\ds a_n = \frac{3^n}{n!}$};
+
+                \end{axis}
+
+                \node [right] at (myplot.right of origin) {\scriptsize $n$};
+
+                \end{tikzpicture}
+
+                </latex-image>
+              </image>
+        <!-- figures/fig_seq1a.tex END -->
+            </figure>
           </li>
 
           <li>
@@ -125,6 +156,37 @@
               consisting of only the values 3 and 5.
               This sequence is plotted in <xref ref="fig_seq1b">Figure</xref>.
             </p>
+            <figure xml:id="fig_seq1b">
+              <caption>Plotting the sequence in <xref ref="item_ex_seq1_2"/></caption>
+        <!-- START figures/fig_seq1b.tex -->
+              <image xml:id="img_seq1b">
+                <description></description>
+                <latex-image>
+
+                \begin{tikzpicture}
+
+                \begin{axis}[
+                axis on top,
+                xtick={1,2,3,4},
+                ytick={1,2,3,4,5},
+                ymin=-.1,ymax=5.5,
+                xmin=-.1,xmax=4.5
+                ]
+
+                \addplot [only marks,firstcolor,mark size={1.75pt},domain=1:4] {4+(-1)^x};
+
+                \draw (axis cs:2,1) node {\scriptsize $\ds a_n = 4+(-1)^n$};
+
+                \end{axis}
+
+                \node [right] at (myplot.right of origin) {\scriptsize $n$};
+
+                \end{tikzpicture}
+
+                </latex-image>
+              </image>
+        <!-- figures/fig_seq1b.tex END -->
+            </figure>
           </li>
 
           <li>
@@ -137,119 +199,46 @@
             </p>
 
             <p>
-              We gave one extra term to begin to show the pattern of signs is ``<m>-</m>,
+              We gave one extra term to begin to show the pattern of signs is <q><m>-</m>,
               <m>-</m>, <m>+</m>, <m>+</m>,
-              <m>-</m>, <m>-</m>, <m>\ldots</m>,
+              <m>-</m>, <m>-</m>, <m>\ldots</m></q>,
               due to the fact that the exponent of <m>-1</m> is a special quadratic.
               This sequence is plotted in <xref ref="fig_seq1c">Figure</xref>.
-
-              <!-- TODO: Maybe move these to be next to each example?
-              Otherwise they are too small to be used meaningfully. -->
             </p>
+            <figure xml:id="fig_seq1c">
+              <caption>Plotting the sequence in <xref ref="item_ex_seq1_3"/></caption>
+        <!-- START figures/fig_seq1c.tex -->
+              <image xml:id="img_seq1c">
+                <description></description>
+                <latex-image>
 
-            <figure xml:id="fig_seq1">
-              <caption>Plotting sequences in <xref ref="ex_seq1">Example</xref>.</caption>
-              <sidebyside widths="31% 31% 31%">
+                \begin{tikzpicture}
 
-                <figure xml:id="fig_seq1a">
-                  <caption/>
-            <!-- START figures/fig_seq1a.tex -->
-                  <image xml:id="img_seq1a">
-                    <description></description>
-                    <latex-image>
+                \begin{axis}[
+                axis on top,
+                xtick={1,2,3,4,5},
+                ytick={-1},
+                extra y ticks={.5,.25},
+                extra y tick labels={$1/2$,$1/4$},
+                ymin=-1.1,ymax=0.6,
+                xmin=-.1,xmax=5.5
+                ]
 
-                    \begin{tikzpicture}
+                \addplot [only marks,firstcolor,mark size={1.75pt}] coordinates {(1,-1)(2,-.25)(3,.111)(4,0.0625)(5,-.04)};
 
-                    \begin{axis}[
-                    axis on top,
-                    xtick={1,2,3,4},
-                    ytick={1,2,3,4,5},
-                    ymin=-.1,ymax=5.5,
-                    xmin=-.1,xmax=4.5
-                    ]
+                \draw (axis cs:3,-.5) node {\scriptsize $\ds a_n = \frac{(-1)^{n(n+1)/2}}{n^2}$};
 
-                    \addplot [only marks,firstcolor,mark size={1.75pt}] coordinates {(1,3)(2,4.5)(3,4.5)(4,3.375)};
+                \end{axis}
 
-                    \draw (axis cs:2.5,1.5) node {\scriptsize $\ds a_n = \frac{3^n}{n!}$};
+                \node [right] at (myplot.right of origin) {\scriptsize $n$};
 
-                    \end{axis}
+                \end{tikzpicture}
 
-                    \node [right] at (myplot.right of origin) {\scriptsize $n$};
-
-                    \end{tikzpicture}
-
-                    </latex-image>
-                  </image>
-            <!-- figures/fig_seq1a.tex END -->
-                </figure>
-
-                <figure xml:id="fig_seq1b">
-                  <caption/>
-            <!-- START figures/fig_seq1b.tex -->
-                  <image xml:id="img_seq1b">
-                    <description></description>
-                    <latex-image>
-
-                    \begin{tikzpicture}
-
-                    \begin{axis}[
-                    axis on top,
-                    xtick={1,2,3,4},
-                    ytick={1,2,3,4,5},
-                    ymin=-.1,ymax=5.5,
-                    xmin=-.1,xmax=4.5
-                    ]
-
-                    \addplot [only marks,firstcolor,mark size={1.75pt},domain=1:4] {4+(-1)^x};
-
-                    \draw (axis cs:2,1) node {\scriptsize $\ds a_n = 4+(-1)^n$};
-
-                    \end{axis}
-
-                    \node [right] at (myplot.right of origin) {\scriptsize $n$};
-
-                    \end{tikzpicture}
-
-                    </latex-image>
-                  </image>
-            <!-- figures/fig_seq1b.tex END -->
-                </figure>
-
-                <figure xml:id="fig_seq1c">
-                  <caption/>
-            <!-- START figures/fig_seq1c.tex -->
-                  <image xml:id="img_seq1c">
-                    <description></description>
-                    <latex-image>
-
-                    \begin{tikzpicture}
-
-                    \begin{axis}[
-                    axis on top,
-                    xtick={1,2,3,4,5},
-                    ytick={-1},
-                    extra y ticks={.5,.25},
-                    extra y tick labels={$1/2$,$1/4$},
-                    ymin=-1.1,ymax=0.6,
-                    xmin=-.1,xmax=5.5
-                    ]
-
-                    \addplot [only marks,firstcolor,mark size={1.75pt}] coordinates {(1,-1)(2,-.25)(3,.111)(4,0.0625)(5,-.04)};
-
-                    \draw (axis cs:3,-.5) node {\scriptsize $\ds a_n = \frac{(-1)^{n(n+1)/2}}{n^2}$};
-
-                    \end{axis}
-
-                    \node [right] at (myplot.right of origin) {\scriptsize $n$};
-
-                    \end{tikzpicture}
-
-                    </latex-image>
-                  </image>
-            <!-- figures/fig_seq1c.tex END -->
-                </figure>
-              </sidebyside>
+                </latex-image>
+              </image>
+        <!-- figures/fig_seq1c.tex END -->
             </figure>
+            <!-- figures were too small in a sidebyside at the end, so they were placed individually in each item -->
           </li>
         </ol>
       </p>
@@ -520,13 +509,13 @@
 
       <p>
         <ol>
-          <li>
+          <li xml:id="item_ex_seq4_1">
             <m>\ds\{a_n\} = \left\{\frac{3n^2-2n+1}{n^2-1000}\right\}</m>
           </li>
 
-          <li><m>\{b_n\} = \{\cos(n) \}</m></li>
+          <li xml:id="item_ex_seq4_2"><m>\{b_n\} = \{\cos(n) \}</m></li>
 
-          <li>
+          <li xml:id="item_ex_seq4_3">
             <m>\ds\{c_n\} = \left\{\frac{(-1)^n}{n}\right\}</m>
           </li>
         </ol>
@@ -546,6 +535,36 @@
               ranging from about <m>-73</m> to <m>125</m>,
               but as <m>n</m> grows, the values approach 3.
             </p>
+            <figure xml:id="fig_seq4a">
+              <caption>Scatter plot for the sequence in <xref ref="item_ex_seq4_1"/></caption>
+              <!-- START figures/fig_seq4a.tex -->
+              <image xml:id="img_seq4a">
+                <description></description>
+                <latex-image>
+
+                \begin{tikzpicture}
+
+                \begin{axis}[
+                axis on top,
+                xtick={20,40,60,80,100},
+                ymin=-11,ymax=11,
+                xmin=-.1,xmax=110
+                ]
+
+                \addplot [only marks,firstcolor,mark size={.75pt},domain=1:100,samples=21] {(3*x^2 - 2*x + 1)/(x^2 - 1000)};
+
+                \draw (axis cs:60,-8) node {\scriptsize $\ds a_n = \frac{3x^2 - 2x + 1}{x^2 - 1000}$};
+
+                \end{axis}
+
+                \node [right] at (myplot.right of origin) {\scriptsize $n$};
+
+                \end{tikzpicture}
+
+                </latex-image>
+              </image>
+              <!-- figures/fig_seq4a.tex END -->
+            </figure>
           </li>
 
           <li>
@@ -572,6 +591,36 @@
               As the sequence takes on values near 1 and <m>-1</m> infinitely many times,
               we conclude that <m>\lim\limits_{n\to\infty}a_n</m> does not exist.
             </p>
+            <figure xml:id="fig_seq4b">
+              <caption>Scatter plot for the sequence in <xref ref="item_ex_seq4_3"/></caption>
+              <!-- START figures/fig_seq4b.tex -->
+              <image xml:id="img_seq4b">
+                <description></description>
+                <latex-image>
+
+                \begin{tikzpicture}
+
+                \begin{axis}[
+                axis on top,
+                xtick={20,40,60,80,100},
+                ymin=-1.1,ymax=1.1,
+                xmin=-.1,xmax=110
+                ]
+
+                \addplot [only marks,firstcolor,mark size={.75pt},domain=1:100,samples=100] {cos(deg(x))};
+
+                \end{axis}
+
+                \node [right] at (myplot.right of origin) {\scriptsize $n$};
+
+                \node at (myplot.north) {\scriptsize $\ds a_n = \cos(n) $};
+
+                \end{tikzpicture}
+
+                </latex-image>
+              </image>
+              <!-- figures/fig_seq4b.tex END -->
+            </figure>
           </li>
 
           <li>
@@ -599,107 +648,38 @@
               hence by the definition of the limit of a sequence,
               we can say <m>\lim\limits_{n\to\infty}a_n = 0</m>.
             </p>
+            <figure xml:id="fig_seq4c">
+              <caption>Scatter plot for the sequence in <xref ref="item_ex_seq4_3"/></caption>
+              <!-- START figures/fig_seq4c.tex -->
+              <image xml:id="img_seq4c">
+                <description></description>
+                <latex-image>
+
+                \begin{tikzpicture}
+
+                \begin{axis}[
+                axis on top,
+                ymin=-1.1,ymax=1.1,
+                xmin=-.1,xmax=22
+                ]
+
+                \addplot [only marks,firstcolor,mark size={.75pt},domain=1:20,samples=20] {((-1)^x)/x};
+
+                \draw (axis cs:10,-.7) node {\scriptsize $\ds a_n = \frac{(-1)^n}{n}$};
+
+                \end{axis}
+
+                \node [right] at (myplot.right of origin) {\scriptsize $n$};
+
+                \end{tikzpicture}
+
+                </latex-image>
+              </image>
+              <!-- figures/fig_seq4c.tex END -->
+            </figure>
           </li>
         </ol>
       </p>
-
-      <figure xml:id="fig_seq4">
-        <caption>Scatter plots of the sequences in <xref ref="ex_seq4">Example</xref>.</caption>
-        <sidebyside widths="31% 31% 31%">
-
-          <figure xml:id="fig_seq4a">
-            <caption/>
-            <!-- START figures/fig_seq4a.tex -->
-            <image xml:id="img_seq4a">
-              <description></description>
-              <latex-image>
-
-              \begin{tikzpicture}
-
-              \begin{axis}[
-              axis on top,
-              xtick={20,40,60,80,100},
-              ymin=-11,ymax=11,
-              xmin=-.1,xmax=110
-              ]
-
-              \addplot [only marks,firstcolor,mark size={.75pt},domain=1:100,samples=21] {(3*x^2 - 2*x + 1)/(x^2 - 1000)};
-
-              \draw (axis cs:60,-8) node {\scriptsize $\ds a_n = \frac{3x^2 - 2x + 1}{x^2 - 1000}$};
-
-              \end{axis}
-
-              \node [right] at (myplot.right of origin) {\scriptsize $n$};
-
-              \end{tikzpicture}
-
-              </latex-image>
-            </image>
-            <!-- figures/fig_seq4a.tex END -->
-          </figure>
-
-          <figure xml:id="fig_seq4b">
-            <caption/>
-            <!-- START figures/fig_seq4b.tex -->
-            <image xml:id="img_seq4b">
-              <description></description>
-              <latex-image>
-
-              \begin{tikzpicture}
-
-              \begin{axis}[
-              axis on top,
-              xtick={20,40,60,80,100},
-              ymin=-1.1,ymax=1.1,
-              xmin=-.1,xmax=110
-              ]
-
-              \addplot [only marks,firstcolor,mark size={.75pt},domain=1:100,samples=100] {cos(deg(x))};
-
-              \end{axis}
-
-              \node [right] at (myplot.right of origin) {\scriptsize $n$};
-
-              \node at (myplot.north) {\scriptsize $\ds a_n = \cos(n) $};
-
-              \end{tikzpicture}
-
-              </latex-image>
-            </image>
-            <!-- figures/fig_seq4b.tex END -->
-          </figure>
-
-          <figure xml:id="fig_seq4c">
-            <caption/>
-            <!-- START figures/fig_seq4c.tex -->
-            <image xml:id="img_seq4c">
-              <description></description>
-              <latex-image>
-
-              \begin{tikzpicture}
-
-              \begin{axis}[
-              axis on top,
-              ymin=-1.1,ymax=1.1,
-              xmin=-.1,xmax=22
-              ]
-
-              \addplot [only marks,firstcolor,mark size={.75pt},domain=1:20,samples=20] {((-1)^x)/x};
-
-              \draw (axis cs:10,-.7) node {\scriptsize $\ds a_n = \frac{(-1)^n}{n}$};
-
-              \end{axis}
-
-              \node [right] at (myplot.right of origin) {\scriptsize $n$};
-
-              \end{tikzpicture}
-
-              </latex-image>
-            </image>
-            <!-- figures/fig_seq4c.tex END -->
-          </figure>
-        </sidebyside>
-      </figure>
     </solution>
   </example>
 
@@ -1459,7 +1439,9 @@
             </figure>
 
             <figure xml:id="fig_seq7d">
-              <caption>A plot of <m>\{a_n\} = \{n^2/n!\}</m> in <xref ref="ex_seq7_4">Example</xref>.</caption>
+              <caption/>
+              <!-- <caption>A plot of <m>\{a_n\} = \{n^2/n!\}</m> in <xref ref="ex_seq7_4">Example</xref>.</caption> -->
+              <!-- Either all get captions, or none. The labels in each image make it clear enough?-->
             <!-- START figures/fig_seq7d.tex -->
               <image xml:id="img_seq7d">
                 <description></description>
