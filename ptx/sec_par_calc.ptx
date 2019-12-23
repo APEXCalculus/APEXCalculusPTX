@@ -1,5 +1,4 @@
-
-
+<?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="sec_par_calc">
   <title>Calculus and Parametric Equations</title>
   <introduction>
@@ -35,12 +34,13 @@
     </p>
 
     <insight xml:id="idea_dydxpar">
-      <title>Finding $\frac{dy}{dx}$ with Parametric Equations.</title>
+      <title>Finding <m>\frac{dy}{dx}</m> with Parametric Equations.</title>
       <p>
         Let <m>x=f(t)</m> and <m>y=g(t)</m>,
         where <m>f</m> and <m>g</m> are differentiable on some open interval <m>I</m> and <m>\fp(t)\neq 0</m> on <m>I</m>.
-        Then <idx><h>parametric equations</h><h>finding
-        <m>\frac{dy}{dx}</m></h></idx><idx><h>derivative</h><h>parametric equations</h></idx>
+        Then
+        <idx><h>parametric equations</h><h>finding <m>\frac{dy}{dx}</m></h></idx>
+        <idx><h>derivative</h><h>parametric equations</h></idx>
         <me>
           \frac{dy}{dx} = \frac{g'(t)}{\fp(t)}
         </me>.
@@ -84,7 +84,9 @@
       (one can draw a line tangent to the <q>right side</q>
       of a circle, for instance),
       so we add the following to the above definition.
+    </p>
 
+    <p>
       <ol>
         <li>
           <p>
@@ -106,7 +108,9 @@
         <p>
           Let <m>x=5t^2-6t+4</m> and <m>y=t^2+6t-1</m>,
           and let <m>C</m> be the curve defined by these equations.
+        </p>
 
+        <p>
           <ol>
             <li>
               <p>
@@ -155,11 +159,41 @@
                 </ul>
               </p>
 
-              This is illustrated in <xref ref="fig_parcalc1">Figure</xref>.
+              <p>
+                This is illustrated in <xref ref="fig_parcalc1">Figure</xref>.
+              </p>
 
               <figure xml:id="fig_parcalc1">
                 <caption>Graphing tangent and normal lines in <xref ref="ex_parcalc1">Example</xref>.</caption>
-                <img src="figures/figparcalc1"/>
+              <!-- START figures/fig_parcalc1.tex -->
+                <image xml:id="img_parcalc1">
+                  <description></description>
+                  <latex-image>
+
+                  \begin{tikzpicture}
+
+                  \begin{axis}[
+                  ymin=-20,ymax=55,
+                  xmin=-5,xmax=90
+                  ]
+
+                  \addplot+ [-,domain=-3.5:5,samples=40] ({5*x^2-6*x+4},{x^2+6*x-1});
+
+                  \addplot [secondcurvestyle,-,solid,domain=-5:90] ({x},{.5*(x-31)+26});
+                  \addplot [secondcurvestyle,-,solid,domain=-20:55] ({x},{-2*(x-31)+26});
+
+                  \draw [&gt;=latex,-&gt;] (axis cs: 12.14,-5.204) -- (axis cs: 12,-5.16);
+
+                  \filldraw (axis cs: 67,-10) circle (1.5pt)
+                            (axis cs: 2.2,2.96) circle (1.5pt);
+
+                  \end{axis}
+
+                  \end{tikzpicture}
+
+                  </latex-image>
+                </image>
+              <!-- figures/fig_parcalc1.tex END -->
               </figure>
 
             </li>
@@ -196,21 +230,23 @@
     <example xml:id="ex_parcalc2">
       <title>Tangent and Normal Lines to a Circle</title>
       <statement>
-        <ol>
-          <li>
-            <p>
-              Find where the unit circle,
-              defined by <m>x=\cos t</m> and <m>y=\sin t</m> on <m>[0,2\pi]</m>,
-              has vertical and horizontal tangent lines.
-            </p>
-          </li>
+        <p>
+          <ol>
+            <li>
+              <p>
+                Find where the unit circle,
+                defined by <m>x=\cos(t)</m> and <m>y=\sin(t)</m> on <m>[0,2\pi]</m>,
+                has vertical and horizontal tangent lines.
+              </p>
+            </li>
 
-          <li>
-            <p>
-              Find the equation of the normal line at <m>t=t_0</m>.
-            </p>
-          </li>
-        </ol>
+            <li>
+              <p>
+                Find the equation of the normal line at <m>t=t_0</m>.
+              </p>
+            </li>
+          </ol>
+        </p>
       </statement>
       <solution>
         <p>
@@ -219,41 +255,60 @@
               <p>
                 We compute the derivative following <xref ref="idea_dydxpar">Key Idea</xref>:
                 <me>
-                  \frac{dy}{dx} = \frac{g'(t)}{\fp(t)} = -\frac{\cos t}{\sin t}
+                  \frac{dy}{dx} = \frac{g'(t)}{\fp(t)} = -\frac{\cos(t) }{\sin(t) }
                 </me>.
-                The derivative is <m>0</m> when <m>\cos t= 0</m>;
-                that is, when <m>t=\pi/2,\ 3\pi/2</m>.
+                The derivative is <m>0</m> when <m>\cos(t) = 0</m>;
+                that is, when <m>t=\pi/2,\, 3\pi/2</m>.
                 These are the points <m>(0,1)</m> and <m>(0,-1)</m> on the circle.
-                The normal line is horizontal
-                (and hence, the tangent line is vertical)
-                when <m>\sin t=0</m>;
-                that is, when <m>t= 0,\ \pi,\ 2\pi</m>,
-                corresponding to the points <m>(-1,0)</m> and <m>(0,1)</m> on the circle.
-                These results should make intuitive sense.
+
+                The normal line is horizontal (and hence, the tangent line is vertical) when <m>\sin(t) =0</m>; that is, when <m>t= 0,\,\pi,\,2\pi</m>, corresponding to the points <m>(-1,0)</m> and <m>(0,1)</m> on the circle. These results should make intuitive sense.
               </p>
             </li>
 
             <li>
               <p>
-                The slope of the normal line at <m>t=t_0</m> is <m>\ds m=\frac{\sin t_0}{\cos t_0} = \tan t_0</m>.
-                This normal line goes through the point <m>(\cos t_0,\sin t_0)</m>,
+                The slope of the normal line at <m>t=t_0</m> is <m>\ds m=\frac{\sin(t_0) }{\cos(t_0) } = \tan(t_0)</m>.
+                This normal line goes through the point <m>(\cos(t_0) ,\sin(t_0) )</m>,
                 giving the line
                 <md>
-                  <mrow>y \amp =\frac{\sin t_0}{\cos t_0}(x-\cos t_0) + \sin t_0</mrow>
-                  <mrow>\amp = (\tan t_0)x</mrow>
+                  <mrow>y \amp =\frac{\sin(t_0) }{\cos(t_0) }(x-\cos(t_0) ) + \sin(t_0)</mrow>
+                  <mrow>\amp = (\tan(t_0) )x</mrow>
                 </md>,
-                as long as <m>\cos t_0\neq 0</m>.
+                as long as <m>\cos(t_0) \neq 0</m>.
                 It is an important fact to recognize that the normal lines to a circle pass through its center,
                 as illustrated in <xref ref="fig_parcalc2">Figure</xref>.
                 Stated in another way,
                 any line that passes through the center of a circle intersects the circle at right angles.
-
-                <figure xml:id="fig_parcalc2">
-                  <caption>Illustrating how a circle's normal lines pass through its center.</caption>
-                  <img src="figures/figparcalc2"/>
-                </figure>
-
               </p>
+
+              <figure xml:id="fig_parcalc2">
+                <caption>Illustrating how a circle's normal lines pass through its center.</caption>
+            <!-- START figures/fig_parcalc2.tex -->
+                <image xml:id="img_parcalc2">
+                  <description></description>
+                  <latex-image>
+
+                  \begin{tikzpicture}
+
+                  \begin{axis}[
+                  ytick={-1,1},
+                  ymin=-1.1,ymax=1.1,
+                  xmin=-1.3,xmax=1.3
+                  ]
+
+                  \addplot+ [-,domain=0:360,samples=70] ({cos(x)},{sin(x)});
+                  \addplot+ [-,solid,domain=-1:1] ({x},{2*x});
+
+                  \filldraw (axis cs: .447,.894) circle (1.5pt);
+
+                  \end{axis}
+
+                  \end{tikzpicture}
+
+                  </latex-image>
+                </image>
+            <!-- figures/fig_parcalc2.tex END -->
+              </figure>
             </li>
           </ol>
         </p>
@@ -261,11 +316,11 @@
     </example>
 
     <example xml:id="ex_parcalc3">
-      <title>Tangent lines when $\frac{dy}{dx}$ is not defined</title>
+      <title>Tangent lines when <m>\frac{dy}{dx}</m> is not defined</title>
       <statement>
         <p>
-          Find the equation of the tangent line to the astroid <m>x=\cos^3 t</m>,
-          <m>y=\sin^3t</m> at <m>t=0</m>,
+          Find the equation of the tangent line to the astroid <m>x=\cos^3(t)</m>,
+          <m>y=\sin^3(t)</m> at <m>t=0</m>,
           shown in <xref ref="fig_parcalc3">Figure</xref>.
         </p>
       </statement>
@@ -273,7 +328,7 @@
         <p>
           We start by finding <m>x'(t)</m> and <m>y'(t)</m>:
           <me>
-            x'(t) = -3\sin t\cos^2t, \qquad y'(t) = 3\cos t\sin^2t
+            x'(t) = -3\sin(t) \cos^2(t) , \qquad y'(t) = 3\cos(t) \sin^2(t)
           </me>.
         </p>
 
@@ -288,8 +343,8 @@
           examine the slopes of tangent lines near <m>t=0</m>,
           and take the limit as <m>t\to 0</m>.
           <md>
-            <mrow>\lim_{t\to0} \frac{y'(t)}{x'(t)} \amp =\lim_{t\to0} \frac{3\cos t\sin^2t}{-3\sin t\cos^2t}  \text{ (We can cancel as \(t\neq 0\).) }</mrow>
-            <mrow>\amp = \lim_{t\to0} -\frac{\sin t}{\cos t}</mrow>
+            <mrow>\lim_{t\to0} \frac{y'(t)}{x'(t)} \amp =\lim_{t\to0} \frac{3\cos(t) \sin^2(t) }{-3\sin(t) \cos^2(t) }  \text{ (We can cancel as \(t\neq 0\).) }</mrow>
+            <mrow>\amp = \lim_{t\to0} -\frac{\sin(t) }{\cos(t) }</mrow>
             <mrow>\amp = 0</mrow>
           </md>.
         </p>
@@ -298,14 +353,36 @@
           We have accomplished something significant.
           When the derivative <m>\frac{dy}{dx}</m> returns an indeterminate form at <m>t=t_0</m>,
           we can define its value by setting it to be
-          <m>\ds \lim_{t\to t_0}</m><m>\frac{dy}{dx}</m>, if that limit exists.
+          <m>\lim\limits_{t\to t_0}</m><m>\frac{dy}{dx}</m>, if that limit exists.
           This allows us to find slopes of tangent lines at cusps,
           which can be very beneficial.
         </p>
 
         <figure xml:id="fig_parcalc3">
           <caption>A graph of an astroid.</caption>
-          <img src="figures/figplanecurve1"/>
+          <!-- START figures/fig_planecurve1.tex -->
+          <image xml:id="img_parcalc3">
+            <description></description>
+            <latex-image>
+
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            xtick={-1,1},
+            ytick={-1,1},
+            ymin=-1.1,ymax=1.1,
+            xmin=-1.1,xmax=1.1
+            ]
+
+            \addplot+ [-,domain=0:360,samples=70] ({(cos(x))^3},{(sin(x))^3});
+
+            \end{axis}
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
+          <!-- figures/fig_planecurve1.tex END -->
         </figure>
 
         <p>
@@ -354,11 +431,12 @@
     </p>
 
     <insight xml:id="idea_second_der_par">
-      <title>Finding $\frac{d^2y}{dx^2}$ with Parametric Equations</title>
+      <title>Finding <m>\frac{d^2y}{dx^2}</m> with Parametric Equations</title>
       <p>
         Let <m>x=f(t)</m> and <m>y=g(t)</m> be twice differentiable functions on an open interval <m>I</m>,
         where <m>\fp(t)\neq 0</m> on <m>I</m>.
-        Then <idx><h>parametric equations</h><h>finding <m>\frac{d^2y}{dx^2}</m></h></idx>
+        Then
+        <idx><h>parametric equations</h><h>finding <m>\frac{d^2y}{dx^2}</m></h></idx>
         <me>
           \frac{d^2y}{dx^2} = \frac{d}{dt}\left[\frac{dy}{dx}\right]\Bigg/\frac{dx}{dt} = \frac{d}{dt}\left[\frac{dy}{dx}\right]\Bigg/\fp(t)
         </me>.
@@ -399,12 +477,39 @@
 
         <figure xml:id="fig_parcalc4">
           <caption>Graphing the parametric equations in <xref ref="ex_parcalc4">Example</xref> to demonstrate concavity.</caption>
-          <img src="figures/figparcalc4"/>
+          <!-- START figures/fig_parcalc4.tex -->
+          <image xml:id="img_parcalc4">
+            <description></description>
+            <latex-image>
+
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            ymin=-20,ymax=55,
+            xmin=-5,xmax=90
+            ]
+
+            \addplot+ [-,domain=-3.5:5,samples=50] ({5*x^2-6*x+4},{x^2+6*x-1});
+
+            \draw [&gt;=latex,-&gt;] (axis cs: 12.14,-5.204) -- (axis cs: 12,-5.16);
+
+            \filldraw (axis cs: 2.2,2.96) circle (1.5pt);
+
+            \draw (axis cs: 31,26) node [above,rotate=26.56] {\scriptsize $t&gt;3/5$; concave down};
+            \draw (axis cs: 50.25,-9.75) node [below] {\scriptsize $t&lt;3/5$; concave up};
+
+            \end{axis}
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
+          <!-- figures/fig_parcalc4.tex END -->
         </figure>
 
         <p>
           The graph of the parametric functions is concave up when
-          <m>\frac{d^2y}{dx^2} > 0</m> and concave down when <m>\frac{d^2y}{dx^2} \lt 0</m>.
+          <m>\frac{d^2y}{dx^2} \gt 0</m> and concave down when <m>\frac{d^2y}{dx^2} \lt 0</m>.
           We determine the intervals when the second derivative is greater/less than 0 by first finding when it is 0 or undefined.
         </p>
 
@@ -416,17 +521,25 @@
           we look at values of <m>t</m> greater/less than <m>3/5</m> on a number line:
         </p>
 
-        <image>
+        <image xml:id="img_parcalc4X">
+          <description></description>
+          <latex-image>
 
-<latex-image>
-<![CDATA[\begin{tikzpicture}[>=latex]
-\draw [<->, thick] (-2.5,0) -- (2.5,0);
-\foreach \x / \y  in 
-{0/{\(3/5\)}}
-{\draw (\x,-.3) node[below] { \y} -- (\x,.3);}
-\draw (-1,.75) node { \(\ds \frac{d^2y}{dx^2}>0\) \ c. up };
-\draw (1,.75) node { \(\ds\frac{d^2y}{dx^2}<0\) \ c. down };\end{tikzpicture}]]>
-</latex-image>
+          \begin{tikzpicture}
+
+          \draw [&lt;-&gt;, thick] (-2.5,0) -- (2.5,0);
+
+          \foreach \x / \y in {0/{\(3/5\)}}
+          {
+            \draw (\x,-.3) node[below] { \text{ \y }} -- (\x,.3);
+          }
+
+          \draw (-1,.75) node {\parbox{50pt}{\(\ds \frac{d^2y}{dx^2}&gt;0\) c. up }};
+          \draw (1,.75) node {\parbox{50pt}{\(\ds\frac{d^2y}{dx^2}&lt;0\) c. down }};
+
+          \end{tikzpicture}
+
+          </latex-image>
         </image>
 
         <p>
@@ -444,17 +557,17 @@
       <statement>
         <p>
           Find the points of inflection of the graph of the parametric equations <m>x=\sqrt{t}</m>,
-          <m>y=\sin t</m>, for <m>0\leq t\leq 16</m>.
+          <m>y=\sin(t)</m>, for <m>0\leq t\leq 16</m>.
         </p>
       </statement>
       <solution>
         <p>
           We need to compute <m>\frac{dy}{dx}</m> and <m>\frac{d^2y}{dx^2}</m>.
           <me>
-            \frac{dy}{dx} = \frac{y'(t)}{x'(t)} = \frac{\cos t}{1/(2\sqrt{t})} = 2\sqrt{t}\cos t
+            \frac{dy}{dx} = \frac{y'(t)}{x'(t)} = \frac{\cos(t) }{1/(2\sqrt{t})} = 2\sqrt{t}\cos(t)
           </me>.
           <me>
-            \frac{d^2y}{dx^2} = \frac{\frac{d}{dt}\left[\frac{dy}{dx}\right]}{x'(t)} = \frac{\cos t/\sqrt{t}-2\sqrt{t}\sin t}{1/(2\sqrt{t})}=2\cos t-4t\sin t
+            \frac{d^2y}{dx^2} = \frac{\frac{d}{dt}\left[\frac{dy}{dx}\right]}{x'(t)} = \frac{\cos(t) /\sqrt{t}-2\sqrt{t}\sin(t) }{1/(2\sqrt{t})}=2\cos(t) -4t\sin(t)
           </me>.
         </p>
 
@@ -465,19 +578,19 @@
         </p>
 
         <p>
-          In <xref ref="fig_parcalc5">Figure</xref>(a) we see a plot of the second derivative.
-          It shows that it has zeros at approximately <m>t=0.5,\ 3.5,\ 6.5,\ 9.5,\ 12.5</m> and <m>16</m>.
+          In <xref ref="fig_parcalc5a">Figure</xref> we see a plot of the second derivative.
+          It shows that it has zeros at approximately <m>t=0.5,\,3.5,\,6.5,\,9.5,\,12.5</m> and <m>16</m>.
           These approximations are not very good,
           made only by looking at the graph.
           Newton's Method provides more accurate approximations.
           Accurate to 2 decimal places, we have:
           <me>
-            t=0.65,\ 3.29,\ 6.36,\ 9.48,\ 12.61\ \text{ and } \ 15.74
+            t=0.65,\,3.29,\,6.36,\,9.48,\,12.61\,\text{ and } \,15.74
           </me>.
         </p>
 
         <p>
-          The corresponding points have been plotted on the graph of the parametric equations in <xref ref="fig_parcalc5">Figure</xref>(b).
+          The corresponding points have been plotted on the graph of the parametric equations in <xref ref="fig_parcalc5b">Figure</xref>.
           Note how most occur near the <m>x</m>-axis,
           but not exactly on the axis.
         </p>
@@ -485,14 +598,70 @@
         <figure xml:id="fig_parcalc5">
           <caption>In (a), a graph of <m>\frac{d^2y}{dx^2}</m>, showing where it is approximately 0. In (b), graph of the parametric equations in <xref ref="ex_parcalc5">Example</xref> along with the points of inflection.</caption>
           <sidebyside>
-            <figure>
-              <caption>(a)</caption>
-              <img src="figures/figparcalc5b"/>
+            <figure xml:id="fig_parcalc5a">
+              <caption/>
+            <!-- START figures/fig_parcalc5b.tex -->
+              <image xml:id="img_parcalc5a">
+                <description></description>
+                <latex-image>
+
+                \begin{tikzpicture}
+
+                \begin{axis}[
+                minor x tick num=4,
+                minor y tick num=4,
+                ymin=-59,ymax=59,
+                xmin=-.5,xmax=16.9
+                ]
+
+                \addplot+ [-,domain=0:16,samples=120] ({x},{2*cos(deg(x))-4*x*sin(deg(x))});
+
+                \draw (axis cs: 5,-40) node {\scriptsize $y=2\cos(t) -4t\sin(t) $};
+
+                \end{axis}
+
+                \node [right] at (myplot.right of origin) {\scriptsize $t$};
+
+                \end{tikzpicture}
+
+                </latex-image>
+              </image>
+            <!-- figures/fig_parcalc5b.tex END -->
             </figure>
 
-            <figure>
-              <caption>(b)</caption>
-              <img src="figures/figparcalc5"/>
+            <figure xml:id="fig_parcalc5b">
+              <caption/>
+            <!-- START figures/fig_parcalc5.tex -->
+              <image xml:id="img_parcalc5">
+                <description></description>
+                <latex-image>
+
+                \begin{tikzpicture}
+
+                \begin{axis}[
+                xtick={3,1,2,4},
+                ymin=-1.1,ymax=1.1,
+                xmin=-.5,xmax=4.5
+                ]
+
+                \addplot+ [-,domain=0:.5,samples=40] ({sqrt(x)},{sin(deg(x))});
+                \addplot [firstcurvestyle,-,domain=.5:3,samples=50] ({sqrt(x)},{sin(deg(x))});
+                \addplot [firstcurvestyle,-,domain=3:18,samples=120] ({sqrt(x)},{sin(deg(x))});
+
+                \filldraw (axis cs: 0.808252, 0.607787) circle (1.5pt)
+                          (axis cs: 1.81447, -0.150147) circle (1.5pt)
+                          (axis cs: 2.52223, 0.0783547) circle (1.5pt)
+                          (axis cs: 3.07855, -0.0526833) circle (1.5pt)
+                          (axis cs: 3.55049, 0.0396324) circle (1.5pt)
+                          (axis cs:3.96733, -0.0317508) circle (1.5pt);
+
+                \end{axis}
+
+                \end{tikzpicture}
+
+                </latex-image>
+              </image>
+            <!-- figures/fig_parcalc5.tex END -->
             </figure>
           </sidebyside>
 
@@ -552,8 +721,9 @@
           Let <m>x=f(t)</m> and <m>y=g(t)</m> be parametric equations with <m>\fp</m> and <m>g'</m> continuous on <m>[t_1,t_2]</m>,
           on which the graph traces itself only once.
           The arc length of the graph, from <m>t=t_1</m> to <m>t=t_2</m>,
-          is <idx><h>parametric equations</h><h>arc length</h></idx>
-              <idx><h>arc length</h></idx>
+          is
+          <idx><h>parametric equations</h><h>arc length</h></idx>
+          <idx><h>arc length</h></idx>
           <me>
             L = \int_{t_1}^{t_2} \sqrt{\fp(t)^2+g'(t)^2}\, dt
           </me>.
@@ -578,15 +748,15 @@
       <title>Arc Length of a Circle</title>
       <statement>
         <p>
-          Find the arc length of the circle parametrized by <m>x=3\cos t</m>,
-          <m>y=3\sin t</m> on <m>[0,3\pi/2]</m>.
+          Find the arc length of the circle parametrized by <m>x=3\cos(t)</m>,
+          <m>y=3\sin(t)</m> on <m>[0,3\pi/2]</m>.
         </p>
       </statement>
       <solution>
         <p>
           By direct application of <xref ref="thm_arc_length_parametric">Theorem</xref>, we have
           <md>
-            <mrow>L \amp = \int_0^{3\pi/2} \sqrt{(-3\sin t)^2 +(3\cos t)^2} \, dt.</mrow>
+            <mrow>L \amp = \int_0^{3\pi/2} \sqrt{(-3\sin(t) )^2 +(3\cos(t) )^2} \, dt.</mrow>
             <intertext>Apply the Pythagorean Theorem.</intertext>
             <mrow>\amp = \int_0^{3\pi/2} 3 \, dt</mrow>
             <mrow>\amp = 3t\Big|_0^{3\pi/2} = 9\pi/2</mrow>
@@ -635,7 +805,31 @@
 
         <figure xml:id="fig_parcalc7">
           <caption>A graph of the parametric equations in <xref ref="ex_parcalc7">Example</xref>, where the arc length of the teardrop is calculated.</caption>
-          <img src="figures/figparcalc7"/>
+          <!-- START figures/fig_parcalc7.tex -->
+          <image xml:id="img_parcalc7">
+            <description></description>
+            <latex-image>
+
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            xtick={1,-1},
+            ytick={-1,1},
+            ymin=-1.1,ymax=1.1,
+            xmin=-1.1,xmax=1.1
+            ]
+
+            \addplot+ [-,domain=-1.5:1.5,samples=60] ({x^3-x},{x^2-1});
+
+            \end{axis}
+
+            \node [right] at (myplot.right of origin) {\scriptsize $t$};
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
+          <!-- figures/fig_parcalc7.tex END -->
         </figure>
       </solution>
     </example>
@@ -645,7 +839,7 @@
     <title>Surface Area of a Solid of Revolution</title>
     <p>
       Related to the formula for finding arc length is the formula for finding surface area.
-      We can adapt the formula found in <xref ref="thm_surface_area">Theorem</xref>
+      We can adapt the formula found in <xref ref="idea_surface_area">Key Idea</xref>
       from <xref ref="sec_arc_length">Section</xref>
       in a similar way as done to produce the formula for arc length done before.
     </p>
@@ -659,7 +853,9 @@
               <idx><h>surface area</h><h>solid of revolution</h></idx>
               <idx><h>integration</h><h>surface area</h></idx>
               <idx><h>parametric equations</h><h>surface area</h></idx>
+        </p>
 
+        <p>
           <ol>
             <li>
               <p>
@@ -706,7 +902,7 @@
           (and does not change the surface area of the resulting solid).
           The surface area is:
           <md>
-            <mrow>\text{ Area } \ S \amp = 2\pi\int_{-1}^1 (1-t^2)\sqrt{(3t^2-1)^2+(2t)^2}\, dt</mrow>
+            <mrow>\text{ Area } \,S \amp = 2\pi\int_{-1}^1 (1-t^2)\sqrt{(3t^2-1)^2+(2t)^2}\, dt</mrow>
             <mrow>\amp =  2\pi\int_{-1}^1 (1-t^2)\sqrt{9t^4-2t^2+1} \, dt</mrow>
           </md>.
         </p>
@@ -720,14 +916,91 @@
 
         <figure xml:id="fig_parcalc8">
           <caption>Rotating a teardrop shape about the <m>x</m>-axis in <xref ref="ex_parcalc8">Example</xref>.</caption>
-          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=pageinvisible,
+          <!--
+           \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=pageinvisible,
           3Droll=0,
           3Dortho=0.004,
           3Dc2c=0.7469545602798462 0.6216799020767212 0.23573943972587585,
           3Dcoo=0 0.000 0,
           3Droo=120.71813597868993,
-          3Dlights=Headlamp,add3Djscript=asylabels.js}
-          <img src="figures/figparcalc8_3D"/>
+          3Dlights=Headlamp,add3Djscript=asylabels.js]
+           -->
+          <!-- START figures/figparcalc8_3D.asy -->
+          <image xml:id="img_parcalc8">
+            <description></description>
+            <asymptote>
+
+              import graph3;
+
+              //ASY file for figparcalc8_3D.asy in Chapter 9
+
+              size(200,200,IgnoreAspect);
+              //currentprojection=perspective(7,2,1);
+              currentprojection=orthographic(4,3,2);
+              defaultrender.merge=true;
+
+              // setup and draw the axes
+              real[] myxchoice={};
+              real[] myychoice={};
+              real[] myzchoice={};
+              defaultpen(0.5mm);
+
+              pair xbounds=(-1.5,1.5);
+              pair ybounds=(-1.,1.);
+              pair zbounds=(-1.25,1.25);
+
+              xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice));
+              yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+              zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+              //label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+              label("$x$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+              label("$y$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+              //surface t(t^2-1), t^2-1 revolved around x axis //({(x^2-1)*cos(y)},{x^3-x},{(x^2-1)*sin(y)});
+              triple f(pair t) {
+                return ((t.x^2-1)*cos(t.y),(t.x^3-t.x),(t.x^2-1)*sin(t.y));
+              }
+              surface s=surface(f,(-1,0),(1,2*pi),8,8,Spline);
+              pen p=rgb(0,0,.7);
+              draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+              //curve on the surfaces
+              triple g(real t) {return (0,t^3-t,-1+t^2);}
+              path3 mypath=graph(g,-1,1,operator ..);
+              draw(mypath,blue+linewidth(2));
+
+              // ////////////////////////////////////
+              //    SAMPLE CODE
+
+              // defaultpen(fontsize(10pt));
+
+              //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+              //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+              //pen p=rgb(0,0,.7);
+              //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+              //triple f(pair t) {
+              //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+              //}
+              //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+              //pen p=rgb(0,0,.7);
+              //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+              //draw(s,paleblue);
+              //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+              //draw(mypath,2bp+blue);
+
+              //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+              //path3 mypath=graph(g,-1,1,operator ..);
+              //draw(mypath,blue+dashed+linewidth(2));
+
+              //pen p=rgb(0,0,1);
+              //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+            </asymptote>
+          </image>
+          <!-- figures/figparcalc8_3D.asy END -->
         </figure>
       </solution>
     </example>
@@ -743,796 +1016,1258 @@
     </p>
   </subsection>
 
-  <subsection>
-    <title>Terms and Concepts</title>
-    <exercise>
-      <statement>
-        <p>
-          T/F: Given parametric equations <m>x=f(t)</m> and <m>y=g(t)</m>,
-          <m>\frac{dy}{dx} = \fp(t)/g'(t)</m>,
-          as long as <m>g'(t) \neq 0</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          F
-        </p>
-      </answer>
-    </exercise>
+  <exercises>
+    <exercisegroup>
 
-    <exercise>
-      <statement>
+      <introduction>
         <p>
-          Given parametric equations <m>x=f(t)</m> and <m>y=g(t)</m>,
-          the derivative <m>\frac{dy}{dx}</m> as given in <xref ref="idea_dydxpar">Key Idea</xref> is a function of <fillin />?
+          Terms and Concepts
         </p>
-      </statement>
-      <answer>
-        <p>
-          <m>t</m>
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <exercise>
-      <statement>
-        <p>
-          T/F: Given parametric equations <m>x=f(t)</m> and <m>y=g(t)</m>,
-          to find <m>\frac{d^2y}{dx^2}</m>,
-          one simply computes <m>\frac{d}{dt}\Big(\frac{dy}{dx}\Big)</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          F
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          T/F: If <m>\frac{dy}{dx}=0</m> at <m>t=t_0</m>,
-          then the normal line to the curve at <m>t=t_0</m> is a vertical line.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          T
-        </p>
-      </answer>
-    </exercise>
-  </subsection>
 
-  <subsection>
-    <title>Problems</title>
-    <p>
-      In the following exercises, parametric equations for a curve are given.
+            <pg-code>
+              $true=PopUp(['?','True','False'],1);
+              $false=PopUp(['?','True','False'],2);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                True or False?
+                Given parametric equations <m>x=f(t)</m> and <m>y=g(t)</m>,
+                <m>\lz{y}{x} = \fp(t)/g'(t)</m>,
+                as long as <m>g'(t) \neq 0</m>.
+                <var name="$false" form="popup"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-      <ol>
-        <li>
-          <title>(a)</title>
-          <p>
-            Find <m>\ds\frac{dy}{dx}</m>.
-          </p>
-        </li>
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-        <li>
-          <title>(b)</title>
-          <p>
-            Find the equations of the tangent and normal line(s) at the point(s) given.
-          </p>
-        </li>
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Given parametric equations <m>x=f(t)</m> and <m>y=g(t)</m>,
+                the derivative <m>\frac{dy}{dx}</m> as given in <xref ref="idea_dydxpar">Key Idea</xref> is a function of <fillin/>?
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>t</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
 
-        <li>
-          <title>(c)</title>
-          <p>
-            Sketch the graph of the parametric functions along with the found tangent and normal lines.
-          </p>
-        </li>
-      </ol>
-    </p>
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-    <exercise xml:id="ex_09_03_ex_05">
-      <statement>
-        <p>
-          <m>x=t</m>, <m>y=t^2</m>;<m>t=1</m>
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              <m>\frac{dy}{dx} = 2t</m>
-            </p>
-          </li>
 
-          <li>
-            <p>
-              Tangent line: <m>y= 2(x-1)+1</m>; normal line:
-              <m>y = -1/2(x-1)+1</m>
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
+            <pg-code>
+              $true=PopUp(['?','True','False'],1);
+              $false=PopUp(['?','True','False'],2);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                True or False?
+                Given parametric equations <m>x=f(t)</m> and <m>y=g(t)</m>,
+                to find <m>\lzn{2}{y}{x}</m>,
+                one simply computes <m>\lzoo{t}{\lz{y}{x}}</m>.
+                <var name="$false" form="popup"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>x=\sqrt{t}</m>, <m>y=5t+2</m>;<m>t=4</m>
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              <m>\frac{dy}{dx} = 10\sqrt{t}</m>
-            </p>
-          </li>
+      <exercise>
+        <webwork seed="1">
+            <setup>
 
-          <li>
-            <p>
-              Tangent line: <m>y= 20(x-2)+22</m>; normal line:
-              <m>y = -1/20(x-2)+22</m>
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>x=t^2-t</m>, <m>y=t^2+t</m>;<m>t=1</m>
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              <m>\frac{dy}{dx} = \frac{2 t+1}{2 t-1}</m>
-            </p>
-          </li>
+            <pg-code>
+              $true=PopUp(['?','True','False'],1);
+              $false=PopUp(['?','True','False'],2);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                True or False?
+                If <m>\lz{y}{x}=0</m> at <m>t=t_0</m>,
+                then the normal line to the curve at <m>t=t_0</m> is a vertical line.
+                <var name="$true" form="popup"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
 
-          <li>
-            <p>
-              Tangent line: <m>y= 3x+2</m>;
-              normal line: <m>y = -1/3x+2</m>
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
+    </exercisegroup>
+    <exercisegroup>
 
-    <exercise>
-      <statement>
+      <introduction>
         <p>
-          <m>x=t^2-1</m>, <m>y=t^3-t</m>;<m>t=0</m> and <m>t=1</m>
+          In the following exercises, parametric equations for a curve are given.
         </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              <m>\frac{dy}{dx} = \frac{3t^2-1}{2 t}</m>
-            </p>
-          </li>
 
-          <li>
-            <p>
-              <m>t=0</m>: Tangent line: <m>x=-1</m>; normal line:
-              <m>y = 0</m> <m>t=1</m>: Tangent line:
-              <m>y=x</m>; normal line: <m>y=-x</m>
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
         <p>
-          <m>x=\sec t</m>,
-          <m>y=\tan t</m> on <m>(-\pi/2,\pi/2)</m>;<m>t=\pi/4</m>
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              <m>\frac{dy}{dx} = \csc t</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>t=\pi/4</m>: Tangent line:
-              <m>y=\sqrt{2}(x-\sqrt{2})+1</m>; normal line:
-              <m>y = -1/\sqrt{2}(x-\sqrt{2})+1</m>
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=\cos t</m>,
-          <m>y=\sin(2t)</m> on <m>[0,2\pi]</m>;<m>t=\pi/4</m>
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              <m>\frac{dy}{dx} = -2\cos(2t)\csc t</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>t=\pi/4</m>: Tangent line:
-              <m>y=1</m>; normal line: <m>x=\sqrt{2}/2</m>
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=\cos t\sin(2t)</m>,
-          <m>y=\sin t\sin(2t)</m> on <m>[0,2\pi]</m>; <m>t=3\pi/4</m>
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              <m>\frac{dy}{dx} = \frac{\cos t\sin(2t)+2\sin t\cos(2t)}{-\sin t\sin(2t)+2\cos t\cos(2t)}</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              Tangent line: <m>y=x-\sqrt{2}</m>;
-              normal line: <m>y=-x</m>
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
-
-    <exercise xml:id="ex_09_03_ex_12">
-      <statement>
-        <p>
-          <m>x=e^{t/10}\cos t</m>, <m>y=e^{t/10}\sin t</m>; <m>t=\pi/2</m>
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              <m>\frac{dy}{dx} = \frac{\sin (t)+10 \cos (t)}{\cos (t)-10 \sin (t)}</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              Tangent line: <m>y=-x/10+e^{\pi/20}</m>; normal line:
-              <m>y=10x+e^{\pi/20}</m>
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
-
-    <p>
-      In the following exercises,
-      find <m>t</m>-values where the curve defined by the given parametric equations has a horizontal tangent line.
-      Note: these are the same equations as in <xref ref="ex_09_03_ex_05">Exercises</xref>
-      <mdash /> <xref ref="ex_09_03_ex_12"></xref>.
-    </p>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=t</m>, <m>y=t^2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>t=0</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=\sqrt{t}</m>, <m>y=5t+2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>t=0</m> (though this uses a one<ndash />sided limit,
-          as <m>x(t)</m> is not defined for <m>t\lt 0</m>.
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=t^2-t</m>, <m>y=t^2+t</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>t=-1/2</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=t^2-1</m>, <m>y=t^3-t</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>t=\pm 1/\sqrt{3}</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=\sec t</m>, <m>y=\tan t</m> on <m>(-\pi/2,\pi/2)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          The graph does not have a horizontal tangent line.
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=\cos t</m>, <m>y=\sin(2t)</m> on <m>[0,2\pi]</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>t=\pi/4, 3\pi/4,5\pi/4, 7\pi/4</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=\cos t\sin(2t)</m>, <m>y=\sin t\sin(2t)</m> on <m>[0,2\pi]</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          The solution is non-trivial;
-          use identities <m>\sin(2t)=2\sin t\cos t</m> and
-          <m>\cos(2t)=\cos^2t-\sin^2t</m> to rewrite <m>g'(t) = 2\sin t(2\cos^2t-\sin^2t)</m>.
-          On <m>[0,2\pi]</m>, <m>\sin t= 0</m> when <m>t=0,\pi,2\pi</m>,
-          and <m>2\cos^2t-\sin^2t=0</m> when <m>t=\tan^{-1}(\sqrt{2}),\ \pi \pm \tan^{-1}(\sqrt{2}),\ 2\pi-\tan^{-1}(\sqrt{2})</m>.
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=e^{t/10}\cos t</m>, <m>y=e^{t/10}\sin t</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>t=\tan^{-1}(-10),\ \tan^{-1}(-10)+\pi</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <p>
-      In the following exercises,
-      find <m>t=t_0</m> where the graph of the given parametric equations is not smooth,
-      then find <m>\ds \lim_{t\to t_0}\frac{dy}{dx}</m>.
-    </p>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds x=\frac{1}{t^2+1}</m>,<m>y=t^3</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>t_0=0</m>; <m>\lim_{t\to 0} \frac{dy}{dx} = 0</m>.
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=-t^3+7t^2-16t+13</m>, <m>y=t^3-5t^2+8t-2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>t_0=2</m>; <m>\lim_{t\to 2} \frac{dy}{dx} = 1</m>.
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=t^3-3t^2+3t-1</m>,<m>y=t^2-2t+1</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>t_0=1</m>; <m>\lim_{t\to 1} \frac{dy}{dx} = \infty</m>.
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds x=\cos^2t</m>,<m>y=1-\sin^2t</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>t_0=\ldots,-\pi/2,0,\pi/2,\pi,\ldots</m>;
-          <m>\lim_{t\to 0} \frac{dy}{dx} = 1</m>.
-        </p>
-      </answer>
-    </exercise>
-
-    <p>
-      In the following exercises, parametric equations for a curve are given.
-      Find <m>\frac{d^2y}{dx^2}</m>,
-      then determine the intervals on which the graph of the curve is concave up/down.
-      Note: these are the same equations as in <xref ref="ex_09_03_ex_05">Exercises</xref>
-      <mdash /> <xref ref="ex_09_03_ex_12"></xref>.
-    </p>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=t</m>,<m>y=t^2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\frac{d^2y}{dx^2}=2</m>; always concave up
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=\sqrt{t}</m>,<m>y=5t+2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\frac{d^2y}{dx^2}=10</m>; always concave up
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=t^2-t</m>,<m>y=t^2+t</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\frac{d^2y}{dx^2}=-\frac{4}{(2t-1)^3}</m>;
-          concave up on <m>(-\infty,1/2)</m>;
-          concave down on <m>(1/2,\infty)</m>.
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=t^2-1</m>,<m>y=t^3-t</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\frac{d^2y}{dx^2}=\frac{3t^2+1}{4t^3}</m>;
-          concave down on <m>(-\infty,0)</m>;
-          concave up on <m>(0,\infty)</m>.
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=\sec t</m>,<m>y=\tan t</m> on <m>(-\pi/2,\pi/2)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\frac{d^2y}{dx^2}=-\cot^3 t</m>;
-          concave up on <m>(-\pi/2,0)</m>;
-          concave down on <m>(0,\pi/2)</m>.
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=\cos t</m>,<m>y=\sin(2t)</m> on <m>[0,2\pi]</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\frac{d^2y}{dx^2}=\frac{\cos t\sin (2t)+2\sin t\cos(2t)}{(-\sin t\sin(2t)+2\cos t\cos(2t))^2}</m>;
-          concavity switches at <m>t=\tan^{-1}(1/\sqrt{2}),\ \pi/2,\ \pi-\tan^{-1}(1/\sqrt{2}),\ \pi+\tan^{-1}(1/\sqrt{2}),\ 3\pi/2,\ 2\pi-\tan^{-1}(1/\sqrt{2})</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds x=\cos t\sin(2t)</m>,<m>y=\sin t\sin (2t)</m> on <m>[-\pi/2,\pi/2]</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\frac{d^2y}{dx^2} = \frac{4(13+3\cos(4t))}{(\cos t+3\cos(3t))^3}</m>,
-          obtained with a computer algebra system;
-          concave up on <m>\big(-\tan^{-1}(\sqrt{2}/2),\tan^{-1}(\sqrt{2}/2)\big)</m>,
-          concave down on <m>\big(-\pi/2,-\tan^{-1}(\sqrt{2}/2)\big)\cup\big(\tan^{-1}(\sqrt{2}/2),\pi/2\big)</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=e^{t/10}\cos t</m>,<m>y=e^{t/10}\sin t</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\frac{d^2y}{dx^2}=\frac{1010}{e^{t/10}\big(\cos t-10\sin t\big)^3}</m>;
-          concavity switches at <m>t=\tan^{-1}(1/10)+n\pi</m>,
-          where <m>n</m> is an integer.
-        </p>
-      </answer>
-    </exercise>
-
-    <p>
-      In the following exercises,
-      find the arc length of the graph of the parametric equations on the given interval(s).
-    </p>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=-3\sin(2t)</m>,<m>y=3\cos(2t)</m> on <m>[0,\pi]</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>L=6\pi</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=e^{t/10}\cos t</m>,<m>y=e^{t/10}\sin t</m> on
-          <m>[0,2\pi]</m> and <m>[2\pi,4\pi]</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          On <m>[0,2\pi]</m>, arc length is <m>L = \sqrt{101}(e^{\pi/5}-1)</m>;
-          on <m>[2\pi,4\pi]</m>, <m>L =\sqrt{101}(e^{2\pi/5}-1)</m>.
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=5t+2</m>,<m>y=1-3t</m> on <m>[-1,1]</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>L=2\sqrt{34}</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>x=2t^{3/2}</m>,<m>y=3t</m> on <m>[0,1]</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>L=4\sqrt{2}-2</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <p>
-      In the following exercises, numerically approximate the given arc length.
-    </p>
-
-    <exercise>
-      <statement>
-        <p>
-          Approximate the arc length of one petal of the rose curve
-          <m>x=\cos t\cos(2t)</m>,<m>y=\sin t\cos(2t)</m> using Simpson's Rule and <m>n=4</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>L\approx 2.4416</m> (actual value: <m>L=2.42211</m>)
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          Approximate the arc length of the <q>bow tie curve</q>
-          <m>x=\cos t</m>,<m>y=\sin (2t)</m> using Simpson's Rule and <m>n=6</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>L\approx 9.73004</m> (actual value: <m>L=9.42943</m>)
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          Approximate the arc length of the parabola <m>x=t^2-t</m>,<m>y=t^2+t</m> on <m>[-1,1]</m> using Simpson's Rule and <m>n=4</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>L\approx 4.19216</m> (actual value: <m>L=4.18308</m>)
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          A common approximate of the circumference of an ellipse given by
-          <m>x=a\cos t</m>,<m>y=b\sin t</m> is <m>\ds C\approx 2\pi\sqrt{\frac{a^2+b^2}2}</m>.
-          Use this formula to approximate the circumference of <m>x=5\cos t</m>,
-          <m>y=3\sin t</m> and compare this to the approximation given by Simpson's Rule and <m>n=6</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Formula: <m>C\approx 25.9062</m>; Simpson's Rule:
-          <m>C\approx 25.4786</m> (actual value: <m>C=25.527</m>)
-        </p>
-      </answer>
-    </exercise>
-
-    <p>
-      In the following exercises, a solid of revolution is described.
-      Find or approximate its surface area as specified.
-    </p>
-
-    <exercise>
-      <statement>
-        <p>
-          Find the surface area of the sphere formed by rotating the circle
-          <m>x=2\cos t</m>,<m>y=2\sin t</m> about:
-
           <ol>
             <li>
               <p>
-                the <m>x</m>-axis and
+                Find <m>\ds\frac{dy}{dx}</m>.
               </p>
             </li>
 
             <li>
               <p>
-                the <m>y</m>-axis.
+                Find the equations of the tangent and normal line(s) at the point(s) given.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                Sketch the graph of the parametric functions along with the found tangent and normal lines.
               </p>
             </li>
           </ol>
         </p>
-      </statement>
-      <answer>
-        <p>
-          The answer is <m>16\pi</m> for both
-          (of course),
-          but the integrals are different.
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <exercise>
-      <statement>
-        <p>
-          Find the surface area of the torus
-          (or <q>donut</q>)
-          formed by rotating the circle
-          <m>x=\cos t+2</m>,<m>y=\sin t</m> about the <m>y</m>-axis.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>8\pi^2</m>.
-        </p>
-      </answer>
-    </exercise>
+      <exercise xml:id="ex_09_03_ex_05">
+        <webwork seed="1">
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          Approximate the surface area of the solid formed by rotating the
-          <q>upper right half</q>
-          of the bow tie curve <m>x=\cos t</m>,<m>y=\sin(2t)</m> on
-          <m>[0,\pi/2]</m> about the <m>x</m>-axis,
-          using Simpson's Rule and <m>n=4</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>SA\approx 8.50101</m> (actual value <m>SA = 8.02851</m>)
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>x=t</m>, <m>y=t^2</m>;<m>t=1</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <ol>
+                  <li>
+                    <p>
+                      <m>\frac{dy}{dx} = 2t</m>
+                    </p>
+                  </li>
 
-    <exercise>
-      <statement>
+                  <li>
+                    <p>
+                      Tangent line: <m>y= 2(x-1)+1</m>; normal line:
+                      <m>y = -1/2(x-1)+1</m>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>x=\sqrt{t}</m>, <m>y=5t+2</m>;<m>t=4</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <ol>
+                  <li>
+                    <p>
+                      <m>\frac{dy}{dx} = 10\sqrt{t}</m>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Tangent line: <m>y= 20(x-2)+22</m>; normal line:
+                      <m>y = -1/20(x-2)+22</m>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>x=t^2-t</m>, <m>y=t^2+t</m>;<m>t=1</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <ol>
+                  <li>
+                    <p>
+                      <m>\frac{dy}{dx} = \frac{2 t+1}{2 t-1}</m>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Tangent line: <m>y= 3x+2</m>;
+                      normal line: <m>y = -1/3x+2</m>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>x=t^2-1</m>, <m>y=t^3-t</m>;<m>t=0</m> and <m>t=1</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <ol>
+                  <li>
+                    <p>
+                      <m>\frac{dy}{dx} = \frac{3t^2}{2 t}</m>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>t=0</m>: Tangent line: <m>x=-1</m>;
+                      normal line: <m>y = 0</m>
+
+                      <m>t=1</m>: Tangent line: <m>y=x</m>; normal line: <m>y=-x</m>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>x=\sec(t)</m>,
+                <m>y=\tan(t)</m> on <m>(-\pi/2,\pi/2)</m>;<m>t=\pi/4</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <ol>
+                  <li>
+                    <p>
+                      <m>\frac{dy}{dx} = \csc(t)</m>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>t=\pi/4</m>: Tangent line:
+                      <m>y=\sqrt{2}(x-\sqrt{2})+1</m>; normal line:
+                      <m>y = -1/\sqrt{2}(x-\sqrt{2})+1</m>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>x=\cos(t)</m>,
+                <m>y=\sin(2t)</m> on <m>[0,2\pi]</m>;<m>t=\pi/4</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <ol>
+                  <li>
+                    <p>
+                      <m>\frac{dy}{dx} = -2\cos(2t)\csc(t)</m>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>t=\pi/4</m>: Tangent line:
+                      <m>y=1</m>; normal line: <m>x=\sqrt{2}/2</m>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>x=\cos(t) \sin(2t)</m>,
+                <m>y=\sin(t) \sin(2t)</m> on <m>[0,2\pi]</m>; <m>t=3\pi/4</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <ol>
+                  <li>
+                    <p>
+                      <m>\frac{dy}{dx} = \frac{\cos(t) \sin(2t)+2\sin(t) \cos(2t)}{-\sin(t) \sin(2t)+2\cos(t) \cos(2t)}</m>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Tangent line: <m>y=x-\sqrt{2}</m>;
+                      normal line: <m>y=-x</m>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise xml:id="ex_09_03_ex_12">
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>x=e^{t/10}\cos(t)</m>, <m>y=e^{t/10}\sin(t)</m>; <m>t=\pi/2</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <ol>
+                  <li>
+                    <p>
+                      <m>\frac{dy}{dx} = \frac{\sin(t)+10 \cos(t)}{\cos(t)-10 \sin(t)}</m>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Tangent line: <m>y=-x/10+e^{\pi/20}</m>; normal line:
+                      <m>y=10x+e^{\pi/20}</m>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
         <p>
-          Approximate the surface area of the solid formed by rotating the one petal of the rose curve
-          <m>x=\cos t\cos(2t)</m>,<m>y=\sin t\cos(2t)</m> on
-          <m>[0,\pi/4]</m> about the <m>x</m>-axis,
-          using Simpson's Rule and <m>n=4</m>.
+          In the following exercises,
+          find <m>t</m>-values where the curve defined by the given parametric equations has a horizontal tangent line.
+          Note: these are the same equations as in <xref ref="ex_09_03_ex_05">Exercises</xref>
+          <mdash/> <xref ref="ex_09_03_ex_12"/>.
         </p>
-      </statement>
-      <answer>
+      </introduction>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>x=t</m>, <m>y=t^2</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>t=0</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>x=\sqrt{t}</m>, <m>y=5t+2</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>t=0</m> (though this uses a one<ndash/>sided limit,
+                as <m>x(t)</m> is not defined for <m>t\lt 0</m>.
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+
+            <pg-code>
+              $hort=List("-1/2");
+              Context("Point");
+              $points=List("(3/4,-1/4)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Find the values of <m>t</m> where the curve defined by <m>x=t^2-t</m>,
+                <m>y=t^2+t</m> has a horizontal tangent line.
+                (If there is more than one, use commas to separate them.)
+              </p>
+
+              <p>
+                <m>t\in\big\{</m><var name="$hort" width="20"/><m>\big\}</m>
+              </p>
+
+              <p>
+                At what point(s) in the plane are the horizontal tangent lines? (If there is more than one,
+                use commas to separate them.)
+              </p>
+
+              <p>
+                <var name="$points" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>x=t^2-1</m>, <m>y=t^3-t</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>t=\pm 1/\sqrt{3}</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>x=\sec(t)</m>, <m>y=\tan(t)</m> on <m>(-\pi/2,\pi/2)</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                The graph does not have a horizontal tangent line.
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+
+            <pg-code>
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $hort=List(Formula("pi/4"),Formula("3pi/4"),Formula("5pi/4"),Formula("7pi/4"));
+              Context("Point");
+              $points=Compute("(sqrt(2)/2,1), (-sqrt(2)/2,-1), (-sqrt(2)/2,1), (sqrt(2)/2,-1)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Find the values of <m>t</m> in
+                <m>[0,2\pi)</m> where the curve defined by <m>x=\cos(t)</m>,
+                <m>y=\sin(2t)</m> has a horizontal tangent line.
+                (If there is more than one, use commas to separate them.)
+              </p>
+
+              <p>
+                <m>t\in\big\{</m><var name="$hort" width="20"/><m>\big\}</m>
+              </p>
+
+              <p>
+                At what point(s) in the plane are the horizontal tangent lines? (If there is more than one,
+                use commas to separate them.)
+              </p>
+
+              <p>
+                <var name="$points" width="40"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>x=\cos(t) \sin(2t)</m>, <m>y=\sin(t) \sin(2t)</m> on <m>[0,2\pi]</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                The solution is non-trivial;
+                use identities <m>\sin(2t)=2\sin(t) \cos(t)</m> and
+                <m>\cos(2t)=\cos^2(t) -\sin^2(t)</m> to rewrite <m>g'(t) = 2\sin(t) (2\cos^2(t) -\sin^2(t) )</m>.
+                On <m>[0,2\pi]</m>, <m>\sin(t) = 0</m> when <m>t=0,\pi,2\pi</m>,
+                and <m>2\cos^2(t) -\sin^2(t) =0</m> when <m>t=\tan^{-1}(\sqrt{2}),\,\pi \pm \tan^{-1}(\sqrt{2}),\,2\pi-\tan^{-1}(\sqrt{2})</m>.
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>x=e^{t/10}\cos(t)</m>, <m>y=e^{t/10}\sin(t)</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>t=\tan^{-1}(-10),\,\tan^{-1}(-10)+\pi</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
         <p>
-          <m>SA\approx 1.36751</m> (actual value <m>SA = 1.36707</m>
+          In the following exercises,
+          find <m>t=t_0</m> where the graph of the given parametric equations is not smooth,
+          then find <m>\lim\limits_{t\to t_0}\frac{dy}{dx}</m>.
         </p>
-      </answer>
-    </exercise>
-  </subsection>
+      </introduction>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+
+            <pg-code>
+              $t0 = Real("0");
+              $L = Real("0");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Find <m>t=t_0</m> where the graph of <m>x=\frac{1}{t^2+1}</m>,
+                <m>y=t^3</m> is not smooth, then find <m>\lim\limits_{t\to t_0}\lz{y}{x}</m>.
+              </p>
+
+              <p>
+                <m>t_0=</m><var name="$t0" width="5"/>
+              </p>
+
+              <p>
+                <m>\lim\limits_{t\to t_0}\lz{y}{x}=</m><var name="$L" width="5"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+
+            <pg-code>
+              $t0 = Real("2");
+              $L = Real("1");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Find <m>t=t_0</m> where the graph of <m>x=-t^3+7t^2-16t+13</m>,
+                <m>y=t^3-5t^2+8t-2</m> is not smooth,
+                then find <m>\lim\limits_{t\to t_0}\lz{y}{x}</m>.
+              </p>
+
+              <p>
+                <m>t_0=</m><var name="$t0" width="5"/>
+              </p>
+
+              <p>
+                <m>\lim\limits_{t\to t_0}\lz{y}{x}=</m><var name="$L" width="5"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>x=t^3-3t^2+3t-1</m>,<m>y=t^2-2t+1</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>t_0=1</m>; <m>\lim_{t\to 1} \frac{dy}{dx} = \infty</m>.
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds x=\cos^2(t)</m>,<m>y=1-\sin^2(t)</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>t_0=\ldots,-\pi/2,0,\pi/2,\pi,\ldots</m>;
+                <m>\lim_{t\to 0} \frac{dy}{dx} = 1</m>.
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
+        <p>
+          In the following exercises, parametric equations for a curve are given.
+          Find <m>\frac{d^2y}{dx^2}</m>,
+          then determine the intervals on which the graph of the curve is concave up/down.
+          Note: these are the same equations as in <xref ref="ex_09_03_ex_05">Exercises</xref>
+          <mdash/> <xref ref="ex_09_03_ex_12"/>.
+        </p>
+      </introduction>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>x=t</m>,<m>y=t^2</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\frac{d^2y}{dx^2}=2</m>; always concave up
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>x=\sqrt{t}</m>,<m>y=5t+2</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\frac{d^2y}{dx^2}=10</m>; always concave up
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+
+
+            <pg-code>
+              Context()->variables->are(t=>'Real');
+              $ypp=Formula("-(4/(2t-1)^3)");
+              Context()->flags->set(ignoreEndpointTypes => 1);
+              $up=List("(-inf,1/2]");
+              $down=List("[1/2,inf)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                For the curve defined by <m>x=t^2-t</m>,
+                <m>y=t^2+t</m>, find <m>\lzn{2}{y}{x}</m>
+                (as a function of <m>t</m>).
+                Then determine the intervals on which the graph of the curve is concave up/down.
+              </p>
+
+              <p>
+                <m>\lzn{2}{y}{x}=</m><var name="$ypp" width="40"/>
+              </p>
+
+              <p>
+                The curve is concave up for <m>t</m> in the interval(s) <var name="$up" width="20"/>.
+                (If there is more than one interval,
+                use commas to separate them.)
+              </p>
+
+              <p>
+                The curve is concave down for <m>t</m> in the interval(s) <var name="$down" width="20"/>.
+                (If there is more than one interval,
+                use commas to separate them.)
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>x=t^2-1</m>,<m>y=t^3-t</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\frac{d^2y}{dx^2}=\frac{3t^2+1}{4t^3}</m>;
+                concave down on <m>(-\infty,0)</m>;
+                concave up on <m>(0,\infty)</m>.
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>x=\sec(t)</m>,<m>y=\tan(t)</m> on <m>(-\pi/2,\pi/2)</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\frac{d^2y}{dx^2}=-\cot^3(t)</m>;
+                concave up on <m>(-\pi/2,0)</m>;
+                concave down on <m>(0,\pi/2)</m>.
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+
+
+            <pg-code>
+              Context()->variables->are(t=>'Real');
+              $ypp=Formula("2 (sin(t)*-2sin(2t) - cos(2t)*cos(t)) / sin^3(t)");
+              Context()->flags->set(ignoreEndpointTypes => 1);
+              $up=Compute("[pi/2,pi], [3pi/2,2pi]");
+              $down=Compute("[0,pi/2], [pi,3pi/2]");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                For the curve defined by <m>x=\cos(t)</m>,
+                <m>y=\sin(2t)</m>, find <m>\lzn{2}{y}{x}</m>
+                (as a function of <m>t</m>).
+                Then determine the intervals (within
+                <m>[0,2\pi)</m>) on which the graph of the curve is concave up/down.
+              </p>
+
+              <p>
+                <m>\lzn{2}{y}{x}=</m><var name="$ypp" width="40"/>
+              </p>
+
+              <p>
+                The curve is concave up for <m>t</m> in the interval(s) <var name="$up" width="40"/>.
+                (If there is more than one interval,
+                use commas to separate them.)
+              </p>
+
+              <p>
+                The curve is concave down for <m>t</m> in the interval(s) <var name="$down" width="40"/>.
+                (If there is more than one interval,
+                use commas to separate them.)
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>\ds x=\cos(t) \sin(2t)</m>,<m>y=\sin(t) \sin(2t)</m> on <m>[-\pi/2,\pi/2]</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\frac{d^2y}{dx^2} = \frac{4(13+3\cos(4t))}{(\cos(t) +3\cos(3t))^3}</m>,
+                obtained with a computer algebra system;
+                concave up on <m>\big(-\tan^{-1}(\sqrt{2}/2),\tan^{-1}(\sqrt{2}/2)\big)</m>,
+                concave down on <m>\big(-\pi/2,-\tan^{-1}(\sqrt{2}/2)\big)\cup\big(\tan^{-1}(\sqrt{2}/2),\pi/2\big)</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>x=e^{t/10}\cos(t)</m>,<m>y=e^{t/10}\sin(t)</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\frac{d^2y}{dx^2}=\frac{1010}{e^{t/10}\big(\cos(t) -10\sin(t) \big)^3}</m>;
+                concavity switches at <m>t=\tan^{-1}(1/10)+n\pi</m>,
+                where <m>n</m> is an integer.
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
+        <p>
+          In the following exercises,
+          find the arc length of the graph of the parametric equations on the given interval(s).
+        </p>
+      </introduction>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              Context()->flags->set(reduceConstants=>0);
+              $length=Formula("6pi");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Find the arc length of the graph defined by <m>x=-3\sin(2t)</m>,
+                <m>y=3\cos(2t)</m> on <m>[0,\pi]</m>.
+              </p>
+
+              <p>
+                <var name="$length" width="10"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+
+            <pg-code>
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $length1=Formula("sqrt(101)(e^(pi/5)-1)");
+              $length2=Formula("sqrt(101)(e^(2pi/5)-e^(pi/5))");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Find the arc length of the graph defined by <m>x=e^{t/10}\cos(t)</m>,
+                <m>y=e^{t/10}\sin(t)</m> on
+                <m>[0,2\pi]</m> and <m>[2\pi,4\pi]</m>.
+              </p>
+
+              <p>
+                On <m>[0,2\pi]</m>, the length is <var name="$length1" width="20"/>.
+              </p>
+
+              <p>
+                On <m>[2\pi,4\pi]</m>, the length is <var name="$length2" width="20"/>.
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $length=Formula("2sqrt(34)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Find the arc length of the graph defined by <m>x=5t+2</m>,
+                <m>y=1-3t</m> on <m>[-1,1]</m>.
+              </p>
+
+              <p>
+                <var name="$length" width="10"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                <m>x=2t^{3/2}</m>,<m>y=3t</m> on <m>[0,1]</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>L=4\sqrt{2}-2</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
+        <p>
+          In the following exercises, numerically approximate the given arc length.
+        </p>
+      </introduction>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Approximate the arc length of one petal of the rose curve
+                <m>x=\cos(t) \cos(2t)</m>,<m>y=\sin(t) \cos(2t)</m> using Simpson's Rule and <m>n=4</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>L\approx 2.4416</m> (actual value: <m>L=2.42211</m>)
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Approximate the arc length of the <q>bow tie curve</q>
+                <m>x=\cos(t)</m>,<m>y=\sin(2t)</m> using Simpson's Rule and <m>n=6</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>L\approx 9.73004</m> (actual value: <m>L=9.42943</m>)
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Approximate the arc length of the parabola <m>x=t^2-t</m>,<m>y=t^2+t</m> on <m>[-1,1]</m> using Simpson's Rule and <m>n=4</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>L\approx 4.19216</m> (actual value: <m>L=4.18308</m>)
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                A common approximate of the circumference of an ellipse given by
+                <m>x=a\cos(t)</m>,<m>y=b\sin(t)</m> is <m>\ds C\approx 2\pi\sqrt{\frac{a^2+b^2}2}</m>.
+                Use this formula to approximate the circumference of <m>x=5\cos(t)</m>,
+                <m>y=3\sin(t)</m> and compare this to the approximation given by Simpson's Rule and <m>n=6</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Formula: <m>C\approx 25.9062</m>; Simpson's Rule:
+                <m>C\approx 25.4786</m> (actual value: <m>C=25.527</m>)
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
+        <p>
+          In the following exercises, a solid of revolution is described.
+          Find or approximate its surface area as specified.
+        </p>
+      </introduction>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Find the surface area of the sphere formed by rotating the circle
+                <m>x=2\cos(t)</m>,<m>y=2\sin(t)</m> about:
+              </p>
+
+              <p>
+                <ol>
+                  <li>
+                    <p>
+                      the <m>x</m>-axis and
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      the <m>y</m>-axis.
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                The answer is <m>16\pi</m> for both
+                (of course),
+                but the integrals are different.
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Find the surface area of the torus
+                (or <q>donut</q>)
+                formed by rotating the circle
+                <m>x=\cos(t) +2</m>,<m>y=\sin(t)</m> about the <m>y</m>-axis.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>8\pi^2</m>.
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Approximate the surface area of the solid formed by rotating the
+                <q>upper right half</q>
+                of the bow tie curve <m>x=\cos(t)</m>,<m>y=\sin(2t)</m> on
+                <m>[0,\pi/2]</m> about the <m>x</m>-axis,
+                using Simpson's Rule and <m>n=4</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>SA\approx 8.50101</m> (actual value <m>SA = 8.02851</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork seed="1">
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Approximate the surface area of the solid formed by rotating the one petal of the rose curve
+                <m>x=\cos(t) \cos(2t)</m>,<m>y=\sin(t) \cos(2t)</m> on
+                <m>[0,\pi/4]</m> about the <m>x</m>-axis,
+                using Simpson's Rule and <m>n=4</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>SA\approx 1.36751</m> (actual value <m>SA = 1.36707</m>)
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+  </exercises>
 </section>
-
