@@ -1,5 +1,4 @@
-
-
+<?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="sec_directional_derivative">
   <title>Directional Derivatives</title>
   <introduction>
@@ -18,7 +17,10 @@
       This section investigates <em>directional derivatives</em>,
       which do measure this rate of change.
     </p>
+  </introduction>
 
+  <subsection>
+    <title>Functions of Two Variables</title>
     <p>
       We begin with a definition.
     </p>
@@ -72,7 +74,9 @@
           Let <m>z= 14-x^2-y^2</m> and let <m>P=(1,2)</m>.
           Find the directional derivative of <m>f</m>,
           at <m>P</m>, in the following directions:
+        </p>
 
+        <p>
           <ol>
             <li>
               <p>
@@ -97,14 +101,123 @@
       <solution>
         <figure xml:id="fig_direct1">
           <caption>Understanding the directional derivative in <xref ref="ex_direct1">Example</xref>.</caption>
-          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          <!--
+           \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
           3Droll=-0.45935076561172045,
           3Dortho=0.00494238780811429,
           3Dc2c=0.8379672765731812 0.26980355381965637 0.4743594527244568,
           3Dcoo=-27.334510803222656 46.63825988769531 23.82315444946289,
           3Droo=130.00000000067573,
-          3Dlights=Headlamp,add3Djscript=asylabels.js}
-          <img src="figures/figdirect1_3D"/>
+          3Dlights=Headlamp,add3Djscript=asylabels.js]
+           -->
+          <!-- START figures/figdirect1_3D.asy -->
+          <image xml:id="img_direct1" width="47%">
+            <description></description>
+            <asymptote>
+
+              import graph3;
+
+              //ASY file for figdirect13D.asy in Chapter 12
+
+              size(200,200,IgnoreAspect);
+              //size(200,200,Aspect);
+              //currentprojection=perspective(7,2,1);
+              currentprojection=orthographic(16,5,25);
+              defaultrender.merge=true;
+
+              // setup and draw the axes
+              real[] myxchoice={4};
+              real[] myychoice={4};
+              real[] myzchoice={10};
+              defaultpen(0.5mm);
+              pair xbounds=(-0.5,4.75);
+              pair ybounds=(-0.5,4.75);
+              pair zbounds=(0,15);
+
+              xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+              yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+              zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+              label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+              //Draw surface z=14-x^2-y^2
+              triple f(pair t) {
+                return (t.x,t.y,14-t.x^2-t.y^2);
+              }
+              surface s=surface(f,(0,0),(2,2.5),6,5,Spline);
+              pen p=rgb(0,0,.7);
+              draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+              //plot point P and on curve and point Q
+              dotfactor=3;dot((1,2,9));
+              dot((1,2,0));
+              label("$P$",(1,2,0),N);
+              dot((3,4,0));
+              label("$Q$",(3,4,0),N);
+
+              //draw grid lines
+              draw((0,1,0)--(4.5,1,0),gray+linewidth(.5));
+              draw((0,2,0)--(4.5,2,0),gray+linewidth(.5));
+              draw((0,3,0)--(4.5,3,0),gray+linewidth(.5));
+              draw((0,4,0)--(4.5,4,0),gray+linewidth(.5));
+              draw((1,0,0)--(1,4.5,0),gray+linewidth(.5));
+              draw((2,0,0)--(2,4.5,0),gray+linewidth(.5));
+              draw((3,0,0)--(3,4.5,0),gray+linewidth(.5));
+              draw((4,0,0)--(4,4.5,0),gray+linewidth(.5));
+
+              //Draw the vectors in the plane from P
+              draw((1,2,0)--(1.707,2.707,0),Arrow3(size=2mm));//P to u1
+              label("$\vec{u}_1$",(1.707,2.707,0),E);//u1
+              draw((1,2,0)--(1.894,1.553,0),Arrow3(size=2mm));//P to u2
+              label("$\vec{u}_2$",(1.894,1.553,0),S);//u2
+              draw((1,2,0)--(0.552,1.106,0),Arrow3(size=2mm));//P to u3
+              label("$\vec{u}_3$",(0.552,1.106,0),W);//u3
+
+              //Draw the vectors on the surface above P
+              draw((1,2,9)--(1.707,2.707,4.76),Arrow3(size=2mm));//P to u1
+              draw((1,2,9)--(1.894,1.553,9),Arrow3(size=2mm));//P to u2
+              draw((1,2,9)--(0.552,1.106,13.47),Arrow3(size=2mm));//P to u3
+
+              // ////////////////////////////////////
+              //    SAMPLE CODE
+
+              // defaultpen(fontsize(10pt));
+
+              //Draw the parabola z=y^2 for t from -2 to 2
+              //triple g(real t) {return (0,t,t^2);}
+              //path3 mypath=graph(g,-2,2,operator ..); draw(mypath,blue);
+
+              //Draw the surface z=1/(1+x^2+y^2)
+              //triple f(pair t) {
+              //  return (t.x,t.y,1/(1+(t.x)^2+(t.y)^2));
+              //}
+              //surface s=surface(f,(-2,-2),(2,2),8,8,Spline);
+              //pen p=rgb(0,0,.7);
+              //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+              //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+              //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+
+              //triple f(pair t) {
+              //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+              //}
+              //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+
+              //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+              //path3 mypath=graph(g,-2,2,operator ..);
+
+              //pen p=rgb(0,0,1);
+              //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+              //draw(s,paleblue);
+              //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+              //draw(mypath,2bp+blue);
+
+            </asymptote>
+          </image>
+          <!-- figures/figdirect1_3D.asy END -->
         </figure>
 
         <p>
@@ -112,7 +225,9 @@
           where the point <m>P=(1,2)</m> is indicated in the <m>x,y</m>-plane as well as the point <m>(1,2,9)</m> which lies on the surface of <m>f</m>.
           We find that <m>f_x(x,y) = -2x</m> and <m>f_x(1,2) = -2</m>;
           <m>f_y(x,y) = -2y</m> and <m>f_y(1,2) = -4</m>.
+        </p>
 
+        <p>
           <ol>
             <li>
               <p>
@@ -202,7 +317,7 @@
 
     <aside>
       <p>
-        <em>Note:</em> The symbol <q><m>\nabla</m></q> is named <q>nabla,</q>
+        The symbol <q><m>\nabla</m></q> is named <q>nabla,</q>
         derived from the Greek name of a Jewish harp.
         Oddly enough, in mathematics the expression
         <m>\nabla f</m> is pronounced <q>del <m>f</m>.</q>
@@ -218,7 +333,7 @@
       <title>The Gradient and Directional Derivatives</title>
       <p>
         The directional derivative of
-        <m>z=f(x,y)</m> in the direction of <m>\vec u</m> is 
+        <m>z=f(x,y)</m> in the direction of <m>\vec u</m> is
             <idx><h>gradient</h></idx>
             <idx><h>directional derivative</h></idx>
             <idx><h>derivative</h><h>directional</h></idx>
@@ -232,7 +347,9 @@
       The properties of the dot product previously studied allow us to investigate the properties of the directional derivative.
       Given that the directional derivative gives the instantaneous rate of change of <m>z</m> when moving in the direction of <m>\vec u</m>,
       three questions naturally arise:
+    </p>
 
+    <p>
       <ol>
         <li>
           <p>
@@ -259,17 +376,19 @@
     <p>
       Using the key property of the dot product, we have
       <men xml:id="eq_gradient">
-        \nabla f\cdot \vec u = \norm{\nabla f}\,\vnorm u \cos \theta = \norm{\nabla f}\cos \theta
+        \nabla f\cdot \vec u = \norm{\nabla f}\,\vnorm u \cos(\theta) = \norm{\nabla f}\cos(\theta)
       </men>,
       where <m>\theta</m> is the angle between the gradient and <m>\vec u</m>.
       (Since <m>\vec u</m> is a unit vector, <m>\vnorm{u} = 1</m>.)
       This equation allows us to answer the three questions stated previously.
+    </p>
 
+    <p>
       <ol>
         <li>
           <p>
             <xref ref="eq_gradient">Equation</xref>
-            is maximized when <m>\cos \theta =1</m>,
+            is maximized when <m>\cos(\theta) =1</m>,
             i.e., when the gradient and <m>\vec u</m> have the same direction.
             We conclude the gradient points in the direction of greatest <m>z</m> change.
           </p>
@@ -278,7 +397,7 @@
         <li>
           <p>
             <xref ref="eq_gradient">Equation</xref>
-            is minimized when <m>\cos \theta = -1</m>,
+            is minimized when <m>\cos(\theta) = -1</m>,
             i.e., when the gradient and <m>\vec u</m> have opposite directions.
             We conclude the gradient points in the opposite direction of the least <m>z</m> change.
           </p>
@@ -287,7 +406,7 @@
         <li>
           <p>
             <xref ref="eq_gradient">Equation</xref>
-            is 0 when <m>\cos \theta = 0</m>,
+            is 0 when <m>\cos(\theta) = 0</m>,
             i.e., when the gradient and <m>\vec u</m> are orthogonal to each other.
             We conclude the gradient is orthogonal to directions of no <m>z</m> change.
           </p>
@@ -299,13 +418,13 @@
       This result is rather amazing.
       Once again imagine standing in a rolling meadow and face the direction that leads you steepest uphill.
       Then the direction that leads steepest downhill is directly behind you,
-      and side<ndash />stepping either left or right (i.e., moving perpendicularly to the direction you face) does not change your elevation at all.
+      and side<ndash/>stepping either left or right (i.e., moving perpendicularly to the direction you face) does not change your elevation at all.
     </p>
 
     <p>
       Recall that a level curve is defined as a curve in the <m>x</m>-<m>y</m> plane along which the <m>z</m>-values of a function do not change.
       Let a surface <m>z=f(x,y)</m> be given,
-      and let's represent one such level curve as a vector<ndash />valued function,
+      and let's represent one such level curve as a vector<ndash/>valued function,
       <m>\vrt = \la x(t), y(t)\ra</m>.
       As the output of <m>f</m> does not change along this curve,
       <m>f\big(x(t),y(t)\big) = c</m> for all <m>t</m>,
@@ -342,7 +461,9 @@
         <p>
           Let <m>z=f(x,y)</m> be differentiable on a set <m>S</m> with gradient <m>\nabla f</m>,
           let <m>P=(x_0,y_0)</m> be a point in <m>S</m> and let <m>\vec u</m> be a unit vector.
+        </p>
 
+        <p>
           <ol>
             <li>
               <p>
@@ -378,7 +499,7 @@
       <title>Finding directions of maximal and minimal increase</title>
       <statement>
         <p>
-          Let <m>f(x,y) = \sin x\cos y</m> and let <m>P=(\pi/3,\pi/3)</m>.
+          Let <m>f(x,y) = \sin(x) \cos(y)</m> and let <m>P=(\pi/3,\pi/3)</m>.
           Find the directions of maximal/minimal increase,
           and find a direction where the instantaneous rate of <m>z</m> change is 0.
         </p>
@@ -386,16 +507,16 @@
       <solution>
         <p>
           We begin by finding the gradient.
-          <m>f_x = \cos x\cos y</m> and <m>f_y = -\sin x\sin y</m>, thus
+          <m>f_x = \cos(x) \cos(y)</m> and <m>f_y = -\sin(x) \sin(y)</m>, thus
           <me>
-            \nabla f = \la \cos x\cos y,-\sin x\sin y\ra  \text{ and, at \(P\), }   \nabla f\left(\frac{\pi}3,\frac{\pi}3\right) = \la\frac14,-\frac34\ra
+            \nabla f = \la \cos(x) \cos(y) ,-\sin(x) \sin(y) \ra  \text{ and, at \(P\), }   \nabla f\left(\frac{\pi}3,\frac{\pi}3\right) = \la\frac14,-\frac34\ra
           </me>.
         </p>
 
         <p>
           Thus the direction of maximal increase is <m>\la 1/4, -3/4\ra</m>.
           In this direction,
-          the instantaneous rate of <m>z</m> change is <m>||\la 1/4,-3/4\ra|| = \sqrt{10}/4 \approx 0.79</m>.
+          the instantaneous rate of <m>z</m> change is <m>\norm{\la 1/4,-3/4\ra} = \sqrt{10}/4 \approx 0.79</m>.
         </p>
 
         <p>
@@ -405,41 +526,234 @@
           (because of the nature of this surface,
           the gradient points <q>into</q> the surface).
           Let <m>\vec u = \la u_1, u_2\ra</m> be the unit vector in the direction of <m>\nabla f</m> at <m>P</m>.
-          Each graph of the figure also contains the vector <m>\la u_1, u_2, ||\nabla f\,||\ra</m>.
+          Each graph of the figure also contains the vector <m>\la u_1, u_2, \norm{\nabla f\,}\ra</m>.
           This vector has a <q>run</q> of 1
           (because in the <m>x</m>-<m>y</m> plane it moves 1 unit)
-          and a <q>rise</q> of <m>||\nabla f\,||</m>,
+          and a <q>rise</q> of <m>\norm{\nabla f}</m>,
           hence we can think of it as a vector with slope of
-          <m>||\nabla f\,||</m> in the direction of <m>\nabla f</m>,
+          <m>\norm{\nabla f}</m> in the direction of <m>\nabla f</m>,
           helping us visualize how <q>steep</q>
           the surface is in its steepest direction.
         </p>
 
         <figure xml:id="fig_direct2">
           <caption>Graphing the surface and important directions in <xref ref="ex_direct2">Example</xref>.</caption>
-          <sidebyside>
-            <figure>
-              <caption>(a)</caption>
-              \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          <sidebyside widths="47% 47%">
+            <figure xml:id="fig_direct2a_3D">
+              <caption/>
+              <!--
+              \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
               3Droll=0,
               3Dortho=0.0051408205181360245,
               3Dc2c=0.6666666865348816 0.6666666865348816 0.3333333432674408,
               3Dcoo=-1.1194640398025513 -3.250971794128418 8.740827560424805,
               3Droo=150,
-              3Dlights=Headlamp,add3Djscript=asylabels.js}
-              <img src="figures/figdirect2_3D"/>
+              3Dlights=Headlamp,add3Djscript=asylabels.js]
+              -->
+              <!-- START figures/figdirect2_3D.asy -->
+              <image xml:id="img_direct2a_3D">
+                <description></description>
+                <asymptote>
+
+                  import graph3;
+
+                  //ASY file for figdirect23D.asy in Chapter 12
+
+                  size(200,200,IgnoreAspect);
+                  //size(200,200,Aspect);
+                  //currentprojection=perspective(7,2,1);
+
+                  // for the default version, figdirect2
+                  currentprojection=orthographic(12,13,3);
+
+                  // for the second, zoomed in view, figdirect2b
+                  //currentprojection=orthographic((5.6,16.3,2.6),(0,0,1),(0,0,0),1.6,(-0.03,-0.34));
+
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={2,4};
+                  real[] myychoice={2,4};
+                  real[] myzchoice={-1,1};
+                  defaultpen(0.5mm);
+                  pair xbounds=(-1,6);
+                  pair ybounds=(-1,5);
+                  pair zbounds=(-1.5,1.5);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //Draw surface z=sin(x)*cos(y)
+                  triple f(pair t) {
+                    return (t.x,t.y,sin(t.x)*cos(t.y));
+                  }
+                  surface s=surface(f,(-1.5,-1.5),(4,4),8,8,Spline);
+                  pen p=rgb(0,0,.7);
+                  draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+                  //plot point on surface
+                  dotfactor=3;dot((pi/3,pi/3,sqrt(3)/4));
+
+                  //Draw the vectors on the surface
+                  draw((pi/3,pi/3,sqrt(3)/4)--(pi/3+3/sqrt(10),pi/3+1/sqrt(10),sqrt(3)/4),Arrow3(size=2mm));//T at point
+                  draw((pi/3,pi/3,sqrt(3)/4)--(pi/3+1/sqrt(10),pi/3-3/sqrt(10),sqrt(3)/4),linetype(new real[] {2,2}),Arrow3(size=2mm));//N at point
+                  //draw((pi/3,pi/3,sqrt(3)/4)--(pi/3+1/sqrt(10),pi/3-3/sqrt(10),sqrt(3)/4),linetype(new real[] {2,2}),Arrow3(size=2mm));//N at point
+                  draw((pi/3,pi/3,sqrt(3)/4)--(pi/3+1/sqrt(10),pi/3-3/sqrt(10),0.79+sqrt(3)/4),Arrow3(size=2mm));//tangent
+
+                  //plot level curve
+                  draw((0.4485,0,0.4336)..(0.4693,0.2857,0.434)..(0.5417,0.5714,0.4337)..(0.7143,0.8481,0.4333)..(0.9331,1.,0.4341)..(1.143,1.075,0.4331)..(1.429,1.118,0.4333)..(1.714,1.118,0.4333)..(2.,1.074,0.4331)..(2.209,1.,0.4341)..(2.429,0.8467,0.4333)..(2.6,0.5714,0.4333)..(2.673,0.2857,0.4333)..(2.694,0,0.4332)..(2.673,-0.2857,0.4333)..(2.615,-0.5276,0.4341)..(2.531,-0.7143,0.4333)..(2.347,-0.9187,0.433)..(2.098,-1.044,0.4341)..(1.821,-1.107,0.4333)..(1.551,-1.122,0.4335)..(1.237,-1.094,0.4338)..(0.9783,-1.022,0.4329)..(0.7185,-0.8529,0.433)..(0.5714,-0.639,0.4341)..(0.4838,-0.3734,0.4331)..(0.4517,-0.1197,0.4334)..(0.4485,-0.01989,0.4335),blue+linewidth(2));
+
+                  // ////////////////////////////////////
+                  //    SAMPLE CODE
+
+                  // defaultpen(fontsize(10pt));
+
+                  //Draw the parabola z=y^2 for t from -2 to 2
+                  //triple g(real t) {return (0,t,t^2);}
+                  //path3 mypath=graph(g,-2,2,operator ..); draw(mypath,blue);
+
+                  //Draw the surface z=1/(1+x^2+y^2)
+                  //triple f(pair t) {
+                  //  return (t.x,t.y,1/(1+(t.x)^2+(t.y)^2));
+                  //}
+                  //surface s=surface(f,(-2,-2),(2,2),8,8,Spline);
+                  //pen p=rgb(0,0,.7);
+                  //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+                  //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+                  //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+
+                  //triple f(pair t) {
+                  //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+                  //}
+                  //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+
+                  //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+                  //path3 mypath=graph(g,-2,2,operator ..);
+
+                  //pen p=rgb(0,0,1);
+                  //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+                  //draw(s,paleblue);
+                  //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+                  //draw(mypath,2bp+blue);
+
+                </asymptote>
+              </image>
+            <!-- figures/figdirect2_3D.asy END -->
             </figure>
 
-            <figure>
-              <caption>(b)</caption>
-              \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+            <figure xml:id="fig_direct2b_3D">
+              <caption/>
+              <!--
+              \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
               3Droll=0,
               3Dortho=0.008940433152019978,
               3Dc2c=0.6666666865348816 0.6666666865348816 0.3333333134651184,
               3Dcoo=-6.498621940612793 -16.487354278564453 45.97212600708008,
               3Droo=149.9999987284343,
-              3Dlights=Headlamp,add3Djscript=asylabels.js}
-              <img src="figures/figdirect2b_3D"/>
+              3Dlights=Headlamp,add3Djscript=asylabels.js]
+              -->
+              <!-- START figures/figdirect2b_3D.asy -->
+              <image xml:id="img_direct2b_3D">
+                <description></description>
+                <asymptote>
+
+                  import graph3;
+
+                  //ASY file for figdirect23D.asy in Chapter 12
+
+                  size(200,200,IgnoreAspect);
+                  //size(200,200,Aspect);
+                  //currentprojection=perspective(7,2,1);
+
+                  // for the default version, figdirect2
+                  //currentprojection=orthographic(12,13,3);
+
+                  // for the second, zoomed in view, figdirect2b
+                  currentprojection=orthographic((5.6,16.3,2.6),(0,0,1),(0,0,0),1.6,(-0.03,-0.34));
+
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={2,4};
+                  real[] myychoice={2,4};
+                  real[] myzchoice={-1,1};
+                  defaultpen(0.5mm);
+                  pair xbounds=(-1,6);
+                  pair ybounds=(-1,5);
+                  pair zbounds=(-1.5,1.5);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //Draw surface z=sin(x)*cos(y)
+                  triple f(pair t) {
+                    return (t.x,t.y,sin(t.x)*cos(t.y));
+                  }
+                  surface s=surface(f,(-1.5,-1.5),(4,4),8,8,Spline);
+                  pen p=rgb(0,0,.7);
+                  draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+                  //plot point on surface
+                  dotfactor=3;dot((pi/3,pi/3,sqrt(3)/4));
+
+                  //Draw the vectors on the surface
+                  draw((pi/3,pi/3,sqrt(3)/4)--(pi/3+3/sqrt(10),pi/3+1/sqrt(10),sqrt(3)/4),Arrow3(size=2mm));//T at point
+                  draw((pi/3,pi/3,sqrt(3)/4)--(pi/3+1/sqrt(10),pi/3-3/sqrt(10),sqrt(3)/4),linetype(new real[] {2,2}),Arrow3(size=2mm));//N at point
+                  draw((pi/3,pi/3,sqrt(3)/4)--(pi/3+1/sqrt(10),pi/3-3/sqrt(10),0.79+sqrt(3)/4),Arrow3(size=2mm));//tangent
+
+                  //plot level curve
+                  draw((0.4485,0,0.4336)..(0.4693,0.2857,0.434)..(0.5417,0.5714,0.4337)..(0.7143,0.8481,0.4333)..(0.9331,1.,0.4341)..(1.143,1.075,0.4331)..(1.429,1.118,0.4333)..(1.714,1.118,0.4333)..(2.,1.074,0.4331)..(2.209,1.,0.4341)..(2.429,0.8467,0.4333)..(2.6,0.5714,0.4333)..(2.673,0.2857,0.4333)..(2.694,0,0.4332)..(2.673,-0.2857,0.4333)..(2.615,-0.5276,0.4341)..(2.531,-0.7143,0.4333)..(2.347,-0.9187,0.433)..(2.098,-1.044,0.4341)..(1.821,-1.107,0.4333)..(1.551,-1.122,0.4335)..(1.237,-1.094,0.4338)..(0.9783,-1.022,0.4329)..(0.7185,-0.8529,0.433)..(0.5714,-0.639,0.4341)..(0.4838,-0.3734,0.4331)..(0.4517,-0.1197,0.4334)..(0.4485,-0.01989,0.4335),blue+linewidth(2));
+
+                  // ////////////////////////////////////
+                  //    SAMPLE CODE
+
+                  // defaultpen(fontsize(10pt));
+
+                  //Draw the parabola z=y^2 for t from -2 to 2
+                  //triple g(real t) {return (0,t,t^2);}
+                  //path3 mypath=graph(g,-2,2,operator ..); draw(mypath,blue);
+
+                  //Draw the surface z=1/(1+x^2+y^2)
+                  //triple f(pair t) {
+                  //  return (t.x,t.y,1/(1+(t.x)^2+(t.y)^2));
+                  //}
+                  //surface s=surface(f,(-2,-2),(2,2),8,8,Spline);
+                  //pen p=rgb(0,0,.7);
+                  //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+                  //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+                  //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+
+                  //triple f(pair t) {
+                  //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+                  //}
+                  //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+
+                  //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+                  //path3 mypath=graph(g,-2,2,operator ..);
+
+                  //pen p=rgb(0,0,1);
+                  //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+                  //draw(s,paleblue);
+                  //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+                  //draw(mypath,2bp+blue);
+
+                </asymptote>
+              </image>
+            <!-- figures/figdirect2b_3D.asy END -->
             </figure>
           </sidebyside>
 
@@ -466,7 +780,7 @@
     </example>
 
     <example xml:id="ex_direct9">
-      <title>Understanding when $\nabla f = \vec 0$</title>
+      <title>Understanding when <m>\nabla f = \vec 0</m></title>
       <statement>
         <p>
           Let <m>f(x,y) = -x^2+2x-y^2+2y+1</m>.
@@ -500,14 +814,98 @@
 
         <figure xml:id="fig_direct9">
           <caption>At the top of a paraboloid, all directional derivatives are 0.</caption>
-          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          <!--
+           \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
           3Droll=0.641848137510025,
           3Dortho=0.00471429293975234,
           3Dc2c=0.8800624012947083 0.28546664118766785 0.3794717788696289,
           3Dcoo=-34.139766693115234 45.736881256103516 38.29633712768555,
           3Droo=200.00000572048617,
-          3Dlights=Headlamp,add3Djscript=asylabels.js}
-          <img src="figures/figdirect9_3D"/>
+          3Dlights=Headlamp,add3Djscript=asylabels.js]
+           -->
+          <!-- START figures/figdirect9_3D.asy -->
+          <image xml:id="img_direct9" width="47%">
+            <description></description>
+            <asymptote>
+
+              import graph3;
+
+              //ASY file for figdirect93D.asy in Chapter 12
+
+              size(200,200,IgnoreAspect);
+              //size(200,200,Aspect);
+              //currentprojection=perspective(7,2,1);
+              currentprojection=orthographic(9,3.3,3.2);
+              defaultrender.merge=true;
+
+              // setup and draw the axes
+              real[] myxchoice={1,2};
+              real[] myychoice={1,2};
+              real[] myzchoice={2};
+              defaultpen(0.5mm);
+              pair xbounds=(-0.5,2.5);
+              pair ybounds=(-0.5,2.5);
+              pair zbounds=(-0.5,3.5);
+
+              xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+              yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+              zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+              label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+              //Draw surface z=-x^2+2x-y^2+2y+1  -x^2-y^2+2*x+2*y+1
+              triple f(pair t) {
+                return (t.x,t.y,-t.x^2+2*t.x-t.y^2+2*t.y+1);
+              }
+              surface s=surface(f,(0,0),(2,2),16,16,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+              pen p=rgb(0,0,.7);
+              draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+              //plot point on surface
+              dotfactor=4;dot((1,1,3));
+
+              label("$P$",(1,1,3),N);
+
+              // ////////////////////////////////////
+              //    SAMPLE CODE
+
+              // defaultpen(fontsize(10pt));
+
+              //Draw the parabola z=y^2 for t from -2 to 2
+              //triple g(real t) {return (0,t,t^2);}
+              //path3 mypath=graph(g,-2,2,operator ..); draw(mypath,blue);
+
+              //Draw the surface z=1/(1+x^2+y^2)
+              //triple f(pair t) {
+              //  return (t.x,t.y,1/(1+(t.x)^2+(t.y)^2));
+              //}
+              //surface s=surface(f,(-2,-2),(2,2),8,8,Spline);
+              //pen p=rgb(0,0,.7);
+              //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+              //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+              //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+
+              //triple f(pair t) {
+              //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+              //}
+              //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+
+              //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+              //path3 mypath=graph(g,-2,2,operator ..);
+
+              //pen p=rgb(0,0,1);
+              //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+              //draw(s,paleblue);
+              //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+              //draw(mypath,2bp+blue);
+
+            </asymptote>
+          </image>
+          <!-- figures/figdirect9_3D.asy END -->
         </figure>
       </solution>
     </example>
@@ -529,7 +927,7 @@
       <solution>
         <p>
           Let <m>\vrt = \la x(t),
-          y(t)\ra</m> be the vector<ndash />valued function describing the path of the water in the <m>x</m>-<m>y</m> plane;
+          y(t)\ra</m> be the vector<ndash/>valued function describing the path of the water in the <m>x</m>-<m>y</m> plane;
           we seek <m>x(t)</m> and <m>y(t)</m>.
           We know that water will always flow downhill in the steepest direction;
           therefore, at any point on its path,
@@ -573,14 +971,14 @@
           Recall from our study of differentials that <m>\ds \frac{dx}{dt}dt = dx</m>.
           Thus:
           <md>
-            <mrow>\int \frac{1}{2x}\frac{dx}{dt}\, dt \amp =\int \frac{1}{4y}\frac{dy}{dt}\, dt</mrow>
-            <mrow>\int \frac{1}{2x}\, dx \amp =\int\frac{1}{4y}\, dy</mrow>
-            <mrow>\frac 12\ln|x| \amp = \frac14\ln|y| +C_1</mrow>
-            <mrow>2\ln|x| \amp = \ln|y| +C_1</mrow>
-            <mrow>\ln |x^2| \amp = \ln|y|+C_1</mrow>
+            <mrow>\int \frac{1}{2x}\frac{dx}{dt}\,dt \amp =\int \frac{1}{4y}\frac{dy}{dt}\,dt</mrow>
+            <mrow>\int \frac{1}{2x}\,dx \amp =\int\frac{1}{4y}\,dy</mrow>
+            <mrow>\frac 12\ln\abs{x} \amp = \frac14\ln\abs{y} +C_1</mrow>
+            <mrow>2\ln\abs{x} \amp = \ln\abs{y} +C_1</mrow>
+            <mrow>\ln\abs{x^2} \amp = \ln\abs{y}+C_1</mrow>
             <intertext>Now raise both sides as a power of <m>e</m>:</intertext>
-            <mrow>x^2 \amp = e^{\ln |y|+C_1}</mrow>
-            <mrow>x^2 \amp = e^{\ln |y|}e^{C_1}\qquad \text{(Note that \(e^{C_1}\) is just a constant.)}</mrow>
+            <mrow>x^2 \amp = e^{\ln\abs{y}+C_1}</mrow>
+            <mrow>x^2 \amp = e^{\ln\abs{y}}e^{C_1}\qquad \text{(Note that \(e^{C_1}\) is just a constant.)}</mrow>
             <mrow>x^2 \amp = yC_2</mrow>
             <mrow>\frac1{C_2}x^2 \amp =y   \qquad \text{ (Note that \(1/C_2\) is just a constant.) }</mrow>
             <mrow>Cx^2 \amp = y</mrow>
@@ -598,21 +996,140 @@
         <figure xml:id="fig_direct3">
           <caption>A graph of the surface described in <xref ref="ex_direct3">Example</xref> along with the path in the <m>x</m>-<m>y</m> plane with the level curves.</caption>
           <sidebyside>
-            <figure>
-              <caption>(a)</caption>
-              \apexincludemedia{width=125pt,3Dmenu,activate=onclick,deactivate=onclick,
+            <figure xml:id="fig_direct3a_3D">
+              <caption/>
+              <!--
+              \includemedia[width=125pt,3Dmenu,activate=onclick,deactivate=onclick,
               3Droll=0.03187335123623557,
               3Dortho=0.004501350689679384,
               3Dc2c=0.37703937292099 0.8674991130828857 0.3244788944721222,
               3Dcoo=31.472492218017578 -33.2381477355957 46.63370132446289,
               3Droo=150.00001038122664,
-              3Dlights=Headlamp,add3Djscript=asylabels.js}
-              <img src="figures/figdirect3_3D"/>
+              3Dlights=Headlamp,add3Djscript=asylabels.js]
+              -->
+              <!-- START figures/figdirect3_3D.asy -->
+              <image xml:id="img_direct3a_3D" width="47%">
+                <description></description>
+                <asymptote>
+
+                  import graph3;
+
+                  //ASY file for figdirect33D.asy in Chapter 12
+
+                  size(200,200,IgnoreAspect);
+                  //size(200,200,Aspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(3.6,18.5,24);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={2,4};
+                  real[] myychoice={2,4};
+                  real[] myzchoice={10,20};
+                  defaultpen(0.5mm);
+                  pair xbounds=(-1,5);
+                  pair ybounds=(-1,5);
+                  pair zbounds=(-0.5,22);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //Draw surface z=20-x^2-2y^2
+                  triple f(pair t) {
+                    return (t.x,t.y,20-t.x^2-2*t.y^2);
+                  }
+
+                  surface s=surface(f,(0,0),(4,4),16,16,Spline);
+
+                  triple g(pair t) {
+                    return (sqrt(20)*cos(t.x)*t.y,sqrt(10)*sin(t.x)*t.y,20-(sqrt(20)*cos(t.x)*t.y)^2-2*(sqrt(10)*sin(t.x)*t.y)^2);
+                  }
+
+                  surface ss=surface(g,(0,0),(pi/2,1),16,16,Spline);
+
+                  pen p=rgb(0,0,.7);
+                  draw(ss,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+                  //plot point on surface
+                  dotfactor=3;dot((1,1/4,18.875));
+
+                  //Draw a trace on the surface
+                  triple g(real t) {return (t,t^2/4,20-t^2-t^4/8);}
+                  path3 mypath=graph(g,1,3.044,operator ..); draw(mypath,blue);
+
+                  // ////////////////////////////////////
+                  //    SAMPLE CODE
+
+                  // defaultpen(fontsize(10pt));
+
+                  //Draw the parabola z=y^2 for t from -2 to 2
+                  //triple g(real t) {return (0,t,t^2);}
+                  //path3 mypath=graph(g,-2,2,operator ..); draw(mypath,blue);
+
+                  //Draw the surface z=1/(1+x^2+y^2)
+                  //triple f(pair t) {
+                  //  return (t.x,t.y,1/(1+(t.x)^2+(t.y)^2));
+                  //}
+                  //surface s=surface(f,(-2,-2),(2,2),8,8,Spline);
+                  //pen p=rgb(0,0,.7);
+                  //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+                  //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+                  //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+
+                  //triple f(pair t) {
+                  //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+                  //}
+                  //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+
+                  //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+                  //path3 mypath=graph(g,-2,2,operator ..);
+
+                  //pen p=rgb(0,0,1);
+                  //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+                  //draw(s,paleblue);
+                  //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+                  //draw(mypath,2bp+blue);
+
+                </asymptote>
+              </image>
+            <!-- figures/figdirect3_3D.asy END -->
             </figure>
 
-            <figure>
-              <caption>(b)</caption>
-              <img src="figures/figdirect3b"/>
+            <figure xml:id="fig_direct3b">
+              <caption/>
+            <!-- START figures/fig_direct3b.tex -->
+              <image xml:id="img_direct3b" width="47%">
+                <description></description>
+                <latex-image>
+
+                \begin{tikzpicture}
+
+                \begin{axis}[
+                ymin=-3.5,ymax=3.5,
+                xmin=-4.2,xmax=4.2
+                ]
+
+                \addplot [secondcurvestyle,-,solid,domain=0:360,samples=60] ({2*cos(x)},{sqrt(2)*sin(x)});
+                \addplot [secondcurvestyle,-,solid,domain=0:360,samples=60] ({2*sqrt(2)*cos(x)},{2*sin(x)});
+                \addplot [secondcurvestyle,-,solid,domain=0:360,samples=80] ({2*sqrt(3)*cos(x)},{sqrt(6)*sin(x)});
+                \addplot [secondcurvestyle,-,solid,domain=0:360,samples=80] ({4*cos(x)},{2*sqrt(2)*sin(x)});
+
+                \addplot [firstcurvestyle,-,domain=1:3.1] ({x},{x^2/4});
+
+                \end{axis}
+
+                \end{tikzpicture}
+
+                </latex-image>
+              </image>
+            <!-- figures/fig_direct3b.tex END -->
             </figure>
           </sidebyside>
 
@@ -620,8 +1137,8 @@
 
         <p>
           Thus the water follows the curve <m>y=x^2/4</m> in the <m>x</m>-<m>y</m> plane.
-          The surface and the path of the water is graphed in <xref ref="fig_direct3">Figure</xref>(a).
-          In part (b) of the figure,
+          The surface and the path of the water is graphed in <xref ref="fig_direct3a_3D">Figure</xref>.
+          In <xref ref="fig_direct3b">Figure</xref>,
           the level curves of the surface are plotted in the <m>x</m>-<m>y</m> plane,
           along with the curve <m>y=x^2/4</m>.
           Notice how the path intersects the level curves at right angles.
@@ -630,7 +1147,7 @@
         </p>
       </solution>
     </example>
-  </introduction>
+  </subsection>
 
   <subsection>
     <title>Functions of Three Variables</title>
@@ -639,7 +1156,7 @@
       (and more)
       variables.
       We combine the concepts behind <xref ref="def_direct_deriv">Definitions</xref>
-      and <xref ref="def_gradient"></xref>
+      and <xref ref="def_gradient"/>
       and <xref ref="thm_direct_deriv1">Theorem</xref> into one set of definitions.
     </p>
 
@@ -721,7 +1238,7 @@
     <p>
       We interpret the third statement of the theorem as
       <q>the gradient is orthogonal to level surfaces,</q>
-      the three<ndash />variable analogue to level curves.
+      the three<ndash/>variable analogue to level curves.
     </p>
 
     <example xml:id="ex_direct5">
@@ -787,832 +1304,1130 @@
     </p>
   </subsection>
 
-  <subsection>
-    <title>Terms and Concepts</title>
-    <exercise>
-      <statement>
-        <p>
-          What is the difference between a directional derivative and a partial derivative?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          A partial derivative is essentially a special case of a directional derivative;
-          it is the directional derivative in the direction of <m>x</m> or <m>y</m>,
-          i.e., <m>\la 1,0\ra</m> or <m>\la 0,1\ra</m>.
-        </p>
-      </answer>
-    </exercise>
+  <exercises>
+    <exercisegroup>
 
-    <exercise>
-      <statement>
+      <introduction>
         <p>
-          For what <m>\vec u</m> is <m>D_{\vec u\,} f = f_x</m>?
+          Terms and Concepts
         </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\vec u = \la 1,0\ra</m>
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <exercise>
-      <statement>
-        <p>
-          For what <m>\vec u</m> is <m>D_{\vec u\,} f = f_y</m>?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\vec u = \la 0,1\ra</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <!-- <webwork>
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          The gradient is <fillin /> to level curves.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          orthogonal
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          The gradient points in the direction of <fillin /> increase.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          maximal, or greatest
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          It is generally more informative to view the directional derivative not as the result of a limit,
-          but rather as the result of a <fillin /> product.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          dot
-        </p>
-      </answer>
-    </exercise>
-  </subsection>
-
-  <subsection>
-    <title>Problems</title>
-    <p>
-      In the following exercises, a function <m>z=f(x,y)</m> is given.
-      Find <m>\nabla f</m>.
-    </p>
-
-    <exercise xml:id="x12_05_ex_07">
-      <statement>
-        <p>
-          <m>f(x,y) = -x^2y+xy^2+xy</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\nabla f = \la -2xy+y^2+y, -x^2+2xy+x\ra</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds f(x,y) = \sin x\cos y</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\nabla f = \la \cos x\cos y, -\sin x\sin y\ra</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds f(x,y) = \frac{1}{x^2+y^2+1}</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\nabla f = \la \frac{-2x}{(x^2+y^2+1)^2}, \frac{-2y}{(x^2+y^2+1)^2}\ra</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise xml:id="x12_05_ex_10">
-      <statement>
-        <p>
-          <m>\ds f(x,y) = -4x+3y</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\nabla f = \la -4,3\ra</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds f(x,y) = x^2+2y^2-xy-7x</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\nabla f = \la 2x-y-7,4y-x\ra</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise xml:id="x12_05_ex_22">
-      <statement>
-        <p>
-          <m>\ds f(x,y) = x^2y^3-2x</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\nabla f = \la 2xy^3-2,3x^2y^2\ra</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <p>
-      In the following exercises,
-      a function <m>z=f(x,y)</m> and a point <m>P</m> are given.
-      Find the directional derivative of <m>f</m> in the indicated directions.
-      Note: these are the same functions as in <xref ref="x12_05_ex_07">Exercises</xref>
-      through <xref ref="x12_05_ex_22"></xref>.
-    </p>
-
-    <exercise xml:id="x12_05_ex_11">
-      <statement>
-        <p>
-          <m>f(x,y) = -x^2y+xy^2+xy</m>, <m>P= (2,1)</m>
-
-          <ol>
-            <li>
+            <pg-code>
+            </pg-code>
+            </setup> -->
+            <statement>
               <p>
-                In the direction of <m>\vec v = \la 3,4\ra</m>
+                What is the difference between a directional derivative and a partial derivative?
               </p>
-            </li>
-
-            <li>
+            </statement>
+            <solution>
               <p>
-                In the direction toward the point <m>Q = (1,-1)</m>.
+                A partial derivative is essentially a special case of a directional derivative;
+                it is the directional derivative in the direction of <m>x</m> or <m>y</m>,
+                i.e., <m>\la 1,0\ra</m> or <m>\la 0,1\ra</m>.
               </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-      <answer>
+            </solution>
+        <!-- </webwork> -->
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <setup>
+
+            <pg-code>
+              Context("Vector2D");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                For <m>f(x,y)</m>,
+                for what <m>\vec u</m> is <m>D_{\vec u}\, f = f_x</m>?
+              </p>
+
+              <p>
+                <var name="'i'" width="20"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <setup>
+
+            <pg-code>
+              Context("Vector2D");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                For <m>f(x,y)</m>,
+                for what <m>\vec u</m> is <m>D_{\vec u}\, f = f_y</m>?
+              </p>
+
+              <p>
+                <var name="'j'" width="20"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <setup>
+
+            <pg-code>
+              Context()->strings->add('orthogonal'=>{},'perpendicular'=>{alias=>'orthogonal'});
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                The gradient is <var name="'orthogonal'" width="15"/> to level curves.
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <!-- <webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup> -->
+            <statement>
+              <p>
+                The gradient points in the direction of <fillin/> increase.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                maximal, or greatest
+              </p>
+            </solution>
+        <!-- </webwork> -->
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <setup>
+
+            <pg-code>
+              Context()->strings->add('dot'=>{},'cross'=>{});
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                It is generally more informative to view the directional derivative not as the result of a limit,
+                but rather as the result of a <var name="'dot'" width="15"/> product.
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
         <p>
-          <m>\nabla f = \la -2xy+y^2+y, -x^2+2xy+x\ra</m>;
-          <m>\nabla f(2,1) = \la -2,2\ra</m>.
-          Be sure to change all directions to unit vectors.
-
-          <ol>
-            <li>
-              <p>
-                <m>2/5</m> (<m>\vec u = \la 3/5,4/5\ra</m>)
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>-2/\sqrt{5}</m> (<m>\vec u = \la -1/\sqrt{5},-2/\sqrt{5}\ra</m>)
-              </p>
-            </li>
-          </ol>
+          In the following exercises, a function <m>z=f(x,y)</m> is given.
+          Find <m>\nabla f</m>.
         </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <exercise>
-      <statement>
+      <exercise xml:id="x12_05_ex_07">
+        <!-- <webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup> -->
+            <statement>
+              <p>
+                <m>f(x,y) = -x^2y+xy^2+xy</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\nabla f = \la -2xy+y^2+y, -x^2+2xy+x\ra</m>
+              </p>
+            </solution>
+        <!-- </webwork> -->
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <setup>
+
+            <pg-code>
+              Context("Vector2D");
+              $gradient=Compute("&lt;cos(x)cos(y),-sin(x)sin(y)>");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Find <m>\nabla f</m>, where <m>f(x,y) = \sin(x)\cos(y)</m>.
+              </p>
+
+              <p>
+                <var name="$gradient" width="30"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <!-- <webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup> -->
+            <statement>
+              <p>
+                <m>\ds f(x,y) = \frac{1}{x^2+y^2+1}</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\nabla f = \la \frac{-2x}{(x^2+y^2+1)^2}, \frac{-2y}{(x^2+y^2+1)^2}\ra</m>
+              </p>
+            </solution>
+        <!-- </webwork> -->
+      </exercise>
+
+      <exercise xml:id="x12_05_ex_10">
+        <webwork>
+            <setup>
+
+            <pg-code>
+              Context("Vector2D");
+              $gradient=Compute("&lt;-4,3>");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Find <m>\nabla f</m>, where <m>f(x,y) = -4x+3y</m>.
+              </p>
+
+              <p>
+                <var name="$gradient" width="30"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <!-- <webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup> -->
+            <statement>
+              <p>
+                <m>\ds f(x,y) = x^2+2y^2-xy-7x</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\nabla f = \la 2x-y-7,4y-x\ra</m>
+              </p>
+            </solution>
+        <!-- </webwork> -->
+      </exercise>
+
+      <exercise xml:id="x12_05_ex_22">
+        <webwork>
+            <setup>
+
+            <pg-code>
+              Context("Vector2D");
+              $gradient=Compute("&lt;2xy^3-2,3x^2y^2>");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Find <m>\nabla f</m>, where <m>f(x,y) = x^2y^3-2x</m>.
+              </p>
+
+              <p>
+                <var name="$gradient" width="30"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
         <p>
-          <m>\ds f(x,y) = \sin x\cos y</m>,
-          <m>\ds P = \left(\frac{\pi}{4},\frac{\pi}{3}\right)</m>
-
-          <ol>
-            <li>
-              <p>
-                In the direction of <m>\vec v=\la 1,1\ra</m>.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                In the direction toward the point <m>Q = (0,0)</m>.
-              </p>
-            </li>
-          </ol>
+          In the following exercises,
+          a function <m>z=f(x,y)</m> and a point <m>P</m> are given.
+          Find the directional derivative of <m>f</m> in the indicated directions.
+          Note: these are the same functions as in <xref first="x12_05_ex_07" last="x12_05_ex_22">Exercises</xref>.
         </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\nabla f = \la \cos x\cos y, -\sin x\sin y\ra</m>;
-          <m>\nabla f(\frac{\pi}{4},\frac{\pi}{3}) = \la \frac{1}{2\sqrt{2}},-\frac12\sqrt{\frac32}\ra</m>.
-          Be sure to change all directions to unit vectors.
+      </introduction>
 
-          <ol>
-            <li>
+      <exercise xml:id="x12_05_ex_11">
+        <!-- <webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup> -->
+            <statement>
               <p>
-                <m>\frac14(1-\sqrt{3})</m> (<m>\vec u = \la 1/\sqrt{2},1/\sqrt{2}\ra</m>)
+                <m>f(x,y) = -x^2y+xy^2+xy</m>, <m>P= (2,1)</m>
               </p>
-            </li>
 
-            <li>
               <p>
-                <m>\frac{4\sqrt{3}-1}{10\sqrt{2}}</m> (<m>\vec u = \la -3/5,-4/5\ra</m>)
+                <ol>
+                  <li>
+                    <p>
+                      In the direction of <m>\vec v = \la 3,4\ra</m>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      In the direction toward the point <m>Q = (1,-1)</m>.
+                    </p>
+                  </li>
+                </ol>
               </p>
-            </li>
-          </ol>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds f(x,y) = \frac{1}{x^2+y^2+1}</m>, <m>P = (1,1)</m>.
-
-          <ol>
-            <li>
+            </statement>
+            <solution>
               <p>
-                In the direction of <m>\vec v = \la 1,-1\ra</m>.
+                <m>\nabla f = \la -2xy+y^2+y, -x^2+2xy+x\ra</m>;
+                <m>\nabla f(2,1) = \la -2,2\ra</m>.
+                Be sure to change all directions to unit vectors.
               </p>
-            </li>
 
-            <li>
               <p>
-                In the direction toward the point <m>Q = (-2,-2)</m>.
+                <ol>
+                  <li>
+                    <p>
+                      <m>2/5</m> (<m>\vec u = \la 3/5,4/5\ra</m>)
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>-2/\sqrt{5}</m> (<m>\vec u = \la -1/\sqrt{5},-2\sqrt{5}\ra</m>)
+                    </p>
+                  </li>
+                </ol>
               </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\nabla f = \la \frac{-2x}{(x^2+y^2+1)^2}, \frac{-2y}{(x^2+y^2+1)^2}\ra</m>;
-          <m>\nabla f(1,1) = \la -2/9,-2/9\ra</m>.
-          Be sure to change all directions to unit vectors.
+            </solution>
+        <!-- </webwork> -->
+      </exercise>
 
-          <ol>
-            <li>
+      <exercise>
+        <webwork>
+            <setup>
+            <pg-code>
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $a=Compute("1/4 (1-sqrt(3))");
+              $b=Compute("(4sqrt(3)-3)/(10 sqrt(2))");
+            </pg-code>
+            </setup>
+            <statement>
               <p>
-                0 (<m>\vec u = \la 1/\sqrt{2},-1/\sqrt{2}\ra</m>)
+                Consider <m>f(x,y) = \sin(x)\cos(y)</m>,
+                at <m>P = \left(\frac{\pi}{4},\frac{\pi}{3}\right)</m>.
               </p>
-            </li>
 
-            <li>
               <p>
-                <m>2\sqrt{2}/9</m> (<m>\vec u = \la -1/\sqrt{2},-1/\sqrt{2}\ra</m>)
+                <ol label="a">
+                  <li>
+                    <p>
+                      Find the directional derivative in the direction of <m>\vec v=\la 1,1\ra</m>.
+                    </p>
+
+                    <p>
+                      <var name="$a" width="15"/>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Find the directional derivative in the direction toward the point <m>Q = (0,0)</m>.
+                    </p>
+
+                    <p>
+                      <var name="$b" width="15"/>
+                    </p>
+                  </li>
+                </ol>
               </p>
-            </li>
-          </ol>
-        </p>
-      </answer>
-    </exercise>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise xml:id="x12_05_ex_14">
-      <statement>
-        <p>
-          <m>\ds f(x,y) = -4x+3y</m>, <m>P = (5,2)</m>
+      <exercise>
+        <!-- <webwork>
+            <setup>
 
-          <ol>
-            <li>
+            <pg-code>
+            </pg-code>
+            </setup> -->
+            <statement>
               <p>
-                In the direction of <m>\vec v = \la 3,1\ra</m>.
+                <m>\ds f(x,y) = \frac{1}{x^2+y^2+1}</m>, <m>P = (1,1)</m>.
               </p>
-            </li>
 
-            <li>
               <p>
-                In the direction toward the point <m>Q = (2,7)</m>.
+                <ol>
+                  <li>
+                    <p>
+                      In the direction of <m>\vec v = \la 1,-1\ra</m>.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      In the direction toward the point <m>Q = (-2,-2)</m>.
+                    </p>
+                  </li>
+                </ol>
               </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\nabla f = \la -4,3\ra</m>;
-          <m>\nabla f(5,2) = \la -4,3\ra</m>.
-          Be sure to change all directions into unit vectors.
-
-          <ol>
-            <li>
+            </statement>
+            <solution>
               <p>
-                <m>-9/\sqrt{10}</m> (<m>\vec u = \la 3/\sqrt{10},1/\sqrt{10}\ra</m>)
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>27/\sqrt{34}</m> (<m>\vec u = \la -3/\sqrt{34},5/\sqrt{34}\ra</m>)
-              </p>
-            </li>
-          </ol>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds f(x,y) = x^2+2y^2-xy-7x</m>, <m>P = (4,1)</m>
-
-          <ol>
-            <li>
-              <p>
-                In the direction of <m>\vec v = \la -2,5\ra</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                In the direction toward the point <m>Q = (4,0)</m>.
-              </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\nabla f = \la 2x-y-7,4y-x\ra</m>;
-          <m>\nabla f(4,1) = \la 0,0\ra</m>.
-
-          <ol>
-            <li>
-              <p>
-                0
-              </p>
-            </li>
-
-            <li>
-              <p>
-                0
-              </p>
-            </li>
-          </ol>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise xml:id="x12_05_ex_23">
-      <statement>
-        <p>
-          <m>\ds f(x,y) = x^2y^3-2x</m>, <m>P = (1,1)</m>
-
-          <ol>
-            <li>
-              <p>
-                In the direction of <m>\vec v = \la 3,3\ra</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                In the direction toward the point <m>Q = (1,2)</m>.
-              </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\nabla f = \la 2xy^3-2,3x^2y^2\ra</m>;
-          <m>\nabla f(1,1) = \la 0,3\ra</m> Be sure to change all directions to unit vectors.
-
-          <ol>
-            <li>
-              <p>
-                <m>3/\sqrt{2}</m>; (<m>\vec u = \la 1/\sqrt{2},1/\sqrt{2}\ra</m>)
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>3</m>
-              </p>
-            </li>
-          </ol>
-        </p>
-      </answer>
-    </exercise>
-
-    <p>
-      In the following exercises,
-      a function <m>z=f(x,y)</m> and a point <m>P</m> are given.
-
-      <ol>
-        <li>
-          <title>(a)</title>
-          <p>
-            Find the direction of maximal increase of <m>f</m> at <m>P</m>.
-          </p>
-        </li>
-
-        <li>
-          <title>(b)</title>
-          <p>
-            What is the maximal value of <m>D_{\vec u\,}f</m> at <m>P</m>?
-          </p>
-        </li>
-
-        <li>
-          <title>(c)</title>
-          <p>
-            Find the direction of minimal increase of <m>f</m> at <m>P</m>.
-          </p>
-        </li>
-
-        <li>
-          <title>(d)</title>
-          <p>
-            Give a direction <m>\vec u</m> such that <m>D_{\vec u\,}f=0</m> at <m>P</m>.
-          </p>
-        </li>
-      </ol>
-    </p>
-
-    <p>
-      Note: these are the same functions and points as in <xref ref="x12_05_ex_11">Exercises</xref>
-      through <xref ref="x12_05_ex_23"></xref>.
-    </p>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>f(x,y) = -x^2y+xy^2+xy</m>, <m>P= (2,1)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\nabla f = \la -2xy+y^2+y, -x^2+2xy+x\ra</m>
-
-          <ol>
-            <li>
-              <p>
-                <m>\nabla f(2,1) = \la -2,2\ra</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\norm{\nabla f(2,1)} = \norm{\la -2,2\ra} = \sqrt{8}</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\la 2,-2\ra</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\la 1/\sqrt{2},1/\sqrt{2}\ra</m>
-              </p>
-            </li>
-          </ol>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds f(x,y) = \sin x\cos y</m>,
-          <m>\ds P = \left(\frac{\pi}{4},\frac{\pi}{3}\right)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\nabla f = \la \cos x\cos y, -\sin x\sin y\ra</m>
-
-          <ol>
-            <li>
-              <p>
-                <m>\nabla f(\frac{\pi}{4},\frac{\pi}{3}) = \la \frac{1}{2\sqrt{2}},-\frac12\sqrt{\frac32}\ra</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\norm{\nabla f(\frac{\pi}{4},\frac{\pi}{3})} = \norm{\la \frac{1}{2\sqrt{2}},-\frac12\sqrt{\frac32}\ra} = 1/\sqrt{2}</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\la -\frac{1}{2\sqrt{2}},\frac12\sqrt{\frac32}\ra</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\la \frac12\sqrt{\frac32},\frac{1}{2\sqrt{2}}\ra</m>
-              </p>
-            </li>
-          </ol>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds f(x,y) = \frac{1}{x^2+y^2+1}</m>, <m>P = (1,1)</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\nabla f = \la \frac{-2x}{(x^2+y^2+1)^2}, \frac{-2y}{(x^2+y^2+1)^2}\ra</m>
-
-          <ol>
-            <li>
-              <p>
+                <m>\nabla f = \la \frac{-2x}{(x^2+y^2+1)^2}, \frac{-2y}{(x^2+y^2+1)^2}\ra</m>;
                 <m>\nabla f(1,1) = \la -2/9,-2/9\ra</m>.
+                Be sure to change all directions to unit vectors.
+              </p>
+
+              <p>
+                <ol>
+                  <li>
+                    <p>
+                      0 (<m>\vec u = \la 1/\sqrt{2},-1/\sqrt{2}\ra</m>)
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>2\sqrt{2}/9</m> (<m>\vec u = \la -1/\sqrt{2},-1/\sqrt{2}\ra</m>)
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </solution>
+        <!-- </webwork> -->
+      </exercise>
+
+      <exercise xml:id="x12_05_ex_14">
+        <webwork>
+            <setup>
+            <pg-code>
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $a=Compute("-9/sqrt(10)");
+              $b=Compute("27/sqrt(34)");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Consider <m>f(x,y) = -4x+3y</m>, at <m>P = (5,2)</m>.
+              </p>
+
+              <p>
+                <ol label="a">
+                  <li>
+                    <p>
+                      Find the directional derivative in the direction of <m>\vec v=\la 3,1\ra</m>.
+                    </p>
+
+                    <p>
+                      <var name="$a" width="15"/>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Find the directional derivative in the direction toward the point <m>Q = (2,7)</m>.
+                    </p>
+
+                    <p>
+                      <var name="$b" width="15"/>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <!-- <webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup> -->
+            <statement>
+              <p>
+                <m>\ds f(x,y) = x^2+2y^2-xy-7x</m>, <m>P = (4,1)</m>
+              </p>
+
+              <p>
+                <ol>
+                  <li>
+                    <p>
+                      In the direction of <m>\vec v = \la -2,5\ra</m>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      In the direction toward the point <m>Q = (4,0)</m>.
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\nabla f = \la 2x-y-7,4y-x\ra</m>;
+                <m>\nabla f(4,1) = \la 0,0\ra</m>.
+              </p>
+
+              <p>
+                <ol>
+                  <li>
+                    <p>
+                      0
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      0
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </solution>
+        <!-- </webwork> -->
+      </exercise>
+
+      <exercise xml:id="x12_05_ex_23">
+        <webwork>
+            <setup>
+            <pg-code>
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $a=Compute("3/sqrt(2)");
+              $b=Compute("3");
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Consider <m>f(x,y) = x^2y^3-2x</m>, at <m>P = (1,1)</m>.
+              </p>
+
+              <p>
+                <ol label="a">
+                  <li>
+                    <p>
+                      Find the directional derivative in the direction of <m>\vec v=\la 3,3\ra</m>.
+                    </p>
+
+                    <p>
+                      <var name="$a" width="15"/>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Find the directional derivative in the direction toward the point <m>Q = (1,2)</m>.
+                    </p>
+
+                    <p>
+                      <var name="$b" width="15"/>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
+        <p>
+          In the following exercises,
+          a function <m>z=f(x,y)</m> and a point <m>P</m> are given.
+        </p>
+
+        <p>
+          <ol label="a">
+            <li>
+              <p>
+                Find the direction of maximal increase of <m>f</m> at <m>P</m>.
               </p>
             </li>
 
             <li>
               <p>
-                <m>\norm{\nabla f(1,1)} = \norm{\la -2/9,-2/9\ra}=2\sqrt{2}/9</m>
+                What is the maximal value of <m>D_{\vec u}\,f</m> at <m>P</m>?
               </p>
             </li>
 
             <li>
               <p>
-                <m>\la 2/9,2/9\ra</m>
+                Find the direction of maximal decrease in <m>f</m> at <m>P</m>.
               </p>
             </li>
 
             <li>
               <p>
-                <m>\la 1/\sqrt{2},-1/\sqrt{2}\ra</m>
+                Give a direction <m>\vec u</m> such that <m>D_{\vec u}\,f=0</m> at <m>P</m>.
               </p>
             </li>
           </ol>
         </p>
-      </answer>
-    </exercise>
 
-    <exercise>
-      <statement>
         <p>
-          <m>\ds f(x,y) = -4x+3y</m>, <m>P = (5,4)</m>.
+          Note: these are the same functions and points as in <xref ref="x12_05_ex_11">Exercises</xref>
+          through <xref ref="x12_05_ex_23"/>.
         </p>
-      </statement>
-      <answer>
+      </introduction>
+
+      <exercise>
+        <!-- <webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup> -->
+            <statement>
+              <p>
+                <m>f(x,y) = -x^2y+xy^2+xy</m>, <m>P= (2,1)</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\nabla f = \la -2xy+y^2+y, -x^2+2xy+x\ra</m>
+              </p>
+
+              <p>
+                <ol>
+                  <li>
+                    <p>
+                      <m>\nabla f(2,1) = \la -2,2\ra</m>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\norm{\nabla f(2,1)} = \norm{\la -2,2\ra} = \sqrt{8}</m>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\la 2,-2\ra</m>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\la 1/\sqrt{2},1/\sqrt{2}\ra</m>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </solution>
+        <!-- </webwork> -->
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <setup>
+            <pg-code>
+              Context("Vector2D");
+              Context()->flags->set(reduceConstants=>0,redcuceConstantFunctions=>0);
+              $maxdir=Compute("&lt;1/(2sqrt(2)), -1/2 sqrt(3/2)>");
+              $maxdirev=$maxdir->cmp(parallel=>1,sameDirection=>1);
+              $maxval=Compute("1/sqrt(2)");
+              $mindir=Compute("&lt;-1/(2sqrt(2)), 1/2 sqrt(3/2)>");
+              $mindirev=$mindir->cmp(parallel=>1,sameDirection=>1);
+              $nochange=Compute("&lt;1/2 sqrt(3/2), 1/(2 sqrt(2))>");
+              $nochangeev=$nochange->cmp(parallel=>1);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Given <m>f(x,y) = \sin(x)\cos(y)</m>,
+                <m>P = \left(\frac{\pi}{4},\frac{\pi}{3}\right)</m>:
+              </p>
+
+              <p>
+                <ol label="a">
+                  <li>
+                    <p>
+                      Find the direction of maximal increase of <m>f</m> at <m>P</m>.
+                    </p>
+
+                    <p>
+                      <var name="$maxdir" evaluator="$maxdirev" width="30"/>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      What is the maximal value of <m>D_{\vec u}\,f</m> at <m>P</m>?
+                    </p>
+
+                    <p>
+                      <var name="$maxval" width="30"/>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Find the direction of maximal decrease of <m>f</m> at <m>P</m>.
+                    </p>
+
+                    <p>
+                      <var name="$mindir" evaluator="$mindirev" width="30"/>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Give a direction <m>\vec u</m> such that <m>D_{\vec u}\,f=0</m> at <m>P</m>.
+                    </p>
+
+                    <p>
+                      <var name="$nochange" evaluator="$nochangeev" width="30"/>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <!-- <webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup> -->
+            <statement>
+              <p>
+                <m>\ds f(x,y) = \frac{1}{x^2+y^2+1}</m>, <m>P = (1,1)</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\nabla f = \la \frac{-2x}{(x^2+y^2+1)^2}, \frac{-2y}{(x^2+y^2+1)^2}\ra</m>
+              </p>
+
+              <p>
+                <ol>
+                  <li>
+                    <p>
+                      <m>\nabla f(1,1) = \la -2/9,-2/9\ra</m>.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\norm{\nabla f(1,1)} = \norm{\la -2/9,-2/9\ra}=2\sqrt{2}/9</m>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\la 2/9,2/9\ra</m>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\la 1/\sqrt{2},-1/\sqrt{2}\ra</m>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </solution>
+        <!-- </webwork> -->
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <setup>
+            <pg-code>
+              Context("Vector2D");
+              Context()->flags->set(reduceConstants=>0,redcuceConstantFunctions=>0);
+              $maxdir=Compute("&lt;-4, 3>");
+              $maxdirev=$maxdir->cmp(parallel=>1,sameDirection=>1);
+              $maxval=Compute("5");
+              $mindir=Compute("&lt;4,-3>");
+              $mindirev=$mindir->cmp(parallel=>1,sameDirection=>1);
+              $nochange=Compute("&lt;3,4>");
+              $nochangeev=$nochange->cmp(parallel=>1);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Given <m>f(x,y) = -4x+3y</m>, <m>P = (5,4)</m>:
+              </p>
+
+              <p>
+                <ol label="a">
+                  <li>
+                    <p>
+                      Find the direction of maximal increase of <m>f</m> at <m>P</m>.
+                    </p>
+
+                    <p>
+                      <var name="$maxdir" evaluator="$maxdirev" width="30"/>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      What is the maximal value of <m>D_{\vec u}\,f</m> at <m>P</m>?
+                    </p>
+
+                    <p>
+                      <var name="$maxval" width="30"/>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Find the direction of maximal decrease of <m>f</m> at <m>P</m>.
+                    </p>
+
+                    <p>
+                      <var name="$mindir" evaluator="$mindirev" width="30"/>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Give a direction <m>\vec u</m> such that <m>D_{\vec u}\,f=0</m> at <m>P</m>.
+                    </p>
+
+                    <p>
+                      <var name="$nochange" evaluator="$nochangeev" width="30"/>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <!-- <webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup> -->
+            <statement>
+              <p>
+                <m>\ds f(x,y) = x^2+2y^2-xy-7x</m>, <m>P = (4,1)</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\nabla f = \la 2x-y-7,4y-x\ra</m>
+              </p>
+
+              <p>
+                <ol>
+                  <li>
+                    <p>
+                      <m>\nabla f(4,1) = \la 0,0\ra</m>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      0
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      <m>\la 0,0\ra</m>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      All directions give a directional derivative of 0.
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </solution>
+        <!-- </webwork> -->
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <setup>
+            <pg-code>
+              Context("Vector2D");
+              Context()->flags->set(reduceConstants=>0,redcuceConstantFunctions=>0);
+              $maxdir=Compute("&lt;0, 3>");
+              $maxdirev=$maxdir->cmp(parallel=>1,sameDirection=>1);
+              $maxval=Compute("3");
+              $mindir=Compute("&lt;0,-3>");
+              $mindirev=$mindir->cmp(parallel=>1,sameDirection=>1);
+              $nochange=Compute("&lt;1,0>");
+              $nochangeev=$nochange->cmp(parallel=>1);
+            </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Given <m>f(x,y) = x^2y^3-2x</m>, <m>P = (1,1)</m>:
+              </p>
+
+              <p>
+                <ol label="a">
+                  <li>
+                    <p>
+                      Find the direction of maximal increase of <m>f</m> at <m>P</m>.
+                    </p>
+
+                    <p>
+                      <var name="$maxdir" evaluator="$maxdirev" width="30"/>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      What is the maximal value of <m>D_{\vec u}\,f</m> at <m>P</m>?
+                    </p>
+
+                    <p>
+                      <var name="$maxval" width="30"/>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Find the direction of maximal decrease of <m>f</m> at <m>P</m>.
+                    </p>
+
+                    <p>
+                      <var name="$mindir" evaluator="$mindirev" width="30"/>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Give a direction <m>\vec u</m> such that <m>D_{\vec u}\,f=0</m> at <m>P</m>.
+                    </p>
+
+                    <p>
+                      <var name="$nochange" evaluator="$nochangeev" width="30"/>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
         <p>
-          <m>\nabla f = \la -4,3\ra</m>
+          In the following exercises, a function <m>w=F(x,y,z)</m>,
+          a vector <m>\vec v</m> and a point <m>P</m> are given.
+        </p>
 
-          <ol>
+        <p>
+          <ol label="a">
             <li>
               <p>
-                <m>\nabla f(5,4) = \la -4,3\ra</m>.
+                Find <m>\nabla F(x,y,z)</m>.
               </p>
             </li>
 
             <li>
               <p>
-                <m>\norm{\nabla f(5,4)} = \norm{\la -4,3\ra}=5</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\la 4,-3\ra</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <m>\la 3/5,4/5\ra</m>
+                Find <m>D_{\vec u}\,F</m> at <m>P</m>,
+                where <m>\vec u</m> is the unit vector in the direction of <m>\vec v</m>.
               </p>
             </li>
           </ol>
         </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds f(x,y) = x^2+2y^2-xy-7x</m>, <m>P = (4,1)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\nabla f = \la 2x-y-7,4y-x\ra</m>
+      <exercise>
+        <!-- <webwork>
+            <setup>
 
-          <ol>
-            <li>
+            <pg-code>
+            </pg-code>
+            </setup> -->
+            <statement>
               <p>
-                <m>\nabla f(4,1) = \la 0,0\ra</m>
+                <m>\ds F(x,y,z) = 3x^2z^3+4xy-3z^2</m>,
+                <m>\vec v = \la 1,1,1\ra</m>, <m>P = (3,2,1)</m>
               </p>
-            </li>
-
-            <li>
+            </statement>
+            <solution>
               <p>
-                0
-              </p>
-            </li>
+                <ol>
+                  <li>
+                    <p>
+                      <m>\nabla F(x,y,z) = \la 6xz^3+4y, 4x, 9x^2z^2-6z\ra</m>
+                    </p>
+                  </li>
 
-            <li>
+                  <li>
+                    <p>
+                      <m>113/\sqrt{3}</m>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </solution>
+        <!-- </webwork> -->
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <setup>
+            <pg-code>
+              Context("Vector");
+              Context()->flags->set(reduceConstants=>0,redcuceConstantFunctions=>0);
+              $gradient=Compute("&lt;cos(x) cos(y) e^z, -sin(x) sin(y) e^z, sin(x) cos(y) e^z>");
+              $directional=Compute("2/3");
+            </pg-code>
+            </setup>
+            <statement>
               <p>
-                <m>\la 0,0\ra</m>
+                Given <m>F(x,y,z) = \sin(x)\cos(y)e^z</m>,
+                <m>\vec v = \la 2,2,1\ra</m>, <m>P = (0,0,0)</m>:
               </p>
-            </li>
 
-            <li>
               <p>
-                All directions give a directional derivative of 0.
+                <ol label="a">
+                  <li>
+                    <p>
+                      Find <m>\nabla F(x,y,z)</m>.
+                    </p>
+
+                    <p>
+                      <var name="$gradient" width="50"/>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Find <m>D_{\vec u}\,F</m> at <m>P</m>.
+                    </p>
+
+                    <p>
+                      <var name="$directional" width="20"/>
+                    </p>
+                  </li>
+                </ol>
               </p>
-            </li>
-          </ol>
-        </p>
-      </answer>
-    </exercise>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds f(x,y) = x^2y^3-2x</m>, <m>P = (1,1)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\nabla f = \la 2xy^3-2,3x^2y^2\ra</m>
+      <exercise>
+        <!-- <webwork>
+            <setup>
 
-          <ol>
-            <li>
+            <pg-code>
+            </pg-code>
+            </setup> -->
+            <statement>
               <p>
-                <m>\nabla f(1,1) = \la 0,3\ra</m>
+                <m>\ds F(x,y,z) = x^2y^2-y^2z^2</m>,
+                <m>\vec v = \la -1,7,3\ra</m>, <m>P = (1,0,-1)</m>
               </p>
-            </li>
-
-            <li>
+            </statement>
+            <solution>
               <p>
-                3
-              </p>
-            </li>
+                <ol>
+                  <li>
+                    <p>
+                      <m>\nabla F(x,y,z) = \la 2xy^2, 2y(x^2-z^2), -2y^2z\ra</m>
+                    </p>
+                  </li>
 
-            <li>
+                  <li>
+                    <p>
+                      <m>0</m>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </solution>
+        <!-- </webwork> -->
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <setup>
+            <pg-code>
+              Context("Vector");
+              Context()->flags->set(reduceConstants=>0,redcuceConstantFunctions=>0);
+              $gradient=Compute("&lt;-4x/(x^2+y^2+z^2)^2, -4y/(x^2+y^2+z^2)^2, -4z/(x^2+y^2+z^2)^2>");
+              $directional=Compute("0");
+            </pg-code>
+            </setup>
+            <statement>
               <p>
-                <m>\la 0,-3\ra</m>
+                Given <m>F(x,y,z) = \frac{2}{x^2+y^2+z^2}</m>,
+                <m>\vec v = \la 1,1,-2\ra</m>, <m>P = (1,1,1)</m>:
               </p>
-            </li>
 
-            <li>
               <p>
-                <m>\vec u = \la 1,0\ra</m>
+                <ol label="a">
+                  <li>
+                    <p>
+                      Find <m>\nabla F(x,y,z)</m>.
+                    </p>
+
+                    <p>
+                      <var name="$gradient" width="50"/>
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      Find <m>D_{\vec u}\,F</m> at <m>P</m>.
+                    </p>
+
+                    <p>
+                      <var name="$directional" width="20"/>
+                    </p>
+                  </li>
+                </ol>
               </p>
-            </li>
-          </ol>
-        </p>
-      </answer>
-    </exercise>
+            </statement>
+        </webwork>
+      </exercise>
 
-    <p>
-      In the following exercises, a function <m>w=F(x,y,z)</m>,
-      a vector <m>\vec v</m> and a point <m>P</m> are given.
-
-      <ol>
-        <li>
-          <title>(a)</title>
-          <p>
-            Find <m>\nabla F(x,y,z)</m>.
-          </p>
-        </li>
-
-        <li>
-          <title>(b)</title>
-          <p>
-            Find <m>D_{\vec u\,}F</m> at <m>P</m>,
-            where <m>\vec u</m> is the unit vector in the direction of <m>\vec v</m>.
-          </p>
-        </li>
-      </ol>
-    </p>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds F(x,y,z) = 3x^2z^3+4xy-3z^2</m>,
-          <m>\vec v = \la 1,1,1\ra</m>, <m>P = (3,2,1)</m>
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              <m>\nabla F(x,y,z) = \la 6xz^3+4y, 4x, 9x^2z^2-6z\ra</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>113/\sqrt{3}</m>
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds F(x,y,z) = \sin(x)\cos(y)e^z</m>,
-          <m>\vec v = \la 2,2,1\ra</m>, <m>P = (0,0,0)</m>
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              <m>\nabla F(x,y,z) = \la \cos x\cos ye^z, -\sin x\sin ye^z, \sin x\cos ye^z\ra</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>2/3</m>
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds F(x,y,z) = x^2y^2-y^2z^2</m>,
-          <m>\vec v = \la -1,7,3\ra</m>, <m>P = (1,0,-1)</m>
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              <m>\nabla F(x,y,z) = \la 2xy^2, 2y(x^2-z^2), -2y^2z\ra</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>0</m>
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds F(x,y,z) = \frac{2}{x^2+y^2+z^2}</m>,
-          <m>\vec v = \la 1,1,-2\ra</m>, <m>P = (1,1,1)</m>
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              <m>\nabla F(x,y,z) = \la -\frac{4x}{(x^2+y^2+z^2)^2},-\frac{4y}{(x^2+y^2+z^2)^2},-\frac{4z}{(x^2+y^2+z^2)^2}\ra</m>
-            </p>
-          </li>
-
-          <li>
-            <p>
-              <m>0</m>
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
-  </subsection>
+    </exercisegroup>
+  </exercises>
 </section>
-
