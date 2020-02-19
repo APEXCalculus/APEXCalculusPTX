@@ -1,5 +1,4 @@
-
-
+<?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="sec_center_of_mass">
   <title>Center of Mass</title>
   <introduction>
@@ -44,23 +43,80 @@
       (and physicists and engineers)
       call such a sheet a <em>lamina</em>.
       So consider a lamina,
-      as shown in <xref ref="fig_mass_intro">Figure</xref>(a),
-      with the shape of some planar region <m>R</m>, as shown in part (b).
+      as shown in <xref ref="fig_mass_introa">Figure</xref>,
+      with the shape of some planar region <m>R</m>, as shown in <xref ref="fig_mass_introb">Figure</xref>.
           <idx><h>lamina</h></idx>
           <idx><h>mass</h></idx>
     </p>
 
     <figure xml:id="fig_mass_intro">
       <caption>Illustrating the concept of a lamina.</caption>
-      <sidebyside>
-        <figure>
-          <caption>(a)</caption>
-          <img src="figures/figmass_intro1b"/>
+      <sidebyside widths="47% 47%">
+        <figure xml:id="fig_mass_introa">
+          <caption/>
+        <!-- START figures/fig_mass_intro1b.tex -->
+          <image xml:id="img_mass_introa">
+            <description></description>
+            <latex-image>
+
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            axis y line=none,
+            axis x line=none,
+            axis on top,
+            ymin=-.1,ymax=3.5,
+            xmin=-.1,xmax=3.5
+            ]
+
+            \addplot [name path=A,firstcurvestyle,-,domain=1:3] {-(x-2)^2+3};
+            \addplot [name path=B,firstcurvestyle,-,domain=1:3] {x/2};
+            \addplot [firstcurvestyle,-,domain=.5:2] (1,x);
+            \addplot [firstcurvestyle,-,domain=1.5:2] (3,x);
+
+            \addplot [firstcurvestyle,areastyle] fill between [of=A and B];
+
+            \end{axis}
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
+        <!-- figures/fig_mass_intro1b.tex END -->
         </figure>
 
-        <figure>
-          <caption>(b)</caption>
-          <img src="figures/figmass_intro1"/>
+        <figure xml:id="fig_mass_introb">
+          <caption/>
+        <!-- START figures/fig_mass_intro1.tex -->
+          <image xml:id="img_mass_introb">
+            <description></description>
+            <latex-image>
+
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            axis on top,
+            ymin=-.1,ymax=3.5,
+            xmin=-.1,xmax=3.5
+            ]
+
+            \addplot [name path=A,firstcurvestyle,-,domain=-.1:3.5,samples=60] {-(x-2)^2+3} node [pos=.65,above,black] {\scriptsize $y=f_2(x)$};
+            \addplot [name path=B,firstcurvestyle,-,domain=-.1:3.5] {x/2} node [pos=.6,sloped,above,black] {\scriptsize $y=f_1(x)$};
+
+            \addplot [firstcurvestyle,areastyle] fill between [of=A and B,soft clip={domain=1:3}];
+
+            \addplot [secondcurvestyle,-,solid,domain=0:3] (1,x);
+            \addplot [secondcurvestyle,-,solid,domain=0:3] (3,x);
+
+            \draw (axis cs:2,2) node {$R$};
+
+            \end{axis}
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
+        <!-- figures/fig_mass_intro1.tex END -->
         </figure>
       </sidebyside>
 
@@ -79,7 +135,7 @@
       partition <m>R</m> into <m>n</m> subregions as we have done in the past.
       The <m>i</m>th subregion has area <m>\Delta A_i</m>.
       A fundamental property of mass is that
-      <q>mass=density<times />area.</q>
+      <q>mass=density<times/>area.</q>
       If the lamina has a constant density <m>\delta</m>,
       then the mass of this <m>i</m>th subregion is <m>\Delta m_i=\delta\Delta A_i</m>.
       That is, we can compute a small amount of mass by multiplying a small amount of area by the density.
@@ -96,8 +152,7 @@
     </p>
     <aside>
       <p>
-        <em>Note:</em> <em>Mass</em> and
-        <em>weight</em> are different measures.
+        <em>Mass</em> and <em>weight</em> are different measures.
         Since they are scalar multiples of each other,
         it is often easy to treat them as the same measure.
         In this section we effectively treat them as the same,
@@ -148,14 +203,35 @@
 
         <figure xml:id="fig_mass1">
           <caption>A region <m>R</m> representing a lamina in <xref ref="ex_mass1">Example</xref>.</caption>
-          <img src="figures/figmass1"/>
+          <!-- START figures/fig_mass1.tex -->
+          <image xml:id="img_mass1" width="47%">
+            <description></description>
+            <latex-image>
+
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            axis on top,
+            ymin=-.1,ymax=1.1,
+            xmin=-.1,xmax=1.1
+            ]
+
+            \filldraw [fill=firstcolor!15,draw=firstcolor,thick] (axis cs:0,0) -- (axis cs:1,0) -- (axis cs: 1,1) -- (axis cs:0,1) -- cycle;
+
+            \end{axis}
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
+          <!-- figures/fig_mass1.tex END -->
         </figure>
 
         <p>
           Following <xref ref="def_mass">Definition</xref>,
           the mass <m>M</m> of the lamina is
           <me>
-            M = \iint_R 3\, dA = \int_0^1\int_0^1 3\, dx\, dy = 3\int_0^1\int_0^1 \, dx\, dy=3\text{ gm } 
+            M = \iint_R 3\, dA = \int_0^1\int_0^1 3\, dx\, dy = 3\int_0^1\int_0^1 \, dx\, dy=3\text{ gm }
           </me>.
         </p>
 
@@ -201,22 +277,110 @@
         </p>
 
         <figure xml:id="fig_mass2">
-          <caption>Graphing the density functions in <xref ref="ex_mass1">Examples</xref> and <xref ref="ex_mass2"></xref>.</caption>
-          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          <caption>Graphing the density functions in <xref ref="ex_mass1">Examples</xref> and <xref ref="ex_mass2"/>.</caption>
+          <!--
+           \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
           3Droll=0.,
           3Dortho=0.0046491301618516445,
           3Dc2c=0.5246235132217407 -0.7953014969825745 0.3037526309490204,
           3Dcoo=26.242107391357422 100.81001281738281 52.60980224609375,
           3Droo=149.9999999399336,
-          3Dlights=Headlamp,add3Djscript=asylabels.js}
-          <img src="figures/figmass2_3D"/>
+          3Dlights=Headlamp,add3Djscript=asylabels.js]
+           -->
+          <!-- START figures/figmass2_3D.asy -->
+          <image xml:id="img_mass2" width="47%">
+            <description></description>
+            <asymptote>
+
+              import graph3;
+              import labelpath3;
+              //ASY file for figmass2.asy in Chapter 13
+
+              size(200,200,IgnoreAspect);
+              //currentprojection=perspective(7,2,1);
+              currentprojection=orthographic(2.9,-4.6,5.2);
+              defaultrender.merge=true;
+
+              // setup and draw the axes
+              real[] myxchoice={1};
+              real[] myychoice={1};
+              real[] myzchoice={2,4};
+              defaultpen(0.5mm);
+
+              pair xbounds=(-0.25,1.25);
+              pair ybounds=(-0.25,1.25);
+              pair zbounds=(0,4.5);
+
+              xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+              yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+              zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+              label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+              //Draw the plane z=3 with thick line
+              triple f(pair t) {
+                return (t.x,t.y,3);
+              }
+              surface s=surface(f,(0,0),(1,1),4,4,Spline);
+              pen q=rgb(.9,0,0);
+              draw(s,rgb(1,.6,.6)+opacity(.5),meshpen=q);
+              draw((0,0,3)--(1,0,3)--(1,1,3)--(0,1,3)--cycle,red+linewidth(1));
+              label("$z=3$",(1,0.5,3),S);
+              path3 gg=(1,0,2.8)--(1,1,2.8);
+              //draw(labelpath("$z=3$",subpath(gg,.35,.65),angle=-90));
+
+              //draw plane z=x+y+2
+              triple f(pair t) {
+                return (t.x,t.y,t.x+t.y+2);
+              }
+              surface s=surface(f,(0,0),(1,1),8,8,Spline);
+              pen p=rgb(0,0,.7);
+              draw(s,rgb(.6,.6,1)+opacity(.5),meshpen=p);
+              draw((0,0,2)--(1,0,3)--(1,1,4)--(0,1,3)--cycle,blue+linewidth(1));
+              label("$z=x+y+2$",(.5,0,2.5),S);
+
+              draw((1,0,3)--(0,1,3),black+dashed+linewidth(1));
+
+              // ////////////////////////////////////
+              //    SAMPLE CODE
+
+              // defaultpen(fontsize(10pt));
+
+              //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+              //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+              //pen p=rgb(0,0,.7);
+              //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+              //triple f(pair t) {
+              //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+              //}
+              //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+              //pen p=rgb(0,0,.7);
+              //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+              //draw(s,paleblue);
+              //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+              //draw(mypath,2bp+blue);
+
+              //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+              //path3 mypath=graph(g,-1,1,operator ..);
+              //draw(mypath,blue+linewidth(2));
+
+              //pen p=rgb(0,0,1);
+              //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+            </asymptote>
+          </image>
+          <!-- figures/figmass2_3D.asy END -->
         </figure>
 
         <p>
           It turns out that since the density of the lamina is so uniformly distributed <q>above and below</q>
           <m>z=3</m> that the mass of the lamina is the same as if it had a constant density of 3.
           The density functions in <xref ref="ex_mass1">Examples</xref>
-          and <xref ref="ex_mass2"></xref>
+          and <xref ref="ex_mass2"/>
           are graphed in <xref ref="fig_mass2">Figure</xref>,
           which illustrates this concept.
         </p>
@@ -233,7 +397,7 @@
           Compare this to the weight of the lamina with the same shape and density <m>\delta(x,y) = (2\sqrt{x^2+y^2}+1)</m>lb/ft<m>^2</m>.
         </p>
       </statement>
-      <solution xml:id="fig_mass3">
+      <solution>
         <p>
           A direct application of <xref ref="def_mass">Definition</xref>
           states that the weight of the lamina is <m>\iint_R\delta(x,y)\, dA</m>.
@@ -242,7 +406,7 @@
         </p>
 
         <p>
-          The density function <m>\delta(x,y) = x^2+y^2+1</m> becomes <m>\delta(r,\theta) = (r\cos\theta)^2+(r\sin\theta)^2+1 = r^2+1</m>.
+          The density function <m>\delta(x,y) = x^2+y^2+1</m> becomes <m>\delta(r,\theta) = (r\cos(\theta) )^2+(r\sin(\theta) )^2+1 = r^2+1</m>.
           The circle is bounded by <m>0\leq r\leq 2</m> and <m>0\leq\theta\leq2\pi</m>.
           Thus the weight <m>W</m> is:
           <md>
@@ -255,7 +419,7 @@
 
         <p>
           Now compare this with the density function <m>\delta(x,y) = 2\sqrt{x^2+y^2}+1</m>.
-          Converting this to polar coordinates gives <m>\delta(r,\theta) = 2\sqrt{(r\cos\theta)^2+(r\sin\theta)^2}+1 = 2r+1</m>.
+          Converting this to polar coordinates gives <m>\delta(r,\theta) = 2\sqrt{(r\cos(\theta) )^2+(r\sin(\theta) )^2}+1 = 2r+1</m>.
           Thus the weight <m>W</m> is:
           <md>
             <mrow>W \amp = \int_0^{2\pi}\int_0^2 (2r+1)r\, dr\, d\theta</mrow>
@@ -272,39 +436,189 @@
           each gives a density of 1 at the origin and a density of 5 at the outside edge of the circle,
           as seen in <xref ref="fig_mass3">Figure</xref>.
         </p>
-<!--
-<caption>Graphing the density functions in Example \ref{ex_mass3}. In (a) is the density function <m>\delta(x,y) = x^2+y^2+1</m>; in (b) is <m>\delta(x,y) = 2\sqrt{x^2+y^2}+1</m>.</caption>
--->
-        <sidebyside>
 
-          <tabular>
-            <row>
-              <cell>\apexincludemedia{width=115pt,3Dmenu,activate=onclick,deactivate=onclick,
-                3Droll=0,
-                3Dortho=0.00725397327914834,
-                3Dc2c=0.6666666865348816 0.6666666865348816 0.3333333432674408,
-                3Dcoo=-16.55617904663086 -14.281390190124512 61.674530029296875,
-                3Droo=150,
-                3Dlights=Headlamp,add3Djscript=asylabels.js}
-                <img src="figures/figmass3a_3D"/></cell>
-              <cell></cell>
-              <cell>\apexincludemedia{width=115pt,3Dmenu,activate=onclick,deactivate=onclick,
-                3Droll=0,
-                3Dortho=0.00725397327914834,
-                3Dc2c=0.6666666865348816 0.6666666865348816 0.3333333432674408,
-                3Dcoo=-16.55617904663086 -14.281390190124512 61.674530029296875,
-                3Droo=150,
-                3Dlights=Headlamp,add3Djscript=asylabels.js}
-                <img src="figures/figmass3b_3D"/></cell>
-            </row>
-            <row>
-              <cell>(a)</cell>
-              <cell></cell>
-              <cell>(b)</cell>
-            </row>
-          </tabular>
+        <figure xml:id="fig_mass3">
+          <caption>Graphing the density functions in <xref ref="ex_mass3">Example</xref>. In (a) is the density function <m>\delta(x,y) = x^2+y^2+1</m>; in (b) is <m>\delta(x,y) = 2\sqrt{x^2+y^2}+1</m>.</caption>
+          <sidebyside widths="47% 47%">
+            <figure xml:id="fig_mass3a_3D">
+              <caption/>
+              <!--
+              \includemedia[width=115pt,3Dmenu,activate=onclick,deactivate=onclick,
+              3Droll=0,
+              3Dortho=0.00725397327914834,
+              3Dc2c=0.6666666865348816 0.6666666865348816 0.3333333432674408,
+              3Dcoo=-16.55617904663086 -14.281390190124512 61.674530029296875,
+              3Droo=150,
+              3Dlights=Headlamp,add3Djscript=asylabels.js]
+              -->
+              <!-- START figures/figmass3a_3D.asy -->
+              <image xml:id="img_mass3a_3D">
+                <description></description>
+                <asymptote>
 
-        </sidebyside>
+                  import graph3;
+
+                  //ASY file for figmass3a3D.asy in Chapter 13
+
+                  size(200,200,Aspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(4,4,2);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={-2,2};
+                  real[] myychoice={-2,2};
+                  real[] myzchoice={5};
+                  defaultpen(0.5mm);
+
+                  pair xbounds=(-2.75,2.75);
+                  pair ybounds=(-2.75,2.75);
+                  pair zbounds=(0,6);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //Draw the plane z=3 with thick line
+                  triple f(pair t) {
+                    return (cos(t.x)*t.y,sin(t.x)*t.y,t.y^2+1);
+                  }
+                  surface s=surface(f,(0,0),(2*pi,2),16,16,Spline);
+                  pen p=rgb(0,0,.7);
+                  draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+                  //draw circle in plane
+                  triple g(real t) {return (2*cos(t),2*sin(t),0);}
+                  path3 mypath=graph(g,0,2*pi,operator ..);
+                  draw(mypath,blue+linewidth(2));
+
+                  // ////////////////////////////////////
+                  //    SAMPLE CODE
+
+                  // defaultpen(fontsize(10pt));
+
+                  //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+                  //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+                  //pen p=rgb(0,0,.7);
+                  //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+                  //triple f(pair t) {
+                  //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+                  //}
+                  //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+                  //pen p=rgb(0,0,.7);
+                  //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+                  //draw(s,paleblue);
+                  //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+                  //draw(mypath,2bp+blue);
+
+                  //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+                  //path3 mypath=graph(g,-1,1,operator ..);
+                  //draw(mypath,blue+linewidth(2));
+
+                  //pen p=rgb(0,0,1);
+                  //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+                </asymptote>
+              </image>
+              <!-- figures/figmass3a_3D.asy END -->
+            </figure>
+
+            <figure xml:id="fig_mass3b_3D">
+              <caption/>
+              <!--
+              \includemedia[width=115pt,3Dmenu,activate=onclick,deactivate=onclick,
+              3Droll=0,
+              3Dortho=0.00725397327914834,
+              3Dc2c=0.6666666865348816 0.6666666865348816 0.3333333432674408,
+              3Dcoo=-16.55617904663086 -14.281390190124512 61.674530029296875,
+              3Droo=150,
+              3Dlights=Headlamp,add3Djscript=asylabels.js]
+              -->
+              <!-- START figures/figmass3b_3D.asy -->
+              <image xml:id="img_mass3b_3D">
+                <description></description>
+                <asymptote>
+
+                  import graph3;
+
+                  //ASY file for figmass3b3D.asy in Chapter 13
+
+                  size(200,200,Aspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(4,4,2);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={-2,2};
+                  real[] myychoice={-2,2};
+                  real[] myzchoice={5};
+                  defaultpen(0.5mm);
+
+                  pair xbounds=(-2.75,2.75);
+                  pair ybounds=(-2.75,2.75);
+                  pair zbounds=(0,6);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //Draw the plane z=3 with thick line
+                  triple f(pair t) {
+                    return (cos(t.x)*t.y,sin(t.x)*t.y,2*t.y+1);
+                  }
+                  surface s=surface(f,(0,0),(2*pi,2),16,16,Spline);
+                  pen p=rgb(0,0,.7);
+                  draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+                  //draw circle in plane
+                  triple g(real t) {return (2*cos(t),2*sin(t),0);}
+                  path3 mypath=graph(g,0,2*pi,operator ..);
+                  draw(mypath,blue+linewidth(2));
+
+                  // ////////////////////////////////////
+                  //    SAMPLE CODE
+
+                  // defaultpen(fontsize(10pt));
+
+                  //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+                  //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+                  //pen p=rgb(0,0,.7);
+                  //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+                  //triple f(pair t) {
+                  //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+                  //}
+                  //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+                  //pen p=rgb(0,0,.7);
+                  //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+                  //draw(s,paleblue);
+                  //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+                  //draw(mypath,2bp+blue);
+
+                  //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+                  //path3 mypath=graph(g,-1,1,operator ..);
+                  //draw(mypath,blue+linewidth(2));
+
+                  //pen p=rgb(0,0,1);
+                  //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+                </asymptote>
+              </image>
+              <!-- figures/figmass3b_3D.asy END -->
+            </figure>
+          </sidebyside>
+        </figure>
 
         <p>
           Notice how <m>x^2+y^2+1 \leq 2\sqrt{x^2+y^2}+1</m> over the circle;
@@ -321,7 +635,7 @@
       The <q>volume</q> under <m>\delta</m> over <m>R</m> is actually mass;
       by compressing the <q>volume</q>
       under <m>\delta</m> onto the <m>x</m>-<m>y</m> plane,
-      we get <q>more mass</q> in some areas than others <mdash /> i.e., areas of greater density.
+      we get <q>more mass</q> in some areas than others <mdash/> <ie/>, areas of greater density.
     </p>
 
     <p>
@@ -357,24 +671,24 @@
     <p>
       We find the center of mass based on the principle of a
       <em>weighted average</em>.
-      Consider a college class in which your homework average is 90<percent />,
-      your test average is 73<percent />, and your final exam grade is an 85<percent />.
+      Consider a college class in which your homework average is 90%,
+      your test average is 73%, and your final exam grade is an 85%.
       Experience tells us that our final grade
       <em>is not</em> the <em>average</em>
       of these three grades: that is, it is not:
       <me>
-        \frac{0.9+0.73+0.85}{3} \approx 0.837 = 83.7\text{ \% } 
+        \frac{0.9+0.73+0.85}{3} \approx 0.837 = 83.7\text{ \% }
       </me>.
     </p>
 
     <p>
       That is, you are probably not pulling a B in the course.
       Rather, your grades are <em>weighted</em>.
-      Let's say the homework is worth 10<percent /> of the grade,
-      tests are 60<percent /> and the exam is 30<percent />.
+      Let's say the homework is worth 10% of the grade,
+      tests are 60% and the exam is 30%.
       Then your final grade is:
       <me>
-        (0.1)(0.9) + (0.6)(0.73)+(0.3)(0.85) = 0.783 = 78.3\text{ \% } 
+        (0.1)(0.9) + (0.6)(0.73)+(0.3)(0.85) = 0.783 = 78.3\text{ \% }
       </me>.
     </p>
 
@@ -405,7 +719,7 @@
         <p>
           Let point masses <m>m_1,m_2,\ldots,m_n</m> be distributed along the <m>x</m>-axis at locations <m>x_1,x_2,\ldots,x_n</m>,
           respectively.
-          The center of mass <m>\overline{x}</m> of the system is located at 
+          The center of mass <m>\overline{x}</m> of the system is located at
               <idx><h>center of mass</h></idx>
           <me>
             \overline{x} = \sum_{i=1}^nm_ix_i\Bigg/\sum_{i=1}^n m_i
@@ -417,24 +731,26 @@
     <example xml:id="ex_mass4">
       <title>Finding the center of mass of a discrete linear system</title>
       <statement>
-        <ol>
-          <li>
-            <p>
-              Point masses of 2gm are located at <m>x=-1</m>,
-              <m>x=2</m> and <m>x=3</m> are connected by a thin rod of negligible weight.
-              Find the center of mass of the system.
-            </p>
-          </li>
+        <p>
+          <ol>
+            <li>
+              <p>
+                Point masses of 2gm are located at <m>x=-1</m>,
+                <m>x=2</m> and <m>x=3</m> are connected by a thin rod of negligible weight.
+                Find the center of mass of the system.
+              </p>
+            </li>
 
-          <li>
-            <p>
-              Point masses of 10gm, 2gm and 1gm are located at <m>x=-1</m>,
-              <m>x=2</m> and <m>x=3</m>,
-              respectively, are connected by a thin rod of negligible weight.
-              Find the center of mass of the system.
-            </p>
-          </li>
-        </ol>
+            <li>
+              <p>
+                Point masses of 10gm, 2gm and 1gm are located at <m>x=-1</m>,
+                <m>x=2</m> and <m>x=3</m>,
+                respectively, are connected by a thin rod of negligible weight.
+                Find the center of mass of the system.
+              </p>
+            </li>
+          </ol>
+        </p>
       </statement>
       <solution>
         <p>
@@ -447,25 +763,80 @@
                   \overline{x}=\frac{2(-1) + 2(2)+2(3)}{2+2+2} = \frac43 = 1.\overline{3}
                 </me>.
                 So the system would balance on a point placed at <m>x=4/3</m>,
-                as illustrated in <xref ref="fig_mass4">Figure</xref>(a).
-
-                <figure xml:id="fig_mass4">
-                  <caption>Illustrating point masses along a thin rod and the center of mass.</caption>
-                  <sidebyside>
-                    <figure>
-                      <caption>(a)</caption>
-                      <img src="figures/figmass4a"/>
-                    </figure>
-
-                    <figure>
-                      <caption>(b)</caption>
-                      <img src="figures/figmass4b"/>
-                    </figure>
-                  </sidebyside>
-
-                </figure>
-
+                as illustrated in <xref ref="fig_mass4a">Figure</xref>.
               </p>
+
+              <figure xml:id="fig_mass4">
+                <caption>Illustrating point masses along a thin rod and the center of mass.</caption>
+                <sidebyside widths="47% 47%">
+                  <figure xml:id="fig_mass4a">
+                    <caption/>
+                  <!-- START figures/fig_mass4a.tex -->
+                    <image xml:id="img_mass4a">
+                      <description></description>
+                      <latex-image>
+
+                      \begin{tikzpicture}
+
+                      \begin{axis}[
+                      axis on top,
+                      axis y line=none,
+                      xtick={-1,0,1,2,3},
+                      ymin=-.5,ymax=.5,
+                      xmin=-1.5,xmax=3.5
+                      ]
+
+                      \filldraw (axis cs:-1,0) circle (2pt)
+                                (axis cs: 2,0) circle (2pt)
+                                (axis cs: 3,0) circle (2pt)
+                                (axis cs: 1.3,0) node [above] {\scriptsize $\overline{x}$} -- (axis cs: 1.2,-.05) -- (axis cs: 1.4,-.05) -- cycle;
+
+                      \draw [very thick] (axis cs: -1,0) -- (axis cs:3,0);
+
+                      \end{axis}
+
+                      \end{tikzpicture}
+
+                      </latex-image>
+                    </image>
+                  <!-- figures/fig_mass4a.tex END -->
+                  </figure>
+
+                  <figure xml:id="fig_mass4b">
+                    <caption/>
+                  <!-- START figures/fig_mass4b.tex -->
+                    <image xml:id="img_mass4b">
+                      <description></description>
+                      <latex-image>
+
+                      \begin{tikzpicture}
+
+                      \begin{axis}[
+                      axis on top,
+                      axis y line=none,
+                      xtick={-1,0,1,2,3},
+                      ymin=-.5,ymax=.5,
+                      xmin=-1.5,xmax=3.5
+                      ]
+
+                      \filldraw (axis cs:-1,0) circle (4.5pt)
+                                (axis cs: 2,0) circle (2pt)
+                                (axis cs: 3,0) circle (1.4pt)
+                                (axis cs: -.23,0) node [above] {\scriptsize $\overline{x}$} -- (axis cs: -.33,-.05) -- (axis cs: -.13,-.05) -- cycle;
+
+                      \draw [very thick] (axis cs: -1,0) -- (axis cs:3,0);
+
+                      \end{axis}
+
+                      \end{tikzpicture}
+
+                      </latex-image>
+                    </image>
+                  <!-- figures/fig_mass4b.tex END -->
+                  </figure>
+                </sidebyside>
+
+              </figure>
             </li>
 
             <li>
@@ -475,7 +846,7 @@
                   \overline{x} = \frac{10(-1)+2(2)+1(3)}{10+2+1} = \frac{-3}{13} \approx -0.23
                 </me>.
                 Placing a large weight at the left hand side of the system moves the center of mass left,
-                as shown in <xref ref="fig_mass4">Figure</xref>(b).
+                as shown in <xref ref="fig_mass4b">Figure</xref>.
               </p>
             </li>
           </ol>
@@ -502,7 +873,7 @@
     </p>
 
     <definition xml:id="def_moment">
-      <title>Moments about the $x$- and $y$- Axes.</title>
+      <title>Moments about the <m>x</m> and <m>y</m> Axes.</title>
       <statement>
         <p>
           Let point masses <m>m_1</m>,
@@ -510,18 +881,21 @@
           <m>(x_2,y_2),\ldots,(x_n,y_n)</m>, respectively,
           in the <m>x</m>-<m>y</m> plane.
               <idx><h>moment</h></idx>
+        </p>
+
+        <p>
           <ol>
             <li>
               <p>
-                The <em>moment about the <m>y</m>-axis</em>,
-                <m>M_y</m>, is <m>\ds M_y = \sum_{i=1}^n m_ix_i</m>.
+                The <em>moment about the <m>y</m>-axis</em>, <m>M_y</m>, is
+                <m>\ds M_y = \sum_{i=1}^n m_ix_i</m>.
               </p>
             </li>
 
             <li>
               <p>
-                The <em>moment about the <m>x</m>-axis</em>,
-                <m>M_x</m>, is <m>\ds M_x = \sum_{i=1}^n m_iy_i</m>.
+                The <em>moment about the <m>x</m>-axis</em>, <m>M_x</m>, is
+                <m>\ds M_x = \sum_{i=1}^n m_iy_i</m>.
               </p>
             </li>
           </ol>
@@ -584,21 +958,54 @@
         </p>
 
         <sidebyside>
-          <md>
-            <mrow>M_x \amp =  \sum_{i=1}^n m_iy_i</mrow>
-            <mrow>\amp = 1(0) + 2(1) + 5(1)</mrow>
-            <mrow>\amp = 7</mrow>
-          </md>.
-          <md>
-            <mrow>M_y \amp =  \sum_{i=1}^n m_ix_i</mrow>
-            <mrow>\amp = 1(2) + 2(1) + 5(3)</mrow>
-            <mrow>\amp = 19</mrow>
-          </md>.
+          <p>
+            <md>
+              <mrow>M_x \amp =  \sum_{i=1}^n m_iy_i</mrow>
+              <mrow>\amp = 1(0) + 2(1) + 5(1)</mrow>
+              <mrow>\amp = 7</mrow>
+            </md>.
+          </p>
+          <p>
+            <md>
+              <mrow>M_y \amp =  \sum_{i=1}^n m_ix_i</mrow>
+              <mrow>\amp = 1(2) + 2(1) + 5(3)</mrow>
+              <mrow>\amp = 19</mrow>
+            </md>.
+          </p>
         </sidebyside>
 
         <figure xml:id="fig_mass5">
           <caption>Illustrating the center of mass of a discrete planar system in <xref ref="ex_mass5">Example</xref>.</caption>
-          <img src="figures/figmass5"/>
+          <!-- START figures/fig_mass5.tex -->
+          <image xml:id="img_mass5" width="47%">
+            <description></description>
+            <latex-image>
+
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            axis on top,
+            xtick={1,2,3},
+            ytick={1,2},
+            ymin=-.5,ymax=1.5,
+            xmin=-.5,xmax=3.5
+            ]
+
+            \filldraw (axis cs:2,0) circle (1.4pt)
+                      (axis cs: 1,1) circle (2pt)
+                      (axis cs: 3,1) circle (3.16pt)
+                      (axis cs: 2.375,0.875) circle (1pt) node [below] {\scriptsize $(\overline{x},\overline{y})$};
+
+
+            \draw [very thick] (axis cs: 2,0) -- (axis cs:3,1) -- (axis cs:1,1) -- cycle;
+
+            \end{axis}
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
+          <!-- figures/fig_mass5.tex END -->
         </figure>
 
         <p>
@@ -624,7 +1031,7 @@
       As done before, we can approximate the mass of the
       <m>i</m>th subregion with <m>\delta(x_i,y_i)\Delta A_i</m>,
       where <m>(x_i,y_i)</m> is a point inside the <m>i</m>th subregion.
-      We can approximate the moment of this subregion about the <m>y</m>-axis with <m>x_i\delta(x_i,y_i)\Delta A_i</m> <mdash /> that is,
+      We can approximate the moment of this subregion about the <m>y</m>-axis with <m>x_i\delta(x_i,y_i)\Delta A_i</m> <mdash/> that is,
       by multiplying the approximate mass of the region by its approximate distance from the <m>y</m>-axis.
       Similarly, we can approximate the moment about the <m>x</m>-axis with <m>y_i\delta(x_i,y_i)\Delta A_i</m>.
       By summing over all subregions, we have:
@@ -649,7 +1056,9 @@
           bounded region <m>R</m> in the <m>x</m>-<m>y</m> plane with density function <m>\delta(x,y)</m>.
               <idx><h>center of mass</h></idx>
               <idx><h>moment</h></idx>
+        </p>
 
+        <p>
           <ol>
             <li>
               <p>
@@ -704,7 +1113,28 @@
 
         <figure xml:id="fig_mass6">
           <caption>A region <m>R</m> representing a lamina in <xref ref="ex_mass1">Example</xref>.</caption>
-          <img src="figures/figmass1"/>
+          <!-- START figures/fig_mass1.tex -->
+          <image xml:id="img_mass6" width="47%">
+            <description></description>
+            <latex-image>
+
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            axis on top,
+            ymin=-.1,ymax=1.1,
+            xmin=-.1,xmax=1.1
+            ]
+
+            \filldraw [fill=firstcolor!15,draw=firstcolor,thick] (axis cs:0,0) -- (axis cs:1,0) -- (axis cs: 1,1) -- (axis cs:0,1) -- cycle;
+
+            \end{axis}
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
+          <!-- figures/fig_mass1.tex END -->
         </figure>
 
         <p>
@@ -771,12 +1201,12 @@
           it is best to describe <m>R</m> using polar coordinates.
           Thus when we compute <m>M_y</m>,
           we will integrate not <m>x\delta(x,y) = x(x^2+y^2+1)</m>,
-          but rather <m>\big(r\cos\theta\big)\delta(r\cos\theta,r\sin\theta) = \big(r\cos\theta\big)\big(r^2+1\big)</m>.
+          but rather <m>\big(r\cos(\theta) \big)\delta(r\cos(\theta) ,r\sin(\theta) ) = \big(r\cos(\theta) \big)\big(r^2+1\big)</m>.
           We compute <m>M</m>, <m>M_x</m> and <m>M_y</m>:
           <md>
             <mrow>M \amp = \int_0^{2\pi}\int_0^2 (r^2+1)r\, dr\, d\theta = 12\pi\approx 37.7\text{ lb } .</mrow>
-            <mrow>M_x \amp = \int_0^{2\pi}\int_0^2 (r\sin\theta)(r^2+1)r \, dr\, d\theta = 0.</mrow>
-            <mrow>M_y \amp = \int_0^{2\pi}\int_0^2 (r\cos\theta)(r^2+1)r \, dr\, d\theta = 0</mrow>
+            <mrow>M_x \amp = \int_0^{2\pi}\int_0^2 (r\sin(\theta) )(r^2+1)r \, dr\, d\theta = 0.</mrow>
+            <mrow>M_y \amp = \int_0^{2\pi}\int_0^2 (r\cos(\theta) )(r^2+1)r \, dr\, d\theta = 0</mrow>
           </md>.
         </p>
 
@@ -807,14 +1237,38 @@
           We compute <m>M</m>, <m>M_x</m> and <m>M_y</m>:
           <md>
             <mrow>M \amp = \int_0^{\pi}\int_5^6 (2)r\, dr\, d\theta = 11\pi\text{ lb } .</mrow>
-            <mrow>M_x \amp = \int_0^{\pi}\int_5^6 (r\sin\theta)(2)r\, dr\, d\theta = \frac{364}3\approx 121.33 .</mrow>
-            <mrow>M_y \amp = \int_0^{\pi}\int_5^6 (r\cos\theta)(2)r\, dr\, d\theta = 0</mrow>
+            <mrow>M_x \amp = \int_0^{\pi}\int_5^6 (r\sin(\theta) )(2)r\, dr\, d\theta = \frac{364}3\approx 121.33 .</mrow>
+            <mrow>M_y \amp = \int_0^{\pi}\int_5^6 (r\cos(\theta) )(2)r\, dr\, d\theta = 0</mrow>
           </md>.
         </p>
 
         <figure xml:id="fig_mass9">
           <caption>Illustrating the region <m>R</m> in <xref ref="ex_mass9">Example</xref>.</caption>
-          <img src="figures/figmass9"/>
+          <!-- START figures/fig_mass9.tex -->
+          <image xml:id="img_mass9" width="47%">
+            <description></description>
+            <latex-image>
+
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            axis on top,
+            ymin=-2,ymax=8.8,
+            xmin=-6.5,xmax=6.5
+            ]
+
+            \addplot [firstcurvestyle,areastyle] coordinates {(6.,0)(5.967,0.6272)(5.869,1.247)(5.706,1.854)(5.481,2.44)(5.196,3.)(4.854,3.527)(4.459,4.015)(4.015,4.459)(3.527,4.854)(3.,5.196)(2.44,5.481)(1.854,5.706)(1.247,5.869)(0.6272,5.967)(0,6.)(-0.6272,5.967)(-1.247,5.869)(-1.854,5.706)(-2.44,5.481)(-3.,5.196)(-3.527,4.854)(-4.015,4.459)(-4.459,4.015)(-4.854,3.527)(-5.196,3.)(-5.481,2.44)(-5.706,1.854)(-5.869,1.247)(-5.967,0.6272)(-6.,0)(-5.,0)(-4.973,0.5226)(-4.891,1.04)(-4.755,1.545)(-4.568,2.034)(-4.33,2.5)(-4.045,2.939)(-3.716,3.346)(-3.346,3.716)(-2.939,4.045)(-2.5,4.33)(-2.034,4.568)(-1.545,4.755)(-1.04,4.891)(-0.5226,4.973)(0,5.)(0.5226,4.973)(1.04,4.891)(1.545,4.755)(2.034,4.568)(2.5,4.33)(2.939,4.045)(3.346,3.716)(3.716,3.346)(4.045,2.939)(4.33,2.5)(4.568,2.034)(4.755,1.545)(4.891,1.04)(4.973,0.5226)(5.,0)(6,0)};
+            \addplot [firstcurvestyle,-] coordinates {(6.,0)(5.967,0.6272)(5.869,1.247)(5.706,1.854)(5.481,2.44)(5.196,3.)(4.854,3.527)(4.459,4.015)(4.015,4.459)(3.527,4.854)(3.,5.196)(2.44,5.481)(1.854,5.706)(1.247,5.869)(0.6272,5.967)(0,6.)(-0.6272,5.967)(-1.247,5.869)(-1.854,5.706)(-2.44,5.481)(-3.,5.196)(-3.527,4.854)(-4.015,4.459)(-4.459,4.015)(-4.854,3.527)(-5.196,3.)(-5.481,2.44)(-5.706,1.854)(-5.869,1.247)(-5.967,0.6272)(-6.,0)(-5.,0)(-4.973,0.5226)(-4.891,1.04)(-4.755,1.545)(-4.568,2.034)(-4.33,2.5)(-4.045,2.939)(-3.716,3.346)(-3.346,3.716)(-2.939,4.045)(-2.5,4.33)(-2.034,4.568)(-1.545,4.755)(-1.04,4.891)(-0.5226,4.973)(0,5.)(0.5226,4.973)(1.04,4.891)(1.545,4.755)(2.034,4.568)(2.5,4.33)(2.939,4.045)(3.346,3.716)(3.716,3.346)(4.045,2.939)(4.33,2.5)(4.568,2.034)(4.755,1.545)(4.891,1.04)(4.973,0.5226)(5.,0)(6,0)};
+
+            \filldraw (axis cs:0,3.51) circle (1.5pt) node [below right] {\scriptsize $(\overline{x},\overline{y})$};
+
+            \end{axis}
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
+          <!-- figures/fig_mass9.tex END -->
         </figure>
 
         <p>
@@ -833,527 +1287,753 @@
     </p>
   </subsection>
 
-  <subsection>
-    <title>Terms and Concepts</title>
-    <exercise>
-      <statement>
-        <p>
-          Why is it easy to use <q>mass</q>
-          and <q>weight</q> interchangeably,
-          even though they are different measures?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Because they are scalar multiples of each other.
-        </p>
-      </answer>
-    </exercise>
+  <exercises>
+    <exercisegroup>
 
-    <exercise>
-      <statement>
+      <introduction>
         <p>
-          Given a point <m>(x,y)</m>,
-          the value of <m>x</m> is a measure of distance from the <fillin />-axis.
+          Terms and Concepts
         </p>
-      </statement>
-      <answer>
-        <p>
-          <m>y</m>
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <exercise>
-      <statement>
-        <p>
-          We can think of <m>\iint_R\, dm</m> as meaning
-          <q>sum up lots of <fillin /></q>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <q>little masses</q>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <!--<webwork>
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          What is a <q>discrete planar system?</q>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          A collection of individual masses in the plane.
-          Each mass is a point mass,
-          i.e., mass located at a point, not across a region.
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                Why is it easy to use <q>mass</q>
+                and <q>weight</q> interchangeably,
+                even though they are different measures?
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Because they are scalar multiples of each other.
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          Why does <m>M_x</m> use <m>\iint_R y\delta(x,y)\, dA</m> instead of <m>\iint_R x\delta(x,y)\, dA</m>;
-          that is, why do we use <q><m>y</m></q> and not <q><m>x</m></q>?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>M_x</m> measures the moment about the <m>x</m>-axis,
-          meaning we need to measure distance from the <m>x</m>-axis.
-          Such measurements are measures in the <m>y</m>-direction.
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <!--<webwork>
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          Describe a situation where the center of mass of a lamina does not lie within the region of the lamina itself.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          If the lamina is an annulus,
-          the center of mass will likely be in the middle, outside of the region.
-          (See <xref ref="ex_mass9">Example</xref>.)
-        </p>
-      </answer>
-    </exercise>
-  </subsection>
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                Given a point <m>(x,y)</m>,
+                the value of <m>x</m> is a measure of distance from the <fillin/>-axis.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>y</m>
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
 
-  <subsection>
-    <title>Problems</title>
-    <p>
-      In the following exercises,
-      point masses are given along a line or in the plane.
-      Find the center of mass <m>\overline{x}</m> or <m>(\overline{x},\overline{y})</m>,
-      as appropriate.
-      (All masses are in grams and distances are in cm.)
-    </p>
+      <exercise>
+        <!--<webwork>
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>m_1=4</m> at <m>x=1</m>; <m>m_2=3</m> at <m>x=3</m>;
-          <m>m_3=5</m> at <m>x=10</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\overline{x}=5.25</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                We can think of <m>\iint_R\, dm</m> as meaning
+                <q>sum up lots of <fillin/></q>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <q>little masses</q>
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
 
-    <exercise>
-      <statement>
+      <exercise>
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                What is a <q>discrete planar system?</q>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                A collection of individual masses in the plane.
+                Each mass is a point mass,
+                i.e., mass located at a point, not across a region.
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+      <exercise>
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                Why does <m>M_x</m> use <m>\iint_R y\delta(x,y)\, dA</m> instead of <m>\iint_R x\delta(x,y)\, dA</m>;
+                that is, why do we use <q><m>y</m></q> and not <q><m>x</m></q>?
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>M_x</m> measures the moment about the <m>x</m>-axis,
+                meaning we need to measure distance from the <m>x</m>-axis.
+                Such measurements are measures in the <m>y</m>-direction.
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+      <exercise>
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                Describe a situation where the center of mass of a lamina does not lie within the region of the lamina itself.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                If the lamina is an annulus,
+                the center of mass will likely be in the middle, outside of the region.
+                (See <xref ref="ex_mass9">Example</xref>.)
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
         <p>
-          <m>m_1=2</m> at <m>x=-3</m>;
-          <m>m_2=2</m> at <m>x=-1</m>;
+          In the following exercises,
+          point masses are given along a line or in the plane.
+          Find the center of mass <m>\overline{x}</m> or <m>(\overline{x},\overline{y})</m>,
+          as appropriate.
+          (All masses are in grams and distances are in cm.)
+        </p>
+      </introduction>
+
+      <exercise>
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>m_1=4</m> at <m>x=1</m>; <m>m_2=3</m> at <m>x=3</m>;
+                <m>m_3=5</m> at <m>x=10</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\overline{x}=5.25</m>
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+      <exercise>
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>m_1=2</m> at <m>x=-3</m>;
+                <m>m_2=2</m> at <m>x=-1</m>;
+              </p>
+
+              <p>
+                <m>m_3=3</m> at <m>x=0</m>;<m>m_4=3</m> at <m>x=7</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\overline{x}=1.3</m>
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+      <exercise>
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>m_1=2</m> at <m>(-2,-2)</m>;
+                <m>m_2=2</m> at <m>(2,-2)</m>;
+              </p>
+
+              <p>
+                <m>m_3=20</m> at <m>(0,4)</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>(\overline{x},\overline{y}) = (0,3)</m>
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+      <exercise>
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>m_1=1</m> at <m>(-1,-1)</m>;
+                <m>m_2=2</m> at <m>(-1,1)</m>;
+              </p>
+
+              <p>
+                <m>m_3=2</m> at <m>(1,1)</m>;<m>m_4=1</m> at <m>(1,-1)</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>(\overline{x},\overline{y}) = (0,1/3)</m>
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
+        <p>
+          In the following exercises,
+          find the mass/weight of the lamina described by the region <m>R</m> in the plane and its density function <m>\delta(x,y)</m>.
+        </p>
+      </introduction>
+
+      <exercise xml:id="x13_04_ex_11">
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>R</m> is the rectangle with corners <m>(1,-3)</m>, <m>(1,2)</m>,
+                <m>(7,2)</m> and <m>(7,-3)</m>;
+                <m>\delta(x,y) = 5</m>gm/cm<m>^2</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>M = 150</m>gm;
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+      <exercise>
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>R</m> is the rectangle with corners <m>(1,-3)</m>, <m>(1,2)</m>,
+                <m>(7,2)</m> and <m>(7,-3)</m>;
+                <m>\delta(x,y) = (x+y^2)</m>gm/cm<m>^2</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>M = 190</m>gm
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+      <exercise>
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>R</m> is the triangle with corners <m>(-1,0)</m>,
+                <m>(1,0)</m>, and <m>(0,1)</m>;
+                <m>\delta(x,y) = 2</m>lb/in<m>^2</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>M = 2</m>lb
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+      <exercise>
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>R</m> is the triangle with corners <m>(0,0)</m>,
+                <m>(1,0)</m>, and <m>(0,1)</m>;
+                <m>\delta(x,y) = (x^2+y^2+1)</m>lb/in<m>^2</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>M = 2/3</m>lb
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+      <exercise>
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>R</m> is the disk centered at the origin with radius 2;
+                <m>\delta(x,y) = (x+y+4)</m>kg/m<m>^2</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>M = 16\pi\approx 50.27</m>kg
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+      <exercise>
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>R</m> is the circle sector bounded by
+                <m>x^2+y^2=25</m> in the first quadrant;
+                <m>\delta(x,y) = (\sqrt{x^2+y^2}+1)</m>kg/m<m>^2</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>M = 325\pi/12\approx 85</m>kg
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+      <exercise>
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>R</m> is the annulus in the first and second quadrants bounded by
+                <m>x^2+y^2=9</m> and <m>x^2+y^2=36</m>;
+                <m>\delta(x,y) = 4</m>lb/ft<m>^2</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>M = 54\pi\approx 169.65</m>lb
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+      <exercise xml:id="x13_04_ex_18">
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>R</m> is the annulus in the first and second quadrants bounded by
+                <m>x^2+y^2=9</m> and <m>x^2+y^2=36</m>;
+                <m>\delta(x,y) = \sqrt{x^2+y^2}</m>lb/ft<m>^2</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>M = 63\pi\approx 197.92</m>lb
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
+        <p>
+          In the following exercises,
+          find the center of mass of the lamina described by the region <m>R</m> in the plane and its density function <m>\delta(x,y)</m>.
+        </p>
+
+      <p>
+          Note: these are the same lamina as in <xref ref="x13_04_ex_11">Exercises</xref>
+          <mdash/> <xref ref="x13_04_ex_18"/>.
+        </p>
+      </introduction>
+
+      <exercise xml:id="ex_13_04_ex_11">
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>R</m> is the rectangle with corners <m>(1,-3)</m>, <m>(1,2)</m>,
+                <m>(7,2)</m> and <m>(7,-3)</m>;
+                <m>\delta(x,y) = 5</m>gm/cm<m>^2</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>M = 150</m>gm; <m>M_y=600</m>; <m>M_x=-75</m>;
+                <m>(\overline{x},\overline{y}) = (4,-0.5)</m>
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+      <exercise>
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>R</m> is the rectangle with corners <m>(1,-3)</m>, <m>(1,2)</m>,
+                <m>(7,2)</m> and <m>(7,-3)</m>;
+                <m>\delta(x,y) = (x+y^2)</m>gm/cm<m>^2</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>M = 190</m>gm; <m>M_y= 850</m>; <m>M_x = -315/2</m>;
+                <m>(\overline{x},\overline{y}) = (4.47,-0.83)</m>
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+      <exercise>
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>R</m> is the triangle with corners <m>(-1,0)</m>,
+                <m>(1,0)</m>, and <m>(0,1)</m>;
+                <m>\delta(x,y) = 2</m>lb/in<m>^2</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>M = 2</m>lb; <m>M_y= 0</m>; <m>M_x = 2/3</m>;
+                <m>(\overline{x},\overline{y}) = (0,1/3)</m>
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+      <exercise>
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>R</m> is the triangle with corners <m>(0,0)</m>,
+                <m>(1,0)</m>, and <m>(0,1)</m>;
+                <m>\delta(x,y) = (x^2+y^2+1)</m>lb/in<m>^2</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>M = 2/3</m>lb; <m>M_y= 7/30</m>; <m>M_x = 7/30</m>;
+                <m>(\overline{x},\overline{y}) = (0.35,0.35)</m>
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+      <exercise>
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>R</m> is the disk centered at the origin with radius 2;
+                <m>\delta(x,y) = (x+y+4)</m>kg/m<m>^2</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>M = 16\pi\approx 50.27</m>kg;
+                <m>M_y= 4\pi</m>; <m>M_x = 4\pi</m>;
+                <m>(\overline{x},\overline{y}) = (1/4,1/4)</m>
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+      <exercise>
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>R</m> is the circle sector bounded by
+                <m>x^2+y^2=25</m> in the first quadrant;
+                <m>\delta(x,y) = (\sqrt{x^2+y^2}+1)</m>kg/m<m>^2</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>M = 325\pi/12\approx 85</m>kg; <m>M_y= 2375/12</m>;
+                <m>M_x = 2375/12</m>;
+                <m>(\overline{x},\overline{y}) = (2.33,2.33)</m>
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+      <exercise>
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>R</m> is the annulus in the first and second quadrants bounded by
+                <m>x^2+y^2=9</m> and <m>x^2+y^2=36</m>;
+                <m>\delta(x,y) = 4</m>lb/ft<m>^2</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>M = 54\pi\approx 169.65</m>lb;
+                <m>M_y= 0</m>; <m>M_x = 504</m>;
+                <m>(\overline{x},\overline{y}) = (0,2.97)</m>
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+      <exercise>
+        <!--<webwork>
+            <setup>
+
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>R</m> is the annulus in the first and second quadrants bounded by
+                <m>x^2+y^2=9</m> and <m>x^2+y^2=36</m>;
+                <m>\delta(x,y) = \sqrt{x^2+y^2}</m>lb/ft<m>^2</m>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>M = 63\pi\approx 197.92</m>lb;
+                <m>M_y= 0</m>; <m>M_x = 1215/2</m>;
+                <m>(\overline{x},\overline{y}) = (0,3.07)</m>
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
+
+    </exercisegroup>
+    <exercisegroup>
+
+      <introduction>
+        <p>
+          <em>The moment of inertia</em>
+          <m>I</m> is a measure of the tendency of a lamina to resist rotating about an axis or continue to rotate about an axis.
+          <m>I_x</m> is the moment of inertia about the <m>x</m>-axis,
+          <m>I_y</m> is the moment of inertia about the <m>y</m>-axis,
+          and <m>I_O</m> is the moment of inertia about the origin.
+          These are computed as follows:
         </p>
 
         <p>
-          <m>m_3=3</m> at <m>x=0</m>;<m>m_4=3</m> at <m>x=7</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\overline{x}=1.3</m>
-        </p>
-      </answer>
-    </exercise>
+          <ul>
+            <li><m>I_x = \iint_R y^2\, dm</m></li>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>m_1=2</m> at <m>(-2,-2)</m>;
-          <m>m_2=2</m> at <m>(2,-2)</m>;
+            <li><m>I_y = \iint_R x^2\, dm</m></li>
+
+            <li><m>I_O = \iint_R \big(x^2+y^2\big)\, dm</m></li>
+          </ul>
         </p>
 
         <p>
-          <m>m_3=20</m> at <m>(0,4)</m>
+          In the following exercises,
+          a lamina corresponding to a planar region <m>R</m> is given with a mass of 16 units.
+          For each, compute <m>I_x</m>,
+          <m>I_y</m> and <m>I_O</m>.
         </p>
-      </statement>
-      <answer>
-        <p>
-          <m>(\overline{x},\overline{y}) = (0,3)</m>
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>m_1=1</m> at <m>(-1,-1)</m>;
-          <m>m_2=2</m> at <m>(-1,1)</m>;
-        </p>
+      <exercise>
+        <!--<webwork>
+            <setup>
 
-        <p>
-          <m>m_3=2</m> at <m>(1,1)</m>;<m>m_4=1</m> at <m>(1,-1)</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>(\overline{x},\overline{y}) = (0,1/3)</m>
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>R</m> is the <m>4\times 4</m> square with corners at <m>(-2,-2)</m> and <m>(2,2)</m> with density <m>\delta(x,y) = 1</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>I_x = 64/3</m>; <m>I_y = 64/3</m>; <m>I_O = 128/3</m>
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
 
-    <p>
-      In the following exercises,
-      find the mass/weight of the lamina described by the region <m>R</m> in the plane and its density function <m>\delta(x,y)</m>.
-    </p>
+      <exercise>
+        <!--<webwork>
+            <setup>
 
-    <exercise xml:id="x13_04_ex_11">
-      <statement>
-        <p>
-          <m>R</m> is the rectangle with corners <m>(1,-3)</m>, <m>(1,2)</m>,
-          <m>(7,2)</m> and <m>(7,-3)</m>;
-          <m>\delta(x,y) = 5</m>gm/cm<m>^2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>M = 150</m>gm;
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>R</m> is the <m>8\times 2</m> rectangle with corners at <m>(-4,-1)</m> and <m>(4,1)</m> with density <m>\delta(x,y) = 1</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>I_x = 16/3</m>; <m>I_y = 256/3</m>; <m>I_O = 272/3</m>
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>R</m> is the rectangle with corners <m>(1,-3)</m>, <m>(1,2)</m>,
-          <m>(7,2)</m> and <m>(7,-3)</m>;
-          <m>\delta(x,y) = (x+y^2)</m>gm/cm<m>^2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>M = 190</m>gm
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <!--<webwork>
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>R</m> is the triangle with corners <m>(-1,0)</m>,
-          <m>(1,0)</m>, and <m>(0,1)</m>;
-          <m>\delta(x,y) = 2</m>lb/in<m>^2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>M = 2</m>lb
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>R</m> is the <m>4\times 2</m> rectangle with corners at <m>(-2,-1)</m> and <m>(2,1)</m> with density <m>\delta(x,y) = 2</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>I_x = 16/3</m>; <m>I_y = 64/3</m>; <m>I_O = 80/3</m>
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>R</m> is the triangle with corners <m>(0,0)</m>,
-          <m>(1,0)</m>, and <m>(0,1)</m>;
-          <m>\delta(x,y) = (x^2+y^2+1)</m>lb/in<m>^2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>M = 2/3</m>lb
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <!--<webwork>
+            <setup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>R</m> is the disk centered at the origin with radius 2;
-          <m>\delta(x,y) = (x+y+4)</m>kg/m<m>^2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>M = 16\pi\approx 50.27</m>kg
-        </p>
-      </answer>
-    </exercise>
+            <pg-code>
+            </pg-code>
+            </setup>-->
+            <statement>
+              <p>
+                <m>R</m> is the disk with radius 2 centered at the origin with density <m>\delta(x,y) = 4/\pi</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>I_x = 16</m>; <m>I_y = 16</m>; <m>I_O = 32</m>
+              </p>
+            </solution>
+        <!--</webwork>-->
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>R</m> is the circle sector bounded by
-          <m>x^2+y^2=25</m> in the first quadrant;
-          <m>\delta(x,y) = (\sqrt{x^2+y^2}+1)</m>kg/m<m>^2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>M = 325\pi/12\approx 85</m>kg
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>R</m> is the annulus in the first and second quadrants bounded by
-          <m>x^2+y^2=9</m> and <m>x^2+y^2=36</m>;
-          <m>\delta(x,y) = 4</m>lb/ft<m>^2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>M = 54\pi\approx 169.65</m>lb
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise xml:id="x13_04_ex_18">
-      <statement>
-        <p>
-          <m>R</m> is the annulus in the first and second quadrants bounded by
-          <m>x^2+y^2=9</m> and <m>x^2+y^2=36</m>;
-          <m>\delta(x,y) = \sqrt{x^2+y^2}</m>lb/ft<m>^2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>M = 63\pi\approx 197.92</m>lb
-        </p>
-      </answer>
-    </exercise>
-
-    <p>
-      In the following exercises,
-      find the center of mass of the lamina described by the region <m>R</m> in the plane and its density function <m>\delta(x,y)</m>.
-    </p>
-
-    <p>
-      Note: these are the same lamina as in <xref ref="x13_04_ex_11">Exercises</xref>
-      <mdash /> <xref ref="x13_04_ex_18"></xref>.
-    </p>
-
-    <exercise xml:id="ex_13_04_ex_11">
-      <statement>
-        <p>
-          <m>R</m> is the rectangle with corners <m>(1,-3)</m>, <m>(1,2)</m>,
-          <m>(7,2)</m> and <m>(7,-3)</m>;
-          <m>\delta(x,y) = 5</m>gm/cm<m>^2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>M = 150</m>gm; <m>M_y=600</m>; <m>M_x=-75</m>;
-          <m>(\overline{x},\overline{y}) = (4,-0.5)</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>R</m> is the rectangle with corners <m>(1,-3)</m>, <m>(1,2)</m>,
-          <m>(7,2)</m> and <m>(7,-3)</m>;
-          <m>\delta(x,y) = (x+y^2)</m>gm/cm<m>^2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>M = 190</m>gm; <m>M_y= 850</m>; <m>M_x = -315/2</m>;
-          <m>(\overline{x},\overline{y}) = (4.47,-0.83)</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>R</m> is the triangle with corners <m>(-1,0)</m>,
-          <m>(1,0)</m>, and <m>(0,1)</m>;
-          <m>\delta(x,y) = 2</m>lb/in<m>^2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>M = 2</m>lb; <m>M_y= 0</m>; <m>M_x = 2/3</m>;
-          <m>(\overline{x},\overline{y}) = (0,1/3)</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>R</m> is the triangle with corners <m>(0,0)</m>,
-          <m>(1,0)</m>, and <m>(0,1)</m>;
-          <m>\delta(x,y) = (x^2+y^2+1)</m>lb/in<m>^2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>M = 2/3</m>lb; <m>M_y= 7/30</m>; <m>M_x = 7/30</m>;
-          <m>(\overline{x},\overline{y}) = (0.35,0.35)</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>R</m> is the disk centered at the origin with radius 2;
-          <m>\delta(x,y) = (x+y+4)</m>kg/m<m>^2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>M = 16\pi\approx 50.27</m>kg;
-          <m>M_y= 4\pi</m>; <m>M_x = 4\pi</m>;
-          <m>(\overline{x},\overline{y}) = (1/4,1/4)</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>R</m> is the circle sector bounded by
-          <m>x^2+y^2=25</m> in the first quadrant;
-          <m>\delta(x,y) = (\sqrt{x^2+y^2}+1)</m>kg/m<m>^2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>M = 325\pi/12\approx 85</m>kg; <m>M_y= 2375/12</m>;
-          <m>M_x = 2375/12</m>;
-          <m>(\overline{x},\overline{y}) = (2.33,2.33)</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>R</m> is the annulus in the first and second quadrants bounded by
-          <m>x^2+y^2=9</m> and <m>x^2+y^2=36</m>;
-          <m>\delta(x,y) = 4</m>lb/ft<m>^2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>M = 54\pi\approx 169.65</m>lb;
-          <m>M_y= 0</m>; <m>M_x = 504</m>;
-          <m>(\overline{x},\overline{y}) = (0,2.97)</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>R</m> is the annulus in the first and second quadrants bounded by
-          <m>x^2+y^2=9</m> and <m>x^2+y^2=36</m>;
-          <m>\delta(x,y) = \sqrt{x^2+y^2}</m>lb/ft<m>^2</m>
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>M = 63\pi\approx 197.92</m>lb;
-          <m>M_y= 0</m>; <m>M_x = 1215/2</m>;
-          <m>(\overline{x},\overline{y}) = (0,3.07)</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <p>
-      {The <em>moment of inertia</em>
-      <m>I</m> is a measure of the tendency of a lamina to resist rotating about an axis or continue to rotate about an axis.
-      <m>I_x</m> is the moment of inertia about the <m>x</m>-axis,
-      <m>I_y</m> is the moment of inertia about the <m>x</m>-axis,
-      and <m>I_O</m> is the moment of inertia about the origin.
-      These are computed as follows:
-
-      <ul>
-        <li>
-          <p>
-            <m>\ds I_x = \iint_R y^2\, dm</m>
-          </p>
-        </li>
-
-        <li>
-          <p>
-            <m>\ds I_y = \iint_R x^2\, dm</m>
-          </p>
-        </li>
-
-        <li>
-          <p>
-            <m>\ds I_O = \iint_R \big(x^2+y^2\big)\, dm</m>
-          </p>
-        </li>
-      </ul>
-    </p>
-
-    <p>
-      In Exercises} {, a lamina corresponding to a planar region <m>R</m> is given with a mass of 16 units.
-      For each, compute <m>I_x</m>,
-      <m>I_y</m> and <m>I_O</m>. }
-    </p>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>R</m> is the <m>4\times 4</m> square with corners at <m>(-2,-2)</m> and <m>(2,2)</m> with density <m>\delta(x,y) = 1</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>I_x = 64/3</m>; <m>I_y = 64/3</m>; <m>I_O = 128/3</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>R</m> is the <m>8\times 2</m> rectangle with corners at <m>(-4,-1)</m> and <m>(4,1)</m> with density <m>\delta(x,y) = 1</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>I_x = 16/3</m>; <m>I_y = 256/3</m>; <m>I_O = 272/3</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>R</m> is the <m>4\times 2</m> rectangle with corners at <m>(-2,-1)</m> and <m>(2,1)</m> with density <m>\delta(x,y) = 2</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>I_x = 16/3</m>; <m>I_y = 64/3</m>; <m>I_O = 80/3</m>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>R</m> is the disk with radius 2 centered at the origin with density <m>\delta(x,y) = 4/\pi</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>I_x = 16</m>; <m>I_y = 16</m>; <m>I_O = 32</m>
-        </p>
-      </answer>
-    </exercise>
-  </subsection>
+    </exercisegroup>
+  </exercises>
 </section>
-
