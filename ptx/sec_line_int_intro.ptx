@@ -1,5 +1,4 @@
-
-
+<?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="sec_line_int_intro">
   <title>Introduction to Line Integrals</title>
   <introduction>
@@ -10,7 +9,7 @@
     </p>
 
     <p>
-      Consider the surface and curve shown in <xref ref="fig_lineint0">Figure</xref>(a).
+      Consider the surface and curve shown in <xref ref="fig_line_integral_intro1a_3D">Figure</xref>.
       The surface is given by <m>f(x,y)=1-\cos(x)\sin(y)</m>.
       The dashed curve lies in the <m>x</m>-<m>y</m> plane and is the familiar <m>y=x^2</m> parabola from <m>-1\leq x\leq1</m>;
       we'll call this curve <m>C</m>.
@@ -22,7 +21,7 @@
       what is the area that lies below the curve drawn with the solid line?
       In other words,
       what is the area of the region above <m>C</m> and under the the surface <m>f</m>?
-      This region is shown in <xref ref="fig_lineint0">Figure</xref>(b).
+      This region is shown in <xref ref="fig_line_integral_intro1b_3D">Figure</xref>.
     </p>
 
     <p>
@@ -31,50 +30,297 @@
       let us first try to approximate its value.
     </p>
 
-    <figure xml:id="fig_lineint0">
+    <figure xml:id="fig_line_integral_intro1">
       <caption>Finding area under a curve in space.</caption>
       <sidebyside>
-        <figure>
-          <caption>(a)</caption>
-          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+        <figure xml:id="fig_line_integral_intro1a_3D">
+          <caption/>
+          <!-- \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
           3Droll=0,
           3Dortho=0.005003686994314194,
           3Dc2c=0.29708048701286316 0.8962657451629639 0.329318642616272,
           3Dcoo=28.221464157104492 62.0896110534668 72.89360809326172,
           3Droo=149.99999640034895,
-          3Dlights=Headlamp,add3Djscript=asylabels.js}
-          <img src="figures/figline_integral_intro1_3D"/>
+          3Dlights=Headlamp,add3Djscript=asylabels.js} -->
+          <image xml:id="img_line_integral_intro1a_3D">
+            <description></description>
+            <asymptote>
+
+              import graph3;
+
+              //ASY file for fig10_01_ex_233D.asy in Chapter 10
+
+              size(200,200,IgnoreAspect);
+              //currentprojection=perspective(7,2,1);
+              currentprojection=orthographic(1.17,4.69,2.35);
+              //currentprojection=orthographic(2.5,4.6,1.9);
+              defaultrender.merge=true;
+
+              // setup and draw the axes
+              real[] myxchoice={-1,1};
+              real[] myychoice={1};
+              real[] myzchoice={1,2};
+              defaultpen(0.5mm);
+              pair xbounds=(-1.5,1.5);
+              pair ybounds=(-.2,1.5);
+              pair zbounds=(-.1,1.5);
+
+              xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+              yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+              zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+              label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+              //Draw the surface z=x^2-y^2+1
+              triple f(pair t) {
+                return (t.x,t.y,-sin(t.y)*cos(t.x)+1);
+              }
+              surface s=surface(f,(-1,-.1),(1,1),16,16,usplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              ,vsplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              );
+              pen p=rgb(0,0,.7);
+              draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+              triple g(real t) {return (t,t^2,-cos(t)*sin(t^2)+1);}
+              path3 mypath=graph(g,-1,1,operator ..);
+              draw(mypath,blue+linewidth(2));
+
+              triple g(real t) {return (t,t^2,0);}
+              path3 mypath=graph(g,-1,1,operator ..);
+              draw(mypath,blue+linewidth(2)+dashed);
+
+              // ////////////////////////////////////
+              //    SAMPLE CODE
+
+              // defaultpen(fontsize(10pt));
+
+              //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+              //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+
+              //triple f(pair t) {
+              //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+              //}
+              //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+
+              //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+              //path3 mypath=graph(g,-1,1,operator ..);
+
+              //pen p=rgb(0,0,1);
+              //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+              //draw(s,paleblue);
+              //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+              //draw(mypath,2bp+blue);
+
+            </asymptote>
+          </image>
         </figure>
 
-        <figure>
-          <caption>(b)</caption>
-          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+        <figure xml:id="fig_line_integral_intro1b_3D">
+          <caption/>
+          <!-- \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
           3Droll=0,
           3Dortho=0.005003686994314194,
           3Dc2c=0.29708048701286316 0.8962657451629639 0.329318642616272,
           3Dcoo=28.221464157104492 62.0896110534668 72.89360809326172,
           3Droo=149.99999640034895,
-          3Dlights=Headlamp,add3Djscript=asylabels.js}
-          <img src="figures/figline_integral_intro1b_3D"/>
+          3Dlights=Headlamp,add3Djscript=asylabels.js} -->
+          <image xml:id="img_line_integral_intro1b_3D">
+            <description></description>
+            <asymptote>
+
+              import graph3;
+
+              //ASY file for fig10_01_ex_233D.asy in Chapter 10
+
+              size(200,200,IgnoreAspect);
+              //currentprojection=perspective(7,2,1);
+              currentprojection=orthographic(1.17,4.69,2.35);
+              defaultrender.merge=true;
+
+              // setup and draw the axes
+              real[] myxchoice={-1,1};
+              real[] myychoice={1};
+              real[] myzchoice={1,2};
+              defaultpen(0.5mm);
+              pair xbounds=(-1.5,1.5);
+              pair ybounds=(-.2,1.5);
+              pair zbounds=(-.1,1.5);
+
+              xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+              yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+              zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+              label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+              //Draw the surface z=x^2-y^2+1
+              triple f(pair t) {
+                return (t.x,t.x^2,t.y*(-sin(t.x^2)*cos(t.x)+1));
+              }
+              surface s=surface(f,(-1,0),(1,1),16,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              ,vsplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              );
+              pen p=rgb(0,0,.7);
+              draw(s,emissive(rgb(.6,.6,1)+opacity(.7)),meshpen=p);
+
+              triple g(real t) {return (t,t^2,-cos(t)*sin(t^2)+1);}
+              path3 mypath=graph(g,-1,1,operator ..);
+              draw(mypath,blue+linewidth(2));
+
+              triple g(real t) {return (t,t^2,0);}
+              path3 mypath=graph(g,-1,1,operator ..);
+              draw(mypath,blue+linewidth(2)+dashed);
+
+              // ////////////////////////////////////
+              //    SAMPLE CODE
+
+              // defaultpen(fontsize(10pt));
+
+              //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+              //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+
+              //triple f(pair t) {
+              //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+              //}
+              //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+
+              //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+              //path3 mypath=graph(g,-1,1,operator ..);
+
+              //pen p=rgb(0,0,1);
+              //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+              //draw(s,paleblue);
+              //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+              //draw(mypath,2bp+blue);
+
+            </asymptote>
+          </image>
         </figure>
 
-        <figure>
-          <caption>(c)</caption>
-          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+        <figure xml:id="fig_line_integral_intro1c_3D">
+          <caption/>
+          <!-- \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
           3Droll=0,
           3Dortho=0.005003686994314194,
           3Dc2c=0.29708048701286316 0.8962657451629639 0.329318642616272,
           3Dcoo=28.221464157104492 62.0896110534668 72.89360809326172,
           3Droo=149.99999640034895,
-          3Dlights=Headlamp,add3Djscript=asylabels.js}
-          <img src="figures/figline_integral_intro1c_3D"/>
+          3Dlights=Headlamp,add3Djscript=asylabels.js} -->
+          <image xml:id="img_line_integral_intro1c_3D">
+            <description></description>
+            <asymptote>
+
+              import graph3;
+
+              //ASY file for fig10_01_ex_233D.asy in Chapter 10
+
+              size(200,200,IgnoreAspect);
+              //currentprojection=perspective(7,2,1);
+              currentprojection=orthographic(1.17,4.69,2.35);
+              defaultrender.merge=true;
+
+              // setup and draw the axes
+              real[] myxchoice={-1,1};
+              real[] myychoice={1};
+              real[] myzchoice={1,2};
+              defaultpen(0.5mm);
+              pair xbounds=(-1.5,1.5);
+              pair ybounds=(-.2,1.5);
+              pair zbounds=(-.1,1.5);
+
+              xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+              yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+              zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+              label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+              //Draw the surface z=x^2-y^2+1
+              triple f1(pair t) {
+                return (t.x,-.75/.5*(t.x+1)+1,t.y*(.664));
+              }
+              surface s1=surface(f1,(-1,0),(-.5,1),1,1,usplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              ,vsplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              );
+              pen p=red+linewidth(1);
+              draw(s1,emissive(rgb(1,.6,.6)+opacity(.8)),meshpen=p);
+
+              //Draw the surface z=x^2-y^2+1
+              triple f2(pair t) {
+                return (t.x,-.5*(t.x+.5)+.25,t.y*(.89));
+              }
+              surface s2=surface(f2,(-.5,0),(0,1),1,1,usplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              ,vsplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              );
+              pen p=red+linewidth(1);
+              draw(s2,emissive(rgb(1,.6,.6)+opacity(.8)),meshpen=p);
+
+              //Draw the surface z=x^2-y^2+1
+              triple f3(pair t) {
+                return (t.x,.5*(t.x-.5)+.25,t.y*(.89));
+              }
+              surface s3=surface(f3,(0,0),(.5,1),1,1,usplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              ,vsplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              );
+              pen p=red+linewidth(1);
+              draw(s3,emissive(rgb(1,.6,.6)+opacity(.8)),meshpen=p);
+
+              //Draw the surface z=x^2-y^2+1
+              triple f4(pair t) {
+                return (t.x,.75/.5*(t.x-1)+1,t.y*(.664));
+              }
+              surface s4=surface(f4,(.5,0),(1,1),1,1,usplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              ,vsplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              );
+              pen p=red+linewidth(1);
+              draw(s4,emissive(rgb(1,.6,.6)+opacity(.8)),meshpen=p);
+
+              triple g(real t) {return (t,t^2,-cos(t)*sin(t^2)+1);}
+              path3 mypath=graph(g,-1,1,operator ..);
+              draw(mypath,blue+linewidth(2));
+
+              triple g(real t) {return (t,t^2,0);}
+              path3 mypath=graph(g,-1,1,operator ..);
+              draw(mypath,blue+linewidth(2)+dashed);
+
+              // ////////////////////////////////////
+              //    SAMPLE CODE
+
+              // defaultpen(fontsize(10pt));
+
+              //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+              //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+
+              //triple f(pair t) {
+              //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+              //}
+              //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+
+              //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+              //path3 mypath=graph(g,-1,1,operator ..);
+
+              //pen p=rgb(0,0,1);
+              //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+              //draw(s,paleblue);
+              //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+              //draw(mypath,2bp+blue);
+
+            </asymptote>
+          </image>
         </figure>
       </sidebyside>
 
     </figure>
 
     <p>
-      In <xref ref="fig_lineint0">Figure</xref>(c),
+      In <xref ref="fig_line_integral_intro1c_3D">Figure</xref>,
       four rectangles have been drawn over the curve <m>C</m>.
       The bottom corners of each rectangle lie on <m>C</m>,
       and each rectangle has a height given by the function <m>f(x,y)</m> for some <m>(x,y)</m> pair along <m>C</m> between the rectangle's bottom corners.
@@ -94,7 +340,7 @@
       our approximation can be improved by using more rectangles.
       The sum of the areas of these rectangles gives an approximate value of the true area above <m>C</m> and under <m>f</m>.
       As the area of each rectangle is
-      <q>height <times /> width</q>, we assert that the
+      <q>height <times/> width</q>, we assert that the
       <me>
         \text{ area above \(C\) } \approx \sum (\text{ heights } \times\text{ widths } )
       </me>.
@@ -102,12 +348,12 @@
 
     <p>
       When first learning of the integral,
-      and approximating areas with <q>heights <times /> widths</q>,
+      and approximating areas with <q>heights <times/> widths</q>,
       the width was a small change in <m>x</m>: <m>dx</m>.
       That will not suffice in this context.
       Rather, each width of a rectangle is actually approximating the arc length of a small portion of <m>C</m>.
       In <xref ref="sec_curvature">Section</xref>,
-      we used <m>s</m> to represent the arc<ndash />length parameter of a curve.
+      we used <m>s</m> to represent the arc<ndash/>length parameter of a curve.
       A small amount of arc length will thus be represented by <m>ds</m>.
     </p>
 
@@ -135,7 +381,7 @@
       we interpret <q><m>\int_C f(s)\, ds</m></q>
       as meaning <q>sum up, along a curve <m>C</m>,
       function values <m>f(s)\times</m>small arc lengths.</q>
-      It is understood here that <m>s</m> represents the arc<ndash />length parameter.
+      It is understood here that <m>s</m> represents the arc<ndash/>length parameter.
     </p>
 
     <p>
@@ -155,7 +401,7 @@
       <statement>
         <p>
           Let <m>C</m> be a smooth curve parametrized by <m>s</m>,
-          the arc<ndash />length parameter,
+          the arc<ndash/>length parameter,
           and let <m>f</m> be a continuous function of <m>s</m>.
           A <term>line integral</term> is an integral of the form
           <me>
@@ -196,7 +442,7 @@
 
     <p>
       This definition of the line integral doesn't really say anything new.
-      If <m>C</m> is a curve and <m>s</m> is the arc<ndash />length parameter of <m>C</m> on <m>a\leq s\leq b</m>, then
+      If <m>C</m> is a curve and <m>s</m> is the arc<ndash/>length parameter of <m>C</m> on <m>a\leq s\leq b</m>, then
       <me>
         \int_Cf(s)\, ds = \int_a^bf(s)\, ds
       </me>.
@@ -208,10 +454,10 @@
       we used in the past is that of context.
       Our previous integrals naturally summed up values over an interval on the <m>x</m>-axis,
       whereas now we are summing up values over a curve.
-      <em>If</em> we can parametrize the curve with the arc<ndash />length parameter,
+      <em>If</em> we can parametrize the curve with the arc<ndash/>length parameter,
       we can evaluate the line integral just as before.
       Unfortunately,
-      parametrizing a curve in terms of the arc<ndash />length parameter is usually very difficult,
+      parametrizing a curve in terms of the arc<ndash/>length parameter is usually very difficult,
       so we must develop a method of evaluating line integrals using a different parametrization.
     </p>
 
@@ -220,13 +466,13 @@
       <m>x = g(t)</m> and <m>y=h(t)</m>,
       for continuous functions <m>g</m> and <m>h</m>,
       where <m>a\leq t\leq b</m>.
-      We can represent this parametrization with a vector<ndash />valued function,
+      We can represent this parametrization with a vector<ndash/>valued function,
       <m>\vrt = \langle g(t),h(t)\rangle</m>.
     </p>
 
     <p>
       In <xref ref="sec_curvature">Section</xref>,
-      we defined the arc<ndash />length parameter in <xref ref="eq_vvfarc">Equation</xref> as
+      we defined the arc<ndash/>length parameter in <xref ref="eq_vvfarc">Equation</xref> as
       <me>
         s(t) = \int_0^t \norm{\vec r\,'(u)}\, du
       </me>.
@@ -249,43 +495,45 @@
 
     <p>
       We restate this as a theorem,
-      along with its three<ndash />dimensional analogue,
+      along with its three<ndash/>dimensional analogue,
       followed by an example where we finally evaluate an integral and find an area.
     </p>
 
     <theorem xml:id="thm_line1">
       <title>Evaluating a Line Integral Over A Scalar Field</title>
       <statement>
-        <ul>
-          <li>
-            <p>
-              Let <m>C</m> be a curve parametrized by <m>\vrt =\langle g(t),
-              h(t)\rangle</m>,
-              <m>a\leq t\leq b</m>,
-              where <m>g</m> and <m>h</m> are continuously differentiable,
-              and let <m>z=f(x,y)</m>, where <m>f</m> is continuous over <m>C</m>.
-              Then<idx><h>line integral</h><h>over scalar field</h></idx>
-              <me>
-                \int_Cf(s)\, ds = \int_a^bf\big(g(t),h(t)\big)\norm{\vec r\,'(t)}\, dt
-              </me>.
-            </p>
-          </li>
+        <p>
+          <ul>
+            <li>
+              <p>
+                Let <m>C</m> be a curve parametrized by <m>\vrt =\langle g(t),
+                h(t)\rangle</m>,
+                <m>a\leq t\leq b</m>,
+                where <m>g</m> and <m>h</m> are continuously differentiable,
+                and let <m>z=f(x,y)</m>, where <m>f</m> is continuous over <m>C</m>.
+                Then<idx><h>line integral</h><h>over scalar field</h></idx>
+                <me>
+                  \int_Cf(s)\, ds = \int_a^bf\big(g(t),h(t)\big)\norm{\vec r\,'(t)}\, dt
+                </me>.
+              </p>
+            </li>
 
-          <li>
-            <p>
-              Let <m>C</m> be a curve parametrized by
-              <m>\vrt =\langle g(t),
-              h(t),k(t)\rangle</m>, <m>a\leq t\leq b</m>,
-              where <m>g</m>,
-              <m>h</m> and <m>k</m> are continuously differentiable,
-              and let <m>w=f(x,y,z)</m>, where <m>f</m> is continuous over <m>C</m>.
-              Then
-              <me>
-                \int_Cf(s)\, ds = \int_a^bf\big(g(t),h(t),k(t)\big)\norm{\vec r\,'(t)}\, dt
-              </me>.
-            </p>
-          </li>
-        </ul>
+            <li>
+              <p>
+                Let <m>C</m> be a curve parametrized by
+                <m>\vrt =\langle g(t),
+                h(t),k(t)\rangle</m>, <m>a\leq t\leq b</m>,
+                where <m>g</m>,
+                <m>h</m> and <m>k</m> are continuously differentiable,
+                and let <m>w=f(x,y,z)</m>, where <m>f</m> is continuous over <m>C</m>.
+                Then
+                <me>
+                  \int_Cf(s)\, ds = \int_a^bf\big(g(t),h(t),k(t)\big)\norm{\vec r\,'(t)}\, dt
+                </me>.
+              </p>
+            </li>
+          </ul>
+        </p>
       </statement>
     </theorem>
 
@@ -313,7 +561,7 @@
       </statement>
       <solution>
         <p>
-          Our first step is to represent <m>C</m> with a vector<ndash />valued function.
+          Our first step is to represent <m>C</m> with a vector<ndash/>valued function.
           Since <m>C</m> is a simple line,
           and we have a explicit relationship between <m>y</m> and <m>x</m> (namely,
           that <m>y</m> is <m>2x+1</m>),
@@ -332,28 +580,181 @@
         <figure xml:id="fig_linescalarfield2">
           <caption>Finding area under a curve in <xref ref="ex_linescalarfield2">Example</xref>.</caption>
           <sidebyside>
-            <figure>
-              <caption>(a)</caption>
-              \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+            <figure xml:id="fig_linescalarfield2a_3D">
+              <caption/>
+              <!-- \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
               3Droll=0,
               3Dortho=0.004519370850175619,
               3Dc2c=0.7659074664115906 0.5764991044998169 0.28466543555259705,
               3Dcoo=36.11199951171875 39.69871139526367 85.62228393554688,
               3Droo=149.9999948024772,
-              3Dlights=Headlamp,add3Djscript=asylabels.js}
-              <img src="figures/figlinescalarfield2_3D"/>
+              3Dlights=Headlamp,add3Djscript=asylabels.js} -->
+              <image xml:id="img_linescalarfield2a_3D">
+                <description></description>
+                <asymptote>
+
+                  import graph3;
+
+                  // ASY file for figlinescalarfield2_3D.asy in Chapter 10
+                  // The surface is z=cos(x)+sin(y)+2; the path is the line
+                  // y=2x+1.
+                  // This draws the path, the curve in space, and the surface.
+
+                  size(200,200,IgnoreAspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(10,7.25,3.75);
+                  //(7.63,8.65,5);
+                  //currentprojection=orthographic(2.5,4.6,1.9);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={-1,3};
+                  real[] myychoice={-1,3};
+                  real[] myzchoice={3};
+                  defaultpen(0.5mm);
+                  pair xbounds=(-1.2,3.4);
+                  pair ybounds=(-1.2,3.4);
+                  pair zbounds=(-.1,3.5);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //Draw the surface z=cos(x)+sin(y)=2
+                  triple f(pair t) {
+                    return (t.x,t.y,-sin(t.y)+cos(t.x)+2);
+                  }
+                  surface s=surface(f,(-1,-1),(pi,pi),16,16,usplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+                  ,vsplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+                  );
+                  pen p=rgb(0,0,.7);
+                  draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+                  triple g(real t) {return (t,2*t+1,-sin(2t+1)+cos(t)+2);}
+                  path3 mypath=graph(g,-1,1,operator ..);
+                  draw(mypath,blue+linewidth(2));
+
+                  triple g(real t) {return (t,2*t+1,0);}
+                  path3 mypath=graph(g,-1,1,operator ..);
+                  draw(mypath,blue+linewidth(2)+dashed);
+
+                  // ////////////////////////////////////
+                  //    SAMPLE CODE
+
+                  // defaultpen(fontsize(10pt));
+
+                  //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+                  //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+
+                  //triple f(pair t) {
+                  //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+                  //}
+                  //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+
+                  //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+                  //path3 mypath=graph(g,-1,1,operator ..);
+
+                  //pen p=rgb(0,0,1);
+                  //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+                  //draw(s,paleblue);
+                  //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+                  //draw(mypath,2bp+blue);
+
+                </asymptote>
+              </image>
             </figure>
 
-            <figure>
-              <caption>(b)</caption>
-              \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+            <figure xml:id="fig_linescalarfield2b_3D">
+              <caption/>
+              <!-- \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
               3Droll=0,
               3Dortho=0.004519370850175619,
               3Dc2c=0.7659074664115906 0.5764991044998169 0.28466543555259705,
               3Dcoo=36.11199951171875 39.69871139526367 85.62228393554688,
               3Droo=149.9999948024772,
-              3Dlights=Headlamp,add3Djscript=asylabels.js}
-              <img src="figures/figlinescalarfield2b_3D"/>
+              3Dlights=Headlamp,add3Djscript=asylabels.js} -->
+              <image xml:id="img_linescalarfield2b_3D">
+                <description></description>
+                <asymptote>
+
+                  import graph3;
+
+                  // ASY file for figlinescalarfield2_3D.asy in Chapter 10
+                  // The surface is z=cos(x)+sin(y)=2; the path is the line
+                  // y=2x+1.
+                  // This draws the surface which we are finding the area of.
+
+                  size(200,200,IgnoreAspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(10,7.25,3.75);
+                  //currentprojection=orthographic(2.5,4.6,1.9);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={-1,3};
+                  real[] myychoice={-1,3};
+                  real[] myzchoice={3};
+                  defaultpen(0.5mm);
+                  pair xbounds=(-1.2,3.4);
+                  pair ybounds=(-1.2,3.4);
+                  pair zbounds=(-.1,3.5);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //Draw the surface z=cos(x)+sin(y)=2
+                  triple f(pair t) {
+                    return (t.x,2*t.x+1,t.y*(-sin(t.x*2+1)+cos(t.x)+2));
+                  }
+                  surface s=surface(f,(-1,0),(1,1),8,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+                  ,vsplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+                  );
+                  pen p=rgb(.1,.1,.7);
+                  draw(s,emissive(rgb(.6,.6,1)+opacity(.7)),meshpen=p);
+
+                  triple g(real t) {return (t,2*t+1,-sin(2t+1)+cos(t)+2);}
+                  path3 mypath=graph(g,-1,1,operator ..);
+                  draw(mypath,blue+linewidth(2));
+
+                  triple g(real t) {return (t,2*t+1,0);}
+                  path3 mypath=graph(g,-1,1,operator ..);
+                  draw(mypath,blue+linewidth(2)+dashed);
+
+                  // ////////////////////////////////////
+                  //    SAMPLE CODE
+
+                  // defaultpen(fontsize(10pt));
+
+                  //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+                  //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+
+                  //triple f(pair t) {
+                  //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+                  //}
+                  //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+
+                  //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+                  //path3 mypath=graph(g,-1,1,operator ..);
+
+                  //pen p=rgb(0,0,1);
+                  //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+                  //draw(s,paleblue);
+                  //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+                  //draw(mypath,2bp+blue);
+
+                </asymptote>
+              </image>
             </figure>
           </sidebyside>
 
@@ -394,28 +795,180 @@
         <figure xml:id="fig_linescalarfield3">
           <caption>Finding area under a curve in <xref ref="ex_linescalarfield3">Example</xref>.</caption>
           <sidebyside>
-            <figure>
-              <caption>(a)</caption>
-              \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+            <figure xml:id="fig_linescalarfield3a_3D">
+              <caption/>
+              <!-- \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
               3Droll=0,
               3Dortho=0.004519370850175619,
               3Dc2c=0.7659074664115906 0.5764991044998169 0.28466543555259705,
               3Dcoo=36.11199951171875 39.69871139526367 85.62228393554688,
               3Droo=149.9999948024772,
-              3Dlights=Headlamp,add3Djscript=asylabels.js}
-              <img src="figures/figlinescalarfield3_3D"/>
+              3Dlights=Headlamp,add3Djscript=asylabels.js} -->
+              <image xml:id="img_linescalarfield3a_3D">
+                <description></description>
+                <asymptote>
+
+                  import graph3;
+
+                  // ASY file for figlinescalarfield2_3D.asy in Chapter 10
+                  // The surface is z=x^2-y^2+3; the path is the unit circle.
+                  //
+                  // This draws the path, the curve in space, and the surface.
+
+                  size(200,200,IgnoreAspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(7.5,9,8);
+                  //(7.63,8.65,5);
+                  //currentprojection=orthographic(2.5,4.6,1.9);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={-1,1};
+                  real[] myychoice={-1,1};
+                  real[] myzchoice={4};
+                  defaultpen(0.5mm);
+                  pair xbounds=(-1.2,1.2);
+                  pair ybounds=(-1.2,1.2);
+                  pair zbounds=(-.1,4.5);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //Draw the surface z=x^2-y^2+3
+                  triple f(pair t) {
+                    return (t.x,t.y,t.x^2-t.y^2+3);
+                  }
+                  surface s=surface(f,(-1.1,-1.1),(1.1,1.1),16,16,usplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+                  ,vsplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+                  );
+                  pen p=rgb(0,0,.7);
+                  draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+                  triple g(real t) {return (cos(t),sin(t),cos(t)^2-sin(t)^2+3);}
+                  path3 mypath=graph(g,0,2pi,operator ..);
+                  draw(mypath,blue+linewidth(2));
+
+                  triple g(real t) {return (cos(t),sin(t),0);}
+                  path3 mypath=graph(g,0,2pi,operator ..);
+                  draw(mypath,blue+linewidth(2)+dashed);
+
+                  // ////////////////////////////////////
+                  //    SAMPLE CODE
+
+                  // defaultpen(fontsize(10pt));
+
+                  //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+                  //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+
+                  //triple f(pair t) {
+                  //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+                  //}
+                  //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+
+                  //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+                  //path3 mypath=graph(g,-1,1,operator ..);
+
+                  //pen p=rgb(0,0,1);
+                  //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+                  //draw(s,paleblue);
+                  //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+                  //draw(mypath,2bp+blue);
+
+                </asymptote>
+              </image>
             </figure>
 
-            <figure>
-              <caption>(b)</caption>
-              \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+            <figure xml:id="fig_linescalarfield3b_3D">
+              <caption/>
+              <!-- \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
               3Droll=0,
               3Dortho=0.004519370850175619,
               3Dc2c=0.7659074664115906 0.5764991044998169 0.28466543555259705,
               3Dcoo=36.11199951171875 39.69871139526367 85.62228393554688,
               3Droo=149.9999948024772,
-              3Dlights=Headlamp,add3Djscript=asylabels.js}
-              <img src="figures/figlinescalarfield3b_3D"/>
+              3Dlights=Headlamp,add3Djscript=asylabels.js} -->
+              <image xml:id="img_linescalarfield3b_3D">
+                <description></description>
+                <asymptote>
+
+                  import graph3;
+
+                  // ASY file for figlinescalarfield2_3D.asy in Chapter 10
+                  // The surface is z=x^2-y^2+3; the path is the unit circle.
+                  //
+                  // This draws the  surface of the area we seek.
+
+                  size(200,200,IgnoreAspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(7.5,9,8);
+                  //(7.63,8.65,5);
+                  //currentprojection=orthographic(2.5,4.6,1.9);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={-1,1};
+                  real[] myychoice={-1,1};
+                  real[] myzchoice={4};
+                  defaultpen(0.5mm);
+                  pair xbounds=(-1.2,1.2);
+                  pair ybounds=(-1.2,1.2);
+                  pair zbounds=(-.1,4.5);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //Draw the surface z=x^2-y^2+3
+                  triple f(pair t) {
+                    return (cos(t.x),sin(t.x),t.y*(cos(t.x)^2-sin(t.x)^2+3));
+                  }
+                  surface s=surface(f,(0,0),(2pi,1),16,8,Spline);
+                  pen p=rgb(0,0,.7);
+                  draw(s,emissive(rgb(.6,.6,1)+opacity(.7)),meshpen=p);
+
+                  triple g(real t) {return (cos(t),sin(t),cos(t)^2-sin(t)^2+3);}
+                  path3 mypath=graph(g,0,2pi,operator ..);
+                  draw(mypath,blue+linewidth(2));
+
+                  triple g(real t) {return (cos(t),sin(t),0);}
+                  path3 mypath=graph(g,0,2pi,operator ..);
+                  draw(mypath,blue+linewidth(2)+dashed);
+
+                  // ////////////////////////////////////
+                  //    SAMPLE CODE
+
+                  // defaultpen(fontsize(10pt));
+
+                  //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+                  //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+
+                  //triple f(pair t) {
+                  //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+                  //}
+                  //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+
+                  //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+                  //path3 mypath=graph(g,-1,1,operator ..);
+
+                  //pen p=rgb(0,0,1);
+                  //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+                  //draw(s,paleblue);
+                  //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+                  //draw(mypath,2bp+blue);
+
+                </asymptote>
+              </image>
             </figure>
           </sidebyside>
 
@@ -492,7 +1045,7 @@
         </p>
 
         <p>
-          We use the given vector-valued function \vec r(t)<nbsp />to determine the curve <m>C</m> in the <m>x</m>-<m>y</m> plane by simply using the first two components of \vec r(t):
+          We use the given vector-valued function \vec r(t)<nbsp/>to determine the curve <m>C</m> in the <m>x</m>-<m>y</m> plane by simply using the first two components of \vec r(t):
           <m>\vec c(t) = \langle \cos t,2\sin t\rangle</m>.
           Thus <m>ds = \norm{\vec c\,'(t)}\,dt = \sqrt{\sin^2t + 4\cos^2t}\,dt</m>.
         </p>
@@ -510,14 +1063,89 @@
 
         <figure xml:id="fig_linescalarfield4">
           <caption>Finding area under a curve in <xref ref="ex_linescalarfield4">Example</xref>.</caption>
-          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          <!-- \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
           3Droll=0,
           3Dortho=0.004994507879018784,
           3Dc2c=0.6830801963806152 0.5863659381866455 0.43540385365486145,
           3Dcoo=1.7807315587997437 0.9528753757476807 54.982017517089844,
           3Droo=141.8977232410902,
-          3Dlights=Headlamp,add3Djscript=asylabels.js}
-          <img src="figures/figlinescalarfield4_3D"/>
+          3Dlights=Headlamp,add3Djscript=asylabels.js} -->
+          <image xml:id="img_linescalarfield4_3D">
+            <description></description>
+            <asymptote>
+
+              import graph3;
+
+              // ASY file for figlinescalarfield2_3D.asy in Chapter 10
+              // The path is an elliptical helix ⟨ cos t, 2sin t, t/pi ⟩; no specific surface.
+              //
+              // This draws the  surface of the area we seek.
+
+              size(200,200,IgnoreAspect);
+              //currentprojection=perspective(7,2,1);
+              currentprojection=orthographic(9.8,10.4,5.5);
+              //(7.63,8.65,5);
+              //currentprojection=orthographic(2.5,4.6,1.9);
+              defaultrender.merge=true;
+
+              // setup and draw the axes
+              real[] myxchoice={-2,2};
+              real[] myychoice={-2,2};
+              real[] myzchoice={2};
+              defaultpen(0.5mm);
+              pair xbounds=(-2.2,2.2);
+              pair ybounds=(-2.2,2.2);
+              pair zbounds=(-.1,2.5);
+
+              xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+              yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+              zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+              label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+              //Draw the surface z=x^2-y^2+3
+              triple f(pair t) {
+                return (cos(t.x),2sin(t.x),t.y*(t.x/pi));
+              }
+              surface s=surface(f,(0,0),(2pi,1),16,4,Spline);
+              pen p=rgb(0,0,.7);
+              draw(s,emissive(rgb(.6,.6,1)+opacity(.7)),meshpen=p);
+
+              triple g(real t) {return (cos(t),2sin(t),t/pi);}
+              path3 mypath=graph(g,0,2pi,operator ..);
+              draw(mypath,blue+linewidth(2));
+
+              triple g(real t) {return (cos(t),2sin(t),0);}
+              path3 mypath=graph(g,0,2pi,operator ..);
+              draw(mypath,blue+linewidth(2)+dashed);
+
+              // ////////////////////////////////////
+              //    SAMPLE CODE
+
+              // defaultpen(fontsize(10pt));
+
+              //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+              //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+
+              //triple f(pair t) {
+              //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+              //}
+              //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+
+              //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+              //path3 mypath=graph(g,-1,1,operator ..);
+
+              //pen p=rgb(0,0,1);
+              //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+              //draw(s,paleblue);
+              //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+              //draw(mypath,2bp+blue);
+
+            </asymptote>
+          </image>
         </figure>
       </solution>
     </example>
@@ -545,7 +1173,7 @@
     <p>
       One property in particular of line integrals is worth noting.
       If <m>C</m> is a curve composed of subcurves <m>C_1</m> and <m>C_2</m>,
-      where they share only one point in common (see <xref ref="fig_line_int_prop">Figure</xref>(a)),
+      where they share only one point in common (see <xref ref="fig_line_int_propa">Figure</xref>,
       then the line integral over <m>C</m> is the sum of the line integrals over <m>C_1</m> and <m>C_2</m>:
       <me>
         \int_Cf(s)\, ds = \int_{C_1}f(s)\, ds+\int_{C_2}f(s)\, ds
@@ -555,14 +1183,58 @@
     <figure xml:id="fig_line_int_prop">
       <caption>Illustrating properties of line integrals.</caption>
       <sidebyside>
-        <figure>
-          <caption>(a)</caption>
-          <img src="figures/figline_integral_curve_a"/>
+        <figure xml:id="fig_line_int_propa">
+          <caption/>
+          <image xml:id="img_line_int_propa">
+            <description></description>
+            <latex-image>
+
+            \begin{tikzpicture}[&gt;=stealth]
+
+            \draw [thick,firstcolor] (0,1) arc [start angle=90,end angle=270,radius=1];
+            \draw [thick,firstcolor] (0,-1) parabola (1,1);
+
+            \filldraw (0,1) circle [radius=2pt] node [below] {$A$};
+            \filldraw (1,1) circle [radius=2pt] node [right] {$B$};
+            \filldraw (0,-1) circle [radius=2pt] node [above] {$D$};
+
+            \draw (-1,0) node [right] {$C_1$};
+            \draw (.5,-.5) node [right] {$C_2$};
+            \draw [thick,-&gt;,firstcolor] (-1,0) -- (-1,-.01);
+            \draw [thick,-&gt;,firstcolor] (.5,-.5) -- (.51,-.48);
+            \draw (-1,0) node {\phantom{M}};
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
         </figure>
 
-        <figure>
-          <caption>(b)</caption>
-          <img src="figures/figline_integral_curve_b"/>
+        <figure xml:id="fig_line_int_propb">
+          <caption/>
+          <image xml:id="img_line_int_propb">
+            <description></description>
+            <latex-image>
+
+            \begin{tikzpicture}[&gt;=stealth]
+
+            \draw [thick,firstcolor] (0,1) arc [start angle=90,end angle=270,radius=1];
+            \draw [thick,firstcolor] (0,-1) -- (1,1);
+
+            \filldraw (0,1) circle [radius=2pt] node [below] {$A$};
+            \filldraw (1,1) circle [radius=2pt] node [right] {$B$};
+            \filldraw (0,-1) circle [radius=2pt] node [above left] {$D$};
+
+            \draw (-1,0) node [right] {$C_1$};
+            \draw (.5,0) node [right] {$C_2$};
+            \draw [thick,-&gt;,firstcolor] (-1,0) -- (-1,-.01);
+            \draw [thick,-&gt;,firstcolor] (.5,0) -- (.51,.02);
+            \draw (-1,0) node {\phantom{M}};
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
         </figure>
       </sidebyside>
 
@@ -570,7 +1242,7 @@
 
     <p>
       This property allows us to evaluate line integrals over some curves <m>C</m> that are not smooth.
-      Note how in <xref ref="fig_line_int_prop">Figure</xref>(b) the curve is not smooth at <m>D</m>,
+      Note how in <xref ref="fig_line_int_propb">Figure</xref> the curve is not smooth at <m>D</m>,
       so by our definition of the line integral we cannot evaluate <m>\int_C f(s)ds</m>.
       However, one can evaluate line integrals over <m>C_1</m> and <m>C_2</m> and their sum will be the desired quantity.
     </p>
@@ -591,30 +1263,32 @@
     <theorem xml:id="thm_line_int_properties_scalar">
       <title>Properties of Line Integrals Over Scalar Fields</title>
       <statement>
-        <ol>
-          <li>
-            <p>
-              Let <m>C</m> be a smooth curve parametrized by the arc<ndash />length parameter <m>s</m>,
-              let <m>f</m> and <m>g</m> be continuous functions of <m>s</m>,
-              and let <m>k_1</m> and <m>k_2</m> be scalars.
-              Then <idx><h>line integral</h><h>properties over a scalar field</h></idx>
-              <me>
-                \ds \int_C\big(k_1f(s)+k_2g(s)\big)\, ds = k_1\int_Cf(s)\, ds +k_2\int_Cg(s)\, ds
-              </me>.
-            </p>
-          </li>
+        <p>
+          <ol>
+            <li>
+              <p>
+                Let <m>C</m> be a smooth curve parametrized by the arc<ndash/>length parameter <m>s</m>,
+                let <m>f</m> and <m>g</m> be continuous functions of <m>s</m>,
+                and let <m>k_1</m> and <m>k_2</m> be scalars.
+                Then <idx><h>line integral</h><h>properties over a scalar field</h></idx>
+                <me>
+                  \ds \int_C\big(k_1f(s)+k_2g(s)\big)\, ds = k_1\int_Cf(s)\, ds +k_2\int_Cg(s)\, ds
+                </me>.
+              </p>
+            </li>
 
-          <li>
-            <p>
-              Let <m>C</m> be piecewise smooth,
-              composed of smooth components <m>C_1</m> and <m>C_2</m>.
-              Then
-              <me>
-                \int_Cf(s)\, ds = \int_{C_1}f(s)\, ds + \int_{C_2}f(s)\, ds
-              </me>.
-            </p>
-          </li>
-        </ol>
+            <li>
+              <p>
+                Let <m>C</m> be piecewise smooth,
+                composed of smooth components <m>C_1</m> and <m>C_2</m>.
+                Then
+                <me>
+                  \int_Cf(s)\, ds = \int_{C_1}f(s)\, ds + \int_{C_2}f(s)\, ds
+                </me>.
+              </p>
+            </li>
+          </ol>
+        </p>
       </statement>
     </theorem>
   </subsection>
@@ -636,7 +1310,7 @@
       represent a thin wire with variable density <m>\delta(s)</m>.
       We can approximate the mass of the wire by dividing the wire (i.e., the curve) into small segments of length
       <m>\Delta s_i</m> and assume the density is constant across these small segments.
-      The mass of each segment is density of the segment <times /> its length;
+      The mass of each segment is density of the segment <times/> its length;
       by summing up the approximate mass of each segment we can approximate the total mass:
       <me>
         \text{ Total Mass of Wire }  = \sum \delta(s_i)\Delta s_i
@@ -725,14 +1399,89 @@
 
         <figure xml:id="fig_linescalarfield6">
           <caption>Finding the mass of a thin wire in <xref ref="ex_linescalarfield6">Example</xref>.</caption>
-          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          <!-- \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
           3Droll=0,
           3Dortho=0.0045836810022592545,
           3Dc2c=0.8566989302635193 -0.4622343182563782 0.22892449796199799,
           3Dcoo=85.21116638183594 55.206966400146484 50.90880584716797,
           3Droo=141.89772711774134,
-          3Dlights=Headlamp,add3Djscript=asylabels.js}
-          <img src="figures/figlinescalarfield6_3D"/>
+          3Dlights=Headlamp,add3Djscript=asylabels.js} -->
+          <image xml:id="img_linescalarfield6">
+            <description></description>
+            <asymptote>
+
+              import graph3;
+              import palette;
+
+              // ASY file for figlinescalarfield2_3D.asy in Chapter 10
+              // The path is an elliptical helix ⟨ cos t, 2sin t, t/pi ⟩; no specific surface.
+              //
+              // This draws the  surface of the area we seek.
+
+              size(200,200,IgnoreAspect);
+              //currentprojection=perspective(7,2,1);
+              currentprojection=orthographic(14.4,-6.86,4);
+              //(7.63,8.65,5);
+              //currentprojection=orthographic(2.5,4.6,1.9);
+              defaultrender.merge=true;
+
+              // setup and draw the axes
+              real[] myxchoice={2};
+              real[] myychoice={2};
+              real[] myzchoice={2};
+              defaultpen(0.5mm);
+              pair xbounds=(-.2,2.5);
+              pair ybounds=(-.2,2.5);
+              pair zbounds=(-.1,2.1);
+
+              xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+              yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+              zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+              label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+              real r(real t) {return 3exp(-0.1*t);}
+              real x(real t) {return 1+cos(t);}
+              real y(real t) {return 1+sin(t);}
+              real z(real t) {return 1+sin(2*t);}
+
+              path3 p=graph(x,y,z,0,2*pi,50,operator ..);
+
+              tube T=tube(p,.05);
+              surface s=T.s;
+              s.colors(palette(s.map(ypart)+s.map(zpart),Gradient(palered,heavyblue)));
+              draw(s,render(merge=true));
+              //dot((1,1.25,1.2),black);
+              draw(shift(1,1.25,1.2)*scale3(.05)*unitsphere);
+              //draw(T.center,thin());
+
+              // ////////////////////////////////////
+              //    SAMPLE CODE
+
+              // defaultpen(fontsize(10pt));
+
+              //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+              //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+
+              //triple f(pair t) {
+              //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+              //}
+              //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+
+              //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+              //path3 mypath=graph(g,-1,1,operator ..);
+
+              //pen p=rgb(0,0,1);
+              //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+              //draw(s,paleblue);
+              //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+              //draw(mypath,2bp+blue);
+
+            </asymptote>
+          </image>
         </figure>
       </statement>
       <solution>
@@ -753,7 +1502,7 @@
         <p>
           Thus the mass is
           <me>
-            M = \oint_C \delta(s)\, ds = \int_0^{2\pi} \big(2+\sin t+\sin(2t)\big)\sqrt{1+4\cos^2(2t)}\, dt \approx 21.08\text{ gm } 
+            M = \oint_C \delta(s)\, ds = \int_0^{2\pi} \big(2+\sin t+\sin(2t)\big)\sqrt{1+4\cos^2(2t)}\, dt \approx 21.08\text{ gm }
           </me>.
         </p>
 
@@ -785,13 +1534,13 @@
       A line integral looks like: <m>\int_C f(s)\, ds</m>.
       As stated before the definition of the line integral,
       this means <q>sum up, along a curve <m>C</m>,
-      function values <m>f(s)</m> <times /> small arc lengths.</q>
+      function values <m>f(s)</m> <times/> small arc lengths.</q>
       When <m>f(s)</m> represents a height,
-      we have <q>height <times /> length = area.</q>
+      we have <q>height <times/> length = area.</q>
       When <m>f(s)</m> is a density (and we use
       <m>\delta(s)</m> by convention), we have <q>density
       (mass per unit length)
-      <times /> length = mass.</q>
+      <times/> length = mass.</q>
     </p>
 
     <p>
@@ -801,328 +1550,347 @@
     </p>
   </subsection>
 
-  <subsection>
-    <title>Terms and Concepts</title>
-    <exercise>
-      <statement>
+  <exercises>
+    <exercisegroup>
+      <introduction>
         <p>
-          Explain how a line integral can be used to find the area under a curve.
+          Terms and Concepts
         </p>
-      </statement>
-      <answer>
-        <p>
-          When <m>C</m> is a curve in the plane and <m>f</m> is a surface defined over <m>C</m>,
-          then <m>\int_C f(s)\, ds</m> describes the area under the spatial curve that lies on <m>f</m>,
-          over <m>C</m>.
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <exercise>
-      <statement>
-        <p>
-          How does the evaluation of a line integral given as
-          <m>\int_C f(s)\, ds</m> differ from a line integral given as <m>\oint_C f(s)\, ds</m>?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          The evaluation is the same.
-          The <m>\oint</m> notation signifies that the curve <m>C</m> is a closed curve,
-          though the evaluation is the same.
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            Explain how a line integral can be used to find the area under a curve.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            When <m>C</m> is a curve in the plane and <m>f</m> is a surface defined over <m>C</m>,
+            then <m>\int_C f(s)\, ds</m> describes the area under the spatial curve that lies on <m>f</m>,
+            over <m>C</m>.
+          </p>
+        </answer>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          Why are most line integrals evaluated using <xref ref="thm_line1">Key Idea</xref> instead of <q>directly</q>
-          as <m>\int_C f(s)\, ds</m>?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          The variable <m>s</m> denotes the arc-length parameter,
-          which is generally difficult to use.
-          The Key Idea allows one to parametrize a curve using another,
-          ideally easier-to-use, parameter.
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            How does the evaluation of a line integral given as
+            <m>\int_C f(s)\, ds</m> differ from a line integral given as <m>\oint_C f(s)\, ds</m>?
+          </p>
+        </statement>
+        <answer>
+          <p>
+            The evaluation is the same.
+            The <m>\oint</m> notation signifies that the curve <m>C</m> is a closed curve,
+            though the evaluation is the same.
+          </p>
+        </answer>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          Sketch a closed,
-          piecewise smooth curve composed of three subcurves.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Answers will vary.
-        </p>
-      </answer>
-    </exercise>
-  </subsection>
+      <exercise>
+        <statement>
+          <p>
+            Why are most line integrals evaluated using <xref ref="thm_line1">Key Idea</xref> instead of <q>directly</q>
+            as <m>\int_C f(s)\, ds</m>?
+          </p>
+        </statement>
+        <answer>
+          <p>
+            The variable <m>s</m> denotes the arc-length parameter,
+            which is generally difficult to use.
+            The Key Idea allows one to parametrize a curve using another,
+            ideally easier-to-use, parameter.
+          </p>
+        </answer>
+      </exercise>
 
-  <subsection>
-    <title>Problems</title>
-    <p>
-      In the following exercises,
-      a planar curve <m>C</m> is given along with a surface <m>f</m> that is defined over <m>C</m>.
-      Evaluate the line integral <m>\ds \int_Cf(s)\, ds</m>.
-    </p>
+      <exercise>
+        <statement>
+          <p>
+            Sketch a closed,
+            piecewise smooth curve composed of three subcurves.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            Answers will vary.
+          </p>
+        </answer>
+      </exercise>
+    </exercisegroup>
 
-    <exercise>
-      <statement>
+    <exercisegroup>
+      <introduction>
         <p>
-          <m>C</m> is the line segment joining the points <m>(-2,-1)</m> and <m>(1,2)</m>;
-          the surface is <m>f(x,y)=x^2+y^2+2</m>.
+          In the following exercises,
+          a planar curve <m>C</m> is given along with a surface <m>f</m> that is defined over <m>C</m>.
+          Evaluate the line integral <m>\ds \int_Cf(s)\, ds</m>.
         </p>
-      </statement>
-      <answer>
-        <p>
-          <m>12\sqrt{2}</m>
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>C</m> is the segment of <m>y=3x+2</m> on <m>[1,2]</m>;
-          the surface is <m>f(x,y)=5x+2y</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>41\sqrt{10}/2</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            <m>C</m> is the line segment joining the points <m>(-2,-1)</m> and <m>(1,2)</m>;
+            the surface is <m>f(x,y)=x^2+y^2+2</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>12\sqrt{2}</m>
+          </p>
+        </answer>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>C</m> is the circle with radius 2 centered at the point <m>(4,2)</m>;
-          the surface is <m>f(x,y)=3x-y</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>40\pi</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            <m>C</m> is the segment of <m>y=3x+2</m> on <m>[1,2]</m>;
+            the surface is <m>f(x,y)=5x+2y</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>41\sqrt{10}/2</m>
+          </p>
+        </answer>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>C</m> is the curve given by <m>\vec r(t) = \langle \cos t+t\sin t, \sin t-t\cos t\rangle</m> on <m>[0,2\pi]</m>;
-          the surface is <m>f(x,y)=5</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>10\pi^2</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            <m>C</m> is the circle with radius 2 centered at the point <m>(4,2)</m>;
+            the surface is <m>f(x,y)=3x-y</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>40\pi</m>
+          </p>
+        </answer>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>C</m> is the piecewise curve composed of the line segments that connect <m>(0,1)</m> to <m>(1,1)</m>,
-          then connect <m>(1,1)</m> to <m>(1,0)</m>;
-          the surface is <m>f(x,y)=x+y^2</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Over the first subcurve of <m>C</m>,
-          the line integral has a value of <m>3/2</m>;
-          over the second subcurve, the line integral has a value of <m>4/3</m>.
-          The total value of the line integral is thus <m>17/6</m>.
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            <m>C</m> is the curve given by <m>\vec r(t) = \langle \cos t+t\sin t, \sin t-t\cos t\rangle</m> on <m>[0,2\pi]</m>;
+            the surface is <m>f(x,y)=5</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>10\pi^2</m>
+          </p>
+        </answer>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>C</m> is the piecewise curve composed of the line segment joining the points <m>(0,0)</m> and <m>(1,1)</m>,
-          along with the quarter<ndash />circle parametrized by <m>\langle \cos t,-\sin t+1\rangle</m> on
-          <m>[0,\pi/2]</m>(which starts at the point <m>(1,1)</m> and ends at <m>(0,0)</m>;
-          the surface is <m>f(x,y)=x^2+y^2</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Over the first subcurve of <m>C</m>,
-          the line integral has a value of <m>2\sqrt{2}/3</m>;
-          over the second subcurve, the line integral has a value of <m>\pi-2</m>.
-          The total value of the line integral is thus <m>\pi+2\sqrt{2}/3-2</m>.
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            <m>C</m> is the piecewise curve composed of the line segments that connect <m>(0,1)</m> to <m>(1,1)</m>,
+            then connect <m>(1,1)</m> to <m>(1,0)</m>;
+            the surface is <m>f(x,y)=x+y^2</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            Over the first subcurve of <m>C</m>,
+            the line integral has a value of <m>3/2</m>;
+            over the second subcurve, the line integral has a value of <m>4/3</m>.
+            The total value of the line integral is thus <m>17/6</m>.
+          </p>
+        </answer>
+      </exercise>
 
-    <p>
-      In the following exercises,
-      a planar curve <m>C</m> is given along with a surface <m>f</m> that is defined over <m>C</m>.
-      Set up the line integral <m>\ds \int_Cf(s)\, ds</m>,
-      then approximate its value using technology.
-    </p>
+      <exercise>
+        <statement>
+          <p>
+            <m>C</m> is the piecewise curve composed of the line segment joining the points <m>(0,0)</m> and <m>(1,1)</m>,
+            along with the quarter<ndash/>circle parametrized by <m>\langle \cos t,-\sin t+1\rangle</m> on
+            <m>[0,\pi/2]</m>(which starts at the point <m>(1,1)</m> and ends at <m>(0,0)</m>;
+            the surface is <m>f(x,y)=x^2+y^2</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            Over the first subcurve of <m>C</m>,
+            the line integral has a value of <m>2\sqrt{2}/3</m>;
+            over the second subcurve, the line integral has a value of <m>\pi-2</m>.
+            The total value of the line integral is thus <m>\pi+2\sqrt{2}/3-2</m>.
+          </p>
+        </answer>
+      </exercise>
+    </exercisegroup>
 
-    <exercise>
-      <statement>
+    <exercisegroup>
+      <introduction>
         <p>
-          <m>C</m> is the portion of the parabola <m>y=2x^2+x+1</m> on <m>[0,1]</m>;
-          the surface is <m>f(x,y)=x^2+2y</m>.
+          In the following exercises,
+          a planar curve <m>C</m> is given along with a surface <m>f</m> that is defined over <m>C</m>.
+          Set up the line integral <m>\ds \int_Cf(s)\, ds</m>,
+          then approximate its value using technology.
         </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\int_0^1(5t^2+_2t+2)\sqrt{(4t+1)^2+1}\, dt \approx 17.071</m>
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>C</m> is the portion of the curve <m>y=\sin x</m> on <m>[0,\pi]</m>;
-          the surface is <m>f(x,y)=x</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\int_0^\pi t\sqrt{1+\cos^2t}\, dt \approx 6.001</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            <m>C</m> is the portion of the parabola <m>y=2x^2+x+1</m> on <m>[0,1]</m>;
+            the surface is <m>f(x,y)=x^2+2y</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>\int_0^1(5t^2+_2t+2)\sqrt{(4t+1)^2+1}\, dt \approx 17.071</m>
+          </p>
+        </answer>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>C</m> is the ellipse given by <m>\vec r(t) = \langle 2\cos t,\sin t\rangle</m> on <m>[0,2\pi]</m>;
-          the surface is <m>f(x,y)=10-x^2-y^2</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\oint_0^{2\pi} \big(10-4\cos^2t-\sin^2t\big)\sqrt{\cos^2t+4\sin^2t}\, dt \approx 74.986</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            <m>C</m> is the portion of the curve <m>y=\sin x</m> on <m>[0,\pi]</m>;
+            the surface is <m>f(x,y)=x</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>\int_0^\pi t\sqrt{1+\cos^2t}\, dt \approx 6.001</m>
+          </p>
+        </answer>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>C</m> is the portion of <m>y=x^3</m> on <m>[-1,1]</m>;
-          the surface is <m>f(x,y)=2x+3y+5</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\int_{-1}^{1} \big(3t^3+2t+5\big)\sqrt{9t^4+1}\, dt \approx 15.479</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            <m>C</m> is the ellipse given by <m>\vec r(t) = \langle 2\cos t,\sin t\rangle</m> on <m>[0,2\pi]</m>;
+            the surface is <m>f(x,y)=10-x^2-y^2</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>\oint_0^{2\pi} \big(10-4\cos^2t-\sin^2t\big)\sqrt{\cos^2t+4\sin^2t}\, dt \approx 74.986</m>
+          </p>
+        </answer>
+      </exercise>
 
-    <p>
-      In the following exercises, a parametrized curve <m>C</m> in space is given.
-      Find the area above the <m>x</m>-<m>y</m> plane that is under <m>C</m>.
-    </p>
+      <exercise>
+        <statement>
+          <p>
+            <m>C</m> is the portion of <m>y=x^3</m> on <m>[-1,1]</m>;
+            the surface is <m>f(x,y)=2x+3y+5</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>\int_{-1}^{1} \big(3t^3+2t+5\big)\sqrt{9t^4+1}\, dt \approx 15.479</m>
+          </p>
+        </answer>
+      </exercise>
+    </exercisegroup>
 
-    <exercise>
-      <statement>
+    <exercisegroup>
+      <introduction>
         <p>
-          <m>C</m>: <m>\vec r(t) = \langle 5t,t,t^2\rangle</m> for <m>1\leq t\leq 2</m>.
+          In the following exercises, a parametrized curve <m>C</m> in space is given.
+          Find the area above the <m>x</m>-<m>y</m> plane that is under <m>C</m>.
         </p>
-      </statement>
-      <answer>
-        <p>
-          <m>7\sqrt{26}/3</m>
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>C</m>: <m>\vec r(t) = \langle \cos t,\sin t, \sin(2t)+1\rangle</m> for <m>0\leq t\leq 2\pi</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>2\pi</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            <m>C</m>: <m>\vec r(t) = \langle 5t,t,t^2\rangle</m> for <m>1\leq t\leq 2</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>7\sqrt{26}/3</m>
+          </p>
+        </answer>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>C</m>: <m>\vec r(t) = \langle 3\cos t,3\sin t, t^2\rangle</m> for <m>0\leq t\leq 2\pi</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>8\pi^3</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            <m>C</m>: <m>\vec r(t) = \langle \cos t,\sin t, \sin(2t)+1\rangle</m> for <m>0\leq t\leq 2\pi</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>2\pi</m>
+          </p>
+        </answer>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>C</m>: <m>\vec r(t) = \langle 3t,4t,
-          t\rangle</m> for <m>0\leq t\leq 1</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>5/2</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            <m>C</m>: <m>\vec r(t) = \langle 3\cos t,3\sin t, t^2\rangle</m> for <m>0\leq t\leq 2\pi</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>8\pi^3</m>
+          </p>
+        </answer>
+      </exercise>
 
-    <p>
-      In the following exercises,
-      a parametrized curve <m>C</m> is given that represents a thin wire with density <m>\delta</m>.
-      Find the mass and center of mass of the thin wire.
-    </p>
+      <exercise>
+        <statement>
+          <p>
+            <m>C</m>: <m>\vec r(t) = \langle 3t,4t,
+            t\rangle</m> for <m>0\leq t\leq 1</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>5/2</m>
+          </p>
+        </answer>
+      </exercise>
+    </exercisegroup>
 
-    <exercise>
-      <statement>
+    <exercisegroup>
+      <introduction>
         <p>
-          <m>C</m>: <m>\vec r(t) = \langle \cos t,\sin t, t\rangle</m> for <m>0\leq t\leq 4\pi</m>;
-          <m>\delta(x,y,z) = z</m>.
+          In the following exercises,
+          a parametrized curve <m>C</m> is given that represents a thin wire with density <m>\delta</m>.
+          Find the mass and center of mass of the thin wire.
         </p>
-      </statement>
-      <answer>
-        <p>
-          <m>M=8\sqrt{2}\pi^2</m>; center of mass is <m>(0,-1/(2\pi), 8\pi/3)</m>.
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>C</m>: <m>\vec r(t) = \langle t-t^2,t^2-t^3,t^3-t^4\rangle</m> for <m>0\leq t\leq 1</m>;
-          <m>\delta(x,y,z) = x+2y+2z</m>.
-          Use technology to approximate the value of each integral.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>M\approx 0.237</m>;
-          center of mass is approximately <m>(0.173, 0.099,0.065)</m>.
-        </p>
-      </answer>
-    </exercise>
-  </subsection>
+      <exercise>
+        <statement>
+          <p>
+            <m>C</m>: <m>\vec r(t) = \langle \cos t,\sin t, t\rangle</m> for <m>0\leq t\leq 4\pi</m>;
+            <m>\delta(x,y,z) = z</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>M=8\sqrt{2}\pi^2</m>; center of mass is <m>(0,-1/(2\pi), 8\pi/3)</m>.
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            <m>C</m>: <m>\vec r(t) = \langle t-t^2,t^2-t^3,t^3-t^4\rangle</m> for <m>0\leq t\leq 1</m>;
+            <m>\delta(x,y,z) = x+2y+2z</m>.
+            Use technology to approximate the value of each integral.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>M\approx 0.237</m>;
+            center of mass is approximately <m>(0.173, 0.099,0.065)</m>.
+          </p>
+        </answer>
+      </exercise>
+    </exercisegroup>
+  </exercises>
 </section>
-

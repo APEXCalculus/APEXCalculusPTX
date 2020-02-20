@@ -1,5 +1,4 @@
-
-
+<?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="sec_surface_integral">
   <title>Surface Integrals</title>
   <introduction>
@@ -10,7 +9,7 @@
 
     <p>
       If the density of this object is constant,
-      then we can find mass via <q>mass<m>=</m> density <times /> surface area,</q>
+      then we can find mass via <q>mass<m>=</m> density <times/> surface area,</q>
       and we could compute the surface area using the techniques of the previous section.
     </p>
 
@@ -49,7 +48,7 @@
     </p>
 
     <p>
-      The integral in Equation <xref ref="eq_surface_int" /> is a specific example of a more general construction defined below.
+      The integral in Equation <xref ref="eq_surface_int"/> is a specific example of a more general construction defined below.
     </p>
 
     <definition xml:id="def_surface_integral">
@@ -98,14 +97,99 @@
 
         <figure xml:id="fig_surfint1">
           <caption>The surface whose mass is computed in <xref ref="ex_surfint1">Example</xref>.</caption>
-          \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
+          <!-- \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
           3Droll=0,
           3Dortho=0.004853160586208105,
           3Dc2c=0.7228285670280457 0.5212869644165039 0.45362839102745056,
           3Dcoo=-2.5405526161193848 7.828289031982422 42.677555084228516,
           3Droo=399.9999621232421,
-          3Dlights=Headlamp,add3Djscript=asylabels.js}
-          <img src="figures/figsurfint1_3D"/>
+          3Dlights=Headlamp,add3Djscript=asylabels.js} -->
+          <image xml:id="img_surfint1_3D">
+            <description></description>
+            <asymptote>
+
+              import graph3;
+
+              //ASY file for figsurfint1_3D.asy in Chapter 14
+
+              size(200,200,IgnoreAspect);
+              //currentprojection=perspective(7,2,1);
+              currentprojection=orthographic(16,12.5,14);
+              defaultrender.merge=true;
+
+              // setup and draw the axes
+              real[] myxchoice={1};
+              real[] myychoice={2};
+              real[] myzchoice={3};
+              defaultpen(0.5mm);
+
+              pair xbounds=(-.1,2.5);
+              pair ybounds=(-.1,2.5);
+              pair zbounds=(-.1,3.5);
+
+              xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+              yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+              zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+              label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+              //Draw the plane 2x+y+z=3 over the triangle bounded
+              // by coordinate planes and y=2-2x
+              triple f(pair t) {
+                return (t.x,t.y*(2-2*t.x),3-2*t.x-t.y*(2-2t.x));//
+              }
+              surface s=surface(f,(0,0),(1,1),8,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+              pen p=rgb(0,0,.7);
+              draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=invisible);
+
+              pen curvepen=.3mm+blue;
+              draw(surface((1,0,0)--(0,0,0)--(0,2,0)--cycle),curvepen+opacity(.5));
+              draw((1,0,0)--(0,0,0)--(0,2,0)--cycle,curvepen);
+              draw(f((0,0))--f((1,0))--f((0,1))--cycle,curvepen);
+
+              //pen curvepen=.3mm+blue;
+              //triple g(real t) {return(cos(t),-1,2sin(t));}
+              //path3 mypath=graph(g,0,2pi,operator ..);
+              //draw(mypath,curvepen);
+              //
+              //triple g(real t) {return(cos(t),2,2sin(t));}
+              //path3 mypath=graph(g,0,2pi,operator ..);
+              //draw(mypath,curvepen);
+
+              //draw((0,1,0)--(0,3,0)--(3,1,0)--cycle,curvepen);
+
+              // ////////////////////////////////////
+              //    SAMPLE CODE
+
+              // defaultpen(fontsize(10pt));
+
+              //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+              //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+              //pen p=rgb(0,0,.7);
+              //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+              //triple f(pair t) {
+              //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+              //}
+              //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+              //pen p=rgb(0,0,.7);
+              //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+              //draw(s,paleblue);
+              //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+              //draw(mypath,2bp+blue);
+
+              //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+              //path3 mypath=graph(g,-1,1,operator ..);
+              //draw(mypath,blue+dashed+linewidth(2));
+
+              //pen p=rgb(0,0,1);
+              //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+            </asymptote>
+          </image>
         </figure>
 
         <p>
@@ -276,14 +360,126 @@
 
         <figure xml:id="fig_surfflux1">
           <caption>The surface and vector field used in  <xref ref="ex_surfflux1">Example</xref>.</caption>
-          \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
+          <!-- \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
           3Droll=0,
           3Dortho=0.004853160586208105,
           3Dc2c=0.7228285670280457 0.5212869644165039 0.45362839102745056,
           3Dcoo=-2.5405526161193848 7.828289031982422 42.677555084228516,
           3Droo=399.9999621232421,
-          3Dlights=Headlamp,add3Djscript=asylabels.js}
-          <img src="figures/figsurfflux1_3D"/>
+          3Dlights=Headlamp,add3Djscript=asylabels.js} -->
+          <image xml:id="img_surfflux1_3D">
+            <description></description>
+            <asymptote>
+
+              import graph3;
+
+              //ASY file for figsurfint1_3D.asy in Chapter 14
+
+              size(200,200,IgnoreAspect);
+              //currentprojection=perspective(7,2,1);
+              currentprojection=orthographic(16,12.5,14);
+              defaultrender.merge=true;
+
+              // setup and draw the axes
+              real[] myxchoice={1};
+              real[] myychoice={2};
+              real[] myzchoice={3};
+              defaultpen(0.5mm);
+
+              pair xbounds=(-.1,2.5);
+              pair ybounds=(-.1,2.5);
+              pair zbounds=(-.1,3.5);
+
+              xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+              yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+              zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+              label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+              //Draw the plane 2x+y+z=3 over the triangle bounded
+              // by coordinate planes and y=2-2x
+              triple f(pair t) {
+                return (t.x,t.y*(2-2*t.x),3-2*t.x-t.y*(2-2t.x));//
+              }
+              surface s=surface(f,(0,0),(1,1),8,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+              pen p=rgb(0,0,.7);
+              draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=invisible);
+
+
+              //pen curvepen=.3mm+blue;
+              //draw(surface((1,0,0)--(0,0,0)--(0,2,0)--cycle),curvepen+opacity(.5));
+              //draw((1,0,0)--(0,0,0)--(0,2,0)--cycle,curvepen);
+              //draw(f((0,0))--f((1,0))--f((0,1))--cycle,curvepen);
+
+              path3 gradient1(triple z){
+                return O--(1,z.x,-z.y);
+              }
+
+              triple A=(0,0,1);
+              triple B=(1,2,3);
+
+              picture VectorPlot3D(path3 vector(triple t), triple a, triple b,
+                                  int nx=nmesh, int ny=nx, int nz=nx,bool truesize=false,
+                                  real maxlength=truesize ? 0 : min(abs(b.x-a.x)/nx,abs(b.y-a.y)/ny,abs(b.z-a.z)/nz),
+                                  //  bool cond(pair z)=null,
+                                  pen p=currentpen,
+                                  arrowbar3 arrow=Arrow3(6), margin3 margin=PenMargin3,
+                                  string name="", render render=defaultrender)
+              {
+                picture pic;
+                real dx=1/nx;
+                real dy=1/ny;
+                real dz=1/nz;
+                real scale;
+                if(maxlength &gt; 0) {
+                  real size(triple t) {
+                    path3 g=vector(t);
+                    return abs(point(g,size(g)-1)-point(g,0));
+                  }
+                  real max=size((0,0,0));
+
+                  for(int i=0; i &lt;= nx; ++i) {
+                    real x=interp(a.x,b.x,i*dx);
+                    for(int j=0; j &lt;= ny; ++j)
+                      {
+                        real y=interp(a.y,b.y,j*dy);
+                        for(int k=0; k &lt;= nz; ++k)
+                          max=max(max,size((x,y,interp(a.z,b.z,k*dz))));
+                      }}
+                  scale=max &gt; 0 ? maxlength/max : 1;
+                } else scale=1;
+                bool group=name != "" || render.defaultnames;
+                if(group)
+                  begingroup3(pic,name == "" ? "vectorfield" : name,render);
+                for(int i=0; i &lt;= nx; ++i) {
+                  real x=interp(a.x,b.x,i*dx);
+                  for(int j=0; j &lt;= ny; ++j) {
+                    real y=interp(a.y,b.y,j*dy);
+                    for(int k=0; k &lt;= nz; ++k)
+                      {      triple z=(x,y,interp(a.z,b.z,k*dz));
+                        {
+                          path3 g=scale3(scale)*vector(z);
+                          string name="vector";
+                          if(truesize) {
+                            picture opic;
+                            draw(opic,g,p,arrow,margin,name,render);
+                            add(pic,opic,z);
+                          } else
+                            draw(pic,shift(z)*g,p,arrow,margin,name,render);
+                        }
+                      }
+                  }}
+                if(group)
+                  endgroup3(pic);
+                return pic;
+
+              }
+              add(VectorPlot3D(gradient1,A,B,3,3,3,blue));
+
+            </asymptote>
+          </image>
         </figure>
       </statement>
       <solution>
@@ -341,14 +537,67 @@
 
         <figure xml:id="fig_surfflux2">
           <caption>The surfaces used in  <xref ref="ex_surfflux2">Example</xref>.</caption>
-          \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
+          <!-- \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
           3Droll=0,
           3Dortho=0.004853160120546818,
           3Dc2c=0.7607786655426025 0.5903141498565674 0.2697128355503082,
           3Dcoo=-4.848384857177734 2.0102698802948 61.921504974365234,
           3Droo=399.9999594035934,
-          3Dlights=Headlamp,add3Djscript=asylabels.js}
-          <img src="figures/figsurfflux2_3D"/>
+          3Dlights=Headlamp,add3Djscript=asylabels.js} -->
+          <image xml:id="img_surfflux2_3D">
+            <description></description>
+            <asymptote>
+
+              import graph3;
+
+              //ASY file for figsurfint1_3D.asy in Chapter 14
+
+              size(200,200,IgnoreAspect);
+              //currentprojection=perspective(7,2,1);
+              currentprojection=orthographic(22.8,20,5.5);
+              defaultrender.merge=true;
+
+              // setup and draw the axes
+              real[] myxchoice={1};
+              real[] myychoice={2};
+              real[] myzchoice={3};
+              defaultpen(0.5mm);
+
+              pair xbounds=(-1.1,1.1);
+              pair ybounds=(-1.1,1.1);
+              pair zbounds=(-.1,1.1);
+
+              xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+              yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+              zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+              label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+              //Draw the plane unit disk
+              triple f(pair t) {
+                return (t.y*cos(t.x),t.y*sin(t.x),0);//
+              }
+              surface s=surface(f,(-pi/2,0),(3pi/2,1),8,8,usplinetype=Spline,vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+              pen p=rgb(.7,0,0);
+              draw(s,rgb(1,.6,.6)+opacity(.7),meshpen=p);
+
+              //Draw paraboloid over unit disk
+              triple f(pair t) {
+                return (t.y*cos(t.x),t.y*sin(t.x),1-t.y^2);//
+              }
+              surface s=surface(f,(0,0),(2pi,1),8,8,Spline);
+              pen p=rgb(0,0,.7);
+              draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+              pen curvepen=.6mm+blue;
+              triple f(real t) {return (cos(t),sin(t),0);}
+              path3 mypath=graph(f,0,2pi,operator ..);
+              draw(mypath,curvepen);
+
+            </asymptote>
+          </image>
         </figure>
 
         <p>
@@ -454,11 +703,11 @@
           Since <m>\vec F_1</m> is constant,
           and moving <q>straight up,</q>
           it makes sense that all air passing through <m>\surfaceS_1</m> also passes through
-          <m>\surfaceS_2</m>, and vice<ndash />versa.
+          <m>\surfaceS_2</m>, and vice<ndash/>versa.
         </p>
 
         <p>
-          If we treated the surfaces as creating one piecewise<ndash />smooth surface <m>\surfaceS</m>, we would find the total flux across <m>\surfaceS</m>by finding the flux across each piece,
+          If we treated the surfaces as creating one piecewise<ndash/>smooth surface <m>\surfaceS</m>, we would find the total flux across <m>\surfaceS</m>by finding the flux across each piece,
           being sure that each normal vector pointed to the outside of the closed surface.
           Above, <m>\vec n_1</m> does not point outside the surface,
           though <m>\vec n_2</m> does.
@@ -517,245 +766,420 @@
     </p>
   </subsection>
 
-  <subsection>
-    <title>Terms and Concepts</title>
-    <exercise>
-      <statement>
+  <exercises>
+    <exercisegroup>
+      <introduction>
         <p>
-          In the plane,
-          flux is a measurement of how much of the vector field passes across a <fillin />;
-          in space, flux is a measurement of how much of the vector field passes across a <fillin />.
+          Terms and Concepts
         </p>
-      </statement>
-      <answer>
-        <p>
-          curve; surface
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <exercise>
-      <statement>
-        <p>
-          When computing flux,
-          what does it mean when the result is a negative number?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          Answers will vary; in general,
-          it means that more of the vector field passes through the surface opposite the direction of the normal vector than in the same direction of the normal vector.
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            In the plane,
+            flux is a measurement of how much of the vector field passes across a <fillin/>;
+            in space, flux is a measurement of how much of the vector field passes across a <fillin/>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            curve; surface
+          </p>
+        </answer>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          When <m>\surfaceS</m> is a closed surface,
-          we choose the normal vector so that it points to the <fillin /> of the surface.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          outside
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            When computing flux,
+            what does it mean when the result is a negative number?
+          </p>
+        </statement>
+        <answer>
+          <p>
+            Answers will vary; in general,
+            it means that more of the vector field passes through the surface opposite the direction of the normal vector than in the same direction of the normal vector.
+          </p>
+        </answer>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          If <m>\surfaceS</m>is a plane,
-          and <m>\vec F</m> is always parallel to <m>\surfaceS</m>, then the flux of <m>\vec F</m> across <m>\surfaceS</m>will be <fillin />.
-        </p>
-      </statement>
-      <answer>
-      </answer>
-    </exercise>
-  </subsection>
+      <exercise>
+        <statement>
+          <p>
+            When <m>\surfaceS</m> is a closed surface,
+            we choose the normal vector so that it points to the <fillin/> of the surface.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            outside
+          </p>
+        </answer>
+      </exercise>
 
-  <subsection>
-    <title>Problems</title>
-    <p>
-      In the following exercises,
-      a surface <m>\surfaceS</m>that represents a thin sheet of material with density <m>\delta</m> is given.
-      Find the mass of each thin sheet.
-    </p>
+      <exercise>
+        <statement>
+          <p>
+            If <m>\surfaceS</m>is a plane,
+            and <m>\vec F</m> is always parallel to <m>\surfaceS</m>, then the flux of <m>\vec F</m> across <m>\surfaceS</m>will be <fillin/>.
+          </p>
+        </statement>
+        <answer>
+          <p/>
+        </answer>
+      </exercise>
+    </exercisegroup>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\surfaceS</m>is the plane
-          <m>f(x,y)=x+y</m> on <m>-2\leq x\leq 2</m>,
-          <m>-3\leq y\leq 3</m>, with <m>\delta(x,y,z) = z</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>240\sqrt{3}</m>
-        </p>
-      </answer>
-    </exercise>
 
-    <exercise>
-      <statement>
+    <exercisegroup>
+      <introduction>
         <p>
-          <m>\surfaceS</m>is the unit sphere,
-          with <m>\delta(x,y,z) = x+y+z+10</m>.
+          In the following exercises,
+          a surface <m>\surfaceS</m>that represents a thin sheet of material with density <m>\delta</m> is given.
+          Find the mass of each thin sheet.
         </p>
-      </statement>
-      <answer>
-        <p>
-          <m>40\pi</m>
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <p>
-      In the following exercises,
-      a surface <m>\surfaceS</m>and a vector field <m>\vec F</m> are given.
-      Compute the flux of <m>\vec F</m> across <m>\surfaceS</m>.
-      (If <m>\surfaceS</m>is not a closed surface,
-      choose <m>\vec n</m> so that it has a positive <m>z</m>-component,
-      unless otherwise indicated.)
-    </p>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\surfaceS</m>is the plane <m>f(x,y) = 3x+y</m> on
-          <m>0\leq x\leq 1</m>, <m>1\leq y\leq 4</m>;
-          <m>\vec F = \langle x^2,-z,2y\rangle</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>24</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            <m>\surfaceS</m>is the plane
+            <m>f(x,y)=x+y</m> on <m>-2\leq x\leq 2</m>,
+            <m>-3\leq y\leq 3</m>, with <m>\delta(x,y,z) = z</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>240\sqrt{3}</m>
+          </p>
+        </answer>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\surfaceS</m>is the plane
-          <m>f(x,y) = 8-x-y</m> over the triangle with vertices at <m>(0,0)</m>,
-          <m>(1,0)</m> and <m>(1,5)</m>;
-          <m>\vec F = \langle 3,1,2\rangle</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>15</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            <m>\surfaceS</m>is the unit sphere,
+            with <m>\delta(x,y,z) = x+y+z+10</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>40\pi</m>
+          </p>
+        </answer>
+      </exercise>
+    </exercisegroup>
 
-    <exercise>
-      <statement>
+    <exercisegroup>
+      <introduction>
         <p>
-          <m>\surfaceS</m>is the paraboloid <m>f(x,y) = x^2+y^2</m> over the unit disk;
-          <m>\vec F = \langle 1,0,0\rangle</m>.
+          In the following exercises,
+          a surface <m>\surfaceS</m>and a vector field <m>\vec F</m> are given.
+          Compute the flux of <m>\vec F</m> across <m>\surfaceS</m>.
+          (If <m>\surfaceS</m>is not a closed surface,
+          choose <m>\vec n</m> so that it has a positive <m>z</m>-component,
+          unless otherwise indicated.)
         </p>
-      </statement>
-      <answer>
-        <p>
-          <m>0</m>
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\surfaceS</m>is the unit sphere;
-          <m>\vec F = \langle y-z,z-x,x-y\rangle</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>0</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            <m>\surfaceS</m>is the plane <m>f(x,y) = 3x+y</m> on
+            <m>0\leq x\leq 1</m>, <m>1\leq y\leq 4</m>;
+            <m>\vec F = \langle x^2,-z,2y\rangle</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>24</m>
+          </p>
+        </answer>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\surfaceS</m>is the square in space with corners at <m>(0,0,0)</m>,
-          <m>(1,0,0)</m>,
-          <m>(1,0,1)</m> and <m>(0,0,1)</m> (choose <m>\vec n</m> such that it has a positive <m>y</m>-component);
-          <m>\vec F = \langle 0,-z,y\rangle</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>-1/2</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            <m>\surfaceS</m>is the plane
+            <m>f(x,y) = 8-x-y</m> over the triangle with vertices at <m>(0,0)</m>,
+            <m>(1,0)</m> and <m>(1,5)</m>;
+            <m>\vec F = \langle 3,1,2\rangle</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>15</m>
+          </p>
+        </answer>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\surfaceS</m>is the disk in the <m>y</m>-<m>z</m> plane with radius 1, centered at <m>(0,1,1)</m> (choose <m>\vec n</m> such that it has a positive <m>x</m>-component);
-          <m>\vec F = \langle y,z,x\rangle</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>\pi</m>
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            <m>\surfaceS</m>is the paraboloid <m>f(x,y) = x^2+y^2</m> over the unit disk;
+            <m>\vec F = \langle 1,0,0\rangle</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>0</m>
+          </p>
+        </answer>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\surfaceS</m>is the closed surface composed of <m>\surfaceS_1</m>,
-          whose boundary is the ellipse in the <m>x</m>-<m>y</m> plane described by
-          <m>\frac{x^2}{25}+\frac{y^2}9 = 1</m> and <m>\surfaceS_2</m>,
-          part of the elliptical paraboloid <m>f(x,y) = 1-\frac{x^2}{25}-\frac{y^2}9</m> (see graph);
-          <m>\vec F = \langle 5,2,3\rangle</m>.
-        </p>
+      <exercise>
+        <statement>
+          <p>
+            <m>\surfaceS</m>is the unit sphere;
+            <m>\vec F = \langle y-z,z-x,x-y\rangle</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>0</m>
+          </p>
+        </answer>
+      </exercise>
 
-        <p>
-          { \apexincludemedia{width=120pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.6666666865348816 0.6666666865348816 0.3333333134651184, 3Dcoo=-14.339106559753418 -14.168757438659668 57.01565933227539, 3Droo=149.9999987284343, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_06_ex_13_3D"/> }
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>0</m>; the flux over <m>\surfaceS_1</m> is <m>-45\pi</m> and the flux over <m>\surfaceS_2</m> is <m>45\pi</m>.
-        </p>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            <m>\surfaceS</m>is the square in space with corners at <m>(0,0,0)</m>,
+            <m>(1,0,0)</m>,
+            <m>(1,0,1)</m> and <m>(0,0,1)</m> (choose <m>\vec n</m> such that it has a positive <m>y</m>-component);
+            <m>\vec F = \langle 0,-z,y\rangle</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>-1/2</m>
+          </p>
+        </answer>
+      </exercise>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\surfaceS</m>is the closed surface composed of <m>\surfaceS_1</m>,
-          part of the unit sphere and <m>\surfaceS_2</m>,
-          part of the plane <m>z=1/2</m> (see graph);
-          <m>\vec F = \langle x,-y,z\rangle</m>.
-        </p>
+      <exercise>
+        <statement>
+          <p>
+            <m>\surfaceS</m>is the disk in the <m>y</m>-<m>z</m> plane with radius 1, centered at <m>(0,1,1)</m> (choose <m>\vec n</m> such that it has a positive <m>x</m>-component);
+            <m>\vec F = \langle y,z,x\rangle</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>\pi</m>
+          </p>
+        </answer>
+      </exercise>
 
-        <p>
-          { \apexincludemedia{width=120pt,3Dmenu,activate=onclick,deactivate=onclick, 3Droll=0, 3Dortho=0.0049995193257927895, 3Dc2c=0.6666666865348816 0.6666666865348816 0.3333333134651184, 3Dcoo=0.05395209789276123 -1.5381652116775513 2.9678030014038086, 3Droo=149.9999987284343, 3Dlights=Headlamp,add3Djscript=asylabels.js} <img src="figures/fig14_06_ex_14_3D"/> }
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>9\pi/8</m>; the flux over
-          <m>\surfaceS_1</m> is <m>3\pi/4</m> (use
-          <m>\vec r(u,v) = \langle \sin u\cos v,\sin u\sin v,\cos u\rangle</m> on <m>\pi/3\leq u\leq \pi</m>,
-          <m>0\leq v\leq 2\pi</m>) and the flux over
-          <m>\surfaceS_2</m> is <m>3\pi/8</m> (use <m>\vec r(u,v) = \langle v\sqrt{3}\cos (u)/2, v\sqrt{3}\sin(u)/2,1/2\rangle</m> for
-          <m>0\leq u\leq 2\pi</m>, <m>0\leq v\leq 1</m>.
-        </p>
-      </answer>
-    </exercise>
-  </subsection>
+      <exercise>
+        <statement>
+          <p>
+            <m>\surfaceS</m>is the closed surface composed of <m>\surfaceS_1</m>,
+            whose boundary is the ellipse in the <m>x</m>-<m>y</m> plane described by
+            <m>\frac{x^2}{25}+\frac{y^2}9 = 1</m> and <m>\surfaceS_2</m>,
+            part of the elliptical paraboloid <m>f(x,y) = 1-\frac{x^2}{25}-\frac{y^2}9</m> (see graph);
+            <m>\vec F = \langle 5,2,3\rangle</m>.
+          </p>
 
+          <sidebyside width="47%">
+            <!-- \apexincludemedia{width=120pt,3Dmenu,activate=onclick,deactivate=onclick,
+            3Droll=0, 3Dortho=0.004999519791454077,
+            3Dc2c=0.6666666865348816 0.6666666865348816 0.3333333134651184,
+            3Dcoo=-14.339106559753418 -14.168757438659668 57.01565933227539,
+            3Droo=149.9999987284343,
+            3Dlights=Headlamp,
+            add3Djscript=asylabels.js} -->
+            <image xml:id="img_14_06_ex_13_3D">
+              <description></description>
+              <asymptote>
+
+                import graph3;
+
+                //ASY file for
+
+                size(200,200,IgnoreAspect);
+                //currentprojection=perspective(7,2,1);
+                currentprojection=orthographic(19,17,1);
+                defaultrender.merge=true;
+
+                // setup and draw the axes
+                real[] myxchoice={-5,5};
+                real[] myychoice={-3,3};
+                real[] myzchoice={1};
+                defaultpen(0.5mm);
+                pair xbounds=(-5.75,5.75);
+                pair ybounds=(-5.75,5.75);
+                pair zbounds=(-0.25,1.1);
+
+                xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                //Draw the parabola z=y^2 for t from -2 to 2
+                triple g(real t) {return (5cos(t),3sin(t),0);}
+                path3 mypath=graph(g,0,2pi,operator ..); draw(mypath,blue);
+
+                //Draw the cylinder z=y^2
+                triple f(pair t) {
+                  return (5t.y*cos(t.x),3t.y*sin(t.x),0);
+                }
+                surface s=surface(f,(0,0),(2pi,1),8,8,Spline);
+                pen p=rgb(0,0,.7);
+                draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+                //Draw the cylinder z=y^2
+                triple f(pair t) {
+                  return (5t.y*cos(t.x),3t.y*sin(t.x),1-t.y^2);
+                }
+                surface s=surface(f,(0,0),(2pi,1),8,8,Spline);
+                pen p=rgb(0,0,.7);
+                draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+                // ////////////////////////////////////
+                //    SAMPLE CODE
+
+                // defaultpen(fontsize(10pt));
+
+                //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+                //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+
+                //triple f(pair t) {
+                //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+                //}
+                //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+
+                //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+                //path3 mypath=graph(g,-2,2,operator ..);
+
+                //pen p=rgb(0,0,1);
+                //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+                //draw(s,paleblue);
+                //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+                //draw(mypath,2bp+blue);
+
+              </asymptote>
+            </image>
+          </sidebyside>
+        </statement>
+        <answer>
+          <p>
+            <m>0</m>; the flux over <m>\surfaceS_1</m> is <m>-45\pi</m> and the flux over <m>\surfaceS_2</m> is <m>45\pi</m>.
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            <m>\surfaceS</m>is the closed surface composed of <m>\surfaceS_1</m>,
+            part of the unit sphere and <m>\surfaceS_2</m>,
+            part of the plane <m>z=1/2</m> (see graph);
+            <m>\vec F = \langle x,-y,z\rangle</m>.
+          </p>
+
+          <sidebyside width="47%">
+            <!-- \apexincludemedia{width=120pt,3Dmenu,activate=onclick,deactivate=onclick,
+            3Droll=0, 3Dortho=0.0049995193257927895,
+            3Dc2c=0.6666666865348816 0.6666666865348816 0.3333333134651184,
+            3Dcoo=0.05395209789276123 -1.5381652116775513 2.9678030014038086,
+            3Droo=149.9999987284343,
+            3Dlights=Headlamp,
+            add3Djscript=asylabels.js} -->
+            <image xml:id="img_14_06_ex_14_3D">
+              <description></description>
+              <asymptote>
+
+                import graph3;
+
+                //ASY file for
+
+                size(200,200,IgnoreAspect);
+                //currentprojection=perspective(7,2,1);
+                currentprojection=orthographic(17,17,11);
+                defaultrender.merge=true;
+
+                // setup and draw the axes
+                real[] myxchoice={-1,1};
+                real[] myychoice={-1,1};
+                real[] myzchoice={-1,1};
+                defaultpen(0.5mm);
+                pair xbounds=(-1.25,1.25);
+                pair ybounds=(-1.25,1.25);
+                pair zbounds=(-1.25,1.25);
+
+                xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                //Draw the parabola z=y^2 for t from -2 to 2
+                triple g(real t) {return (sqrt(3)/2*cos(t),sqrt(3)/2*sin(t),.5);}
+                path3 mypath=graph(g,0,2pi,operator ..); draw(mypath,blue);
+
+                //Draw the cylinder z=y^2
+                triple f(pair t) {
+                  return (sin(t.x)*cos(t.y),sin(t.x)*sin(t.y),cos(t.x));
+                }
+                surface s=surface(f,(pi/3,0),(pi,2pi),8,8,Spline);
+                pen p=rgb(0,0,.7);
+                draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+                //Draw the cylinder z=y^2
+                triple f(pair t) {
+                  return (t.y*sqrt(3)/2*cos(t.x),t.y*sqrt(3)/2*sin(t.x),.5);
+                }
+                surface s=surface(f,(0,0),(2pi,1),8,8,Spline);
+                pen p=rgb(0,0,.7);
+                draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+                // ////////////////////////////////////
+                //    SAMPLE CODE
+
+                // defaultpen(fontsize(10pt));
+
+                //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+                //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+
+                //triple f(pair t) {
+                //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+                //}
+                //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+
+                //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+                //path3 mypath=graph(g,-2,2,operator ..);
+
+                //pen p=rgb(0,0,1);
+                //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+                //draw(s,paleblue);
+                //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+                //draw(mypath,2bp+blue);
+
+              </asymptote>
+            </image>
+          </sidebyside>
+        </statement>
+        <answer>
+          <p>
+            <m>9\pi/8</m>; the flux over
+            <m>\surfaceS_1</m> is <m>3\pi/4</m> (use
+            <m>\vec r(u,v) = \langle \sin u\cos v,\sin u\sin v,\cos u\rangle</m> on <m>\pi/3\leq u\leq \pi</m>,
+            <m>0\leq v\leq 2\pi</m>) and the flux over
+            <m>\surfaceS_2</m> is <m>3\pi/8</m> (use <m>\vec r(u,v) = \langle v\sqrt{3}\cos (u)/2, v\sqrt{3}\sin(u)/2,1/2\rangle</m> for
+            <m>0\leq u\leq 2\pi</m>, <m>0\leq v\leq 1</m>.
+          </p>
+        </answer>
+      </exercise>
+    </exercisegroup>
+  </exercises>
 </section>
-
