@@ -1,5 +1,4 @@
-
-
+<?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="sec_line_int_vf">
   <title>Line Integrals over Vector Fields</title>
   <introduction>
@@ -27,7 +26,7 @@
       that <m>C</m> can be parametrized by the arc length parameter <m>s</m>.
       Over a short piece of the curve with length <m>ds</m>,
       the curve is approximately straight and our force is approximately constant.
-      The straight<ndash />line direction of this short length of curve is given by <m>\vec T</m>,
+      The straight<ndash/>line direction of this short length of curve is given by <m>\vec T</m>,
       the unit tangent vector;
       let <m>\vec d = \vec T\, ds</m>,
       which gives the direction and magnitude of a small section of <m>C</m>.
@@ -52,7 +51,7 @@
       yet is not so useful in making actual computations
       (largely because the arc length parameter is so difficult to work with).
       To compute actual work,
-      we need to parametrize <m>C</m> with another parameter <m>t</m> via a vector<ndash />valued function <m>\vec r(t)</m>.
+      we need to parametrize <m>C</m> with another parameter <m>t</m> via a vector<ndash/>valued function <m>\vec r(t)</m>.
       As stated in <xref ref="sec_line_int_intro">Section</xref>,
       <m>ds = \norm{\vrp(t)}\, dt</m>,
       and recall that <m>\vec T = \vrp(t)/\norm{\vrp(t)}</m>.
@@ -102,10 +101,10 @@
       note how the dot product <m>\vec F \cdot \vec T</m> is just a scalar.
       Therefore, this new line integral is really just a special kind of line integral found in <xref ref="sec_line_int_intro">Section</xref>;
       letting <m>f(s) = \vec F(s)\cdot \vec T(s)</m>,
-      the right<ndash />hand side simply becomes <m>\int_C f(s)\, ds</m>,
+      the right<ndash/>hand side simply becomes <m>\int_C f(s)\, ds</m>,
       and we can use the techniques of that section to evaluate the integral.
       We combine those techniques,
-      along with parts of Equation <xref ref="eq_line_integral" />,
+      along with parts of Equation <xref ref="eq_line_integral"/>,
       to clearly state how to evaluate a line integral over a vector field in the following Key Idea.
     </p>
 
@@ -170,7 +169,7 @@
         </p>
 
         <p>
-          Along the straight<ndash />line path,
+          Along the straight<ndash/>line path,
           <m>\vec F\big(\vec r_1(t)\big) = \langle x, x+y\rangle = \langle t, t+t\rangle = \langle t,2t\rangle</m>.
           We find <m>\vrp_1(t) =\langle 1,2\rangle</m>.
           The integral that computes work is:
@@ -195,7 +194,89 @@
 
         <figure xml:id="fig_livf1">
           <caption>Paths through a vector field in <xref ref="ex_livf1">Example</xref>.</caption>
-          <img src="figures/figlivf1"/>
+          <image xml:id="img_livf1">
+            <description></description>
+            <asymptote>
+
+              import graph;
+              size(150,150);
+
+              // vector field F = ⟨ x, x+y ⟩
+
+              defaultpen(fontsize(8));
+
+              bool incolor;
+              incolor = true;
+
+              pen colorone;
+              pen colortwo;
+              pen mainvect;
+              pen bgvect;
+
+              if(incolor) {
+                colorone = blue+1.5pt+linejoin(0);
+                colortwo = red+1.5pt+linejoin(0);
+                mainvect = blue + linejoin(0);
+                bgvect = rgb(.6,.6,.6)+linejoin(0);
+                } else
+                {
+                colorone = black+1.5pt+linejoin(0);
+                colortwo = gray+1.5pt+linejoin(0);
+                mainvect = black + linejoin(0);
+                bgvect = rgb(.6,.6,.6)+linejoin(0);
+                };
+
+              bool incolor;
+              incolor = true;
+
+              pen colorone;
+              pen colortwo;
+
+              if(incolor) {
+                colorone = blue+1.5pt;
+                colortwo = red+1.5pt;
+                } else
+                {
+                colorone = black+1.5pt;
+                colortwo = gray+1.5pt;
+                };
+
+              real f(real x) {return x;}
+              pair F(real x) {return (x,f(x));}
+
+              real g(real x) {return x^4;}
+              pair G(real x) {return (x,g(x));}
+
+
+              pair xbounds=(-.1,1.1);
+              pair ybounds=(-.1,1.1);
+              real[] myxchoice={1};
+              real[] myychoice={1};
+
+              xaxis("",xbounds.x,xbounds.y,Ticks(myxchoice),arrow=Arrow(DefaultHead,size=4));
+              yaxis("",ybounds.x,ybounds.y,Ticks(myychoice),arrow=Arrow(DefaultHead,size=4));
+
+              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0));
+              //label("\phantom{$x$}",(xbounds.x-0.05*(xbounds.y-xbounds.x),0));
+              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x)));
+              //label("\phantom{$y$}",(0,ybounds.x-0.05*(ybounds.y-ybounds.x)));
+
+              pair a=(0,0);
+              pair b=(1,1);
+
+              pair vectfunction(pair z) {return (z.x,z.x+z.y);}
+              path vector(pair t) {return -vectfunction(t)/2 -- vectfunction(t)/2;}
+
+              add(vectorfield(vector,a,b,12,12,bgvect));
+
+              draw(graph(f,0,1,operator ..),colorone);
+              draw(graph(g,0,1,operator ..),colortwo);
+
+              label("$y=x$",(.4,.55),filltype=Fill(white));
+              label("$y=x^4$",(.55,.25),filltype=Fill(white));
+
+            </asymptote>
+          </image>
         </figure>
 
         <p>
@@ -231,7 +312,75 @@
 
         <figure xml:id="fig_livf2">
           <caption>Paths through a vector field in <xref ref="ex_livf2">Example</xref>.</caption>
-          <img src="figures/figlivf2"/>
+          <image xml:id="img_livf2">
+            <description></description>
+            <asymptote>
+
+              import graph;
+              size(150,150);
+
+              // vector field F = ⟨ y, x ⟩
+
+              defaultpen(fontsize(8));
+
+              bool incolor;
+              incolor = true;
+
+              pen colorone;
+              pen colortwo;
+              pen mainvect;
+              pen bgvect;
+
+              if(incolor) {
+                colorone = blue+1.5pt+linejoin(0);
+                colortwo = red+1.5pt+linejoin(0);
+                mainvect = blue + linejoin(0);
+                bgvect = rgb(.6,.6,.6)+linejoin(0);
+                } else
+                {
+                colorone = black+1.5pt+linejoin(0);
+                colortwo = gray+1.5pt+linejoin(0);
+                mainvect = black + linejoin(0);
+                bgvect = rgb(.6,.6,.6)+linejoin(0);
+                };
+
+              real f(real x) {return 2*x^2-1;}
+              pair F(real x) {return (x,f(x));}
+
+              //real g(real x) {return x^4;}
+              //pair G(real x) {return (x,g(x));}
+
+              pair G(real t) {return (cos(t),sin(t)+1);}
+
+              pair xbounds=(-1.1,1.1);
+              pair ybounds=(-1.1,1.1);
+              real[] myxchoice={-1,1};
+              real[] myychoice={-1,1};
+
+              xaxis("",xbounds.x,xbounds.y,Ticks(myxchoice),arrow=Arrow(DefaultHead,size=4));
+              yaxis("",ybounds.x,ybounds.y,Ticks(myychoice),arrow=Arrow(DefaultHead,size=4));
+
+              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0));
+              //label("\phantom{$x$}",(xbounds.x-0.05*(xbounds.y-xbounds.x),0));
+              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x)));
+              //label("\phantom{$y$}",(0,ybounds.x-0.05*(ybounds.y-ybounds.x)));
+
+              pair a=(-1,-1);
+              pair b=(1,1);
+
+              pair vectfunction(pair z) {return (z.y,z.x);}
+              path vector(pair t) {return -vectfunction(t)/2 -- vectfunction(t)/2;}
+
+              add(vectorfield(vector,a,b,12,12,bgvect));
+
+              draw(graph(F,-1,1,operator ..),colorone);
+              draw(graph(G,pi,2*pi,operator ..),colortwo);
+
+              label("$y=2x^2-1$",(.7,-.9),filltype=Fill(white+opacity(.7)));
+              label("$x^2+(y-1)^2=1$",(0,.25),filltype=Fill(white+opacity(.7)));
+
+            </asymptote>
+          </image>
         </figure>
 
         <p>
@@ -295,40 +444,42 @@
     <theorem xml:id="thm_line_int_properties_vector">
       <title>Properties of Line Integrals Over Vector Fields</title>
       <statement>
-        <ol>
-          <li>
-            <p>
-              Let <m>\vec F</m> and <m>\vec G</m> be  vector fields with continuous components defined on a smooth curve <m>C</m>,
-              parametrized by <m>\vrt</m>, and let <m>k_1</m> and <m>k_2</m> be scalars.
-              Then<idx><h>line integral</h><h>properties over a vector field</h></idx>
-              <me>
-                \ds \int_C\big(k_1\vec F+k_2\vec G\big)\cdot d\vec r = k_1\int_C\vec F\cdot d\vec r +k_2\int_C\vec G\cdot d\vec r
-              </me>.
-            </p>
-          </li>
+        <p>
+          <ol>
+            <li>
+              <p>
+                Let <m>\vec F</m> and <m>\vec G</m> be  vector fields with continuous components defined on a smooth curve <m>C</m>,
+                parametrized by <m>\vrt</m>, and let <m>k_1</m> and <m>k_2</m> be scalars.
+                Then<idx><h>line integral</h><h>properties over a vector field</h></idx>
+                <me>
+                  \ds \int_C\big(k_1\vec F+k_2\vec G\big)\cdot d\vec r = k_1\int_C\vec F\cdot d\vec r +k_2\int_C\vec G\cdot d\vec r
+                </me>.
+              </p>
+            </li>
 
-          <li>
-            <p>
-              Let <m>C</m> be piecewise smooth,
-              composed of smooth components <m>C_1</m> and <m>C_2</m>.
-              Then
-              <me>
-                \int_C\vec F\cdot d\vec r = \int_{C_1}\vec F\cdot d\vec r + \int_{C_2}\vec F\cdot d\vec r
-              </me>.
-            </p>
-          </li>
+            <li>
+              <p>
+                Let <m>C</m> be piecewise smooth,
+                composed of smooth components <m>C_1</m> and <m>C_2</m>.
+                Then
+                <me>
+                  \int_C\vec F\cdot d\vec r = \int_{C_1}\vec F\cdot d\vec r + \int_{C_2}\vec F\cdot d\vec r
+                </me>.
+              </p>
+            </li>
 
-          <li>
-            <p>
-              Let <m>C^*</m> be the curve <m>C</m> with opposite orientation,
-              parametrized by <m>\vec r\,^*</m>.
-              Then
-              <me>
-                \int_C\vec F\cdot d\vec r = -\int_{C^*}\vec F\cdot d\vec r\,^*
-              </me>.
-            </p>
-          </li>
-        </ol>
+            <li>
+              <p>
+                Let <m>C^*</m> be the curve <m>C</m> with opposite orientation,
+                parametrized by <m>\vec r\,^*</m>.
+                Then
+                <me>
+                  \int_C\vec F\cdot d\vec r = -\int_{C^*}\vec F\cdot d\vec r\,^*
+                </me>.
+              </p>
+            </li>
+          </ol>
+        </p>
       </statement>
     </theorem>
 
@@ -349,7 +500,75 @@
 
         <figure xml:id="fig_livf3">
           <caption>The vector field and curve in <xref ref="ex_livf3">Example</xref>.</caption>
-          <img src="figures/figlivf3"/>
+          <image xml:id="img_livf3">
+            <description></description>
+            <asymptote>
+
+              import graph;
+              size(150,150);
+
+              // vector field F = ⟨ 3(y-.5), 1 ⟩
+
+              defaultpen(fontsize(8));
+
+              bool incolor;
+              incolor = true;
+
+              pen colorone;
+              pen colortwo;
+              pen mainvect;
+              pen bgvect;
+
+              if(incolor) {
+                colorone = blue+1.5pt+linejoin(0);
+                colortwo = red+1.5pt+linejoin(0);
+                mainvect = blue + linejoin(0);
+                bgvect = rgb(.6,.6,.6)+linejoin(0);
+                } else
+                {
+                colorone = black+1.5pt+linejoin(0);
+                colortwo = gray+1.5pt+linejoin(0);
+                mainvect = black + linejoin(0);
+                bgvect = rgb(.6,.6,.6)+linejoin(0);
+                };
+
+              pair xbounds=(-.2,1.2);
+              pair ybounds=(-.2,1.2);
+              real[] myxchoice={1};
+              real[] myychoice={1};
+
+              xaxis("",xbounds.x,xbounds.y,Ticks(myxchoice),arrow=Arrow(DefaultHead,size=4));
+              yaxis("",ybounds.x,ybounds.y,Ticks(myychoice),arrow=Arrow(DefaultHead,size=4));
+
+              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0));
+              //label("\phantom{$x$}",(xbounds.x-0.05*(xbounds.y-xbounds.x),0));
+              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x)));
+              //label("\phantom{$y$}",(0,ybounds.x-0.05*(ybounds.y-ybounds.x)));
+
+              pair a=(-.1,-.1);
+              pair b=(1.1,1.1);
+
+              pair vectfunction(pair z) {return (3(z.y-.5),1);}
+              path vector(pair t) {return -vectfunction(t)/2 -- vectfunction(t)/2;}
+
+              add(vectorfield(vector,a,b,12,12,bgvect));
+
+              real f(real x) {return 2*x^2-1;}
+              pair F(real x) {return (x,x^3);}
+
+              //real g(real x) {return x^4;}
+              //pair G(real x) {return (x,g(x));}
+
+              pair G(real t) {return (t,t);}
+
+              draw(graph(F,0,1,operator ..),colorone,arrow=MidArrow(5));
+              draw(graph(G,1,0,operator ..),colortwo,arrow=MidArrow(5));
+
+              //label("$y=2x^2-1$",(.7,-.9),filltype=Fill(white+opacity(.7)));
+              //label("$x^2+(y-1)^2=1$",(0,.25),filltype=Fill(white+opacity(.7)));
+
+            </asymptote>
+          </image>
         </figure>
       </statement>
       <solution>
@@ -421,14 +640,115 @@
 
         <figure xml:id="fig_livf4">
           <caption>The graph of <m>\vec r(t)</m> in <xref ref="ex_livf4">Example</xref>.</caption>
-          \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          <!-- \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
           3Droll=0,
           3Dortho=0.005022394936531782,
           3Dc2c=0.7812440395355225 0.4906015396118164 0.38596370816230774,
           3Dcoo=12.9679536819458 12.412303924560547 19.615886688232422,
           3Droo=399.99998637870164,
-          3Dlights=Headlamp,add3Djscript=asylabels.js}
-          <img src="figures/figlivf4_3D"/>
+          3Dlights=Headlamp,add3Djscript=asylabels.js} -->
+          <image xml:id="img_livf4_3D">
+            <description></description>
+            <asymptote>
+
+              import graph3;
+
+              size(200,200,IgnoreAspect);
+              currentprojection=orthographic(16.8,9.4,8.6);
+              defaultrender.merge=true;
+
+              // setup and draw the axes
+              real[] myxchoice={1};
+              real[] myychoice={1};
+              real[] myzchoice={1};
+              defaultpen(0.25mm);
+              pair xbounds=(-1.5,1.5);
+              pair ybounds=(-1.5,1.5);
+              pair zbounds=(-1.5,1.5);
+
+              xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+              yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+              zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+              label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+              path3 gradient1(triple z){
+                return O--(-z.y,z.x,1);
+              }
+
+              triple A=(-1,-1,-1);
+              triple B=(1,1,1);
+
+              picture VectorPlot3D(path3 vector(triple t), triple a, triple b,
+                                  int nx=nmesh, int ny=nx, int nz=nx,bool truesize=false,
+                                  real maxlength=truesize ? 0 : min(abs(b.x-a.x)/nx,abs(b.y-a.y)/ny,abs(b.z-a.z)/nz),
+                                  //  bool cond(pair z)=null,
+                                  pen p=currentpen,
+                                  arrowbar3 arrow=Arrow3(6), margin3 margin=PenMargin3,
+                                  string name="", render render=defaultrender)
+              {
+                picture pic;
+                real dx=1/nx;
+                real dy=1/ny;
+                real dz=1/nz;
+                real scale;
+                if(maxlength &gt; 0) {
+                  real size(triple t) {
+                    path3 g=vector(t);
+                    return abs(point(g,size(g)-1)-point(g,0));
+                  }
+                  real max=size((0,0,0));
+
+                  for(int i=0; i &lt;= nx; ++i) {
+                    real x=interp(a.x,b.x,i*dx);
+                    for(int j=0; j &lt;= ny; ++j)
+                      {
+                        real y=interp(a.y,b.y,j*dy);
+                        for(int k=0; k &lt;= nz; ++k)
+                          max=max(max,size((x,y,interp(a.z,b.z,k*dz))));
+                      }}
+                  scale=max &gt; 0 ? maxlength/max : 1;
+                } else scale=1;
+                bool group=name != "" || render.defaultnames;
+                if(group)
+                  begingroup3(pic,name == "" ? "vectorfield" : name,render);
+                for(int i=0; i &lt;= nx; ++i) {
+                  real x=interp(a.x,b.x,i*dx);
+                  for(int j=0; j &lt;= ny; ++j) {
+                    real y=interp(a.y,b.y,j*dy);
+                    for(int k=0; k &lt;= nz; ++k)
+                      {      triple z=(x,y,interp(a.z,b.z,k*dz));
+                        {
+                          path3 g=scale3(scale)*vector(z);
+                          string name="vector";
+                          if(truesize) {
+                            picture opic;
+                            draw(opic,g,p,arrow,margin,name,render);
+                            add(pic,opic,z);
+                          } else
+                            draw(pic,shift(z)*g,p,arrow,margin,name,render);
+                        }
+                      }
+                  }}
+                if(group)
+                  endgroup3(pic);
+                return pic;
+
+              }
+              add(VectorPlot3D(gradient1,A,B,3,3,3,blue));
+
+              pen curvepen=.5mm+red;
+              triple g(real t) {return(cos(t),sin(t),t/(2*pi));}
+              path3 mypath=graph(g,0,2pi,operator ..);
+              draw(mypath,curvepen,MidArrow3(6));
+
+              //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+              //path3 mypath=graph(g,-1,1,operator ..);
+
+            </asymptote>
+          </image>
         </figure>
       </statement>
       <solution>
@@ -489,14 +809,14 @@
       We have applied these terms to regions of the plane,
       but they can be extended intuitively to domains in space
       (and hyperspace).
-      In <xref ref="fig_simply_connected_space">Figure</xref>(a),
+      In <xref ref="fig_simply_connected_spacea_3D">Figure</xref>,
       the domain bounded by the sphere
       (at left)
       and the domain with a subsphere removed
       (at right)
       are both simply connected.
       Any simple closed path that lies entirely within these domains can be continuously deformed into a single point.
-      In <xref ref="fig_simply_connected_space">Figure</xref>(b),
+      In <xref ref="fig_simply_connected_spacea_3D">Figure</xref>,
       neither domain is simply connected.
       A left, the ball has a hole that extends its length and the pictured closed path cannot be deformed to a point.
       At right, two paths are illustrated on the torus that cannot be shrunk to a point.
@@ -508,34 +828,263 @@
 
     <figure xml:id="fig_simply_connected_plane">
       <caption><m>R_1</m> is simply connected; <m>R_2</m> is connected, but not simply connected; <m>R_3</m> is not connected.</caption>
-      <img src="figures/figsimply_connected_c"/>
+      <image xml:id="img_simply_connected_plane">
+        <description></description>
+        <latex-image>
+
+          \begin{tikzpicture}
+
+          \begin{axis}[
+            axis y line=none,
+            axis x line=none,
+            ymin=-.75,ymax=3,
+            xmin=-2,xmax=2,
+          ]
+
+          \draw (axis cs: -1.6,1.4) node {$R_1$}
+                (axis cs: 1.6,1.1) node {$R_2$}
+                (axis cs: 0,.6) node {$R_3$};
+
+          \addplot [firstcurvestyle,areastyle] coordinates {(-0.45,2.)(-0.4429,2.07)(-0.4788,2.134)(-0.5466,2.18)(-0.6142,2.212)(-0.6552,2.251)(-0.6695,2.31)(-0.6802,2.387)(-0.7106,2.456)(-0.766,2.497)(-0.8346,2.509)(-0.9034,2.506)(-0.9684,2.502)(-1.031,2.496)(-1.091,2.476)(-1.144,2.442)(-1.192,2.407)(-1.246,2.388)(-1.318,2.384)(-1.399,2.374)(-1.464,2.337)(-1.49,2.27)(-1.476,2.189)(-1.447,2.115)(-1.435,2.055)(-1.45,2.)(-1.477,1.94)(-1.491,1.874)(-1.482,1.809)(-1.457,1.749)(-1.426,1.691)(-1.389,1.634)(-1.339,1.59)(-1.273,1.57)(-1.2,1.576)(-1.135,1.586)(-1.081,1.573)(-1.03,1.528)(-0.9669,1.474)(-0.8941,1.445)(-0.8255,1.463)(-0.7738,1.519)(-0.737,1.586)(-0.702,1.64)(-0.6605,1.681)(-0.6167,1.722)(-0.5804,1.769)(-0.5524,1.823)(-0.5227,1.877)(-0.4848,1.935)(-0.45,2.)};
+          \addplot [firstcurvestyle,-,smooth] coordinates {(-0.45,2.)(-0.4429,2.07)(-0.4788,2.134)(-0.5466,2.18)(-0.6142,2.212)(-0.6552,2.251)(-0.6695,2.31)(-0.6802,2.387)(-0.7106,2.456)(-0.766,2.497)(-0.8346,2.509)(-0.9034,2.506)(-0.9684,2.502)(-1.031,2.496)(-1.091,2.476)(-1.144,2.442)(-1.192,2.407)(-1.246,2.388)(-1.318,2.384)(-1.399,2.374)(-1.464,2.337)(-1.49,2.27)(-1.476,2.189)(-1.447,2.115)(-1.435,2.055)(-1.45,2.)(-1.477,1.94)(-1.491,1.874)(-1.482,1.809)(-1.457,1.749)(-1.426,1.691)(-1.389,1.634)(-1.339,1.59)(-1.273,1.57)(-1.2,1.576)(-1.135,1.586)(-1.081,1.573)(-1.03,1.528)(-0.9669,1.474)(-0.8941,1.445)(-0.8255,1.463)(-0.7738,1.519)(-0.737,1.586)(-0.702,1.64)(-0.6605,1.681)(-0.6167,1.722)(-0.5804,1.769)(-0.5524,1.823)(-0.5227,1.877)(-0.4848,1.935)(-0.45,2.)};
+
+          \addplot [firstcurvestyle,areastyle] coordinates {(1.825,2.)(1.798,2.101)(1.715,2.183)(1.663,2.262)(1.664,2.365)(1.656,2.477)(1.579,2.543)(1.452,2.547)(1.345,2.544)(1.287,2.609)(1.239,2.735)(1.159,2.831)(1.052,2.824)(0.9532,2.744)(0.8693,2.685)(0.7754,2.691)(0.6668,2.708)(0.5799,2.662)(0.5417,2.554)(0.5173,2.453)(0.4423,2.405)(0.3111,2.379)(0.202,2.316)(0.1927,2.207)(0.2657,2.093)(0.325,2.)(0.3095,1.913)(0.2618,1.81)(0.2683,1.71)(0.3498,1.643)(0.4423,1.595)(0.4851,1.516)(0.4962,1.391)(0.5417,1.278)(0.648,1.252)(0.7754,1.309)(0.8775,1.358)(0.9577,1.327)(1.047,1.247)(1.15,1.212)(1.239,1.265)(1.305,1.351)(1.384,1.396)(1.498,1.398)(1.611,1.427)(1.656,1.523)(1.626,1.656)(1.597,1.764)(1.646,1.834)(1.754,1.905)(1.825,2.)};
+          \addplot [firstcurvestyle,-,smooth] coordinates {(1.825,2.)(1.798,2.101)(1.715,2.183)(1.663,2.262)(1.664,2.365)(1.656,2.477)(1.579,2.543)(1.452,2.547)(1.345,2.544)(1.287,2.609)(1.239,2.735)(1.159,2.831)(1.052,2.824)(0.9532,2.744)(0.8693,2.685)(0.7754,2.691)(0.6668,2.708)(0.5799,2.662)(0.5417,2.554)(0.5173,2.453)(0.4423,2.405)(0.3111,2.379)(0.202,2.316)(0.1927,2.207)(0.2657,2.093)(0.325,2.)(0.3095,1.913)(0.2618,1.81)(0.2683,1.71)(0.3498,1.643)(0.4423,1.595)(0.4851,1.516)(0.4962,1.391)(0.5417,1.278)(0.648,1.252)(0.7754,1.309)(0.8775,1.358)(0.9577,1.327)(1.047,1.247)(1.15,1.212)(1.239,1.265)(1.305,1.351)(1.384,1.396)(1.498,1.398)(1.611,1.427)(1.656,1.523)(1.626,1.656)(1.597,1.764)(1.646,1.834)(1.754,1.905)(1.825,2.)};
+
+          \addplot [fill=white] coordinates {(1.12,1.75)(1.123,1.778)(1.117,1.806)(1.103,1.83)(1.082,1.85)(1.057,1.864)(1.032,1.874)(1.01,1.883)(0.9914,1.894)(0.9744,1.908)(0.9568,1.925)(0.9366,1.942)(0.9129,1.955)(0.8866,1.963)(0.8594,1.963)(0.8332,1.956)(0.8091,1.943)(0.7873,1.928)(0.7674,1.91)(0.7492,1.892)(0.7332,1.871)(0.7207,1.849)(0.7131,1.824)(0.7112,1.798)(0.7142,1.773)(0.72,1.75)(0.7259,1.728)(0.7296,1.706)(0.7308,1.683)(0.731,1.657)(0.7332,1.629)(0.7406,1.6)(0.7553,1.575)(0.7771,1.556)(0.8041,1.546)(0.8332,1.544)(0.8616,1.549)(0.8878,1.556)(0.9117,1.564)(0.9344,1.57)(0.9568,1.575)(0.9794,1.581)(1.002,1.59)(1.022,1.602)(1.041,1.618)(1.057,1.636)(1.071,1.656)(1.085,1.677)(1.099,1.699)(1.111,1.723)(1.12,1.75)};
+          \addplot [firstcurvestyle,-,smooth] coordinates {(1.12,1.75)(1.123,1.778)(1.117,1.806)(1.103,1.83)(1.082,1.85)(1.057,1.864)(1.032,1.874)(1.01,1.883)(0.9914,1.894)(0.9744,1.908)(0.9568,1.925)(0.9366,1.942)(0.9129,1.955)(0.8866,1.963)(0.8594,1.963)(0.8332,1.956)(0.8091,1.943)(0.7873,1.928)(0.7674,1.91)(0.7492,1.892)(0.7332,1.871)(0.7207,1.849)(0.7131,1.824)(0.7112,1.798)(0.7142,1.773)(0.72,1.75)(0.7259,1.728)(0.7296,1.706)(0.7308,1.683)(0.731,1.657)(0.7332,1.629)(0.7406,1.6)(0.7553,1.575)(0.7771,1.556)(0.8041,1.546)(0.8332,1.544)(0.8616,1.549)(0.8878,1.556)(0.9117,1.564)(0.9344,1.57)(0.9568,1.575)(0.9794,1.581)(1.002,1.59)(1.022,1.602)(1.041,1.618)(1.057,1.636)(1.071,1.656)(1.085,1.677)(1.099,1.699)(1.111,1.723)(1.12,1.75)};
+
+          \addplot [firstcurvestyle,areastyle] coordinates {(-0.05,0)(-0.0447,0.07015)(-0.07696,0.1343)(-0.1383,0.1828)(-0.2054,0.217)(-0.2552,0.2505)(-0.2804,0.3001)(-0.2931,0.3709)(-0.3146,0.4497)(-0.3593,0.5116)(-0.4255,0.5371)(-0.4999,0.5248)(-0.5691,0.4919)(-0.629,0.461)(-0.6849,0.4453)(-0.7436,0.442)(-0.8063,0.4384)(-0.8688,0.4236)(-0.9266,0.3947)(-0.9786,0.3555)(-1.026,0.3093)(-1.066,0.2559)(-1.09,0.1942)(-1.093,0.1266)(-1.075,0.06001)(-1.05,0)(-1.037,-0.05518)(-1.046,-0.1144)(-1.068,-0.1853)(-1.082,-0.2648)(-1.064,-0.3373)(-1.009,-0.3844)(-0.9306,-0.3996)(-0.8505,-0.3947)(-0.785,-0.3932)(-0.7345,-0.414)(-0.6873,-0.4575)(-0.6318,-0.5062)(-0.5662,-0.537)(-0.4976,-0.537)(-0.4346,-0.5091)(-0.3805,-0.4664)(-0.333,-0.4208)(-0.2891,-0.3758)(-0.2496,-0.329)(-0.2167,-0.2785)(-0.1892,-0.2258)(-0.1607,-0.1739)(-0.1245,-0.1221)(-0.08292,-0.06532)(-0.05,0)};
+          \addplot [firstcurvestyle,-,smooth] coordinates {(-0.05,0)(-0.0447,0.07015)(-0.07696,0.1343)(-0.1383,0.1828)(-0.2054,0.217)(-0.2552,0.2505)(-0.2804,0.3001)(-0.2931,0.3709)(-0.3146,0.4497)(-0.3593,0.5116)(-0.4255,0.5371)(-0.4999,0.5248)(-0.5691,0.4919)(-0.629,0.461)(-0.6849,0.4453)(-0.7436,0.442)(-0.8063,0.4384)(-0.8688,0.4236)(-0.9266,0.3947)(-0.9786,0.3555)(-1.026,0.3093)(-1.066,0.2559)(-1.09,0.1942)(-1.093,0.1266)(-1.075,0.06001)(-1.05,0)(-1.037,-0.05518)(-1.046,-0.1144)(-1.068,-0.1853)(-1.082,-0.2648)(-1.064,-0.3373)(-1.009,-0.3844)(-0.9306,-0.3996)(-0.8505,-0.3947)(-0.785,-0.3932)(-0.7345,-0.414)(-0.6873,-0.4575)(-0.6318,-0.5062)(-0.5662,-0.537)(-0.4976,-0.537)(-0.4346,-0.5091)(-0.3805,-0.4664)(-0.333,-0.4208)(-0.2891,-0.3758)(-0.2496,-0.329)(-0.2167,-0.2785)(-0.1892,-0.2258)(-0.1607,-0.1739)(-0.1245,-0.1221)(-0.08292,-0.06532)(-0.05,0)};
+
+          \addplot [firstcurvestyle,areastyle] coordinates {(1.15,0)(1.157,0.07033)(1.143,0.1393)(1.107,0.2007)(1.054,0.2495)(0.992,0.2848)(0.9305,0.3104)(0.8756,0.3332)(0.8286,0.3602)(0.786,0.3953)(0.742,0.4371)(0.6914,0.4793)(0.6323,0.5134)(0.5665,0.5321)(0.4985,0.5319)(0.433,0.514)(0.3727,0.4829)(0.3182,0.444)(0.2685,0.4007)(0.223,0.354)(0.183,0.303)(0.1517,0.2464)(0.1328,0.185)(0.128,0.1212)(0.1355,0.05868)(0.15,0)(0.1646,-0.055)(0.174,-0.1094)(0.177,-0.1675)(0.1775,-0.2323)(0.183,-0.303)(0.2016,-0.3742)(0.2382,-0.4373)(0.2928,-0.4841)(0.3602,-0.5095)(0.433,-0.514)(0.504,-0.503)(0.5695,-0.4846)(0.6293,-0.4659)(0.6859,-0.4504)(0.742,-0.4371)(0.7985,-0.4219)(0.8541,-0.4004)(0.9059,-0.3698)(0.952,-0.3305)(0.992,-0.2848)(1.028,-0.2353)(1.063,-0.1831)(1.097,-0.1275)(1.128,-0.06665)(1.15,0)};
+          \addplot [firstcurvestyle,-,smooth] coordinates {(1.15,0)(1.157,0.07033)(1.143,0.1393)(1.107,0.2007)(1.054,0.2495)(0.992,0.2848)(0.9305,0.3104)(0.8756,0.3332)(0.8286,0.3602)(0.786,0.3953)(0.742,0.4371)(0.6914,0.4793)(0.6323,0.5134)(0.5665,0.5321)(0.4985,0.5319)(0.433,0.514)(0.3727,0.4829)(0.3182,0.444)(0.2685,0.4007)(0.223,0.354)(0.183,0.303)(0.1517,0.2464)(0.1328,0.185)(0.128,0.1212)(0.1355,0.05868)(0.15,0)(0.1646,-0.055)(0.174,-0.1094)(0.177,-0.1675)(0.1775,-0.2323)(0.183,-0.303)(0.2016,-0.3742)(0.2382,-0.4373)(0.2928,-0.4841)(0.3602,-0.5095)(0.433,-0.514)(0.504,-0.503)(0.5695,-0.4846)(0.6293,-0.4659)(0.6859,-0.4504)(0.742,-0.4371)(0.7985,-0.4219)(0.8541,-0.4004)(0.9059,-0.3698)(0.952,-0.3305)(0.992,-0.2848)(1.028,-0.2353)(1.063,-0.1831)(1.097,-0.1275)(1.128,-0.06665)(1.15,0)};
+
+          \end{axis}
+
+          \end{tikzpicture}
+
+        </latex-image>
+      </image>
     </figure>
 
     <figure xml:id="fig_simply_connected_space">
       <caption>The domains in (a) are simply connected, while the domains in (b) are not.</caption>
       <sidebyside>
-        <figure>
-          <caption>(a)</caption>
-          \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
+        <figure xml:id="fig_simply_connected_spacea_3D">
+          <caption/>
+          <!-- \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
           3Droll=0,
           3Dortho=0.009668752551078796,
           3Dc2c=-0.040020350366830826 -0.8586178421974182 0.511051595211029,
           3Dcoo=0.47741085290908813 38.61087417602539 -23.2408390045166,
           3Droo=149.999998390057,
-          3Dlights=Headlamp,add3Djscript=asylabels.js}
-          <img src="figures/figsimply_connected_1_3D"/>
+          3Dlights=Headlamp,add3Djscript=asylabels.js} -->
+          <image xml:id="img_simply_connected_spacea_3D">
+            <description></description>
+            <asymptote>
+
+              import graph3;
+
+              //ASY file for fig10_01_ex_233D.asy in Chapter 10
+
+              size(200,200);
+              //currentprojection=perspective(7,2,1);
+              currentprojection=orthographic(0,-5,3);
+              defaultrender.merge=true;
+
+              // setup and draw the axes
+              real[] myxchoice={-1,1};
+              real[] myychoice={1};
+              real[] myzchoice={1,2};
+              defaultpen(0.5mm);
+              pair xbounds=(-1.1,1.1);
+              pair ybounds=(-1.1,1.1);
+              pair zbounds=(-1.1,1.1);
+
+              //xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+              //yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+              //zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+              //label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+              //label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+              //label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+              //Draw the surface z^2+x^2+y^2=1, a sphere shifted
+              triple f(pair t) {
+                return (cos(t.x)*sin(t.y)-1.1,sin(t.x)*sin(t.y),cos(t.y));
+              }
+              surface s=surface(f,(0,0),(2pi,pi),16,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              ,vsplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              );
+              pen p=rgb(0,0,.8)+.09mm;
+              draw(s,emissive(rgb(.6,.6,1)+opacity(.7)),meshpen=p);
+
+              //Draw the surface z^2+x^2+y^2=1, a sphere shifted
+              triple f(pair t) {
+                return (cos(t.x)*sin(t.y)+1.1,sin(t.x)*sin(t.y),cos(t.y));
+              }
+              surface s=surface(f,(0,0),(2pi,pi),16,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              ,vsplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              );
+              //pen p=rgb(0,0,.2);
+              draw(s,emissive(rgb(.6,.6,1)+opacity(.7)),meshpen=p);
+
+              //Draw the surface z^2+x^2+y^2=1, a smaller sphere shifted
+              triple f(pair t) {
+                return (.3*cos(t.x)*sin(t.y)+1.1,.3*sin(t.x)*sin(t.y),.3*cos(t.y));
+              }
+              surface s=surface(f,(0,0),(2pi,pi),16,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              ,vsplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              );
+              //pen p=rgb(0,0,.2);
+              draw(s,emissive(rgb(.8,.8,1)+opacity(.7)),meshpen=p);
+
+              triple g(real t) {return (t,t^2,-cos(t)*sin(t^2)+1);}
+              path3 mypath=graph(g,-1,1,operator ..);
+              //draw(mypath,blue+linewidth(2));
+
+              triple g(real t) {return (t,t^2,0);}
+              path3 mypath=graph(g,-1,1,operator ..);
+              //draw(mypath,blue+linewidth(2)+dashed);
+
+              // ////////////////////////////////////
+              //    SAMPLE CODE
+
+              // defaultpen(fontsize(10pt));
+
+              //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+              //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+
+              //triple f(pair t) {
+              //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+              //}
+              //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+
+              //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+              //path3 mypath=graph(g,-1,1,operator ..);
+
+              //pen p=rgb(0,0,1);
+              //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+              //draw(s,paleblue);
+              //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+              //draw(mypath,2bp+blue);
+
+            </asymptote>
+          </image>
         </figure>
 
-        <figure>
-          <caption>(b)</caption>
-          \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
+        <figure xml:id="fig_simply_connected_spaceb_3D">
+          <caption/>
+          <!-- \apexincludemedia{width=145pt,3Dmenu,activate=onclick,deactivate=onclick,
           3Droll=0,
           3Dortho=0.009668752551078796,
           3Dc2c=-0.040020350366830826 -0.8586178421974182 0.511051595211029,
           3Dcoo=0.47741085290908813 38.61087417602539 -23.2408390045166,
           3Droo=149.999998390057,
-          3Dlights=Headlamp,add3Djscript=asylabels.js}
-          <img src="figures/figsimply_connected_2_3D"/>
+          3Dlights=Headlamp,add3Djscript=asylabels.js} -->
+          <image xml:id="img_simply_connected_spaceb_3D">
+            <description></description>
+            <asymptote>
+
+              import graph3;
+
+              //ASY file for fig10_01_ex_233D.asy in Chapter 10
+
+              size(200,200);
+              //currentprojection=perspective(7,2,1);
+              currentprojection=orthographic(0,-5,3);
+              defaultrender.merge=true;
+
+              // setup and draw the axes
+              real[] myxchoice={-1,1};
+              real[] myychoice={1};
+              real[] myzchoice={1,2};
+              defaultpen(0.5mm);
+              pair xbounds=(-1.1,1.1);
+              pair ybounds=(-1.1,1.1);
+              pair zbounds=(-1.1,1.1);
+
+              //xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+              //yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+              //zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+              //label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+              //label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+              //label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+              //Draw the surface z^2+x^2+y^2=1, a sphere
+              triple f(pair t) {
+                return (cos(t.x)*sin(t.y)-1.1,sin(t.x)*sin(t.y),cos(t.y));
+              }
+              surface s=surface(f,(0,1/4),(2pi,pi-1/4),16,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              ,vsplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              );
+              pen p=rgb(0,0,.8)+.09mm;
+              draw(s,emissive(rgb(.6,.6,1)+opacity(.6)),meshpen=p);
+
+              //Draw the surface z^2+x^2+y^2=1, a sphere
+              triple f(pair t) {
+                return (cos(t.x)*sin(.25)-1.1,sin(t.x)*sin(.25),cos(.25)+t.y*(cos(pi-.25)-cos(.25)));
+              }
+              surface s=surface(f,(0,0),(2pi,1),16,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              ,vsplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              );
+              //pen p=rgb(0,0,.2);
+              draw(s,emissive(rgb(.6,.6,1)+opacity(.7)),meshpen=p);
+
+              triple g(real t) {return (cos(t)-1.1, sin(t),0);}
+              path3 mypath=graph(g,0,2pi,operator ..);
+              draw(mypath,blue+linewidth(1));
+
+              //Draw the torus
+              real cc=.75;
+              real aa=.25;
+              triple f(pair t) {
+                return ((cc+aa*cos(t.y))*cos(t.x)+1.1,(cc+aa*cos(t.y))*sin(t.x),aa*sin(t.y));
+              }
+              surface s=surface(f,(0,0),(2pi,2pi),16,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              ,vsplinetype=new splinetype[] {notaknot,notaknot,monotonic}
+              );
+              //pen p=rgb(0,0,.7);
+              draw(s,emissive(rgb(.6,.6,1)+opacity(.7)),meshpen=p);
+
+              triple g(real t) {return (cos(t)+1.1,sin(t),0);}
+              path3 mypath=graph(g,0,2pi,operator ..);
+              draw(mypath,blue+linewidth(1));
+
+              real yy = 5pi/4;
+
+              triple g(real t) {return ((cc+aa*cos(t))*cos(yy)+1.1,(cc+aa*cos(t))*sin(yy),aa*sin(t));}
+              path3 mypath=graph(g,0,2pi,operator ..);
+              draw(mypath,blue+linewidth(1));
+
+              // ////////////////////////////////////
+              //    SAMPLE CODE
+
+              // defaultpen(fontsize(10pt));
+
+              //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+              //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+
+              //triple f(pair t) {
+              //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+              //}
+              //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+
+              //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+              //path3 mypath=graph(g,-1,1,operator ..);
+
+              //pen p=rgb(0,0,1);
+              //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+              //draw(s,paleblue);
+              //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+              //draw(mypath,2bp+blue);
+
+            </asymptote>
+          </image>
         </figure>
       </sidebyside>
 
@@ -558,7 +1107,7 @@
         <p>
           Let <m>\vec F</m> be a vector field defined on an open,
           connected domain <m>D</m> in the plane or in space containing points <m>A</m> and <m>B</m>.
-          If the line integral <m>\int_C \vec F\cdot d\vec r</m><nbsp /> has the same value for all choices of paths <m>C</m> starting at <m>A</m> and ending at <m>B</m>, then
+          If the line integral <m>\int_C \vec F\cdot d\vec r</m><nbsp/> has the same value for all choices of paths <m>C</m> starting at <m>A</m> and ending at <m>B</m>, then
               <idx><h>conservative field</h></idx>
               <idx><h>vector field</h><h>conservative</h></idx>
               <idx><h>path independent</h></idx>
@@ -813,451 +1362,477 @@
     </p>
   </subsection>
 
-  <subsection>
-    <title>Terms and Concepts</title>
-    <exercise>
-      <statement>
+  <exercises>
+    <exercisegroup>
+      <introduction>
         <p>
-          T/F: In practice,
-          the evaluation of line integrals over vector fields involves computing the magnitude of a vector<ndash />valued function.
+          Terms and Concepts
         </p>
-      </statement>
-      <answer>
-        <p>
-          False.
-          It is true for line integrals over scalar fields, though.
-        </p>
-      </answer>
-    </exercise>
+      </introduction>
 
-    <exercise>
-      <statement>
-        <p>
-          Let <m>\vec F(x,y)</m> be a vector field in the plane and let
-          <m>\vec r(t)</m> be a two<ndash />dimensional vector<ndash />valued function.
-          Why is <q><m>\vec F\big(\vec r(t)\big)</m></q>
-          an <q>abuse of notation</q>?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          The input of <m>\vec F</m> should be a point in the plane,
-          not a two dimensional vector.
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          T/F: The orientation of a curve <m>C</m> matters when computing a line integral over a vector field.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          True.
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          T/F: The orientation of a curve <m>C</m> matters when computing a line integral over a scalar field.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          False.
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          Under <q>reasonable conditions,</q>
-          if <m>\curl \vec F = \vec 0</m>,
-          what can we conclude about the vector field <m>\vec F</m>?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          We can conclude that <m>\vec F</m> is conservative.
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          Let <m>\vec F</m> be a conservative field and let <m>C</m> be a closed curve.
-          Why are we able to conclude that <m>\oint _C \vec F\cdot d\vec r = 0</m>?
-        </p>
-      </statement>
-      <answer>
-        <p>
-          By the Fundamental Theorem of Line Integrals,
-          since <m>\vec F</m> is conservative,
-          <m>\oint_C \vec F\cdot d\vec r = f(B) - f(A)</m>,
-          where <m>f</m> is a potential function for <m>\vec F</m> and <m>A</m> and <m>B</m> are the initial and terminal points of <m>C</m>,
-          respectively.
-          Since <m>C</m> is a closed curve, <m>A = B</m>,
-          and hence <m>f(B) - f(A) = 0</m>.
-        </p>
-      </answer>
-    </exercise>
-  </subsection>
-
-  <subsection>
-    <title>Problems</title>
-    <p>
-      In the following exercises,
-      a vector field <m>\vec F</m> and a curve <m>C</m> are given.
-      Evaluate <m>\ds\int_C\vec F\cdot d\vec r</m>.
-    </p>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\vec F = \langle y, y^2\rangle</m>;
-          <m>C</m> is the line segment from <m>(0,0)</m> to <m>(3,1)</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>11/6</m>. (One parametrization for <m>C</m> is
-          <m>\vec r(t) = \langle 3t,t\rangle</m> on <m>0\leq t\leq 1</m>.)
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\vec F = \langle x,x+y\rangle</m>;
-          <m>C</m> is the portion of the parabola <m>y=x^2</m> from <m>(0,0)</m> to <m>(1,1)</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>5/3</m>. (One parametrization for <m>C</m> is
-          <m>\vec r(t) = \langle t,t^2\rangle</m> on <m>0\leq t\leq 1</m>.)
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\vec F = \langle y,x\rangle</m>;
-          <m>C</m> is the top half of the unit circle,
-          beginning at <m>(1,0)</m> and ending at <m>(-1,0)</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>0</m>. (One parametrization for <m>C</m> is
-          <m>\vec r(t) = \langle \cos t,\sin t\rangle</m> on <m>0\leq t\leq \pi</m>.)
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\vec F = \langle xy,x\rangle</m>;
-          <m>C</m> is the portion of the curve <m>y=x^3</m> on <m>-1\leq x\leq 1</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>2/5</m>. (One parametrization for <m>C</m> is
-          <m>\vec r(t) = \langle t,t^3\rangle</m> on <m>-1\leq t\leq 1</m>.)
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\vec F = \langle z,x^2,y\rangle</m>;
-          <m>C</m> is the line segment from <m>(1,2,3)</m> to <m>(4,3,2)</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>12</m>. (One parametrization for <m>C</m> is
-          <m>\vec r(t) = \langle 1,2,3\rangle+t\langle 3,1,-1\rangle</m> on <m>0\leq t\leq 1</m>.)
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\vec F = \langle y+z,x+z,x+y\rangle</m>;
-          <m>C</m> is the helix <m>\vec r(t) = \langle \cos t,\sin t,t/(2\pi)\rangle</m> on <m>0\leq t\leq 2\pi</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>1</m>.
-        </p>
-      </answer>
-    </exercise>
-
-    <p>
-      In the following exercises,
-      find the work performed by the force field <m>\vec F</m> moving a particle along the path <m>C</m>.
-    </p>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\vec F = \langle y,x^2\rangle</m> N; <m>C</m> is the segment of the line <m>y=x</m> from <m>(0,0)</m> to <m>(1,1)</m>,
-          where distances are measured in meters.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>5/6</m> joules. (One parametrization for <m>C</m> is
-          <m>\vec r(t) = \langle t,t\rangle</m> on <m>0\leq t\leq 1</m>.)
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\vec F = \langle y,x^2\rangle</m> N; <m>C</m> is the portion of
-          <m>y=\sqrt x</m> from <m>(0,0)</m> to <m>(1,1)</m>,
-          where distances are measured in meters.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>13/15</m> joules. (One parametrization for <m>C</m> is
-          <m>\vec r(t) = \langle t,\sqrt t\rangle</m> on <m>0\leq t\leq 1</m>.)
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\vec F = \langle 2xy,x^2,1\rangle</m> lbs;
-          <m>C</m> is the path from <m>(0,0,0)</m> to <m>(2,4,8)</m> via
-          <m>\vec r(t) = \langle t, t^2, t^3\rangle</m> on <m>0\leq t\leq 2</m>,
-          where distance are measured in feet.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>24</m> ft-lbs.
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\vec F = \langle 2xy,x^2,1\rangle</m> lbs;
-          <m>C</m> is the path from <m>(0,0,0)</m> to <m>(2,4,8)</m> via
-          <m>\vec r(t) = \langle t,2t, 4t\rangle</m> on <m>0\leq t\leq 2</m>,
-          where distance are measured in feet.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>24</m> ft-lbs.
-        </p>
-      </answer>
-    </exercise>
-
-    <p>
-      In the following exercises,
-      a conservative vector field <m>\vec F</m> and a curve <m>C</m> are given.
-
-      <ol>
-        <li>
+      <exercise>
+        <statement>
           <p>
-            Find a potential function <m>f</m> for <m>\vec F</m>.
+            T/F: In practice,
+            the evaluation of line integrals over vector fields involves computing the magnitude of a vector<ndash/>valued function.
           </p>
-        </li>
-
-        <li>
+        </statement>
+        <answer>
           <p>
-            Compute <m>\curl \vec F</m>.
+            False.
+            It is true for line integrals over scalar fields, though.
           </p>
-        </li>
+        </answer>
+      </exercise>
 
-        <li>
+      <exercise>
+        <statement>
           <p>
-            Evaluate <m>\ds\int_C \vec F\cdot d\vec r</m> directly,
-            i.e., using <xref ref="idea_line2">Key Idea</xref>.
+            Let <m>\vec F(x,y)</m> be a vector field in the plane and let
+            <m>\vec r(t)</m> be a two<ndash/>dimensional vector<ndash/>valued function.
+            Why is <q><m>\vec F\big(\vec r(t)\big)</m></q>
+            an <q>abuse of notation</q>?
           </p>
-        </li>
-
-        <li>
+        </statement>
+        <answer>
           <p>
-            Evaluate <m>\ds\int_C \vec F\cdot d\vec r</m> using the Fundamental Theorem of Line Integrals.
+            The input of <m>\vec F</m> should be a point in the plane,
+            not a two dimensional vector.
           </p>
-        </li>
-      </ol>
-    </p>
+        </answer>
+      </exercise>
 
-    <exercise>
-      <statement>
+      <exercise>
+        <statement>
+          <p>
+            T/F: The orientation of a curve <m>C</m> matters when computing a line integral over a vector field.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            True.
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            T/F: The orientation of a curve <m>C</m> matters when computing a line integral over a scalar field.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            False.
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            Under <q>reasonable conditions,</q>
+            if <m>\curl \vec F = \vec 0</m>,
+            what can we conclude about the vector field <m>\vec F</m>?
+          </p>
+        </statement>
+        <answer>
+          <p>
+            We can conclude that <m>\vec F</m> is conservative.
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            Let <m>\vec F</m> be a conservative field and let <m>C</m> be a closed curve.
+            Why are we able to conclude that <m>\oint _C \vec F\cdot d\vec r = 0</m>?
+          </p>
+        </statement>
+        <answer>
+          <p>
+            By the Fundamental Theorem of Line Integrals,
+            since <m>\vec F</m> is conservative,
+            <m>\oint_C \vec F\cdot d\vec r = f(B) - f(A)</m>,
+            where <m>f</m> is a potential function for <m>\vec F</m> and <m>A</m> and <m>B</m> are the initial and terminal points of <m>C</m>,
+            respectively.
+            Since <m>C</m> is a closed curve, <m>A = B</m>,
+            and hence <m>f(B) - f(A) = 0</m>.
+          </p>
+        </answer>
+      </exercise>
+    </exercisegroup>
+
+    <exercisegroup>
+      <introduction>
         <p>
-          <m>\vec F = \langle y+1,x\rangle</m>,
-          <m>C</m> is the line segment from <m>(0,1)</m> to <m>(1,0)</m>.
+          In the following exercises,
+          a vector field <m>\vec F</m> and a curve <m>C</m> are given.
+          Evaluate <m>\ds\int_C\vec F\cdot d\vec r</m>.
         </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              <m>f(x,y) = xy+x</m>
-            </p>
-          </li>
+      </introduction>
 
-          <li>
-            <p>
-              <m>\curl \vec F = 0</m>.
-            </p>
-          </li>
+      <exercise>
+        <statement>
+          <p>
+            <m>\vec F = \langle y, y^2\rangle</m>;
+            <m>C</m> is the line segment from <m>(0,0)</m> to <m>(3,1)</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>11/6</m>. (One parametrization for <m>C</m> is
+            <m>\vec r(t) = \langle 3t,t\rangle</m> on <m>0\leq t\leq 1</m>.)
+          </p>
+        </answer>
+      </exercise>
 
-          <li>
-            <p>
-              <m>1</m>. (One parametrization for <m>C</m> is
-              <m>\vec r(t) = \langle t,t-1\rangle</m> on <m>0\leq t\leq 1</m>.)
-            </p>
-          </li>
+      <exercise>
+        <statement>
+          <p>
+            <m>\vec F = \langle x,x+y\rangle</m>;
+            <m>C</m> is the portion of the parabola <m>y=x^2</m> from <m>(0,0)</m> to <m>(1,1)</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>5/3</m>. (One parametrization for <m>C</m> is
+            <m>\vec r(t) = \langle t,t^2\rangle</m> on <m>0\leq t\leq 1</m>.)
+          </p>
+        </answer>
+      </exercise>
 
-          <li>
-            <p>
-              <m>1</m> (with <m>A = (0,1)</m> and
-              <m>B = (1,0)</m>, <m>f(B) - f(A) = 1</m>.)
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            <m>\vec F = \langle y,x\rangle</m>;
+            <m>C</m> is the top half of the unit circle,
+            beginning at <m>(1,0)</m> and ending at <m>(-1,0)</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>0</m>. (One parametrization for <m>C</m> is
+            <m>\vec r(t) = \langle \cos t,\sin t\rangle</m> on <m>0\leq t\leq \pi</m>.)
+          </p>
+        </answer>
+      </exercise>
 
-    <exercise>
-      <statement>
+      <exercise>
+        <statement>
+          <p>
+            <m>\vec F = \langle xy,x\rangle</m>;
+            <m>C</m> is the portion of the curve <m>y=x^3</m> on <m>-1\leq x\leq 1</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>2/5</m>. (One parametrization for <m>C</m> is
+            <m>\vec r(t) = \langle t,t^3\rangle</m> on <m>-1\leq t\leq 1</m>.)
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            <m>\vec F = \langle z,x^2,y\rangle</m>;
+            <m>C</m> is the line segment from <m>(1,2,3)</m> to <m>(4,3,2)</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>12</m>. (One parametrization for <m>C</m> is
+            <m>\vec r(t) = \langle 1,2,3\rangle+t\langle 3,1,-1\rangle</m> on <m>0\leq t\leq 1</m>.)
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            <m>\vec F = \langle y+z,x+z,x+y\rangle</m>;
+            <m>C</m> is the helix <m>\vec r(t) = \langle \cos t,\sin t,t/(2\pi)\rangle</m> on <m>0\leq t\leq 2\pi</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>1</m>.
+          </p>
+        </answer>
+      </exercise>
+    </exercisegroup>
+
+    <exercisegroup>
+      <introduction>
         <p>
-          <m>\vec F = \langle 2x+y, 2y+x\rangle</m>,
-          <m>C</m> is curve parametrized by
-          <m>\vec r(t) = \langle t^2-t, t^3-t\rangle</m> on <m>0\leq t\leq 1</m>.
+          In the following exercises,
+          find the work performed by the force field <m>\vec F</m> moving a particle along the path <m>C</m>.
         </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              <m>f(x,y) = x^2+xy+y^2</m>
-            </p>
-          </li>
+      </introduction>
 
-          <li>
-            <p>
-              <m>\curl \vec F = 0</m>.
-            </p>
-          </li>
+      <exercise>
+        <statement>
+          <p>
+            <m>\vec F = \langle y,x^2\rangle</m> N; <m>C</m> is the segment of the line <m>y=x</m> from <m>(0,0)</m> to <m>(1,1)</m>,
+            where distances are measured in meters.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>5/6</m> joules. (One parametrization for <m>C</m> is
+            <m>\vec r(t) = \langle t,t\rangle</m> on <m>0\leq t\leq 1</m>.)
+          </p>
+        </answer>
+      </exercise>
 
-          <li>
-            <p>
-              <m>0</m>.
-            </p>
-          </li>
+      <exercise>
+        <statement>
+          <p>
+            <m>\vec F = \langle y,x^2\rangle</m> N; <m>C</m> is the portion of
+            <m>y=\sqrt x</m> from <m>(0,0)</m> to <m>(1,1)</m>,
+            where distances are measured in meters.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>13/15</m> joules. (One parametrization for <m>C</m> is
+            <m>\vec r(t) = \langle t,\sqrt t\rangle</m> on <m>0\leq t\leq 1</m>.)
+          </p>
+        </answer>
+      </exercise>
 
-          <li>
-            <p>
-              <m>0</m> (with <m>A = (0,0)</m> and
-              <m>B = (0,0)</m>, <m>f(B) - f(A) = 0</m>.)
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
+      <exercise>
+        <statement>
+          <p>
+            <m>\vec F = \langle 2xy,x^2,1\rangle</m> lbs;
+            <m>C</m> is the path from <m>(0,0,0)</m> to <m>(2,4,8)</m> via
+            <m>\vec r(t) = \langle t, t^2, t^3\rangle</m> on <m>0\leq t\leq 2</m>,
+            where distance are measured in feet.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>24</m> ft-lbs.
+          </p>
+        </answer>
+      </exercise>
 
-    <exercise>
-      <statement>
+      <exercise>
+        <statement>
+          <p>
+            <m>\vec F = \langle 2xy,x^2,1\rangle</m> lbs;
+            <m>C</m> is the path from <m>(0,0,0)</m> to <m>(2,4,8)</m> via
+            <m>\vec r(t) = \langle t,2t, 4t\rangle</m> on <m>0\leq t\leq 2</m>,
+            where distance are measured in feet.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>24</m> ft-lbs.
+          </p>
+        </answer>
+      </exercise>
+    </exercisegroup>
+
+    <exercisegroup>
+      <introduction>
         <p>
-          <m>\vec F = \langle 2xyz,x^2z,x^2y\rangle</m>,
-          <m>C</m> is curve parametrized by
-          <m>\vec r(t) = \langle 2t+1,3t-1,t\rangle</m> on <m>0\leq t\leq 2</m>.
+          <p>
+            In the following exercises,
+            a conservative vector field <m>\vec F</m> and a curve <m>C</m> are given.
+
+            <ol>
+              <li>
+                <p>
+                  Find a potential function <m>f</m> for <m>\vec F</m>.
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  Compute <m>\curl \vec F</m>.
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  Evaluate <m>\ds\int_C \vec F\cdot d\vec r</m> directly,
+                  i.e., using <xref ref="idea_line2">Key Idea</xref>.
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  Evaluate <m>\ds\int_C \vec F\cdot d\vec r</m> using the Fundamental Theorem of Line Integrals.
+                </p>
+              </li>
+            </ol>
+          </p>
         </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              <m>f(x,y) = x^2yz</m>
-            </p>
-          </li>
+      </introduction>
 
-          <li>
-            <p>
-              <m>\curl \vec F = \vec 0</m>.
-            </p>
-          </li>
+      <exercise>
+        <statement>
+          <p>
+            <m>\vec F = \langle y+1,x\rangle</m>,
+            <m>C</m> is the line segment from <m>(0,1)</m> to <m>(1,0)</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <ol>
+              <li>
+                <p>
+                  <m>f(x,y) = xy+x</m>
+                </p>
+              </li>
 
-          <li>
-            <p>
-              <m>250</m>.
-            </p>
-          </li>
+              <li>
+                <p>
+                  <m>\curl \vec F = 0</m>.
+                </p>
+              </li>
 
-          <li>
-            <p>
-              <m>250</m> (with <m>A = (1,-1,0)</m> and <m>B = (5,5,2)</m>,
-              <m>f(B) - f(A) = 250</m>.)
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
+              <li>
+                <p>
+                  <m>1</m>. (One parametrization for <m>C</m> is
+                  <m>\vec r(t) = \langle t,t-1\rangle</m> on <m>0\leq t\leq 1</m>.)
+                </p>
+              </li>
 
-    <exercise>
-      <statement>
-        <p>
-          <m>\vec F = \langle 2x, 2y, 2z\rangle</m>,
-          <m>C</m> is curve parametrized by
-          <m>\vec r(t) = \langle \cos t,\sin t, \sin (2t)\rangle</m> on <m>0\leq t\leq 2\pi</m>.
-        </p>
-      </statement>
-      <answer>
-        <ol>
-          <li>
-            <p>
-              <m>f(x,y) = x^2+y^2+z^2</m>
-            </p>
-          </li>
+              <li>
+                <p>
+                  <m>1</m> (with <m>A = (0,1)</m> and
+                  <m>B = (1,0)</m>, <m>f(B) - f(A) = 1</m>.)
+                </p>
+              </li>
+            </ol>
+          </p>
+        </answer>
+      </exercise>
 
-          <li>
-            <p>
-              <m>\curl \vec F = \vec 0</m>.
-            </p>
-          </li>
+      <exercise>
+        <statement>
+          <p>
+            <m>\vec F = \langle 2x+y, 2y+x\rangle</m>,
+            <m>C</m> is curve parametrized by
+            <m>\vec r(t) = \langle t^2-t, t^3-t\rangle</m> on <m>0\leq t\leq 1</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <ol>
+              <li>
+                <p>
+                  <m>f(x,y) = x^2+xy+y^2</m>
+                </p>
+              </li>
 
-          <li>
-            <p>
-              <m>0</m>.
-            </p>
-          </li>
+              <li>
+                <p>
+                  <m>\curl \vec F = 0</m>.
+                </p>
+              </li>
 
-          <li>
-            <p>
-              <m>0</m> (with <m>A = (1,0,0)</m> and
-              <m>B = (1,0,0)</m>, <m>f(B) - f(A) = 0</m>.)
-            </p>
-          </li>
-        </ol>
-      </answer>
-    </exercise>
+              <li>
+                <p>
+                  <m>0</m>.
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  <m>0</m> (with <m>A = (0,0)</m> and
+                  <m>B = (0,0)</m>, <m>f(B) - f(A) = 0</m>.)
+                </p>
+              </li>
+            </ol>
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            <m>\vec F = \langle 2xyz,x^2z,x^2y\rangle</m>,
+            <m>C</m> is curve parametrized by
+            <m>\vec r(t) = \langle 2t+1,3t-1,t\rangle</m> on <m>0\leq t\leq 2</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <ol>
+              <li>
+                <p>
+                  <m>f(x,y) = x^2yz</m>
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  <m>\curl \vec F = \vec 0</m>.
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  <m>250</m>.
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  <m>250</m> (with <m>A = (1,-1,0)</m> and <m>B = (5,5,2)</m>,
+                  <m>f(B) - f(A) = 250</m>.)
+                </p>
+              </li>
+            </ol>
+          </p>
+        </answer>
+      </exercise>
+
+      <exercise>
+        <statement>
+          <p>
+            <m>\vec F = \langle 2x, 2y, 2z\rangle</m>,
+            <m>C</m> is curve parametrized by
+            <m>\vec r(t) = \langle \cos t,\sin t, \sin (2t)\rangle</m> on <m>0\leq t\leq 2\pi</m>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <ol>
+              <li>
+                <p>
+                  <m>f(x,y) = x^2+y^2+z^2</m>
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  <m>\curl \vec F = \vec 0</m>.
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  <m>0</m>.
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  <m>0</m> (with <m>A = (1,0,0)</m> and
+                  <m>B = (1,0,0)</m>, <m>f(B) - f(A) = 0</m>.)
+                </p>
+              </li>
+            </ol>
+          </p>
+        </answer>
+      </exercise>
+    </exercisegroup>
 
     <exercise>
       <statement>
@@ -1267,7 +1842,7 @@
           Show that <m>\curl \vec F = 0</m>.
         </p>
       </statement>
-      <answer>
+      <solution>
         <p>
           Since <m>\vec F</m> is conservative,
           it is the gradient of some potential function.
@@ -1281,8 +1856,7 @@
           by <xref ref="thm_mixed_partial">Theorem</xref>,
           is <m>\langle 0,0,0\rangle</m>.
         </p>
-      </answer>
+      </solution>
     </exercise>
-  </subsection>
+  </exercises>
 </section>
-
