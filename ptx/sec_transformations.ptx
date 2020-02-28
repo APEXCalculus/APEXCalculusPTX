@@ -1,0 +1,2423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="sec_transformations">
+	<title>Change of Variables in Multiple Integrals</title>
+	<introduction>
+		<p>
+			We have seen in Sections <xref ref="sec_double_int_polar" text="global"/>
+			and <xref ref="sec_cylindrical_spherical" text="global"/>
+			that switching to a different coordinate system can be a powerful tool.
+			Integrals that are intractable (or even impossible) in one coordinate system can become straightforward in another.
+		</p>
+
+		<aside>
+		  <p>
+		    Recall <xref ref="ex_13_03_ex_15">Exercise</xref> in <xref ref="sec_double_int_polar">Section</xref>: the function <m>f(x,y) = e^{-x^2-y^2}</m> is impossible to integrate in rectangular coordinates (at least, by finding antidervatives in terms of elementary functions), but switching to polar coordinates results in an integral that can be evaluated using a simple substitution.
+		  </p>
+		</aside>
+
+		<p>
+			Changing from rectangular coordinates to  polar, or cylindrical, or spherical coordinates,
+			are special cases of a general process known as a <term>change of variables</term>
+				<idx><h>change of variables</h></idx>
+				<idx><h>transformation</h></idx>
+ 			or <term>transformation</term>.
+			A change of variables should be considered in any situation where we are presented with an integral that is difficult to evaluate in rectangular coordinates.
+		</p>
+
+		<p>
+			Our goals in this section are as follows:
+			<ul>
+			  <li>
+			    <p>
+			      Understand how a change of variables affects the area element <m>dA</m> in a double integral,
+						or the volume element <m>dV</m> in a triple integral.
+			    </p>
+			  </li>
+
+				<li>
+				  <p>
+				    Derive a general change of variables formula for multiple integrals that works for any suitable change of coordinates,
+						including the ones we have already seen in Sections <xref ref="sec_double_int_polar" text="global/">
+						and <xref ref="sec_cylindrical_spherical" text="global"/>
+				  </p>
+				</li>
+
+				<li>
+				  <p>
+				    Develop some basic guiding principles for knowing when a change of variables should be considered,
+						and how to define the corresponding transformation.
+				  </p>
+				</li>
+			</ul>
+		</p>
+	</introduction>
+
+	<subsection xml:id="subsec-sub-review">
+		<title>Review of substitution techniques</title>
+		<p>
+			One of the situations that should be covered by our general change of variables formula is that of substitution for a definite integral in one variable,
+			as encountered in <xref ref="sec_substitution">Section</xref>, way back in Calculus I.
+			Of course, for a definite integral in one variable,
+			there is only one type of region of integration: a closed interval <m>[a,b]</m>.
+			For single integrals, our only consideration when making a change of variables is the function being integrated.
+			Recall that substitution <mdash/> at least, for indefinite integrals <mdash/> is essentially an attempt to reverse the Chain Rule: given
+			<me>
+			  \int_a^b f(T(u))T'(u)\,du
+			</me>,
+			we set <m>x=T(u)</m>, compute the differential <m>dx = T'(u)\,du</m>, and set
+			<men xml:id="eqn_single_sub">
+				\int_a^b f(T(u))T\primeskip'(u)\,du = \int_{T(a)}^{T(b)}f(x)\,dx
+			</men>.
+		</p>
+
+		<aside>
+		  <p>
+		    We have reversed the roles of <m>x</m> and <m>u</m> as they typically appear in Calculus I.
+				This may seem strange in this context, but it's in keeping with the way the change of variables formula in several variables is usually presented.
+		  </p>
+		</aside>
+
+		<p>
+			The formula we seek will be a generalization of this result, with one notable change in perspective:
+			for multiple integrals, it is often the <em>region of integration</em> that creates most of the difficulty,
+			and not the function being integrated. (In one variable, one closed interval is transformed into another,
+			and we apply the Fundamental Theorem of Calculus.
+			 What we will find is that in most cases,
+			 we start on the <em>right</em> hand side of our analogue of Equation <xref ref="eqn_single_sub"/>,
+			 and move to the left.
+		</p>
+
+		<aside>
+		  <p>
+		    For double and triple integrals, it will be important to understand how both the function <em>and</em>
+				the region of integration are transformed. For single integrals,
+				the Fundamental Theorem of Calculus (<xref ref="thm_FTC2">Theorem</xref>)
+				lets us gloss over some of the details we'll now need to consider.
+				In particular, we don't really need to pay any attention to the interval over which we integrate in a single integral,
+				as long as we can come up with an antiderivative.
+		  </p>
+		</aside>
+
+		<p>
+			Changing from polar coordinates can be viewed as the process of writing our rectangular coordinates
+			<m>(x,y)</m> in terms of new variables <m>r</m> and <m>\theta</m>:
+			<md>
+			  <mrow>x(r,\theta) \amp = r\cos\theta</mrow>
+			  <mrow>y(r,\theta) \amp = r\sin\theta</mrow>
+			</md>.
+			Or conversely, as defining new variables <m>r</m> and <m>\theta</m> as functions of the old variables <m>x</m> and <m>y</m>:
+			<md>
+			  <mrow>r(x,y) \amp = \sqrt{x^2+y^2}</mrow>
+			  <mrow>\theta(x,y) \amp = \arctan(y/x)</mrow>
+			</md>.
+		</p>
+
+		<p>
+			We can think of the polar coordinate transformation as a change of variables,
+			where we define new variables in terms of old ones, but we could also think of it as a
+			<em>function</em> from the plane <m>\mathbb{R}^2</m> to itself.
+			That is, we have a mapping
+			<md>
+			  <mrow>T:  D\amp\subseteq \mathbb{R}^2\to \mathbb{R}^2</mrow>
+			  <mrow>(x,y) \amp= T(r,\theta) = (r\cos\theta,r\sin\theta)</mrow>
+			</md>,
+			where <m>D</m> is some subset of <m>\mathbb{R}^2</m> (with coordinates labelled by <m>r</m> and <m>\theta</m>),
+			and the codomain is <m>\mathbb{R}^2</m> with usual <m>(x,y)</m> coordinates.
+			As we know from <xref ref="sec_double_int_polar">Section</xref>,
+			the polar coordinate transformation <m>T</m> given above transforms a rectangle such as
+			<m>D=[0,3]\times [0,2\pi]</m> into a disk <mdash/> in this case,
+			the set of points <m>(x,y)</m> with <m>x^2+y^2\leq 9</m>, as shown in <xref ref="fig_polar_trans1">Figure</xref> below.
+		</p>
+
+		<aside>
+		  <p>
+		    Polar coordinates are a very common choice of coordinate system,
+				because they are well adapted to situations with circular symmetry,
+				a common assumption in many physical problems. They are also natural from a navigational perspective.
+				However, the polar coordinate transformation is a bit unusual,
+				in that it violates some of the principles we will require below for a general transformation.
+				For example, the transformation is not one-to-one, and since we often allow <m>r<0</m>
+				(recall <xref ref="sec_polar">Section</xref>),
+				the inverse transformation (from polar to rectangular) technically isn't even a function!
+				However, we're willing to overlook these defects due to the ubiquity and usefulness of the polar coordinate system.
+		  </p>
+		</aside>
+
+		<figure xml:id="fig_polar_trans1">
+			<caption>Transforming a rectangle to a disk using polar coordinates.</caption>
+			<sidebyside widths="44% 10% 44%" valign="center">
+				<image xml:id="img_polar_trans1a">
+				  <description></description>
+					<latex-image>
+					  \begin{tikzpicture}
+							\begin{axis}[
+										xtick={1,2,3,4,5,6,7,8,9},%
+										ytick={1,2,3,4,5,6,7,8,9},
+										ymin=-0.5,ymax=10,%
+										xmin=-0.5,xmax=10,%
+										xlabel={$r$},
+										ylabel={$\theta$}
+							]
+
+							\addplot [name path=top,black,domain=0:3,thick] ({x},{6.28});
+							\addplot [name path=bottom, black, domain=0:3,thick] ({x},{0});
+							\addplot [black,domain=0:6.28,thick] ({0},{x});
+							\addplot [black,domain=0:6.28,thick] ({3},{x});
+							\addplot [color=gray!20] fill between [of=top and bottom, soft clip={domain=0:3}];
+							\end{axis}
+					  \end{tikzpicture}
+					</latex-image>
+				</image>
+
+				<image xml:id="img_polar_trans1b">
+					<description></description>
+					<latex-image>
+						\begin{tikzpicture}
+							\draw [&lt;-] (2,3.75) arc (45:135:1.1cm);
+							\node [above] at (1.2,4) {$T$};
+							\node [below] at (1,2) {};
+						\end{tikzpicture}
+					</latex-image>
+				</image>
+
+				<image xml:id="img_polar_trans1c">
+				  <description></description>
+					<latex-image>
+					  \begin{tikzpicture}
+							\begin{axis}[
+							scale only axis,%
+							xtick={-3,-2,-1,1,2,3},%
+							ytick={-3,-2,-1,1,2,3},
+							ymin=-3.5,ymax=4,%
+							xmin=-3.5,xmax=4%
+							]
+							\addplot [name path=top,black,domain={-3:3},samples=100,thick] {sqrt(9-x^2)};
+							\addplot [name path=bottom, black, domain={-3:3},samples=100,thick] {-sqrt(9-x^2)};
+							\addplot [color=gray!20] fill between [of=top and bottom, soft clip={domain={-3:3}}];
+							\end{axis}
+					  \end{tikzpicture}
+					</latex-image>
+				</image>
+			</sidebyside>
+		</figure>
+
+		<p>
+			It is interesting to pause and consider what happens to the four sides of the rectangle <m>D</m> in the transformation above.
+			(As we'll see, this particular transformation exhibits some behaviour we usually prefer to avoid!).
+			First, the side with <m>r=0</m> is collapsed to a single point: the origin.
+			The side with <m>r=3</m> forms the entire perimeter of the circle.
+			What happens to the sides <m>\theta=0</m> and <m>\theta=2\pi</m>?
+			They both get sent to the line segment from <m>(0,0)</m> to <m>(3,0)</m>!
+		</p>
+
+		<p>
+		  These observations let us imagine transformation as a physical process:
+			first, the left side of the rectangle is shrunk down to a single point,
+			while the right side is simultaneously stretched by a factor of 3.
+			(Vertical lines in between are stretched/shrunk by a factor of <m>r</m>, with <m>0\leq r\leq 3</m>.)
+			The top of the rectangle is then bent around until it joins with the bottom.
+		</p>
+
+		<p>
+		  It is perhaps easier to picture the transformation for a domain of the form <m>[a,b]\times [\alpha,\beta]</m>,
+			with <m>0<a< b</m> and <m>0\leq \alpha<\beta< 2\pi</m>.
+			The case <m>r\in [1,3]</m>, <m>\theta\in [\pi/6, \pi/3]</m> is pictured in <xref ref="fig_polar_trans2">Figure</xref> below.
+		</p>
+
+		<figure xml:id="fig_polar_trans2">
+			<caption>Transforming a rectangle to an annular portion using polar coordinates.</caption>
+			<sidebyside width="44% 10% 44%" valign="center">
+				<image xml:id="img_polar_trans2a">
+				  <description></description>
+					<latex-image>
+					  \begin{tikzpicture}
+						\begin{axis}[
+									xtick={1,2,3},%
+									ytick={1,2},
+									xlabel={$r$},
+									ylabel={$\theta$},
+									ymin=-0.5,ymax=2.5,%
+									xmin=-0.5,xmax=3.5%
+						]
+
+						\addplot [name path=top,black,domain=1:2,thick] ({x},{1.047});
+						\addplot [name path=bottom, black, domain=1:2,thick] ({x},{0.523});
+						\addplot [black,domain=0.523:1.047,thick] ({1},{x});
+						\addplot [black,domain=0.523:1.047,thick] ({2},{x});
+						\addplot [color=gray!20] fill between [of=top and bottom, soft clip={domain=1:2}];
+						\end{axis}
+
+					  \end{tikzpicture}
+					</latex-image>
+				</image>
+
+				<image xml:id="img_polar_trans2b">
+				  <description></description>
+					<latex-image>
+					  \begin{tikzpicture}
+							\draw [&lt;-] (2,3.75) arc (45:135:1.1cm);
+							\node [above] at (1.2,4) {$T$};
+							\node [below] at (1,2) {};
+					  \end{tikzpicture}
+					</latex-image>
+				</image>
+
+				<image xml:id="img_polar_trans2c">
+				  <description></description>
+					<latex-image>
+					  \begin{tikzpicture}
+						\begin{axis}[width=\marginparwidth+25pt,%
+						tick label style={font=\scriptsize},axis y line=middle,axis x line=middle,name=myplot,axis on top,%
+									xtick={1,2,3},%
+						%			extra x ticks={3.14,1.57},
+						%			extra x tick labels={$\pi$,$\pi/2$},
+									ytick={1,2,3},
+									%minor y tick num=1,%extra y ticks={-5,-3,...,7},%
+						%			minor x tick num=4,
+									ymin=-0.2,ymax=3.5,%
+									xmin=-0.2,xmax=3.5%
+						]
+						\addplot[data cs=polar, domain=30:60, samples=20, black, thick, name path=out](x,{2});
+						\addplot[data cs=polar, domain=30:60, samples=20, black, thick, name path=in](x,{1});
+						\addplot[gray,dashed,domain=0:2.5]{0.57735*x};
+						\addplot[black,thick,domain=0.866:1.732]{0.57735*x};
+						\addplot[gray,dashed,domain=0:1.7]{1.732*x};
+						\addplot[black,thick,domain=0.5:1]{1.732*x};
+
+						\addplot[color=gray!20] fill between [of=out and in];
+						\end{axis}
+
+					  \end{tikzpicture}
+					</latex-image>
+				</image>
+			</sidebyside>
+		</figure>
+	</subsection>
+
+	<subsection xml:id="subsec-general-transforms">
+		<title>General transformations</title>
+		<p>
+			Given a region <m>R</m> in the plane and an integral <m>\iint_R f(x,y)\,dA</m>,
+			we will look for a domain <m>D\subseteq \mathbb{R}^2</m> and a function <m>T:D\to \mathbb{R}^2</m> of the form
+			<me>
+			  (x,y) = T(u,v) = (h(u,v),k(u,v))
+			</me>
+			that maps <m>D</m> onto <m>R</m>, which can be used to simplify our integral.
+		</p>
+
+		<p>
+			<xref ref="def_transformation">Definition</xref>
+			below specifies the properties we require for a function <m>T:D\subseteq \mathbb{R}^n\to\mathbb{R}^n</m>
+			to be used to define a change of variables. To explain some of those properties, we will need the following definitions.
+		</p>
+
+		<aside>
+		  <p>
+		    The notation <m>f:A\to B</m> is commonly used in mathematics when we want to indicate that a function <m>f</m>
+				has a particular domain <m>A</m> and codomain <m>B</m>.
+				We usually do not see this notation in calculus,
+				since the domain is always a subset of <m>\mathbb{R}^n</m> for some <m>n</m>,
+				and understood to be the largest set of values for which the function is defined.
+		  </p>
+
+			<p>
+			  Note however that the choice of domain is part of the definition of a function,
+				and it can significantly affect important properties of that function,
+				such as being one-to-one: recall the definition of the inverse trigonometric functions in <xref ref="sec_deriv_inverse_function">Section</xref>.
+			</p>
+		</aside>
+
+		<definition xml:id="def_image">
+			<title>The image of a point or set</title>
+			<statement>
+				<p>
+					Let <m>D\subseteq \mathbb{R}^n</m> be any subset,
+					and let <m>F:D\to \mathbb{R}^m</m> be a function.
+					For any point <m>\mathbf{x}\in D</m>, the <term>image</term>
+					of <m>\mathbf{x}</m> under <m>F</m> is the point <m>\mathbf{y}=F(\mathbf{x})</m> in the range of <m>F</m>.
+					<idx><h>image</h><h>of a point</h></idx>
+				</p>
+
+				<p>
+					For any subset <m>C\subseteq D</m>, the <term>image</term>
+					of <m>C</m> under <m>F</m> is denoted <m>F(C)</m> and defined by
+					<me>
+					  F(C) = \{F(\mathbf{x})\,|\, \mathbf{x}\in C\}
+					</me>.
+					In other words, <m>\mathbf{y}\in F(C)</m> if and only if <m>\mathbf{y}</m> is the image of <m>\mathbf{x}</m> for some <m>\mathbf{x}\in C</m>.
+					<idx><h>image</h><h>of a subset</h></idx>
+				</p>
+
+				<p>
+					In particular, we denote the range (or <term>image</term>) of <m>F</m> by <m>F(D)</m>.
+				</p>
+			</statement>
+		</definition>
+
+		<definition xml:id="def_one_to_one_onto">
+			<title>One-to-one and onto functions</title>
+			<statement>
+				<p>
+					Let <m>A\subseteq \mathbb{R}^n</m>, let <m>B\subseteq \mathbb{R}^m</m>, and let <m>T:A\to B</m> be a function.
+					<idx><h>one-to-one</h></idx>
+					<idx><h>onto</h></idx>
+				</p>
+
+				<p>
+				  <ul>
+				    <li>
+				      <p>
+				        We say that <m>T</m> is <term>one-to-one</term> if no two points in <m>A</m> have the same image.
+								That is, for any <m>\mathbf{x}_1,\mathbf{x}_2\in A</m>, if <m>\mathbf{x}_1\neq \mathbf{x}_2</m>,
+								then <m>T(\mathbf{x}_1)\neq T(\mathbf{x}_2)</m>.
+				      </p>
+				    </li>
+
+						<li>
+						  <p>
+						    We say that <m>T</m> is <term>onto</term> if the range of <m>T</m> is <m>B</m>; that is, if <m>T(A)=B</m>.
+						  </p>
+						</li>
+				  </ul>
+				</p>
+			</statement>
+		</definition>
+
+		<aside>
+		  <p>
+		    To avoid clutter throughout this section,
+				we will use boldface variables as shorthand for points in <m>\mathbb{R}^n</m>.
+				For example, we will write <m>\mathbf{x}</m> instead of <m>(x_1,x_2,\ldots, x_n)</m>.
+		  </p>
+		</aside>
+
+		<p>
+			A function used for a change of variables is called a <em>transformation</em>.
+			Such functions need to be one-to-one, except possibly on the boundary of their domain,
+			and they need to be continuously differentiable.
+			(See <xref ref="def_transformation">Definition</xref> below.)
+			One of the important properties of a transformation, which we will justify later in this section
+			(see <xref ref="thm_boundary_transform">Theorem</xref>),
+			is that the boundary of a closed, bounded domain is mapped to the boundary of the range.
+			This observation is key to visualizing the effect of a transformation.
+		</p>
+
+		<example xml:id="ex_trans_boundary">
+		  <statement>
+		    <p>
+					Let <m>D\subseteq \mathbb{R}^2</m> be the rectangle defined by <m>1\leq u\leq 2</m> and <m>0\leq v\leq 1</m>.
+					Determine the range of the function <m>T:D\to\mathbb{R}^2</m> defined by
+					<me>
+					  (x,y)=T(u,v)=(uv, u^2+2v^2)
+					</me>.
+				</p>
+			</statement>
+			<solution>
+			  <p>
+			    The function <m>T</m> is continuously differentiable,
+					since <m>x=4uv</m> and <m>y=u^2+v^2</m> both have continuous first-order partial derivatives with respect to <m>u</m> and <m>v</m>.
+					Showing that <m>T</m> is one-to-one is a mess of algebra that we omit here.
+					From these properties, we can conclude that the boundary of <m>D</m> will be transformed to the boundary of <m>T(D)</m>.
+			  </p>
+
+				<aside>
+				  <p>
+				    While it is important to know that our function is one-to-one,
+						we will usually not ask you to check this fact.
+						However, you should make sure you're aware of what can go wrong if this property is not satisfied:
+						see the discussion following <xref ref="def_transformation">Definition</xref>.
+				  </p>
+				</aside>
+
+				<p>
+					Now, let's see what happens to the boundary of <m>D</m>. The boundary consists of four line segments:
+					<ol>
+					  <li>
+					    <p>
+					      The segment <m>u=1</m>, <m>0\leq v\leq 1</m>.
+					    </p>
+					  </li>
+
+						<li>
+						  <p>
+						    The segment <m>u=2</m>, <m>0\leq v\leq 1</m>.
+						  </p>
+						</li>
+
+						<li>
+						  <p>
+						    The segment <m>1\leq u\leq 2</m>, <m>v=0</m>.
+						  </p>
+						</li>
+
+						<li>
+						  <p>
+						    The segment <m>1\leq u\leq 2</m>, <m>v=1</m>.
+						  </p>
+						</li>
+					</ol>
+				</p>
+
+				<p>
+					On the first segment, <m>x=v</m> and <m>y=1+v^2</m>, with <m>0\leq v\leq 1</m>.
+					Eliminating the parameter <m>v</m> gives us portion of the parabola <m>y=1+x^2</m> from <m>(0,1)</m> to <m>(1,2)</m>.
+				</p>
+
+				<p>
+					For the second segment we have <m>x=2v</m> and <m>y=4+v^2</m>.
+					This is the part of the parabola <m>y=4+\frac14 x^2</m> from <m>(0,4)</m> to <m>(2,5)</m>.
+				</p>
+
+				<p>
+					The third segment has <m>x=0</m> and <m>y=u^2</m>, for <m>1\leq u\leq 2</m>.
+					This is the portion of the <m>y</m> axis from <m>(0,1)</m> to <m>(0,4)</m>.
+				</p>
+
+				<p>
+					Finally, the fourth segment is given by <m>x=u</m>, <m>y=u^2+1</m>, for <m>1\leq u\leq 2</m>.
+					This is again the parabola <m>y=1+x^2</m>, but this time <m>1\leq x\leq 2</m>.
+				</p>
+
+				<p>
+					The resulting region is plotted in <xref ref="fig_trans_map1">Figure</xref>.
+					Interestingly, two of the four sides of the rectangle bounding <m>D</m> were mapped to (different portions of) the same curve.
+				</p>
+
+				<figure xml:id="fig_trans_map1">
+					<caption>Plotting the image of the function <m>T</m> in <xref ref="ex_trans_boundary"/></caption>
+					<image xml:id="img_trans_map1" width="47%">
+					  <description></description>
+						<latex-image>
+						  \begin{tikzpicture}
+							\begin{axis}[
+										xtick={1,2,3},%
+										ytick={1,2,3,4,5},
+										ymin=-0.5,ymax=5.2,%
+										xmin=-0.5,xmax=3.2%
+							]
+
+							\addplot[-,firstcurvestyle,name path=a,domain=0:1] {x^2+1};
+
+							\addplot [-,secondcurvestyle,name path=b,domain=1:2] {x^2+1};
+
+							\addplot [-,firstcolor,name path=c,domain=0:2] {0.25*x^2+4};
+
+							\addplot [-,secondcurvestyle,domain=1:4]({0},{x});
+
+							\addplot [firstcurvestyle,areastyle] fill between [of=a and c, soft clip={domain=0:1}];
+							\addplot [firstcurvestyle,areastyle] fill between [of=b and c, soft clip={domain=1:2}];
+							\end{axis}
+
+							\node [right,color=blue] at (1,3.7) {$u=2$};
+							\node [right,color=red] at (3,2.5) {$v=1$};
+							\node [right,color=blue] at (1,0.9) {$u=1$};
+							\node [left,color=red] at (0.2,2) {$v=0$};
+
+						  \end{tikzpicture}
+						</latex-image>
+					</image>
+				</figure>
+
+			</solution>
+		</example>
+
+		<p>
+			This example is interesting,
+			in that two of the four sides of our rectangular domain were mapped to the same curve.
+			Note also that (without explicitly solving for the inverse function, giving <m>u</m> and <m>v</m> as functions of <m>x</m> and <m>y</m>)
+			we can see that lines of constant <m>x</m> in the <m>u,v</m> plane are circles,
+			and lines of constant <m>y</m> are hyperbolas.
+		</p>
+
+		<p>
+			One other observation is worthy of note:
+			we mentioned above that we will be primarily concerned with finding transformations that can be used to simplify a double integral.
+			Suppose we were given a double integral over <m>R=T(D)</m>,
+			as pictured in <xref ref="fig_trans_map1">Figure</xref>.
+			We probably wouldn't even consider a change of variables in this case,
+			unless one was needed for the function being integrated:
+			the region can be described by the inequalities
+			<me>
+			  1+x^2\leq y\leq 4+\frac14 x^2, \text { where } 0\leq x\leq 2
+			</me>.
+		</p>
+
+		<p>
+			We already learned how to deal with such regions at the beginning of this Chapter,
+			and in any case, it's unlikely that anyone looking at this region would come up with the transformation we just considered.
+		</p>
+	</subsection>
+
+	<subsection xml:id="subsect-jacobian">
+		<title>The Jacobian of a transformation</title>
+		<p>
+			We're ready to move on, and describe the effect of a change of variables on an integral.
+			We begin with an observation from single variable calculus.
+			Consider the definition of a definite integral as a limit of Riemann sums.
+			When we make a change of variables <m>x=T(u)</m> in a single integral,
+			a partition of <m>[a,b]</m> given by <m>a=u_0<u_1<\cdots <u_n=b</m> is transformed into a partition
+			<m>x_0=T(u_0),x_1=T(u_1), \ldots, x_n=T(u_n)</m>. (As long as <m>T'(u)>0</m>, we have <m>x_0<x_1<\cdots x_n</m>.)
+		</p>
+
+		<p>
+			The transformation affects the size of the subintervals in the partition:
+			from <xref ref="sec_differentials">Section</xref>, we know that <m>\Delta x_i \approx T\primeskip' (u_i)\Delta x_i</m>.
+			Thus, the derivative tells us how the size of each subinterval changes under the transformation.
+		</p>
+
+		<p>
+			This gives us a way of thinking about the geometric effect of a substitution.
+			In the integral <m>\displaystyle\int_{T(a)}^{T(b)}f(x)\,dx</m>,
+			the subintervals in a partition (thought of as the width of the rectangles in a Riemann sum)
+			are stretched/shrunk horizontally by a factor given by the derivative <m>T'(u)</m>
+			of the transformation function <m>g(u)</m>.
+			In the integral <m>\displaystyle\int_a^b f(T(u))T'(u)\,du</m>,
+			the derivative <m>T'(u)</m> is part of the integrand,
+			and therefore our horizontal stretch/shrink becomes a vertical stretch/shrink.
+			Of course, the area of a rectangle changes by the same amount regardless of whether the stretch/shrink is horizontal or vertical.
+		</p>
+
+		<aside>
+		  <p>
+		    In the discussion given here, we will stick to two variables for simplicity of presentation.
+				However, everything we do for double integrals works equally well for triple integrals in three variables.
+		  </p>
+		</aside>
+
+		<p>
+			Similarly, when we do a change of variables in two or three variables,
+			we need a measure of how the size of each subregion in a partition changes under change of variables.
+			This measure is given by an object known as the <em>Jacobian</em>.
+		</p>
+
+		<definition xml:id="def_jacobian">
+			<title>The Jacobian of a transformation</title>
+
+			<statement>
+				<p>
+					Let <m>D\subseteq \mathbb{R}^2</m> be a subset of the plane, described with coordinates <m>(u,v)</m>.
+					Let <m>T:D\subseteq \mathbb{R}^2\to \mathbb{R}^2</m> be given by
+					<me>
+					  T(u,v)=(f(u,v),g(u,v))
+					</me>,
+					where <m>f</m> and <m>g</m> are continuously differentiable on <m>D</m>.
+					The <term>Jacobian</term> is the function <m>J_T:D\to \mathbb{R}</m> defined by
+					<me>
+					  J_T(u,v)=\det\begin{bmatrix}f_u(u,v)\amp f_v(u,v)\\g_u(u,v)\amp g_v(u,v)\end{bmatrix}
+					</me>.
+					<idx><h>Jacobian</h><h>of a transformation</h></idx>
+				</p>
+
+				<p>
+					If we define <m>x=f(u,v)</m> and <m>y=g(u,v)</m>, we can write the Jacobian as
+					<me>
+					  J_T(u,v) = \det\begin{bmatrix}x_u\amp x_v\\y_u\amp y_v\end{bmatrix} =
+						\det\begin{bmatrix}\frac{\partial x}{\partial u}\amp\frac{\partial x}{\partial v}\\[5pt] \frac{\partial y}{\partial u}\amp\frac{\partial y}{\partial v}\end{bmatrix}
+					</me>.
+				</p>
+			</statement>
+		</definition>
+
+		<p>
+			In the case of a transformation <m>T:D\subseteq \mathbb{R}^3\to\mathbb{R}^3</m>,
+			with <m>(x,y,z)=T(u,v,w)</m>, the definition of the Jacobian is similar,
+			except that we need to compute the determinant of a <m>3\times 3</m> matrix.
+		</p>
+
+		<p>
+			If you read <xref ref="sec_deriv_matrix">Section</xref>
+			on the definition of the derivative as a matrix of partial derivatives,
+			you probably recognize the matrix whose determinant gives us the Jacobian:
+			it's the derivative matrix! One therefore could write
+			<me>
+			  J_T(u,v) = \det DT(u,v)
+			</me>
+			for the Jacobian, and this formula is valid in any dimension.
+		</p>
+
+		<p>
+			In fact, we can even use this definition for single integrals: a <m>1\times 1</m> matrix is just a number,
+			and the determinant does nothing to that number, and of course, the derivative of a function of one variable is the same as always.
+		</p>
+
+		<aside>
+		  <p>
+				Another common notation for the Jacobian is
+				<me>
+				  J_T(u,v) = \frac{\partial (x,y)}{\partial (u,v)}
+				</me>.
+				This notation is intended to be reminiscent of the Leibniz form of the chain rule when <m>T</m> is used to define a change of variables: we have the mnemonic devices
+				<md>
+					<mrow>dx \amp = \frac{dx}{du}du</mrow>
+					<mrow>dx\,dy \amp= \frac{\partial(x,y)}{\partial (u,v)}\,du\,dv</mrow>
+					<mrow>dx\,dy\,dz \amp= \frac{\partial (x,y,z)}{\partial (u,v,w)}\,du\,dv\,dw</mrow>
+				</md>
+				for a change of variables in single, double, and triple integrals, respectively.
+		  </p>
+		</aside>
+
+
+		<example xml:id="ex_jacobian1">
+		  <statement>
+		    <p>
+					Compute the Jacobian of the transformation <m>(x,y)=T(u,v)</m> given by
+					<me>
+					  x = 7u-3v \quad y = -4u+2v
+					</me>.
+				</p>
+			</statement>
+			<solution>
+			  <p>
+					We apply <xref ref="def_jacobian">Definition</xref> directly:
+					<me>
+					  J_T(u,v) = \det\begin{bmatrix}x_u(u,v)\ampx_v(u,v)\\y_u(u,v)\ampy_v(u,v)\end{bmatrix} = \det\begin{bmatrix}7\amp-3\\-4\amp2\end{bmatrix} = 7(2)-(-3)(-4)=2
+					</me>.
+			  </p>
+			</solution>
+		</example>
+
+		<p>
+		  In this case, the Jacobian is a constant function.
+			This is the case whenever <m>x</m> and <m>y</m> are linear functions of <m>u</m> and <m>v</m>., but not true in general.
+			We'll look at the case of linear transformations in more detail after a few more examples.
+		</p>
+
+		<example xml:id="ex_jacobian2">
+		  <statement>
+		    <p>
+					Compute the Jacobian of the transformation given by
+					<me>
+					  T(u,v) = (\sqrt[3]{x^2y}, \sqrt[3]{xy^2})
+					</me>.
+				</p>
+			</statement>
+			<solution>
+			  <p>
+					Again, this is a direct application of the definition,
+					but we should be clever about how we compute our partial derivatives.
+					Our transformation defines <m>x=\sqrt[3]{x^2y}</m> and <m>y=\sqrt[3]{xy^2}</m>.
+					If we blindly push forward with the partial derivatives as written, we get a mess.
+					For example, if we get a little too excited, we might do something like:
+					<me>
+					  x_u(u,v) = \frac{\partial}{\partial u}(\sqrt[3]{x^2y}) = \frac{1}{3}(x^2y)^{-2/3}(2xy)
+					</me>,
+					with similar results for the other four partial derivatives.
+				</p>
+
+				<p>
+					Instead, let's first simplify using laws of exponents:
+					<md>
+					  <mrow>x(u,v) \amp= \sqrt[3]{x^2y} = (x^2y)^{1/3} = x^{2/3}y^{1/3} \quad\text{ and}</mrow>
+					  <mrow>y(u,v) \amp= \sqrt[3]{xy^2} = (xy^2)^{1/3} = x^{1/3}y^{2/3}</mrow>
+					</md>.
+					Now we only need the power rule to compute our partial derivatives, and we find
+					\begin{align*}
+					J_T(u,v) \amp= \det\begin{bmatrix}x_u(u,v)\ampx_v(u,v)\\y_u(u,v)\ampy_v(u,v)\end{bmatrix} \\
+					\amp= \det\begin{bmatrix}\frac23 x^{-1/3}y^{1/3}\amp \frac13 x^{2/3}y^{-2/3}\\ \frac13 x^{-2/3}y^{2/3}\amp \frac23 x^{1/3}y^{-1/3}\end{bmatrix}\\
+					\amp= \left(\frac23 x^{-1/3}y^{1/3}\right)\left( \frac23 x^{1/3}y^{-1/3}\right)-\left(\frac13 x^{2/3}y^{-2/3}\right)\left(\frac13 x^{-2/3}y^{2/3}\right)\\
+					\amp=\frac49 -\frac19 = \frac13.
+					\end{align*}
+			  </p>
+			</solution>
+		</example>
+
+		<p>
+			Interestingly enough, the Jacobian turns out to be constant again,
+			even though the transformation was far from being linear. Let's try one more.
+		</p>
+
+		<example xml:id="ex_jacobian3">
+		  <statement>
+		    <p>
+					Compute the Jacobian of the transformation
+					<me>
+					  x= 4u^2-v^2 \quad y = 2u^2+3v^2
+					</me>.
+				</p>
+			</statement>
+			<solution>
+			  <p>
+					Computing the Jacobian in this case is straightforward:
+					<me>
+					  J_T(u,v) = \det\begin{bmatrix}x_u(u,v)\ampx_v(u,v)\\y_u(u,v)\ampy_v(u,v)\end{bmatrix} = \det\begin{bmatrix} 8u\amp-2v\\4u\amp6v\end{bmatrix} 48uv+8uv=56uv
+					</me>.
+			  </p>
+			</solution>
+		</example>
+
+		<p>
+			As hinted at earlier, the Jacobian is important because it appears in the change of variables formula to come.
+			Its role is analogous to that of the derivative <m>g'(u)</m> in Equation <xref ref="eqn_single_sub"/>.
+			We also need the Jacobian to precisely define the type of function that can be used for a change of variables.
+		</p>
+
+		<definition xml:id="def_transformation">
+			<title>Properties of a transformation</title>
+			<statement>
+				<p>
+					Let <m>D</m> and <m>E</m> subsets of <m>\mathbb{R}^2</m>,
+					with <m>D\subseteq \mathbb{R}^2</m> described in terms of coordinates <m>u,v</m>,
+					and <m>E\subseteq \mathbb{R}^2</m> described in terms of coordinates <m>x,y</m>.
+					Let <m>D^\mathsf{o}</m> denote the <em>interior</em> of <m>D</m>;
+					that is, the set of all non-boundary points of <m>D</m>.
+					We say that a function <m>T:D\to E</m> is a <term>transformation</term> if:
+					<idx><h>transformation</h></idx>
+				</p>
+
+				<p>
+					<ol>
+					  <li>
+					    <p>
+					      <m>T</m> is continuously differentiable on <m>D^\mathsf{o}</m>.
+					    </p>
+					  </li>
+
+						<li>
+						  <p>
+						    <m>T</m> is one-to-one on <m>D^\mathsf{o}</m>, and the range of <m>T</m> is <m>E</m>.
+						  </p>
+						</li>
+
+						<li>
+						  <p>
+						    The Jacobian of <m>T</m> does not vanish: <m>J_T(u,v)\neq 0</m> for all <m>(u.v)\in D^\mathsf{o}</m>.
+						  </p>
+						</li>
+					</ol>
+				</p>
+			</statement>
+		</definition>
+
+		<aside>
+		  <p>
+		    For all three coordinate systems we've studied,
+				the transformation conditions can fail on the boundary of our domain,
+				which we're willing to accept, and we account forthis  by only requring these conditions to hold on the interior of the domain.
+				What would <em>not</em> be acceptable is a situation where the transformation conditions fail on a region interior to the domain.
+		  </p>
+
+			<p>
+				For example, the function <m>T(r,\theta) = (r\cos\theta,r\sin\theta)</m>
+				would not produce an acceptable transformation for domains such as
+				<m>r\in [-1,1],\, \theta\in [0,2\pi]</m> or <m>r\in [0,2],\, \theta\in [0,3\pi]</m>.
+				The first traces out the unit disk twice: once for <m>r<0</m>, and once for <m>r>0</m>.
+				The range of the second transformation is the disk <m>x^2+y^2\leq 4</m>,
+				but the upper half of this disk is produced twice: once for <m>\theta\in [0,\pi]</m>,
+				and again for <m>\theta\in [2\pi,3\pi]</m>.
+			</p>
+
+			<p>
+				If we were using these transformations to compute a double integral over a circular region, we'd get the wrong answer!
+			</p>
+		</aside>
+
+		<p>
+			When <m>D</m> is a closed, bounded subset, note that we do not require <xref ref="def_transformation">Definition</xref> to hold on the boundary.
+			Each of the three conditions above must hold on the interior of <m>D</m>,
+			but are allowed to fail on all or part of the boundary.
+			In particular, this is the case for cylindrical, and spherical coordinates:
+		</p>
+
+		<p>
+			<ul>
+			  <li>
+			    <p>
+			      The polar coordinate transformation <m>x=r\cos\theta, y=r\sin\theta</m>
+						is only one-to-one if <m>r>0</m> and <m>\theta</m> belongs to an interval whose length is less than <m>2\pi</m>.
+						Note that <m>J_T(r,\theta)</m> vanishes at <m>r=0</m>.
+			    </p>
+
+					<p>
+					  Of course, we often use a domain such as <m>r\in [0,R]</m>, <m>\theta = [0,2\pi]</m> to describe a disk centred at the origin.
+						The conditions of <xref ref="def_transformation">Definition</xref> fail at <m>r=0</m>,
+						and because points with <m>\theta=0</m> get mapped to the same place as points with <m>\theta = 2\pi</m>.
+						But these coordinates describe 3 of the 4 sides of the boundary rectangle for our domain,
+						and the conditions are not required to hold on the boundadry.
+					</p>
+			  </li>
+
+				<li>
+				  <p>
+				    The cylindrical coordinate transformation has exactly the same issues as polar coordinates.
+				  </p>
+				</li>
+
+				<li>
+				  <p>
+				    For spherical coordinates, we take <m>\rho\geq 0</m> and again accept the fact that our transformation is not one-to-one
+						(and the Jacobian is zero) when <m>\rho=0</m>.
+						Similarly, we generally allow <m>\theta\in [0,2\pi]</m> and <m>\varphi\in [0,\pi]</m>
+						even though endpoints of these intervals might get sent to the same point.
+				  </p>
+				</li>
+			</ul>
+		</p>
+
+		<p>
+			Before we move on to the change of variables formula,
+			we consider one more example that will help clarify the geometry involved in a change of variables,
+			and that may be familiar to you from a first course in linear algebra.
+		</p>
+
+		<p>
+		  We saw in <xref ref="ex_jacobian1">Example</xref> that when <m>x</m> and <m>y</m> are linear functions of <m>u</m> and <m>v</m>,
+			the Jacobian of the transformation is a constant.
+			What does that constant tell us about the transformation?
+			Here is an example taken from the book Matrix Algebra, by Greg Hartman (who is also the main author of this text).
+		</p>
+
+		<example xml:id="ex_mv_3">
+		  <statement>
+		    <p>
+					Consider the function <m>T:\mathbb{R}^2\to \mathbb{R}^2</m> given by
+					<me>
+					  T(u,v) = (u+4v,2u+3v)
+					</me>.
+					Note that <m>T</m> is linear in both variables.
+					In fact, if we set <m>(x,y)=T(u,v)</m> and represent points by vectors,
+					replacing <m>(x,y)</m> by <m>\vec{x}=\begin{bmatrix}x\\y\end{bmatrix}</m>
+					and <m>(u,v)</m> by <m>\vec{u}=\begin{bmatrix}u\\v\end{bmatrix}</m>,
+					then we can write this function as the matrix transformation <m>\vec{x}=A\vec{u}</m>,
+					where <m>A</m> is the <m>2\times 2</m> matrix <m>\begin{bmatrix}1\amp4\\2\amp3\end{bmatrix}</m>. That is:
+					<me>
+					  \begin{bmatrix}x\\y\end{bmatrix} = \begin{bmatrix}1\amp4\\2\amp3\end{bmatrix}\begin{bmatrix}u\\v\end{bmatrix}
+					</me>.
+					To visualize the effect of <m>T</m>, plot the vectors representing the four corners of the unit square,
+					before and after they have been multiplied by <m>A</m>, where
+					<me>
+					  A = \begin{bmatrix} 1\amp4\\2\amp3\end{bmatrix}
+					</me>.
+				</p>
+			</statement>
+			<solution>
+			  <p>
+					The four corners of the unit square can be represented by the vectors
+					<me>
+					  \begin{bmatrix}0\\0\end{bmatrix}, \quad \begin{bmatrix}1\\0\end{bmatrix},\quad \begin{bmatrix}1\\1\end{bmatrix},\quad \begin{bmatrix}0\\1\end{bmatrix}
+					</me>.
+					Multiplying each by <m>A</m> gives the vectors
+					<me>
+					  \begin{bmatrix}0\\0\end{bmatrix},\quad \begin{bmatrix} 1\\2\end{bmatrix},\quad \begin{bmatrix} 5\\5\end{bmatrix},\quad \begin{bmatrix} 4\\3\end{bmatrix}
+					</me>,
+					respectively.
+			  </p>
+
+				<p>
+				  The unit square and its transformation are graphed in <xref ref="fig_mv_3">Figure</xref>,
+					where the shaped vertices correspond to each other across the two graphs.
+					Note how the square got turned into some sort of quadrilateral (it's actually a parallelogram).
+					A really interesting thing is how the triangular and square vertices seem to have changed places <mdash/> it is as though the square,
+					in addition to being stretched out of shape, was flipped.
+				</p>
+
+				<figure>
+					<caption>Transforming the unit square by matrix multiplication in <xref ref="ex_mv_3">Example</xref></caption>
+					<sidebyside widths="47% 47%">
+						<image xml:id="img_ex_mv_3a">
+						  <description></description>
+							<latex-image>
+							  \begin{tikzpicture}
+								\draw[thick,<->] (-1.2,0) -- (5.2,0) node[right] {$x$};
+								\draw[thick,<->] (0,-1.2) -- (0,5.2) node[above] {$y$};
+								\foreach \x in {-1,0,1,2,3,4,5}
+									\draw (\x, 2pt) -- (\x, -2pt);
+								\foreach \x in {-1,1,2,3,4,5}
+									\node at (\x,0) [below] {$\x$};
+								\foreach \y in {-1,0,1,2,3,4,5}
+									\draw (2pt,\y) -- (-2pt,\y);
+								\foreach \y in {-1,1,2,3,4,5}
+									\node at (0,\y) [left] {$\y$};
+
+
+								\draw (0,0) node (A) {} -- (1,0) node (B) {} -- (1,1) node (C) {} -- (0,1) node (D) {} -- cycle;
+								\draw [->, ultra thin] (0,.25)--(1,.25);
+								\draw [->, ultra thin] (0,.5)--(1,.5);
+								\draw [->, ultra thin] (0,.75)--(1,.75);
+								\filldraw [black]  (A) circle (2pt);
+								\filldraw [fill=white,thick]  (B) ++(-2pt,-2pt) rectangle ++(4pt,4pt);
+								\filldraw [fill=white,thick]  (C) circle (2pt);
+								\filldraw [fill=white,thick]  (D) ++(-2.5pt,-2.5pt) -- ++(5pt,0pt) -- ++(-2.5pt,5pt) -- cycle;
+
+							  \end{tikzpicture}
+							</latex-image>
+						</image>
+
+						<image xml:id="img_ex_mv_3b">
+						  <description></description>
+							<latex-image>
+							  \begin{tikzpicture}
+								\draw[thick,<->] (-1.2,0) -- (5.2,0) node[right] {$x$};
+								\draw[thick,<->] (0,-1.2) -- (0,5.2) node[above] {$y$};
+								\foreach \x in {-1,0,1,2,3,4,5}
+									\draw (\x, 2pt) -- (\x, -2pt);
+								\foreach \x in {-1,1,2,3,4,5}
+									\node at (\x,0) [below] {$\x$};
+								\foreach \y in {-1,0,1,2,3,4,5}
+									\draw (2pt,\y) -- (-2pt,\y);
+								\foreach \y in {-1,1,2,3,4,5}
+									\node at (0,\y) [left] {$\y$};
+
+								\draw (0,0) node (E) {} -- (1,2) node (F) {} -- (5,5) node (G) {} -- (4,3) node (H) {} -- cycle;
+								\draw [->, ultra thin] (1,.75)--(2,2.75);
+								\draw [->, ultra thin] (2,1.5)--(3,3.5);
+								\draw [->, ultra thin] (3,2.25)--(4,4.25);
+								\filldraw [black]  (E) circle (2pt);
+								\filldraw [fill=white,thick]  (F) ++(-2pt,-2pt) rectangle ++(4pt,4pt);
+								\filldraw [fill=white,thick]  (G) circle (2pt);
+								\filldraw [fill=white,thick]  (H) ++(-2.5pt,-2.5pt) -- ++(5pt,0pt) -- ++(-2.5pt,5pt) -- cycle;
+
+							  \end{tikzpicture}
+							</latex-image>
+						</image>
+					</sidebyside>
+				</figure>
+			</solution>
+		</example>
+
+		<p>
+			How does all this relate to Jacobians and change of variables?
+			First note that the derivative of any linear function is (perhaps not so surprisingly)
+			the matrix that defines it: for <m>T(u,v) = (u+4v,2u+3v)</m>, we have
+			<me>
+			  DT(u,v) = \begin{bmatrix}1\amp4\\2\amp3\end{bmatrix} = A
+			</me>.
+			The Jacobian of <m>T</m> is then the determinant of this matrix:
+			<me>
+			  J_T(u,v) = \det A = 1(3)-4(2)=-5
+			</me>.
+		</p>
+
+		<p>
+			Let us make a note of a few key points about <xref ref="ex_mv3">Example</xref>.
+			First, note that in this case, the derivative matrix, (and as a result, the Jacobian) is constant.
+			(This of course is generally true of the derivative for linear functions.)
+		</p>
+
+		<p>
+			What happens when we apply the map <m>T</m> to the unit square?
+			The value <m>J_T(u,v)=-5</m> tells us two things:
+		</p>
+
+		<p>
+			<ul>
+			  <li>
+			    <p>
+			      First, the area of the unit square is increased by a factor of 5.
+			    </p>
+			  </li>
+
+				<li>
+				  <p>
+				    Second, the transformation <m>T</m> reverses the <term>orientation</term> of the unit square.
+						This is indicated by the negative value of the determinant.
+						The reversal of orientation is responsible for the ``flipping'' of the square noticed in the solution above.
+						<idx><h>orientation</h></idx>
+				  </p>
+				</li>
+			</ul>
+		</p>
+
+		<p>
+			The result of performing the transformation <m>T</m> on the unit square is therefore the following:
+			first, the square is flipped over. Then, the square is stretched out into a parallelogram whose area is 5 times that of the original square.
+		</p>
+
+		<aside>
+		  <p>
+		    Recall, from linear algebra, that if two vectors <m>\vec{a}, \vec{b}</m> span a parallelogram in the plane,
+				then the determinant of the <m>2\times 2</m> matrix containing <m>\vec{a}</m> and <m>\vec{b}</m> gives the area (up to sign) of the parallelogram.
+		  </p>
+		</aside>
+
+		<p>
+			Let us make a couple more remarks about the <xref ref="ex_mv3">Example</xref>.
+			First, note the need for an absolute value around the determinant,
+			to ensure the area computed is positive. This absolute value will be needed in our change of variables formula as well.
+		</p>
+
+		<p>
+			Second, since our transformation was linear, with constant derivative,
+			the effect on area is the same for any portion of the plane:
+			applying the transformation <m>T</m> to a closed bounded region <m>D\subseteq \mathbb{R}^2</m> of area <m>A</m> will produce a region of area <m>5A</m>.
+			For non-linear transformations, the value of the Jacobian (and hence, the effect on area) will vary from point to point.
+		</p>
+
+		<aside>
+		  <p>
+		    Recall the following property for definite integrals in one variable:
+				<m>\displaystyle \int_a^bf(x)\,dx = -\int_b^af(x)\,dx</m>.
+				The definite integral is sensitive to the <em>orientation</em> of the interval over which the integration is performed.
+				(Left to right or right to left.) Double and triple integrals do not have this sensitivity.
+				We'll see in <xref ref="sec_parametric_surfaces">Section</xref> how information about orientation is reintroduced in the context of vector calculus.
+		  </p>
+		</aside>
+
+		<p>
+			Before we move on, let's do two more examples,
+			with transformations we've already encountered.
+			In these examples, we'll find that the value of the Jacobian is not a constant.
+		</p>
+
+		<example xml:id="ex_jacobian4">
+		  <statement>
+		    <p>
+					Compute the Jacobian for
+					<ol>
+					  <li>
+					    <p>
+								The polar coordinate transformation
+								<me>
+								  x = r\cos\theta \quad y = r\sin\theta
+								</me>
+					    </p>
+					  </li>
+
+						<li>
+						  <p>
+								The spherical coordinate transformation
+								<me>
+								  x = r\cos\theta\sin\varphi \quad y = r\sin\theta\sin\varphi \quad z = r\cos\varphi
+								</me>.
+						  </p>
+						</li>
+					</ol>
+				</p>
+			</statement>
+			<solution>
+			  <p>
+			    <ol>
+			      <li>
+			        <p>
+								Here we've defined <m>x</m> and <m>y</m> in terms of the coordinates <m>r</m> and <m>\theta</m> instead of <m>u</m> and <m>v</m>, but the process is the same:
+								<md>
+									<mrow>J_T(r,\theta) \amp= \det\begin{bmatrix}x_r(r,\theta) \amp x_\theta(r,\theta)</mrow>
+									<mrow>y_r(r,\theta) \amp y_\theta(r,\theta)\end{bmatrix} = \det\begin{bmatrix}
+										    \cos\theta \amp -r\sin\theta\\ \sin\theta \amp r\cos\theta\end{bmatrix}</mrow>
+									<mrow>\amp = r\cos^2\theta+r\sin^2\theta = r</mrow>
+								</md>.
+							</p>
+
+							<p>
+								Interesting. Note that the value of the Jacobian is <m>r</m>,
+								which is precisely the correction factor needed in the area element for a double integral when we change from rectangular to polar coordinates.
+								Let's try the spherical coordinate transformation to see if this was merely a coincidence.
+			        </p>
+			      </li>
+
+						<li>
+						  <p>
+								Although we haven't defined the Jacobian for a change of coordinates in three variables,
+								the process is exactly the same. We form the derivative of the transformation,
+								given by the matrix of partial derivatives, and compute its determinant. We find:
+								<md>
+									<mrow>J_T(r,\theta,\varphi) \amp= \det\begin{bmatrix}
+												x_\rho(\rho,\theta,\varphi) \amp x_\theta(\rho,\theta,\varphi) \amp x_\varphi(\rho,\theta,\varphi)\\
+												y_\rho(\rho,\theta,\varphi) \amp y_\theta(\rho,\theta,\varphi) \amp y_\varphi(\rho,\theta,\varphi)\\
+												z_\rho(\rho,\theta,\varphi) \amp z_\theta(\rho,\theta,\varphi) \amp z_\varphi(\rho,\theta,\varphi)\end{bmatrix}</mrow>
+									<mrow>\amp = \det\begin{bmatrix}
+												\cos\theta\sin\varphi \amp -\rho\sin\theta\sin\varphi \amp \rho\cos\theta\cos\varphi\\
+												\sin\theta\sin\varphi \amp \rho\cos\theta\sin\varphi \amp \rho\sin\theta\cos\varphi\\
+												\cos\varphi \amp 0 \amp -\rho\sin\varphi\end{bmatrix}</mrow>
+								  <mrow>\amp = \rho\sin\theta\sin\varphi\begin{vmatrix}
+												\sin\theta\sin\varphi \amp \rho\sin\theta\cos\varphi\\
+												\cos\varphi \amp -\rho\sin\varphi
+												\end{vmatrix}</mrow>
+									<mrow>\amp\quad\quad + \rho\cos\theta\sin\varphi\begin{vmatrix}
+												\cos\theta\sin\varphi \amp \rho\cos\theta\cos\varphi\\
+												\cos\varphi \amp-\rho\sin\varphi
+												\end{vmatrix}</mrow>
+								  <mrow>\amp=\rho\sin\theta\sin\varphi(-\rho\sin\theta(\sin^2\varphi+\cos^2\varphi)</mrow>
+									<mrow>\amp\quad\quad+\rho\cos\theta\sin\varphi(-\rho\cos\theta(\sin^2\varphi+\cos^2\varphi)</mrow>
+									<mrow>\amp=-\rho^2\sin^2\theta\sin\varphi-\rho^2\cos^2\theta\sin\varphi</mrow>
+									<mrow>\amp=-\rho^2\sin\theta</mrow>
+								</md>.
+						  </p>
+						</li>
+			    </ol>
+			  </p>
+			</solution>
+		</example>
+
+		<p>
+			We computed the above <m>3\times 3</m> determinant using a cofactor expansion along the second column.
+			Except for the minus sign this is once again exactly the correction factor for the volume element in spherical coordinates,
+			as given in <xref ref="thm_triple_int_spherical">Theorem</xref> in <xref ref="sec_cylindrical_spherical">Section</xref>.
+			In fact, we can account for the minus sign as simply an artifact of how the coordinates <m>(\rho,\theta,\varphi)</m>
+			are ordered in <xref ref="sec_cylindrical_spherical">Section</xref>.
+			Had we chosen the order <m>(\rho,\varphi,\theta)</m>,
+			the second and third columns in the determinant above would be switched,
+			and the minus sign disappears.
+			This is again related to the question of orientation discussed in the context of linear transformations above.
+		</p>
+	</subsection>
+
+	<subsection xml:id="subsec-change-variables-formula">
+		<title>The Change of Variables Formula</title>
+		<p>
+			It seems that we're onto something. It is time that we stated the general change of variables formula for multiple integrals.
+			Notice how, as with the derivative <m>g'(u)</m> in Equation <xref ref="eqn_single_sub"/>,
+			the Jacobian gives us a measure of how subregions in the domain are stretched or shrunk.
+			It shouldn't be too surprising, then, that the Jacobian plays the same role in multiple integrals that the derivative does in a single integral.
+		</p>
+
+		<theorem xml:id="thm_change_of_variables">
+			<title>Change of variables formula for double integrals</title>
+
+			<statement>
+				<p>
+					Let <m>D</m> be a closed, bounded region in the plane,
+					and let <m>T:D\subseteq \mathbb{R}^2\to \mathbb{R}^2</m> be a transformation.
+					If <m>f</m> is a continuous, real-valued function on <m>D</m>, then
+					<me>
+					  \iint_D f(T(u,v))\lvert J_T(u,v)\rvert\,du\,dv = \iint_{T(D)} f(x,y)\,dx\,dy
+					</me>.
+				</p>
+
+				<p>
+					The formula for triple integrals is analogous:
+					given <m>(x,y,z)=T(u,v,w)</m> for <m>(u,v,w)</m> in some closed,
+					bounded domain <m>D</m>, then
+					<me>
+					  \iiint_D f(T(u,v,w))\,du\,dv\,dw = \iiint_{T(D)} f(x,y,z)\,dx\,dy\,dz
+					</me>.
+				</p>
+			</statement>
+		</theorem>
+
+		<p>
+			Let us try a simple example.
+		</p>
+
+		<example xml:id="ex_cov1">
+		  <statement>
+		    <p>
+					Let <m>R</m> be the region in the <m>x,y</m> plane whose boundary is the parallelogram with vertices
+					<m>(0,0)</m>, <m>(3,1)</m>, <m>(1,4)</m>, and <m>(4,5)</m>.
+				</p>
+
+				<p>
+					<ol>
+					  <li>
+					    <p>
+					      Determine a rectangular region <m>D</m> and a transformation <m>T:D\to \mathbb{R}^2</m> such that <m>R=T(D)</m>.
+					    </p>
+					  </li>
+
+						<li>
+						  <p>
+						    Use the transformation <m>T</m> and <xref ref="thm_change_of_variables">Theorem</xref> to determine the area of <m>R</m>.
+						  </p>
+						</li>
+					</ol>
+				</p>
+			</statement>
+			<solution>
+			  <p>
+			    <ol>
+			      <li>
+			        <p>
+			          For inspiration, we look to <xref ref="ex_mv_3">Example</xref>.
+								Notice how the transformation defined by the matrix
+								<m>A=\begin{bmatrix}1\amp 4\\2\amp 3\end{bmatrix}</m> preserves the origin,
+								and sends the points <m>(1,0)</m> and <m>(0,1)</m> to <m>(1,2)</m>m> and <m>(4,3)</m>, respectively.
+								In general, the transformation
+								<me>
+									T(u,v) = (au+cv,bu+dv), \quad\text{ with matrix } \quad \begin{bmatrix}a\amp c\\b\amp d\end{bmatrix}
+							  </me>
+								will send <m>(1,0)</m> to <m>(a,b)</m>, and <m>(0,1)</m> to <m>(c,d)</m>.
+							</p>
+
+							<aside>
+							  <p>
+							    If you need further convincing, notice that setting <m>u=0</m>, <m>v=t</m>
+									gives the parametric curve <m>T(0,t)=(t,4t)</m>,
+									which is the same as the line <m>y=4x</m>: the line from <m>(0,0)</m> to <m>(1,4)</m>.
+									Similarly, setting <m>u=t,v=0</m> gives <m>T(t,0)=(3t,t)</m>:
+									the line <m>y=\frac13 x</m> from <m>(0,0)</m> to <m>(3,1)</m>.
+									One can similarly check that <m>T(1,t)</m> and <m>T(t,1)</m> give lines forming the other two sides of the parallelogram.
+							  </p>
+							</aside>
+
+							<p>
+								This suggests that in our case we can take <m>D</m> to be the unit square <m>[0,1]\times [0,1]</m>, and set
+								<me>
+								  T(u,v) = (3u+v,u+4v)
+								</me>.
+								We check that <m>T(0,0)=(0,0)</m>, <m>T(1,0)=(3,1)</m>, <m>T(0,1)=(1,4)</m>, and <m>T(1,1)=(4,5)</m>.
+								The four corners of the unit square are mapped to the four corners of the parallelogram.
+								Since linear transformations map <q>lines to lines</q>, we have our transformation.
+			        </p>
+			      </li>
+
+						<li>
+						  <p>
+								To use <xref ref="thm_change_of_variables">Theorem</xref>,
+								we need to compute the Jacobian of our transformation. We have
+								<me>
+								  J_T(u,v) = \det\begin{bmatrix}3\amp1\\1\amp4\end{bmatrix} = 11
+								</me>,
+								and since <m>R=T(D)</m>, the change of variables formula gives us
+								<me>
+								  A = \iint_R 1 \,dx\,dy = \iint_D 11\,du\,dv = 11
+								</me>.
+						  </p>
+						</li>
+			    </ol>
+			  </p>
+			</solution>
+		</example>
+
+		<p>
+			Let's try another example. Our next example is more complicated,
+			but this time, we're given the change of variables.
+		</p>
+
+		<example xml:id="ex_int_trans0">
+		  <statement>
+		    <p>
+					Use the change of variables <m>x= u+v</m>, <m>y=u-v</m> to evaluate the integral
+					<me>
+					  \iint_R xe^{x^2-y^2}\,dA
+					</me>,
+					where <m>R</m> is the region bounded by the lines:
+					<me>
+					  y=x, \, y=-x, \, y=x-2,\, \text{ and } y=2-x
+					</me>.
+				</p>
+			</statement>
+			<solution>
+			  <p>
+			    The region of integration is shown in <xref ref="fig_trans_int_reg0">Figure</xref>.
+				</p>
+
+				<figure xml:id="fig_trans_int_reg0">
+					<caption>The region of integration <m>R</m> in <xref ref="ex_int_trans0">Example</xref></caption>
+					<image xml:id="img_trans_int_reg0" width="47%">
+					  <description></description>
+						<latex-image>
+						  \begin{tikzpicture}
+							\begin{axis}[
+										scale only axis,
+										xtick={1,2},%
+										ytick={-1,1},
+										ymin=-2,ymax=2,%
+										xmin=-1,xmax=3%
+							]
+
+							\addplot [secondcolor,domain=0:3]{x};
+							\addplot [secondcolor,domain=0:3]{x-2};
+							\addplot [secondcolor,domain=0:3]{2-x};
+							\addplot [secondcolor,domain=0:3]{-x};
+							\addplot [firstcurvestyle,areastyle] coordinates
+								{(0,0) (1,-1) (2,0) (1,1) (0,0)}\closedcycle;
+							\end{axis}
+
+						  \end{tikzpicture}
+						</latex-image>
+					</image>
+				</figure>
+
+				<p>
+					We need to determine a domain for the transformation <m>T(u,v)=(u+v,u-v)</m> such that the range of <m>T</m> is <m>R</m>.
+					Let's put <m>x=u+v</m> and <m>y=u-v</m> into the equations of our boundary lines,
+					to see what the corresponding lines in the <m>u,v</m> plane are.
+					<md>
+					  <mrow>y=x \amp\quad \Rightarrow \quad u-v = u+v \quad \Rightarrow \quad v=0.</mrow>
+					  <mrow>y=-x \amp\quad \Rightarrow \quad u-v = -(u+v) \quad \Rightarrow \quad u=0.</mrow>
+					  <mrow>y=x-2 \amp\quad \Rightarrow \quad u-v = u+v-2 \quad \Rightarrow \quad 2v=2 \quad \Rightarrow \quad v=1</mrow>
+					</md>.
+					These lines are simply the boundary of the unit square in the <m>u,v</m> plane.
+					Thus, if we take the domain <m>D=[0,1]\times [0,1]</m> for <m>T</m>, we will have <m>R=T(D)</m>, as required.
+				</p>
+
+				<p>
+					Now, we apply <xref ref="thm_change_of_variables">Theorem</xref>. Recall the formula:
+					<me>
+					  \iint_D f(T(u,v))\lvert J_T(u,v)\rvert\,du\,dv = \iint_{T(D)} f(x,y)\,dx\,dy
+					</me>.
+					We have <m>f(x,y) = xe^{x^2-y^2}</m>. It follows that
+					<me>
+						f(T(u,v)) = (u+v)e^{(u+v)^2-(u-v)^2} = (u+v)e^{u^2+2uv+v^2-(u^2-2uv+v^2)} = (u+v)e^{4uv}
+					</me>.
+				</p>
+
+				<p>
+					We also need to compute the Jacobian. Since the transformation is linear, we know this will be a constant. We find:
+					<me>
+					  J_T(u,v) = \det\begin{bmatrix}x_u\ampx_v\\y_u\ampy_v\end{bmatrix} = \det\begin{bmatrix}1\amp1\\1\amp-1\end{bmatrix} = -2
+					</me>.
+				</p>
+
+				<aside>
+					<p>
+						In this case, understanding the geometry of the Jacobian gives us the answer without any computation.
+						Since a square of area 1 is transformed to a square of area 2, we know <m>\lvert J_T(u,v)\rvert =2</m>.
+					</p>
+				</aside>
+
+				<p>
+					Putting all this into our change of variables formula, we have
+					<me>
+					  \iint_R xe^{x^2+y^2}\,dx\,dy = \iint_D (u+v)e^{4uv}\lvert -2\rvert \,du\,dv
+					</me>.
+					This integral can be evaluated by splitting it in two, and choosing the most convenient order of integration for each part:
+					<me>
+					  \iint_D 2(u+v)e^{4uv} \,du\,dv = 2\int_0^1\int_0^1 ue^{4uv}\,dv\,du + 2\int_0^1\int_0^1 ve^{4uv}\,du\,dv
+					</me>.
+				</p>
+
+				<p>
+					Now, we find that
+					<md>
+					  <mrow>\int_0^1\int_0^1 ue^{4uv}\,dv\,du \amp= \int_0^1\left(\left.\frac14 e^{4uv}\right|_0^1\right)\,du</mrow>
+					  <mrow>\amp = \frac14\int_0^1 (e^{4u}-1)\,du</mrow>
+					  <mrow>\amp = \frac{1}{16}(e^4-1)-\frac14(1) = \frac{1}{16}e^4-\frac{5}{16}</mrow>
+					</md>,
+					and the second integral differs only in the labelling of the variables, and gives the same result. Thus, we have
+					<me>
+					  \iint_R xe^{x^2-y^2}\,dx\,dy = \frac14 e^4-\frac54
+					</me>.
+			  </p>
+			</solution>
+		</example>
+
+		<p>
+			Let's try one more example where we're given some guidance before tackling a general change of variables problem.
+		</p>
+
+		<example xml:id="ex_int_trans00">
+		  <statement>
+		    <p>
+					Let <m>R</m> be the region in the first quadrant bounded by the lines <m>y=x</m> and <m>y=4x</m>,
+					and the hyperbolas <m>y=1/x</m> and <m>y=4/x</m>. Evaluate the integral
+					<me>
+					  \iint_R xy^2\,dA
+					</me>
+					using the change of variables <m>x=u/v</m>, <m>y=v</m>.
+				</p>
+			</statement>
+			<solution>
+			  <p>
+					First, we note that setting <m>y=kx</m>, where <m>k</m> is a constant, gives us
+					<me>
+					  v = k\frac{u}{v} \quad\Rightarrow\quad u=\frac1k v^2
+					</me>,
+					while setting <m>y=k/x</m> gives <m>xy=k</m>, or <m>u=k</m>.
+					The region <m>R</m> is therefore the image under the transformation
+					<m>T(u,v)=(u/v,v)</m> of the region <m>D</m> bounded by the curves
+					<m>u=v^2</m> and <m>u=\frac14 v^2</m>, and the lines <m>u=1, u=4</m>;
+					see <xref ref="fig_int_trans00b">Figure</xref>.
+				</p>
+
+				<aside>
+				  <p>
+				    Some caution is needed when determining the domain <m>D</m>.
+						Note that the given curves bound two regions: one above the <m>u</m> axis, and one below.
+						But we note that <m>y=v</m>, and since <m>y>0</m> for the region <m>R</m>, we must have <m>v>0</m> in <m>D</m>.
+				  </p>
+				</aside>
+
+				<sidebyside widths="47% 47%" valign="bottom">
+					<figure xml:id="fig_int_trans00a">
+						<caption>The region of integration <m>R</m> in <xref ref="ex_int_trans00"/></caption>
+						<image xml:id="img_int_trans00a">
+						  <description></description>
+							<latex-image>
+							  \begin{tikzpicture}
+								\begin{axis}[
+											xtick={1,2,3,4},%
+											ytick={1,2,3,4},
+											ymin=-1,ymax=5,%
+											xmin=-1,xmax=5%
+								]
+
+								\addplot [-,name path=A,secondcurvestyle,domain={-1:4.5}]{x};
+								\addplot [-,name path=B,secondcurvestyle,domain={-0.25:1.25}]{4*x};
+								\addplot [-,name path=C,firstcurvestyle,domain=0.2:4.5]{1/x};
+								\addplot [-,name path=D,firstcurvestyle,domain=0.8:5]{4/x};
+								\addplot [firstcurvestyle,areastyle] fill between [of=B and C, soft clip={domain=0.5:1}];
+								\addplot [firstcurvestyle,areastyle] fill between [of=D and A, soft clip={domain=1:2}];
+								\node at (axis cs:1.2,2) {$R$};
+								\end{axis}
+
+							  \end{tikzpicture}
+							</latex-image>
+						</image>
+					</figure>
+					<figure xml:id="fig_int_trans00b">
+						<caption>The domain <m>D</m> mapped onto <m>R</m> by <m>T</m> in <xref ref="ex_int_trans00"/>.</caption>
+						<image xml:id="img_int_trans00b">
+						  <description></description>
+							<latex-image>
+							  \begin{tikzpicture}
+								\begin{axis}[
+											xtick={1,2,3,4},%
+											ytick={-4,-3,-2,-1,1,2,3,4},
+											ymin=-4.5,ymax=4.5,%
+											xmin=-1,xmax=5%
+								]
+
+								\addplot [-,secondcurvestyle,domain=1:2]({1},{x});
+								\addplot [-,secondcurvestyle,domain=2:4]({4},{x});
+								\addplot [name path=C,firstcurvestyle,domain=0:5]{sqrt(x)};
+								\addplot [-,firstcurvestyle,domain=0:5]{-sqrt(x)};
+								\addplot [name path=D,firstcurvestyle,domain=0:5]{2*sqrt(x)};
+								\addplot [-,firstcurvestyle,domain=0:5]{-2*sqrt(x)};
+								\addplot [-,firstcurvestyle,areastyle] fill between [of=C and D, soft clip={domain=1:4}];
+								\node at (axis cs:2.5,2.5) {$D$};
+								\end{axis}
+
+							  \end{tikzpicture}
+							</latex-image>
+						</image>
+					</figure>
+				</sidebyside>
+
+				<p>
+					This is perhaps not the best possible change of variables: the domain <m>D</m> is not a rectangle.
+					(See <xref ref="ex_int_trans2">Example</xref> below for a change of variables that is more effective for this type of region.)
+					However, it is a region of the type we considered in <xref ref="sec_double_int_volume">Section</xref>,
+					so we're better off than we were with the original region.
+					We have <m>1\leq u\leq 4</m>, and the equations <m>u=v^2</m>,
+					<m>u=\frac14 v^2</m> can be re-written (noting that <m>v>0</m>) as <m>v=\sqrt{u}</m> and <m>v=2\sqrt{u}</m>.
+				</p>
+
+				<p>
+					With <m>f(x,y)=xy^2</m> we have <m>f(T(u,v))=\frac{u}{v}\cdot v^2=uv</m>, and the Jacobian is given by
+					<me>
+					  J_T(u,v) = \det\begin{bmatrix}1/v \amp -u/v^2\\0\amp1\end{bmatrix} = \frac{1}{v}
+					</me>.
+					Thus, we have
+					<md>
+					  <mrow>\iint_R xy^2\,dA \amp = \iint_D uv\left\lvert\frac1v\right\rvert\,du\,dv</mrow>
+					  <mrow>\amp = \int_1^4\int_{\sqrt{u}}^{2\sqrt{u}}u\,dv\,du</mrow>
+					  <mrow>\amp = \int_1^4 u^{3/2}\,du</mrow>
+					</md>.
+			  </p>
+			</solution>
+		</example>
+
+		<p>
+			Our next goal is to tackle the following general problem:
+			given a multiple integral over a region <m>E</m>,
+			determine a transformation <m>T</m> with domain <m>D</m> such that <m>T(D)=E</m>,
+			and use it to evaluate the integral.
+			Before attempting a couple of examples,
+			we take a brief detour to consider some technical details that will assist us in understanding the problem.
+		</p>
+
+		<p>
+			Recall from <xref ref="def_transformation">Definition</xref>
+			that we require transformations to be one-to-one and onto
+			(see <xref ref="def_one_to_one_onto">Definition</xref>),
+			except possibly on the boundary of their domain.
+		</p>
+
+		<p>
+			One of the reasons that we require these properties is that they guarantee that <m>T</m> has an <term>inverse</term>.
+				If a transformation <m>T:D\to E</m> is one-to-one and onto,
+			then we can define the inverse mapping <m>T^{-1}:E\to D</m> according to
+			<me>
+			  T^{-1}(\mathbf{x}) = \mathbf{u} \quad\text{ if and only if }\quad \mathbf{x} = T(\mathbf{u})
+			</me>.
+			<idx><h>inverse</h><h>of a transformation</h></idx>
+		</p>
+
+		<p>
+			Notice that the onto condition guarantees that the domain of <m>T^{-1}</m> is all of <m>E</m>.
+			When considering a changes of variables for a multiple integral over a region <m>E</m>,
+			we would ideally like to have a one-to-one and onto mapping from <m>D</m> to <m>E</m>
+			to ensure that when we convert to an integral over <m>D</m>,
+			each point in <m>E</m> only gets <q>counted once</q>.
+		</p>
+
+		<p>
+			For example, consider the mapping <m>T(u,v)=(u^2,v)</m> defined on <m>[-1,1]\times [0,1]</m>.
+			(That is, <m>x=u^2</m> with <m>-1\leq u\leq 1</m> and <m>y=v</m>, with <m>0\leq v\leq 1</m>.)
+			The image of <m>T</m> is the square <m>[0,1]\times [0,1]</m>,
+			but each point <m>(x,y)</m> corresponds to two points <m>(\pm \sqrt{x},\sqrt{y})</m> in <m>D</m>,
+			so integrating over <m>D</m> would be the same as integrating over <m>E</m> {\em twice}!
+		</p>
+
+		<p>
+			Next we want to consider differentiability. Recall that a vector-valued function
+			<me>
+			  \mathbf{r}(t) = \langle x(t),y(t)\rangle
+			</me>
+			is continuous if and only if each of the component functions <m>x(t), y(t)</m> is continuous,
+			and similarly, <m>\mathbf{r}(t)</m> is differentiable if and only if each of the component functions is differentiable, and
+			<me>
+			  \mathbf{r}'(t) = \langle x'(t), y'(t)\rangle
+			</me>.
+		</p>
+
+		<p>
+			Similarly, a function <m>T:D\subset \mathbb{R}^n \to \mathbb{R}^n</m>
+			is continuous if and only if each of its components is continuous
+			(as a function of several variables),
+			and (for <m>n=2</m>) the partial derivatives of <m>T</m> can be viewed as the vector-valued functions
+			<md>
+			  <mrow>\mathbf{r}_u(u,v) \amp= \frac{\partial T}{\partial u}(u,v) = \left<\frac{\partial x}{\partial u}(u,v),\frac{\partial y}{\partial u}(u,v)\right></mrow>
+			  <mrow>\mathbf{r}_v(u,v) \amp= \frac{\partial T}{\partial v}(u,v) = \left<\frac{\partial x}{\partial v}(u,v),\frac{\partial y}{\partial v}(u,v)\right></mrow>
+			</md>,
+			with similar formulas for <m>n=3</m>.
+			(For <m>n=1</m> we have only the single derivative <m>T'(u)</m>.)
+		</p>
+
+		<p>
+			If each of the components of each of the partial derivatives is continuous
+			(that is, if the partial derivative of each of the <m>\mathbf{x}</m>
+			variables with respect to each of the <m>\mathbf{u}</m> variables is continuous)
+			we say that <m>T</m> is <m>C^1</m>, or continuously differentiable.
+		</p>
+
+		<aside>
+		  <p>
+				Recall that in <xref ref="sec_deriv_matrix">Section</xref>
+				we gave the following alternative definition of differentiability:
+				<m>f:D\subset \mathbb{R}^n\to\mathbb{R}^m</m> is <em>differentiable</em> if
+				<me>
+				  \lim_{\mathbf{h}\to\mathbf{0}}\frac{\lVert f(\mathbf{a}+\mathbf{h})-f(\mathbf{a})-Df(\mathbf{a})\mathbf{h}\rVert}{\lVert\mathbf{h}\rVert}=0
+				</me>,
+				where <m>Df(\mathbf{a})</m> is the matrix of partial derivatives of <m>f</m> at <m>\mathbf{a}</m>,
+				and <m>Df(\mathbf{a})\mathbf{h}</m> denotes matrix multiplication,
+				with <m>\mathbf{h}</m> viewed as a column vector.
+		  </p>
+		</aside>
+
+		<p>
+			If a function <m>T:D\subset\mathbb{R}^n\to E\subset \mathbb{R}^n</m> is <m>C^1</m>,
+			then as with real-valued functions,
+			being continuously differentiable implies that <m>T</m> is differentiable
+			(in the sense of the definition from <xref ref="sec_deriv_matrix">Section</xref>),
+			and therefore continuous.
+			The derivative of <m>T</m> is then an <m>n\times n</m> matrix.
+			For example, when <m>n=2</m>, if <m>T(u,v) = (x(u,v), y(u,v)</m>, we get
+			<me>
+				DT(u,v) = \begin{bmatrix}
+				\dfrac{\partial x}{\partial u}\amp \dfrac{\partial x}{\partial v}\\ \amp \\ \dfrac{\partial y}{\partial u}\amp\dfrac{\partial y}{\partial v}
+				\end{bmatrix}
+			</me>.
+		</p>
+
+		<p>
+			Notice that, while the gradients <m>\nabla x(u,v), \nabla y(u,v)</m>
+			make up the rows of the derivative matrix <m>DT(\mathbf{a})</m>,
+			the <em>columns</em> of <m>DT(\mathbf{a})</m> are the partial derivative vectors <m>\mathbf{r}_u</m> and <m>\mathbf{r}_v</m>.
+		</p>
+
+		<p>
+			Given our function <m>T:D\subset \mathbb{R}^n\to E\subset \mathbb{R}^n</m>,
+			let us denote by <m>DT</m> the matrix of partial derivatives,
+			as in <xref ref="sec_deriv_matrix">Section</xref>.
+			Since the dimension of the domain and range are the same,
+			<m>DT</m> is a square (<m>n\times n</m>) matrix, so we can compute its determinant,
+			and this, of course, is the Jacobian, as defined in <xref ref="def_jacobian">Definition</xref>.
+		</p>
+
+		<p>
+			Let's come back to the change of variables formula.
+			If we let <m>d\mathbf{x}</m> denote either <m>dx</m>, <m>dA</m>, or <m>dV</m>,
+			depending on whether <m>n=1,2</m> or <m>3</m>, and doing the same for  <m>d\mathbf{u}</m>,
+			the change of variables formula for a transformation <m>T:D\to E</m> can be written as
+			<me>
+			  \int_E f(\mathbf{x})d\mathbf{x} = \int_D f(T(\mathbf{u}))\lvert J_T(\mathbf{u})\rvert d\mathbf{u}
+			</me>,
+			where the integral sign represents a single, double, or triple integral, depending on the value of <m>n</m>.
+			(So this really is just a generalization of the method of substitution you learned in Calculus I.)
+		</p>
+
+		<p>
+			Note that the properties required for <m>T</m> to be a transformation tell us that every point of <m>E</m> corresponds to a point in <m>D</m>,
+			and integrating over <m>D</m> is the same as integrating over <m>E</m>,
+			once we account for the <q>stretch factor</q> of the transformation given by the Jacobian <m>J_T(\mathbf{u})</m>.
+			A rigorous proof of the change of variables formula is very difficult,
+			but we will give an argument at the end of this section similar to the one we considered for the polar and spherical coordinate transformations that,
+			although not a complete proof, is at least a plausible explanation.
+		</p>
+
+		<p>
+			The general inverse function theorem, which is not stated in most calculus textbooks,
+			(probably in part because the statement requires defining the matrix <m>DT</m> of partial derivatives and explaining what the inverse of a matrix is),
+			states that if <m>T:D\to E</m> is one-to-one and onto,
+			then <m>T^{-1}</m> exists, and moreover,
+			if <m>T</m> is <m>C^1</m> <em>and</em> <m>J_T(\mathbf{u})\neq 0</m> for all <m>\mathbf{u}\in D</m>,
+			then <m>T^{-1}</m> is <em>also</em> a <m>C^1</m> function, and
+			<men xml:id="eqn_gen_inverse">
+			DT^{-1}(\mathbf{x}) = (DT(\mathbf{u}))^{-1}
+			</men>,
+			where <m>\mathbf{u}=T^{-1}(\mathbf{x})</m>.
+		</p>
+
+		<aside>
+		  <p>
+		    The <m>-1</m> on the right-hand side of Equation <xref ref="eqn_gen_inverse"/> denotes a matrix inverse.
+				A basic result from linear algebra tells us that a matrix is invertible if and only if its determinant is non-zero,
+				which is one reason why we require a nonzero Jacobian in <xref ref="def_transformation">Definition</xref>.
+				(Compare this to the result <m>(f^{-1})'(x) = \dfrac{1}{f'(f^{-1}(x))}</m> in one variable.)
+		  </p>
+		</aside>
+
+		<p>
+			A useful consequence of Equation <xref ref="eqn_gen_inverse"/>
+			is obtained by taking the determinant of both sides of the above equation
+			(recall that <m>\det(A^{-1}) = 1/\det(A)</m> for any invertible matrix <m>A</m>).
+		</p>
+
+		<theorem xml:id="thm_inverse_jacobian">
+			<title>The Jacobian of an inverse transformation</title>
+			<statement>
+				<p>
+					Let <m>T:D\to\mathbb{R}^2</m> be a one-to-one <m>C^1</m> mapping with image <m>E=T(D)</m>.
+					If <m>J_T(\mathbf{u})\neq 0</m> for all <m>\mathbf{u}\in D</m>,
+					then <m>T^{-1}:E\to \mathbb{R}^2</m> is a transformation,
+					and the Jacobian of <m>T^{-1}</m> is given by
+					<me>
+					  J_{T^{-1}}(\mathbf{x}) = \frac{1}{J_T(T^{-1}(\mathbf{x}))}
+					</me>.
+				</p>
+			</statement>
+		</theorem>
+
+		<p>
+			This result can come in handy in cases where it's easy to come up with the inverse mapping
+			<m>\mathbf{u} = T^{-1}(\mathbf{x})</m>,
+			but hard to solve for <m>\mathbf{x}</m> in terms of <m>\mathbf{u}</m> to obtain <m>T</m>.
+		</p>
+
+		<p>
+			Our last technical detail is a theorem that can be very useful when trying to determine the transformation to use for a change of variables:
+			the boundary of <m>E</m> must correspond to the boundary of <m>D</m>.
+			This is useful because we usually would like <m>D</m> to be as simple as possible,
+			ideally a rectangle (or box, if <m>n=3</m>).
+		</p>
+
+		<p>
+			Since the sides of the rectangle are given by setting <m>u</m> or <m>v</m> equal to a constant,
+			we look at the curves that define the boundary of <m>E</m>.
+			If the boundary of <m>E</m> can be expressed in terms of level curves for two functions <m>f(x,y)</m> and <m>g(x,y)</m>,
+			we can define <m>u=f(x,y)</m> and <m>v=g(x,y)</m>, which allows us to define <m>T^{-1}(x,y) = (f(x,y),g(x,y))</m>.
+			From there, we can try to compute <m>T</m> from <m>T^{-1}</m>, which is a matter of solving for <m>x</m> and <m>y</m> in terms of <m>u</m> and <m>v</m>.
+		</p>
+
+		<theorem xml:id="thm_boundary_transform">
+			<title>Transformations preserve the boundary</title>
+
+			<statement>
+				<p>
+					Let <m>D,E\subset \mathbb{R}^n</m> be closed, bounded regions.
+					If <m>T:D\to E</m> is a transformation,
+					then the boundary of <m>E</m> is the image under <m>T</m> of the boundary of <m>D</m>;
+					that is, if <m>T(\mathbf{u})=\mathbf{x}</m> is on the boundary of <m>E</m>,
+					then <m>\mathbf{u}</m> is on the boundary of <m>D</m>.
+				</p>
+			</statement>
+		</theorem>
+
+		<p>
+			We will prove this result in the case that <m>T</m> is one-to-one,
+			with <m>J_T(\mathbf{u})\neq 0</m>, on all of <m>D</m>, including the boundary.
+			Note that if this property fails on some portion on the boundary,
+			this will not affect the integral.
+			For example, if <m>n=2</m>, the boundary of <m>D</m> consists of a finite union of continuous curves,
+			so any portion of the boundary is a continuous curve,
+			and we know that we can neglect the graphs of finitely many continuous curves when carrying out an integral.
+			We begin by first proving a simpler result.
+		</p>
+
+		<aside>
+		  <p>
+		    A result such as <xref ref="thm_open_transform">Theorem</xref>
+				that is used as a step towards proving a more substantial result is often referred to as a <em>lemma</em>.
+		  </p>
+		</aside>
+
+		<theorem xml:id="thm_open_transform">
+			<title>Transformations are open mappings</title>
+			<statement>
+				<p>
+					If <m>f:A\to B</m> is a continuous, one-to-one,
+					and onto mapping from <m>A</m> to <m>B</m> with continuous inverse <m>f^{-1}:B\to A</m>,
+					then <m>f</m> maps open sets to open sets. That is, if <m>U\subset A</m> is an open subset of <m>A</m>,
+					then the image <m>f(U) = \{f(\mathbf{u})\in B|\mathbf{u}\in U\}</m> is an open subset of <m>B</m>.
+				</p>
+			</statement>
+			<proof>
+				<p>
+					Let <m>U\subset A</m> be open, and let <m>\mathbf{x}\in f(U)</m>.
+					We need to show that there exists some <m>\delta>0</m> such that
+					<m>N_\delta(\mathbf{x}) = \{\mathbf{y}\in A| \norm{\mathbf{x}-\mathbf{y}}<\delta\}</m> is a subset of <m>f(U)</m>.
+					(By definition, <m>f(U)</m> is open if each element of <m>f(U)</m> has a <m>\delta</m>-neighbourhood completely contained in <m>f(U)</m>.)
+					Since <m>f</m> is one-to-one and onto, there exists a unique <m>\mathbf{v}=f^{-1}(\mathbf{x})\in U</m> such that <m>f(\mathbf{v})=\mathbf{x}</m>.
+					(We must have <m>\mathbf{v}\in U</m> since <m>f(\mathbf{v})\in f(U)</m>.)
+					Since <m>U</m> is open, there exists an <m>\epsilon>0</m> such that <m>N_\epsilon(\mathbf{v})\subset U</m>.
+				</p>
+
+				<p>
+					Now, since <m>f^{-1}</m> is continuous,
+					there exists a <m>\delta>0</m> such that if <m>\mathbf{y}\in N_\delta(\mathbf{x})</m>,
+					then <m>f^{-1}(\mathbf{y})\in N_\epsilon(\mathbf{v})</m>.
+					But if <m>f^{-1}(\mathbf{y})\in N_\epsilon\subset U</m>,
+					then <m>f(f^{-1}(\mathbf{y}))=\mathbf{y}\in f(U)</m>, by definition of <m>f(U)</m>.
+					Thus, <m>N_\delta(\mathbf{x})\subset f(U)</m>, which is what we needed to show.
+				</p>
+			</proof>
+
+		</theorem>
+
+		<p>
+			Using the above lemma, we can now give a proof of our theorem.
+		</p>
+
+		<proof>
+			<title>Proof of <xref ref="thm_boundary_transform">Theorem</xref></title>
+
+			<p>
+				Let <m>T:D\to E</m> be the given transformation,
+				which is one-to-one and onto,
+				and such that <m>J_T(\mathbf{u})\neq 0</m> for all <m>\mathbf{u}\in D</m>.
+				Since <m>T</m> is one-to-one and onto, we can find an inverse function <m>T^{-1}:E\to D</m>.
+				Since <m>T</m> is <m>C^1</m> and <m>J_T(\mathbf{u})\neq 0</m> for all <m>\mathbf{u}\in D</m>,
+				the inverse function theorem tells us that <m>T^{-1}</m> must be <m>C^1</m> on <m>E</m>.
+				Since <m>T</m> and <m>T^{-1}</m> are both <m>C^1</m>, they are differentiable and therefore continuous.
+			</p>
+
+			<p>
+				Now, let <m>\mathbf{x}\in E</m> be a boundary point.
+				We need to show that <m>\mathbf{x}</m> is the image of a boundary point in <m>D</m>.
+				Recall that <m>\mathbf{x}</m> is a boundary point if and only if every neighbourhood of
+				<m>\mathbf{x}</m> contains both points in <m>E</m> and points not in <m>E</m>.
+				Let <m>\mathbf{u}=T^{-1}(\mathbf{x})\in D</m> be the element of <m>D</m> that is mapped to <m>\mathbf{x}</m> by <m>T</m>.
+				For the sake of contradiction, suppose that <m>\mathbf{u}</m> is not a boundary point of <m>D</m>.
+				Then since <m>\mathbf{u}\in D</m> it must be an interior point of <m>D</m>,
+				and therefore, there exists some <m>\delta>0</m> such that <m>N_\delta(\mathbf{u})\subset D</m>.
+				(That is, there is a neighbourhood of <m>\mathbf{u}</m> that is completely contained in <m>D</m>.)
+			</p>
+
+			<p>
+				However, since <m>T</m> satisfies the conditions of <xref ref="thm_open_transform">Theorem</xref>,
+				we know that <m>T</m> must map open sets to open sets.
+				In particular, since <m>N_\delta(\mathbf{u})</m> is an open subset of <m>D</m>,
+				<m>T(N_\delta(\mathbf{u}))</m> must be an open subset of <m>E</m>.
+				But since <m>\mathbf{u}\in N_\delta(\mathbf{u})</m>, we must have <m>\mathbf{x} = T(\mathbf{u})\in T(N_\delta(\mathbf{u}))</m>,
+				and thus <m>T(N_\delta(\mathbf{u}))</m> is an open subset of <m>E</m> that contains <m>\mathbf{x}</m>,
+				which contradicts the fact that <m>\mathbf{x}</m> is a boundary point.
+				Thus, it must be the case that <m>\mathbf{u}</m> is a boundary point of <m>D</m>.
+			</p>
+		</proof>
+
+		<p>
+			Note that since <m>T^{-1}:E\to D</m> is also a transformation with the same properties as <m>T</m>,
+			the converse to this result is valid as well: if <m>\mathbf{u}</m> belongs to the boundary of <m>D</m>,
+			then <m>T(\mathbf{u})</m> belongs to the boundary of <m>E</m>.
+		</p>
+
+		<p>
+			We will see how Theorems <xref ref="thm_boundary_transform" text="global"/>
+			and <xref ref="thm_inverse_jacobian" text="global"/> are put to use in the following examples.
+		</p>
+
+		<example xml:id="ex_int_trans1">
+		  <statement>
+		    <p>
+					Compute <m>\displaystyle \iint_E \left(\frac{y^2}{x^4}+\frac{x^2}{y^4}\right)\,dA</m>,
+					where <m>E</m> is the region bounded by <m>y=x^2</m>, <m>y=2x^2</m>, <m>x=y^2</m>, and <m>x=4y^2</m>.
+				</p>
+			</statement>
+			<solution>
+			  <p>
+					The region <m>E</m> is pictured in <xref ref="fig_int_trans1">Figure</xref> below.
+					We need to find a region <m>D\subset \mathbb{R}^2</m> and a transformation <m>T:D\to \mathbb{R}^2</m> whose image is <m>E</m>.
+					We use the fact that <m>T</m> must map the boundary of <m>D</m> to the boundary of <m>E</m> as a guideline.
+					In particular, note that since <m>T</m> is <m>C^1</m>, it must map smooth curves to smooth curves by the chain rule.
+					This tells us that the corners of <m>E</m> must correspond to the corners of <m>D</m>, and in particular,
+					that each of the four curves that make up the boundary of <m>E</m> must come from four curves that make up the boundary of <m>D</m>.
+					Since we would like the integral over <m>D</m> to be as simple as possible, we try to find a transformation such that <m>D</m> is a rectangle.
+				</p>
+
+				<figure xml:id="fig_int_trans1">
+					<caption>The region of integration for <xref ref="ex_int_trans1">Example</xref></caption>
+					<image xml:id="img_int_trans1" width="47%">
+					  <description></description>
+						<latex-image>
+						  \begin{tikzpicture}
+							\begin{axis}[
+										xtick={1},%
+										ytick={1},
+										ymin=-0.2,ymax=1.2,%
+										xmin=-0.2,xmax=1.2%
+							]
+
+							\addplot [-,name path=A,secondcurvestyle,domain={-0.2:1.2}]{x^2};
+							\addplot [-,name path=B,secondcurvestyle,domain={-0.2:1.2}]{2*x^2};
+							\addplot [-,name path=C,firstcurvestyle,domain=0:1.2]{sqrt(x)};
+							\addplot [-,firstcurvestyle,domain=0:0.5]{-sqrt(x)};
+							\addplot [-,name path=D,firstcurvestyle, domain=0:1.2]{0.5*sqrt(x)};
+							\addplot [-,firstcurvestyle,domain=0:0.5]{-0.5*sqrt(x)};
+							\addplot [firstcurvestyle,areastyle] fill between [of=B and D, soft clip={domain=0.39685:0.62996}];
+							\addplot [firstcurvestyle,areastyle] fill between [of=C and A, soft clip={domain=0.62996:1}];
+							%\node at (axis cs:1.2,2) {$R$};
+							\end{axis}
+
+						  \end{tikzpicture}
+						</latex-image>
+					</image>
+				</figure>
+
+				<p>
+					Since the sides of a rectangle in the <m>uv</m>-plane are given by either <m>u=\text{constant}</m> or <m>v=\text{constant}</m>,
+					we try to express the boundary of <m>E</m> in terms of level curves <m>u(x,y)=c_1, c_2</m> and <m>v(x,y)=d_1,d_2</m>.
+					Let's look at the curves <m>y=x^2</m> and <m>y=2x^2</m>.
+					These both belong to the family of curves <m>y=cx^2</m>,
+					or <m>\dfrac{y}{x^2}=c</m>, so we set <m>u(x,y) = \dfrac{y}{x^2}</m>.
+					The region between these two parabolas is then given by <m>1\leq u\leq 2</m>, or <m>u\in [1,2]</m>.
+					Similarly, the other two sides of the boundary of <m>E</m>,
+					given by <m>x=y^2</m> and <m>x=4y^2</m> both belong to the family of curves <m>x=dy^2</m>,
+					or <m>\dfrac{x}{y^2}=d</m>. This suggests that we take <m>v(x,y)=\dfrac{x}{y^2}</m>, with <m>1\leq v\leq 4</m>.
+				</p>
+
+				<p>
+					We have now determined a map <m>S:E\to D=[1,2]\times [1,4]</m> given by
+					<me>
+						S(x,y) = \left(\frac{y}{x^2}, \frac{x}{y^2}\right)
+					</me>.
+					This map is one-to-one and onto (check this), clearly <m>C^1</m>, and has Jacobian
+					<me>
+						J_S(x,y) = \frac{\partial}{\partial x}\left(\frac{y}{x^2}\right)\frac{\partial}{\partial y}\left(\frac{x}{y^2}\right)-\frac{\partial}{\partial x}\left(\frac{x}{y^2}\right)\frac{\partial}{\partial y}\left(\frac{y}{x^2}\right)=\frac{3}{x^2y^2}
+					</me>,
+					which is defined and non-zero on all of <m>E</m>.
+					This means that <m>S=T^{-1}</m> for some transformation <m>T:D\to E</m>.
+					We can now proceed to compute the integral via change of variables in one of two ways:
+				</p>
+
+				<p>
+				  <ol>
+				    <li>
+				      <p>
+								Directly, by solving for <m>x</m> and <m>y</m> in terms of <m>u</m> and <m>v</m>,
+								which will give us the transformation <m>T</m>.
+							</p>
+
+							<p>
+								From <m>u=\dfrac{y}{x^2}</m> we get <m>y=ux^2</m>, so <m>x=vy^2 = vu^2x^4</m>.
+								Since <m>x\neq 0</m> on <m>E</m>, this gives us <m>x^{-3} = u^2v</m>,
+								so <m>x = u^{-2/3}v^{-1/3}</m>, and thus <m>y=ux^2 = u^{-1/3}v^{-2/3}</m>.
+								The transformation <m>T</m> is thus <m>T(u,v) = (u^{-2/3}v^{-1/3},u^{-1/3}v^{-2/3})</m>,
+								and its Jacobian is given by
+								<me>
+								  J_T(u,v) = \frac{\partial}{\partial u}(u^{-2/3}v^{-1/3})\frac{\partial}{\partial v}(u^{-1/3}v^{-2/3})-\frac{\partial}{\partial u}(u^{-1/3}v^{-2/3})\frac{\partial}{\partial v}(u^{-2/3}v^{-1/3})=\frac{1}{3u^2v^2}
+								</me>.
+							</p>
+
+							<p>
+								The integral is therefore
+								<md>
+								  <mrow>\iint_E\left(\frac{x^2}{y^4}+\frac{y^2}{x^4}\right)\,dA \amp = \iint_D\left(v^2+u^2\right)\left| \frac{1}{3u^2v^2}\right|\,du\,dv</mrow>
+								  <mrow>\amp = \frac{1}{3}\int_1^4\int_1^2 \left(\frac{1}{u^2}+\frac{1}{v^2}\right)\,du\,dv</mrow>
+								  <mrow>\amp = \frac{1}{3}\int_1^4\left(\frac{-1}{2}-\frac{-1}{1} +\frac{1}{v^2}\right)\, dv</mrow>
+								</md>.
+				      </p>
+				    </li>
+
+						<li>
+						  <p>
+								Indirectly, using the fact that <m>J_T(u,v) = \dfrac{1}{J_{T^{-1}}(x(u,v),y(u,v))}</m>.
+							</p>
+
+							<p>
+								From the above, we have that <m>J_{T^{-1}}(x,y) = \frac{3}{x^2y^2}</m>,
+								so <m>J_T(u,v) = \frac{1}{3}(x(u,v))^2(y(u,v))^2</m>.
+								From <m>u=\dfrac{y}{x^2}</m> and <m>v=\dfrac{x}{y^2}</m>,
+								we have <m>uv = \dfrac{xy}{x^2y^2} = \dfrac{1}{xy}</m>.
+								Thus, <m>x^2y^2 = \dfrac{1}{u^2v^2}</m>, so <m>J_T(u,v) = \dfrac{1}{3u^2v^2}</m> as before.
+								From here we can proceed as above.
+						  </p>
+						</li>
+				  </ol>
+				</p>
+			</solution>
+		</example>
+
+		<example xml:id="ex_int_trans2">
+		  <statement>
+		    <p>
+					Compute <m>\displaystyle \iint_E xy \, dA</m>,
+					where <m>E</m> is the region in the first quadrant bounded by <m>y=x</m>,
+					<m>y=4x</m>, <m>y=1/x</m>, and <m>y=2/x</m>.
+				</p>
+			</statement>
+			<solution>
+			  <p>
+					We need to find a region <m>D\subset \mathbb{R}^2</m> and a transformation <m>T:D\to \mathbb{R}^2</m> whose image is <m>E</m>.
+					This problem is almost identical to the one we solved in <xref ref="ex_int_trans00">Example</xref>,
+					where we were given a change of variables whose domain was still somewhat complicated.
+					This time, we look for a transformation with a rectangular domain.
+				</p>
+
+				<p>
+					Using the principle that <m>T</m> must map the boundary of <m>D</m> to the boundary of <m>E</m> as above,
+					we set <m>u=\dfrac{y}{x}</m>, so that <m>1\leq u\leq 4</m> gives the region between <m>y=x</m> and <m>y=4x</m>,
+					and <m>v=xy</m>, so that <m>1\leq v\leq 2</m> gives the region between <m>y=1/x</m> and <m>y=2/x</m>.
+					Thus the desired transformation is defined on the rectangle <m>D = [1,4]\times [1,2]</m> and has an inverse given by <m>T^{-1}(x,y) = (y/x,xy)</m>.
+				</p>
+
+				<figure xml:id="fig_int_trans2">
+					<caption>The region of integration in <xref ref="ex_int_trans2">Example</xref></caption>
+					<image xml:id="img_int_trans2" width="47%">
+					  <description></description>
+						<latex-image>
+						  \begin{tikzpicture}
+							\begin{axis}[
+										xtick={1,2},%
+										ytick={1,2,3,4},
+										ymin=-0.1,ymax=4.1,%
+										xmin=-0.1,xmax=2.1%
+							]
+
+							\addplot [-,name path=A,secondcurvestyle,domain={-0.1:2}]{x};
+							\addplot [-,name path=B,secondcurvestyle,domain={-0.1:1}]{4*x};
+							\addplot [-,name path=C,firstcurvestyle,domain=0.25:2]{1/x};
+							\addplot [-,name path=D,firstcurvestyle,domain=0.5:2]{2/x};
+							\addplot [-,firstcurvestyle,areastyle] fill between [of=B and C, soft clip={domain=0.5:0.7071}];
+							\addplot [-,firstcurvestyle,areastyle] fill between [of=D and C, soft clip={domain=0.7071:1}];
+							\addplot [-,firstcurvestyle,areastyle] fill between [of=D and A, soft clip={domain=1:1.4142}];
+							%\node at (axis cs:1.2,2) {$R$};
+							\end{axis}
+
+						  \end{tikzpicture}
+						</latex-image>
+					</image>
+				</figure>
+
+				<p>
+					This time we leave the direct method (solving for <m>x</m> and <m>y</m> in terms of <m>u</m> and <m>v</m>)
+					as an exercise and use the indirect method. The Jacobian of <m>T^{-1}</m> is given by
+					<me>
+						J_{T^{-1}}(x,y) = \det\begin{pmatrix}
+															\dfrac{\partial}{\partial x}\left(\dfrac{y}{x}\right)\amp\dfrac{\partial }{\partial y}\left(\dfrac{y}{x}\right)\\ \amp \\ \dfrac{\partial }{\partial x}(xy)\amp \dfrac{\partial }{\partial y}(xy)
+															\end{pmatrix} = \det\begin{pmatrix}
+																							\dfrac{-y}{x^2}\amp\dfrac{1}{x}\\ \amp \\ y \amp x
+																							\end{pmatrix} = \dfrac{-2y}{x}
+					</me>.
+				</p>
+
+				<p>
+					The Jacobian of <m>T</m> is thus
+					<me>
+						J_T(u,v) = \dfrac{1}{J_T^{-1}(x(u,v),y(u,v))} = -\dfrac{x(u,v)}{2y(u,v)} = -\dfrac{1}{2u}
+					</me>,
+					since <m>u=y/x</m>. The integral is then
+					<md>
+					  <mrow>\iint_E xy\, dA \amp = \iint_D x(u,v)y(u,v)\lvert J_T(u,v)\rvert \,du\,dv</mrow>
+					  <mrow>\amp = \int_1^2\int_1^4 v\left(\frac{1}{2u}\right)\,du\,dv</mrow>
+					  <mrow>\amp = \int_1^2 \frac{v}{2}(\ln 4-\ln 1)\,dv</mrow>
+					</md>.
+			  </p>
+			</solution>
+		</example>
+	</subsection>
+
+	<subsection xml:id="sec-understanding-transformation">
+		<title>Understanding the change of variables formula</title>
+		<p>
+			We now have some practice working with the change of variables formula,
+			but why is it valid? In any dimension, the formula has the form
+			<me>
+			  \int_{T(D)} f(\mathbf{x})d\mathbf{x} = \int_D f(T(\mathbf{u}))\lvert J_T(\mathbf{u})\rvert d\mathbf{u}
+			</me>,
+			if we let the symbol <m>\int</m> stand for a single, double, or triple integral as necessary.
+		</p>
+
+		<p>
+			In practice, we use the formula in one of two ways:
+			<ul>
+			  <li>
+			    <p>
+			      Right-to-left, because it is easier to compute antiderivatives for the function <m>f(\mathbf{x})</m>.
+						This is the case with change of variables for single integrals.
+			    </p>
+			  </li>
+
+				<li>
+				  <p>
+				    Left-to-right, because the domain <m>D</m> is a simpler region of integration than <m>T(D)</m>,
+						such as the examples above, as well as the transformations to polar,
+						cylindrical, or spherical coordinates considered earlier.
+						(Of course, we might also get lucky and find that our function simplifies as well!)
+				  </p>
+				</li>
+			</ul>
+		</p>
+
+		<p>
+			Let's consider this formula in the intermediate case of a double integral.
+			If the function <m>f</m> is positive throughout the region <m>E=T(D)</m>,
+			we can interpret the integral on the left as a volume.
+			In terms of Riemann sums, we are adding up volumes of boxes:
+			<me>
+			  \Delta V_{ij} = f(x_{ij},y_{ij})\Delta x_i\,\Delta y_j
+			</me>.
+		</p>
+
+		<p>
+			Just as <m>f(x)\approx T'(u)\,\Delta u</m> in one variable,
+			the validity of the change of variables formula rests on the approximation
+			<me>
+			  \Delta x_i\,\Delta y_j \approx \lvert J_T(u_{ij},v_{ij})\rvert \Delta u_i\,\Delta v_j
+			</me>.
+			The distortion in area caused by the mapping <m>T</m> when we move from the region
+			<m>D</m> in the <m>u,v</m> plane to the region <m>E</m> in the <m>x,y</m>
+			plane is hidden within the <m>dx\,dy</m> area element in the integral on the left-hand side.
+		</p>
+
+		<p>
+			To ensure that both integrals compute the same volume,
+			the Jacobian is introduced as part of the integrand on the right-hand side to produce a corresponding change in height:
+			<me>
+			  \Delta V_{ij} \approx \underbrace{\left(f(x_{ij},y_{ij})\right)}_{\text{height}}\underbrace{\left(\lvert J_T(u_{ij},v_{ij})\rvert\Delta u_i\,\Delta v_j\right)}_{\text{area}} = \underbrace{\left(f(T(u_{ij},v_{ij}))\lvert J_T(u_{ij},v_{ij})\rvert\right)}_{\text{height}}\underbrace{\left(\Delta u_i\,\Delta v_j\right)}_{\text{area}}
+			</me>.
+		</p>
+
+		<p>
+			Appropriately interpreted,
+			the only differences between the integrals on either side are the labelling of the variables,
+			and whether the Jacobian provides a measure of height, or of area, in the calculation of volume.
+		</p>
+
+		<p>
+			In general, transformations produce what are called <q>curvilinear coordinate systems</q>:
+			the original linear coordinate system in the <m>u,v</m> plane,
+			with grid lines given by <m>u=\text{constant}</m> or <m>v=\text{constant}</m>
+			is transformed into a <q>grid of curves</q> in the <m>x,y</m> plane.
+			This is the case, for example, with the polar coordinate transformation,
+			as seen in <xref ref="fig_polar_trans3">Figure</xref> below.
+		</p>
+
+		<figure xml:id="fig_polar_trans3">
+			<caption>Correspondence between rectangular and polar grid lines</caption>
+			<sidebyside widths="44% 10% 44%" valign="center">
+				<image xml:id="img_polar_trans3a">
+				  <description></description>
+					<latex-image>
+					  \begin{tikzpicture}
+						\begin{axis}[
+									xtick={1,2,3,4,5},%
+									ytick={0,1,2,3,4,5,6,7},
+									yticklabels={0,$\pi/4$,$\pi/2$,$3\pi/4$,$\pi$,$5\pi/4$,$3\pi/2$,$7\pi/4$},
+									ymin=-0.1,ymax=6.5,%
+									xmin=-0.1,xmax=5.5,%
+									grid=both,
+									xlabel={$r$},
+									ylabel={$\theta$}
+						]
+
+						\end{axis}
+
+					  \end{tikzpicture}
+					</latex-image>
+				</image>
+
+				<image xml:id="img_polar_trans3b">
+					<description></description>
+					<latex-image>
+					  \begin{tikzpicture}
+						\draw [<-] (2,3.75) arc (45:135:1.1cm);
+						\node [above] at (1.2,4) {$T$};
+						\node [below] at (1,2) {};
+
+					  \end{tikzpicture}
+					</latex-image>
+
+				</image>
+
+				<image xml:id="img_polar_trans3c">
+				  <description></description>
+					<latex-image>
+					  \begin{tikzpicture}
+						\begin{polaraxis}[width=\marginparwidth+15pt,%
+							tick label style={font=\scriptsize},
+							clip=false,
+							x axis line style={transparent},
+							grid=both,
+							major grid style=black,
+							minor x tick num=2,
+							minor y tick num=2,
+							xtick={0,45,...,315},
+							xticklabels={,0,$\pi/4$,$\pi/2$,$3\pi/4$,$\pi$,$5\pi/4$,$3\pi/2$,$7\pi/4$},
+							yticklabel=\empty,
+							domain=0:360,
+							samples=360,
+							mark=none
+						]
+
+						\end{polaraxis}
+
+					  \end{tikzpicture}
+					</latex-image>
+				</image>
+			</sidebyside>
+		</figure>
+
+		<p>
+			For another example, consider the transformation <m>T</m> given by
+			<me>
+			  T(u,v) = (u^{1/3}v^{-1/3},u^{2/3}v^{1/3}), T^{-1}(x,y) = \left(xy,\frac{y}{x^2}\right)
+			</me>.
+		</p>
+
+		<p>
+			A grid in the <m>u,v</m> plane is transformed to two families of curves:
+			lines <m>u=m</m>, <m>v=n</m>, where <m>m,n</m> are constants become the curves <m>y=\frac{m}{x}</m> and <m>y=nx^2</m>, respectively.
+			The transformation is pictured in <xref ref="fig_gen_trans_eg">Figure</xref> below.
+		</p>
+
+		<figure xml:id="fig_gen_trans_eg">
+			<caption>Visualizing a general transformation</caption>
+			<sidebyside widths="44% 10% 44%" valign="center">
+				<image xml:id="img_gen_trans_ega">
+				  <description></description>
+					<latex-image>
+					  \begin{tikzpicture}
+						\begin{axis}[
+									xtick={1,2,3,4,5,6,7},%
+									ytick={1,2,3,4,5,6,7},
+									ymin=-1,ymax=7.5,%
+									xmin=-1,xmax=7.5,%
+									xlabel={$u$},
+									ylabel={$v$}
+						]
+
+							\addplot [-,black,domain={-0.8:8.2},dashed] ({1},{x});
+							\addplot [-,black,domain={-0.8:8.2},dashed] ({x},{1});
+							\addplot [-,black,domain={-0.8:8.2},dashed] ({2},{x});
+							\addplot [-,black,domain={-0.8:8.2},dashed] ({x},{2});
+							\addplot [-,black,domain={-0.8:8.2},dashed] ({5},{x});
+							\addplot [-,black,domain={-0.8:8.2},dashed] ({x},{5});
+							\addplot [-,black,domain={-0.8:8.2},dashed] ({6},{x});
+							\addplot [-,black,domain={-0.8:8.2},dashed] ({x},{6});
+							\addplot [-,black,domain={-0.8:8.2},dashed] ({7},{x});
+							\addplot [-,black,domain={-0.8:8.2},dashed] ({x},{7});
+
+							\addplot [-,firstcurvestyle,domain={-0.8:8.2}] ({3},{x});
+							\addplot [-,secondcurvestyle,name path=bot,domain={-0.8:8.2}] ({x},{3});
+							\addplot [-,firstcurvestyle,domain={-0.8:8.2}] ({4},{x});
+							\addplot [-,secondcurvestyle,name path=top,domain={-0.8:8.2}] ({x},{4});
+							\addplot [firstcurvestyle,areastyle] fill between [of=top and bot, soft clip={domain=3:4}];
+						\end{axis}
+
+					  \end{tikzpicture}
+					</latex-image>
+				</image>
+
+				<image xml:id="img_gen_trans_egb">
+				  <description></description>
+					<latex-image>
+					  \begin{tikzpicture}
+						\draw [<-] (2,3.75) arc (45:135:1.1cm);
+						\node [above] at (1.2,4) {$T$};
+						\node [below] at (1,2) {};
+					  \end{tikzpicture}
+					</latex-image>
+				</image>
+
+				<image xml:id="img_gen_trans_egc">
+				  <description></description>
+					<latex-image>
+					  \begin{tikzpicture}
+						\begin{axis}[
+									xtick={1,2},%
+									ytick={1,2,3,4},%
+									ymin=-0.2,ymax=5,%
+									xmin=-0.2,xmax=2.2%
+						]
+
+							 \addplot [-,black,domain={0.1:2},dashed] {1/x};
+							 \addplot [-,black,domain={-0.1:2},dashed] {1*x^2};
+							 \addplot [-,black,domain={0.1:2},dashed] {2/x};
+							 \addplot [-,black,domain={-0.1:2},dashed] {2*x^2};
+							 \addplot [-,black,domain={0.1:2},dashed] {5/x};
+							 \addplot [-,black,domain={-0.1:2},dashed] {5*x^2};
+							 \addplot [-,black,domain={0.1:2},dashed] {6/x};
+							 \addplot [-,black,domain={-0.1:2},dashed] {6*x^2};
+							 \addplot [-,black,domain={0.1:2},dashed] {7/x};
+							 \addplot [-,black,domain={-0.1:2},dashed] {7*x^2};
+
+
+							\addplot [-,name path=A,firstcurvestyle,domain={0.1:2}] {3/x};
+							\addplot [-,name path=B,secondcurvestyle,domain={-0.1:2}] {3*x^2};
+							\addplot [-,name path=C,firstcurvestyle,domain={0.1:2}] {4/x};
+							\addplot [-,name path=D,secondcurvestyle,domain={-0.1:2}] {4*x^2};
+							\addplot [firstcurvestyle,areastyle] fill between [of=A and D, soft clip={domain=0.9086:1}];
+							\addplot [firstcurvestyle,areastyle] fill between [of=C and B, soft clip={domain=1:1.1006}];
+
+						\end{axis}
+
+					  \end{tikzpicture}
+					</latex-image>
+				</image>
+			</sidebyside>
+		</figure>
+
+		<p>
+			In <xref ref="fig_gen_trans_eg">Figure</xref> we've highlighted one of the rectangles in our grid to see how it's transformed.
+			Imagine now that our grid lines are much finer, coming not from the integer values of <m>u</m> and <m>v</m>,
+			but from a partition of a rectangle <m>D</m> in the <m>u,v</m> plane.
+			Zooming in, we'd see that each rectangle in the partition is transformed much like the one above.
+		</p>
+
+		<p>
+			Indeed, recall the following philosophy from <xref ref="sec_deriv_matrix">Section</xref>:
+			the transformation <m>T</m> maps points in the <m>u,v</m> plane to points in the <m>x,y</m> plane.
+			The derivative matrix <m>DT(u,v)</m> of <m>T</m> at a point <m>(u,v)</m>,
+			when viewed as the matrix of a linear transformation, maps (tangent) vectors at the point <m>(u,v)</m> to (tangent) vectors at the point <m>(x,y)=T(u,v)</m>.
+			(This is a consequence of the Chain Rule.)
+		</p>
+
+		<aside>
+		  <p>
+		    This also fits with a general philosophy of differential calculus:
+				the derivative of a function at a point determines the best linear approximation to that function near that point.
+				It seems only fitting, then, that the best linear approximation to a transformation is a linear transformation!
+		  </p>
+		</aside>
+
+		<p>
+			Consider a general transformation <m>T(u,v) = (x(u,v),y(u,v))</m> and a uniform partition of the domain of <m>T</m>.
+			At a point <m>(u_i,v_j)</m> in our partition, the lines <m>u=u_i</m> and <m>v=v_j</m> can be viewed as parametric curves:
+			<md>
+			  <mrow>\vec{r}_1(t) \amp= \langle t,v_j\rangle, \text{ for } u_i\leq t\leq u_i+\Delta u, \text{ and}</mrow>
+			  <mrow>\vec{r}_2(t) \amp= \langle u_i,t\rangle, \text{ for } v_j\leq t\leq v_j+\Delta v</mrow>
+			</md>.
+		</p>
+
+		<p>
+			Tangent vectors to these curves are given by
+			<me>
+			  \vec{r}_1\primeskip '(t) = \langle 1,0\rangle = \vec{i} \quad \text{ and } \quad \vec{r}_2\primeskip '(t) = \langle 0,1\rangle = \vec{j}
+			</me>.
+			The <m>(i,j)</m>-th rectangle, given by <m>u_i\leq u\leq u_i+\Delta u</m> and <m>v_j\leq v\leq v_j+\Delta v</m>, has area <m>\Delta u \,Delta v</m>.
+		</p>
+
+		<p>
+			Viewed another way, this rectangle is a parallelogram spanned by the vectors <m>\Delta u\vec{i}</m> and <m>\Delta v\vec{j}</m>.
+			The area of this parallelogram is given by the determinant of the matrix whose columns are these vectors. Of course, this produces the same area:
+			<me>
+			  \det\begin{bmatrix}\Delta u \amp 0\\0\amp\Delta v\end{bmatrix} = \Delta u\,\Delta v
+			</me>.
+		</p>
+
+		<p>
+			Now, let's consider the corresponding region in the <m>x,y</m> plane.
+			The curves in <xref ref="fig_gen_trans_eg">Figure</xref> above can also be realized as parametric curves.
+			In fact, they are precisely the composition of the curves above with our transformation,
+			if we view <m>T</m> as a vector-valued function. We have curves
+			<md>
+			  <mrow>\vec{s}_1(t) \amp= T(\vec{r}_1(t))=T(t,v_j) = \langle x(t,v_j),y(t,v_j)\rangle</mrow>
+			  <mrow>\vec{s}_2(t) \amp= T(\vec{r}_2(t))=T(u_i,t) = \langle x(u_i,t),y(u_i,t)\rangle</mrow>
+			</md>
+			making up two of the four sides of our transformed rectangle.
+		</p>
+
+		<p>
+			Now, <m>\vec{s}_1(t)</m> and <m>\vec{s}_2(t)</m> are curves in general,
+			not lines, and the image of our rectangle is no longer rectangular.
+			But for <m>\Delta u,\Delta v</m> small enough, our curves are <em>approximately</em> linear,
+			and the image of our rectangle is <em>approximately</em> a parallelogram.
+			See <xref ref="fig_pargrm_approx">Figure</xref>.
+		</p>
+
+		<p>
+			We can make linear approximations to vector-valued functions in much the same way as we do for real-valued functions. We have
+			<me>
+			  \vec{s}_1(u_i+\Delta u)-\vec{s}_1(u_i) \approx \vec{s}_1\primeskip '(u_i)\Delta u
+			</me>,
+			with a similar result for <m>\vec{s}_2</m>.
+			This means that we can approximate the area of our transformed rectangle using the parallelogram spanned by the vectors
+			<md>
+			  <mrow>\vec{a} \amp = \Delta u \vec{s}_1\primeskip '(u_i) = \Delta u\left\langle \frac{\partial x}{\partial u}(u_i,v_j),\frac{\partial y}{\partial u}(u_i,v_j)\right\rangle</mrow>
+			  <mrow>\vec{b} \amp = \Delta u \vec{s}_2\primeskip '(u_i) = \Delta u\left\langle \frac{\partial x}{\partial v}(u_i,v_j),\frac{\partial y}{\partial v}(u_i,v_j)\right\rangle</mrow>
+			</md>.
+		</p>
+
+		<aside>
+		  <p>
+				Recall that the Chain Rule gives us
+				<me>
+				  \frac{d}{dt}(x(\vec{r}(t))) = \nabla x(\vec{r}(t))\cdot \vec{r}\primeskip'(t)
+				</me>,
+				with an analogous result for <m>y(\vec{r}(t))</m>.
+				Applying this for the curves <m>\vec{r}_1(t)</m> and <m>\vec{r}_2(t)</m>
+				above allows us to compute the derivatives <m>\vec{s}_1\primeskip'(t)</m> and <m>\vec{s}_2\primeskip'(t)</m>.
+			</p>
+
+			<p>
+				Note further that we can obtain the same result by writing <m>\vec{i}</m> and <m>\vec{j}</m> as column vectors,
+				and multiplying by the matrix <m>DT(u_i,v_j)</m> <mdash/> this is the sense in which the derivative acts as a linear transformation on vectors.
+		  </p>
+		</aside>
+
+		<figure xml:id="fig_pargrm_approx">
+			<caption>A transformed rectangle and its parallelogram approximation</caption>
+			<image xml:id="img_pargrm_approx" width="47%">
+			  <description></description>
+				<latex-image>
+				  \begin{tikzpicture}
+					\begin{axis}[
+								ticks=none,
+								xticklabel=\empty,
+								yticklabel=\empty,
+								x axis line style={transparent},
+								y axis line style={transparent},
+								ymin=2.5,ymax=4.5,%
+								xmin=0.5,xmax=1.5,%
+								xlabel=\empty,
+								ylabel=\empty
+					]
+						\addplot [-,firstcolor,domain={0.8:1.2},dashed] {2/x};
+						\addplot [-,firstcolor,domain={0.8:1.2},dashed] {5/x};
+						\addplot [-,secondcolor,domain={0.8:1.2},dashed] {2*x^2};
+						\addplot [-,secondcolor,domain={0.8:1.2},dashed] {5*x^2};
+						\addplot [-,name path=A,firstcurvestyle,domain={0.8:1.2}] {3/x};
+						\addplot [-,name path=B,secondcurvestyle,domain={0.8:1.2}] {3*x^2};
+						\addplot [-,name path=C,secondcurvestyle,domain={0.8:1.2}] {4/x};
+						\addplot [-,name path=D,secondcurvestyle,domain={0.8:1.2}] {4*x^2};
+						\addplot [firstcurvestyle,areastyle] fill between [of=A and D, soft clip={domain=0.9086:1}];
+						\addplot [firstcurvestyle,areastyle] fill between [of=C and B, soft clip={domain=1:1.1006}];
+						\draw [->,darkgray,ultra thick] (axis cs:1,3)--(axis cs:0.908,3.276);
+						\draw [->,darkgray,ultra thick] (axis cs:1,3)--(axis cs: 1.101,3.606);
+						\draw [darkgray,ultra thick] (axis cs:0.908,3.276)--(axis cs: 1.003,3.882);
+						\draw [darkgray,ultra thick] (axis cs: 1.101,3.606)--(axis cs: 1.003,3.882);
+						\addplot [fill=gray,draw=gray,opacity=0.7] coordinates
+						{(1,3) (0.908,3.276) (1.003,3.882) (1.101,3.606) (1,3)}\closedcycle;
+					\end{axis}
+
+				  \end{tikzpicture}
+				</latex-image>
+			</image>
+		</figure>
+
+		<p>
+			The area of our transformed region is therefore approximated by the area of the parallelogram spanned by the vectors <m>\vec{a}</m> and <m>\vec{b}</m>:
+			<md>
+			  <mrow>\Delta A \amp\approx \det\begin{bmatrix} x_u(u_i,v_j)\Delta u \amp x_v(u_i,v_j)\Delta v\\y_u(u_i,v_j)\Delta u \amp y_v(u_i,v_j)\Delta v\end{bmatrix}</mrow>
+			  <mrow>\amp = \det\begin{bmatrix} x_u(u_i,v_j) \amp x_v(u_i,v_j)\\y_u(u_i,v_j) y_v(u_i,v_j) \end{bmatrix}\Delta u\,\Delta v</mrow>
+			  <mrow>\amp = J_T(u_i,v_j)\,\Delta u\Delta v</mrow>
+			</md>.
+			This is exactly the result we wanted:
+			the area of our transformed rectangle is approximately the area of the original rectangle,
+			multiplied by the Jacobian.
+		</p>
+
+		<p>
+			We can begin to see the change of variables formula by putting this result into the Riemann sum definition of the double integral:
+			<me>
+			  f(x_i,y_j)\Delta x\Delta y \approx f(T(u_i,v_j))\cdot J_T(u_i,v_j)\Delta u_i\Delta v_j
+			</me>.
+			This equation should be viewed somewhat skeptically.
+			The area element on the left is that of a rectangle, not the parallelogram we ended up with above.
+			The argument given here is far from a complete proof of <xref ref="thm_change_of_variables">Theorem</xref>,
+			but the result is true nonetheless. The interested reader is directed to search online,
+			or seek out the advanced calculus section of their library, should they wish to see a proof.
+		</p>
+	</subsection>
+</section>
