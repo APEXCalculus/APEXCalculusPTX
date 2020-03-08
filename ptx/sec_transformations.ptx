@@ -11,7 +11,7 @@
 
 		<aside>
 		  <p>
-		    Recall <xref ref="ex_13_03_ex_15">Exercise</xref> in <xref ref="sec_double_int_polar">Section</xref>:
+		    Recall <xref ref="ex_double_int_polar_gaussian">Exercise</xref> in <xref ref="sec_double_int_polar">Section</xref>:
 				the function <m>f(x,y) = e^{-x^2-y^2}</m> is impossible to integrate in rectangular coordinates
 				(at least, by finding antidervatives in terms of elementary functions),
 				but switching to polar coordinates results in an integral that can be evaluated using a simple substitution.
@@ -148,7 +148,7 @@
 
 		<figure xml:id="fig_polar_trans1">
 			<caption>Transforming a rectangle to a disk using polar coordinates.</caption>
-			<sidebyside widths="44% 10% 44%" valign="middle">
+			<sidebyside widths="40% 15% 40%" valign="middle">
 				<image xml:id="img_polar_trans1a">
 				  <description></description>
 					<latex-image>
@@ -162,11 +162,11 @@
 										ylabel={$\theta$}
 							]
 
-							\addplot [name path=top,black,domain=0:3,thick] ({x},{6.28});
-							\addplot [name path=bottom, black, domain=0:3,thick] ({x},{0});
-							\addplot [black,domain=0:6.28,thick] ({0},{x});
-							\addplot [black,domain=0:6.28,thick] ({3},{x});
-							\addplot [color=gray!20] fill between [of=top and bottom, soft clip={domain=0:3}];
+							\addplot [name path=top,firstcolor,domain=0:3,thick] ({x},{6.28});
+							\addplot [name path=bottom, firstcolor, domain=0:3,thick] ({x},{0});
+							\addplot [firstcolor,domain=0:6.28,thick] ({0},{x});
+							\addplot [firstcolor,domain=0:6.28,thick] ({3},{x});
+							\addplot [firstcurvestyle,areastyle] fill between [of=top and bottom, soft clip={domain=0:3}];
 							\end{axis}
 					  \end{tikzpicture}
 					</latex-image>
@@ -188,15 +188,16 @@
 					<latex-image>
 					  \begin{tikzpicture}
 							\begin{axis}[
-							scale only axis,%
+							axis equal=true,%
+							axis on top,
 							xtick={-3,-2,-1,1,2,3},%
 							ytick={-3,-2,-1,1,2,3},
 							ymin=-3.5,ymax=4,%
 							xmin=-3.5,xmax=4%
 							]
-							\addplot [name path=top,black,domain={-3:3},samples=100,thick] {sqrt(9-x^2)};
-							\addplot [name path=bottom, black, domain={-3:3},samples=100,thick] {-sqrt(9-x^2)};
-							\addplot [color=gray!20] fill between [of=top and bottom, soft clip={domain={-3:3}}];
+							\addplot [name path=top,firstcolor,domain={-3:3},samples=100,thick] {sqrt(9-x^2)};
+							\addplot [name path=bottom, firstcolor, domain={-3:3},samples=100,thick] {-sqrt(9-x^2)};
+							\addplot [firstcurvestyle,areastyle] fill between [of=top and bottom, soft clip={domain={-3:3}}];
 							\end{axis}
 					  \end{tikzpicture}
 					</latex-image>
@@ -229,7 +230,7 @@
 
 		<figure xml:id="fig_polar_trans2">
 			<caption>Transforming a rectangle to an annular portion using polar coordinates.</caption>
-			<sidebyside width="44% 10% 44%" valign="middle">
+			<sidebyside widths="40% 15% 40%" valign="middle">
 				<image xml:id="img_polar_trans2a">
 				  <description></description>
 					<latex-image>
@@ -243,11 +244,11 @@
 									xmin=-0.5,xmax=3.5%
 						]
 
-						\addplot [name path=top,black,domain=1:2,thick] ({x},{1.047});
-						\addplot [name path=bottom, black, domain=1:2,thick] ({x},{0.523});
-						\addplot [black,domain=0.523:1.047,thick] ({1},{x});
-						\addplot [black,domain=0.523:1.047,thick] ({2},{x});
-						\addplot [color=gray!20] fill between [of=top and bottom, soft clip={domain=1:2}];
+						\addplot [name path=top,firstcolor,domain=1:2,thick] ({x},{1.047});
+						\addplot [name path=bottom, firstcolor, domain=1:2,thick] ({x},{0.523});
+						\addplot [firstcolor,domain=0.523:1.047,thick] ({1},{x});
+						\addplot [firstcolor,domain=0.523:1.047,thick] ({2},{x});
+						\addplot [firstcurvestyle,areastyle] fill between [of=top and bottom, soft clip={domain=1:2}];
 						\end{axis}
 
 					  \end{tikzpicture}
@@ -269,25 +270,20 @@
 				  <description></description>
 					<latex-image>
 					  \begin{tikzpicture}
-						\begin{axis}[width=\marginparwidth+25pt,%
-						tick label style={font=\scriptsize},axis y line=middle,axis x line=middle,name=myplot,axis on top,%
+						\begin{axis}[
 									xtick={1,2,3},%
-						%			extra x ticks={3.14,1.57},
-						%			extra x tick labels={$\pi$,$\pi/2$},
 									ytick={1,2,3},
-									%minor y tick num=1,%extra y ticks={-5,-3,...,7},%
-						%			minor x tick num=4,
 									ymin=-0.2,ymax=3.5,%
 									xmin=-0.2,xmax=3.5%
 						]
-						\addplot[data cs=polar, domain=30:60, samples=20, black, thick, name path=out](x,{2});
-						\addplot[data cs=polar, domain=30:60, samples=20, black, thick, name path=in](x,{1});
-						\addplot[gray,dashed,domain=0:2.5]{0.57735*x};
-						\addplot[black,thick,domain=0.866:1.732]{0.57735*x};
-						\addplot[gray,dashed,domain=0:1.7]{1.732*x};
-						\addplot[black,thick,domain=0.5:1]{1.732*x};
+						\addplot[data cs=polar, domain=30:60, samples=20, firstcolor, thick, name path=out](x,{2});
+						\addplot[data cs=polar, domain=30:60, samples=20, firstcolor, thick, name path=in](x,{1});
+						\addplot[secondcolor,dashed,domain=0:2.5]{0.57735*x};
+						\addplot[firstcolor,thick,domain=0.866:1.732]{0.57735*x};
+						\addplot[secondcolor,dashed,domain=0:1.7]{1.732*x};
+						\addplot[firstcolor,thick,domain=0.5:1]{1.732*x};
 
-						\addplot[color=gray!20] fill between [of=out and in];
+						\addplot[firstcurvestyle,areastyle] fill between [of=out and in];
 						\end{axis}
 
 					  \end{tikzpicture}
@@ -499,22 +495,22 @@
 										xmin=-0.5,xmax=3.2%
 							]
 
-							\addplot[-,firstcurvestyle,name path=a,domain=0:1] {x^2+1};
+							\addplot[firstcolor,thick,name path=a,domain=0:1] {x^2+1};
 
-							\addplot [-,secondcurvestyle,name path=b,domain=1:2] {x^2+1};
+							\addplot [secondcolor,dashed,thick,name path=b,domain=1:2] {x^2+1};
 
-							\addplot [-,firstcolor,name path=c,domain=0:2] {0.25*x^2+4};
+							\addplot [firstcolor,name path=c,domain=0:2] {0.25*x^2+4};
 
-							\addplot [-,secondcurvestyle,domain=1:4]({0},{x});
+							\addplot [secondcolor,dashed,thick,domain=1:4]({0},{x});
 
-							\addplot [firstcurvestyle,areastyle] fill between [of=a and c, soft clip={domain=0:1}];
-							\addplot [firstcurvestyle,areastyle] fill between [of=b and c, soft clip={domain=1:2}];
+							\addplot [firstcolor,areastyle] fill between [of=a and c, soft clip={domain=0:1}];
+							\addplot [firstcolor,areastyle] fill between [of=b and c, soft clip={domain=1:2}];
 							\end{axis}
 
-							\node [right,color=blue] at (1,3.7) {$u=2$};
-							\node [right,color=red] at (3,2.5) {$v=1$};
-							\node [right,color=blue] at (1,0.9) {$u=1$};
-							\node [left,color=red] at (0.2,2) {$v=0$};
+							\node [right,firstcolor] at (1,3.7) {$u=2$};
+							\node [right,secondcolor] at (3,2.5) {$v=1$};
+							\node [right,firstcolor] at (1,0.9) {$u=1$};
+							\node [left,secondcolor] at (0.2,2) {$v=0$};
 
 						  \end{tikzpicture}
 						</latex-image>
@@ -673,7 +669,7 @@
 			  <p>
 					We apply <xref ref="def_jacobian">Definition</xref> directly:
 					<me>
-					  J_T(u,v) = \det\begin{bmatrix}x_u(u,v)\ampx_v(u,v)\\y_u(u,v)\ampy_v(u,v)\end{bmatrix} = \det\begin{bmatrix}7\amp-3\\-4\amp2\end{bmatrix} = 7(2)-(-3)(-4)=2
+					  J_T(u,v) = \det\begin{bmatrix}x_u(u,v)\amp x_v(u,v)\\y_u(u,v)\amp y_v(u,v)\end{bmatrix} = \det\begin{bmatrix}7\amp -3\\-4\amp 2\end{bmatrix} = 7(2)-(-3)(-4)=2
 					</me>.
 			  </p>
 			</solution>
@@ -715,10 +711,10 @@
 					</md>.
 					Now we only need the power rule to compute our partial derivatives, and we find
 					\begin{align*}
-					J_T(u,v) \amp= \det\begin{bmatrix}x_u(u,v)\ampx_v(u,v)\\y_u(u,v)\ampy_v(u,v)\end{bmatrix} \\
-					\amp= \det\begin{bmatrix}\frac23 x^{-1/3}y^{1/3}\amp \frac13 x^{2/3}y^{-2/3}\\ \frac13 x^{-2/3}y^{2/3}\amp \frac23 x^{1/3}y^{-1/3}\end{bmatrix}\\
-					\amp= \left(\frac23 x^{-1/3}y^{1/3}\right)\left( \frac23 x^{1/3}y^{-1/3}\right)-\left(\frac13 x^{2/3}y^{-2/3}\right)\left(\frac13 x^{-2/3}y^{2/3}\right)\\
-					\amp=\frac49 -\frac19 = \frac13.
+					J_T(u,v) \amp = \det\begin{bmatrix}x_u(u,v)\amp x_v(u,v)\\y_u(u,v)\amp y_v(u,v)\end{bmatrix} \\
+					\amp = \det\begin{bmatrix}\frac23 x^{-1/3}y^{1/3}\amp \frac13 x^{2/3}y^{-2/3}\\ \frac13 x^{-2/3}y^{2/3}\amp \frac23 x^{1/3}y^{-1/3}\end{bmatrix}\\
+					\amp = \left(\frac23 x^{-1/3}y^{1/3}\right)\left( \frac23 x^{1/3}y^{-1/3}\right)-\left(\frac13 x^{2/3}y^{-2/3}\right)\left(\frac13 x^{-2/3}y^{2/3}\right)\\
+					\amp = \frac49 -\frac19 = \frac13.
 					\end{align*}
 			  </p>
 			</solution>
@@ -742,7 +738,7 @@
 			  <p>
 					Computing the Jacobian in this case is straightforward:
 					<me>
-					  J_T(u,v) = \det\begin{bmatrix}x_u(u,v)\ampx_v(u,v)\\y_u(u,v)\ampy_v(u,v)\end{bmatrix} = \det\begin{bmatrix} 8u\amp-2v\\4u\amp6v\end{bmatrix} 48uv+8uv=56uv
+					  J_T(u,v) = \det\begin{bmatrix}x_u(u,v)\amp x_v(u,v)\\y_u(u,v)\amp y_v(u,v)\end{bmatrix} = \det\begin{bmatrix} 8u\amp -2v\\4u\amp 6v\end{bmatrix} 48uv+8uv=56uv
 					</me>.
 			  </p>
 			</solution>
@@ -913,7 +909,7 @@
 					in addition to being stretched out of shape, was flipped.
 				</p>
 
-				<figure>
+				<figure xml:id="fig_mv_3">
 					<caption>Transforming the unit square by matrix multiplication in <xref ref="ex_mv_3">Example</xref></caption>
 					<sidebyside widths="47% 47%">
 						<image xml:id="img_ex_mv_3a">
@@ -991,7 +987,7 @@
 		</p>
 
 		<p>
-			Let us make a note of a few key points about <xref ref="ex_mv3">Example</xref>.
+			Let us make a note of a few key points about <xref ref="ex_mv_3">Example</xref>.
 			First, note that in this case, the derivative matrix, (and as a result, the Jacobian) is constant.
 			(This of course is generally true of the derivative for linear functions.)
 		</p>
@@ -1033,7 +1029,7 @@
 		</aside>
 
 		<p>
-			Let us make a couple more remarks about the <xref ref="ex_mv3">Example</xref>.
+			Let us make a couple more remarks about the <xref ref="ex_mv_3">Example</xref>.
 			First, note the need for an absolute value around the determinant,
 			to ensure the area computed is positive. This absolute value will be needed in our change of variables formula as well.
 		</p>
@@ -1348,7 +1344,7 @@
 				<p>
 					We also need to compute the Jacobian. Since the transformation is linear, we know this will be a constant. We find:
 					<me>
-					  J_T(u,v) = \det\begin{bmatrix}x_u\ampx_v\\y_u\ampy_v\end{bmatrix} = \det\begin{bmatrix}1\amp1\\1\amp-1\end{bmatrix} = -2
+					  J_T(u,v) = \det\begin{bmatrix}x_u\amp x_v\\y_u\amp y_v\end{bmatrix} = \det\begin{bmatrix}1\amp 1\\1\amp -1\end{bmatrix} = -2
 					</me>.
 				</p>
 
@@ -1435,10 +1431,10 @@
 											xmin=-1,xmax=5%
 								]
 
-								\addplot [-,name path=A,secondcurvestyle,domain={-1:4.5}]{x};
-								\addplot [-,name path=B,secondcurvestyle,domain={-0.25:1.25}]{4*x};
-								\addplot [-,name path=C,firstcurvestyle,domain=0.2:4.5]{1/x};
-								\addplot [-,name path=D,firstcurvestyle,domain=0.8:5]{4/x};
+								\addplot [name path=A,secondcolor,dashed,thick,domain={-1:4.5}]{x};
+								\addplot [name path=B,secondcolor,dashed,thick,domain={-0.25:1.25}]{4*x};
+								\addplot [name path=C,firstcolor,thick,domain=0.2:4.5]{1/x};
+								\addplot [name path=D,firstcolor,thick,domain=0.8:5]{4/x};
 								\addplot [firstcurvestyle,areastyle] fill between [of=B and C, soft clip={domain=0.5:1}];
 								\addplot [firstcurvestyle,areastyle] fill between [of=D and A, soft clip={domain=1:2}];
 								\node at (axis cs:1.2,2) {$R$};
@@ -1449,7 +1445,7 @@
 						</image>
 					</figure>
 					<figure xml:id="fig_int_trans00b">
-						<caption>The domain <m>D</m> mapped onto <m>R</m> by <m>T</m> in <xref ref="ex_int_trans00"/></caption>
+						<caption>The domain <m>D</m> mapped onto <m>R</m> by <m>T</m></caption>
 						<image xml:id="img_int_trans00b">
 						  <description></description>
 							<latex-image>
@@ -1461,13 +1457,13 @@
 											xmin=-1,xmax=5%
 								]
 
-								\addplot [-,secondcurvestyle,domain=1:2]({1},{x});
-								\addplot [-,secondcurvestyle,domain=2:4]({4},{x});
-								\addplot [name path=C,firstcurvestyle,domain=0:5]{sqrt(x)};
-								\addplot [-,firstcurvestyle,domain=0:5]{-sqrt(x)};
-								\addplot [name path=D,firstcurvestyle,domain=0:5]{2*sqrt(x)};
-								\addplot [-,firstcurvestyle,domain=0:5]{-2*sqrt(x)};
-								\addplot [-,firstcurvestyle,areastyle] fill between [of=C and D, soft clip={domain=1:4}];
+								\addplot [secondcolor,dashed,thick,domain=1:2]({1},{x});
+								\addplot [secondcolor,dashed,thick,domain=2:4]({4},{x});
+								\addplot [name path=C,firstcolor,thick,domain=0:5]{sqrt(x)};
+								\addplot [firstcolor,thick,domain=0:5,samples=100]{-sqrt(x)};
+								\addplot [name path=D,firstcolor,thick,domain=0:5,samples=100]{2*sqrt(x)};
+								\addplot [firstcolor,thick,domain=0:5]{-2*sqrt(x)};
+								\addplot [firstcurvestyle,areastyle] fill between [of=C and D, soft clip={domain=1:4}];
 								\node at (axis cs:2.5,2.5) {$D$};
 								\end{axis}
 
@@ -1852,12 +1848,12 @@
 										xmin=-0.2,xmax=1.2%
 							]
 
-							\addplot [-,name path=A,secondcurvestyle,domain={-0.2:1.2}]{x^2};
-							\addplot [-,name path=B,secondcurvestyle,domain={-0.2:1.2}]{2*x^2};
-							\addplot [-,name path=C,firstcurvestyle,domain=0:1.2]{sqrt(x)};
-							\addplot [-,firstcurvestyle,domain=0:0.5]{-sqrt(x)};
-							\addplot [-,name path=D,firstcurvestyle, domain=0:1.2]{0.5*sqrt(x)};
-							\addplot [-,firstcurvestyle,domain=0:0.5]{-0.5*sqrt(x)};
+							\addplot [name path=A,secondcolor,dashed,thick,domain={-0.2:1.2}]{x^2};
+							\addplot [name path=B,secondcolor,dashed,thick,domain={-0.2:1.2}]{2*x^2};
+							\addplot [name path=C,firstcolor,thick,domain=0:1.2,samples=100]{sqrt(x)};
+							\addplot [firstcolor,thick,domain=0:0.5]{-sqrt(x)};
+							\addplot [name path=D,firstcolor,thick, domain=0:1.2,samples=100]{0.5*sqrt(x)};
+							\addplot [firstcolor,thick,domain=0:0.5]{-0.5*sqrt(x)};
 							\addplot [firstcurvestyle,areastyle] fill between [of=B and D, soft clip={domain=0.39685:0.62996}];
 							\addplot [firstcurvestyle,areastyle] fill between [of=C and A, soft clip={domain=0.62996:1}];
 							%\node at (axis cs:1.2,2) {$R$};
@@ -1978,13 +1974,13 @@
 										xmin=-0.1,xmax=2.1%
 							]
 
-							\addplot [-,name path=A,secondcurvestyle,domain={-0.1:2}]{x};
-							\addplot [-,name path=B,secondcurvestyle,domain={-0.1:1}]{4*x};
-							\addplot [-,name path=C,firstcurvestyle,domain=0.25:2]{1/x};
-							\addplot [-,name path=D,firstcurvestyle,domain=0.5:2]{2/x};
-							\addplot [-,firstcurvestyle,areastyle] fill between [of=B and C, soft clip={domain=0.5:0.7071}];
-							\addplot [-,firstcurvestyle,areastyle] fill between [of=D and C, soft clip={domain=0.7071:1}];
-							\addplot [-,firstcurvestyle,areastyle] fill between [of=D and A, soft clip={domain=1:1.4142}];
+							\addplot [name path=A,secondcolor,dashed,thick,domain={-0.1:2}]{x};
+							\addplot [name path=B,secondcolor,dashed,thick,domain={-0.1:1}]{4*x};
+							\addplot [name path=C,firstcolor,thick,domain=0.25:2]{1/x};
+							\addplot [name path=D,firstcolor,thick,domain=0.5:2]{2/x};
+							\addplot [firstcurvestyle,areastyle] fill between [of=B and C, soft clip={domain=0.5:0.7071}];
+							\addplot [firstcurvestyle,areastyle] fill between [of=D and C, soft clip={domain=0.7071:1}];
+							\addplot [firstcurvestyle,areastyle] fill between [of=D and A, soft clip={domain=1:1.4142}];
 							%\node at (axis cs:1.2,2) {$R$};
 							\end{axis}
 
@@ -2099,7 +2095,7 @@
 
 		<figure xml:id="fig_polar_trans3">
 			<caption>Correspondence between rectangular and polar grid lines</caption>
-			<sidebyside widths="44% 10% 44%" valign="middle">
+			<sidebyside widths="40% 10% 40%" valign="middle">
 				<image xml:id="img_polar_trans3a">
 				  <description></description>
 					<latex-image>
@@ -2137,22 +2133,10 @@
 				<image xml:id="img_polar_trans3c">
 				  <description></description>
 					<latex-image>
-					  \begin{tikzpicture}
-						\begin{polaraxis}[width=\marginparwidth+15pt,%
-							tick label style={font=\scriptsize},
-							clip=false,
-							x axis line style={transparent},
-							grid=both,
-							major grid style=black,
-							minor x tick num=2,
-							minor y tick num=2,
-							xtick={0,45,...,315},
-							xticklabels={,0,$\pi/4$,$\pi/2$,$3\pi/4$,$\pi$,$5\pi/4$,$3\pi/2$,$7\pi/4$},
-							yticklabel=\empty,
-							domain=0:360,
-							samples=360,
-							mark=none
-						]
+						\begin{tikzpicture}[/pgfplots/every axis/.style=polarstyle]
+						\begin{polaraxis}[
+						polarstyle,
+						ymax=4]
 
 						\end{polaraxis}
 
@@ -2177,7 +2161,7 @@
 
 		<figure xml:id="fig_gen_trans_eg">
 			<caption>Visualizing a general transformation</caption>
-			<sidebyside widths="44% 10% 44%" valign="middle">
+			<sidebyside widths="40% 10% 40%" valign="middle">
 				<image xml:id="img_gen_trans_ega">
 				  <description></description>
 					<latex-image>
@@ -2191,21 +2175,21 @@
 									ylabel={$v$}
 						]
 
-							\addplot [-,black,domain={-0.8:8.2},dashed] ({1},{x});
-							\addplot [-,black,domain={-0.8:8.2},dashed] ({x},{1});
-							\addplot [-,black,domain={-0.8:8.2},dashed] ({2},{x});
-							\addplot [-,black,domain={-0.8:8.2},dashed] ({x},{2});
-							\addplot [-,black,domain={-0.8:8.2},dashed] ({5},{x});
-							\addplot [-,black,domain={-0.8:8.2},dashed] ({x},{5});
-							\addplot [-,black,domain={-0.8:8.2},dashed] ({6},{x});
-							\addplot [-,black,domain={-0.8:8.2},dashed] ({x},{6});
-							\addplot [-,black,domain={-0.8:8.2},dashed] ({7},{x});
-							\addplot [-,black,domain={-0.8:8.2},dashed] ({x},{7});
+							\addplot [black,domain={-0.8:8.2},dashed] ({1},{x});
+							\addplot [black,domain={-0.8:8.2},dashed] ({x},{1});
+							\addplot [black,domain={-0.8:8.2},dashed] ({2},{x});
+							\addplot [black,domain={-0.8:8.2},dashed] ({x},{2});
+							\addplot [black,domain={-0.8:8.2},dashed] ({5},{x});
+							\addplot [black,domain={-0.8:8.2},dashed] ({x},{5});
+							\addplot [black,domain={-0.8:8.2},dashed] ({6},{x});
+							\addplot [black,domain={-0.8:8.2},dashed] ({x},{6});
+							\addplot [black,domain={-0.8:8.2},dashed] ({7},{x});
+							\addplot [black,domain={-0.8:8.2},dashed] ({x},{7});
 
-							\addplot [-,firstcurvestyle,domain={-0.8:8.2}] ({3},{x});
-							\addplot [-,secondcurvestyle,name path=bot,domain={-0.8:8.2}] ({x},{3});
-							\addplot [-,firstcurvestyle,domain={-0.8:8.2}] ({4},{x});
-							\addplot [-,secondcurvestyle,name path=top,domain={-0.8:8.2}] ({x},{4});
+							\addplot [firstcolor,thick,domain={-0.8:8.2}] ({3},{x});
+							\addplot [secondcolor,dashed,thick,name path=bot,domain={-0.8:8.2}] ({x},{3});
+							\addplot [firstcolor,thick,domain={-0.8:8.2}] ({4},{x});
+							\addplot [secondcolor,dashed,thick,name path=top,domain={-0.8:8.2}] ({x},{4});
 							\addplot [firstcurvestyle,areastyle] fill between [of=top and bot, soft clip={domain=3:4}];
 						\end{axis}
 
@@ -2235,22 +2219,22 @@
 									xmin=-0.2,xmax=2.2%
 						]
 
-							 \addplot [-,black,domain={0.1:2},dashed] {1/x};
-							 \addplot [-,black,domain={-0.1:2},dashed] {1*x^2};
-							 \addplot [-,black,domain={0.1:2},dashed] {2/x};
-							 \addplot [-,black,domain={-0.1:2},dashed] {2*x^2};
-							 \addplot [-,black,domain={0.1:2},dashed] {5/x};
-							 \addplot [-,black,domain={-0.1:2},dashed] {5*x^2};
-							 \addplot [-,black,domain={0.1:2},dashed] {6/x};
-							 \addplot [-,black,domain={-0.1:2},dashed] {6*x^2};
-							 \addplot [-,black,domain={0.1:2},dashed] {7/x};
-							 \addplot [-,black,domain={-0.1:2},dashed] {7*x^2};
+							 \addplot [black,domain={0.1:2},dashed] {1/x};
+							 \addplot [black,domain={-0.1:2},dashed] {1*x^2};
+							 \addplot [black,domain={0.1:2},dashed] {2/x};
+							 \addplot [black,domain={-0.1:2},dashed] {2*x^2};
+							 \addplot [black,domain={0.1:2},dashed] {5/x};
+							 \addplot [black,domain={-0.1:2},dashed] {5*x^2};
+							 \addplot [black,domain={0.1:2},dashed] {6/x};
+							 \addplot [black,domain={-0.1:2},dashed] {6*x^2};
+							 \addplot [black,domain={0.1:2},dashed] {7/x};
+							 \addplot [black,domain={-0.1:2},dashed] {7*x^2};
 
 
-							\addplot [-,name path=A,firstcurvestyle,domain={0.1:2}] {3/x};
-							\addplot [-,name path=B,secondcurvestyle,domain={-0.1:2}] {3*x^2};
-							\addplot [-,name path=C,firstcurvestyle,domain={0.1:2}] {4/x};
-							\addplot [-,name path=D,secondcurvestyle,domain={-0.1:2}] {4*x^2};
+							\addplot [name path=A,firstcolor,thick,domain={0.1:2}] {3/x};
+							\addplot [name path=B,secondcolor,dashed,thick,domain={-0.1:2}] {3*x^2};
+							\addplot [name path=C,firstcolor,thick,domain={0.1:2}] {4/x};
+							\addplot [name path=D,secondcolor,dashed,thick,domain={-0.1:2}] {4*x^2};
 							\addplot [firstcurvestyle,areastyle] fill between [of=A and D, soft clip={domain=0.9086:1}];
 							\addplot [firstcurvestyle,areastyle] fill between [of=C and B, soft clip={domain=1:1.1006}];
 
@@ -2377,14 +2361,14 @@
 								xlabel=\empty,
 								ylabel=\empty
 					]
-						\addplot [-,firstcolor,domain={0.8:1.2},dashed] {2/x};
-						\addplot [-,firstcolor,domain={0.8:1.2},dashed] {5/x};
-						\addplot [-,secondcolor,domain={0.8:1.2},dashed] {2*x^2};
-						\addplot [-,secondcolor,domain={0.8:1.2},dashed] {5*x^2};
-						\addplot [-,name path=A,firstcurvestyle,domain={0.8:1.2}] {3/x};
-						\addplot [-,name path=B,secondcurvestyle,domain={0.8:1.2}] {3*x^2};
-						\addplot [-,name path=C,secondcurvestyle,domain={0.8:1.2}] {4/x};
-						\addplot [-,name path=D,secondcurvestyle,domain={0.8:1.2}] {4*x^2};
+						\addplot [firstcolor,domain={0.8:1.2},dashed] {2/x};
+						\addplot [firstcolor,domain={0.8:1.2},dashed] {5/x};
+						\addplot [secondcolor,domain={0.8:1.2},dashed] {2*x^2};
+						\addplot [secondcolor,domain={0.8:1.2},dashed] {5*x^2};
+						\addplot [name path=A,firstcolor,thick,domain={0.8:1.2}] {3/x};
+						\addplot [name path=B,secondcolor,dashed,thick,domain={0.8:1.2}] {3*x^2};
+						\addplot [name path=C,secondcolor,dashed,thick,domain={0.8:1.2}] {4/x};
+						\addplot [name path=D,secondcolor,dashed,thick,domain={0.8:1.2}] {4*x^2};
 						\addplot [firstcurvestyle,areastyle] fill between [of=A and D, soft clip={domain=0.9086:1}];
 						\addplot [firstcurvestyle,areastyle] fill between [of=C and B, soft clip={domain=1:1.1006}];
 						\draw [-&gt;,darkgray,ultra thick] (axis cs:1,3)--(axis cs:0.908,3.276);
