@@ -1216,100 +1216,96 @@
   </subsection>
 
   <exercises>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          Terms and Concepts
-        </p>
-      </introduction>
+    <subexercises>
+      <title>Terms and Concepts</title>
 
       <exercise>
-        <webwork seed="1">
-            <statement>
-              <p>
-                In your own words, what does it mean to
-                <q>find the limit of <m>f(x)</m> as <m>x</m> approaches 3</q>?
-              </p>
+        <webwork>
+          <statement>
+            <p>
+              In your own words, what does it mean to
+              <q>find the limit of <m>f(x)</m> as <m>x</m> approaches 3</q>?
+            </p>
 
-              <p>
-                <var form="essay"/>
-              </p>
-            </statement>
+            <p>
+              <var form="essay"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
+          <setup>
             <pg-code>
-              $answer="an indeterminate form";
-              $undefined="an undefined expression";
-              Context()->strings->add($answer=>{},indeterminate=>{alias=>$answer},$undefined=>{},undefined=>{alias=>$undefined});
-              $evaluator=Compute($answer)->cmp()->withPostFilter(AnswerHints([Compute("undefined")]=>"Yes, but there is a more specific answer."));
+              $answer = "an indeterminate form";
+              $undefined = "an undefined expression";
+              Context()->strings->add(
+                $answer => {},
+                indeterminate => {alias => $answer},
+                $undefined => {},
+                undefined => {alias => $undefined}
+              );
+              $evaluator = Compute($answer)->cmp()->withPostFilter(
+                AnswerHints(
+                  [Compute("undefined")] => "Yes, but there is a more specific answer."
+                )
+              );
             </pg-code>
-            </setup>
-            <statement>
-              <p>
-                An expression of the form <m>\frac{0}{0}</m> is called <var evaluator="$evaluator" name="$evaluator" width="25"/>.
-              </p>
-            </statement>
-            <solution>
-              <p>
-                An expression of the form <m>\frac{0}{0}</m> is called <var name="$answer"/>.
-              </p>
-            </solution>
+          </setup>
+          <statement>
+            <p>
+              An expression of the form <m>\frac{0}{0}</m> is called <var evaluator="$evaluator" name="$answer" width="25"/>.
+            </p>
+          </statement>
         </webwork>
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
+          <setup>
             <pg-code>
-              $limitequalsvalue=PopUp(['?','True','False'],'False');
+              $limitequalsvalue = PopUp(['?','True','False'],2);
             </pg-code>
-            </setup>
-            <statement>
-              <p>
-                True or False?
-                The limit of <m>f(x)</m> as <m>x</m> approaches <m>5</m> is <m>f(5)</m>.
-                <var name="$limitequalsvalue" form="popup"/>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                False: the limit considers values of <m>x</m> <em>near</em> to <m>5</m>,
-                but not <em>equal</em> to 5.
-              </p>
-            </solution>
+          </setup>
+          <statement>
+            <p>
+              The limit of <m>f(x)</m> as <m>x</m> approaches <m>5</m> is <m>f(5)</m>.
+              <var name="$limitequalsvalue" form="popup"/>
+            </p>
+          </statement>
+          <solution>
+            <p>
+              False: the limit considers values of <m>x</m> <em>near</em> to <m>5</m>,
+              but not <em>equal</em> to <m>5</m>.
+            </p>
+          </solution>
         </webwork>
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <statement>
-              <p>
-                Describe three situations where <m>\lim\limits_{x\to c}f(x)</m> does not exist.
-              </p>
+        <webwork>
+          <statement>
+            <p>
+              Describe three situations where <m>\lim\limits_{x\to c}f(x)</m> does not exist.
+            </p>
 
-              <p>
-                <var form="essay"/>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                The function may approach different values from the left and right,
-                the function may grow without bound,
-                or the function might oscillate.
-              </p>
-            </solution>
+            <p>
+              <var form="essay"/>
+            </p>
+          </statement>
+          <solution>
+            <p>
+              The function may approach different values from the left and right,
+              the function may grow without bound,
+              or the function might oscillate.
+            </p>
+          </solution>
         </webwork>
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
           <statement>
             <p>
               In your own words, what is a difference quotient?
@@ -1323,48 +1319,53 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
           <statement>
             <p>
               When <m>x</m> is near <m>0</m>,
-              <m>\ds\frac{\sin x}{x}</m> is near what value?
+              <m>\dfrac{\sin x}{x}</m> is near what value?
             </p>
             <p>
               <var name="1" width="10"/>
             </p>
           </statement>
+          <solution>
+            <p>
+              Try values of <m>x</m> close to <m>0</m>, such as <m>0.0001</m>.
+              A calculator reveals that <m>\dfrac{\sin 0.0001}{0.0001}\approx0.999999998\ldots</m>.
+              This is near <m>1</m>.
+            </p>
+          </solution>
         </webwork>
       </exercise>
-  </exercisegroup>
+    </subexercises>
 
-    <!--TODO: Resolve this exercisegroup's introduction instructions and their repetition in each exercise. -->
-  <exercisegroup>
-
-      <introduction>
-        <p>
-          In the following exercises,
-          approximate the given limits both numerically and graphically.
-        </p>
-      </introduction>
-
-      <exercise>
-        <webwork seed="1">
+    <subexercises>
+      <title>Problems</title>
+      <exercisegroup cols="2">
+        <exercise>
+          <webwork seed="1">
             <setup>
-            <pg-code>
-              do{
-              do{$b=non_zero_random(-5,5,1);
-              $c=non_zero_random(-5,5,1);
-              }until(gcd($b,$c)==1);
-              $a=non_zero_random(-1,1,1);
-              if ($envir{problemSeed}==1){$a=1;$b=3;$c=-5;};
-              $f=Formula("x^2+$b x+$c")->reduce;
-              $l=$f->eval(x=>$a);
-              }until($l!=0);
-              @tabin=($a-0.1,$a-0.01,$a-0.001,$a+0.001,$a+0.01,$a+0.1);
-              @tabout=map{$f->eval(x=>$_)} @tabin;
-              $solgr=init_graph(-2,-abs($l)-2,2,abs($l)+2,axes=>[0,0],grid=>[4,2*abs($l)+4],size=>[282,282]);
-              add_functions($solgr,"$f for x in &lt;-2,2> using color:blue and weight:2");
-            </pg-code>
+              <pg-code>
+                do {
+                  do {
+                    $b = non_zero_random(-5,5,1);
+                    $c = non_zero_random(-5,5,1);
+                  } until(gcd($b,$c) == 1);
+                  $a = random(-1,1,2);
+                  if ($envir{problemSeed} == 1){
+                    $a=1;
+                    $b=3;
+                    $c=-5;
+                  };
+                  $f = Formula("x^2 + $b x + $c")->reduce;
+                  $l = $f->eval(x => $a);
+                } until($l != 0);
+                @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
+                @tabout = map{$f->eval(x => $_)} (@tabin);
+                $solgr = init_graph(-2, -abs($l) - 2, 2, abs($l) + 2, axes => [0,0], grid => [4, 2*abs($l) + 4], size => [282, 282]);
+                add_functions($solgr, "$f for x in &lt;-2,2> using color:blue and weight:2");
+              </pg-code>
             </setup>
             <statement>
               <p>
@@ -1372,7 +1373,10 @@
               </p>
 
               <p>
-                <m>\lim\limits_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)=</m><var name="$l" width="10"/>
+                <m>\lim\limits_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)</m>
+              </p>
+              <p>
+                <var name="$l" width="10"/>
               </p>
             </statement>
             <solution>
@@ -1380,63 +1384,36 @@
                 For a numerical approximation, make a table:
               </p>
 
-
-                <tabular>
-                  <row bottom="medium">
-                    <cell><m>x</m></cell>
-                    <cell><m>
-                      <var name="$f"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[0]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[0]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[1]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[1]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[2]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[2]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[3]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[3]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[4]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[4]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[5]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[5]"/>
-                      </m></cell>
-                  </row>
-                </tabular>
+              <tabular>
+                <row bottom="medium">
+                  <cell><m>x</m></cell>
+                  <cell><m><var name="$f"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[0]"/></m></cell>
+                  <cell><m><var name="$tabout[0]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[1]"/></m></cell>
+                  <cell><m><var name="$tabout[1]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[2]"/></m></cell>
+                  <cell><m><var name="$tabout[2]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[3]"/></m></cell>
+                  <cell><m><var name="$tabout[3]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[4]"/></m></cell>
+                  <cell><m><var name="$tabout[4]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[5]"/></m></cell>
+                  <cell><m><var name="$tabout[5]"/></m></cell>
+                </row>
+              </tabular>
 
               <p>
                 For a graphical approximation:
@@ -1455,265 +1432,239 @@
                 </me>.
               </p>
             </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
+        <exercise>
+          <webwork seed="1">
             <setup>
-            <pg-code>
-              do{
-              do{$b=non_zero_random(-5,5,1);
-              $c=non_zero_random(-5,5,1);
-              }until(gcd($b,$c)==1);
-              $d=non_zero_random(-5,5,1);
-              $a=random(-1,1,1);
-              if ($envir{problemSeed}==1){$a=0;$b=-3;$c=1;$d=-5};
-              $f=Formula("x^3+$b x^2+$c x+$d")->reduce;
-              $l=$f->eval(x=>$a);
-              }until($l!=0);
-              @tabin=($a-0.1,$a-0.01,$a-0.001,$a+0.001,$a+0.01,$a+0.1);
-              @tabout=map{$f->eval(x=>$_)} @tabin;
-              $solgr=init_graph(-2,-abs($l)-2,2,abs($l)+2,axes=>[0,0],grid=>[4,2*abs($l)+4],size=>[282,282]);
-              add_functions($solgr,"$f for x in &lt;-2,2> using color:blue and weight:2");
-            </pg-code>
-            </setup>
-            <statement>
-              <p>
-                Approximate the limit numerically and graphically.
-              </p>
+              <pg-code>
+                do {
+                  do {
+                    $b = non_zero_random(-5,5,1);
+                    $c = non_zero_random(-5,5,1);
+                  } until (gcd($b,$c) == 1);
+                  $d = non_zero_random(-5,5,1);
+                  $a = random(-1,1,1);
+                  if ($envir{problemSeed} == 1){
+                    $a = 0;
+                    $b = -3;
+                    $c = 1;
+                    $d = -5
+                  };
+                  $f = Formula("x^3 + $b x^2 + $c x + $d")->reduce;
+                  $l = $f->eval(x => $a);
+                } until ($l != 0);
+                @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
+                @tabout = map{$f->eval(x => $_)} (@tabin);
+                $solgr = init_graph(-2, -abs($l) - 2, 2, abs($l) + 2, axes => [0,0], grid => [4, 2*abs($l) + 4], size => [282, 282]);
+                add_functions($solgr, "$f for x in &lt;-2,2> using color:blue and weight:2");
+              </pg-code>
+              </setup>
+              <statement>
+                <p>
+                  Approximate the limit numerically and graphically.
+                </p>
 
-              <p>
-                <m>\lim\limits_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)=</m><var name="$l" width="10"/>
+                <p>
+                  <m>\lim\limits_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)</m>
               </p>
-            </statement>
-            <solution>
               <p>
-                For a numerical approximation, make a table:
-              </p>
-
-
+                <var name="$l" width="10"/>
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  For a numerical approximation, make a table:
+                </p>
 
                 <tabular>
                   <row bottom="medium">
                     <cell><m>x</m></cell>
-                    <cell><m>
-                      <var name="$f"/>
-                      </m></cell>
+                    <cell><m><var name="$f"/></m></cell>
                   </row>
                   <row>
-                    <cell><m>
-                      <var name="$tabin[0]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[0]"/>
-                      </m></cell>
+                    <cell><m><var name="$tabin[0]"/></m></cell>
+                    <cell><m><var name="$tabout[0]"/></m></cell>
                   </row>
                   <row>
-                    <cell><m>
-                      <var name="$tabin[1]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[1]"/>
-                      </m></cell>
+                    <cell><m><var name="$tabin[1]"/></m></cell>
+                    <cell><m><var name="$tabout[1]"/></m></cell>
                   </row>
                   <row>
-                    <cell><m>
-                      <var name="$tabin[2]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[2]"/>
-                      </m></cell>
+                    <cell><m><var name="$tabin[2]"/></m></cell>
+                    <cell><m><var name="$tabout[2]"/></m></cell>
                   </row>
                   <row>
-                    <cell><m>
-                      <var name="$tabin[3]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[3]"/>
-                      </m></cell>
+                    <cell><m><var name="$tabin[3]"/></m></cell>
+                    <cell><m><var name="$tabout[3]"/></m></cell>
                   </row>
                   <row>
-                    <cell><m>
-                      <var name="$tabin[4]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[4]"/>
-                      </m></cell>
+                    <cell><m><var name="$tabin[4]"/></m></cell>
+                    <cell><m><var name="$tabout[4]"/></m></cell>
                   </row>
                   <row>
-                    <cell><m>
-                      <var name="$tabin[5]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[5]"/>
-                      </m></cell>
+                    <cell><m><var name="$tabin[5]"/></m></cell>
+                    <cell><m><var name="$tabout[5]"/></m></cell>
                   </row>
                 </tabular>
 
-
-              <p>
-                For a graphical approximation:
-              </p>
+                <p>
+                  For a graphical approximation:
+                </p>
 
                 <sidebyside widths="47%">
                   <image pg-name="$solgr"/>
                 </sidebyside>
 
-              <p>
-                It appears that when <m>x</m> is close to <m><var name="$a"/></m>,
-                that <m><var name="$f"/></m> is close to <m><var name="$l"/></m>.
-                So
-                <me>
-                  \lim_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)=<var name="$l"/>
-                </me>.
-              </p>
-            </solution>
-        </webwork>
-      </exercise>
+                <p>
+                  It appears that when <m>x</m> is close to <m><var name="$a"/></m>,
+                  that <m><var name="$f"/></m> is close to <m><var name="$l"/></m>.
+                  So
+                  <me>
+                    \lim_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)=<var name="$l"/>
+                  </me>.
+                </p>
+              </solution>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
+        <exercise>
+          <webwork seed="1">
             <setup>
-            <pg-code>
-              do{$b=non_zero_random(-5,5,1);
-              $c=non_zero_random(-5,5,1);
-              }until($b!=$c);
-              $a=0;
-              if ($envir{problemSeed}==1){$a=0;$b=1;$c=3};
-              $f=Formula("(x+$b)/(x^2+$c x)")->reduce;
-              $l=Compute("DNE");
-              @tabin=($a-0.1,$a-0.01,$a-0.001,$a+0.001,$a+0.01,$a+0.1);
-              @tabout=map{$f->eval(x=>$_)} @tabin;
-              $solgr=init_graph(-2,-25,2,25,axes=>[0,0],grid=>[4,10],size=>[282,282]);
-              if(0&lt;-$c){
-              add_functions($solgr,"$f for x in &lt;-2,-0.01> using color:blue and weight:2");
-              add_functions($solgr,"$f for x in &lt;0.01,-$c) using color:blue and weight:2");
-              add_functions($solgr,"$f for x in (-$c,2> using color:blue and weight:2");
-              }else{
-              add_functions($solgr,"$f for x in &lt;-2,$c) using color:blue and weight:2");
-              add_functions($solgr,"$f for x in ($c,-0.01> using color:blue and weight:2");
-              add_functions($solgr,"$f for x in &lt;0.01,2> using color:blue and weight:2");
-              };
-            </pg-code>
+              <pg-code>
+                do {
+                  $b = non_zero_random(-5,5,1);
+                  $c = non_zero_random(-5,5,1);
+                } until ($b != $c);
+                $a = 0;
+                if ($envir{problemSeed} == 1){
+                  $a = 0;
+                  $b = 1;
+                  $c = 3
+                };
+                $f = Formula("(x + $b)/(x^2 + $c x)")->reduce;
+                $l = Compute("DNE");
+                @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
+                @tabout = map{$f->eval(x => $_)} (@tabin);
+                $solgr = init_graph(-2, -25, 2, 25, axes => [0,0], grid => [4, 10], size => [282, 282]);
+                if(0 &lt; -$c){
+                  add_functions($solgr, "$f for x in &lt;-2,-0.01> using color:blue and weight:2");
+                  add_functions($solgr, "$f for x in &lt;0.01,-$c) using color:blue and weight:2");
+                  add_functions($solgr, "$f for x in (-$c,2> using color:blue and weight:2");
+                } else {
+                  add_functions($solgr, "$f for x in &lt;-2,$c) using color:blue and weight:2");
+                  add_functions($solgr, "$f for x in ($c,-0.01> using color:blue and weight:2");
+                  add_functions($solgr, "$f for x in &lt;0.01,2> using color:blue and weight:2");
+                };
+              </pg-code>
             </setup>
             <statement>
-              <p>
-                Approximate the limit numerically and graphically.
-              </p>
+                <p>
+                  Approximate the limit numerically and graphically.
+                </p>
 
-              <p>
-                <m>\lim\limits_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)=</m><var name="$l" width="10"/>
+                <p>
+                  <m>\lim\limits_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)</m>
               </p>
-            </statement>
-            <solution>
               <p>
-                For a numerical approximation, make a table:
-              </p>
+                <var name="$l" width="10"/>
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  For a numerical approximation, make a table:
+                </p>
 
                 <tabular>
                   <row bottom="medium">
                     <cell><m>x</m></cell>
-                    <cell><m>
-                      <var name="$f"/>
-                      </m></cell>
+                    <cell><m><var name="$f"/></m></cell>
                   </row>
                   <row>
-                    <cell><m>
-                      <var name="$tabin[0]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[0]"/>
-                      </m></cell>
+                    <cell><m><var name="$tabin[0]"/></m></cell>
+                    <cell><m><var name="$tabout[0]"/></m></cell>
                   </row>
                   <row>
-                    <cell><m>
-                      <var name="$tabin[1]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[1]"/>
-                      </m></cell>
+                    <cell><m><var name="$tabin[1]"/></m></cell>
+                    <cell><m><var name="$tabout[1]"/></m></cell>
                   </row>
                   <row>
-                    <cell><m>
-                      <var name="$tabin[2]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[2]"/>
-                      </m></cell>
+                    <cell><m><var name="$tabin[2]"/></m></cell>
+                    <cell><m><var name="$tabout[2]"/></m></cell>
                   </row>
                   <row>
-                    <cell><m>
-                      <var name="$tabin[3]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[3]"/>
-                      </m></cell>
+                    <cell><m><var name="$tabin[3]"/></m></cell>
+                    <cell><m><var name="$tabout[3]"/></m></cell>
                   </row>
                   <row>
-                    <cell><m>
-                      <var name="$tabin[4]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[4]"/>
-                      </m></cell>
+                    <cell><m><var name="$tabin[4]"/></m></cell>
+                    <cell><m><var name="$tabout[4]"/></m></cell>
                   </row>
                   <row>
-                    <cell><m>
-                      <var name="$tabin[5]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[5]"/>
-                      </m></cell>
+                    <cell><m><var name="$tabin[5]"/></m></cell>
+                    <cell><m><var name="$tabout[5]"/></m></cell>
                   </row>
                 </tabular>
 
-              <p>
-                For a graphical approximation:
-              </p>
+                <p>
+                  For a graphical approximation:
+                </p>
 
                 <sidebyside widths="47%">
                   <image pg-name="$solgr"/>
                 </sidebyside>
 
-              <p>
-                It appears that when <m>x</m> is close to <m><var name="$a"/></m>,
-                that <m><var name="$f"/></m> grows without bound.
-                So
-                <me>
-                  \lim_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)\text{ does not exist (DNE).}
-                </me>
-              </p>
-            </solution>
-        </webwork>
-      </exercise>
+                <p>
+                  It appears that when <m>x</m> is close to <m><var name="$a"/></m>,
+                  that <m><var name="$f"/></m> grows without bound.
+                  So
+                  <me>
+                    \lim_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)\text{ does not exist (DNE).}
+                  </me>
+                </p>
+              </solution>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
+        <exercise>
+          <webwork seed="1">
             <setup>
-            <pg-code>
-              do{$b=non_zero_random(-5,5,1);
-              $c=non_zero_random(-5,5,1);
-              }until($b!=$c);
-              do{$a=non_zero_random(-5,5,1);}until($a!=$b and $a!=$c);
-              if ($envir{problemSeed}==1){$a=3;$b=-1;$c=1};
-              $f=Formula("(x^2-($a+$b)x+$a*$b)/(x^2-($a+$c)x+$a*$c)")->reduce;
-              Context("Fraction");
-              $l=Fraction(($a-$b)/($a-$c));
-              @tabin=($a-0.1,$a-0.01,$a-0.001,$a+0.001,$a+0.01,$a+0.1);
-              @tabout=map{$f->eval(x=>$_)} @tabin;
-              $xmin=-abs($a)-2;$xmax=abs($a)+2;$xmid1=$c-0.01;$xmid2=$c+0.01;$ymin=-ceil(abs(Real($l)))-2;$ymax=ceil(abs(Real($l)))+2;
-              $solgr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[282,282]);
-              if($a&lt;$c){
-              add_functions($solgr,"$f for x in &lt;$xmin,$xmid1> using color:blue and weight:2");
-              add_functions($solgr,"$f for x in &lt;$xmid2,$c) using color:blue and weight:2");
-              add_functions($solgr,"$f for x in ($c,$xmax> using color:blue and weight:2");
-              }else{
-              add_functions($solgr,"$f for x in &lt;$xmin,$c) using color:blue and weight:2");
-              add_functions($solgr,"$f for x in ($c,$xmid1> using color:blue and weight:2");
-              add_functions($solgr,"$f for x in &lt;$xmid2,$xmax> using color:blue and weight:2");
-              };
-            </pg-code>
+              <pg-code>
+                do {
+                  $b = non_zero_random(-5,5,1);
+                  $c = non_zero_random(-5,5,1);
+                } until ($b != $c);
+                do {
+                  $a = non_zero_random(-5,5,1);
+                } until ($a != $b and $a != $c);
+                if ($envir{problemSeed} == 1){
+                  $a = 3;
+                  $b = -1;
+                  $c = 1;
+                };
+                $f = Formula("(x^2 - ($a + $b)x + $a*$b)/(x^2 - ($a + $c)x + $a*$c)")->reduce;
+                Context("Fraction");
+                $l = Fraction(($a - $b)/($a - $c));
+                @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
+                @tabout = map{$f->eval(x => $_)} (@tabin);
+                $xmin = -abs($a) - 2;
+                $xmax = abs($a) + 2;
+                $xmid1 = $c - 0.01;
+                $xmid2 = $c + 0.01;
+                $ymin = -ceil(abs(Real($l))) - 2;
+                $ymax = ceil(abs(Real($l))) + 2;
+                $solgr = init_graph($xmin, $ymin, $xmax, $ymax, axes => [0,0],grid => [$xmax - $xmin, $ymax - $ymin], size => [282,282]);
+                if ($a &lt; $c) {
+                  add_functions($solgr, "$f for x in &lt;$xmin,$xmid1> using color:blue and weight:2");
+                  add_functions($solgr, "$f for x in &lt;$xmid2,$c) using color:blue and weight:2");
+                  add_functions($solgr, "$f for x in ($c,$xmax> using color:blue and weight:2");
+                }else{
+                  add_functions($solgr, "$f for x in &lt;$xmin,$c) using color:blue and weight:2");
+                  add_functions($solgr, "$f for x in ($c,$xmid1> using color:blue and weight:2");
+                  add_functions($solgr, "$f for x in &lt;$xmid2,$xmax> using color:blue and weight:2");
+                };
+              </pg-code>
             </setup>
             <statement>
               <p>
@@ -1721,7 +1672,10 @@
               </p>
 
               <p>
-                <m>\lim\limits_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)=</m><var name="$l" width="10"/>
+                <m>\lim\limits_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)</m>
+              </p>
+              <p>
+                <var name="$l" width="10"/>
               </p>
             </statement>
             <solution>
@@ -1729,183 +1683,36 @@
                 For a numerical approximation, make a table:
               </p>
 
-
-                <tabular>
-                  <row bottom="medium">
-                    <cell><m>x</m></cell>
-                    <cell><m>
-                      <var name="$f"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[0]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[0]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[1]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[1]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[2]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[2]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[3]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[3]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[4]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[4]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[5]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[5]"/>
-                      </m></cell>
-                  </row>
-                </tabular>
-
-
-              <p>
-                For a graphical approximation:
-              </p>
-
-                              <sidebyside widths="47%">
-                                <image pg-name="$solgr"/>
-                              </sidebyside>
-
-              <p>
-                It appears that when <m>x</m> is close to <m><var name="$a"/></m>,
-                that <m><var name="$f"/></m> is close to <m><var name="$l"/></m>.
-                So
-                <me>
-                  \lim_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)=<var name="$l"/>
-                </me>.
-              </p>
-            </solution>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork seed="1">
-            <setup>
-            <pg-code>
-              do{$b=random(-1,1,2)*random(6,9,1);
-              $c=non_zero_random(-5,5,1);
-              }until($b!=$c);
-              do{$a=non_zero_random(-5,5,1);}until($a!=$c);
-              if ($envir{problemSeed}==1){$a=-1;$b=-7;$c=-5};
-              $f=Formula("(x^2-($a+$b)x+$a*$b)/(x^2-($a+$c)x+$a*$c)")->reduce;
-              Context("Fraction");
-              $l=Fraction(($a-$b)/($a-$c));
-              @tabin=($a-0.1,$a-0.01,$a-0.001,$a+0.001,$a+0.01,$a+0.1);
-              @tabout=map{$f->eval(x=>$_)} @tabin;
-              $xmin=-abs($a)-2;$xmax=abs($a)+2;$xmid1=$c-0.01;$xmid2=$c+0.01;$ymin=-ceil(abs(Real($l)))-2;$ymax=ceil(abs(Real($l)))+2;
-              $solgr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[282,282]);
-              if($a&lt;$c){
-              add_functions($solgr,"$f for x in &lt;$xmin,$xmid1> using color:blue and weight:2");
-              add_functions($solgr,"$f for x in &lt;$xmid2,$c) using color:blue and weight:2");
-              add_functions($solgr,"$f for x in ($c,$xmax> using color:blue and weight:2");
-              }else{
-              add_functions($solgr,"$f for x in &lt;$xmin,$c) using color:blue and weight:2");
-              add_functions($solgr,"$f for x in ($c,$xmid1> using color:blue and weight:2");
-              add_functions($solgr,"$f for x in &lt;$xmid2,$xmax> using color:blue and weight:2");
-              };
-            </pg-code>
-            </setup>
-            <statement>
-              <p>
-                Approximate the limit numerically and graphically.
-              </p>
-
-              <p>
-                <m>\lim\limits_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)=</m><var name="$l" width="10"/>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                For a numerical approximation, make a table:
-              </p>
-
-
-                <tabular>
-                  <row bottom="medium">
-                    <cell><m>x</m></cell>
-                    <cell><m>
-                      <var name="$f"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[0]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[0]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[1]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[1]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[2]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[2]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[3]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[3]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[4]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[4]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[5]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[5]"/>
-                      </m></cell>
-                  </row>
-                </tabular>
+              <tabular>
+                <row bottom="medium">
+                  <cell><m>x</m></cell>
+                  <cell><m><var name="$f"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[0]"/></m></cell>
+                  <cell><m><var name="$tabout[0]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[1]"/></m></cell>
+                  <cell><m><var name="$tabout[1]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[2]"/></m></cell>
+                  <cell><m><var name="$tabout[2]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[3]"/></m></cell>
+                  <cell><m><var name="$tabout[3]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[4]"/></m></cell>
+                  <cell><m><var name="$tabout[4]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[5]"/></m></cell>
+                  <cell><m><var name="$tabout[5]"/></m></cell>
+                </row>
+              </tabular>
 
               <p>
                 For a graphical approximation:
@@ -1924,34 +1731,47 @@
                 </me>.
               </p>
             </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
+        <exercise>
+          <webwork seed="1">
             <setup>
-            <pg-code>
-              do{$b=random(-1,1,2)*random(6,9,1);
-              $c=non_zero_random(-5,5,1);
-              }until($b!=$c);
-              $a=non_zero_random(-5,5,1);
-              if ($envir{problemSeed}==1){$a=2;$b=-5;$c=2};
-              $f=Formula("(x^2-(-$a+$b)x-$a*$b)/(x^2-($a+$c)x+$a*$c)")->reduce;
-              $l=Compute("DNE");
-              @tabin=($a-0.1,$a-0.01,$a-0.001,$a+0.001,$a+0.01,$a+0.1);
-              @tabout=map{$f->eval(x=>$_)} @tabin;
-              $xmin=-abs($a)-2;$xmax=abs($a)+2;$xmid1=$c-0.01;$xmid2=$c+0.01;$ymin=-1000;$ymax=1000;
-              $solgr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,10],size=>[282,282]);
-              if($a&lt;$c){
-              add_functions($solgr,"$f for x in &lt;$xmin,$xmid1> using color:blue and weight:2");
-              add_functions($solgr,"$f for x in &lt;$xmid2,$c) using color:blue and weight:2");
-              add_functions($solgr,"$f for x in ($c,$xmax> using color:blue and weight:2");
-              }else{
-              add_functions($solgr,"$f for x in &lt;$xmin,$c) using color:blue and weight:2");
-              add_functions($solgr,"$f for x in ($c,$xmid1> using color:blue and weight:2");
-              add_functions($solgr,"$f for x in &lt;$xmid2,$xmax> using color:blue and weight:2");
-              };
-            </pg-code>
+              <pg-code>
+                do {
+                  $b = random(-1,1,2)*random(6,9,1);
+                  $c = non_zero_random(-5,5,1);
+                } until ($b != $c);
+                do {
+                  $a = non_zero_random(-5,5,1);
+                } until ($a != $c);
+                if ($envir{problemSeed} == 1){
+                  $a = -1;
+                  $b = -7;
+                  $c = -5;
+                };
+                $f = Formula("(x^2 - ($a + $b)x + $a*$b)/(x^2 - ($a + $c)x + $a*$c)")->reduce;
+                Context("Fraction");
+                $l = Fraction(($a - $b)/($a - $c));
+                @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
+                @tabout = map{$f->eval(x => $_)} (@tabin);
+                $xmin = -abs($a) - 2;
+                $xmax = abs($a) + 2;
+                $xmid1 = $c - 0.01;
+                $xmid2 = $c + 0.01;
+                $ymin = -ceil(abs(Real($l))) - 2;
+                $ymax = ceil(abs(Real($l))) + 2;
+                $solgr = init_graph($xmin, $ymin, $xmax, $ymax, axes => [0,0],grid => [$xmax - $xmin, $ymax - $ymin], size => [282,282]);
+                if ($a &lt; $c) {
+                  add_functions($solgr, "$f for x in &lt;$xmin,$xmid1> using color:blue and weight:2");
+                  add_functions($solgr, "$f for x in &lt;$xmid2,$c) using color:blue and weight:2");
+                  add_functions($solgr, "$f for x in ($c,$xmax> using color:blue and weight:2");
+                } else {
+                  add_functions($solgr, "$f for x in &lt;$xmin,$c) using color:blue and weight:2");
+                  add_functions($solgr, "$f for x in ($c,$xmid1> using color:blue and weight:2");
+                  add_functions($solgr, "$f for x in &lt;$xmid2,$xmax> using color:blue and weight:2");
+                };
+              </pg-code>
             </setup>
             <statement>
               <p>
@@ -1959,7 +1779,10 @@
               </p>
 
               <p>
-                <m>\lim\limits_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)=</m><var name="$l" width="10"/>
+                <m>\lim\limits_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)</m>
+              </p>
+              <p>
+                <var name="$l" width="10"/>
               </p>
             </statement>
             <solution>
@@ -1967,64 +1790,140 @@
                 For a numerical approximation, make a table:
               </p>
 
+              <tabular>
+                <row bottom="medium">
+                  <cell><m>x</m></cell>
+                  <cell><m><var name="$f"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[0]"/></m></cell>
+                  <cell><m><var name="$tabout[0]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[1]"/></m></cell>
+                  <cell><m><var name="$tabout[1]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[2]"/></m></cell>
+                  <cell><m><var name="$tabout[2]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[3]"/></m></cell>
+                  <cell><m><var name="$tabout[3]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[4]"/></m></cell>
+                  <cell><m><var name="$tabout[4]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[5]"/></m></cell>
+                  <cell><m><var name="$tabout[5]"/></m></cell>
+                </row>
+              </tabular>
 
-                <tabular>
-                  <row bottom="medium">
-                    <cell><m>x</m></cell>
-                    <cell><m>
-                      <var name="$f"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[0]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[0]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[1]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[1]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[2]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[2]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[3]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[3]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[4]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[4]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[5]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[5]"/>
-                      </m></cell>
-                  </row>
-                </tabular>
+              <p>
+                For a graphical approximation:
+              </p>
 
+              <sidebyside widths="47%">
+                <image pg-name="$solgr"/>
+              </sidebyside>
+
+              <p>
+                It appears that when <m>x</m> is close to <m><var name="$a"/></m>,
+                that <m><var name="$f"/></m> is close to <m><var name="$l"/></m>.
+                So
+                <me>
+                  \lim_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)=<var name="$l"/>
+                </me>.
+              </p>
+            </solution>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork seed="1">
+            <setup>
+              <pg-code>
+                do {
+                  $b = random(-1,1,2)*random(6,9,1);
+                  $c = non_zero_random(-5,5,1);
+                } until ($b != $c);
+                $a = non_zero_random(-5,5,1);
+                if ($envir{problemSeed} == 1){
+                  $a = 2;
+                  $b = -5;
+                  $c = 2;
+                };
+                $f = Formula("(x^2-(-$a+$b)x-$a*$b)/(x^2-($a+$c)x+$a*$c)")->reduce;
+                $l = Compute("DNE");
+                @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
+                @tabout = map{$f->eval(x => $_)} (@tabin);
+                $xmin = -abs($a) - 2;
+                $xmax = abs($a) + 2;
+                $xmid1 = $c - 0.01;
+                $xmid2 = $c + 0.01;
+                $ymin = -1000;
+                $ymax = 1000;
+                $solgr = init_graph($xmin,$ymin,$xmax,$ymax,axes => [0,0],grid => [$xmax-$xmin,10],size => [282,282]);
+                if ($a &lt; $c) {
+                  add_functions($solgr, "$f for x in &lt;$xmin,$xmid1> using color:blue and weight:2");
+                  add_functions($solgr, "$f for x in &lt;$xmid2,$c) using color:blue and weight:2");
+                  add_functions($solgr, "$f for x in ($c,$xmax> using color:blue and weight:2");
+                }else{
+                  add_functions($solgr, "$f for x in &lt;$xmin,$c) using color:blue and weight:2");
+                  add_functions($solgr, "$f for x in ($c,$xmid1> using color:blue and weight:2");
+                  add_functions($solgr, "$f for x in &lt;$xmid2,$xmax> using color:blue and weight:2");
+                };
+              </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Approximate the limit numerically and graphically.
+              </p>
+
+              <p>
+                <m>\lim\limits_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)</m>
+              </p>
+              <p>
+                <var name="$l" width="10"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                For a numerical approximation, make a table:
+              </p>
+
+              <tabular>
+                <row bottom="medium">
+                  <cell><m>x</m></cell>
+                  <cell><m><var name="$f"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[0]"/></m></cell>
+                  <cell><m><var name="$tabout[0]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[1]"/></m></cell>
+                  <cell><m><var name="$tabout[1]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[2]"/></m></cell>
+                  <cell><m><var name="$tabout[2]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[3]"/></m></cell>
+                  <cell><m><var name="$tabout[3]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[4]"/></m></cell>
+                  <cell><m><var name="$tabout[4]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[5]"/></m></cell>
+                  <cell><m><var name="$tabout[5]"/></m></cell>
+                </row>
+              </tabular>
 
               <p>
                 For a graphical approximation:
@@ -2043,31 +1942,40 @@
                 </me>
               </p>
             </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
+        <exercise>
+          <webwork seed="1">
             <setup>
-            <pg-code>
-              $b=non_zero_random(-5,5,1);
-              $c=list_random(-4,-3,-2,-1,2,3,4);
-              $diff=non_zero_random(-3,3,1);
-              $a=non_zero_random(-5,5,1);
-              $d=$a+$b-($c*$a)-$diff;
-              if ($envir{problemSeed}==1){$a=2;$b=2;$c=3;$d=-5;};
-              $f1=Formula("x+$b")->reduce;$f2=Formula("$c*x+$d")->reduce;
-              Context("PiecewiseFunction");
-              Context()->flags->set(tolType=>"absolute",tolerance=>0.00001);
-              $f=PiecewiseFunction("x &lt;= $a" => "$f1", "x > $a" => "$f2");
-              $l=Compute("DNE");
-              @tabin=($a-0.1,$a-0.01,$a-0.001,$a+0.001,$a+0.01,$a+0.1);
-              @tabout=map{$f->eval(x=>$_)} @tabin;
-              $xmin=-abs($a)-2;$xmax=abs($a)+2;$ymin=min($a+$b,$c*$a+$d)-2;$ymax=max($a+$b,$c*$a+$d)+2;
-              $solgr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[282,282]);
-              add_functions($solgr,"$f1 for x in &lt;$xmin,$a) using color:blue and weight:2");
-              add_functions($solgr,"$f2 for x in [$a,$xmax> using color:blue and weight:2");
-            </pg-code>
+              <pg-code>
+                $b = non_zero_random(-5,5,1);
+                $c = list_random(-4,-3,-2,-1,2,3,4);
+                $diff = non_zero_random(-3,3,1);
+                $a = non_zero_random(-5,5,1);
+                $d = $a + $b - ($c*$a) - $diff;
+                if ($envir{problemSeed} == 1){
+                  $a = 2;
+                  $b = 2;
+                  $c = 3;
+                  $d = -5;
+                };
+                $f1 = Formula("x + $b")->reduce;
+                $f2 = Formula("$c*x + $d")->reduce;
+                Context("PiecewiseFunction");
+                Context()->flags->set(tolType=>"absolute",tolerance => 0.00001);
+                $f = PiecewiseFunction("x &lt;= $a" => "$f1", "x > $a" => "$f2");
+                $l = Compute("DNE");
+                @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
+                @tabout = map{$f->eval(x => $_)} (@tabin);
+                $xmin = -abs($a) - 2;
+                $xmax = abs($a) + 2;
+                $ymin = min($a + $b,$c*$a + $d) - 2;
+                $ymax = max($a + $b,$c*$a + $d) + 2;
+                $solgr = init_graph($xmin, $ymin, $xmax, $ymax, axes => [0,0],grid => [$xmax - $xmin, $ymax - $ymin], size => [282,282]);
+                add_functions($solgr, "$f1 for x in &lt;$xmin,$a) using color:blue and weight:2");
+                add_functions($solgr, "$f2 for x in [$a,$xmax> using color:blue and weight:2");
+              </pg-code>
             </setup>
             <statement>
               <p>
@@ -2075,11 +1983,11 @@
               </p>
 
               <p>
-                For <m>f(x)=<var name="$f"/></m>,
+                <m>\lim\limits_{x\to <var name="$a"/>}f(x)</m>, where <m>f(x)=<var name="$f"/></m>.
               </p>
 
               <p>
-                <m>\lim\limits_{x\to <var name="$a"/>}f(x)=</m><var name="$l" width="10"/>
+                <var name="$l" width="10"/>
               </p>
             </statement>
             <solution>
@@ -2087,62 +1995,36 @@
                 For a numerical approximation, make a table:
               </p>
 
-
-                <tabular>
-                  <row bottom="medium">
-                    <cell><m>x</m></cell>
-                    <cell><m>f(x)</m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[0]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[0]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[1]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[1]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[2]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[2]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[3]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[3]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[4]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[4]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[5]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[5]"/>
-                      </m></cell>
-                  </row>
-                </tabular>
-
+              <tabular>
+                <row bottom="medium">
+                  <cell><m>x</m></cell>
+                  <cell><m><var name="$f"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[0]"/></m></cell>
+                  <cell><m><var name="$tabout[0]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[1]"/></m></cell>
+                  <cell><m><var name="$tabout[1]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[2]"/></m></cell>
+                  <cell><m><var name="$tabout[2]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[3]"/></m></cell>
+                  <cell><m><var name="$tabout[3]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[4]"/></m></cell>
+                  <cell><m><var name="$tabout[4]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[5]"/></m></cell>
+                  <cell><m><var name="$tabout[5]"/></m></cell>
+                </row>
+              </tabular>
 
               <p>
                 For a graphical approximation:
@@ -2161,33 +2043,42 @@
                 </me>
               </p>
             </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
+        <exercise>
+          <webwork seed="1">
             <setup>
-            <pg-code>
-              do{
-              $a=non_zero_random(-3,3,1);
-              $b=random(-4,-1,1);
-              $c=non_zero_random(-5,5,1);
-              $d=non_zero_random(-3,3,1);
-              $e=$a**2+$b*$a+$c-$d*$a;
-              if ($envir{problemSeed}==1){$a=3;$b=-1;$c=1;$d=2;$e=1};
-              $f1=Formula("x^2+$b*x+$c")->reduce;$f2=Formula("$d*x+$e")->reduce;
-              Context("PiecewiseFunction");
-              Context()->flags->set(tolType=>"absolute",tolerance=>0.00001);
-              $f=PiecewiseFunction("x &lt;= $a" => "$f1", "x > $a" => "$f2");
-              $l=$f1->eval(x=>$a);
-              }until($l!=0);
-              @tabin=($a-0.1,$a-0.01,$a-0.001,$a+0.001,$a+0.01,$a+0.1);
-              @tabout=map{$f->eval(x=>$_)} @tabin;
-              $xmin=-4;$xmax=4;$ymin=-abs($l)-2;$ymax=abs($l)+2;
-              $solgr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[282,282]);
-              add_functions($solgr,"$f1 for x in &lt;$xmin,$a) using color:blue and weight:2");
-              add_functions($solgr,"$f2 for x in [$a,$xmax> using color:blue and weight:2");
-            </pg-code>
+              <pg-code>
+                do {
+                  $a = non_zero_random(-3,3,1);
+                  $b = random(-4,-1,1);
+                  $c = non_zero_random(-5,5,1);
+                  $d = non_zero_random(-3,3,1);
+                  if ($envir{problemSeed} == 1){
+                    $a=3;
+                    $b=-1;
+                    $c=1;
+                    $d=2;
+                  };
+                  $e = $a**2 + $b*$a + $c - $d*$a;
+                  $f1 = Formula("x^2+$b*x+$c")->reduce;
+                  $f2 = Formula("$d*x+$e")->reduce;
+                  Context("PiecewiseFunction");
+                  Context()->flags->set(tolType=>"absolute",tolerance => 0.00001);
+                  $f = PiecewiseFunction("x &lt;= $a" => "$f1", "x > $a" => "$f2");
+                  $l = $f1->eval(x => $a);
+                } until ($l!=0);
+                @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
+                @tabout = map{$f->eval(x => $_)} (@tabin);
+                $xmin = -4;
+                $xmax = 4;
+                $ymin = -abs($l) - 2;
+                $ymax = abs($l) + 2;
+                $solgr = init_graph($xmin, $ymin, $xmax, $ymax, axes => [0,0],grid => [$xmax - $xmin, $ymax - $ymin], size => [282,282]);
+                add_functions($solgr, "$f1 for x in &lt;$xmin,$a) using color:blue and weight:2");
+                add_functions($solgr, "$f2 for x in [$a,$xmax> using color:blue and weight:2");
+              </pg-code>
             </setup>
             <statement>
               <p>
@@ -2195,11 +2086,11 @@
               </p>
 
               <p>
-                For <m>f(x)=<var name="$f"/></m>,
+                <m>\lim\limits_{x\to <var name="$a"/>}f(x)</m>, where <m>f(x)=<var name="$f"/></m>.
               </p>
 
               <p>
-                <m>\lim\limits_{x\to <var name="$a"/>}f(x)=</m><var name="$l" width="10"/>
+                <var name="$l" width="10"/>
               </p>
             </statement>
             <solution>
@@ -2207,62 +2098,36 @@
                 For a numerical approximation, make a table:
               </p>
 
-
-                <tabular>
-                  <row bottom="medium">
-                    <cell><m>x</m></cell>
-                    <cell><m>f(x)</m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[0]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[0]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[1]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[1]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[2]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[2]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[3]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[3]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[4]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[4]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[5]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[5]"/>
-                      </m></cell>
-                  </row>
-                </tabular>
-
+              <tabular>
+                <row bottom="medium">
+                  <cell><m>x</m></cell>
+                  <cell><m><var name="$f"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[0]"/></m></cell>
+                  <cell><m><var name="$tabout[0]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[1]"/></m></cell>
+                  <cell><m><var name="$tabout[1]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[2]"/></m></cell>
+                  <cell><m><var name="$tabout[2]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[3]"/></m></cell>
+                  <cell><m><var name="$tabout[3]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[4]"/></m></cell>
+                  <cell><m><var name="$tabout[4]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[5]"/></m></cell>
+                  <cell><m><var name="$tabout[5]"/></m></cell>
+                </row>
+              </tabular>
 
               <p>
                 For a graphical approximation:
@@ -2281,28 +2146,35 @@
                 </me>.
               </p>
             </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
+        <exercise>
+          <webwork seed="1">
             <setup>
-            <pg-code>
-              $a=0;
-              $b=non_zero_random(-5,5,1);
-              if ($envir{problemSeed}==1){$a=0;$b=3;};
-              $f1=Formula("cos(x)")->reduce;$f2=Formula("x^2+$b*x+1")->reduce;
-              Context("PiecewiseFunction");
-              Context()->flags->set(tolType=>"absolute",tolerance=>0.00001);
-              $f=PiecewiseFunction("x &lt;= $a" => "$f1", "x > $a" => "$f2");
-              $l=$f1->eval(x=>$a);
-              @tabin=($a-0.1,$a-0.01,$a-0.001,$a+0.001,$a+0.01,$a+0.1);
-              @tabout=map{$f->eval(x=>$_)} @tabin;
-              $xmin=-3;$xmax=3;$ymin=-3;$ymax=3;
-              $solgr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[282,282]);
-              add_functions($solgr,"$f1 for x in &lt;$xmin,$a) using color:blue and weight:2");
-              add_functions($solgr,"$f2 for x in [$a,$xmax> using color:blue and weight:2");
-            </pg-code>
+              <pg-code>
+                $a=0;
+                $b = non_zero_random(-5,5,1);
+                if ($envir{problemSeed} == 1){
+                  $a = 0;
+                  $b = 3;
+                };
+                $f1 = Formula("cos(x)")->reduce;
+                $f2 = Formula("x^2+$b*x+1")->reduce;
+                Context("PiecewiseFunction");
+                Context()->flags->set(tolType=>"absolute",tolerance => 0.00001);
+                $f = PiecewiseFunction("x &lt;= $a" => "$f1", "x > $a" => "$f2");
+                $l = $f1->eval(x => $a);
+                @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
+                @tabout = map{$f->eval(x => $_)} (@tabin);
+                $xmin = -3;
+                $xmax = 3;
+                $ymin = -3;
+                $ymax = 3;
+                $solgr = init_graph($xmin, $ymin, $xmax, $ymax, axes => [0,0],grid => [$xmax - $xmin, $ymax - $ymin], size => [282,282]);
+                add_functions($solgr, "$f1 for x in &lt;$xmin,$a) using color:blue and weight:2");
+                add_functions($solgr, "$f2 for x in [$a,$xmax> using color:blue and weight:2");
+              </pg-code>
             </setup>
             <statement>
               <p>
@@ -2310,11 +2182,11 @@
               </p>
 
               <p>
-                For <m>f(x)=<var name="$f"/></m>,
+                <m>\lim\limits_{x\to <var name="$a"/>}f(x)</m>, where <m>f(x)=<var name="$f"/></m>.
               </p>
 
               <p>
-                <m>\lim\limits_{x\to <var name="$a"/>}f(x)=</m><var name="$l" width="10"/>
+                <var name="$l" width="10"/>
               </p>
             </statement>
             <solution>
@@ -2322,62 +2194,36 @@
                 For a numerical approximation, make a table:
               </p>
 
-
-                <tabular>
-                  <row bottom="medium">
-                    <cell><m>x</m></cell>
-                    <cell><m>f(x)</m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[0]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[0]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[1]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[1]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[2]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[2]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[3]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[3]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[4]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[4]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[5]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[5]"/>
-                      </m></cell>
-                  </row>
-                </tabular>
-
+              <tabular>
+                <row bottom="medium">
+                  <cell><m>x</m></cell>
+                  <cell><m><var name="$f"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[0]"/></m></cell>
+                  <cell><m><var name="$tabout[0]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[1]"/></m></cell>
+                  <cell><m><var name="$tabout[1]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[2]"/></m></cell>
+                  <cell><m><var name="$tabout[2]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[3]"/></m></cell>
+                  <cell><m><var name="$tabout[3]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[4]"/></m></cell>
+                  <cell><m><var name="$tabout[4]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[5]"/></m></cell>
+                  <cell><m><var name="$tabout[5]"/></m></cell>
+                </row>
+              </tabular>
 
               <p>
                 For a graphical approximation:
@@ -2396,29 +2242,34 @@
                 </me>.
               </p>
             </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
+        <exercise>
+          <webwork seed="1">
             <setup>
-            <pg-code>
-              Context()->flags->set(reduceConstants=>0);
-              $a=list_random(Formula("pi/2"),Formula("pi/3"),Formula("pi/6"));
-              if ($envir{problemSeed}==1){$a=Formula("pi/2")};
-              $f1=Formula("sin(x)")->reduce;$f2=Formula("cos(x)")->reduce;
-              Context("PiecewiseFunction");
-              Context()->flags->set(tolType=>"absolute",tolerance=>0.00001);
-              $areal=$a->eval(x=>0);
-              $f=PiecewiseFunction("x &lt;= $areal" => "$f1", "x > $areal" => "$f2");
-              $l=Compute("DNE");
-              @tabin=($a-0.1,$a-0.01,$a-0.001,$a+0.001,$a+0.01,$a+0.1);
-              @tabout=map{$f->eval(x=>$_->eval(x=>0))} @tabin;
-              $xmin=-1;$xmax=3;$ymin=-2;$ymax=2;
-              $solgr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[282,282]);
-              add_functions($solgr,"$f1 for x in &lt;$xmin,$areal) using color:blue and weight:2");
-              add_functions($solgr,"$f2 for x in [$areal,$xmax> using color:blue and weight:2");
-            </pg-code>
+              <pg-code>
+                Context()->flags->set(reduceConstants => 0);
+                $a = list_random(Formula("pi/2"),Formula("pi/3"),Formula("pi/6"));
+                if ($envir{problemSeed} == 1){
+                  $a = Formula("pi/2")
+                };
+                $f1=Formula("sin(x)")->reduce;$f2=Formula("cos(x)")->reduce;
+                Context("PiecewiseFunction");
+                Context()->flags->set(tolType=>"absolute",tolerance => 0.00001);
+                $areal = $a->eval(x => 0);
+                $f = PiecewiseFunction("x &lt;= $areal" => "$f1", "x > $areal" => "$f2");
+                $l = Compute("DNE");
+                @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
+                @tabout = map{$f->eval(x => $_->eval(x => 0))} (@tabin);
+                $xmin = -1;
+                $xmax = 3;
+                $ymin = -2;
+                $ymax = 2;
+                $solgr = init_graph($xmin, $ymin, $xmax, $ymax, axes => [0,0],grid => [$xmax - $xmin, $ymax - $ymin], size => [282,282]);
+                add_functions($solgr, "$f1 for x in &lt;$xmin,$areal) using color:blue and weight:2");
+                add_functions($solgr, "$f2 for x in [$areal,$xmax> using color:blue and weight:2");
+              </pg-code>
             </setup>
             <statement>
               <p>
@@ -2426,72 +2277,49 @@
               </p>
 
               <p>
-                For <m>f(x)=\begin{cases}\sin(x)\amp x\leq <var name="$a"/>\\\cos(x)\amp x\gt <var name="$a"/>\end{cases}</m>,
+                <m>\lim\limits_{x\to <var name="$a"/>}f(x)</m>,
+                where <m>f(x)=\begin{cases}\sin(x)\amp x\leq <var name="$a"/>\\\cos(x)\amp x\gt <var name="$a"/>\end{cases}</m>.
               </p>
 
               <p>
-                <m>\lim\limits_{x\to <var name="$a"/>}f(x)=</m><var name="$l" width="10"/>
+                <var name="$l" width="10"/>
               </p>
             </statement>
             <solution>
               <p>
                 For a numerical approximation, make a table:
               </p>
-                <tabular>
-                  <row bottom="medium">
-                    <cell><m>x</m></cell>
-                    <cell><m>f(x)</m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[0]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[0]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[1]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[1]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[2]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[2]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[3]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[3]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[4]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[4]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>
-                      <var name="$tabin[5]"/>
-                      </m></cell>
-                    <cell><m>
-                      <var name="$tabout[5]"/>
-                      </m></cell>
-                  </row>
-                </tabular>
 
+              <tabular>
+                <row bottom="medium">
+                  <cell><m>x</m></cell>
+                  <cell><m><var name="$f"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[0]"/></m></cell>
+                  <cell><m><var name="$tabout[0]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[1]"/></m></cell>
+                  <cell><m><var name="$tabout[1]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[2]"/></m></cell>
+                  <cell><m><var name="$tabout[2]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[3]"/></m></cell>
+                  <cell><m><var name="$tabout[3]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[4]"/></m></cell>
+                  <cell><m><var name="$tabout[4]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[5]"/></m></cell>
+                  <cell><m><var name="$tabout[5]"/></m></cell>
+                </row>
+              </tabular>
 
               <p>
                 For a graphical approximation:
@@ -2510,243 +2338,450 @@
                 </me>
               </p>
             </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-          <setup>
-            <pg-code>
-              $f=Formula("abs(x)^x");
-              $a=0;
-              $l=1;
-              @tabin=($a-0.1,$a-0.01,$a-0.001,$a+0.001,$a+0.01,$a+0.1);
-              @tabout=map{$f->eval(x=>$_)} @tabin;
-              $solgr=init_graph(-2,-2,2,2,axes=>[0,0],grid=>[4,4],size=>[282,282]);
-              add_functions($solgr,"$f for x in &lt;-2,0) using color:blue and weight:2");
-              add_functions($solgr,"$f for x in (0,2> using color:blue and weight:2");
-            </pg-code>
-          </setup>
-          <statement>
-            <p>Approximate the limit numerically and graphically.</p>
-            <p><m>\lim\limits_{x\to 0}\lvert x\rvert^x=</m><var name="$l" width="10"/></p>
-          </statement>
-          <solution>
-            <p>For a numerical approximation, make a table:</p>
-              <tabular>
-                <row bottom="medium">
-                  <cell><m>x</m></cell>
-                  <cell><m>
-                  <var name="$f"/>
-                  </m></cell>
-                </row>
-                <row>
-                  <cell><m>
-                  <var name="$tabin[0]"/>
-                  </m></cell>
-                  <cell><m>
-                  <var name="$tabout[0]"/>
-                  </m></cell>
-                </row>
-                <row>
-                  <cell><m>
-                  <var name="$tabin[1]"/>
-                  </m></cell>
-                  <cell><m>
-                  <var name="$tabout[1]"/>
-                  </m></cell>
-                </row>
-                <row>
-                  <cell><m>
-                  <var name="$tabin[2]"/>
-                  </m></cell>
-                  <cell><m>
-                  <var name="$tabout[2]"/>
-                  </m></cell>
-                </row>
-                <row>
-                  <cell><m>
-                  <var name="$tabin[3]"/>
-                  </m></cell>
-                  <cell><m>
-                  <var name="$tabout[3]"/>
-                  </m></cell>
-                </row>
-                <row>
-                  <cell><m>
-                  <var name="$tabin[4]"/>
-                  </m></cell>
-                  <cell><m>
-                  <var name="$tabout[4]"/>
-                  </m></cell>
-                </row>
-                <row>
-                  <cell><m>
-                  <var name="$tabin[5]"/>
-                  </m></cell>
-                  <cell><m>
-                  <var name="$tabout[5]"/>
-                  </m></cell>
-                </row>
-              </tabular>
+        <exercise>
+          <webwork>
+            <setup>
+              <pg-code>
+                $f = Formula("abs(x)^x");
+                $a = 0;
+                $l = 1;
+                @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
+                @tabout = map{$f->eval(x => $_)} (@tabin);
+                $solgr = init_graph(-2, -2, 2, 2, axes => [0,0], grid => [4,4], size => [282,282]);
+                add_functions($solgr,"$f for x in &lt;-2,0) using color:blue and weight:2");
+                add_functions($solgr,"$f for x in (0,2> using color:blue and weight:2");
+              </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Approximate the limit numerically and graphically.
+              </p>
 
+              <p>
+                <m>\lim\limits_{x\to 0}\lvert x\rvert^x</m>
+              </p>
 
-            <p>For a graphical approximation:</p>
-
-            <sidebyside widths="47%">
-              <image pg-name="$solgr"/>
-            </sidebyside>
-
-            <p>It appears that when <m>x</m> is close to <m>0</m>, that <m>\lvert x \rvert^x</m> is close to <m>1</m>. So
-              <me>
-                \lim_{x\to0}\lvert x\rvert^x=1
-              </me>.
-            </p>
-          </solution>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork seed="1">
-          <setup>
-            <pg-code>
-              $f=Formula("e^{-e^{1/x}}");
-              $a=0;
-              $l=Compute("DNE");
-              @tabin=($a-0.1,$a-0.01,$a-0.001,$a+0.001,$a+0.01,$a+0.1);
-              @tabout=map{$f->eval(x=>$_)} @tabin;
-              $solgr=init_graph(-2,-2,2,2,axes=>[0,0],grid=>[4,4],size=>[282,282]);
-              add_functions($solgr,"$f for x in &lt;-2,-0.0001) using color:blue and weight:2");
-              add_functions($solgr,"$f for x in (0.0001,2> using color:blue and weight:2");
-            </pg-code>
-          </setup>
-          <statement>
-            <p>Approximate the limit numerically and graphically.</p>
-            <p><m>\lim\limits_{x\to0}e^{-e^{1/x}}=</m><var name="$l" width="10"/></p>
-          </statement>
-          <solution>
-            <p>For a numerical approximation, make a table:</p>
+              <p>
+                <var name="$l" width="10"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                For a numerical approximation, make a table:
+              </p>
 
               <tabular>
                 <row bottom="medium">
                   <cell><m>x</m></cell>
-                  <cell><m>
-                  <var name="$f"/>
-                  </m></cell>
+                  <cell><m><var name="$f"/></m></cell>
                 </row>
                 <row>
-                  <cell><m>
-                  <var name="$tabin[0]"/>
-                  </m></cell>
-                  <cell><m>
-                  <var name="$tabout[0]"/>
-                  </m></cell>
+                  <cell><m><var name="$tabin[0]"/></m></cell>
+                  <cell><m><var name="$tabout[0]"/></m></cell>
                 </row>
                 <row>
-                  <cell><m>
-                  <var name="$tabin[1]"/>
-                  </m></cell>
-                  <cell><m>
-                  <var name="$tabout[1]"/>
-                  </m></cell>
+                  <cell><m><var name="$tabin[1]"/></m></cell>
+                  <cell><m><var name="$tabout[1]"/></m></cell>
                 </row>
                 <row>
-                  <cell><m>
-                  <var name="$tabin[2]"/>
-                  </m></cell>
-                  <cell><m>
-                  <var name="$tabout[2]"/>
-                  </m></cell>
+                  <cell><m><var name="$tabin[2]"/></m></cell>
+                  <cell><m><var name="$tabout[2]"/></m></cell>
                 </row>
                 <row>
-                  <cell><m>
-                  <var name="$tabin[3]"/>
-                  </m></cell>
-                  <cell><m>
-                  <var name="$tabout[3]"/>
-                  </m></cell>
+                  <cell><m><var name="$tabin[3]"/></m></cell>
+                  <cell><m><var name="$tabout[3]"/></m></cell>
                 </row>
                 <row>
-                  <cell><m>
-                  <var name="$tabin[4]"/>
-                  </m></cell>
-                  <cell><m>
-                  <var name="$tabout[4]"/>
-                  </m></cell>
+                  <cell><m><var name="$tabin[4]"/></m></cell>
+                  <cell><m><var name="$tabout[4]"/></m></cell>
                 </row>
                 <row>
-                  <cell><m>
-                  <var name="$tabin[5]"/>
-                  </m></cell>
-                  <cell><m>
-                  <var name="$tabout[5]"/>
-                  </m></cell>
+                  <cell><m><var name="$tabin[5]"/></m></cell>
+                  <cell><m><var name="$tabout[5]"/></m></cell>
                 </row>
               </tabular>
 
+              <p>
+                For a graphical approximation:
+              </p>
 
-            <p>For a graphical approximation:</p>
+              <sidebyside widths="47%">
+                <image pg-name="$solgr"/>
+              </sidebyside>
 
-            <sidebyside widths="47%">
-              <image pg-name="$solgr"/>
-            </sidebyside>
+              <p>
+                It appears that when <m>x</m> is close to <m>0</m>, that <m>\lvert x \rvert^x</m> is close to <m>1</m>. So
+                <me>
+                  \lim_{x\to0}\lvert x\rvert^x=1
+                </me>.
+              </p>
+            </solution>
+          </webwork>
+        </exercise>
 
-            <p>It appears that when <m>x</m> is close to <m>0</m>, that <m>e^{-e^{1/x}}</m> approaches different values from the left and right. So
-              <me>
-                \lim_{x\to0}e^{-e^{1/x}}\text{ does not exist (DNE).}
-              </me>
-            </p>
-          </solution>
-        </webwork>
-      </exercise>
-    </exercisegroup>
-    <!--TODO: Uncomment the above exercises once there is no longer a need to keep version 3.0 numbering consistent with version 4.0 numbering. -->
-    <!--TODO: Resolve this exercisegroup's introduction instructions and their repetition in each exercise. -->
-    <exercisegroup>
+        <exercise>
+          <webwork>
+            <setup>
+              <pg-code>
+                $f = Formula("e^{-e^{1/x}}");
+                $a = 0;
+                $l = Compute("DNE");
+                @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
+                @tabout = map{$f->eval(x => $_)} (@tabin);
+                $solgr = init_graph(-2,-2,2,2,axes => [0,0],grid => [4,4],size => [282,282]);
+                add_functions($solgr, "$f for x in &lt;-2,-0.0001) using color:blue and weight:2");
+                add_functions($solgr, "$f for x in (0.0001,2> using color:blue and weight:2");
+              </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Approximate the limit numerically and graphically.
+              </p>
 
-      <introduction>
-        <p>
-          In the following exercises,
-          a function <m>f</m> and a value <m>a</m> are given.
-          Approximate the limit of the difference quotient,
-          <m>\lim\limits_{h\to 0}\frac{f(a+h)-f(a)}{h}</m>,
-          using <m>h = \pm 0.1, \pm 0.01</m>.
-        </p>
-      </introduction>
+              <p>
+                <m>\lim\limits_{x\to0}e^{-e^{1/x}}</m>
+              </p>
+
+              <p>
+                <var name="$l" width="10"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                For a numerical approximation, make a table:
+              </p>
+
+              <tabular>
+                <row bottom="medium">
+                  <cell><m>x</m></cell>
+                  <cell><m><var name="$f"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[0]"/></m></cell>
+                  <cell><m><var name="$tabout[0]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[1]"/></m></cell>
+                  <cell><m><var name="$tabout[1]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[2]"/></m></cell>
+                  <cell><m><var name="$tabout[2]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[3]"/></m></cell>
+                  <cell><m><var name="$tabout[3]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[4]"/></m></cell>
+                  <cell><m><var name="$tabout[4]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[5]"/></m></cell>
+                  <cell><m><var name="$tabout[5]"/></m></cell>
+                </row>
+              </tabular>
+
+              <p>
+                For a graphical approximation:
+              </p>
+
+              <sidebyside widths="47%">
+                <image pg-name="$solgr"/>
+              </sidebyside>
+
+              <p>
+                It appears that when <m>x</m> is close to <m>0</m>, that <m>e^{-e^{1/x}}</m> approaches different values from the left and right. So
+                <me>
+                  \lim_{x\to0}e^{-e^{1/x}}\text{ does not exist (DNE).}
+                </me>
+              </p>
+            </solution>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork>
+            <setup>
+              <pg-code>
+                %fact = (0 => 1, 1 => 1, 2 => 2, 3 => 6, 4 => 24, 5 => 120, 6 => 720);
+                sub f {
+                  my $x = shift;
+                  return $fact{int(abs($x))};
+                }
+                $a = random(2,5,1)*list_random(-1,1);
+                #$a = random(-1,1,1);
+                $l = (abs($a) &lt;= 1) ? Real(1) : Compute("DNE");
+                @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
+                @tabout = map{f($_)} (@tabin);
+                $mag = max(int(log(f($a-0.1))/log(10)), int(log(f($a+0.1))/log(10)));
+                $mantissa = max(int(f($a-0.1)/10**$mag),int(f($a+0.1)/10**$mag)) + 2;
+                $ymax =  $mantissa * 10**$mag;
+                $ymin = -10**$mag;
+                $solgr = init_graph(-6,$ymin,6,$ymax,axes => [0,0],grid => [12,$mantissa + 1],size => [282,282]);
+                $solgr->lb('reset');
+                for my $i (1..5) {
+                  $solgr->lb(new Label($i,0,$i,'black','center','top','large'));
+                  $solgr->lb(new Label(-$i,0,-$i,'black','center','top','large'));
+                }
+                for my $i (1..$mantissa-1) {
+                  $solgr->lb(new Label(0,$i*10**$mag,$i*10**$mag,'black','right','middle','large'));
+                }
+                for my $i (2..5) {
+                  $solgr->moveTo($i,f($i));
+                  $solgr->lineTo($i+1,f($i),'blue',2);
+                  $solgr->stamps( open_circle($i+1,f($i),'blue') );
+                  $solgr->stamps( closed_circle($i,f($i),'blue') );
+                  $solgr->moveTo(-$i,f($i));
+                  $solgr->lineTo(-$i-1,f($i),'blue',2);
+                  $solgr->stamps( open_circle(-$i-1,f($i),'blue') );
+                  $solgr->stamps( closed_circle(-$i,f($i),'blue') );
+                }
+                $solgr->moveTo(-2,1);
+                $solgr->lineTo(2,1,'blue',2);
+                $solgr->stamps( open_circle(-2,1,'blue') );
+                $solgr->stamps( open_circle(2,1,'blue') );
+              </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Approximate the limit numerically and graphically.
+              </p>
+
+              <p>
+                <m>\lim\limits_{x\to<var name="$a"/>}\big\lfloor\lvert x\rvert\big\rfloor !</m>,
+                where <m>\lvert x\rvert</m> is the absolute value of <m>x</m>,
+                <m>\lfloor x\rfloor</m> is the floor of <m>x</m> (the greatest integer less than or equal to <m>x</m>),
+                and <m>x!</m> is <m>x</m> factorial.
+              </p>
+
+              <p>
+                <var name="$l" width="10"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                For a numerical approximation, make a table:
+              </p>
+
+              <tabular>
+                <row bottom="medium">
+                  <cell><m>x</m></cell>
+                  <cell><m>\big\lfloor\lvert x\rvert\big\rfloor !</m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[0]"/></m></cell>
+                  <cell><m><var name="$tabout[0]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[1]"/></m></cell>
+                  <cell><m><var name="$tabout[1]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[2]"/></m></cell>
+                  <cell><m><var name="$tabout[2]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[3]"/></m></cell>
+                  <cell><m><var name="$tabout[3]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[4]"/></m></cell>
+                  <cell><m><var name="$tabout[4]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[5]"/></m></cell>
+                  <cell><m><var name="$tabout[5]"/></m></cell>
+                </row>
+              </tabular>
+
+              <p>
+                For a graphical approximation:
+              </p>
+
+              <sidebyside widths="47%">
+                <image pg-name="$solgr"/>
+              </sidebyside>
+
+              <p>
+                It appears that when <m>x</m> is close to <m><var name="$a"/></m>, that <m>\big\lfloor\lvert x\rvert\big\rfloor !</m> approaches different values from the left and right. So
+                <me>
+                  \lim_{x\to<var name="$a"/>}\big\lfloor\lvert x\rvert\big\rfloor !\text{ does not exist (DNE).}
+                </me>
+              </p>
+            </solution>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork>
+            <setup>
+              <pg-code>
+                %fact = (0 => 1, 1 => 1, 2 => 2, 3 => 6, 4 => 24, 5 => 120, 6 => 720);
+                sub f {
+                  my $x = shift;
+                  return $fact{int(abs($x))};
+                }
+                #$a = random(2,5,1)*list_random(-1,1);
+                $a = random(-1,1,1);
+                $l = (abs($a) &lt;= 1) ? Real(1) : Compute("DNE");
+                @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
+                @tabout = map{f($_)} (@tabin);
+                $mag = max(int(log(f($a-0.1))/log(10)), int(log(f($a+0.1))/log(10)));
+                $mantissa = max(int(f($a-0.1)/10**$mag),int(f($a+0.1)/10**$mag)) + 2;
+                $ymax =  $mantissa * 10**$mag;
+                $ymin = -10**$mag;
+                $solgr = init_graph(-6,$ymin,6,$ymax,axes => [0,0],grid => [12,$mantissa + 1],size => [282,282]);
+                $solgr->lb('reset');
+                for my $i (1..5) {
+                  $solgr->lb(new Label($i,0,$i,'black','center','top','large'));
+                  $solgr->lb(new Label(-$i,0,-$i,'black','center','top','large'));
+                }
+                for my $i (1..$mantissa-1) {
+                  $solgr->lb(new Label(0,$i*10**$mag,$i*10**$mag,'black','right','middle','large'));
+                }
+                for my $i (2..5) {
+                  $solgr->moveTo($i,f($i));
+                  $solgr->lineTo($i+1,f($i),'blue',2);
+                  $solgr->stamps( open_circle($i+1,f($i),'blue') );
+                  $solgr->stamps( closed_circle($i,f($i),'blue') );
+                  $solgr->moveTo(-$i,f($i));
+                  $solgr->lineTo(-$i-1,f($i),'blue',2);
+                  $solgr->stamps( open_circle(-$i-1,f($i),'blue') );
+                  $solgr->stamps( closed_circle(-$i,f($i),'blue') );
+                }
+                $solgr->moveTo(-2,1);
+                $solgr->lineTo(2,1,'blue',2);
+                $solgr->stamps( open_circle(-2,1,'blue') );
+                $solgr->stamps( open_circle(2,1,'blue') );
+              </pg-code>
+            </setup>
+            <statement>
+              <p>
+                Approximate the limit numerically and graphically.
+              </p>
+
+              <p>
+                <m>\lim\limits_{x\to<var name="$a"/>}\big\lfloor\lvert x\rvert\big\rfloor !</m>,
+                where <m>\lvert x\rvert</m> is the absolute value of <m>x</m>,
+                <m>\lfloor x\rfloor</m> is the floor of <m>x</m> (the greatest integer less than or equal to <m>x</m>),
+                and <m>x!</m> is <m>x</m> factorial.
+              </p>
+
+              <p>
+                <var name="$l" width="10"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                For a numerical approximation, make a table:
+              </p>
+
+              <tabular>
+                <row bottom="medium">
+                  <cell><m>x</m></cell>
+                  <cell><m>\big\lfloor\lvert x\rvert\big\rfloor !</m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[0]"/></m></cell>
+                  <cell><m><var name="$tabout[0]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[1]"/></m></cell>
+                  <cell><m><var name="$tabout[1]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[2]"/></m></cell>
+                  <cell><m><var name="$tabout[2]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[3]"/></m></cell>
+                  <cell><m><var name="$tabout[3]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[4]"/></m></cell>
+                  <cell><m><var name="$tabout[4]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m><var name="$tabin[5]"/></m></cell>
+                  <cell><m><var name="$tabout[5]"/></m></cell>
+                </row>
+              </tabular>
+
+              <p>
+                For a graphical approximation:
+              </p>
+
+              <sidebyside widths="47%">
+                <image pg-name="$solgr"/>
+              </sidebyside>
+
+              <p>
+                It appears that when <m>x</m> is close to <m><var name="$a"/></m>, that <m>\big\lfloor\lvert x\rvert\big\rfloor !</m> is always equal to <m>1</m>. So
+                <me>
+                  \lim_{x\to<var name="$a"/>}\big\lfloor\lvert x\rvert\big\rfloor !=1
+                </me>
+              </p>
+            </solution>
+          </webwork>
+        </exercise>
+      </exercisegroup>
+
+      <exercisegroup cols="2">
       <!--ToDo: these do not render well if HTML is compiled without interactivity turned on-->
-      <exercise>
-        <webwork seed="1">
+        <exercise>
+          <webwork seed="1">
             <setup>
-            <pg-code>
-              $m=non_zero_random(-9,9,1);
-              do {$b=non_zero_random(-9,9,1);}until(abs($m)!=abs($b));
-              $a=random(1,5,1);
-              if ($envir{problemSeed}==1){$a=3;$m=-7;$b=2};
-              $f=Formula("$m*x+$b")->reduce;
-              Context()->variables->add(h=>'Real');
-              $dq=($f->substitute(x=>Formula("$a+h"))-($f->eval(x=>$a)))/Formula("h");
-              @tabin=(Real(-0.1),Real(-0.01),Real(0.01),Real(0.1));
-              @tabout=map{$dq->eval(h=>$_,x=>1)} @tabin;
-              @table=map{($tabin[$_],$tabout[$_])}(0 .. $#tabin);
-              $tableanswers=MultiAnswer(@table)->with(allowBlankAnswers=>1,checker=>sub{
+              <pg-code>
+                $m = non_zero_random(-9,9,1);
+                do {
+                  $b = non_zero_random(-9,9,1);
+                } until (abs($m) != abs($b));
+                $a = random(1,5,1);
+                if ($envir{problemSeed} == 1){
+                  $a=3;
+                  $m=-7;
+                  $b=2
+                };
+                $f = Formula("$m*x + $b")->reduce;
+                Context()->variables->add(h => 'Real');
+                $dq = ($f->substitute(x => Formula("$a + h")) - ($f->eval(x => $a)))/Formula("h");
+                @tabin = (Real(-0.1), Real(-0.01), Real(0.01), Real(0.1));
+                @tabout = map{$dq->eval(h => $_, x => 1)} (@tabin);
+                @table = map{($tabin[$_], $tabout[$_])} (0 .. $#tabin);
+                $tableanswers = MultiAnswer(@table)->with(allowBlankAnswers => 1,checker => sub{
                   my ($correct,$student,$self)=@_;
-                  my @cor=@{$correct};my @stu=@{$student};
-                  my @return=(1,1,1,1,1,1,1,1);
+                  my @cor = @{$correct};
+                  my @stu = @{$student};
+                  my @return = (1,1,1,1,1,1,1,1);
                   for my $i (0,2,4,6) {
-                      do {$return[$i+1]=0;$self->setMessage($i+2,'This is not the difference quotient when h='."$stu[$i]".'.');}
-                      unless($stu[$i] ne "" and $dq->eval(h=>$stu[$i]) == $stu[$i+1]);
-                      do {$return[$i]=0;$self->setMessage($i+1,'You should use h-values '."$cor[0]".', '."$cor[2]".', '."$cor[4]".', and '."$cor[6]".'.');}
-                      unless($stu[$i]==$cor[0] or $stu[$i]==$cor[2] or $stu[$i]==$cor[4] or $stu[$i]==$cor[6]);
+                      do {
+                        $return[$i+1] = 0;
+                        $self->setMessage($i+2, 'This is not the difference quotient when h='."$stu[$i]".'.');
+                      } unless ($stu[$i] ne "" and $dq->eval(h => $stu[$i]) == $stu[$i+1]);
+                      do {
+                        $return[$i] = 0;
+                        $self->setMessage($i+1, 'You should use h-values '."$cor[0]".', '."$cor[2]".', '."$cor[4]".', and '."$cor[6]".'.');
+                      } unless ($stu[$i] == $cor[0] or $stu[$i] == $cor[2] or $stu[$i] == $cor[4] or $stu[$i] == $cor[6]);
                   };
-                  do {$return[2]=0;$self->setMessage(3,'You already used this h-value.');}
-                  unless($stu[2]!=$stu[0] or $stu[2] eq "");
-                  do {$return[4]=0;$self->setMessage(5,'You already used this h-value.');}
-                  unless($stu[4]!=$stu[0] and $stu[4]!=$stu[2] or $stu[2] eq "");
-                  do {$return[6]=0;$self->setMessage(7,'You already used this h-value.');}
-                  unless($stu[6]!=$stu[0] and $stu[6]!=$stu[2] and $stu[6]!=$stu[4] or $stu[2] eq "");
+                  do {
+                    $return[2] = 0;
+                    $self->setMessage(3,'You already used this h-value.');
+                  } unless ($stu[2] != $stu[0] or $stu[2] eq "");
+                  do {
+                    $return[4] = 0;
+                    $self->setMessage(5,'You already used this h-value.');
+                  } unless ($stu[4] != $stu[0] and $stu[4] != $stu[2] or $stu[2] eq "");
+                  do {
+                    $return[6] = 0;
+                    $self->setMessage(7,'You already used this h-value.');
+                  } unless ($stu[6] != $stu[0] and $stu[6] != $stu[2] and $stu[6] != $stu[4] or $stu[2] eq "");
                   return [@return];
-              });
-            </pg-code>
+                });
+              </pg-code>
             </setup>
             <statement>
               <p>
@@ -2760,111 +2795,116 @@
                 <m>a=<var name="$a"/></m>
               </p>
 
-                <tabular>
-                  <col halign="center"/>
-                  <col halign="center"/>
-                  <row bottom="medium">
-                    <cell><m>h</m></cell>
-                    <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                </tabular>
-
+              <tabular>
+                <col halign="center"/>
+                <col halign="center"/>
+                <row bottom="medium">
+                  <cell><m>h</m></cell>
+                  <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+              </tabular>
 
               <p>
-                It appears that <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=</m><var name="$m" width="5"/>.
+                <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=</m><var name="$m" width="10"/>.
               </p>
             </statement>
             <solution>
-                <tabular>
-                  <col halign="center"/>
-                  <col halign="center"/>
-                  <row bottom="medium">
-                    <cell><m>h</m></cell>
-                    <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
-                  </row>
-                  <row>
-                    <cell><m>-0.1</m></cell>
-                    <cell><m>
-                      <var name="$tabout[0]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>-0.01</m></cell>
-                    <cell><m>
-                      <var name="$tabout[1]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>0.01</m></cell>
-                    <cell><m>
-                      <var name="$tabout[2]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>0.1</m></cell>
-                    <cell><m>
-                      <var name="$tabout[3]"/>
-                      </m></cell>
-                  </row>
-                </tabular>
-
+              <tabular>
+                <col halign="center"/>
+                <col halign="center"/>
+                <row bottom="medium">
+                  <cell><m>h</m></cell>
+                  <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
+                </row>
+                <row>
+                  <cell><m>-0.1</m></cell>
+                  <cell><m><var name="$tabout[0]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>-0.01</m></cell>
+                  <cell><m><var name="$tabout[1]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>0.01</m></cell>
+                  <cell><m><var name="$tabout[2]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>0.1</m></cell>
+                  <cell><m><var name="$tabout[3]"/></m></cell>
+                </row>
+              </tabular>
 
               <p>
-                It appears that <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=<var name="$m"/></m>.
+                <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=</m><var name="$m" width="5"/>.
               </p>
             </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
+        <exercise>
+          <webwork seed="1">
             <setup>
-            <pg-code>
-              $m=non_zero_random(-9,9,1);
-              $b=random(0.01,0.09,0.01)+random(0.1,0.9,0.1)+random(-9,9,1);
-              $a=random(-5,5,1);
-              if ($envir{problemSeed}==1){$a=-1;$m=9;$b=0.06};
-              $f=Formula("$m*x+$b")->reduce;
-              Context()->variables->add(h=>'Real');
-              $dq=($f->substitute(x=>Formula("$a+h"))-($f->eval(x=>$a)))/Formula("h");
-              @tabin=(Real(-0.1),Real(-0.01),Real(0.01),Real(0.1));
-              @tabout=map{$dq->eval(h=>$_,x=>1)} @tabin;
-              @table=map{($tabin[$_],$tabout[$_])}(0 .. $#tabin);
-              $tableanswers=MultiAnswer(@table)->with(allowBlankAnswers=>1,checker=>sub{
+              <pg-code>
+                $m = non_zero_random(-9,9,1);
+                $b = random(0.01,0.09,0.01) + random(0.1,0.9,0.1) + random(-9,9,1);
+                $a = random(-5,5,1);
+                if ($envir{problemSeed} == 1){
+                  $a = -1;
+                  $m = 9;
+                  $b = 0.06;
+                };
+                $f = Formula("$m*x + $b")->reduce;
+                Context()->variables->add(h => 'Real');
+                $dq = ($f->substitute(x => Formula("$a + h")) - ($f->eval(x => $a)))/Formula("h");
+                @tabin = (Real(-0.1),Real(-0.01),Real(0.01),Real(0.1));
+                @tabout = map{$dq->eval(h => $_, x => 1)} (@tabin);
+                @table = map{($tabin[$_], $tabout[$_])} (0 .. $#tabin);
+                $tableanswers = MultiAnswer(@table)->with(allowBlankAnswers => 1,checker => sub{
                   my ($correct,$student,$self)=@_;
-                  my @cor=@{$correct};my @stu=@{$student};
-                  my @return=(1,1,1,1,1,1,1,1);
+                  my @cor = @{$correct};
+                  my @stu = @{$student};
+                  my @return = (1,1,1,1,1,1,1,1);
                   for my $i (0,2,4,6) {
-                      do {$return[$i+1]=0;$self->setMessage($i+2,'This is not the difference quotient when h='."$stu[$i]".'.');}
-                      unless($stu[$i] ne "" and $dq->eval(h=>$stu[$i]) == $stu[$i+1]);
-                      do {$return[$i]=0;$self->setMessage($i+1,'You should use h-values '."$cor[0]".', '."$cor[2]".', '."$cor[4]".', and '."$cor[6]".'.');}
-                      unless($stu[$i]==$cor[0] or $stu[$i]==$cor[2] or $stu[$i]==$cor[4] or $stu[$i]==$cor[6]);
+                      do {
+                        $return[$i+1] = 0;
+                        $self->setMessage($i+2, 'This is not the difference quotient when h='."$stu[$i]".'.');
+                      } unless ($stu[$i] ne "" and $dq->eval(h => $stu[$i]) == $stu[$i+1]);
+                      do {
+                        $return[$i] = 0;
+                        $self->setMessage($i+1, 'You should use h-values '."$cor[0]".', '."$cor[2]".', '."$cor[4]".', and '."$cor[6]".'.');
+                      } unless ($stu[$i] == $cor[0] or $stu[$i] == $cor[2] or $stu[$i] == $cor[4] or $stu[$i] == $cor[6]);
                   };
-                  do {$return[2]=0;$self->setMessage(3,'You already used this h-value.');}
-                  unless($stu[2]!=$stu[0] or $stu[2] eq "");
-                  do {$return[4]=0;$self->setMessage(5,'You already used this h-value.');}
-                  unless($stu[4]!=$stu[0] and $stu[4]!=$stu[2] or $stu[2] eq "");
-                  do {$return[6]=0;$self->setMessage(7,'You already used this h-value.');}
-                  unless($stu[6]!=$stu[0] and $stu[6]!=$stu[2] and $stu[6]!=$stu[4] or $stu[2] eq "");
+                  do {
+                    $return[2] = 0;
+                    $self->setMessage(3,'You already used this h-value.');
+                  } unless ($stu[2] != $stu[0] or $stu[2] eq "");
+                  do {
+                    $return[4] = 0;
+                    $self->setMessage(5,'You already used this h-value.');
+                  } unless ($stu[4] != $stu[0] and $stu[4] != $stu[2] or $stu[2] eq "");
+                  do {
+                    $return[6] = 0;
+                    $self->setMessage(7,'You already used this h-value.');
+                  } unless ($stu[6] != $stu[0] and $stu[6] != $stu[2] and $stu[6] != $stu[4] or $stu[2] eq "");
                   return [@return];
-              });
-            </pg-code>
+                });
+              </pg-code>
             </setup>
             <statement>
               <p>
@@ -2877,114 +2917,120 @@
                 <m>f(x)=<var name="$f"/></m>,
                 <m>a=<var name="$a"/></m>
               </p>
-                <tabular>
-                  <col halign="center"/>
-                  <col halign="center"/>
-                  <row bottom="medium">
-                    <cell><m>h</m></cell>
-                    <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                </tabular>
 
+              <tabular>
+                <col halign="center"/>
+                <col halign="center"/>
+                <row bottom="medium">
+                  <cell><m>h</m></cell>
+                  <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+              </tabular>
 
               <p>
-                It appears that <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=</m><var name="$m" width="5"/>.
+                <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=</m><var name="$m" width="10"/>.
               </p>
             </statement>
             <solution>
-                <tabular>
-                  <col halign="center"/>
-                  <col halign="center"/>
-                  <row bottom="medium">
-                    <cell><m>h</m></cell>
-                    <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
-                  </row>
-                  <row>
-                    <cell><m>-0.1</m></cell>
-                    <cell><m>
-                      <var name="$tabout[0]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>-0.01</m></cell>
-                    <cell><m>
-                      <var name="$tabout[1]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>0.01</m></cell>
-                    <cell><m>
-                      <var name="$tabout[2]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>0.1</m></cell>
-                    <cell><m>
-                      <var name="$tabout[3]"/>
-                      </m></cell>
-                  </row>
-                </tabular>
-
+              <tabular>
+                <col halign="center"/>
+                <col halign="center"/>
+                <row bottom="medium">
+                  <cell><m>h</m></cell>
+                  <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
+                </row>
+                <row>
+                  <cell><m>-0.1</m></cell>
+                  <cell><m><var name="$tabout[0]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>-0.01</m></cell>
+                  <cell><m><var name="$tabout[1]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>0.01</m></cell>
+                  <cell><m><var name="$tabout[2]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>0.1</m></cell>
+                  <cell><m><var name="$tabout[3]"/></m></cell>
+                </row>
+              </tabular>
 
               <p>
                 It appears that <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=<var name="$m"/></m>.
               </p>
             </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
+        <exercise>
+          <webwork seed="1">
             <setup>
-            <pg-code>
-              do{
-              $b=non_zero_random(-5,5,1);
-              $c=non_zero_random(-9,9,1);
-              $a=random(-5,5,1);
-              if ($envir{problemSeed}==1){$a=1;$b=3;$c=-7};
-              $f=Formula("x^2+$b*x+$c")->reduce;
-              $m=$f->D('x')->eval(x=>$a);
-              }until($m!=0);
-              Context()->variables->add(h=>'Real');
-              $dq=($f->substitute(x=>Formula("$a+h"))-($f->eval(x=>$a)))/Formula("h");
-              @tabin=(Real(-0.1),Real(-0.01),Real(0.01),Real(0.1));
-              @tabout=map{$dq->eval(h=>$_,x=>1)} @tabin;
-              @table=map{($tabin[$_],$tabout[$_])}(0 .. $#tabin);
-              $tableanswers=MultiAnswer(@table)->with(allowBlankAnswers=>1,checker=>sub{
-                  my ($correct,$student,$self)=@_;
-                  my @cor=@{$correct};my @stu=@{$student};
-                  my @return=(1,1,1,1,1,1,1,1);
-                  for my $i (0,2,4,6) {
-                      do {$return[$i+1]=0;$self->setMessage($i+2,'This is not the difference quotient when h='."$stu[$i]".'.');}
-                      unless($stu[$i] ne "" and $dq->eval(h=>$stu[$i]) == $stu[$i+1]);
-                      do {$return[$i]=0;$self->setMessage($i+1,'You should use h-values '."$cor[0]".', '."$cor[2]".', '."$cor[4]".', and '."$cor[6]".'.');}
-                      unless($stu[$i]==$cor[0] or $stu[$i]==$cor[2] or $stu[$i]==$cor[4] or $stu[$i]==$cor[6]);
+              <pg-code>
+                do {
+                  $b = non_zero_random(-5,5,1);
+                  $c = non_zero_random(-9,9,1);
+                  $a = random(-5,5,1);
+                  if ($envir{problemSeed} == 1){
+                    $a = 1;
+                    $b = 3;
+                    $c = -7;
                   };
-                  do {$return[2]=0;$self->setMessage(3,'You already used this h-value.');}
-                  unless($stu[2]!=$stu[0] or $stu[2] eq "");
-                  do {$return[4]=0;$self->setMessage(5,'You already used this h-value.');}
-                  unless($stu[4]!=$stu[0] and $stu[4]!=$stu[2] or $stu[2] eq "");
-                  do {$return[6]=0;$self->setMessage(7,'You already used this h-value.');}
-                  unless($stu[6]!=$stu[0] and $stu[6]!=$stu[2] and $stu[6]!=$stu[4] or $stu[2] eq "");
+                  $f = Formula("x^2+$b*x+$c")->reduce;
+                  $m = $f->D('x')->eval(x => $a);
+                } until ($m!=0);
+                Context()->variables->add(h => 'Real');
+                $dq = ($f->substitute(x => Formula("$a+h"))-($f->eval(x => $a)))/Formula("h");
+                @tabin = (Real(-0.1),Real(-0.01),Real(0.01),Real(0.1));
+                @tabout = map{$dq->eval(h => $_, x => 1)} (@tabin);
+                @table = map{($tabin[$_], $tabout[$_])} (0 .. $#tabin);
+                $tableanswers = MultiAnswer(@table)->with(allowBlankAnswers => 1,checker => sub{
+                  my ($correct,$student,$self)=@_;
+                  my @cor = @{$correct};
+                  my @stu = @{$student};
+                  my @return = (1,1,1,1,1,1,1,1);
+                  for my $i (0,2,4,6) {
+                      do {
+                        $return[$i+1] = 0;
+                        $self->setMessage($i+2, 'This is not the difference quotient when h='."$stu[$i]".'.');
+                      } unless ($stu[$i] ne "" and $dq->eval(h => $stu[$i]) == $stu[$i+1]);
+                      do {
+                        $return[$i] = 0;
+                        $self->setMessage($i+1, 'You should use h-values '."$cor[0]".', '."$cor[2]".', '."$cor[4]".', and '."$cor[6]".'.');
+                      } unless ($stu[$i] == $cor[0] or $stu[$i] == $cor[2] or $stu[$i] == $cor[4] or $stu[$i] == $cor[6]);
+                  };
+                  do {
+                    $return[2] = 0;
+                    $self->setMessage(3,'You already used this h-value.');
+                  } unless ($stu[2] != $stu[0] or $stu[2] eq "");
+                  do {
+                    $return[4] = 0;
+                    $self->setMessage(5,'You already used this h-value.');
+                  } unless ($stu[4] != $stu[0] and $stu[4] != $stu[2] or $stu[2] eq "");
+                  do {
+                    $return[6] = 0;
+                    $self->setMessage(7,'You already used this h-value.');
+                  } unless ($stu[6] != $stu[0] and $stu[6] != $stu[2] and $stu[6] != $stu[4] or $stu[2] eq "");
                   return [@return];
-              });
-            </pg-code>
+                });
+              </pg-code>
             </setup>
             <statement>
               <p>
@@ -2997,111 +3043,118 @@
                 <m>f(x)=<var name="$f"/></m>,
                 <m>a=<var name="$a"/></m>
               </p>
-                <tabular>
-                  <col halign="center"/>
-                  <col halign="center"/>
-                  <row bottom="medium">
-                    <cell><m>h</m></cell>
-                    <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                </tabular>
 
+              <tabular>
+                <col halign="center"/>
+                <col halign="center"/>
+                <row bottom="medium">
+                  <cell><m>h</m></cell>
+                  <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+              </tabular>
 
               <p>
-                It appears that <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=</m><var name="$m" width="5"/>.
+                <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=</m><var name="$m" width="10"/>.
               </p>
             </statement>
             <solution>
-                <tabular>
-                  <col halign="center"/>
-                  <col halign="center"/>
-                  <row bottom="medium">
-                    <cell><m>h</m></cell>
-                    <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
-                  </row>
-                  <row>
-                    <cell><m>-0.1</m></cell>
-                    <cell><m>
-                      <var name="$tabout[0]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>-0.01</m></cell>
-                    <cell><m>
-                      <var name="$tabout[1]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>0.01</m></cell>
-                    <cell><m>
-                      <var name="$tabout[2]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>0.1</m></cell>
-                    <cell><m>
-                      <var name="$tabout[3]"/>
-                      </m></cell>
-                  </row>
-                </tabular>
-
+              <tabular>
+                <col halign="center"/>
+                <col halign="center"/>
+                <row bottom="medium">
+                  <cell><m>h</m></cell>
+                  <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
+                </row>
+                <row>
+                  <cell><m>-0.1</m></cell>
+                  <cell><m><var name="$tabout[0]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>-0.01</m></cell>
+                  <cell><m><var name="$tabout[1]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>0.01</m></cell>
+                  <cell><m><var name="$tabout[2]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>0.1</m></cell>
+                  <cell><m><var name="$tabout[3]"/></m></cell>
+                </row>
+              </tabular>
 
               <p>
                 It appears that <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=<var name="$m"/></m>.
               </p>
             </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
+        <exercise>
+          <webwork seed="1">
             <setup>
-            <pg-code>
-              do{$b=non_zero_random(-5,5,1);
-              $a=random(-5,5,1);} until ($a + $b!= 0);
-              if ($envir{problemSeed}==1){$a=2;$b=1;};
-              $f=Formula("1/(x+$b)")->reduce;
-              $m=$f->D('x')->eval(x=>$a)->with(tolerance => .01);
-              Context()->variables->add(h=>'Real');
-              $dq=($f->substitute(x=>Formula("$a+h"))-($f->eval(x=>$a)))/Formula("h");
-              @tabin=(Real(-0.1),Real(-0.01),Real(0.01),Real(0.1));
-              @tabout=map{$dq->eval(h=>$_,x=>1)} @tabin;
-              @table=map{($tabin[$_],$tabout[$_])}(0 .. $#tabin);
-              $tableanswers=MultiAnswer(@table)->with(allowBlankAnswers=>1,checker=>sub{
+              <pg-code>
+                do {
+                  $b = non_zero_random(-5,5,1);
+                  $a = random(-5,5,1);
+                } until ($a + $b!= 0);
+                if ($envir{problemSeed} == 1){
+                  $a = 2;
+                  $b = 1;
+                };
+                $f = Formula("1/(x+$b)")->reduce;
+                $m = $f->D('x')->eval(x => $a)->with(tolerance => .01);
+                Context()->variables->add(h => 'Real');
+                $dq = ($f->substitute(x => Formula("$a+h"))-($f->eval(x => $a)))/Formula("h");
+                @tabin = (Real(-0.1),Real(-0.01),Real(0.01),Real(0.1));
+                @tabout = map{$dq->eval(h => $_, x => 1)} (@tabin);
+                @table = map{($tabin[$_], $tabout[$_])} (0 .. $#tabin);
+                $tableanswers = MultiAnswer(@table)->with(allowBlankAnswers => 1,checker => sub{
                   my ($correct,$student,$self)=@_;
-                  my @cor=@{$correct};my @stu=@{$student};
-                  my @return=(1,1,1,1,1,1,1,1);
+                  my @cor = @{$correct};
+                  my @stu = @{$student};
+                  my @return = (1,1,1,1,1,1,1,1);
                   for my $i (0,2,4,6) {
-                      do {$return[$i+1]=0;$self->setMessage($i+2,'This is not the difference quotient when h='."$stu[$i]".'.');}
-                      unless($stu[$i] ne "" and $dq->eval(h=>$stu[$i]) == $stu[$i+1]);
-                      do {$return[$i]=0;$self->setMessage($i+1,'You should use h-values '."$cor[0]".', '."$cor[2]".', '."$cor[4]".', and '."$cor[6]".'.');}
-                      unless($stu[$i]==$cor[0] or $stu[$i]==$cor[2] or $stu[$i]==$cor[4] or $stu[$i]==$cor[6]);
+                      do {
+                        $return[$i+1] = 0;
+                        $self->setMessage($i+2, 'This is not the difference quotient when h='."$stu[$i]".'.');
+                      } unless ($stu[$i] ne "" and $dq->eval(h => $stu[$i]) == $stu[$i+1]);
+                      do {
+                        $return[$i] = 0;
+                        $self->setMessage($i+1, 'You should use h-values '."$cor[0]".', '."$cor[2]".', '."$cor[4]".', and '."$cor[6]".'.');
+                      } unless ($stu[$i] == $cor[0] or $stu[$i] == $cor[2] or $stu[$i] == $cor[4] or $stu[$i] == $cor[6]);
                   };
-                  do {$return[2]=0;$self->setMessage(3,'You already used this h-value.');}
-                  unless($stu[2]!=$stu[0] or $stu[2] eq "");
-                  do {$return[4]=0;$self->setMessage(5,'You already used this h-value.');}
-                  unless($stu[4]!=$stu[0] and $stu[4]!=$stu[2] or $stu[2] eq "");
-                  do {$return[6]=0;$self->setMessage(7,'You already used this h-value.');}
-                  unless($stu[6]!=$stu[0] and $stu[6]!=$stu[2] and $stu[6]!=$stu[4] or $stu[2] eq "");
+                  do {
+                    $return[2] = 0;
+                    $self->setMessage(3,'You already used this h-value.');
+                  } unless ($stu[2] != $stu[0] or $stu[2] eq "");
+                  do {
+                    $return[4] = 0;
+                    $self->setMessage(5,'You already used this h-value.');
+                  } unless ($stu[4] != $stu[0] and $stu[4] != $stu[2] or $stu[2] eq "");
+                  do {
+                    $return[6] = 0;
+                    $self->setMessage(7,'You already used this h-value.');
+                  } unless ($stu[6] != $stu[0] and $stu[6] != $stu[2] and $stu[6] != $stu[4] or $stu[2] eq "");
                   return [@return];
-              });
-            </pg-code>
+                });
+              </pg-code>
             </setup>
             <statement>
               <p>
@@ -3114,117 +3167,124 @@
                 <m>f(x)=<var name="$f"/></m>,
                 <m>a=<var name="$a"/></m>
               </p>
-                <tabular>
-                  <col halign="center"/>
-                  <col halign="center"/>
-                  <row bottom="medium">
-                    <cell><m>h</m></cell>
-                    <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                </tabular>
 
+              <tabular>
+                <col halign="center"/>
+                <col halign="center"/>
+                <row bottom="medium">
+                  <cell><m>h</m></cell>
+                  <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+              </tabular>
 
               <p>
-                It appears that <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=</m><var name="$m" width="5"/>.
+                <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=</m><var name="$m" width="10"/>.
               </p>
             </statement>
             <solution>
-                <tabular>
-                  <col halign="center"/>
-                  <col halign="center"/>
-                  <row bottom="medium">
-                    <cell><m>h</m></cell>
-                    <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
-                  </row>
-                  <row>
-                    <cell><m>-0.1</m></cell>
-                    <cell><m>
-                      <var name="$tabout[0]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>-0.01</m></cell>
-                    <cell><m>
-                      <var name="$tabout[1]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>0.01</m></cell>
-                    <cell><m>
-                      <var name="$tabout[2]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>0.1</m></cell>
-                    <cell><m>
-                      <var name="$tabout[3]"/>
-                      </m></cell>
-                  </row>
-                </tabular>
-
+              <tabular>
+                <col halign="center"/>
+                <col halign="center"/>
+                <row bottom="medium">
+                  <cell><m>h</m></cell>
+                  <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
+                </row>
+                <row>
+                  <cell><m>-0.1</m></cell>
+                  <cell><m><var name="$tabout[0]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>-0.01</m></cell>
+                  <cell><m><var name="$tabout[1]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>0.01</m></cell>
+                  <cell><m><var name="$tabout[2]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>0.1</m></cell>
+                  <cell><m><var name="$tabout[3]"/></m></cell>
+                </row>
+              </tabular>
 
               <p>
                 It appears that <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=<var name="$m"/></m>.
               </p>
             </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
+        <exercise>
+          <webwork seed="1">
             <setup>
-            <pg-code>
-              do{
-              do{
-              $d=non_zero_random(-5,5,1);
-              $b=non_zero_random(-5,5,1);
-              $c=non_zero_random(-5,5,1);
-              }until(gcd($d,gcd($b,$c))==1);
-              $a=random(-5,5,1);
-              if ($envir{problemSeed}==1){$a=-3;$d=-4;$b=5;$c=-1};
-              $f=Formula("$d*x^2+$b*x+$c")->reduce;
-              $m=$f->D('x')->eval(x=>$a);
-              }until($m!=0);
-              Context()->variables->add(h=>'Real');
-              $dq=($f->substitute(x=>Formula("$a+h"))-($f->eval(x=>$a)))/Formula("h");
-              @tabin=(Real(-0.1),Real(-0.01),Real(0.01),Real(0.1));
-              @tabout=map{$dq->eval(h=>$_,x=>1)} @tabin;
-              @table=map{($tabin[$_],$tabout[$_])}(0 .. $#tabin);
-              $tableanswers=MultiAnswer(@table)->with(allowBlankAnswers=>1,checker=>sub{
-                  my ($correct,$student,$self)=@_;
-                  my @cor=@{$correct};my @stu=@{$student};
-                  my @return=(1,1,1,1,1,1,1,1);
-                  for my $i (0,2,4,6) {
-                      do {$return[$i+1]=0;$self->setMessage($i+2,'This is not the difference quotient when h='."$stu[$i]".'.');}
-                      unless($stu[$i] ne "" and $dq->eval(h=>$stu[$i]) == $stu[$i+1]);
-                      do {$return[$i]=0;$self->setMessage($i+1,'You should use h-values '."$cor[0]".', '."$cor[2]".', '."$cor[4]".', and '."$cor[6]".'.');}
-                      unless($stu[$i]==$cor[0] or $stu[$i]==$cor[2] or $stu[$i]==$cor[4] or $stu[$i]==$cor[6]);
+              <pg-code>
+                do {
+                  do {
+                    $d = non_zero_random(-5,5,1);
+                    $b = non_zero_random(-5,5,1);
+                    $c = non_zero_random(-5,5,1);
+                  } until (gcd($d,gcd($b,$c))==1);
+                  $a = random(-5,5,1);
+                  if ($envir{problemSeed} == 1){
+                    $a = -3;
+                    $d = -4;
+                    $b = 5;
+                    $c = -1
                   };
-                  do {$return[2]=0;$self->setMessage(3,'You already used this h-value.');}
-                  unless($stu[2]!=$stu[0] or $stu[2] eq "");
-                  do {$return[4]=0;$self->setMessage(5,'You already used this h-value.');}
-                  unless($stu[4]!=$stu[0] and $stu[4]!=$stu[2] or $stu[2] eq "");
-                  do {$return[6]=0;$self->setMessage(7,'You already used this h-value.');}
-                  unless($stu[6]!=$stu[0] and $stu[6]!=$stu[2] and $stu[6]!=$stu[4] or $stu[2] eq "");
+                  $f = Formula("$d*x^2+$b*x+$c")->reduce;
+                  $m = $f->D('x')->eval(x => $a);
+                } until ($m!=0);
+                Context()->variables->add(h => 'Real');
+                $dq = ($f->substitute(x => Formula("$a+h"))-($f->eval(x => $a)))/Formula("h");
+                @tabin = (Real(-0.1),Real(-0.01),Real(0.01),Real(0.1));
+                @tabout = map{$dq->eval(h => $_, x => 1)} (@tabin);
+                @table = map{($tabin[$_], $tabout[$_])} (0 .. $#tabin);
+                $tableanswers = MultiAnswer(@table)->with(allowBlankAnswers => 1,checker => sub{
+                  my ($correct,$student,$self)=@_;
+                  my @cor = @{$correct};
+                  my @stu = @{$student};
+                  my @return = (1,1,1,1,1,1,1,1);
+                  for my $i (0,2,4,6) {
+                      do {
+                        $return[$i+1] = 0;
+                        $self->setMessage($i+2, 'This is not the difference quotient when h='."$stu[$i]".'.');
+                      } unless ($stu[$i] ne "" and $dq->eval(h => $stu[$i]) == $stu[$i+1]);
+                      do {
+                        $return[$i] = 0;
+                        $self->setMessage($i+1, 'You should use h-values '."$cor[0]".', '."$cor[2]".', '."$cor[4]".', and '."$cor[6]".'.');
+                      } unless ($stu[$i] == $cor[0] or $stu[$i] == $cor[2] or $stu[$i] == $cor[4] or $stu[$i] == $cor[6]);
+                  };
+                  do {
+                    $return[2] = 0;
+                    $self->setMessage(3,'You already used this h-value.');
+                  } unless ($stu[2] != $stu[0] or $stu[2] eq "");
+                  do {
+                    $return[4] = 0;
+                    $self->setMessage(5,'You already used this h-value.');
+                  } unless ($stu[4] != $stu[0] and $stu[4] != $stu[2] or $stu[2] eq "");
+                  do {
+                    $return[6] = 0;
+                    $self->setMessage(7,'You already used this h-value.');
+                  } unless ($stu[6] != $stu[0] and $stu[6] != $stu[2] and $stu[6] != $stu[4] or $stu[2] eq "");
                   return [@return];
-              });
-            </pg-code>
+                });
+              </pg-code>
             </setup>
             <statement>
               <p>
@@ -3237,110 +3297,114 @@
                 <m>f(x)=<var name="$f"/></m>,
                 <m>a=<var name="$a"/></m>
               </p>
-                <tabular>
-                  <col halign="center"/>
-                  <col halign="center"/>
-                  <row bottom="medium">
-                    <cell><m>h</m></cell>
-                    <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                </tabular>
 
+              <tabular>
+                <col halign="center"/>
+                <col halign="center"/>
+                <row bottom="medium">
+                  <cell><m>h</m></cell>
+                  <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+              </tabular>
 
               <p>
-                It appears that <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=</m><var name="$m" width="5"/>.
+                <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=</m><var name="$m" width="10"/>.
               </p>
             </statement>
             <solution>
-                <tabular>
-                  <col halign="center"/>
-                  <col halign="center"/>
-                  <row bottom="medium">
-                    <cell><m>h</m></cell>
-                    <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
-                  </row>
-                  <row>
-                    <cell><m>-0.1</m></cell>
-                    <cell><m>
-                      <var name="$tabout[0]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>-0.01</m></cell>
-                    <cell><m>
-                      <var name="$tabout[1]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>0.01</m></cell>
-                    <cell><m>
-                      <var name="$tabout[2]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>0.1</m></cell>
-                    <cell><m>
-                      <var name="$tabout[3]"/>
-                      </m></cell>
-                  </row>
-                </tabular>
-
+              <tabular>
+                <col halign="center"/>
+                <col halign="center"/>
+                <row bottom="medium">
+                  <cell><m>h</m></cell>
+                  <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
+                </row>
+                <row>
+                  <cell><m>-0.1</m></cell>
+                  <cell><m><var name="$tabout[0]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>-0.01</m></cell>
+                  <cell><m><var name="$tabout[1]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>0.01</m></cell>
+                  <cell><m><var name="$tabout[2]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>0.1</m></cell>
+                  <cell><m><var name="$tabout[3]"/></m></cell>
+                </row>
+              </tabular>
 
               <p>
                 It appears that <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=<var name="$m"/></m>.
               </p>
             </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
+        <exercise>
+          <webwork seed="1">
             <setup>
-            <pg-code>
-              $a=random(2,9,1);
-              if ($envir{problemSeed}==1){$a=5;};
-              $f=Formula("ln(x)");
-              $m=$f->D('x')->eval(x=>$a)->with(tolerance => .01);
-              Context()->variables->add(h=>'Real');
-              $dq=($f->substitute(x=>Formula("$a+h"))-($f->eval(x=>$a)))/Formula("h");
-              @tabin=(Real(-0.1),Real(-0.01),Real(0.01),Real(0.1));
-              @tabout=map{$dq->eval(h=>$_,x=>1)} @tabin;
-              @table=map{($tabin[$_],$tabout[$_])}(0 .. $#tabin);
-              $tableanswers=MultiAnswer(@table)->with(allowBlankAnswers=>1,checker=>sub{
+              <pg-code>
+                $a = random(2,9,1);
+                if ($envir{problemSeed} == 1){
+                  $a = 5;
+                };
+                $f = Formula("ln(x)");
+                $m = $f->D('x')->eval(x => $a)->with(tolerance => .01);
+                Context()->variables->add(h => 'Real');
+                $dq = ($f->substitute(x => Formula("$a+h"))-($f->eval(x => $a)))/Formula("h");
+                @tabin = (Real(-0.1),Real(-0.01),Real(0.01),Real(0.1));
+                @tabout = map{$dq->eval(h => $_, x => 1)} (@tabin);
+                @table = map{($tabin[$_], $tabout[$_])} (0 .. $#tabin);
+                $tableanswers = MultiAnswer(@table)->with(allowBlankAnswers => 1,checker => sub{
                   my ($correct,$student,$self)=@_;
-                  my @cor=@{$correct};my @stu=@{$student};
-                  my @return=(1,1,1,1,1,1,1,1);
+                  my @cor = @{$correct};
+                  my @stu = @{$student};
+                  my @return = (1,1,1,1,1,1,1,1);
                   for my $i (0,2,4,6) {
-                      do {$return[$i+1]=0;$self->setMessage($i+2,'This is not the difference quotient when h='."$stu[$i]".'.');}
-                      unless($stu[$i] ne "" and $dq->eval(h=>$stu[$i]) == $stu[$i+1]);
-                      do {$return[$i]=0;$self->setMessage($i+1,'You should use h-values '."$cor[0]".', '."$cor[2]".', '."$cor[4]".', and '."$cor[6]".'.');}
-                      unless($stu[$i]==$cor[0] or $stu[$i]==$cor[2] or $stu[$i]==$cor[4] or $stu[$i]==$cor[6]);
+                      do {
+                        $return[$i+1] = 0;
+                        $self->setMessage($i+2, 'This is not the difference quotient when h='."$stu[$i]".'.');
+                      } unless ($stu[$i] ne "" and $dq->eval(h => $stu[$i]) == $stu[$i+1]);
+                      do {
+                        $return[$i] = 0;
+                        $self->setMessage($i+1, 'You should use h-values '."$cor[0]".', '."$cor[2]".', '."$cor[4]".', and '."$cor[6]".'.');
+                      } unless ($stu[$i] == $cor[0] or $stu[$i] == $cor[2] or $stu[$i] == $cor[4] or $stu[$i] == $cor[6]);
                   };
-                  do {$return[2]=0;$self->setMessage(3,'You already used this h-value.');}
-                  unless($stu[2]!=$stu[0] or $stu[2] eq "");
-                  do {$return[4]=0;$self->setMessage(5,'You already used this h-value.');}
-                  unless($stu[4]!=$stu[0] and $stu[4]!=$stu[2] or $stu[2] eq "");
-                  do {$return[6]=0;$self->setMessage(7,'You already used this h-value.');}
-                  unless($stu[6]!=$stu[0] and $stu[6]!=$stu[2] and $stu[6]!=$stu[4] or $stu[2] eq "");
+                  do {
+                    $return[2] = 0;
+                    $self->setMessage(3,'You already used this h-value.');
+                  } unless ($stu[2] != $stu[0] or $stu[2] eq "");
+                  do {
+                    $return[4] = 0;
+                    $self->setMessage(5,'You already used this h-value.');
+                  } unless ($stu[4] != $stu[0] and $stu[4] != $stu[2] or $stu[2] eq "");
+                  do {
+                    $return[6] = 0;
+                    $self->setMessage(7,'You already used this h-value.');
+                  } unless ($stu[6] != $stu[0] and $stu[6] != $stu[2] and $stu[6] != $stu[4] or $stu[2] eq "");
                   return [@return];
-              });
-            </pg-code>
+                });
+              </pg-code>
             </setup>
             <statement>
               <p>
@@ -3353,111 +3417,115 @@
                 <m>f(x)=<var name="$f"/></m>,
                 <m>a=<var name="$a"/></m>
               </p>
-                <tabular>
-                  <col halign="center"/>
-                  <col halign="center"/>
-                  <row bottom="medium">
-                    <cell><m>h</m></cell>
-                    <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                </tabular>
 
+              <tabular>
+                <col halign="center"/>
+                <col halign="center"/>
+                <row bottom="medium">
+                  <cell><m>h</m></cell>
+                  <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+              </tabular>
 
               <p>
-                It appears that <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=</m><var name="$m" width="5"/>.
+                <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=</m><var name="$m" width="10"/>.
               </p>
             </statement>
             <solution>
-                <tabular>
-                  <col halign="center"/>
-                  <col halign="center"/>
-                  <row bottom="medium">
-                    <cell><m>h</m></cell>
-                    <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
-                  </row>
-                  <row>
-                    <cell><m>-0.1</m></cell>
-                    <cell><m>
-                      <var name="$tabout[0]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>-0.01</m></cell>
-                    <cell><m>
-                      <var name="$tabout[1]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>0.01</m></cell>
-                    <cell><m>
-                      <var name="$tabout[2]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>0.1</m></cell>
-                    <cell><m>
-                      <var name="$tabout[3]"/>
-                      </m></cell>
-                  </row>
-                </tabular>
-
+              <tabular>
+                <col halign="center"/>
+                <col halign="center"/>
+                <row bottom="medium">
+                  <cell><m>h</m></cell>
+                  <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
+                </row>
+                <row>
+                  <cell><m>-0.1</m></cell>
+                  <cell><m><var name="$tabout[0]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>-0.01</m></cell>
+                  <cell><m><var name="$tabout[1]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>0.01</m></cell>
+                  <cell><m><var name="$tabout[2]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>0.1</m></cell>
+                  <cell><m><var name="$tabout[3]"/></m></cell>
+                </row>
+              </tabular>
 
               <p>
                 It appears that <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=<var name="$m"/></m>.
               </p>
             </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
+        <exercise>
+          <webwork seed="1">
             <setup>
-            <pg-code>
-              Context()->flags->set(reduceConstants=>0);
-              $a=list_random(Formula("pi/3"),Formula("2pi/3"),Formula("pi"),Formula("4pi/3"),Formula("5pi/3"),);
-              if ($envir{problemSeed}==1){$a=Formula("pi");};
-              $f=Formula("sin(x)");
-              $m=$f->D('x')->eval(x=>$a->eval(x=>0))->with(tolerance => .01);
-              Context()->variables->add(h=>'Real');
-              $dq=($f->substitute(x=>Formula("$a+h"))-($f->eval(x=>$a->eval(x=>0))))/Formula("h");
-              @tabin=(Real(-0.1),Real(-0.01),Real(0.01),Real(0.1));
-              @tabout=map{$dq->eval(h=>$_,x=>1)} @tabin;
-              @table=map{($tabin[$_],$tabout[$_])}(0 .. $#tabin);
-              $tableanswers=MultiAnswer(@table)->with(allowBlankAnswers=>1,checker=>sub{
+              <pg-code>
+                Context()->flags->set(reduceConstants => 0);
+                $a = list_random(Formula("pi/3"),Formula("2pi/3"),Formula("pi"),Formula("4pi/3"),Formula("5pi/3"),);
+                if ($envir{problemSeed} == 1){
+                  $a = Formula("pi");
+                };
+                $f = Formula("sin(x)");
+                $m = $f->D('x')->eval(x => $a->eval(x => 0))->with(tolerance => .01);
+                Context()->variables->add(h => 'Real');
+                $dq = ($f->substitute(x => Formula("$a+h"))-($f->eval(x => $a->eval(x => 0))))/Formula("h");
+                @tabin = (Real(-0.1),Real(-0.01),Real(0.01),Real(0.1));
+                @tabout = map{$dq->eval(h => $_, x => 1)} (@tabin);
+                @table = map{($tabin[$_], $tabout[$_])} (0 .. $#tabin);
+                $tableanswers = MultiAnswer(@table)->with(allowBlankAnswers => 1,checker => sub{
                   my ($correct,$student,$self)=@_;
-                  my @cor=@{$correct};my @stu=@{$student};
-                  my @return=(1,1,1,1,1,1,1,1);
+                  my @cor = @{$correct};
+                  my @stu = @{$student};
+                  my @return = (1,1,1,1,1,1,1,1);
                   for my $i (0,2,4,6) {
-                      do {$return[$i+1]=0;$self->setMessage($i+2,'This is not the difference quotient when h='."$stu[$i]".'.');}
-                      unless($stu[$i] ne "" and $dq->eval(h=>$stu[$i]) == $stu[$i+1]);
-                      do {$return[$i]=0;$self->setMessage($i+1,'You should use h-values '."$cor[0]".', '."$cor[2]".', '."$cor[4]".', and '."$cor[6]".'.');}
-                      unless($stu[$i]==$cor[0] or $stu[$i]==$cor[2] or $stu[$i]==$cor[4] or $stu[$i]==$cor[6]);
+                      do {
+                        $return[$i+1] = 0;
+                        $self->setMessage($i+2, 'This is not the difference quotient when h='."$stu[$i]".'.');
+                      } unless ($stu[$i] ne "" and $dq->eval(h => $stu[$i]) == $stu[$i+1]);
+                      do {
+                        $return[$i] = 0;
+                        $self->setMessage($i+1, 'You should use h-values '."$cor[0]".', '."$cor[2]".', '."$cor[4]".', and '."$cor[6]".'.');
+                      } unless ($stu[$i] == $cor[0] or $stu[$i] == $cor[2] or $stu[$i] == $cor[4] or $stu[$i] == $cor[6]);
                   };
-                  do {$return[2]=0;$self->setMessage(3,'You already used this h-value.');}
-                  unless($stu[2]!=$stu[0] or $stu[2] eq "");
-                  do {$return[4]=0;$self->setMessage(5,'You already used this h-value.');}
-                  unless($stu[4]!=$stu[0] and $stu[4]!=$stu[2] or $stu[2] eq "");
-                  do {$return[6]=0;$self->setMessage(7,'You already used this h-value.');}
-                  unless($stu[6]!=$stu[0] and $stu[6]!=$stu[2] and $stu[6]!=$stu[4] or $stu[2] eq "");
+                  do {
+                    $return[2] = 0;
+                    $self->setMessage(3,'You already used this h-value.');
+                  } unless ($stu[2] != $stu[0] or $stu[2] eq "");
+                  do {
+                    $return[4] = 0;
+                    $self->setMessage(5,'You already used this h-value.');
+                  } unless ($stu[4] != $stu[0] and $stu[4] != $stu[2] or $stu[2] eq "");
+                  do {
+                    $return[6] = 0;
+                    $self->setMessage(7,'You already used this h-value.');
+                  } unless ($stu[6] != $stu[0] and $stu[6] != $stu[2] and $stu[6] != $stu[4] or $stu[2] eq "");
                   return [@return];
-              });
-            </pg-code>
+                });
+              </pg-code>
             </setup>
             <statement>
               <p>
@@ -3470,111 +3538,115 @@
                 <m>f(x)=<var name="$f"/></m>,
                 <m>a=<var name="$a"/></m>
               </p>
-                <tabular>
-                  <col halign="center"/>
-                  <col halign="center"/>
-                  <row bottom="medium">
-                    <cell><m>h</m></cell>
-                    <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                </tabular>
 
+              <tabular>
+                <col halign="center"/>
+                <col halign="center"/>
+                <row bottom="medium">
+                  <cell><m>h</m></cell>
+                  <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+              </tabular>
 
               <p>
-                It appears that <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=</m><var name="$m" width="5"/>.
+                <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=</m><var name="$m" width="10"/>.
               </p>
             </statement>
             <solution>
-                <tabular>
-                  <col halign="center"/>
-                  <col halign="center"/>
-                  <row bottom="medium">
-                    <cell><m>h</m></cell>
-                    <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
-                  </row>
-                  <row>
-                    <cell><m>-0.1</m></cell>
-                    <cell><m>
-                      <var name="$tabout[0]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>-0.01</m></cell>
-                    <cell><m>
-                      <var name="$tabout[1]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>0.01</m></cell>
-                    <cell><m>
-                      <var name="$tabout[2]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>0.1</m></cell>
-                    <cell><m>
-                      <var name="$tabout[3]"/>
-                      </m></cell>
-                  </row>
-                </tabular>
-
+              <tabular>
+                <col halign="center"/>
+                <col halign="center"/>
+                <row bottom="medium">
+                  <cell><m>h</m></cell>
+                  <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
+                </row>
+                <row>
+                  <cell><m>-0.1</m></cell>
+                  <cell><m><var name="$tabout[0]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>-0.01</m></cell>
+                  <cell><m><var name="$tabout[1]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>0.01</m></cell>
+                  <cell><m><var name="$tabout[2]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>0.1</m></cell>
+                  <cell><m><var name="$tabout[3]"/></m></cell>
+                </row>
+              </tabular>
 
               <p>
                 It appears that <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=<var name="$m"/></m>.
               </p>
             </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
+       <exercise>
+          <webwork seed="1">
             <setup>
-            <pg-code>
-              Context()->flags->set(reduceConstants=>0);
-              $a=list_random(Formula("pi/3"),Formula("2pi/3"),Formula("pi"),Formula("4pi/3"),Formula("5pi/3"),);
-              if ($envir{problemSeed}==1){$a=Formula("pi");};
-              $f=Formula("cos(x)");
-              $m=$f->D('x')->eval(x=>$a->eval(x=>0))->with(tolerance => .01);
-              Context()->variables->add(h=>'Real');
-              $dq=($f->substitute(x=>Formula("$a+h"))-($f->eval(x=>$a->eval(x=>0))))/Formula("h");
-              @tabin=(Real(-0.1),Real(-0.01),Real(0.01),Real(0.1));
-              @tabout=map{$dq->eval(h=>$_,x=>1)} @tabin;
-              @table=map{($tabin[$_],$tabout[$_])}(0 .. $#tabin);
-              $tableanswers=MultiAnswer(@table)->with(allowBlankAnswers=>1,checker=>sub{
+              <pg-code>
+                Context()->flags->set(reduceConstants => 0);
+                $a = list_random(Formula("pi/3"),Formula("2pi/3"),Formula("pi"),Formula("4pi/3"),Formula("5pi/3"),);
+                if ($envir{problemSeed} == 1){
+                  $a = Formula("pi");
+                };
+                $f = Formula("cos(x)");
+                $m = $f->D('x')->eval(x => $a->eval(x => 0))->with(tolerance => .01);
+                Context()->variables->add(h => 'Real');
+                $dq = ($f->substitute(x => Formula("$a+h"))-($f->eval(x => $a->eval(x => 0))))/Formula("h");
+                @tabin = (Real(-0.1),Real(-0.01),Real(0.01),Real(0.1));
+                @tabout = map{$dq->eval(h => $_, x => 1)} (@tabin);
+                @table = map{($tabin[$_], $tabout[$_])} (0 .. $#tabin);
+                $tableanswers = MultiAnswer(@table)->with(allowBlankAnswers => 1,checker => sub{
                   my ($correct,$student,$self)=@_;
-                  my @cor=@{$correct};my @stu=@{$student};
-                  my @return=(1,1,1,1,1,1,1,1);
+                  my @cor = @{$correct};
+                  my @stu = @{$student};
+                  my @return = (1,1,1,1,1,1,1,1);
                   for my $i (0,2,4,6) {
-                      do {$return[$i+1]=0;$self->setMessage($i+2,'This is not the difference quotient when h='."$stu[$i]".'.');}
-                      unless($stu[$i] ne "" and $dq->eval(h=>$stu[$i]) == $stu[$i+1]);
-                      do {$return[$i]=0;$self->setMessage($i+1,'You should use h-values '."$cor[0]".', '."$cor[2]".', '."$cor[4]".', and '."$cor[6]".'.');}
-                      unless($stu[$i]==$cor[0] or $stu[$i]==$cor[2] or $stu[$i]==$cor[4] or $stu[$i]==$cor[6]);
+                      do {
+                        $return[$i+1] = 0;
+                        $self->setMessage($i+2, 'This is not the difference quotient when h='."$stu[$i]".'.');
+                      } unless ($stu[$i] ne "" and $dq->eval(h => $stu[$i]) == $stu[$i+1]);
+                      do {
+                        $return[$i] = 0;
+                        $self->setMessage($i+1, 'You should use h-values '."$cor[0]".', '."$cor[2]".', '."$cor[4]".', and '."$cor[6]".'.');
+                      } unless ($stu[$i] == $cor[0] or $stu[$i] == $cor[2] or $stu[$i] == $cor[4] or $stu[$i] == $cor[6]);
                   };
-                  do {$return[2]=0;$self->setMessage(3,'You already used this h-value.');}
-                  unless($stu[2]!=$stu[0] or $stu[2] eq "");
-                  do {$return[4]=0;$self->setMessage(5,'You already used this h-value.');}
-                  unless($stu[4]!=$stu[0] and $stu[4]!=$stu[2] or $stu[2] eq "");
-                  do {$return[6]=0;$self->setMessage(7,'You already used this h-value.');}
-                  unless($stu[6]!=$stu[0] and $stu[6]!=$stu[2] and $stu[6]!=$stu[4] or $stu[2] eq "");
+                  do {
+                    $return[2] = 0;
+                    $self->setMessage(3,'You already used this h-value.');
+                  } unless ($stu[2] != $stu[0] or $stu[2] eq "");
+                  do {
+                    $return[4] = 0;
+                    $self->setMessage(5,'You already used this h-value.');
+                  } unless ($stu[4] != $stu[0] and $stu[4] != $stu[2] or $stu[2] eq "");
+                  do {
+                    $return[6] = 0;
+                    $self->setMessage(7,'You already used this h-value.');
+                  } unless ($stu[6] != $stu[0] and $stu[6] != $stu[2] and $stu[6] != $stu[4] or $stu[2] eq "");
                   return [@return];
-              });
-            </pg-code>
+                });
+              </pg-code>
             </setup>
             <statement>
               <p>
@@ -3587,78 +3659,69 @@
                 <m>f(x)=<var name="$f"/></m>,
                 <m>a=<var name="$a"/></m>
               </p>
-                <tabular>
-                  <col halign="center"/>
-                  <col halign="center"/>
-                  <row bottom="medium">
-                    <cell><m>h</m></cell>
-                    <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                    <cell><var name="$tableanswers" width="5"/></cell>
-                  </row>
-                </tabular>
 
+              <tabular>
+                <col halign="center"/>
+                <col halign="center"/>
+                <row bottom="medium">
+                  <cell><m>h</m></cell>
+                  <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+                <row>
+                  <cell><var name="$tableanswers" width="5"/></cell>
+                  <cell><var name="$tableanswers" width="10"/></cell>
+                </row>
+              </tabular>
 
               <p>
-                It appears that <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=</m><var name="$m" width="5"/>.
+                <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=</m><var name="$m" width="10"/>.
               </p>
             </statement>
             <solution>
-                <tabular>
-                  <col halign="center"/>
-                  <col halign="center"/>
-                  <row bottom="medium">
-                    <cell><m>h</m></cell>
-                    <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
-                  </row>
-                  <row>
-                    <cell><m>-0.1</m></cell>
-                    <cell><m>
-                      <var name="$tabout[0]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>-0.01</m></cell>
-                    <cell><m>
-                      <var name="$tabout[1]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>0.01</m></cell>
-                    <cell><m>
-                      <var name="$tabout[2]"/>
-                      </m></cell>
-                  </row>
-                  <row>
-                    <cell><m>0.1</m></cell>
-                    <cell><m>
-                      <var name="$tabout[3]"/>
-                      </m></cell>
-                  </row>
-                </tabular>
-
+              <tabular>
+                <col halign="center"/>
+                <col halign="center"/>
+                <row bottom="medium">
+                  <cell><m>h</m></cell>
+                  <cell><m>\frac{f(a+h)-f(a)}{h}</m></cell>
+                </row>
+                <row>
+                  <cell><m>-0.1</m></cell>
+                  <cell><m><var name="$tabout[0]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>-0.01</m></cell>
+                  <cell><m><var name="$tabout[1]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>0.01</m></cell>
+                  <cell><m><var name="$tabout[2]"/></m></cell>
+                </row>
+                <row>
+                  <cell><m>0.1</m></cell>
+                  <cell><m><var name="$tabout[3]"/></m></cell>
+                </row>
+              </tabular>
 
               <p>
                 It appears that <m>\lim\limits_{h\to0}\frac{f(a+h)-f(a)}{h}=<var name="$m"/></m>.
               </p>
             </solution>
-        </webwork>
-      </exercise>
-
-    </exercisegroup>
+          </webwork>
+        </exercise>
+      </exercisegroup>
+    </subexercises>
   </exercises>
 </section>
