@@ -223,6 +223,7 @@
 
           \begin{axis}[
           axis on top,
+          xtick = {2,4,6,8,10},
           extra x ticks={12.57},
           extra x tick labels={$4\pi$},
           ymin=-2,ymax=3.5,
@@ -230,7 +231,7 @@
           ]
 
           \addplot [name path=A,firstcurvestyle,-,domain=0:12.57,samples=70] {sin(deg(x))+2} node [shift={(-15pt,7pt)},black] {\scriptsize $f(x)$};
-          \addplot [name path=B,firstcurvestyle,-,domain=0:12.57,samples=90] {.5*cos(deg(2*x))-1.2} node [shift={(-25pt,-16pt)},black] {\scriptsize $g(x)$};
+          \addplot [name path=B,firstcurvestyle,-,domain=0:12.57,samples=90] {.5*cos(deg(2*x))-1.2} node [shift={(-20pt,-16pt)},black] {\scriptsize $g(x)$};
 
           \addplot [firstcurvestyle,areastyle] fill between [of=A and B];
 
@@ -254,7 +255,7 @@
         <md>
           <mrow>\int_0^{4\pi} \big(f(x)- g(x)\big)\, dx \amp  = \int_0^{4\pi} \Big(\sin(x) +2 - \big(\frac12\cos(2x)-1\big)\Big)\, dx</mrow>
           <mrow>\amp = -\cos(x) -\frac14\sin(2x)+3x\Big|_0^{4\pi}</mrow>
-          <mrow>\amp =	12\pi \approx 37.7\,\text{ units } ^2</mrow>
+          <mrow>\amp =	12\pi \approx 37.7\,\text{ units}^2</mrow>
         </md>.
       </p>
     </solution>
@@ -284,8 +285,8 @@
           xmin=-.5,xmax=4.7
           ]
 
-          \addplot [name path=A,firstcurvestyle,-,domain=-.2:4.5,samples=60] {x^3-7*x^2+12*x-3};
-          \addplot [name path=B,firstcurvestyle,-,domain=0:4.5] {5-2*x};
+          \addplot [name path=A,firstcurvestyle,-,domain=-.2:4.4,samples=60] {x^3-7*x^2+12*x-3};
+          \addplot [name path=B,firstcurvestyle,-,domain=0:4.4] {5-2*x};
 
           \addplot [firstcurvestyle,areastyle] fill between [of=A and B,soft clip={domain=1:4}];
 
@@ -316,7 +317,7 @@
           <mrow>\text{ Total Area }  \amp = \int_1^2 \big(g(x)-f(x)\big)\, dx + \int_2^4\big(f(x)-g(x)\big)\, dx</mrow>
           <mrow>\amp = \int_1^2 \big(x^3-7x^2+14x-8\big) \, dx + \int_2^4\big(-x^3+7x^2-14x+8\big)\, dx</mrow>
           <mrow>\amp = 5/12 + 8/3</mrow>
-          <mrow>\amp = 37/12 = 3.083\,\text{ units } ^2</mrow>
+          <mrow>\amp = 37/12 = 3.083\,\text{ units}^2</mrow>
         </md>.
       </p>
     </solution>
@@ -677,16 +678,16 @@
         We also have that <m>\dx=\frac{b-a}{n} = 2</m>, so Simpson's Rule gives
         <md>
           <mrow>\text{ Area } \amp \approx \frac{2}{3}\Big(1\cdot0+4\cdot2.25+2\cdot5.08+4\cdot6.35+2\cdot5.21+4\cdot2.76+1\cdot0\Big)</mrow>
-          <mrow>\amp = 44.01\overline{3} \,\text{ units } ^2</mrow>
+          <mrow>\amp = 44.01\overline{3} \,\text{ units}^2</mrow>
         </md>.
       </p>
 
       <p>
         Since the measurements are in hundreds of feet,
-        units<m>^2 = (100\,\text{ ft } )^2 = 10,000\,\text{ ft } ^2</m>,
-        giving a total area of <m>440,133\,\text{ ft } ^2</m>.
+        square units are given by (<quantity><mag>100</mag><unit base="foot"/></quantity>)<m>^2 = </m><quantity><mag>10,000</mag><unit base="foot" exp="2"/></quantity>,
+        giving a total area of <quantity><mag>440,133</mag><unit base="foot" exp="2"/></quantity>.
         (Since we are approximating,
-        we'd likely say the area was about <m>440,000\,\text{ ft } ^2</m>,
+        we'd likely say the area was about <quantity><mag>440,000</mag><unit base="foot" exp="2"/></quantity>,
         which is a little more than 10 acres.)
       </p>
     </solution>
@@ -710,7 +711,7 @@
             <pg-code>
               $true = PopUp(['?','True','False'],1);
             </pg-code>
-            
+
             <statement>
               <p>
                 The area between curves is always positive.<var name="$true" form="popup"/>
@@ -724,7 +725,7 @@
             <pg-code>
               $true = PopUp(['?','True','False'],1);
             </pg-code>
-            
+
             <statement>
               <p>
                 Calculus can be used to find the area of basic geometric shapes.<var name="$true" form="popup"/>
@@ -737,7 +738,7 @@
         <webwork>
             <pg-code>
             </pg-code>
-            
+
             <statement>
               <p>
                 In your own words,
@@ -755,7 +756,7 @@
         <webwork>
           <pg-code>
           </pg-code>
-          
+
           <statement>
             <p>
               Describe a situation where it is advantageous to find an area enclosed by curves through integration with respect to <m>y</m> instead of <m>x</m>.
@@ -1276,7 +1277,7 @@
               $D = Formula("$F-$G");
               $area = $D->eval(x=>$x1) - $D->eval(x=>$x0);
             </pg-code>
-            
+
             <statement>
               <p>
                 <m>f(x) = 2x^2+5x-3</m>, <m>g(x) = x^2+4x-1</m>
@@ -1302,7 +1303,7 @@
               $D = Formula("$F-$G");
               $area = $D->eval(x=>$x1) - $D->eval(x=>$x0);
             </pg-code>
-            
+
             <statement>
               <p>
                 <m>f(x) = x^2-3x+2</m>, <m>g(x) = -3x+3</m>
@@ -1329,7 +1330,7 @@
               $area = $D->eval(x=>$x1) - $D->eval(x=>$x0);
               $area = 2*$area; <!-- symmetry, region from -pi/2 to pi/2 -->
             </pg-code>
-            
+
             <statement>
               <p>
                 <m>f(x) = \sin(x)</m>, <m>g(x) = 2x/\pi</m>
@@ -1360,7 +1361,7 @@
               $area2 = $D2->eval(x=>$x2) - $D2->eval(x=>$x1);
               $area = $area1 + $area2;
             </pg-code>
-            
+
             <statement>
               <p>
                 <m>f(x) = x^3-4x^2+x-1</m>, <m>g(x) = -x^2+2x-4</m>
@@ -1386,7 +1387,7 @@
               $D = Formula("$F-$G");
               $area = $D->eval(x=>$x1) - $D->eval(x=>$x0);
             </pg-code>
-            
+
             <statement>
               <p>
                 <m>f(x) = x</m>, <m>g(x) = \sqrt{x}</m>
@@ -1416,7 +1417,7 @@
               $area2 = $D2->eval(x=>$x2) - $D2->eval(x=>$x1);
               $area = $area1 + $area2;
             </pg-code>
-            
+
             <statement>
               <p>
                 <m>f(x) = -x^3+5x^2+2x+1</m>, <m>g(x) = 3x^2+x+3</m>
@@ -1470,7 +1471,7 @@
               $area2 = $D2->eval(x=>$x2) - $D2->eval(x=>$x1);
               $area = $area1 + $area2;
             </pg-code>
-            
+
             <statement>
               <p>
                 The functions <m>f(x) = \cos(2x)</m> and
@@ -1881,7 +1882,7 @@
               $s2 = join(", ", @p2);
               $s3 = join(", ", @p3);
             </pg-code>
-            
+
             <statement>
               <p>
                 <m>(<var name="$s1"/>)</m>,<m>(<var name="$s2"/>)</m>,and <m>(<var name="$s3"/>)</m>
@@ -1907,7 +1908,7 @@
               $s2 = join(", ", @p2);
               $s3 = join(", ", @p3);
             </pg-code>
-            
+
             <statement>
               <p>
                 <m>(<var name="$s1"/>)</m>,<m>(<var name="$s2"/>)</m>,and <m>(<var name="$s3"/>)</m>
@@ -1933,7 +1934,7 @@
               $s2 = join(", ", @p2);
               $s3 = join(", ", @p3);
             </pg-code>
-            
+
             <statement>
               <p>
                 <m>(<var name="$s1"/>)</m>,<m>(<var name="$s2"/>)</m>,and <m>(<var name="$s3"/>)</m>
@@ -1959,7 +1960,7 @@
               $s2 = join(", ", @p2);
               $s3 = join(", ", @p3);
             </pg-code>
-            
+
             <statement>
               <p>
                 <m>(<var name="$s1"/>)</m>,<m>(<var name="$s2"/>)</m>,and <m>(<var name="$s3"/>)</m>
