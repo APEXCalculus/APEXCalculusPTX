@@ -105,84 +105,91 @@
 
   <figure xml:id="fig_alt_series_converge">
     <caption/>
-    <sidebyside widths="47% 47%" align="bottom">
-      <figure xml:id="fig_alt_series_converge_a">
-        <caption>Illustrating convergence with the Alternating Series Test.</caption>
-      <!-- START figures/fig_alt_series_converge.tex -->
-        <image xml:id="img_alt_series_converge_a">
-          <description></description>
-          <latex-image>
+    <sbsgroup>
+      <sidebyside width="47%">
+        <figure xml:id="fig_alt_series_converge_a">
+          <caption>Illustrating convergence with the Alternating Series Test.</caption>
+        <!-- START figures/fig_alt_series_converge.tex -->
+          <image xml:id="img_alt_series_converge_a">
+            <description></description>
+            <latex-image>
 
-          \begin{tikzpicture}
+            \begin{tikzpicture}
 
-          \begin{axis}[
-          axis on top,
-          ymin=-.25,ymax=1.25,
-          xmin=-1,xmax=11
-          ]
+            \begin{axis}[
+            axis on top,
+            ymin=-.25,ymax=1.25,
+            xmin=-1,xmax=11,
+            xlabel=\empty
+            ]
 
-          \addplot [only marks,firstcolor,mark size={1.5pt},domain=0:10,samples=11] {2/(x+1)};
-          \addplot [only marks,secondcolor,mark size={1.5pt},domain=1:10,samples=10] coordinates {(1., 1.)(2., 0.333333)(3., 0.833333)(4., 0.433333)(5.,0.766667)(6., 0.480952)(7., 0.730952)(8., 0.50873)(9.,0.70873)(10., 0.526912)};
-          \addplot [dashed,domain=-.1:10] {.614} node [pos=0,left] {\scriptsize $L$};
+			\addplot [only marks,firstcolor,mark size={2pt}] coordinates{(1,1)};
+			\addplot [only marks,secondcolor,mark size={1pt}] coordinates{(1,1)};
+            \addplot [only marks,firstcolor,mark size={1.5pt},domain=2:10,samples=9] {2/(x+1)};
+            \addplot [only marks,secondcolor,mark size={1.5pt},domain=2:10,samples=9] coordinates {(2., 0.333333)(3., 0.833333)(4., 0.433333)(5.,0.766667)(6., 0.480952)(7., 0.730952)(8., 0.50873)(9.,0.70873)(10., 0.526912)};
+            \addplot [dashed,domain=-.1:10] {.614} node [pos=0,left] {\scriptsize $L$};
 
-          \end{axis}
+            \end{axis}
 
-          \node [right] at (myplot.right of origin) {\scriptsize $n$};
+            \node [right] at (myplot.right of origin) {\scriptsize $n$};
 
-          \node[shift={(0,-10pt)},draw] at (myplot.south)
-            {\begin{tikzpicture}
+            \node[shift={(0,-10pt)},draw] at (myplot.south)
+              {\begin{tikzpicture}
 
-              \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] {\scriptsize $a_n$};
-              \fill [secondcolor] (1,0) circle (1.5pt) node [right, black] {\scriptsize $S_n$};
+                \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] {\scriptsize $a_n$};
+                \fill [secondcolor] (1,0) circle (1.5pt) node [right, black] {\scriptsize $S_n$};
 
-            \end{tikzpicture}};
+              \end{tikzpicture}};
 
-          \end{tikzpicture}
+            \end{tikzpicture}
 
-          </latex-image>
-        </image>
-      <!-- figures/fig_alt_series_converge.tex END -->
-      </figure>
+            </latex-image>
+          </image>
+        <!-- figures/fig_alt_series_converge.tex END -->
+        </figure>
+      </sidebyside>
 
-      <figure xml:id="fig_alt_series_converge_b">
-        <caption>A visual representation of adding terms of an alternating series. The arrows represent the length and direction of each term of the sequence.</caption>
-      <!-- START figures/fig_ftc1.tex -->
-        <image xml:id="img_alt_series_converge_b">
-          <description></description>
-          <latex-image>
+      <sidebyside width="67%">
+        <figure xml:id="fig_alt_series_converge_b">
+          <caption>A visual representation of adding terms of an alternating series. The arrows represent the length and direction of each term of the sequence.</caption>
+        <!-- START figures/fig_ftc1.tex -->
+          <image xml:id="img_alt_series_converge_b">
+            <description></description>
+            <latex-image>
 
-          \begin{tikzpicture}
+            \begin{tikzpicture}
 
-          \begin{axis}[
-          axis on top,
-          xtick=\empty,
-          extra x ticks={1, 0.3333, 0.83333, 0.43333, 0.76667, 0.4809, 0.7309, 0.612},
-          extra x tick labels={\scriptsize $S_1$,\scriptsize $S_2$,\scriptsize $S_3$,\scriptsize $S_4$,\scriptsize $S_5$,\scriptsize $S_6$,\scriptsize $S_7$, $L$ },
-          ytick=\empty,
-          xlabel=\empty,
-          ylabel=\empty,
-          ymin=-.2,ymax=2.25,
-          xmin=-.2,xmax=1.2,
-          x post scale=2,
-          ]
+            \begin{axis}[
+            axis on top,
+            xtick=\empty,
+            extra x ticks={1, 0.3333, 0.83333, 0.43333, 0.76667, 0.4809, 0.7309, 0.612},
+            extra x tick labels={\scriptsize $S_1$,\scriptsize $S_2$,\scriptsize $S_3$,\scriptsize $S_4$,\scriptsize $S_5$,\scriptsize $S_6$,\scriptsize $S_7$, $L$ },
+            ytick=\empty,
+            xlabel=\empty,
+            ylabel=\empty,
+            ymin=-.2,ymax=2.25,
+            xmin=-.2,xmax=1.2,
+            x post scale=2,
+            ]
 
-          \addplot[-&gt;,domain=0:1] ({x},{2}) node [pos=1, right] {$a_1$};
-          \addplot[&lt;-,domain=0.333:1] ({x},{1.75}) node [pos=0, left] {$-a_2$};
-          \addplot[-&gt;,domain=0.333:.833] ({x},{1.5}) node [pos=1, right] {$a_3$};
-          \addplot[&lt;-,domain=0.433:.8333] ({x},{1.25}) node [pos=0, left] {$-a_4$};
-          \addplot[-&gt;,domain=0.4333:.76667] ({x},{1}) node [pos=1, right] {$a_5$};
-          \addplot[&lt;-,domain=0.4809:.76667] ({x},{.75}) node [pos=0, left] {$-a_6$};
-          \addplot[-&gt;,domain=0.4809:.7309] ({x},{.5}) node [pos=1, right] {$a_7$};
+            \addplot[-&gt;,domain=0:1] ({x},{2}) node [pos=1, right] {$a_1$};
+            \addplot[&lt;-,domain=0.333:1] ({x},{1.75}) node [pos=0, left] {$-a_2$};
+            \addplot[-&gt;,domain=0.333:.833] ({x},{1.5}) node [pos=1, right] {$a_3$};
+            \addplot[&lt;-,domain=0.433:.8333] ({x},{1.25}) node [pos=0, left] {$-a_4$};
+            \addplot[-&gt;,domain=0.4333:.76667] ({x},{1}) node [pos=1, right] {$a_5$};
+            \addplot[&lt;-,domain=0.4809:.76667] ({x},{.75}) node [pos=0, left] {$-a_6$};
+            \addplot[-&gt;,domain=0.4809:.7309] ({x},{.5}) node [pos=1, right] {$a_7$};
 
-          \end{axis}
+            \end{axis}
 
-          \end{tikzpicture}
+            \end{tikzpicture}
 
-          </latex-image>
-        </image>
-      <!-- figures/fig_ftc0.tex END -->
-      </figure>
-    </sidebyside>
+            </latex-image>
+          </image>
+        <!-- figures/fig_ftc0.tex END -->
+        </figure>
+      </sidebyside>
+    </sbsgroup>
   </figure>
 
   <example xml:id="ex_alt1">
@@ -497,7 +504,7 @@
   </p>
 
   <example xml:id="ex_alt_series2">
-    <title>Determining absolute and conditional convergence.</title>
+    <title>Determining absolute and conditional convergence</title>
     <statement>
       <p>
         Determine if the following series converge absolutely,
@@ -570,7 +577,7 @@
 
   <p>
     Knowing that a series converges absolutely allows us to make two important statements,
-    given in the following theorem.
+    given in <xref ref="thm_abs_convergence"/> below.
     The first is that absolute convergence is <q>stronger</q>
     than regular convergence.
     That is, just because <m>\infser a_n</m> converges,
@@ -756,11 +763,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 Why is <m>\ds\infser \sin(n)</m> not an alternating series?
@@ -778,11 +783,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 A series <m>\ds\infser (-1)^na_n</m> converges when <m>\{a_n\}</m> is <fillin/>, <fillin/><nbsp/>and <m>\lim\limits_{n\to\infty}a_n</m> =<fillin/>.
@@ -798,11 +801,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 Give an example of a series where
@@ -819,11 +820,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 The sum of a <fillin/><nbsp/>convergent series can be changed by rearranging the order of its terms.
@@ -872,11 +871,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser \frac{(-1)^{n+1}}{n^2}</m>
@@ -910,11 +907,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser \frac{(-1)^{n+1}}{\sqrt{n!}}</m>
@@ -948,11 +943,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser[0] (-1)^{n}\frac{n+5}{3n-5}</m>
@@ -986,11 +979,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser (-1)^{n}\frac{2^n}{n^2}</m>
@@ -1024,11 +1015,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser[0] (-1)^{n+1}\frac{3n+5}{n^2-3n+1}</m>
@@ -1062,11 +1051,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser \frac{(-1)^{n}}{\ln(n) +1}</m>
@@ -1100,11 +1087,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \sum_{n=2}^\infty (-1)^n\frac{n}{\ln(n) }</m>
@@ -1138,11 +1123,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser \frac{(-1)^{n+1}}{1+3+5+\cdots+(2n-1) }</m>
@@ -1176,11 +1159,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser \cos\big(\pi n\big)</m>
@@ -1214,11 +1195,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser[2] \frac{\sin\big((n+1/2)\pi\big)}{n\ln(n) }</m>
@@ -1252,11 +1231,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser[0] \left(-\frac23\right)^n</m>
@@ -1290,11 +1267,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser[0] (-e)^{-n}</m>
@@ -1328,11 +1303,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser[0] \frac{(-1)^nn^2}{n!}</m>
@@ -1366,11 +1339,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser[0] (-1)^n2^{-n^2}</m>
@@ -1404,11 +1375,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser \frac{(-1)^n}{\sqrt{n}}</m>
@@ -1442,11 +1411,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser \frac{(-1000)^n}{n!}</m>
@@ -1491,11 +1458,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser \frac{(-1)^n}{\ln(n+1)}</m>, <m>n=5</m>
@@ -1515,11 +1480,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser \frac{(-1)^{n+1}}{n^4}</m>, <m>n=4</m>
@@ -1539,11 +1502,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser[0] \frac{(-1)^{n}}{n!}</m>, <m>n=6</m>
@@ -1563,11 +1524,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser[0] \left(-\frac12\right)^n</m>, <m>n=9</m>
@@ -1601,11 +1560,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser \frac{(-1)^{n+1}}{n^4} = \frac{7\pi^4}{720}</m>,
@@ -1622,11 +1579,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser[0] \frac{(-1)^{n}}{n!} = \frac1e</m>,
@@ -1643,11 +1598,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser[0] \frac{(-1)^{n}}{2n+1}=\frac{\pi}4</m>,
@@ -1667,11 +1620,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser[0] \frac{(-1)^{n}}{(2n)!}=\cos(1)</m>,

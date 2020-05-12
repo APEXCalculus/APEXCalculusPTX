@@ -6,10 +6,10 @@
       Given the sequence <m>\{a_n\} = \{1/2^n\} = 1/2,\, 1/4,\, 1/8,\, \ldots</m>,
       consider the following sums:
       <md>
-        <mrow> a_1\amp = 1/2 \amp = \amp 1/2</mrow>
-        <mrow> a_1\amp +a_2 = 1/2+1/4 \amp = \amp 3/4 </mrow>
-        <mrow> a_1\amp +a_2+a_3 = 1/2+1/4+1/8 \amp =\amp 7/8</mrow>
-        <mrow> a_1\amp +a_2+a_3+a_4 \amp= 1/2+1/4+1/8+1/16 \amp = \amp 15/16 </mrow>
+        <mrow> a_1 \amp= 1/2 \amp = \amp 1/2</mrow>
+        <mrow> a_1+a_2\amp = 1/2+1/4 \amp = \amp 3/4 </mrow>
+        <mrow> a_1+a_2+a_3 \amp = 1/2+1/4+1/8 \amp =\amp 7/8</mrow>
+        <mrow> a_1+a_2+a_3+a_4 \amp= 1/2+1/4+1/8+1/16 \amp = \amp 15/16 </mrow>
       </md>
     </p>
 
@@ -175,7 +175,7 @@
 
               <figure xml:id="fig_series1">
                 <caption>Scatter plots relating to <xref ref="ex_series1">Example</xref>.</caption>
-                <sidebyside widths="47% 47%">
+                <sidebyside widths="47% 47%" align="bottom">
                   <figure xml:id="fig_series1a">
                     <caption/>
               <!-- START figures/fig_series1a.tex -->
@@ -187,7 +187,8 @@
                       \begin{axis}[
                       axis on top,
                       ymin=-10,%ymax=2.1,
-                      xmin=-1,xmax=11
+                      xmin=-1,xmax=11,
+                      xlabel=\empty
                       ]
 
                       \addplot [only marks,firstcolor,mark size={1.5pt},domain=1:10,samples=10] {x^2};
@@ -224,7 +225,8 @@
                       \begin{axis}[
                       axis on top,
                       ymin=-1.1,ymax=1.1,
-                      xmin=-1,xmax=11
+                      xmin=-1,xmax=11,
+                      xlabel=\empty
                       ]
 
                       \addplot [only marks,firstcolor,mark size={2.5pt},domain=1:10,samples=10] {(-1)^(x+1)};
@@ -459,7 +461,7 @@
               <figure xml:id="fig_series2a">
                 <caption>Scatter plots for the series in <xref ref="item_ex_ser2_1"/></caption>
             <!-- START figures/fig_series2a.tex -->
-                <image xml:id="img_series2a">
+                <image xml:id="img_series2a" width="47%">
                   <description></description>
                   <latex-image>
 
@@ -469,7 +471,8 @@
                   axis on top,
                   xtick={2,4,6,8,10},
                   ymin=-.5,ymax=2.5,
-                  xmin=-1,xmax=11
+                  xmin=-1,xmax=11,
+                  xlabel=\empty
                   ]
 
                   \addplot [only marks,firstcolor,mark size={1.5pt},domain=2:10,samples=9] {(.75)^x};
@@ -508,7 +511,7 @@
               <figure xml:id="fig_series2b">
                 <caption>Scatter plots for the series in <xref ref="item_ex_ser2_2"/></caption>
           <!-- START figures/fig_series2b.tex -->
-                <image xml:id="img_series2b">
+                <image xml:id="img_series2b" width="47%">
                   <description></description>
                   <latex-image>
 
@@ -518,7 +521,8 @@
                   axis on top,
                   xtick={2,4,6,8,10},
                   ymin=-1.1,ymax=1.1,
-                  xmin=-1,xmax=11
+                  xmin=-1,xmax=11,
+                  xlabel=\empty
                   ]
 
                   \addplot [only marks,firstcolor,mark size={1.5pt},domain=0:10,samples=11] {(-.5)^(x)};
@@ -557,7 +561,7 @@
               <figure xml:id="fig_series2c">
                 <caption>Scatter plots for the series in <xref ref="item_ex_ser2_3"/></caption>
           <!-- START figures/fig_series2c.tex -->
-                <image xml:id="img_series2c">
+                <image xml:id="img_series2c" width="47%">
                   <description></description>
                   <latex-image>
 
@@ -566,7 +570,8 @@
                   \begin{axis}[
                   axis on top,
                   ymin=-50,%ymax=1.1,
-                  xmin=-1,xmax=7
+                  xmin=-1,xmax=7,
+                  xlabel=\empty
                   ]
 
                   \addplot [only marks,firstcolor,mark size={1.5pt},domain=0:6,samples=7] {3^(x)};
@@ -623,14 +628,12 @@
 
                 <idx><h>series</h><h>p@<m>p</m>-series</h></idx>
                 <idx><h>p@<m>p</m>-series</h></idx>
-
-                <idx>
-                  <h>p@<m>p</m>-series</h>
-                </idx>
+                <idx><h>p@<m>p</m>-series</h></idx>
 
                 <me>
-                  \infser \frac{1}{(an+b)^p}, \qquad \text{ where \(p \gt 0\) and \(a\), \(b\) are real numbers. }
-                </me>
+                  \infser \frac{1}{(an+b)^p}
+                </me>,
+                where <m>p \gt 0</m> and <m>a, b</m> are real numbers such that <m>a\neq 0</m> and <m>an+b\gt 0</m> for all <m>n\geq 1</m>.
               </p>
             </li>
           </ol>
@@ -663,9 +666,12 @@
       <p>
         We will be able to prove <xref ref="thm_pseries">Theorem</xref>
         in <xref ref="sec_int_comp_tests">Section</xref>.
-        This theorem assumes that <m>an+b\neq 0</m> for all <m>n</m>.
-        If <m>an+b=0</m> for some <m>n</m>,
+        This theorem assumes that <m>an+b\gt 0</m> for all <m>n</m>;
+        if <m>an+b\lt 0</m>, <m>(an+b)^p</m> won't be defined when <m>p</m> is not an integer,
+        and if <m>an+b=0</m> for some <m>n</m>,
         then of course the series does not converge regardless of <m>p</m> as not all of the terms of the sequence are defined.
+        These requirements actually force us to have <m>a\gt 0</m>, since if <m>a\lt 0</m>,
+        we'll have <m>an+b\lt 0</m> for sufficiently large <m>n</m>.
       </p>
     </aside>
 
@@ -804,7 +810,7 @@
             <mrow>S_1 \amp =	\frac11-\frac12  = 1-\frac12</mrow>
             <mrow>S_2 \amp =	\left(\frac11-\frac12\right) + \left(\frac12-\frac13\right)  = 1-\frac13</mrow>
             <mrow>S_3 \amp =	\left(\frac11-\frac12\right) + \left(\frac12-\frac13\right)+\left(\frac13-\frac14\right)  = 1-\frac14</mrow>
-            <mrow>S_4 \amp =	\left(\frac11-\frac12\right) + \left(\frac12-\frac13\right)+\left(\frac13-\frac14\right) +\left(\frac14-\frac15\right = 1-\frac15</mrow>
+            <mrow>S_4 \amp =	\left(\frac11-\frac12\right) + \left(\frac12-\frac13\right)+\left(\frac13-\frac14\right) +\left(\frac14-\frac15\right) = 1-\frac15</mrow>
           </md>
         </p>
 
@@ -830,7 +836,8 @@
             axis on top,
 		      	xtick={2,4,6,8,10},
 		      	ymin=-.1,ymax=1.1,
-		      	xmin=-1,xmax=11
+		      	xmin=-1,xmax=11,
+            xlabel=\empty
             ]
 
             \addplot [only marks,firstcolor,mark size={1.5pt},domain=1:10,samples=10] {1/x-1/(x+1)};
@@ -971,7 +978,7 @@
 
         <figure xml:id="fig_series4">
           <caption>Scatter plots relating to the series in <xref ref="ex_series4">Example</xref>.</caption>
-          <sidebyside widths="47% 47%">
+          <sidebyside widths="47% 47%" align="bottom">
 
             <figure xml:id="fig_series4a">
               <caption/>
@@ -986,7 +993,8 @@
                 axis on top,
                 xtick={2,4,6,8,10},
                 ymin=-.1,ymax=1.6,
-                xmin=-1,xmax=11
+                xmin=-1,xmax=11,
+                xlabel=\empty
                 ]
 
                 \addplot [only marks,firstcolor,mark size={1.5pt},domain=1:10,samples=10] {2/(x^2+2*x)};
@@ -1023,7 +1031,8 @@
                 \begin{axis}[
                 axis on top,
                 ymin=-.5,ymax=5,
-                xmin=-10,xmax=110
+                xmin=-10,xmax=110,
+                xlabel=\empty
                 ]
 
                 \addplot [only marks,firstcolor,mark size={1.5pt},domain=10:100,samples=10] {ln((x+1)/x)};
@@ -1205,7 +1214,7 @@
 
               <figure xml:id="fig_series5">
                 <caption>Scatter plots relating to the series in <xref ref="ex_series5">Example</xref>.</caption>
-                <sidebyside widths="47% 47%">
+                <sidebyside widths="47% 47%" align="bottom">
 
                   <figure xml:id="fig_series5a">
                     <caption/>
@@ -1220,7 +1229,8 @@
                       axis on top,
                       xtick={10,20,30,40,50},
                       ymin=-.3,ymax=.3,
-                      xmin=-1,xmax=55
+                      xmin=-1,xmax=55,
+                      xlabel=\empty
                       ]
 
                       \addplot [only marks,firstcolor,mark size={1.5pt},domain=5:50,samples=10] {((-1)^(x+1)*(x^2-x))/(x^3)};
@@ -1257,7 +1267,8 @@
                       \begin{axis}[
                       axis on top,
                       ymin=-.3,ymax=2100,
-                      xmin=-1,xmax=11
+                      xmin=-1,xmax=11,
+                      xlabel=\empty
                       ]
 
                       \addplot [only marks,firstcolor,mark size={1.5pt}] coordinates {(1,1000.)(2,500.)(3,166.7)(4,41.67)(5,8.333)(6,1.389)(7,0.1984)(8,0.0248)(9,0.002756)(10,0.0002756)};
@@ -1548,11 +1559,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 Use your own words to describe how sequences and series are related.
@@ -1568,11 +1577,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 Use your own words to define a <em>partial sum</em>.
@@ -1588,11 +1595,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 Given a series <m>\ds \infser a_n</m>,
@@ -1611,11 +1616,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 Use your own words to explain what a geometric series is.
@@ -1631,11 +1634,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 T/F: If <m>\{a_n\}</m> is convergent,
@@ -1689,11 +1690,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser \frac{(-1)^n}{n}</m>
@@ -1721,11 +1720,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser \frac{1}{n^2}</m>
@@ -1754,11 +1751,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser \cos(\pi n)</m>
@@ -1786,11 +1781,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser n</m>
@@ -1818,11 +1811,9 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code>-->
+
             <statement>
               <p>
                 <m>\ds \infser \frac{1}{n!}</m>
@@ -1848,100 +1839,40 @@
         <!--</webwork>-->
       </exercise>
 
-      <exercise>
-        <!--<webwork>
-            <setup>
-
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds \infser \frac{1}{3^n}</m>
+                T/F: The integral formula for computing Arc Length was found by first approximating arc length with straight line segments.
               </p>
             </statement>
             <solution>
               <p>
-                <ol>
-                  <li>
-                    <p>
-                      <m>\frac{1}{3},\frac{4}{9},\frac{13}{27},\frac{40}{81},\frac{121}{243}</m>
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      Plot omitted
-                    </p>
-                  </li>
-                </ol>
+                T
               </p>
             </solution>
-        <!--</webwork>-->
+        </webwork>
       </exercise>
 
       <exercise>
-        <!--<webwork>
-            <setup>
-
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds \infser \left(-\frac{9}{10}\right)^n</m>
+                T/F: The integral formula for computing Arc Length includes a square<ndash/>root,
+                meaning the integration is probably easy.
               </p>
             </statement>
             <solution>
               <p>
-                <ol>
-                  <li>
-                    <p>
-                      <m>-0.9,-0.09,-0.819,-0.1629,-0.75339</m>
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      Plot omitted
-                    </p>
-                  </li>
-                </ol>
+                F
               </p>
             </solution>
-        <!--</webwork>-->
-      </exercise>
-
-      <exercise>
-        <!--<webwork>
-            <setup>
-
-            <pg-code>
-            </pg-code>
-            </setup>-->
-            <statement>
-              <p>
-                <m>\ds \infser \left(\frac{1}{10}\right)^n</m>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                <ol>
-                  <li>
-                    <p>
-                      <m>0.1,0.11,0.111,0.1111,0.11111</m>
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      Plot omitted
-                    </p>
-                  </li>
-                </ol>
-              </p>
-            </solution>
-        <!--</webwork>-->
+        </webwork>
       </exercise>
 
     </exercisegroup>
@@ -1950,135 +1881,188 @@
       <introduction>
         <p>
           In the following exercises,
-          use <xref ref="thm_series_nth_term">Theorem</xref>
-          to show the given series diverges.
+          find the arc length of the function on the given interval.
         </p>
       </introduction>
 
       <exercise>
-        <!--<webwork>
-            <setup>
-
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds \infser \frac{3n^2}{n(n+2)}</m>
+                <m>\ds f(x) = x</m> on <m>[0, 1]</m>.
               </p>
             </statement>
             <solution>
               <p>
-                <m>\lim\limits_{n\to\infty}a_n = 3</m>;
-                by <xref ref="thm_series_nth_term">Theorem</xref> the series diverges.
+                <m>\sqrt{2}</m>
               </p>
             </solution>
-        <!--</webwork>-->
+        </webwork>
       </exercise>
 
       <exercise>
-        <!--<webwork>
-            <setup>
-
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds \infser \frac{2^n}{n^2}</m>
+                <m>\ds f(x) = \sqrt{8}x</m> on <m>[-1, 1]</m>.
               </p>
             </statement>
             <solution>
               <p>
-                <m>\lim\limits_{n\to\infty}a_n = \infty</m>;
-                by <xref ref="thm_series_nth_term">Theorem</xref> the series diverges.
+                <m>6</m>
               </p>
             </solution>
-        <!--</webwork>-->
+        </webwork>
       </exercise>
 
       <exercise>
-        <!--<webwork>
-            <setup>
-
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds \infser \frac{n!}{10^n}</m>
+                <m>\ds f(x) = \frac13x^{3/2}-x^{1/2}</m> on <m>[0,1]</m>.
               </p>
             </statement>
             <solution>
               <p>
-                <m>\lim\limits_{n\to\infty}a_n = \infty</m>;
-                by <xref ref="thm_series_nth_term">Theorem</xref> the series diverges.
+                <m>4/3</m>
               </p>
             </solution>
-        <!--</webwork>-->
+        </webwork>
       </exercise>
 
       <exercise>
-        <!--<webwork>
-            <setup>
-
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds \infser \frac{5^n-n^5}{5^n+n^5}</m>
+                <m>\ds f(x) = \frac1{12}x^{3}+\frac1x</m> on <m>[1,4]</m>.
               </p>
             </statement>
             <solution>
               <p>
-                <m>\lim\limits_{n\to\infty}a_n = 1</m>;
-                by <xref ref="thm_series_nth_term">Theorem</xref> the series diverges.
+                <m>6</m>
               </p>
             </solution>
-        <!--</webwork>-->
+        </webwork>
       </exercise>
 
       <exercise>
-        <!--<webwork>
-            <setup>
-
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds \infser \frac{2^n+1}{2^{n+1}}</m>
+                <m>\ds f(x) = 2x^{3/2}-\frac16\sqrt{x}</m> on <m>[0,9]</m>.
               </p>
             </statement>
             <solution>
               <p>
-                <m>\lim\limits_{n\to\infty}a_n = 1/2</m>;
-                by <xref ref="thm_series_nth_term">Theorem</xref> the series diverges.
+                <m>109/2</m>
               </p>
             </solution>
-        <!--</webwork>-->
+        </webwork>
       </exercise>
 
       <exercise>
-        <!--<webwork>
-            <setup>
-
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds \infser \left(1+\frac1n\right)^n</m>
+                <m>\ds f(x) = \cosh(x)</m> on <m>[-\ln(2) , \ln(2) ]</m>.
               </p>
             </statement>
             <solution>
               <p>
-                <m>\lim\limits_{n\to\infty}a_n = e</m>;
-                by <xref ref="thm_series_nth_term">Theorem</xref> the series diverges.
+                <m>3/2</m>
               </p>
             </solution>
-        <!--</webwork>-->
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <pg-code>
+            </pg-code>
+
+            <statement>
+              <p>
+                <m>\ds f(x) = \frac12\big(e^x+e^{-x}\big)</m> on <m>[0, \ln(5) ]</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>12/5</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <pg-code>
+            </pg-code>
+
+            <statement>
+              <p>
+                <m>\ds f(x) = \frac1{12}x^5+\frac1{5x^3}</m> on <m>[0.1, 1]</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>79953333/400000 \approx 199.883</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <pg-code>
+            </pg-code>
+
+            <statement>
+              <p>
+                <m>\ds f(x) = \ln\big(\sin(x) \big)</m> on <m>[\pi/6, \pi/2]</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>-\ln(2-\sqrt{3}) \approx 1.31696</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <pg-code>
+            </pg-code>
+
+            <statement>
+              <p>
+                <m>\ds f(x) = \ln\big(\cos(x) \big)</m> on <m>[0, \pi/4]</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>\sinh^{-1}(1)</m>
+              </p>
+            </solution>
+        </webwork>
       </exercise>
 
     </exercisegroup>
@@ -2087,214 +2071,155 @@
       <introduction>
         <p>
           In the following exercises,
-          state whether the given series converges or diverges.
+          set up the integral to compute the arc length of the function on the given interval.
+          Do not evaluate the integral.
         </p>
       </introduction>
 
-      <exercise>
-        <!--<webwork>
-            <setup>
-
+      <exercise xml:id="ex_07_04_ex_13">
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds \infser \frac{1}{n^5}</m>
+                <m>\ds f(x) = x^2</m> on <m>[0, 1]</m>.
               </p>
             </statement>
             <solution>
               <p>
-                Converges; <m>p</m>-series with <m>p=5</m>.
+                <m>\int_0^1 \sqrt{1+4x^2}\, dx</m>
               </p>
             </solution>
-        <!--</webwork>-->
+        </webwork>
       </exercise>
 
       <exercise>
-        <!--<webwork>
-            <setup>
-
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds \infser[0] \frac{1}{5^n}</m>
+                <m>\ds f(x) = x^{10}</m> on <m>[0, 1]</m>.
               </p>
             </statement>
             <solution>
               <p>
-                Converges; geometric series with <m>r=1/5</m>.
+                <m>\int_0^1 \sqrt{1+100x^{18}}\, dx</m>
               </p>
             </solution>
-        <!--</webwork>-->
+        </webwork>
       </exercise>
 
       <exercise>
-        <!--<webwork>
-            <setup>
-
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds \infser[0] \frac{6^n}{5^n}</m>
+                <m>\ds f(x) = \sqrt{x}</m> on <m>[0, 1]</m>.
               </p>
             </statement>
             <solution>
               <p>
-                Diverges; geometric series with <m>r=6/5</m>.
+                <m>\int_0^1 \sqrt{1+\frac{1}{4x}}\, dx</m>
               </p>
             </solution>
-        <!--</webwork>-->
+        </webwork>
       </exercise>
 
       <exercise>
-        <!--<webwork>
-            <setup>
-
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds \infser n^{-4}</m>
+                <m>\ds f(x) = \ln(x)</m> on <m>[1, e]</m>.
               </p>
             </statement>
             <solution>
               <p>
-                Converges; <m>p</m>-series with <m>p=4</m>.
+                <m>\int_1^e \sqrt{1+\frac1{x^2}}\, dx</m>
               </p>
             </solution>
-        <!--</webwork>-->
+        </webwork>
       </exercise>
 
       <exercise>
-        <!--<webwork>
-            <setup>
-
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds \infser \sqrt{n}</m>
+                <m>\ds f(x) = \sqrt{1-x^2}</m> on <m>[-1, 1]</m>.
+                (Note: this describes the top half of a circle with radius 1.)
               </p>
             </statement>
             <solution>
               <p>
-                Diverges; fails <m>n</m>th term test.
+                <m>\int_{-1}^1 \sqrt{1+\frac{x^2}{1-x^2}}\, dx</m>
               </p>
             </solution>
-        <!--</webwork>-->
+        </webwork>
       </exercise>
 
       <exercise>
-        <!--<webwork>
-            <setup>
-
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds \infser \frac{10}{n!}</m>
+                <m>\ds f(x) = \sqrt{1-x^2/9}</m> on <m>[-3, 3]</m>.
+                (Note: this describes the top half of an ellipse with a major axis of length 6 and a minor axis of length 2.)
               </p>
             </statement>
             <solution>
               <p>
-                Converges; by <xref ref="idea_famous_series">Key Idea</xref>
-          and <xref ref="thm_series_prop">Theorem</xref>,
-          series converges to <m>10e</m>.
+                <m>\int_{-3}^3 \sqrt{1+\frac{x^2}{81-9x^2}}\, dx</m>
               </p>
             </solution>
-        <!--</webwork>-->
+        </webwork>
       </exercise>
 
       <exercise>
-        <!--<webwork>
-            <setup>
-
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds \infser \left(\frac{1}{n!}+\frac1n\right)</m>
+                <m>\ds f(x) = \frac1x</m> on <m>[1,2]</m>.
               </p>
             </statement>
             <solution>
               <p>
-                Diverges; although the series <m>\ds\infser \frac{1}{n!}</m> converges, <m>\ds \infser \frac1n</m> is the (divergent) harmonic series. We can only use the sum rule for series if both parts converge separately.
+                <m>\int_{1}^2 \sqrt{1+\frac1{x^4}}\, dx</m>
               </p>
             </solution>
-        <!--</webwork>-->
+        </webwork>
       </exercise>
 
-      <exercise>
-        <!--<webwork>
-            <setup>
-
+      <exercise xml:id="ex_07_04_ex_20">
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds \infser \frac{2}{(2n+8)^2}</m>
+                <m>\ds f(x) = \sec(x)</m> on <m>[-\pi/4,\pi/4]</m>.
               </p>
             </statement>
             <solution>
               <p>
-                Converges; general <m>p</m>-series with <m>p=2</m>.
+                <m>\int_{-\pi/4}^{\pi/4} \sqrt{1+\sec^2(x) \tan^2(x) }\, dx</m>
               </p>
             </solution>
-        <!--</webwork>-->
-      </exercise>
-
-      <exercise>
-        <!--<webwork>
-            <setup>
-
-            <pg-code>
-            </pg-code>
-            </setup>-->
-            <statement>
-              <p>
-                <m>\ds \infser \frac{1}{2n}</m>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                Diverges; by <xref ref="thm_series_prop">Theorem</xref>
-          this is half the Harmonic Series,
-          which diverges by growing without bound.
-          <q>Half of growing without bound</q>
-          is still growing without bound.
-              </p>
-            </solution>
-        <!--</webwork>-->
-      </exercise>
-
-      <exercise>
-        <!--<webwork>
-            <setup>
-
-            <pg-code>
-            </pg-code>
-            </setup>-->
-            <statement>
-              <p>
-                <m>\ds \infser \frac{1}{2n-1}</m>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                Diverges; general <m>p</m>-series with <m>p=1</m>.
-              </p>
-            </solution>
-        <!--</webwork>-->
+        </webwork>
       </exercise>
 
     </exercisegroup>
@@ -2302,672 +2227,260 @@
 
       <introduction>
         <p>
-          In the following exercises, a series is given.
-        </p>
-
-        <p>
-          <ol>
-            <li>
-              <p>
-                Find a formula for <m>S_n</m>,
-                the <m>n</m>th partial sum of the series.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                Determine whether the series converges or diverges.
-                If it converges, state what it converges to.
-              </p>
-            </li>
-          </ol>
+          In the following exercises, use Simpson's Rule, with <m>n=4</m>,
+          to approximate the arc length of the function on the given interval.
+          Note: these are the same problems as in <xref ref="ex_07_04_ex_13">Exercises</xref><ndash/> <xref ref="ex_07_04_ex_20"/>.
         </p>
       </introduction>
 
       <exercise>
-        <!--<webwork>
-            <setup>
-
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds \infser[0] \frac{1}{4^n}</m>
+                <m>\ds f(x) = x^2</m> on <m>[0, 1]</m>.
               </p>
             </statement>
             <solution>
               <p>
-                <ol>
-                  <li>
-                    <p>
-                      <m>S_n = \frac{1-(1/4)^n}{3/4}</m>
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      Converges to <m>4/3</m>.
-                    </p>
-                  </li>
-                </ol>
+                <m>1.4790</m>
               </p>
             </solution>
-        <!--</webwork>-->
+        </webwork>
       </exercise>
 
-   <exercise>
-      <statement>
+      <exercise>
+        <webwork>
+            <pg-code>
+            </pg-code>
+
+            <statement>
+              <p>
+                <m>\ds f(x) = x^{10}</m> on <m>[0, 1]</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>1.8377</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <pg-code>
+            </pg-code>
+
+            <statement>
+              <p>
+                <m>\ds f(x) = \sqrt{x}</m> on <m>[0, 1]</m>. (Note:
+                <m>\fp(x)</m> is not defined at <m>x=0</m>.)
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Simpson's Rule fails, as it requires one to divide by 0.
+                However, recognize the answer should be the same as for <m>y=x^2</m>; why?
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <pg-code>
+            </pg-code>
+
+            <statement>
+              <p>
+                <m>\ds f(x) = \ln(x)</m> on <m>[1, e]</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>2.1300</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <pg-code>
+            </pg-code>
+
+            <statement>
+              <p>
+                <m>\ds f(x) = \sqrt{1-x^2}</m> on <m>[-1, 1]</m>. (Note:
+                <m>\fp(x)</m> is not defined at the endpoints.)
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Simpson's Rule fails.
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <pg-code>
+            </pg-code>
+
+            <statement>
+              <p>
+                <m>\ds f(x) = \sqrt{1-x^2/9}</m> on <m>[-3, 3]</m>. (Note:
+                <m>\fp(x)</m> is not defined at the endpoints.)
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Simpson's Rule fails.
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <pg-code>
+            </pg-code>
+
+            <statement>
+              <p>
+                <m>\ds f(x) = \frac1x</m> on <m>[1,2]</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>1.4058</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <pg-code>
+            </pg-code>
+
+            <statement>
+              <p>
+                <m>\ds f(x) = \sec(x)</m> on <m>[-\pi/4,\pi/4]</m>.
+              </p>
+            </statement>
+            <solution>
+              <p>
+                <m>1.7625</m>
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
+
+      </exercisegroup>
+      <exercisegroup>
+
+      <introduction>
         <p>
-          <m>\ds \sum_{n=1}^\infty 2</m>
+          In the following exercises,
+          find the surface area of the described solid of revolution.
         </p>
-      </statement>
-      <solution>
-        <p>
-          <ol>
-            <li>
-              <p>
-                <m>S_n = 2n</m>
-              </p>
-            </li>
-
-            <li>
-              <p>
-                Diverges.
-              </p>
-            </li>
-          </ol>
-        </p>
-      </solution>
-    </exercise>
-
+      </introduction>
 
       <exercise>
-        <!--<webwork>
-            <setup>
-
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds 1^3+2^3+3^3+4^3+\cdots</m>
+                The solid formed by revolving <m>y=2x</m> on <m>[0,1]</m> about the <m>x</m>-axis.
               </p>
             </statement>
             <solution>
               <p>
-                <ol>
-                  <li>
-                    <p>
-                      <m>S_n = \left(\frac{n(n+1)}{2}\right)^2</m>
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      Diverges
-                    </p>
-                  </li>
-                </ol>
+                <m>2\pi\int_0^1 2x\sqrt{5}\, dx = 2\pi\sqrt{5}</m>
               </p>
             </solution>
-        <!--</webwork>-->
+        </webwork>
       </exercise>
 
       <exercise>
-        <!--<webwork>
-            <setup>
-
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds \infser (-1)^n n</m>
+                The solid formed by revolving <m>y=x^2</m> on <m>[0,1]</m> about the <m>y</m>-axis.
               </p>
             </statement>
             <solution>
               <p>
-                <ol>
-                  <li>
-                    <p>
-                      <m>
-                        S_n = \left\{\begin{array}{cc} \frac{n+1}{2} \amp n \text{ is odd } \\
-                        -\frac{n}{2} \amp n \text{ is even }
-                        \end{array} \right.
-                      </m>
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      Diverges
-                    </p>
-                  </li>
-                </ol>
+                <m>2\pi\int_0^1 x\sqrt{1+4x^2}\, dx = \pi/6(5\sqrt{5}-1)</m>
               </p>
             </solution>
-        <!--</webwork>-->
+        </webwork>
       </exercise>
 
       <exercise>
-        <!--<webwork>
-            <setup>
-
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds \infser[0] \frac{5}{2^n}</m>
+                The solid formed by revolving <m>y=x^3</m> on <m>[0,1]</m> about the <m>x</m>-axis.
               </p>
             </statement>
             <solution>
               <p>
-                <ol>
-                  <li>
-                    <p>
-                      <m>S_n = 5\frac{1-1/2^n}{1/2}</m>
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      Converges to 10.
-                    </p>
-                  </li>
-                </ol>
+                <m>2\pi\int_0^1 x^3\sqrt{1+9x^4}\, dx = \pi/27(10\sqrt{10}-1)</m>
               </p>
             </solution>
-        <!--</webwork>-->
+        </webwork>
       </exercise>
 
       <exercise>
-        <!--<webwork>
-            <setup>
-
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds \infser[0] e^{-n}</m>
+                The solid formed by revolving
+                <m>y=\sqrt{x}</m> on <m>[0,1]</m> about the <m>x</m>-axis.
               </p>
             </statement>
             <solution>
               <p>
-                <ol>
-                  <li>
-                    <p>
-                      <m>S_n = \frac{1-(1/e)^{n+1}}{1-1/e}</m>.
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      Converges to <m>1/(1-1/e) = e/(e-1)</m>.
-                    </p>
-                  </li>
-                </ol>
+                <m>2\pi\int_0^1 \sqrt{x}\sqrt{1+1/(4x)}\, dx = \pi/6(5\sqrt{5}-1)</m>
               </p>
             </solution>
-        <!--</webwork>-->
+        </webwork>
       </exercise>
 
       <exercise>
-        <!--<webwork>
-            <setup>
-
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>-->
+
             <statement>
               <p>
-                <m>\ds 1-\frac13+\frac19-\frac{1}{27}+\frac{1}{81}+\cdots</m>
+                The sphere formed by revolving
+                <m>y=\sqrt{1-x^2}</m> on <m>[-1,1]</m> about the <m>x</m>-axis.
               </p>
             </statement>
             <solution>
               <p>
-                <ol>
-                  <li>
-                    <p>
-                      <m>S_n = \frac{1-(-1/3)^n}{4/3}</m>
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      Converges to <m>3/4</m>.
-                    </p>
-                  </li>
-                </ol>
+                <m>2\pi\int_0^1 \sqrt{1-x^2}\sqrt{1+x/(1-x^2)}\, dx = 4\pi</m>
               </p>
             </solution>
-        <!--</webwork>-->
-      </exercise>
-
-      <exercise>
-        <!--<webwork>
-            <setup>
-
-            <pg-code>
-            </pg-code>
-            </setup>-->
-            <statement>
-              <p>
-                <m>\ds \infser \frac{1}{n(n+1)}</m>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                <ol>
-                  <li>
-                    <p>
-                      With partial fractions, <m>a_n = \frac1n-\frac1{n+1}</m>.
-                      Thus <m>S_n = 1-\frac1{n+1}</m>.
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      Converges to 1.
-                    </p>
-                  </li>
-                </ol>
-              </p>
-            </solution>
-        <!--</webwork>-->
-      </exercise>
-
-      <exercise>
-        <!--<webwork>
-            <setup>
-
-            <pg-code>
-            </pg-code>
-            </setup>-->
-            <statement>
-              <p>
-                <m>\ds \infser \frac{3}{n(n+2)}</m>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                <ol>
-                  <li>
-                    <p>
-                      With partial fractions,
-                      <m>a_n = \frac32\left(\frac1n-\frac1{n+2}\right)</m>.
-                      Thus <m>S_n = \frac32\left(\frac32-\frac1{n+1}-\frac1{n+2}\right)</m>.
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      Converges to 9/4
-                    </p>
-                  </li>
-                </ol>
-              </p>
-            </solution>
-        <!--</webwork>-->
-      </exercise>
-
-      <exercise>
-        <!--<webwork>
-            <setup>
-
-            <pg-code>
-            </pg-code>
-            </setup>-->
-            <statement>
-              <p>
-                <m>\ds \infser \frac{1}{(2n-1)(2n+1)}</m>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                <ol>
-                  <li>
-                    <p>
-                      With partial fractions,
-                      <m>a_n = \frac12\left(\frac{1}{2n-1}-\frac{1}{2n+1}\right)</m>.
-                      Then <m>S_n = \frac12\left(1-\frac1{2n+1}\right) = \frac{n}{2n+1}</m>.
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      Converges to <m>1/2</m>.
-                    </p>
-                  </li>
-                </ol>
-              </p>
-            </solution>
-        <!--</webwork>-->
-      </exercise>
-
-      <exercise>
-        <!--<webwork>
-            <setup>
-
-            <pg-code>
-            </pg-code>
-            </setup>-->
-            <statement>
-              <p>
-                <m>\ds \infser \ln\left(\frac{n}{n+1}\right)</m>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                <ol>
-                  <li>
-                    <p>
-                      <m>S_n = \ln\big(1/(n+1)\big)</m>
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      Diverges
-                      (to <m>-\infty</m>).
-                    </p>
-                  </li>
-                </ol>
-              </p>
-            </solution>
-        <!--</webwork>-->
-      </exercise>
-
-      <exercise>
-        <!--<webwork>
-            <setup>
-
-            <pg-code>
-            </pg-code>
-            </setup>-->
-            <statement>
-              <p>
-                <m>\ds \infser \frac{2n+1}{n^2(n+1)^2}</m>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                <ol>
-                  <li>
-                    <p>
-                      <m>S_n = 1-\frac{1}{(n+1)^2}</m>
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      Converges to 1.
-                    </p>
-                  </li>
-                </ol>
-              </p>
-            </solution>
-        <!--</webwork>-->
-      </exercise>
-
-      <exercise>
-        <!--<webwork>
-            <setup>
-
-            <pg-code>
-            </pg-code>
-            </setup>-->
-            <statement>
-              <p>
-                <m>\ds \frac{1}{1\cdot 4}+\frac1{2\cdot5}+\frac1{3\cdot6}+\frac1{4\cdot7}+\cdots</m>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                <ol>
-                  <li>
-                    <p>
-                      <m>a_n = \frac1{n(n+3)}</m>;
-                      using partial fractions,
-                      the resulting telescoping sum reduces to <m>S_n = \frac13\left(1+\frac12+\frac13-\frac1{n+1}-\frac1{n+2}-\frac1{n+3}\right)</m>
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      Converges to <m>11/18</m>.
-                    </p>
-                  </li>
-                </ol>
-              </p>
-            </solution>
-        <!--</webwork>-->
-      </exercise>
-
-      <exercise>
-        <!--<webwork>
-            <setup>
-
-            <pg-code>
-            </pg-code>
-            </setup>-->
-            <statement>
-              <p>
-                <m>\ds 2+\left(\frac12+\frac13\right) + \left(\frac14+\frac19\right) + \left(\frac18+\frac1{27}\right)+\cdots</m>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                <ol>
-                  <li>
-                    <p>
-                      <m>a_n = 1/2^n+1/3^n</m> for <m>n\geq 0</m>.
-                      Thus <m>S_n = \frac{1-1/2^2}{1/2}+\frac{1-1/3^n}{2/3}</m>.
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      Converges to <m>2+3/2 = 7/2</m>.
-                    </p>
-                  </li>
-                </ol>
-              </p>
-            </solution>
-        <!--</webwork>-->
-      </exercise>
-
-      <exercise>
-        <!--<webwork>
-            <setup>
-
-            <pg-code>
-            </pg-code>
-            </setup>-->
-            <statement>
-              <p>
-                <m>\ds \sum_{n=2}^\infty \frac{1}{n^2-1}</m>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                <ol>
-                  <li>
-                    <p>
-                      With partial fractions,
-                      <m>a_n = \frac12\left(\frac1{n-1}-\frac1{n+1}\right)</m>.
-                      Thus <m>S_n = \frac12\left(3/2-\frac1n-\frac{1}{n+1}\right)</m>.
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      Converges to 3/4.
-                    </p>
-                  </li>
-                </ol>
-              </p>
-            </solution>
-        <!--</webwork>-->
-      </exercise>
-
-      <exercise>
-        <!--<webwork>
-            <setup>
-
-            <pg-code>
-            </pg-code>
-            </setup>-->
-            <statement>
-              <p>
-                <m>\ds \infser[0] \big(\sin(1) \big)^n</m>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                <ol>
-                  <li>
-                    <p>
-                      <m>S_n=\frac{1-(\sin(1) )^{n+1}}{1-\sin(1) }</m>
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      Converges to <m>\frac{1}{1-\sin(1) }</m>..
-                    </p>
-                  </li>
-                </ol>
-              </p>
-            </solution>
-        <!--</webwork>-->
-      </exercise>
-
-      <exercise xml:id="x08_02_ex_24">
-        <!--<webwork>
-            <setup>
-
-            <pg-code>
-            </pg-code>
-            </setup>-->
-            <statement>
-              <p>
-                Break the Harmonic Series into the sum of the odd and even terms:
-                <me>
-                  \infser \frac1n = \infser \frac{1}{2n-1}+\infser \frac{1}{2n}
-                </me>.
-              </p>
-
-              <p>
-                The goal is to show that each of the series on the right diverge.
-              </p>
-
-              <p>
-                <ol>
-                  <li>
-                    <p>
-                      Show why <m>\ds \infser \frac{1}{2n-1} \gt \infser \frac{1}{2n}</m>.
-
-                      (Compare each <m>n</m>th partial sum.)
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      Show why <m>\ds\infser \frac{1}{2n-1}\lt 1+\infser \frac{1}{2n}</m>
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      Explain why (a) and (b) demonstrate that the series of odd terms is convergent, if,
-                      and only if, the series of even terms is also convergent.
-                      (That is, show both converge or both diverge.)
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      Explain why knowing the Harmonic Series is divergent determines that the even and odd series are also divergent.
-                    </p>
-                  </li>
-                </ol>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                <ol>
-                  <li>
-                    <p>
-                      The <m>n</m>th partial sum of the odd series is <m>1+\frac13+\frac15+\cdots+\frac{1}{2n-1}</m>.
-                      The <m>n</m>th partial sum of the even series is <m>\frac12+\frac14 + \frac16 + \cdots +\frac1{2n}</m>.
-                      Each term of the even series is less than the corresponding term of the odd series,
-                      giving us our result.
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      The <m>n</m>th partial sum of the odd series is <m>1+\frac13+\frac15+\cdots+\frac1{2n-1}</m>.
-                      The <m>n</m>th partial sum of 1 plus the even series is <m>1+\frac12+\frac14+\cdots + \frac{1}{2(n-1)}</m>.
-                      Each term of the even series is now greater than or equal to the corresponding term of the odd series,
-                      with equality only on the first term.
-                      This gives us the result.
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      If the odd series converges,
-                      the work done in (a) shows the even series converges also.
-                      (The sequence of the <m>n</m>th partial sum of the even series is bounded and monotonically increasing.)
-                      Likewise, (b) shows that if the even series converges,
-                      the odd series will, too.
-                      Thus if either series converges, the other does.
-
-                      Similarly, (a) and (b) can be used to show that if either series diverges,
-                      the other does, too.
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      If both the even and odd series converge,
-                      then their sum would be a convergent series.
-                      This would imply that the Harmonic Series, their sum, is convergent.
-                      It is not.
-                      Hence each series diverges.
-                    </p>
-                  </li>
-                </ol>
-              </p>
-            </solution>
-        <!--</webwork>-->
-      </exercise>
-
-      <exercise>
-        <!--<webwork>
-            <setup>
-
-            <pg-code>
-            </pg-code>
-            </setup>-->
-            <statement>
-              <p>
-                Show the series <m>\ds \infser \frac{n}{(2n-1)(2n+1)}</m> diverges.
-              </p>
-            </statement>
-            <solution>
-              <p>
-                Using partial fractions,
-                we can show that <m>a_n = \frac14\left(\frac1{2n-1}+\frac{1}{2n+1}\right)</m>.
-                The series is effectively twice the sum of the odd terms of the Harmonic Series which was shown to diverge in <xref ref="x08_02_ex_24">Exercise</xref>.
-                Thus this series diverges.
-              </p>
-            </solution>
-        <!--</webwork>-->
+        </webwork>
       </exercise>
 
     </exercisegroup>
