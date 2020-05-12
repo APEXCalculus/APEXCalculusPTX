@@ -218,6 +218,7 @@
 
           \begin{axis}[
           axis on top,
+          xtick = {2,4,6,8,10},
           extra x ticks={12.57},
           extra x tick labels={$4\pi$},
           ymin=-2,ymax=3.5,
@@ -225,7 +226,7 @@
           ]
 
           \addplot [name path=A,firstcurvestyle,-,domain=0:12.57,samples=70] {sin(deg(x))+2} node [shift={(-15pt,7pt)},black] {\scriptsize $f(x)$};
-          \addplot [name path=B,firstcurvestyle,-,domain=0:12.57,samples=90] {.5*cos(deg(2*x))-1.2} node [shift={(-25pt,-16pt)},black] {\scriptsize $g(x)$};
+          \addplot [name path=B,firstcurvestyle,-,domain=0:12.57,samples=90] {.5*cos(deg(2*x))-1.2} node [shift={(-20pt,-16pt)},black] {\scriptsize $g(x)$};
 
           \addplot [firstcurvestyle,areastyle] fill between [of=A and B];
 
@@ -245,7 +246,7 @@
         <md>
           <mrow>\int_0^{4\pi} \big(f(x)- g(x)\big)\, dx \amp  = \int_0^{4\pi} \Big(\sin(x) +2 - \big(\frac12\cos(2x)-1\big)\Big)\, dx</mrow>
           <mrow>\amp = -\cos(x) -\frac14\sin(2x)+3x\Big|_0^{4\pi}</mrow>
-          <mrow>\amp =	12\pi \approx 37.7\ \text{ units } ^2</mrow>
+          <mrow>\amp =	12\pi \approx 37.7\,\text{ units}^2</mrow>
         </md>.
       </p>
     </solution>
@@ -275,8 +276,8 @@
           xmin=-.5,xmax=4.7
           ]
 
-          \addplot [name path=A,firstcurvestyle,-,domain=-.2:4.5,samples=60] {x^3-7*x^2+12*x-3};
-          \addplot [name path=B,firstcurvestyle,-,domain=0:4.5] {5-2*x};
+          \addplot [name path=A,firstcurvestyle,-,domain=-.2:4.4,samples=60] {x^3-7*x^2+12*x-3};
+          \addplot [name path=B,firstcurvestyle,-,domain=0:4.4] {5-2*x};
 
           \addplot [firstcurvestyle,areastyle] fill between [of=A and B,soft clip={domain=1:4}];
 
@@ -303,7 +304,7 @@
           <mrow>\text{ Total Area }  \amp = \int_1^2 \big(g(x)-f(x)\big)\, dx + \int_2^4\big(f(x)-g(x)\big)\, dx</mrow>
           <mrow>\amp = \int_1^2 \big(x^3-7x^2+14x-8\big) \, dx + \int_2^4\big(-x^3+7x^2-14x+8\big)\, dx</mrow>
           <mrow>\amp = 5/12 + 8/3</mrow>
-          <mrow>\amp = 37/12 = 3.083\ \text{ units } ^2</mrow>
+          <mrow>\amp = 37/12 = 3.083\,\text{ units}^2</mrow>
         </md>.
       </p>
     </solution>
@@ -648,7 +649,7 @@
       <p>
         We have the following data points:
         <me>
-          (0,0),\ (2,2.25),\ (4,5.08),\ (6,6.35),\ (8,5.21),\ (10,2.76),\ (12,0)
+          (0,0),\,(2,2.25),\,(4,5.08),\,(6,6.35),\,(8,5.21),\,(10,2.76),\,(12,0)
         </me>.
       </p>
 
@@ -656,16 +657,16 @@
         We also have that <m>\dx=\frac{b-a}{n} = 2</m>, so Simpson's Rule gives
         <md>
           <mrow>\text{ Area } \amp \approx \frac{2}{3}\Big(1\cdot0+4\cdot2.25+2\cdot5.08+4\cdot6.35+2\cdot5.21+4\cdot2.76+1\cdot0\Big)</mrow>
-          <mrow>\amp = 44.01\overline{3} \ \text{ units } ^2</mrow>
+          <mrow>\amp = 44.01\overline{3} \,\text{ units}^2</mrow>
         </md>.
       </p>
 
       <p>
         Since the measurements are in hundreds of feet,
-        units<m>^2 = (100\ \text{ ft } )^2 = 10,000\ \text{ ft } ^2</m>,
-        giving a total area of <m>440,133\ \text{ ft } ^2</m>.
+        square units are given by (<quantity><mag>100</mag><unit base="foot"/></quantity>)<m>^2 = </m><quantity><mag>10,000</mag><unit base="foot" exp="2"/></quantity>,
+        giving a total area of <quantity><mag>440,133</mag><unit base="foot" exp="2"/></quantity>.
         (Since we are approximating,
-        we'd likely say the area was about <m>440,000\ \text{ ft } ^2</m>,
+        we'd likely say the area was about <quantity><mag>440,000</mag><unit base="foot" exp="2"/></quantity>,
         which is a little more than 10 acres.)
       </p>
     </solution>
@@ -685,13 +686,11 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
             <pg-code>
               $true = PopUp(['?','True','False'],1);
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 The area between curves is always positive.<var name="$true" form="popup"/>
@@ -701,13 +700,11 @@
       </exercise>
 <!-- Exercise 2 -->
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
             <pg-code>
               $true = PopUp(['?','True','False'],1);
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 Calculus can be used to find the area of basic geometric shapes.<var name="$true" form="popup"/>
@@ -717,12 +714,10 @@
       </exercise>
 <!-- Exercise 3 -->
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
             <pg-code>
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 In your own words,
@@ -738,11 +733,9 @@
 
       <exercise>
         <webwork>
-          <setup>
-
           <pg-code>
           </pg-code>
-          </setup>
+
           <statement>
             <p>
               Describe a situation where it is advantageous to find an area enclosed by curves through integration with respect to <m>y</m> instead of <m>x</m>.
@@ -779,9 +772,7 @@
 
 <!-- Exercise 4 -->
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
               $x0 = 0;
               $x1 = Compute("2*pi");
@@ -792,7 +783,7 @@
               $D = Formula("$F-$G");
               $area = $D->eval(x=>$x1) - $D->eval(x=>$x0);
             </pg-code>
-            </setup> -->
+             -->
             <statement>
               <p>
                 Find the area of the shaded region in the graph below.
@@ -817,7 +808,7 @@
                   \addplot [name path=A,firstcurvestyle,-,domain=-.9:6.5,samples=40] {.5*cos(deg(x))+1} node [shift={(-25pt,7pt)} ,black] {\scriptsize $y=\frac12\cos(x) +1$};
                   \addplot [name path=B,firstcurvestyle,-,domain=-.9:6.5] {.5*x+3}node [shift={(-30pt,0pt)} ,black] {\scriptsize $y=\frac12x+3$};
 
-                  \addplot [firstcurvestyle,areastyle] fill between [of=A and B,soft clip={domain=0:2*pi}];  
+                  \addplot [firstcurvestyle,areastyle] fill between [of=A and B,soft clip={domain=0:2*pi}];
 
                   \end{axis}
 
@@ -841,9 +832,7 @@
       </exercise>
 <!-- Exercise 5 -->
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
               $x0 = Compute("-1");
               $x1 = Compute("1");
@@ -854,7 +843,7 @@
               $D = Formula("$F-$G");
               $area = $D->eval(x=>$x1) - $D->eval(x=>$x0);
             </pg-code>
-            </setup> -->
+             -->
             <statement>
               <p>
                 Find the area of the shaded region in the graph below.
@@ -902,9 +891,7 @@
       </exercise>
 <!-- Exercise 6 -->
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
               $x0 = Compute("0");
               $x1 = Compute("pi");
@@ -915,7 +902,7 @@
               $D = Formula("$F-$G");
               $area = $D->eval(x=>$x1) - $D->eval(x=>$x0);
             </pg-code>
-            </setup> -->
+             -->
             <statement>
               <p>
                 Find the area of the shaded region in the graph below.
@@ -965,9 +952,7 @@
       </exercise>
 <!-- Exercise 7 -->
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
               $x0 = Compute("0");
               $x1 = Compute("pi");
@@ -978,7 +963,7 @@
               $D = Formula("$F-$G");
               $area = $D->eval(x=>$x1) - $D->eval(x=>$x0);
             </pg-code>
-            </setup> -->
+             -->
             <statement>
               <p>
                 Find the area of the shaded region in the graph below.
@@ -1027,10 +1012,9 @@
         <!-- </webwork> -->
       </exercise>
 <!-- Exercise 8 -->
-      <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+<!--TODO: The wrong graph is used in this one. Needs updating.-->
+      <!-- <exercise> -->
+        <!-- <webwork>
             <pg-code>
               $x0 = Compute("0");
               $x1 = Compute("pi/4");
@@ -1041,14 +1025,14 @@
               $D = Formula("$F-$G");
               $area = $D->eval(x=>$x1) - $D->eval(x=>$x0);
             </pg-code>
-            </setup> -->
-            <statement>
+             -->
+            <!-- <statement>
               <p>
                 Find the area of the shaded region in the graph below.
               </p>
-              <sidebyside width="47%">
+              <sidebyside width="47%"> -->
             <!-- START figures/fig_07_01_ex_07.tex -->
-                <image xml:id="img_07_01_ex_07">
+                <!-- <image xml:id="img_07_01_ex_07">
                   <description></description>
                   <latex-image>
 
@@ -1074,26 +1058,24 @@
                   \end{tikzpicture}
 
                   </latex-image>
-                </image>
+                </image> -->
             <!-- figures/fig_07_01_ex_07.tex END -->
-              </sidebyside>
+              <!-- </sidebyside> -->
               <!-- <p>
                 <var name="$area" width="10"/>
               </p> -->
   <!-- 1/2 -->
-            </statement>
+            <!-- </statement>
             <answer>
               <p>
                 <m>1/2</m>
               </p>
-            </answer>
+            </answer> -->
         <!-- </webwork> -->
-      </exercise>
+      <!-- </exercise> -->
 <!-- Exercise 9 -->
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
               $x0 = Compute("pi/4");
               $x1 = Compute("5*pi/4");
@@ -1104,7 +1086,7 @@
               $D = Formula("$F-$G");
               $area = $D->eval(x=>$x1) - $D->eval(x=>$x0);
             </pg-code>
-            </setup> -->
+             -->
             <statement>
               <p>
                 Find the area of the shaded region in the graph below.
@@ -1153,9 +1135,7 @@
       </exercise>
 <!-- Exercise 10 -->
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
               $x0 = Compute("0");
               $x1 = Compute("1");
@@ -1166,7 +1146,7 @@
               $D = Formula("$F-$G");
               $area = $D->eval(x=>$x1) - $D->eval(x=>$x0);
             </pg-code>
-            </setup> -->
+             -->
             <statement>
               <p>
                 Find the area of the shaded region in the graph below.
@@ -1222,7 +1202,7 @@
               <latex-image>
 
               \begin{tikzpicture}
-                
+
               \begin{axis}[
                 axis on top,
                 ymin=-.1,ymax=2.5,
@@ -1240,7 +1220,7 @@
               \addplot [firstcurvestyle,areastyle] fill between [of=C and D];
 
               \end{axis}
-              
+
               \end{tikzpicture}
 
               </latex-image>
@@ -1265,9 +1245,7 @@
       </introduction>
 <!-- Exercise 11 -->
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
             <pg-code>
               $x0 = Compute("-2");
               $x1 = Compute("1");
@@ -1278,7 +1256,7 @@
               $D = Formula("$F-$G");
               $area = $D->eval(x=>$x1) - $D->eval(x=>$x0);
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(x) = 2x^2+5x-3</m>, <m>g(x) = x^2+4x-1</m>
@@ -1293,9 +1271,7 @@
       </exercise>
 <!-- Exercise 12 -->
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
             <pg-code>
               $x0 = Compute("-1");
               $x1 = Compute("1");
@@ -1306,7 +1282,7 @@
               $D = Formula("$F-$G");
               $area = $D->eval(x=>$x1) - $D->eval(x=>$x0);
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(x) = x^2-3x+2</m>, <m>g(x) = -3x+3</m>
@@ -1321,9 +1297,7 @@
       </exercise>
 <!-- Exercise 13 -->
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
             <pg-code>
               $x0 = Compute("0");
               $x1 = Compute("pi/2");
@@ -1335,7 +1309,7 @@
               $area = $D->eval(x=>$x1) - $D->eval(x=>$x0);
               $area = 2*$area; <!-- symmetry, region from -pi/2 to pi/2 -->
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(x) = \sin(x)</m>, <m>g(x) = 2x/\pi</m>
@@ -1350,9 +1324,7 @@
       </exercise>
 <!-- Exercise 14 -->
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
             <pg-code>
               $x0 = Compute("-1");
               $x1 = Compute("1");
@@ -1368,7 +1340,7 @@
               $area2 = $D2->eval(x=>$x2) - $D2->eval(x=>$x1);
               $area = $area1 + $area2;
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(x) = x^3-4x^2+x-1</m>, <m>g(x) = -x^2+2x-4</m>
@@ -1383,9 +1355,7 @@
       </exercise>
 <!-- Exercise 15 -->
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
             <pg-code>
               $x0 = Compute("0");
               $x1 = Compute("1");
@@ -1396,7 +1366,7 @@
               $D = Formula("$F-$G");
               $area = $D->eval(x=>$x1) - $D->eval(x=>$x0);
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(x) = x</m>, <m>g(x) = \sqrt{x}</m>
@@ -1411,9 +1381,7 @@
       </exercise>
 <!-- Exercise 16 -->
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
             <pg-code>
               $x0 = Compute("-1");
               $x1 = Compute("1");
@@ -1428,7 +1396,7 @@
               $area2 = $D2->eval(x=>$x2) - $D2->eval(x=>$x1);
               $area = $area1 + $area2;
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(x) = -x^3+5x^2+2x+1</m>, <m>g(x) = 3x^2+x+3</m>
@@ -1466,9 +1434,7 @@
 
 <!-- Exercise 17 -->
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
             <pg-code>
               $x0 = Compute("pi/6");
               $x1 = Compute("5*pi/6");
@@ -1484,7 +1450,7 @@
               $area2 = $D2->eval(x=>$x2) - $D2->eval(x=>$x1);
               $area = $area1 + $area2;
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 The functions <m>f(x) = \cos(2x)</m> and
@@ -1535,9 +1501,7 @@
       </introduction>
 <!-- Exercise 18 -->
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
               $x0 = Compute("0");
               $x1 = Compute("1");
@@ -1555,7 +1519,7 @@
               $area2 = $D2->eval(x=>$x2) - $D2->eval(x=>$x1);
               $area = $area1 + $area2;
             </pg-code>
-            </setup> -->
+             -->
             <statement>
               <sidebyside width="47%">
             <!-- START figures/fig_07_01_ex_18.tex -->
@@ -1599,9 +1563,7 @@
       </exercise>
 <!-- Exercise 19 -->
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
               $x0 = Compute("0");
               $x1 = Compute("1");
@@ -1619,7 +1581,7 @@
               $area2 = $D2->eval(x=>$x2) - $D2->eval(x=>$x1);
               $area = $area1 + $area2;
             </pg-code>
-            </setup> -->
+             -->
             <statement>
               <sidebyside width="47%">
             <!-- START figures/fig_07_01_ex_19.tex -->
@@ -1663,9 +1625,7 @@
       </exercise>
 <!-- Exercise 20 -->
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
               $x0 = Compute("-1");
               $x1 = Compute("2");
@@ -1676,7 +1636,7 @@
               $D = Formula("$F-$G");
               $area = $D->eval(x=>$x1) - $D->eval(x=>$x0);
             </pg-code>
-            </setup> -->
+             -->
             <statement>
               <sidebyside width="47%">
             <!-- START figures/fig_07_01_ex_20.tex -->
@@ -1719,9 +1679,7 @@
       </exercise>
 <!-- Exercise 21 -->
       <exercise>
-        <!--<webwork seed="1">
-            <setup>
-
+        <!--<webwork>
             <pg-code>
               $x0 = Compute("0");
               $x1 = Compute("1/2");
@@ -1739,7 +1697,7 @@
               $area2 = $D2->eval(x=>$x2) - $D2->eval(x=>$x1);
               $area = $area1 + $area2;
             </pg-code>
-            </setup> -->
+             -->
             <statement>
               <sidebyside width="47%">
             <!-- START figures/fig_07_01_ex_21.tex -->
@@ -1782,9 +1740,7 @@
       </exercise>
 <!-- Exercise 22 -->
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
               $x0 = Compute("0");
               $x1 = Compute("1/2");
@@ -1802,7 +1758,7 @@
               $area2 = $D2->eval(x=>$x2) - $D2->eval(x=>$x1);
               $area = $area1 + $area2;
             </pg-code>
-            </setup> -->
+             -->
             <statement>
               <sidebyside width="47%">
             <!-- START figures/fig_07_01_ex_22.tex -->
@@ -1851,7 +1807,7 @@
             <latex-image>
 
                \begin{tikzpicture}
-                
+
                 \begin{axis}[
                   axis on top,
                   ymin=-.1,ymax=2.5,
@@ -1869,9 +1825,9 @@
                 \addplot [firstcurvestyle,areastyle] fill between [of=C and D];
 
                 \end{axis}
-                
+
                 \end{tikzpicture}
-                
+
             </latex-image>
           </image>
         </sidebyside>
@@ -1894,9 +1850,7 @@
       </introduction>
 <!-- Exercise 23 -->
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
             <pg-code>
               @p1 = (1,1);
               @p2 = (2,3);
@@ -1907,7 +1861,7 @@
               $s2 = join(", ", @p2);
               $s3 = join(", ", @p3);
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>(<var name="$s1"/>)</m>,<m>(<var name="$s2"/>)</m>,and <m>(<var name="$s3"/>)</m>
@@ -1922,9 +1876,7 @@
       </exercise>
 <!-- Exercise 24 -->
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
             <pg-code>
               @p1 = (-1,1);
               @p2 = (1,3);
@@ -1935,7 +1887,7 @@
               $s2 = join(", ", @p2);
               $s3 = join(", ", @p3);
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>(<var name="$s1"/>)</m>,<m>(<var name="$s2"/>)</m>,and <m>(<var name="$s3"/>)</m>
@@ -1950,9 +1902,7 @@
       </exercise>
 <!-- Exercise 25 -->
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
             <pg-code>
               @p1 = (-1,1);
               @p2 = (3,3);
@@ -1963,7 +1913,7 @@
               $s2 = join(", ", @p2);
               $s3 = join(", ", @p3);
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>(<var name="$s1"/>)</m>,<m>(<var name="$s2"/>)</m>,and <m>(<var name="$s3"/>)</m>
@@ -1978,9 +1928,7 @@
       </exercise>
 <!-- Exercise 26 -->
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
             <pg-code>
               @p1 = (0,0);
               @p2 = (2,5);
@@ -1991,7 +1939,7 @@
               $s2 = join(", ", @p2);
               $s3 = join(", ", @p3);
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>(<var name="$s1"/>)</m>,<m>(<var name="$s2"/>)</m>,and <m>(<var name="$s3"/>)</m>
@@ -2009,9 +1957,7 @@
     <exercisegroup>
 <!-- Exercise 27 -->
       <exercise xml:id="x07_01_ex_29">
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code> -->
             <!-- Trapezoidal Rule, n = 6 -->
               <!-- $a = 0;
@@ -2030,7 +1976,7 @@
               $area = NumberWithUnits("$area cm^2");
               $area_ft = NumberWithUnits("$area_ft ft^2");
             </pg-code>
-            </setup> -->
+             -->
             <statement>
               <p>
                 Use the Trapezoidal Rule to approximate the area of the pictured lake whose lengths,
@@ -2074,9 +2020,7 @@
       </exercise>
 <!-- Exercise 28 -->
       <exercise xml:id="x07_01_ex_30">
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code> -->
             <!-- Simpson's Rule, n = 6 -->
               <!-- $a = 0;
@@ -2095,7 +2039,7 @@
               $area = NumberWithUnits("$area cm^2");
               $area_ft = NumberWithUnits("$area_ft ft^2");
             </pg-code>
-            </setup> -->
+             -->
             <statement>
               <p>
                 Use Simpson's Rule to approximate the area of the pictured lake whose lengths,
