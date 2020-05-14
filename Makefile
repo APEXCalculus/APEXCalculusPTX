@@ -123,7 +123,7 @@ pdf:
 	cp -a $(WWOUT)/*.png $(PRINTOUT)/images || :
 	cp -a $(IMGSRC) $(PRINTOUT) || :
 	cd $(PRINTOUT); \
-	xsltproc -xinclude $(PTXXSL)/mathbook-latex.xsl $(OUTPUT)/merge.xml > apex.tex; \
+	xsltproc -xinclude --stringparam latex.print 'yes' --stringparam latex.pageref 'no' --stringparam latex.sides 'two' --stringparam exercise.divisional.answer no --stringparam exercise.divisional.solution no --stringparam exercise.divisional.hint no $(PTXXSL)/mathbook-latex.xsl $(OUTPUT)/merge.xml > apex.tex; \
 	xelatex apex.tex; \
 	xelatex apex.tex; \
 
