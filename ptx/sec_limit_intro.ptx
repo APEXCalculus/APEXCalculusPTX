@@ -27,47 +27,48 @@
       1, <m>y</m> will be <q>near</q> <m>0.84</m>.
     </p>
 
-    <sidebyside widths="47% 47%" valign="bottom">
+    <sidebyside widths="47% 47%" margins="0%">
       <figure xml:id="fig_sinx_over_x_full">
-        <caption><m>\sin(x)/x</m>.</caption>
+        <caption><m>\sin(x)/x</m></caption>
         <image xml:id="img_sinx_over_x_full">
           <latex-image>
-
-          \begin{tikzpicture}[
-          declare function = {func(\x) = (\x != 0) * (sin(x*180/pi)/x) + (\x == 0) * (1);}]
-          \begin{axis}[
-          ymin=-0.25, ymax=1.2,
-          xmin=-7, xmax=7
-          ]
-          \addplot+[domain=-7:7,samples=50] {func(x)};
-          \addplot[hollowdot] coordinates {(0,1)};
-          \end{axis}
-          \end{tikzpicture}
-
+            \begin{tikzpicture}[
+              declare function = {func(\x) = (\x != 0) * (sin(x*180/pi)/x) + (\x == 0) * (1);}
+            ]
+              \begin{axis}[
+                ymin=-0.25,
+                ymax=1.2,
+                xmin=-7,
+                xmax=7,
+              ]
+                \addplot+[domain=-7:7,samples=50] {func(x)};
+                \addplot[hollowdot] coordinates {(0,1)};
+              \end{axis}
+            \end{tikzpicture}
           </latex-image>
         </image>
-
       </figure>
 
       <figure xml:id="fig_zoom_sinx_over_x">
-        <caption><m>\sin(x)/x</m> near <m>x=1</m>.</caption>
+        <caption><m>\sin(x)/x</m> near <m>x=1</m></caption>
         <!-- START figures/sinx_over_x_1.tex -->
         <image xml:id="img_zoom_sinx_over_x">
           <latex-image>
-
-          \begin{tikzpicture}
-          \begin{axis}[xmin=.3, xmax=1.6,
-          ymin=.4, ymax=1.1,
-          xtick={0.5,1,1.5},
-          ytick={0.6,0.8,1},
-          xdiscontinuity,
-          ydiscontinuity,
-          grid=both,
-          ]
-          \addplot+[domain=0.5:1.5] {sin(x*180/pi)/x};
-          \end{axis}
-          \end{tikzpicture}
-
+            \begin{tikzpicture}
+              \begin{axis}[
+                xmin=.3,
+                xmax=1.6,
+                ymin=.4,
+                ymax=1.1,
+                xtick={0.5,1,1.5},
+                ytick={0.6,0.8,1},
+                xdiscontinuity,
+                ydiscontinuity,
+                grid=both,
+              ]
+                \addplot+[domain=0.5:1.5] {sin(x*180/pi)/x};
+              \end{axis}
+            \end{tikzpicture}
           </latex-image>
         </image>
         <!-- figures/sinx_over_x_1.tex END -->
@@ -84,7 +85,7 @@
       But what happens when <m>x=0</m>?
       We have
       <me>
-        y \rightarrow \frac{\sin(0) }{0} \rightarrow {{\text{“}}\atop{}}\frac{0}{0}{{\text{”}}\atop{}}
+        y \rightarrow \frac{\sin(0) }{0} \rightarrow {\genfrac{}{}{0pt}{0}{\text{“}}{}}\frac{0}{0}{\genfrac{}{}{0pt}{0}{\text{”}}{}}
       </me>.
       The expression <m>0/0</m> has no value; it is
 
@@ -98,23 +99,26 @@
     </p>
 
     <figure xml:id="fig_sinx_over_x">
-      <caption><m>\sin(x)/x</m> near <m>x=0</m>.</caption>
+      <caption><m>\sin(x)/x</m> near <m>x=0</m></caption>
             <!-- START figures/sinx_over_x_2.tex -->
       <image xml:id="img_sinx_over_x_2" width="47%">
         <latex-image>
-
-        \begin{tikzpicture}[declare function = {func(\x) = (\x != 0) * (sin(x*180/pi)/x) + (\x == 0) * (1);}]
-        \begin{axis}[xmin=-1.1,xmax=1.2,
-        ymin=.75,ymax=1.05,
-        ytick={.8,.9,1},
-        extra y ticks={.1,.3,...,.9},
-        extra y tick labels={},
-        ]
-        \addplot+[domain=-1:1] {func(x)};
-        \addplot[hollowdot] coordinates {(0,1)};
-        \end{axis}
-        \end{tikzpicture}
-
+          \begin{tikzpicture}[
+            declare function = {func(\x) = (\x != 0) * (sin(x*180/pi)/x) + (\x == 0) * (1);}
+          ]
+            \begin{axis}[
+              xmin=-1.1,
+              xmax=1.2,
+              ymin=.75,
+              ymax=1.05,
+              ytick={.8,.9,1},
+              extra y ticks={.1,.3,...,.9},
+              extra y tick labels={},
+            ]
+              \addplot+[domain=-1:1] {func(x)};
+              \addplot[hollowdot] coordinates {(0,1)};
+            \end{axis}
+          \end{tikzpicture}
         </latex-image>
       </image>
             <!-- figures/sinx_over_x_2.tex END -->
@@ -163,7 +167,7 @@
     </p>
 
     <p>
-      Consider again <m>\lim\limits_{x\to 1}\frac{\sin(x)}{x}</m>.
+      Consider again <m>\lim_{x\to 1}\frac{\sin(x)}{x}</m>.
       To approximate this limit numerically,
       we can create a table of <m>x</m> and <m>f(x)</m> values where <m>x</m> is <q>near</q> <m>1</m>.
       This is done in <xref ref="table_sinx_1">Figure</xref>.
@@ -179,7 +183,7 @@
     </p>
 
     <figure xml:id="table_sinx_1">
-      <caption>Values of <m>\sin(x)/x</m> with <m>x</m> near <m>1</m>.</caption>
+      <caption>Values of <m>\sin(x)/x</m> with <m>x</m> near <m>1</m></caption>
       <tabular>
         <row bottom="medium">
           <cell><m>x</m></cell>
@@ -214,11 +218,10 @@
           <cell>0.810189</cell>
         </row>
       </tabular>
-
     </figure>
 
     <p>
-      Now approximate <m>\lim\limits_{x\to 0} \frac{\sin(x)}{x}</m> numerically.
+      Now approximate <m>\lim_{x\to 0} \frac{\sin(x)}{x}</m> numerically.
       We already approximated the value of this limit as <m>1</m> graphically in
       <xref ref="fig_sinx_over_x">Figure</xref>.
       <xref ref="table_sinx_2">Figure</xref>
@@ -230,7 +233,7 @@
     </p>
 
     <figure xml:id="table_sinx_2">
-      <caption>Values of <m>\sin(x)/x</m> with <m>x</m> near <m>0</m>.</caption>
+      <caption>Values of <m>\sin(x)/x</m> with <m>x</m> near <m>0</m></caption>
       <tabular>
         <row bottom="medium">
           <cell><m>x</m></cell>
@@ -265,12 +268,11 @@
           <cell>0.9983341665</cell>
         </row>
       </tabular>
-
     </figure>
 
     <p>
       This numerical method gives confidence to say that <m>1</m> is a good approximation of
-      <m>\lim\limits_{x\to 0} \frac{\sin(x)}{x}</m>; that is,
+      <m>\lim_{x\to 0} \frac{\sin(x)}{x}</m>; that is,
       <me>
         \lim_{x\to 0} \frac{\sin(x)}{x} \approx 1
       </me>.
@@ -308,34 +310,34 @@
           and <xref ref="table_limit1">Figure</xref>, respectively.
         </p>
 
-        <sidebyside widths="47% 47%" valign="bottom">
+        <sidebyside widths="47% 47%" margins="0%" valign="bottom">
           <figure xml:id="fig_limit1">
-            <caption>Graphically approximating a limit in <xref ref="ex_limit1">Example</xref>.</caption>
+            <caption>Graphically approximating a limit in <xref ref="ex_limit1">Example</xref></caption>
             <!-- START figures/fig_limit1.tex -->
             <image xml:id="img_limit1">
               <latex-image>
-
-              \begin{tikzpicture}
-              \begin{axis}[xmin=2.3,xmax=3.7,
-              ymin=0.2,ymax=.35,
-              xdiscontinuity,
-              ydiscontinuity,
-              extra y tick labels={},
-              grid=both,
-              ]
-              \addplot+[domain=2.5:3.45] {(x^2 - x - 6)/(6*x^2 - 19*x + 3)};
-              \addplot [hollowdot] coordinates{(3,0.294)};
-
-              \end{axis}
-              \end{tikzpicture}
-
+                \begin{tikzpicture}
+                  \begin{axis}[
+                    xmin=2.3,
+                    xmax=3.7,
+                    ymin=0.2,
+                    ymax=.35,
+                    xdiscontinuity,
+                    ydiscontinuity,
+                    extra y tick labels={},
+                    grid=both,
+                  ]
+                    \addplot+[domain=2.5:3.45] {(x^2 - x - 6)/(6*x^2 - 19*x + 3)};
+                    \addplot [hollowdot] coordinates{(3,0.294)};
+                  \end{axis}
+                \end{tikzpicture}
               </latex-image>
             </image>
             <!-- figures/fig_limit1.tex END -->
           </figure>
 
           <figure xml:id="table_limit1">
-            <caption>Numerically approximating a limit in <xref ref="ex_limit1">Example</xref>.</caption>
+            <caption>Numerically approximating a limit in <xref ref="ex_limit1">Example</xref></caption>
             <tabular>
               <row bottom="medium">
                 <cell><m>x</m></cell>
@@ -370,9 +372,7 @@
                 <cell><m>0.289773</m></cell>
               </row>
             </tabular>
-
           </figure>
-
         </sidebyside>
 
         <p>
@@ -391,7 +391,6 @@
     <p>
       This example may bring up a few questions about approximating limits
       (and the nature of limits themselves).
-
       <ol>
         <li>
           <p>
@@ -399,7 +398,6 @@
             why bother with it?
           </p>
         </li>
-
         <li>
           <p>
             How many values of <m>x</m> in a table are
@@ -458,30 +456,32 @@
           as indicated in the graph with the open circle.
         </p>
 
-        <sidebyside widths="47% 47%" valign="bottom">
+        <sidebyside widths="47% 47%" margins="0%" valign="bottom">
           <figure xml:id="fig_limit2">
-            <caption>Graphically approximating a limit in <xref ref="ex_limit2">Example</xref>.</caption>
+            <caption>Graphically approximating a limit in <xref ref="ex_limit2">Example</xref></caption>
             <!-- START figures/fig_limit2.tex -->
             <image xml:id="img_limit2">
               <latex-image>
-
-              \begin{tikzpicture}[
-              declare function = {func(\x) = (\x &lt; 0) * (x+1) + (\x &gt; 0) * (-x^2+1);}]
-              \begin{axis}[xmin=-1.1,xmax=1.2,
-              ymin=-.1,ymax=1.1,
-              ]
-              \addplot+[domain=-1:1] {func(x)};
-              \addplot[hollowdot] coordinates {(0,1)};
-              \end{axis}
-              \end{tikzpicture}
-
+                \begin{tikzpicture}[
+                  declare function = {func(\x) = (\x &lt; 0) * (x+1) + (\x &gt; 0) * (-x^2+1);}
+                ]
+                  \begin{axis}[
+                    xmin=-1.1,
+                    xmax=1.2,
+                    ymin=-.1,
+                    ymax=1.1,
+                  ]
+                    \addplot+[domain=-1:1] {func(x)};
+                    \addplot[hollowdot] coordinates {(0,1)};
+                  \end{axis}
+                \end{tikzpicture}
               </latex-image>
             </image>
             <!-- figures/fig_limit2.tex END -->
           </figure>
 
           <figure xml:id="table_limit2">
-            <caption>Numerically approximating a limit in <xref ref="ex_limit2">Example</xref>.</caption>
+            <caption>Numerically approximating a limit in <xref ref="ex_limit2">Example</xref></caption>
             <tabular>
               <row bottom="medium">
                 <cell><m>x</m></cell>
@@ -512,9 +512,7 @@
                 <cell><m>0.99</m></cell>
               </row>
             </tabular>
-
           </figure>
-
         </sidebyside>
 
         <p>
@@ -566,7 +564,6 @@
           </p>
         </li>
       </ol>
-
       We'll explore each of these in turn.
     </p>
 
@@ -574,7 +571,7 @@
       <title>Different Values Approached From Left and Right</title>
       <statement>
         <p>
-          Explore why <m>\lim\limits_{x\to 1} f(x)</m> does not exist, where
+          Explore why <m>\lim_{x\to 1} f(x)</m> does not exist, where
           <me>
             f(x) = \begin{cases}x^2-2x+3 \amp  x\leq 1 \\ x \amp  x \gt 1\end{cases}
           </me>.
@@ -601,31 +598,32 @@
           values as <m>x</m> approaches <m>1</m>.
         </p>
 
-        <sidebyside widths="47% 47%" valign="bottom">
+        <sidebyside widths="47% 47%" margins="0%" valign="bottom">
           <figure xml:id="fig_nolimit1">
-            <caption>Observing no limit as <m>x\to 1</m> in <xref ref="ex_no_limit1">Example</xref>.</caption>
+            <caption>Observing no limit as <m>x\to 1</m> in <xref ref="ex_no_limit1">Example</xref></caption>
             <!-- START figures/fig_nolimit1.tex -->
             <image xml:id="img_nolimit1">
               <latex-image>
-
-              \begin{tikzpicture}
-              \begin{axis}[xmin=-.1,xmax=2.1,
-              ymin=-.1,ymax=3.3,
-              ]
-              \addplot[firstcurvestyle,leftarrow, domain=0:1] {x^2 - 2*x + 3};
-              \addplot[firstcurvestyle,rightarrow, domain=1:2] {x};
-              \addplot[soliddot] coordinates {(1,2)};
-              \addplot[hollowdot] coordinates {(1,1)};
-              \end{axis}
-              \end{tikzpicture}
-
+                \begin{tikzpicture}
+                  \begin{axis}[
+                    xmin=-.1,
+                    xmax=2.1,
+                    ymin=-.1,
+                    ymax=3.3,
+                  ]
+                    \addplot[firstcurvestyle,leftarrow, domain=0:1] {x^2 - 2*x + 3};
+                    \addplot[firstcurvestyle,rightarrow, domain=1:2] {x};
+                    \addplot[soliddot] coordinates {(1,2)};
+                    \addplot[hollowdot] coordinates {(1,1)};
+                  \end{axis}
+                \end{tikzpicture}
               </latex-image>
             </image>
             <!-- figures/fig_nolimit1.tex END -->
           </figure>
 
           <figure xml:id="table_nolimit1">
-            <caption>Values of <m>f(x)</m> near <m>x=1</m> in <xref ref="ex_no_limit1">Example</xref>.</caption>
+            <caption>Values of <m>f(x)</m> near <m>x=1</m> in <xref ref="ex_no_limit1">Example</xref></caption>
             <tabular>
               <row bottom="medium">
                 <cell><m>x</m></cell>
@@ -656,9 +654,7 @@
                 <cell><m>1.1</m></cell>
               </row>
             </tabular>
-
           </figure>
-
         </sidebyside>
       </solution>
     </example>
@@ -667,7 +663,7 @@
       <title>The Function Grows Without Bound</title>
       <statement>
         <p>
-          Explore why <m>\lim\limits_{x\to 1} \frac{1}{(x-1)^2}</m> does not exist.
+          Explore why <m>\lim_{x\to 1} \frac{1}{(x-1)^2}</m> does not exist.
         </p>
       </statement>
       <solution>
@@ -679,30 +675,31 @@
           <m>f(x)</m> grows larger and larger.
         </p>
 
-        <sidebyside widths="47% 47%" valign="bottom">
+        <sidebyside widths="47% 47%" margins="0%" valign="bottom">
           <figure xml:id="fig_nolimit2">
-            <caption>Observing no limit as <m>x\to 1</m> in <xref ref="ex_no_limit2">Example</xref>.</caption>
+            <caption>Observing no limit as <m>x\to 1</m> in <xref ref="ex_no_limit2">Example</xref></caption>
             <!-- START figures/fig_nolimit2.tex -->
             <image xml:id="img_nolimit2">
               <latex-image>
-
-              \begin{tikzpicture}
-              \begin{axis}[xmin=-.1,xmax=2.1,
-              ymin=-1,ymax=110
-              ]
-              \addplot[firstcurvestyle,domain=0:0.9] {1/(x - 1)^2};
-              \addplot[firstcurvestyle,domain=1.1:2] {1/(x - 1)^2};
-              \addplot[asymptote,rightarrow] coordinates {(1,1) (1,100)};
-              \end{axis}
-              \end{tikzpicture}
-
+                \begin{tikzpicture}
+                  \begin{axis}[
+                    xmin=-.1,
+                    xmax=2.1,
+                    ymin=-1,
+                    ymax=110
+                  ]
+                    \addplot[firstcurvestyle,domain=0:0.9] {1/(x - 1)^2};
+                    \addplot[firstcurvestyle,domain=1.1:2] {1/(x - 1)^2};
+                    \addplot[asymptote,rightarrow] coordinates {(1,1) (1,100)};
+                  \end{axis}
+                \end{tikzpicture}
               </latex-image>
             </image>
             <!-- figures/fig_nolimit2.tex END -->
           </figure>
 
           <figure xml:id="table_nolimit2">
-            <caption>Values of <m>f(x)</m> near <m>x=1</m> in <xref ref="ex_no_limit2">Example</xref>.</caption>
+            <caption>Values of <m>f(x)</m> near <m>x=1</m> in <xref ref="ex_no_limit2">Example</xref></caption>
             <tabular>
               <row bottom="medium">
                 <cell><m>x</m></cell>
@@ -733,9 +730,7 @@
                 <cell><m>100</m>.</cell>
               </row>
             </tabular>
-
           </figure>
-
         </sidebyside>
 
         <p>
@@ -761,7 +756,7 @@
       <title>The Function Oscillates</title>
       <statement>
         <p>
-          Explore why <m>\lim\limits_{x\to 0}\sin(1/x)</m> does not exist.
+          Explore why <m>\lim_{x\to 0}\sin(1/x)</m> does not exist.
         </p>
       </statement>
       <solution>
@@ -783,138 +778,138 @@
         </p>
 
         <figure xml:id="fig_nolimit3">
-        <caption>Observing that <m>f(x)=\sin(1/x)</m> has no limit as <m>x\to0</m> in
-        <xref ref="ex_no_limit3">Example</xref>.</caption>
-        <sidebyside widths="47% 47%">
-          <figure xml:id="fig_nolimit3a">
-            <caption/><!-- START figures/fig_nolimit3a.tex -->
-            <image xml:id="img_nolimit3a">
-              <latex-image>
+          <caption>Observing that <m>f(x)=\sin(1/x)</m> has no limit as <m>x\to0</m> in <xref ref="ex_no_limit3">Example</xref></caption>
+          <sidebyside widths="47% 47%" margins="0%">
+            <figure xml:id="fig_nolimit3a">
+              <caption/><!-- START figures/fig_nolimit3a.tex -->
+              <image xml:id="img_nolimit3a">
+                <latex-image>
+                  \begin{tikzpicture}
+                    \begin{axis}[
+                      xmin=-1.1,
+                      xmax=1.1,
+                      ymin=-1.1,
+                      ymax=1.2,
+                    ]
+                      \addplot[firstcurvestyle,leftarrow,
+                        domain=-1.018591636:-0.318309886, % 1/(15/48 pi) to 1/(48/48 pi)
+                        samples=34, % sample every pi/48 through phase
+                      ] {sin(1/x * 180 / pi)};
+                      \addplot[firstcurvestyle,-,smooth,
+                        domain=-0.318309886:-0.106103295, % 1/pi to 1/(3 pi)
+                        samples=25, % sample every pi/12 through phase
+                      ] {sin(1/x * 180 / pi)};
+                      \addplot[firstcurvestyle,-,smooth,
+                        domain=-0.106103295:-0.063661977, % 1/(3 pi) to 1/(5 pi)
+                        samples=49, % sample every pi/24 through phase
+                      ] {sin(1/x * 180 / pi)};
+                      \addplot[firstcurvestyle,-,smooth,
+                        domain=-0.063661977:-0.045472841, % 1/(5 pi) to 1/(7 pi)
+                        samples=97, % sample every pi/48 through phase
+                      ] {sin(1/x * 180 / pi)};
+                      \draw [color=blue,fill=blue] (axis cs:-0.045472841,-1) rectangle (axis cs:0.045472841,1);
+                      %\addplot[firstcurvestyle,-,smooth,
+                      %  domain=-0.045472841:-0.0106103295, % 1/(7 pi) to 1/(30 pi)
+                      %  samples=93, % sample every pi/2 through phase
+                      %] {sin(1/x * 180 / pi)};
+                      %\addplot[firstcurvestyle,-,smooth,
+                      %  domain=0.0106103295:0.045472841, % 1/(30 pi) to 1/(7 pi)
+                      %  samples=93, % sample every pi/2 through phase
+                      %] {sin(1/x * 180 / pi)};
+                      \addplot[firstcurvestyle,-,smooth,
+                        domain=0.045472841:0.063661977, % 1/(7 pi) to 1/(5 pi)
+                        samples=97, % sample every pi/48 through phase
+                      ] {sin(1/x * 180 / pi)};
+                      \addplot[firstcurvestyle,-,smooth,
+                        domain=0.063661977:0.106103295, % 1/(5 pi) to 1/(3 pi)
+                        samples=49, % sample every pi/24 through phase
+                      ] {sin(1/x * 180 / pi)};
+                      \addplot[firstcurvestyle,-,smooth,
+                        domain=0.106103295:0.318309886, % 1/(3 pi) to 1/pi
+                        samples=25, % sample every pi/12 through phase
+                      ] {sin(1/x * 180 / pi)};
+                      \addplot[firstcurvestyle,rightarrow,
+                        domain=0.318309886:1.018591636, % 1/(48/48 pi) to 1/(15/48 pi)
+                        samples=34, % sample every pi/48 through phase
+                      ] {sin(1/x * 180 / pi)};
+                    \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
+              <!-- figures/fig_nolimit3a.tex END -->
+            </figure>
 
-              \begin{tikzpicture}
-              \begin{axis}[xmin=-1.1,xmax=1.1,
-              ymin=-1.1,ymax=1.2,
-              ]
-              \addplot[firstcurvestyle,leftarrow,
-              domain=-1.018591636:-0.318309886, % 1/(15/48 pi) to 1/(48/48 pi)
-              samples=34, % sample every pi/48 through phase
-              ] {sin(1/x * 180 / pi)};
-              \addplot[firstcurvestyle,-,smooth,
-              domain=-0.318309886:-0.106103295, % 1/pi to 1/(3 pi)
-              samples=25, % sample every pi/12 through phase
-              ] {sin(1/x * 180 / pi)};
-              \addplot[firstcurvestyle,-,smooth,
-              domain=-0.106103295:-0.063661977, % 1/(3 pi) to 1/(5 pi)
-              samples=49, % sample every pi/24 through phase
-              ] {sin(1/x * 180 / pi)};
-              \addplot[firstcurvestyle,-,smooth,
-              domain=-0.063661977:-0.045472841, % 1/(5 pi) to 1/(7 pi)
-              samples=97, % sample every pi/48 through phase
-              ] {sin(1/x * 180 / pi)};
-              \draw [color=blue,fill=blue] (axis cs:-0.045472841,-1) rectangle (axis cs:0.045472841,1);
-              %\addplot[firstcurvestyle,-,smooth,
-              %         domain=-0.045472841:-0.0106103295, % 1/(7 pi) to 1/(30 pi)
-              %         samples=93, % sample every pi/2 through phase
-              %        ] {sin(1/x * 180 / pi)};
-              %\addplot[firstcurvestyle,-,smooth,
-              %         domain=0.0106103295:0.045472841, % 1/(30 pi) to 1/(7 pi)
-              %         samples=93, % sample every pi/2 through phase
-              %        ] {sin(1/x * 180 / pi)};
-              \addplot[firstcurvestyle,-,smooth,
-              domain=0.045472841:0.063661977, % 1/(7 pi) to 1/(5 pi)
-              samples=97, % sample every pi/48 through phase
-              ] {sin(1/x * 180 / pi)};
-              \addplot[firstcurvestyle,-,smooth,
-              domain=0.063661977:0.106103295, % 1/(5 pi) to 1/(3 pi)
-              samples=49, % sample every pi/24 through phase
-              ] {sin(1/x * 180 / pi)};
-              \addplot[firstcurvestyle,-,smooth,
-              domain=0.106103295:0.318309886, % 1/(3 pi) to 1/pi
-              samples=25, % sample every pi/12 through phase
-              ] {sin(1/x * 180 / pi)};
-              \addplot[firstcurvestyle,rightarrow,
-              domain=0.318309886:1.018591636, % 1/(48/48 pi) to 1/(15/48 pi)
-              samples=34, % sample every pi/48 through phase
-              ] {sin(1/x * 180 / pi)};
-              \end{axis}
-              \end{tikzpicture}
-
-              </latex-image>
-            </image>
-            <!-- figures/fig_nolimit3a.tex END -->
-          </figure>
-
-          <figure xml:id="fig_nolimit3b">
-            <caption/><!-- START figures/fig_nolimit3b.tex -->
-            <image xml:id="img_nolimit3b">
-              <latex-image>
-
-              \begin{tikzpicture}
-              \begin{axis}[xmin=-.11,xmax=.11,
-              ymin=-1.1,ymax=1.1
-              ]
-              \addplot[firstcurvestyle,leftarrow,
-              domain=-0.100518911:-0.063661977, % 1/(152/48 pi) to 1/(240/48 pi)
-              samples=89, % sample every pi/48 through phase
-              ] {sin(1/x * 180 / pi)};
-              \addplot[firstcurvestyle,-,smooth,
-              domain=-0.063661977:-0.045472841, % 1/(5 pi) to 1/(7 pi)
-              samples=25, % sample every pi/12 through phase
-              ] {sin(1/x * 180 / pi)};
-              \addplot[firstcurvestyle,-,smooth,
-              domain=-0.045472841:-0.035367765, % 1/(7 pi) to 1/(9 pi)
-              samples=49, % sample every pi/24 through phase
-              ] {sin(1/x * 180 / pi)};
-              \addplot[firstcurvestyle,-,smooth,
-              domain=-0.035367765:-0.024485376, % 1/(9 pi) to 1/(13 pi)
-              samples=145, % sample every pi/36 through phase
-              ] {sin(1/x * 180 / pi)};
-              \addplot[firstcurvestyle,-,smooth,
-              domain=-0.024485376:-0.012732395, % 1/(13 pi) to 1/(25 pi)
-              samples=73, % sample every pi/6 through phase
-              ] {sin(1/x * 180 / pi)};
-              \draw [color=blue,fill=blue] (axis cs:-0.012732395,-1) rectangle (axis cs:0.012732395,1);
-              %\addplot[firstcurvestyle,-,smooth,
-              %         domain=-0.0031830988618379:-0.0010610329539459, % 1/(100 pi) to 1/(300 pi)
-              %         samples=401, % sample every pi/2 through phase
-              %        ] {sin(1/x * 180 / pi)};
-              \addplot[firstcurvestyle,leftarrow,
-              domain=0.100518911:0.063661977, % 1/(152/48 pi) to 1/(240/48 pi)
-              samples=89, % sample every pi/48 through phase
-              ] {sin(1/x * 180 / pi)};
-              \addplot[firstcurvestyle,-,smooth,
-              domain=0.063661977:0.045472841, % 1/(5 pi) to 1/(7 pi)
-              samples=25, % sample every pi/12 through phase
-              ] {sin(1/x * 180 / pi)};
-              \addplot[firstcurvestyle,-,smooth,
-              domain=0.045472841:0.035367765, % 1/(7 pi) to 1/(9 pi)
-              samples=49, % sample every pi/24 through phase
-              ] {sin(1/x * 180 / pi)};
-              \addplot[firstcurvestyle,-,smooth,
-              domain=0.035367765:0.024485376, % 1/(9 pi) to 1/(13 pi)
-              samples=145, % sample every pi/36 through phase
-              ] {sin(1/x * 180 / pi)};
-              \addplot[firstcurvestyle,-,smooth,
-              domain=0.024485376:0.012732395, % 1/(13 pi) to 1/(25 pi)
-              samples=73, % sample every pi/6 through phase
-              ] {sin(1/x * 180 / pi)};
-              %\addplot[firstcurvestyle,-,smooth,
-              %         domain=0.0031830988618379:0.0010610329539459, % 1/(100 pi) to 1/(300 pi)
-              %         samples=401, % sample every pi/2 through phase
-              %        ] {sin(1/x * 180 / pi)};
-              \end{axis}
-              \end{tikzpicture}
-
-              </latex-image>
-            </image>
-            <!-- figures/fig_nolimit3b.tex END -->
-          </figure>
-        </sidebyside>
+            <figure xml:id="fig_nolimit3b">
+              <caption/><!-- START figures/fig_nolimit3b.tex -->
+              <image xml:id="img_nolimit3b">
+                <latex-image>
+                  \begin{tikzpicture}
+                    \begin{axis}[
+                      xmin=-.11,
+                      xmax=.11,
+                      ymin=-1.1,
+                      ymax=1.1
+                    ]
+                      \addplot[firstcurvestyle,leftarrow,
+                        domain=-0.100518911:-0.063661977, % 1/(152/48 pi) to 1/(240/48 pi)
+                        samples=89, % sample every pi/48 through phase
+                      ] {sin(1/x * 180 / pi)};
+                      \addplot[firstcurvestyle,-,smooth,
+                        domain=-0.063661977:-0.045472841, % 1/(5 pi) to 1/(7 pi)
+                        samples=25, % sample every pi/12 through phase
+                      ] {sin(1/x * 180 / pi)};
+                      \addplot[firstcurvestyle,-,smooth,
+                        domain=-0.045472841:-0.035367765, % 1/(7 pi) to 1/(9 pi)
+                        samples=49, % sample every pi/24 through phase
+                      ] {sin(1/x * 180 / pi)};
+                      \addplot[firstcurvestyle,-,smooth,
+                        domain=-0.035367765:-0.024485376, % 1/(9 pi) to 1/(13 pi)
+                        samples=145, % sample every pi/36 through phase
+                      ] {sin(1/x * 180 / pi)};
+                      \addplot[firstcurvestyle,-,smooth,
+                        domain=-0.024485376:-0.012732395, % 1/(13 pi) to 1/(25 pi)
+                        samples=73, % sample every pi/6 through phase
+                      ] {sin(1/x * 180 / pi)};
+                      \draw [color=blue,fill=blue] (axis cs:-0.012732395,-1) rectangle (axis cs:0.012732395,1);
+                      %\addplot[firstcurvestyle,-,smooth,
+                      %  domain=-0.0031830988618379:-0.0010610329539459, % 1/(100 pi) to 1/(300 pi)
+                      %  samples=401, % sample every pi/2 through phase
+                      %] {sin(1/x * 180 / pi)};
+                      \addplot[firstcurvestyle,leftarrow,
+                        domain=0.100518911:0.063661977, % 1/(152/48 pi) to 1/(240/48 pi)
+                        samples=89, % sample every pi/48 through phase
+                      ] {sin(1/x * 180 / pi)};
+                      \addplot[firstcurvestyle,-,smooth,
+                        domain=0.063661977:0.045472841, % 1/(5 pi) to 1/(7 pi)
+                        samples=25, % sample every pi/12 through phase
+                      ] {sin(1/x * 180 / pi)};
+                      \addplot[firstcurvestyle,-,smooth,
+                        domain=0.045472841:0.035367765, % 1/(7 pi) to 1/(9 pi)
+                        samples=49, % sample every pi/24 through phase
+                      ] {sin(1/x * 180 / pi)};
+                      \addplot[firstcurvestyle,-,smooth,
+                        domain=0.035367765:0.024485376, % 1/(9 pi) to 1/(13 pi)
+                        samples=145, % sample every pi/36 through phase
+                      ] {sin(1/x * 180 / pi)};
+                      \addplot[firstcurvestyle,-,smooth,
+                        domain=0.024485376:0.012732395, % 1/(13 pi) to 1/(25 pi)
+                        samples=73, % sample every pi/6 through phase
+                      ] {sin(1/x * 180 / pi)};
+                      %\addplot[firstcurvestyle,-,smooth,
+                      %  domain=0.0031830988618379:0.0010610329539459, % 1/(100 pi) to 1/(300 pi)
+                      %  samples=401, % sample every pi/2 through phase
+                      %] {sin(1/x * 180 / pi)};
+                    \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
+              <!-- figures/fig_nolimit3b.tex END -->
+            </figure>
+          </sidebyside>
         </figure>
 
         <figure xml:id="table_nolimit3c">
-          <caption>Observing that <m>f(x)=\sin(1/x)</m> has no limit as <m>x\to0</m> in
-          <xref ref="ex_no_limit3">Example</xref>.</caption>
+          <caption>Observing that <m>f(x)=\sin(1/x)</m> has no limit as <m>x\to0</m> in <xref ref="ex_no_limit3">Example</xref></caption>
           <tabular>
             <row bottom="medium">
               <cell><m>x</m></cell>
@@ -949,7 +944,6 @@
               <cell><m>0.420548</m></cell>
             </row>
           </tabular>
-
         </figure>
 
         <p>
@@ -957,7 +951,7 @@
           as <m>x</m> approaches 0, <m>\sin(1/x)</m> takes on all values between
           <m>-1</m> and <m>1</m> infinitely many times!
           Because of this oscillation,
-          <m>\lim\limits_{x\to 0}\sin(1/x)</m> does not exist.
+          <m>\lim_{x\to 0}\sin(1/x)</m> does not exist.
         </p>
       </solution>
     </example>
@@ -1020,21 +1014,22 @@
     </p>
 
     <figure xml:id="fig_diffquot1">
-      <caption>Interpreting a difference quotient as the slope of a secant line.</caption>
+      <caption>Interpreting a difference quotient as the slope of a secant line</caption>
       <!-- START figures/fig_diff_quot1.tex -->
       <image xml:id="img_diffquot1" width="47%">
         <latex-image>
-
-        \begin{tikzpicture}
-        \begin{axis}[xmin=-1,xmax=6.5,
-        ymin=-1,ymax=25,
-        ]
-        \addplot+[domain=0:6] {-1.5*x^2+11.5*x};
-        \addplot+[domain=0:6] {2.5*(x-1)+10};
-        \addplot[soliddot] coordinates {(1,10) (5,20)};
-        \end{axis}
-        \end{tikzpicture}
-
+          \begin{tikzpicture}
+            \begin{axis}[
+              xmin=-1,
+              xmax=6.5,
+              ymin=-1,
+              ymax=25,
+            ]
+              \addplot+[domain=0:6] {-1.5*x^2+11.5*x};
+              \addplot+[domain=0:6] {2.5*(x-1)+10};
+              \addplot[soliddot] coordinates {(1,10) (5,20)};
+            \end{axis}
+          \end{tikzpicture}
         </latex-image>
       </image>
       <!-- figures/fig_diff_quot1.tex END -->
@@ -1080,71 +1075,74 @@
     <!--TODO: Add a geogebra applet (for online version only). I've made one here: https://ggbm.at/mGffD9sE -->
 
     <figure xml:id="fig_diff_quot_smallh">
-    <caption>Secant lines of <m>f(x)</m> at <m>x=1</m> and <m>x=1+h</m>, for shrinking values of <m>h</m> (i.e., <m>h\rightarrow 0</m>).</caption>
-    <sidebyside widths="31% 31% 31%">
-      <figure xml:id="fig_diff_quot_smallha">
-        <caption><m>h=2</m></caption>
-        <!-- START figures/fig_diff_quot_smallha.tex -->
-        <image xml:id="img_diff_quot_smallha">
-          <latex-image>
+      <caption>Secant lines of <m>f(x)</m> at <m>x=1</m> and <m>x=1+h</m>, for shrinking values of <m>h</m> (i.e., <m>h\rightarrow 0</m>)</caption>
+      <sidebyside widths="31% 31% 31%" margins="0%" >
+        <figure xml:id="fig_diff_quot_smallha">
+          <caption><m>h=2</m></caption>
+          <!-- START figures/fig_diff_quot_smallha.tex -->
+          <image xml:id="img_diff_quot_smallha">
+            <latex-image>
+              \begin{tikzpicture}
+                \begin{axis}[
+                  xmin=-1,
+                  xmax=6.5,
+                  ymin=-1,
+                  ymax=25,
+                ]
+                  \addplot+[domain=0:6] {-1.5*x^2+11.5*x};
+                  \addplot+[domain=0:3.5454] {5.5*(x-1)+10};
+                  \addplot[soliddot] coordinates {(1,10) (3,21)};
+                \end{axis}
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+          <!-- figures/fig_diff_quot_smallha.tex END -->
+        </figure>
 
-          \begin{tikzpicture}
-          \begin{axis}[xmin=-1,xmax=6.5,
-          ymin=-1,ymax=25,
-          ]
-          \addplot+[domain=0:6] {-1.5*x^2+11.5*x};
-          \addplot+[domain=0:3.5454] {5.5*(x-1)+10};
-          \addplot[soliddot] coordinates {(1,10) (3,21)};
-          \end{axis}
-          \end{tikzpicture}
+        <figure xml:id="fig_diff_quot_smallhb">
+          <caption><m>h=1</m></caption>
+          <!-- START figures/fig_diff_quot_smallhb.tex -->
+          <image xml:id="img_diff_quot_smallhb">
+            <latex-image>
+              \begin{tikzpicture}
+                \begin{axis}[
+                  xmin=-1,
+                  xmax=6.5,
+                  ymin=-1,
+                  ymax=25,
+                ]
+                  \addplot+[domain=0:6] {-1.5*x^2+11.5*x};
+                  \addplot+[domain=0:3] {7*(x-1)+10};
+                  \addplot[soliddot] coordinates {(1,10) (2,17)};
+                \end{axis}
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+          <!-- figures/fig_diff_quot_smallhb.tex END -->
+        </figure>
 
-          </latex-image>
-        </image>
-        <!-- figures/fig_diff_quot_smallha.tex END -->
-      </figure>
-
-      <figure xml:id="fig_diff_quot_smallhb">
-        <caption><m>h=1</m></caption>
-        <!-- START figures/fig_diff_quot_smallhb.tex -->
-        <image xml:id="img_diff_quot_smallhb">
-          <latex-image>
-
-          \begin{tikzpicture}
-          \begin{axis}[xmin=-1,xmax=6.5,
-          ymin=-1,ymax=25,
-          ]
-          \addplot+[domain=0:6] {-1.5*x^2+11.5*x};
-          \addplot+[domain=0:3] {7*(x-1)+10};
-          \addplot[soliddot] coordinates {(1,10) (2,17)};
-          \end{axis}
-          \end{tikzpicture}
-
-          </latex-image>
-        </image>
-        <!-- figures/fig_diff_quot_smallhb.tex END -->
-      </figure>
-
-      <figure xml:id="fig_diff_quot_smallhc">
-        <caption><m>h=0.5</m></caption>
-        <!-- START figures/fig_diff_quot_smallhc.tex -->
-        <image xml:id="img_diff_quot_smallhc">
-          <latex-image>
-
-          \begin{tikzpicture}
-          \begin{axis}[xmin=-1,xmax=6.5,
-          ymin=-1,ymax=25,
-          ]
-          \addplot+[domain=0:6] {-1.5*x^2+11.5*x};
-          \addplot+[domain=0:2.80645] {7.75*(x-1)+10};
-          \addplot[soliddot] coordinates {(1,10) (1.5,13.875)};
-          \end{axis}
-          \end{tikzpicture}
-
-          </latex-image>
-        </image>
-        <!-- figures/fig_diff_quot_smallhc.tex END -->
-      </figure>
-    </sidebyside>
+        <figure xml:id="fig_diff_quot_smallhc">
+          <caption><m>h=0.5</m></caption>
+          <!-- START figures/fig_diff_quot_smallhc.tex -->
+          <image xml:id="img_diff_quot_smallhc">
+            <latex-image>
+              \begin{tikzpicture}
+                \begin{axis}[
+                  xmin=-1,
+                  xmax=6.5,
+                  ymin=-1,
+                  ymax=25,
+                ]
+                  \addplot+[domain=0:6] {-1.5*x^2+11.5*x};
+                  \addplot+[domain=0:2.80645] {7.75*(x-1)+10};
+                  \addplot[soliddot] coordinates {(1,10) (1.5,13.875)};
+                \end{axis}
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+          <!-- figures/fig_diff_quot_smallhc.tex END -->
+        </figure>
+      </sidebyside>
     </figure>
 
     <p>
@@ -1159,7 +1157,7 @@
     </p>
 
     <figure xml:id="table_diff_quot_smallh">
-      <caption>The difference quotient evaluated at values of <m>h</m> near <m>0</m>.</caption>
+      <caption>The difference quotient evaluated at values of <m>h</m> near <m>0</m></caption>
       <tabular>
         <row bottom="medium">
           <cell><m>h</m></cell>
@@ -1190,7 +1188,6 @@
           <cell><m>7.75</m></cell>
         </row>
       </tabular>
-
     </figure>
 
     <p>
@@ -1216,105 +1213,95 @@
   </subsection>
 
   <exercises>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          Terms and Concepts
-        </p>
-      </introduction>
+    <subexercises>
+      <title>Terms and Concepts</title>
 
       <exercise>
-        <webwork seed="1">
-            <statement>
-              <p>
-                In your own words, what does it mean to
-                <q>find the limit of <m>f(x)</m> as <m>x</m> approaches 3</q>?
-              </p>
+        <webwork>
+          <statement>
+            <p>
+              In your own words, what does it mean to
+              <q>find the limit of <m>f(x)</m> as <m>x</m> approaches 3</q>?
+            </p>
 
-              <p>
-                <var form="essay"/>
-              </p>
-            </statement>
+            <p>
+              <var form="essay"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
-
-            <pg-code>
-              $answer="an indeterminate form";
-              $undefined="an undefined expression";
-              Context()->strings->add($answer=>{},indeterminate=>{alias=>$answer},$undefined=>{},undefined=>{alias=>$undefined});
-              $evaluator=Compute($answer)->cmp()->withPostFilter(AnswerHints([Compute("undefined")]=>"Yes, but there is a more specific answer."));
-            </pg-code>
-            </setup>
-            <statement>
-              <p>
-                An expression of the form <m>\frac{0}{0}</m> is called <var evaluator="$evaluator" name="$evaluator" width="25"/>.
-              </p>
-            </statement>
-            <solution>
-              <p>
-                An expression of the form <m>\frac{0}{0}</m> is called <var name="$answer"/>.
-              </p>
-            </solution>
+        <webwork>
+          <pg-code>
+            $answer = "an indeterminate form";
+            $undefined = "an undefined expression";
+            Context()->strings->add(
+              $answer => {},
+              indeterminate => {alias => $answer},
+              $undefined => {},
+              undefined => {alias => $undefined}
+            );
+            $evaluator = Compute($answer)->cmp()->withPostFilter(
+              AnswerHints(
+                [Compute("undefined")] => "Yes, but there is a more specific answer."
+              )
+            );
+          </pg-code>
+          <statement>
+            <p>
+              An expression of the form <m>\frac{0}{0}</m> is called <var evaluator="$evaluator" name="$answer" width="13"/>.
+            </p>
+          </statement>
         </webwork>
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
-
-            <pg-code>
-              $limitequalsvalue=PopUp(['?','True','False'],'False');
-            </pg-code>
-            </setup>
-            <statement>
-              <p>
-                True or False?
-                The limit of <m>f(x)</m> as <m>x</m> approaches <m>5</m> is <m>f(5)</m>.
-                <var name="$limitequalsvalue" form="popup"/>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                False: the limit considers values of <m>x</m> <em>near</em> to <m>5</m>,
-                but not <em>equal</em> to 5.
-              </p>
-            </solution>
+        <webwork>
+          <pg-code>
+            $limitequalsvalue = PopUp(['?','True','False'],2);
+          </pg-code>
+          <statement>
+            <p>
+              <var name="$limitequalsvalue" form="popup"/>
+              The limit of <m>f(x)</m> as <m>x</m> approaches <m>5</m> is <m>f(5)</m>.
+            </p>
+          </statement>
+          <solution>
+            <p>
+              False: the limit considers values of <m>x</m> <em>near</em> to <m>5</m>,
+              but not <em>equal</em> to <m>5</m>.
+            </p>
+          </solution>
         </webwork>
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <statement>
-              <p>
-                Describe three situations where <m>\lim\limits_{x\to c}f(x)</m> does not exist.
-              </p>
-
-              <p>
-                <var form="essay"/>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                The function may approach different values from the left and right,
-                the function may grow without bound,
-                or the function might oscillate.
-              </p>
-            </solution>
+        <webwork>
+          <statement>
+            <p>
+              Describe three situations where <m>\lim\limits_{x\to c}f(x)</m> does not exist.
+            </p>
+            <p>
+              <var form="essay"/>
+            </p>
+          </statement>
+          <solution>
+            <p>
+              The function may approach different values from the left and right,
+              the function may grow without bound,
+              or the function might oscillate.
+            </p>
+          </solution>
         </webwork>
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
           <statement>
             <p>
               In your own words, what is a difference quotient?
             </p>
-
             <p>
               <var form="essay"/>
             </p>
