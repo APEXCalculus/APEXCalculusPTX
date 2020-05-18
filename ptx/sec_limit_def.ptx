@@ -775,23 +775,18 @@
     rarely are limits evaluated using the definition.
     Rather, the techniques of <xref ref="sec_limit_analytically">Section</xref> are employed.
   </p>
-  <exercises>
-    <exercisegroup>
 
-      <introduction>
-        <p>
-          Terms and Concepts
-        </p>
-      </introduction>
+  <exercises>
+    <subexercises>
+      <title>Terms and Concepts</title>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <statement>
               <p>
                 What is wrong with the following
                 <q>definition</q> of a limit?
               </p>
-
               <!-- blockquote not allowed here-->
               <!-- <blockquote> -->
                 <p>
@@ -801,7 +796,6 @@
                   we have <m>\abs{x-a}\lt \delta</m>.
                 </p>
               <!-- </blockquote> -->
-
               <p>
                 <var form="essay"/>
               </p>
@@ -817,136 +811,109 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
             <pg-code>
               $limitequalsvalue=PopUp(['?','x-tolerance','y-tolerance'],2);
             </pg-code>
-            </setup>
             <statement>
               <p>
-                Which is given first in establishing a limit,
-                the <m>x</m>-tolerance or the <m>y</m>-tolerance?
+                Which is given first in establishing a limit?
               </p>
-
               <p>
-                <var name="$limitequalsvalue" form="popup"/>is given first.
+                <var name="$limitequalsvalue" form="popup"/>
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <pg-code>
+              $ispositive=PopUp(['?','True','False'],'True');
+            </pg-code>
+            <statement>
+              <p>
+                <var name="$ispositive" form="popup"/>
+                <m>\varepsilon</m> must always be positive.
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+
+      <exercise>
+        <webwork>
+            <pg-code>
+              $ispositive=PopUp(['?','True','False'],'True');
+            </pg-code>
+            <statement>
+              <p>
+                <var name="$ispositive" form="popup"/>
+                <m>\delta</m> must always be positive.
+              </p>
+            </statement>
+        </webwork>
+      </exercise>
+    </subexercises>
+
+    <subexercises>
+      <title>Problems</title>
+
+      <exercisegroup cols="2">
+        <introduction>
+          <p>
+            Prove the given limit using an <m>\varepsilon</m>-<m>\delta</m> proof.
+          </p>
+        </introduction>
+
+        <exercise>
+          <webwork>
+            <statement>
+              <p>
+                <m>\lim\limits_{x\to 4} (2x+5) = 13</m>
+              </p>
+              <p>
+                <var form="essay"/>
               </p>
             </statement>
             <solution>
               <p>
-                The <m>y</m>-tolerance is given first.
+                Let <m>\varepsilon  \gt 0</m> be given.
+                We wish to find <m>\delta  \gt 0</m> such that when <m>|x-4|\lt \delta</m>,
+                <m>\abs{f(x)-13}\lt \epsilon</m>.
+              </p>
+              <p>
+                Consider <m>\abs{f(x)-13}\lt \varepsilon</m>:
+                <md>
+                  <mrow>\abs{f(x) -13} \lt  \varepsilon</mrow>
+                  <mrow>\abs{(2x+5)-13}\lt \varepsilon</mrow>
+                  <mrow>\abs{2x-8} \lt  \varepsilon</mrow>
+                  <mrow>2\abs{x-4} \lt  \varepsilon</mrow>
+                  <mrow>-\varepsilon/2 \lt  x-4 \lt  \varepsilon/2</mrow>
+                </md>.
+              </p>
+              <p>
+                This implies we can let <m>\delta =\varepsilon/2</m>.
+                Then:
+                <md>
+                  <mrow>\abs{x-4}\lt \delta</mrow>
+                  <mrow>-\delta \lt  x-4 \lt  \delta</mrow>
+                  <mrow>-\varepsilon/2 \lt  x-4 \lt  \varepsilon/2</mrow>
+                  <mrow>-\varepsilon \lt  2x-8 \lt  \varepsilon</mrow>
+                  <mrow>-\varepsilon \lt  (2x+5)-13 \lt  \varepsilon</mrow>
+                  <mrow>\abs{(2x+5) - 13} \lt  \epsilon</mrow>
+                </md>,
+                which is what we wanted to prove.
               </p>
             </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-            <setup>
-
-            <pg-code>
-              $ispositive=PopUp(['?','True','False'],'True');
-            </pg-code>
-            </setup>
+        <exercise>
+          <webwork>
             <statement>
               <p>
-                True or False?
-                <m>\varepsilon</m> must always be positive.
-                <var name="$ispositive" form="popup"/>
+                <m>\lim\limits_{x\to 5}(3-x)=-2</m>
               </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork seed="1">
-            <setup>
-
-            <pg-code>
-              $ispositive=PopUp(['?','True','False'],'True');
-            </pg-code>
-            </setup>
-            <statement>
-              <p>
-                True or False?
-                <m>\delta</m> must always be positive.
-                <var name="$ispositive" form="popup"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-    </exercisegroup>
-    <!--TODO: Resolve this exercisegroup's introduction instructions and their repetition in each exercise. -->
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          In the following exercises,
-          prove the given limit using an <m>\varepsilon</m>-<m>\delta</m> proof.
-        </p>
-      </introduction>
-
-      <exercise>
-        <webwork seed="1">
-          <statement>
-            <p>
-              Use an <m>\varepsilon</m>-<m>\delta</m> proof to prove that
-              <me>
-                \lim\limits_{x\to 4} (2x+5) = 13
-              </me>
-          </p>
-          <p>
-            <var form="essay"/>
-          </p>
-        </statement>
-        <solution>
-          <p>
-            Let <m>\varepsilon  \gt 0</m> be given.
-            We wish to find <m>\delta  \gt 0</m> such that when <m>|x-4|\lt \delta</m>,
-            <m>\abs{f(x)-13}\lt \epsilon</m>.
-          </p>
-
-          <p>
-            Consider <m>\abs{f(x)-13}\lt \varepsilon</m>:
-            <md>
-              <mrow>\abs{f(x) -13} \lt  \varepsilon</mrow>
-              <mrow>\abs{(2x+5)-13}\lt \varepsilon</mrow>
-              <mrow>\abs{2x-8} \lt  \varepsilon</mrow>
-              <mrow>2\abs{x-4} \lt  \varepsilon</mrow>
-              <mrow>-\varepsilon/2 \lt  x-4 \lt  \varepsilon/2</mrow>
-            </md>.
-          </p>
-
-          <p>
-            This implies we can let <m>\delta =\varepsilon/2</m>.
-            Then:
-            <md>
-              <mrow>\abs{x-4}\lt \delta</mrow>
-              <mrow>-\delta \lt  x-4 \lt  \delta</mrow>
-              <mrow>-\varepsilon/2 \lt  x-4 \lt  \varepsilon/2</mrow>
-              <mrow>-\varepsilon \lt  2x-8 \lt  \varepsilon</mrow>
-              <mrow>-\varepsilon \lt  (2x+5)-13 \lt  \varepsilon</mrow>
-              <mrow>\abs{(2x+5) - 13} \lt  \epsilon</mrow>
-            </md>,
-            which is what we wanted to prove.
-          </p>
-        </solution>
-      </webwork>
-    </exercise>
-
-<exercise>
-        <webwork seed="1">
-            <statement>
-              <p>
-                Use an <m>\varepsilon</m>-<m>\delta</m> proof to prove that
-                <me>
-                  \lim\limits_{x\to 5}(3-x)=-2
-                </me>
-              </p>
-
               <p>
                 <var form="essay"/>
               </p>
@@ -957,7 +924,6 @@
                 We wish to find <m>\delta \gt 0</m> such that when <m>\abs{x-5}\lt\delta</m>,
                 <m>\abs{f(x)-(-2)}\lt\varepsilon</m>.
               </p>
-
               <p>
                 First, some preliminary investigation to find a suitable <m>\delta</m>.
                 Consider <m>\abs{f(x)-(-2)}\lt\varepsilon</m>:
@@ -970,7 +936,6 @@
                 Since we want to start with <m>\abs{x-5}\lt\delta</m>,
                 this suggests we let <m>\delta=\varepsilon</m>.
               </p>
-
               <p>
                 Now we can apply the definition.
                 <md>
@@ -986,19 +951,15 @@
                 This is what we needed to prove.
               </p>
             </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
+        <exercise>
+          <webwork>
             <statement>
               <p>
-                Use an <m>\varepsilon</m>-<m>\delta</m> proof to prove that
-                <me>
-                  \lim\limits_{x\to 3}\left(x^2-3\right)=6
-                </me>
+                <m>\lim\limits_{x\to 3}\left(x^2-3\right)=6</m>
               </p>
-
               <p>
                 <var form="essay"/>
               </p>
@@ -1009,7 +970,6 @@
                 We wish to find <m>\delta \gt 0</m> such that when <m>\abs{x-3}\lt\delta</m>,
                 <m>\abs{f(x)-6}\lt\varepsilon</m>.
               </p>
-
               <p>
                 First, some preliminary investigation to find a suitable <m>\delta</m>.
                 Consider <m>\abs{f(x)-6}\lt\varepsilon</m>:
@@ -1031,7 +991,6 @@
                 Since we need to begin the actual proof with <m>\abs{x-3}\lt\delta</m>,
                 this suggests that we take <m>\delta=\frac{\varepsilon}{7}</m>.
               </p>
-
               <p>
                 Now we can apply the definition.
                 <md>
@@ -1047,19 +1006,15 @@
                 This is what we needed to prove.
               </p>
             </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
+        <exercise>
+          <webwork>
             <statement>
               <p>
-                Use an <m>\varepsilon</m>-<m>\delta</m> proof to prove that
-                <me>
-                  \lim\limits_{x\to 4}\left(x^2+x-5\right)=15
-                </me>
+                <m>\lim\limits_{x\to 4}\left(x^2+x-5\right)=15</m>
               </p>
-
               <p>
                 <var form="essay"/>
               </p>
@@ -1070,7 +1025,6 @@
                 We wish to find <m>\delta \gt 0</m> such that when <m>\abs{x-4}\lt\delta</m>,
                 <m>\abs{f(x)-15}\lt\varepsilon</m>.
               </p>
-
               <p>
                 First, some preliminary investigation to find a suitable <m>\delta</m>.
                 Consider <m>\abs{f(x)-15}\lt\varepsilon</m>:
@@ -1092,7 +1046,6 @@
                 Since we need to begin the actual proof with <m>\abs{x-4}\lt\delta</m>,
                 this suggests that we take <m>\delta=\frac{\varepsilon}{10}</m>.
               </p>
-
               <p>
                 Now we can apply the definition.
                 <md>
@@ -1108,89 +1061,77 @@
                 This is what we needed to prove.
               </p>
             </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-          <statement>
-            <p>
-                Use an <m>\varepsilon</m>-<m>\delta</m> proof to prove that
-                <me>
-                  \lim\limits_{x\to 1} \left(2x^2+3x+1\right) = 6
-                </me>
-            </p>
-
-            <p>
-              <var form="essay"/>
-            </p>
-          </statement>
-          <solution>
-            <p>
-              Let <m>\varepsilon  \gt 0</m> be given.
-              We wish to find <m>\delta  \gt 0</m> such that when <m>\abs{x-1}\lt \delta</m>,
-              <m>\abs{f(x)-6}\lt \varepsilon</m>.
-            </p>
-
-            <p>
-              First, some prelimary investigation to find a suitable <m>\delta</m>.
-              Consider <m>\abs{f(x)-6}\lt \varepsilon</m>,
-              keeping in mind we want to make a statement about <m>\abs{x-1}</m>:
-              <md>
-                <mrow>\abs{f(x) -6} \lt \varepsilon</mrow>
-                <mrow>\abs{(2x^2+3x+1)-6}\lt \varepsilon</mrow>
-                <mrow>\abs{2x^2+3x-5} \lt \varepsilon</mrow>
-                <mrow>\abs{2x+5}\cdot\abs{x-1} \lt \varepsilon</mrow>
-                <mrow>\abs{x-1} \lt  \varepsilon/\abs{2x+5}</mrow>
-              </md>
-            </p>
-
-            <p>
-              Since <m>x</m> is near <m>1</m>, we can safely assume that,
-              for instance, <m>0\lt x\lt 2</m>.
-              Thus
-              <md>
-                <mrow>0+5\lt 2x+5\lt 4+5</mrow>
-                <mrow>5 \lt  2x+5 \lt  9</mrow>
-                <mrow>\frac{1}{9} \lt  \frac{1}{2x+5} \lt  \frac{1}{5}</mrow>
-                <mrow>\frac{\varepsilon}{9} \lt  \frac{\varepsilon}{2x+5} \lt  \frac{\varepsilon}{5}</mrow>
-              </md>
-            </p>
-
-            <p>
-              Let <m>\delta =\frac{\varepsilon}{9}</m>.
-              Then:
-              <md>
-                <mrow>\abs{x-1}\lt \delta</mrow>
-                <mrow>\abs{x-1} \lt  \frac{\varepsilon}{9}</mrow>
-                <mrow>\abs{x-1} \lt  \frac{\varepsilon}{2x+5}</mrow>
-                <mrow>\abs{x-1}\cdot\abs{2x+5} \lt  \frac{\epsilon}{2x+5}\cdot\abs{2x+5}</mrow>
-              </md>
-            </p>
-
-            <p>
-              Assuming <m>x</m> is near <m>1</m>, <m>2x+5</m> is positive and we can drop the absolute value signs on the right.
-              <md>
-                <mrow>\abs{x-1}\cdot\abs{2x+5} \lt  \frac{\varepsilon}{2x+5}\cdot(2x+5)</mrow>
-                <mrow>\abs{2x^2+3x-5} \lt  \varepsilon</mrow>
-                <mrow>\abs{(2x^2+3x+1) -6} \lt  \varepsilon</mrow>
-              </md>,
-              which is what we wanted to prove.
-            </p>
-          </solution>
-      </webwork>
-    </exercise>
-
-      <exercise>
-        <webwork seed="1">
+        <exercise>
+          <webwork>
             <statement>
               <p>
-                Use an <m>\varepsilon</m>-<m>\delta</m> proof to prove that
-                <me>
-                  \lim\limits_{x\to 2}\left(x^3-1\right)=7
-                </me>
+                <m>\lim\limits_{x\to 1} \left(2x^2+3x+1\right) = 6</m>
               </p>
+              <p>
+                <var form="essay"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Let <m>\varepsilon  \gt 0</m> be given.
+                We wish to find <m>\delta  \gt 0</m> such that when <m>\abs{x-1}\lt \delta</m>,
+                <m>\abs{f(x)-6}\lt \varepsilon</m>.
+              </p>
+              <p>
+                First, some prelimary investigation to find a suitable <m>\delta</m>.
+                Consider <m>\abs{f(x)-6}\lt \varepsilon</m>,
+                keeping in mind we want to make a statement about <m>\abs{x-1}</m>:
+                <md>
+                  <mrow>\abs{f(x) -6} \lt \varepsilon</mrow>
+                  <mrow>\abs{(2x^2+3x+1)-6}\lt \varepsilon</mrow>
+                  <mrow>\abs{2x^2+3x-5} \lt \varepsilon</mrow>
+                  <mrow>\abs{2x+5}\cdot\abs{x-1} \lt \varepsilon</mrow>
+                  <mrow>\abs{x-1} \lt  \varepsilon/\abs{2x+5}</mrow>
+                </md>
+              </p>
+              <p>
+                Since <m>x</m> is near <m>1</m>, we can safely assume that,
+                for instance, <m>0\lt x\lt 2</m>.
+                Thus
+                <md>
+                  <mrow>0+5\lt 2x+5\lt 4+5</mrow>
+                  <mrow>5 \lt  2x+5 \lt  9</mrow>
+                  <mrow>\frac{1}{9} \lt  \frac{1}{2x+5} \lt  \frac{1}{5}</mrow>
+                  <mrow>\frac{\varepsilon}{9} \lt  \frac{\varepsilon}{2x+5} \lt  \frac{\varepsilon}{5}</mrow>
+                </md>
+              </p>
+              <p>
+                Let <m>\delta =\frac{\varepsilon}{9}</m>.
+                Then:
+                <md>
+                  <mrow>\abs{x-1}\lt \delta</mrow>
+                  <mrow>\abs{x-1} \lt  \frac{\varepsilon}{9}</mrow>
+                  <mrow>\abs{x-1} \lt  \frac{\varepsilon}{2x+5}</mrow>
+                  <mrow>\abs{x-1}\cdot\abs{2x+5} \lt  \frac{\epsilon}{2x+5}\cdot\abs{2x+5}</mrow>
+                </md>
+              </p>
+              <p>
+                Assuming <m>x</m> is near <m>1</m>, <m>2x+5</m> is positive and we can drop the absolute value signs on the right.
+                <md>
+                  <mrow>\abs{x-1}\cdot\abs{2x+5} \lt  \frac{\varepsilon}{2x+5}\cdot(2x+5)</mrow>
+                  <mrow>\abs{2x^2+3x-5} \lt  \varepsilon</mrow>
+                  <mrow>\abs{(2x^2+3x+1) -6} \lt  \varepsilon</mrow>
+                </md>,
+                which is what we wanted to prove.
+              </p>
+            </solution>
+          </webwork>
+        </exercise>
 
+        <exercise>
+          <webwork>
+            <statement>
+              <p>
+                <m>\lim\limits_{x\to 2}\left(x^3-1\right)=7</m>
+              </p>
               <p>
                 <var form="essay"/>
               </p>
@@ -1201,7 +1142,6 @@
                 We wish to find <m>\delta \gt 0</m> such that when <m>\abs{x-2}\lt\delta</m>,
                 <m>\abs{f(x)-7}\lt\varepsilon</m>.
               </p>
-
               <p>
                 First, some preliminary investigation to find a suitable <m>\delta</m>.
                 Consider <m>\abs{f(x)-7}\lt\varepsilon</m>:
@@ -1223,7 +1163,6 @@
                 Since we need to begin the actual proof with <m>\abs{x-2}\lt\delta</m>,
                 this suggests that we take <m>\delta=\frac{\varepsilon}{19}</m>.
               </p>
-
               <p>
                 Now we can apply the definition.
                 <md>
@@ -1239,19 +1178,15 @@
                 This is what we needed to prove.
               </p>
             </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
+        <exercise>
+          <webwork>
             <statement>
               <p>
-                Use an <m>\varepsilon</m>-<m>\delta</m> proof to prove that
-                <me>
-                  \lim\limits_{x\to 2}5=5
-                </me>
+                <m>\lim\limits_{x\to 2}5=5</m>
               </p>
-
               <p>
                 <var form="essay"/>
               </p>
@@ -1262,7 +1197,6 @@
                 We wish to find <m>\delta \gt 0</m> such that when <m>\abs{x-2}\lt\delta</m>,
                 <m>\abs{f(x)-5}\lt\varepsilon</m>.
               </p>
-
               <p>
                 First, some preliminary investigation to find a suitable <m>\delta</m>.
                 Consider <m>\abs{f(x)-5}\lt\varepsilon</m>:
@@ -1274,7 +1208,6 @@
                 (as long as its positive).
                 So it really doesn't matter what <m>\delta</m> is.
               </p>
-
               <p>
                 Now we can apply the definition.
                 <md>
@@ -1287,19 +1220,15 @@
                 This is what we needed to prove.
               </p>
             </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
+        <exercise>
+          <webwork>
             <statement>
               <p>
-                Use an <m>\varepsilon</m>-<m>\delta</m> proof to prove that
-                <me>
-                  \lim\limits_{x\to 0}\left(e^{2x}-1\right)=0
-                </me>
+                <m>\lim\limits_{x\to 0}\left(e^{2x}-1\right)=0</m>
               </p>
-
               <p>
                 <var form="essay"/>
               </p>
@@ -1310,7 +1239,6 @@
                 We wish to find <m>\delta \gt 0</m> such that when <m>\abs{x-0}\lt\delta</m>,
                 <m>\abs{f(x)-0}\lt\varepsilon</m>.
               </p>
-
               <p>
                 First, some preliminary investigation to find a suitable <m>\delta</m>.
                 Consider <m>\abs{f(x)-0}\lt\varepsilon</m>:
@@ -1326,7 +1254,6 @@
                 Since we will need to start with <m>\abs{x-0}\lt\delta</m>,
                 this suggests we take <m>\delta=\min\left\{\frac{1}{2}\abs{\ln(1-\varepsilon)},\frac{1}{2}\ln(1+\varepsilon)\right\}=\frac{1}{2}\ln(1+\varepsilon)</m>.
               </p>
-
               <p>
                 Now we can apply the definition.
                 <md>
@@ -1344,87 +1271,71 @@
                 This is what we needed to prove.
               </p>
             </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-          <statement>
-            <p>
-              Use an <m>\varepsilon</m>-<m>\delta</m> proof to prove that
-              <me>
-                \lim\limits_{x\to 1} \frac1x = 1
-              </me>
-            </p>
-            <p>
-              <var form="essay"/>
-            </p>
-          </statement>
-          <solution>
-            <p>
-              Let <m>\epsilon  \gt 0</m> be given.
-              We wish to find <m>\delta  \gt 0</m> such that when <m>|x-1|\lt \delta</m>,
-              <m>|f(x)-1|\lt \epsilon</m>.
-            </p>
-
-            <p>
-              Consider <m>|f(x)-1|\lt \epsilon</m>,
-              keeping in mind we want to make a statement about <m>|x-1|</m>:
-              <md>
-                <mrow>|f(x) -1 | \lt  \epsilon</mrow>
-                <mrow>|1/x-1 |\lt \epsilon</mrow>
-                <mrow>| (1-x)/x | \lt  \epsilon</mrow>
-                <mrow>| x-1 |/|x| \lt  \epsilon</mrow>
-                <mrow>| x-1 | \lt  \epsilon\cdot|x|</mrow>
-              </md>
-            </p>
-
-            <p>
-              Since <m>x</m> is near 1, we can safely assume that,
-              for instance, <m>1/2\lt x\lt 3/2</m>.
-              Thus
-              <m>\epsilon/2 \lt \epsilon\cdot x</m>.
-            </p>
-
-            <p>
-              Let <m>\delta =\frac{\epsilon}{2}</m>.
-              Then:
-              <md>
-                <mrow>\abs{x-1}\lt \delta</mrow>
-                <mrow>\abs{x-1} \lt  \frac{\epsilon}{2}</mrow>
-                <mrow>\abs{x-1} \lt  \epsilon\cdot x</mrow>
-                <mrow>\abs{x-1}/x \lt  \epsilon</mrow>
-              </md>
-            </p>
-
-            <p>
-              Assuming <m>x</m> is near 1, <m>x</m> is positive and we can bring it into the absolute value signs on the left.
-              <md>
-                <mrow>\abs{(x-1)/x} \lt  \epsilon</mrow>
-                <mrow>\abs{1-1/x} \lt  \epsilon</mrow>
-                <mrow>\abs{(1/x) -1} \lt  \epsilon</mrow>
-              </md>,
-              which is what we wanted to prove.
-            </p>
-          </solution>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork seed="1">
-            <setup>
-
-            <pg-code>
-            </pg-code>
-            </setup>
+        <exercise>
+          <webwork>
             <statement>
               <p>
-                Use an <m>\varepsilon</m>-<m>\delta</m> proof to prove that
-                <me>
-                  \lim\limits_{x\to 0} \sin(x)= 0
-                </me>
+                <m>\lim\limits_{x\to 1} \frac1x = 1</m>
               </p>
+              <p>
+                <var form="essay"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Let <m>\epsilon  \gt 0</m> be given.
+                We wish to find <m>\delta  \gt 0</m> such that when <m>|x-1|\lt \delta</m>,
+                <m>|f(x)-1|\lt \epsilon</m>.
+              </p>
+              <p>
+                Consider <m>|f(x)-1|\lt \epsilon</m>,
+                keeping in mind we want to make a statement about <m>|x-1|</m>:
+                <md>
+                  <mrow>|f(x) -1 | \lt  \epsilon</mrow>
+                  <mrow>|1/x-1 |\lt \epsilon</mrow>
+                  <mrow>| (1-x)/x | \lt  \epsilon</mrow>
+                  <mrow>| x-1 |/|x| \lt  \epsilon</mrow>
+                  <mrow>| x-1 | \lt  \epsilon\cdot|x|</mrow>
+                </md>
+              </p>
+              <p>
+                Since <m>x</m> is near 1, we can safely assume that,
+                for instance, <m>1/2\lt x\lt 3/2</m>.
+                Thus
+                <m>\epsilon/2 \lt \epsilon\cdot x</m>.
+              </p>
+              <p>
+                Let <m>\delta =\frac{\epsilon}{2}</m>.
+                Then:
+                <md>
+                  <mrow>\abs{x-1}\lt \delta</mrow>
+                  <mrow>\abs{x-1} \lt  \frac{\epsilon}{2}</mrow>
+                  <mrow>\abs{x-1} \lt  \epsilon\cdot x</mrow>
+                  <mrow>\abs{x-1}/x \lt  \epsilon</mrow>
+                </md>
+              </p>
+              <p>
+                Assuming <m>x</m> is near 1, <m>x</m> is positive and we can bring it into the absolute value signs on the left.
+                <md>
+                  <mrow>\abs{(x-1)/x} \lt  \epsilon</mrow>
+                  <mrow>\abs{1-1/x} \lt  \epsilon</mrow>
+                  <mrow>\abs{(1/x) -1} \lt  \epsilon</mrow>
+                </md>,
+                which is what we wanted to prove.
+              </p>
+            </solution>
+          </webwork>
+        </exercise>
 
+        <exercise>
+          <webwork>
+            <statement>
+              <p>
+                <m>\lim\limits_{x\to 0} \sin(x)= 0</m>
+              </p>
               <p>
                 <var form="essay"/>
               </p>
@@ -1441,7 +1352,6 @@
                 We wish to find <m>\delta \gt 0</m> such that when <m>\abs{x-0}\lt\delta</m>,
                 <m>\abs{f(x)-0}\lt\varepsilon</m>.
               </p>
-
               <p>
                 First, some preliminary investigation to find a suitable <m>\delta</m>.
                 Consider <m>\abs{f(x)-0}\lt\varepsilon</m>:
@@ -1453,7 +1363,6 @@
                 then if <m>\abs{x}\lt0</m>, it is automatic that <m>\abs{\sin(x)}\lt0</m>.
                 This suggests we take <m>\delta=\varepsilon</m>.
               </p>
-
               <p>
                 Now we can apply the definition.
                 <md>
@@ -1467,9 +1376,9 @@
                 This is what we needed to prove.
               </p>
             </solution>
-        </webwork>
-      </exercise>
-
-    </exercisegroup>
+          </webwork>
+        </exercise>
+      </exercisegroup>
+    </subexercises>
   </exercises>
 </section>
