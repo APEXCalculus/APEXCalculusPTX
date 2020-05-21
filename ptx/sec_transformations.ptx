@@ -2133,13 +2133,26 @@
 				<image xml:id="img_polar_trans3c">
 				  <description></description>
 					<latex-image>
-						\begin{tikzpicture}[/pgfplots/every axis/.style=polarstyle]
-						\begin{polaraxis}[
-						polarstyle,
-						ymax=4]
-
-						\end{polaraxis}
-
+						\begin{tikzpicture}
+				    \foreach \r in {2,4,6}
+				      \draw[black, thick] (0,0) circle (\r);
+				    \foreach \r in {1,3,5}
+				      \draw[black,dashed,thin] (0,0) circle (\r);
+				    \foreach \a in {0, 15,...,359}
+				      \draw[black,thin,dashed] (\a:0) -- (\a:6);
+				    \foreach \a in {0, 45,...,359}
+				      \draw[thick,black] (0, 0) -- (\a:6);
+				    \foreach \a in {0, 90,...,359}
+				      \draw[very thick] (0, 0) -- (\a:6);
+				      \draw (0:6.5) node {$0$};
+				      \draw (45:6.5) node {$\pi/4$};
+				      \draw (90:6.5) node {$\pi/2$};
+				      \draw (135:6.5) node {$3\pi/4$};
+				      \draw (180:6.5) node {$\pi$};
+				      \draw (225:6.5) node {$5\pi/4$};
+				      \draw (270:6.5) node {$3\pi/2$};
+				      \draw (315:6.5) node {$7\pi/4$};
+				    \draw[fill=black] (0,0) circle(0.5mm);
 					  \end{tikzpicture}
 					</latex-image>
 				</image>
