@@ -673,647 +673,794 @@
   </p>
 
   <exercises>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          Terms and Concepts
-        </p>
-      </introduction>
+    <subexercises>
+      <title>Terms and Concepts</title>
 
       <exercise>
-        <webwork seed="1">
-            <statement>
-              <p>
-                What are the three ways in which a limit may fail to exist?
-              </p>
-
-              <p>
-                <var form="essay"/>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                The function approaches different values from the left and right;
-                the function grows without bound;
-                the function oscillates.
-              </p>
-            </solution>
+        <webwork>
+          <statement>
+            <p>
+              What are the three ways in which a limit may fail to exist?
+            </p>
+            <p>
+              <var form="essay"/>
+            </p>
+          </statement>
+          <solution>
+            <p>
+              The function approaches different values from the left and right;
+              the function grows without bound;
+              the function oscillates.
+            </p>
+          </solution>
         </webwork>
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
-            <pg-code>
-              $truefalse=PopUp(['?','True','False'],'False');
-            </pg-code>
-            </setup>
-            <statement>
-              <p>
-                True or False?
-                If <m>\lim\limits_{x\to 1^-}f(x)=5</m>,
-                then <m>\lim\limits_{x\to 1}f(x)=5</m>.
-                <var name="$truefalse" form="popup"/>
-              </p>
-            </statement>
+        <webwork>
+          <pg-code>
+            $truefalse=PopUp(['?','True','False'],2);
+          </pg-code>
+          <statement>
+            <p>
+              <var name="$truefalse" form="popup"/>
+              If <m>\lim\limits_{x\to 1^-}f(x)=5</m>,
+              then <m>\lim\limits_{x\to 1}f(x)=5</m>.
+            </p>
+          </statement>
+          <solution>
+            <p>
+              False: the right-hand limit might not equal <m>5</m>.
+            </p>
+          </solution>
         </webwork>
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
-            <pg-code>
-              $truefalse=PopUp(['?','True','False'],'False');
-            </pg-code>
-            </setup>
-            <statement>
-              <p>
-                True or False?
-                If <m>\lim\limits_{x\to 1^-}f(x)=5</m>,
-                then <m>\lim\limits_{x\to 1^+}f(x)=5</m>.
-                <var name="$truefalse" form="popup"/>
-              </p>
-            </statement>
+        <webwork>
+          <pg-code>
+            $truefalse=PopUp(['?','True','False'],2);
+          </pg-code>
+          <statement>
+            <p>
+              <var name="$truefalse" form="popup"/>
+              If <m>\lim\limits_{x\to 1^-}f(x)=5</m>,
+              then <m>\lim\limits_{x\to 1^+}f(x)=5</m>.
+            </p>
+          </statement>
+          <solution>
+            <p>
+              False: just because the left-hand limit equals some number,
+              that doesn't mean the right-hand limit exists or equals the same number.
+            </p>
+          </solution>
         </webwork>
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
-            <pg-code>
-              $truefalse=PopUp(['?','True','False'],'True');
-            </pg-code>
-            </setup>
-            <statement>
-              <p>
-                True or False?
-                If <m>\lim\limits_{x\to 1}f(x)=5</m>,
-                then <m>\lim\limits_{x\to 1^-}f(x)=5</m>.
-                <var name="$truefalse" form="popup"/>
-              </p>
-            </statement>
+        <webwork>
+          <pg-code>
+            $truefalse=PopUp(['?','True','False'],1);
+          </pg-code>
+          <statement>
+            <p>
+              <var name="$truefalse" form="popup"/>
+              If <m>\lim\limits_{x\to 1}f(x)=5</m>,
+              then <m>\lim\limits_{x\to 1^-}f(x)=5</m>.
+            </p>
+          </statement>
+          <solution>
+            <p>
+              True: When the limit exists, both the left-hand and right-hand limits also exist
+              and have the same value.
+            </p>
+          </solution>
         </webwork>
       </exercise>
+    </subexercises>
 
-    </exercisegroup>
-    <exercisegroup>
-    <!--ToDo: fix images in this exercisegroup. The sbs width is not being applied. The size of the pg graph should be changed as well.-->
-      <introduction>
-        <p>
-          In the following exercises,
-          evaluate each expression using the given graph of <m>f(x)</m>.
-        </p>
-      </introduction>
+    <subexercises>
+      <title>Problems</title>
 
-      <exercise>
-        <webwork seed="1">
-            <setup>
+      <exercisegroup cols="2">
+        <introduction>
+          <p>
+            Evaluate each expression using the given graph of <m>f</m>.
+          </p>
+        </introduction>
+
+        <exercise>
+          <webwork seed="1">
             <pg-code>
-                @x=(0,random(1,3,1));
-                $x[2]=$x[1]+random(1,2,1);
-                @y=NchooseK(5,3,1);
-                do{$z=random(1,4,1);}until($z!=$y[1]);
-                $b=$x[random(0,2,2)];
-                if($envir{problemSeed}==1){@x=(0,1,2);@y=(1,2,0);$z=1;$b=0;};
-                $a=$x[1];
-                $f=Formula("($y[1]-$y[0])/($x[1]-$x[0])*(x-$x[0])+$y[0]");
-                $g=Formula("($y[1]-$y[2])/($x[1]-$x[2])^2*(x-$x[2])^2+$y[2]");
-                $xmin=min(@x)-1;$xmax=max(@x)+1;$ymin=min(@y,$z)-1;$ymax=max(@y,$z)+1;
-                $gr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[282,282]);
-                add_functions($gr,"$f for x in [$x[0],$x[1]) using color:blue and weight:2");
-                add_functions($gr,"$g for x in ($x[1],$x[2]] using color:blue and weight:2");
-                $gr->stamps(closed_circle($x[1],$z,'blue'));
-                @L=($y[1],$y[1],$y[1],$z);
-                ($L[4],$L[5])=($b==0)?(Compute("DNE"),$y[0]):($y[2],Compute("DNE"));
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
+              @x=num_sort((0,(1..5)[NchooseK(5,2)]));
+              @y=NchooseK(5,3,1);
+              $z=list_random(1..$y[1]-1,$y[1]+1..5);
+              $b=list_random($x[0],$x[2]);
+              if($envir{problemSeed}==1){@x=(0,1,2);@y=(1,2,0);$z=1;$b=0;};
+              $a=$x[1];
+              $f=Formula("($y[1]-$y[0])/($x[1]-$x[0])*(x-$x[0])+$y[0]");
+              $g=Formula("($y[1]-$y[2])/($x[1]-$x[2])^2*(x-$x[2])^2+$y[2]");
+              $xmin=min(@x)-1;$xmax=max(0,@x)+1;
+              $ymin=min(0,@y,$z)-1;$ymax=max(@y,$z)+1;
+              $gr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[400,240]);
+              $gr->lb('reset');
+              for my $i (1..$xmax-1) {
+                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
+              }
+              for my $i (1..$ymax-1) {
+                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
+              }
+              $gr->lb(new Label($xmax,0,'x','black','right','bottom','large'));
+              $gr->lb(new Label(0,$ymax,'y','black','left','top','large'));
+              add_functions($gr,"$f for x in [$x[0],$x[1]) using color:blue and weight:2");
+              add_functions($gr,"$g for x in ($x[1],$x[2]] using color:blue and weight:2");
+              $gr->stamps(closed_circle($x[1],$z,'blue'));
+              @L=($y[1],$y[1],$y[1],$z);
+              ($L[4],$L[5])=($b==0)?(Compute("DNE"),$y[0]):($y[2],Compute("DNE"));
             </pg-code>
-            </setup>
             <statement>
-              <p>
-                Evaluate each expression using the given graph of <m>f</m>.
-              </p>
-
-              <sidebyside widths="47%">
+              <sidebyside>
                 <image pg-name="$gr"/>
               </sidebyside>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 <ol cols="2">
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)=</m><var name="$L[0]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[0]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)=</m><var name="$L[1]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[1]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)=</m><var name="$L[2]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[2]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>f(<var name="$a"/>)=</m><var name="$L[3]" width="10"/>
+                      <m>f(<var name="$a"/>)</m>
+                    </p>
+                    <p>
+                      <var name="$L[3]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$b"/>^-} f(x)=</m><var name="$L[4]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$b"/>^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[4]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$b"/>^+} f(x)=</m><var name="$L[5]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$b"/>^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[5]" width="10"/>
                     </p>
                   </li>
                 </ol>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-            <setup>
+        <exercise>
+          <webwork seed="1">
             <pg-code>
-                @x=(0,random(1,3,1));
-                $x[2]=$x[1]+random(1,2,1);
-                @y=NchooseK(5,3,1);
-                do{$z=random(1,4,1);}until($z!=$y[1]);
-                $b=$x[random(0,2,2)];
-                if($envir{problemSeed}==1){@x=(0,1,2);@y=(0,1,0);$z=2;$b=2;};
-                $a=$x[1];
-                $f=Formula("($y[1]-$y[0])/($x[1]-$x[0])*(x-$x[0])+$y[0]");
-                $g=Formula("($z-$y[2])/($x[1]-$x[2])*(x-$x[2])+$y[2]");
-                $xmin=min(@x)-1;$xmax=max(@x)+1;$ymin=min(@y,$z)-1;$ymax=max(@y,$z)+1;
-                $gr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[282,282]);
-                add_functions($gr,"$f for x in [$x[0],$x[1]) using color:blue and weight:2");
-                add_functions($gr,"$g for x in [$x[1],$x[2]] using color:blue and weight:2");
-                @L=($y[1],$z,Compute("DNE"),$z);
-                ($L[4],$L[5])=($b==0)?(Compute("DNE"),$y[0]):($y[2],Compute("DNE"));
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
+              @x=num_sort((0,(1..5)[NchooseK(5,2)]));
+              @y=NchooseK(5,2,1);
+              $y[2]=random(0,5,1);
+              $z=list_random(1..$y[1]-1,$y[1]+1..5);
+              $b=list_random($x[0],$x[2]);
+              if($envir{problemSeed}==1){@x=(0,1,2);@y=(0,1,0);$z=2;$b=2;};
+              $a=$x[1];
+              $f=Formula("($y[1]-$y[0])/($x[1]-$x[0])*(x-$x[0])+$y[0]");
+              $g=Formula("($z-$y[2])/($x[1]-$x[2])*(x-$x[2])+$y[2]");
+              $xmin=min(0,@x)-1;$xmax=max(0,@x)+1;$ymin=min(0,@y,$z)-1;$ymax=max(0,@y,$z)+1;
+              $gr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[400,240]);
+              $gr->lb('reset');
+              for my $i (1..$xmax-1) {
+                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
+              }
+              for my $i (1..$ymax-1) {
+                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
+              }
+              $gr->lb(new Label($xmax,0,'x','black','right','bottom','large'));
+              $gr->lb(new Label(0,$ymax,'y','black','left','top','large'));
+              add_functions($gr,"$f for x in [$x[0],$x[1]) using color:blue and weight:2");
+              add_functions($gr,"$g for x in [$x[1],$x[2]] using color:blue and weight:2");
+              @L=($y[1],$z,Compute("DNE"),$z);
+              ($L[4],$L[5])=($b==0)?(Compute("DNE"),$y[0]):($y[2],Compute("DNE"));
             </pg-code>
-            </setup>
             <statement>
-              <p>
-                Evaluate each expression using the given graph of <m>f</m>.
-              </p>
-
-              <sidebyside widths="47%">
+              <sidebyside>
                 <image pg-name="$gr"/>
               </sidebyside>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 <ol cols="2">
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)=</m><var name="$L[0]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[0]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)=</m><var name="$L[1]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[1]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)=</m><var name="$L[2]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[2]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>f(<var name="$a"/>)=</m><var name="$L[3]" width="10"/>
+                      <m>f(<var name="$a"/>)</m>
+                    </p>
+                    <p>
+                      <var name="$L[3]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$b"/>^-} f(x)=</m><var name="$L[4]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$b"/>^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[4]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$b"/>^+} f(x)=</m><var name="$L[5]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$b"/>^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[5]" width="10"/>
                     </p>
                   </li>
                 </ol>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-            <setup>
+        <exercise>
+          <webwork seed="1">
             <pg-code>
-                @x=(0,random(1,3,1));
-                $x[2]=$x[1]+random(1,2,1);
-                @y=(random(0,3,1),Compute("inf"),random(0,3,1));
-                $b=$x[random(0,2,2)];
-                if($envir{problemSeed}==1){@x=(0,1,2);@y=(0,Compute("inf"),0);$b=2;};
-                $a=$x[1];
-                $c=$x[2]-$b;
-                $f=Formula("sec((x-$x[0])/($x[1]-$x[0])*pi/2)-1+$y[0]");
-                $g=Formula("sec((x-$x[2])/($x[1]-$x[2])*pi/2)-1+$y[2]");
-                $xmin=min(@x)-1;$xmax=max(@x)+1;$ymin=-1;$ymax=max($y[0],$y[2])+4;
-                $gr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[282,282]);
-                $xmidlow=$x[1]-0.1;$xmidhigh=$x[1]+0.1;
-                add_functions($gr,"$f for x in [$x[0],$xmidlow) using color:blue and weight:2");
-                add_functions($gr,"$g for x in ($xmidhigh,$x[2]] using color:blue and weight:2");
-                $gr->moveTo($x[1],$ymin);$gr->lineTo($x[1],$ymax,'gray',2,'dashed');
-                @L=(OneOf(Compute("DNE"),Compute("INF")),OneOf(Compute("DNE"),Compute("INF")),OneOf(Compute("DNE"),Compute("INF")),Compute("DNE"));
-                ($L[4],$L[5])=($b==0)?(Compute("DNE"),Compute("DNE")):($y[2],$y[0]);
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
+              @x=num_sort((0,(1..5)[NchooseK(5,2)]));
+              $y[0]=random(0,5,1);
+              $y[1]=Compute("inf");
+              $y[2]=random(0,5,1);
+              $b=list_random($x[0],$x[2]);
+              if($envir{problemSeed}==1){@x=(0,1,2);@y=(0,Compute("inf"),0);$b=2;};
+              $a=$x[1];
+              $c=($b==$x[0])?$x[2]:$x[0];
+              $f=Formula("sec((x-$x[0])/($x[1]-$x[0])*pi/2)-1+$y[0]");
+              $g=Formula("sec((x-$x[2])/($x[1]-$x[2])*pi/2)-1+$y[2]");
+              $xmin=min(0,@x)-1;$xmax=max(0,@x)+1;$ymin=-1;$ymax=max(0,$y[0],$y[2])+4;
+              $gr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[400,240]);
+              $gr->lb('reset');
+              for my $i (1..$xmax-1) {
+                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
+              }
+              for my $i (1..$ymax-1) {
+                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
+              }
+              $gr->lb(new Label($xmax,0,'x','black','right','bottom','large'));
+              $gr->lb(new Label(0,$ymax,'y','black','left','top','large'));
+              $xmidlow=$x[1]-0.1;$xmidhigh=$x[1]+0.1;
+              add_functions($gr,"$f for x in [$x[0],$xmidlow) using color:blue and weight:2");
+              add_functions($gr,"$g for x in ($xmidhigh,$x[2]] using color:blue and weight:2");
+              $gr->moveTo($x[1],$ymin);$gr->lineTo($x[1],$ymax,'gray',2,'dashed');
+              @L=(OneOf(Compute("DNE"),Compute("INF")),OneOf(Compute("DNE"),Compute("INF")),OneOf(Compute("DNE"),Compute("INF")),Compute("DNE"));
+              ($L[4],$L[5])=($b==0)?(Compute("DNE"),Compute("DNE")):($y[2],$y[0]);
             </pg-code>
-            </setup>
             <statement>
-              <p>
-                Evaluate each expression using the given graph of <m>f</m>.
-              </p>
-
-              <sidebyside widths="47%">
+              <sidebyside>
                 <image pg-name="$gr"/>
               </sidebyside>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 <ol cols="2">
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)=</m><var name="$L[0]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[0]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)=</m><var name="$L[1]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[1]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)=</m><var name="$L[2]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[2]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>f(<var name="$a"/>)=</m><var name="$L[3]" width="10"/>
+                      <m>f(<var name="$a"/>)</m>
+                    </p>
+                    <p>
+                      <var name="$L[3]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$b"/>^-} f(x)=</m><var name="$L[4]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$b"/>^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[4]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$c"/>^+} f(x)=</m><var name="$L[5]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$c"/>^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[5]" width="10"/>
                     </p>
                   </li>
                 </ol>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-            <setup>
+        <exercise>
+          <webwork seed="1">
             <pg-code>
-                @x=(0,random(1,3,1));
-                $x[2]=$x[1]+random(1,2,1);
-                @y=NchooseK(5,3,1);
-                do{$z=random(1,4,1);}until($z!=$y[1]);
-                do{$w=random(1,4,1);}until(($w!=$y[1])and($w!=$z));
-                if($envir{problemSeed}==1){@x=(0,1,2);@y=(1,0,2);$z=2;$w=1;};
-                $a=$x[1];
-                $f=Formula("($z-$y[0])/($x[1]-$x[0])*(x-$x[0])+$y[0]");
-                $g=Formula("($y[2]-$y[1])/($x[2]-$x[1])^2*(x-$x[1])^2+$y[1]");
-                $xmin=min(@x)-1;$xmax=max(@x)+1;$ymin=min(@y,$z,$w)-1;$ymax=max(@y,$z,$w)+1;
-                $gr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[282,282]);
-                add_functions($gr,"$f for x in [$x[0],$x[1]) using color:blue and weight:2");
-                add_functions($gr,"$g for x in ($x[1],$x[2]] using color:blue and weight:2");
-                $gr->stamps(closed_circle($x[1],$w,'blue'));
-                @L=($z,$y[1],Compute("DNE"),$w);
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
+              @x=num_sort((0,(1..5)[NchooseK(5,2)]));
+              @y=NchooseK(5,3,1);
+              ($w,$z)=(1..$y[1]-1,$y[1]+1..5)[NchooseK(4,2)];
+              if($envir{problemSeed}==1){@x=(0,1,2);@y=(1,0,2);$z=2;$w=1;};
+              $a=$x[1];
+              $f=Formula("($z-$y[0])/($x[1]-$x[0])*(x-$x[0])+$y[0]");
+              $g=Formula("($y[2]-$y[1])/($x[2]-$x[1])^2*(x-$x[1])^2+$y[1]");
+              $xmin=min(0,@x)-1;$xmax=max(0,@x)+1;$ymin=min(0,@y,$z,$w)-1;$ymax=max(0,@y,$z,$w)+1;
+              $gr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[400,240]);
+              $gr->lb('reset');
+              for my $i (1..$xmax-1) {
+                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
+              }
+              for my $i (1..$ymax-1) {
+                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
+              }
+              $gr->lb(new Label($xmax,0,'x','black','right','bottom','large'));
+              $gr->lb(new Label(0,$ymax,'y','black','left','top','large'));
+              add_functions($gr,"$f for x in [$x[0],$x[1]) using color:blue and weight:2");
+              add_functions($gr,"$g for x in ($x[1],$x[2]] using color:blue and weight:2");
+              $gr->stamps(closed_circle($x[1],$w,'blue'));
+              @L=($z,$y[1],Compute("DNE"),$w);
             </pg-code>
-            </setup>
             <statement>
-              <p>
-                Evaluate each expression using the given graph of <m>f</m>.
-              </p>
-
-              <sidebyside widths="47%">
+              <sidebyside>
                 <image pg-name="$gr"/>
               </sidebyside>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 <ol cols="2">
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)=</m><var name="$L[0]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[0]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)=</m><var name="$L[1]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[1]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)=</m><var name="$L[2]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[2]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>f(<var name="$a"/>)=</m><var name="$L[3]" width="10"/>
+                      <m>f(<var name="$a"/>)</m>
+                    </p>
+                    <p>
+                      <var name="$L[3]" width="10"/>
                     </p>
                   </li>
                 </ol>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-            <setup>
+        <exercise>
+          <webwork seed="1">
             <pg-code>
-                @x=(0,random(1,3,1));
-                $x[2]=$x[1]+random(1,2,1);
-                @y=NchooseK(5,2,1);
-                do{$y[2]=random(0,4,1);}until($y[2]!=$y[1]);
-                if($envir{problemSeed}==1){@x=(0,1,2);@y=(0,2,0);};
-                $a=$x[1];
-                $f=Formula("($y[0]-$y[1])/($x[0]-$x[1])^2*(x-$x[1])^2+$y[1]");
-                $g=Formula("($y[2]-$y[1])/($x[2]-$x[1])*(x-$x[1])+$y[1]");
-                $xmin=min(@x)-1;$xmax=max(@x)+1;$ymin=min(@y)-1;$ymax=max(@y)+1;
-                $gr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[282,282]);
-                add_functions($gr,"$f for x in [$x[0],$x[1]] using color:blue and weight:2");
-                add_functions($gr,"$g for x in [$x[1],$x[2]] using color:blue and weight:2");
-                @L=($y[1],$y[1],$y[1],$y[1]);
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
+              @x=num_sort((0,(1..5)[NchooseK(5,2)]));
+              @y=NchooseK(5,2,1);
+              $y[2]=$y[0];
+              if($envir{problemSeed}==1){@x=(0,1,2);@y=(0,2,0);};
+              $a=$x[1];
+              $f=Formula("($y[0]-$y[1])/($x[0]-$x[1])^2*(x-$x[1])^2+$y[1]");
+              $g=Formula("($y[2]-$y[1])/($x[2]-$x[1])*(x-$x[1])+$y[1]");
+              $xmin=min(0,@x)-1;$xmax=max(0,@x)+1;$ymin=min(0,@y,0)-1;$ymax=max(0,@y,0)+1;
+              $gr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[400,240]);
+              $gr->lb('reset');
+              for my $i (1..$xmax-1) {
+                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
+              }
+              for my $i (1..$ymax-1) {
+                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
+              }
+              $gr->lb(new Label($xmax,0,'x','black','right','bottom','large'));
+              $gr->lb(new Label(0,$ymax,'y','black','left','top','large'));
+              add_functions($gr,"$f for x in [$x[0],$x[1]] using color:blue and weight:2");
+              add_functions($gr,"$g for x in [$x[1],$x[2]] using color:blue and weight:2");
+              @L=($y[1],$y[1],$y[1],$y[1]);
             </pg-code>
-            </setup>
             <statement>
-              <p>
-                Evaluate each expression using the given graph of <m>f</m>.
-              </p>
-
-              <sidebyside widths="47%">
+              <sidebyside>
                 <image pg-name="$gr"/>
               </sidebyside>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 <ol cols="2">
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)=</m><var name="$L[0]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[0]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)=</m><var name="$L[1]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[1]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)=</m><var name="$L[2]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[2]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>f(<var name="$a"/>)=</m><var name="$L[3]" width="10"/>
+                      <m>f(<var name="$a"/>)</m>
+                    </p>
+                    <p>
+                      <var name="$L[3]" width="10"/>
                     </p>
                   </li>
                 </ol>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-            <setup>
+        <exercise>
+          <webwork seed="1">
             <pg-code>
-                $x[0]=random(-6,-2,1);
-                $x[1]=$x[0]+random(3,5,1);
-                $x[2]=$x[1]+random(3,5,1);
-                ($y[1],$y[2],$y[3])=map{$_-6}NchooseK(13,3);
-                do{$y[0]=random(-6,6,1);}until($y[0]!=$y[1]);
-                do{$y[4]=random(-6,6,1);}until($y[4]!=$y[3]);
-                if($envir{problemSeed}==1){@x=(-4,0,4);@y=(-4,4,0,-4,4);};
-                $a=$x[1];
-                $f=Formula("($y[1]-$y[0])/2*cos((x-$x[1])/($x[0]-$x[1])*pi)+($y[0]+$y[1])/2");
-                $g=Formula("($y[4]-$y[3])/2*cos((x-$x[2])/($x[1]-$x[2])*pi)+($y[3]+$y[4])/2");
-                $xmin=min(@x)-1;$xmax=max(@x)+1;$ymin=min(@y)-1;$ymax=max(@y)+1;
-                $gr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[282,282]);
-                add_functions($gr,"$f for x in [$x[0],$x[1]) using color:blue and weight:2");
-                add_functions($gr,"$g for x in ($x[1],$x[2]] using color:blue and weight:2");
-                $gr->stamps(closed_circle($x[1],$y[2],'blue'));
-                @L=($y[1],$y[3],Compute("DNE"),$y[2]);
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
+              $x[0]=random(-6,-2,1);
+              $x[1]=$x[0]+random(3,5,1);
+              $x[2]=$x[1]+random(3,5,1);
+              ($y[1],$y[2],$y[3])=(-6..6)[NchooseK(13,3)];
+              $y[0]=list_random(-6..$y[1]-1,$y[1]+1..6);
+              $y[4]=list_random(-6..$y[3]-1,$y[3]+1..6);
+              if($envir{problemSeed}==1){@x=(-4,0,4);@y=(-4,4,0,-4,4);};
+              $a=$x[1];
+              $f=Formula("($y[1]-$y[0])/2*cos((x-$x[1])/($x[0]-$x[1])*pi)+($y[0]+$y[1])/2");
+              $g=Formula("($y[4]-$y[3])/2*cos((x-$x[2])/($x[1]-$x[2])*pi)+($y[3]+$y[4])/2");
+              $xmin=min(0,@x)-1;$xmax=max(0,@x)+1;$ymin=min(0,@y)-1;$ymax=max(0,@y)+1;
+              $gr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[400,240]);
+              $gr->lb('reset');
+              for my $i ($xmin+1..-1,1..$xmax-1) {
+                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
+              }
+              for my $i ($ymin+1..-1,1..$ymax-1) {
+                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
+              }
+              $gr->lb(new Label($xmax,0,'x','black','right','bottom','large'));
+              $gr->lb(new Label(0,$ymax,'y','black','left','top','large'));
+              add_functions($gr,"$f for x in [$x[0],$x[1]) using color:blue and weight:2");
+              add_functions($gr,"$g for x in ($x[1],$x[2]] using color:blue and weight:2");
+              $gr->stamps(closed_circle($x[1],$y[2],'blue'));
+              @L=($y[1],$y[3],Compute("DNE"),$y[2]);
             </pg-code>
-            </setup>
             <statement>
-              <p>
-                Evaluate each expression using the given graph of <m>f</m>.
-              </p>
-
-              <sidebyside widths="47%">
+              <sidebyside>
                 <image pg-name="$gr"/>
               </sidebyside>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 <ol cols="2">
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)=</m><var name="$L[0]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[0]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)=</m><var name="$L[1]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[1]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)=</m><var name="$L[2]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[2]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>f(<var name="$a"/>)=</m><var name="$L[3]" width="10"/>
+                      <m>f(<var name="$a"/>)</m>
+                    </p>
+                    <p>
+                      <var name="$L[3]" width="10"/>
                     </p>
                   </li>
                 </ol>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-            <setup>
+        <exercise>
+          <webwork>
             <pg-code>
-                $gr=init_graph(-5,-4,5,4,axes=>[0,0],grid=>[10,8],size=>[282,282]);
-                add_functions($gr,"x+4 for x in [-4,-2) using color:blue and weight:2");
-                add_functions($gr,"-x for x in (-2,0] using color:blue and weight:2");
-                add_functions($gr,"x for x in [0,2) using color:blue and weight:2");
-                add_functions($gr,"4-x for x in (2,4] using color:blue and weight:2");
-                $gr->stamps(closed_circle(-2,0,'blue'));
-                @L=(2,2,2,0,2,2,2,Compute("DNE"));
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
+              $gr=init_graph(-5,-4,5,4,axes=>[0,0],grid=>[10,8],size=>[400,240]);
+              $gr->lb('reset');
+              for my $i (1..4) {
+                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
+                $gr->lb(new Label(-$i,0,-$i,'black','center','top','large'));
+              }
+              for my $i (1..3) {
+                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
+                $gr->lb(new Label(0,-$i,-$i,'black','right','middle','large'));
+              }
+              $gr->lb(new Label(5,0,'x','black','right','bottom','large'));
+              $gr->lb(new Label(0,4,'y','black','left','top','large'));
+              add_functions($gr,"x+4 for x in [-4,-2) using color:blue and weight:2");
+              add_functions($gr,"-x for x in (-2,0] using color:blue and weight:2");
+              add_functions($gr,"x for x in [0,2) using color:blue and weight:2");
+              add_functions($gr,"4-x for x in (2,4] using color:blue and weight:2");
+              $gr->stamps(closed_circle(-2,0,'blue'));
+              @L=(2,2,2,0,2,2,2,Compute("DNE"));
             </pg-code>
-            </setup>
             <statement>
-              <p>
-                Evaluate each expression using the given graph of <m>f</m>.
-              </p>
-
-              <sidebyside widths="47%">
+              <sidebyside>
                 <image pg-name="$gr"/>
               </sidebyside>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 <ol cols="2">
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to -2^-} f(x)=</m><var name="$L[0]" width="10"/>
+                      <m>\lim\limits_{x\to -2^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[0]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to -2^+} f(x)=</m><var name="$L[1]" width="10"/>
+                      <m>\lim\limits_{x\to -2^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[1]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to -2} f(x)=</m><var name="$L[2]" width="10"/>
+                      <m>\lim\limits_{x\to -2} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[2]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>f(-2)=</m><var name="$L[3]" width="10"/>
+                      <m>f(-2)</m>
+                    </p>
+                    <p>
+                      <var name="$L[3]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to 2^-} f(x)=</m><var name="$L[4]" width="10"/>
+                      <m>\lim\limits_{x\to 2^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[4]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to 2^+} f(x)=</m><var name="$L[5]" width="10"/>
+                      <m>\lim\limits_{x\to 2^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[5]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to 2} f(x)=</m><var name="$L[6]" width="10"/>
+                      <m>\lim\limits_{x\to 2} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[6]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>f(2)=</m><var name="$L[7]" width="10"/>
+                      <m>f(2)</m>
+                    </p>
+                    <p>
+                      <var name="$L[7]" width="10"/>
                     </p>
                   </li>
                 </ol>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-            <setup>
+        <exercise>
+          <webwork>
             <pg-code>
-                $gr=init_graph(-5,-5,5,5,axes=>[0,0],grid=>[10,10],size=>[282,282]);
-                for my $i(-4..3) {$ip1=$i+1;add_functions($gr,"$i for x in [$i,$ip1) using color:blue and weight:2");};
-                Context()->variables->are(a=>'Real');
-                @L=(Formula("a-1"),Formula("a"),Compute("DNE"),Formula("a"));
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
+              $gr=init_graph(-5,-5,5,5,axes=>[0,0],grid=>[10,10],size=>[400,240]);
+              $gr->lb('reset');
+              for my $i (1..4) {
+                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
+                $gr->lb(new Label(-$i,0,-$i,'black','center','top','large'));
+                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
+                $gr->lb(new Label(0,-$i,-$i,'black','right','middle','large'));
+              }
+              $gr->lb(new Label(5,0,'x','black','right','bottom','large'));
+              $gr->lb(new Label(0,5,'y','black','left','top','large'));
+              for my $i(-4..3) {$ip1=$i+1;add_functions($gr,"$i for x in [$i,$ip1) using color:blue and weight:2");};
+              Context()->variables->are(a=>'Real');
+              @L=(Formula("a-1"),Formula("a"),Compute("DNE"),Formula("a"));
             </pg-code>
-            </setup>
             <statement>
-              <p>
-                Evaluate each expression using the given graph of <m>f</m>.
-              </p>
-
-              <sidebyside widths="47%">
+              <sidebyside>
                 <image pg-name="$gr"/>
               </sidebyside>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 Let <m>a</m> be an integer with <m>-3\leq a\leq3</m>.
               </p>
-
               <p>
                 <ol cols="2">
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to a^-} f(x)=</m><var name="$L[0]" width="10"/>
+                      <m>\lim\limits_{x\to a^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[0]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to a^+} f(x)=</m><var name="$L[1]" width="10"/>
+                      <m>\lim\limits_{x\to a^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[1]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to a} f(x)=</m><var name="$L[2]" width="10"/>
+                      <m>\lim\limits_{x\to a} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[2]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>f(a)=</m><var name="$L[3]" width="10"/>
+                      <m>f(a)</m>
+                    </p>
+                    <p>
+                      <var name="$L[3]" width="10"/>
                     </p>
                   </li>
                 </ol>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
+      </exercisegroup>
 
-    </exercisegroup>
-    <exercisegroup>
+      <exercisegroup cols="2">
+        <introduction>
+          <p>
+            Evaluate the given limits of the piecewise defined function.
+          </p>
+        </introduction>
 
-      <introduction>
-        <p>
-          In the following exercises,
-          evaluate the given limits of the piecewise defined functions <m>f</m>.
-        </p>
-      </introduction>
-
-      <exercise>
-        <webwork seed="1">
-            <setup>
+        <exercise>
+          <webwork seed="1">
             <pg-code>
               $a=random(-2,4,1);
               $b=non_zero_random(-5,5,1);
@@ -1321,118 +1468,131 @@
               if($envir{problemSeed}==1){$a=1;$b=1;$c=-5};
               @f=(Formula("x+$b")->reduce,Formula("x^2+$c")->reduce);
               Context("PiecewiseFunction");
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
               $g=PiecewiseFunction("x &lt;= $a" => "$f[0]", "x > $a" => "$f[1]");
               @L=($f[0]->eval(x=>$a),$f[1]->eval(x=>$a));
               $L[2]=($L[0]==$L[1])?$L[0]:Compute("DNE");
               $L[3]=$g->eval(x=>$a);
             </pg-code>
-            </setup>
             <statement>
-              <p>
-                Evaluate the given limits of the piecewise defined function.
-              </p>
-
               <p>
                 <m>f(x) =<var name="$g"/></m>
               </p>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 <ol cols="2">
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)=</m><var name="$L[0]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[0]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)=</m><var name="$L[1]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[1]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)=</m><var name="$L[2]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[2]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>f(<var name="$a"/>)=</m><var name="$L[3]" width="10"/>
+                      <m>f(<var name="$a"/>)</m>
+                    </p>
+                    <p>
+                      <var name="$L[3]" width="10"/>
                     </p>
                   </li>
                 </ol>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-            <setup>
+        <exercise>
+          <webwork seed="1">
             <pg-code>
               $a=random(-2,4,1);
               $b=non_zero_random(-2,2,1);
-              $c=non_zero_random(-5,5,1);
-              $d=non_zero_random(-5,5,1);
+              ($c,$d)=(-5..-1,1..5)[NchooseK(10,2)];
               if($envir{problemSeed}==1){$a=0;$b=2;$c=5;$d=-1;};
               @f=(Formula("$b x^2 + $c x+$d")->reduce,Formula("sin(x-$a)")->reduce);
               Context("PiecewiseFunction");
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
               $g=PiecewiseFunction("x &lt; $a" => "$f[0]", "x >= $a" => "$f[1]");
               @L=($f[0]->eval(x=>$a),$f[1]->eval(x=>$a));
               $L[2]=($L[0]==$L[1])?$L[0]:Compute("DNE");
               $L[3]=$g->eval(x=>$a);
             </pg-code>
-            </setup>
             <statement>
-              <p>
-                Evaluate the given limits of the piecewise defined function.
-              </p>
-
               <p>
                 <m>f(x) =<var name="$g"/></m>
               </p>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 <ol cols="2">
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)=</m><var name="$L[0]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[0]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)=</m><var name="$L[1]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[1]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)=</m><var name="$L[2]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[2]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>f(<var name="$a"/>)=</m><var name="$L[3]" width="10"/>
+                      <m>f(<var name="$a"/>)</m>
+                    </p>
+                    <p>
+                      <var name="$L[3]" width="10"/>
                     </p>
                   </li>
                 </ol>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-            <setup>
+        <exercise>
+          <webwork seed="1">
             <pg-code>
-              $a=random(-3,-1,1);
-              $b=$a+random(4,5,1);
+              ($a,$b)=(-5..-1,1..5)[NchooseK(10,2)];
               if($envir{problemSeed}==1){$a=-1;$b=1;};
-              @f=(Formula("x^2 + ($a+1) x+($a)^3+1-($a)^2-($a+1)*$a")->reduce,Formula("x^3+1")->reduce,Formula("x^2 + ($b-1) x+($b)^3+1-($b)^2-($b-1)*$b")->reduce);
+              @f=(Formula("x^2 + ($a+1) x+(($a)^3+1-($a)^2-($a+1)*$a)")->reduce,Formula("x^3+1")->reduce,Formula("x^2 + ($b-1) x+(($b)^3+1-($b)^2-($b-1)*$b)")->reduce);
               Context("PiecewiseFunction");
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
               $g=PiecewiseFunction("x &lt; $a" => "$f[0]", "$a &lt;= x &lt;= $b" => "$f[1]", "x > $b" => $f[2]);
               @L=($f[0]->eval(x=>$a),$f[1]->eval(x=>$a));
               $L[2]=($L[0]==$L[1])?$L[0]:Compute("DNE");
@@ -1441,478 +1601,534 @@
               $L[6]=($L[4]==$L[5])?$L[4]:Compute("DNE");
               $L[7]=$g->eval(x=>$b);
             </pg-code>
-            </setup>
             <statement>
-              <p>
-                Evaluate the given limits of the piecewise defined function.
-              </p>
-
               <p>
                 <m>f(x) =<var name="$g"/></m>
               </p>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 <ol cols="2">
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)=</m><var name="$L[0]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[0]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)=</m><var name="$L[1]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[1]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)=</m><var name="$L[2]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[2]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>f(<var name="$a"/>)=</m><var name="$L[3]" width="10"/>
+                      <m>f(<var name="$a"/>)</m>
+                    </p>
+                    <p>
+                      <var name="$L[3]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$b"/>^-} f(x)=</m><var name="$L[4]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$b"/>^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[4]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$b"/>^+} f(x)=</m><var name="$L[5]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$b"/>^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[5]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$b"/>} f(x)=</m><var name="$L[6]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$b"/>} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[6]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>f(<var name="$b"/>)=</m><var name="$L[7]" width="10"/>
+                      <m>f(<var name="$b"/>)</m>
+                    </p>
+                    <p>
+                      <var name="$L[7]" width="10"/>
                     </p>
                   </li>
                 </ol>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-            <setup>
+        <exercise>
+          <webwork>
             <pg-code>
-              @f=($envir{problemSeed}%2==1)?(Formula("cos(x)"),Formula("sin(x)")):(Formula("sin(x)"),Formula("cos(x)"));
-              @L=($f[0]->eval(x=>pi),$f[1]->eval(x=>pi));
-              $L[2]=($L[0]==$L[1])?$L[0]:Compute("DNE");
-              $L[3]=$L[1];
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
+              $f=Formula("cos(x)"),Formula("sin(x)");
+              @L=(-1,0,Compute("DNE"),0);
             </pg-code>
-            </setup>
             <statement>
-              <p>
-                Evaluate the given limits of the piecewise defined function.
-              </p>
-
               <p>
                 <m>f(x) = \begin{cases}<var name="$f[0]"/>\amp x\lt\pi\\ <var name="$f[1]"/>\amp x\geq\pi\end{cases}</m>
               </p>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 <ol cols="2">
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to\pi^-} f(x)=</m><var name="$L[0]" width="10"/>
+                      <m>\lim\limits_{x\to\pi^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[0]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to\pi^+} f(x)=</m><var name="$L[1]" width="10"/>
+                      <m>\lim\limits_{x\to\pi^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[1]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to\pi} f(x)=</m><var name="$L[2]" width="10"/>
+                      <m>\lim\limits_{x\to\pi} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[2]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>f(\pi)=</m><var name="$L[3]" width="10"/>
+                      <m>f(\pi)</m>
+                    </p>
+                    <p>
+                      <var name="$L[3]" width="10"/>
                     </p>
                   </li>
                 </ol>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-            <setup>
+        <exercise>
+          <webwork>
             <pg-code>
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
               Context()->variables->add(a=>'Real');
               @L=(Formula("1-cos^2(a)"),Formula("sin^2(a)"),OneOf(Formula("1-cos^2(a)"),Formula("sin^2(a)")),Formula("sin^2(a)"));
             </pg-code>
-            </setup>
             <statement>
               <p>
-                Evaluate the given limits of the piecewise defined function.
-              </p>
-
-              <p>
                 <m>f(x) = \begin{cases}1-\cos^2(x)\amp x&lt;a\\\sin^2(x)\amp x\geq a\end{cases}</m>
-              </p>
-
-              <p>
                 where <m>a</m> is a real number.
               </p>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 <ol cols="2">
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to a^-} f(x)=</m><var name="$L[0]" width="10"/>
+                      <m>\lim\limits_{x\to a^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[0]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to a^+} f(x)=</m><var name="$L[1]" width="10"/>
+                      <m>\lim\limits_{x\to a^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[1]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to a} f(x)=</m><var name="$L[2]" width="10"/>
+                      <m>\lim\limits_{x\to a} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[2]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>f(a)=</m><var name="$L[3]" width="10"/>
+                      <m>f(a)</m>
+                    </p>
+                    <p>
+                      <var name="$L[3]" width="10"/>
                     </p>
                   </li>
                 </ol>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-            <setup>
+        <exercise>
+          <webwork seed="1">
             <pg-code>
               $a=random(-3,3,1);
-              @y=map{$_-2}NchooseK(5,3);
+              @y=(-2..2)[NchooseK(5,3)];
               if($envir{problemSeed}==1){$a=1;@y=(1,0,-1);};
               @f=(Formula("x+$y[0]")->reduce,Formula("x+$y[1]")->reduce,Formula("x+$y[2]")->reduce);
               Context("PiecewiseFunction");
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
               $g=PiecewiseFunction("x &lt; $a" => "$f[0]", "x = $a" => "$f[1]", "x > $a" => $f[2]);
               @L=($f[0]->eval(x=>$a),$f[2]->eval(x=>$a));
               $L[2]=($L[0]==$L[1])?$L[0]:Compute("DNE");
               $L[3]=$g->eval(x=>$a);
             </pg-code>
-            </setup>
             <statement>
-              <p>
-                Evaluate the given limits of the piecewise defined function.
-              </p>
-
               <p>
                 <m>f(x) =<var name="$g"/></m>
               </p>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 <ol cols="2">
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)=</m><var name="$L[0]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[0]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)=</m><var name="$L[1]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[1]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)=</m><var name="$L[2]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[2]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>f(<var name="$a"/>)=</m><var name="$L[3]" width="10"/>
+                      <m>f(<var name="$a"/>)</m>
+                    </p>
+                    <p>
+                      <var name="$L[3]" width="10"/>
                     </p>
                   </li>
                 </ol>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-            <setup>
+        <exercise>
+          <webwork seed="1">
             <pg-code>
               $a=random(-3,3,1);
-              @y=map{$_-2}NchooseK(5,2);
+              @y=(-5..5)[NchooseK(5,2)];
               if($envir{problemSeed}==1){$a=2;@y=(4,3);};
               @f=(Formula("x^2+($y[0]-2*$a)x+($y[0]-($a)^2-($y[0]-2*$a)*$a)")->reduce->reduce,Formula("x+($y[1]-$a)")->reduce,Formula("-x^2+$a*x+$y[0]")->reduce);
               Context("PiecewiseFunction");
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
               $g=PiecewiseFunction("x &lt; $a" => "$f[0]", "x = $a" => "$f[1]", "x > $a" => $f[2]);
               @L=($f[0]->eval(x=>$a),$f[2]->eval(x=>$a));
               $L[2]=($L[0]==$L[1])?$L[0]:Compute("DNE");
               $L[3]=$g->eval(x=>$a);
             </pg-code>
-            </setup>
             <statement>
-              <p>
-                Evaluate the given limits of the piecewise defined function.
-              </p>
-
               <p>
                 <m>f(x) =<var name="$g"/></m>
               </p>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 <ol cols="2">
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)=</m><var name="$L[0]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[0]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)=</m><var name="$L[1]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[1]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)=</m><var name="$L[2]" width="10"/>
+                      <m>\lim\limits_{x\to <var name="$a"/>} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[2]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>f(<var name="$a"/>)=</m><var name="$L[3]" width="10"/>
+                      <m>f(<var name="$a"/>)</m>
+                    </p>
+                    <p>
+                      <var name="$L[3]" width="10"/>
                     </p>
                   </li>
                 </ol>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-            <setup>
+        <exercise>
+          <webwork>
             <pg-code>
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
               Context()->variables->add(c=>'Real');
               $L=Formula("c");
             </pg-code>
-            </setup>
             <statement>
-              <p>
-                Evaluate the given limits of the piecewise defined function.
-              </p>
-
               <p>
                 <m>f(x) = \begin{cases}a(x-b)^2+c\amp x\lt b\\a(x-b)+c\amp x\geq b\end{cases}</m>
               </p>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 <ol cols="2">
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to b^-} f(x)=</m><var name="$L" width="10"/>
+                      <m>\lim\limits_{x\to b^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to b^+} f(x)=</m><var name="$L" width="10"/>
+                      <m>\lim\limits_{x\to b^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to b} f(x)=</m><var name="$L" width="10"/>
+                      <m>\lim\limits_{x\to b} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>f(b)=</m><var name="$L" width="10"/>
+                      <m>f(b)</m>
+                    </p>
+                    <p>
+                      <var name="$L" width="10"/>
                     </p>
                   </li>
                 </ol>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-            <setup>
+        <exercise>
+          <webwork>
             <pg-code>
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
               @L=(-1,1,Compute("DNE"),0);
             </pg-code>
-            </setup>
             <statement>
-              <p>
-                Evaluate the given limits of the piecewise defined function.
-              </p>
-
               <p>
                 <m>f(x) = \begin{cases}\frac{\abs{x}}{x}\amp x\neq0\\0\amp x=0\end{cases}</m>
               </p>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 <ol cols="2">
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to 0^-} f(x)=</m><var name="$L[0]" width="10"/>
+                      <m>\lim\limits_{x\to 0^-} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[0]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to 0^+} f(x)=</m><var name="$L[1]" width="10"/>
+                      <m>\lim\limits_{x\to 0^+} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[1]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>\lim\limits_{x\to 0} f(x)=</m><var name="$L[2]" width="10"/>
+                      <m>\lim\limits_{x\to 0} f(x)</m>
+                    </p>
+                    <p>
+                      <var name="$L[2]" width="10"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      <m>f(0)=</m><var name="$L[3]" width="10"/>
+                      <m>f(0)</m>
+                    </p>
+                    <p>
+                      <var name="$L[3]" width="10"/>
                     </p>
                   </li>
                 </ol>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
+      </exercisegroup>
+    </subexercises>
 
-    </exercisegroup>
-    <exercisegroup>
+    <subexercises>
+      <title>Review</title>
+      <exercisegroup cols="3">
+        <introduction>
+          <p>
+            Evaluate the limit.
+          </p>
+        </introduction>
 
-      <introduction>
-        <p>
-          The following exercises are review from prior sections.
-        </p>
-      </introduction>
-
-      <exercise>
-        <webwork seed="1">
-            <setup>
+        <exercise>
+          <webwork seed="1">
             <pg-code>
-              ($a,$b,$c)=map{($_+1)*random(-1,1,2)}NchooseK(9,3);
+              ($a,$b,$c)=(-9..-1,1..9)[NchooseK(18,3)];
               if($envir{problemSeed}==1){$a=-1;$b=-4;$c=4;};
               $f=Formula("x^2-($a+$b)x+$a*$b")->reduce;
               $g=Formula("x^2-($a+$c)x+$a*$c")->reduce;
               $r=$f/$g;
               Context("Fraction");
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
               $L=Fraction($a-$b,$a-$c);
             </pg-code>
-            </setup>
             <statement>
-              <p>
-                Use limit theorems to evaluate the limit.
-              </p>
-
               <p>
                 <m>\lim\limits_{x\to <var name="$a"/>}<var name="$r"/></m>
               </p>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 <var name="$L" width="20"/>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-            <setup>
+        <exercise>
+          <webwork seed="1">
             <pg-code>
-              ($a,$b,$c)=map{($_+1)*random(-1,1,2)}NchooseK(9,3);
+              ($a,$b,$c)=(-9..-1,1..9)[NchooseK(18,3)];
               if($envir{problemSeed}==1){$a=-4;$b=4;$c=8;};
               $f=Formula("x^2-($a+$b)x+$a*$b")->reduce;
               $g=Formula("x^2-($a+$c)x+$a*$c")->reduce;
               $r=$f/$g;
               Context("Fraction");
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
               $L=Fraction($a-$b,$a-$c);
             </pg-code>
-            </setup>
             <statement>
-              <p>
-                Use limit theorems to evaluate the limit.
-              </p>
-
               <p>
                 <m>\lim\limits_{x\to <var name="$a"/>}<var name="$r"/></m>
               </p>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 <var name="$L" width="20"/>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-            <setup>
+        <exercise>
+          <webwork seed="1">
             <pg-code>
-              @a=map{($_-9)}NchooseK(18,4);
+              @a=(-9..9)[NchooseK(19,4)];
               if($envir{problemSeed}==1){@a=(-6,6,9,0)};
               $f=Formula("x^2-($a[1]+$a[2])x+$a[1]*$a[2]")->reduce;
               $g=Formula("x^2-($a[1]+$a[3])x+$a[1]*$a[3]")->reduce;
               $r=$f/$g;
               Context("Fraction");
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
               $L=Fraction($a[0]-$a[2],$a[0]-$a[3]);
             </pg-code>
-            </setup>
             <statement>
-              <p>
-                Use limit theorems to evaluate the limit.
-              </p>
-
               <p>
                 <m>\lim\limits_{x\to <var name="$a[0]"/>}<var name="$r"/></m>
               </p>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 <var name="$L" width="20"/>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
+      </exercisegroup>
 
-      <exercise>
-        <webwork seed="1">
-            <setup>
+      <exercisegroup cols="2">
+        <introduction>
+          <p>
+            Approximate the limit numerically.
+          </p>
+        </introduction>
+
+        <exercise>
+          <webwork seed="1">
             <pg-code>
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
               ($a,$b,$c)=map{$_*random(-1,1,2)/10}NchooseK(99,3);
               if($envir{problemSeed}==1){$a=0.4;$b=4;$c=0;};
               $f=Formula("x^2-($a+$b)x+$a*$b")->reduce;
@@ -1920,27 +2136,25 @@
               $r=$f/$g;
               $L=Real(($a-$b)/($a-$c));
             </pg-code>
-            </setup>
             <statement>
-              <p>
-                Approximate the limit numerically.
-              </p>
-
               <p>
                 <m>\lim\limits_{x\to <var name="$a"/>}<var name="$r"/></m>
               </p>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 <var name="$L" width="20"/>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork seed="1">
-            <setup>
+        <exercise>
+          <webwork seed="1">
             <pg-code>
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
               ($a,$b,$c)=map{$_*random(-1,1,2)/10}NchooseK(99,3);
               if($envir{problemSeed}==1){$a=0.2;$b=-6;$c=4;};
               $f=Formula("x^2-($a+$b)x+$a*$b")->reduce;
@@ -1948,23 +2162,21 @@
               $r=$f/$g;
               $L=Real(($a-$b)/($a-$c));
             </pg-code>
-            </setup>
             <statement>
-              <p>
-                Approximate the limit numerically.
-              </p>
-
               <p>
                 <m>\lim\limits_{x\to <var name="$a"/>}<var name="$r"/></m>
               </p>
-
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
               <p>
                 <var name="$L" width="20"/>
               </p>
             </statement>
-        </webwork>
-      </exercise>
-
-    </exercisegroup>
+          </webwork>
+        </exercise>
+      </exercisegroup>
+    </subexercises>
   </exercises>
 </section>
