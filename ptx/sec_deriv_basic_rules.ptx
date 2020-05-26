@@ -2,6 +2,7 @@
 <section xml:id="sec_basic_diff_rules">
   <title>Basic Differentiation Rules</title>
   <introduction>
+
     <p>
       The derivative is a powerful tool but is admittedly awkward given its reliance on limits.
       Fortunately, one thing mathematicians are good at is
@@ -98,6 +99,21 @@
       </statement>
     </theorem>
 
+    <figure>
+      <caption>Video explanation of <xref ref="thm_deriv_common"/></caption>
+      <sidebyside widths="47% 47%">
+        <figure xml:id="vid_deriv_basic_rules_simp">
+          <caption>Basic rules</caption>
+          <video  youtube="Je10KZXLlwo"/>
+        </figure>
+        <figure xml:id="vid_deriv_basic_rules_power_rule">
+          <caption>Power rule</caption>
+          <video  youtube="fSaHMq9mNq0"/>
+        </figure>
+      </sidebyside>
+    </figure>
+
+
     <p>
       This theorem starts by stating an intuitive fact:
       constant functions have zero rate of change as they are <em>constant</em>.
@@ -133,6 +149,17 @@
       Since <m>f(x)=x</m> is a linear function with constant slope <m>1</m>,
       we can say that the derivative of <m>f(x)=x</m> is <m>\fp(x)=1</m>.
     </p>
+
+    <p>
+      <xref ref="thm_deriv_common"/> states that the natural exponential function has a remarkable propery:
+      it is equal to its own derivative! The following video explains why this is the case.
+    </p>
+
+    <figure xml:id="vid_deriv_basic_rules_exp_func">
+      <caption>Determining the derivative of <m>f(x)=e^x</m></caption>
+      <video youtube="ipKTEdQFBjw"/>
+    </figure>
+
 
     <p>
       Let's practice using this theorem.
@@ -174,6 +201,11 @@
         </p>
       </statement>
       <solution>
+        <figure xml:id="vid_deriv_basic_rules_ex">
+          <caption>Video presentation of <xref ref="ex_deriv_rule1"/></caption>
+          <video width="90%" youtube="lyAEJSmSr-A"/>
+        </figure>
+
         <p>
           <ol>
             <li>
@@ -290,6 +322,24 @@
       </statement>
     </theorem>
 
+    <figure xml:id="vid_deriv_basic_rules_const_sum_rule">
+      <caption>Video presentation of <xref ref="thm_deriv_prop"/></caption>
+      <video youtube="Hr0sQcVhQ9A"/>
+    </figure>
+
+    <p>
+      While we will be mainly focused on <em>using</em> these rules,
+      it can also be interesting to see where they come from.
+      Fortunately, it is not too difficult to establish these rules using the definition of the derivative.
+      The video below shows why the sum rule is true.
+    </p>
+
+    <figure xml:id="vid_deriv_basic_rules_proofs">
+      <caption>Proving the sum rule.</caption>
+      <video youtube="nVVpyilxZTw"/>
+    </figure>
+
+
     <p>
       <xref ref="thm_deriv_prop">Theorem</xref>
       allows us to find the derivatives of a wide variety of functions.
@@ -298,8 +348,8 @@
       using the limit definition, the derivative of <m>f(x) = 3x^2+5x-7</m>.
       We can now find its derivative without expressly using limits:
       <md>
-        <mrow>\lzoo{x}{3x^2+5x+7} \amp = 3\lzoo{x}{x^2} + 5\lzoo{x}{x} + \lzoo{x}{7}</mrow>
-        <mrow>\amp = 3\cdot 2x+5\cdot 1+ 0</mrow>
+        <mrow>\lzoo{x}{3x^2+5x-7} \amp = 3\lzoo{x}{x^2} + 5\lzoo{x}{x} - \lzoo{x}{7}</mrow>
+        <mrow>\amp = 3\cdot 2x+5\cdot 1- 0</mrow>
         <mrow>\amp = 6x+5</mrow>
       </md>.
     </p>
@@ -318,6 +368,11 @@
         </p>
       </statement>
       <solution>
+        <figure xml:id="vid_deriv_basic_rules_examples_1">
+          <caption>Video presentation of <xref ref="ex_der2"/>, and a bonus example</caption>
+          <video width="90%" youtube="a0hsWtT74jM"/>
+        </figure>
+
         <p>
           This problem is intentionally ambiguous;
           we are to <em>approximate</em> using an
@@ -509,6 +564,12 @@
         differentiable on all of <m>I</m>, and so on.
       </p>
     </aside>
+
+    <figure xml:id="vid_deriv_basic_rules_higher_order_deriv">
+      <caption>Video explanation of <xref ref="def_Higher_Deriv"/></caption>
+      <video youtube="usabSpUh65w"/>
+    </figure>
+
     <p>
       In general, when finding the fourth derivative and on,
       we resort to the <m>f\,^{(4)}(x)</m> notation, not <m>\fp'''(x)</m>;
@@ -535,6 +596,11 @@
         </p>
       </statement>
       <solution>
+        <figure xml:id="vid_deriv_basic_rules_examples_2">
+          <caption>Video presentation of <xref ref="ex_high_order"/></caption>
+          <video width="90%" youtube="nF2-IrvHmqc"/>
+        </figure>
+
         <p>
           <ol>
             <li>
@@ -651,9 +717,7 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
-            <pg-macros><macro-file>contextArbitraryString.pl</macro-file></pg-macros>
-            <setup>
+        <webwork>
             <pg-code>
               Context("ArbitraryString");
               $ans=Compute("Power Rule");
@@ -669,7 +733,7 @@
               return ($#words &lt;= 2 and ((uc($words[0]) eq 'POWER' and uc($words[1]) eq 'RULE') or (uc($words[0]) eq 'THE' and uc($words[1]) eq 'POWER' and uc($words[2]) eq 'RULE')));
               });
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 What is the name of the rule which states that <m>\lzoo{x}{x^n} = nx^{n-1}</m>,
@@ -684,12 +748,11 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               $ans=Formula("1/x");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 What is <m>\lzoo{x}{\ln(x)}</m>?
@@ -703,8 +766,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               $ans=Compute("e^x");
               $ev=$ans->cmp(checker=>sub{my($correct,$student,$self )=@_;
@@ -717,7 +779,7 @@
                 return $correct == $student;
               });
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 Give an example of a function <m>f(x)</m> where <m>\fp(x) = f(x)</m>.
@@ -737,8 +799,8 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>            <pg-code>
+        <webwork>
+            <pg-code>
               $ans=Formula("10");
               $ev=$ans->cmp(checker=>sub{my($correct,$student,$self )=@_;
                 my$context=Context()->copy;
@@ -750,7 +812,7 @@
                 return $correct == $student;
               });
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 Give an example of a function <m>f(x)</m> where <m>\fp(x) = 0</m>.
@@ -770,13 +832,12 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               $covered = RadioButtons(["Covered by this section","Not covered"],0);
               $not = RadioButtons(["Covered by this section","Not covered"],1);
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 The derivative rules introduced in this section
@@ -852,7 +913,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <statement>
               <p>
                 Explain in your own words how to find the third derivative of a function <m>f(x)</m>.
@@ -866,8 +927,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               $ans=Compute("17x-205");
               $ev=$ans->cmp(checker=>sub{my($correct,$student,$self )=@_;
@@ -883,7 +943,7 @@
                 return $correct == $student;
               });
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 Give an example of a function where
@@ -904,7 +964,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
+        <webwork>
             <statement>
               <p>
                 Explain in your own words how to find the third derivative of a function <m>f(x)</m>.
@@ -918,10 +978,8 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <pg-macros><macro-file>contextArbitraryString.pl</macro-file></pg-macros>
-            <setup>
-            <pg-code>
+        <webwork>
+          <pg-code>
               Context("ArbitraryString");
               $ans[0]=Compute("a velocity function");
               $ans[1]=Compute("an acceleration function");
@@ -948,7 +1006,7 @@
               return ($#words &lt;= 2 and ((uc($words[0]) eq 'ACCELERATION') or (uc($words[0]) eq 'ACCELERATION' and uc($words[1]) eq 'FUNCTION') or (uc($words[0]) eq 'AN' and uc($words[1]) eq 'ACCELERATION' and uc($words[2]) eq 'FUNCTION')));
               });
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 If <m>f(x)</m> describes a position function,
@@ -977,10 +1035,8 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <pg-macros><macro-file>contextArbitraryString.pl</macro-file></pg-macros>
-            <setup>
-            <pg-code>
+        <webwork>
+          <pg-code>
               Context("ArbitraryString");
               $ans=Compute("lb/ft^2");
               $ev=$ans->cmp(checker => sub {
@@ -998,7 +1054,7 @@
               return $check->{score};
               });
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 Let <m>f(x)</m> be a function measured in pounds (lb),
@@ -1024,13 +1080,12 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               $f=Formula("7x^2-5x+7");
               $fp=Formula("14x-5");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(x) = <var name="$f"/></m>
@@ -1044,13 +1099,12 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               $f=Formula("14x^3+7x^2+11x-29");
               $fp=Formula("42x^2+14x+11");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>g(x) = <var name="$f"/></m>
@@ -1064,15 +1118,14 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               Context()->variables->are(t=>'Real');
               Context()->flags->set(reduceConstants=>0);
               $f=Formula("9t^5-1/8t^3+3t-8");
               $fp=Formula("45t^4-3/8t^2+3");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>m(t) = <var name="$f"/></m>
@@ -1086,14 +1139,13 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               Context()->variables->are(theta=>['Real',TeX=>'\theta']);
               $f=Formula("9sin(theta) +10cos(theta)");
               $fp=Formula("9cos(theta)-10sin(theta)");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(\theta) = <var name="$f"/></m>
@@ -1111,14 +1163,13 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               Context()->variables->are(r=>'Real');
               $f=Formula("6e^r");
               $fp=Formula("6e^r");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(r) = <var name="$f"/></m>
@@ -1132,14 +1183,13 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               Context()->variables->are(t=>'Real');
               $f=Formula("10t^4-cos(t) +7sin(t)");
               $fp=Formula("40t^3 + sin(t) + 7cos(t)");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>g(t) = <var name="$f"/></m>
@@ -1153,13 +1203,12 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               $f=Formula("2ln(x)-x");
               $fp=Formula("2/x-1");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(x) = <var name="$f"/></m>
@@ -1173,15 +1222,14 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               Context()->variables->are(s=>'Real');
               Context()->flags->set(reduceConstants=>0);
               $f=Formula("1/4s^4+1/3s^3+1/2s^2+s+1");
               $fp=Formula("s^3+s^2+s+1");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>p(s) = <var name="$f"/></m>
@@ -1195,14 +1243,13 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               Context()->variables->are(t=>'Real');
               $f=Formula("e^t-sin(t)-cos(t)");
               $fp=Formula("e^t-cos(t)+sin(t)");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>h(t) = <var name="$f"/></m>
@@ -1216,13 +1263,12 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               $f=Formula("ln(5x^3)");
               $fp=Formula("3/x");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(x) = <var name="$f"/></m>
@@ -1236,8 +1282,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               Context()->variables->are(t=>'Real');
               Context()->flags->set(reduceConstantFunctions=>0);
@@ -1245,7 +1290,7 @@
               $f=Formula("ln(17)+e^2+sin(pi)/2");
               $fp=Formula("0");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(t) = <var name="$f"/></m>
@@ -1259,14 +1304,13 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               Context()->variables->are(t=>'Real');
               $f=Formula("(1+3t)^2");
               $fp=Formula("18t+6");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>g(t) = <var name="$f"/></m>
@@ -1280,13 +1324,12 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               $f=Formula("(2x-5)^3");
               $fp=Formula("24x^2-120x+150");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>g(x) = <var name="$f"/></m>
@@ -1300,13 +1343,12 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               $f=Formula("(1-x)^3");
               $fp=Formula("-3x^2+6x-3");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(x) = <var name="$f"/></m>
@@ -1320,13 +1362,12 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               $f=Formula("(2-3x)^2");
               $fp=Formula("18x-12");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(x) = <var name="$f"/></m>
@@ -1344,7 +1385,7 @@
 <!-- TODO: Greg added the instruction with <m>a=10</m> in V4. Is it needed? -->
 
     <exercise>
-      <webwork seed="1">
+      <webwork>
           <statement>
             <p>
               A property of logarithms is that <m>\log_a(x) = \frac{\log_b(x)}{\log_b(a)}</m>,
@@ -1389,13 +1430,12 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               $f=Formula("x^6");
               @d=(Formula("6x^5"), Formula("30x^4"), Formula("120x^3"), Formula("360x^2"));
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(x) = <var name="$f"/></m>
@@ -1421,13 +1461,12 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               $f=Formula("2cos(x)");
               @d=(Formula("-2sin(x)"), Formula("-2cos(x)"), Formula("2sin(x)"), Formula("2cos(x)"));
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>g(x) = <var name="$f"/></m>
@@ -1453,14 +1492,13 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               Context()->variables->are(t=>'Real');
               $f=Formula("t^2 - e^t");
               @d=(Formula("2t - e^t"), Formula("2 - e^t"), Formula("-e^t"), Formula("-e^t"));
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>h(t) = <var name="$f"/></m>
@@ -1486,14 +1524,13 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               Context()->variables->are(theta=>['Real',TeX=>'\theta']);
               $f=Formula("theta^4-theta^3");
               @d=(Formula("4theta^3-3theta^2"), Formula("12theta^2-6theta"), Formula("24theta-6"), Formula("24"));
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>p(\theta) = <var name="$f"/></m>
@@ -1523,14 +1560,13 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               Context()->variables->are(theta=>['Real',TeX=>'\theta']);
               $f=Formula("sin(theta)-cos(theta)");
               @d=(Formula("cos(theta)+sin(theta)"), Formula("-sin(theta)+cos(theta)"), Formula("-cos(theta)-sin(theta)"), Formula("sin(theta)-cos(theta)"));
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(\theta) = <var name="$f"/></m>
@@ -1560,13 +1596,12 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               $f=Formula("1100");
               @d=(Formula("0"), Formula("0"), Formula("0"), Formula("0"));
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(x) = <var name="$f"/></m>
@@ -1602,8 +1637,7 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               Context()->flags->set(reduceConstants=>0);
               Context()->variables->add(y=>'Real');
@@ -1611,7 +1645,7 @@
               $t=Formula("y=2(x-1)");
               $n=Formula("y=-(1/2)(x-1)");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(x)=x^3-x</m> at <m>x=1</m>
@@ -1629,8 +1663,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               Context()->flags->set(reduceConstants=>0);
               Context()->variables->are(y=>'Real',t=>'Real');
@@ -1638,7 +1671,7 @@
               $t=Formula("y=t+4");
               $n=Formula("y=-t+4");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(t)=e^t+3</m> at <m>t=0</m>
@@ -1656,8 +1689,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               Context()->flags->set(reduceConstants=>0);
               Context()->variables->are(y=>'Real',x=>'Real');
@@ -1665,7 +1697,7 @@
               $t=Formula("y=x-1");
               $n=Formula("y=-(x-1)");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>g(x)=\ln(x)</m> at <m>x=1</m>
@@ -1683,8 +1715,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               Context()->flags->set(reduceConstants=>0);
               Context()->variables->are(y=>'Real',x=>'Real');
@@ -1692,7 +1723,7 @@
               $t=Formula("y=4");
               $n=Formula("x=pi/2");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(x)=4\sin(x)</m> at <m>x=\pi/2</m>
@@ -1710,8 +1741,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               Context()->flags->set(reduceConstants=>0);
               Context()->flags->set(reduceConstantFunctions=>0);
@@ -1720,7 +1750,7 @@
               $t=Formula("y=sqrt(2)(x-pi/4)-sqrt(2)");
               $n=Formula("y=-(1/sqrt(2))(x-pi/4)-sqrt(2)");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(x)=-2\cos(x)</m> at <m>x=\pi/4</m>
@@ -1738,8 +1768,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               Context()->flags->set(reduceConstants=>0);
               Context()->flags->set(reduceConstantFunctions=>0);
@@ -1748,7 +1777,7 @@
               $t=Formula("y=2(x-5)+13");
               $n=Formula("y=-(1/2)(x-5)+13");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>f(x)=2x+3</m> at <m>x=5</m>
@@ -1775,12 +1804,11 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               $ans=1.1;
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 Given that <m>e^0=1</m>,
@@ -1801,12 +1829,11 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
+        <webwork>
             <pg-code>
               $ans=82.08;
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 Approximate the value of <m>(3.01)^4</m> using the tangent line to <m>f(x) = x^4</m> at <m>x=3</m>.
