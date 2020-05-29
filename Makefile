@@ -82,7 +82,7 @@ SERVER = "(https://webwork.pcc.edu,orcca,orcca,anonymous,orcca)"
 webwork-extraction:
 	-rm -r $(WWOUT) || :
 	install -d $(WWOUT)
-	$(PTX)/script/mbx -vv -a -c webwork -d $(WWOUT) -s $(SERVER) $(MAINFILE)
+	$(PTX)/pretext/pretext -vv -a -c webwork -d $(WWOUT) -s $(SERVER) $(MAINFILE)
 
 merge:
 	cd $(OUTPUT); \
@@ -105,13 +105,13 @@ html:
 	cp -a $(IMGSRC) $(HTMLOUT) || :
 	cp -a $(WWOUT)/*.png $(HTMLOUT)/images || :
 	cd $(HTMLOUT); \
-	xsltproc -xinclude --stringparam html.calculator geogebra-graphing --stringparam exercise.inline.hint no --stringparam exercise.inline.answer no --stringparam exercise.inline.solution yes --stringparam exercise.divisional.hint no --stringparam exercise.divisional.answer no --stringparam exercise.divisional.solution no --stringparam html.knowl.exercise.inline no --stringparam html.knowl.example no $(PTXXSL)/mathbook-html.xsl $(OUTPUT)/merge.xml; \
+	xsltproc -xinclude --stringparam html.calculator geogebra-graphing --stringparam exercise.inline.hint no --stringparam exercise.inline.answer no --stringparam exercise.inline.solution yes --stringparam exercise.divisional.hint no --stringparam exercise.divisional.answer no --stringparam exercise.divisional.solution no --stringparam html.knowl.exercise.inline no --stringparam html.knowl.example no $(PTXXSL)/pretext-html.xsl $(OUTPUT)/merge.xml; \
 
 images:
 	install -d $(OUTPUT)
 	-rm $(IMGOUT) || :
 	install -d $(IMGOUT)
-	$(PTX)/script/mbx -c latex-image -f all -d $(IMGOUT) $(OUTPUT)/merge.xml
+	$(PTX)/pretext/pretext -c latex-image -f all -d $(IMGOUT) $(OUTPUT)/merge.xml
 
 pdf:
 	install -d $(OUTPUT)
@@ -123,7 +123,7 @@ pdf:
 	cp -a $(WWOUT)/*.png $(PRINTOUT)/images || :
 	cp -a $(IMGSRC) $(PRINTOUT) || :
 	cd $(PRINTOUT); \
-	xsltproc -xinclude --stringparam latex.print 'yes' --stringparam latex.pageref 'no' --stringparam latex.sides 'two' --stringparam exercise.divisional.answer no --stringparam exercise.divisional.solution no --stringparam exercise.divisional.hint no $(PTXXSL)/mathbook-latex.xsl $(OUTPUT)/merge.xml > apex.tex; \
+	xsltproc -xinclude --stringparam latex.print 'yes' --stringparam latex.pageref 'no' --stringparam latex.sides 'two' --stringparam exercise.divisional.answer no --stringparam exercise.divisional.solution no --stringparam exercise.divisional.hint no $(PTXXSL)/pretext-latex.xsl $(OUTPUT)/merge.xml > apex.tex; \
 	xelatex apex.tex; \
 	xelatex apex.tex; \
 
