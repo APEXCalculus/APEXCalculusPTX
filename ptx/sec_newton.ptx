@@ -611,34 +611,32 @@
 
       <exercise>
         <webwork>
-            <pg-code>
-              $true=PopUp(['?','True','False'],1);
-              $false=PopUp(['?','True','False'],2);
-            </pg-code>
-
-            <statement>
-              <p>
-                Given a function <m>f(x)</m>, Newton's Method produces an exact solution to <m>f(x) = 0</m>.
-                <var name="$false" form="popup"/>
-              </p>
-            </statement>
+          <pg-code>
+            $true=PopUp(['?','True','False'],1);
+            $false=PopUp(['?','True','False'],2);
+          </pg-code>
+          <statement>
+            <p>
+              Given a function <m>f(x)</m>, Newton's Method produces an exact solution to <m>f(x) = 0</m>.
+              <var name="$false" form="popup"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
 
       <exercise>
         <webwork>
-            <pg-code>
-              $true=PopUp(['?','True','False'],1);
-              $false=PopUp(['?','True','False'],2);
-            </pg-code>
-
-            <statement>
-              <p>
-                In order to get a solution to <m>f(x)=0</m> accurate to <m>d</m> places after the decimal,
-                at least <m>d+1</m> iterations of Newtons' Method must be used.
-                <var name="$false" form="popup"/>
-              </p>
-            </statement>
+          <pg-code>
+            $true=PopUp(['?','True','False'],1);
+            $false=PopUp(['?','True','False'],2);
+          </pg-code>
+          <statement>
+            <p>
+              In order to get a solution to <m>f(x)=0</m> accurate to <m>d</m> places after the decimal,
+              at least <m>d+1</m> iterations of Newtons' Method must be used.
+              <var name="$false" form="popup"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
 
@@ -657,266 +655,261 @@
 <!--Exercise 3: Newton's Method with cos(x)-->
       <exercise>
         <webwork>
-            <pg-code>
-              $f=list_random('cos(x)');
-              $f=Compute($f);
-              Context("LimitedNumeric");
-              $x[0]=random(1.5,1.5,0.1);
-              $df=$f->D('x');
-              for my $i (1..5) {
-              $x[$i] = Compute($x[$i-1] - ($f->eval(x=>$x[$i-1]))/($df->eval(x=>$x[$i-1])));
-              };
-            </pg-code>
+          <pg-code>
+            $f=list_random('cos(x)');
+            $f=Compute($f);
+            Context("LimitedNumeric");
+            $x[0]=random(1.5,1.5,0.1);
+            $df=$f->D('x');
+            for my $i (1..5) {
+            $x[$i] = Compute($x[$i-1] - ($f->eval(x=>$x[$i-1]))/($df->eval(x=>$x[$i-1])));
+            };
+          </pg-code>
+          <statement>
+            <p>
+              Let <m>f(x) = <var name="$f"/></m>.
+              Use five iterations of Newton's Method with <m>x_0=<var name="$x[0]"/></m> to approximate the root.
+            </p>
 
-            <statement>
-              <p>
-                Let <m>f(x) = <var name="$f"/></m>.
-                Use five iterations of Newton's Method with <m>x_0=<var name="$x[0]"/></m> to approximate the root.
-              </p>
+            <tabular>
+              <row>
+                <cell><m>x_0=</m></cell>
+                <cell><var name="$x[0]"/></cell>
+              </row>
+              <row>
+                <cell><m>x_1=</m></cell>
+                <cell><var name="$x[1]" width="10"/></cell>
+              </row>
+              <row>
+                <cell><m>x_2=</m></cell>
+                <cell><var name="$x[2]" width="10"/></cell>
+              </row>
+              <row>
+                <cell><m>x_3=</m></cell>
+                <cell><var name="$x[3]" width="10"/></cell>
+              </row>
+              <row>
+                <cell><m>x_4=</m></cell>
+                <cell><var name="$x[4]" width="10"/></cell>
+              </row>
+              <row>
+                <cell><m>x_5=</m></cell>
+                <cell><var name="$x[5]" width="10"/></cell>
+              </row>
+            </tabular>
 
-              <tabular>
-                <row>
-                  <cell><m>x_0=</m></cell>
-                  <cell><var name="$x[0]"/></cell>
-                </row>
-                <row>
-                  <cell><m>x_1=</m></cell>
-                  <cell><var name="$x[1]" width="10"/></cell>
-                </row>
-                <row>
-                  <cell><m>x_2=</m></cell>
-                  <cell><var name="$x[2]" width="10"/></cell>
-                </row>
-                <row>
-                  <cell><m>x_3=</m></cell>
-                  <cell><var name="$x[3]" width="10"/></cell>
-                </row>
-                <row>
-                  <cell><m>x_4=</m></cell>
-                  <cell><var name="$x[4]" width="10"/></cell>
-                </row>
-                <row>
-                  <cell><m>x_5=</m></cell>
-                  <cell><var name="$x[5]" width="10"/></cell>
-                </row>
-              </tabular>
-
-              <p>
-                Compare <m>x_5</m> to the known value of the root.
-              </p>
-            </statement>
+            <p>
+              Compare <m>x_5</m> to the known value of the root.
+            </p>
+          </statement>
         </webwork>
       </exercise>
 <!--Exercise 4 sine function-->
       <exercise>
         <webwork>
-            <pg-code>
-              $f=list_random('sin(x)');
-              $f=Compute($f);
-              Context("LimitedNumeric");
-              $x[0]=random(1,1,0.1);
-              $df=$f->D('x');
-              for my $i (1..5) {
-              $x[$i] = Compute($x[$i-1] - ($f->eval(x=>$x[$i-1]))/($df->eval(x=>$x[$i-1])));
-              };
-            </pg-code>
+          <pg-code>
+            $f=list_random('sin(x)');
+            $f=Compute($f);
+            Context("LimitedNumeric");
+            $x[0]=random(1,1,0.1);
+            $df=$f->D('x');
+            for my $i (1..5) {
+            $x[$i] = Compute($x[$i-1] - ($f->eval(x=>$x[$i-1]))/($df->eval(x=>$x[$i-1])));
+            };
+          </pg-code>
+          <statement>
+            <p>
+              Let <m>f(x) = <var name="$f"/></m>.
+              Use five iterations of Newton's Method with <m>x_0=<var name="$x[0]"/></m> to approximate the root.
+            </p>
 
-            <statement>
-              <p>
-                Let <m>f(x) = <var name="$f"/></m>.
-                Use five iterations of Newton's Method with <m>x_0=<var name="$x[0]"/></m> to approximate the root.
-              </p>
+            <tabular>
+              <row>
+                <cell><m>x_0=</m></cell>
+                <cell><m><var name="$x[0]"/></m></cell>
+              </row>
+              <row>
+                <cell><m>x_1=</m></cell>
+                <cell><var name="$x[1]" width="10"/></cell>
+              </row>
+              <row>
+                <cell><m>x_2=</m></cell>
+                <cell><var name="$x[2]" width="10"/></cell>
+              </row>
+              <row>
+                <cell><m>x_3=</m></cell>
+                <cell><var name="$x[3]" width="10"/></cell>
+              </row>
+              <row>
+                <cell><m>x_4=</m></cell>
+                <cell><var name="$x[4]" width="10"/></cell>
+              </row>
+              <row>
+                <cell><m>x_5=</m></cell>
+                <cell><var name="$x[5]" width="10"/></cell>
+              </row>
+            </tabular>
 
-              <tabular>
-                <row>
-                  <cell><m>x_0=</m></cell>
-                  <cell><m><var name="$x[0]"/></m></cell>
-                </row>
-                <row>
-                  <cell><m>x_1=</m></cell>
-                  <cell><var name="$x[1]" width="10"/></cell>
-                </row>
-                <row>
-                  <cell><m>x_2=</m></cell>
-                  <cell><var name="$x[2]" width="10"/></cell>
-                </row>
-                <row>
-                  <cell><m>x_3=</m></cell>
-                  <cell><var name="$x[3]" width="10"/></cell>
-                </row>
-                <row>
-                  <cell><m>x_4=</m></cell>
-                  <cell><var name="$x[4]" width="10"/></cell>
-                </row>
-                <row>
-                  <cell><m>x_5=</m></cell>
-                  <cell><var name="$x[5]" width="10"/></cell>
-                </row>
-              </tabular>
-
-              <p>
-                Compare <m>x_5</m> to the known value of the root.
-              </p>
-            </statement>
+            <p>
+              Compare <m>x_5</m> to the known value of the root.
+            </p>
+          </statement>
         </webwork>
       </exercise>
 <!--Exercise 5 quadratic function-->
       <exercise>
         <webwork>
-            <pg-code>
-              $f=list_random('x^2+x-2');
-              $f=Compute($f);
-              Context("LimitedNumeric");
-              $x[0]=random(0,0,0.1);
-              $df=$f->D('x');
-              for my $i (1..5) {
-              $x[$i] = Compute($x[$i-1] - ($f->eval(x=>$x[$i-1]))/($df->eval(x=>$x[$i-1])));
-              };
-            </pg-code>
+          <pg-code>
+            $f=list_random('x^2+x-2');
+            $f=Compute($f);
+            Context("LimitedNumeric");
+            $x[0]=random(0,0,0.1);
+            $df=$f->D('x');
+            for my $i (1..5) {
+            $x[$i] = Compute($x[$i-1] - ($f->eval(x=>$x[$i-1]))/($df->eval(x=>$x[$i-1])));
+            };
+          </pg-code>
+          <statement>
+            <p>
+              Let <m>f(x) = <var name="$f"/></m>.
+              Use five iterations of Newton's Method with <m>x_0=<var name="$x[0]"/></m> to approximate the root.
+            </p>
 
-            <statement>
-              <p>
-                Let <m>f(x) = <var name="$f"/></m>.
-                Use five iterations of Newton's Method with <m>x_0=<var name="$x[0]"/></m> to approximate the root.
-              </p>
+            <tabular>
+              <row>
+                <cell><m>x_0=</m></cell>
+                <cell><m><var name="$x[0]"/></m></cell>
+              </row>
+              <row>
+                <cell><m>x_1=</m></cell>
+                <cell><var name="$x[1]" width="10"/></cell>
+              </row>
+              <row>
+                <cell><m>x_2=</m></cell>
+                <cell><var name="$x[2]" width="10"/></cell>
+              </row>
+              <row>
+                <cell><m>x_3=</m></cell>
+                <cell><var name="$x[3]" width="10"/></cell>
+              </row>
+              <row>
+                <cell><m>x_4=</m></cell>
+                <cell><var name="$x[4]" width="10"/></cell>
+              </row>
+              <row>
+                <cell><m>x_5=</m></cell>
+                <cell><var name="$x[5]" width="10"/></cell>
+              </row>
+            </tabular>
 
-              <tabular>
-                <row>
-                  <cell><m>x_0=</m></cell>
-                  <cell><m><var name="$x[0]"/></m></cell>
-                </row>
-                <row>
-                  <cell><m>x_1=</m></cell>
-                  <cell><var name="$x[1]" width="10"/></cell>
-                </row>
-                <row>
-                  <cell><m>x_2=</m></cell>
-                  <cell><var name="$x[2]" width="10"/></cell>
-                </row>
-                <row>
-                  <cell><m>x_3=</m></cell>
-                  <cell><var name="$x[3]" width="10"/></cell>
-                </row>
-                <row>
-                  <cell><m>x_4=</m></cell>
-                  <cell><var name="$x[4]" width="10"/></cell>
-                </row>
-                <row>
-                  <cell><m>x_5=</m></cell>
-                  <cell><var name="$x[5]" width="10"/></cell>
-                </row>
-              </tabular>
-
-              <p>
-                Compare <m>x_5</m> to the known value of the root.
-              </p>
-            </statement>
+            <p>
+              Compare <m>x_5</m> to the known value of the root.
+            </p>
+          </statement>
         </webwork>
       </exercise>
 <!--Exercise 6 quadratic function 2-->
       <exercise>
         <webwork>
-            <pg-code>
-              $f=list_random('x^2-2');
-              $f=Compute($f);
-              Context("LimitedNumeric");
-              $x[0]=random(1.5,1.5,.1);
-              $df=$f->D('x');
-              for my $i (1..5) {
-              $x[$i] = Compute($x[$i-1] - ($f->eval(x=>$x[$i-1]))/($df->eval(x=>$x[$i-1])));
-              };
-            </pg-code>
+          <pg-code>
+            $f=list_random('x^2-2');
+            $f=Compute($f);
+            Context("LimitedNumeric");
+            $x[0]=random(1.5,1.5,.1);
+            $df=$f->D('x');
+            for my $i (1..5) {
+            $x[$i] = Compute($x[$i-1] - ($f->eval(x=>$x[$i-1]))/($df->eval(x=>$x[$i-1])));
+            };
+          </pg-code>
+          <statement>
+            <p>
+              Let <m>f(x) = <var name="$f"/></m>.
+              Use five iterations of Newton's Method with <m>x_0=<var name="$x[0]"/></m> to approximate the root.
+            </p>
 
-            <statement>
-              <p>
-                Let <m>f(x) = <var name="$f"/></m>.
-                Use five iterations of Newton's Method with <m>x_0=<var name="$x[0]"/></m> to approximate the root.
-              </p>
+            <tabular>
+              <row>
+                <cell><m>x_0=</m></cell>
+                <cell><m><var name="$x[0]"/></m></cell>
+              </row>
+              <row>
+                <cell><m>x_1=</m></cell>
+                <cell><var name="$x[1]" width="10"/></cell>
+              </row>
+              <row>
+                <cell><m>x_2=</m></cell>
+                <cell><var name="$x[2]" width="10"/></cell>
+              </row>
+              <row>
+                <cell><m>x_3=</m></cell>
+                <cell><var name="$x[3]" width="10"/></cell>
+              </row>
+              <row>
+                <cell><m>x_4=</m></cell>
+                <cell><var name="$x[4]" width="10"/></cell>
+              </row>
+              <row>
+                <cell><m>x_5=</m></cell>
+                <cell><var name="$x[5]" width="10"/></cell>
+              </row>
+            </tabular>
 
-              <tabular>
-                <row>
-                  <cell><m>x_0=</m></cell>
-                  <cell><m><var name="$x[0]"/></m></cell>
-                </row>
-                <row>
-                  <cell><m>x_1=</m></cell>
-                  <cell><var name="$x[1]" width="10"/></cell>
-                </row>
-                <row>
-                  <cell><m>x_2=</m></cell>
-                  <cell><var name="$x[2]" width="10"/></cell>
-                </row>
-                <row>
-                  <cell><m>x_3=</m></cell>
-                  <cell><var name="$x[3]" width="10"/></cell>
-                </row>
-                <row>
-                  <cell><m>x_4=</m></cell>
-                  <cell><var name="$x[4]" width="10"/></cell>
-                </row>
-                <row>
-                  <cell><m>x_5=</m></cell>
-                  <cell><var name="$x[5]" width="10"/></cell>
-                </row>
-              </tabular>
-
-              <p>
-                Compare <m>x_5</m> to the known value of the root.
-              </p>
-            </statement>
+            <p>
+              Compare <m>x_5</m> to the known value of the root.
+            </p>
+          </statement>
         </webwork>
       </exercise>
 <!--Exercise 7 ln(x) -->
       <exercise>
         <webwork>
-            <pg-code>
-              $f=list_random('ln(x)');
-              $f=Compute($f);
-              Context("LimitedNumeric");
-              $x[0]=random(2,2,0.1);
-              $df=$f->D('x');
-              for my $i (1..5) {
-              $x[$i] = Compute($x[$i-1] - ($f->eval(x=>$x[$i-1]))/($df->eval(x=>$x[$i-1])));
-              };
-            </pg-code>
+          <pg-code>
+            $f=list_random('ln(x)');
+            $f=Compute($f);
+            Context("LimitedNumeric");
+            $x[0]=random(2,2,0.1);
+            $df=$f->D('x');
+            for my $i (1..5) {
+            $x[$i] = Compute($x[$i-1] - ($f->eval(x=>$x[$i-1]))/($df->eval(x=>$x[$i-1])));
+            };
+          </pg-code>
+          <statement>
+            <p>
+              Let <m>f(x) = <var name="$f"/></m>.
+              Use five iterations of Newton's Method with <m>x_0=<var name="$x[0]"/></m> to approximate the root.
+            </p>
 
-            <statement>
-              <p>
-                Let <m>f(x) = <var name="$f"/></m>.
-                Use five iterations of Newton's Method with <m>x_0=<var name="$x[0]"/></m> to approximate the root.
-              </p>
+            <tabular>
+              <row>
+                <cell><m>x_0=</m></cell>
+                <cell><m><var name="$x[0]"/></m></cell>
+              </row>
+              <row>
+                <cell><m>x_1=</m></cell>
+                <cell><var name="$x[1]" width="10"/></cell>
+              </row>
+              <row>
+                <cell><m>x_2=</m></cell>
+                <cell><var name="$x[2]" width="10"/></cell>
+              </row>
+              <row>
+                <cell><m>x_3=</m></cell>
+                <cell><var name="$x[3]" width="10"/></cell>
+              </row>
+              <row>
+                <cell><m>x_4=</m></cell>
+                <cell><var name="$x[4]" width="10"/></cell>
+              </row>
+              <row>
+                <cell><m>x_5=</m></cell>
+                <cell><var name="$x[5]" width="10"/></cell>
+              </row>
+            </tabular>
 
-              <tabular>
-                <row>
-                  <cell><m>x_0=</m></cell>
-                  <cell><m><var name="$x[0]"/></m></cell>
-                </row>
-                <row>
-                  <cell><m>x_1=</m></cell>
-                  <cell><var name="$x[1]" width="10"/></cell>
-                </row>
-                <row>
-                  <cell><m>x_2=</m></cell>
-                  <cell><var name="$x[2]" width="10"/></cell>
-                </row>
-                <row>
-                  <cell><m>x_3=</m></cell>
-                  <cell><var name="$x[3]" width="10"/></cell>
-                </row>
-                <row>
-                  <cell><m>x_4=</m></cell>
-                  <cell><var name="$x[4]" width="10"/></cell>
-                </row>
-                <row>
-                  <cell><m>x_5=</m></cell>
-                  <cell><var name="$x[5]" width="10"/></cell>
-                </row>
-              </tabular>
-
-              <p>
-                Compare <m>x_5</m> to the known value of the root.
-              </p>
-            </statement>
+            <p>
+              Compare <m>x_5</m> to the known value of the root.
+            </p>
+          </statement>
         </webwork>
       </exercise>
 
@@ -950,91 +943,87 @@
 
       <exercise>
         <webwork>
-            <pg-code>
-              $f = list_random('x^3+5x^2-x-1');
-              $f = Compute($f);
-              $L = List(-5.15633,-0.369102,0.525430);
-              Context("LimitedNumeric");
-            </pg-code>
+          <pg-code>
+            $f = list_random('x^3+5x^2-x-1');
+            $f = Compute($f);
+            $L = List(-5.15633,-0.369102,0.525430);
+            Context("LimitedNumeric");
+          </pg-code>
+          <statement>
+            <p>
+              Use Newton's Method to approximate all roots of <m>f(x)=<var name="$f"/></m> accurate to three places after the decimal.
+              Use technology to obtain good initial approximations.
+            </p>
 
-            <statement>
-              <p>
-                Use Newton's Method to approximate all roots of <m>f(x)=<var name="$f"/></m> accurate to three places after the decimal.
-                Use technology to obtain good initial approximations.
-              </p>
-
-              <p>
-                <var name="$L" width="50"/>
-              </p>
-            </statement>
+            <p>
+              <var name="$L" width="50"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
 
       <exercise>
         <webwork>
-            <pg-code>
-              $f = list_random('x^4+2x^3-7x^2-x+5');
-              $f = Compute($f);
-              $L = List(-3.71448,-0.856723,1,1.57120);
-              Context("LimitedNumeric");
-              </pg-code>
+          <pg-code>
+            $f = list_random('x^4+2x^3-7x^2-x+5');
+            $f = Compute($f);
+            $L = List(-3.71448,-0.856723,1,1.57120);
+            Context("LimitedNumeric");
+          </pg-code>
+          <statement>
+            <p>
+              Use Newton's Method to approximate all roots of <m>f(x)=<var name="$f"/></m> accurate to three places after the decimal.
+              Use technology to obtain good initial approximations.
+            </p>
 
-            <statement>
-              <p>
-                Use Newton's Method to approximate all roots of <m>f(x)=<var name="$f"/></m> accurate to three places after the decimal.
-                Use technology to obtain good initial approximations.
-              </p>
-
-              <p>
-                <var name="$L" width="50"/>
-              </p>
-            </statement>
+            <p>
+              <var name="$L" width="50"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
 
       <exercise>
         <webwork>
-            <pg-code>
-              $f = list_random('x^17-2x^13-10x^8+10');
-              $I = Interval(-2,2);
-              $f = Compute($f);
-              $L = List(-1.01340,0.988312,1.39341);
-              Context("LimitedNumeric");
-            </pg-code>
+          <pg-code>
+            $f = list_random('x^17-2x^13-10x^8+10');
+            $I = Interval(-2,2);
+            $f = Compute($f);
+            $L = List(-1.01340,0.988312,1.39341);
+            Context("LimitedNumeric");
+          </pg-code>
+          <statement>
+            <p>
+              Use Newton's Method to approximate all roots of <m>f(x)=<var name="$f"/></m> on the interval <m><var name="$I"/></m> accurate to three places after the decimal.
+              Use technology to obtain good initial approximations.
+            </p>
 
-            <statement>
-              <p>
-                Use Newton's Method to approximate all roots of <m>f(x)=<var name="$f"/></m> on the interval <m><var name="$I"/></m> accurate to three places after the decimal.
-                Use technology to obtain good initial approximations.
-              </p>
-
-              <p>
-                <var name="$L" width="50"/>
-              </p>
-            </statement>
+            <p>
+              <var name="$L" width="50"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
 
       <exercise>
         <webwork>
-            <pg-code>
-              $f = list_random('x^2cos(x) + (x-1)sin(x)');
-              $I = Interval(-3,3);
-              $f = Compute($f);
-              $L = List(-2.16477,0,0.524501,1.81328);
-              Context("LimitedNumeric");
-            </pg-code>
+          <pg-code>
+            $f = list_random('x^2cos(x) + (x-1)sin(x)');
+            $I = Interval(-3,3);
+            $f = Compute($f);
+            $L = List(-2.16477,0,0.524501,1.81328);
+            Context("LimitedNumeric");
+          </pg-code>
+          <statement>
+            <p>
+              Use Newton's Method to approximate all roots of <m>f(x)=<var name="$f"/></m> on the interval <m><var name="$I"/></m> accurate to three places after the decimal.
+              Use technology to obtain good initial approximations.
+            </p>
 
-            <statement>
-              <p>
-                Use Newton's Method to approximate all roots of <m>f(x)=<var name="$f"/></m> on the interval <m><var name="$I"/></m> accurate to three places after the decimal.
-                Use technology to obtain good initial approximations.
-              </p>
-
-              <p>
-                <var name="$L" width="50"/>
-              </p>
-            </statement>
+            <p>
+              <var name="$L" width="50"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
 
@@ -1053,103 +1042,99 @@
 <!--ONE OF FOUR-->
       <exercise>
         <webwork>
-            <pg-code>
-              $f = list_random('x^2');
-              $g = list_random('cos(x)');
-              $f = Compute($f);
-              $g = Compute($g);
-              $L = List(0.824132,-0.824132);
-              Context("LimitedNumeric");
-            </pg-code>
+          <pg-code>
+            $f = list_random('x^2');
+            $g = list_random('cos(x)');
+            $f = Compute($f);
+            $g = Compute($g);
+            $L = List(0.824132,-0.824132);
+            Context("LimitedNumeric");
+          </pg-code>
+          <statement>
+            <p>
+              Use Newton's Method to approximate when <m>f(x)=<var name="$f"/></m> is equal to <m>g(x)=<var name="$g"/></m>,
+              accurate to three places after the decimal.
+              Use technology to obtain good initial approximations.
+            </p>
 
-            <statement>
-              <p>
-                Use Newton's Method to approximate when <m>f(x)=<var name="$f"/></m> is equal to <m>g(x)=<var name="$g"/></m>,
-                accurate to three places after the decimal.
-                Use technology to obtain good initial approximations.
-              </p>
-
-              <p>
-                <var name="$L" width="50"/>
-              </p>
-            </statement>
+            <p>
+              <var name="$L" width="50"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
 <!--TWO OF FOUR-->
       <exercise>
         <webwork>
-            <pg-code>
-              $f = list_random('x^2-1');
-              $g = list_random('sin(x)');
-              $f = Compute($f);
-              $g = Compute($g);
-              $L = List(-0.636733,1.40962);
-              Context("LimitedNumeric");
-            </pg-code>
+          <pg-code>
+            $f = list_random('x^2-1');
+            $g = list_random('sin(x)');
+            $f = Compute($f);
+            $g = Compute($g);
+            $L = List(-0.636733,1.40962);
+            Context("LimitedNumeric");
+          </pg-code>
+          <statement>
+            <p>
+              Use Newton's Method to approximate when <m>f(x)=<var name="$f"/></m> is equal to <m>g(x)=<var name="$g"/></m>,
+              accurate to three places after the decimal.
+              Use technology to obtain good initial approximations.
+            </p>
 
-            <statement>
-              <p>
-                Use Newton's Method to approximate when <m>f(x)=<var name="$f"/></m> is equal to <m>g(x)=<var name="$g"/></m>,
-                accurate to three places after the decimal.
-                Use technology to obtain good initial approximations.
-              </p>
-
-              <p>
-                <var name="$L" width="50"/>
-              </p>
-            </statement>
+            <p>
+              <var name="$L" width="50"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
 <!--THREE OF FOUR-->
 <!--This exercise has the solution x = 0, not the one listed in the solutions; it's rather trivial-->
       <exercise>
         <webwork>
-            <pg-code>
-              $f = list_random('e^(x^2)');
-              $g = list_random('cos(x)');
-              $f = Compute($f);
-              $g = Compute($g);
-              $L = List(0);
-              Context("LimitedNumeric");
-            </pg-code>
+          <pg-code>
+            $f = list_random('e^(x^2)');
+            $g = list_random('cos(x)');
+            $f = Compute($f);
+            $g = Compute($g);
+            $L = List(0);
+            Context("LimitedNumeric");
+          </pg-code>
+          <statement>
+            <p>
+              Use Newton's Method to approximate when <m>f(x)=<var name="$f"/></m> is equal to <m>g(x)=<var name="$g"/></m>,
+              accurate to three places after the decimal.
+              Use technology to obtain good initial approximations.
+            </p>
 
-            <statement>
-              <p>
-                Use Newton's Method to approximate when <m>f(x)=<var name="$f"/></m> is equal to <m>g(x)=<var name="$g"/></m>,
-                accurate to three places after the decimal.
-                Use technology to obtain good initial approximations.
-              </p>
-
-              <p>
-                <var name="$L" width="50"/>
-              </p>
-            </statement>
+            <p>
+              <var name="$L" width="50"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
 <!--FOUR OF FOUR-->
       <exercise>
         <webwork>
-            <pg-code>
-              $f = list_random('x');
-              $g = list_random('tan(x)');
-              $f = Compute($f);
-              $g = Compute($g);
-              $I = Interval([-6,6]);
-              $L = List(4.49341,-4.49341,0);
-              Context("LimitedNumeric");
-            </pg-code>
+          <pg-code>
+            $f = list_random('x');
+            $g = list_random('tan(x)');
+            $f = Compute($f);
+            $g = Compute($g);
+            $I = Interval([-6,6]);
+            $L = List(4.49341,-4.49341,0);
+            Context("LimitedNumeric");
+          </pg-code>
+          <statement>
+            <p>
+              Use Newton's Method to approximate when <m>f(x)=<var name="$f"/></m> is equal to <m>g(x)=<var name="$g"/></m> on the interval <m><var name="$I"/></m>,
+              accurate to three places after the decimal.
+              Use technology to obtain good initial approximations.
+            </p>
 
-            <statement>
-              <p>
-                Use Newton's Method to approximate when <m>f(x)=<var name="$f"/></m> is equal to <m>g(x)=<var name="$g"/></m> on the interval <m><var name="$I"/></m>,
-                accurate to three places after the decimal.
-                Use technology to obtain good initial approximations.
-              </p>
-
-              <p>
-                <var name="$L" width="50"/>
-              </p>
-            </statement>
+            <p>
+              <var name="$L" width="50"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
 
@@ -1157,40 +1142,40 @@
 
     <exercise>
       <webwork>
-          <statement>
-            <p>
-              Why does Newton's Method fail in finding a root of <m>f(x) = x^3-3x^2+x+3</m> when <m>x_0=1</m>?
-            </p>
+        <statement>
+          <p>
+            Why does Newton's Method fail in finding a root of <m>f(x) = x^3-3x^2+x+3</m> when <m>x_0=1</m>?
+          </p>
 
-            <p>
-              <var form="essay"/>
-            </p>
-          </statement>
-          <solution>
-            <p>
-              The approximations alternate between <m>x=1</m> and <m>x=2</m>.
-            </p>
-          </solution>
+          <p>
+            <var form="essay"/>
+          </p>
+        </statement>
+        <solution>
+          <p>
+            The approximations alternate between <m>x=1</m> and <m>x=2</m>.
+          </p>
+        </solution>
       </webwork>
     </exercise>
 
     <exercise>
       <webwork>
-          <statement>
-            <p>
-              Why does Newton's Method fail in finding a root of <m>f(x) = -17x^4+130x^3-301x^2+156x+156</m> when <m>x_0=1</m>?
-            </p>
+        <statement>
+          <p>
+            Why does Newton's Method fail in finding a root of <m>f(x) = -17x^4+130x^3-301x^2+156x+156</m> when <m>x_0=1</m>?
+          </p>
 
-            <p>
-              <var form="essay"/>
-            </p>
-          </statement>
-          <solution>
-            <p>
-              The approximations alternate between <m>x=1</m>,
-              <m>x=2</m> and <m>x=3</m>.
-            </p>
-          </solution>
+          <p>
+            <var form="essay"/>
+          </p>
+        </statement>
+        <solution>
+          <p>
+            The approximations alternate between <m>x=1</m>,
+            <m>x=2</m> and <m>x=3</m>.
+          </p>
+        </solution>
       </webwork>
     </exercise>
 
