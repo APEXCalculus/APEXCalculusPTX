@@ -39,7 +39,7 @@
         <title>Separable</title>
         <ol>
           <li><m>\displaystyle \frac{dy}{dx} = x^2y</m></li>
-          <li><m>\displaystyle y\sqrt{y^2-5} \frac{dy}{dx} - \sin x \cos x = 0</m></li>
+          <li><m>\displaystyle y\sqrt{y^2-5} \frac{dy}{dx} - \sin(x) \cos(x) = 0</m></li>
           <li><m>\displaystyle \frac{dy}{dx} = \frac{(x^2 + 1)e^{y}}{y}</m></li>
         </ol>
       </list>
@@ -47,7 +47,7 @@
         <title>Not Separable</title>
         <ol>
           <li xml:id="item-not-sep"><m>\displaystyle \frac{dy}{dx} = x^2 + y</m></li>
-          <li><m>\displaystyle y\sqrt{y^2-1} \frac{dy}{dx} - \sin x \cos y = 0</m></li>
+          <li><m>\displaystyle y\sqrt{y^2-1} \frac{dy}{dx} - \sin(x) \cos y = 0</m></li>
           <li><m>\displaystyle \frac{dy}{dx} = \frac{(xy + 1)e^{y}}{y}</m></li>
         </ol>
       </list>
@@ -144,6 +144,16 @@
             \frac{dy}{y} = x^2 dx
           </me>.
         </p>
+
+        <aside>
+          <p>
+            The indefinite integrals <m>\int \frac{dy}{y}</m> and
+            <m>\int x^2\, dx</m> both produce arbitrary constants.
+            Since both constants are arbitrary,
+            we combine them into a single constant of integration.
+          </p>
+        </aside>
+
         <p>
           Integrating the left hand side of the equation with respect to <m>y</m> and the right hand side of the equation with respect to <m>x</m> yields
           <me>
@@ -158,15 +168,6 @@
             \abs{y} = e^{x^3/3 + C} = e^{x^3/3}e^C
           </me>.
         </p>
-
-        <aside>
-          <p>
-            The indefinite integrals <m>\int \frac{dy}{y}</m> and
-            <m>\int x^2\, dx</m> both produce arbitrary constants.
-            Since both constants are arbitrary,
-            we combine them into a single constant of integration.
-          </p>
-        </aside>
 
         <p>
           This solution is a bit problematic.
@@ -187,6 +188,20 @@
           Thus, we haven't actually found a general solution to the problem.
           We can clean up the solution and recover the missing solution with a bit of clever thought.
         </p>
+
+        <aside>
+          <p>
+            Missing constant solutions can't always be recovered by cleverly redefining the arbitrary constant.
+            The differential equation <m>\yp = y^2 - 1</m> is an example of this fact.
+            Both <m>y=1</m> and <m>y=-1</m> are constant solutions to this differential equation.
+            Separation of variables yields a solution where <m>y=1</m> can be attained by choosing an appropriate <m>C</m> value,
+            but <m>y=-1</m> can't.
+            The general solution is the set containing the solution produced by separation of variables <em>and</em>
+            the missing solution <m>y=-1</m>.
+            We should always be careful to look for missing constant solutions when seeking the general solution to a separable differential equation.
+          </p>
+        </aside>
+
         <p>
           Recall the formal definition of the absolute value:
           <m>\abs{y} = y</m> if <m>y \geq 0</m> and <m>\abs{y} =  -y</m> if <m>y \lt  0</m>.
@@ -206,25 +221,12 @@
       </solution>
     </example>
 
-    <aside>
-      <p>
-        Missing constant solutions can't always be recovered by cleverly redefining the arbitrary constant.
-        The differential equation <m>\yp = y^2 - 1</m> is an example of this fact.
-        Both <m>y=1</m> and <m>y=-1</m> are constant solutions to this differential equation.
-        Separation of variables yields a solution where <m>y=1</m> can be attained by choosing an appropriate <m>C</m> value,
-        but <m>y=-1</m> can't.
-        The general solution is the set containing the solution produced by separation of variables <em>and</em>
-        the missing solution <m>y=-1</m>.
-        We should always be careful to look for missing constant solutions when seeking the general solution to a separable differential equation.
-      </p>
-    </aside>
-
     <example xml:id="ex_separable_IVP">
       <title>Solving a Separable Initial Value Problem</title>
       <statement>
         <p>
           Solve the initial value problem
-          <m>\displaystyle (y\sqrt{y^2-5}) \yp - \sin x \cos x = 0</m>,
+          <m>\displaystyle (y\sqrt{y^2-5}) \yp - \sin(x) \cos(x) = 0</m>,
           with <m>y(0) = -3</m>.
         </p>
       </statement>
@@ -233,13 +235,13 @@
         <p>
           We first put the differential equation in separated form
           <me>
-            y\sqrt{y^2-5}\,dy = \sin x \cos x\, dx
+            y\sqrt{y^2-5}\,dy = \sin(x) \cos(x)\, dx
           </me>.
         </p>
         <p>
           The indefinite integral <m>\displaystyle \int y\sqrt{y^2-5}\,dy</m> requires the substitution <m>u = y^2-5</m>.
           Using this substitute yields the antiderivative <m>\displaystyle \frac{1}{3} (y^2-5)^{3/2}</m>.
-          The indefinite integral <m>\displaystyle \int \sin x \cos x\,dx</m> requires the substitution <m>u = \sin x</m>.
+          The indefinite integral <m>\displaystyle \int \sin(x) \cos(x)\,dx</m> requires the substitution <m>u = \sin(x)</m>.
           Using this substitution yields the antiderivative <m>\displaystyle \frac{1}{2} \sin^2 x</m>.
           Thus, we have an implicit form of the solution to the differential equation given by
           <me>
@@ -261,6 +263,7 @@
         </p>
       </solution>
     </example>
+
     <example xml:id="ex_separable_DE2">
       <title>Solving a Separable Differential Equation</title>
       <statement>
@@ -292,6 +295,7 @@
         </p>
       </solution>
     </example>
+
     <example xml:id="ex_logistic">
       <title>Solving the Logistic Differential Equation</title>
       <statement>
@@ -393,7 +397,7 @@
       <exercise>
         <statement>
           <p>
-            <m>\displaystyle x\yp + x^2y = \frac{\sin x}{x-y}</m>
+            <m>\displaystyle x\yp + x^2y = \frac{\sin(x)}{x-y}</m>
           </p>
         </statement>
         <answer>
@@ -405,7 +409,7 @@
       <exercise>
         <statement>
           <p>
-            <m>\displaystyle (y + 3)\yp + (\ln x) \yp - x\sin y = (y+3)\ln x</m>
+            <m>\displaystyle (y + 3)\yp + (\ln(x)) \yp - x\sin y = (y+3)\ln(x)</m>
           </p>
         </statement>
         <answer>
@@ -543,13 +547,13 @@
       <exercise>
         <statement>
           <p>
-            <m>\displaystyle \yp = \frac{\sin x}{\cos y}</m>,
+            <m>\displaystyle \yp = \frac{\sin(x)}{\cos y}</m>,
             with <m>y(0) = \displaystyle \frac{\pi}{2}</m>
           </p>
         </statement>
         <answer>
           <p>
-            <m>\sin y + \cos x = 2</m>
+            <m>\sin y + \cos(x) = 2</m>
           </p>
         </answer>
       </exercise>
