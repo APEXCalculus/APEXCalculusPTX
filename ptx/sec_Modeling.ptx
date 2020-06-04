@@ -30,7 +30,7 @@
 
           \draw  (1,1) node {$\displaystyle \frac{dp}{dt} = kp$};
 
-          \draw [firstcolor] (-1,0) node [text width=60pt,align=center] (a) {\scriptsize \centering The rate of change of the population};
+          \draw [firstcolor] (-1.5,0) node [text width=60pt,align=center] (a) {\scriptsize \centering The rate of change of the population};
           \draw [firstcolor,-&gt;] (a) -- (.3,.7);
 
           \draw [firstcolor] (2,.25) node [text width=60pt,align=center] (b) {\scriptsize \centering the population.};
@@ -83,6 +83,7 @@
         </p>
       </statement>
       <solution>
+        <!-- <video width="90%" youtube="EC18tbH7SQw" xml:id="vid-diffeq-model-bacterial-growth"/> -->
         <p>
           We already know that the population at time <m>t</m> is given by
           <m>p = Ce^{kt}</m> for some <m>C</m> and <m>k</m>.
@@ -105,7 +106,7 @@
           <me>
             10000 = 200e^{(\ln(8)/3)t}
           </me>
-          yields <m>t =(3\ln 50)/\ln 8 \approx 5.644</m>.
+          yields <m>t =(3\ln(50))/\ln(8) \approx 5.644</m>.
           The population is predicted to reach 10,000 bacteria in slightly more than five and a half hours.
         </p>
       </solution>
@@ -172,6 +173,7 @@
         </p>
       </statement>
       <solution>
+        <!-- <video width="90%" youtube="tEMLcz1yvFI" xml:id="vid-diffeq-model-newton-cooling"/> -->
         <p>
           Since we have already solved the differential equation for Newton's Law of Cooling,
           we can immediately use the function
@@ -241,9 +243,9 @@
         </p>
         <p>
           The conditions <m>y(0)=0.05</m> and <m>y(1) = 0.1</m> lead to
-          <m>C = 0.05</m> a and <m>k = \ln 2</m>, so the function is
+          <m>C = 0.05</m> a and <m>k = \ln(2)</m>, so the function is
           <me>
-            y = 0.05e^{(\ln 2)t}
+            y = 0.05e^{(\ln(2)t}
           </me>.
         </p>
         <p>
@@ -254,6 +256,11 @@
         </p>
       </solution>
     </example>
+
+    <!-- <figure xml:id="vid-diffeq-model-disease12">
+      <caption>Video presentation of <xref first="ex_disease_exponential" last="ex_disease_newton">Examples</xref></caption>
+      <video youtube="UjRpT852su4"/>
+    </figure> -->
     <example xml:id="ex_disease_newton">
       <title>Disease Spread 2</title>
       <statement>
@@ -299,6 +306,7 @@
         </p>
       </solution>
     </example>
+
     <p>
       In <xref ref="ex_disease_exponential">Example</xref>,
       we assumed disease spread depends on the number of infected individuals.
@@ -323,6 +331,7 @@
         </p>
       </statement>
       <solution>
+        <!-- <video width="90%" youtube="vV8Jy231gLk" xml:id="vid-diffeq-model-disease3"/> -->
         <p>
           The differential equation is
           <me>
@@ -351,6 +360,9 @@
           Each of the three functions meets the conditions
           <m>y(0)=0.05</m> and <m>y(1) = 0.1</m>.
           The three functions are shown in <xref ref="fig_disease">Figure</xref>.
+        </p>
+
+        <p>
           Notice that the logistic function mimics specific parts of the functions from <xref ref="ex_disease_exponential">Examples</xref>
           and <xref ref="ex_disease_newton"></xref>.
           We see in <xref ref="fig_diseasea">Figure</xref> that the logistic and exponential functions are virtually indistinguishable for small <m>t</m> values.
@@ -359,6 +371,9 @@
           The logistic curve captures this feature, and is
           <q>almost exponential</q>
           early on.
+        </p>
+
+        <p>
           In <xref ref="fig_diseaseb">Figure</xref>,
           we see that the logistic curve leaves the exponential curve from <xref ref="ex_disease_exponential">Example</xref>
           and approaches the curve from <xref ref="ex_disease_newton">Example</xref>.
@@ -369,6 +384,7 @@
           <q>best</q>
           of the three.
         </p>
+
         <figure xml:id="fig_disease">
           <caption>Plots of the functions from <xref ref="ex_disease_exponential">Example</xref> (dotted),
           <xref ref="ex_disease_newton">Example</xref> (dashed),
@@ -385,7 +401,8 @@
                     ytick={0,0.05,.1},
                     yticklabels = {0,0.05,0.1},
                     ymin=-.01,ymax=.11,
-                    xmin=-.1,xmax=1.25
+                    xmin=-.1,xmax=1.25,
+                    xlabel={$t$}
                   ]
 
                   \addplot [firstcurvestyle,-,domain = 0:10, samples=50] {1/(1+19*exp(ln(9/19)*x)};
@@ -396,9 +413,6 @@
                   \fill[black,draw=black](axis cs:1,.1) circle (1.5pt);
 
                   \end{axis}
-
-                  \node [right] at (myplot.right of origin) {\scriptsize $t$};
-                  \node [above] at (myplot.above origin) {\scriptsize $y$};
 
                   \end{tikzpicture}
                 </latex-image>
@@ -413,7 +427,8 @@
 
                   \begin{axis}[
                     ymin=-.01,ymax=1.1,
-                    xmin=-.1,xmax=50.1%
+                    xmin=-.1,xmax=50.1%,
+                    xlabel={$t$}
                   ]
 
                   \addplot [firstcurvestyle,-,domain = 0:50, samples=100] {1/(1+19*exp(ln(9/19)*x)};
@@ -424,9 +439,6 @@
                   \fill[black,draw=black](axis cs:1,.1) circle (1.5pt);
 
                   \end{axis}
-
-                  \node [right] at (myplot.right of origin) {\scriptsize $t$};
-                  \node [above] at (myplot.above origin) {\scriptsize $y$};
 
                   \end{tikzpicture}
                 </latex-image>
@@ -457,6 +469,11 @@
         \text{ rate of change of some quantity }  = \text{ rate in }  - \text{ rate out }
       </me>.
     </p>
+
+    <!-- <figure xml:id="vid-diffeq-model-ratein-rateout-intro">
+      <caption>Introduction to Rate-in Rate-out problems</caption>
+      <video youtube="G3nvU0Jc5pw"/>
+    </figure> -->
     <p>
       Though we stick to relatively simple examples,
       this basic idea can be used to derive some very important differential equations in mathematics and physics.
@@ -501,6 +518,7 @@
         </p>
       </statement>
       <solution>
+        <!-- <video width="90%" youtube="Au4n_QP73Ko" xml:id="vid-diffeq-model-ratein-rateout-example1"/> -->
         <p>
           We use the rate in <ndash/> rate out setup described above.
           The quantity here is the amount
@@ -606,15 +624,13 @@
 
               \begin{axis}[
                 ymin=-.1,ymax=15.5,
-                xmin=-.1,xmax=10.3
+                xmin=-.1,xmax=10.3,
+                xlabel={$t$}
               ]
 
               \addplot [firstcurvestyle,-,domain = 0:10, samples=50] {15-10*exp(-2/5*x)};
 
               \end{axis}
-
-              \node [right] at (myplot.right of origin) {\scriptsize $t$};
-              \node [above] at (myplot.above origin) {\scriptsize $y$};
 
               \end{tikzpicture}
             </latex-image>
@@ -636,6 +652,7 @@
         </p>
       </statement>
       <solution>
+        <!-- <video width="90%" youtube="P3fkhn-TQEk" xml:id="vid-diffeq-model-ratein-ratout-example2"/> -->
         <p>
           Because the inflow and outflow rates no longer match,
           the volume of liquid in the bucket is not the constant 5 L. In general,
