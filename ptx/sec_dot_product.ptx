@@ -171,7 +171,7 @@
 
     <figure xml:id="fig_dotpangle">
       <caption>Illustrating the angle formed by two vectors with the same initial point.</caption>
-      <sidebyside widths="37% 47%" valign="bottom">
+      <sidebyside widths="47% 47%" valign="bottom">
         <figure xml:id="fig_dotpanglea">
           <caption/>
         <!-- START figures/fig_dotpangle.tex -->
@@ -879,7 +879,7 @@
       <statement>
         <p>
           <ol>
-            <li>
+            <li xml:id="ex_dotp4_part1">
               <p>
                 Let <m>\vec u= \la -2,1\ra</m> and <m>\vec v=\la 3,1\ra</m>.
                 Find <m>\proj uv</m>,
@@ -887,7 +887,7 @@
               </p>
             </li>
 
-            <li>
+            <li xml:id="ex_dotp4_part2">
               <p>
                 Let <m>\vec w = \la 2,1,3\ra</m> and <m>\vec x = \la 1,1,1\ra</m>.
                 Find <m>\proj wx</m>,
@@ -916,249 +916,34 @@
                 That is because the angle between <m>\vec u</m> and <m>\vec v</m> is obtuse (i.e., greater than <m>90^\circ</m>).
               </p>
 
-              <figure xml:id="fig_dotp4">
-                <caption>Graphing the vectors used in <xref ref="ex_dotp4">Example</xref>.</caption>
-                <sidebyside widths="33% 33% 33%">
-                  <figure xml:id="fig_dotp4a">
-                    <caption/>
-                      <image xml:id="img_dotp4a">
-                        <description></description>
-                        <latex-image>
+              <figure xml:id="fig_dotp4a">
+                <caption>Sketching the three vectors in <xref ref="ex_dotp4_part1">Part</xref> of <xref ref="ex_dotp4">Example</xref></caption>
+                <image xml:id="img_dotp4a" width="47%">
+                  <description></description>
+                  <latex-image>
 
-                        \begin{tikzpicture}[&gt;=stealth]
+                  \begin{tikzpicture}[&gt;=stealth]
 
-                        \begin{axis}[
-                        axis on top,
-                        xtick={-3,-2,-1,1,2,3},
-                        ytick={1,2,-1,-2},
-                        ymin=-2.8,ymax=2.8,
-                        xmin=-2.9,xmax=3.9,
-                        ]
+                  \begin{axis}[
+                  axis on top,
+                  xtick={-3,-2,-1,1,2,3},
+                  ytick={1,2,-1,-2},
+                  ymin=-2.8,ymax=2.8,
+                  xmin=-2.9,xmax=3.9,
+                  ]
 
-                        \draw [thick,-&gt;] (axis cs:0,0) -- (axis cs: -2,1) node [above] {\scriptsize$\vec u$};
-                        \draw [thick,-&gt;] (axis cs:0,0) -- (axis cs: 3,1) node [above] {\scriptsize$\vec v$};
-                        \draw [thick,-&gt;,gray] (axis cs:0,0) -- (axis cs: -1.5,-.5) node [below,black] {\scriptsize$\text{proj}_{\, \vec v}\, \vec u$};
+                  \draw [thick,-&gt;] (axis cs:0,0) -- (axis cs: -2,1) node [above] {\scriptsize$\vec u$};
+                  \draw [thick,-&gt;] (axis cs:0,0) -- (axis cs: 3,1) node [above] {\scriptsize$\vec v$};
+                  \draw [thick,-&gt;,gray] (axis cs:0,0) -- (axis cs: -1.5,-.5) node [below,black] {\scriptsize$\text{proj}_{\, \vec v}\, \vec u$};
 
-                        \draw [dotted,thick] (axis cs: -2,1) -- (axis cs:-1.5,-.5);
+                  \draw [dotted,thick] (axis cs: -2,1) -- (axis cs:-1.5,-.5);
 
-                        \end{axis}
+                  \end{axis}
 
-                        \end{tikzpicture}
+                  \end{tikzpicture}
 
-                        </latex-image>
-                      </image>
-                  </figure>
-
-                  <figure xml:id="figdotp4b_3D">
-                    <caption/>
-                    <!--
-                      \includemedia[width=100pt,3Dmenu,activate=onclick,deactivate=onclick,
-                    3Droll=0,
-                    3Dortho=0.0046,
-                    3Dc2c=.9 .12 .42,
-                    3Dcoo=0 50 30,
-                    3Droo=250,
-                    3Dlights=Headlamp,add3Djscript=asylabels.js]
-                      -->
-                      <image xml:id="img_dotp4b_3D">
-                        <description></description>
-                        <asymptote>
-
-                          import graph3;
-
-                          //ASY file for figdotp4b.asy in Chapter 10
-
-                          size(200,200,IgnoreAspect);
-                          //currentprojection=perspective(7,2,1);
-
-                          // The text calls for two viewpoints of this picture to show orthogonality
-                          // The two projections below give those two views
-                          //  view "b", saved as figdotp4b_3D
-                          currentprojection=orthographic(8,2,5);
-
-                          //  view "c", saved as figdotp4c_3D
-                          //currentprojection=orthographic(2,8,6);
-                          defaultrender.merge=true;
-
-                          // setup and draw the axes
-                          real[] myxchoice={2};
-                          real[] myychoice={2};
-                          real[] myzchoice={2};
-                          defaultpen(0.5mm);
-                          pair xbounds=(-0.5,2.5);
-                          pair ybounds=(-1,2.5);
-                          pair zbounds=(-0.5,3);
-
-                          xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                          yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                          zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                          label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                          label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                          label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                          // Draw the lines for vec{x}=&lt;1,1,1&gt;
-                          //draw((0,0,1)--(0,1,1)--(1,1,1)--(1,0,1)--(0,0,1), dashed+linewidth(.5));//top
-                          draw((0,0,0)--(0,1,0)--(1,1,0)--(1,0,0)--(0,0,0), dashed+linewidth(.5));//bottom
-                          //draw((1,0,0)--(1,0,1), dashed+linewidth(.5));//up1
-                          //draw((0,1,0)--(0,1,1), dashed+linewidth(.5));//up2
-                          draw((1,1,0)--(1,1,1), dashed+linewidth(.5));//up3
-                          draw((0,0,0)--(1,1,1), Arrow3(size=3mm));
-                          label("$\vec{x}$",(1,1,1),N);
-                          //dotfactor=3;  dot((2,1,1),blue);
-
-                          // Draw the lines for projection of w onto x as &lt;2,2,2&gt;
-                          //draw((0,0,2)--(0,2,2)--(2,2,2)--(2,0,2)--(0,0,2), dashed+linewidth(.5));//top
-                          draw((0,0,0)--(0,2,0)--(2,2,0)--(2,0,0)--(0,0,0), dashed+linewidth(.5));//bottom
-                          //draw((2,0,0)--(2,0,2), dashed+linewidth(.5));//up1
-                          //draw((0,2,0)--(0,2,2), dashed+linewidth(.5));//up2
-                          draw((2,2,0)--(2,2,2), dashed+linewidth(.5));//up3
-                          draw((0,0,0)--(2,2,2), gray,Arrow3(size=3mm));
-                          label("$\textrm{proj}_{\vec{x}} \vec{w}$",(2,2,2),N);
-
-                          // Draw the lines for \vec{w}=&lt;2,1,3&gt;
-                          //draw((0,0,3)--(0,1,3)--(2,1,3)--(2,0,3)--(0,0,3), dashed+linewidth(.5));//top
-                          draw((0,0,0)--(0,1,0)--(2,1,0)--(2,0,0)--(0,0,0), dashed+linewidth(.5));//bottom
-                          //draw((2,0,0)--(2,0,3), dashed+linewidth(.5));//up1
-                          //draw((0,1,0)--(0,1,3), dashed+linewidth(.5));//up2
-                          draw((2,1,0)--(2,1,3), dashed+linewidth(.5));//up3
-                          draw((0,0,0)--(2,1,3), Arrow3(size=3mm));
-                          label("$\vec{w}$",(2,1,3),N);
-
-                          // ////////////////////////////////////
-                          //    SAMPLE CODE
-
-                          // defaultpen(fontsize(10pt));
-
-                          //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
-                          //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
-
-                          //triple f(pair t) {
-                          //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
-                          //}
-                          //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
-
-                          //draw(s,paleblue);
-                          //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
-                          //draw(mypath,2bp+blue);
-
-                          //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
-                          //path3 mypath=graph(g,-1,1,operator ..);
-
-                          //pen p=rgb(0,0,1);
-                          //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
-
-                        </asymptote>
-                      </image>
-                  <!-- figures/figdotp4b_3D.asy END -->
-                    </figure>
-
-                    <figure xml:id="figdotp4c_3D">
-                      <caption/>
-                  <!--
-                      \includemedia[width=100pt,3Dmenu,activate=onclick,deactivate=onclick,
-                    3Droll=0,
-                    3Dortho=0.0046,
-                    3Dc2c=.29 .77 .56,
-                    3Dcoo=50 0 40,
-                    3Droo=250,
-                    3Dlights=Headlamp,add3Djscript=asylabels.js]
-                      -->
-                    <!-- START figures/figdotp4c_3D.asy -->
-                      <image xml:id="img_dotp4c_3D">
-                        <description></description>
-                        <asymptote>
-
-                          import graph3;
-
-                          //ASY file for figdotp4b.asy in Chapter 10
-
-                          size(200,200,IgnoreAspect);
-                          //currentprojection=perspective(7,2,1);
-
-                          // The text calls for two viewpoints of this picture to show orthogonality
-                          // The two projections below give those two views
-                          //  view "b", saved as figdotp4b_3D
-                          //currentprojection=orthographic(8,2,5);
-
-                          //  view "c", saved as figdotp4c_3D
-                          currentprojection=orthographic(2,8,6);
-                          defaultrender.merge=true;
-
-                          // setup and draw the axes
-                          real[] myxchoice={2};
-                          real[] myychoice={2};
-                          real[] myzchoice={2};
-                          defaultpen(0.5mm);
-                          pair xbounds=(-0.5,2.5);
-                          pair ybounds=(-1,2.5);
-                          pair zbounds=(-0.5,3);
-
-                          xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                          yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                          zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                          label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                          label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                          label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                          // Draw the lines for vec{x}=&lt;1,1,1&gt;
-                          //draw((0,0,1)--(0,1,1)--(1,1,1)--(1,0,1)--(0,0,1), dashed+linewidth(.5));//top
-                          draw((0,0,0)--(0,1,0)--(1,1,0)--(1,0,0)--(0,0,0), dashed+linewidth(.5));//bottom
-                          //draw((1,0,0)--(1,0,1), dashed+linewidth(.5));//up1
-                          //draw((0,1,0)--(0,1,1), dashed+linewidth(.5));//up2
-                          draw((1,1,0)--(1,1,1), dashed+linewidth(.5));//up3
-                          draw((0,0,0)--(1,1,1), Arrow3(size=3mm));
-                          label("$\vec{x}$",(1,1,1),N);
-                          //dotfactor=3;  dot((2,1,1),blue);
-
-                          // Draw the lines for projection of w onto x as &lt;2,2,2&gt;
-                          //draw((0,0,2)--(0,2,2)--(2,2,2)--(2,0,2)--(0,0,2), dashed+linewidth(.5));//top
-                          draw((0,0,0)--(0,2,0)--(2,2,0)--(2,0,0)--(0,0,0), dashed+linewidth(.5));//bottom
-                          //draw((2,0,0)--(2,0,2), dashed+linewidth(.5));//up1
-                          //draw((0,2,0)--(0,2,2), dashed+linewidth(.5));//up2
-                          draw((2,2,0)--(2,2,2), dashed+linewidth(.5));//up3
-                          draw((0,0,0)--(2,2,2), gray,Arrow3(size=3mm));
-                          label("$\textrm{proj}_{\vec{x}} \vec{w}$",(2,2,2),N);
-
-                          // Draw the lines for \vec{w}=&lt;2,1,3&gt;
-                          //draw((0,0,3)--(0,1,3)--(2,1,3)--(2,0,3)--(0,0,3), dashed+linewidth(.5));//top
-                          draw((0,0,0)--(0,1,0)--(2,1,0)--(2,0,0)--(0,0,0), dashed+linewidth(.5));//bottom
-                          //draw((2,0,0)--(2,0,3), dashed+linewidth(.5));//up1
-                          //draw((0,1,0)--(0,1,3), dashed+linewidth(.5));//up2
-                          draw((2,1,0)--(2,1,3), dashed+linewidth(.5));//up3
-                          draw((0,0,0)--(2,1,3), Arrow3(size=3mm));
-                          label("$\vec{w}$",(2,1,3),N);
-
-                          // ////////////////////////////////////
-                          //    SAMPLE CODE
-
-                          // defaultpen(fontsize(10pt));
-
-                          //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
-                          //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
-
-                          //triple f(pair t) {
-                          //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
-                          //}
-                          //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
-
-                          //draw(s,paleblue);
-                          //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
-                          //draw(mypath,2bp+blue);
-
-                          //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
-                          //path3 mypath=graph(g,-1,1,operator ..);
-
-                          //pen p=rgb(0,0,1);
-                          //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
-
-                        </asymptote>
-                      </image>
-                    <!-- figures/figdotp4c_3D.asy END -->
-                    </figure>
-                </sidebyside>
-
+                  </latex-image>
+                </image>
               </figure>
             </li>
 
@@ -1176,6 +961,220 @@
                 the sketch in <xref ref="figdotp4b_3D">Figure</xref> makes it difficult to recognize that the drawn projection has the geometric properties it should.
                 The graph shown in <xref ref="figdotp4c_3D">Figure</xref> illustrates these properties better.
               </p>
+
+              <figure xml:id="fig_dotp4bc">
+                <caption>Sketching the three vectors in <xref ref="ex_dotp4_part2">Part</xref> of <xref ref="ex_dotp4">Example</xref></caption>
+                <sidebyside widths="47% 47%">
+                  <figure xml:id="figdotp4b_3D">
+                    <caption/>
+                    <!--
+                      \includemedia[width=100pt,3Dmenu,activate=onclick,deactivate=onclick,
+                    3Droll=0,
+                    3Dortho=0.0046,
+                    3Dc2c=.9 .12 .42,
+                    3Dcoo=0 50 30,
+                    3Droo=250,
+                    3Dlights=Headlamp,add3Djscript=asylabels.js]
+                      -->
+                    <image xml:id="img_dotp4b_3D">
+                      <description></description>
+                      <asymptote>
+
+                        import graph3;
+
+                        //ASY file for figdotp4b.asy in Chapter 10
+
+                        size(200,200,IgnoreAspect);
+                        //currentprojection=perspective(7,2,1);
+
+                        // The text calls for two viewpoints of this picture to show orthogonality
+                        // The two projections below give those two views
+                        //  view "b", saved as figdotp4b_3D
+                        currentprojection=orthographic(8,2,5);
+
+                        //  view "c", saved as figdotp4c_3D
+                        //currentprojection=orthographic(2,8,6);
+                        defaultrender.merge=true;
+
+                        // setup and draw the axes
+                        real[] myxchoice={2};
+                        real[] myychoice={2};
+                        real[] myzchoice={2};
+                        defaultpen(0.5mm);
+                        pair xbounds=(-0.5,2.5);
+                        pair ybounds=(-1,2.5);
+                        pair zbounds=(-0.5,3);
+
+                        xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                        yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                        zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                        label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                        label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                        label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                        // Draw the lines for vec{x}=&lt;1,1,1&gt;
+                        //draw((0,0,1)--(0,1,1)--(1,1,1)--(1,0,1)--(0,0,1), dashed+linewidth(.5));//top
+                        draw((0,0,0)--(0,1,0)--(1,1,0)--(1,0,0)--(0,0,0), dashed+linewidth(.5));//bottom
+                        //draw((1,0,0)--(1,0,1), dashed+linewidth(.5));//up1
+                        //draw((0,1,0)--(0,1,1), dashed+linewidth(.5));//up2
+                        draw((1,1,0)--(1,1,1), dashed+linewidth(.5));//up3
+                        draw((0,0,0)--(1,1,1), Arrow3(size=3mm));
+                        label("$\vec{x}$",(1,1,1),N);
+                        //dotfactor=3;  dot((2,1,1),blue);
+
+                        // Draw the lines for projection of w onto x as &lt;2,2,2&gt;
+                        //draw((0,0,2)--(0,2,2)--(2,2,2)--(2,0,2)--(0,0,2), dashed+linewidth(.5));//top
+                        draw((0,0,0)--(0,2,0)--(2,2,0)--(2,0,0)--(0,0,0), dashed+linewidth(.5));//bottom
+                        //draw((2,0,0)--(2,0,2), dashed+linewidth(.5));//up1
+                        //draw((0,2,0)--(0,2,2), dashed+linewidth(.5));//up2
+                        draw((2,2,0)--(2,2,2), dashed+linewidth(.5));//up3
+                        draw((0,0,0)--(2,2,2), gray,Arrow3(size=3mm));
+                        label("$\textrm{proj}_{\vec{x}} \vec{w}$",(2,2,2),N);
+
+                        // Draw the lines for \vec{w}=&lt;2,1,3&gt;
+                        //draw((0,0,3)--(0,1,3)--(2,1,3)--(2,0,3)--(0,0,3), dashed+linewidth(.5));//top
+                        draw((0,0,0)--(0,1,0)--(2,1,0)--(2,0,0)--(0,0,0), dashed+linewidth(.5));//bottom
+                        //draw((2,0,0)--(2,0,3), dashed+linewidth(.5));//up1
+                        //draw((0,1,0)--(0,1,3), dashed+linewidth(.5));//up2
+                        draw((2,1,0)--(2,1,3), dashed+linewidth(.5));//up3
+                        draw((0,0,0)--(2,1,3), Arrow3(size=3mm));
+                        label("$\vec{w}$",(2,1,3),N);
+
+                        // ////////////////////////////////////
+                        //    SAMPLE CODE
+
+                        // defaultpen(fontsize(10pt));
+
+                        //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+                        //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+
+                        //triple f(pair t) {
+                        //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+                        //}
+                        //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+
+                        //draw(s,paleblue);
+                        //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+                        //draw(mypath,2bp+blue);
+
+                        //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+                        //path3 mypath=graph(g,-1,1,operator ..);
+
+                        //pen p=rgb(0,0,1);
+                        //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+                      </asymptote>
+                    </image>
+                <!-- figures/figdotp4b_3D.asy END -->
+                  </figure>
+
+                  <figure xml:id="figdotp4c_3D">
+                    <caption/>
+                <!--
+                    \includemedia[width=100pt,3Dmenu,activate=onclick,deactivate=onclick,
+                  3Droll=0,
+                  3Dortho=0.0046,
+                  3Dc2c=.29 .77 .56,
+                  3Dcoo=50 0 40,
+                  3Droo=250,
+                  3Dlights=Headlamp,add3Djscript=asylabels.js]
+                    -->
+                  <!-- START figures/figdotp4c_3D.asy -->
+                    <image xml:id="img_dotp4c_3D">
+                      <description></description>
+                      <asymptote>
+
+                        import graph3;
+
+                        //ASY file for figdotp4b.asy in Chapter 10
+
+                        size(200,200,IgnoreAspect);
+                        //currentprojection=perspective(7,2,1);
+
+                        // The text calls for two viewpoints of this picture to show orthogonality
+                        // The two projections below give those two views
+                        //  view "b", saved as figdotp4b_3D
+                        //currentprojection=orthographic(8,2,5);
+
+                        //  view "c", saved as figdotp4c_3D
+                        currentprojection=orthographic(2,8,6);
+                        defaultrender.merge=true;
+
+                        // setup and draw the axes
+                        real[] myxchoice={2};
+                        real[] myychoice={2};
+                        real[] myzchoice={2};
+                        defaultpen(0.5mm);
+                        pair xbounds=(-0.5,2.5);
+                        pair ybounds=(-1,2.5);
+                        pair zbounds=(-0.5,3);
+
+                        xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                        yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                        zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                        label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                        label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                        label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                        // Draw the lines for vec{x}=&lt;1,1,1&gt;
+                        //draw((0,0,1)--(0,1,1)--(1,1,1)--(1,0,1)--(0,0,1), dashed+linewidth(.5));//top
+                        draw((0,0,0)--(0,1,0)--(1,1,0)--(1,0,0)--(0,0,0), dashed+linewidth(.5));//bottom
+                        //draw((1,0,0)--(1,0,1), dashed+linewidth(.5));//up1
+                        //draw((0,1,0)--(0,1,1), dashed+linewidth(.5));//up2
+                        draw((1,1,0)--(1,1,1), dashed+linewidth(.5));//up3
+                        draw((0,0,0)--(1,1,1), Arrow3(size=3mm));
+                        label("$\vec{x}$",(1,1,1),N);
+                        //dotfactor=3;  dot((2,1,1),blue);
+
+                        // Draw the lines for projection of w onto x as &lt;2,2,2&gt;
+                        //draw((0,0,2)--(0,2,2)--(2,2,2)--(2,0,2)--(0,0,2), dashed+linewidth(.5));//top
+                        draw((0,0,0)--(0,2,0)--(2,2,0)--(2,0,0)--(0,0,0), dashed+linewidth(.5));//bottom
+                        //draw((2,0,0)--(2,0,2), dashed+linewidth(.5));//up1
+                        //draw((0,2,0)--(0,2,2), dashed+linewidth(.5));//up2
+                        draw((2,2,0)--(2,2,2), dashed+linewidth(.5));//up3
+                        draw((0,0,0)--(2,2,2), gray,Arrow3(size=3mm));
+                        label("$\textrm{proj}_{\vec{x}} \vec{w}$",(2,2,2),N);
+
+                        // Draw the lines for \vec{w}=&lt;2,1,3&gt;
+                        //draw((0,0,3)--(0,1,3)--(2,1,3)--(2,0,3)--(0,0,3), dashed+linewidth(.5));//top
+                        draw((0,0,0)--(0,1,0)--(2,1,0)--(2,0,0)--(0,0,0), dashed+linewidth(.5));//bottom
+                        //draw((2,0,0)--(2,0,3), dashed+linewidth(.5));//up1
+                        //draw((0,1,0)--(0,1,3), dashed+linewidth(.5));//up2
+                        draw((2,1,0)--(2,1,3), dashed+linewidth(.5));//up3
+                        draw((0,0,0)--(2,1,3), Arrow3(size=3mm));
+                        label("$\vec{w}$",(2,1,3),N);
+
+                        // ////////////////////////////////////
+                        //    SAMPLE CODE
+
+                        // defaultpen(fontsize(10pt));
+
+                        //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+                        //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+
+                        //triple f(pair t) {
+                        //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+                        //}
+                        //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+
+                        //draw(s,paleblue);
+                        //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+                        //draw(mypath,2bp+blue);
+
+                        //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+                        //path3 mypath=graph(g,-1,1,operator ..);
+
+                        //pen p=rgb(0,0,1);
+                        //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+                      </asymptote>
+                    </image>
+                  <!-- figures/figdotp4c_3D.asy END -->
+                  </figure>
+                </sidebyside>
+              </figure>              
             </li>
           </ol>
         </p>
@@ -1636,8 +1635,7 @@
       <exercise>
         <!--<webwork>
             <pg-code>
-            </pg-code>
-            -->
+            </pg-code> -->
             <statement>
               <p>
                 The dot product of two vectors is a <fillin/>, not a vector.
@@ -1654,8 +1652,7 @@
       <exercise>
         <!--<webwork>
             <pg-code>
-            </pg-code>
-            -->
+            </pg-code> -->
             <statement>
               <p>
                 How are the concepts of the dot product and vector magnitude related?
@@ -1673,8 +1670,7 @@
       <exercise>
         <!--<webwork>
             <pg-code>
-            </pg-code>
-            -->
+            </pg-code> -->
             <statement>
               <p>
                 How can one quickly tell if the angle between two vectors is acute or obtuse?
@@ -1693,8 +1689,7 @@
       <exercise>
         <!--<webwork>
             <pg-code>
-            </pg-code>
-            -->
+            </pg-code> -->
             <statement>
               <p>
                 Give a synonym for <q>orthogonal.</q>
@@ -1723,7 +1718,7 @@
               Context("LimitedNumeric");
               $dot=Real("-22");
             </pg-code>
-            
+
             <statement>
               <p>
                 <m>\vec u = \la 2,-4\ra</m>, <m>\vec v = \la 3,7\ra</m>
@@ -1742,7 +1737,7 @@
               Context("LimitedNumeric");
               $dot=Real("33");
             </pg-code>
-            
+
             <statement>
               <p>
                 <m>\vec u = \la 5,3\ra</m>, <m>\vec v = \la 6,1\ra</m>
@@ -1761,7 +1756,7 @@
               Context("LimitedNumeric");
               $dot=Real("3");
             </pg-code>
-            
+
             <statement>
               <p>
                 <m>\vec u = \la 1,-1,2\ra</m>,
@@ -1781,7 +1776,7 @@
               Context("LimitedNumeric");
               $dot=Real("0");
             </pg-code>
-            
+
             <statement>
               <p>
                 <m>\vec u = \la 3,5,-1\ra</m>,
@@ -1798,8 +1793,7 @@
       <exercise>
         <!--<webwork>
             <pg-code>
-            </pg-code>
-            -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\vec u = \la 1,1\ra</m>, <m>\vec v = \la 1,2,3\ra</m>
@@ -1819,7 +1813,7 @@
               Context("LimitedNumeric");
               $dot=Real("0");
             </pg-code>
-            
+
             <statement>
               <p>
                 <m>\vec u = \la 1,2,3\ra</m>,
@@ -1838,8 +1832,7 @@
     <exercise>
       <!--<webwork>
           <pg-code>
-          </pg-code>
-          -->
+          </pg-code> -->
           <statement>
             <p>
               Create your own vectors <m>\vec u</m>,
@@ -1858,8 +1851,7 @@
     <exercise>
       <!--<webwork>
           <pg-code>
-          </pg-code>
-          -->
+          </pg-code> -->
           <statement>
             <p>
               Create your own vectors <m>\vec u</m> and <m>\vec v</m> in
@@ -1889,7 +1881,7 @@
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               $theta=Formula("arccos(3/sqrt(10))");
             </pg-code>
-            
+
             <statement>
               <p>
                 The angle between <m>\vec u = \la 1,1\ra</m> and
@@ -1905,7 +1897,7 @@
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               $theta=Formula("arccos(-1/sqrt(170))");
             </pg-code>
-            
+
             <statement>
               <p>
                 The angle between <m>\vec u = \la -2,1\ra</m> and
@@ -1921,7 +1913,7 @@
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               $theta=Formula("pi/4");
             </pg-code>
-            
+
             <statement>
               <p>
                 The angle between <m>\vec u = \la 8,1,-4\ra</m> and
@@ -1937,7 +1929,7 @@
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               $theta=Formula("pi/2");
             </pg-code>
-            
+
             <statement>
               <p>
                 The angle between <m>\vec u = \la 1,7,2\ra</m> and
@@ -1975,7 +1967,7 @@
                    }
                 );
             </pg-code>
-            
+
             <statement>
               <p>
                 Find two nonzero vectors orthogonal to <m>\vec v = \la 4,7\ra</m>.
@@ -2012,7 +2004,7 @@
                    }
                 );
             </pg-code>
-            
+
             <statement>
               <p>
                 Find two nonzero vectors orthogonal to <m>\vec v = \la -3,5\ra</m>.
@@ -2049,7 +2041,7 @@
                    }
                 );
             </pg-code>
-            
+
             <statement>
               <p>
                 Find two nonzero vectors orthogonal to <m>\vec v = \la 1,1,1\ra</m>.
@@ -2086,7 +2078,7 @@
                    }
                 );
             </pg-code>
-            
+
             <statement>
               <p>
                 Find two nonzero vectors orthogonal to <m>\vec v = \la 1,-2,3\ra</m>.
@@ -2130,7 +2122,7 @@
               @nums=map{$_*$num}(@vc);
               $projuv=Compute("&lt;$nums[0]/$den,$nums[1]/$den>");
             </pg-code>
-            
+
             <statement>
               <p>
                 If <m>\vec u = \la 1,2\ra</m> and <m>\vec v = \la -1,3\ra</m>,
@@ -2157,7 +2149,7 @@
               @nums=map{$_*$num}(@vc);
               $projuv=Compute("&lt;$nums[0]/$den,$nums[1]/$den>");
             </pg-code>
-            
+
             <statement>
               <p>
                 If <m>\vec u = \la 5,5\ra</m> and <m>\vec v = \la 1,3\ra</m>,
@@ -2184,7 +2176,7 @@
               @nums=map{$_*$num}(@vc);
               $projuv=Compute("&lt;$nums[0]/$den,$nums[1]/$den>");
             </pg-code>
-            
+
             <statement>
               <p>
                 If <m>\vec u = \la -3,2\ra</m> and <m>\vec v = \la 1,1\ra</m>,
@@ -2211,7 +2203,7 @@
               @nums=map{$_*$num}(@vc);
               $projuv=Compute("&lt;$nums[0]/$den,$nums[1]/$den>");
             </pg-code>
-            
+
             <statement>
               <p>
                 If <m>\vec u = \la -3,2\ra</m> and <m>\vec v = \la 2,3\ra</m>,
@@ -2238,7 +2230,7 @@
               @nums=map{$_*$num}(@vc);
               $projuv=Compute("&lt;$nums[0]/$den,$nums[1]/$den,$nums[2]/$den>");
             </pg-code>
-            
+
             <statement>
               <p>
                 If <m>\vec u = \la 1,5,1\ra</m> and <m>\vec v = \la 1,2,3\ra</m>,
@@ -2265,7 +2257,7 @@
               @nums=map{$_*$num}(@vc);
               $projuv=Compute("&lt;$nums[0]/$den,$nums[1]/$den,$nums[2]/$den>");
             </pg-code>
-            
+
             <statement>
               <p>
                 If <m>\vec u = \la 3,-1,2\ra</m> and <m>\vec v = \la 2,2,1\ra</m>,
@@ -2348,7 +2340,7 @@
                    }
                 );
             </pg-code>
-            
+
             <statement>
               <p>
                 Write <m>\vec u = \la 1,2\ra</m> as the sum of two vectors,
@@ -2418,7 +2410,7 @@
                    }
                 );
             </pg-code>
-            
+
             <statement>
               <p>
                 Write <m>\vec u = \la 5,5\ra</m> as the sum of two vectors,
@@ -2488,7 +2480,7 @@
                    }
                 );
             </pg-code>
-            
+
             <statement>
               <p>
                 Write <m>\vec u = \la -3,2\ra</m> as the sum of two vectors,
@@ -2558,7 +2550,7 @@
                    }
                 );
             </pg-code>
-            
+
             <statement>
               <p>
                 Write <m>\vec u = \la -3,2\ra</m> as the sum of two vectors,
@@ -2628,7 +2620,7 @@
                    }
                 );
             </pg-code>
-            
+
             <statement>
               <p>
                 Write <m>\vec u = \la 1,5,1\ra</m> as the sum of two vectors,
@@ -2698,7 +2690,7 @@
                    }
                 );
             </pg-code>
-            
+
             <statement>
               <p>
                 Write <m>\vec u = \la 3,-1,2\ra</m> as the sum of two vectors,
@@ -2719,8 +2711,7 @@
     <exercise>
       <!--<webwork>
           <pg-code>
-          </pg-code>
-          -->
+          </pg-code> -->
           <statement>
             <p>
               A 10lb box sits on a ramp that rises 4ft over a distance of 20ft.
@@ -2738,8 +2729,7 @@
     <exercise>
       <!--<webwork>
           <pg-code>
-          </pg-code>
-          -->
+          </pg-code> -->
           <statement>
             <p>
               A 10lb box sits on a 15ft ramp that makes a
@@ -2758,8 +2748,7 @@
     <exercise>
       <!--<webwork>
           <pg-code>
-          </pg-code>
-          -->
+          </pg-code> -->
           <statement>
             <p>
               How much work is performed in moving a box horizontally 10ft with a force of 20lb applied at an angle of <m>45^\circ</m> to the horizontal?
@@ -2776,8 +2765,7 @@
     <exercise>
       <!--<webwork>
           <pg-code>
-          </pg-code>
-          -->
+          </pg-code> -->
           <statement>
             <p>
               How much work is performed in moving a box horizontally 10ft with a force of 20lb applied at an angle of <m>10^\circ</m> to the horizontal?
@@ -2794,8 +2782,7 @@
     <exercise>
       <!--<webwork>
           <pg-code>
-          </pg-code>
-          -->
+          </pg-code> -->
           <statement>
             <p>
               How much work is performed in moving a box up the length of a ramp that rises 2ft over a distance of 10ft,
@@ -2813,8 +2800,7 @@
     <exercise>
       <!--<webwork>
           <pg-code>
-          </pg-code>
-          -->
+          </pg-code> -->
           <statement>
             <p>
               How much work is performed in moving a box up the length of a ramp that rises 2ft over a distance of 10ft,
@@ -2832,8 +2818,7 @@
     <exercise>
       <!--<webwork>
           <pg-code>
-          </pg-code>
-          -->
+          </pg-code> -->
           <statement>
             <p>
               How much work is performed in moving a box up the length of a 10ft ramp that makes a <m>5^\circ</m> angle with the horizontal,
