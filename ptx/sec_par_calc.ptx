@@ -14,6 +14,11 @@
       and they indicate instantaneous direction of travel.
     </p>
 
+    <!-- <figure xml:id="vid-planecurves-parcalc-intro">
+      <caption>Video introduction to <xref ref="sec_par_calc"/></caption>
+      <video youtube="FIvX66HAaj8"/>
+    </figure> -->
+
     <p>
       The slope of the tangent line is still <m>\frac{dy}{dx}</m>,
       and the Chain Rule allows us to calculate this in the context of parametric equations.
@@ -34,7 +39,7 @@
     </p>
 
     <insight xml:id="idea_dydxpar">
-      <title>Finding <m>\frac{dy}{dx}</m> with Parametric Equations.</title>
+      <title>Finding <m>\frac{dy}{dx}</m> with Parametric Equations</title>
       <p>
         Let <m>x=f(t)</m> and <m>y=g(t)</m>,
         where <m>f</m> and <m>g</m> are differentiable on some open interval <m>I</m> and <m>\fp(t)\neq 0</m> on <m>I</m>.
@@ -127,6 +132,7 @@
         </p>
       </statement>
       <solution>
+        <!-- <video width="90%" youtube="A62eUDxiOw4" xml:id="vid-planecurves-parcalc-example-tangent"/> -->
         <p>
           <ol>
             <li>
@@ -249,6 +255,7 @@
         </p>
       </statement>
       <solution>
+        <!-- <video width="90%" youtube="PpmsaMVJAZI" xml:id="vid-planecurves-parcalc-circle"/> -->
         <p>
           <ol>
             <li>
@@ -325,6 +332,7 @@
         </p>
       </statement>
       <solution>
+        <!-- <video width="90%" youtube="rb4wEkhcUtE" xml:id="vid-planecurves-parcalc-astroid"/> -->
         <p>
           We start by finding <m>x'(t)</m> and <m>y'(t)</m>:
           <me>
@@ -457,6 +465,7 @@
         </p>
       </statement>
       <solution>
+        <!-- <video width="90%" youtube="rb4wEkhcUtE" xml:id="vid-planecurves-parcalc-concavity"/> -->
         <p>
           Concavity is determined by the second derivative of <m>y</m> with respect to <m>x</m>,
           <m>\frac{d^2y}{dx^2}</m>,
@@ -521,22 +530,22 @@
           we look at values of <m>t</m> greater/less than <m>3/5</m> on a number line:
         </p>
 
-        <sidebyside  width="47%">
+        <sidebyside width="47%">
           <image xml:id="img_parcalc4X">
             <description></description>
             <latex-image>
 
             \begin{tikzpicture}
-
-            \draw [&lt;-&gt;, thick] (-2.5,0) -- (2.5,0);
-
-            \foreach \x / \y in {0/{\(3/5\)}}
-            {
-              \draw (\x,-.3) node[below] { \text{ \y }} -- (\x,.3);
-            }
-
-            \draw (-1,.75) node {\parbox{50pt}{\(\ds \frac{d^2y}{dx^2}&gt;0\) c. up }};
-            \draw (1,.75) node {\parbox{50pt}{\(\ds\frac{d^2y}{dx^2}&lt;0\) c. down }};
+            \begin{axis}[numberline,
+            xmin=-0.9,xmax=0.9,
+            after end axis/.code={
+            \path (axis cs:0,0)
+            node [anchor=north,yshift=-0.075cm] {\footnotesize $3/5$};
+            },]
+            \addplot[guideline] coordinates {(0,0) (0,2)};
+            \addplot[mark=none] coordinates {(-0.5,1)} node {\parbox{8em}{\centering \small $\frac{d^2y}{dx^2}&gt; 0$\\concave up}};
+            \addplot[mark=none] coordinates {(0.5,1)} node {\parbox{8em}{\centering \small $\frac{d^2y}{dx^2}&lt;0$\\concave down}};
+            \end{axis}
 
             \end{tikzpicture}
 
@@ -551,6 +560,15 @@
           This point is also a point of inflection for the graph,
           illustrated in <xref ref="fig_parcalc4">Figure</xref>.
         </p>
+        <!-- <p xml:id="vidint-planecurves-parcalc-sketch">
+          The video in <xref ref="vid-planecurves-parcalc-sketch">Figure</xref>
+          shows how this information can be used to sketch the curve by hand.
+        </p> -->
+
+        <!-- <figure xml:id="vid-planecurves-parcalc-sketch">
+          <caption>Sketching the curve in <xref ref="ex_parcalc4"/></caption>
+          <video youtube="HSBSVFSVqms"/>
+        </figure> -->
       </solution>
     </example>
 
@@ -613,7 +631,8 @@
                 minor x tick num=4,
                 minor y tick num=4,
                 ymin=-59,ymax=59,
-                xmin=-.5,xmax=16.9
+                xmin=-.5,xmax=16.9,
+                xlabel={$t$}
                 ]
 
                 \addplot+ [-,domain=0:16,samples=120] ({x},{2*cos(deg(x))-4*x*sin(deg(x))});
@@ -621,9 +640,6 @@
                 \draw (axis cs: 5,-40) node {\scriptsize $y=2\cos(t) -4t\sin(t) $};
 
                 \end{axis}
-
-                \node [right] at (myplot.right of origin) {\scriptsize $t$};
-
                 \end{tikzpicture}
 
                 </latex-image>
@@ -678,6 +694,10 @@
       We continue our study of the features of the graphs of parametric equations by computing their arc length.
     </p>
 
+    <!-- <figure xml:id="vid-planecurves-parcalc-arclength">
+      <caption>Video introduction to arc length for parametric curves</caption>
+      <video youtube="57F7ZspP0lU"/>
+    </figure> -->
     <p>
       Recall in <xref ref="sec_arc_length">Section</xref>
       we found the arc length of the graph of a function,
@@ -755,6 +775,7 @@
         </p>
       </statement>
       <solution>
+        <!-- <video width="90%" youtube="It8vHw3RHEw" xml:id="vid-planecurves-parcalc-arclength-example1"/> -->
         <p>
           By direct application of <xref ref="thm_arc_length_parametric">Theorem</xref>, we have
           <md>
@@ -784,6 +805,7 @@
         </p>
       </statement>
       <solution>
+        <!-- <video width="90%" youtube="G5U9BVhB3PE" xml:id="vid-planecurves-parcalc-arclength-example2"/> -->
         <p>
           We can see by the parametrizations of <m>x</m> and <m>y</m> that when <m>t=\pm 1</m>,
           <m>x=0</m> and <m>y=0</m>.
@@ -825,8 +847,6 @@
 
             \end{axis}
 
-            \node [right] at (myplot.right of origin) {\scriptsize $t$};
-
             \end{tikzpicture}
 
             </latex-image>
@@ -841,7 +861,7 @@
     <title>Surface Area of a Solid of Revolution</title>
     <p>
       Related to the formula for finding arc length is the formula for finding surface area.
-      We can adapt the formula found in <xref ref="idea_surface_area">Key Idea</xref>
+      We can adapt the formula found in <xref ref="thm_surface_area">Theorem</xref>
       from <xref ref="sec_arc_length">Section</xref>
       in a similar way as done to produce the formula for arc length done before.
     </p>
@@ -1028,15 +1048,12 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
 
             <pg-code>
               $true=PopUp(['?','True','False'],1);
               $false=PopUp(['?','True','False'],2);
             </pg-code>
-            </setup>
             <statement>
               <p>
                 True or False?
@@ -1050,12 +1067,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 Given parametric equations <m>x=f(t)</m> and <m>y=g(t)</m>,
@@ -1071,15 +1085,12 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
 
             <pg-code>
               $true=PopUp(['?','True','False'],1);
               $false=PopUp(['?','True','False'],2);
             </pg-code>
-            </setup>
             <statement>
               <p>
                 True or False?
@@ -1093,15 +1104,12 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
 
             <pg-code>
               $true=PopUp(['?','True','False'],1);
               $false=PopUp(['?','True','False'],2);
             </pg-code>
-            </setup>
             <statement>
               <p>
                 True or False?
@@ -1145,12 +1153,9 @@
       </introduction>
 
       <exercise xml:id="ex_09_03_ex_05">
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>x=t</m>, <m>y=t^2</m>;<m>t=1</m>
@@ -1178,12 +1183,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>x=\sqrt{t}</m>, <m>y=5t+2</m>;<m>t=4</m>
@@ -1211,12 +1213,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>x=t^2-t</m>, <m>y=t^2+t</m>;<m>t=1</m>
@@ -1244,12 +1243,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>x=t^2-1</m>, <m>y=t^3-t</m>;<m>t=0</m> and <m>t=1</m>
@@ -1279,12 +1275,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>x=\sec(t)</m>,
@@ -1314,12 +1307,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>x=\cos(t)</m>,
@@ -1348,12 +1338,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>x=\cos(t) \sin(2t)</m>,
@@ -1382,12 +1369,9 @@
       </exercise>
 
       <exercise xml:id="ex_09_03_ex_12">
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>x=e^{t/10}\cos(t)</m>, <m>y=e^{t/10}\sin(t)</m>; <m>t=\pi/2</m>
@@ -1427,12 +1411,9 @@
       </introduction>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>x=t</m>, <m>y=t^2</m>
@@ -1447,12 +1428,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>x=\sqrt{t}</m>, <m>y=5t+2</m>
@@ -1468,16 +1446,13 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
 
             <pg-code>
               $hort=List("-1/2");
               Context("Point");
               $points=List("(3/4,-1/4)");
             </pg-code>
-            </setup>
             <statement>
               <p>
                 Find the values of <m>t</m> where the curve defined by <m>x=t^2-t</m>,
@@ -1502,12 +1477,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>x=t^2-1</m>, <m>y=t^3-t</m>
@@ -1522,12 +1494,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>x=\sec(t)</m>, <m>y=\tan(t)</m> on <m>(-\pi/2,\pi/2)</m>
@@ -1542,9 +1511,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
 
             <pg-code>
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
@@ -1552,7 +1519,6 @@
               Context("Point");
               $points=Compute("(sqrt(2)/2,1), (-sqrt(2)/2,-1), (-sqrt(2)/2,1), (sqrt(2)/2,-1)");
             </pg-code>
-            </setup>
             <statement>
               <p>
                 Find the values of <m>t</m> in
@@ -1578,12 +1544,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>x=\cos(t) \sin(2t)</m>, <m>y=\sin(t) \sin(2t)</m> on <m>[0,2\pi]</m>
@@ -1602,12 +1565,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>x=e^{t/10}\cos(t)</m>, <m>y=e^{t/10}\sin(t)</m>
@@ -1633,15 +1593,12 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
 
             <pg-code>
               $t0 = Real("0");
               $L = Real("0");
             </pg-code>
-            </setup>
             <statement>
               <p>
                 Find <m>t=t_0</m> where the graph of <m>x=\frac{1}{t^2+1}</m>,
@@ -1660,15 +1617,12 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
 
             <pg-code>
               $t0 = Real("2");
               $L = Real("1");
             </pg-code>
-            </setup>
             <statement>
               <p>
                 Find <m>t=t_0</m> where the graph of <m>x=-t^3+7t^2-16t+13</m>,
@@ -1688,12 +1642,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>x=t^3-3t^2+3t-1</m>,<m>y=t^2-2t+1</m>
@@ -1708,12 +1659,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds x=\cos^2(t)</m>,<m>y=1-\sin^2(t)</m>
@@ -1742,12 +1690,9 @@
       </introduction>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>x=t</m>,<m>y=t^2</m>
@@ -1762,12 +1707,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>x=\sqrt{t}</m>,<m>y=5t+2</m>
@@ -1782,9 +1724,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
 
 
             <pg-code>
@@ -1794,7 +1734,6 @@
               $up=List("(-inf,1/2]");
               $down=List("[1/2,inf)");
             </pg-code>
-            </setup>
             <statement>
               <p>
                 For the curve defined by <m>x=t^2-t</m>,
@@ -1823,12 +1762,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>x=t^2-1</m>,<m>y=t^3-t</m>
@@ -1845,12 +1781,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>x=\sec(t)</m>,<m>y=\tan(t)</m> on <m>(-\pi/2,\pi/2)</m>
@@ -1867,9 +1800,7 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
 
 
             <pg-code>
@@ -1879,7 +1810,6 @@
               $up=Compute("[pi/2,pi], [3pi/2,2pi]");
               $down=Compute("[0,pi/2], [pi,3pi/2]");
             </pg-code>
-            </setup>
             <statement>
               <p>
                 For the curve defined by <m>x=\cos(t)</m>,
@@ -1909,12 +1839,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds x=\cos(t) \sin(2t)</m>,<m>y=\sin(t) \sin(2t)</m> on <m>[-\pi/2,\pi/2]</m>
@@ -1932,12 +1859,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>x=e^{t/10}\cos(t)</m>,<m>y=e^{t/10}\sin(t)</m>
@@ -1964,14 +1888,11 @@
       </introduction>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
             <pg-code>
               Context()->flags->set(reduceConstants=>0);
               $length=Formula("6pi");
             </pg-code>
-            </setup>
             <statement>
               <p>
                 Find the arc length of the graph defined by <m>x=-3\sin(2t)</m>,
@@ -1986,16 +1907,13 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
 
             <pg-code>
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               $length1=Formula("sqrt(101)(e^(pi/5)-1)");
               $length2=Formula("sqrt(101)(e^(2pi/5)-e^(pi/5))");
             </pg-code>
-            </setup>
             <statement>
               <p>
                 Find the arc length of the graph defined by <m>x=e^{t/10}\cos(t)</m>,
@@ -2015,14 +1933,11 @@
       </exercise>
 
       <exercise>
-        <webwork seed="1">
-            <setup>
-
+        <webwork>
             <pg-code>
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               $length=Formula("2sqrt(34)");
             </pg-code>
-            </setup>
             <statement>
               <p>
                 Find the arc length of the graph defined by <m>x=5t+2</m>,
@@ -2037,12 +1952,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 <m>x=2t^{3/2}</m>,<m>y=3t</m> on <m>[0,1]</m>
@@ -2066,12 +1978,9 @@
       </introduction>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 Approximate the arc length of one petal of the rose curve
@@ -2087,12 +1996,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 Approximate the arc length of the <q>bow tie curve</q>
@@ -2108,12 +2014,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 Approximate the arc length of the parabola <m>x=t^2-t</m>,<m>y=t^2+t</m> on <m>[-1,1]</m> using Simpson's Rule and <m>n=4</m>.
@@ -2128,12 +2031,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 A common approximate of the circumference of an ellipse given by
@@ -2162,12 +2062,9 @@
       </introduction>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 Find the surface area of the sphere formed by rotating the circle
@@ -2201,12 +2098,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 Find the surface area of the torus
@@ -2224,12 +2118,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 Approximate the surface area of the solid formed by rotating the
@@ -2248,12 +2139,9 @@
       </exercise>
 
       <exercise>
-        <!-- <webwork seed="1">
-            <setup>
-
+        <!-- <webwork>
             <pg-code>
-            </pg-code>
-            </setup> -->
+            </pg-code> -->
             <statement>
               <p>
                 Approximate the surface area of the solid formed by rotating the one petal of the rose curve
