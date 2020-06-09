@@ -13,7 +13,7 @@
     </p>
 
     <p>
-      Currently, our vector<ndash/>valued functions have defined points with a parameter <m>t</m>,
+      Currently, our vector-valued functions have defined points with a parameter <m>t</m>,
       which we often take to represent time.
       Consider <xref ref="fig_vvfarc_intro1a">Figure</xref>,
       where <m>\vrt = \la t^2-t,t^2+t\ra</m> is graphed and the points corresponding to <m>t=0,\ 1</m> and <m>2</m> are shown.
@@ -45,7 +45,7 @@
             \filldraw [secondcolor] (axis cs: 0,2) circle (1.5pt) node [black, right] {\scriptsize $t=1$};
             \filldraw [secondcolor] (axis cs: 2,6) circle (1.5pt) node [black, right] {\scriptsize $t=2$};
 
-            \draw [thick,-&gt;,firstcolor,&gt;=stealth] (axis cs:3.79,.77) -- (axis cs:3.75,.75) node [above ,black] {\scriptsize $\vec r(t)$};
+            \draw [thick,-&gt;,firstcolor,&gt;=stealth] (axis cs:3.79,.77) -- (axis cs:3.75,.75) node [above ,black] {\scriptsize $\vrt$};
 
             \end{axis}
 
@@ -117,7 +117,7 @@
       Start with any parametrization of <m>\vec r</m>.
       We can compute the arc length of the graph of <m>\vec r</m> on the interval <m>[0,t]</m> with
       <me>
-        \text{ arc length }  = \int_0^t\norm{\vec r\,'(u)}\, du
+        \text{arc length}\,  = \int_0^t\norm{\vrp(u)}\, du
       </me>.
     </p>
 
@@ -127,14 +127,14 @@
       we find the arc length <m>s</m> from <m>0</m> to <m>t</m>.
       This function is
       <men xml:id="eq_vvfarc">
-        s(t) = \int_0^t \norm{\vec r\,'(u)}\, du
+        s(t) = \int_0^t \norm{\vrp(u)}\, du
       </men>.
     </p>
 
     <p>
       This establishes a relationship between <m>s</m> and <m>t</m>.
       Knowing this relationship explicitly,
-      we can rewrite <m>\vec r(t)</m> as a function of <m>s</m>:
+      we can rewrite <m>\vrt</m> as a function of <m>s</m>:
       <m>\vec r(s)</m>.
       We demonstrate this in an example.
     </p>
@@ -143,7 +143,7 @@
       <title>Finding the arc length parameter</title>
       <statement>
         <p>
-          Let <m>\vec r(t) = \la 3t-1,4t+2\ra</m>.
+          Let <m>\vrt = \la 3t-1,4t+2\ra</m>.
           Parametrize <m>\vec r</m> with the arc length parameter <m>s</m>.
         </p>
       </statement>
@@ -151,7 +151,7 @@
         <p>
           Using Equation <xref ref="eq_vvfarc"/>, we write
           <me>
-            s(t) = \int_0^t \norm{\vec r\,'(u)}\, du
+            s(t) = \int_0^t \norm{\vrp(u)}\, du
           </me>.
         </p>
 
@@ -159,7 +159,7 @@
           We can integrate this,
           explicitly finding a relationship between <m>s</m> and <m>t</m>:
           <md>
-            <mrow>s(t) \amp = \int_0^t \norm{\vec r\,'(u)}\, du</mrow>
+            <mrow>s(t) \amp = \int_0^t \norm{\vrp(u)}\, du</mrow>
             <mrow>\amp = \int_0^t \sqrt{3^2+4^2}\, du</mrow>
             <mrow>\amp = \int_0^t 5\, du</mrow>
             <mrow>\amp = 5t</mrow>
@@ -168,7 +168,7 @@
 
         <p>
           Since <m>s=5t</m>,
-          we can write <m>t=s/5</m> and replace <m>t</m> in <m>\vec r(t)</m> with <m>s/5</m>:
+          we can write <m>t=s/5</m> and replace <m>t</m> in <m>\vrt</m> with <m>s/5</m>:
           <me>
             \vec r(s) = \la 3(s/5)-1, 4(s/5)+2\ra = \la \frac35s-1,\frac45s+2\ra
           </me>.
@@ -237,7 +237,7 @@
       Things worked out very nicely in <xref ref="ex_vvfarc1">Example</xref>;
       we were able to establish directly that <m>s=5t</m>.
       Usually, the arc length parameter is much more difficult to describe in terms of <m>t</m>,
-      a result of integrating a square<ndash/>root.
+      a result of integrating a square root.
       There are a number of things that we can learn about the arc length parameter from Equation <xref ref="eq_vvfarc"/>, though,
       that are incredibly useful.
     </p>
@@ -248,12 +248,12 @@
       (see <xref ref="thm_FTC1">Theorem</xref>)
       states that
       <men xml:id="eq_vvfarc3">
-        \frac{ds}{dt}=s\,'(t) = \norm{\vrp(t)}
+        \frac{ds}{dt}=s\primeskip'(t) = \norm{\vrp(t)}
       </men>.
     </p>
 
     <p>
-      Letting <m>t</m> represent time and <m>\vec r(t)</m> represent position,
+      Letting <m>t</m> represent time and <m>\vrt</m> represent position,
       we see that the rate of change of <m>s</m> with respect to <m>t</m> is speed;
       that is, the rate of change of <q>distance traveled</q> is speed,
       which should match our intuition.
@@ -270,11 +270,11 @@
     <p>
       Solving for <m>\vrp(s)</m>, we have
       <men xml:id="eq_vvfarc2">
-        \vrp(s) = \frac{\vrp(t)}{\norm{\vrp(t)}} = \vec T(t)
+        \vrp(s) = \frac{\vrp(t)}{\norm{\vrp(t)}} = \unittangent(t)
       </men>,
-      where <m>\vec T(t)</m> is the unit tangent vector.
+      where <m>\unittangent(t)</m> is the unit tangent vector.
       <xref ref="eq_vvfarc2">Equation</xref> is often misinterpreted,
-      as one is tempted to think it states <m>\vrp(t) = \vec T(t)</m>,
+      as one is tempted to think it states <m>\vrp(t) = \unittangent(t)</m>,
       but there is a big difference between <m>\vrp(s)</m> and <m>\vrp(t)</m>.
       The key to take from it is that <m>\vrp(s)</m> is a unit vector.
       In fact, the following theorem states that this characterizes the arc length parameter.
@@ -284,7 +284,7 @@
       <title>Arc Length Parameter</title>
       <statement>
         <p>
-          Let <m>\vec r(s)</m> be a vector<ndash/>valued function.
+          Let <m>\vec r(s)</m> be a vector-valued function.
           The parameter <m>s</m> is the arc length parameter if,
           and only if, <m>\norm{\vrp(s)} = 1</m>.
               <idx><h>arc length parameter</h></idx>
@@ -388,12 +388,12 @@
       <title>Curvature</title>
       <statement>
         <p>
-          Let <m>\vec r(s)</m> be a vector<ndash/>valued function where <m>s</m> is the arc length parameter.
+          Let <m>\vec r(s)</m> be a vector-valued function where <m>s</m> is the arc length parameter.
           The curvature <m>\kappa</m> of the graph of <m>\vec r(s)</m> is
               <idx><h>curvature</h></idx>
               <idx><h>unit tangent vector</h><h>and curvature</h></idx>
           <me>
-            \kappa = \snorm{\frac{d\vec T}{ds}} = \snorm{\vec T\,'(s)}
+            \kappa = \snorm{\frac{d\unittangent}{ds}} = \snorm{\unittangentprime(s)}
           </me>.
         </p>
       </statement>
@@ -402,27 +402,27 @@
     <p>
       If <m>\vec r(s)</m> is parametrized by the arc length parameter, then
       <me>
-        \vec T(s) = \frac{\vrp(s)}{\norm{\vrp(s)}}  \text{ and }  \vec N(s) = \frac{\vec T\,'(s)}{\norm{\vec T\,'(s)}}
+        \unittangent(s) = \frac{\vrp(s)}{\norm{\vrp(s)}}  \text{ and }  \unitnormal(s) = \frac{\unittangentprime(s)}{\norm{\unittangentprime(s)}}
       </me>.
     </p>
 
     <p>
-      Having defined <m>\norm{\vec T\,'(s)} =\kappa</m>,
+      Having defined <m>\norm{\unittangentprime(s)} =\kappa</m>,
       we can rewrite the second equation as
       <men xml:id="eq_curvature">
-        \vec T\,'(s) = \kappa\vec N(s)
+        \unittangentprime(s) = \kappa\unitnormal(s)
       </men>.
     </p>
 
     <p>
-      We already knew that <m>\vec T\,'(s)</m> is in the same direction as <m>\vec N(s)</m>;
-      that is, we can think of <m>\vec T(s)</m> as being <q>pulled</q>
-      in the direction of <m>\vec N(s)</m>.
+      We already knew that <m>\unittangentprime(s)</m> is in the same direction as <m>\unitnormal(s)</m>;
+      that is, we can think of <m>\unittangent(s)</m> as being <q>pulled</q>
+      in the direction of <m>\unitnormal(s)</m>.
       How <q>hard</q> is it being pulled?
       By a factor of <m>\kappa</m>.
       When the curvature is large,
-      <m>\vec T(s)</m> is being <q>pulled hard</q>
-      and the direction of <m>\vec T(s)</m> changes rapidly.
+      <m>\unittangent(s)</m> is being <q>pulled hard</q>
+      and the direction of <m>\unittangent(s)</m> changes rapidly.
       When <m>\kappa</m> is small,
       <m>T(s)</m> is not being pulled hard and hence its direction is not changing rapidly.
     </p>
@@ -445,14 +445,14 @@
           In <xref ref="ex_vvfarc1">Example</xref>,
           we found that the arc length parameter was defined by <m>s=5t</m>,
           so <m>\vec r(s) =\la 3s/5-1, 4s/5+2\ra</m> parametrized <m>\vec r</m> with the arc length parameter.
-          To find <m>\kappa</m>, we need to find <m>\vec T\,'(s)</m>.
+          To find <m>\kappa</m>, we need to find <m>\unittangentprime(s)</m>.
           <md>
-            <mrow>\vec T(s) \amp = \vrp(s) \text{ (recall this is a unit vector) }</mrow>
+            <mrow>\unittangent(s) \amp = \vrp(s) \text{ (recall this is a unit vector) }</mrow>
             <mrow>\amp = \la 3/5, 4/5\ra.</mrow>
             <intertext>Therefore</intertext>
-            <mrow>\vec T\,'(s) \amp = \la 0,0\ra</mrow>
+            <mrow>\unittangentprime(s) \amp = \la 0,0\ra</mrow>
             <intertext>and</intertext>
-            <mrow>\kappa\amp =\snorm{\vec T\,'(s)} = 0</mrow>
+            <mrow>\kappa\amp =\snorm{\unittangentprime(s)} = 0</mrow>
           </md>.
         </p>
 
@@ -493,8 +493,8 @@
 
             <li>
               <p>
-                If <m>C</m> is defined as a vector<ndash/>valued function in the plane,
-                <m>\vec r(t) = \la x(t), y(t)\ra</m>, then
+                If <m>C</m> is defined as a vector-valued function in the plane,
+                <m>\vrt = \la x(t), y(t)\ra</m>, then
                 <me>
                   \kappa = \frac{\abs{x'y''-x''y'}}{\big((x')^2+(y')^2\big)^{3/2}}
                 </me>.
@@ -503,9 +503,9 @@
 
             <li>
               <p>
-                If <m>C</m> is defined in space by a vector<ndash/>valued function <m>\vec r(t)</m>, then
+                If <m>C</m> is defined in space by a vector-valued function <m>\vrt</m>, then
                 <me>
-                  \kappa = \frac{\norm{\vec T\,'(t)}}{\norm{\vrp(t)}} = \frac{\norm{\vrp(t)\times\vrp'(t)}}{\norm{\vrp(t)}^3} = \frac{\vec a(t)\cdot \vec N(t)}{\norm{\vec v(t)}^2}
+                  \kappa = \frac{\norm{\unittangentprime(t)}}{\norm{\vrp(t)}} = \frac{\norm{\vrp(t)\times\vrpp(t)}}{\norm{\vrp(t)}^3} = \frac{\vec a(t)\cdot \unitnormal(t)}{\norm{\vec v(t)}^2}
                 </me>.
               </p>
             </li>
@@ -714,7 +714,7 @@
       <title>Finding curvature</title>
       <statement>
         <p>
-          Find where the curvature of <m>\vec r(t) = \la t, t^2, 2t^3\ra</m> is maximized.
+          Find where the curvature of <m>\vrt = \la t, t^2, 2t^3\ra</m> is maximized.
         </p>
       </statement>
       <solution>
@@ -723,7 +723,7 @@
           as <m>\vrt</m> is defined in space.
           We leave it to the reader to verify that
           <me>
-            \vrp(t) =\la 1,2t,6t^2\ra, \vrp'(t) = \la 0,2,12t\ra, \text{ and }  \vrp(t)\times \vrp'(t) = \la 12t^2,-12t,2\ra
+            \vrp(t) =\la 1,2t,6t^2\ra, \vrp'(t) = \la 0,2,12t\ra, \text{ and }  \vrp(t)\times \vrpp(t) = \la 12t^2,-12t,2\ra
           </me>.
         </p>
 
@@ -874,11 +874,11 @@
   <subsection>
     <title>Curvature and Motion</title>
     <p>
-      Let <m>\vec r(t)</m> be a position function of an object,
-      with velocity <m>\vvt = \vrp(t)</m> and acceleration <m>\vec a(t)=\vrp'(t)</m>.
+      Let <m>\vrt</m> be a position function of an object,
+      with velocity <m>\vvt = \vrp(t)</m> and acceleration <m>\vec a(t)=\vrpp(t)</m>.
       In <xref ref="sec_tan_norm">Section</xref>
       we established that acceleration is in the plane formed by
-      <m>\vec T(t)</m> and <m>\vec N(t)</m>,
+      <m>\unittangent(t)</m> and <m>\unitnormal(t)</m>,
       and that we can find scalars <m>a_\text{T}</m> and
       <m>a_\text{N}</m> such that
           <idx><h>curvature</h><h>and motion</h></idx>
@@ -887,7 +887,7 @@
           <idx><h>at@<m>a_\text{T}</m></h></idx>
           <idx><h>an@<m>a_\text{N}</m></h></idx>
       <me>
-        \vat = a_\text{T} \vec T(t) + a_\text{N} \vec N(t)
+        \vat = a_\text{T} \unittangent(t) + a_\text{N} \unitnormal(t)
       </me>.
     </p>
 
@@ -900,24 +900,24 @@
     </p>
 
     <p>
-      We understood that the amount of acceleration in the direction of <m>\vec T</m> relates only to how the speed of the object is changing,
-      and that the amount of acceleration in the direction of <m>\vec N</m> relates to how the direction of travel of the object is changing.
+      We understood that the amount of acceleration in the direction of <m>\unittangent</m> relates only to how the speed of the object is changing,
+      and that the amount of acceleration in the direction of <m>\unitnormal</m> relates to how the direction of travel of the object is changing.
       (That is, if the object travels at constant speed, <m>a_\text{T} =0</m>;
       if the object travels in a constant direction, <m>a_\text{N} =0</m>.)
     </p>
 
     <p>
       In Equation <xref ref="eq_vvfarc3"/> at the beginning of this section, we found
-      <m>s\,'(t) = \norm{\vvt}</m>.
+      <m>s\primeskip'(t) = \norm{\vvt}</m>.
       We can combine this fact with the above formula for <m>a_\text{T}</m> to write
       <me>
-        a_\text{T}  = \frac{d}{dt}\Big(\norm{\vvt}\Big) = \frac{d}{dt}\big( s\,'(t)\big) = s\,''(t)
+        a_\text{T}  = \frac{d}{dt}\Big(\norm{\vvt}\Big) = \frac{d}{dt}\big( s\primeskip'(t)\big) = s\primeskip''(t)
       </me>.
     </p>
 
     <p>
-      Since <m>s\,'(t)</m> is speed,
-      <m>s\,''(t)</m> is the rate at which speed is changing with respect to time.
+      Since <m>s\primeskip'(t)</m> is speed,
+      <m>s\primeskip''(t)</m> is the rate at which speed is changing with respect to time.
       We see once more that the component of acceleration in the direction of travel relates only to speed,
       not to a change in direction.
     </p>
@@ -926,7 +926,7 @@
       Now compare the formula for
       <m>a_\text{N}</m> above to the formula for curvature in <xref ref="thm_curvature_formulas">Theorem</xref>:
       <me>
-        a_\text{N}  = \frac{\norm{\vvt\times \vat}}{\norm{\vvt}} \text{ and }  \kappa = \frac{\norm{\vrp(t)\times\vrp'(t)}}{\norm{\vrp(t)}^3}=\frac{\norm{\vvt\times \vat}}{\norm{\vvt}^3}
+        a_\text{N}  = \frac{\norm{\vvt\times \vat}}{\norm{\vvt}} \text{ and }  \kappa = \frac{\norm{\vrp(t)\times\vrpp(t)}}{\norm{\vrp(t)}^3}=\frac{\norm{\vvt\times \vat}}{\norm{\vvt}^3}
       </me>.
     </p>
 
@@ -934,7 +934,7 @@
       Thus
       <md>
         <mrow>a_\text{N}  \amp = \kappa \norm{\vvt}^2</mrow>
-        <mrow>\amp = \kappa\Big(s\,'(t)\Big)^2</mrow>
+        <mrow>\amp = \kappa\Big(s\primeskip'(t)\Big)^2</mrow>
       </md>
     </p>
 
@@ -948,7 +948,7 @@
       You will naturally feel a force pushing you towards the door
       (more accurately,
       the door is pushing you as the car is turning and you want to travel in a straight line).
-      If you keep the radius of the circle constant but speed up (i.e., increasing <m>s\,'(t)</m>),
+      If you keep the radius of the circle constant but speed up (i.e., increasing <m>s\primeskip'(t)</m>),
       the door pushes harder against you
       (<m>a_\text{N}</m> has increased).
       If you keep your speed constant but tighten the turn (i.e., increase <m>\kappa</m>),
@@ -959,7 +959,7 @@
       Putting our new formulas for
       <m>a_\text{T}</m> and <m>a_\text{N}</m> together, we have
       <me>
-        \vat = s\,''(t)\vec T(t) + \kappa\norm{\vvt}^2\vec N(t)
+        \vat = s\primeskip''(t)\unittangent(t) + \kappa\norm{\vvt}^2\unitnormal(t)
       </me>.
     </p>
 
@@ -981,7 +981,7 @@
       <solution>
 
         <table xml:id="fig_curvature5">
-          <title>Operating speed and minimum radius in highway cloverleaf design.</title>
+          <title>Operating speed and minimum radius in highway cloverleaf design</title>
           <tabular>
             <!-- <col width="45%"/>
             <col width="45%"/> -->
@@ -1012,20 +1012,20 @@
           <q>miles per hour</q> to <q>feet per second</q>
           by multiplying by <m>5280/3600</m>.
           <md>
-            <mrow>\text{ 35mph, 310ft }  \amp \Rightarrow 51.33\text{ ft/s } , \kappa = 1/310</mrow>
-            <mrow>a_\text{N} \amp = \kappa\ \norm{\vvt}^2</mrow>
+            <mrow>\text{35 mph, 310 ft}  \amp \Rightarrow 51.33\,\text{ft/s},\, \kappa = 1/310</mrow>
+            <mrow>a_\text{N} \amp = \kappa\, \norm{\vvt}^2</mrow>
             <mrow>\amp = \frac1{310}\big(51.33\big)^2</mrow>
-            <mrow>\amp = 8.50\text{ ft/s } ^2</mrow>
+            <mrow>\amp = 8.50\,\text{ft/s}^2</mrow>
           </md>.
           <md>
-            <mrow>\text{ 40mph, 430ft }  \amp \Rightarrow 58.67\text{ ft/s } , \kappa = 1/430</mrow>
+            <mrow>\text{40 mph, 430 ft}  \amp \Rightarrow 58.67\,\text{ft/s},\, \kappa = 1/430</mrow>
             <mrow>a_\text{N} \amp = \frac1{430}\big(58.67\big)^2</mrow>
-            <mrow>\amp = 8.00\text{ ft/s } ^2</mrow>
+            <mrow>\amp = 8.00\,\text{ft/s}^2</mrow>
           </md>.
           <md>
-            <mrow>\text{ 45mph,540ft }  \amp \Rightarrow 66\text{ ft/s } , \kappa = 1/540</mrow>
+            <mrow>\text{45 mph, 540 ft}  \amp \Rightarrow 66\,\text{ft/s},\, \kappa = 1/540</mrow>
             <mrow>a_\text{N} \amp = \frac1{540}\big(66\big)^2</mrow>
-            <mrow>\amp = 8.07\text{ ft/s } ^2</mrow>
+            <mrow>\amp = 8.07\,\text{ft/s}^2</mrow>
           </md>.
         </p>
 
@@ -1034,23 +1034,24 @@
           Considering the classic <q>Force <m>=</m> mass <times/> acceleration</q> formula,
           this acceleration must be kept small in order for the tires of a vehicle to keep a
           <q>grip</q> on the road.
-          If one travels on a turn of radius 310ft at a rate of 50mph,
-          the acceleration is double, at 17.35ft/s<m>^2</m>.
+          If one travels on a turn of radius <quantity><mag>310</mag><unit base="foot"/></quantity>
+          at a rate of <quantity><mag>50</mag><unit base="mileperhour"/></quantity>,
+          the acceleration is double, at <quantity><mag>17.35</mag><unit base="foot"/><per base="second" exp="2"/></quantity>.
           If the acceleration is too high,
           the frictional force created by the tires may not be enough to keep the car from sliding.
           Civil engineers routinely compute a
           <q>safe</q> design speed,
-          then subtract 5-10mph to create the posted speed limit for additional safety.
+          then subtract 5-10 mph to create the posted speed limit for additional safety.
         </p>
       </solution>
     </example>
 
     <p>
       We end this chapter with a reflection on what we've covered.
-      We started with vector<ndash/>valued functions,
+      We started with vector-valued functions,
       which may have seemed at the time to be just another way of writing parametric equations.
       However, we have seen that the vector perspective has given us great insight into the behavior of functions and the study of motion.
-      Vector<ndash/>valued position functions convey displacement,
+      Vector-valued position functions convey displacement,
       distance traveled, speed, velocity,
       acceleration and curvature information,
       each of which has great importance in science and engineering.
@@ -1068,11 +1069,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 It is common to describe position in terms of both <fillin/> and/or <fillin/>.
@@ -1088,11 +1086,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 A measure of the <q>curviness</q>
@@ -1109,11 +1104,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 Give two shapes with constant curvature.
@@ -1129,11 +1121,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 Describe in your own words what an
@@ -1151,14 +1140,11 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
-                Complete the identity: <m>\vec T\,'(s) = \underline{}\vec N(s)</m>.
+                Complete the identity: <m>\unittangentprime(s) = <fillin />\unitnormal(s)</m>.
               </p>
             </statement>
             <answer>
@@ -1171,22 +1157,19 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 Given a position function \vrt,
-                how are <m>a_{\text{T} }</m> and
-                <m>a_{\text{N} }</m> affected by the curvature?
+                how are <m>a_\text{T}</m> and
+                <m>a_\text{N}</m> affected by the curvature?
               </p>
             </statement>
             <answer>
               <p>
-                <m>a_{\text{T} }</m> is not affected by curvature;
-                the greater the curvature, the larger <m>a_{\text{N} }</m> becomes.
+                <m>a_\text{T}</m> is not affected by curvature;
+                the greater the curvature, the larger <m>a_\text{N}</m> becomes.
               </p>
             </answer>
         <!--</webwork>-->
@@ -1207,11 +1190,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\vrt = \la 2t, t, -2t\ra</m>
@@ -1227,14 +1207,13 @@
 
       <exercise>
         <webwork>
-            <setup>
             <pg-code>
               Context("Vector2D");
               Context()->variables->are(s=>'Real',t=>'Real');
               $s=Formula("7t");
               $rs=Compute("&lt;7cos(s/7),7sin(s/7)>");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 Given <m>\vrt = \la 7\cos(t) ,7\sin(t) \ra</m>,
@@ -1258,11 +1237,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\vrt = \la 3\cos(t) ,3\sin(t) , 2t\ra</m>
@@ -1279,14 +1255,13 @@
 
       <exercise>
         <webwork>
-            <setup>
             <pg-code>
               Context("Vector");
               Context()->variables->are(s=>'Real',t=>'Real');
               $s=Formula("13t");
               $rs=Compute("&lt;5cos(s/13),13sin(s/13),12cos(s/13)>");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 Given <m>\vrt = \vrt = \la 5\cos(t) ,13\sin(t) , 12\cos(t) \ra</m>,
@@ -1338,11 +1313,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>C</m> is defined by <m>y = x^3-x</m>;
@@ -1364,7 +1336,6 @@
 
       <exercise>
         <webwork>
-            <setup>
             <pg-code>
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               $comp=PopUp(['?','greater than', 'equal to', 'less than'],1);
@@ -1372,7 +1343,7 @@
               $k[0]=Compute("2");
               $k[1]=Formula("2750/641^(3/2)");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>C</m> is defined by <m>y=\frac{1}{x^2+1}</m>.
@@ -1394,11 +1365,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>C</m> is defined by <m>\ds y = \cos(x)</m>;
@@ -1419,11 +1387,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>C</m> is defined by <m>\ds y = \sqrt{1-x^2}</m> on <m>(-1,1)</m>;
@@ -1444,7 +1409,6 @@
 
       <exercise>
         <webwork>
-            <setup>
             <pg-code>
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               Context()->variables->are(t=>'Real');
@@ -1453,7 +1417,7 @@
               $k[0]=Formula("1/4");
               $k[1]=Formula("8");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>C</m> is defined by <m>\vrt = \la \cos(t) , \sin(2t)\ra</m>.
@@ -1475,11 +1439,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>C</m> is defined by <m>\ds \vrt = \la \cos^2(t) , \sin(t) \cos(t) \ra</m>;
@@ -1500,11 +1461,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>C</m> is defined by <m>\ds \vrt = \la t^2-1,t^3-t\ra</m>;
@@ -1526,7 +1484,6 @@
 
       <exercise>
         <webwork>
-            <setup>
             <pg-code>
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               Context()->variables->are(t=>'Real');
@@ -1535,7 +1492,7 @@
               $k[0]=Formula("1");
               $k[1]=Formula("3sqrt(3)/(5sqrt(5))");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>C</m> is defined by <m>\vrt = \la \tan(t) ,\sec(t) \ra</m>.
@@ -1557,11 +1514,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>C</m> is defined by <m>\ds \vrt = \la 4t+2,3t-1,2t+5\ra</m>;
@@ -1582,7 +1536,6 @@
 
       <exercise>
         <webwork>
-            <setup>
             <pg-code>
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               Context()->variables->are(t=>'Real');
@@ -1591,7 +1544,7 @@
               $k[0]=Formula("2");
               $k[1]=Formula("2sqrt(2)/17");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>C</m> is defined by <m>\vrt = \la t^3-t,t^3-4,t^2-1\ra</m>.
@@ -1613,11 +1566,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>C</m> is defined by <m>\ds \vrt = \la 3\cos(t) ,3\sin(t) , 2t\ra</m>;
@@ -1638,7 +1588,6 @@
 
       <exercise>
         <webwork>
-            <setup>
             <pg-code>
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               Context()->variables->are(t=>'Real');
@@ -1647,7 +1596,7 @@
               $k[0]=Formula("1/13");
               $k[1]=Formula("1/13");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 <m>C</m> is defined by <m>\vrt = \la 5\cos(t) ,13\sin(t) , 12\cos(t) \ra</m>.
@@ -1680,14 +1629,12 @@
       <exercise>
         <webwork>
             <!-- <pg-macros><macro-file>parserRoot.pl</macro-file></pg-macros> -->
-            <setup>
-
             <pg-code>
               parser::Root->Enable;
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               $max=List(Formula("sqrt(2)/root(4,5)"), Formula("-sqrt(2)/root(4,5)"));
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 Find the value(s) of <m>x</m> where the curvature of <m>y=\frac{1}{6}x^3</m> is maximized.
@@ -1702,11 +1649,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds y=\sin(x)</m>
@@ -1722,13 +1666,11 @@
 
       <exercise>
         <webwork>
-            <setup>
-
             <pg-code>
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               $max=Formula("1/4");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 Find the value(s) of <m>t</m> where the curvature of <m>\vrt = \la t^2+2t,3t-t^2\ra</m> is maximized.
@@ -1743,13 +1685,11 @@
 
       <exercise>
         <webwork>
-            <setup>
-
             <pg-code>
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               $max=List(Formula("sqrt(5)"),Formula("-sqrt(5)"));
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 Find the value(s) of <m>t</m> where the curvature of <m>\vrt = \la t, 4/t, 3/t\ra</m> is maximized.
@@ -1774,11 +1714,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>y=\tan(x)</m>, at <m>x=\pi/4</m>
@@ -1794,13 +1731,11 @@
 
       <exercise>
         <webwork>
-            <setup>
-
             <pg-code>
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               $radius=Formula("5sqrt(10)");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 Find the radius of curvature on <m>y=x^2+x-3</m> at <m>x=1</m>.
@@ -1815,11 +1750,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\vrt = \la \cos(t) , \sin(3t)\ra</m>, at <m>t=0</m>
@@ -1835,13 +1767,11 @@
 
       <exercise>
         <webwork>
-            <setup>
-
             <pg-code>
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               $radius=Formula("1/45");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 Find the radius of curvature on <m>\vrt = \la 5\cos(3 t),
@@ -1867,11 +1797,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\vrt = \la t,t^2\ra</m>, at <m>t=0</m>
@@ -1888,8 +1815,6 @@
 
       <exercise>
         <webwork>
-            <setup>
-
             <pg-code>
               Context("ImplicitEquation");
               Context()->variables->set(x=>{limits=>[2,4]});
@@ -1897,7 +1822,7 @@
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               $osc=ImplicitEquation("(x-8/3)^2+y^2 = 1/9");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 Find the equation of the osculating circle to <m>\vrt = \la 3\cos(t) , \sin(t) \ra</m> at <m>t=0</m>.
@@ -1912,11 +1837,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\vrt = \la 3\cos(t) , \sin(t) \ra</m>, at <m>t=\pi/2</m>
@@ -1933,8 +1855,6 @@
 
       <exercise>
         <webwork>
-            <setup>
-
             <pg-code>
               Context("ImplicitEquation");
               Context()->variables->set(x=>{limits=>[-1,2]});
@@ -1942,7 +1862,7 @@
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               $osc=ImplicitEquation("(x-1/2)^2+(y-1/2)^2 = 1/2");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 Find the equation of the osculating circle to <m>\vrt = \la t^2-t,t^2+t\ra</m> at <m>t=0</m>.
