@@ -26,7 +26,7 @@
 
 
 	<example xml:id="ex_optimize_param_bound">
-	  <title>ex_optimize_param_bound</title>
+	  <title>Constrained optimization by parametrization</title>
 	  <statement>
 	    <p>
 	      Find the absolute maximum and minimum values of <m>f(x,y) = x^2-8x-3y^2</m> on the disc <m>x^2+y^2\leq 4</m>.
@@ -88,6 +88,11 @@
 		<idx><h>optimization</h><h>with Lagrange multipliers</h></idx>
 	</p>
 
+	<figure xml:id="vid-multi-lagrange-intro">
+	  <caption>Introducing Lagrange multipliers</caption>
+	  <video youtube="W5ykqB7261c"/>
+	</figure>
+
 	<p>
 		Suppose we are trying to maximize a function <m>f(x,y)</m> subject to a constrain <m>g(x,y)=c</m>.
 		We could follow the approach given above:
@@ -141,7 +146,7 @@
 	</p>
 
 	<theorem xml:id="thm_lagrange_multipliers">
-	  <title>lagrange_multipliers</title>
+	  <title>Location of constrained extrema</title>
 	  <statement>
 	    <p>
 				Let <m>f</m> and <m>g</m> be continuously differentiable functions of two variables,
@@ -178,7 +183,7 @@
 	</insight>
 
 	<example xml:id="ex_lagrange1">
-	  <title>ex_lagrange1</title>
+	  <title>Using Lagrange multipliers</title>
 	  <statement>
 	    <p>
 	      Find the absolute maximum and minimum values of <m>f(x,y) = x^2-8x-3y^2</m> on the disc <m>x^2+y^2\leq 4</m>.
@@ -236,6 +241,11 @@
 		</solution>
 	</example>
 
+	<figure xml:id="vid-multi-lagrange-example1">
+	  <caption>Using the method of Lagrange multipliers</caption>
+	  <video youtube="WgzwyBEDTzA"/>
+	</figure>
+
 	<p>
 		The method of Lagrange multipliers seems rather arcane at first glance, but it's actually not hard to understand geometrically why it works.
 	</p>
@@ -251,17 +261,17 @@
 							ymin=-3,ymax=3,%
 							xmin=-3,xmax=4.5%
 				]
-				\addplot [secondcurvestyle,domain=0:360] ({2*cos(x)},{2*sin(x)});
-				\addplot [firstcurvestyle,domain={-2:2}] ({4-2*cosh(x)},{1.1547*sinh(x)});
-				\addplot [firstcurvestyle,domain={-4:4}] {0.57735*(x-4)};
-				\addplot [firstcurvestyle,domain={-4:4}] {-0.57735*(x-4)};
-				\addplot [firstcurvestyle,domain={-2:2}] ({4-6*cosh(x)},{3.4641*sinh(x)});
-				\addplot [thirdcurvestyle,domain={-2:2}] ({2*sinh(x)+4},{1.1547*cosh(x)});
-				\addplot [thirdcurvestyle,domain={-2:2}] ({2*sinh(x)+4},{-1.1547*cosh(x)});
-				\addplot [thirdcurvestyle,domain={-2:2}] ({4-3.4641*cosh(x)},{2*sinh(x)});
-				\addplot [thirdcurvestyle,domain={-2:2}] ({4-4*cosh(x)},{2.3094*sinh(x)});
-				\addplot [thirdcurvestyle,domain={-2:2}] ({4-5*cosh(x)},{2.88675*sinh(x)});
-				\addplot  [thirdcurvestyle, domain={-2:2}] ({4-6.48*cosh(x)},{3.74*sinh(x)});
+				\addplot [-,secondcurvestyle,domain=0:360] ({2*cos(x)},{2*sin(x)});
+				\addplot [-,firstcurvestyle,domain={-2:2}] ({4-2*cosh(x)},{1.1547*sinh(x)});
+				\addplot [-,firstcurvestyle,domain={-4:4}] {0.57735*(x-4)};
+				\addplot [-,firstcurvestyle,domain={-4:4}] {-0.57735*(x-4)};
+				\addplot [-,firstcurvestyle,domain={-2:2}] ({4-6*cosh(x)},{3.4641*sinh(x)});
+				\addplot [-,thirdcurvestyle,domain={-2:2}] ({2*sinh(x)+4},{1.1547*cosh(x)});
+				\addplot [-,thirdcurvestyle,domain={-2:2}] ({2*sinh(x)+4},{-1.1547*cosh(x)});
+				\addplot [-,thirdcurvestyle,domain={-2:2}] ({4-3.4641*cosh(x)},{2*sinh(x)});
+				\addplot [-,thirdcurvestyle,domain={-2:2}] ({4-4*cosh(x)},{2.3094*sinh(x)});
+				\addplot [-,thirdcurvestyle,domain={-2:2}] ({4-5*cosh(x)},{2.88675*sinh(x)});
+				\addplot [-,thirdcurvestyle, domain={-2:2}] ({4-6.48*cosh(x)},{3.74*sinh(x)});
 				\end{axis}
 
 		    \end{tikzpicture}
@@ -382,11 +392,11 @@
 							ymin=-4,ymax=4,%
 							xmin=-3,xmax=3%
 				]
-				\addplot [firstcurvestyle,domain=0:360] ({sqrt(3)*cos(x)},{sqrt(6)*sin(x)});
-				\addplot [thirdcurvestyle,domain=0:360] ({sqrt(2)*cos(x)},{2*sin(x)});
-				\addplot [thirdcurvestyle,domain=0:360] ({2*cos(x)},{sqrt(8)*sin(x)});
-				\addplot [thirdcurvestyle,domain=0:360] ({sqrt(5)*cos(x)},{sqrt(10)*sin(x)});
-				\addplot [secondcurvestyle,domain={-1:4}]{3-x};
+				\addplot [-,firstcurvestyle,domain=0:360,samples=100] ({sqrt(3)*cos(x)},{sqrt(6)*sin(x)});
+				\addplot [-,thirdcurvestyle,domain=0:360,samples=100] ({sqrt(2)*cos(x)},{2*sin(x)});
+				\addplot [-,thirdcurvestyle,domain=0:360,samples=100] ({2*cos(x)},{sqrt(8)*sin(x)});
+				\addplot [-,thirdcurvestyle,domain=0:360,samples=100] ({sqrt(5)*cos(x)},{sqrt(10)*sin(x)});
+				\addplot [-,secondcurvestyle,domain={-1:4}]{3-x};
 				\end{axis}
 
 		    \end{tikzpicture}
@@ -484,13 +494,14 @@
 
 	<aside>
 	  <p>
-			for functions of three or more variables,
+			For functions of three or more variables,
 			it is also possible to consider two or more constraints.
 			If we wished to optimize a function <m>f(x,y,z)</m> subject to constraints <m>g(x,y,z)=a</m> and <m>h(x,y,z)=b</m>,
 			we would have to solve the vector equation
-			<me>
-			  \nabla f(x,y,z)=\lambda g(x,y,z) + \mu h(x,y,z)
-			</me>,
+			<md>
+			  <mrow>\nabla f(x,y,z)\amp =\lambda g(x,y,z)</mrow>
+				<mrow>\amp \quad + \mu h(x,y,z)</mrow>
+			</md>,
 			along with the two constraint equations.
 			Problems involving large (or even arbitrary!)
 			numbers of variables and constraints are encountered everywhere from Economics to Quantum Mechanics.
@@ -557,4 +568,9 @@
 			</p>
 		</solution>
 	</example>
+
+	<figure xml:id="vid-multi-lagrange-example2">
+	  <caption>Another optimization problem using Lagrange multipliers</caption>
+	  <video youtube="uvQku50u_-0"/>
+	</figure>
 </section>
