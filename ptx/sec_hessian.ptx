@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="sec-hessian">
+  <title>Hessians and the General Second Derivative Test</title>
+  <introduction>
+    <p>
+      In <xref ref="sec_multi_extreme_values">Section</xref>,
+      we saw that, just as for functions of a single variable
+      (recall <xref ref="sec_extreme_values">Section</xref>), local extreme values occur at critical points.
+      <xref ref="def_multi_critical_point">Definition</xref>
+      defined a critical point <m>(a,b)</m> of a function <m>f(x,y)</m>  to be one where the gradient vanishes:
+      <me>
+        \nabla f(a,b) = \la f_x(a,b),f_y(a,b)\ra = \la 0,0\ra
+      </me>.
+    </p>
+
+    <p>
+      Given a critical point for a function <m>f</m> of two variables,
+      <xref ref="thm_multi_second_test">Theorem</xref>, the Second Derivative Test,
+      tells us how to determine whether that critical point corresponds to a local minimum,
+      local maximum, or saddle point.
+      You might have been left wondering why the second derivative test looks so different in two variables.
+      You might also have been left wondering what this test looks like if we have three or more variables!
+    </p>
+
+    <p>
+      The appearance of the quantity
+      <me>
+        D = f_{xx}(a,b)f_{yy}(a,b)-f_{xy}^{\,2}(a,b)
+      </me>
+      seems a bit weird at first, but the idea is actually fairly simple,
+      if you're willing to accept Taylor's Theorem without proof for functions of more than one variable.
+      We already know that if <m>f(x,y)</m> is <m>C^1</m> (continuously differentiable), then we get the linear approximation
+      <me>
+        f(x,y) \approx f(a,b) +\nabla f(a,b)\cdot\langle x-a,y-b\rangle
+      </me>
+      near a point <m>(a,b)</m> in the domain of <m>f</m>.
+      (Multiplying out the dot product above gives us the differential <m>df</m> defined in <xref ref="def_total_differential">Definition</xref>.)
+    </p>
+
+    <p>
+      Taylor's theorem tells us that if <m>f</m> is <m>C^2</m> (has continuous second-order derivatives),
+      then we get the <em>quadratic</em> approximation
+      <md>
+        <mrow>f(x,y) \amp \approx f(a,b) + \nabla f(a,b)\cdot \langle x-a,y-b\rangle</mrow>
+        <mrow>\amp \, +\frac{1}{2}A(x-a)^2+B(x-a)(y-b)+\frac{1}{2}C(y-b)^2
+      </me>,
+      where <m>A = \dfrac{\partial ^2 f}{\partial x^2}(a,b)</m>,
+      <m>B = \dfrac{\partial^2 f}{\partial x\partial y}(a,b)</m>,
+      and <m>C =\dfrac{\partial^2 f}{\partial y^2}(a,b)</m>.
+      (Compare this to the single-variable version: <m>f(x)\approx f(a) + f'(a)(x-a)+\frac{1}{2}f''(a)(x-a)^2</m>.)
+    </p>
+
+    <p>
+      Now, if <m>(a,b)</m> is a critical point, then <m>\nabla f(a,b)=\vec{0}</m>, and we get the approximation
+      <me>
+        f(x,y) \approx k+ \frac{1}{2}\left(AX^2+2BXY+CY^2\right)
+      </me>,
+      where <m>k=f(a,b), X=x-a, Y=y-b</m>. So it's enough to understand the critical points of the function
+      <me>
+        g(x,y) = Ax^2+2Bxy+Cy^2
+      </me>,
+      since <m>f</m> locally looks just like <m>g</m>.
+      (We've basically just done a shift of the graph, and stretched by a factor of 2 to get rid of the 1/2.)
+    </p>
+
+    <p>
+      Now, we can re-write <m>g</m> as follows, assuming <m>A\neq 0</m>:
+      <md>
+        <mrow>g(x,y) \amp  = Ax^2+2Bxy+Cy^2</mrow>
+        <mrow>\amp  = A(x^2+2\frac{B}{A}xy) + Cy^2</mrow>
+        <mrow>\amp  = A(x+\frac{B}{A}y)^2 - \frac{B^2}{A}y^2-Cy^2</mrow>
+        <mrow>\amp  = A(x+\frac{B}{A}y)^2 + \frac{1}{A}(AC-B^2)y^2</mrow>
+      </md>.
+      Now we can see that this is basically just a paraboloid, as long as <m>AC-B^2\neq 0</m>.
+      (Otherwise, we end up with a parabolic cylinder.)
+    </p>
+
+    <p>
+      If <m>AC-B^2\gt0</m> (note that this is just the discriminant <m>D</m>!),
+      then both the coefficient for both terms has the same sign;
+      if <m>A\gt0</m> we get an elliptic paraboloid opening upwards (local minimum),
+      and if <m>A\lt 0</m> we get an elliptic paraboloid opening downwards (local maximum).
+      If <m>AC-B^2\lt 0</m>, then the two terms have coefficients with opposite signs,
+      and that gives us a hyperbolic paraboloid (saddle point).
+    </p>
+
+    <p>
+      And what if <m>A=0?</m> Well, in that case <m>AC-B^2=-B^2\leq 0</m>,
+      so there are two cases: if <m>B\neq 0</m>,
+      the second derivative test tells us to expect a saddle point, and indeed this is what we get.
+      Either <m>C=0</m> as well, and <m>g(x,y) = 2Bxy</m>,
+      which is just a hyperbolic paraboloid rotated by <m>\pi/4</m>
+      (its contour curves are the hyperbolas <m>xy=c</m>),
+      or <m>C\neq 0</m>, in which case you can complete the square in <m>y</m>,
+      and check that the result is once again a hyperbolic paraboloid (exercise).
+    </p>
+
+    <p>
+      The other case is if <m>B=0</m>, in which case <m>D=0</m>,
+      so we can't make any conclusions from the second derivative test
+      (although we'll have <m>g(x,y)=Cy^2</m>, which is again a parabolic cylinder).
+    </p>
+
+    <p>
+      We will now explain how to state second derivative test in general,
+      for functions of <m>n</m> variables, where <m>n=1,2,3,\ldots</m>.
+      We will also give an outline of the proof of this result.
+      The proof requires the use of Taylor's theorem for a function of several variables,
+      which we will not prove, and a bit of terminology from linear algebra.
+      Our sketch of the proof follows the exposition given in the text <em>Vector Calculus</em>, 4th edition, by Marsden and Tromba.
+    </p>
+  </introduction>
+
+  <subsection xml:id="subsec-taylor-poly-multi">
+    <title>Taylor Polynomials in Several Variables</title>
+    <p>
+      Before getting to the general result, let's take a brief detour and discuss Taylor polynomials.
+      One way of thinking about differentiability of a function <m>f:D\subseteq\mathbb{R}^n\to\mathbb{R}</m>
+      is to think of the linearization <m>L(\vec{x})</m> as the degree one Taylor polynomial
+      <me>
+         P_1(\vec{x}) = f(\vec{a})+\nabla f(\vec{a})\cdot(\vec{x}-\vec{a}) = f(\vec{a})+ \frac{\partial f}{\partial x_1}(\vec{a})(x_1-a_1)+\cdots + \frac{\partial f}{\partial x_n}(x_n-a_n)
+      </me>.
+    </p>
+
+    <aside>
+      <p>
+        We will use the shorthand <m>f(\vec{x})</m> from <xref ref="sec_deriv_matrix">Section</xref> for the function <m>f(x_1,\ldots, x_n)</m>,
+        where <m>\vec{x} = \la x_1,\ldots, x_n\ra</m>.
+        We will also write our vectors using angle bracket notation,
+        even when we should really write them as column vectors for the purposes of matrix multiplication.
+        Finally, as in <xref ref="sec_deriv_matrix">Section</xref>,
+        for an <m>n\times n</m> matrix <m>A</m>, we will use the dot product <m>A\cdot \vec{x}</m> to account for this.
+      </p>
+    </aside>
+
+    <p>
+      The requirement of differentiability is then that the remainder <m>R_1(\vec{x}) = f(\vec{x})-P_1(\vec{x})</m> goes to zero faster than <m>\norm{\vec{x}-\vec{a}}</m>; that is,
+      <me>
+         \lim_{\vec{x}\to\vec{a}}\frac{R_1(\vec{x})}{\norm{\vec{x}-\vec{a}}}=0
+      </me>.
+      Using the terminology from <xref ref="sec_deriv_matrix">Section</xref>,
+      we say that <m>f</m> and <m>P_1</m> <q>agree to first order</q>.
+      From here we can go on and ask for degree <m>k</m> Taylor polynomials
+      <m>P_k(\vec{x})</m> that give a <q><m>k</m>th-order approximation</q> of <m>f</m> near <m>\vec{a}</m>.
+    </p>
+
+    <p>
+      In other words, we want a polynomial
+      <md>
+        <mrow> P_k(x_1,\ldots, x_n) \amp = a_0 +a_{1}x_1+\cdots+a_{n}x_n+a_{11}x_1^2+a_{12}x_1x_2+\cdots+a_{nn}x_n^2</mrow>
+        <mrow>\amp \quad\quad\quad\quad +\cdots+a_{1\cdots 1}x_1^k+a_{1\cdots 12}x_1^{k-1}x_2+\cdots+a_{n\cdots n}x_n^k</mrow>
+      </md>,
+      in <m>n</m> variables, of degree <m>k</m>,
+      such that the remainder <m>R_k(\vec{x}) = f(\vec{x})-P_k(\vec{x})</m>
+      satisfies <m>R_k(\vec{x})\approx C\norm{\vec{x}-\vec{a}}^l</m>, with <m>l\gt k</m>.
+      In terms of limits, this means
+      <me>
+         \lim_{\vec{x}\to\vec{a}}\frac{R_k(\vec{x})}{\norm{\vec{x}-\vec{a}}^k}=0
+      </me>.
+    </p>
+
+    <p>
+      You've probably already noticed a problem with talking about higher-order polynomials in several variables:
+      the notation gets really messy, since there are so many more possible terms!
+      For example, even a relatively simple case like a degree 3 polynomial in 3 variables looks like
+      <md>
+        <mrow> P(x,y,z) \amp = a+bx+cy+dz+ex^2+fxy+gxz+hy^2+kyz+lz^2</mrow>
+        <mrow>\amp \quad\quad\quad\quad +mx^3+nx^2y+oxy^2+pxyz+qx^2z+rxz^2+sy^3+ty^2z+uyz^2+vz^3</mrow>
+      </md>
+      for constants <m>a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v</m>!
+    </p>
+
+    <p>
+      Usually we get around this using <q>multi-index</q> notation
+      We let <m>\alpha=(a_1,\ldots, a_n)</m> denote a <m>n</m>-tuple of non-negative integers,
+      and then we define <m>\vec{x}^\alpha = x_1^{a_1}x_2^{a_2}\cdots x_n^{a_n}</m>,
+      <m>\lvert\alpha\rvert=a_1+\cdots +a_n</m>
+      (so that <m>\vec{x}^\alpha</m> is a monomial of order <m>\lvert\alpha\rvert</m>),
+      and we denote a possible coefficient of <m>\vec{x}^\alpha</m> by <m>a_\alpha</m>.
+      A general <m>k^{\text{th}}</m>-order polynomial then looks like
+      <me>
+         P_k(\vec{x}) = \sum_{\lvert\alpha\rvert=0}^k a_\alpha x^\alpha
+      </me>.
+      <idx><h>multi-index notation</h></idx>
+    </p>
+
+    <p>
+      For example, in 3 variables, the terms where <m>\lvert\alpha\rvert=3</m>
+      would involve <m>\alpha = (3,0,0)</m>, <m>(2,1,0)</m>, <m>(2,0,1)</m>, <m>(1,2,0)</m>, <m>(1,0,2)</m>, <m>(0,3,0)</m>, <m>(0,2,1)</m>, <m>(0,1,2)</m>, <m>(0,0,3)</m>,
+      so in the above polynomial <m>m=a_{(3,0,0)},\, n = a_{(2,1,0)}</m>, <etc/>,
+      with <m>\vec{x}^{(3,0,0)} = x^3,\, \vec{x}^{(2,1,0)} = x^2y</m>, and so on.
+      (Note that <m>\alpha = (0,\ldots, 0)</m> is the only multi-index with <m>\lvert\alpha\rvert=0</m>).
+    </p>
+
+    <p>
+      With all of that notational unpleasantness out of the way,
+      we can say what the <m>k^{\textrm{th}}</m>-order Taylor polynomial for <m>f</m> near <m>\vec{a}</m> should be:
+      Taylor's Theorem, generalized to <m>n</m> variables, states that
+      <me>
+         P_k(\vec{x}) = \sum_{\lvert\alpha\rvert=0}^k \frac{f^{(\alpha)}(\vec{a})}{\alpha!}(\vec{x}-\vec{a})^\alpha
+      </me>,
+      where <m>\alpha! = a_1!a_2!\cdots a_n!</m>, and
+      <me>
+        f^{(\alpha)}(\vec{a}) = \left(\frac{\partial^{a_1}}{\partial x_1^{a_1}}\frac{\partial^{a_2}}{\partial x_2^{a_n}}\cdots\frac{\partial^{a_n}}{\partial x_n}f\right)(\vec{a})
+      </me>.
+      <idx><h>Taylor polynimial</h><h>of several variables</h></idx>
+      <idx><h>Taylor's Theorem</h><h>in several variables</h></idx>
+    </p>
+
+    <p>
+      As an exercise, check that putting <m>k=1</m> reproduces the linearization <m>P_1(\vec{x})</m>
+      (note that if <m>\lvert\alpha\rvert=1</m> we have to have <m>\alpha = (1,0,\ldots, 0),\, (0,1,0,\ldots, 0),</m> <etc/>),
+      and that putting <m>k=2</m> gives the quadratic approximation discussed below.
+    </p>
+  </subsection>
+
+  <subsection xml:id="subsec-multi-quadratic">
+    <title>Quadratic Functions in Several Variables</title>
+    <p>
+      Let <m>A=[a_{ij}]</m> be an <m>n\times n</m> matrix.
+      We say that <m>A</m> is <em>symmetric</em> if <m>A^T=A</m>, or equivalently,
+      if <m>a_{ij} = a_{ji}</m> for each <m>i,j</m> between 1 and <m>n</m>.
+      To each such <m>A</m> we can associate a <em>quadratic function</em>
+      <m>q:\mathbb{R}^n\to \mathbb{R}</m> given by
+      <me>
+        q(\vec{x}) = \vec{x}\cdot (A\cdot \vec{x})
+      </me>,
+      or in terms of components,
+      <me>
+        q(x_1,\ldots, x_n) = \sum_{i,j=1}^n a_{ij}x^ix^j
+      </me>.
+    </p>
+
+    <p>
+      We say that <m>A</m> is <em>non-degenerate</em> if <m>\det A\neq 0</m>;
+      this is equivalent to saying that <m>A</m> is invertible,
+      or that <m>A\vec{x}=\vec{0}</m> is possible only if <m>\vec{x}=\vec{0}</m>.
+      (Note however that the corresponding property does not hold for <m>q</m>:
+      it is possible to have <m>q(\vec{x})=0</m> for <m>\vec{x}\neq \vec{0}</m>
+      even if the corresponding matrix <m>A</m> is non-degenerate.
+      For example, the quadratic function <m>q(x,y)=x^2-y^2</m> has <m>q(1,1)=0</m>
+      and corresponds to the non-degenerate matrix <m>\begin{bmatrix}1\amp 0\\0\amp -1\end{bmatrix}</m>.
+    </p>
+
+    <p>
+      A quadratic function <m>q</m> is called <em>positive-definite</em>
+      if <m>q(\vec{x})\geq 0</m> for all <m>\vec{x}\in\mathbb{R}^n</m>,
+      and <m>q(\vec{x})=0</m> only for <m>\vec{x}=\vec{0}</m>.
+      (Note that the quadratic function <m>q(x,y)=x^2-y^2</m> given above is <em>not</em> positive definite;
+      however, <m>\tilde{q}(x,y) = x^2+y^2</m> is.)
+      Similarly, <m>q</m> is <em>negative-definite</em> if <m>q(\vec{x})\leq 0</m>
+      for all <m>\vec{x}\in\mathbb{R}^n</m> with <m>q(\vec{x})=0</m> for <m>\vec{x}=\vec{0}</m> only.
+    </p>
+
+    <p>
+      If <m>q(\vec{x}) = \vec{x}\cdot A\vec{x}</m> is positive(negative)-definite,
+      we refer to the corresponding symmetric matrix <m>A</m> as positive(negative)-definite as well.
+      In general it can be difficult to determine when a given quadratic function
+      (or its corresponding matrix) is positive or negative-definite.
+      In the case of a <m>2\times 2</m> matrix <m>A = \begin{bmatrix} a\amp b\\b\amp c\end{bmatrix}</m> we get
+      <md>
+        <mrow>q(x_1,x_2)\amp = ax_1^2+2bx_1x_2+cx_2^2</mrow>
+        <mrow>\amp =a\left(x_1+\frac{b}{a}x_2\right)^2+\left(c-\frac{b^2}{a}\right)x_2^2</mrow>
+      </md>,
+      by completing the square.
+      Since we must have <m>q(x_1,0)\gt0</m> if <m>x_1\neq 0</m>, we get <m>a\gt0</m>,
+      and since <m>q(0,x_2)\gt0</m> for <m>x_2\neq 0</m>, it follows that <m>ac-b^2=\det A \gt0</m>.
+      Similarly <m>q</m> is negative-definite if <m>a\lt 0</m> and <m>\det A\gt0</m>.
+    </p>
+
+    <p>
+      For an <m>n\times n</m> matrix, one test is as follows:
+      consider the sequence of <m>j\times j</m> matrices <m>A_j</m>, for <m>j=1,\ldots , n</m>,
+      given by  <m>A_1=[a_{11}]</m>, <m>A_2 = \begin{bmatrix} a_{11}\amp a_{12}\\vec{a}_{21}\amp a_{22}\end{bmatrix},\ldots, A_n=A</m>.
+      (<ie/> we take upper-left square sub-matrices of increasing size.)
+      Then <m>A</m> is positive-definite if and only if <m>\det A_j\gt0</m> for each <m>j=1,\ldots n</m>,
+      and <m>A</m> is negative-definite if the signs of <m>\det A_j</m> alternate between negative and positive.
+      (So <m>\det A_1 = a_{11}\lt 0, \det A_2\gt0, \det A_3\lt 0,\ldots</m>.)
+    </p>
+
+    <p>
+      Another approach, which is more illuminating but requires more advanced linear algebra,
+      is to use the fact that for any symmetric matrix <m>A</m>,
+      there exists a change of basis such that <m>A</m> becomes a diagonal matrix <m>\tilde{A}</m> with respect to that basis.
+      (<ie/> <m>A</m> can be diagonalized.)
+      If the entries <m>\tilde{a}_{ii}</m> of <m>\tilde{A}</m> along the main diagonal
+      (that is, the <term>eigenvalues</term> of <m>A</m>) are all non-zero,
+      then <m>A</m> is non-degenerate. If they are all positive,
+      then <m>A</m> is positive-definite. If they are all negative, then <m>A</m> is negative-definite.
+    </p>
+
+    <p>
+      We will need the following lemma below, which is a consequence of the Extreme Value Theorem.
+    </p>
+
+    <theorem xml:id="thm_quadfunction">
+      <statement>
+        <p>
+          If <m>q:\mathbb{R}^n\to \mathbb{R}</m> is a positive-definite quadratic function,
+          then there exists a real number <m>M\gt0</m> such that
+          <me>
+            q(\vec{x})\geq M\lVert\vec{x}\rVert^2
+          </me>
+          for any <m>x\in\mathbb{R}^n</m>.
+        </p>
+      </statement>
+    </theorem>
+
+    <p>
+      To see that this is true, consider <m>q(\vec{x})</m> on the set <m>B</m>
+      of all <m>\vec{x}</m> with <m>\lVert \vec{x}\rVert = 1</m>.
+      The set <m>B</m> is closed and bounded and <m>q</m> is continuous on <m>B</m>,
+      so by the Extreme Value Theorem, <m>q</m> must attain a minimum value <m>M</m> for some <m>\vec{a}\in B</m>.
+      Now, for any constant <m>c\in\mathbb{R}</m>,
+      the fact that <m>q</m> is quadratic implies that <m>q(c\vec{x}) = c^2q(\vec{x})</m>.
+      For any non-zero <m>\vec{x}\in \mathbb{R}^n</m>,
+      we know that <m>\dfrac{\vec{x}}{\lVert\vec{x}\rVert}\in B</m>, and thus, we have
+      <me>
+        q(\vec{x}) = q\left(\lVert\vec{x}\rVert\frac{\vec{x}}{\lVert\vec{x}\rVert}\right)=\lVert\vec{x}\rVert^2q\left(\frac{\vec{x}}{\lVert\vec{x}\rVert}\right)\geq M\lVert\vec{x}\rVert^2
+      </me>.
+      Finally, if <m>\vec{x}=\vec{0}</m> we get <m>q(\vec{0})=0=M\lVert\vec{0}\rVert^2</m>.
+    </p>
+  </subsection>
+
+  <subsection xml:id="subsec-hessian">
+    <title>The Hessian Matrix of a Real-Valued Function</title>
+    <definition xml:id="def_hessian">
+      <title>The Hessian Matrix</title>
+      <statement>
+        <p>
+          Let <m>f:\mathbb{R}^n\to \mathbb{R}</m> be a function with continuous second-order partial derivatives.
+          We define the <em>Hessian matrix</em> of <m>f</m> at a point <m>\vec{a}</m> in the domain of <m>f</m> to be the <m>n\times n</m> symmetric matrix
+          <me>
+          \Hess f(\vec{a}) = \frac{1}{2}\begin{bmatrix}
+          \frac{\partial^2 f}{\partial x_1^2}(\vec{a}) \amp  \frac{\partial^2 f}{\partial x_1\partial x_2}(\vec{a})\amp \cdots \amp \frac{\partial^2 f}{\partial x_1\partial x_n}(\vec{a})\\
+          \frac{\partial^2 f}{\partial x_2\partial x_1}(\vec{a}) \amp  \frac{\partial^2 f}{\partial x_2^2}(\vec{a})\amp \cdots \amp \frac{\partial^2 f}{\partial x_2\partial x_n}(\vec{a})\\
+          \vdots \amp  \vdots \amp  \amp  \vdots \\
+          \frac{\partial^2 f}{\partial x_n\partial x_1}(\vec{a}) \amp  \frac{\partial^2 f}{\partial x_n\partial x_2}(\vec{a})\amp \cdots \amp \frac{\partial^2 f}{\partial x_n^2}(\vec{a})
+          \end{bmatrix}
+          </me>.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      Note that <m>\Hess f(\vec{a})</m> is symmetric by Clairaut's theorem
+      (<xref ref="thm_mixed_partial">Theorem</xref>.
+      The factor of <m>1/2</m> is included for convenience with respect to Taylor's theorem.
+      Recall that for a function of one variable, the second-order Taylor polynomial of <m>f</m> about <m>x=a</m> is
+      <me>
+        P_2(x)=f(a)+f'(a)(x-a)+\frac{1}{2}f''(a)(x-a)^2
+      </me>.
+    </p>
+
+    <p>
+      For <m>\vec{x}\in\mathbb{R}^n</m>, let us define the quadratic function
+      <m>h_{f,\vec{a}}(\vec{x}) = \vec{x}\cdot (\Hess f(\vec{a})\cdot\vec{x})</m>
+      associated to the Hessian of <m>f</m> at <m>\vec{a}</m>.
+      Taylor's theorem for functions of several variables tells us that if all the
+      <em>third</em> derivatives of <m>f</m> are continuous,
+      then near <m>\vec{a}\in\mathbb{R}^n</m> we have
+      <men xml:id="eq_hesstaylor">
+        f(\vec{x}) = f(\vec{a}) + \nabla f(\vec{a})\cdot (\vec{x}-\vec{a}) + h_{f,\vec{a}}(\vec{x}-\vec{a}) + R(\vec{a},\vec{x})
+      </men>,
+      where the remainder term <m>R(\vec{a},\vec{x})</m> satisfies
+      <men xml:id="eq_remainderorder">
+        \lim_{\vec{x}\to\vec{a}}\frac{R(\vec{x},\vec{a})}{\lVert \vec{x}-\vec{a}\rVert^2}=0
+      </men>.
+    </p>
+
+    <p>
+      Finally, let us define a critical point <m>\vec{a}</m> for <m>f</m> to be
+      <em>non-degenerate</em> if <m>\Hess f(\vec{a})</m> is non-degenerate.
+      Now we're ready to state our result on the second derivative test.
+    </p>
+
+    <theorem xml:id="thm_second_deriv_general">
+      <title>The General Second Derivative Test</title>
+      <statement>
+        <p>
+          Let <m>f:\mathbb{R}^n\to\mathbb{R}</m> be three times continuously differentiable,
+          and suppose that <m>f</m> has a non-degenerate critical point at <m>\vec{a}</m>.
+          If <m>\Hess f(\vec{a})</m> is positive-definite,
+          then <m>\vec{a}</m> is a local minimum for <m>f</m>.
+          Similarly, if <m>\Hess f(\vec{a})</m> is negative-definite, then <m>\vec{a}</m> is a local maximum for <m>f</m>.
+        </p>
+      </statement>
+    </theorem>
+
+    <p>
+      The way to think about this intuitively is the following:
+      the matrix <m>\Hess f(\vec{a})</m> is symmetric.
+      We know from Linear Algebra that every symmetric matrix can be diagonalized.
+      Less obvious (but still true) is that we can make a (linear) change of variables
+      <m>(u_1,\ldots, u_n) = T(x_1,\ldots, x_n)</m> so that the vectors in the direction of the <m>u_i</m> coordinate axes are eigenvectors for <m>\Hess f(\vec{a})</m>.
+      Slightly harder to show (but also true) is that this change of variables can be chosen so that it is <term>orthogonal</term>.
+      That is, we simply have to <em>rotate</em> our coordinate system: lengths and angles are all preserved.
+    </p>
+
+    <p>
+      In this new coordinate system, the Hessian matrix is diagonal:
+      <me>
+      \Hess f(\vec{a}) = \begin{bmatrix} \lambda_1 \amp  0 \amp  \cdots \amp  0\\
+                        0 \amp  \lambda_2 \amp  \cdots \amp  0\\
+                        \vdots \amp  \vdots \amp  \ddots \amp  \vdots\\
+                        0 \amp  0 \amp  \cdots \amp  \lambda_n\end{bmatrix}
+      </me>.
+      If each of the eigenvalues <m>\lambda_1,\ldots, \lambda_n</m> is positive,
+      the Hessian is positive-definite, and our critical point is a local minimum.
+      If all the eigenvalues are negative, our critical point is a local maximum.
+      If some of the eigenvalues are positive and some are negative, we have a saddle point.
+    </p>
+
+    <aside>
+      <p>
+        We in fact do slightly better than a local minimum:
+        we get the <em>strict</em> inequality <m>f(\vec{x})\gt f(\vec{a})</m>, and not just <m>f(\vec{x})\geq f(\vec{a})</m>.
+        Often this fact is expressed by saying that non-degenerate critical points are <em>isolated</em> <mdash/>
+        if <m>f</m> has a critical point at <m>\vec{a}</m>,
+        then there is some neighbourhood of <m>\vec{a}</m> in which <m>f</m> has no other critical points.
+        (We have only established this for local maxima and minima, but this fact is true for non-degenerate critical points in general.)
+        This observation is the starting point for an important area of differential topology known as Morse Theory.
+      </p>
+    </aside>
+
+    <p>
+      Proving the result is somewhat more technical.
+      Suppose <m>\vec{a}</m> is a critical point for <m>f</m>,
+      and that <m>\Hess f(\vec{a})</m> is positive definite.
+      We know that <m>\nabla f(\vec{a})=0</m> at a critical point,
+      so from <xref ref="eq_hesstaylor"/> we get
+      <me>
+        f(\vec{x})-f(\vec{a}) = h_{f,\vec{a}}(\vec{x}-\vec{a})+R(\vec{a},\vec{x})
+      </me>.
+    </p>
+
+    <p>
+      <xref ref="thm_quadfunction">Theorem</xref> tells us that
+      <m>h_{f,\vec{a}}(\vec{x}-\vec{a})\geq M\lVert\vec{x}-\vec{a}\rVert^2</m> for some <m>M</m>,
+      and by <xref ref="eq_remainderorder"/>,
+      there exists a <m>\delta\gt0</m> such that whenever <m>0\lt \lVert \vec{x}-\vec{a}\rVert\lt \delta</m>,
+      we get <m>\lvert R(\vec{a},\vec{x})\rvert\lt M\lVert \vec{x}-\vec{a}\rVert^2</m>.
+      (Take <m>\epsilon=M</m> in the definition of the limit.)
+    </p>
+
+    <p>
+      If we carefully put all this together, we can show that
+      <me>
+        h_{f,\vec{a}}(\vec{x}-\vec{a})+R(\vec{a},\vec{x})\gt0
+      </me>,
+      since
+      <me>
+        h_{f,\vec{a}}(\vec{x}-\vec{a})\geq M\lVert \vec{x}-\vec{a}\rVert^2\gt \lvert R(\vec{a},\vec{x})\rvert
+      </me>.
+      Substituting this into the above equation,
+      we get <m>f(\vec{x})-f(\vec{a})\gt0</m> for any <m>\vec{x}</m> with <m>0\lt \lVert\vec{x}-\vec{a}\rVert\lt \delta</m>,
+      and thus <m>f</m> has a local minimum at <m>\vec{a}\in\mathbb{R}^n</m>.
+      The case of a local maximum can be handled similarly (or by replacing <m>f</m> with <m>-f</m>).
+    </p>
+  </subsection>
+</section>
