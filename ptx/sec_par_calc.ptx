@@ -330,6 +330,32 @@
           <m>y=\sin^3(t)</m> at <m>t=0</m>,
           shown in <xref ref="fig_parcalc3">Figure</xref>.
         </p>
+        <figure xml:id="fig_parcalc3">
+          <caption>A graph of an astroid.</caption>
+          <!-- START figures/fig_planecurve1.tex -->
+          <image xml:id="img_parcalc3" width="47%">
+            <description></description>
+            <latex-image>
+
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            xtick={-1,1},
+            ytick={-1,1},
+            ymin=-1.1,ymax=1.1,
+            xmin=-1.1,xmax=1.1
+            ]
+
+            \addplot+ [-,domain=0:360,samples=70] ({(cos(x))^3},{(sin(x))^3});
+
+            \end{axis}
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
+          <!-- figures/fig_planecurve1.tex END -->
+        </figure>
       </statement>
       <solution>
         <video width="90%" youtube="rb4wEkhcUtE" xml:id="vid-planecurves-parcalc-astroid"/>
@@ -365,33 +391,6 @@
           This allows us to find slopes of tangent lines at cusps,
           which can be very beneficial.
         </p>
-
-        <figure xml:id="fig_parcalc3">
-          <caption>A graph of an astroid.</caption>
-          <!-- START figures/fig_planecurve1.tex -->
-          <image xml:id="img_parcalc3" width="47%">
-            <description></description>
-            <latex-image>
-
-            \begin{tikzpicture}
-
-            \begin{axis}[
-            xtick={-1,1},
-            ytick={-1,1},
-            ymin=-1.1,ymax=1.1,
-            xmin=-1.1,xmax=1.1
-            ]
-
-            \addplot+ [-,domain=0:360,samples=70] ({(cos(x))^3},{(sin(x))^3});
-
-            \end{axis}
-
-            \end{tikzpicture}
-
-            </latex-image>
-          </image>
-          <!-- figures/fig_planecurve1.tex END -->
-        </figure>
 
         <p>
           We found the slope of the tangent line at <m>t=0</m> to be 0;
@@ -803,30 +802,6 @@
           <m>y=t^2-1</m> crosses itself as shown in <xref ref="fig_parcalc7">Figure</xref>,
           forming a <q>teardrop.</q> Find the arc length of the teardrop.
         </p>
-      </statement>
-      <solution>
-        <video width="90%" youtube="G5U9BVhB3PE" xml:id="vid-planecurves-parcalc-arclength-example2"/>
-        <p>
-          We can see by the parametrizations of <m>x</m> and <m>y</m> that when <m>t=\pm 1</m>,
-          <m>x=0</m> and <m>y=0</m>.
-          This means we'll integrate from <m>t=-1</m> to <m>t=1</m>.
-          Applying <xref ref="thm_arc_length_parametric">Theorem</xref>, we have
-          <md>
-            <mrow>L   \amp = \int_{-1}^1\sqrt{(3t^2-1)^2+(2t)^2}\, dt</mrow>
-            <mrow>\amp =  \int_{-1}^1 \sqrt{9t^4-2t^2+1} \, dt</mrow>
-          </md>.
-        </p>
-
-        <p>
-          Unfortunately,
-          the integrand does not have an antiderivative expressible by elementary functions.
-          We turn to numerical integration to approximate its value.
-          Using 4 subintervals, Simpson's Rule approximates the value of the integral as <m>2.65051</m>.
-          Using a computer, more subintervals are easy to employ,
-          and <m>n=20</m> gives a value of <m>2.71559</m>.
-          Increasing <m>n</m> shows that this value is stable and a good approximation of the actual value.
-        </p>
-
         <figure xml:id="fig_parcalc7">
           <caption>A graph of the parametric equations in <xref ref="ex_parcalc7">Example</xref>, where the arc length of the teardrop is calculated.</caption>
           <!-- START figures/fig_parcalc7.tex -->
@@ -853,6 +828,29 @@
           </image>
           <!-- figures/fig_parcalc7.tex END -->
         </figure>
+      </statement>
+      <solution>
+        <video width="90%" youtube="G5U9BVhB3PE" xml:id="vid-planecurves-parcalc-arclength-example2"/>
+        <p>
+          We can see by the parametrizations of <m>x</m> and <m>y</m> that when <m>t=\pm 1</m>,
+          <m>x=0</m> and <m>y=0</m>.
+          This means we'll integrate from <m>t=-1</m> to <m>t=1</m>.
+          Applying <xref ref="thm_arc_length_parametric">Theorem</xref>, we have
+          <md>
+            <mrow>L   \amp = \int_{-1}^1\sqrt{(3t^2-1)^2+(2t)^2}\, dt</mrow>
+            <mrow>\amp =  \int_{-1}^1 \sqrt{9t^4-2t^2+1} \, dt</mrow>
+          </md>.
+        </p>
+
+        <p>
+          Unfortunately,
+          the integrand does not have an antiderivative expressible by elementary functions.
+          We turn to numerical integration to approximate its value.
+          Using 4 subintervals, Simpson's Rule approximates the value of the integral as <m>2.65051</m>.
+          Using a computer, more subintervals are easy to employ,
+          and <m>n=20</m> gives a value of <m>2.71559</m>.
+          Increasing <m>n</m> shows that this value is stable and a good approximation of the actual value.
+        </p>
       </solution>
     </example>
   </subsection>
@@ -912,30 +910,6 @@
           Find the surface area if this shape is rotated about the <m>x</m>-axis,
           as shown in <xref ref="fig_parcalc8">Figure</xref>.
         </p>
-      </statement>
-      <solution>
-        <p>
-          The teardrop shape is formed between <m>t=-1</m> and <m>t=1</m>.
-          Using <xref ref="thm_surface_area_parametric">Theorem</xref>,
-          we see we need for <m>g(t)\geq 0</m> on <m>[-1,1]</m>,
-          and this is not the case.
-          To fix this, we simplify replace <m>g(t)</m> with <m>-g(t)</m>,
-          which flips the whole graph about the <m>x</m>-axis
-          (and does not change the surface area of the resulting solid).
-          The surface area is:
-          <md>
-            <mrow>\text{ Area } \,S \amp = 2\pi\int_{-1}^1 (1-t^2)\sqrt{(3t^2-1)^2+(2t)^2}\, dt</mrow>
-            <mrow>\amp =  2\pi\int_{-1}^1 (1-t^2)\sqrt{9t^4-2t^2+1} \, dt</mrow>
-          </md>.
-        </p>
-
-        <p>
-          Once again we arrive at an integral that we cannot compute in terms of elementary functions.
-          Using Simpson's Rule with <m>n=20</m>,
-          we find the area to be <m>S=9.44</m>.
-          Using larger values of <m>n</m> shows this is accurate to 2 places after the decimal.
-        </p>
-
         <figure xml:id="fig_parcalc8">
           <caption>Rotating a teardrop shape about the <m>x</m>-axis in <xref ref="ex_parcalc8">Example</xref>.</caption>
           <!--
@@ -1024,6 +998,29 @@
           </image>
           <!-- figures/figparcalc8_3D.asy END -->
         </figure>
+      </statement>
+      <solution>
+        <p>
+          The teardrop shape is formed between <m>t=-1</m> and <m>t=1</m>.
+          Using <xref ref="thm_surface_area_parametric">Theorem</xref>,
+          we see we need for <m>g(t)\geq 0</m> on <m>[-1,1]</m>,
+          and this is not the case.
+          To fix this, we simplify replace <m>g(t)</m> with <m>-g(t)</m>,
+          which flips the whole graph about the <m>x</m>-axis
+          (and does not change the surface area of the resulting solid).
+          The surface area is:
+          <md>
+            <mrow>\text{ Area } \,S \amp = 2\pi\int_{-1}^1 (1-t^2)\sqrt{(3t^2-1)^2+(2t)^2}\, dt</mrow>
+            <mrow>\amp =  2\pi\int_{-1}^1 (1-t^2)\sqrt{9t^4-2t^2+1} \, dt</mrow>
+          </md>.
+        </p>
+
+        <p>
+          Once again we arrive at an integral that we cannot compute in terms of elementary functions.
+          Using Simpson's Rule with <m>n=20</m>,
+          we find the area to be <m>S=9.44</m>.
+          Using larger values of <m>n</m> shows this is accurate to 2 places after the decimal.
+        </p>
       </solution>
     </example>
 

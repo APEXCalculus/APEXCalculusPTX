@@ -696,6 +696,89 @@
           using the order of integration <m>dz\, dy\, dx</m>.
           Set up the triple integrals that give the volume in the other 5 orders of integration.
         </p>
+        <figure xml:id="fig_trip2a1_3D">
+          <caption>The region <m>D</m> used in <xref ref="ex_trip2">Example</xref></caption>
+          <!--
+          \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.004707579035311937,
+          3Dc2c=0.4086907207965851 0.6385185718536377 0.6521241664886475,
+          3Dcoo=3.675152540206909 -7.818903923034668 16.216196060180664,
+          3Droo=150.00000119319247,
+          3Dlights=Headlamp,add3Djscript=asylabels.js]
+          -->
+          <!-- START figures/figtrip2_3D.asy -->
+          <image xml:id="img_trip2a1_3D">
+            <description></description>
+            <asymptote>
+
+              import graph3;
+
+              //ASY file for figtrip23D.asy in Chapter 13
+
+              size(200,200,IgnoreAspect);
+              //currentprojection=perspective(7,2,1);
+              currentprojection=orthographic(7.2,10.1,6.5);
+              defaultrender.merge=true;
+
+              // setup and draw the axes
+              real[] myxchoice={2,4};
+              real[] myychoice={5};
+              real[] myzchoice={2};
+              defaultpen(0.5mm);
+
+              pair xbounds=(-0.5,5);
+              pair ybounds=(-0.5,7);
+              pair zbounds=(-0.5,3);
+
+              xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+              yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+              zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+              label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+              //triangle in space
+              draw((3,0,0)--(0,6,0)--(0,0,2)--cycle,blue+linewidth(1.5));
+
+              //shade
+              import three;
+              path3 p =  (3,0,0)--(0,6,0)--(0,0,2); //Left
+              draw(surface(p -- cycle), emissive(rgb(.6,.6,1)+opacity(0.7)));
+
+              // ////////////////////////////////////
+              //    SAMPLE CODE
+
+              // defaultpen(fontsize(10pt));
+
+              //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+              //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+              //pen p=rgb(0,0,.7);
+              //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+              //triple f(pair t) {
+              //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+              //}
+              //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+              //pen p=rgb(0,0,.7);
+              //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+              //draw(s,paleblue);
+              //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+              //draw(mypath,2bp+blue);
+
+              //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+              //path3 mypath=graph(g,-1,1,operator ..);
+              //draw(mypath,blue+dashed+linewidth(2));
+
+              //pen p=rgb(0,0,1);
+              //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+            </asymptote>
+          </image>
+        <!-- figures/figtrip2_3D.asy END -->
+        </figure>
       </statement>
       <solution>
         <p>
@@ -716,179 +799,89 @@
           Secondly, we know this is going to be a straight line between the points <m>(3,0)</m> and <m>(0,6)</m> in the <m>x</m>-<m>y</m> plane.)
         </p>
 
-        <figure xml:id="fig_trip2a">
-          <caption>The region <m>D</m> used in <xref ref="ex_trip2">Example</xref> in (a); in (b), the region found by collapsing <m>D</m> onto the <m>x</m>-<m>y</m> plane.</caption>
-          <sidebyside widths="47% 47%">
-            <figure xml:id="fig_trip2a1_3D">
-              <caption/>
-              <!--
-              \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
-              3Droll=0,
-              3Dortho=0.004707579035311937,
-              3Dc2c=0.4086907207965851 0.6385185718536377 0.6521241664886475,
-              3Dcoo=3.675152540206909 -7.818903923034668 16.216196060180664,
-              3Droo=150.00000119319247,
-              3Dlights=Headlamp,add3Djscript=asylabels.js]
-              -->
-              <!-- START figures/figtrip2_3D.asy -->
-              <image xml:id="img_trip2a1_3D">
-                <description></description>
-                <asymptote>
+        <figure xml:id="fig_trip2a2_3D">
+          <caption>The region found by collapsing <m>D</m> onto the <m>x</m>-<m>y</m> plane</caption>
+          <!--
+          \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.004707579035311937,
+          3Dc2c=0.4086907207965851 0.6385185718536377 0.6521241664886475,
+          3Dcoo=3.675152540206909 -7.818903923034668 16.216196060180664,
+          3Droo=150.00000119319247,
+          3Dlights=Headlamp,add3Djscript=asylabels.js]
+          -->
+          <!-- START figures/figtrip2b_3D.asy -->
+          <image xml:id="img_trip2a2_3D">
+            <description></description>
+            <asymptote>
 
-                  import graph3;
+              import graph3;
 
-                  //ASY file for figtrip23D.asy in Chapter 13
+              //ASY file for figtrip2b3D.asy in Chapter 13
 
-                  size(200,200,IgnoreAspect);
-                  //currentprojection=perspective(7,2,1);
-                  currentprojection=orthographic(7.2,10.1,6.5);
-                  defaultrender.merge=true;
+              size(200,200,IgnoreAspect);
+              //currentprojection=perspective(7,2,1);
+              currentprojection=orthographic(7.2,10.1,6.5);
+              defaultrender.merge=true;
 
-                  // setup and draw the axes
-                  real[] myxchoice={2,4};
-                  real[] myychoice={5};
-                  real[] myzchoice={2};
-                  defaultpen(0.5mm);
+              // setup and draw the axes
+              real[] myxchoice={2,4};
+              real[] myychoice={5};
+              real[] myzchoice={2};
+              defaultpen(0.5mm);
 
-                  pair xbounds=(-0.5,5);
-                  pair ybounds=(-0.5,7);
-                  pair zbounds=(-0.5,3);
+              pair xbounds=(-0.5,5);
+              pair ybounds=(-0.5,7);
+              pair zbounds=(-0.5,3);
 
-                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+              xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+              yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+              zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
 
-                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+              label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
 
-                  //triangle in space
-                  draw((3,0,0)--(0,6,0)--(0,0,2)--cycle,blue+linewidth(1.5));
+              //triangle in space
+              draw((3,0,0)--(0,6,0)--(0,0,0)--cycle,blue+linewidth(1.5));
 
-                  //shade
-                  import three;
-                  path3 p =  (3,0,0)--(0,6,0)--(0,0,2); //Left
-                  draw(surface(p -- cycle), emissive(rgb(.6,.6,1)+opacity(0.7)));
+              //shade
+              import three;
+              path3 p =  (3,0,0)--(0,6,0)--(0,0,0); //Left
+              draw(surface(p -- cycle), emissive(rgb(.6,.6,1)+opacity(0.7)));
+              label("$y=6-2x$",(2.5,3.5,0));
 
-                  // ////////////////////////////////////
-                  //    SAMPLE CODE
+              // ////////////////////////////////////
+              //    SAMPLE CODE
 
-                  // defaultpen(fontsize(10pt));
+              // defaultpen(fontsize(10pt));
 
-                  //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
-                  //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
-                  //pen p=rgb(0,0,.7);
-                  //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+              //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+              //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+              //pen p=rgb(0,0,.7);
+              //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
 
-                  //triple f(pair t) {
-                  //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
-                  //}
-                  //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
-                  //pen p=rgb(0,0,.7);
-                  //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+              //triple f(pair t) {
+              //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+              //}
+              //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+              //pen p=rgb(0,0,.7);
+              //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
 
-                  //draw(s,paleblue);
-                  //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
-                  //draw(mypath,2bp+blue);
+              //draw(s,paleblue);
+              //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+              //draw(mypath,2bp+blue);
 
-                  //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
-                  //path3 mypath=graph(g,-1,1,operator ..);
-                  //draw(mypath,blue+dashed+linewidth(2));
+              //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+              //path3 mypath=graph(g,-1,1,operator ..);
+              //draw(mypath,blue+dashed+linewidth(2));
 
-                  //pen p=rgb(0,0,1);
-                  //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+              //pen p=rgb(0,0,1);
+              //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
 
-                </asymptote>
-              </image>
-            <!-- figures/figtrip2_3D.asy END -->
-            </figure>
-
-            <figure xml:id="fig_trip2a2_3D">
-              <caption/>
-              <!--
-              \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
-              3Droll=0,
-              3Dortho=0.004707579035311937,
-              3Dc2c=0.4086907207965851 0.6385185718536377 0.6521241664886475,
-              3Dcoo=3.675152540206909 -7.818903923034668 16.216196060180664,
-              3Droo=150.00000119319247,
-              3Dlights=Headlamp,add3Djscript=asylabels.js]
-              -->
-              <!-- START figures/figtrip2b_3D.asy -->
-              <image xml:id="img_trip2a2_3D">
-                <description></description>
-                <asymptote>
-
-                  import graph3;
-
-                  //ASY file for figtrip2b3D.asy in Chapter 13
-
-                  size(200,200,IgnoreAspect);
-                  //currentprojection=perspective(7,2,1);
-                  currentprojection=orthographic(7.2,10.1,6.5);
-                  defaultrender.merge=true;
-
-                  // setup and draw the axes
-                  real[] myxchoice={2,4};
-                  real[] myychoice={5};
-                  real[] myzchoice={2};
-                  defaultpen(0.5mm);
-
-                  pair xbounds=(-0.5,5);
-                  pair ybounds=(-0.5,7);
-                  pair zbounds=(-0.5,3);
-
-                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                  //triangle in space
-                  draw((3,0,0)--(0,6,0)--(0,0,0)--cycle,blue+linewidth(1.5));
-
-                  //shade
-                  import three;
-                  path3 p =  (3,0,0)--(0,6,0)--(0,0,0); //Left
-                  draw(surface(p -- cycle), emissive(rgb(.6,.6,1)+opacity(0.7)));
-                  label("$y=6-2x$",(2.5,3.5,0));
-
-                  // ////////////////////////////////////
-                  //    SAMPLE CODE
-
-                  // defaultpen(fontsize(10pt));
-
-                  //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
-                  //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
-                  //pen p=rgb(0,0,.7);
-                  //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
-
-                  //triple f(pair t) {
-                  //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
-                  //}
-                  //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
-                  //pen p=rgb(0,0,.7);
-                  //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
-
-                  //draw(s,paleblue);
-                  //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
-                  //draw(mypath,2bp+blue);
-
-                  //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
-                  //path3 mypath=graph(g,-1,1,operator ..);
-                  //draw(mypath,blue+dashed+linewidth(2));
-
-                  //pen p=rgb(0,0,1);
-                  //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
-
-                </asymptote>
-              </image>
-            <!-- figures/figtrip2b_3D.asy END -->
-            </figure>
-          </sidebyside>
-
+            </asymptote>
+          </image>
+        <!-- figures/figtrip2b_3D.asy END -->
         </figure>
 
         <p>
@@ -1286,15 +1279,6 @@
           shown dashed.
           Find the equations of the projections into the coordinate planes.
         </p>
-      </statement>
-      <solution>
-        <p>
-          The two surfaces are <m>z=3-x^2-y^2</m> and <m>z=2y</m>.
-          To find where they intersect,
-          it is natural to set them equal to each other: <m>3-x^2-y^2=2y</m>.
-          This is an implicit function of <m>x</m> and <m>y</m> that gives all points <m>(x,y)</m> in the <m>x</m>-<m>y</m> plane where the <m>z</m> values of the two surfaces are equal.
-        </p>
-
         <figure xml:id="fig_trip2bb">
           <caption>Finding the projections of the curve of intersection in <xref ref="ex_trip2b">Example</xref></caption>
           <sidebyside widths="47% 47%">
@@ -1507,6 +1491,14 @@
           </sidebyside>
 
         </figure>
+      </statement>
+      <solution>
+        <p>
+          The two surfaces are <m>z=3-x^2-y^2</m> and <m>z=2y</m>.
+          To find where they intersect,
+          it is natural to set them equal to each other: <m>3-x^2-y^2=2y</m>.
+          This is an implicit function of <m>x</m> and <m>y</m> that gives all points <m>(x,y)</m> in the <m>x</m>-<m>y</m> plane where the <m>z</m> values of the two surfaces are equal.
+        </p>
 
         <p>
           We can rewrite this implicit function by completing the square:
