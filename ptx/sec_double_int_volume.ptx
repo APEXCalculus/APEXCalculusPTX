@@ -12,7 +12,7 @@
     Summing all the rectangle's areas gave an approximation of the definite integral,
     and <xref ref="thm_riemann_sum">Theorem</xref> stated that
     <me>
-      \int_a^bf(x)\, dx = \lim_{\abs{\Delta x\}\to 0}\sum f(c_i)\dx_i
+      \int_a^bf(x)\, dx = \lim_{\norm{\Delta x}\to 0}\sum f(c_i)\dx_i
     </me>,
     connecting the area under the curve with sums of the areas of rectangles.
   </p>
@@ -20,6 +20,11 @@
   <p>
     We use a similar approach in this section to find volume under a surface.
   </p>
+
+  <!-- <figure xml:id="vid-multint-double-intro">
+    <caption>Introducing the double integral</caption>
+    <video youtube="5FpKcnG-5vY"/>
+  </figure> -->
 
   <p>
     Let <m>R</m> be a closed,
@@ -45,8 +50,8 @@
   </p>
 
   <figure xml:id="fig_double_intro">
-    <caption>Developing a method for finding signed volume under a surface.</caption>
-    <sidebyside widths="47% 47%">
+    <caption>Developing a method for finding signed volume under a surface</caption>
+    <sidebyside widths="47% 47%" valign="bottom">
       <figure xml:id="fig_double_introa">
         <caption/>
         <!-- START figures/fig_double_intro1.tex -->
@@ -318,6 +323,8 @@
     This leads to a definition.
   </p>
   <aside xml:id="note_doubleint">
+    <title>Double integrals as limits of double sums</title>
+
     <p>
       Recall that the integration symbol
       <q><m>\int</m></q> is an <q>elongated S,</q>
@@ -380,8 +387,13 @@
     </statement>
   </definition>
 
+  <!-- <figure xml:id="vid-mutlint-double-def">
+    <caption>Defining the double integral</caption>
+    <video youtube="l7hGaXcsq9g"/>
+  </figure> -->
+
   <p>
-    The definition above does not state how to find the signed volume,
+    <xref ref="def_double_int"/> does not state how to find the signed volume,
     though the notation offers a hint.
     We need the next two theorems to evaluate double integrals to find volume.
   </p>
@@ -437,7 +449,7 @@
   </p>
 
   <figure xml:id="fig_double_intro3">
-    <caption>Finding volume under a surface by sweeping out a cross<ndash/>sectional area.</caption>
+    <caption>Finding volume under a surface by sweeping out a cross-sectional area</caption>
     <!--
       \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
     3Droll=0,
@@ -608,6 +620,11 @@
     not just signed volume under a surface.
   </p>
 
+  <!-- <figure xml:id="vid-multint-double-fubini">
+    <caption>Fubini's Theorem and iterated integrals</caption>
+    <video youtube="smdRuI_ztAw"/>
+  </figure> -->
+
   <example xml:id="ex_double1">
     <title>Evaluating a double integral</title>
     <statement>
@@ -617,28 +634,8 @@
         which is the rectangle with corners <m>(3,1)</m> and <m>(4,2)</m> pictured in <xref ref="fig_double1">Figure</xref>,
         using Fubini's Theorem and both orders of integration.
       </p>
-    </statement>
-    <solution>
-      <p>
-        We wish to evaluate <m>\iint_R \big(xy+e^y\big)\, dA</m>.
-        As <m>R</m> is a rectangle,
-        the bounds are easily described as
-        <m>3\leq x\leq 4</m> and <m>1\leq y\leq 2</m>.
-      </p>
-
-      <p>
-        Using the order <m>dy\, dx</m>:
-        <md>
-          <mrow>\iint_R\big(xy+e^y\big) \, dA \amp = \int_3^4\int_1^2\big(xy+e^y\big)\, dy \, dx</mrow>
-          <mrow>\amp = \int_3^4 \left(\left.\left[\frac12xy^2+e^y\right]\right|_1^2\, \right) dx</mrow>
-          <mrow>\amp = \int_3^4\left(\frac 32x + e^2-e\right)dx</mrow>
-          <mrow>\amp = \left.\left(\frac 34x^2 + \big(e^2-e\big)x\right)\right|_3^4</mrow>
-          <mrow>\amp = \frac {21}4+ e^2-e\approx 9.92</mrow>
-        </md>.
-      </p>
-
       <figure xml:id="fig_double1">
-        <caption>Finding the signed volume under a surface in <xref ref="ex_double1">Example</xref>.</caption>
+        <caption>Finding the signed volume under a surface in <xref ref="ex_double1">Example</xref></caption>
         <!--
           \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
         3Droll=0.,
@@ -732,6 +729,25 @@
         </image>
         <!-- figures/figdouble1_3D.asy END -->
       </figure>
+    </statement>
+    <solution>
+      <p>
+        We wish to evaluate <m>\iint_R \big(xy+e^y\big)\, dA</m>.
+        As <m>R</m> is a rectangle,
+        the bounds are easily described as
+        <m>3\leq x\leq 4</m> and <m>1\leq y\leq 2</m>.
+      </p>
+
+      <p>
+        Using the order <m>dy\, dx</m>:
+        <md>
+          <mrow>\iint_R\big(xy+e^y\big) \, dA \amp = \int_3^4\int_1^2\big(xy+e^y\big)\, dy \, dx</mrow>
+          <mrow>\amp = \int_3^4 \left(\left.\left[\frac12xy^2+e^y\right]\right|_1^2\, \right) dx</mrow>
+          <mrow>\amp = \int_3^4\left(\frac 32x + e^2-e\right)dx</mrow>
+          <mrow>\amp = \left.\left(\frac 34x^2 + \big(e^2-e\big)x\right)\right|_3^4</mrow>
+          <mrow>\amp = \frac {21}4+ e^2-e\approx 9.92</mrow>
+        </md>.
+      </p>
 
       <p>
         Now we check the validity of Fubini's Theorem by using the order <m>dx\, dy</m>:
@@ -759,15 +775,8 @@
         <m>y=0</m> and <m>x/2+y=1</m>,
         as shown in <xref ref="fig_double2">Figure</xref>.
       </p>
-    </statement>
-    <solution>
-      <p>
-        While it is not specified which order we are to use,
-        we will evaluate the double integral using both orders to help drive home the point that it does not matter which order we use.
-      </p>
-
       <figure xml:id="fig_double2">
-        <caption>Finding the signed volume under the surface in <xref ref="ex_double2">Example</xref>.</caption>
+        <caption>Finding the signed volume under the surface in <xref ref="ex_double2">Example</xref></caption>
         <!--
           \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
         3Droll=0,
@@ -869,13 +878,19 @@
         </image>
         <!-- figures/figdouble2_3D.asy END -->
       </figure>
+    </statement>
+    <solution>
+      <p>
+        While it is not specified which order we are to use,
+        we will evaluate the double integral using both orders to help drive home the point that it does not matter which order we use.
+      </p>
 
       <p>
         Using the order <m>dy\, dx</m>:
         The bounds on <m>y</m> go from <q>curve to curve,</q>
-        i.e., <m>0\leq y\leq 1-x/2</m>,
+        <ie/>, <m>0\leq y\leq 1-x/2</m>,
         and the bounds on <m>x</m> go from
-        <q>point to point,</q> i.e., <m>0\leq x\leq 2</m>.
+        <q>point to point,</q> <ie/>, <m>0\leq x\leq 2</m>.
         <md>
           <mrow>\iint_R (3xy-x^2-y^2+6\big)\, dA \amp = \int_0^2\int_0^{-\frac x2+1} (3xy-x^2-y^2+6\big)\, dy\, dx</mrow>
           <mrow>\amp = \int_0^2\left.\left(\frac32xy^2-x^2y-\frac13y^3+6y\right)\right|_0^{-\frac x2+1}dx</mrow>
@@ -904,8 +919,12 @@
     </solution>
   </example>
 
+  <!-- <figure xml:id="vid-multint-double-rectangle-eg">
+    <caption>Further examples of double integrals over rectangles</caption>
+    <video youtube="MMbLzFw-5Rg"/>
+  </figure> -->
   <p>
-    Note how in these two examples that the bounds of integration depend only on <m>R</m>;
+    Note how in these examples that the bounds of integration depend only on <m>R</m>;
     the bounds of integration have nothing to do with <m>f(x,y)</m>.
     This is an important concept,
     so we include it as a Key Idea.
@@ -914,7 +933,7 @@
   <insight xml:id="idea_bounds_on_double">
     <title>Double Integration Bounds</title>
     <p>
-      When evaluating <m>\iint_Rf(x,y)\, dA</m> using an iterated integral,
+      When evaluating <m>\iint_R f(x,y)\, dA</m> using an iterated integral,
       the bounds of integration depend only on <m>R</m>.
       The surface <m>f</m> does not determine the bounds of integration.
     </p>
@@ -977,44 +996,49 @@
                 \iint_R f(x,y)\, dA = \iint_{R_1}f(x,y)\, dA+ \iint_{R_2}f(x,y)\, dA
               </me>.
             </p>
+
+            <figure xml:id="fig_double_region">
+              <caption><m>R</m> is the union of two nonoverlapping regions, <m>R_1</m> and <m>R_2</m></caption>
+              <!-- START figures/fig_double_region.tex -->
+              <image xml:id="img_double_region" width="35%">
+                <description></description>
+                <latex-image>
+
+                \begin{tikzpicture}
+
+                \draw [firstcolor,thick,fill=firstcolor!15,smooth] plot coordinates {(0,2.)(0.06639,2.527)(0.2407,2.839)(0.4857,3.009)(0.7641,3.112)(1.039,
+                3.221)(1.294,3.367)(1.532,3.53)(1.759,3.689)(1.98,3.823)(2.2,3.915)(2.
+                42,3.967)(2.64,3.992)(2.86,4.)(3.08,4.)(3.305,3.987)(3.543,3.93)(3.
+                808,3.797)(4.107,3.558)(4.45,3.185)(4.815,2.703)(5.17,2.152)(5.483,1.
+                577)(5.723,1.018)(5.872,0.5022)(5.938,0.02083)(5.93,-0.4363)(5.861,-0.
+                88)(5.741,-1.319)(5.58,-1.742)(5.389,-2.128)(5.179,-2.456)(4.96,-2.
+                705)(4.737,-2.865)(4.502,-2.953)(4.243,-2.991)(3.95,-3.)(3.614,-2.999)
+                (3.244,-2.984)(2.86,-2.935)(2.484,-2.829)(2.137,-2.646)(1.832,-2.378)(
+                1.558,-2.06)(1.299,-1.734)(1.039,-1.443)(0.7641,-1.222)(0.4857,-0.
+                9779)(0.2407,-0.5015)(0.06639,0.4201)(0,2.)};
+
+                \draw [thick,firstcolor] (3,4) -- (4,-3);
+
+                \draw (2,1) node {$R_1$};
+                \draw (5,.5) node {$R_2$};
+                \draw (1,-2) node {$R$};
+
+                \end{tikzpicture}
+
+                </latex-image>
+              </image>
+              <!-- figures/fig_double_region.tex END -->
+            </figure>
           </li>
         </ol>
       </p>
     </statement>
   </theorem>
 
-  <figure xml:id="fig_double_region">
-    <caption><m>R</m> is the union of two nonoverlapping regions, <m>R_1</m> and <m>R_2</m>.</caption>
-    <!-- START figures/fig_double_region.tex -->
-    <image xml:id="img_double_region" width="47%">
-      <description></description>
-      <latex-image>
-
-      \begin{tikzpicture}
-
-      \draw [firstcolor,thick,fill=firstcolor!15,smooth] plot coordinates {(0,2.)(0.06639,2.527)(0.2407,2.839)(0.4857,3.009)(0.7641,3.112)(1.039,
-      3.221)(1.294,3.367)(1.532,3.53)(1.759,3.689)(1.98,3.823)(2.2,3.915)(2.
-      42,3.967)(2.64,3.992)(2.86,4.)(3.08,4.)(3.305,3.987)(3.543,3.93)(3.
-      808,3.797)(4.107,3.558)(4.45,3.185)(4.815,2.703)(5.17,2.152)(5.483,1.
-      577)(5.723,1.018)(5.872,0.5022)(5.938,0.02083)(5.93,-0.4363)(5.861,-0.
-      88)(5.741,-1.319)(5.58,-1.742)(5.389,-2.128)(5.179,-2.456)(4.96,-2.
-      705)(4.737,-2.865)(4.502,-2.953)(4.243,-2.991)(3.95,-3.)(3.614,-2.999)
-      (3.244,-2.984)(2.86,-2.935)(2.484,-2.829)(2.137,-2.646)(1.832,-2.378)(
-      1.558,-2.06)(1.299,-1.734)(1.039,-1.443)(0.7641,-1.222)(0.4857,-0.
-      9779)(0.2407,-0.5015)(0.06639,0.4201)(0,2.)};
-
-      \draw [thick,firstcolor] (3,4) -- (4,-3);
-
-      \draw (2,1) node {$R_1$};
-      \draw (5,.5) node {$R_2$};
-      \draw (1,-2) node {$R$};
-
-      \end{tikzpicture}
-
-      </latex-image>
-    </image>
-    <!-- figures/fig_double_region.tex END -->
-  </figure>
+  <!-- <figure xml:id="vid-multint-double-general-region">
+    <caption>Evaluating a double integral over a more general region</caption>
+    <video youtube="FcxnuFSNOfY"/>
+  </figure> -->
 
   <example xml:id="ex_double3">
     <title>Evaluating a double integral</title>
@@ -1027,7 +1051,7 @@
       </p>
 
       <figure xml:id="fig_double3">
-        <caption>Finding the signed volume under a surface in <xref ref="ex_double3">Example</xref>.</caption>
+        <caption>Finding the signed volume under a surface in <xref ref="ex_double3">Example</xref></caption>
         <!--
           \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
         3Droll=0.,
@@ -1146,7 +1170,7 @@
         This gives us:
         <md>
           <mrow>\iint_R f(x,y)\, dA \amp = \int_0^1\int_{y-1}^{1-y}\sin(x) \cos(y) \, dx\, dy</mrow>
-          <mrow>\amp = \int_0^1\left.\Big( -\cos(x) \cos(y) \Big)\right|_{y-1}^{1-y}dy</mrow>
+          <mrow>\amp = \int_0^1\left.\Big( -\cos(x) \cos(y) \Big)\right|_{y-1}^{1-y}\,dy</mrow>
           <mrow>\amp = \int_0^1 \cos(y) \Big(-\cos(1-y) + \cos(y-1)\Big)dy</mrow>
         </md>.
       </p>
@@ -1172,6 +1196,10 @@
     </solution>
   </example>
 
+  <!-- <figure xml:id="vid-multint-double-tetrahedron-volume">
+    <caption>Finding the volume of a tetrahedron</caption>
+    <video youtube="m_8kBmNVxEM"/>
+  </figure> -->
   <example xml:id="ex_double4">
     <title>Evaluating a double integral</title>
     <statement>
@@ -1182,7 +1210,7 @@
       </p>
 
       <figure xml:id="fig_double4">
-        <caption>Finding the volume under the surface in <xref ref="ex_double4">Example</xref>.</caption>
+        <caption>Finding the volume under the surface in <xref ref="ex_double4">Example</xref></caption>
         <!--
           \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
         3Droll=0,
@@ -1315,11 +1343,15 @@
       <p>
         Thus we have the following <q>curve to curve,
         point to point</q> bounds:
-        <m>y^2/4\leq x\leq 2\sqrt y</m>, and <m>0\leq y\leq 4</m>.
+        <me>
+          y^2/4\leq x\leq 2\sqrt y, \text{ and } 0\leq y\leq 4
+        </me>.
+        Therefore,
         <md>
           <mrow>\iint_R (4-y)\, dA \amp = \int_0^4\int_{y^2/4}^{2\sqrt{y}}(4-y)\, dx\, dy</mrow>
           <mrow>\amp = \int_0^4 \big(x(4-y)\big)\Big|_{y^2/4}^{2\sqrt{y}} dy</mrow>
-          <mrow>\amp = \int_0^4 \Big(\big(2\sqrt{y}-\frac{y^2}{4}\big)\big(4-y)\Big)\, dy = \int_0^4 \Big( \frac{y^3}{4}-y^2-2y^{3/2}+8y^{1/2}\Big)\, dy</mrow>
+          <mrow>\amp = \int_0^4 \Big(\big(2\sqrt{y}-\frac{y^2}{4}\big)\big(4-y)\Big)\, dy</mrow>
+          <mrow>\amp = \int_0^4 \Big( \frac{y^3}{4}-y^2-2y^{3/2}+8y^{1/2}\Big)\, dy</mrow>
           <mrow>\amp = \left.\left(\frac{y^4}{16}-\frac{y^3}{3}-\frac{4y^{5/2}}5+\frac{16y^{3/2}}3\right)\right|_0^4</mrow>
           <mrow>\amp = \frac{176}{15} = 11.7\overline{3}</mrow>
         </md>.
@@ -1331,6 +1363,10 @@
     </solution>
   </example>
 
+  <!-- <figure xml:id="vid-multint-double-general-example">
+    <caption>Evaluating a double integral over a general region</caption>
+    <video youtube="a4XiokkzyrU"/>
+  </figure> -->
   <p>
     In the previous section we practiced changing the order of integration of a given iterated integral,
     where the region <m>R</m> was not explicitly given.
@@ -1359,7 +1395,7 @@
       </p>
 
       <figure xml:id="fig_double6">
-        <caption>Determining the region <m>R</m> determined by the bounds of integration in <xref ref="ex_double6">Example</xref>.</caption>
+        <caption>Determining the region <m>R</m> determined by the bounds of integration in <xref ref="ex_double6">Example</xref></caption>
         <!-- START figures/fig_double6.tex -->
         <image xml:id="img_double6" width="47%">
           <description></description>
@@ -1437,7 +1473,7 @@
       </p>
 
       <figure xml:id="fig_double6b">
-        <caption>Showing the surface <m>f</m> defined in <xref ref="ex_double6">Example</xref> over its region <m>R</m>.</caption>
+        <caption>Showing the surface <m>f</m> defined in <xref ref="ex_double6">Example</xref> over its region <m>R</m></caption>
         <!--
           \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
         3Droll=0.,
@@ -1542,9 +1578,14 @@
     </solution>
   </example>
 
+  <!-- <figure xml:id="vid-multint-double-changing-order">
+    <caption>Two more examples of changing the order of integration</caption>
+    <video youtube="a4XiokkzyrU yvwwWML9PS4"/>
+  </figure> -->
+
   <p>
     <xref ref="def_av_val">Definition</xref>
-    defines the average value of a single<ndash/>variable function <m>f(x)</m> on the interval <m>[a,b]</m> as
+    defines the average value of a single-variable function <m>f(x)</m> on the interval <m>[a,b]</m> as
     <me>
       \text{ average value of \(f(x)\) on \([a,b]\) }  = \frac1{b-a}\int_a^b f(x)\, dx;
     </me>
@@ -1606,7 +1647,7 @@
       </p>
 
       <figure xml:id="fig_double8">
-        <caption>Finding the average value of <m>f</m> in <xref ref="ex_double8">Example</xref>.</caption>
+        <caption>Finding the average value of <m>f</m> in <xref ref="ex_double8">Example</xref></caption>
         <!--
           \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
         3Droll=0,
@@ -1735,7 +1776,7 @@
   </p>
 
   <figure xml:id="fig_double_summary">
-    <caption>Showing how an iterated integral used to find area also finds a certain volume.</caption>
+    <caption>Showing how an iterated integral used to find area also finds a certain volume</caption>
     <!--
       \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
     3Droll=0,
@@ -1860,11 +1901,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 An integral can be interpreted as giving the signed area over an interval;
@@ -1881,11 +1919,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 Explain why the following statement is false:
@@ -1904,11 +1939,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 Explain why if <m>f(x,y) \gt 0</m> over a region <m>R</m>, then
@@ -1931,11 +1963,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 If <m>\iint_R f(x,y)\, dA = \iint_R g(x,y)\, dA</m>,
@@ -1977,11 +2006,8 @@
 
       <exercise xml:id="x13_02_ex_05">
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds \int_1^2\int_{-1}^1\left(\frac xy+3\right)\, dx\, dy</m>
@@ -1995,10 +2021,9 @@
         <!--</webwork>-->
       </exercise>
 
+      <!--TODO: the WW vode below does NOT produce a good static version-->
       <exercise>
-        <webwork>
-            <setup>
-
+        <!-- <webwork>
 
             <pg-code>
                 Context()->variables->are(x=>"Real", dx=>"Real", y=>"Real", dy=>"Real");
@@ -2023,8 +2048,7 @@
                     }
                 );
                 $value=Compute("4");
-            </pg-code>
-            </setup>
+            </pg-code> -->
             <statement>
               <p>
                 <ol label="a">
@@ -2033,9 +2057,9 @@
                       Calculate <m>\ds \int_{-\pi/2}^{\pi/2}\int_{0}^\pi\left(\sin(x) \cos(y) \right)\,dx\,dy</m>
                     </p>
 
-                    <p>
+                    <!-- <p>
                       <var name="$value" width="10"/>
-                    </p>
+                    </p> -->
                   </li>
 
                   <li>
@@ -2043,7 +2067,7 @@
                       Rewrite the integral using the other order of integration.
                     </p>
 
-                    <tabular>
+                    <!-- <tabular>
                       <row>
                         <cell><var name="$multians" width="1"/></cell>
                         <cell><var name="$multians" width="1"/></cell>
@@ -2057,22 +2081,19 @@
                         <cell><var name="$multians" width="1"/></cell>
                         <cell><var name="$multians" width="1"/></cell>
                       </row>
-                    </tabular>
+                    </tabular> -->
 
                   </li>
                 </ol>
               </p>
             </statement>
-        </webwork>
+        <!-- </webwork> -->
       </exercise>
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds \int_{0}^{4}\int_{0}^{-x/2+2}\left(3x^2-y+2\right)\, dy\, dx</m>
@@ -2087,9 +2108,7 @@
       </exercise>
 
       <exercise xml:id="x13_02_ex_08">
-        <webwork>
-            <setup>
-
+        <!-- <webwork>
 
             <pg-code>
                 Context()->variables->are(x=>"Real", dx=>"Real", y=>"Real", dy=>"Real");
@@ -2114,8 +2133,7 @@
                     }
                 );
                 $value=Formula("76/15");
-            </pg-code>
-            </setup>
+            </pg-code> -->
             <statement>
               <p>
                 <ol label="a">
@@ -2124,16 +2142,16 @@
                       Calculate <m>\ds \int_{1}^{3}\int_{y}^{3}\left(x^2y-xy^2\right)\,dx\,dy</m>
                     </p>
 
-                    <p>
+                    <!-- <p>
                       <var name="$value" width="10"/>
-                    </p>
+                    </p> -->
                   </li>
 
                   <li>
                     <p>
                       Rewrite the integral using the other order of integration.
                     </p>
-
+<!--
                     <tabular>
                       <row>
                         <cell><var name="$multians" width="1"/></cell>
@@ -2148,22 +2166,19 @@
                         <cell><var name="$multians" width="1"/></cell>
                         <cell><var name="$multians" width="1"/></cell>
                       </row>
-                    </tabular>
+                    </tabular> -->
 
                   </li>
                 </ol>
               </p>
             </statement>
-        </webwork>
+        <!-- </webwork> -->
       </exercise>
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds \int_{0}^{1}\int_{-\sqrt{1-y}}^{\sqrt{1-y}}\left(x+y+2\right)\, dx\, dy</m>
@@ -2178,9 +2193,7 @@
       </exercise>
 
       <exercise>
-        <webwork>
-            <setup>
-
+        <!-- <webwork>
 
             <pg-code>
                 Context()->variables->are(x=>"Real", dx=>"Real", y=>"Real", dy=>"Real");
@@ -2205,8 +2218,7 @@
                     }
                 );
                 $value=Formula("6561/40");
-            </pg-code>
-            </setup>
+            </pg-code> -->
             <statement>
               <p>
                 <ol label="a">
@@ -2215,9 +2227,9 @@
                       Calculate <m>\ds \int_{0}^{9}\int_{y/3}^{\sqrt{y}}\left(xy^2\right)\,dx\,dy</m>
                     </p>
 
-                    <p>
+                    <!-- <p>
                       <var name="$value" width="10"/>
-                    </p>
+                    </p> -->
                   </li>
 
                   <li>
@@ -2225,7 +2237,7 @@
                       Rewrite the integral using the other order of integration.
                     </p>
 
-                    <tabular>
+                    <!-- <tabular>
                       <row>
                         <cell><var name="$multians" width="1"/></cell>
                         <cell><var name="$multians" width="1"/></cell>
@@ -2239,13 +2251,13 @@
                         <cell><var name="$multians" width="1"/></cell>
                         <cell><var name="$multians" width="1"/></cell>
                       </row>
-                    </tabular>
+                    </tabular> -->
 
                   </li>
                 </ol>
               </p>
             </statement>
-        </webwork>
+        <!-- </webwork> -->
       </exercise>
 
     </exercisegroup>
@@ -2281,11 +2293,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds \iint_R x^2y\, dA</m>,
@@ -2346,11 +2355,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds \iint_R x^2y\, dA</m>,
@@ -2414,11 +2420,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds \iint_R x^2-y^2\, dA</m>,
@@ -2480,11 +2483,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds \iint_R ye^x\, dA</m>,
@@ -2547,11 +2547,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds \iint_R \big(6-3x-2y\big)\, dA</m>,
@@ -2614,11 +2611,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds \iint_R e^y\, dA</m>, where <m>R</m> is bounded by <m>y=\ln(x)</m> and
@@ -2684,11 +2678,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds \iint_R \big(x^3y-x\big)\, dA</m>,
@@ -2749,11 +2740,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds \iint_R \big(4-3y\big)\, dA</m>,
@@ -2834,11 +2822,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds \int_0^4\int_{y/2}^2 e^{x^2}\, dx\, dy</m>
@@ -2855,11 +2840,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds \int_0^{\sqrt{\pi/2}}\int_{x}^{\sqrt{\pi/2}} \cos\big(y^2\big)\, dy\, dx</m>
@@ -2876,11 +2858,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds \int_0^{1}\int_y^{1} \frac{2y}{x^2+y^2}\, dx\, dy</m>
@@ -2901,11 +2880,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds \int_{-1}^{1}\int_1^{2} \frac{x\tan^2(y) }{1+\ln(y) }\, dy\, dx</m>
@@ -2937,11 +2913,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds f(x,y) =\frac xy+3</m>;<m>R</m> is the rectangle with opposite corners <m>(-1,1)</m> and <m>(1,2)</m>.
@@ -2957,11 +2930,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds f(x,y) = \sin(x) \cos(y)</m>;
@@ -2979,11 +2949,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds f(x,y) = 3x^2-y+2</m>;<m>R</m> is bounded by the lines <m>y=0</m>,
@@ -3000,11 +2967,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds f(x,y) =x^2y-xy^2</m>;

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="sec_triple_int">
   <title>Volume Between Surfaces and Triple Integration</title>
-  <introduction>
+  <subsection>
+    <title>Volume between surfaces</title>
     <p>
       We learned in <xref ref="sec_double_int_volume">Section</xref>
       how to compute the signed volume <m>V</m> under a surface
@@ -42,7 +43,7 @@
         </p>
 
         <figure xml:id="fig_trip1">
-          <caption>Finding the volume between the planes given in <xref ref="ex_trip1">Example</xref>.</caption>
+          <caption>Finding the volume between the planes given in <xref ref="ex_trip1">Example</xref></caption>
           <sidebyside widths="47% 47%">
             <figure xml:id="fig_trip1a_3D">
               <caption/>
@@ -276,7 +277,7 @@
           <md>
             <mrow>V \amp = \iint_R \big(8-3x-2y-(3x+y-4)\big)\, dA</mrow>
             <mrow>\amp = \int_0^2\int_0^{4-2x} \big(12-6x-3y\big)\, dy\, dx</mrow>
-            <mrow>\amp = 16\text{u} ^3</mrow>
+            <mrow>\amp = 16\,\text{units}^3</mrow>
           </md>.
         </p>
 
@@ -316,7 +317,7 @@
     </p>
 
     <figure xml:id="fig_tripintro">
-      <caption>Approximating the volume of a region <m>D</m> in space.</caption>
+      <caption>Approximating the volume of a region <m>D</m> in space</caption>
       <sidebyside widths="47% 47%">
         <figure xml:id="fig_tripintroa_3D">
           <caption/>
@@ -590,6 +591,11 @@
       <m>\iint_R\, dA</m> and <m>\iint_R\, dm</m>.
     </p>
 
+    <!-- <figure xml:id="vid-multint-triple-intro">
+      <caption>Introducing the triple integral</caption>
+      <video youtube="EEWiIQfJktI"/>
+    </figure> -->
+
     <p>
       We now state the major theorem of this section.
     </p>
@@ -676,6 +682,11 @@
       including integrating with various orders of integration.
     </p>
 
+    <!-- <figure xml:id="vid-multint-triple-tetrahedron">
+      <caption>Finding the volume of a tetrahedron</caption>
+      <video youtube="lswNoU6cAmA"/>
+    </figure> -->
+
     <example xml:id="ex_trip2">
       <title>Finding the volume of a space region with triple integration</title>
       <statement>
@@ -685,6 +696,89 @@
           using the order of integration <m>dz\, dy\, dx</m>.
           Set up the triple integrals that give the volume in the other 5 orders of integration.
         </p>
+        <figure xml:id="fig_trip2a1_3D">
+          <caption>The region <m>D</m> used in <xref ref="ex_trip2">Example</xref></caption>
+          <!--
+          \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.004707579035311937,
+          3Dc2c=0.4086907207965851 0.6385185718536377 0.6521241664886475,
+          3Dcoo=3.675152540206909 -7.818903923034668 16.216196060180664,
+          3Droo=150.00000119319247,
+          3Dlights=Headlamp,add3Djscript=asylabels.js]
+          -->
+          <!-- START figures/figtrip2_3D.asy -->
+          <image xml:id="img_trip2a1_3D">
+            <description></description>
+            <asymptote>
+
+              import graph3;
+
+              //ASY file for figtrip23D.asy in Chapter 13
+
+              size(200,200,IgnoreAspect);
+              //currentprojection=perspective(7,2,1);
+              currentprojection=orthographic(7.2,10.1,6.5);
+              defaultrender.merge=true;
+
+              // setup and draw the axes
+              real[] myxchoice={2,4};
+              real[] myychoice={5};
+              real[] myzchoice={2};
+              defaultpen(0.5mm);
+
+              pair xbounds=(-0.5,5);
+              pair ybounds=(-0.5,7);
+              pair zbounds=(-0.5,3);
+
+              xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+              yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+              zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+              label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+              //triangle in space
+              draw((3,0,0)--(0,6,0)--(0,0,2)--cycle,blue+linewidth(1.5));
+
+              //shade
+              import three;
+              path3 p =  (3,0,0)--(0,6,0)--(0,0,2); //Left
+              draw(surface(p -- cycle), emissive(rgb(.6,.6,1)+opacity(0.7)));
+
+              // ////////////////////////////////////
+              //    SAMPLE CODE
+
+              // defaultpen(fontsize(10pt));
+
+              //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+              //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+              //pen p=rgb(0,0,.7);
+              //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+              //triple f(pair t) {
+              //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+              //}
+              //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+              //pen p=rgb(0,0,.7);
+              //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+
+              //draw(s,paleblue);
+              //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+              //draw(mypath,2bp+blue);
+
+              //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+              //path3 mypath=graph(g,-1,1,operator ..);
+              //draw(mypath,blue+dashed+linewidth(2));
+
+              //pen p=rgb(0,0,1);
+              //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+
+            </asymptote>
+          </image>
+        <!-- figures/figtrip2_3D.asy END -->
+        </figure>
       </statement>
       <solution>
         <p>
@@ -705,179 +799,89 @@
           Secondly, we know this is going to be a straight line between the points <m>(3,0)</m> and <m>(0,6)</m> in the <m>x</m>-<m>y</m> plane.)
         </p>
 
-        <figure xml:id="fig_trip2a">
-          <caption>The region <m>D</m> used in <xref ref="ex_trip2">Example</xref> in (a); in (b), the region found by collapsing <m>D</m> onto the <m>x</m>-<m>y</m> plane.</caption>
-          <sidebyside widths="47% 47%">
-            <figure xml:id="fig_trip2a1_3D">
-              <caption/>
-              <!--
-              \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
-              3Droll=0,
-              3Dortho=0.004707579035311937,
-              3Dc2c=0.4086907207965851 0.6385185718536377 0.6521241664886475,
-              3Dcoo=3.675152540206909 -7.818903923034668 16.216196060180664,
-              3Droo=150.00000119319247,
-              3Dlights=Headlamp,add3Djscript=asylabels.js]
-              -->
-              <!-- START figures/figtrip2_3D.asy -->
-              <image xml:id="img_trip2a1_3D">
-                <description></description>
-                <asymptote>
+        <figure xml:id="fig_trip2a2_3D">
+          <caption>The region found by collapsing <m>D</m> onto the <m>x</m>-<m>y</m> plane</caption>
+          <!--
+          \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
+          3Droll=0,
+          3Dortho=0.004707579035311937,
+          3Dc2c=0.4086907207965851 0.6385185718536377 0.6521241664886475,
+          3Dcoo=3.675152540206909 -7.818903923034668 16.216196060180664,
+          3Droo=150.00000119319247,
+          3Dlights=Headlamp,add3Djscript=asylabels.js]
+          -->
+          <!-- START figures/figtrip2b_3D.asy -->
+          <image xml:id="img_trip2a2_3D">
+            <description></description>
+            <asymptote>
 
-                  import graph3;
+              import graph3;
 
-                  //ASY file for figtrip23D.asy in Chapter 13
+              //ASY file for figtrip2b3D.asy in Chapter 13
 
-                  size(200,200,IgnoreAspect);
-                  //currentprojection=perspective(7,2,1);
-                  currentprojection=orthographic(7.2,10.1,6.5);
-                  defaultrender.merge=true;
+              size(200,200,IgnoreAspect);
+              //currentprojection=perspective(7,2,1);
+              currentprojection=orthographic(7.2,10.1,6.5);
+              defaultrender.merge=true;
 
-                  // setup and draw the axes
-                  real[] myxchoice={2,4};
-                  real[] myychoice={5};
-                  real[] myzchoice={2};
-                  defaultpen(0.5mm);
+              // setup and draw the axes
+              real[] myxchoice={2,4};
+              real[] myychoice={5};
+              real[] myzchoice={2};
+              defaultpen(0.5mm);
 
-                  pair xbounds=(-0.5,5);
-                  pair ybounds=(-0.5,7);
-                  pair zbounds=(-0.5,3);
+              pair xbounds=(-0.5,5);
+              pair ybounds=(-0.5,7);
+              pair zbounds=(-0.5,3);
 
-                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+              xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+              yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+              zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
 
-                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+              label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
 
-                  //triangle in space
-                  draw((3,0,0)--(0,6,0)--(0,0,2)--cycle,blue+linewidth(1.5));
+              //triangle in space
+              draw((3,0,0)--(0,6,0)--(0,0,0)--cycle,blue+linewidth(1.5));
 
-                  //shade
-                  import three;
-                  path3 p =  (3,0,0)--(0,6,0)--(0,0,2); //Left
-                  draw(surface(p -- cycle), emissive(rgb(.6,.6,1)+opacity(0.7)));
+              //shade
+              import three;
+              path3 p =  (3,0,0)--(0,6,0)--(0,0,0); //Left
+              draw(surface(p -- cycle), emissive(rgb(.6,.6,1)+opacity(0.7)));
+              label("$y=6-2x$",(2.5,3.5,0));
 
-                  // ////////////////////////////////////
-                  //    SAMPLE CODE
+              // ////////////////////////////////////
+              //    SAMPLE CODE
 
-                  // defaultpen(fontsize(10pt));
+              // defaultpen(fontsize(10pt));
 
-                  //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
-                  //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
-                  //pen p=rgb(0,0,.7);
-                  //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+              //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
+              //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
+              //pen p=rgb(0,0,.7);
+              //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
 
-                  //triple f(pair t) {
-                  //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
-                  //}
-                  //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
-                  //pen p=rgb(0,0,.7);
-                  //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+              //triple f(pair t) {
+              //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
+              //}
+              //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
+              //pen p=rgb(0,0,.7);
+              //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
 
-                  //draw(s,paleblue);
-                  //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
-                  //draw(mypath,2bp+blue);
+              //draw(s,paleblue);
+              //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
+              //draw(mypath,2bp+blue);
 
-                  //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
-                  //path3 mypath=graph(g,-1,1,operator ..);
-                  //draw(mypath,blue+dashed+linewidth(2));
+              //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
+              //path3 mypath=graph(g,-1,1,operator ..);
+              //draw(mypath,blue+dashed+linewidth(2));
 
-                  //pen p=rgb(0,0,1);
-                  //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
+              //pen p=rgb(0,0,1);
+              //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
 
-                </asymptote>
-              </image>
-            <!-- figures/figtrip2_3D.asy END -->
-            </figure>
-
-            <figure xml:id="fig_trip2a2_3D">
-              <caption/>
-              <!--
-              \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
-              3Droll=0,
-              3Dortho=0.004707579035311937,
-              3Dc2c=0.4086907207965851 0.6385185718536377 0.6521241664886475,
-              3Dcoo=3.675152540206909 -7.818903923034668 16.216196060180664,
-              3Droo=150.00000119319247,
-              3Dlights=Headlamp,add3Djscript=asylabels.js]
-              -->
-              <!-- START figures/figtrip2b_3D.asy -->
-              <image xml:id="img_trip2a2_3D">
-                <description></description>
-                <asymptote>
-
-                  import graph3;
-
-                  //ASY file for figtrip2b3D.asy in Chapter 13
-
-                  size(200,200,IgnoreAspect);
-                  //currentprojection=perspective(7,2,1);
-                  currentprojection=orthographic(7.2,10.1,6.5);
-                  defaultrender.merge=true;
-
-                  // setup and draw the axes
-                  real[] myxchoice={2,4};
-                  real[] myychoice={5};
-                  real[] myzchoice={2};
-                  defaultpen(0.5mm);
-
-                  pair xbounds=(-0.5,5);
-                  pair ybounds=(-0.5,7);
-                  pair zbounds=(-0.5,3);
-
-                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                  //triangle in space
-                  draw((3,0,0)--(0,6,0)--(0,0,0)--cycle,blue+linewidth(1.5));
-
-                  //shade
-                  import three;
-                  path3 p =  (3,0,0)--(0,6,0)--(0,0,0); //Left
-                  draw(surface(p -- cycle), emissive(rgb(.6,.6,1)+opacity(0.7)));
-                  label("$y=6-2x$",(2.5,3.5,0));
-
-                  // ////////////////////////////////////
-                  //    SAMPLE CODE
-
-                  // defaultpen(fontsize(10pt));
-
-                  //real f(pair z) {return -z.x^4+2*z.x^2-z.y^4+2*z.y^2;}
-                  //surface s=surface(f,(-1.5,-1.5),(1.5,1.5),Spline);
-                  //pen p=rgb(0,0,.7);
-                  //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
-
-                  //triple f(pair t) {
-                  //  return (cos(t.x)*1.5*cos(t.y),sin(t.x)*cos(t.y),sin(t.y));
-                  //}
-                  //surface s=surface(f,(0,0),(pi,2*pi),8,8,Spline);
-                  //pen p=rgb(0,0,.7);
-                  //draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
-
-                  //draw(s,paleblue);
-                  //draw(s,lightblue,meshpen=black+thick(),nolight,render(merge=true));
-                  //draw(mypath,2bp+blue);
-
-                  //triple g(real t) {return (t,t,-2*t^4+4*t^2);}
-                  //path3 mypath=graph(g,-1,1,operator ..);
-                  //draw(mypath,blue+dashed+linewidth(2));
-
-                  //pen p=rgb(0,0,1);
-                  //draw(s,paleblue+opacity(.5),meshpen=p,render(merge=true));
-
-                </asymptote>
-              </image>
-            <!-- figures/figtrip2b_3D.asy END -->
-            </figure>
-          </sidebyside>
-
+            </asymptote>
+          </image>
+        <!-- figures/figtrip2b_3D.asy END -->
         </figure>
 
         <p>
@@ -890,10 +894,9 @@
             <mrow>\amp = \int_0^3\int_0^{6-2x}\int_0^{2-\frac 13y-\frac 23x}\, dz\, dy\, dx</mrow>
             <mrow>\amp = \int_0^3\int_0^{6-2x}\left(\int_0^{2-\frac 13y-\frac 23x}\, dz\right)\, dy\, dx</mrow>
             <mrow>\amp =\int_0^3\int_0^{6-2x}z\Big|_0^{2-\frac 13y-\frac 23x}\, dy\, dx</mrow>
-            <mrow>\amp = \int_0^3\int_0^{6-2x}\left(2-\frac 13y-\frac 23x\right)\, dy\, dx.</mrow>
-            <intertext>From this step on, we are evaluating a double integral as done many times before. We skip these steps and give the final volume,</intertext>
-            <mrow>\amp = 6\text{u} ^3</mrow>
+            <mrow>\amp = \int_0^3\int_0^{6-2x}\left(2-\frac 13y-\frac 23x\right)\, dy\, dx</mrow>
           </md>.
+          From this step on, we are evaluating a double integral as done many times before. We skip these steps and give the final volume, <m>V=6</m>.
         </p>
 
         <p>
@@ -941,7 +944,7 @@
           Thus the triple integral giving volume is:
         </p>
 
-        <sidebyside widths="40% 10% 40%" valign="middle">
+        <sidebyside widths="40% 10% 40%" valign="middle" margins="0%">
           <p>
             <md>
               <mrow>0 \amp \leq x\leq 3-y/2-3z/2</mrow>
@@ -1148,7 +1151,7 @@
           Thus the volume is given by:
         </p>
 
-        <sidebyside widths="40% 10% 40%" valign="middle">
+        <sidebyside widths="40% 10% 40%" valign="middle" margins="0%">
           <p>
             <md>
               <mrow>0 \amp \leq x\leq 3-y/2-3z/2</mrow>
@@ -1190,7 +1193,7 @@
           Thus the triple integral giving volume is:
         </p>
 
-        <sidebyside widths="40% 10% 40%" valign="middle">
+        <sidebyside widths="40% 10% 40%" valign="middle" margins="0%">
           <p>
             <md>
               <mrow>0 \amp \leq y\leq 6-2x-3z</mrow>
@@ -1222,7 +1225,7 @@
           This leads to the triple integral:
         </p>
 
-        <sidebyside widths="40% 10% 40%" valign="middle">
+        <sidebyside widths="40% 10% 40%" valign="middle" margins="0%">
           <p>
             <md>
               <mrow>0 \amp \leq y\leq 6-2x-3z</mrow>
@@ -1276,17 +1279,8 @@
           shown dashed.
           Find the equations of the projections into the coordinate planes.
         </p>
-      </statement>
-      <solution>
-        <p>
-          The two surfaces are <m>z=3-x^2-y^2</m> and <m>z=2y</m>.
-          To find where they intersect,
-          it is natural to set them equal to each other: <m>3-x^2-y^2=2y</m>.
-          This is an implicit function of <m>x</m> and <m>y</m> that gives all points <m>(x,y)</m> in the <m>x</m>-<m>y</m> plane where the <m>z</m> values of the two surfaces are equal.
-        </p>
-
         <figure xml:id="fig_trip2bb">
-          <caption>Finding the projections of the curve of intersection in <xref ref="ex_trip2b">Example</xref>.</caption>
+          <caption>Finding the projections of the curve of intersection in <xref ref="ex_trip2b">Example</xref></caption>
           <sidebyside widths="47% 47%">
             <figure xml:id="fig_trip2bb1_3D">
               <caption/>
@@ -1497,6 +1491,14 @@
           </sidebyside>
 
         </figure>
+      </statement>
+      <solution>
+        <p>
+          The two surfaces are <m>z=3-x^2-y^2</m> and <m>z=2y</m>.
+          To find where they intersect,
+          it is natural to set them equal to each other: <m>3-x^2-y^2=2y</m>.
+          This is an implicit function of <m>x</m> and <m>y</m> that gives all points <m>(x,y)</m> in the <m>x</m>-<m>y</m> plane where the <m>z</m> values of the two surfaces are equal.
+        </p>
 
         <p>
           We can rewrite this implicit function by completing the square:
@@ -1545,6 +1547,11 @@
         </p>
       </solution>
     </example>
+
+    <!-- <figure xml:id="vid-multint-triple-changing-order">
+      <caption>Changing the order of integration in a triple integral</caption>
+      <video youtube="PA9fkl8bLaI"/>
+    </figure> -->
 
     <example xml:id="ex_trip3">
       <title>Finding the volume of a space region with triple integration</title>
@@ -1783,7 +1790,7 @@
           the bounds of integration and triple integral are as follows:
         </p>
 
-        <sidebyside widths="40% 10% 40%" valign="middle">
+        <sidebyside widths="40% 10% 40%" valign="middle" margins="0%">
           <p>
             <md>
               <mrow>0 \amp \leq z\leq -y</mrow>
@@ -1837,7 +1844,7 @@
           All together, we have:
         </p>
 
-        <sidebyside widths="40% 10% 40%" valign="middle">
+        <sidebyside widths="40% 10% 40%" valign="middle" margins="0%">
           <p>
             <md>
               <mrow>-\sqrt{1-x^2} \amp \leq y\leq -z</mrow>
@@ -2054,7 +2061,7 @@
           This gives:
         </p>
 
-        <sidebyside widths="40% 10% 40%" valign="middle">
+        <sidebyside widths="40% 10% 40%" valign="middle" margins="0%">
           <p>
             <md>
               <mrow>-\sqrt{1-y^2} \amp \leq x\leq \sqrt{1-y^2}</mrow>
@@ -2414,6 +2421,10 @@
         <sbsgroup>
           <sidebyside widths="18% 33% 33%" valign="middle">
             <p>
+
+            </p>
+
+            <p>
               <md>
                 <mrow>0 \amp \leq z\leq 1-x/2</mrow>
                 <mrow> y/2 \amp \leq x\leq 2</mrow>
@@ -2623,23 +2634,57 @@
 
         <p>
           <m>dy\, dx\, dz</m>:
-          <me>
-            \begin{array}{cc} \begin{array}{c} 0\leq y\leq 4-4z\\ 0\leq x\leq 2-2z\\ 0\leq z\leq 1 \end{array} \amp \ds \Rightarrow \int_0^1\int_{0}^{2-2z}\int_0^{4-4z}\, dy\, dx\, dz \end{array}
-          </me>
         </p>
+
+        <sidebyside widths="40% 10% 40%" valign="middle" margins="0%">
+          <p>
+            <md>
+              <mrow>0 \amp \leq y\leq 4-4z</mrow>
+              <mrow>0 \amp \leq x\leq 2-2z</mrow>
+              <mrow>0 \amp \leq z\leq 1</mrow>
+            </md>
+          </p>
+
+          <p>
+            <m>\Rightarrow</m>
+          </p>
+
+          <p>
+            <me>
+              \int_0^1\int_{0}^{2-2z}\int_0^{4-4z}\, dy\, dx\, dz
+            </me>.
+          </p>
+        </sidebyside>
 
         <p>
           <m>dy\, dz\, dx</m>:
-          <me>
-            \begin{array}{cc} \begin{array}{c} 0\leq y\leq 4-4z\\ 0\leq z\leq 1-x/2\\ 0\leq x\leq 2 \end{array} \amp \ds \Rightarrow \int_0^2\int_{0}^{1-x/2}\int_0^{4-4z}\, dy\, dx\, dz \end{array}
-          </me>
         </p>
+
+        <sidebyside widths="40% 10% 40%" valign="middle" margins="0%">
+          <p>
+            <md>
+              <mrow>0 \amp \leq y\leq 4-4z</mrow>
+              <mrow>0 \amp \leq z\leq 1-x/2</mrow>
+              <mrow>0 \amp \leq x\leq 2</mrow>
+            </md>
+          </p>
+
+          <p>
+            <m>\Rightarrow</m>
+          </p>
+
+          <p>
+            <me>
+              \int_0^2\int_{0}^{1-x/2}\int_0^{4-4z}\, dy\, dx\, dz
+            </me>.
+          </p>
+        </sidebyside>
 
         <p>
           <m>dx\, dy\, dz</m>:
         </p>
 
-        <sidebyside widths="40% 10% 40%" valign="middle">
+        <sidebyside widths="40% 10% 40%" valign="middle" margins="0%">
           <p>
             <md>
               <mrow>0 \amp \leq x\leq 2-2z</mrow>
@@ -2663,7 +2708,7 @@
           <m>dx\, dz\, dy</m>:
         </p>
 
-        <sidebyside widths="40% 10% 40%" valign="middle">
+        <sidebyside widths="40% 10% 40%" valign="middle" margins="0%">
           <p>
             <md>
               <mrow>0 \amp \leq x\leq 2-2z</mrow>
@@ -3021,7 +3066,7 @@
           Thus we find volume as
         </p>
 
-        <sidebyside widths="40% 10% 40%" valign="middle">
+        <sidebyside widths="40% 10% 40%" valign="middle" margins="0%">
           <p>
             <md>
               <mrow>2x^2+2 \amp \leq z\leq 6-2x^2-y^2</mrow>
@@ -3067,7 +3112,7 @@
           Thus we have:
         </p>
 
-        <sidebyside widths="40% 10% 40%" valign="middle">
+        <sidebyside widths="40% 10% 40%" valign="middle" margins="0%">
           <p>
             <md>
               <mrow>-\sqrt{6-2x^2-z} \amp \leq y\leq \sqrt{6-2x^2-z}</mrow>
@@ -3355,11 +3400,10 @@
       and 2) because sometimes we <q>have</q>
       to use a less desirable order of integration in order to actually integrate.
     </p>
+  </subsection>
 
-    <p>
-      <em> Triple Integration and Functions of Three Variables</em>
-    </p>
-
+  <subsection>
+    <title>Triple Integration and Functions of Three Variables</title>
     <p>
       There are uses for triple integration beyond merely finding volume,
       just as there are uses for integration beyond
@@ -3525,8 +3569,9 @@
       </statement>
     </theorem>
 
+    <!-- TODO: a knowl containing an aside does not look good. Is there a better way to reference this? -->
     <p>
-      <em>Note:</em> In an <xref ref="note_doubleint">aside</xref> in <xref ref="sec_double_int_volume">Section</xref>,
+      <em>Note:</em> In an <!--<xref ref="note_doubleint" text="custom">-->aside<!--</xref>--> in <xref ref="sec_double_int_volume">Section</xref>,
       we showed how the summation of rectangles over a region <m>R</m> in the plane could be viewed as a double sum,
       leading to the double integral.
       Likewise, we can view the sum
@@ -3560,7 +3605,7 @@
     <p>
       We now apply triple integration to find the centers of mass of solid objects.
     </p>
-  </introduction>
+  </subsection>
 
   <subsection>
     <title>Mass and Center of Mass</title>
@@ -3628,12 +3673,12 @@
         <p>
           Find the mass and center of mass of the solid represented by the space region bounded by the coordinate planes and <m>z=2-y/3-2x/3</m>,
           shown in <xref ref="fig_trip7_3D">Figure</xref>,
-          with constant density <m>\delta(x,y,z)=3</m>gm/cm<m>^3</m>.
+          with constant density <m>\delta(x,y,z)=3\,\text{g/cm}^3</m>.
           (Note: this space region was used in <xref ref="ex_trip2">Example</xref>.)
         </p>
 
         <figure xml:id="fig_trip7_3D">
-          <caption>Finding the center of mass of this solid in <xref ref="ex_trip7">Example</xref>.</caption>
+          <caption>Finding the center of mass of this solid in <xref ref="ex_trip7">Example</xref></caption>
           <!--
            \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
           3Droll=0,
@@ -3728,7 +3773,7 @@
             <mrow>M \amp = \iiint_D \delta(x,y,z)\, dV</mrow>
             <mrow>\amp = \int_0^3\int_0^{6-2x}\int_0^{2-y/3-2x/3} \big(3\big)\, dz\, dy\, dx</mrow>
             <mrow>\amp = 3\int_0^3\int_0^{6-2x}\int_0^{2-y/3-2x/3} \, dz\, dy\, dx</mrow>
-            <mrow>\amp = 3(6) = 18\text{ gm } </mrow>
+            <mrow>\amp = 3(6) = 18\,\text{g} </mrow>
           </md>.
         </p>
 
@@ -3780,7 +3825,7 @@
         </p>
 
         <figure xml:id="fig_trip8_3D">
-          <caption>Finding the center of mass of this solid in <xref ref="ex_trip8">Example</xref>.</caption>
+          <caption>Finding the center of mass of this solid in <xref ref="ex_trip8">Example</xref></caption>
           <!--
            \includemedia[width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
           3Droll=0,
@@ -3963,11 +4008,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 The strategy for establishing bounds for triple integrals is
@@ -3985,11 +4027,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 Give an informal interpretation of what
@@ -4006,11 +4045,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 Give two uses of triple integration.
@@ -4028,11 +4064,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 If an object has a constant density <m>\delta</m> and a volume <m>V</m>,
@@ -4062,11 +4095,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>f_1(x,y) = 8-x^2-y^2</m>, <m>f_2(x,y) = 2x+y</m>;
@@ -4086,12 +4116,10 @@
 
       <exercise>
         <webwork>
-            <setup>
-
             <pg-code>
                 $int=Compute("52");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 Evaluate the double integral that finds the volme between the surfaces
@@ -4109,11 +4137,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>f_1(x,y) = \sin(x) \cos(y)</m>,
@@ -4135,12 +4160,10 @@
 
       <exercise>
         <webwork>
-            <setup>
-
             <pg-code>
                 $int=Compute("3pi/2");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 Evaluate the double integral that finds the volme between the surfaces
@@ -4170,11 +4193,8 @@
 
       <exercise xml:id="x13_06_ex_07">
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>D</m> is bounded by the coordinate planes and
@@ -4324,11 +4344,8 @@
 
       <exercise xml:id="x13_06_ex_08">
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>D</m> is bounded by the planes <m>y=0</m>,
@@ -4482,11 +4499,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>D</m> is bounded by the planes <m>x=0</m>,
@@ -4641,11 +4655,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>D</m> is bounded by the planes <m>z=0</m>,
@@ -4788,11 +4799,8 @@
 
       <exercise xml:id="x13_06_ex_11">
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>D</m> is bounded by the planes <m>x=2</m>,
@@ -4933,11 +4941,8 @@
 
       <exercise xml:id="x13_06_ex_12">
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>D</m> is bounded by the plane <m>z=2y</m> and by <m>y=4-x^2</m>.
@@ -5082,11 +5087,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>D</m> is bounded by the coordinate planes and by
@@ -5245,11 +5247,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>D</m> is bounded by the coordinate planes and by
@@ -5404,11 +5403,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds \int_{-\pi/2}^{\pi/2}\int_0^\pi\int_0^\pi\big(\cos(x) \sin(y) \sin(z) \big)\, dz\, dy\, dx</m>
@@ -5419,12 +5415,10 @@
 
       <exercise>
         <webwork>
-            <setup>
-
             <pg-code>
                 $int=Compute("7/8");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 Evaluate <m>\ds \int_{0}^{1}\int_0^x\int_0^{x+y}(x+y+z)\,dz\,dy\,dx</m>.
@@ -5439,11 +5433,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>\ds \int_{0}^{\pi}\int_{0}^{1}\int_{0}^{z}\big(\sin(yz)\big)\, dx\, dy\, dz</m>
@@ -5459,12 +5450,10 @@
 
       <exercise>
         <webwork>
-            <setup>
-
             <pg-code>
                 $int=Compute("0");
             </pg-code>
-            </setup>
+
             <statement>
               <p>
                 Evaluate <m>\ds \int_{\pi}^{\pi^2}\int_{x}^{x^3}\int_{-y^2}^{y^2}\left(z\frac{x^2y+y^2x}{e^{x^2+y^2}}\right)\,dz\,dy\,dx</m>.
@@ -5489,18 +5478,15 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>D</m> is bounded by the coordinate planes and
               </p>
 
               <p>
-                <m>z=2-2x/3-2y</m>; <m>\delta(x,y,z) = 10</m>gm/cm<m>^3</m>.
+                <m>z=2-2x/3-2y</m>; <m>\delta(x,y,z) = 10\,\text{g/cm}^3</m>.
               </p>
 
               <p>
@@ -5522,11 +5508,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>D</m> is bounded by the planes <m>y=0</m>,
@@ -5534,7 +5517,7 @@
               </p>
 
               <p>
-                <m>z=(3-x)/2</m>; <m>\delta(x,y,z) = 2</m>gm/cm<m>^3</m>.
+                <m>z=(3-x)/2</m>; <m>\delta(x,y,z) = 2\,\text{g/cm}^3</m>.
               </p>
 
               <p>
@@ -5556,11 +5539,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>D</m> is bounded by the planes <m>x=2</m>,
@@ -5590,11 +5570,8 @@
 
       <exercise>
         <!--<webwork>
-            <setup>
-
             <pg-code>
-            </pg-code>
-            </setup>-->
+            </pg-code> -->
             <statement>
               <p>
                 <m>D</m> is bounded by the plane <m>z=2y</m> and by <m>y=4-x^2</m>.
