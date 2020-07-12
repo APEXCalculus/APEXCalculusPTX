@@ -7,7 +7,10 @@
       <q>area under a curve.</q> In this section,
       we learn to do this (again), but in a different context.
     </p>
+  </introduction>
 
+  <subsection xml:id="subsec-line-int-scalar">
+    <title>Line Integrals of Functions</title>
     <p>
       Consider the surface and curve shown in <xref ref="fig_line_integral_intro1a_3D">Figure</xref>.
       The surface is given by <m>f(x,y)=1-\cos(x)\sin(y)</m>.
@@ -32,7 +35,7 @@
 
     <figure xml:id="fig_line_integral_intro1">
       <caption>Finding area under a curve in space.</caption>
-      <sidebyside>
+      <sidebyside widths="33% 33% 33%">
         <figure xml:id="fig_line_integral_intro1a_3D">
           <caption/>
           <!-- \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
@@ -366,11 +369,11 @@
       we can say that <m>f</m> is a function of <m>s</m>.
       Given a value <m>s</m>, we can compute <m>f(s)</m> and find a height.
       Thus
-      <md>
-        <mrow>\text{ area under \(f\) and above \(C\) } \amp \approx \sum (\text{ heights } \times\text{ widths } );</mrow>
-        <mrow>\text{ area under \(f\) and above \(C\) }               \amp =\lim_{||\Delta s||\to0}\sum f(c_i)\Delta s_i</mrow>
-        <mrow>\amp =\int_Cf(s)\, ds</mrow>
-      </md>.
+      <mdn>
+        <mrow number="no">\text{ area under \(f\) and above \(C\) } \amp \approx \sum (\text{ heights } \times\text{ widths } );</mrow>
+        <mrow number="no">\text{ area under \(f\) and above \(C\) }               \amp =\lim_{\norm{\Delta s}\to0}\sum f(c_i)\Delta s_i</mrow>
+        <mrow xml:id="eq_line0">\amp =\int_Cf(s)\, ds</mrow>
+      </mdn>.
     </p>
 
     <p>
@@ -405,12 +408,12 @@
           and let <m>f</m> be a continuous function of <m>s</m>.
           A <term>line integral</term> is an integral of the form
           <me>
-            \int_C f(s)\, ds = \lim_{||\Delta s||\to 0}\sum_{i=1}^n f(c_i)\Delta s_i
+            \int_C f(s)\, ds = \lim_{\norm{\Delta s}\to 0}\sum_{i=1}^n f(c_i)\Delta s_i
           </me>,
           where <m>s_1\lt s_2\lt \ldots\lt s_n</m> is any partition of the <m>s</m>-interval over which <m>C</m> is defined,
           <m>c_i</m> is any value in the <m>i</m>th subinterval,
           <m>\Delta s_i</m> is the width of the <m>i</m>th subinterval,
-          and <m>||\Delta s||</m> is the length of the longest subinterval in the partition.
+          and <m>\norm{\Delta s}</m> is the length of the longest subinterval in the partition.
               <idx><h>line integral</h><h>over scalar field</h></idx>
         </p>
       </statement>
@@ -550,7 +553,7 @@
     </p>
 
     <example xml:id="ex_linescalarfield2">
-      <title>Evaluating a line integral: area under a surface over a curve.</title>
+      <title>Evaluating a line integral: area under a surface over a curve</title>
       <statement>
         <p>
           Find the area under the surface
@@ -558,28 +561,9 @@
           which is the segment of the line <m>y=2x+1</m> on <m>-1\leq x\leq 1</m>,
           as shown in <xref ref="fig_linescalarfield2">Figure</xref>.
         </p>
-      </statement>
-      <solution>
-        <p>
-          Our first step is to represent <m>C</m> with a vector<ndash/>valued function.
-          Since <m>C</m> is a simple line,
-          and we have a explicit relationship between <m>y</m> and <m>x</m> (namely,
-          that <m>y</m> is <m>2x+1</m>),
-          we can let <m>x = t</m>, <m>y = 2t+1</m>,
-          and write <m>\vrt = \langle t, 2t+1\rangle</m> for <m>-1\leq t\leq 1</m>.
-        </p>
-
-        <p>
-          We find the values of <m>f</m> over <m>C</m> as <m>f(x,y) = f(t,2t+1) = \cos(t)+\sin(2t+1) + 2</m>.
-          We also need <m>\norm{\vec r\,'(t)}</m>;
-          with <m>\vrp(t) = \langle 1,2\rangle</m>,
-          we have <m>\norm{\vrp(t)} = \sqrt{5}</m>.
-          Thus <m>ds = \sqrt{5}\, dt</m>.
-        </p>
-
         <figure xml:id="fig_linescalarfield2">
           <caption>Finding area under a curve in <xref ref="ex_linescalarfield2">Example</xref>.</caption>
-          <sidebyside>
+          <sidebyside widths="47% 47%">
             <figure xml:id="fig_linescalarfield2a_3D">
               <caption/>
               <!-- \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
@@ -759,6 +743,24 @@
           </sidebyside>
 
         </figure>
+      </statement>
+      <solution>
+        <p>
+          Our first step is to represent <m>C</m> with a vector<ndash/>valued function.
+          Since <m>C</m> is a simple line,
+          and we have a explicit relationship between <m>y</m> and <m>x</m> (namely,
+          that <m>y</m> is <m>2x+1</m>),
+          we can let <m>x = t</m>, <m>y = 2t+1</m>,
+          and write <m>\vrt = \langle t, 2t+1\rangle</m> for <m>-1\leq t\leq 1</m>.
+        </p>
+
+        <p>
+          We find the values of <m>f</m> over <m>C</m> as <m>f(x,y) = f(t,2t+1) = \cos(t)+\sin(2t+1) + 2</m>.
+          We also need <m>\norm{\vec r\,'(t)}</m>;
+          with <m>\vrp(t) = \langle 1,2\rangle</m>,
+          we have <m>\norm{\vrp(t)} = \sqrt{5}</m>.
+          Thus <m>ds = \sqrt{5}\, dt</m>.
+        </p>
 
         <p>
           The area we seek is
@@ -777,24 +779,15 @@
     </p>
 
     <example xml:id="ex_linescalarfield3">
-      <title>Evaluating a line integral: area under a surface over a curve.</title>
+      <title>Evaluating a line integral: area under a surface over a curve</title>
       <statement>
         <p>
           Find the area over the unit circle in the <m>x</m>-<m>y</m> plane and under the surface <m>f(x,y) = x^2-y^2+3</m>,
           shown in <xref ref="fig_linescalarfield3">Figure</xref>.
         </p>
-      </statement>
-      <solution>
-        <p>
-          The curve <m>C</m> is the unit circle,
-          which we will describe with the parametrization
-          <m>\vrt = \langle \cos t, \sin t\rangle</m> for <m>0\leq t\leq 2\pi</m>.
-          We find <m>\norm{\vrp(t)} = 1</m>, so <m>ds = 1 dt</m>.
-        </p>
-
         <figure xml:id="fig_linescalarfield3">
           <caption>Finding area under a curve in <xref ref="ex_linescalarfield3">Example</xref>.</caption>
-          <sidebyside>
+          <sidebyside widths="47% 47%">
             <figure xml:id="fig_linescalarfield3a_3D">
               <caption/>
               <!-- \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
@@ -973,6 +966,14 @@
           </sidebyside>
 
         </figure>
+      </statement>
+      <solution>
+        <p>
+          The curve <m>C</m> is the unit circle,
+          which we will describe with the parametrization
+          <m>\vrt = \langle \cos t, \sin t\rangle</m> for <m>0\leq t\leq 2\pi</m>.
+          We find <m>\norm{\vrp(t)} = 1</m>, so <m>ds = 1 dt</m>.
+        </p>
 
         <p>
           We find the values of <m>f</m> over <m>C</m> as <m>f(x,y) = f(\cos t, \sin t) = \cos^2t-\sin^2t+3</m>.
@@ -997,7 +998,7 @@
     </p>
 
     <example xml:id="ex_linescalarfield5">
-      <title>Evaluating a line integral: area under a surface over a curve.</title>
+      <title>Evaluating a line integral: area under a surface over a curve</title>
       <statement>
         <p>
           Find the area under <m>f(x,y) = 1-\cos(x)\sin(y)</m> and over the parabola <m>y = x^2</m>,
@@ -1030,37 +1031,13 @@
     </p>
 
     <example xml:id="ex_linescalarfield4">
-      <title>Evaluating a line integral: area under a curve in space.</title>
+      <title>Evaluating a line integral: area under a curve in space</title>
       <statement>
         <p>
           Find the area above the <m>x</m>-<m>y</m> plane and below the helix parametrized by <m>\vrt = \langle \cos t,2\sin t,t/\pi\rangle</m>,
           for <m>0\leq t\leq 2\pi</m>,
           as shown in <xref ref="fig_linescalarfield4">Figure</xref>.
         </p>
-      </statement>
-      <solution>
-        <p>
-          Note how this is problem is different than the previous examples:
-          here, the height is not given by a surface, but by the curve itself.
-        </p>
-
-        <p>
-          We use the given vector-valued function \vec r(t)<nbsp/>to determine the curve <m>C</m> in the <m>x</m>-<m>y</m> plane by simply using the first two components of \vec r(t):
-          <m>\vec c(t) = \langle \cos t,2\sin t\rangle</m>.
-          Thus <m>ds = \norm{\vec c\,'(t)}\,dt = \sqrt{\sin^2t + 4\cos^2t}\,dt</m>.
-        </p>
-
-        <p>
-          The height is not found by evaluating a surface over <m>C</m>,
-          but rather it is given directly by the third component of \vec r(t):
-          <m>t/\pi</m>.
-          Thus
-          <me>
-            \oint_C f(s)\, ds = \int_0^{2\pi} \frac{t}{\pi}\sqrt{\sin^2t + 4\cos^2t}\,dt \approx 9.69
-          </me>,
-          where the approximation was obtained using numerical methods.
-        </p>
-
         <figure xml:id="fig_linescalarfield4">
           <caption>Finding area under a curve in <xref ref="ex_linescalarfield4">Example</xref>.</caption>
           <!-- \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
@@ -1070,7 +1047,7 @@
           3Dcoo=1.7807315587997437 0.9528753757476807 54.982017517089844,
           3Droo=141.8977232410902,
           3Dlights=Headlamp,add3Djscript=asylabels.js} -->
-          <image xml:id="img_linescalarfield4_3D">
+          <image xml:id="img_linescalarfield4_3D" width="47%">
             <description></description>
             <asymptote>
 
@@ -1147,6 +1124,29 @@
             </asymptote>
           </image>
         </figure>
+      </statement>
+      <solution>
+        <p>
+          Note how this is problem is different than the previous examples:
+          here, the height is not given by a surface, but by the curve itself.
+        </p>
+
+        <p>
+          We use the given vector-valued function \vec r(t)<nbsp/>to determine the curve <m>C</m> in the <m>x</m>-<m>y</m> plane by simply using the first two components of \vec r(t):
+          <m>\vec c(t) = \langle \cos t,2\sin t\rangle</m>.
+          Thus <m>ds = \norm{\vec c\,'(t)}\,dt = \sqrt{\sin^2t + 4\cos^2t}\,dt</m>.
+        </p>
+
+        <p>
+          The height is not found by evaluating a surface over <m>C</m>,
+          but rather it is given directly by the third component of \vec r(t):
+          <m>t/\pi</m>.
+          Thus
+          <me>
+            \oint_C f(s)\, ds = \int_0^{2\pi} \frac{t}{\pi}\sqrt{\sin^2t + 4\cos^2t}\,dt \approx 9.69
+          </me>,
+          where the approximation was obtained using numerical methods.
+        </p>
       </solution>
     </example>
 
@@ -1160,7 +1160,7 @@
       The figures show how the curve <m>C</m> defines another curve on the surface <m>z=f(x,y)</m>,
       and we are finding the area under that curve.
     </p>
-  </introduction>
+  </subsection>
 
   <subsection>
     <title>Properties of Line Integrals</title>
@@ -1182,7 +1182,7 @@
 
     <figure xml:id="fig_line_int_prop">
       <caption>Illustrating properties of line integrals.</caption>
-      <sidebyside>
+      <sidebyside widths="47% 47%">
         <figure xml:id="fig_line_int_propa">
           <caption/>
           <image xml:id="img_line_int_propa">
@@ -1384,7 +1384,7 @@
     </definition>
 
     <example xml:id="ex_linescalarfield6">
-      <title>Evaluating a line integral: calculating mass.</title>
+      <title>Evaluating a line integral: calculating mass</title>
       <statement>
         <p>
           A thin wire follows the path
@@ -1406,7 +1406,7 @@
           3Dcoo=85.21116638183594 55.206966400146484 50.90880584716797,
           3Droo=141.89772711774134,
           3Dlights=Headlamp,add3Djscript=asylabels.js} -->
-          <image xml:id="img_linescalarfield6">
+          <image xml:id="img_linescalarfield6" width="47%">
             <description></description>
             <asymptote>
 
