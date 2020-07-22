@@ -707,7 +707,7 @@
     <title>Tangent Planes</title>
     <p>
       Another way to interpret partial derivatives is in terms of the <em>tangent plane</em>.
-      Consider a graph <m>z=f(x,y)</m>, such as the one in <xref ref="fig_partialintro">Figure</xref>.
+      Consider the graph of a function <m>f(x,y)</m>, such as the one in <xref ref="fig_partialintro">Figure</xref>.
       Setting <m>x=a</m>, <m>y=b</m> defines a point <m>(a,b,f(a,b))</m> on the graph.
       Through the point <m>(a,b)</m>, we have the lines <m>x=a+s, y=b</m>, and <m>x=a, y=b+t</m>,
       parallel to the <m>x</m> and <m>y</m> axes, respectively (where <m>s,t</m> are parameters).
@@ -720,16 +720,25 @@
         <mrow>\vec{r}_2(t) \amp = \la a, b+t, f(a,b+t)\ra</mrow>
       </md>.
       Both vector-valued functions define space curves that lie on the surface <m>z=f(x,y)</m>,
-      and these curves intersect at the point <m>(a,b,f(a,b))</m>.
+      and these curves intersect at the point <m>(a,b,f(a,b))</m>, when <m>s=t=0</m>.
     </p>
 
     <p>
-      Notice that in <m>\vec{r}_1(s)</m>, we vary <m>x</m> while holding <m>y</m> constant.
-      Using <xref ref="def_partial_derivative">Definition</xref>, we see that
+      Now consider computing <m>\vec{r}_1'(s)</m>.
+      The first two components of this derivative are found in a straightforward manner:
+      they are <m>1</m> and <m>0</m>, respectively.
+      To find the third component of the derivative,
+      notice that in <m>\vec{r}_1(s)</m> we vary the <m>x</m>-component of <m>f</m> while holding the <m>y</m>-component constant.
+      Using the Chain Rule and <xref ref="def_partial_derivative">Definition</xref>,
+      we find that the third component is <m>f_x(a+s,b)</m>. Altogether, we have
+			<me>
+			\vec{r}_1'(s) = \la 1,0,f_x(a+s,b)\ra
+			</me>.
+			Evaluating this at <m>s=0</m> gives
       <me>
         \vec{v}=\vec{r}_1'(0) = \la 1,0,f_x(a,b)\ra
-      </me>,
-      and similarly,
+      </me>.
+      We can perform a similar process with <m>\vec{r}_2(t)</m>, ultimately leading to
       <me>
         \vec{w}=\vec{r}_2'(0) = \la 0,1,f_y(a,b)\ra
       </me>.
@@ -747,7 +756,7 @@
       We also know that taking the cross product of these two vectors gives us a normal vector:
       the cross product gives us
       <me>
-        \vec{n}=\vec{r}_1'(0)\times\vec{r}_2'(0)=\la -f_x(a,b), -f_y(a,b), 1\ra
+        \vec{n}=\vec{v}\times\vec{w}=\la -f_x(a,b), -f_y(a,b), 1\ra
       </me>.
     </p>
 
@@ -763,7 +772,7 @@
       <statement>
         <p>
           Let <m>f(x,y)</m> be a function whose first-order partial derivatives exist at <m>(a,b)</m>.
-          The <term>tangent plane</term> to the graph <m>z=f(x,y)</m> at the point <m>(a,b,f(a,b))</m> is the plane defined by the equation
+          The <term>tangent plane</term> to the surface <m>z=f(x,y)</m> at the point <m>(a,b,f(a,b))</m> is the plane defined by the equation
           <me>
             z = f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)
           </me>.
@@ -777,7 +786,7 @@
       <title>Finding a tangent plane equation</title>
       <statement>
         <p>
-          Find the equation of tangent plane to the surface <m>z=x^2+3y^2</m> when <m>(x,y)=(1,-1)</m>.
+          Find the equation of tangent plane to the surface <m>z=x^2+3y^2</m> at <m>(x,y)=(1,-1)</m>.
         </p>
       </statement>
       <solution>
@@ -785,7 +794,8 @@
           Our function is <m>f(x,y)=x^2+3y^2</m>, and we have <m>f(1,-1)=4</m>,
           so the point on the surface is <m>(1,-1,4)</m>.
           The partial derivatives are <m>f_x(x,y)=2x</m> and <m>f_y(x,y)=6y</m>,
-          so <m>f_x(1,-1)=2</m>, <m>f_y(1,-1)=-6</m>, and our plane is given by
+          so <m>f_x(1,-1)=2</m>, <m>f_y(1,-1)=-6</m>.
+          Using <xref ref="def-tangent-plane"/>, our plane is given by
           <me>
             z = 4+2(x-1)-6(y+1)
           </me>.
