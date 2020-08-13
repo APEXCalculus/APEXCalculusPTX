@@ -21,12 +21,12 @@
   <subsection xml:id="subsec-first-partial">
     <title>First-order partial derivatives</title>
     <p>
-      Consider the function <m>z=f(x,y) = x^2+2y^2</m>,
+      Consider the function <m>f(x,y) = x^2+2y^2</m>,
       as graphed in <xref ref="fig_partialintroa_3D">Figure</xref>.
       By fixing <m>y=2</m>,
       we focus our attention to all points on the surface where the <m>y</m>-value is 2, shown in both <xref ref="fig_partialintroa_3D">Figure</xref> and <xref ref="fig_partialintrob_3D">Figure</xref>.
-      These points form a curve in space:
-      <m>z = f(x,2) = x^2+8</m> which is a function of just one variable.
+      These points form a curve in the plane <m>y=2</m>:
+      <m>z = f(x,2) = x^2+8</m> which defines <m>z</m> as a function of just one variable.
       We can take the derivative of <m>z</m> with respect to <m>x</m> along this curve and find equations of tangent lines, etc.
     </p>
 
@@ -406,6 +406,11 @@
       </solution>
     </example>
 
+    <!-- <figure xml:id="vid-multi-partial-examples">
+      <caption>Additional partial derivative computation examples</caption>
+      <video youtube="R3PXGwjOmtw"/> -->
+    </figure>
+
     <p>
       We have shown <em>how</em> to compute a partial derivative,
       but it may still not be clear what a partial derivative <em>means</em>.
@@ -696,11 +701,105 @@
         </p>
       </solution>
     </example>
+  </subsection>
 
-    <!-- <figure xml:id="vid-multi-partial-examples">
-      <caption>Additional partial derivative computation examples</caption>
-      <video youtube="R3PXGwjOmtw"/>
-    </figure> -->
+  <subsection xml:id="subsec-tangent-plane">
+    <title>Tangent Planes</title>
+    <p>
+      Another way to interpret partial derivatives is in terms of the <em>tangent plane</em>.
+      Consider a graph <m>z=f(x,y)</m>, such as the one in <xref ref="fig_partialintro">Figure</xref>.
+      Setting <m>x=a</m>, <m>y=b</m> defines a point <m>(a,b,f(a,b))</m> on the graph.
+      Through the point <m>(a,b)</m>, we have the lines <m>x=a+s, y=b</m>, and <m>x=a, y=b+t</m>,
+      parallel to the <m>x</m> and <m>y</m> axes, respectively (where <m>s,t</m> are parameters).
+    </p>
+
+    <p>
+      Using the function <m>f(x,y)</m> we define two vector-valued functions:
+      <md>
+        <mrow>\vec{r}_1(s) \amp = \la a+s, b, f(a+s,b)\ra</mrow>
+        <mrow>\vec{r}_2(t) \amp = \la a, b+t, f(a,b+t)\ra</mrow>
+      </md>.
+      Both vector-valued functions define space curves that lie on the surface <m>z=f(x,y)</m>,
+      and these curves intersect at the point <m>(a,b,f(a,b))</m>.
+    </p>
+
+    <p>
+      Notice that in <m>\vec{r}_1(s)</m>, we vary <m>x</m> while holding <m>y</m> constant.
+      Using <xref ref="def_partial_derivative">Definition</xref>, we see that
+      <me>
+        \vec{v}=\vec{r}_1'(0) = \la 1,0,f_x(a,b)\ra
+      </me>,
+      and similarly,
+      <me>
+        \vec{w}=\vec{r}_2'(0) = \la 0,1,f_y(a,b)\ra
+      </me>.
+      From <xref ref="sec_vvf_calc">Section</xref>,
+      we know that <m>\vec{r}_1'(0)</m> defines a tangent vector to the curve <m>\vec{r}_1(s)</m> when <m>s=0</m>,
+      and similarly, <m>\vec{r}_2'(0)</m> defines a tangent vector to the curve <m>\vec{r}_2(t)</m> when <m>t=0</m>.
+    </p>
+
+    <p>
+      It seems reasonable that any vector that is tangent to these curves,
+      which lie on our surface, should also be considered tangent to that surface.
+      The vectors <m>\vec{v}</m> and <m>\vec{w}</m> are therefore tangent to <m>z=f(x,y)</m> at <m>(a,b,f(a,b))</m>,
+      and they are definitely not parallel.
+      From <xref ref="sec_planes">Section</xref> we know that any two non-parallel vectors at a point define a plane through that point.
+      We also know that taking the cross product of these two vectors gives us a normal vector:
+      the cross product gives us
+      <me>
+        \vec{n}=\vec{r}_1'(0)\times\vec{r}_2'(0)=\la -f_x(a,b), -f_y(a,b), 1\ra
+      </me>.
+    </p>
+
+    <p>
+      The equation of the plane through <m>(a,b,f(a,b))</m> with normal vector <m>\vec{n}=\la -f_x(a,b),-f_y(a,b),1\ra</m> is
+      <me>
+        -f_x(a,b)(x-a)-f_y(a,b)(y-b)+(z-f(a,b))=0
+      </me>.
+      It is customary to solve for <m>z</m> in this equation and make the following definition.
+    </p>
+
+    <definition xml:id="def-tangent-plane">
+      <statement>
+        <p>
+          Let <m>f(x,y)</m> be a function whose first-order partial derivatives exist at <m>(a,b)</m>.
+          The <term>tangent plane</term> to the graph <m>z=f(x,y)</m> at the point <m>(a,b,f(a,b))</m> is the plane defined by the equation
+          <me>
+            z = f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)
+          </me>.
+          <idx><h>tangent plane</h></idx>
+          <idx><h>tangent plane</h><h>to a graph</h></idx>
+        </p>
+      </statement>
+    </definition>
+
+    <example>
+      <title>Finding a tangent plane equation</title>
+      <statement>
+        <p>
+          Find the equation of tangent plane to the surface <m>z=x^2+3y^2</m> when <m>(x,y)=(1,-1)</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          Our function is <m>f(x,y)=x^2+3y^2</m>, and we have <m>f(1,-1)=4</m>,
+          so the point on the surface is <m>(1,-1,4)</m>.
+          The partial derivatives are <m>f_x(x,y)=2x</m> and <m>f_y(x,y)=6y</m>,
+          so <m>f_x(1,-1)=2</m>, <m>f_y(1,-1)=-6</m>, and our plane is given by
+          <me>
+            z = 4+2(x-1)-6(y+1)
+          </me>.
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      Notice the similarity between the tangent plane equation in <xref ref="def-tangent-plane"/>
+      and the single variable tangent line equation <m>y = f(c)+f'(c)(x-c)</m>.
+      As with functions of one variable, this suggests a connection between derivatives and linear approximation.
+      We explore this connection in <xref ref="sec_total_differential"/>,
+      where we'll see that <xref ref="def-tangent-plane"/> should be strengthed to require that the partial derivatives of <m>f</m> be <em>continuous</em>.
+    </p>
   </subsection>
 
   <subsection xml:id="subsec-second-partial">
@@ -1494,7 +1593,7 @@
             </pg-code> -->
             <statement>
               <p>
-                Given a function <m>z=f(x,y)</m>,
+                Given a function <m>f(x,y)</m>,
                 explain in your own words how to compute <m>f_x</m>.
               </p>
             </statement>
@@ -2308,7 +2407,7 @@
       <introduction>
         <p>
           In the following exercises,
-          form a function <m>z=f(x,y)</m> such that <m>f_x</m> and <m>f_y</m> match those given.
+          form a function <m>f(x,y)</m> such that <m>f_x</m> and <m>f_y</m> match those given.
         </p>
       </introduction>
 
