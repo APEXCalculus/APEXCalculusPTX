@@ -66,27 +66,6 @@
 
 
 
-<!-- #######-->
-<!-- Colors -->
-<!-- #######-->
-
-<!-- Selected from UPS maroon-compatibility chart  -->
-<!-- UPS Communications Office, 2019-10-04         -->
-<!-- Not every color may be in use, due to changes -->
-<!-- 2019-12-30, muted3 is free                    -->
-<xsl:template name="xcolor-style">
-    <xsl:text>\definecolor{maroon}{HTML}{660000}&#xa;</xsl:text>
-    <xsl:text>\definecolor{neutral1}{HTML}{d0ccbd}&#xa;</xsl:text>
-    <xsl:text>\definecolor{muted2}{HTML}{d0c681}&#xa;</xsl:text>
-    <xsl:text>\definecolor{muted3}{HTML}{b1a77d}&#xa;</xsl:text>
-    <xsl:text>\definecolor{muted4}{HTML}{93a396}&#xa;</xsl:text>
-    <xsl:text>\definecolor{muted5}{HTML}{a2bac2}&#xa;</xsl:text>
-    <xsl:text>\definecolor{bright4}{HTML}{b4bd00}&#xa;</xsl:text>
-    <xsl:text>\definecolor{bright5}{HTML}{6c712f}&#xa;</xsl:text>
-    <xsl:text>\definecolor{bright6}{HTML}{48848d}&#xa;</xsl:text>
-</xsl:template>
-
-
 <!-- ################# -->
 <!-- Division Headings -->
 <!-- ################# -->
