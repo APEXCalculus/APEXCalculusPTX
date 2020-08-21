@@ -318,27 +318,13 @@
 </xsl:template>
 
 
-<!-- decide on inclusion of videos -->
-<xsl:variable name="video-inclusion">
-    <xsl:choose>
-        <xsl:when test="$publication/html/video/@include = 'yes'">
-            <xsl:value-of select="$publication/html/video/@include"/>
-        </xsl:when>
-        <xsl:when test="$publication/html/video/@include = 'no'">
-            <xsl:value-of select="$publication/html/video/@include"/>
-        </xsl:when>
-        <!-- set, but not correct, so inform and use default -->
-        <xsl:when test="$publication/html/video/@include">
-            <xsl:value-of select="$publication/html/video/@include"/>
-            <xsl:message>PTX WARNING:   HTML video/@include in publisher file should be "yes" (include video) or "no" (omit video), not "<xsl:value-of select="$publication/html/video/@include"/>". Proceeding with default value: "yes" (include video)</xsl:message>
-            <xsl:text>yes</xsl:text>
-        </xsl:when>
-        <!-- unset, so use default -->
-        <xsl:otherwise>
-            <xsl:text>yes</xsl:text>
-        </xsl:otherwise>
-    </xsl:choose>
-</xsl:variable>
-
-<!-- <xsl:variable name="b-video-delete" select="$video-inclusion = 'no'"/> -->
+<!-- uncommenting these will omit videos -->
+    <xsl:template match="video[starts-with(@xml:id, 'vid')]" />
+    <!-- use next line if videos also omitted in html -->
+    <xsl:template match="figure[starts-with(@xml:id, 'vid')]" />
+    <!-- use this instead if videos included in html  **don't use both!!** -->
+    <!-- <xsl:template match="figure[starts-with(@xml:id, 'vid')]">
+      <xsl:text>\stepcounter{cthm}&#xa;&#xa;</xsl:text>
+    </xsl:template> -->
+    <xsl:template match="p[starts-with(@xml:id, 'vidint')]" />
 </xsl:stylesheet>
