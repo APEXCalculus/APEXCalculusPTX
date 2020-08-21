@@ -1,17 +1,10 @@
 <?xml version='1.0'?> <!-- As XML file -->
-<!-- This file is adapted from the book                                      -->
-<!--                                                                    -->
-<!--                 Sound Writing                                      -->
-<!--                                                                    -->
-<!-- Copyright (C) 2017-2019 by                                         -->
-<!-- Cody Chun, Kieran O'Neil, Kylie Young, Julie Nelson Christoph      -->
-<!--                                                                    -->
-<!-- Creative Commons Attribution-ShareAlike 4.0 International License  -->
-<!--                                                                    -->
-<!-- Source:  https://github.com/UPS-CWLT/soundwriting                  -->
-<!--                                                                    -->
 
-<!-- Edited by Sean Fitzpatrick, August 2020                            -->
+<!-- Created by Sean Fitzpatrick, August 2020                           -->
+<!-- Borrows liberally from the style file for Sound Writing  by        -->
+<!-- Cody Chun, Kieran O'Neil, Kylie Young, Julie Nelson Christoph.     -->
+<!-- With additional... err... inspiration from style files from        -->
+<!-- ORCCA, CLP, and the PreTeXt guide.                                 -->
 
 <!--NB: move this file from APEXCalculusPTX/style to mathbook/user !!!  -->
 
@@ -23,8 +16,7 @@
 <!-- Identify as a stylesheet -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 
-<!-- Place ups-writers-latex-styled.xsl file into  mathbook/user -->
-<!-- Assumes next file can be found in mathbook/user, so it must be copied there -->
+<!-- next line will fail if this file is not in mathbook/user -->
 <xsl:import href="../xsl/pretext-latex.xsl" />
 
 <xsl:output method="text" />
@@ -64,7 +56,7 @@
     <xsl:text>\newfontfamily{\ornamental}{Carlito-Regular}&#xa;</xsl:text>
 </xsl:template> -->
 
-
+<!-- the above additional font declarations didn't seem to work for Carlito -->
 
 <!-- ################# -->
 <!-- Division Headings -->
@@ -128,59 +120,11 @@
     <xsl:text>\titlespacing*{\subsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}&#xa;</xsl:text>
 </xsl:template>
 
-<!-- ############ -->
-<!-- Page Headers -->
-<!-- ############ -->
-
-<!-- Every page is "odd" in electronic version   -->
-<!-- so no optional arguments for "even" pages   -->
-<!-- Section (number)   (title)    (page-number) -->
-<!-- NB: The "plain" style is used for the first -->
-<!-- page of chapters, etc, so needs to have the -->
-<!-- number styled the same.                     -->
-<!-- NB: the \ifthechapter conditional stops a   -->
-<!-- "Chapter 0" appearing in the front matter   -->
-<!-- NB: titlesec (not titleps) provides         -->
-<!-- \chaptertitlename so that the LaTeX         -->
-<!-- \chaptername and \appendixname (which       -->
-<!-- we internationalize) are used in the        -->
-<!-- right places                                -->
-<!-- N.B. Does this match the default now w/ \pagefont? -->
-
-<!-- <xsl:template match="book" mode="titleps-style">
-    <xsl:text>%% Page style configuration for Sound Writing&#xa;</xsl:text>
-    <xsl:text>%% Supports one-sided and two-sided printing&#xa;</xsl:text>
-    <xsl:text>%%&#xa;</xsl:text>
-    <xsl:text>%% Ensure plain pages have the same font for page numbers&#xa;</xsl:text>
-    <xsl:text>\renewpagestyle{plain}{%&#xa;</xsl:text>
-    <xsl:text>\setfoot{}{\pagefont\thepage}{}%&#xa;</xsl:text>
-    <xsl:text>}%&#xa;</xsl:text>
-    <xsl:text>%% Page heading, generally&#xa;</xsl:text>
-    <xsl:text>\renewpagestyle{headings}{%&#xa;</xsl:text>
-    <xsl:text>\pagefont\headrule%&#xa;</xsl:text>
-    <xsl:text>\sethead%&#xa;</xsl:text>
-    <xsl:text>[\pagefont\thepage]%&#xa;</xsl:text>
-    <xsl:text>[{\pagefont\space\chaptertitle\space}]%&#xa;</xsl:text>
-    <xsl:text>[\ifthechapter{\pagefont Chapter \thechapter}{}]%&#xa;</xsl:text>
-    <xsl:text>{\ifthesection{\pagefont\thesection}{}}%&#xa;</xsl:text>
-    <xsl:text>{{\pagefont\space\ifthesection{\sectiontitle}{}\space}}%&#xa;</xsl:text>
-    <xsl:text>{\pagefont\thepage}%&#xa;</xsl:text>
-    <xsl:text>}%&#xa;</xsl:text>
-    <xsl:text>%% Set default document headings&#xa;</xsl:text>
-    <xsl:text>\pagestyle{headings}&#xa;</xsl:text>
-</xsl:template> -->
-
-
-<!-- ############## -->
-<!-- Styling Blocks -->
-<!-- ############## -->
-
+<!-- define tcolorboxes for theorem and friends -->
 
 <xsl:template match="list" mode="tcb-style">
     <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=blue!60!black!20, colframe=blue!30!black!50, colback=white!95!blue, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
-
-
 
 <xsl:template match="insight" mode="tcb-style">
     <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=red!60!black!20, colframe=red!30!black!50, colback=white!95!red, coltitle=black, titlerule=-0.3pt,</xsl:text>
@@ -194,19 +138,14 @@
     <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=green!60!black!20, colframe=green!30!black!50, colback=white!95!green, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
-<!-- "assemblage" -->
-<!-- Boxed title -->
 <xsl:template match="assemblage" mode="tcb-style">
     <xsl:text>enhanced, arc=2ex, colback=blue!5, colframe=blue!75!black,&#xa;</xsl:text>
     <xsl:text>colbacktitle=blue!20, coltitle=black, boxed title style={sharp corners, frame hidden},&#xa;</xsl:text>
     <xsl:text>fonttitle=\bfseries, attach boxed title to top left={xshift=4mm,yshift=-3mm}, top=3mm,&#xa;</xsl:text>
 </xsl:template>
 
-<!-- ASIDE-LIKE: "aside", "historical", "biographical" -->
-<!-- Square, drop shadow                               -->
 <xsl:template match="&ASIDE-LIKE;" mode="tcb-style">
-    <xsl:text>enhanced, sharp corners, colback=blue!3, colframe=blue!50!black,&#xa;</xsl:text>
-    <xsl:text>add to width=-1ex, shadow={1ex}{-1ex}{0ex}{black!50!white},&#xa;</xsl:text>
+    <xsl:text>enhanced, colback=blue!3, colframe=blue!50!black,&#xa;</xsl:text>
     <xsl:text>coltitle=black, fonttitle=\bfseries, attach title to upper, after title={\space},</xsl:text>
 </xsl:template>
 
@@ -230,4 +169,118 @@
     </xsl:text>
 </xsl:template>
 
+<!-- turn off hints, answers, and solutions for divisional exercises -->
+<xsl:param name="exercise.divisional.hint" select="'no'"/>
+<xsl:param name="exercise.divisional.answer" select="'no'"/>
+<xsl:param name="exercise.divisional.solution" select="'no'"/>
+
+<!-- print options -->
+<xsl:param name="latex.print" select="'no'"/>
+<xsl:param name="latex.pageref" select="'no'"/>
+<xsl:param name="latex.sides" select="'one'"/>
+<!-- ragged right text alignment for accessibility -->
+<xsl:param name="text.alignment" select="'raggedright'"/>
+
+<!-- use original APEX geometry definitions -->
+<xsl:param name="latex.geometry" select="'papersize={8.5in,11in},inner=1in,textheight=9in,textwidth=320pt,marginparwidth=150pt,marginparsep=32pt'"/>
+
+<!-- apply exercise geometry -->
+<xsl:template match="exercises|solutions[not(parent::backmatter)]|reading-questions|glossary|references|worksheet" mode="latex-division-heading">
+    <!-- Inspect parent (part through subsubsection)  -->
+    <!-- to determine one of two models of a division -->
+    <!-- NB: return values are 'true' and empty       -->
+    <xsl:variable name="is-structured">
+        <xsl:apply-templates select="parent::*" mode="is-structured-division"/>
+    </xsl:variable>
+    <xsl:variable name="b-is-structured" select="$is-structured = 'true'"/>
+
+    <xsl:if test="self::exercises">
+        <!-- \newgeometry includes a \clearpage -->
+        <xsl:apply-templates select="." mode="new-geometry"/>
+    </xsl:if>
+    <xsl:text>\begin{</xsl:text>
+    <xsl:apply-templates select="." mode="division-environment-name" />
+    <xsl:if test="not($b-is-structured)">
+        <xsl:text>-numberless</xsl:text>
+    </xsl:if>
+    <xsl:text>}</xsl:text>
+    <xsl:text>{</xsl:text>
+    <xsl:apply-templates select="." mode="title-full"/>
+    <xsl:text>}</xsl:text>
+    <xsl:text>{</xsl:text>
+    <!-- subtitle here -->
+    <xsl:text>}</xsl:text>
+    <xsl:text>{</xsl:text>
+    <xsl:apply-templates select="." mode="title-short"/>
+    <xsl:text>}</xsl:text>
+    <xsl:text>{</xsl:text>
+    <!-- author here -->
+    <xsl:text>}</xsl:text>
+    <xsl:text>{</xsl:text>
+    <!-- subtitle here -->
+    <xsl:text>}</xsl:text>
+    <xsl:text>{</xsl:text>
+    <xsl:apply-templates select="." mode="latex-id" />
+    <xsl:text>}</xsl:text>
+    <xsl:text>&#xa;</xsl:text>
+</xsl:template>
+
+
+<!-- define exercise geometry -->
+<xsl:template match="exercises" mode="new-geometry">
+    <xsl:text>\newgeometry{</xsl:text>
+    <xsl:text>inner=72pt</xsl:text>
+    <xsl:text>, outer=72pt</xsl:text>
+    <xsl:text>, textheight=9.25in</xsl:text>
+    <xsl:text>, tmargin=.75in</xsl:text>
+    <xsl:text>, marginparwidth=150pt</xsl:text>
+    <xsl:text>, marginparsep=32pt</xsl:text>
+    <xsl:text>}&#xa;</xsl:text>
+</xsl:template>
+
+<!-- restore geometry for next section -->
+
+
+<xsl:template match="exercises" mode="latex-division-footing">
+    <!-- Inspect parent (part through subsubsection)  -->
+    <!-- to determine one of two models of a division -->
+    <!-- NB: return values are 'true' and empty       -->
+    <xsl:variable name="is-structured">
+        <xsl:apply-templates select="parent::*" mode="is-structured-division"/>
+    </xsl:variable>
+    <xsl:variable name="b-is-structured" select="$is-structured = 'true'"/>
+
+    <xsl:text>\end{</xsl:text>
+    <xsl:apply-templates select="." mode="division-environment-name" />
+    <xsl:text>}&#xa;</xsl:text>
+    <xsl:if test="self::exercises">
+        <!-- \restoregeometry includes a \clearpage -->
+        <xsl:text>\restoregeometry&#xa;</xsl:text>
+    </xsl:if>
+</xsl:template>
+
+
+<!-- decide on inclusion of videos -->
+<xsl:variable name="video-inclusion">
+    <xsl:choose>
+        <xsl:when test="$publication/html/video/@include = 'yes'">
+            <xsl:value-of select="$publication/html/video/@include"/>
+        </xsl:when>
+        <xsl:when test="$publication/html/video/@include = 'no'">
+            <xsl:value-of select="$publication/html/video/@include"/>
+        </xsl:when>
+        <!-- set, but not correct, so inform and use default -->
+        <xsl:when test="$publication/html/video/@include">
+            <xsl:value-of select="$publication/html/video/@include"/>
+            <xsl:message>PTX WARNING:   HTML video/@include in publisher file should be "yes" (include video) or "no" (omit video), not "<xsl:value-of select="$publication/html/video/@include"/>". Proceeding with default value: "yes" (include video)</xsl:message>
+            <xsl:text>yes</xsl:text>
+        </xsl:when>
+        <!-- unset, so use default -->
+        <xsl:otherwise>
+            <xsl:text>yes</xsl:text>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:variable>
+
+<!-- <xsl:variable name="b-video-delete" select="$video-inclusion = 'no'"/> -->
 </xsl:stylesheet>

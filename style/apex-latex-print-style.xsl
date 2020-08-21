@@ -227,5 +227,118 @@
       },
     </xsl:text>
 </xsl:template>
+<!-- turn off hints, answers, and solutions for divisional exercises -->
+<xsl:param name="exercise.divisional.hint" select="'no'"/>
+<xsl:param name="exercise.divisional.answer" select="'no'"/>
+<xsl:param name="exercise.divisional.solution" select="'no'"/>
 
+<!-- print options -->
+<xsl:param name="latex.print" select="'yes'"/>
+<xsl:param name="latex.pageref" select="'yes'"/>
+<xsl:param name="latex.sides" select="'two'"/>
+<!-- ragged right text alignment for accessibility -->
+<xsl:param name="text.alignment" select="'raggedright'"/>
+
+<!-- use original APEX geometry definitions -->
+<xsl:param name="latex.geometry" select="'papersize={8.5in,11in},inner=1in,textheight=9in,textwidth=320pt,marginparwidth=150pt,marginparsep=32pt'"/>
+
+<!-- apply exercise geometry -->
+<xsl:template match="exercises|solutions[not(parent::backmatter)]|reading-questions|glossary|references|worksheet" mode="latex-division-heading">
+    <!-- Inspect parent (part through subsubsection)  -->
+    <!-- to determine one of two models of a division -->
+    <!-- NB: return values are 'true' and empty       -->
+    <xsl:variable name="is-structured">
+        <xsl:apply-templates select="parent::*" mode="is-structured-division"/>
+    </xsl:variable>
+    <xsl:variable name="b-is-structured" select="$is-structured = 'true'"/>
+
+    <xsl:if test="self::exercises">
+        <!-- \newgeometry includes a \clearpage -->
+        <xsl:apply-templates select="." mode="new-geometry"/>
+    </xsl:if>
+    <xsl:text>\begin{</xsl:text>
+    <xsl:apply-templates select="." mode="division-environment-name" />
+    <xsl:if test="not($b-is-structured)">
+        <xsl:text>-numberless</xsl:text>
+    </xsl:if>
+    <xsl:text>}</xsl:text>
+    <xsl:text>{</xsl:text>
+    <xsl:apply-templates select="." mode="title-full"/>
+    <xsl:text>}</xsl:text>
+    <xsl:text>{</xsl:text>
+    <!-- subtitle here -->
+    <xsl:text>}</xsl:text>
+    <xsl:text>{</xsl:text>
+    <xsl:apply-templates select="." mode="title-short"/>
+    <xsl:text>}</xsl:text>
+    <xsl:text>{</xsl:text>
+    <!-- author here -->
+    <xsl:text>}</xsl:text>
+    <xsl:text>{</xsl:text>
+    <!-- subtitle here -->
+    <xsl:text>}</xsl:text>
+    <xsl:text>{</xsl:text>
+    <xsl:apply-templates select="." mode="latex-id" />
+    <xsl:text>}</xsl:text>
+    <xsl:text>&#xa;</xsl:text>
+</xsl:template>
+
+
+<!-- define exercise geometry -->
+<xsl:template match="exercises" mode="new-geometry">
+    <xsl:text>\newgeometry{</xsl:text>
+    <xsl:text>inner=72pt</xsl:text>
+    <xsl:text>, outer=72pt</xsl:text>
+    <xsl:text>, textheight=9.25in</xsl:text>
+    <xsl:text>, tmargin=.75in</xsl:text>
+    <xsl:text>, marginparwidth=150pt</xsl:text>
+    <xsl:text>, marginparsep=32pt</xsl:text>
+    <xsl:text>}&#xa;</xsl:text>
+</xsl:template>
+
+<!-- restore geometry for next section -->
+
+
+<xsl:template match="exercises" mode="latex-division-footing">
+    <!-- Inspect parent (part through subsubsection)  -->
+    <!-- to determine one of two models of a division -->
+    <!-- NB: return values are 'true' and empty       -->
+    <xsl:variable name="is-structured">
+        <xsl:apply-templates select="parent::*" mode="is-structured-division"/>
+    </xsl:variable>
+    <xsl:variable name="b-is-structured" select="$is-structured = 'true'"/>
+
+    <xsl:text>\end{</xsl:text>
+    <xsl:apply-templates select="." mode="division-environment-name" />
+    <xsl:text>}&#xa;</xsl:text>
+    <xsl:if test="self::exercises">
+        <!-- \restoregeometry includes a \clearpage -->
+        <xsl:text>\restoregeometry&#xa;</xsl:text>
+    </xsl:if>
+</xsl:template>
+
+
+<!-- decide on inclusion of videos -->
+<xsl:variable name="video-inclusion">
+    <xsl:choose>
+        <xsl:when test="$publication/html/video/@include = 'yes'">
+            <xsl:value-of select="$publication/html/video/@include"/>
+        </xsl:when>
+        <xsl:when test="$publication/html/video/@include = 'no'">
+            <xsl:value-of select="$publication/html/video/@include"/>
+        </xsl:when>
+        <!-- set, but not correct, so inform and use default -->
+        <xsl:when test="$publication/html/video/@include">
+            <xsl:value-of select="$publication/html/video/@include"/>
+            <xsl:message>PTX WARNING:   HTML video/@include in publisher file should be "yes" (include video) or "no" (omit video), not "<xsl:value-of select="$publication/html/video/@include"/>". Proceeding with default value: "yes" (include video)</xsl:message>
+            <xsl:text>yes</xsl:text>
+        </xsl:when>
+        <!-- unset, so use default -->
+        <xsl:otherwise>
+            <xsl:text>yes</xsl:text>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:variable>
+
+<!-- <xsl:variable name="b-video-delete" select="$video-inclusion = 'no'"/> -->
 </xsl:stylesheet>
