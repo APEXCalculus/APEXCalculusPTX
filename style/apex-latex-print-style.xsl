@@ -327,4 +327,5 @@
       <xsl:text>\stepcounter{cthm}&#xa;&#xa;</xsl:text>
     </xsl:template> -->
     <xsl:template match="p[starts-with(@xml:id, 'vidint')]" />
+    <xsl:template match="aside[starts-with(@xml:id, 'vidnote')]" />
 </xsl:stylesheet>
