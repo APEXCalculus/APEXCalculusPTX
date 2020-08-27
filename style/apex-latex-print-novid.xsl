@@ -198,7 +198,7 @@
 </xsl:template>
 
 <xsl:template match="figure[not(ancestor::sidebyside) and not(descendant::sidebyside) and descendant::latex-image and not(ancestor::exercise)]">
-    <xsl:text>\marginnote[]{%&#xa;</xsl:text>
+    <xsl:text>\marginnote{%&#xa;</xsl:text>
     <xsl:text>\begin{</xsl:text>
     <xsl:apply-templates select="." mode="environment-name"/>
     <xsl:text>}{</xsl:text>
@@ -229,7 +229,7 @@
 </xsl:template>
 
 <xsl:template match="figure[not(ancestor::sidebyside) and not(descendant::sidebyside) and descendant::tabular and not(ancestor::exercise)]">
-    <xsl:text>\marginnote[]{%&#xa;</xsl:text>
+    <xsl:text>\marginnote{%&#xa;</xsl:text>
     <xsl:text>\begin{</xsl:text>
     <xsl:apply-templates select="." mode="environment-name"/>
     <xsl:text>}{</xsl:text>
@@ -262,7 +262,7 @@
 <!-- asides in the margin -->
 <!-- simple asides, with no styling available -->
 <xsl:template match="aside">
-    <xsl:text>\marginnote[]{&#xa;</xsl:text>
+    <xsl:text>\marginnote{&#xa;</xsl:text>
     <xsl:apply-templates select="." mode="label"/>
     <xsl:apply-templates select="p|&FIGURE-LIKE;|sidebyside" />
     <xsl:text>}&#xa;</xsl:text>
@@ -270,7 +270,7 @@
 
 <!-- puts standard tcolorbox for aside into the margin -->
 <!-- <xsl:template match="aside">
-    <xsl:text>\marginnote[]{&#xa;</xsl:text>
+    <xsl:text>\marginnote{&#xa;</xsl:text>
     <xsl:text>\begin{</xsl:text>
     <xsl:value-of select="local-name(.)" />
     <xsl:text>}</xsl:text>
@@ -308,9 +308,9 @@
 <xsl:param name="exercise.divisional.solution" select="'no'"/>
 
 <!-- print options -->
-<xsl:param name="latex.print" select="'no'"/>
-<xsl:param name="latex.pageref" select="'no'"/>
-<xsl:param name="latex.sides" select="'one'"/>
+<xsl:param name="latex.print" select="'yes'"/>
+<xsl:param name="latex.pageref" select="'yes'"/>
+<xsl:param name="latex.sides" select="'two'"/>
 
 <!-- uncommenting these will omit videos -->
 <xsl:template match="video[starts-with(@xml:id, 'vid')]" />
