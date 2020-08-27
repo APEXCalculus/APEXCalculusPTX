@@ -47,30 +47,29 @@
 
 <!-- don't colour a list if it's inside an insight -->
 <xsl:template match="list[not(parent::insight)]" mode="tcb-style">
-    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=blue!60!black!20, colframe=blue!30!black!50, colback=white!95!blue, coltitle=black, titlerule=-0.3pt,</xsl:text>
+    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
 <xsl:template match="insight" mode="tcb-style">
-    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=red!60!black!20, colframe=red!30!black!50, colback=white!95!red, coltitle=black, titlerule=-0.3pt,</xsl:text>
+    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
 <xsl:template match="&DEFINITION-LIKE;" mode="tcb-style">
-    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=yellow!90!black!30, colframe=yellow!95!black!60, colback=white!95!yellow, coltitle=black, titlerule=-0.3pt,</xsl:text>
+    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
 <xsl:template match="&THEOREM-LIKE;" mode="tcb-style">
-    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=green!60!black!20, colframe=green!30!black!50, colback=white!95!green, coltitle=black, titlerule=-0.3pt,</xsl:text>
+    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
 <xsl:template match="assemblage" mode="tcb-style">
-    <xsl:text>enhanced, arc=2ex, colback=blue!5, colframe=blue!75!black,&#xa;</xsl:text>
-    <xsl:text>colbacktitle=blue!20, coltitle=black, boxed title style={sharp corners, frame hidden},&#xa;</xsl:text>
+    <xsl:text>enhanced, arc=2ex, colback=white, colframe=black,&#xa;</xsl:text>
+    <xsl:text>colbacktitle=white, coltitle=black, boxed title style={sharp corners, frame hidden},&#xa;</xsl:text>
     <xsl:text>fonttitle=\bfseries, attach boxed title to top left={xshift=4mm,yshift=-3mm}, top=3mm,&#xa;</xsl:text>
 </xsl:template>
 
 <!-- <xsl:template match="&ASIDE-LIKE;" mode="tcb-style">
-    <xsl:text>enhanced, colback=blue!3, colframe=blue!50!black,&#xa;</xsl:text>
-    <xsl:text>coltitle=black, fonttitle=\bfseries, attach title to upper, after title={\space},</xsl:text>
+    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=black!20!white, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template> -->
 
 <xsl:template match="example" mode="tcb-style">

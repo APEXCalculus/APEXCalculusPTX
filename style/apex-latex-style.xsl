@@ -45,9 +45,10 @@
 
 <!-- define tcolorboxes for theorem and friends -->
 
-<!-- <xsl:template match="list" mode="tcb-style">
+<!-- don't colour a list if it's inside an insight -->
+<xsl:template match="list[not(parent::insight)]" mode="tcb-style">
     <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=blue!60!black!20, colframe=blue!30!black!50, colback=white!95!blue, coltitle=black, titlerule=-0.3pt,</xsl:text>
-</xsl:template> -->
+</xsl:template>
 
 <xsl:template match="insight" mode="tcb-style">
     <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=red!60!black!20, colframe=red!30!black!50, colback=white!95!red, coltitle=black, titlerule=-0.3pt,</xsl:text>
@@ -87,13 +88,13 @@
           \draw[thick] ([yshift=-2ex]frame.north west)--(frame.south west);
       },
       overlay last={
-          \draw[thick] ([yshift=-2ex]frame.north west)--(frame.south west)--([xshift=4ex]frame.south west);
+          \draw[thick] ([yshift=-2ex]frame.north west)--([yshift=2ex]frame.south west)--([xshift=2ex,yshift=2ex]frame.south west);
       },
     </xsl:text>
 </xsl:template>
 
 <!-- use original APEX geometry definitions -->
-<xsl:param name="latex.geometry" select="'inner=1in,textheight=9in,marginparwidth=150pt,marginparsep=12pt,bottom=1in,footskip=29pt'"/>
+<xsl:param name="latex.geometry" select="'inner=1in,textheight=9in,marginparwidth=150pt,marginparsep=32pt,bottom=1in,footskip=29pt'"/>
 
 <!-- apply exercise geometry -->
 <xsl:template match="exercises|solutions[not(parent::backmatter)]|reading-questions|glossary|references|worksheet" mode="latex-division-heading">
@@ -174,7 +175,7 @@
     <xsl:text>, textheight=9.25in</xsl:text>
     <xsl:text>, tmargin=.75in</xsl:text>
     <xsl:text>, marginparwidth=150pt</xsl:text>
-    <xsl:text>, marginparsep=32pt</xsl:text>
+    <xsl:text>, marginparsep=12pt</xsl:text>
     <xsl:text>}&#xa;</xsl:text>
 </xsl:template>
 
