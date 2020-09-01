@@ -94,7 +94,7 @@
 </xsl:template>
 
 <!-- use original APEX geometry definitions -->
-<xsl:param name="latex.geometry" select="'inner=1in,textheight=9in,marginparwidth=150pt,marginparsep=32pt,bottom=1in,footskip=29pt'"/>
+<xsl:param name="latex.geometry" select="'inner=1in,textheight=9in,textwidth=320pt,marginparwidth=150pt,marginparsep=32pt,bottom=1in,footskip=29pt'"/>
 
 <!-- apply exercise geometry -->
 <xsl:template match="exercises|solutions[not(parent::backmatter)]|reading-questions|glossary|references|worksheet" mode="latex-division-heading">

@@ -19,7 +19,7 @@
 <xsl:param name="exercise.divisional.solution" select="'no'"/> -->
 
 <!-- if answers and solutions are inline, don't need solutions at the end -->
-<!-- <xsl:template match="solutions"/> -->
+<xsl:template match="solutions"/>
 
 <!-- uncommenting these will omit videos -->
     <!-- <xsl:template match="video[starts-with(@xml:id, 'vid')]" /> -->
