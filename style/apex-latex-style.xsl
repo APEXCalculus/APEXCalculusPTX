@@ -217,8 +217,6 @@
     <xsl:if test="self::figure and not(image)">
         <xsl:text>\centering&#xa;</xsl:text>
     </xsl:if>
-    <!-- TODO: process meta-data, then restrict contents -->
-    <!-- multiple, program|console                       -->
     <xsl:apply-templates select="*"/>
     <!-- reserve space for the caption -->
     <xsl:text>\tcblower&#xa;</xsl:text>
@@ -249,8 +247,6 @@
     <xsl:if test="self::figure and not(image)">
         <xsl:text>\centering&#xa;</xsl:text>
     </xsl:if>
-    <!-- TODO: process meta-data, then restrict contents -->
-    <!-- multiple, program|console                       -->
     <xsl:apply-templates select="*"/>
     <!-- reserve space for the caption -->
     <xsl:text>\tcblower&#xa;</xsl:text>

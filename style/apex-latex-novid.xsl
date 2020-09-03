@@ -217,8 +217,6 @@
     <xsl:if test="self::figure and not(image)">
         <xsl:text>\centering&#xa;</xsl:text>
     </xsl:if>
-    <!-- TODO: process meta-data, then restrict contents -->
-    <!-- multiple, program|console                       -->
     <xsl:apply-templates select="*"/>
     <!-- reserve space for the caption -->
     <xsl:text>\tcblower&#xa;</xsl:text>
@@ -226,7 +224,8 @@
     <xsl:apply-templates select="." mode="environment-name"/>
     <xsl:text>}%&#xa;</xsl:text>
     <xsl:apply-templates select="." mode="pop-footnote-text"/>
-    <xsl:text>}</xsl:text>
+    <xsl:text>}%&#xa;</xsl:text>
+    <xsl:text>\par&#xa;</xsl:text>
 </xsl:template>
 
 <xsl:template match="figure[not(ancestor::sidebyside) and not(descendant::sidebyside) and descendant::tabular and not(ancestor::exercise)]">
@@ -248,8 +247,6 @@
     <xsl:if test="self::figure and not(image)">
         <xsl:text>\centering&#xa;</xsl:text>
     </xsl:if>
-    <!-- TODO: process meta-data, then restrict contents -->
-    <!-- multiple, program|console                       -->
     <xsl:apply-templates select="*"/>
     <!-- reserve space for the caption -->
     <xsl:text>\tcblower&#xa;</xsl:text>
@@ -257,7 +254,8 @@
     <xsl:apply-templates select="." mode="environment-name"/>
     <xsl:text>}%&#xa;</xsl:text>
     <xsl:apply-templates select="." mode="pop-footnote-text"/>
-    <xsl:text>}</xsl:text>
+    <xsl:text>}&#xa;</xsl:text>
+    <xsl:text>\par&#xa;</xsl:text>
 </xsl:template>
 
 <!-- asides in the margin -->
@@ -267,6 +265,7 @@
     <xsl:apply-templates select="." mode="label"/>
     <xsl:apply-templates select="p|&FIGURE-LIKE;|sidebyside" />
     <xsl:text>}&#xa;</xsl:text>
+    <xsl:text>\par&#xa;</xsl:text>
 </xsl:template>
 
 <!-- puts standard tcolorbox for aside into the margin -->
@@ -312,6 +311,9 @@
 <xsl:param name="latex.print" select="'no'"/>
 <xsl:param name="latex.pageref" select="'no'"/>
 <xsl:param name="latex.sides" select="'one'"/>
+
+<!-- set toc depth -->
+<xsl:param name="toc.level" select="3"/>
 
 <!-- uncommenting these will omit videos -->
 <xsl:template match="video[starts-with(@xml:id, 'vid')]" />
