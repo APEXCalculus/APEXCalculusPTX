@@ -113,6 +113,27 @@
       \DeclareMathOperator{\curl}{curl}
       \DeclareMathOperator{\divv}{div}
       \DeclareMathOperator{\Hess}{Hess}
+
+      %%temporary fix to get circles working right in TexLive 2019
+
+      \makeatletter
+      \def\pgfplots@install@path@replacements{%
+          \ifpgfplots@path@replace@ellipse
+              \let\tikz@do@circle=\pgfplots@path@@tikz@do@circle
+              \let\tikz@do@ellipse=\pgfplots@path@@tikz@do@circle
+              \expandafter\def\expandafter\pgfinterruptpicture\expandafter{\pgfinterruptpicture
+                  \let\tikz@do@circle=\pgfplots@path@@tikz@do@circle@orig
+                  \let\tikz@do@ellipse=\pgfplots@path@@tikz@do@ellipse@orig
+              }%
+          \fi
+      }%
+      \let\pgfplots@path@@tikz@do@circle@orig=\tikz@do@circle
+      \let\pgfplots@path@@tikz@do@ellipse@orig=\tikz@do@ellipse
+
+      \let\pgfplots@path@@tikz@do@circle@oldandbroken=\pgfplots@path@@tikz@do@circle
+      \def\pgfplots@path@@tikz@do@circle#1{\pgfplots@path@@tikz@do@circle@oldandbroken{#1}{#1}}
+      \def\pgfplots@path@@tikz@do@ellipse#1#2{\pgfplots@path@@tikz@do@circle@oldandbroken{#1}{#2}}
+      \makeatother
     </macros>
 
     <latex-image-preamble>
