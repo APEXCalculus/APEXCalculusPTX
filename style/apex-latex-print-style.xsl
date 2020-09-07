@@ -46,9 +46,9 @@
 <!-- define tcolorboxes for theorem and friends -->
 
 <!-- don't colour a list if it's inside an insight -->
-<xsl:template match="list[not(parent::insight)]" mode="tcb-style">
+<!-- <xsl:template match="list[not(parent::insight)]" mode="tcb-style">
     <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
-</xsl:template>
+</xsl:template> -->
 
 <xsl:template match="insight" mode="tcb-style">
     <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
