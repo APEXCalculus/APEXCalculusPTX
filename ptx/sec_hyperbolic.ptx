@@ -56,7 +56,7 @@
             \addplot [firstcurvestyle,areastyle,domain=0:45] ({cos(x)},{sin(x)}) -- (axis cs:0,0) -- cycle;
             \addplot [firstcurvestyle,-,domain=0:360,samples=80] ({cos(x)},{sin(x)});
 
-            \filldraw (axis cs:.707,.707) circle (1pt) node [shift={(5.5pt,11pt)}] { ($\cos(\theta) $,$\sin(\theta) $)};
+            \filldraw (axis cs:.707,.707) circle (1pt) node [shift={(5pt,11pt)}] { ($\cos(\theta) $,$\sin(\theta) $)};
 
             \draw (axis cs:.6,.25) node { $\ds\frac{\theta}{2}$};
             \draw (axis cs:-.75,1) node { $x^2+y^2=1$};
@@ -93,7 +93,7 @@
 
             \filldraw (axis cs:2.577,2.376) circle (1pt) node [left] { ($\cosh(\theta) $,$\sinh(\theta) $)};
 
-            \draw (axis cs:.73,.32) node { $\frac{\theta}{2}$};
+            \draw (axis cs:.73,.32) node { $\ds\frac{\theta}{2}$};
             \draw (axis cs:-1.75,2.75) node { $x^2-y^2=1$};
 
             \end{axis}
@@ -925,25 +925,55 @@
     <insight xml:id="idea_hyperbolic_inverse_integrals">
       <title>Integrals Involving Inverse Hyperbolic Functions</title>
       <p>
+        Assume <m>a\gt 0</m>.
         <ol>
-          <li><m>\begin{aligned}\int \frac{1}{\sqrt{x^2-a^2}}\, dx \amp = \cosh^{-1}\left(\frac xa\right)+C\\
-                   \amp =\ln\abs{x+\sqrt{x^2-a^2}}+C\, (\text{if } 0\lt a\lt x)\end{aligned}</m></li>
+          <li>
+            <p>
+              <md>
+                <mrow>\int \frac{1}{\sqrt{x^2-a^2}}\, dx \amp = \ln\abs{x+\sqrt{x^2-a^2}}+C</mrow>
+                <mrow>(\text{for } 0\lt x\lt a)\, \amp = \cosh^{-1}\left(\frac xa\right)+C </mrow>
+              </md>
+            </p>
+          </li>
 
-          <li><m>\begin{aligned}\int \frac{1}{\sqrt{x^2+a^2}}\, dx \amp =\sinh^{-1}\left(\frac xa\right)+C\\
-                   \amp =\ln\abs{x+\sqrt{x^2+a^2}}+C\, (\text{if } a \gt 0)\end{aligned}</m></li>
+          <li>
+            <p>
+              <md>
+                <mrow>\int \frac{1}{\sqrt{x^2+a^2}}\, dx \amp =\ln\abs{x+\sqrt{x^2+a^2}}+C</mrow>
+                <mrow>\amp = \sinh^{-1}\left(\frac xa\right)+C</mrow>
+              </md>
+            </p>
+          </li>
 
-          <li><m>\begin{aligned}\int \frac{1}{a^2-x^2}\, dx \amp = \begin{cases}
-                \frac1a\tanh^{-1}\left(\frac xa\right)+C \amp x^2\lt a^2\\
-                \frac1a\coth^{-1}\left(\frac xa\right)+C \amp  a^2\lt x^2
-                \end{cases}\\
-                \amp =\frac1{2a}\ln\abs{\frac{a+x}{a-x}}+C\end{aligned}
-              </m></li>
+          <li>
+            <p>
+              <md>
+                <mrow>\int \frac{1}{a^2-x^2}\, dx \amp \frac1{2a}\ln\abs{\frac{a+x}{a-x}}+C</mrow>
+                <mrow> \amp = \begin{cases}
+                              \frac1a\tanh^{-1}\left(\frac xa\right)+C \amp x^2\lt a^2\\
+                              \frac1a\coth^{-1}\left(\frac xa\right)+C \amp  a^2\lt x^2
+                              \end{cases}</mrow>
+              </md>
+            </p>
+          </li>
 
-          <li><m>\begin{aligned}\int \frac{1}{x\sqrt{a^2-x^2}}\, dx \amp = -\frac1a\sech^{-1}\left(\frac xa\right)+C\\
-                  \amp =\frac1a \ln\left(\frac{x}{a+\sqrt{a^2-x^2}}\right)+C\, (\text{if } 0\lt x\lt a)\end{aligned}</m></li>
+          <li>
+            <p>
+              <md>
+                <mrow>\int \frac{1}{x\sqrt{a^2-x^2}}\, dx \amp =\frac1a \ln\left(\frac{x}{a+\sqrt{a^2-x^2}}\right)+C</mrow>
+                <mrow>(text{for } 0\lt x\lt a)\, \amp = -\frac1a\sech^{-1}\left(\frac xa\right)+C</mrow>
+              </md>
+            </p>
+          </li>
 
-          <li><m>\begin{aligned}\int \frac{1}{x\sqrt{x^2+a^2}}\, dx \amp = -\frac1a\csch^{-1}\abs{\frac xa} + C\\
-                  \amp = \frac1a \ln\abs{\frac{x}{a+\sqrt{a^2+x^2}}}+C\, (\text{if } x\neq 0,\,a\gt 0)\end{aligned}</m></li>
+          <li>
+            <p>
+              <md>
+                <mrow>\int \frac{1}{x\sqrt{x^2+a^2}}\, dx \amp = \frac1a \ln\abs{\frac{x}{a+\sqrt{a^2+x^2}}}+C</mrow>
+                <mrow> \amp = -\frac1a\csch^{-1}\abs{\frac xa} + C</mrow>
+              </md>
+            </p>
+          </li>
         </ol>
         <idx><h>integration</h><h>inverse hyperbolic</h></idx>
 
