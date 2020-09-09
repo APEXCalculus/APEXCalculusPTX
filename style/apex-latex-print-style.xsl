@@ -185,7 +185,7 @@
 <xsl:param name="latex.preamble.early" select="'\usepackage{marginnote}'"/>
 
 <!-- we want images in margin to be the full margin width -->
-<xsl:template match="figure/image[not(ancestor::sidebyside) and descendant::latex-image and not(ancestor::exercise)]">
+<xsl:template match="figure/image[not(ancestor::sidebyside) and (descendant::latex-image or descendant::asymptote) and not(ancestor::exercise)]">
     <xsl:text>\begin{image}</xsl:text>
     <xsl:text>{0</xsl:text>
     <xsl:text>}</xsl:text>
@@ -197,7 +197,8 @@
     <xsl:text>\end{image}%&#xa;</xsl:text>
 </xsl:template>
 
-<xsl:template match="figure[not(ancestor::sidebyside) and not(descendant::sidebyside) and descendant::latex-image and not(ancestor::exercise)]">
+<!-- latex-image, asymptote, and tabular can all go in margin -->
+<xsl:template match="figure[not(ancestor::sidebyside) and not(descendant::sidebyside) and (descendant::latex-image or descendant::asymptote or descendant::tabular) and not(ancestor::exercise)]">
     <xsl:text>\marginnote{%&#xa;</xsl:text>
     <xsl:text>\begin{</xsl:text>
     <xsl:apply-templates select="." mode="environment-name"/>
@@ -227,35 +228,6 @@
     <xsl:text>\par&#xa;</xsl:text>
 </xsl:template>
 
-<xsl:template match="figure[not(ancestor::sidebyside) and not(descendant::sidebyside) and descendant::tabular and not(ancestor::exercise)]">
-    <xsl:text>\marginnote{%&#xa;</xsl:text>
-    <xsl:text>\begin{</xsl:text>
-    <xsl:apply-templates select="." mode="environment-name"/>
-    <xsl:text>}{</xsl:text>
-    <xsl:apply-templates select="." mode="caption-full"/>
-    <xsl:text>}{</xsl:text>
-    <xsl:apply-templates select="." mode="latex-id"/>
-    <xsl:text>}{</xsl:text>
-    <xsl:if test="$b-latex-hardcode-numbers">
-        <xsl:apply-templates select="." mode="number"/>
-    </xsl:if>
-    <xsl:text>}%&#xa;</xsl:text>
-    <!-- images have margins and widths, so centering not needed -->
-    <!-- Eventually everything in a figure should control itself -->
-    <!-- or be flush left (or so)                                -->
-    <xsl:if test="self::figure and not(image)">
-        <xsl:text>\centering&#xa;</xsl:text>
-    </xsl:if>
-    <xsl:apply-templates select="*"/>
-    <!-- reserve space for the caption -->
-    <xsl:text>\tcblower&#xa;</xsl:text>
-    <xsl:text>\end{</xsl:text>
-    <xsl:apply-templates select="." mode="environment-name"/>
-    <xsl:text>}%&#xa;</xsl:text>
-    <xsl:apply-templates select="." mode="pop-footnote-text"/>
-    <xsl:text>}&#xa;</xsl:text>
-    <xsl:text>\par&#xa;</xsl:text>
-</xsl:template>
 
 <!-- asides in the margin -->
 <!-- simple asides, with no styling available -->
@@ -263,7 +235,7 @@
     <xsl:text>\marginnote{&#xa;</xsl:text>
     <xsl:apply-templates select="." mode="label"/>
     <xsl:apply-templates select="p|&FIGURE-LIKE;|sidebyside" />
-    <xsl:text>}&#xa;</xsl:text>
+    <xsl:text>}%&#xa;</xsl:text>
     <xsl:text>\par&#xa;</xsl:text>
 </xsl:template>
 
