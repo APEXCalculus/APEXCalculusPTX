@@ -11,31 +11,19 @@
 <xsl:param name="html.knowl.exercise.sectional" select="'no'"/>
 <xsl:param name="html.knowl.example" select="'no'"/>
 <!-- uncomment next line to enable hypothesis annotation -->
-<xsl:param name="html.annotation" select="'hypothesis'"/>
+<!-- <xsl:param name="html.annotation" select="'hypothesis'"/> -->
 
 <!-- uncomment to turn off hints, answers, and solutions for divisional exercises -->
 <!-- <xsl:param name="exercise.divisional.hint" select="'no'"/>
 <xsl:param name="exercise.divisional.answer" select="'no'"/>
 <xsl:param name="exercise.divisional.solution" select="'no'"/> -->
 
-<<<<<<< HEAD
-<!-- uncommenting these will omit videos -->
-    <xsl:template match="video[starts-with(@xml:id, 'vid')]" />
-    <!-- use next line if videos also omitted in html -->
-    <xsl:template match="figure[starts-with(@xml:id, 'vid')]" />
-    <!-- use this instead if videos included in html  **don't use both!!** -->
-    <!-- <xsl:template match="figure[starts-with(@xml:id, 'vid')]">
-      <xsl:text>\stepcounter{cthm}&#xa;&#xa;</xsl:text>
-    </xsl:template> -->
-    <xsl:template match="p[starts-with(@xml:id, 'vidint')]" />
-=======
 <!-- if answers and solutions are inline, don't need solutions at the end -->
 <xsl:template match="solutions"/>
 
 <!-- uncommenting these will omit videos -->
-    <!-- <xsl:template match="video[starts-with(@xml:id, 'vid')]" /> -->
-    <!-- <xsl:template match="figure[starts-with(@xml:id, 'vid')]" /> -->
-    <!-- <xsl:template match="p[starts-with(@xml:id, 'vidint')]" /> -->
-    <!-- <xsl:template match="aside[starts-with(@xml:id, 'vidnote')]" /> -->
->>>>>>> sean/main
+    <xsl:template match="video[starts-with(@xml:id, 'vid')]" />
+    <xsl:template match="figure[starts-with(@xml:id, 'vid')]" />
+    <xsl:template match="p[starts-with(@xml:id, 'vidint')]" />
+    <xsl:template match="aside[starts-with(@xml:id, 'vidnote')]" />
 </xsl:stylesheet>

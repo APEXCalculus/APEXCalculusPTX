@@ -113,6 +113,27 @@
       \DeclareMathOperator{\curl}{curl}
       \DeclareMathOperator{\divv}{div}
       \DeclareMathOperator{\Hess}{Hess}
+
+      %%temporary fix to get circles working right in TexLive 2019
+
+      \makeatletter
+      \def\pgfplots@install@path@replacements{%
+          \ifpgfplots@path@replace@ellipse
+              \let\tikz@do@circle=\pgfplots@path@@tikz@do@circle
+              \let\tikz@do@ellipse=\pgfplots@path@@tikz@do@circle
+              \expandafter\def\expandafter\pgfinterruptpicture\expandafter{\pgfinterruptpicture
+                  \let\tikz@do@circle=\pgfplots@path@@tikz@do@circle@orig
+                  \let\tikz@do@ellipse=\pgfplots@path@@tikz@do@ellipse@orig
+              }%
+          \fi
+      }%
+      \let\pgfplots@path@@tikz@do@circle@orig=\tikz@do@circle
+      \let\pgfplots@path@@tikz@do@ellipse@orig=\tikz@do@ellipse
+
+      \let\pgfplots@path@@tikz@do@circle@oldandbroken=\pgfplots@path@@tikz@do@circle
+      \def\pgfplots@path@@tikz@do@circle#1{\pgfplots@path@@tikz@do@circle@oldandbroken{#1}{#1}}
+      \def\pgfplots@path@@tikz@do@ellipse#1#2{\pgfplots@path@@tikz@do@circle@oldandbroken{#1}{#2}}
+      \makeatother
     </macros>
 
     <latex-image-preamble>
@@ -123,11 +144,10 @@
       \usetikzlibrary{shapes,decorations,shadows,fadings}
       \usepgfplotslibrary{fillbetween,decorations.softclip,polar}
 
-      \setlength{\marginparwidth}{215pt}
 
       \usepackage{tkz-euclide}
       %\usetkzobj{all}
-      %%% uncomment above line if on TeXLive 2019 or earlier %%%
+      %%% uncomment above line if on TeXLive 2017 or earlier %%%
 
       \colorlet{firstcolor}{blue}
       \colorlet{secondcolor}{red}
@@ -319,9 +339,9 @@
 
     <xi:include href="./chapter_differential_equations.ptx"/>
 
-    <xi:include href="./chapter_sequences_series.ptx"/>
-
     <xi:include href="./chapter_planar_curves.ptx"/>
+
+    <xi:include href="./chapter_sequences_series.ptx"/>
 
     <xi:include href="./chapter_vectors.ptx"/>
 
@@ -334,14 +354,14 @@
     <xi:include href="./chapter_vector_calc.ptx"/>
 
     <backmatter>
-      <solutions divisional="answer solution">
+      <!-- <solutions divisional="answer solution">
         <title>Answers and Solutions to Selected Exercises</title>
-      </solutions>
+      </solutions> -->
+      <xi:include href="./appendix_back_reference.ptx"/>
       <index>
         <title>Index</title>
         <index-list/>
       </index>
-      <xi:include href="./appendix_back_reference.ptx"/>
     </backmatter>
   </book>
 </pretext>
