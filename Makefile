@@ -53,7 +53,7 @@ include Makefile.paths
 # the project distribution
 ###################################
 SRC       = $(PRJ)/ptx
-IMGSRC    = $(SRC)/images
+IMGSRC    = $(PRJ)/external-images
 OUTPUT    = $(PRJ)/output
 PUB       = $(PRJ)/publication
 XSL       = $(PRJ)/xsl
@@ -76,6 +76,8 @@ WWOUT      = $(OUTPUT)/webwork-representations
 IMGOUT     = $(OUTPUT)/images
 PGOUT      = $(OUTPUT)/pg
 PRVOUT     = $(OUTPUT)/preview
+VIDEOOUT   = $(OUTPUT)/video
+SAGEPLOT   = $(OUTPUT)/sageplot
 
 # The WeBWorK server we use
 #SERVER = "(https://webwork-dev.aimath.org,anonymous,anonymous,anonymous,anonymous)"
@@ -113,6 +115,18 @@ images:
 	install -d $(IMGOUT)
 	$(PTX)/pretext/pretext -c latex-image -p $(PUBFILE) -f all -d $(IMGOUT) $(MAINFILE)
 
+video-preview:
+	install -d $(OUTPUT)
+	-rm $(VIDEOOUT) || :
+	install -d $(VIDEOOUT)
+	$(PTX)/pretext/pretext -c youtube -p $(PUBFILE) -d $(VIDEOOUT) $(MAINFILE)
+
+sageplot:
+	install -d $(OUTPUT)
+	-rm $(SAGEPLOT) || :
+	install -d $(SAGEPLOT)
+	$(PTX)/pretext/pretext -c sageplot -f pdf -p $(PUBFILE) -d $(SAGEPLOT) $(MAINFILE)
+
 pdf:
 	install -d $(OUTPUT)
 	-rm -r $(PRINTOUT) || :
@@ -122,6 +136,8 @@ pdf:
 	install -d $(IMGSRC)
 	cp -a $(WWOUT)/*.png $(PRINTOUT)/images || :
 	cp -a $(IMGSRC) $(PRINTOUT) || :
+	cp -a $(VIDEOOUT)/*.jpg $(PRINTOUT)/images || :
+	cp -a $(SAGEPLOT)/*.pdf $(PRINTOUT)/images || :
 	cd $(PRINTOUT); \
 	xsltproc -xinclude --stringparam publisher $(PUBFILE) --stringparam latex.print 'yes' --stringparam latex.pageref 'no' --stringparam latex.sides 'two' --stringparam exercise.divisional.answer no --stringparam exercise.divisional.solution no --stringparam exercise.divisional.hint no $(PTXXSL)/pretext-latex.xsl $(MAINFILE) > apex.tex; \
 	xelatex apex.tex; \
