@@ -59,7 +59,7 @@ PUB       = $(PRJ)/publication
 XSL       = $(PRJ)/xsl
 
 # The project's root file
-MAINFILE  = $(SRC)/index.ptx
+MAINFILE  = $(SRC)/apex.ptx
 
 # The project's styling files
 PUBFILE   = $(PUB)/publication.xml
