@@ -1,576 +1,576 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="sec-multi_extreme_further">
-  <title>Constrained Optimization and Lagrange Multipliers</title>
-  <p>
-    Let us continue our discussion of constrained optimization begun in <xref ref="sec_multi_extreme_values">Section</xref>.
-    <xref ref="thm_extreme_val3">Theorem</xref> tells us that the Extreme Value Theorem extends to functions of two variables;
-    in fact, this is true for a function of any number of variables:
-    if a real-valued function <m>f</m> is continuous on a closed, bounded subset of <m>\mathbb{R}^n</m>,
-    then it is guaranteed to have an absolute maximum and minimum.
-  </p>
+	<title>Constrained Optimization and Lagrange Multipliers</title>
+	<p>
+		Let us continue our discussion of constrained optimization begun in <xref ref="sec_multi_extreme_values">Section</xref>.
+		<xref ref="thm_extreme_val3">Theorem</xref> tells us that the Extreme Value Theorem extends to functions of two variables;
+		in fact, this is true for a function of any number of variables:
+		if a real-valued function <m>f</m> is continuous on a closed, bounded subset of <m>\mathbb{R}^n</m>,
+		then it is guaranteed to have an absolute maximum and minimum.
+	</p>
 
-  <p>
-    However, as the number of variables increases,
-    the job of finding these absolute extrema becomes more and more complicated.
-    We saw one approach in <xref ref="sec_multi_extreme_values">Section</xref>:
-    given a continuous function on a closed, bounded region <m>D</m>,
-    we first consider critical values on the interior of <m>D</m>.
-    We then restrict our function <m>f</m> to points on the boundary of <m>D</m>,
-    and attempt to reduce the problem to optimization in one variable.
-  </p>
+	<p>
+		However, as the number of variables increases,
+		the job of finding these absolute extrema becomes more and more complicated.
+		We saw one approach in <xref ref="sec_multi_extreme_values">Section</xref>:
+		given a continuous function on a closed, bounded region <m>D</m>,
+		we first consider critical values on the interior of <m>D</m>.
+		We then restrict our function <m>f</m> to points on the boundary of <m>D</m>,
+		and attempt to reduce the problem to optimization in one variable.
+	</p>
 
-  <p>
-    In many cases, this approach is best accomplished by parametrizing the boundary.
-    We learned how to define parametric curves in the plane in <xref ref="sec_param_eqs">Section</xref>.
-  </p>
+	<p>
+		In many cases, this approach is best accomplished by parametrizing the boundary.
+		We learned how to define parametric curves in the plane in <xref ref="sec_param_eqs">Section</xref>.
+	</p>
 
 
-  <example xml:id="ex_optimize_param_bound">
-    <title>Constrained optimization by parametrization</title>
-    <statement>
-      <p>
-        Find the absolute maximum and minimum values of <m>f(x,y) = x^2-8x-3y^2</m> on the disc <m>x^2+y^2\leq 4</m>.
-      </p>
-    </statement>
-    <solution>
-      <p>
-        First, we check for critical points: We have
-        <me>
-          \nabla f(x,y) = \la 2x-8,-6y\ra
-        </me>,
-        which vanishes when <m>(x,y) = (4,0)</m>.
-        This critical point is outside our region, so we do not consider it.
-      </p>
+	<example xml:id="ex_optimize_param_bound">
+	  <title>Constrained optimization by parametrization</title>
+	  <statement>
+	    <p>
+	      Find the absolute maximum and minimum values of <m>f(x,y) = x^2-8x-3y^2</m> on the disc <m>x^2+y^2\leq 4</m>.
+	    </p>
+	  </statement>
+	  <solution>
+	    <p>
+				First, we check for critical points: We have
+				<me>
+				  \nabla f(x,y) = \la 2x-8,-6y\ra
+				</me>,
+				which vanishes when <m>(x,y) = (4,0)</m>.
+				This critical point is outside our region, so we do not consider it.
+			</p>
 
-      <p>
-        Next, we look for extreme values on the boundary.
-        The boundary of our region is the circle <m>x^2+y^2=4</m>,
-        which we can parametrize using <m>x=2\cos t</m>, <m>y=2\sin t</m>,
-        for <m>t\in [0,2\pi]</m>. For <m>(x,y)</m> on the boundary, we have
-        <me>
-          f(x,y) = x^2-8x-3y^2 = 4\cos^2t-16\cos t-12\sin^2t = h(t)
-        </me>,
-        a function of one variable, with domain <m>[0,2\pi]</m>.
-      </p>
+			<p>
+				Next, we look for extreme values on the boundary.
+				The boundary of our region is the circle <m>x^2+y^2=4</m>,
+				which we can parametrize using <m>x=2\cos t</m>, <m>y=2\sin t</m>,
+				for <m>t\in [0,2\pi]</m>. For <m>(x,y)</m> on the boundary, we have
+				<me>
+				  f(x,y) = x^2-8x-3y^2 = 4\cos^2t-16\cos t-12\sin^2t = h(t)
+				</me>,
+				a function of one variable, with domain <m>[0,2\pi]</m>.
+			</p>
 
-      <p>
-        We learned how to find the extreme values of such a function back in our first course in calculus:
-        see <xref ref="sec_extreme_values">Section</xref>. We have <m>h(0)=h(2\pi)=-12</m>, and
-        <me>
-          h'(t) = -8\cos t\sin t+16\sin t-24\sin t\cos t = 16\sin t (1-2\cos t)
-        </me>.
-        Thus, <m>h'(t)=0</m> if <m>\sin t = 0</m> (<m>t=0,\pi,2\pi</m>) or <m>\cos =\frac12</m> (<m>t=\pi/3, 5\pi/3</m>).
-        We have already checked that <m>h(0)=h(2\pi)=-12</m>, so we check the remaining points:
-        <md>
-          <mrow>h(\pi) \amp = 4(-1)^2-16(-1) = 20</mrow>
-          <mrow>h(\pi/3)=h(5\pi/3) \amp  = 4\left(\frac14\right)-16\left(\frac{1}{2}\right)-12\left(\frac34\right) = -16</mrow>
-        </md>.
-        We see that the absolute maximum is when <m>t=\pi</m>: <m>h(\pi) = f(-2,0)=20</m>,
-        and the absolute minimum is <m>-16</m>, which occurs when <m>t=\pi/3</m> and <m>t=5\pi/3</m>,
-        corresponding to the points <m>(1,\sqrt{3})</m> and <m>(1,-\sqrt{3})</m>, respectively.
-      </p>
-    </solution>
-  </example>
+			<p>
+				We learned how to find the extreme values of such a function back in our first course in calculus:
+				see <xref ref="sec_extreme_values">Section</xref>. We have <m>h(0)=h(2\pi)=-12</m>, and
+				<me>
+				  h'(t) = -8\cos t\sin t+16\sin t-24\sin t\cos t = 16\sin t (1-2\cos t)
+				</me>.
+				Thus, <m>h'(t)=0</m> if <m>\sin t = 0</m> (<m>t=0,\pi,2\pi</m>) or <m>\cos =\frac12</m> (<m>t=\pi/3, 5\pi/3</m>).
+				We have already checked that <m>h(0)=h(2\pi)=-12</m>, so we check the remaining points:
+				<md>
+				  <mrow>h(\pi) \amp = 4(-1)^2-16(-1) = 20</mrow>
+				  <mrow>h(\pi/3)=h(5\pi/3) \amp  = 4\left(\frac14\right)-16\left(\frac{1}{2}\right)-12\left(\frac34\right) = -16</mrow>
+				</md>.
+				We see that the absolute maximum is when <m>t=\pi</m>: <m>h(\pi) = f(-2,0)=20</m>,
+				and the absolute minimum is <m>-16</m>, which occurs when <m>t=\pi/3</m> and <m>t=5\pi/3</m>,
+				corresponding to the points <m>(1,\sqrt{3})</m> and <m>(1,-\sqrt{3})</m>, respectively.
+			</p>
+		</solution>
+	</example>
 
-  <p>
-    The above method works well, when it's straightforward to set up.
-    The advantage is that it reduces the problem of optimization along the boundary to an optimization problem in one variable,
-    which is something we mastered long ago.
-  </p>
+	<p>
+		The above method works well, when it's straightforward to set up.
+		The advantage is that it reduces the problem of optimization along the boundary to an optimization problem in one variable,
+		which is something we mastered long ago.
+	</p>
 
-  <p>
-    One downside is that it is not always easy to come up with a parametrization for a curve.
-    In the above example, the boundary <m>x^2+y^2=4</m> is a <em>level curve</em>:
-    it's of the form <m>g(x,y)=c</m>.
-    When we're trying to optimize subject to a constraint of this form,
-    there is another approach, called the <term>method of Lagrange multipliers</term>.
-    <idx><h>Lagrange multipliers</h></idx>
-    <idx><h>optimization</h><h>with Lagrange multipliers</h></idx>
-  </p>
+	<p>
+		One downside is that it is not always easy to come up with a parametrization for a curve.
+		In the above example, the boundary <m>x^2+y^2=4</m> is a <em>level curve</em>:
+		it's of the form <m>g(x,y)=c</m>.
+		When we're trying to optimize subject to a constraint of this form,
+		there is another approach, called the <term>method of Lagrange multipliers</term>.
+		<idx><h>Lagrange multipliers</h></idx>
+		<idx><h>optimization</h><h>with Lagrange multipliers</h></idx>
+	</p>
 
-  <figure xml:id="vid-multi-lagrange-intro">
-    <caption>Introducing Lagrange multipliers</caption>
-    <video youtube="W5ykqB7261c"/>
-  </figure>
+	<figure xml:id="vid-multi-lagrange-intro">
+	  <caption>Introducing Lagrange multipliers</caption>
+	  <video youtube="W5ykqB7261c"/>
+	</figure>
 
-  <p>
-    Suppose we are trying to maximize a function <m>f(x,y)</m> subject to a constrain <m>g(x,y)=c</m>.
-    We could follow the approach given above:
-    find a function <m>\vec{r}: [a,b]\to \mathbb{R}^2</m> that parametrizes the curve <m>g(x,y)=c</m>.
-    As we saw above, the maximum (or minimum) should occur at some point <m>t_0</m> that is a critical number of <m>h(t)=f(\vec{r}(t))</m>;
-    that is, such that
-    <me>
-      h'(t_0)=\nabla f(\vec{r}(t_0))\cdot \vrp (t_0) = 0
-    </me>.
-  </p>
+	<p>
+		Suppose we are trying to maximize a function <m>f(x,y)</m> subject to a constrain <m>g(x,y)=c</m>.
+		We could follow the approach given above:
+		find a function <m>\vec{r}: [a,b]\to \mathbb{R}^2</m> that parametrizes the curve <m>g(x,y)=c</m>.
+		As we saw above, the maximum (or minimum) should occur at some point <m>t_0</m> that is a critical number of <m>h(t)=f(\vec{r}(t))</m>;
+		that is, such that
+		<me>
+		  h'(t_0)=\nabla f(\vec{r}(t_0))\cdot \vrp (t_0) = 0
+		</me>.
+	</p>
 
-  <p>
-    This tells us that the gradient <m>\nabla f</m> should be orthogonal to the constraint curve <m>g(x,y)=c</m> at the point <m>(x_0,y_0)=(x(t_0),y(t_0))</m>.
-    But we know another gradient that is orthogonal to this curve: <m>\nabla g</m>!
-    Recall from <xref ref="thm_gradient">Theorem</xref> that <m>\nabla g(x,y)</m> is always orthogonal to the level curve <m>g(x,y)=c</m> at points along the curve.
-  </p>
+	<p>
+		This tells us that the gradient <m>\nabla f</m> should be orthogonal to the constraint curve <m>g(x,y)=c</m> at the point <m>(x_0,y_0)=(x(t_0),y(t_0))</m>.
+		But we know another gradient that is orthogonal to this curve: <m>\nabla g</m>!
+		Recall from <xref ref="thm_gradient">Theorem</xref> that <m>\nabla g(x,y)</m> is always orthogonal to the level curve <m>g(x,y)=c</m> at points along the curve.
+	</p>
 
-  <p>
-    Let's sum up: the vectors <m>\nabla f(x_0,y_0)</m> and <m>\nabla g(x_0,y_0)</m> are both orthogonal to the vector <m>\vrp(t_0)</m>.
-    We assume that <m>\nabla f(x_0,y_0)\neq \vec{0}</m>, since critical points of <m>f</m> have already been checked.
-    We also assume that <m>c</m> is a \sword{regular value}\index{regular value} of <m>g</m>,
-    meaning that there are no critical points of <m>g</m> along the curve <m>g(x,y)=c</m>,
-    so <m>\nabla g(x_0,y_0)\neq\vec{0}</m> as well.
-  </p>
+	<p>
+		Let's sum up: the vectors <m>\nabla f(x_0,y_0)</m> and <m>\nabla g(x_0,y_0)</m> are both orthogonal to the vector <m>\vrp(t_0)</m>.
+		We assume that <m>\nabla f(x_0,y_0)\neq \vec{0}</m>, since critical points of <m>f</m> have already been checked.
+		We also assume that <m>c</m> is a \sword{regular value}\index{regular value} of <m>g</m>,
+		meaning that there are no critical points of <m>g</m> along the curve <m>g(x,y)=c</m>,
+		so <m>\nabla g(x_0,y_0)\neq\vec{0}</m> as well.
+	</p>
 
-  <aside>
-    <p>
-      If <m>(x_0,y_0)</m> is a critical point of a function <m>g</m>;
-      that is, if <m>\nabla g(x_0,y_0)=\vec{0}</m>, and <m>g(x_0,y_0)=c</m>,
-      we call the number <m>c</m> a <term>critical value</term> of <m>g</m>.
-      Any number that is not a critical value is called a regular value.
-      Often, if <m>c</m> is a critical value, the level set defined by <m>g(x,y)=c</m>
-      is not a smooth curve, or even a curve at all.
-      <idx><h>critical value</h><h>of a function of two variables</h></idx>
-    </p>
+	<aside>
+	  <p>
+			If <m>(x_0,y_0)</m> is a critical point of a function <m>g</m>;
+			that is, if <m>\nabla g(x_0,y_0)=\vec{0}</m>, and <m>g(x_0,y_0)=c</m>,
+			we call the number <m>c</m> a <term>critical value</term> of <m>g</m>.
+			Any number that is not a critical value is called a regular value.
+			Often, if <m>c</m> is a critical value, the level set defined by <m>g(x,y)=c</m>
+			is not a smooth curve, or even a curve at all.
+			<idx><h>critical value</h><h>of a function of two variables</h></idx>
+		</p>
 
-    <p>
-      For example, <m>g(x,y)=x^2+y^2</m> has the critical point <m>(0,0)</m>, and critical value 0.
-      The set of <m>(x,y)</m> with <m>x^2+y^2=0</m> is not a curve; it's a single point.
-      Because of this, it's usually a safe assumption that when a level curve <m>g(x,y)=c</m> is given, the value <m>c</m> is a regular value.
-    </p>
-  </aside>
+		<p>
+			For example, <m>g(x,y)=x^2+y^2</m> has the critical point <m>(0,0)</m>, and critical value 0.
+			The set of <m>(x,y)</m> with <m>x^2+y^2=0</m> is not a curve; it's a single point.
+			Because of this, it's usually a safe assumption that when a level curve <m>g(x,y)=c</m> is given, the value <m>c</m> is a regular value.
+		</p>
+	</aside>
 
-  <p>
-    But the only way that two non-zero vectors in the plane can both be orthogonal to a third vector is if they're parallel!
-    This means that there must be some scalar <m>\lambda</m> such that
-    <me>
-      \nabla f(x_0,y_0) = \lambda\nabla g(x_0,y_0)
-    </me>.
-    We have demonstrated the following:
-  </p>
+	<p>
+		But the only way that two non-zero vectors in the plane can both be orthogonal to a third vector is if they're parallel!
+		This means that there must be some scalar <m>\lambda</m> such that
+		<me>
+		  \nabla f(x_0,y_0) = \lambda\nabla g(x_0,y_0)
+		</me>.
+		We have demonstrated the following:
+	</p>
 
-  <theorem xml:id="thm_lagrange_multipliers">
-    <title>Location of constrained extrema</title>
-    <statement>
-      <p>
-        Let <m>f</m> and <m>g</m> be continuously differentiable functions of two variables,
-        and suppose <m>c</m> is a regular value for <m>g</m>.
-        If the function <m>f</m>, when constrained to the level curve <m>g(x,y)=c</m>
-        has a local maximum or minimum value at a point <m>(x_0,y_0)</m>, then
-        <me>
-          \nabla f(x_0,y_0) = \lambda \nabla g(x_0,y_0)
-        </me>
-        for some scalar <m>\lambda</m>.
-      </p>
-    </statement>
-  </theorem>
+	<theorem xml:id="thm_lagrange_multipliers">
+	  <title>Location of constrained extrema</title>
+	  <statement>
+	    <p>
+				Let <m>f</m> and <m>g</m> be continuously differentiable functions of two variables,
+				and suppose <m>c</m> is a regular value for <m>g</m>.
+				If the function <m>f</m>, when constrained to the level curve <m>g(x,y)=c</m>
+				has a local maximum or minimum value at a point <m>(x_0,y_0)</m>, then
+				<me>
+				  \nabla f(x_0,y_0) = \lambda \nabla g(x_0,y_0)
+				</me>
+				for some scalar <m>\lambda</m>.
+			</p>
+		</statement>
+	</theorem>
 
-  <p>
-    Note that there are two possibilities: either <m>\lambda=0</m>,
-    in which case <m>(x_0,y_0)</m> is a critical point of <m>f</m>, or <m>\lambda\neq 0</m>,
-    in which case the level curve of <m>f</m> that passes through <m>(x_0,y_0)</m> must be <em>tangent</em> to the curve <m>g(x,y)=c</m> at that point.
-    Putting <xref ref="thm_lagrange_multipliers">Theorem</xref> to use is a matter of solving a system of equations.
-  </p>
+	<p>
+		Note that there are two possibilities: either <m>\lambda=0</m>,
+		in which case <m>(x_0,y_0)</m> is a critical point of <m>f</m>, or <m>\lambda\neq 0</m>,
+		in which case the level curve of <m>f</m> that passes through <m>(x_0,y_0)</m> must be <em>tangent</em> to the curve <m>g(x,y)=c</m> at that point.
+		Putting <xref ref="thm_lagrange_multipliers">Theorem</xref> to use is a matter of solving a system of equations.
+	</p>
 
-  <insight xml:id="idea_lagrange_multipliers">
-    <title>Method of Lagrange Multipliers</title>
-    <p>
-      To find the maximum and minimum values of a function <m>f</m> of two variables subject to a constraint <m>g(x,y)=c</m>,
-      we must find the simultaneous solutions to the following equations,
-      where <m>\lambda</m> is an unknown constant (called a Lagrange multiplier):
-      <md>
-        <mrow>f_x(x,y) \amp = \lambda g_x(x,y)</mrow>
-        <mrow>f_y(x,y) \amp = \lambda g_y(x,y)</mrow>
-        <mrow>g(x,y) \amp  = c</mrow>
-      </md>.
-    </p>
-  </insight>
+	<insight xml:id="idea_lagrange_multipliers">
+		<title>Method of Lagrange Multipliers</title>
+		<p>
+			To find the maximum and minimum values of a function <m>f</m> of two variables subject to a constraint <m>g(x,y)=c</m>,
+			we must find the simultaneous solutions to the following equations,
+			where <m>\lambda</m> is an unknown constant (called a Lagrange multiplier):
+			<md>
+			  <mrow>f_x(x,y) \amp = \lambda g_x(x,y)</mrow>
+			  <mrow>f_y(x,y) \amp = \lambda g_y(x,y)</mrow>
+			  <mrow>g(x,y) \amp  = c</mrow>
+			</md>.
+		</p>
+	</insight>
 
-  <example xml:id="ex_lagrange1">
-    <title>Using Lagrange multipliers</title>
-    <statement>
-      <p>
-        Find the absolute maximum and minimum values of <m>f(x,y) = x^2-8x-3y^2</m> on the disc <m>x^2+y^2\leq 4</m>.
-      </p>
-    </statement>
-    <solution>
-      <p>
-        This is the same problem as <xref ref="ex_optimize_param_bound">Example</xref>,
-        but this time, we will attempt to solve it using the method of Lagrange multipliers.
-        Again, since <m>\nabla f(x,y) = \la 2x-8,-6y\ra</m>,
-        the only critical point for <m>f</m> is outside the given disc.
-        It remains to find the maximum and minimum of <m>f</m> subject to the constraint <m>x^2+y^2=4</m>,
-        so our constraint function is <m>g(x,y)=x^2+y^2</m>. We have
-        <me>
-          \nabla f(x,y) = \la 2x-8, -6y\ra = \lambda \la 2x,2y\ra = \lambda\nabla g(x,y)
-        </me>.
-      </p>
+	<example xml:id="ex_lagrange1">
+	  <title>Using Lagrange multipliers</title>
+	  <statement>
+	    <p>
+	      Find the absolute maximum and minimum values of <m>f(x,y) = x^2-8x-3y^2</m> on the disc <m>x^2+y^2\leq 4</m>.
+	    </p>
+	  </statement>
+	  <solution>
+			<p>
+				This is the same problem as <xref ref="ex_optimize_param_bound">Example</xref>,
+				but this time, we will attempt to solve it using the method of Lagrange multipliers.
+				Again, since <m>\nabla f(x,y) = \la 2x-8,-6y\ra</m>,
+				the only critical point for <m>f</m> is outside the given disc.
+				It remains to find the maximum and minimum of <m>f</m> subject to the constraint <m>x^2+y^2=4</m>,
+				so our constraint function is <m>g(x,y)=x^2+y^2</m>. We have
+				<me>
+				  \nabla f(x,y) = \la 2x-8, -6y\ra = \lambda \la 2x,2y\ra = \lambda\nabla g(x,y)
+				</me>.
+			</p>
 
-      <p>
-        Together with  the constraint, we have three equations:
-        <md>
-          <mrow>2x-8 \amp  = 2\lambda x \quad \Rightarrow\, (1-\lambda)x=4</mrow>
-          <mrow>-6y \amp  = 2\lambda y \quad \Rightarrow\, y=0 \text{ or } \lambda = -3</mrow>
-          <mrow>x^2+y^2=4</mrow>
-        </md>.
-      </p>
+			<p>
+				Together with  the constraint, we have three equations:
+				<md>
+				  <mrow>2x-8 \amp  = 2\lambda x \quad \Rightarrow\, (1-\lambda)x=4</mrow>
+				  <mrow>-6y \amp  = 2\lambda y \quad \Rightarrow\, y=0 \text{ or } \lambda = -3</mrow>
+				  <mrow>x^2+y^2=4</mrow>
+				</md>.
+			</p>
 
-      <p>
-        Now we encounter the primary difficulty with Lagrange multipliers.
-        While the idea is simple, the equations it leads to frequently are not.
-        The equations are rarely linear, so there is no systematic method for solving them:
-        solving a Lagrange multiplier problem requires a certain amount of patience and creativity!
-      </p>
+			<p>
+				Now we encounter the primary difficulty with Lagrange multipliers.
+				While the idea is simple, the equations it leads to frequently are not.
+				The equations are rarely linear, so there is no systematic method for solving them:
+				solving a Lagrange multiplier problem requires a certain amount of patience and creativity!
+			</p>
 
-      <p>
-        One of the possibilities we see above is <m>y=0</m>.
-        If <m>y=0</m>, the constraint equation requires <m>x=\pm 2</m>,
-        and in either case we can choose a value for <m>\lambda</m>
-        (<m>-1</m> and <m>3</m>, respectively) that solves the equation <m>(1-\lambda)x=4</m>.
-      </p>
+			<p>
+				One of the possibilities we see above is <m>y=0</m>.
+				If <m>y=0</m>, the constraint equation requires <m>x=\pm 2</m>,
+				and in either case we can choose a value for <m>\lambda</m>
+				(<m>-1</m> and <m>3</m>, respectively) that solves the equation <m>(1-\lambda)x=4</m>.
+			</p>
 
-      <p>
-        We find <m>f(2,0)=-12</m>, and <m>f(-2,0)=20</m>.
-        If <m>y\neq 0</m>, then we must have <m>\lambda=-3</m>.
-        Putting this into the equation <m>(1-\lambda)x=4</m> gives us <m>4x=4</m>, or <m>x=1</m>.
-        If <m>x=1</m>, the constraint equation gives us <m>1+y^2=4</m>, so <m>y=\pm \sqrt{3}</m>.
-      </p>
+			<p>
+				We find <m>f(2,0)=-12</m>, and <m>f(-2,0)=20</m>.
+				If <m>y\neq 0</m>, then we must have <m>\lambda=-3</m>.
+				Putting this into the equation <m>(1-\lambda)x=4</m> gives us <m>4x=4</m>, or <m>x=1</m>.
+				If <m>x=1</m>, the constraint equation gives us <m>1+y^2=4</m>, so <m>y=\pm \sqrt{3}</m>.
+			</p>
 
-      <p>
-        We find <m>f(1,\sqrt{3})=f(1,-\sqrt{3}) = -16</m>.
-        There are no other points that satisfy all three equations,
-        so we compare values to complete the problem: the maximum is <m>f(-2,0)=20</m>,
-        and the minimum is <m>f(1,\pm\sqrt{3})=-16</m>, as before.
-      </p>
-    </solution>
-  </example>
+			<p>
+				We find <m>f(1,\sqrt{3})=f(1,-\sqrt{3}) = -16</m>.
+				There are no other points that satisfy all three equations,
+				so we compare values to complete the problem: the maximum is <m>f(-2,0)=20</m>,
+				and the minimum is <m>f(1,\pm\sqrt{3})=-16</m>, as before.
+			</p>
+		</solution>
+	</example>
 
-  <figure xml:id="vid-multi-lagrange-example1">
-    <caption>Using the method of Lagrange multipliers</caption>
-    <video youtube="WgzwyBEDTzA"/>
-  </figure>
+	<figure xml:id="vid-multi-lagrange-example1">
+	  <caption>Using the method of Lagrange multipliers</caption>
+	  <video youtube="WgzwyBEDTzA"/>
+	</figure>
 
-  <p>
-    The method of Lagrange multipliers seems rather arcane at first glance, but it's actually not hard to understand geometrically why it works.
-  </p>
+	<p>
+		The method of Lagrange multipliers seems rather arcane at first glance, but it's actually not hard to understand geometrically why it works.
+	</p>
 
-  <figure xml:id="fig_lagrange1">
-    <caption>The constraint curve and several level curves in <xref ref="ex_lagrange1">Example</xref></caption>
-    <image xml:id="img_lagrange1" width="47%">
-      <latex-image>
-        \begin{tikzpicture}
-        \begin{axis}[
-              axis equal,
-              xtick={-2,-1,1,2},%
-              ymin=-3,ymax=3,%
-              xmin=-3,xmax=4.5%
-        ]
-        \addplot [secondcurvestyle,-,domain=0:360] ({2*cos(x)},{2*sin(x)});
-        \addplot [firstcurvestyle,-,domain={-2:2}] ({4-2*cosh(x)},{1.1547*sinh(x)});
-        \addplot [firstcurvestyle,-,domain={-4:4}] {0.57735*(x-4)};
-        \addplot [firstcurvestyle,-,domain={-4:4}] {-0.57735*(x-4)};
-        \addplot [firstcurvestyle,-,domain={-2:2}] ({4-6*cosh(x)},{3.4641*sinh(x)});
-        \addplot [thirdcurvestyle,-,domain={-2:2}] ({2*sinh(x)+4},{1.1547*cosh(x)});
-        \addplot [thirdcurvestyle,-,domain={-2:2}] ({2*sinh(x)+4},{-1.1547*cosh(x)});
-        \addplot [thirdcurvestyle,-,domain={-2:2}] ({4-3.4641*cosh(x)},{2*sinh(x)});
-        \addplot [thirdcurvestyle,-,domain={-2:2}] ({4-4*cosh(x)},{2.3094*sinh(x)});
-        \addplot [thirdcurvestyle,-,domain={-2:2}] ({4-5*cosh(x)},{2.88675*sinh(x)});
-        \addplot [thirdcurvestyle,-, domain={-2:2}] ({4-6.48*cosh(x)},{3.74*sinh(x)});
-        \end{axis}
+	<figure xml:id="fig_lagrange1">
+		<caption>The constraint curve and several level curves in <xref ref="ex_lagrange1">Example</xref></caption>
+		<image xml:id="img_lagrange1" width="47%">
+		  <latex-image>
+		    \begin{tikzpicture}
+				\begin{axis}[
+							axis equal,
+							xtick={-2,-1,1,2},%
+							ymin=-3,ymax=3,%
+							xmin=-3,xmax=4.5%
+				]
+				\addplot [secondcurvestyle,-,domain=0:360] ({2*cos(x)},{2*sin(x)});
+				\addplot [firstcurvestyle,-,domain={-2:2}] ({4-2*cosh(x)},{1.1547*sinh(x)});
+				\addplot [firstcurvestyle,-,domain={-4:4}] {0.57735*(x-4)};
+				\addplot [firstcurvestyle,-,domain={-4:4}] {-0.57735*(x-4)};
+				\addplot [firstcurvestyle,-,domain={-2:2}] ({4-6*cosh(x)},{3.4641*sinh(x)});
+				\addplot [thirdcurvestyle,-,domain={-2:2}] ({2*sinh(x)+4},{1.1547*cosh(x)});
+				\addplot [thirdcurvestyle,-,domain={-2:2}] ({2*sinh(x)+4},{-1.1547*cosh(x)});
+				\addplot [thirdcurvestyle,-,domain={-2:2}] ({4-3.4641*cosh(x)},{2*sinh(x)});
+				\addplot [thirdcurvestyle,-,domain={-2:2}] ({4-4*cosh(x)},{2.3094*sinh(x)});
+				\addplot [thirdcurvestyle,-,domain={-2:2}] ({4-5*cosh(x)},{2.88675*sinh(x)});
+				\addplot [thirdcurvestyle,-, domain={-2:2}] ({4-6.48*cosh(x)},{3.74*sinh(x)});
+				\end{axis}
 
-        \end{tikzpicture}
-      </latex-image>
-    </image>
-  </figure>
+		    \end{tikzpicture}
+		  </latex-image>
+		</image>
+	</figure>
 
-  <p>
-    Consider <xref ref="fig_lagrange1">Figure</xref>.
-    The constraint curve <m>x^2+y^2=4</m> is the dashed circle.
-    We also see the three level curves (solid) that were obtained as solutions to the Lagrange multiplier equations:
-  </p>
+	<p>
+		Consider <xref ref="fig_lagrange1">Figure</xref>.
+		The constraint curve <m>x^2+y^2=4</m> is the dashed circle.
+		We also see the three level curves (solid) that were obtained as solutions to the Lagrange multiplier equations:
+	</p>
 
-  <p>
-    <ul>
-      <li>
-        <p>
-          <m>f(x,y)=-12</m>: passing through <m>(2,0)</m>
-        </p>
-      </li>
+	<p>
+		<ul>
+			<li>
+				<p>
+					<m>f(x,y)=-12</m>: passing through <m>(2,0)</m>
+				</p>
+			</li>
 
-      <li>
-        <p>
-          <m>f(x,y)=20</m>: passing through <m>(-2,0)</m>
-        </p>
-      </li>
+			<li>
+				<p>
+					<m>f(x,y)=20</m>: passing through <m>(-2,0)</m>
+				</p>
+			</li>
 
-      <li>
-        <p>
-          <m>f(x,y)=-16</m>: this curve is actually a pair of lines,
-          <m>\sqrt{3}y=\pm (x-4)</m>, passing through <m>(1,\pm\sqrt{3})</m>, respectively.
-        </p>
-      </li>
-    </ul>
-  </p>
+			<li>
+				<p>
+					<m>f(x,y)=-16</m>: this curve is actually a pair of lines,
+					<m>\sqrt{3}y=\pm (x-4)</m>, passing through <m>(1,\pm\sqrt{3})</m>, respectively.
+				</p>
+			</li>
+		</ul>
+	</p>
 
-  <p>
-    We see that all three curves are tangent to the constraint curve,
-    as we expect from the requirement that the gradients <m>\nabla f</m> and <m>\nabla g</m> be parallel where the curves intersect.
-  </p>
+	<p>
+		We see that all three curves are tangent to the constraint curve,
+		as we expect from the requirement that the gradients <m>\nabla f</m> and <m>\nabla g</m> be parallel where the curves intersect.
+	</p>
 
-  <p>
-    Additional level curves <m>f(x,y)=c</m> are plotted as well, with dashed-dotted lines.
-    For values of <m>c</m> with <m>c\gt20</m> (greater than the maximum) or <m>c\lt-16</m> (less than the minimum),
-    the level curve <m>f(x,y)=c</m> does not intersect the constraint curve at all.
-  </p>
+	<p>
+		Additional level curves <m>f(x,y)=c</m> are plotted as well, with dashed-dotted lines.
+		For values of <m>c</m> with <m>c\gt20</m> (greater than the maximum) or <m>c\lt-16</m> (less than the minimum),
+		the level curve <m>f(x,y)=c</m> does not intersect the constraint curve at all.
+	</p>
 
-  <p>
-    For values of <m>c</m> with <m>-16\lt c\lt 20</m>,
-    the curve <m>f(x,y)=c</m> intersects the constraint curve,
-    but the intersection is what's called <em>transversal</em>:
-    at these points of intersection, the two curves are not tangent, and the gradients are not parallel.
-  </p>
+	<p>
+		For values of <m>c</m> with <m>-16\lt c\lt 20</m>,
+		the curve <m>f(x,y)=c</m> intersects the constraint curve,
+		but the intersection is what's called <em>transversal</em>:
+		at these points of intersection, the two curves are not tangent, and the gradients are not parallel.
+	</p>
 
-  <p>
-    In <xref ref="fig_lagrange1">Figure</xref>,
-    you can imagine that increasing or decreasing the value of <m>c</m> has the effect of shifting the level curve one way or the other,
-    until it <em>just</em> touches the circle. Any bigger than the maximum,
-    or smaller than the minimum, and the curves no longer intersect.
-    Of course, saying that the curves <q>just touch</q> amounts to saying that they are tangent at their point of intersection,
-    just as <xref ref="thm_lagrange_multipliers">Theorem</xref> predicts.
-  </p>
+	<p>
+		In <xref ref="fig_lagrange1">Figure</xref>,
+		you can imagine that increasing or decreasing the value of <m>c</m> has the effect of shifting the level curve one way or the other,
+		until it <em>just</em> touches the circle. Any bigger than the maximum,
+		or smaller than the minimum, and the curves no longer intersect.
+		Of course, saying that the curves <q>just touch</q> amounts to saying that they are tangent at their point of intersection,
+		just as <xref ref="thm_lagrange_multipliers">Theorem</xref> predicts.
+	</p>
 
-  <example xml:id="ex_lagrange2">
-    <title>Exploring Lagrange Multipliers Geometrically</title>
-    <statement>
-      <p>
-        Use Lagrange multipliers to locate the extrema of <m>f(x,y)=2x^2+y^2</m>, subject to the constraint <m>x+y=3</m>.
-      </p>
-    </statement>
-    <solution>
-      <p>
-        Let's see what happens if we dive right in and apply our machinery.
-        With <m>g(x,y)=x+y</m>, we need to have
-        <me>
-          \nabla f(x,y) = \la 4x, 2y\ra = \lambda\la 1,1\ra = \lambda\nabla g(x,y)
-        </me>,
-        so <m>x+y=4</m>, from our constraint, and <m>4x=\lambda=2y</m>,
-        giving us <m>y=3-x</m> and <m>y=2x</m>, so <m>2x=3-x</m>, giving <m>x=1</m>, and <m>y=2</m>.
-      </p>
+	<example xml:id="ex_lagrange2">
+	  <title>Exploring Lagrange Multipliers Geometrically</title>
+	  <statement>
+	    <p>
+	      Use Lagrange multipliers to locate the extrema of <m>f(x,y)=2x^2+y^2</m>, subject to the constraint <m>x+y=3</m>.
+	    </p>
+	  </statement>
+	  <solution>
+			<p>
+				Let's see what happens if we dive right in and apply our machinery.
+				With <m>g(x,y)=x+y</m>, we need to have
+				<me>
+				  \nabla f(x,y) = \la 4x, 2y\ra = \lambda\la 1,1\ra = \lambda\nabla g(x,y)
+				</me>,
+				so <m>x+y=4</m>, from our constraint, and <m>4x=\lambda=2y</m>,
+				giving us <m>y=3-x</m> and <m>y=2x</m>, so <m>2x=3-x</m>, giving <m>x=1</m>, and <m>y=2</m>.
+			</p>
 
-      <p>
-        We get only one solution: the value <m>f(1,2)=6</m>.
-        But is this a maximum or a minimum? And shouldn't we get both?
-      </p>
+			<p>
+				We get only one solution: the value <m>f(1,2)=6</m>.
+				But is this a maximum or a minimum? And shouldn't we get both?
+			</p>
 
-      <p>
-        Rather than blindly attacking the equations,
-        perhaps it would do to take a step back and think about the problem.
-        First, consider the constraint equation: <m>x+y=3</m>.
-        This is a line; it certainly is not the boundary of a closed, bounded reason in the plane.
-        Thus, we haven't satisfied the conditions of the Extreme Value Theorem,
-        and have no reason to expect both an absolute maximum and an absolute minimum.
-      </p>
+			<p>
+				Rather than blindly attacking the equations,
+				perhaps it would do to take a step back and think about the problem.
+				First, consider the constraint equation: <m>x+y=3</m>.
+				This is a line; it certainly is not the boundary of a closed, bounded reason in the plane.
+				Thus, we haven't satisfied the conditions of the Extreme Value Theorem,
+				and have no reason to expect both an absolute maximum and an absolute minimum.
+			</p>
 
-      <p>
-        Now, since the line <m>x+y=3</m> extends without bound,
-        it's clear that there can be no maximum value <m>c</m> beyond which the ellipse <m>2x^2+y^2=c</m> does not intersect the line.
-        There is, however, a minimum value: when <m>c=6</m>,
-        the ellipse <m>2x^2+y^2=6</m> has gradient <m>\nabla f(x,y)=\la 4,4\ra</m>,
-        giving us the tangent line
-        <me>
-          4(x-1)+4(y-2)=0, \text{ or } x+y=3
-        </me>,
-        the equation of our constraint. For value of <m>c</m> less than 3,
-        the ellipse <m>2x^2+y^2=c</m> does not intersect the line <m>x+y=3</m>.
-      </p>
-    </solution>
-  </example>
+			<p>
+				Now, since the line <m>x+y=3</m> extends without bound,
+				it's clear that there can be no maximum value <m>c</m> beyond which the ellipse <m>2x^2+y^2=c</m> does not intersect the line.
+				There is, however, a minimum value: when <m>c=6</m>,
+				the ellipse <m>2x^2+y^2=6</m> has gradient <m>\nabla f(x,y)=\la 4,4\ra</m>,
+				giving us the tangent line
+				<me>
+				  4(x-1)+4(y-2)=0, \text{ or } x+y=3
+				</me>,
+				the equation of our constraint. For value of <m>c</m> less than 3,
+				the ellipse <m>2x^2+y^2=c</m> does not intersect the line <m>x+y=3</m>.
+			</p>
+	  </solution>
+	</example>
 
-  <figure xml:id="fig_lagrange2">
-    <caption>The constraint and some level curves in <xref ref="ex_lagrange2">Example</xref></caption>
-    <image xml:id="img_lagrange2" width="47%">
-      <latex-image>
-        \begin{tikzpicture}
-        \begin{axis}[
-              xtick={-2,-1,1,2},%
-              ymin=-4,ymax=4,%
-              xmin=-3,xmax=3%
-        ]
-        \addplot [firstcurvestyle,-,domain=0:360,samples=100] ({sqrt(3)*cos(x)},{sqrt(6)*sin(x)});
-        \addplot [thirdcurvestyle,-,domain=0:360,samples=100] ({sqrt(2)*cos(x)},{2*sin(x)});
-        \addplot [thirdcurvestyle,-,domain=0:360,samples=100] ({2*cos(x)},{sqrt(8)*sin(x)});
-        \addplot [thirdcurvestyle,-,domain=0:360,samples=100] ({sqrt(5)*cos(x)},{sqrt(10)*sin(x)});
-        \addplot [secondcurvestyle,-,domain={-1:4}]{3-x};
-        \end{axis}
+	<figure xml:id="fig_lagrange2">
+		<caption>The constraint and some level curves in <xref ref="ex_lagrange2">Example</xref></caption>
+		<image xml:id="img_lagrange2" width="47%">
+		  <latex-image>
+		    \begin{tikzpicture}
+				\begin{axis}[
+							xtick={-2,-1,1,2},%
+							ymin=-4,ymax=4,%
+							xmin=-3,xmax=3%
+				]
+				\addplot [firstcurvestyle,-,domain=0:360,samples=100] ({sqrt(3)*cos(x)},{sqrt(6)*sin(x)});
+				\addplot [thirdcurvestyle,-,domain=0:360,samples=100] ({sqrt(2)*cos(x)},{2*sin(x)});
+				\addplot [thirdcurvestyle,-,domain=0:360,samples=100] ({2*cos(x)},{sqrt(8)*sin(x)});
+				\addplot [thirdcurvestyle,-,domain=0:360,samples=100] ({sqrt(5)*cos(x)},{sqrt(10)*sin(x)});
+				\addplot [secondcurvestyle,-,domain={-1:4}]{3-x};
+				\end{axis}
 
-        \end{tikzpicture}
-      </latex-image>
-    </image>
-  </figure>
+		    \end{tikzpicture}
+		  </latex-image>
+		</image>
+	</figure>
 
-  <p>
-    The method of Lagrange multipliers is not restricted to functions of two variables or to single constraints.
-    We can similarly determine the extrema of a function <m>f</m> of three variables on a closed bounded subset of <m>\mathbb{R}^3</m>.
-  </p>
+	<p>
+		The method of Lagrange multipliers is not restricted to functions of two variables or to single constraints.
+		We can similarly determine the extrema of a function <m>f</m> of three variables on a closed bounded subset of <m>\mathbb{R}^3</m>.
+	</p>
 
-  <example xml:id="ex_lagrange3">
-    <title>Determining constrained extrema for a function of three variables</title>
-    <statement>
-      <p>
-        Determine the maximum and minimum values of the function <m>f(x,y,z)=x^4+y^4+z^4</m>, subject to the constraint <m>x^2+y^2+z^2=1</m>.
-      </p>
-    </statement>
-    <solution>
-      <p>
-        With <m>g(x,y,z)=x^2+y^2+z^2</m>, the equation <m>\nabla f(x,y,z)=\lambda \nabla g(x,y,z)</m> gives us
-        <me>
-          \la 4x^3,4y^3,4z^3\ra = \lambda \la 2x, 2y, 2z\ra
-        </me>.
-      </p>
+	<example xml:id="ex_lagrange3">
+	  <title>Determining constrained extrema for a function of three variables</title>
+	  <statement>
+	    <p>
+	      Determine the maximum and minimum values of the function <m>f(x,y,z)=x^4+y^4+z^4</m>, subject to the constraint <m>x^2+y^2+z^2=1</m>.
+	    </p>
+	  </statement>
+	  <solution>
+			<p>
+				With <m>g(x,y,z)=x^2+y^2+z^2</m>, the equation <m>\nabla f(x,y,z)=\lambda \nabla g(x,y,z)</m> gives us
+				<me>
+				  \la 4x^3,4y^3,4z^3\ra = \lambda \la 2x, 2y, 2z\ra
+				</me>.
+			</p>
 
-      <p>
-        Equating first components, we have <m>2x^3=\lambda x</m>.
-        One possibility is <m>x=0</m>; the other is <m>\lambda = 2x^2</m>.
-        Similar results hold for the other two variables, leaving us with several possibilities to consider.
-      </p>
+			<p>
+				Equating first components, we have <m>2x^3=\lambda x</m>.
+				One possibility is <m>x=0</m>; the other is <m>\lambda = 2x^2</m>.
+				Similar results hold for the other two variables, leaving us with several possibilities to consider.
+			</p>
 
-      <p>
-        <ul>
-         <li>
-           <p>
-             We take the solution <m>x=0</m>, <m>y=0</m>, and <m>z=0</m> from the vector equation above.
-             But this result cannot satisfy our constraint, so we rule it out.
-           </p>
-         </li>
+			<p>
+				<ul>
+				 <li>
+					 <p>
+						 We take the solution <m>x=0</m>, <m>y=0</m>, and <m>z=0</m> from the vector equation above.
+						 But this result cannot satisfy our constraint, so we rule it out.
+					 </p>
+				 </li>
 
-          <li>
-            <p>
-              We have <m>x=0</m> and <m>y=0</m>, but <m>z\neq 0</m>.
-              The constraint equation forces <m>z=\pm 1</m>.
-              Similarly, we can have <m>x=0</m>, <m>y=\pm 1</m>, and <m>z=0</m>,
-              or <m>x=\pm 1</m>, <m>y=0</m>, and <m>z=0</m>.
-              This gives us six points, and they all give the same value for <m>f</m>:
-              <me>
-                f(\pm 1, 0, 0) = f(0,\pm 1, 0) = f(0, 0, \pm 1)=1
-              </me>.
-            </p>
-          </li>
+				  <li>
+						<p>
+							We have <m>x=0</m> and <m>y=0</m>, but <m>z\neq 0</m>.
+							The constraint equation forces <m>z=\pm 1</m>.
+							Similarly, we can have <m>x=0</m>, <m>y=\pm 1</m>, and <m>z=0</m>,
+							or <m>x=\pm 1</m>, <m>y=0</m>, and <m>z=0</m>.
+							This gives us six points, and they all give the same value for <m>f</m>:
+							<me>
+							  f(\pm 1, 0, 0) = f(0,\pm 1, 0) = f(0, 0, \pm 1)=1
+							</me>.
+						</p>
+					</li>
 
-          <li>
-            <p>
-              One of the three variables is zero.
-              If <m>x=0</m>, with <m>y</m> and <m>z</m> nonzero,
-              then we have <m>2y^2=\lambda =2z^2</m>, and since <m>x^2+y^2+z^2=1</m>,
-              we must have <m>y^2=z^2=\frac12</m>. This gives us <m>f(x,y,z) = 0+\frac14+\frac14=\frac12</m>.
-            </p>
+					<li>
+						<p>
+							One of the three variables is zero.
+							If <m>x=0</m>, with <m>y</m> and <m>z</m> nonzero,
+							then we have <m>2y^2=\lambda =2z^2</m>, and since <m>x^2+y^2+z^2=1</m>,
+							we must have <m>y^2=z^2=\frac12</m>. This gives us <m>f(x,y,z) = 0+\frac14+\frac14=\frac12</m>.
+						</p>
 
-            <p>
-              There are twelve possibilities here: one variable zero,
-              and the other two can be <m>\pm \frac{1}{\sqrt{2}}</m>.
-              Each one gives a value of <m>\frac12</m> for <m>f</m>.
-            </p>
-          </li>
+						<p>
+							There are twelve possibilities here: one variable zero,
+							and the other two can be <m>\pm \frac{1}{\sqrt{2}}</m>.
+							Each one gives a value of <m>\frac12</m> for <m>f</m>.
+						</p>
+					</li>
 
-          <li>
-            <p>
-              Finally, we could have all three variables nonzero.
-              In this case the Lagrange multiplier equations give us
-              <me>
-                2x^2=2y^2=2z^2=\lambda
-              </me>,
-              and putting these into the constraint equation gives us <m>x^2=y^2=z^2=\frac13</m>.
-              There are eight different points satisfying this requirement, but all of them give us a value of
-              <me>
-                f(x,y,z)=\frac19+\frac19+\frac19=\frac13
-              </me>.
-            </p>
-          </li>
-        </ul>
-      </p>
+				  <li>
+						<p>
+							Finally, we could have all three variables nonzero.
+							In this case the Lagrange multiplier equations give us
+							<me>
+							  2x^2=2y^2=2z^2=\lambda
+							</me>,
+							and putting these into the constraint equation gives us <m>x^2=y^2=z^2=\frac13</m>.
+							There are eight different points satisfying this requirement, but all of them give us a value of
+							<me>
+							  f(x,y,z)=\frac19+\frac19+\frac19=\frac13
+							</me>.
+						</p>
+					</li>
+				</ul>
+			</p>
 
-      <p>
-        Comparing values, we see that the maximum value for <m>f</m>,
-        when constrained to unit sphere, is 1, and there are 6 points on the sphere with this value.
-        The minimum value is <m>\frac13</m>, and this occurs at 8 different points.
-      </p>
-    </solution>
-  </example>
+			<p>
+				Comparing values, we see that the maximum value for <m>f</m>,
+				when constrained to unit sphere, is 1, and there are 6 points on the sphere with this value.
+				The minimum value is <m>\frac13</m>, and this occurs at 8 different points.
+			</p>
+		</solution>
+	</example>
 
-  <aside>
-    <p>
-      For functions of three or more variables,
-      it is also possible to consider two or more constraints.
-      If we wished to optimize a function <m>f(x,y,z)</m> subject to constraints <m>g(x,y,z)=a</m> and <m>h(x,y,z)=b</m>,
-      we would have to solve the vector equation
-      <md>
-        <mrow>\nabla f(x,y,z)\amp =\lambda g(x,y,z)</mrow>
-        <mrow>\amp \quad + \mu h(x,y,z)</mrow>
-      </md>,
-      along with the two constraint equations.
-      Problems involving large (or even arbitrary!)
-      numbers of variables and constraints are encountered everywhere from Economics to Quantum Mechanics.
-    </p>
-  </aside>
+	<aside>
+	  <p>
+			For functions of three or more variables,
+			it is also possible to consider two or more constraints.
+			If we wished to optimize a function <m>f(x,y,z)</m> subject to constraints <m>g(x,y,z)=a</m> and <m>h(x,y,z)=b</m>,
+			we would have to solve the vector equation
+			<md>
+			  <mrow>\nabla f(x,y,z)\amp =\lambda g(x,y,z)</mrow>
+				<mrow>\amp \quad + \mu h(x,y,z)</mrow>
+			</md>,
+			along with the two constraint equations.
+			Problems involving large (or even arbitrary!)
+			numbers of variables and constraints are encountered everywhere from Economics to Quantum Mechanics.
+		</p>
+	</aside>
 
-  <p>
-    As the above examples show, Lagrange multiplier problems are often easy to set up,
-    but hard to solve by hand. So why is the method useful?
-    One reason is that it can be used to establish useful theoretical results.
-    But more practically, the method of Lagrange multipliers is useful because it is easy to program into a computer:
-    we simply provide the function and the constraint(s), and the computer solves the resulting equations.
-    There is no need for the same degree of problem-solving employed when we first tackled optimization problems in one variable,
-    back in <xref ref="chapter_deriv_apps">Chapter</xref>.
-    To emphasize this, we consider one more example:
-    a reprise of one of the optimization problems from <xref ref="sec_optimization">Section</xref>.
-  </p>
+	<p>
+		As the above examples show, Lagrange multiplier problems are often easy to set up,
+		but hard to solve by hand. So why is the method useful?
+		One reason is that it can be used to establish useful theoretical results.
+		But more practically, the method of Lagrange multipliers is useful because it is easy to program into a computer:
+		we simply provide the function and the constraint(s), and the computer solves the resulting equations.
+		There is no need for the same degree of problem-solving employed when we first tackled optimization problems in one variable,
+		back in <xref ref="chapter_deriv_apps">Chapter</xref>.
+		To emphasize this, we consider one more example:
+		a reprise of one of the optimization problems from <xref ref="sec_optimization">Section</xref>.
+	</p>
 
-  <example xml:id="ex_lagrange4">
-    <title>Solving an optimization problem with Lagrange multipliers</title>
-    <statement>
-      <p>
-        Find the dimensions of a cylindrical can of volume <m>206 \text{ in}^3</m> that minimize the can's surface area.
-      </p>
-    </statement>
-    <solution>
-      <p>
-        This was one of the exercises at the end of <xref ref="sec_optimization">Section</xref>.
-        The surface area of a cylinder of radius <m>r</m> and height <m>h</m> is given by
-        <me>
-          s(r,h) = 2r^2+2\pi rh
-        </me>.
-        This is the function we wish to minimize, subject to the volume constraint <m>\pi r^2 h = 206</m>.
-      </p>
+	<example xml:id="ex_lagrange4">
+	  <title>Solving an optimization problem with Lagrange multipliers</title>
+	  <statement>
+	    <p>
+	      Find the dimensions of a cylindrical can of volume <m>206 \text{ in}^3</m> that minimize the can's surface area.
+	    </p>
+	  </statement>
+	  <solution>
+			<p>
+				This was one of the exercises at the end of <xref ref="sec_optimization">Section</xref>.
+				The surface area of a cylinder of radius <m>r</m> and height <m>h</m> is given by
+				<me>
+				  s(r,h) = 2r^2+2\pi rh
+				</me>.
+				This is the function we wish to minimize, subject to the volume constraint <m>\pi r^2 h = 206</m>.
+			</p>
 
-      <p>
-        In <xref ref="sec_optimization">Section</xref>,
-        our next step would have been to solve the constraint equation for one of the two variables (likely <m>h</m> ) in terms of the other,
-        so we could rewrite <m>s(r,h)</m> as a function of one variable and apply the techniques of <xref ref="sec_extreme_values">Section</xref>.
-      </p>
+			<p>
+				In <xref ref="sec_optimization">Section</xref>,
+				our next step would have been to solve the constraint equation for one of the two variables (likely <m>h</m> ) in terms of the other,
+				so we could rewrite <m>s(r,h)</m> as a function of one variable and apply the techniques of <xref ref="sec_extreme_values">Section</xref>.
+			</p>
 
-      <p>
-        Instead, we introduce the constraint function <m>v(r,h)= \pi r^2 h</m>.
-        The Lagrange multiplier equation <m>\nabla s = \lambda \nabla v</m> gives us
-        <me>
-          \la 4r+2\pi h, 2\pi r\ra = \lambda\la 2\pi r h, \pi r^2\ra
-        </me>.
-        Equating the second components gives us <m>2\pi r = \lambda\pi r^2</m>.
-        Since the constraint ensures that <m>r\neq 0</m>, we have <m>\lambda r = 2</m>.
-      </p>
+			<p>
+				Instead, we introduce the constraint function <m>v(r,h)= \pi r^2 h</m>.
+				The Lagrange multiplier equation <m>\nabla s = \lambda \nabla v</m> gives us
+				<me>
+				  \la 4r+2\pi h, 2\pi r\ra = \lambda\la 2\pi r h, \pi r^2\ra
+				</me>.
+				Equating the second components gives us <m>2\pi r = \lambda\pi r^2</m>.
+				Since the constraint ensures that <m>r\neq 0</m>, we have <m>\lambda r = 2</m>.
+			</p>
 
-      <p>
-        Now, we equate the first components:
-        <me>
-          4r+2\pi h = \lambda \cdot 2\pi r
-        </me>,
-        but <m>\lambda r =2</m>, so we have simply <m>4r+2\pi h = 4\pi h</m>,
-        or <m>\pi h = 2r</m>. Putting this into the constraint equation gives us
-        <me>
-          \pi r^2 h = 2r^2 = 206
-        </me>,
-        so <m>r=\sqrt[3]{103}\approx 4.688</m>, and <m>h=2\sqrt[3]{103}/\pi  \approx 2.984</m>.
-        This is, of course, the same result you would have found if you did this exercise back in <xref ref="sec_optimization">Section</xref>.
-      </p>
-    </solution>
-  </example>
+			<p>
+				Now, we equate the first components:
+				<me>
+				  4r+2\pi h = \lambda \cdot 2\pi r
+				</me>,
+				but <m>\lambda r =2</m>, so we have simply <m>4r+2\pi h = 4\pi h</m>,
+				or <m>\pi h = 2r</m>. Putting this into the constraint equation gives us
+				<me>
+				  \pi r^2 h = 2r^2 = 206
+				</me>,
+				so <m>r=\sqrt[3]{103}\approx 4.688</m>, and <m>h=2\sqrt[3]{103}/\pi  \approx 2.984</m>.
+				This is, of course, the same result you would have found if you did this exercise back in <xref ref="sec_optimization">Section</xref>.
+			</p>
+		</solution>
+	</example>
 
-  <figure xml:id="vid-multi-lagrange-example2">
-    <caption>Another optimization problem using Lagrange multipliers</caption>
-    <video youtube="uvQku50u_-0"/>
-  </figure>
+	<figure xml:id="vid-multi-lagrange-example2">
+	  <caption>Another optimization problem using Lagrange multipliers</caption>
+	  <video youtube="uvQku50u_-0"/>
+	</figure>
 </section>
