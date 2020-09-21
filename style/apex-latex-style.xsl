@@ -42,91 +42,6 @@
     <xsl:text>\setmainfont{Carlito-Regular}[Numbers=OldStyle]&#xa;</xsl:text>
 </xsl:template>
 
-<<<<<<< HEAD
-<!-- <xsl:template name="font-xelatex-style">
-    <xsl:call-template name="xelatex-font-check">
-        <xsl:with-param name="font-name" select="'Carlito-Regular'"/>
-    </xsl:call-template>
-    <xsl:text>\newfontfamily{\divisionfont}{Carlito-Regular}[Numbers=Lining]&#xa;</xsl:text>
-    <xsl:text>\newfontfamily{\contentsfont}{Carlito-Regular}[Numbers=Lining]&#xa;</xsl:text>
-    <xsl:text>\newfontfamily{\pagefont}{Carlito-Regular}[Numbers=Lining]&#xa;</xsl:text>
-    <xsl:text>\newfontfamily{\blocktitlefont}{Carlito-Regular}[Numbers=Lining]&#xa;</xsl:text>
-    <xsl:text>\newfontfamily{\tabularfont}{Carlito-Regular}[Numbers={Monospaced,Lining}]&#xa;</xsl:text>
-    <xsl:text>\newfontfamily{\xreffont}{Carlito-Regular}[Numbers=Lining]&#xa;</xsl:text>
-    <xsl:text>\newfontfamily{\titlepagefont}{Carlito-Regular}[Numbers=Lining]&#xa;</xsl:text>
-    <xsl:text>\newfontfamily{\ornamental}{Carlito-Regular}&#xa;</xsl:text>
-</xsl:template> -->
-
-<!-- the above additional font declarations didn't seem to work for Carlito -->
-
-<!-- ################# -->
-<!-- Division Headings -->
-<!-- ################# -->
-
-<!-- Default LaTeX style, retaining \divisionfont defined above   -->
-<!-- But all division headings are in maroon color, defined above -->
-
-<xsl:template name="titlesec-chapter-style">
-    <xsl:text>\titleformat{\chapter}[display]&#xa;</xsl:text>
-    <xsl:text>{\divisionfont\huge\bfseries}{\divisionnameptx\space\thechapter}{20pt}{\Huge#1}&#xa;</xsl:text>
-    <xsl:text>[{\Large\authorsptx}]&#xa;</xsl:text>
-    <xsl:text>\titleformat{name=\chapter,numberless}[display]&#xa;</xsl:text>
-    <xsl:text>{\divisionfont\huge\bfseries}{}{0pt}{#1}&#xa;</xsl:text>
-    <xsl:text>[{\Large\authorsptx}]&#xa;</xsl:text>
-    <xsl:text>\titlespacing*{\chapter}{0pt}{50pt}{40pt}&#xa;</xsl:text>
-</xsl:template>
-
-<!-- Horizontal rule before, plus line break          -->
-<!-- Section 4.1(1ex)(title)                          -->
-<!-- Horizontal rule after, but lifted                -->
-<!-- Spacing after is default, likely needs reduction -->
-<!-- No change to unnumbered version                  -->
-<!-- N.B. Protect optional argument inside optional   -->
-<!-- argument with a defensive TeX group, {}          -->
-
-<xsl:template name="titlesec-section-style">
-    <xsl:text>\titleformat{\section}[block]&#xa;</xsl:text>
-    <xsl:text>{\divisionfont\Large\bfseries\hrulefill\\}{\divisionnameptx\space\thesection}{1ex}{#1}&#xa;</xsl:text>
-    <xsl:text>[{\rule[0.8\baselineskip]{\textwidth}{0.5pt}}]&#xa;</xsl:text>
-    <xsl:text>\titleformat{name=\section,numberless}[block]&#xa;</xsl:text>
-    <xsl:text>{\divisionfont\Large\bfseries}{}{0pt}{#1}&#xa;</xsl:text>
-    <xsl:text>[{\large\authorsptx}]&#xa;</xsl:text>
-    <xsl:text>\titlespacing*{\section}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}&#xa;</xsl:text>
-</xsl:template>
-
-<!-- "subsection" are much like "section", except -->
-<!--   * no rule before                           -->
-<!--   * no "Subsection" string                   -->
-<!--   * 90% width rule below, flush left         -->
-<xsl:template name="titlesec-subsection-style">
-    <xsl:text>\titleformat{\subsection}[block]&#xa;</xsl:text>
-    <xsl:text>{\divisionfont\large\bfseries}{\thesubsection}{1ex}{#1}&#xa;</xsl:text>
-    <xsl:text>[{\rule[0.8\baselineskip]{0.9\textwidth}{0.5pt}}]&#xa;</xsl:text>
-    <xsl:text>\titleformat{name=\subsection,numberless}[block]&#xa;</xsl:text>
-    <xsl:text>{\normalfont\large\bfseries}{}{0pt}{#1}&#xa;</xsl:text>
-    <xsl:text>[{\normalsize\authorsptx}]&#xa;</xsl:text>
-    <xsl:text>\titlespacing*{\subsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}&#xa;</xsl:text>
-</xsl:template>
-
- <!-- subsubsections are not numbered, so are -->
- <!-- plain, just a font change from defaults -->
-
- <xsl:template name="titlesec-subsubsection-style">
-    <xsl:text>\titleformat{\subsubsection}[hang]&#xa;</xsl:text>
-    <xsl:text>{\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{#1}&#xa;</xsl:text>
-    <xsl:text>[{\small\authorsptx}]&#xa;</xsl:text>
-    <xsl:text>\titleformat{name=\subsubsection,numberless}[block]&#xa;</xsl:text>
-    <xsl:text>{\divisionfont\normalsize\bfseries}{}{0pt}{#1}&#xa;</xsl:text>
-    <xsl:text>[{\normalsize\authorsptx}]&#xa;</xsl:text>
-    <xsl:text>\titlespacing*{\subsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}&#xa;</xsl:text>
-</xsl:template>
-
-<!-- define tcolorboxes for theorem and friends -->
-
-<xsl:template match="list" mode="tcb-style">
-    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=blue!60!black!20, colframe=blue!30!black!50, colback=white!95!blue, coltitle=black, titlerule=-0.3pt,</xsl:text>
-</xsl:template>
-=======
 
 <!-- define tcolorboxes for theorem and friends -->
 
@@ -134,7 +49,6 @@
 <!-- <xsl:template match="list[not(parent::insight)]" mode="tcb-style">
     <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=blue!60!black!20, colframe=blue!30!black!50, colback=white!95!blue, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template> -->
->>>>>>> sean/main
 
 <xsl:template match="insight" mode="tcb-style">
     <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=red!60!black!20, colframe=red!30!black!50, colback=white!95!red, coltitle=black, titlerule=-0.3pt,</xsl:text>
@@ -154,17 +68,10 @@
     <xsl:text>fonttitle=\bfseries, attach boxed title to top left={xshift=4mm,yshift=-3mm}, top=3mm,&#xa;</xsl:text>
 </xsl:template>
 
-<<<<<<< HEAD
-<xsl:template match="&ASIDE-LIKE;" mode="tcb-style">
-    <xsl:text>enhanced, colback=blue!3, colframe=blue!50!black,&#xa;</xsl:text>
-    <xsl:text>coltitle=black, fonttitle=\bfseries, attach title to upper, after title={\space},</xsl:text>
-</xsl:template>
-=======
 <!-- <xsl:template match="&ASIDE-LIKE;" mode="tcb-style">
     <xsl:text>enhanced, colback=blue!3, colframe=blue!50!black,&#xa;</xsl:text>
     <xsl:text>coltitle=black, fonttitle=\bfseries, attach title to upper, after title={\space},</xsl:text>
 </xsl:template> -->
->>>>>>> sean/main
 
 <xsl:template match="example" mode="tcb-style">
     <xsl:text>fonttitle=\normalfont\bfseries, colback=white, colframe=black, colbacktitle=white, coltitle=black,
@@ -172,11 +79,7 @@
       breakable,
       frame hidden,
       overlay unbroken={
-<<<<<<< HEAD
-          \draw[thick] ([yshift=-2ex]frame.north west)--(frame.south west)--([xshift=4ex]frame.south west);
-=======
           \draw[thick] ([yshift=-2ex]frame.north west)--([yshift=2ex]frame.south west)--([xshift=2ex,yshift=2ex]frame.south west);
->>>>>>> sean/main
       },
       overlay first={
           \draw[thick] ([yshift=-2ex]frame.north west)--(frame.south west);
@@ -185,34 +88,13 @@
           \draw[thick] ([yshift=-2ex]frame.north west)--(frame.south west);
       },
       overlay last={
-<<<<<<< HEAD
-          \draw[thick] ([yshift=-2ex]frame.north west)--(frame.south west)--([xshift=4ex]frame.south west);
-=======
           \draw[thick] ([yshift=-2ex]frame.north west)--([yshift=2ex]frame.south west)--([xshift=2ex,yshift=2ex]frame.south west);
->>>>>>> sean/main
       },
     </xsl:text>
 </xsl:template>
 
-<<<<<<< HEAD
-<!-- turn off hints, answers, and solutions for divisional exercises -->
-<xsl:param name="exercise.divisional.hint" select="'no'"/>
-<xsl:param name="exercise.divisional.answer" select="'no'"/>
-<xsl:param name="exercise.divisional.solution" select="'no'"/>
-
-<!-- print options -->
-<xsl:param name="latex.print" select="'no'"/>
-<xsl:param name="latex.pageref" select="'no'"/>
-<xsl:param name="latex.sides" select="'one'"/>
-<!-- ragged right text alignment for accessibility -->
-<xsl:param name="text.alignment" select="'raggedright'"/>
-
-<!-- use original APEX geometry definitions -->
-<xsl:param name="latex.geometry" select="'papersize={8.5in,11in},inner=1in,textheight=9in,textwidth=320pt,marginparwidth=150pt,marginparsep=32pt'"/>
-=======
 <!-- use original APEX geometry definitions -->
 <xsl:param name="latex.geometry" select="'inner=1in,textheight=9in,textwidth=320pt,marginparwidth=150pt,marginparsep=32pt,bottom=1in,footskip=29pt'"/>
->>>>>>> sean/main
 
 <!-- apply exercise geometry -->
 <xsl:template match="exercises|solutions[not(parent::backmatter)]|reading-questions|glossary|references|worksheet" mode="latex-division-heading">
@@ -255,11 +137,6 @@
     <xsl:text>&#xa;</xsl:text>
 </xsl:template>
 
-<<<<<<< HEAD
-
-<!-- define exercise geometry -->
-<xsl:template match="exercises" mode="new-geometry">
-=======
 <!-- exercise geometry for backmatter appendix -->
 <xsl:template match="appendix" mode="latex-division-heading">
   <xsl:if test="self::appendix">
@@ -292,25 +169,18 @@
 </xsl:template>
 <!-- define exercise geometry -->
 <xsl:template match="exercises|appendix" mode="new-geometry">
->>>>>>> sean/main
     <xsl:text>\newgeometry{</xsl:text>
     <xsl:text>inner=72pt</xsl:text>
     <xsl:text>, outer=72pt</xsl:text>
     <xsl:text>, textheight=9.25in</xsl:text>
     <xsl:text>, tmargin=.75in</xsl:text>
     <xsl:text>, marginparwidth=150pt</xsl:text>
-<<<<<<< HEAD
-    <xsl:text>, marginparsep=32pt</xsl:text>
-=======
     <xsl:text>, marginparsep=12pt</xsl:text>
->>>>>>> sean/main
     <xsl:text>}&#xa;</xsl:text>
 </xsl:template>
 
 <!-- restore geometry for next section -->
 
-<<<<<<< HEAD
-=======
 <!-- figures in the margin -->
 <!-- load marginnote package -->
 <xsl:param name="latex.preamble.early" select="'\usepackage{marginnote}'"/>
@@ -384,7 +254,6 @@
     <xsl:text>}&#xa;</xsl:text>
     <xsl:text>}&#xa;</xsl:text>
 </xsl:template> -->
->>>>>>> sean/main
 
 <xsl:template match="exercises" mode="latex-division-footing">
     <!-- Inspect parent (part through subsubsection)  -->
@@ -404,18 +273,6 @@
     </xsl:if>
 </xsl:template>
 
-<<<<<<< HEAD
-
-<!-- uncommenting these will omit videos -->
-    <xsl:template match="video[starts-with(@xml:id, 'vid')]" />
-    <!-- use next line if videos also omitted in html -->
-    <xsl:template match="figure[starts-with(@xml:id, 'vid')]" />
-    <!-- use this instead if videos included in html  **don't use both!!** -->
-    <!-- <xsl:template match="figure[starts-with(@xml:id, 'vid')]">
-      <xsl:text>\stepcounter{cthm}&#xa;&#xa;</xsl:text>
-    </xsl:template> -->
-    <xsl:template match="p[starts-with(@xml:id, 'vidint')]" />
-=======
 <!-- now come all the options -->
 <!-- turn off hints, answers, and solutions for divisional exercises -->
 <xsl:param name="exercise.divisional.hint" select="'no'"/>
@@ -435,5 +292,4 @@
 <xsl:template match="figure[starts-with(@xml:id, 'vid')]" />
 <xsl:template match="p[starts-with(@xml:id, 'vidint')]" />
 <xsl:template match="aside[starts-with(@xml:id, 'vidnote')]" /> -->
->>>>>>> sean/main
 </xsl:stylesheet>
