@@ -645,7 +645,7 @@
       </p>
     </statement>
     <solution>
-      <video xml:id="vid_graphs_extreme_val_ex_2" width="98%" youtube="zn--ShSSMqk"/>
+      <video xml:id="vid_graphs_extreme_val_ex_2" width="98%" youtube="zn&#45;-ShSSMqk"/>
 
       <p>
         Here <m>f</m> is piecewise-defined,
@@ -952,32 +952,26 @@
     rate of change is same as the <em>average</em> rate of change.
     This is surprisingly useful, as we'll see.
   </p>
+
   <exercises>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          Terms and Concepts
-        </p>
-      </introduction>
-
+    <subexercises>
+      <title>Terms and Concepts</title>
       <exercise>
         <webwork>
-            <statement>
-              <p>
-                Describe what an <q>extreme value</q>
-                of a function is in your own words.
-              </p>
-
-              <p>
-                <var form="essay"/>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                Answers will vary.
-              </p>
-            </solution>
+          <statement>
+            <p>
+              Describe what an <q>extreme value</q>
+              of a function is in your own words.
+            </p>
+            <p>
+              <var form="essay"/>
+            </p>
+          </statement>
+          <solution>
+            <p>
+              Answers will vary.
+            </p>
+          </solution>
         </webwork>
       </exercise>
 
@@ -996,20 +990,19 @@
 
       <exercise>
         <webwork>
-            <statement>
-              <p>
-                Describe the difference between absolute and relative maxima in your own words.
-              </p>
-
-              <p>
-                <var form="essay"/>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                Answers will vary.
-              </p>
-            </solution>
+          <statement>
+            <p>
+              Describe the difference between absolute and relative maxima in your own words.
+            </p>
+            <p>
+              <var form="essay"/>
+            </p>
+          </statement>
+          <solution>
+            <p>
+              Answers will vary.
+            </p>
+          </solution>
         </webwork>
       </exercise>
 
@@ -1028,54 +1021,56 @@
 
       <exercise>
         <webwork>
-            <pg-code>
-              $true=PopUp(['?','True','False'],1);
-              $false=PopUp(['?','True','False'],2);
-            </pg-code>
-
-            <statement>
-              <p>
-                True or False?
-                If <m>c</m> is a critical value of a function <m>f</m>,
-                then <m>f</m> has either a relative maximum or relative minimum at <m>x=c</m>.
-                <var name="$false" form="popup"/>
-              </p>
-            </statement>
+          <pg-code>
+            $true=PopUp(['?','True','False'],1);
+            $false=PopUp(['?','True','False'],2);
+          </pg-code>
+          <statement>
+            <p>
+              <var name="$false" form="popup"/>
+              If <m>c</m> is a critical value of a function <m>f</m>,
+              then <m>f</m> has either a relative maximum or relative minimum at <m>x=c</m>.
+            </p>
+          </statement>
         </webwork>
       </exercise>
 
       <exercise>
-        <statement>
-          <p>
-            Fill in the blanks: The critical points of a function <m>f</m> are found where <m>\fp(x)</m> is equal to <fillin/> or where <m>\fp(x)</m> is <fillin/>.
-          </p>
-        </statement>
-        <answer>
-          <p>
-            Where <m>\fp(x)</m> is equal to <em>0</em>
-            or where <m>\fp(x)</m> is <em>undefined</em>.
-          </p>
-        </answer>
-      </exercise>
-
-    </exercisegroup>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          In the following exercises,
-          identify each of the marked points as being an absolute maximum or minimum,
-          a relative maximum or minimum, or none of the above.
-        </p>
-      </introduction>
-
-      <exercise>
         <webwork>
+          <pg-code>
+            $zero = Real(0);
+            Context()->strings->add('undefined'=>{});
+            Context()->strings->add('not defined'=>{alias=>'undefined'});
+            $undefined = String("undefined");
+          </pg-code>
+          <statement>
+            <p>
+              Fill in the blanks:
+              The critical points of a function <m>f</m> are found where <m>\fp(x)</m> is equal to <var name="$zero" width="10"/>
+              or where <m>\fp(x)</m> is <var name="$undefined" width="10"/>.
+            </p>
+          </statement>
+        </webwork>
+      </exercise>
+    </subexercises>
+
+    <subexercises>
+      <title>Problems</title>
+      <exercisegroup cols="2">
+        <introduction>
+          <p>
+            Identify each of the marked points as being an absolute maximum or minimum,
+            a relative maximum or minimum, or none of the above.
+          </p>
+        </introduction>
+
+        <exercise>
+          <webwork>
             <pg-code>
               $gr=init_graph(-0.5,-2.5,6.5,3.5,axes=>[0,0],size=>[282,282]);
               $gr->lb('reset');
-              for my$i(2,4,6){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top'));};
-              for my$i(-2,2){$gr->moveTo(-0.04,$i);$gr->lineTo(0.04,$i,'black',2);$gr->lb(new Label(-0.05,$i,$i,'black','right','middle'));};
+              for my$i(2,4,6){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top','large'));};
+              for my$i(-2,2){$gr->moveTo(-0.04,$i);$gr->lineTo(0.04,$i,'black',2);$gr->lb(new Label(-0.05,$i,$i,'black','right','middle','large'));};
               @x=(0.1,1,2,3,4,5,6);
               @y=(-2,3,1,2,1,-1,2.5);
               for my $i(0..2){
@@ -1085,80 +1080,62 @@
                 add_functions($gr,"$right[$i] for x in &lt;$x[2*$i+1],$x[2*$i+2]> using color:blue and weight:2");
               };
               for my $i (0) {$gr->stamps(open_circle($x[$i],$y[$i],'blue'));
-                $gr->lb(new Label($x[$i]+0.1,$y[$i],$ALPHABET[$i],'black','left','middle'));
-              };
-              for my $i (1) {$gr->stamps(closed_circle($x[$i],$y[$i],'blue'));
-                $gr->lb(new Label($x[$i],$y[$i]+0.05,$ALPHABET[$i],'black','center','bottom'));
-              };
-              for my $i (2,5) {$gr->stamps(closed_circle($x[$i],$y[$i],'blue'));
-                $gr->lb(new Label($x[$i],$y[$i]-0.05,$ALPHABET[$i],'black','center','top'));
+                $gr->lb(new Label($x[$i],$y[$i],$ALPHABET[$i],'black','left','top','large'));
               };
               for my $i (3) {$gr->stamps(open_circle($x[$i],$y[$i],'blue'));
-                $gr->lb(new Label($x[$i],$y[$i]+0.05,$ALPHABET[$i],'black','center','bottom'));
+                $gr->lb(new Label($x[$i],$y[$i],$ALPHABET[$i],'black','left','bottom','large'));
               };
-              for my $i (4) {$gr->stamps(closed_circle($x[$i],$y[$i],'blue'));
-                $gr->lb(new Label($x[$i]+0.1,$y[$i],$ALPHABET[$i],'black','left','middle'));
+              for my $i (1,4,6) {$gr->stamps(closed_circle($x[$i],$y[$i],'blue'));
+                $gr->lb(new Label($x[$i],$y[$i],$ALPHABET[$i],'black','left','bottom','large'));
               };
-              for my $i (6) {$gr->stamps(closed_circle($x[$i],$y[$i],'blue'));
-                $gr->lb(new Label($x[$i]-0.1,$y[$i],$ALPHABET[$i],'black','right','middle'));
+              for my $i (2,5) {$gr->stamps(closed_circle($x[$i],$y[$i],'blue'));
+                $gr->lb(new Label($x[$i],$y[$i],$ALPHABET[$i],'black','left','top','large'));
               };
-              $A=PopUp(['?','an absolute maximum','an absolute minimum','a relative maximum','a relative minimum','none of the above'],5);
-              $B=PopUp(['?','an absolute maximum','an absolute minimum','a relative maximum','a relative minimum','none of the above'],1);
-              $C=PopUp(['?','an absolute maximum','an absolute minimum','a relative maximum','a relative minimum','none of the above'],4);
-              $D=PopUp(['?','an absolute maximum','an absolute minimum','a relative maximum','a relative minimum','none of the above'],5);
-              $E=PopUp(['?','an absolute maximum','an absolute minimum','a relative maximum','a relative minimum','none of the above'],5);
-              $F=PopUp(['?','an absolute maximum','an absolute minimum','a relative maximum','a relative minimum','none of the above'],4);
-              $G=PopUp(['?','an absolute maximum','an absolute minimum','a relative maximum','a relative minimum','none of the above'],5);
+              for my $A ('A'..'G') {Context()->strings->add($A=>{})};
+              $absmax = List("B");
+              $absmin = List("None");
+              $relmax = List("B");
+              $relmin = List("C","F");
             </pg-code>
-
             <statement>
-              <p>
-                Identify each of the marked points as being an absolute maximum or minimum,
-                a relative maximum or minimum, or none of the above.
-              </p>
-
-              <sidebyside widths="47%">
+              <sidebyside>
                 <image pg-name="$gr"/>
               </sidebyside>
-
+              <instruction>
+                Enter the <em>absolute maxima</em> points here, using commas to separate them if there is more than one. If there are none, enter <c>NONE</c>.
+              </instruction>
               <p>
-                <m>A</m> is <var name="$A" form="popup"/>.
+                <var name="$absmax" width="10"/>
               </p>
-
+              <instruction>
+                Enter the <em>absolute minima</em> points here, using commas to separate them if there is more than one. If there are none, enter <c>NONE</c>.
+              </instruction>
               <p>
-                <m>B</m> is <var name="$B" form="popup"/>.
+                <var name="$absmin" width="10"/>
               </p>
-
+              <instruction>
+                Enter the <em>relative maxima</em> points here, using commas to separate them if there is more than one. If there are none, enter <c>NONE</c>.
+              </instruction>
               <p>
-                <m>C</m> is <var name="$C" form="popup"/>.
+                <var name="$relmax" width="10"/>
               </p>
-
+              <instruction>
+                Enter the <em>relative minima</em> points here, using commas to separate them if there is more than one. If there are none, enter <c>NONE</c>.
+              </instruction>
               <p>
-                <m>D</m> is <var name="$D" form="popup"/>.
-              </p>
-
-              <p>
-                <m>E</m> is <var name="$E" form="popup"/>.
-              </p>
-
-              <p>
-                <m>F</m> is <var name="$F" form="popup"/>.
-              </p>
-
-              <p>
-                <m>G</m> is <var name="$G" form="popup"/>.
+                <var name="$relmin" width="10"/>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
             <pg-code>
               $gr=init_graph(-0.5,-2.5,5.5,2.5,axes=>[0,0],size=>[282,282]);
               $gr->lb('reset');
-              for my$i(2,4){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top'));};
-              for my$i(-2,2){$gr->moveTo(-0.04,$i);$gr->lineTo(0.04,$i,'black',2);$gr->lb(new Label(-0.05,$i,$i,'black','right','middle'));};
+              for my$i(2,4){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top','large'));};
+              for my$i(-2,2){$gr->moveTo(-0.04,$i);$gr->lineTo(0.04,$i,'black',2);$gr->lb(new Label(-0.05,$i,$i,'black','right','middle','large'));};
               @x=(1,2,3,4,5);
               @y=(-2,1,2,1,-1);
               $f[0]=Formula("(x-$x[0])^2/($x[1]-$x[0])^2*($y[1]-$y[0])+$y[0]");
@@ -1166,633 +1143,792 @@
               $f[2]=Formula("(x-$x[3])^2/($x[2]-$x[3])^2*($y[2]-$y[3])+$y[3]");
               $f[3]=Formula("(x-$x[3])/($x[4]-$x[3])*($y[4]-$y[3])+$y[3]");
               for my $i(0..3) {add_functions($gr,"$f[$i] for x in &lt;$x[$i],$x[$i+1]> using color:blue and weight:2");};
-              for my $i (0,2) {$gr->stamps(closed_circle($x[$i],$y[$i],'blue'));
-                $gr->lb(new Label($x[$i],$y[$i]+0.05,$ALPHABET[$i],'black','center','bottom'));
+              for my $i (0,1,2) {$gr->stamps(closed_circle($x[$i],$y[$i],'blue'));
+                $gr->lb(new Label($x[$i],$y[$i],$ALPHABET[$i],'black','right','bottom','large'));
               };
-              for my $i (1) {$gr->stamps(closed_circle($x[$i],$y[$i],'blue'));
-                $gr->lb(new Label($x[$i]-0.1,$y[$i],$ALPHABET[$i],'black','right','middle'));
+              for my $i (3,4) {$gr->stamps(closed_circle($x[$i],$y[$i],'blue'));
+                $gr->lb(new Label($x[$i],$y[$i],$ALPHABET[$i],'black','left','bottom','large'));
               };
-              for my $i (3) {$gr->stamps(closed_circle($x[$i],$y[$i],'blue'));
-                $gr->lb(new Label($x[$i]+0.1,$y[$i],$ALPHABET[$i],'black','left','middle'));
-              };
-              for my $i (4) {$gr->stamps(closed_circle($x[$i],$y[$i],'blue'));
-                $gr->lb(new Label($x[$i],$y[$i]-0.05,$ALPHABET[$i],'black','center','top'));
-              };
-              $A=PopUp(['?','an absolute maximum','an absolute minimum','a relative maximum','a relative minimum','none of the above'],2);
-              $B=PopUp(['?','an absolute maximum','an absolute minimum','a relative maximum','a relative minimum','none of the above'],5);
-              $C=PopUp(['?','an absolute maximum','an absolute minimum','a relative maximum','a relative minimum','none of the above'],1);
-              $D=PopUp(['?','an absolute maximum','an absolute minimum','a relative maximum','a relative minimum','none of the above'],5);
-              $E=PopUp(['?','an absolute maximum','an absolute minimum','a relative maximum','a relative minimum','none of the above'],5);
+              for my $A ('A'..'E') {Context()->strings->add($A=>{})};
+              $absmax = List("C");
+              $absmin = List("A");
+              $relmax = List("C");
+              $relmin = List("A");
             </pg-code>
-
             <statement>
-              <p>
-                Identify each of the marked points as being an absolute maximum or minimum,
-                a relative maximum or minimum, or none of the above.
-              </p>
-
-              <sidebyside widths="47%">
+              <sidebyside>
                 <image pg-name="$gr"/>
               </sidebyside>
-
+              <instruction>
+                Enter the absolute maxima points here, using commas to separate them if there is more than one. If there are none, enter <c>NONE</c>.
+              </instruction>
               <p>
-                <m>A</m> is <var name="$A" form="popup"/>.
+                <var name="$absmax" width="10"/>
               </p>
-
+              <instruction>
+                Enter the absolute minima points here, using commas to separate them if there is more than one. If there are none, enter <c>NONE</c>.
+              </instruction>
               <p>
-                <m>B</m> is <var name="$B" form="popup"/>.
+                <var name="$absmin" width="10"/>
               </p>
-
+              <instruction>
+                Enter the relative maxima points here, using commas to separate them if there is more than one. If there are none, enter <c>NONE</c>.
+              </instruction>
               <p>
-                <m>C</m> is <var name="$C" form="popup"/>.
+                <var name="$relmax" width="10"/>
               </p>
-
+              <instruction>
+                Enter the relative minima points here, using commas to separate them if there is more than one. If there are none, enter <c>NONE</c>.
+              </instruction>
               <p>
-                <m>D</m> is <var name="$D" form="popup"/>.
-              </p>
-
-              <p>
-                <m>E</m> is <var name="$E" form="popup"/>.
+                <var name="$relmin" width="10"/>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
+      </exercisegroup>
 
-    </exercisegroup>
-    <exercisegroup>
+      <exercisegroup cols="2">
+        <introduction>
+          <p>
+            Evaluate <m>\fp(x)</m> at the points indicated in the graph.
+          </p>
+        </introduction>
 
-      <introduction>
-        <p>
-          In the following exercises,
-          evaluate <m>\fp(x)</m> at the points indicated in the graph.
-        </p>
-      </introduction>
-
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
             <pg-code>
               $gr=init_graph(-5.5,-0.5,5.5,2.5,axes=>[0,0],size=>[282,282]);
               $gr->lb('reset');
-              for my$i(-5,5){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top'));};
-              for my$i(1,2){$gr->moveTo(-0.19,$i);$gr->lineTo(0.19,$i,'black',2);$gr->lb(new Label(-0.2,$i,$i,'black','right','middle'));};
+              for my$i(-5,5){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top','large'));};
+              for my$i(1,2){$gr->moveTo(-0.19,$i);$gr->lineTo(0.19,$i,'black',2);$gr->lb(new Label(-0.2,$i,$i,'black','right','middle','large'));};
               $f=Formula("2/(x^2+1)");
               add_functions($gr,"$f for x in &lt;-5,5> using color:blue and weight:2");
               $gr->stamps(closed_circle(0,2,'blue'));
-              $gr->lb(new Label(0+0.1,2+0.05,'(0,2)','black','left','bottom'));
+              $gr->lb(new Label(0,2,'(0,2)','black','left','bottom','large'));
+              $zero=Real(0);
+              $dne = String("DNE");
             </pg-code>
-
             <statement>
               <p>
-                If <m>f(x) = \frac{2}{x^2+1}</m>,
-                evaluate <m>\fp(x)</m> at the points indicated.
-                If <m>\fp(x)</m> does not exist,
-                you may enter <q><c>DNE</c></q>.
+                <m>f(x) = <var name="$f"/></m>
               </p>
-
-              <sidebyside widths="47%">
+              <sidebyside>
                 <image pg-name="$gr"/>
               </sidebyside>
-
+              <instruction>
+                Enter <m>f^{\prime}(0)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
+              </instruction>
               <p>
-                <m>f'(0)=</m><var name="0" width="10"/>
+                <var name="$zero" width="10"/>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
             <pg-code>
               $gr=init_graph(-4,-1,4,6.5,axes=>[0,0],size=>[282,282]);
               $gr->lb('reset');
-              for my$i(-2,2){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top'));};
-              for my$i(2,4,6){$gr->moveTo(-0.19,$i);$gr->lineTo(0.19,$i,'black',2);$gr->lb(new Label(-0.2,$i,$i,'black','right','middle'));};
+              for my$i(-2,2){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top','large'));};
+              for my$i(2,4,6){$gr->moveTo(-0.19,$i);$gr->lineTo(0.19,$i,'black',2);$gr->lb(new Label(-0.2,$i,$i,'black','right','middle','large'));};
               $f=Formula("x^2*sqrt(6-x^2)");
               add_functions($gr,"$f for x in &lt;-2.449489,2.449489> using color:blue and weight:2");
               $gr->stamps(closed_circle(0,0,'blue'));
-              $gr->lb(new Label(0+0.1,0-0.05,'(0,0)','black','left','top'));
+              $gr->lb(new Label(0,0,'(0,0)','black','left','top','large'));
               $gr->stamps(closed_circle(2,5.656854,'blue'));
-              $gr->lb(new Label(2+0.1,5.656+0.05,'(2,4sqrt(2))','black','left','bottom'));
+              $gr->lb(new Label(2,4*sqrt(2),'(2,4sqrt(2))','black','center','bottom','large'));
+              $zero=Real(0);
+              $dne = String("DNE");
             </pg-code>
-
             <statement>
               <p>
-                If <m>f(x) = x^2\sqrt{6-x^2}</m>,
-                evaluate <m>\fp(x)</m> at the points indicated.
-                If <m>\fp(x)</m> does not exist,
-                you may enter <q><c>DNE</c></q>.
+                <m>f(x) = <var name="$f"/></m>
               </p>
-
-              <sidebyside widths="47%">
+              <sidebyside>
                 <image pg-name="$gr"/>
               </sidebyside>
-
+              <instruction>
+                Enter <m>f^{\prime}(0)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
+              </instruction>
               <p>
-                <m>f'(0)=</m><var name="0" width="10"/>
+                <var name="$zero" width="10"/>
               </p>
-
+              <instruction>
+                Enter <m>f^{\prime}(2)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
+              </instruction>
               <p>
-                <m>f'(2)=</m><var name="0" width="10"/>
+                <var name="$zero" width="10"/>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
             <pg-code>
               $gr=init_graph(-0.5,-1.4,6.5,1.4,axes=>[0,0],size=>[282,282]);
               $gr->lb('reset');
-              for my$i(2,4,6){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top'));};
-              for my$i(-1,1){$gr->moveTo(-0.19,$i);$gr->lineTo(0.19,$i,'black',2);$gr->lb(new Label(-0.2,$i,$i,'black','right','middle'));};
+              for my$i(2,4,6){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top','large'));};
+              for my$i(-1,1){$gr->moveTo(-0.19,$i);$gr->lineTo(0.19,$i,'black',2);$gr->lb(new Label(-0.2,$i,$i,'black','right','middle','large'));};
               $f=Formula("sin(x)");
               add_functions($gr,"$f for x in &lt;0,6.2831852> using color:blue and weight:2");
               $gr->stamps(closed_circle(1.570796,1,'blue'));
-              $gr->lb(new Label(1.570796+0.1,1+0.05,'(pi/2,1)','black','left','bottom'));
+              $gr->lb(new Label(pi/2,1,'(pi/2,1)','black','left','bottom','large'));
               $gr->stamps(closed_circle(4.712389,-1,'blue'));
-              $gr->lb(new Label(4.712389+0.1,-1-0.05,'(3pi/2,-1)','black','left','top'));
+              $gr->lb(new Label(3*pi/2,-1,'(3pi/2,-1)','black','right','top','large'));
+              $zero=Real(0);
+              $dne = String("DNE");
             </pg-code>
-
             <statement>
               <p>
-                If <m>f(x) = \sin(x)</m>, evaluate <m>\fp(x)</m> at the points indicated.
-                If <m>\fp(x)</m> does not exist,
-                you may enter <q><c>DNE</c></q>.
+                <m>f(x) = <var name="$f"/></m>
               </p>
-
-              <sidebyside widths="47%">
+              <sidebyside>
                 <image pg-name="$gr"/>
               </sidebyside>
-
+              <instruction>
+                Enter <m>f^{\prime}(\pi/2)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
+              </instruction>
               <p>
-                <m>f'(\pi/2)=</m><var name="0" width="10"/>
+                <var name="$zero" width="10"/>
               </p>
-
+              <instruction>
+                Enter <m>f^{\prime}(3\pi/2)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
+              </instruction>
               <p>
-                <m>f'(3\pi/2)=</m><var name="0" width="10"/>
+                <var name="$zero" width="10"/>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
             <pg-code>
               $gr=init_graph(-2.5,-2,4.5,11,axes=>[0,0],size=>[282,282]);
               $gr->lb('reset');
-              for my$i(-2,2,4){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top'));};
-              for my$i(5,10){$gr->moveTo(-0.09,$i);$gr->lineTo(0.09,$i,'black',2);$gr->lb(new Label(-0.1,$i,$i,'black','right','middle'));};
+              for my$i(-2,2,4){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top','large'));};
+              for my$i(5,10){$gr->moveTo(-0.09,$i);$gr->lineTo(0.09,$i,'black',2);$gr->lb(new Label(-0.1,$i,$i,'black','right','middle','large'));};
               $f=Formula("x^2*sqrt(4-x)");
               add_functions($gr,"$f for x in &lt;-2,3.999999> using color:blue and weight:2");
               $gr->stamps(closed_circle(0,0,'blue'));
-              $gr->lb(new Label(0+0.1,0-0.05,'(0,0)','black','left','top'));
+              $gr->lb(new Label(0,0,'(0,0)','black','left','top','large'));
               $gr->stamps(closed_circle(16/5,512*sqrt(5)/125,'blue'));
-              $gr->lb(new Label(16/5-0.1,512*sqrt(5)/125+0.05,'(16/5,512sqrt(5)/125)','black','right','bottom'));
+              $gr->lb(new Label(16/5,512*sqrt(5)/125,'(16/5,512sqrt(5)/125)','black','right','bottom','large'));
+              $gr->stamps(closed_circle(4,0,'blue'));
+              $gr->lb(new Label(4,0,'(4,0)','black','right','bottom','large'));
+              $zero=Real(0);
+              $dne = String("DNE");
             </pg-code>
-
             <statement>
               <p>
-                If <m>f(x) = x^2\sqrt{4-x}</m>,
-                evaluate <m>\fp(x)</m> at the points indicated.
-                If <m>\fp(x)</m> does not exist,
-                you may enter <q><c>DNE</c></q>.
+                <m>f(x) = <var name="$f"/></m>
               </p>
-
-              <sidebyside widths="47%">
+              <sidebyside>
                 <image pg-name="$gr"/>
               </sidebyside>
-
+              <instruction>
+                Enter <m>f^{\prime}(0)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
+              </instruction>
               <p>
-                <m>f'(0)=</m><var name="0" width="10"/>
+                <var name="$zero" width="10"/>
               </p>
-
+              <instruction>
+                Enter <m>f^{\prime}(16/5)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
+              </instruction>
               <p>
-                <m>f'(16/5)=</m><var name="0" width="10"/>
+                <var name="$zero" width="10"/>
+              </p>
+              <instruction>
+                Enter <m>f^{\prime}(4)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
+              </instruction>
+              <p>
+                <var name="$dne" width="10"/>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
+            <pg-code>
+              $gr=init_graph(-1,-0.5,11,6.5,axes=>[0,0],size=>[282,282]);
+              $gr->lb('reset');
+              for my$i(5,10){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top','large'));};
+              for my$i(2,4,6){$gr->moveTo(-0.09,$i);$gr->lineTo(0.09,$i,'black',2);$gr->lb(new Label(-0.1,$i,$i,'black','right','middle','large'));};
+              Context()->flags->set(reduceConstants=>0);
+              $f=Formula("1+(x-2)^(2/3)/x");
+              $g=Formula("1+(2-x)^(2/3)/x");
+              add_functions($gr,"$g for x in &lt;0.1,2> using color:blue and weight:2");
+              add_functions($gr,"$f for x in &lt;2,11> using color:blue and weight:2");
+              $gr->stamps(closed_circle(2,1,'blue'));
+              $gr->lb(new Label(2,1,'(2,1)','black','left','top','large'));
+              $gr->stamps(closed_circle(6,1+2**(1/3)/3,'blue'));
+              $gr->lb(new Label(6,1+2**(1/3)/3,'(6,1+cbrt(2)/3)','black','center','top','large'));
+              $zero=Real(0);
+              $dne = String("DNE");
+            </pg-code>
+            <statement>
+              <p>
+                <m>f(x) = <var name="$f"/></m>
+              </p>
+              <sidebyside>
+                <image pg-name="$gr"/>
+              </sidebyside>
+              <instruction>
+                Enter <m>f^{\prime}(2)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
+              </instruction>
+              <p>
+                <var name="$dne" width="10"/>
+              </p>
+              <instruction>
+                Enter <m>f^{\prime}(6)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
+              </instruction>
+              <p>
+                <var name="$zero" width="10"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork>
+            <pg-code>
+              $gr=init_graph(-2.5,-0.5,2.5,3.5,axes=>[0,0],size=>[282,282]);
+              $gr->lb('reset');
+              for my$i(-2,2){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top','large'));};
+              for my$i(1,2,3){$gr->moveTo(-0.09,$i);$gr->lineTo(0.09,$i,'black',2);$gr->lb(new Label(-0.1,$i,$i,'black','right','middle','large'));};
+              Context()->flags->set(reduceConstants=>0);
+              parser::Root->Enable;
+              $f=Formula("root(3,x^4-2x^2+1)");
+              $g=Formula("-root(3,-(x^4-2x^2+1))");
+              add_functions($gr,"$f for x in &lt;-2.5,-1> using color:blue and weight:2");
+              add_functions($gr,"$g for x in &lt;-1,1> using color:blue and weight:2");
+              add_functions($gr,"$f for x in &lt;1,2.5> using color:blue and weight:2");
+              $gr->stamps(closed_circle(-1,0,'blue'));
+              $gr->lb(new Label(-1,0,'(-1,0)','black','left','top','large'));
+              $gr->stamps(closed_circle(1,0,'blue'));
+              $gr->lb(new Label(1,0,'(1,0)','black','left','top','large'));
+              $zero=Real(0);
+              $dne = String("DNE");
+            </pg-code>
+            <statement>
+              <p>
+                <m>f(x) = <var name="$f"/></m>
+              </p>
+              <sidebyside>
+                <image pg-name="$gr"/>
+              </sidebyside>
+              <instruction>
+                Enter <m>f^{\prime}(-1)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
+              </instruction>
+              <p>
+                <var name="$dne" width="10"/>
+              </p>
+              <instruction>
+                Enter <m>f^{\prime}(1)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
+              </instruction>
+              <p>
+                <var name="$dne" width="10"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork>
             <pg-code>
               $gr=init_graph(-1.1,-0.6,1.1,1.1,axes=>[0,0],size=>[282,282]);
               $gr->lb('reset');
-              for my$i(-1,-0.5,0.5,1){$gr->moveTo($i,-0.02);$gr->lineTo($i,0.02,'black',2);$gr->lb(new Label($i,-0.03,$i,'black','center','top'));};
-              for my$i(-0.5,0.5,1){$gr->moveTo(-0.04,$i);$gr->lineTo(0.04,$i,'black',2);$gr->lb(new Label(-0.05,$i,$i,'black','right','middle'));};
+              for my$i(-1,-0.5,0.5,1){$gr->moveTo($i,-0.02);$gr->lineTo($i,0.02,'black',2);$gr->lb(new Label($i,-0.03,$i,'black','center','top','large'));};
+              for my$i(-0.5,0.5,1){$gr->moveTo(-0.04,$i);$gr->lineTo(0.04,$i,'black',2);$gr->lb(new Label(-0.05,$i,$i,'black','right','middle','large'));};
               $f=Formula("x^2");
               $g=Formula("x^5");
               add_functions($gr,"$f for x in &lt;-1,0> using color:blue and weight:2");
               add_functions($gr,"$g for x in &lt;0,1> using color:blue and weight:2");
               $gr->stamps(closed_circle(0,0,'blue'));
-              $gr->lb(new Label(0+0.1,0-0.05,'(0,0)','black','left','top'));
+              $gr->lb(new Label(0,0,'(0,0)','black','left','top','large'));
+              $zero=Real(0);
+              $dne = String("DNE");
             </pg-code>
-
             <statement>
               <p>
-                If <m>f(x) = \begin{cases}x^2\amp x\leq0\\x^5\amp x\gt0\end{cases}</m>,
-                evaluate <m>\fp(x)</m> at the points indicated.
-                If <m>\fp(x)</m> does not exist,
-                you may enter <q><c>DNE</c></q>.
+                <m>f(x) = \begin{cases}x^2,\amp x\leq0\\x^5,\amp x\gt0\end{cases}</m>
               </p>
-
-              <sidebyside widths="47%">
+              <sidebyside>
                 <image pg-name="$gr"/>
               </sidebyside>
-
+              <instruction>
+                Enter <m>f^{\prime}(0)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
+              </instruction>
               <p>
-                <m>f'(0)=</m><var name="0" width="10"/>
+                <var name="$zero" width="10"/>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
             <pg-code>
               $gr=init_graph(-1.1,-0.6,1.1,1.1,axes=>[0,0],size=>[282,282]);
               $gr->lb('reset');
-              for my$i(-1,-0.5,0.5,1){$gr->moveTo($i,-0.02);$gr->lineTo($i,0.02,'black',2);$gr->lb(new Label($i,-0.03,$i,'black','center','top'));};
-              for my$i(-0.5,0.5,1){$gr->moveTo(-0.04,$i);$gr->lineTo(0.04,$i,'black',2);$gr->lb(new Label(-0.05,$i,$i,'black','right','middle'));};
+              for my$i(-1,-0.5,0.5,1){$gr->moveTo($i,-0.02);$gr->lineTo($i,0.02,'black',2);$gr->lb(new Label($i,-0.03,$i,'black','center','top','large'));};
+              for my$i(-0.5,0.5,1){$gr->moveTo(-0.04,$i);$gr->lineTo(0.04,$i,'black',2);$gr->lb(new Label(-0.05,$i,$i,'black','right','middle','large'));};
               $f=Formula("x^2");
               $g=Formula("x");
               add_functions($gr,"$f for x in &lt;-1,0> using color:blue and weight:2");
               add_functions($gr,"$g for x in &lt;0,1> using color:blue and weight:2");
               $gr->stamps(closed_circle(0,0,'blue'));
-              $gr->lb(new Label(0+0.1,0-0.05,'(0,0)','black','left','top'));
+              $gr->lb(new Label(0,0,'(0,0)','black','left','top','large'));
+              $zero=Real(0);
+              $dne = String("DNE");
             </pg-code>
-
             <statement>
               <p>
-                If <m>f(x) = \begin{cases}x^2\amp x\leq0\\x\amp x\gt0\end{cases}</m>,
-                evaluate <m>\fp(x)</m> at the points indicated.
-                If <m>\fp(x)</m> does not exist,
-                you may enter <q><c>DNE</c></q>.
+                <m>f(x) = \begin{cases}x^2,\amp x\leq0\\x,\amp x\gt0\end{cases}</m>
               </p>
-
-              <sidebyside widths="47%">
+              <sidebyside>
                 <image pg-name="$gr"/>
               </sidebyside>
-
+              <instruction>
+                Enter <m>f^{\prime}(0)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
+              </instruction>
               <p>
-                <m>f'(0)=</m><var name="DNE" width="10"/>
+                <var name="$dne" width="10"/>
               </p>
             </statement>
+          </webwork>
+        </exercise>
+      </exercisegroup>
+
+      <exercisegroup cols="2">
+        <introduction>
+          <p>
+            Find the extreme values of the function on the given interval.
+          </p>
+        </introduction>
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              ($b,$c) = (-9..-1,1..9)[NchooseK(18,2)];
+              ($l,$h) = (1..4)[NchooseK(4,2)];
+              if($envir{problemSeed}==1){$b=1;$c=4;$l=1;$h=2};
+              $low = int(-$b/2) - $l;
+              $high = int(-$b/2) + $h;
+              $f = Formula("x^2+$b x+$c")->reduce;
+              Context("Fraction");
+              $max = Fraction(max($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>-$b/2)));
+              $min = Fraction(min($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>-$b/2)));
+            </pg-code>
+            <statement>
+              <p>
+                <m>f(x) = <var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>
+              </p>
+              <instruction>
+                Enter the maximimum value here, or enter <c>NONE</c> if there isn't one.
+              </instruction>
+              <p>
+                <var name="$max" width="10"/>
+              </p>
+              <instruction>
+                Enter the minimimum value here, or enter <c>NONE</c> if there isn't one.
+              </instruction>
+              <p>
+                <var name="$min" width="10"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              Context("Fraction");
+              $r = random(-9,-1,1);
+              $s = random(1,9,1);
+              $d = non_zero_random(-9,9,1);
+              $high = $s+random(1,2,1);
+              if($envir{problemSeed}==1){$r=-2;$s=5;$d=3;$high=6};
+              $low = Real(0);
+              $b = Fraction(-3*($r+$s)/2);
+              $c = 3*$r*$s;
+              $f = Formula("x^3+$b x^2+$c x+$d")->reduce;
+              $max = Fraction(max($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>$r),$f->eval(x=>$s)));
+              $min = Fraction(min($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>$r),$f->eval(x=>$s)));
+            </pg-code>
+            <statement>
+              <p>
+                <m>f(x) = <var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>
+              </p>
+              <instruction>
+                Enter the maximimum value here, or enter <c>NONE</c> if there isn't one.
+              </instruction>
+              <p>
+                <var name="$max" width="10"/>
+              </p>
+              <instruction>
+                Enter the minimimum value here, or enter <c>NONE</c> if there isn't one.
+              </instruction>
+              <p>
+                <var name="$min" width="10"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              Context("Fraction");
+              $c = random(2,4,1);
+              $trig = list_random('sin','cos');
+              ($lowd,$highd) = (3,4,6)[NchooseK(3,2)];
+              if ($trig eq 'sin') {
+                if (list_random(0,1)) {$low = Formula("pi/$lowd"); $high = Formula("(($highd-1)pi)/$highd")}
+                else {$low = Formula("(($lowd+1)pi)/$lowd"); $high = Formula("((2*$highd-1)pi)/$highd")}
+              } else {
+                if (list_random(0,1)) {$low = Formula("-pi/$lowd"); $high = Formula("pi/$highd")}
+                else {$low = Formula("(($lowd-1)pi)/$lowd"); $high = Formula("(($highd+1)pi)/$highd")}
+              }
+              if($envir{problemSeed}==1){$c=3;$trig='sin';$low=Formula("pi/4");$high=Formula("(2pi)/3")};
+              $f = Formula("$c $trig(x)");
+              $max = max($f->eval(x=>$low->eval(x=>0)),$f->eval(x=>$high->eval(x=>0)),$c * $f->eval(x=>$low->eval(x=>0)) / abs($f->eval(x=>$low->eval(x=>0))));
+              $min = min($f->eval(x=>$low->eval(x=>0)),$f->eval(x=>$high->eval(x=>0)),$c * $f->eval(x=>$low->eval(x=>0)) / abs($f->eval(x=>$low->eval(x=>0))));
+            </pg-code>
+            <statement>
+              <p>
+                <m>f(x) = <var name="$f"/></m> on <m>\left[<var name="$low"/>,<var name="$high"/>\right]</m>
+              </p>
+              <instruction>
+                Enter the maximimum value here, or enter <c>NONE</c> if there isn't one.
+              </instruction>
+              <p>
+                <var name="$max" width="10"/>
+              </p>
+              <instruction>
+                Enter the minimimum value here, or enter <c>NONE</c> if there isn't one.
+              </instruction>
+              <p>
+                <var name="$min" width="10"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              Context("Fraction");
+              $n = list_random(2,4,6);
+              $r = random(1,4,1);
+              if($envir{problemSeed}==1){$n=2;$r=2;};
+              $low = -$r;
+              $high = $r;
+              $f = Formula("x^$n sqrt($r^2-x^2)");
+              $a = -sqrt($n*$r**2/($n+1));
+              $b = sqrt($n*$r**2/($n+1));
+              $max = max($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>$a),$f->eval(x=>$b),$f->eval(x=>0));
+              $min = min($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>$a),$f->eval(x=>$b),$f->eval(x=>0));
+            </pg-code>
+            <statement>
+              <p>
+                <m>f(x) = <var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>
+              </p>
+              <instruction>
+                Enter the maximimum value here, or enter <c>NONE</c> if there isn't one.
+              </instruction>
+              <p>
+                <var name="$max" width="10"/>
+              </p>
+              <instruction>
+                Enter the minimimum value here, or enter <c>NONE</c> if there isn't one.
+              </instruction>
+              <p>
+                <var name="$min" width="10"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              Context("Fraction");
+              $a = list_random(2,3,5,6,7);
+              $low = random(1,int(sqrt($a)),1);
+              $high = random(int(sqrt($a))+1,int(sqrt($a))+6);
+              if($envir{problemSeed}==1){$a=3;$low=1;$high=5;};
+              $f = Formula("x+$a/x");
+              $max = Fraction(max($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>sqrt($a))));
+              $min = min($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>sqrt($a)));
+            </pg-code>
+            <statement>
+              <p>
+                <m>f(x) = <var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>
+              </p>
+              <instruction>
+                Enter the maximimum value here, or enter <c>NONE</c> if there isn't one.
+              </instruction>
+              <p>
+                <var name="$max" width="10"/>
+              </p>
+              <instruction>
+                Enter the minimimum value here, or enter <c>NONE</c> if there isn't one.
+              </instruction>
+              <p>
+                <var name="$min" width="10"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              Context("Fraction");
+              $n = random(2,4,2);
+              $a = random(1,9,1);
+              $low = random(-9,-1,1);
+              $high = random(1,9,1);
+              if($envir{problemSeed}==1){$n=2;$a=5;$low=-3;$high=5;};
+              $f = Formula("x^$n/(x^$n+$a)");
+              $max = Fraction(max($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>0)));
+              $min = Fraction(min($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>0)));
+            </pg-code>
+            <statement>
+              <p>
+                <m>f(x) = <var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>
+              </p>
+              <instruction>
+                Enter the maximimum value here, or enter <c>NONE</c> if there isn't one.
+              </instruction>
+              <p>
+                <var name="$max" width="10"/>
+              </p>
+              <instruction>
+                Enter the minimimum value here, or enter <c>NONE</c> if there isn't one.
+              </instruction>
+              <p>
+                <var name="$min" width="10"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              Context("Fraction");
+              #$trig = list_random('sin','cos');
+              $trig='cos'; #if($envir{problemSeed}==1){$trig='cos'};
+              $low = Formula("0");
+              $high = Formula("pi");
+              $f = Formula("e^x $trig(x)");
+              $a = ($trig eq 'cos') ? Formula("3pi/4") : Formula("pi/4");
+              $max = Fraction(max($f->eval(x=>$low->eval(x=>0)),$f->eval(x=>$high->eval(x=>0)),$f->eval(x=>$a->eval(x=>0))));
+              $min = Fraction(min($f->eval(x=>$low->eval(x=>0)),$f->eval(x=>$high->eval(x=>0)),$f->eval(x=>$a->eval(x=>0))));
+            </pg-code>
+            <statement>
+              <p>
+                <m>f(x) = <var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>
+              </p>
+              <instruction>
+                Enter the maximimum value here, or enter <c>NONE</c> if there isn't one.
+              </instruction>
+              <p>
+                <var name="$max" width="10"/>
+              </p>
+              <instruction>
+                Enter the minimimum value here, or enter <c>NONE</c> if there isn't one.
+              </instruction>
+              <p>
+                <var name="$min" width="10"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              Context("Fraction");
+              #$trig = list_random('sin','cos');
+              $trig='sin'; #if($envir{problemSeed}==1){$trig='sin'};
+              $low = Formula("0");
+              $high = Formula("pi");
+              $f = Formula("e^x $trig(x)");
+              $a = ($trig eq 'cos') ? Formula("3pi/4") : Formula("pi/4");
+              $max = Fraction(max($f->eval(x=>$low->eval(x=>0)),$f->eval(x=>$high->eval(x=>0)),$f->eval(x=>$a->eval(x=>0))));
+              $min = Fraction(min($f->eval(x=>$low->eval(x=>0)),$f->eval(x=>$high->eval(x=>0)),$f->eval(x=>$a->eval(x=>0))));
+            </pg-code>
+            <statement>
+              <p>
+                <m>f(x) = <var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>
+              </p>
+              <instruction>
+                Enter the maximimum value here, or enter <c>NONE</c> if there isn't one.
+              </instruction>
+              <p>
+                <var name="$max" width="10"/>
+              </p>
+              <instruction>
+                Enter the minimimum value here, or enter <c>NONE</c> if there isn't one.
+              </instruction>
+              <p>
+                <var name="$min" width="10"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              Context("Fraction");
+              $n = random(1,4,1);
+              $high = random(3,9,1);
+              if($envir{problemSeed}==1){$n=1;$high=4;};
+              $low = Compute("1");
+              $a = exp(1/$n);
+              $f = Formula("ln(x)/x^$n")->reduce;
+              $max = Fraction(max($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>$a)));
+              $min = Fraction(min($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>$a)));
+            </pg-code>
+            <statement>
+              <p>
+                <m>f(x) = <var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>
+              </p>
+              <instruction>
+                Enter the maximimum value here, or enter <c>NONE</c> if there isn't one.
+              </instruction>
+              <p>
+                <var name="$max" width="10"/>
+              </p>
+              <instruction>
+                Enter the minimimum value here, or enter <c>NONE</c> if there isn't one.
+              </instruction>
+              <p>
+                <var name="$min" width="10"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              Context("Fraction");
+              $d = random(2,5,1);
+              do {$n = random(1,2*$d-1,1)} until (gcd($n,$d) == 1);
+              $m = random(int($n/$d)+1,int($n/$d)+5,1);
+              $high = random(2,4,1);
+              if($envir{problemSeed}==1){$d=3;$n=2;$m=1;$high=2;};
+              $low = Compute("0");
+              $a = ($r/$n)^(1/($n-$r));
+              $f = Formula("x^($n/$d) - x^$m")->reduce;
+              $max = Fraction(max($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>$a)));
+              $min = Fraction(min($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>$a)));
+            </pg-code>
+            <statement>
+              <p>
+                <m>f(x) = <var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>
+              </p>
+              <instruction>
+                Enter the maximimum value here, or enter <c>NONE</c> if there isn't one.
+              </instruction>
+              <p>
+                <var name="$max" width="10"/>
+              </p>
+              <instruction>
+                Enter the minimimum value here, or enter <c>NONE</c> if there isn't one.
+              </instruction>
+              <p>
+                <var name="$min" width="10"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+      </exercisegroup>
+    </subexercises>
+
+    <subexercises>
+      <title>Review</title>
+      <exercise>
+        <webwork seed="1">
+          <pg-code>
+            Context()->variables->add(y=>'Real');
+            ($m,$n) = (1..4)[NchooseK(4,2)];
+            if($envir{problemSeed}==1){$m=1;$n=2};
+            $left = Formula("x^2y^$m-y^$n x")->reduce;
+            @y=(random(0.1,5,0.1),random(0.1,5,0.1),random(0.1,5,0.1),random(0.1,5,0.1),random(0.1,5,0.1));
+            @x=map{($_**$n + list_random(-1,1)*sqrt($_**(2*$n) + 4*$_**$m))/(2*$_**$m)}(@y);
+            @xy=map{[$x[$_],$y[$_]]}(0..4);
+            $dydx = Formula("(y^$n-2xy^$m)/($m x^2 y^($m-1) - $n x y^($n-1))")->reduce;
+            $dydx->{test_points}=~~@xy;
+          </pg-code>
+          <statement>
+            <p>
+              Find <m>\lz{y}{x}</m>, where <m><var name="$left"/>=1</m>.
+            </p>
+            <p>
+              <var name="$dydx" width="80"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
 
       <exercise>
-        <webwork>
-            <pg-code>
-              $gr=init_graph(-1,-0.5,11,6.5,axes=>[0,0],size=>[282,282]);
-              $gr->lb('reset');
-              for my$i(5,10){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top'));};
-              for my$i(2,4,6){$gr->moveTo(-0.09,$i);$gr->lineTo(0.09,$i,'black',2);$gr->lb(new Label(-0.1,$i,$i,'black','right','middle'));};
-              $f=Formula("(2-x)^(2/3)/x+1");
-              $g=Formula("(x-2)^(2/3)/x+1");
-              add_functions($gr,"$f for x in &lt;0.1,2> using color:blue and weight:2");
-              add_functions($gr,"$g for x in &lt;2,11> using color:blue and weight:2");
-              $gr->stamps(closed_circle(2,1,'blue'));
-              $gr->lb(new Label(2+0.1,1-0.05,'(2,1)','black','left','top'));
-              $gr->stamps(closed_circle(6,1+2**(1/3)/3,'blue'));
-              $gr->lb(new Label(6,1+2**(1/3)/3+0.05,'(6,1+cbrt(2)/3)','black','center','bottom'));
-            </pg-code>
-
-            <statement>
-              <p>
-                If <m>f(x) = \frac{\sqrt[3]{(x-2)^{2}}}{x}+1</m>,
-                evaluate <m>\fp(x)</m> at the points indicated.
-                If <m>\fp(x)</m> does not exist,
-                you may enter <q><c>DNE</c></q>.
-              </p>
-
-              <sidebyside widths="47%">
-                <image pg-name="$gr"/>
-              </sidebyside>
-
-              <p>
-                <m>f'(2)=</m><var name="DNE" width="10"/>
-              </p>
-
-              <p>
-                <m>f'(6)=</m><var name="0" width="10"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-    </exercisegroup>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          In the following exercises,
-          find the extreme values of the function on the given interval.
-        </p>
-      </introduction>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              $maxy=Compute("10");
-              $maxx=Compute("2");
-              $miny=Compute("3.75");
-              $minx=Compute("-0.5");
-            </pg-code>
-
-            <statement>
-              <p>
-                Find the extreme values of <m>f(x) = x^2+x+4</m> on <m>[-1,2]</m>.
-                If an extremum occurs at multiple inputs, list them all.
-              </p>
-
-              <p>
-                The absolute maximum is <var name="$maxy" width="10"/> at <var name="$maxx" width="10"/> and the absolute minimum is <var name="$miny" width="10"/> at <var name="$minx" width="10"/>.
-              </p>
-            </statement>
+        <webwork seed="1">
+          <pg-code>
+            Context("Fraction");
+            Context()->variables->add(y=>'Real');
+            parser::Assignment->Allow;
+            do {
+              $n = random(2,4,1);
+              ($x0,$y0) = (-3..-1,1..3)[NchooseK(6,2)];
+              $pm=list_random('+','-');
+            } until ($x0 != $n*$y0**($n-1));
+            if($envir{problemSeed}==1){$n=2;$x0=1;$y0=2;$pm='+'};
+            $left = Formula("x^$n+y^$n $pm xy");
+            $c = $left->eval(x=>$x0,y=>$y0);
+            if ($pm eq '+') {$m = Fraction(-$n*$x0**($n-1)-$y0,$n*$y0**($n-1)+$x0)}
+            else {$m = Fraction(-$n*$x0**($n-1)+$y0,$n*$y0**($n-1)-$x0)};
+            $t=Formula("y=$m(x-$x0)+$y0")->reduce;
+          </pg-code>
+          <statement>
+            <p>
+              Find the equation of the line tangent to the graph of
+              <m><var name="$left"/>=<var name="$c"/></m> at the point <m>(<var name="$x0"/>,<var name="$y0"/>)</m>.
+            </p>
+            <p>
+              <var name="$t" width="80"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
 
       <exercise>
-        <webwork>
-            <pg-code>
-              $maxy=Compute("3");
-              $maxx=Compute("0");
-              $miny=Compute("-134.5");
-              $minx=Compute("5");
-            </pg-code>
-
-            <statement>
-              <p>
-                Find the extreme values of <m>f(x) = x^3-\frac{9}{2}x^2-30x+3</m> on <m>[0,6]</m>.
-                If an extremum occurs at multiple inputs, list them all.
-              </p>
-
-              <p>
-                The absolute maximum is <var name="$maxy" width="10"/> at <var name="$maxx" width="10"/> and the absolute minimum is <var name="$miny" width="10"/> at <var name="$minx" width="10"/>.
-              </p>
-            </statement>
+        <webwork seed="1">
+          <pg-code>
+            $n = random(3,4,1);
+            $b = non_zero_random(-2,2,1);
+            if($envir{problemSeed}==1){$n=3;$b=1;};
+            $f = Formula("x^$n+$b x")->reduce;
+            $l = $f->D('x');
+          </pg-code>
+          <statement>
+            <p>
+              Let <m>f(x) = <var name="$f"/></m>. Find <m>\lim\limits_{s\to 0} \frac{f(x+s)-f(x)}{s}</m>.
+            </p>
+            <p>
+              <var name="$l" width="80"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
-              $maxy=Compute("3");
-              $maxx=Compute("pi/2");
-              $miny=Compute("3sqrt(2)/2");
-              $minx=Compute("pi/4");
-            </pg-code>
-
-            <statement>
-              <p>
-                Find the extreme values of
-                <m>f(x) = 3\sin(x)</m> on <m>[\pi/4,2\pi/3]</m>.
-                If an extremum occurs at multiple inputs, list them all.
-              </p>
-
-              <p>
-                The absolute maximum is <var name="$maxy" width="10"/> at <var name="$maxx" width="10"/> and the absolute minimum is <var name="$miny" width="10"/> at <var name="$minx" width="10"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
-              $maxy=Compute("16sqrt(3)/9");
-              $maxx=Compute("-2sqrt(2/3), 2sqrt(2/3)");
-              $miny=Compute("0");
-              $minx=Compute("-2,0,2");
-            </pg-code>
-
-            <statement>
-              <p>
-                Find the extreme values of <m>f(x) = x^2\sqrt{4-x^2}</m> on <m>[-2,2]</m>.
-                If an extremum occurs at multiple inputs, list them all.
-              </p>
-
-              <p>
-                The absolute maximum is <var name="$maxy" width="10"/> at <var name="$maxx" width="10"/> and the absolute minimum is <var name="$miny" width="10"/> at <var name="$minx" width="10"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
-              $maxy=Compute("28/5");
-              $maxx=Compute("5");
-              $miny=Compute("2*sqrt(3)");
-              $minx=Compute("sqrt(3)");
-            </pg-code>
-
-            <statement>
-              <p>
-                Find the extreme values of <m>f(x) = x+\frac3x</m> on <m>[1,5]</m>.
-                If an extremum occurs at multiple inputs, list them all.
-              </p>
-
-              <p>
-                The absolute maximum is <var name="$maxy" width="10"/> at <var name="$maxx" width="10"/> and the absolute minimum is <var name="$miny" width="10"/> at <var name="$minx" width="10"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
-              $maxy=Compute("5/6");
-              $maxx=Compute("5");
-              $miny=Compute("0");
-              $minx=Compute("0");
-            </pg-code>
-
-            <statement>
-              <p>
-                Find the extreme values of <m>f(x) = \frac{x^2}{x^2+5}</m> on <m>[-3,5]</m>.
-                If an extremum occurs at multiple inputs, list them all.
-              </p>
-
-              <p>
-                The absolute maximum is <var name="$maxy" width="10"/> at <var name="$maxx" width="10"/> and the absolute minimum is <var name="$miny" width="10"/> at <var name="$minx" width="10"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
-              $maxy=Compute("(sqrt(2)e^(pi/4))/2");
-              $maxx=Compute("pi/4");
-              $miny=Compute("-e^(pi)");
-              $minx=Compute("pi");
-            </pg-code>
-
-            <statement>
-              <p>
-                Find the extreme values of <m>f(x) = e^x\cos(x)</m> on <m>[0,\pi]</m>.
-                If an extremum occurs at multiple inputs, list them all.
-              </p>
-
-              <p>
-                The absolute maximum is <var name="$maxy" width="10"/> at <var name="$maxx" width="10"/> and the absolute minimum is <var name="$miny" width="10"/> at <var name="$minx" width="10"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
-              $maxy=Compute("(sqrt(2)e^(3pi/4))/2");
-              $maxx=Compute("3pi/4");
-              $miny=Compute("0");
-              $minx=Compute("0,pi");
-            </pg-code>
-
-            <statement>
-              <p>
-                Find the extreme values of <m>f(x) = e^x\sin(x)</m> on <m>[0,\pi]</m>.
-                If an extremum occurs at multiple inputs, list them all.
-              </p>
-
-              <p>
-                The absolute maximum is <var name="$maxy" width="10"/> at <var name="$maxx" width="10"/> and the absolute minimum is <var name="$miny" width="10"/> at <var name="$minx" width="10"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
-              $maxy=Compute("1/e");
-              $maxx=Compute("e");
-              $miny=Compute("0");
-              $minx=Compute("1");
-            </pg-code>
-
-            <statement>
-              <p>
-                Find the extreme values of <m>f(x) = \frac{\ln(x) }{x}</m> on <m>[1,4]</m>.
-                If an extremum occurs at multiple inputs, list them all.
-              </p>
-
-              <p>
-                The absolute maximum is <var name="$maxy" width="10"/> at <var name="$maxx" width="10"/> and the absolute minimum is <var name="$miny" width="10"/> at <var name="$minx" width="10"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
-              $maxy=Compute("4/27");
-              $maxx=Compute("8/27");
-              $miny=Compute("2^(2/3)-2");
-              $minx=Compute("2");
-            </pg-code>
-
-            <statement>
-              <p>
-                Find the extreme values of <m>f(x) = x^{2/3}-x</m> on <m>[0,2]</m>.
-                If an extremum occurs at multiple inputs, list them all.
-              </p>
-
-              <p>
-                The absolute maximum is <var name="$maxy" width="10"/> at <var name="$maxx" width="10"/> and the absolute minimum is <var name="$miny" width="10"/> at <var name="$minx" width="10"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-    </exercisegroup>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          Review
-        </p>
-      </introduction>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context()->variables->add(y=>'Real');
-              $dydx=Formula("(y*(y-2x))/(x*(x-2y))");
-              @x=(random(-4,-0.1,0.1),random(-4,-0.1,0.1),random(-4,-0.1,0.1),random(2,4,0.1),random(2,4,0.1));
-              @y=map{(($_)**2 + random(-1,1,2)*sqrt(($_)**4 - 4*$_))/(2*$_)}(@x);
-              @xy=map{[$x[$_],$y[$_]]}(0..4);
-              $dydx->{test_points}=~~@xy;
-            </pg-code>
-
-            <statement>
-              <p>
-                Find <m>\lz{y}{x}</m>, where <m>x^2y-y^2x = 1</m>.
-              </p>
-
-              <p>
-                <m>\lz{y}{x}=</m><var name="$dydx" width="40"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context()->flags->set(reduceConstants=>0);
-              Context()->variables->add(y=>'Real');
-              parser::Assignment->Allow;
-              $line=Formula("y=-4/5(x-1)+2");
-            </pg-code>
-
-            <statement>
-              <p>
-                Find the equation of the line tangent to the graph of
-                <m>x^2+y^2+xy=7</m> at the point <m>(1,2)</m>.
-              </p>
-
-              <p>
-                <var name="$line" width="20"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              $L=Formula("3x^2+1");
-            </pg-code>
-
-            <statement>
-              <p>
-                Let <m>f(x) = x^3+x</m>.
-                Evaluate:
-              </p>
-
-              <p>
-                <m>\lim\limits_{s\to 0} \frac{f(x+s)-f(x)}{s}=</m><var name="$L" width="20"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-    </exercisegroup>
+    </subexercises>
   </exercises>
 </section>

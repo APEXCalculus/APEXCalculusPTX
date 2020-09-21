@@ -732,6 +732,9 @@
             <p>
               Give an example of a function <m>f(x)</m> where <m>\fp(x) = f(x)</m>.
             </p>
+            <instruction>
+              Enter the formula for the function <em>without</em> the <q><m>f(x)=</m></q>.
+            </instruction>
             <p>
               <var name="$ans" width="20" evaluator="$ev"/>
             </p>
@@ -758,6 +761,9 @@
             <p>
               Give an example of a function <m>f(x)</m> where <m>\fp(x) = 0</m>.
             </p>
+            <instruction>
+              Enter the formula for the function <em>without</em> the <q><m>f(x)=</m></q>.
+            </instruction>
             <p>
               <var name="$ans" width="20" evaluator="$ev"/>
             </p>
@@ -827,6 +833,9 @@
               Give an example of a function where
               <m>\fp(x) \neq 0</m> and <m>\fpp(x) = 0</m>.
             </p>
+            <instruction>
+              Enter the formula for the function <em>without</em> the <q><m>f(x)=</m></q>.
+            </instruction>
             <p>
               <var name="$ans" width="20" evaluator="$ev"/>
             </p>
@@ -945,6 +954,21 @@
               'pounds/foot/foot' => {alias=>'pound per foot squared'},
               'pounds/ft^2' => {alias=>'pound per foot squared'},
               'pounds/ft/ft' => {alias=>'pound per foot squared'},
+              'lbs per foot squared' => {alias=>'pound per foot squared'},
+              'lbs per square foot' => {alias=>'pound per foot squared'},
+              'lbs per foot per foot' => {alias=>'pound per foot squared'},
+              'lbs per ft^2' => {alias=>'pound per foot squared'},
+              'lbs per ft per ft' => {alias=>'pound per foot squared'},
+              'lbs / foot squared' => {alias=>'pound per foot squared'},
+              'lbs / square foot' => {alias=>'pound per foot squared'},
+              'lbs / foot / foot' => {alias=>'pound per foot squared'},
+              'lbs / ft^2' => {alias=>'pound per foot squared'},
+              'lbs / ft / ft' => {alias=>'pound per foot squared'},
+              'lbs/foot squared' => {alias=>'pound per foot squared'},
+              'lbs/square foot' => {alias=>'pound per foot squared'},
+              'lbs/foot/foot' => {alias=>'pound per foot squared'},
+              'lbs/ft^2' => {alias=>'pound per foot squared'},
+              'lbs/ft/ft' => {alias=>'pound per foot squared'},
             );
             $ans=Compute("pound per foot squared");
           </pg-code>
@@ -1945,20 +1969,28 @@
       <exercise>
         <webwork>
           <pg-code>
-            $ans=82.08;
+            ($n,$x0) = (3,4,5)[NchooseK(3,2)];
+            $dx = 0.1;
+            $x = $x0 + $dx;
+            $f = Formula("x^$n");
+            $df = $f->D('x');
+            $dfx0 = $df->eval(x=>$x0);
+            $fx0 = $f->eval(x=>$x0);
+            $answer = $fx0 + $dx*$dfx0;
+            $l = Formula("$dfx0(x-$x0)+$fx0");
           </pg-code>
           <statement>
             <p>
-              Approximate the value of <m>(3.01)^4</m> using the tangent line to <m>f(x) = x^4</m> at <m>x=3</m>.
+              Approximate the value of <m>(<var name="$x"/>)^{<var name="$n"/>}</m> using the tangent line to <m>f(x) = <var name="$f"/></m> at <m>x=<var name="$x0"/></m>.
             </p>
             <p>
-              <var name="$ans" width="20"/>
+              <var name="$answer" width="20"/>
             </p>
           </statement>
           <solution>
             <p>
-              The tangent line to <m>f(x) = x^4</m> at <m>x=3</m> is <m>y=108(x-3)+81</m>;
-              thus <m>(3.01)^4 \approx y(3.01) = 108(0.01)+81 = 82.08</m>.
+              The tangent line to <m>f(x) = <var name="$f"/></m> at <m>x=<var name="$x0"/></m> is <m>y=<var name="l"/></m>;
+              thus <m>(<var name="$x"/>)^<var name="$n"/> \approx y(<var name="$x"/>) = <var name="$dfx0"/>(<var name="$dx"/>)+<var name="$fx0"/> = <var name="$answer"/></m>.
             </p>
           </solution>
         </webwork>

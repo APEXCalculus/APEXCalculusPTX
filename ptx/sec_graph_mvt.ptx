@@ -463,656 +463,637 @@
 
 
   <exercises>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          Terms and Concepts
-        </p>
-      </introduction>
-
+    <subexercises>
+      <title>Terms and Concepts</title>
       <exercise>
         <webwork>
-            <statement>
-              <p>
-                Explain in your own words what the Mean Value Theorem states.
-              </p>
-
-              <p>
-                <var form="essay"/>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                Answers will vary.
-              </p>
-            </solution>
+          <statement>
+            <p>
+              Explain in your own words what the Mean Value Theorem states.
+            </p>
+            <p>
+              <var form="essay"/>
+            </p>
+          </statement>
+          <solution>
+            <p>
+              Answers will vary.
+            </p>
+          </solution>
         </webwork>
       </exercise>
 
       <exercise>
         <webwork>
-            <statement>
-              <p>
-                Explain in your own words what Rolle's Theorem states.
-              </p>
-
-              <p>
-                <var form="essay"/>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                Answers will vary.
-              </p>
-            </solution>
+          <statement>
+            <p>
+              Explain in your own words what Rolle's Theorem states.
+            </p>
+            <p>
+              <var form="essay"/>
+            </p>
+          </statement>
+          <solution>
+            <p>
+              Answers will vary.
+            </p>
+          </solution>
         </webwork>
       </exercise>
+    </subexercises>
 
-    </exercisegroup>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          In the following exercises,
-          a function <m>f(x)</m> and interval <m>[a,b]</m> are given.
-          Check if <xref ref="thm_rolles" text="title"/> can be applied to <m>f</m> on <m>[a,b]</m>;
-          if so, find <m>c</m> in <m>(a,b)</m> such that <m>\fp(c)=0</m>.
-        </p>
-      </introduction>
-
-      <exercise>
-        <webwork>
+    <subexercises>
+      <title>Problems</title>
+      <exercisegroup cols="2">
+        <introduction>
+          <p>
+            A function <m>f(x)</m> and interval <m>[a,b]</m> are given.
+            Check if <xref ref="thm_rolles" text="title"/> can be applied to <m>f</m> on <m>[a,b]</m>;
+            if so, find <m>c</m> in <m>(a,b)</m> such that <m>\fp(c)=0</m>.
+          </p>
+        </introduction>
+        <exercise>
+          <webwork>
             <pg-code>
               Context("Interval");
               Context()->strings->add('does not apply'=>{});
               $c=Compute("(-1,1)");
+              $showwork = q![@ explanation_box(message => "Explain why Rolle's Theorem can or cannot be applied.") @]*!;
             </pg-code>
-
             <statement>
               <p>
-                Let <m>f(x) = 6</m>.
-                Check if Rolle's Theorem can be applied on <m>[-1,1]</m>.
-                If it cannot, state that Rolle's Theorem
-                <q><c>does not apply</c></q>.
-                Otherwise find all <m>c</m> in <m>(-1,1)</m> such that <m>\fp(c)=0</m>.
+                <m>f(x) = 6</m> on <m>[-1,1]</m>
               </p>
-
+              <p>
+                <var name="$showwork" data="pgml"/>
+              </p>
+              <instruction>
+                If Rolle's Theorem applies, enter the values of <m>c</m> in <m>(a,b)</m> such that <m>\fp(c)=0</m>.
+                You may either list individual numbers separated by commas, or use interval notation.
+                If Rolle's Theorem does not apply, enter <c>does not apply</c>.
+              </instruction>
               <p>
                 <var name="$c" width="30"/>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
             <pg-code>
               Context("Interval");
               Context()->strings->add('does not apply'=>{});
               $c=Compute("does not apply");
+              $showwork = q![@ explanation_box(message => "Explain why Rolle's Theorem can or cannot be applied.") @]*!;
             </pg-code>
-
             <statement>
               <p>
-                Let <m>f(x) = 6x</m>.
-                Check if Rolle's Theorem can be applied on <m>[-1,1]</m>.
-                If it cannot, state that Rolle's Theorem
-                <q><c>does not apply</c></q>.
-                Otherwise find all <m>c</m> in <m>(-1,1)</m> such that <m>\fp(c)=0</m>.
+                <m>f(x) = 6x</m> on <m>[-1,1]</m>
               </p>
-
+              <p>
+                <var name="$showwork" data="pgml"/>
+              </p>
+              <instruction>
+                If Rolle's Theorem applies, enter the values of <m>c</m> in <m>(a,b)</m> such that <m>\fp(c)=0</m>.
+                You may either list individual numbers separated by commas, or use interval notation.
+                If Rolle's Theorem does not apply, enter <c>does not apply</c>.
+              </instruction>
               <p>
                 <var name="$c" width="30"/>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
             <pg-code>
-              Context("Interval");
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              Context("Fraction");
               Context()->strings->add('does not apply'=>{});
-              $c=Compute("-1/2");
+              $c=Fraction("-1/2");
+              $showwork = q![@ explanation_box(message => "Explain why Rolle's Theorem can or cannot be applied.") @]*!;
             </pg-code>
-
             <statement>
               <p>
-                Let <m>f(x) = x^2+x-6</m>.
-                Check if Rolle's Theorem can be applied on <m>[-3,2]</m>.
-                If it cannot, state that Rolle's Theorem
-                <q><c>does not apply</c></q>.
-                Otherwise find all <m>c</m> in <m>(-3,2)</m> such that <m>\fp(c)=0</m>.
+                <m>f(x) = x^2+x-6</m> on <m>[-3,2]</m>
               </p>
-
+              <p>
+                <var name="$showwork" data="pgml"/>
+              </p>
+              <instruction>
+                If Rolle's Theorem applies, enter the values of <m>c</m> in <m>(a,b)</m> such that <m>\fp(c)=0</m>.
+                You may either list individual numbers separated by commas, or use interval notation.
+                If Rolle's Theorem does not apply, enter <c>does not apply</c>.
+              </instruction>
               <p>
                 <var name="$c" width="30"/>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
             <pg-code>
-              Context("Interval");
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              Context("Fraction");
               Context()->strings->add('does not apply'=>{});
-              $c=Compute("-1/2");
+              $c=Fraction("-1/2");
+              $showwork = q![@ explanation_box(message => "Explain why Rolle's Theorem can or cannot be applied.") @]*!;
             </pg-code>
-
             <statement>
               <p>
-                Let <m>f(x) = x^2+x-2</m>.
-                Check if Rolle's Theorem can be applied on <m>[-3,2]</m>.
-                If it cannot, state that Rolle's Theorem
-                <q><c>does not apply</c></q>.
-                Otherwise find all <m>c</m> in <m>(-3,2)</m> such that <m>\fp(c)=0</m>.
+                <m>f(x) = x^2+x-2</m> on <m>[-3,2]</m>
               </p>
-
+              <p>
+                <var name="$showwork" data="pgml"/>
+              </p>
+              <instruction>
+                If Rolle's Theorem applies, enter the values of <m>c</m> in <m>(a,b)</m> such that <m>\fp(c)=0</m>.
+                You may either list individual numbers separated by commas, or use interval notation.
+                If Rolle's Theorem does not apply, enter <c>does not apply</c>.
+              </instruction>
               <p>
                 <var name="$c" width="30"/>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
             <pg-code>
               Context("Interval");
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               Context()->strings->add('does not apply'=>{});
               $c=Compute("does not apply");
+              $showwork = q![@ explanation_box(message => "Explain why Rolle's Theorem can or cannot be applied.") @]*!;
             </pg-code>
-
             <statement>
               <p>
-                Let <m>f(x) = x^2+x</m>.
-                Check if Rolle's Theorem can be applied on <m>[-2,2]</m>.
-                If it cannot, state that Rolle's Theorem
-                <q><c>does not apply</c></q>.
-                Otherwise find all <m>c</m> in <m>(-2,2)</m> such that <m>\fp(c)=0</m>.
+                <m>f(x) = x^2+x</m> on <m>[-2,2]</m>
               </p>
-
+              <p>
+                <var name="$showwork" data="pgml"/>
+              </p>
+              <instruction>
+                If Rolle's Theorem applies, enter the values of <m>c</m> in <m>(a,b)</m> such that <m>\fp(c)=0</m>.
+                You may either list individual numbers separated by commas, or use interval notation.
+                If Rolle's Theorem does not apply, enter <c>does not apply</c>.
+              </instruction>
               <p>
                 <var name="$c" width="30"/>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
             <pg-code>
               Context("Interval");
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               Context()->strings->add('does not apply'=>{});
               $c=Formula("pi/2");
+              $showwork = q![@ explanation_box(message => "Explain why Rolle's Theorem can or cannot be applied.") @]*!;
             </pg-code>
-
             <statement>
               <p>
-                Let <m>f(x) = \sin(x)</m>.
-                Check if Rolle's Theorem can be applied on <m>[\pi/6,5\pi/6]</m>.
-                If it cannot, state that Rolle's Theorem
-                <q><c>does not apply</c></q>.
-                Otherwise find all <m>c</m> in
-                <m>(\pi/6,5\pi/6)</m> such that <m>\fp(c)=0</m>.
+                <m>f(x) = \sin(x)</m> on <m>[\pi/6,5\pi/6]</m>
               </p>
-
+              <p>
+                <var name="$showwork" data="pgml"/>
+              </p>
+              <instruction>
+                If Rolle's Theorem applies, enter the values of <m>c</m> in <m>(a,b)</m> such that <m>\fp(c)=0</m>.
+                You may either list individual numbers separated by commas, or use interval notation.
+                If Rolle's Theorem does not apply, enter <c>does not apply</c>.
+              </instruction>
               <p>
                 <var name="$c" width="30"/>
               </p>
             </statement>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
             <pg-code>
               Context("Interval");
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               Context()->strings->add('does not apply'=>{});
               $c=Compute("does not apply");
+              $showwork = q![@ explanation_box(message => "Explain why Rolle's Theorem can or cannot be applied.") @]*!;
             </pg-code>
-
             <statement>
               <p>
-                Let <m>f(x) = \cos(x)</m>.
-                Check if Rolle's Theorem can be applied on <m>[0,\pi]</m>.
-                If it cannot, state that Rolle's Theorem
-                <q><c>does not apply</c></q>.
-                Otherwise find all <m>c</m> in <m>(0,\pi)</m> such that <m>\fp(c)=0</m>.
+                <m>f(x) = \cos(x)</m> on <m>[0,\pi]</m>
               </p>
-
+              <p>
+                <var name="$showwork" data="pgml"/>
+              </p>
+              <instruction>
+                If Rolle's Theorem applies, enter the values of <m>c</m> in <m>(a,b)</m> such that <m>\fp(c)=0</m>.
+                You may either list individual numbers separated by commas, or use interval notation.
+                If Rolle's Theorem does not apply, enter <c>does not apply</c>.
+              </instruction>
               <p>
                 <var name="$c" width="30"/>
               </p>
             </statement>
-<!--           <solution>
-            <p>Rolle's Thm. does not apply.</p>
-          </solution> -->
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
             <pg-code>
               Context("Interval");
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               Context()->strings->add('does not apply'=>{});
               $c=Compute("does not apply");
+              $showwork = q![@ explanation_box(message => "Explain why Rolle's Theorem can or cannot be applied.") @]*!;
             </pg-code>
-
             <statement>
               <p>
-                Let <m>f(x) = \frac{1}{x^2-2x+1}</m>.
-                Check if Rolle's Theorem can be applied on <m>[0,2]</m>.
-                If it cannot, state that Rolle's Theorem
-                <q><c>does not apply</c></q>.
-                Otherwise find all <m>c</m> in <m>(0,2)</m> such that <m>\fp(c)=0</m>.
+                <m>f(x) = \frac{1}{x^2-2x+1}</m> on <m>[0,2]</m>
               </p>
-
+              <p>
+                <var name="$showwork" data="pgml"/>
+              </p>
+              <instruction>
+                If Rolle's Theorem applies, enter the values of <m>c</m> in <m>(a,b)</m> such that <m>\fp(c)=0</m>.
+                You may either list individual numbers separated by commas, or use interval notation.
+                If Rolle's Theorem does not apply, enter <c>does not apply</c>.
+              </instruction>
               <p>
                 <var name="$c" width="30"/>
               </p>
             </statement>
-<!--           <solution>
-            <p>Rolle's Theorem does not apply.</p>
-          </solution> -->
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
+      </exercisegroup>
 
-    </exercisegroup>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          In the following exercises,
-          a function <m>f(x)</m> and interval <m>[a,b]</m> are given.
-          Check if the Mean Value Theorem can be applied to <m>f</m> on <m>[a,b]</m>;
-          if so, find a value <m>c</m> in <m>(a,b)</m> guaranteed by the Mean Value Theorem.
-        </p>
-      </introduction>
-
-    <exercise>
-      <statement>
-        <p>
-          <m>\ds f(x) = x^2+3x-1</m> on <m>[-2,2]</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>c=0</m>
-        </p>
-      </answer>
-    </exercise>
-
-      <exercise>
-        <webwork>
+      <exercisegroup cols="2">
+        <introduction>
+          <p>
+            A function <m>f(x)</m> and interval <m>[a,b]</m> are given.
+            Check if <xref ref="thm_mvt" text="title"/> can be applied to <m>f</m> on <m>[a,b]</m>;
+            if so, find <m>c</m> in <m>(a,b)</m> guaranteed by the Mean Value Theorem.
+          </p>
+        </introduction>
+        <exercise>
+          <webwork>
             <pg-code>
               Context("Interval");
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               Context()->strings->add('does not apply'=>{});
               $c=Formula("0");
+              $showwork = '[@ explanation_box(message => "Explain why the Mean Value Theorem can or cannot be applied.") @]*';
             </pg-code>
-
             <statement>
               <p>
-                Let <m>\ds f(x) = x^2+3x-1</m>.
-                Check if the Mean Value Theorem can be applied to <m>f</m> on <m>[-2,2]</m>.
-                If it cannot, state that the Mean Value Theorem
-                <q><c>does not apply</c></q>.
-                Otherwise find all values <m>c</m> in <m>[-2,2]</m> guaranteed by the Mean Value Theorem
+                <m>f(x) = x^2+3x-1</m> on <m>[-2,2]</m>
               </p>
-
+              <p>
+                <var name="$showwork" data="pgml"/>
+              </p>
+              <instruction>
+                If the Mean Value Theorem applies, enter the values of <m>c</m> in <m>(a,b)</m> guaranteed by the Mean Value Theorem.
+                You may either list individual numbers separated by commas, or use interval notation.
+                If the Mean Value Theorem does not apply, enter <c>does not apply</c>.
+              </instruction>
               <p>
                 <var name="$c" width="30"/>
               </p>
             </statement>
- <!--          <solution>
-            <p><m>c=0</m></p>
-          </solution> -->
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
             <pg-code>
-              Context("Interval");
+              Context("Fraction");
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               Context()->strings->add('does not apply'=>{});
-              $c=Formula("5/2");
+              $c=Fraction("5/2");
+              $showwork = '[@ explanation_box(message => "Explain why the Mean Value Theorem can or cannot be applied.") @]*';
             </pg-code>
-
             <statement>
               <p>
-                Let <m>\ds f(x) = 5x^2-6x+8</m>.
-                Check if the Mean Value Theorem can be applied to <m>f</m> on <m>[0,5]</m>.
-                If it cannot, state that the Mean Value Theorem
-                <q><c>does not apply</c></q>.
-                Otherwise find all values <m>c</m> in <m>[0,5]</m> guaranteed by the Mean Value Theorem
+                <m>f(x) = 5x^2-6x+8</m> on <m>[0,5]</m>
               </p>
-
+              <p>
+                <var name="$showwork" data="pgml"/>
+              </p>
+              <instruction>
+                If the Mean Value Theorem applies, enter the values of <m>c</m> in <m>(a,b)</m> guaranteed by the Mean Value Theorem.
+                You may either list individual numbers separated by commas, or use interval notation.
+                If the Mean Value Theorem does not apply, enter <c>does not apply</c>.
+              </instruction>
               <p>
                 <var name="$c" width="30"/>
               </p>
             </statement>
-<!--           <solution>
-            <p><m>c=5/2</m></p>
-          </solution> -->
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
             <pg-code>
-              Context("Interval");
+              Context("Fraction");
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               Context()->strings->add('does not apply'=>{});
-              $c=Formula("3/sqrt(2)");
+              $c=Formula("3sqrt(2)/2");
+              $showwork = '[@ explanation_box(message => "Explain why the Mean Value Theorem can or cannot be applied.") @]*';
             </pg-code>
-
             <statement>
               <p>
-                Let <m>\ds f(x) = \sqrt{9-x^2}</m>.
-                Check if the Mean Value Theorem can be applied to <m>f</m> on <m>[0,3]</m>.
-                If it cannot, state that the Mean Value Theorem
-                <q><c>does not apply</c></q>.
-                Otherwise find all values <m>c</m> in <m>[0,3]</m> guaranteed by the Mean Value Theorem
+                <m>f(x) = \sqrt{9-x^2}</m> on <m>[0,3]</m>
               </p>
-
+              <p>
+                <var name="$showwork" data="pgml"/>
+              </p>
+              <instruction>
+                If the Mean Value Theorem applies, enter the values of <m>c</m> in <m>(a,b)</m> guaranteed by the Mean Value Theorem.
+                You may either list individual numbers separated by commas, or use interval notation.
+                If the Mean Value Theorem does not apply, enter <c>does not apply</c>.
+              </instruction>
               <p>
                 <var name="$c" width="30"/>
               </p>
             </statement>
-<!--           <solution>
-            <p><m>c=3/\sqrt{2}</m></p>
-          </solution> -->
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
             <pg-code>
-              Context("Interval");
+              Context("Fraction");
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               Context()->strings->add('does not apply'=>{});
-              $c=Formula("19/4");
+              $c=Fraction("19/4");
+              $showwork = '[@ explanation_box(message => "Explain why the Mean Value Theorem can or cannot be applied.") @]*';
             </pg-code>
-
             <statement>
               <p>
-                Let <m>\ds f(x) = \sqrt{25-x}</m>.
-                Check if the Mean Value Theorem can be applied to <m>f</m> on <m>[0,9]</m>.
-                If it cannot, state that the Mean Value Theorem
-                <q><c>does not apply</c></q>.
-                Otherwise find all values <m>c</m> in <m>[0,9]</m> guaranteed by the Mean Value Theorem
+                <m>f(x) = \sqrt{25-x}</m> on <m>[0,9]</m>
               </p>
-
+              <p>
+                <var name="$showwork" data="pgml"/>
+              </p>
+              <instruction>
+                If the Mean Value Theorem applies, enter the values of <m>c</m> in <m>(a,b)</m> guaranteed by the Mean Value Theorem.
+                You may either list individual numbers separated by commas, or use interval notation.
+                If the Mean Value Theorem does not apply, enter <c>does not apply</c>.
+              </instruction>
               <p>
                 <var name="$c" width="30"/>
               </p>
             </statement>
-<!--           <solution>
-            <p><m>c=19/4</m></p>
-          </solution> -->
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
             <pg-code>
-              Context("Interval");
+              Context("Fraction");
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               Context()->strings->add('does not apply'=>{});
               $c=Compute("does not apply");
+              $showwork = '[@ explanation_box(message => "Explain why the Mean Value Theorem can or cannot be applied.") @]*';
             </pg-code>
-
             <statement>
               <p>
-                Let <m>\ds f(x) =\frac{x^2-9}{x^2-1}</m>.
-                Check if the Mean Value Theorem can be applied to <m>f</m> on <m>[0,2]</m>.
-                If it cannot, state that the Mean Value Theorem
-                <q><c>does not apply</c></q>.
-                Otherwise find all values <m>c</m> in <m>[0,2]</m> guaranteed by the Mean Value Theorem
+                <m>f(x) = \frac{x^2-9}{x^2-1}</m> on <m>[0,2]</m>
               </p>
-
+              <p>
+                <var name="$showwork" data="pgml"/>
+              </p>
+              <instruction>
+                If the Mean Value Theorem applies, enter the values of <m>c</m> in <m>(a,b)</m> guaranteed by the Mean Value Theorem.
+                You may either list individual numbers separated by commas, or use interval notation.
+                If the Mean Value Theorem does not apply, enter <c>does not apply</c>.
+              </instruction>
               <p>
                 <var name="$c" width="30"/>
               </p>
             </statement>
-<!--           <solution>
-            <p>The Mean Value Theorem does not apply.</p>
-          </solution> -->
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
             <pg-code>
-              Context("Interval");
+              Context("Fraction");
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               Context()->strings->add('does not apply'=>{});
               $c=Formula("4/ln(5)");
+              $showwork = '[@ explanation_box(message => "Explain why the Mean Value Theorem can or cannot be applied.") @]*';
             </pg-code>
-
             <statement>
               <p>
-                Let <m>\ds f(x) = \ln(x)</m>.
-                Check if the Mean Value Theorem can be applied to <m>f</m> on <m>[1,5]</m>.
-                If it cannot, state that the Mean Value Theorem
-                <q><c>does not apply</c></q>.
-                Otherwise find all values <m>c</m> in <m>[1,5]</m> guaranteed by the Mean Value Theorem
+                <m>f(x) = \ln(x)</m> on <m>[1,5]</m>
               </p>
-
+              <p>
+                <var name="$showwork" data="pgml"/>
+              </p>
+              <instruction>
+                If the Mean Value Theorem applies, enter the values of <m>c</m> in <m>(a,b)</m> guaranteed by the Mean Value Theorem.
+                You may either list individual numbers separated by commas, or use interval notation.
+                If the Mean Value Theorem does not apply, enter <c>does not apply</c>.
+              </instruction>
               <p>
                 <var name="$c" width="30"/>
               </p>
             </statement>
-            <solution>
-              <p>
-                <m>c=4/\ln(5)</m>
-              </p>
-            </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
             <pg-code>
-              Context("Interval");
+              Context("Fraction");
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               Context()->strings->add('does not apply'=>{});
               $c=Compute("-asec(2/sqrt(pi)), asec(2/sqrt(pi))");
+              $showwork = '[@ explanation_box(message => "Explain why the Mean Value Theorem can or cannot be applied.") @]*';
             </pg-code>
-
             <statement>
               <p>
-                Let <m>\ds f(x) = \tan(x)</m>.
-                Check if the Mean Value Theorem can be applied to <m>f</m> on <m>[-\pi/4,\pi/4]</m>.
-                If it cannot, state that the Mean Value Theorem
-                <q><c>does not apply</c></q>.
-                Otherwise find all values <m>c</m> in
-                <m>[-\pi/4,\pi/4]</m> guaranteed by the Mean Value Theorem
+                <m>f(x) = \tan(x)</m> on <m>[-\pi/4,\pi/4]</m>
               </p>
-
+              <p>
+                <var name="$showwork" data="pgml"/>
+              </p>
+              <instruction>
+                If the Mean Value Theorem applies, enter the values of <m>c</m> in <m>(a,b)</m> guaranteed by the Mean Value Theorem.
+                You may either list individual numbers separated by commas, or use interval notation.
+                If the Mean Value Theorem does not apply, enter <c>does not apply</c>.
+              </instruction>
               <p>
                 <var name="$c" width="30"/>
               </p>
             </statement>
-            <solution>
-              <p>
-                <m>c=\pm \sec^{-1}(2/\sqrt{\pi})</m>
-              </p>
-            </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
             <pg-code>
-              Context("Interval");
+              Context("Fraction");
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               Context()->strings->add('does not apply'=>{});
-              $c=Formula("-2/3");
+              $c=Fraction("-2/3");
+              $showwork = '[@ explanation_box(message => "Explain why the Mean Value Theorem can or cannot be applied.") @]*';
             </pg-code>
-
             <statement>
               <p>
-                Let <m>\ds f(x) = x^3-2x^2+x+1</m>.
-                Check if the Mean Value Theorem can be applied to <m>f</m> on <m>[-2,2]</m>.
-                If it cannot, state that the Mean Value Theorem
-                <q><c>does not apply</c></q>.
-                Otherwise find all values <m>c</m> in <m>[-2,2]</m> guaranteed by the Mean Value Theorem
+                <m>f(x) = x^3-2x^2+x+1</m> on <m>[-2,2]</m>
               </p>
-
+              <p>
+                <var name="$showwork" data="pgml"/>
+              </p>
+              <instruction>
+                If the Mean Value Theorem applies, enter the values of <m>c</m> in <m>(a,b)</m> guaranteed by the Mean Value Theorem.
+                You may either list individual numbers separated by commas, or use interval notation.
+                If the Mean Value Theorem does not apply, enter <c>does not apply</c>.
+              </instruction>
               <p>
                 <var name="$c" width="30"/>
               </p>
             </statement>
-            <solution>
-              <p>
-                <m>c=-2/3</m>
-              </p>
-            </solution>
-        </webwork>
-      </exercise>
+          </webwork>
+        </exercise>
 
-      <exercise>
-        <webwork>
+        <exercise>
+          <webwork>
             <pg-code>
-              Context("Interval");
+              Context("Fraction");
               Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               Context()->strings->add('does not apply'=>{});
               $c=Compute("5+7sqrt(7)/6, 5-7sqrt(7)/6");
+              $showwork = '[@ explanation_box(message => "Explain why the Mean Value Theorem can or cannot be applied.") @]*';
             </pg-code>
-
             <statement>
               <p>
-                Let <m>\ds f(x) = 2x^3-5x^2+6x+1</m>.
-                Check if the Mean Value Theorem can be applied to <m>f</m> on <m>[-5,2]</m>.
-                If it cannot, state that the Mean Value Theorem
-                <q><c>does not apply</c></q>.
-                Otherwise find all values <m>c</m> in <m>[-5,2]</m> guaranteed by the Mean Value Theorem
+                <m>f(x) = 2x^3-5x^2+6x+1</m> on <m>[-5,2]</m>
               </p>
-
+              <p>
+                <var name="$showwork" data="pgml"/>
+              </p>
+              <instruction>
+                If the Mean Value Theorem applies, enter the values of <m>c</m> in <m>(a,b)</m> guaranteed by the Mean Value Theorem.
+                You may either list individual numbers separated by commas, or use interval notation.
+                If the Mean Value Theorem does not apply, enter <c>does not apply</c>.
+              </instruction>
               <p>
                 <var name="$c" width="30"/>
               </p>
             </statement>
-            <solution>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork>
+            <pg-code>
+              Context("Fraction");
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              Context()->strings->add('does not apply'=>{});
+              $c=Compute("sqrt(pi^2-4)/pi, -sqrt(pi^2-4)/pi");
+              $showwork = '[@ explanation_box(message => "Explain why the Mean Value Theorem can or cannot be applied.") @]*';
+            </pg-code>
+            <statement>
               <p>
-                <m>c=\frac{5+7\sqrt{7}}{6}</m>,<m>c=\frac{5-7\sqrt{7}}{6}</m>
+                <m>f(x) = \sin^{-1}(x)</m> on <m>[-1,1]</m>
               </p>
-            </solution>
+              <p>
+                <var name="$showwork" data="pgml"/>
+              </p>
+              <instruction>
+                If the Mean Value Theorem applies, enter the values of <m>c</m> in <m>(a,b)</m> guaranteed by the Mean Value Theorem.
+                You may either list individual numbers separated by commas, or use interval notation.
+                If the Mean Value Theorem does not apply, enter <c>does not apply</c>.
+              </instruction>
+              <p>
+                <var name="$c" width="30"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+      </exercisegroup>
+    </subexercises>
+
+    <subexercises>
+      <title>Review</title>
+      <exercise>
+        <webwork seed="1">
+          <pg-code>
+            ($b,$c) = (-9..-1,1..9)[NchooseK(18,2)];
+            ($l,$h) = (1..4)[NchooseK(4,2)];
+            if($envir{problemSeed}==1){$b=-3;$c=9;$l=3;$h=4};
+            $low = int(-$b/2) - $l;
+            $high = int(-$b/2) + $h;
+            $f = Formula("x^2+$b x+$c")->reduce;
+            Context("Fraction");
+            $max = Fraction(max($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>-$b/2)));
+            $min = Fraction(min($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>-$b/2)));
+          </pg-code>
+          <statement>
+            <p>
+              Find the extreme values of <m>f(x) = <var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>.
+            </p>
+            <instruction>
+              Enter the maximimum value here, or enter <c>NONE</c> if there isn't one.
+            </instruction>
+            <p>
+              <var name="$max" width="10"/>
+            </p>
+            <instruction>
+              Enter the minimimum value here, or enter <c>NONE</c> if there isn't one.
+            </instruction>
+            <p>
+              <var name="$min" width="10"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
 
       <exercise>
         <webwork>
-            <pg-code>
-              Context("Interval");
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
-              Context()->strings->add('does not apply'=>{});
-              $c=Compute("sqrt(pi^2-4)/pi, -sqrt(pi^2-4)/pi");
-            </pg-code>
-
-            <statement>
-              <p>
-                Let <m>\ds f(x) = \sin^{-1}(x)</m>.
-                Check if the Mean Value Theorem can be applied to <m>f</m> on <m>[-1,1]</m>.
-                If it cannot, state that the Mean Value Theorem
-                <q><c>does not apply</c></q>.
-                Otherwise find all values <m>c</m> in <m>[-1,1]</m> guaranteed by the Mean Value Theorem
-              </p>
-
-              <p>
-                <var name="$c" width="30"/>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                <m>c=\frac{\sqrt{\pi^2-4}}{\pi}</m>,<m>c=-\frac{\sqrt{\pi^2-4}}{\pi}</m>
-              </p>
-            </solution>
+          <statement>
+            <p>
+              Describe the critical points of <m>f(x) = \cos(x)</m>.
+            </p>
+            <p>
+              <var form="essay" />
+            </p>
+          </statement>
+          <solution>
+            <p>
+              They are the multiples of <m>\pi</m> such as <m>0</m>, <m>\pm\pi</m>, <m>\pm 2\pi</m>, <m>\pm4\pi</m>, etc.
+            </p>
+          </solution>
         </webwork>
       </exercise>
 
-    </exercisegroup>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          Review
-        </p>
-      </introduction>
-
       <exercise>
-<!--         <webwork>
-            <pg-code>
-            </pg-code>
-           -->
-        <statement>
-          <p>
-            Find the extreme values of <m>f(x) =x^2-3x+9</m> on <m>[-2,5]</m>
-          </p>
-
-          <!-- State your answer(s) in the form <m>x=...</m>. If any of the extreme values below are not present, state <q><c>does not apply</c></q></p> -->
-            <!-- <p><var form="essay" /></p> -->
-        </statement>
-        <solution>
-          <p>
-            Max value of 19 at <m>x=-2</m> and <m>x=5</m>;
-            min value of 6.75 at <m>x=1.5</m>.
-          </p>
-        </solution>
-<!--         </webwork> -->
+        <webwork>
+          <pg-code>
+          </pg-code>
+          <statement>
+            <p>
+              Describe the critical points of <m>f(x) = \tan(x)</m>.
+            </p>
+            <p>
+              <var form="essay" />
+            </p>
+          </statement>
+          <solution>
+            <p>
+              There aren't any critical points. Wherever <m>\tan(x)</m> is defined, its derivative is also defined and strictly positive.
+            </p>
+          </solution>
+        </webwork>
       </exercise>
-
-      <exercise>
-<!--         <webwork>
-            <pg-code>
-            </pg-code>
-           -->
-        <statement>
-          <p>
-            Describe the critical points of <m>f(x) = \cos(x)</m>.
-          </p>
-            <!-- <p><var form="essay" /></p> -->
-        </statement>
-        <solution>
-          <p>
-            They are the odd,
-            integer valued multiples of <m>\pi/2</m> (such as <m>0,\pm\pi/2, \pm 3\pi/2, \pm5\pi/2</m>, etc.)
-          </p>
-        </solution>
-<!--         </webwork> -->
-      </exercise>
-
-      <exercise>
-<!--         <webwork>
-            <pg-code>
-            </pg-code>
-           -->
-        <statement>
-          <p>
-            Describe the critical points of <m>f(x) = \tan(x)</m>.
-          </p>
-            <!-- <p><var form="essay" /></p> -->
-        </statement>
-        <solution>
-          <p>
-            They are the odd,
-            integer valued multiples of <m>\pi/2</m> (such as <m>\pm\pi/2, \pm 3\pi/2, \pm5\pi/2</m>, etc.)
-          </p>
-        </solution>
-<!--         </webwork> -->
-      </exercise>
-
-    </exercisegroup>
+    </subexercises>
   </exercises>
 </section>
