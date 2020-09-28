@@ -106,34 +106,13 @@
       \newcommand{\zerooverzero}{\ds \raisebox{8pt}{\text{``\ }}\frac{0}{0}\raisebox{8pt}{\textit{ ''}}}
       \newcommand{\deriv}[2]{\myds\frac{d}{dx}\left(#1\right)=#2}
       \newcommand{\myint}[2]{\myds\int #1\, dx= {\ds #2}}
-      \DeclareMathOperator{\sech}{sech}
-      \DeclareMathOperator{\csch}{csch}
       \newcommand{\primeskip}{\hskip.75pt}
       \newcommand{\abs}[1]{\left\lvert #1\right\rvert}
-      \DeclareMathOperator{\curl}{curl}
-      \DeclareMathOperator{\divv}{div}
-      \DeclareMathOperator{\Hess}{Hess}
-
-      %%temporary fix to get circles working right in TexLive 2019
-
-      \makeatletter
-      \def\pgfplots@install@path@replacements{%
-          \ifpgfplots@path@replace@ellipse
-              \let\tikz@do@circle=\pgfplots@path@@tikz@do@circle
-              \let\tikz@do@ellipse=\pgfplots@path@@tikz@do@circle
-              \expandafter\def\expandafter\pgfinterruptpicture\expandafter{\pgfinterruptpicture
-                  \let\tikz@do@circle=\pgfplots@path@@tikz@do@circle@orig
-                  \let\tikz@do@ellipse=\pgfplots@path@@tikz@do@ellipse@orig
-              }%
-          \fi
-      }%
-      \let\pgfplots@path@@tikz@do@circle@orig=\tikz@do@circle
-      \let\pgfplots@path@@tikz@do@ellipse@orig=\tikz@do@ellipse
-
-      \let\pgfplots@path@@tikz@do@circle@oldandbroken=\pgfplots@path@@tikz@do@circle
-      \def\pgfplots@path@@tikz@do@circle#1{\pgfplots@path@@tikz@do@circle@oldandbroken{#1}{#1}}
-      \def\pgfplots@path@@tikz@do@ellipse#1#2{\pgfplots@path@@tikz@do@circle@oldandbroken{#1}{#2}}
-      \makeatother
+      \newcommand{\sech}{\operatorname{sech}}
+      \newcommand{\csch}{\operatorname{csch}}
+      \newcommand{\curl}{\operatorname{curl}}
+      \newcommand{\div}{\operatorname{div}}
+      \newcommand{\Hess}{\operatorname{Hess}}
     </macros>
 
     <latex-image-preamble>
@@ -217,6 +196,26 @@
         clip=false,
         axis background/.style={},
       }}
+      %%temporary fix to get circles working right in TexLive 2019
+
+      \makeatletter
+      \def\pgfplots@install@path@replacements{%
+          \ifpgfplots@path@replace@ellipse
+              \let\tikz@do@circle=\pgfplots@path@@tikz@do@circle
+              \let\tikz@do@ellipse=\pgfplots@path@@tikz@do@circle
+              \expandafter\def\expandafter\pgfinterruptpicture\expandafter{\pgfinterruptpicture
+                  \let\tikz@do@circle=\pgfplots@path@@tikz@do@circle@orig
+                  \let\tikz@do@ellipse=\pgfplots@path@@tikz@do@ellipse@orig
+              }%
+          \fi
+      }%
+      \let\pgfplots@path@@tikz@do@circle@orig=\tikz@do@circle
+      \let\pgfplots@path@@tikz@do@ellipse@orig=\tikz@do@ellipse
+
+      \let\pgfplots@path@@tikz@do@circle@oldandbroken=\pgfplots@path@@tikz@do@circle
+      \def\pgfplots@path@@tikz@do@circle#1{\pgfplots@path@@tikz@do@circle@oldandbroken{#1}{#1}}
+      \def\pgfplots@path@@tikz@do@ellipse#1#2{\pgfplots@path@@tikz@do@circle@oldandbroken{#1}{#2}}
+      \makeatother
     </latex-image-preamble>
 
     <rename element="insight" xml:lang="en-US">Key Idea</rename>
