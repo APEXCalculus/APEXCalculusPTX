@@ -2607,14 +2607,21 @@
       <exercise>
         <webwork seed="1">
           <pg-code>
-            for my$i(0,3){$b[$i]=random(-1,1,1);};
-            for my$i(1,2,4,5){$b[$i]=random(-5,5,1);};
-            $a=non_zero_random(-3,3,1);
+            Context('Fraction')->noreduce('(-x)-y','(-x)+y');
+            for my$i(0,3){$b[$i]=non_zero_random(-1,1,1);};
+            for my$i(1,2,4){$b[$i]=non_zero_random(-5,5,1);};
+            do {$a=non_zero_random(-3,3,1)} until ($b[4] != $b[3]*$a);
             $continuous=list_random('yes','no');
-            if($envir{problemSeed}==1){$a=3;@b=(1,1,-1,0,-1,5);$continuous='no'};
-            if($continuous eq'yes'){$b[5]=$b[0]*$a**2-($b[1]+$b[0]*$b[2])*$a+$b[1]*$b[2]-$b[3]*$a**2+($b[4]+$b[3]*$b[5])*$a;};
+            if($envir{problemSeed}==1){$a=3;@b=(1,1,-1,0,-1);$continuous='no'};
+            $b[5]=Fraction($b[0]*$a**2-($b[1]+$b[0]*$b[2])*$a+$b[1]*$b[2]-$b[3]*$a**2+$b[4]*$a, $b[4]-$b[3]*$a);
+            ($m,$n) = $b[5]->value;
             $f[0]=Formula("$b[0]*x^2-($b[1]+$b[0]*$b[2])*x+$b[1]*$b[2]")->reduce;
-            $f[1]=Formula("$b[3]*x^2-($b[4]+$b[3]*$b[5])*x+$b[4]*$b[5]")->reduce;
+            if($continuous eq 'yes'){
+              $f[1]=Formula("$b[3]*$n*x^2-($b[4]*$n+$b[3]*$m)*x+$b[4]*$m")->reduce;
+            } else {
+              $c = non_zero_random(-2,2,1);
+              $f[1]=Formula("$b[3]*$n*x^2-($b[4]*$n+$b[3]*$m)*x+($b[4]*$m+$c)")->reduce;
+            };
             $yesno=PopUp(['?','yes','no'],$continuous);
           </pg-code>
           <statement>
