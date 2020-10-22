@@ -1792,14 +1792,14 @@
               $m = Formula("-$b")->reduce*$trig{$trigd{$c}}{$a} if ($c eq 'cos');
               Context()->variables->add(y=>'Real');
               parser::Assignment->Allow;
-              $t=Formula("y=$m(x-$a)+$k");
+              $t=Formula("y=$m(x-pi/$a)+$k");
               $t=Formula("y=$k") if ($m == 0);
               if (($c eq 'sin') and ($a==2))
                 {$n= Formula("x=pi/$a");}
               else {
-                $rm = Formula("$b")*$trigrecip{$trigd{$c}}{$a};
-                $rm = Formula("-$b")->reduce*$trigrecip{$trigd{$c}}{$a} if ($c eq 'cos');
-                $n= Formula("y=-$rm(x-$a)+$k");
+                $rm = Formula("1/$b")*$trigrecip{$trigd{$c}}{$a};
+                $rm = Formula("1/-$b")->reduce*$trigrecip{$trigd{$c}}{$a} if ($c eq 'cos');
+                $n= Formula("y=-$rm(x-pi/$a)+$k");
                 $t=Formula("y=$k") if ($m == 0);
               };
             </pg-code>
@@ -1871,14 +1871,14 @@
               $m = Formula("-$b")->reduce*$trig{$trigd{$c}}{$a} if ($c eq 'cos');
               Context()->variables->add(y=>'Real');
               parser::Assignment->Allow;
-              $t=Formula("y=$m(x-$a)+$k");
+              $t=Formula("y=$m(x-pi/$a)+$k");
               $t=Formula("y=$k") if ($m == 0);
               if (($c eq 'sin') and ($a==2))
                 {$n= Formula("x=pi/$a");}
               else {
-                $rm = Formula("$b")*$trigrecip{$trigd{$c}}{$a};
-                $rm = Formula("-$b")->reduce*$trigrecip{$trigd{$c}}{$a} if ($c eq 'cos');
-                $n= Formula("y=-$rm(x-$a)+$k");
+                $rm = Formula("1/$b")*$trigrecip{$trigd{$c}}{$a};
+                $rm = Formula("1/-$b")->reduce*$trigrecip{$trigd{$c}}{$a} if ($c eq 'cos');
+                $n= Formula("y=-$rm(x-pi/$a)+$k");
                 $t=Formula("y=$k") if ($m == 0);
               };
             </pg-code>
