@@ -155,8 +155,8 @@
               return (t.x,t.y,-.5*(t.x-1)^2-.5*(t.y)^2+2);
             }
             surface s=surface(f,(-0.221,-1),(2.2,1),12,20,vsplinetype=new splinetype[] {notaknot,notaknot,monotonic},usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-            pen p=rgb(0,0,.7);
-            draw(s,rgb(.7,.7,1)+opacity(.7),meshpen=p);
+            pen p=apexmeshpen;
+            draw(s,surfacepen,meshpen=p);
 
             pen pp=linewidth(.25mm);
             //draw the grid in the xy-plane
@@ -203,8 +203,8 @@
             draw(mypath,bluepen);
 
             //surface s=surface(f,(-pi/2,0),(pi/2,2*pi),8,8,Spline);
-            //pen p=rgb(0,0,.7);
-            //draw(s,rgb(.6,.6,1)+opacity(.7),bluepen+linewidth(2));
+            //pen p=apexmeshpen;
+            //draw(s,surfacepen,bluepen+linewidth(2));
             //path3 mypath=graph(g,0,32.5,operator ..); draw(mypath,bluepen);
 
             //Draw the top of the column on the surface
@@ -226,29 +226,29 @@
             //top
             draw((1.6,0.3,1.7)--(1.8,.3,1.7)--(1.8,.4,1.7)--(1.6,.4,1.7)--cycle,redpen);
 
-            pen q=rgb(.9,0,0)+.4mm;
-            //  draw(ss,rgb(1,.6,.6)+opacity(.8),meshpen=q,nolight,render(merge=true));
+            pen q=redcurvepen+.4mm;
+            //  draw(ss,surfacepen2,meshpen=q,nolight,render(merge=true));
             //   emissive(redpen+opacity(0.7))
 
             //Shade the column now
             //import three;
 
             path3 p =  (1.6,0.3,0)--(1.8,.3,0) -- (1.8,0.3,1.7)--(1.6,.3,1.7); //Left
-            draw(surface(p -- cycle),rgb(1,.6,.6)+opacity(.8),meshpen=q,nolight,render(merge=true));
+            draw(surface(p -- cycle),surfacepen2,meshpen=q,nolight,render(merge=true));
             path3 p =  (1.6,0.3,1.7)--(1.8,.3,1.7)--(1.8,.4,1.7)--(1.6,.4,1.7); //top
-            draw(surface(p -- cycle),rgb(1,.6,.6)+opacity(.8),meshpen=q,nolight,render(merge=true));
+            draw(surface(p -- cycle),surfacepen2,meshpen=q,nolight,render(merge=true));
             //draw(surface(p -- cycle), emissive(redpen+opacity(0.7)));
             path3 p =  (1.6,0.4,0)--(1.8,.4,0) -- (1.8,0.4,1.7)--(1.6,.4,1.7); //right
-            draw(surface(p -- cycle),rgb(1,.6,.6)+opacity(.8),meshpen=q,nolight,render(merge=true));
+            draw(surface(p -- cycle),surfacepen2,meshpen=q,nolight,render(merge=true));
             //draw(surface(p -- cycle), emissive(redpen+opacity(0.7)));
             path3 p =  (1.6,0.3,0)--(1.6,.4,0) -- (1.6,0.4,1.7)--(1.6,.3,1.7); //back
-            draw(surface(p -- cycle),rgb(1,.6,.6)+opacity(.8),meshpen=q,nolight,render(merge=true));
+            draw(surface(p -- cycle),surfacepen2,meshpen=q,nolight,render(merge=true));
             //draw(surface(p -- cycle), emissive(redpen+opacity(0.7)));
             path3 p =  (1.8,0.3,0)--(1.8,.4,0) -- (1.8,0.4,1.7)--(1.8,.3,1.7); //front
-            draw(surface(p -- cycle),rgb(1,.6,.6)+opacity(.8),meshpen=q,nolight,render(merge=true));
+            draw(surface(p -- cycle),surfacepen2,meshpen=q,nolight,render(merge=true));
             //draw(surface(p -- cycle), emissive(redpen+opacity(0.7)));
             path3 p =  (1.6,0.3,0)--(1.8,.3,0)--(1.8,.4,0)--(1.6,.4,0); //bottom
-            draw(surface(p -- cycle),rgb(1,.6,.6)+opacity(.8),meshpen=q,nolight,render(merge=true));
+            draw(surface(p -- cycle),surfacepen2,meshpen=q,nolight,render(merge=true));
             //draw(surface(p -- cycle), emissive(redpen+opacity(0.7)));
 
           </asymptote>
@@ -466,9 +466,9 @@
 
         //Create a shaded slice
 
-        pen q=rgb(.9,0,0)+.4mm;
+        pen q=redcurvepen+.4mm;
         path3 p =  (1.6,-0.65,0)--(1.6,0.65,0) -- (1.6,0.65,1.65)..(1.6,0,1.8)..(1.6,-0.65,1.65)--cycle;
-        draw(surface(p), rgb(1,.6,.6)+opacity(.8),meshpen=invisible,nolight,render(merge=true));
+        draw(surface(p), surfacepen2,meshpen=invisible,nolight,render(merge=true));
         draw(p,q);
 
         //Draw the surface//{z=-.5*(x-1)^2-.5*(y)^2+2};
@@ -476,8 +476,8 @@
           return (t.x,t.y,-.5*(t.x-1)^2-.5*(t.y)^2+2);
         }
         surface s=surface(f,(-0.221,-1),(2.2,1),12,20,vsplinetype=new splinetype[] {notaknot,notaknot,monotonic},usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-        pen p=rgb(0,0,.7);
-        draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+        pen p=apexmeshpen;
+        draw(s,surfacepen,meshpen=p);
 
         //Draw curve in xy plane ({cos(x)*(1+cos(2*x))},{sin(x)*(1+cos(2*x))},0);
         triple g(real t) {return (cos(t)*(1+cos(2*t)),sin(t)*(1+cos(2*t)),0);}
@@ -492,8 +492,8 @@
         path3 mypath=graph(gg,-pi/2,pi/2,operator ..);
         draw(mypath,.4mm+bluepen);
 
-        //draw the edge in thick red  pen q=rgb(.9,0,0)+.4mm;
-        //draw((1.6,-0.65,0)--(1.6,0.65,0)--(1.6,0.65,1.625)..(1.6,0,1.825)..(1.6,-0.65,1.625)--(1.6,-0.65,0),rgb(.9,0,0)+.4mm);
+        //draw the edge in thick red  pen q=redcurvepen+.4mm;
+        //draw((1.6,-0.65,0)--(1.6,0.65,0)--(1.6,0.65,1.625)..(1.6,0,1.825)..(1.6,-0.65,1.625)--(1.6,-0.65,0),redcurvepen+.4mm);
 
       </asymptote>
     </image>
@@ -628,8 +628,8 @@
               return (t.x,t.y,t.x*t.y+exp(t.y));
             }
             surface s=surface(f,(0,0),(4.25,2.25),12,20,Spline);
-            pen p=rgb(0,0,.7);
-            draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+            pen p=apexmeshpen;
+            draw(s,surfacepen,meshpen=p);
 
             //Draw rectangle in plane
             draw((3,1,0)--(4,1,0)--(4,2,0)--(3,2,0)--(3,1,0),bluepen+linewidth(2));
@@ -742,8 +742,8 @@
               return (t.x,t.y,3*t.x*t.y-t.x^2-t.y^2+6);
             }
             surface s=surface(f,(-0.1,-0.1),(2.1,1.1),12,20,Spline);
-            pen p=rgb(0,0,.7);
-            draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+            pen p=apexmeshpen;
+            draw(s,surfacepen,meshpen=p);
 
             //Draw triangle in plane
             draw((0,0,0)--(2,0,0)--(0,1,0)--(0,0,0),bluepen+linewidth(2));
@@ -990,8 +990,8 @@
               return (t.x,t.y,sin(t.x)*cos(t.y));
             }
             surface s=surface(f,(-1.25,-0.25),(1.25,1.5),12,20,Spline);
-            pen p=rgb(0,0,.7);
-            draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+            pen p=apexmeshpen;
+            draw(s,surfacepen,meshpen=p);
 
             //Draw triangle in plane
             draw((-1,0,0)--(1,0,0)--(0,1,0)--(-1,0,0),bluepen+dashed+linewidth(0.75));
@@ -1122,8 +1122,8 @@
               return (t.x,t.y,4-t.y);
             }
             surface s=surface(f,(-0.25,-0.25),(4.5,4.25),12,20,Spline);
-            pen p=rgb(0,0,.7);
-            draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+            pen p=apexmeshpen;
+            draw(s,surfacepen,meshpen=p);
 
             //Draw parabolas in plane
             triple g(real t) {return (t^2/4,t,0);}
@@ -1358,8 +1358,8 @@
               return (t.x,t.y,exp(-t.x^2));
             }
             surface s=surface(f,(-0.25,0),(3.5,3.5),12,20,Spline);
-            pen p=rgb(0,0,.7);
-            draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+            pen p=apexmeshpen;
+            draw(s,surfacepen,meshpen=p);
 
             //Draw lines in plane
             draw((0,0,0)--(3,0,0)--(3,3,0)--cycle,bluepen+dashed+linewidth(0.75));
@@ -1505,8 +1505,8 @@
               return (t.x,t.y,4-t.y);
             }
             surface s=surface(f,(-0.25,-0.25),(4.5,4.25),12,20,Spline);
-            pen p=rgb(0,0,.7);
-            draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+            pen p=apexmeshpen;
+            draw(s,surfacepen,meshpen=p);
 
             //Draw parabolas in plane
             triple g(real t) {return (t^2/4,t,0);}
@@ -1607,8 +1607,8 @@
         //  return (t.x,t.y,-.5*(t.x-1)^2-.5*(t.y)^2+2);
         //}
         //surface s=surface(f,(-0.221,-1),(2.2,1),12,20,vsplinetype=new splinetype[] {notaknot,notaknot,monotonic},usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-        //pen p=rgb(0,0,.7);
-        //draw(s,rgb(.7,.7,1)+opacity(.7),meshpen=p);
+        //pen p=apexmeshpen;
+        //draw(s,surfacepen,meshpen=p);
 
         //Draw curve on top of the grid in xy plane ({cos(x)*(1+cos(2*x))},{sin(x)*(1+cos(2*x))},0);
         triple g(real t) {return (cos(t)*(1+cos(2*t)),sin(t)*(1+cos(2*t)),0);}
@@ -1622,17 +1622,17 @@
         path3 mypath=graph(g,-pi/2,pi/2,operator ..);
         draw(mypath,bluepen);
 
-        pen q=rgb(.9,0,0);
+        pen q=redcurvepen;
         triple gg(pair t) {return (cos(t.x)*(1+cos(2*t.x)),sin(t.x)*(1+cos(2*t.x)),t.y);}
         surface s=surface(gg,(-pi/2,0),(pi/2,1),16,4,Spline);
-        draw(s,rgb(1,.6,.6)+opacity(.8),meshpen=q,nolight,render(merge=true));
+        draw(s,surfacepen2,meshpen=q,nolight,render(merge=true));
 
         triple f(pair t) {
           return (t.x,t.y,1);
         }
         surface s=surface(f,(-.1,ybounds.x),(xbounds.y,ybounds.y),8,8);
-        pen p=rgb(0,0,.7);
-        draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+        pen p=apexmeshpen;
+        draw(s,surfacepen,meshpen=p);
 
       </asymptote>
     </image>
