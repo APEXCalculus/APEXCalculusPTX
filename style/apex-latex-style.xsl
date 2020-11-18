@@ -292,21 +292,4 @@
 <xsl:template match="figure[starts-with(@xml:id, 'vid')]" />
 <xsl:template match="p[starts-with(@xml:id, 'vidint')]" />
 <xsl:template match="aside[starts-with(@xml:id, 'vidnote')]" /> -->
-
-<!-- link asymptote images in pdf to interactive html -->
-<!-- Asymptote graphics language  -->
-<!-- PDF's produced by mbx script -->
-<xsl:template match="image[asymptote]" mode="image-inclusion">
-    <xsl:text>\href{</xsl:text>
-    <xsl:value-of select="$baseurl" />
-    <xsl:text>images/</xsl:text>
-    <xsl:apply-templates select="." mode="visible-id" />
-    <xsl:text>.html}</xsl:text>
-    <xsl:text>{\includegraphics[width=\linewidth]</xsl:text>
-    <xsl:text>{</xsl:text>
-    <xsl:value-of select="$directory.images" />
-    <xsl:text>/</xsl:text>
-    <xsl:apply-templates select="." mode="visible-id" />
-    <xsl:text>.pdf}}&#xa;</xsl:text>
-</xsl:template>
 </xsl:stylesheet>
