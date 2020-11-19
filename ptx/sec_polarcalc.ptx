@@ -1098,7 +1098,7 @@
                 <description></description>
                 <asymptote>
 
-                  import graph3;
+
 
                   //ASY file for figparcalc8_3D.asy in Chapter 9
 
@@ -1133,12 +1133,13 @@
                     return (cos(t.y)*cos(2*t.y),sin(t.y)*cos(2*t.y)*cos(t.x),sin(t.y)*cos(2*t.y)*sin(t.x));
                   }
                   surface s=surface(f,(0,0),(2pi,pi/4),8,16,Spline);
-                  pen p=rgb(0,0,.7);
-                  draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+                  //Should use apexmeshpen for p but that was causing a core dump somehow
+                  pen p=blackmeshpen;
+                  draw(s,surfacepen,meshpen=p);
 
                   //curve on the surfaces  //({cos(x)*cos(2*x)},{0},{sin(x)*cos(2*x)});
                   triple g(real t) {return (cos(t)*cos(2*t),0,sin(t)*cos(2*t));}
-                  path3 mypath=graph(g,0,pi/4,operator ..);draw(mypath,blue+linewidth(2));
+                  path3 mypath=graph(g,0,pi/4,operator ..);draw(mypath,bluepen+linewidth(2));
 
                 </asymptote>
               </image>

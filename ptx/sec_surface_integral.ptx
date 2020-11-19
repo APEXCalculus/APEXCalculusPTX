@@ -106,7 +106,7 @@
             <description></description>
             <asymptote>
 
-              import graph3;
+
 
               //ASY file for figsurfint1_3D.asy in Chapter 14
 
@@ -139,25 +139,12 @@
                 return (t.x,t.y*(2-2*t.x),3-2*t.x-t.y*(2-2t.x));//
               }
               surface s=surface(f,(0,0),(1,1),8,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-              pen p=rgb(0,0,.7);
-              draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=invisible);
+              pen p=apexmeshpen;
+              draw(s,surfacepen,meshpen=invisible);
 
-              pen curvepen=.3mm+blue;
               draw(surface((1,0,0)--(0,0,0)--(0,2,0)--cycle),curvepen+opacity(.5));
               draw((1,0,0)--(0,0,0)--(0,2,0)--cycle,curvepen);
               draw(f((0,0))--f((1,0))--f((0,1))--cycle,curvepen);
-
-              //pen curvepen=.3mm+blue;
-              //triple g(real t) {return(cos(t),-1,2sin(t));}
-              //path3 mypath=graph(g,0,2pi,operator ..);
-              //draw(mypath,curvepen);
-              //
-              //triple g(real t) {return(cos(t),2,2sin(t));}
-              //path3 mypath=graph(g,0,2pi,operator ..);
-              //draw(mypath,curvepen);
-
-              //draw((0,1,0)--(0,3,0)--(3,1,0)--cycle,curvepen);
-
             </asymptote>
           </image>
         </figure>
@@ -356,7 +343,7 @@
             <description></description>
             <asymptote>
 
-              import graph3;
+
 
               //ASY file for figsurfint1_3D.asy in Chapter 14
 
@@ -389,14 +376,8 @@
                 return (t.x,t.y*(2-2*t.x),3-2*t.x-t.y*(2-2t.x));//
               }
               surface s=surface(f,(0,0),(1,1),8,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-              pen p=rgb(0,0,.7);
-              draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=invisible);
-
-
-              //pen curvepen=.3mm+blue;
-              //draw(surface((1,0,0)--(0,0,0)--(0,2,0)--cycle),curvepen+opacity(.5));
-              //draw((1,0,0)--(0,0,0)--(0,2,0)--cycle,curvepen);
-              //draw(f((0,0))--f((1,0))--f((0,1))--cycle,curvepen);
+              pen p=apexmeshpen;
+              draw(s,surfacepen,meshpen=invisible);
 
               path3 gradient1(triple z){
                 return O--(1,z.x,-z.y);
@@ -461,7 +442,7 @@
                 return pic;
 
               }
-              add(VectorPlot3D(gradient1,A,B,3,3,3,blue));
+              add(VectorPlot3D(gradient1,A,B,3,3,3,bluepen));
 
             </asymptote>
           </image>
@@ -538,7 +519,7 @@
             <description></description>
             <asymptote>
 
-              import graph3;
+
 
               //ASY file for figsurfint1_3D.asy in Chapter 14
 
@@ -570,18 +551,17 @@
                 return (t.y*cos(t.x),t.y*sin(t.x),0);//
               }
               surface s=surface(f,(-pi/2,0),(3pi/2,1),8,8,usplinetype=Spline,vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-              pen p=rgb(.7,0,0);
-              draw(s,rgb(1,.6,.6)+opacity(.7),meshpen=p);
+              pen p=redmeshpen;
+              draw(s,surfacepen2,meshpen=p);
 
               //Draw paraboloid over unit disk
               triple f(pair t) {
                 return (t.y*cos(t.x),t.y*sin(t.x),1-t.y^2);//
               }
               surface s=surface(f,(0,0),(2pi,1),8,8,Spline);
-              pen p=rgb(0,0,.7);
-              draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+              pen p=apexmeshpen;
+              draw(s,surfacepen,meshpen=p);
 
-              pen curvepen=.6mm+blue;
               triple f(real t) {return (cos(t),sin(t),0);}
               path3 mypath=graph(f,0,2pi,operator ..);
               draw(mypath,curvepen);
@@ -1004,7 +984,7 @@
               <description></description>
               <asymptote>
 
-                import graph3;
+
 
                 //ASY file for
 
@@ -1032,23 +1012,23 @@
 
                 //Draw the parabola z=y^2 for t from -2 to 2
                 triple g(real t) {return (5cos(t),3sin(t),0);}
-                path3 mypath=graph(g,0,2pi,operator ..); draw(mypath,blue);
+                path3 mypath=graph(g,0,2pi,operator ..); draw(mypath,bluepen);
 
                 //Draw the cylinder z=y^2
                 triple f(pair t) {
                   return (5t.y*cos(t.x),3t.y*sin(t.x),0);
                 }
                 surface s=surface(f,(0,0),(2pi,1),8,8,Spline);
-                pen p=rgb(0,0,.7);
-                draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+                pen p=apexmeshpen;
+                draw(s,surfacepen,meshpen=p);
 
                 //Draw the cylinder z=y^2
                 triple f(pair t) {
                   return (5t.y*cos(t.x),3t.y*sin(t.x),1-t.y^2);
                 }
                 surface s=surface(f,(0,0),(2pi,1),8,8,Spline);
-                pen p=rgb(0,0,.7);
-                draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+                pen p=apexmeshpen;
+                draw(s,surfacepen,meshpen=p);
 
               </asymptote>
             </image>
@@ -1082,7 +1062,7 @@
               <description></description>
               <asymptote>
 
-                import graph3;
+
 
                 //ASY file for
 
@@ -1110,23 +1090,23 @@
 
                 //Draw the parabola z=y^2 for t from -2 to 2
                 triple g(real t) {return (sqrt(3)/2*cos(t),sqrt(3)/2*sin(t),.5);}
-                path3 mypath=graph(g,0,2pi,operator ..); draw(mypath,blue);
+                path3 mypath=graph(g,0,2pi,operator ..); draw(mypath,bluepen);
 
                 //Draw the cylinder z=y^2
                 triple f(pair t) {
                   return (sin(t.x)*cos(t.y),sin(t.x)*sin(t.y),cos(t.x));
                 }
                 surface s=surface(f,(pi/3,0),(pi,2pi),8,8,Spline);
-                pen p=rgb(0,0,.7);
-                draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+                pen p=apexmeshpen;
+                draw(s,surfacepen,meshpen=p);
 
                 //Draw the cylinder z=y^2
                 triple f(pair t) {
                   return (t.y*sqrt(3)/2*cos(t.x),t.y*sqrt(3)/2*sin(t.x),.5);
                 }
                 surface s=surface(f,(0,0),(2pi,1),8,8,Spline);
-                pen p=rgb(0,0,.7);
-                draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+                pen p=apexmeshpen;
+                draw(s,surfacepen,meshpen=p);
 
               </asymptote>
             </image>

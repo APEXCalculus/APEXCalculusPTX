@@ -50,7 +50,7 @@
         <description></description>
         <asymptote>
 
-          import graph3;
+          
 
           //ASY file for figmchain_intro3D.asy in Chapter 12
 
@@ -82,18 +82,18 @@
             return (t.x,t.y,-0.2*(t.x-1)^2-0.05*t.y^2+2);
           }
           surface s=surface(f,(0,0),(4,4),16,16,Spline);
-          pen p=rgb(0,0,.7);
-          draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+          pen p=apexmeshpen;
+          draw(s,surfacepen,meshpen=p);
 
           //Draw the circle in xy-plane
           triple g(real t) {return (cos(t)+2,sin(t)+2,0);}
-          path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,dashed+blue+linewidth(.75));
+          path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,dashed+bluepen+linewidth(.75));
 
           //Draw the circle on surface
           triple g(real t) {
           return (cos(t)+2,sin(t)+2,-0.2*(cos(t)+2-1)^2-0.05*(sin(t)+2)^2+2);
           }
-          path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,blue);
+          path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,bluepen);
 
         </asymptote>
       </image>
@@ -333,7 +333,7 @@
             <description></description>
             <asymptote>
 
-              import graph3;
+              
 
               //ASY file for figmchain23D.asy in Chapter 12
 
@@ -365,14 +365,14 @@
                 return (t.x,t.y,t.x^2+t.y^2-t.x*t.y);
               }
               surface s=surface(f,(-1.1,-1.1),(1.1,1.1),16,16,Spline);
-              pen p=rgb(0,0,.7);
-              draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+              pen p=apexmeshpen;
+              draw(s,surfacepen,meshpen=p);
 
               //Draw the circle on surface
               triple g(real t) {
               return (cos(t),sin(t),(cos(t))^2+(sin(t))^2-cos(t)*sin(t));
               }
-              path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,blue);
+              path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,bluepen);
 
               //plot points for min and max along the curve
               dotfactor=3;

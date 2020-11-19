@@ -170,7 +170,7 @@
             <description></description>
             <asymptote>
 
-              import graph3;
+              
 
               //ASY file for figmultigraph_intro3D.asy in Chapter 12
 
@@ -203,7 +203,7 @@
               {
               for (int j=0; j&lt;5; ++j)
               {
-                dot((A[i],A[j],1/(1+(A[i])^2+(A[j])^2)),rgb(.6,.6,1));
+                dot((A[i],A[j],1/(1+(A[i])^2+(A[j])^2)),dotblue);
               }
               }
 
@@ -228,7 +228,7 @@
             <description></description>
             <asymptote>
 
-              import graph3;
+              
 
               //ASY file for figmultigraph_introb3D.asy in Chapter 12
 
@@ -259,8 +259,8 @@
                 return (t.x,t.y,1/(1+(t.x)^2+(t.y)^2));
               }
               surface s=surface(f,(-2,-2),(2,2),8,8,Spline);
-              pen p=rgb(0,0,.7);
-              draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+              pen p=apexmeshpen;
+              draw(s,surfacepen,meshpen=p);
 
             </asymptote>
           </image>
@@ -444,7 +444,7 @@
                 <description></description>
                 <asymptote>
 
-                  import graph3;
+                  
 
                   //ASY file for figlevelcurve13D.asy in Chapter 12
 
@@ -476,23 +476,23 @@
                     return (3*sin(t.y),sin(t.x)*2*cos(t.y),cos(t.x)*cos(t.y));
                   }
                   surface s=surface(f,(-pi/2,-pi/2),(pi/2,pi/2),16,16,Spline);
-                  pen p=rgb(0,0,.7);
-                  draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
 
                   //Draw level curves for surface x^2/9+y^2/4+z^2=1 at c=0,0.2,0.4,0.6,0.8,1
                   triple g(real t) {return (3*cos(t)*sqrt(1-(0.8)^2),2*sin(t)*sqrt(1-(0.8)^2),0.8);}
-                  path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,blue);
+                  path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,bluepen);
                   triple g(real t) {return (3*cos(t)*sqrt(1-(0.6)^2),2*sin(t)*sqrt(1-(0.6)^2),0.6);}
-                  path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,blue);
+                  path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,bluepen);
                   triple g(real t) {return (3*cos(t)*sqrt(1-(0.4)^2),2*sin(t)*sqrt(1-(0.4)^2),0.4);}
-                  path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,blue);
+                  path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,bluepen);
                   triple g(real t) {return (3*cos(t)*sqrt(1-(0.2)^2),2*sin(t)*sqrt(1-(0.2)^2),0.2);}
-                  path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,blue);
+                  path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,bluepen);
                   triple g(real t) {return (3*cos(t)*sqrt(1-(0)^2),2*sin(t)*sqrt(1-(0)^2),0);}
-                  path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,blue);
+                  path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,bluepen);
 
                   dotfactor=3;
-                  dot((0,0,1),blue);
+                  dot((0,0,1),bluepen);
 
                 </asymptote>
               </image>
@@ -600,7 +600,7 @@
                 <description></description>
                 <asymptote>
 
-                  import graph3;
+                  
 
                   //ASY file for figlevelcurve23D.asy in Chapter 12
 
@@ -631,8 +631,8 @@
                     return (t.x,t.y,(t.x+t.y)/(1+(t.x)^2+(t.y)^2));
                   }
                   surface s=surface(f,(-6,-6),(6,6),16,16,Spline);
-                  pen p=rgb(0,0,.7);
-                  draw(s,rgb(.6,.6,1)+opacity(.7),meshpen=p);
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
 
                   //Draw level curves for surface x^2/9+y^2/4+z^2=1 at c=0.2,0.4,0.6
                   real[] A={0.2,0.4,0.6};
@@ -640,18 +640,18 @@
                   {
                     triple g(real t) {
                     return (1/(2*A[i])+(cos(t))*sqrt(-1+(1/(2*A[i]^2))),1/(2*A[i])+(sin(t))*sqrt(-1+(1/(2*A[i]^2))),A[i]);}
-                    path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,blue);
+                    path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,bluepen);
                     //Negative values too
                     triple g(real t) {
                     return (1/(-2*A[i])+(cos(t))*sqrt(-1+(1/(2*A[i]^2))),1/(-2*A[i])+(sin(t))*sqrt(-1+(1/(2*A[i]^2))),-A[i]);}
-                    path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,blue);
+                    path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,bluepen);
                   }
 
-                  draw((-6,6,0)--(6,-6,0),blue);
+                  draw((-6,6,0)--(6,-6,0),bluepen);
 
                   //triple g(real t) {
                   //return (1/(2*0.6)+(cos(t))*sqrt(-1+(1/(2*0.6^2))),1/(2*0.6)+(sin(t))*sqrt(-1+(1/(2*0.6^2))),0.6);}
-                  //path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,blue);
+                  //path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,bluepen);
 
                 </asymptote>
               </image>
