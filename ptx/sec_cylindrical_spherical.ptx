@@ -45,7 +45,7 @@
       <image xml:id="img_cylindricalintro_3D" width="47%">
         <description></description>
         <asymptote>
-          
+
           //import apexstyle;
 
 
@@ -210,7 +210,7 @@
           <image xml:id="img_cylindrical1_3D" width="47%">
             <description></description>
             <asymptote>
-              
+
               //import apexstyle;
 
 
@@ -397,7 +397,7 @@
           <image xml:id="img_cylindrical2_3D" width="47%">
             <description></description>
             <asymptote>
-              
+
               //import apexstyle;
 
 
@@ -517,7 +517,7 @@
           <image xml:id="img_doublepol4_3D" width="47%">
             <description></description>
             <asymptote>
-              
+
 
               //ASY file for figdoublepol43D.asy in Chapter 13
 
@@ -676,7 +676,7 @@
       <image xml:id="img_sphericalintro_3D" width="47%">
         <description></description>
         <asymptote>
-          
+
           //import apexstyle;
 
 
@@ -857,7 +857,7 @@
           <image xml:id="img_spherical1_3D" width="47%">
             <description></description>
             <asymptote>
-              
+
               //import apexstyle;
 
 
@@ -999,7 +999,7 @@
       <image xml:id="img_sphericalwedge_3D" width="47%">
         <description></description>
         <asymptote>
-          
+
           //import apexstyle;
 
 
@@ -1247,7 +1247,7 @@
           <image xml:id="img_spherical3_3D" width="47%">
             <description></description>
             <asymptote>
-              
+
               //import apexstyle;
 
 
@@ -1842,188 +1842,151 @@
             Cylindrical coordinates, integrating <m>h(r,\theta,z)</m>:
           </p>
 
-          <sidebyside width="47%">
             <!-- \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
             3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.6666666865348816 0.6666666865348816 0.3333333134651184,
             3Dcoo=-11.596293449401855 -12.679614067077637 48.551517486572266, 3Droo=149.9999987284343,
             3Dlights=Headlamp,add3Djscript=asylabels.js} -->
-            <image xml:id="img_13_07_ex_09_3D">
-              <description></description>
-              <asymptote>
-                
-                //import apexstyle;
+          <image xml:id="img_13_07_ex_09_3D" width="47%">
+            <description></description>
+            <asymptote>
+              //import apexstyle;
+              //ASY file for figspherical1_3D.asy in Chapter 13
+
+              size(282,282,IgnoreAspect);
+              //currentprojection=perspective(7,2,1);
+              currentprojection=orthographic(16.5,1,4.8);
+              defaultrender.merge=true;
+
+              // setup and draw the axes
+              real[] myxchoice={};
+              real[] myychoice={};
+              real[] myzchoice={};
+              defaultpen(0.5mm);
+
+              pair xbounds=(-1.1,1.1);
+              pair ybounds=(-1.1,1.1);
+              pair zbounds=(-.1,1.1);
+
+              xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+              yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+              zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+              label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+              real r1=.4;
+              real r2=.6;
+              real t1=pi/6;
+              real t2=4pi/3;
+              real z1=.4;
+              real z2=.8;
+
+              // (t.x*cos(t.y),t.x*sin(t.y),z)
+              //Draw the plane  z=7-2x-2y
+              triple f(pair t) {
+              	return (r1*cos(t.y),r1*sin(t.y),t.x);//
+              }
+              surface s=surface(f,(z1,t1),(z2,t2),4,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+              pen p=apexmeshpen+.1mm;
+              draw(s,simplesurfacepen,meshpen=p);
+
+              triple f(pair t) {
+              	return (r2*cos(t.y),r2*sin(t.y),t.x);//
+              }
+              surface s=surface(f,(z1,t1),(z2,t2),4,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+              draw(s,simplesurfacepen,meshpen=p);
+
+              triple f(pair t) {
+              	return (t.x*cos(t1),t.x*sin(t1),t.y);//
+              }
+              surface s=surface(f,(r1,z1),(r2,z2),4,4,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+              draw(s,simplesurfacepen,meshpen=p);
+
+              triple f(pair t) {
+              	return (t.x*cos(t2),t.x*sin(t2),t.y);//
+              }
+              surface s=surface(f,(r1,z1),(r2,z2),4,4,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+              draw(s,simplesurfacepen,meshpen=p);
+
+              triple f(pair t) {
+              	return (t.x*cos(t.y),t.x*sin(t.y),z1);//
+              }
+              surface s=surface(f,(r1,t1),(r2,t2),4,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+              draw(s,simplesurfacepen,meshpen=p);
+
+              triple f(pair t) {
+              	return (t.x*cos(t.y),t.x*sin(t.y),z2);//
+              }
+              surface s=surface(f,(r1,t1),(r2,t2),4,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+              draw(s,simplesurfacepen,meshpen=p);
 
 
-                //ASY file for figspherical1_3D.asy in Chapter 13
+              draw((0,0,0) -- .8*(cos(t1),sin(t1),0),dashed+.25mm);
+              draw((0,0,0) -- .8*(cos(t2),sin(t2),0),dashed+.25mm);
 
+              draw(arc((0,0,0),.3*(1,0,0),.3*(cos(t2),sin(t2),0),(0,0,1)),black+.25mm,Arrow3(size=2mm));
+              draw(arc((0,0,0),.5*(1,0,0),.3*(cos(t1),sin(t1),0),(0,0,1)),black+.25mm,Arrow3(size=2mm));
 
-                size(282,282,IgnoreAspect);
-                //currentprojection=perspective(7,2,1);
-                currentprojection=orthographic(16.5,1,4.8);
-                defaultrender.merge=true;
+              label("$\theta_1$",.6(cos(t1/2),sin(t1/2),-.05));
+              label("$\theta_2$",.5(cos(t2/1.5),sin(t2/1.5),0));
 
-                // setup and draw the axes
-                real[] myxchoice={};
-                real[] myychoice={};
-                real[] myzchoice={};
-                defaultpen(0.5mm);
+              draw ((r2*cos(t2),r2*sin(t2),z1) -- (r2*cos(t2),r2*sin(t2),0),dashed+.25mm);
+              draw ((r2*cos(t1),r2*sin(t1),z1) -- (r2*cos(t1),r2*sin(t1),0),dashed+.25mm);
 
-                pair xbounds=(-1.1,1.1);
-                pair ybounds=(-1.1,1.1);
-                pair zbounds=(-.1,1.1);
+              draw ((0,0,z2) -- (r2*cos(t2/1.5),r2*sin(t2/1.5),z2),dashed+.25mm);
+              draw ((0,0,z2) -- (r1*cos(t2/3),r1*sin(t2/3),z2),dashed+.25mm);
 
-                xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+              label("$r_2$",(r2*.95*cos(t2/1.5),r2*.95*sin(t2/1.5),z2+.05));
+              label("$r_1$",(r1*.8*cos(t2/3),r1*.8*sin(t2/3),z2+.05));
 
-                label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+              draw((0,0,z1) -- (r1*cos(t1),r1*sin(t1),z1),dashed+.25mm);
+              draw((0,0,z2) -- (r1*cos(t1),r1*sin(t1),z2),dashed+.25mm);
 
-                real r1=.4;
-                real r2=.6;
-                real t1=pi/6;
-                real t2=4pi/3;
-                real z1=.4;
-                real z2=.8;
+              label("$z_1$",(0,0,z1),W);
+              label("$z_2$",(0,0,z2),W);
 
-                // (t.x*cos(t.y),t.x*sin(t.y),z)
-                //Draw the plane  z=7-2x-2y
-                triple f(pair t) {
-                	return (r1*cos(t.y),r1*sin(t.y),t.x);//
-                }
-                surface s=surface(f,(z1,t1),(z2,t2),4,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen+.1mm;
-                draw(s,simplesurfacepen,meshpen=p);
+              //dot((0,0,2.799),blackmeshpen+1.2mm);
+              //draw((-1.5,-1.5,2) -- (-1.5,1.5,2) -- (1.5,1.5,2) -- (1.5,-1.5,2) -- (-1.5,-1.5,2),apexmeshpen+.25mm);
 
-                triple f(pair t) {
-                	return (r2*cos(t.y),r2*sin(t.y),t.x);//
-                }
-                surface s=surface(f,(z1,t1),(z2,t2),4,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                draw(s,simplesurfacepen,meshpen=p);
+              triple g(real t) {return (1.5/sqrt(3)*cos(t),1.5/sqrt(3)*sin(t),1.5);}
+              path3 mypath=graph(g,0,2*pi,operator ..);
+              //draw(mypath,apexmeshpen);
 
-                triple f(pair t) {
-                	return (t.x*cos(t1),t.x*sin(t1),t.y);//
-                }
-                surface s=surface(f,(r1,z1),(r2,z2),4,4,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                draw(s,simplesurfacepen,meshpen=p);
+              //Draw the plane  z=7-2x-2y
+              triple f(pair t) {
+              	return (t.x,t.x*sqrt(3),t.y);//
+              }
+              surface s=surface(f,(-1.25,-1.5),(1.25,1.5),8,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+              pen q=redmeshpen;
+              //draw(s,simplesurfacepen2,meshpen=q);
 
-                triple f(pair t) {
-                	return (t.x*cos(t2),t.x*sin(t2),t.y);//
-                }
-                surface s=surface(f,(r1,z1),(r2,z2),4,4,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                draw(s,simplesurfacepen,meshpen=p);
+              //draw((-1.25,-1.25*sqrt(3),-1.5) -- (1.25,1.25*sqrt(3),-1.5) -- (1.25,1.25*sqrt(3),1.5) -- (-1.25,-1.25*sqrt(3),1.5) -- (-1.25,-1.25*sqrt(3),-1.5),redcurvepen+.25mm);
 
-                triple f(pair t) {
-                	return (t.x*cos(t.y),t.x*sin(t.y),z1);//
-                }
-                surface s=surface(f,(r1,t1),(r2,t2),4,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                draw(s,simplesurfacepen,meshpen=p);
+              //Draw the plane  z=7-2x-2y
+              triple f(pair t) {
+              	return (sin(t.y)*cos(t.x),sin(t.y)*sin(t.x),cos(t.y));//
+              }
+              surface s=surface(f,(0,0),(2*pi,pi),16,16,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+              pen q=greencurvepen;
+              //draw(s,simplesurfacepen3,meshpen=q);
 
-                triple f(pair t) {
-                	return (t.x*cos(t.y),t.x*sin(t.y),z2);//
-                }
-                surface s=surface(f,(r1,t1),(r2,t2),4,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                draw(s,simplesurfacepen,meshpen=p);
+              //dot((.5,sqrt(3)*.5,2),rgb(.1,.1,.1));
 
+              //draw((.5,sqrt(3)*.5,-.5)--(.5,sqrt(3)*.5,2.25));
 
-                draw((0,0,0) -- .8*(cos(t1),sin(t1),0),dashed+.25mm);
-                draw((0,0,0) -- .8*(cos(t2),sin(t2),0),dashed+.25mm);
+              triple g(real t) {return (1/2*cos(t),1/2*sin(t),1/2*sqrt(3));}
+              path3 mypath=graph(g,0,2*pi,operator ..);
+              //draw(mypath,blackmeshpen);
 
-                draw(arc((0,0,0),.3*(1,0,0),.3*(cos(t2),sin(t2),0),(0,0,1)),black+.25mm,Arrow3(size=2mm));
-                draw(arc((0,0,0),.5*(1,0,0),.3*(cos(t1),sin(t1),0),(0,0,1)),black+.25mm,Arrow3(size=2mm));
+              //(1.5/sqrt(3)*cos(t),1.5/sqrt(3)*sin(t),1.5)
+              //draw((1.5/sqrt(3)*cos(4*pi/3),1.5/sqrt(3)*sin(4*pi/3),1.5) -- (0,0,0) -- (1.5/sqrt(3)*cos(pi/3),1.5/sqrt(3)*sin(pi/3),1.5));
 
-                label("$\theta_1$",.6(cos(t1/2),sin(t1/2),-.05));
-                label("$\theta_2$",.5(cos(t2/1.5),sin(t2/1.5),0));
-
-                draw ((r2*cos(t2),r2*sin(t2),z1) -- (r2*cos(t2),r2*sin(t2),0),dashed+.25mm);
-                draw ((r2*cos(t1),r2*sin(t1),z1) -- (r2*cos(t1),r2*sin(t1),0),dashed+.25mm);
-
-                draw ((0,0,z2) -- (r2*cos(t2/1.5),r2*sin(t2/1.5),z2),dashed+.25mm);
-                draw ((0,0,z2) -- (r1*cos(t2/3),r1*sin(t2/3),z2),dashed+.25mm);
-
-
-                label("$r_2$",(r2*.95*cos(t2/1.5),r2*.95*sin(t2/1.5),z2+.05));
-                label("$r_1$",(r1*.8*cos(t2/3),r1*.8*sin(t2/3),z2+.05));
-
-
-                draw((0,0,z1) -- (r1*cos(t1),r1*sin(t1),z1),dashed+.25mm);
-                draw((0,0,z2) -- (r1*cos(t1),r1*sin(t1),z2),dashed+.25mm);
-
-                label("$z_1$",(0,0,z1),W);
-                label("$z_2$",(0,0,z2),W);
-
-
-
-
-                //dot((0,0,2.799),blackmeshpen+1.2mm);
-
-
-
-
-
-
-
-
-                //draw((-1.5,-1.5,2) -- (-1.5,1.5,2) -- (1.5,1.5,2) -- (1.5,-1.5,2) -- (-1.5,-1.5,2),apexmeshpen+.25mm);
-
-                triple g(real t) {return (1.5/sqrt(3)*cos(t),1.5/sqrt(3)*sin(t),1.5);}
-                path3 mypath=graph(g,0,2*pi,operator ..);
-                //draw(mypath,apexmeshpen);
-
-                //Draw the plane  z=7-2x-2y
-                triple f(pair t) {
-                	return (t.x,t.x*sqrt(3),t.y);//
-                }
-                surface s=surface(f,(-1.25,-1.5),(1.25,1.5),8,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen q=redmeshpen;
-                //draw(s,simplesurfacepen2,meshpen=q);
-
-                //draw((-1.25,-1.25*sqrt(3),-1.5) -- (1.25,1.25*sqrt(3),-1.5) -- (1.25,1.25*sqrt(3),1.5) -- (-1.25,-1.25*sqrt(3),1.5) -- (-1.25,-1.25*sqrt(3),-1.5),redcurvepen+.25mm);
-
-
-                //Draw the plane  z=7-2x-2y
-                triple f(pair t) {
-                	return (sin(t.y)*cos(t.x),sin(t.y)*sin(t.x),cos(t.y));//
-                }
-                surface s=surface(f,(0,0),(2*pi,pi),16,16,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen q=greencurvepen;
-                //draw(s,simplesurfacepen3,meshpen=q);
-
-                //dot((.5,sqrt(3)*.5,2),rgb(.1,.1,.1));
-
-                //draw((.5,sqrt(3)*.5,-.5)--(.5,sqrt(3)*.5,2.25));
-
-                triple g(real t) {return (1/2*cos(t),1/2*sin(t),1/2*sqrt(3));}
-                path3 mypath=graph(g,0,2*pi,operator ..);
-                //draw(mypath,blackmeshpen);
-
-                //(1.5/sqrt(3)*cos(t),1.5/sqrt(3)*sin(t),1.5)
-                //draw((1.5/sqrt(3)*cos(4*pi/3),1.5/sqrt(3)*sin(4*pi/3),1.5) -- (0,0,0) -- (1.5/sqrt(3)*cos(pi/3),1.5/sqrt(3)*sin(pi/3),1.5));
-
-                triple g(real t) {return (sin(t)*cos(pi/3),sin(t)*sin(pi/3),cos(t));}
-                path3 mypath=graph(g,0,2*pi,operator ..);
-                //draw(mypath,blackmeshpen);
-
-
-
-
-
-                //draw(s,emissive(gray+opacity(.3)),meshpen=invisible);
-
-
-                //draw(s,simplesurfacepen,meshpen=apexmeshpen);
-
-
-
-                //label("$\varphi=\frac{\pi}{6}$",(1.5/sqrt(3)*cos(2pi/3),1.5/sqrt(3)*sin(2pi/3),1.5),E);
-                //label("$\rho=1$",(1.1*cos(pi/6),1.1*sin(pi/6),-.5));
-                //label("$\theta=\frac{\pi}{3}$",(1.25,1.25*sqrt(3),1));
-
-                //draw((0,1,0)--(0,3,0)--(3,1,0)--cycle,curvepen);
-              </asymptote>
-            </image>
-          </sidebyside>
+              triple g(real t) {return (sin(t)*cos(pi/3),sin(t)*sin(pi/3),cos(t));}
+              path3 mypath=graph(g,0,2*pi,operator ..);
+              //draw(mypath,blackmeshpen);
+            </asymptote>
+          </image>
         </statement>
         <answer>
           <p>
@@ -2037,171 +2000,165 @@
           <p>
             Cylindrical coordinates, integrating <m>h(\rho,\theta,\varphi)</m>:
           </p>
-
-          <sidebyside width="47%">
             <!-- \apexincludemedia{width=150pt,3Dmenu,activate=onclick,deactivate=onclick,
             3Droll=0, 3Dortho=0.004999519791454077, 3Dc2c=0.6666666865348816 0.6666666865348816 0.3333333134651184,
             3Dcoo=-11.596293449401855 -12.679614067077637 48.551517486572266, 3Droo=149.9999987284343,
             3Dlights=Headlamp,add3Djscript=asylabels.js} -->
-            <image xml:id="img_13_07_ex_10_3D">
-              <description></description>
-              <asymptote>
-                
-                //import apexstyle;
+          <image xml:id="img_13_07_ex_10_3D" width="47%">
+            <description></description>
+            <asymptote>
+
+              //import apexstyle;
 
 
-                //ASY file for figspherical1_3D.asy in Chapter 13
+              //ASY file for figspherical1_3D.asy in Chapter 13
 
 
-                size(282,282,IgnoreAspect);
-                //currentprojection=perspective(7,2,1);
-                currentprojection=orthographic(16,.9,8.1);
-                defaultrender.merge=true;
+              size(282,282,IgnoreAspect);
+              //currentprojection=perspective(7,2,1);
+              currentprojection=orthographic(16,.9,8.1);
+              defaultrender.merge=true;
 
-                // setup and draw the axes
-                real[] myxchoice={};
-                real[] myychoice={};
-                real[] myzchoice={};
-                defaultpen(0.5mm);
+              // setup and draw the axes
+              real[] myxchoice={};
+              real[] myychoice={};
+              real[] myzchoice={};
+              defaultpen(0.5mm);
 
-                pair xbounds=(-.6,.6);
-                pair ybounds=(-.6,.6);
-                pair zbounds=(-.1,1);
+              pair xbounds=(-.6,.6);
+              pair ybounds=(-.6,.6);
+              pair zbounds=(-.1,1);
 
-                xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+              xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+              yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+              zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
 
-                label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-
-                real t1=pi/3;
-                real t2=7pi/6;
-                real p1=pi/6-.2;
-                real p2=pi/6+.2;
-                real r1=.75;
-                real r2=.9;
+              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+              label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
 
 
-
-                //Draw the plane  z=7-2x-2y
-                triple f(pair t) {
-                	return (r1*cos(t.x)*sin(t.y),r1*sin(t.x)*sin(t.y),r1*cos(t.y));//
-                }
-                surface s=surface(f,(t1,p1),(t2,p2),4,4,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen+.1mm;
-                draw(s,simplesurfacepen,meshpen=p);
-
-
-                triple f(pair t) {
-                	return (r2*cos(t.x)*sin(t.y),r2*sin(t.x)*sin(t.y),r2*cos(t.y));//
-                }
-                surface s=surface(f,(t1,p1),(t2,p2),4,4,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                draw(s,simplesurfacepen,meshpen=p);
-
-
-                triple f(pair t) {
-                	return (t.y*cos(t.x)*sin(p1),t.y*sin(t.x)*sin(p1),t.y*cos(p1));//
-                }
-                surface s=surface(f,(t1,r1),(t2,r2),4,4,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                draw(s,simplesurfacepen,meshpen=p);
-
-
-                triple f(pair t) {
-                	return (t.y*cos(t.x)*sin(p2),t.y*sin(t.x)*sin(p2),t.y*cos(p2));//
-                }
-                surface s=surface(f,(t1,r1),(t2,r2),4,4,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                draw(s,simplesurfacepen,meshpen=p);
-
-
-                triple f(pair t) {
-                	return (t.y*cos(t1)*sin(t.x),t.y*sin(t1)*sin(t.x),t.y*cos(t.x));//
-                }
-                surface s=surface(f,(p1,r1),(p2,r2),4,4,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                draw(s,simplesurfacepen,meshpen=p);
-
-
-                triple f(pair t) {
-                	return (t.y*cos(t2)*sin(t.x),t.y*sin(t2)*sin(t.x),t.y*cos(t.x));//
-                }
-                surface s=surface(f,(p1,r1),(p2,r2),4,4,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                draw(s,simplesurfacepen,meshpen=p);
-
-
-                //
-                // lines for phi
-                //
-                draw((r1*cos(t1)*sin(p1),r1*sin(t1)*sin(p1),r1*cos(p1)) -- (0,0,0) -- (r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),r1*cos(p2)),black+.25mm+dashed);
-
-                //draw(arc((0,0,0),(r1*cos(t1)*sin(p1)/2.5,r1*sin(t1)*sin(p1)/2.5,r1*cos(p1)/2.5),(r1*cos(t1)*sin(p2)/2.5,r1*sin(t1)*sin(p2)/2.5,r1*cos(p2)/2.5)),black+.25mm,Arrow3(size=1.5mm));
-
-                //label("$\Delta\varphi$",.95*(r1*cos(t1)*sin((p1+p2)/2)/2,r1*sin(t1)*sin((p1+p2)/2)/2,r1*cos((p1+p2)/2)/2));
+              real t1=pi/3;
+              real t2=7pi/6;
+              real p1=pi/6-.2;
+              real p2=pi/6+.2;
+              real r1=.75;
+              real r2=.9;
 
 
 
-                //
-                //  lines for theta
-                //
-
-                draw((0,0,0) -- (r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),0),black+.25mm+dashed);
-
-                draw((0,0,0) -- (r1*cos(t2)*sin(p2),r1*sin(t2)*sin(p2),0),black+.25mm+dashed);
-
-                draw(arc((0,0,0),.25*(r1,0,0),.5*(r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),0)),black+.25mm,Arrow3(size=1.5mm));
-
-                draw(arc((0,0,0),.4*(r1,0,0),.4*(r1*cos(t2)*sin(p2),r1*sin(t2)*sin(p2),0),(0,0,1)),black+.25mm,Arrow3(size=1.5mm));
-
-                label("$\theta_1$",.25*(r1*cos(t1/2)*sin(p2),r1*sin(t1/2)*sin(p2),0));
-                label("$\theta_2$",.5*(r1*cos(t2/2)*sin(p2),r1*sin(t2/2)*sin(p2),0));
-
-                //
-                // lines for rho
-                //
-
-                draw(arc((0,0,0),(r1*cos(t1)*sin(0),r1*sin(t1)*sin(0),r1*cos(0)),(r1*cos(t1)*sin(p1),r1*sin(t1)*sin(p1),r1*cos(p1))),black+.25mm+dashed);
-
-                draw(arc((0,0,0),(r2*cos(t1)*sin(0),r2*sin(t1)*sin(0),r2*cos(0)),(r2*cos(t1)*sin(p1),r2*sin(t1)*sin(p1),r2*cos(p1))),black+.25mm+dashed);
+              //Draw the plane  z=7-2x-2y
+              triple f(pair t) {
+              	return (r1*cos(t.x)*sin(t.y),r1*sin(t.x)*sin(t.y),r1*cos(t.y));//
+              }
+              surface s=surface(f,(t1,p1),(t2,p2),4,4,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+              pen p=apexmeshpen+.1mm;
+              draw(s,simplesurfacepen,meshpen=p);
 
 
-                label("$\rho_1$",(0,0,r1),W);
-                label("$\rho_2$",(0,0,r2),W);
-
-                real poff = -0.05;
-
-                //draw((r1*cos(t1)*sin(p1+poff),r1*sin(t1)*sin(p1+poff),r1*cos(p1+poff)) -- (r2*cos(t1)*sin(p1+poff),r2*sin(t1)*sin(p1+poff),r2*cos(p1+poff)),black+.25mm,Arrows3(size=1.5mm));
-
-                //label("$\rho$",(0,-.04,.5*r1));
-
-                //draw((0,-.02,.01) -- (0,-.02,.99*r1),black+.25mm,Arrows3(size=1.5mm));
+              triple f(pair t) {
+              	return (r2*cos(t.x)*sin(t.y),r2*sin(t.x)*sin(t.y),r2*cos(t.y));//
+              }
+              surface s=surface(f,(t1,p1),(t2,p2),4,4,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+              draw(s,simplesurfacepen,meshpen=p);
 
 
-                //
-                //  lines for theta length
-                //
-
-                //draw((r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),r1*cos(p2)-.05) -- (r1*cos(t2)*sin(p2),r1*sin(t2)*sin(p2),r1*cos(p2)-.05),black+.25mm,Arrows3(size=1.5mm));
-
-                //label("$\rho\sin(\varphi)\Delta\theta$",1.5*((r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),r1*cos(p2)-.05) + (r1*cos(t2)*sin(p2),r1*sin(t2)*sin(p2),r1*cos(p2)-.05)+(0,0,-.05))/2+(0,0,-.25),S);
-
-                //draw(1.5*((r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),r1*cos(p2)-.05) + (r1*cos(t2)*sin(p2),r1*sin(t2)*sin(p2),r1*cos(p2)-.05)+(0,0,-.05))/2 + (0,0,-.25) -- 1.05((r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),r1*cos(p2)-.05) + (r1*cos(t2)*sin(p2),r1*sin(t2)*sin(p2),r1*cos(p2)-.05))/2+(0,0,-.01),black+.25mm+dashed,Arrow3(size=1.5mm));
-
-                //
-                // lines for phi length
-                //
+              triple f(pair t) {
+              	return (t.y*cos(t.x)*sin(p1),t.y*sin(t.x)*sin(p1),t.y*cos(p1));//
+              }
+              surface s=surface(f,(t1,r1),(t2,r2),4,4,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+              draw(s,simplesurfacepen,meshpen=p);
 
 
+              triple f(pair t) {
+              	return (t.y*cos(t.x)*sin(p2),t.y*sin(t.x)*sin(p2),t.y*cos(p2));//
+              }
+              surface s=surface(f,(t1,r1),(t2,r2),4,4,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+              draw(s,simplesurfacepen,meshpen=p);
 
-                draw(arc((0,0,0),.9*(0,0,r1),.95*(r1*cos(t1)*sin(p1),r1*sin(t1)*sin(p1),r1*cos(p1))),black+.25mm,Arrows3(size=1.5mm));
-                label("$\varphi_1$",.9*(r1*cos(t1)*sin(p1/2),r1*sin(t1)*sin(p1/2),r1*cos(p1/2)),S);
+
+              triple f(pair t) {
+              	return (t.y*cos(t1)*sin(t.x),t.y*sin(t1)*sin(t.x),t.y*cos(t.x));//
+              }
+              surface s=surface(f,(p1,r1),(p2,r2),4,4,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+              draw(s,simplesurfacepen,meshpen=p);
 
 
-                label("$\varphi_2$",.68*(r1*cos(t1)*sin(p1+(p2-p1)/2),r1*sin(t1)*sin(p1+(p2-p1)/2),r1*cos(p1+(p2-p1)/2)),S);
-                draw(arc((0,0,0),.7*(0,0,r1),.7*(r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),r1*cos(p2))),black+.25mm,Arrows3(size=1.5mm));
-              </asymptote>
-            </image>
-          </sidebyside>
+              triple f(pair t) {
+              	return (t.y*cos(t2)*sin(t.x),t.y*sin(t2)*sin(t.x),t.y*cos(t.x));//
+              }
+              surface s=surface(f,(p1,r1),(p2,r2),4,4,usplinetype=new splinetype[] {notaknot,notaknot,monotonic},vsplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+              draw(s,simplesurfacepen,meshpen=p);
+
+
+              //
+              // lines for phi
+              //
+              draw((r1*cos(t1)*sin(p1),r1*sin(t1)*sin(p1),r1*cos(p1)) -- (0,0,0) -- (r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),r1*cos(p2)),black+.25mm+dashed);
+
+              //draw(arc((0,0,0),(r1*cos(t1)*sin(p1)/2.5,r1*sin(t1)*sin(p1)/2.5,r1*cos(p1)/2.5),(r1*cos(t1)*sin(p2)/2.5,r1*sin(t1)*sin(p2)/2.5,r1*cos(p2)/2.5)),black+.25mm,Arrow3(size=1.5mm));
+
+              //label("$\Delta\varphi$",.95*(r1*cos(t1)*sin((p1+p2)/2)/2,r1*sin(t1)*sin((p1+p2)/2)/2,r1*cos((p1+p2)/2)/2));
+
+
+
+              //
+              //  lines for theta
+              //
+
+              draw((0,0,0) -- (r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),0),black+.25mm+dashed);
+
+              draw((0,0,0) -- (r1*cos(t2)*sin(p2),r1*sin(t2)*sin(p2),0),black+.25mm+dashed);
+
+              draw(arc((0,0,0),.25*(r1,0,0),.5*(r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),0)),black+.25mm,Arrow3(size=1.5mm));
+
+              draw(arc((0,0,0),.4*(r1,0,0),.4*(r1*cos(t2)*sin(p2),r1*sin(t2)*sin(p2),0),(0,0,1)),black+.25mm,Arrow3(size=1.5mm));
+
+              label("$\theta_1$",.25*(r1*cos(t1/2)*sin(p2),r1*sin(t1/2)*sin(p2),0));
+              label("$\theta_2$",.5*(r1*cos(t2/2)*sin(p2),r1*sin(t2/2)*sin(p2),0));
+
+              //
+              // lines for rho
+              //
+
+              draw(arc((0,0,0),(r1*cos(t1)*sin(0),r1*sin(t1)*sin(0),r1*cos(0)),(r1*cos(t1)*sin(p1),r1*sin(t1)*sin(p1),r1*cos(p1))),black+.25mm+dashed);
+
+              draw(arc((0,0,0),(r2*cos(t1)*sin(0),r2*sin(t1)*sin(0),r2*cos(0)),(r2*cos(t1)*sin(p1),r2*sin(t1)*sin(p1),r2*cos(p1))),black+.25mm+dashed);
+
+
+              label("$\rho_1$",(0,0,r1),W);
+              label("$\rho_2$",(0,0,r2),W);
+
+              real poff = -0.05;
+
+              //draw((r1*cos(t1)*sin(p1+poff),r1*sin(t1)*sin(p1+poff),r1*cos(p1+poff)) -- (r2*cos(t1)*sin(p1+poff),r2*sin(t1)*sin(p1+poff),r2*cos(p1+poff)),black+.25mm,Arrows3(size=1.5mm));
+
+              //label("$\rho$",(0,-.04,.5*r1));
+
+              //draw((0,-.02,.01) -- (0,-.02,.99*r1),black+.25mm,Arrows3(size=1.5mm));
+
+
+              //
+              //  lines for theta length
+              //
+
+              //draw((r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),r1*cos(p2)-.05) -- (r1*cos(t2)*sin(p2),r1*sin(t2)*sin(p2),r1*cos(p2)-.05),black+.25mm,Arrows3(size=1.5mm));
+
+              //label("$\rho\sin(\varphi)\Delta\theta$",1.5*((r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),r1*cos(p2)-.05) + (r1*cos(t2)*sin(p2),r1*sin(t2)*sin(p2),r1*cos(p2)-.05)+(0,0,-.05))/2+(0,0,-.25),S);
+
+              //draw(1.5*((r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),r1*cos(p2)-.05) + (r1*cos(t2)*sin(p2),r1*sin(t2)*sin(p2),r1*cos(p2)-.05)+(0,0,-.05))/2 + (0,0,-.25) -- 1.05((r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),r1*cos(p2)-.05) + (r1*cos(t2)*sin(p2),r1*sin(t2)*sin(p2),r1*cos(p2)-.05))/2+(0,0,-.01),black+.25mm+dashed,Arrow3(size=1.5mm));
+
+              //
+              // lines for phi length
+              //
+
+              draw(arc((0,0,0),.9*(0,0,r1),.95*(r1*cos(t1)*sin(p1),r1*sin(t1)*sin(p1),r1*cos(p1))),black+.25mm,Arrows3(size=1.5mm));
+              label("$\varphi_1$",.9*(r1*cos(t1)*sin(p1/2),r1*sin(t1)*sin(p1/2),r1*cos(p1/2)),S);
+
+              label("$\varphi_2$",.68*(r1*cos(t1)*sin(p1+(p2-p1)/2),r1*sin(t1)*sin(p1+(p2-p1)/2),r1*cos(p1+(p2-p1)/2)),S);
+              draw(arc((0,0,0),.7*(0,0,r1),.7*(r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),r1*cos(p2))),black+.25mm,Arrows3(size=1.5mm));
+            </asymptote>
+          </image>
         </statement>
         <answer>
           <p>
