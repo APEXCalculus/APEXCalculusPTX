@@ -279,9 +279,9 @@
 <xsl:param name="exercise.divisional.solution" select="'no'"/>
 
 <!-- print options -->
-<xsl:param name="latex.print" select="'yes'"/>
+<!-- <xsl:param name="latex.print" select="'yes'"/> -->
 <xsl:param name="latex.pageref" select="'yes'"/>
-<xsl:param name="latex.sides" select="'two'"/>
+<!-- <xsl:param name="latex.sides" select="'two'"/> -->
 
 <!-- set toc depth -->
 <xsl:param name="toc.level" select="3"/>
