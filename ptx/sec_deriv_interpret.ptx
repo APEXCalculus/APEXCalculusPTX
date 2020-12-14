@@ -1156,10 +1156,12 @@
                 $gr->lineTo(0.05,$i,black,1);
                 $gr->lb(new Label(-0.1,$i,$i,'black','right','middle','large'));
               };
-              add_functions($gr, "$fp for x in &lt;$fpleft,$fpright> using color:blue and weight:2");
-              $gr->lb(new Label($fpright-1,$fp->eval(x=>$fpright-1),'f','blue',@fppos,'large'));
-              add_functions($gr, "$f for x in &lt;$fleft,$fright> using color:red and weight:2");
-              $gr->lb(new Label($h,$k,'g','red',@fpos,'large'));
+              $gr->new_color("lightblue", 174,180,244);
+              $gr->new_color("darkred", 159,64,16);
+              add_functions($gr, "$fp for x in &lt;$fpleft,$fpright> using color:lightblue and weight:3");
+              $gr->lb(new Label($fpright-1,$fp->eval(x=>$fpright-1),'f','lightblue',@fppos,'large'));
+              add_functions($gr, "$f for x in &lt;$fleft,$fright> using color:darkred and weight:2");
+              $gr->lb(new Label($h,$k,'g','darkred',@fpos,'large'));
               $radio=RadioButtons([
                 math_ev3(f).' is the derivative of '.math_ev3(g).'.',
                 math_ev3(g).' is the derivative of '.math_ev3(f).'.'
@@ -1197,6 +1199,8 @@
               $infl=($r+$s+$t)/3;
               $gr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],size=>[400,240]);
               $gr->lb('reset');
+              $gr->new_color("lightblue", 174,180,244);
+              $gr->new_color("darkred", 159,64,16);
               for my$i(($xmin+1)..-1,1..($xmax-1)){
                 $gr->moveTo($i,-0.05);
                 $gr->lineTo($i,0.05,black,1);
@@ -1214,10 +1218,10 @@
                 @fpos=('left','bottom');
                 @fppos=('center','bottom');
               }
-              add_functions($gr, "$f for x in &lt;$xmin,$xmax> using color:blue and weight:2");
-              $gr->lb(new Label($t,0,'f','blue',@fpos,'large'));
-              add_functions($gr, "$fp for x in &lt;$xmin,$xmax> using color:red and weight:2");
-              $gr->lb(new Label($infl,$fp->eval(x=>$infl),'g','red',@fppos,'large'));
+              add_functions($gr, "$f for x in &lt;$xmin,$xmax> using color:lightblue and weight:3");
+              $gr->lb(new Label($t,0,'f','lightblue',@fpos,'large'));
+              add_functions($gr, "$fp for x in &lt;$xmin,$xmax> using color:darkred and weight:2");
+              $gr->lb(new Label($infl,$fp->eval(x=>$infl),'g','darkred',@fppos,'large'));
               $radio=RadioButtons([
                 math_ev3(f).' is the derivative of '.math_ev3(g).'.',
                 math_ev3(g).' is the derivative of '.math_ev3(f).'.'
@@ -1237,14 +1241,16 @@
             <pg-code>
               $gr=init_graph(-5,-5,5,5,axes=>[0,0],size=>[400,240],grid=>[10,10]);
               $gr->lb('reset');
+              $gr->new_color("lightblue", 174,180,244);
+              $gr->new_color("darkred", 159,64,16);
               for my$i(-4..-1,1..4){$gr->moveTo($i,-0.05);$gr->lineTo($i,0.05,black,1);$gr->lb(new Label($i,-0.1,$i,'black','center','top','large'));};
               for my$i(-4..-1,1..4){$gr->moveTo(-0.05,$i);$gr->lineTo(0.05,$i,black,1);$gr->lb(new Label(-0.1,$i,$i,'black','right','middle','large'));};
-              add_functions($gr, "1/x for x in &lt;-5,-0.2> using color:blue and weight:2");
-              add_functions($gr, "1/x for x in &lt;0.2,5> using color:blue and weight:2");
-              $gr->lb(new Label(1,1.2,'f','blue','left','bottom','large'));
-              add_functions($gr, "-1/x^2 for x in &lt;-5,-0.45> using color:red and weight:2");
-              add_functions($gr, "-1/x^2 for x in &lt;0.45,5> using color:red and weight:2");
-              $gr->lb(new Label(1,-1.2,'g','red','left','top','large'));
+              add_functions($gr, "1/x for x in &lt;-5,-0.2> using color:lightblue and weight:3");
+              add_functions($gr, "1/x for x in &lt;0.2,5> using color:lightblue and weight:3");
+              $gr->lb(new Label(1,1.2,'f','lightblue','left','bottom','large'));
+              add_functions($gr, "-1/x^2 for x in &lt;-5,-0.45> using color:darkred and weight:2");
+              add_functions($gr, "-1/x^2 for x in &lt;0.45,5> using color:darkred and weight:2");
+              $gr->lb(new Label(1,-1.2,'g','darkred','left','top','large'));
               $radio=RadioButtons([
                 math_ev3(f).' is the derivative of '.math_ev3(g).'.',
                 math_ev3(g).' is the derivative of '.math_ev3(f).'.'
@@ -1271,6 +1277,8 @@
               $ymax=max(int(pi/$p),1)+1;
               $gr=init_graph(-4,$ymin,4,$ymax,axes=>[0,0],size=>[400,240]);
               $gr->lb('reset');
+              $gr->new_color("lightblue", 174,180,244);
+              $gr->new_color("darkred", 159,64,16);
               for my$i(-3..-1,1..3){
                 $gr->moveTo($i,-0.05);
                 $gr->lineTo($i,0.05,black,1);
@@ -1281,10 +1289,10 @@
                 $gr->lineTo(0.05,$i,black,1);
                 $gr->lb(new Label(-0.1,$i,$i,'black','right','middle','large'));
               };
-              add_functions($gr, "$f for x in &lt;-4,4> using color:blue and weight:2");
-              $gr->lb(new Label($h,1,'f','blue','center','bottom','large'));
-              add_functions($gr, "$fp for x in &lt;-4,4> using color:red and weight:2");
-              $gr->lb(new Label($h-3*$p/2,-pi/$p,'g','red','center','top','large'));
+              add_functions($gr, "$f for x in &lt;-4,4> using color:lightblue and weight:3");
+              $gr->lb(new Label($h,1,'f','lightblue','center','bottom','large'));
+              add_functions($gr, "$fp for x in &lt;-4,4> using color:darkred and weight:2");
+              $gr->lb(new Label($h-3*$p/2,-pi/$p,'g','darkred','center','top','large'));
               $radio=RadioButtons([
                 math_ev3(f).' is the derivative of '.math_ev3(g).'.',
                 math_ev3(g).' is the derivative of '.math_ev3(f).'.'
