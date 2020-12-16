@@ -180,6 +180,26 @@
 </xsl:template>
 
 <!-- restore geometry for next section -->
+<xsl:template match="exercises" mode="latex-division-footing">
+    <!-- Inspect parent (part through subsubsection)  -->
+    <!-- to determine one of two models of a division -->
+    <!-- NB: return values are 'true' and empty       -->
+    <xsl:variable name="is-structured">
+        <xsl:apply-templates select="parent::*" mode="is-structured-division"/>
+    </xsl:variable>
+    <xsl:variable name="b-is-structured" select="$is-structured = 'true'"/>
+
+    <xsl:text>\end{</xsl:text>
+    <xsl:apply-templates select="." mode="division-environment-name" />
+    <xsl:if test="not($b-is-structured)">
+        <xsl:text>-numberless</xsl:text>
+    </xsl:if>
+    <xsl:text>}&#xa;</xsl:text>
+    <xsl:if test="self::exercises">
+        <!-- \restoregeometry includes a \clearpage -->
+        <xsl:text>\restoregeometry&#xa;</xsl:text>
+    </xsl:if>
+</xsl:template>
 
 <!-- figures in the margin -->
 <!-- load marginnote package -->
@@ -255,23 +275,6 @@
     <xsl:text>}&#xa;</xsl:text>
 </xsl:template> -->
 
-<xsl:template match="exercises" mode="latex-division-footing">
-    <!-- Inspect parent (part through subsubsection)  -->
-    <!-- to determine one of two models of a division -->
-    <!-- NB: return values are 'true' and empty       -->
-    <xsl:variable name="is-structured">
-        <xsl:apply-templates select="parent::*" mode="is-structured-division"/>
-    </xsl:variable>
-    <xsl:variable name="b-is-structured" select="$is-structured = 'true'"/>
-
-    <xsl:text>\end{</xsl:text>
-    <xsl:apply-templates select="." mode="division-environment-name" />
-    <xsl:text>}&#xa;</xsl:text>
-    <xsl:if test="self::exercises">
-        <!-- \restoregeometry includes a \clearpage -->
-        <xsl:text>\restoregeometry&#xa;</xsl:text>
-    </xsl:if>
-</xsl:template>
 
 <!-- now come all the options -->
 <!-- turn off hints, answers, and solutions for divisional exercises -->
