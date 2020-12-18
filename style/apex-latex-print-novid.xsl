@@ -96,24 +96,15 @@
 <xsl:param name="latex.geometry" select="'inner=1in,textheight=9in,textwidth=320pt,marginparwidth=150pt,marginparsep=32pt,bottom=1in,footskip=29pt'"/>
 
 <!-- apply exercise geometry -->
-<xsl:template match="exercises|solutions[not(parent::backmatter)]|reading-questions|glossary|references|worksheet" mode="latex-division-heading">
-    <!-- Inspect parent (part through subsubsection)  -->
-    <!-- to determine one of two models of a division -->
-    <!-- NB: return values are 'true' and empty       -->
-    <xsl:variable name="is-structured">
-        <xsl:apply-templates select="parent::*" mode="is-structured-division"/>
-    </xsl:variable>
-    <xsl:variable name="b-is-structured" select="$is-structured = 'true'"/>
-
+<xsl:template match="exercises" mode="latex-division-heading">
     <xsl:if test="self::exercises">
         <!-- \newgeometry includes a \clearpage -->
         <xsl:apply-templates select="." mode="new-geometry"/>
     </xsl:if>
     <xsl:text>\begin{</xsl:text>
     <xsl:apply-templates select="." mode="division-environment-name" />
-    <xsl:if test="not($b-is-structured)">
-        <xsl:text>-numberless</xsl:text>
-    </xsl:if>
+    <!-- possibly numberless -->
+    <xsl:apply-templates select="." mode="division-environment-name-suffix" />
     <xsl:text>}</xsl:text>
     <xsl:text>{</xsl:text>
     <xsl:apply-templates select="." mode="title-full"/>
@@ -144,6 +135,8 @@
   </xsl:if>
     <xsl:text>\begin{</xsl:text>
     <xsl:apply-templates select="." mode="division-environment-name" />
+    <!-- possibly numberless -->
+    <xsl:apply-templates select="." mode="division-environment-name-suffix" />
     <xsl:text>}</xsl:text>
     <xsl:text>{</xsl:text>
     <xsl:apply-templates select="." mode="title-full"/>
@@ -166,6 +159,7 @@
     <xsl:text>}</xsl:text>
     <xsl:text>&#xa;</xsl:text>
 </xsl:template>
+
 <!-- define exercise geometry -->
 <xsl:template match="exercises|appendix" mode="new-geometry">
     <xsl:text>\newgeometry{</xsl:text>
@@ -179,6 +173,18 @@
 </xsl:template>
 
 <!-- restore geometry for next section -->
+<xsl:template match="exercises" mode="latex-division-footing">
+    <xsl:text>\end{</xsl:text>
+    <xsl:apply-templates select="." mode="division-environment-name" />
+    <!-- possibly numberless -->
+    <xsl:apply-templates select="." mode="division-environment-name-suffix" />
+    <xsl:text>}&#xa;</xsl:text>
+    <xsl:if test="self::exercises">
+        <!-- \restoregeometry includes a \clearpage -->
+        <xsl:text>\restoregeometry&#xa;</xsl:text>
+    </xsl:if>
+</xsl:template>
+
 
 <!-- figures in the margin -->
 <!-- load marginnote package -->
@@ -254,24 +260,6 @@
     <xsl:text>}&#xa;</xsl:text>
 </xsl:template> -->
 
-<xsl:template match="exercises" mode="latex-division-footing">
-    <!-- Inspect parent (part through subsubsection)  -->
-    <!-- to determine one of two models of a division -->
-    <!-- NB: return values are 'true' and empty       -->
-    <xsl:variable name="is-structured">
-        <xsl:apply-templates select="parent::*" mode="is-structured-division"/>
-    </xsl:variable>
-    <xsl:variable name="b-is-structured" select="$is-structured = 'true'"/>
-
-    <xsl:text>\end{</xsl:text>
-    <xsl:apply-templates select="." mode="division-environment-name" />
-    <xsl:text>}&#xa;</xsl:text>
-    <xsl:if test="self::exercises">
-        <!-- \restoregeometry includes a \clearpage -->
-        <xsl:text>\restoregeometry&#xa;</xsl:text>
-    </xsl:if>
-</xsl:template>
-
 <!-- now come all the options -->
 <!-- turn off hints, answers, and solutions for divisional exercises -->
 <xsl:param name="exercise.divisional.hint" select="'no'"/>
@@ -279,9 +267,9 @@
 <xsl:param name="exercise.divisional.solution" select="'no'"/>
 
 <!-- print options -->
-<xsl:param name="latex.print" select="'yes'"/>
+<!-- <xsl:param name="latex.print" select="'yes'"/> -->
 <xsl:param name="latex.pageref" select="'yes'"/>
-<xsl:param name="latex.sides" select="'two'"/>
+<!-- <xsl:param name="latex.sides" select="'two'"/> -->
 
 <!-- set toc depth -->
 <xsl:param name="toc.level" select="3"/>
