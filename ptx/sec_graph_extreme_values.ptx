@@ -1701,15 +1701,14 @@
         <exercise>
           <webwork seed="1">
             <pg-code>
-              Context("Fraction");
-              #$trig = list_random('sin','cos');
-              $trig='cos'; #if($envir{problemSeed}==1){$trig='cos'};
+              Context("Numeric");
+              $trig='cos';
               $low = Formula("0");
               $high = Formula("pi");
               $f = Formula("e^x $trig(x)");
               $a = ($trig eq 'cos') ? Formula("3pi/4") : Formula("pi/4");
-              $max = Fraction(max($f->eval(x=>$low->eval(x=>0)),$f->eval(x=>$high->eval(x=>0)),$f->eval(x=>$a->eval(x=>0))));
-              $min = Fraction(min($f->eval(x=>$low->eval(x=>0)),$f->eval(x=>$high->eval(x=>0)),$f->eval(x=>$a->eval(x=>0))));
+              $max = Compute("e^($a)/sqrt(2)");
+              $min = Compute("-e^(pi)");
             </pg-code>
             <statement>
               <p>
@@ -1734,15 +1733,14 @@
         <exercise>
           <webwork seed="1">
             <pg-code>
-              Context("Fraction");
-              #$trig = list_random('sin','cos');
-              $trig='sin'; #if($envir{problemSeed}==1){$trig='sin'};
+              Context("Numeric");
+              $trig='sin';
               $low = Formula("0");
               $high = Formula("pi");
               $f = Formula("e^x $trig(x)");
-              $a = ($trig eq 'cos') ? Formula("3pi/4") : Formula("pi/4");
-              $max = Fraction(max($f->eval(x=>$low->eval(x=>0)),$f->eval(x=>$high->eval(x=>0)),$f->eval(x=>$a->eval(x=>0))));
-              $min = Fraction(min($f->eval(x=>$low->eval(x=>0)),$f->eval(x=>$high->eval(x=>0)),$f->eval(x=>$a->eval(x=>0))));
+              $a = Formula("3pi/4");
+              $max = Compute("e^($a)/sqrt(2)")
+              $min = Compute("0");
             </pg-code>
             <statement>
               <p>
@@ -1767,15 +1765,16 @@
         <exercise>
           <webwork seed="1">
             <pg-code>
-              Context("Fraction");
+              Context("Numeric");
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
               $n = random(1,4,1);
               $high = random(3,9,1);
               if($envir{problemSeed}==1){$n=1;$high=4;};
               $low = Compute("1");
               $a = exp(1/$n);
               $f = Formula("ln(x)/x^$n")->reduce;
-              $max = Fraction(max($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>$a)));
-              $min = Fraction(min($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>$a)));
+              $max = Compute("1/($n e)");
+              $min = Real(0);
             </pg-code>
             <statement>
               <p>
