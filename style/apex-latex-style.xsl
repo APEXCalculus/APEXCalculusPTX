@@ -240,7 +240,7 @@
 <xsl:template match="aside">
     <xsl:text>\marginnote{&#xa;</xsl:text>
     <xsl:apply-templates select="." mode="label"/>
-    <xsl:apply-templates select="p|&FIGURE-LIKE;|sidebyside" />
+    <xsl:apply-templates select="p|&FIGURE-LIKE;|sidebyside|image|tabular" />
     <xsl:text>}%&#xa;</xsl:text>
     <xsl:text>\par&#xa;</xsl:text>
 </xsl:template>
