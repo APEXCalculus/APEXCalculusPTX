@@ -717,15 +717,9 @@
   </p>
 <!--ToDo: Units in exercises need to be done better. Can we use quantity? If not, fix spacing.-->
   <exercises>
-<!--Group 1: T/F questions-->
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          Terms and Concepts
-        </p>
-      </introduction>
-<!--Exercise 1: T/F-->
+    <subexercises>
+      <title>Terms and Concepts</title>
+      <!--Exercise 1: T/F-->
       <exercise>
         <webwork>
           <pg-code>
@@ -734,14 +728,14 @@
           </pg-code>
           <statement>
             <p>
+              <var name="$true" form="popup"/>
               Implicit differentiation is often used when solving
               <q>related rates</q> type problems.
-              <var name="$true" form="popup"/>
             </p>
           </statement>
         </webwork>
       </exercise>
-<!--Exercise 2: Bizarre T/F-->
+      <!--Exercise 2: Bizarre T/F-->
       <exercise>
         <webwork>
           <pg-code>
@@ -750,74 +744,63 @@
           </pg-code>
           <statement>
             <p>
-              A study of related rates is part of the standard police officer training.
               <var name="$false" form="popup"/>
+              A study of related rates is part of the standard police officer training.
             </p>
           </statement>
         </webwork>
       </exercise>
+    </subexercises>
 
-    </exercisegroup>
-<!--Group 2: Related rates answer entry-->
-    <exercisegroup>
+    <subexercises>
       <title>Problems</title>
-<!--Exercise 3: Puddle of depth 10 cm growing-->
+      <!--Exercise 3: Puddle of depth 10 cm growing-->
       <exercise>
-        <webwork>
+        <webwork seed="1">
           <pg-code>
-            Context()->flags->set(ReducedConstants=>0);
-            $a = Compute("5/(2pi)");
-            $a = NumberWithUnits("$a cm/s");
-            $b = Compute("5/(20pi)");
-            $b = NumberWithUnits("$b cm/s");
-            $c = Compute("5/(200pi)");
-            $c = NumberWithUnits("$c cm/s");
+            ($rate,$depth) = (4..10)[NchooseK(7,2)];
+            $a = random(1,4,1);
+            if($envir{problemSeed}==1){$rate=5; $depth=10; $a=1;};
+            Context()->flags->set(reduceConstants=>0);
+            $rateU = NumberWithUnits("$rate cm^3/s");
+            $depthU = NumberWithUnits("$depth mm");
+            @r=($a,$a*10,$a*100);
+            @rU = map{NumberWithUnits("$_ cm")}(@r);
+            Context("Fraction");
+            @f = map{Fraction(5*$rate,2*$_*$depth)}(@r);
+            @num = map{($_->value)[0]}(@f);
+            @den = map{($_->value)[1]}(@f);
+            @sU = map{NumberWithUnits("$num[$_]/($den[$_] pi) cm/s")}(0,1,2);
           </pg-code>
           <statement>
             <p>
-              Water flows onto a flat surface at a rate of <m>5\text{ cm}^3/\text{s}</m>
-              <!-- <quantity>
-                <mag>5</mag><unit prefix="centi" base="meter" exp="3"/><per base="second"/>
-              </quantity> -->
-              forming a circular puddle 10 mm deep.
+              Water flows onto a flat surface at a rate of
+              <m><var name="$rateU"/></m>
+              forming a circular puddle <m><var name="$depthU"/></m> deep.
               How fast is the radius growing when the radius is:
-            </p>
-
-            <p>
               <ol>
                 <li>
                   <p>
-                    <quantity>
-                      <mag>1</mag><unit prefix="centi" base="meter"/>
-                    </quantity>?
+                    <m><var name="$rU[0]"/></m>
                   </p>
-
                   <p>
-                    <var name="$a" width="20"/>
+                    <var name="$sU[0]" width="20"/>
                   </p>
                 </li>
-
                 <li>
                   <p>
-                    <quantity>
-                      <mag>10</mag><unit prefix="centi" base="meter"/>
-                    </quantity>?
+                    <m><var name="$rU[1]"/></m>
                   </p>
-
                   <p>
-                    <var name="$b" width="20"/>
+                    <var name="$sU[1]" width="20"/>
                   </p>
                 </li>
-
                 <li>
                   <p>
-                    <quantity>
-                      <mag>100</mag><unit prefix="centi" base="meter"/>
-                    </quantity>?
+                    <m><var name="$rU[2]"/></m>
                   </p>
-
                   <p>
-                    <var name="$c" width="20"/>
+                    <var name="$sU[2]" width="20"/>
                   </p>
                 </li>
               </ol>
@@ -825,63 +808,51 @@
           </statement>
         </webwork>
       </exercise>
-<!--Exercise 4: Spherical balloon radius increasing-->
+      <!--Exercise 4: Spherical balloon radius increasing-->
       <exercise>
-        <webwork>
+        <webwork seed="1">
           <pg-code>
-            Context()->flags->set(ReducedConstants=>0);
-            $a = Compute("5/(2pi)");
-            $a = NumberWithUnits("$a cm/s");
-            $b = Compute("5/(200pi)");
-            $b = NumberWithUnits("$b cm/s");
-            $c = Compute("5/(20000pi)");
-            $c = NumberWithUnits("$c cm/s");
+            $rate = random(4,12,1);
+            $a = random(1,4,1);
+            if($envir{problemSeed}==1){$rate=10; $a=1;};
+            Context()->flags->set(reduceConstants=>0);
+            $rateU = NumberWithUnits("$rate cm^3/s");
+            @r=($a,$a*10,$a*100);
+            @rU = map{NumberWithUnits("$_ cm")}(@r);
+            Context("Fraction");
+            @f = map{Fraction($rate,4*$_**2)}(@r);
+            @num = map{($_->value)[0]}(@f);
+            @den = map{($_->value)[1]}(@f);
+            @sU = map{NumberWithUnits("$num[$_]/($den[$_] pi) cm/s")}(0,1,2);
           </pg-code>
           <statement>
             <p>
               A spherical balloon is inflated with air flowing at a rate of
-              <!-- <quantity>
-                <mag>10</mag><unit prefix="centi" base="meter" exp="3"/><per base="second"/>
-              </quantity> -->
-              <m>10\text{ cm}^3/\text{s}</m>.
+              <m><var name="$rateU"/></m>.
               How fast is the radius of the balloon increasing when the radius is:
-            </p>
-
-            <p>
               <ol>
                 <li>
                   <p>
-                    <quantity>
-                      <mag>1</mag><unit prefix="centi" base="meter"/>
-                    </quantity>?
+                    <m><var name="$rU[0]"/></m>
                   </p>
-
                   <p>
-                    <var name="$a" width="10"/>
+                    <var name="$sU[0]" width="20"/>
                   </p>
                 </li>
-
                 <li>
                   <p>
-                    <quantity>
-                      <mag>10</mag><unit prefix="centi" base="meter"/>
-                    </quantity>?
+                    <m><var name="$rU[1]"/></m>
                   </p>
-
                   <p>
-                    <var name="$b" width="10"/>
+                    <var name="$sU[1]" width="20"/>
                   </p>
                 </li>
-
                 <li>
                   <p>
-                    <quantity>
-                      <mag>100</mag><unit prefix="centi" base="meter"/>
-                    </quantity>?
+                    <m><var name="$rU[2]"/></m>
                   </p>
-
                   <p>
-                    <var name="$c" width="10"/>
+                    <var name="$sU[2]" width="20"/>
                   </p>
                 </li>
               </ol>
@@ -889,83 +860,77 @@
           </statement>
         </webwork>
       </exercise>
-<!--Exercise 5: Refer to Example 100-->
+      <!--Exercise 5: Refer to Example 100-->
       <exercise>
-        <webwork>
+        <webwork seed="1">
           <pg-code>
-            Context()->flags->set(ReducedConstants=>0);
-            $a = Compute("abs(-80*sqrt(2)+50)");
+            Context("Fraction");
+            $f = list_random(Fraction(1,2),Fraction(3,4),Fraction(2,3),Fraction(3,5),Fraction(4,5));
+            $speed = random(45,55,5);
+            $rate = random(70,90,5);
+            if($envir{problemSeed}==1){$f=Fraction(1,2);$speed=50;$rate=80;};
+            Context("Numeric");
+            Context()->flags->set(reduceConstants=>0);
+            $a = Compute("$rate*sqrt(2)-$speed");
             $a = NumberWithUnits("$a mi/h");
           </pg-code>
           <statement>
             <p>
-              Consider the traffic situation introduced in
-              <xref ref="ex_rr3">Example</xref>.
-              How fast is the <q>other car</q>
-              traveling if the officer and the other car are each
-              <m>1/2</m> mile from the intersection,
-              the other car is traveling <em>due west</em>,
-              the officer is traveling north at
-              <quantity>
-                <mag>50</mag><unit base="mileperhour"/>
-              </quantity>,
-              and the radar reading is
-              <quantity>
-                <mag>-80</mag><unit base="mileperhour"/>
-              </quantity>?
+              Consider the traffic situation introduced in <xref ref="ex_rr3">Example</xref>.
+              How fast is the <q>other car</q> traveling if the officer and the other car are each
+              <m><var name="$f"/></m> mile from the intersection, the other car is traveling <em>due west</em>,
+              the officer is traveling north at <m><var name="$speed"/>\,\text{mph}</m>,
+              and the radar reading is <m>-<var name="$rate"/>\,\text{mph}</m>?
             </p>
-
             <p>
               <var name="$a" width="20"/>
             </p>
           </statement>
         </webwork>
       </exercise>
-<!--Exercise 6: Also refer to Example 100-->
+      <!--Exercise 6: Also refer to Example 100-->
       <exercise>
-        <webwork>
+        <webwork seed="1">
           <pg-code>
-            Context()->flags->set(ReducedConstants=>0);
-            $a = Compute("abs(-40*sqrt(5)+25)");
+            Context("Fraction");
+            $f = list_random(Fraction(1,2),Fraction(3,4),Fraction(2,3),Fraction(3,5),Fraction(4,5));
+            $speed = random(45,55,5);
+            $rate = random(70,90,5);
+            if($envir{problemSeed}==1){$f=Fraction(1,2);$speed=50;$rate=80;};
+            Context("Numeric");
+            Context()->flags->set(reduceConstants=>0);
+            $f2 = 1+$f**2;
+            $f3 = $speed*$f;
+            $a = Compute("$rate*sqrt($f2)-$f3");
             $a = NumberWithUnits("$a mi/h");
-            $b = Compute("abs(-80*sqrt(5)+100)");
+            $f4 = $rate/$f;
+            $f5 = $speed/$f;
+            $b = Compute("$f4 sqrt($f2)-$f5");
             $b = NumberWithUnits("$b mi/h");
           </pg-code>
           <statement>
             <p>
-              Consider the traffic situation introduced in
-              <xref ref="ex_rr3">Example</xref>.
-              Calculate how fast the <q>other car</q>
-              is traveling in each of the following situations.
-            </p>
-
-            <p>
+              Consider the traffic situation introduced in <xref ref="ex_rr3">Example</xref>.
+              Calculate how fast the <q>other car</q> is traveling in each of the following situations.
               <ol>
                 <li>
                   <p>
-                    The officer is traveling due north at
-                    <quantity><mag>50</mag><unit base="mileperhour"/></quantity>
-                    and is <m>1/2</m> mile from the intersection,
-                    while the other car is 1 mile from the intersection
-                    traveling west and the radar reading is
-                    <quantity><mag>-80</mag><unit base="mileperhour"/></quantity>?
+                    The officer is traveling due north at <m><var name="$speed"/>\,\text{mph}</m>
+                    and is <m><var name="$f"/></m> mile from the intersection,
+                    while the other car is <m>1</m> mile from the intersection
+                    traveling west and the radar reading is <m>-<var name="$rate"/>\,\text{mph}</m>?
                   </p>
-
                   <p>
                     <var name="$a" width="20"/>
                   </p>
                 </li>
-
                 <li>
                   <p>
-                    The officer is traveling due north at
-                    <quantity><mag>50</mag><unit base="mileperhour"/></quantity>
+                    The officer is traveling due north at <m><var name="$speed"/>\,\text{mph}</m>
                     and is <m>1</m> mile from the intersection,
-                    while the other car is <m>1/2</m> mile from the
-                    intersection traveling west and the radar reading is
-                    <quantity><mag>-80</mag><unit base="mileperhour"/></quantity>?
+                    while the other car is <m><var name="$f"/></m> mile from the
+                    intersection traveling west and the radar reading is <m>-<var name="$rate"/>\,\text{mph}</m>?
                   </p>
-
                   <p>
                     <var name="$b" width="20"/>
                   </p>
@@ -975,11 +940,11 @@
           </statement>
         </webwork>
       </exercise>
-<!--Exercise 7: Anti-aircraft gun-->
+      <!--Exercise 7: Anti-aircraft gun-->
       <exercise xml:id="exer_04_02_ex_07">
         <!--<webwork>
           <pg-code>
-            Context()->flags->set(ReducedConstants=>0);
+            Context()->flags->set(reduceConstants=>0);
             $a = Compute("10000/5280*500/1^2*cos(atan(10000/5280/1))^2");
             $a = NumberWithUnits("$a rad/hr");
             $b = Compute("10000/5280*500/0.2^2*cos(atan(10000/5280/0.2))^2");
@@ -989,76 +954,58 @@
           <!-- </pg-code> -->
           <statement>
             <p>
-              An F-22 aircraft is flying at
-              <quantity><mag>500</mag><unit base="mileperhour"/></quantity>
-              with an elevation of
-              <quantity><mag>10,000</mag><unit base="foot"/></quantity> on a
+              An F-22 aircraft is flying at <m>500\,\text{mph}</m>
+              with an elevation of <m>10{,}000\,\text{ft}</m> on a
               straight-line path that will take it directly over an
               anti-aircraft gun.
             </p>
-
-              <image xml:id="img_04_02_ex_07" width="47%">
-                <description></description>
-                <latex-image>
-
+            <image xml:id="img_04_02_ex_07" width="47%">
+              <description></description>
+              <latex-image>
                 \begin{tikzpicture}[&gt;=latex]
-
-                \begin{scope}
-                \clip (0,0) rectangle (120pt,50pt);
-                \draw [inner color=firstcolor,draw = white] (-10,-25pt) rectangle (180pt,70pt);
-                \end{scope}
-                \draw [top color=treestump, bottom color=white,draw=white] (0,0) rectangle (120pt,-15pt);
-                \draw (0,0) -- (120pt,0);
-                \draw [dashed] (12.5pt,0pt) node [xshift=22pt,yshift=4pt] { $\theta$} -- (105pt,35pt);
-                \draw [ultra thick] (12.5pt,0) -- (18pt,4pt);
-                \filldraw [fill=white] (10pt,-2.5pt) rectangle (15pt,2.5pt);
-
-
-                \draw [&lt;-&gt;] (15pt,-10pt) -- (110pt,-10pt) node [below,pos=.5] { $x$};
-                \draw [&lt;-&gt;] (120pt,0pt) -- (120pt,35pt) node [right, pos=.5] { 10,000 ft};
-
-                \begin{scope}[shift={(105pt,35pt)}]
-                \draw [fill=black] (0,0) rectangle (10pt,2pt);
-                \draw [very thick] (3pt,1pt) -- (6pt,-1.5pt) -- (5pt,0pt);
-                \draw [very thick] (9pt,2pt) -- (9pt,4pt) -- (7pt,2pt);
-                \end{scope}
-
+                  \begin{scope}
+                    \clip (0,0) rectangle (120pt,50pt);
+                    \draw [inner color=firstcolor,draw = white] (-10,-25pt) rectangle (180pt,70pt);
+                  \end{scope}
+                  \draw [top color=treestump, bottom color=white,draw=white] (0,0) rectangle (120pt,-15pt);
+                  \draw (0,0) -- (120pt,0);
+                  \draw [dashed] (12.5pt,0pt) node [xshift=22pt,yshift=4pt] { $\theta$} -- (105pt,35pt);
+                  \draw [ultra thick] (12.5pt,0) -- (18pt,4pt);
+                  \filldraw [fill=white] (10pt,-2.5pt) rectangle (15pt,2.5pt);
+                  \draw [&lt;-&gt;] (15pt,-10pt) -- (110pt,-10pt) node [below,pos=.5] { $x$};
+                  \draw [&lt;-&gt;] (120pt,0pt) -- (120pt,35pt) node [right, pos=.5] { 10,000 ft};
+                  \begin{scope}[shift={(105pt,35pt)}]
+                    \draw [fill=black] (0,0) rectangle (10pt,2pt);
+                    \draw [very thick] (3pt,1pt) -- (6pt,-1.5pt) -- (5pt,0pt);
+                    \draw [very thick] (9pt,2pt) -- (9pt,4pt) -- (7pt,2pt);
+                  \end{scope}
                 \end{tikzpicture}
-
-                </latex-image>
-              </image>
+              </latex-image>
+            </image>
             <p>
               How fast must the gun be able to turn to accurately track the
               aircraft when the plane is:
-            </p>
-
-            <p>
               <ol>
                 <li>
                   <p>
                     <m>1</m> mile away?
                   </p>
-
                   <!-- <p>
                     <var name="$a" width="10"/>
                   </p> -->
                 </li>
-
                 <li>
                   <p>
                     <m>1/5</m> mile away?
                   </p>
-
                   <!-- <p>
                     <var name="$b" width="10"/>
                   </p> -->
                 </li>
-
                 <li>
                   <p>
                     Directly overhead?
                   </p>
-
                   <!-- <p>
                     <var name="$c" width="10"/>
                   </p> -->
@@ -1068,67 +1015,63 @@
           </statement>
         <!-- </webwork> -->
       </exercise>
-<!--Exercise 8: Anti-aircraft gun 2-->
+      <!--Exercise 8: Anti-aircraft gun 2-->
       <exercise>
-        <webwork>
+        <webwork seed="1">
           <pg-code>
-            Context()->flags->set(ReducedConstants=>0);
-            $hmi = Compute("100/5280");
-            $dmi_a = Compute("1000/5280");
-            $dmi_b = Compute("100/5280");
-            $a = Compute("$hmi*500/($dmi_a)^2*cos(atan($hmi/$dmi_a))^2");
-            $a = NumberWithUnits("$a rad/hr");
-            $b = Compute("$hmi*500/($dmi_b)^2*cos(atan($hmi/$dmi_b))^2");
-            $b = NumberWithUnits("$b rad/hr");
-            $c = Compute("500/(100/5280)");
-            $c = NumberWithUnits("$c rad/hr");
+            Context()->flags->set(reduceConstants=>0);
+            $speed = random(400,600,50);
+            $speedU = NumberWithUnits("$speed mi/h");
+            @a = (random(1000,2000,100), random(100,500,50), 0);
+            if($envir{problemSeed}==1){$a[0]=1000,$a[1]=100;};
+            @aU = map{NumberWithUnits("$_ ft")}(@a);
+            @b = map{100*$speed*5280/3600/(100**2 + $_**2)}(@a);
+            @bU = map{NumberWithUnits("$_ rad/s")}(@b);
           </pg-code>
           <statement>
             <p>
               An F-22 aircraft is flying at
-              <quantity><mag>500</mag><unit base="mileperhour"/></quantity>
-              with an elevation of
-              <quantity><mag>100</mag><unit base="foot"/></quantity> on a
-              straight-line path that will take it directly over an
-              anti-aircraft gun as in
-              <xref ref="exer_04_02_ex_07">Exercise</xref>
+              <var name="$speedU"/>
+              with an elevation of <m>100\,\text{ft}</m>
+              on a straight-line path that will take it directly over an
+              anti-aircraft gun as in <xref ref="exer_04_02_ex_07">Exercise</xref>
               (note the lower elevation here).
             </p>
-
             <p>
               How fast must the gun be able to turn to accurately track the
               aircraft when the plane is:
-            </p>
-
-            <p>
               <ol>
                 <li>
                   <p>
-                    <m>1000</m> feet away?
+                    <m><var name="$aU[0]"/></m> feet away?
                   </p>
-
+                  <instruction>
+                    Use <c>rad/s</c> for radians per second.
+                  </instruction>
                   <p>
-                    <var name="$a" width="20"/>
+                    <var name="$bU[0]" width="20"/>
                   </p>
                 </li>
-
                 <li>
                   <p>
-                    <m>100</m> feet away?
+                    <m><var name="$aU[1]"/></m> feet away?
                   </p>
-
+                  <instruction>
+                    Use <c>rad/s</c> for radians per second.
+                  </instruction>
                   <p>
-                    <var name="$b" width="20"/>
+                    <var name="$bU[1]" width="20"/>
                   </p>
                 </li>
-
                 <li>
                   <p>
                     Directly overhead?
                   </p>
-
+                  <instruction>
+                    Use <c>rad/s</c> for radians per second.
+                  </instruction>
                   <p>
-                    <var name="$c" width="20"/>
+                    <var name="$bU[2]" width="20"/>
                   </p>
                 </li>
               </ol>
@@ -1136,7 +1079,7 @@
           </statement>
         </webwork>
       </exercise>
-<!--Exercise 9: Ladder sliding down a house-->
+      <!--Exercise 9: Ladder sliding down a house-->
       <exercise>
         <!-- <webwork>
           <pg-code>
@@ -1158,54 +1101,42 @@
                 <mag>1</mag><unit base="foot"/><per base="second"/>
               </quantity>.
             </p>
-
-              <image xml:id="img_04_02_ex_09" width="47%">
-                <description></description>
-                <latex-image>
-
+            <image xml:id="img_04_02_ex_09" width="47%">
+              <description></description>
+              <latex-image>
                 \begin{tikzpicture}[&gt;=latex]
-
-                \draw [top color=treestump, bottom color=treestump!50!white,draw=black] (0,0) rectangle (20pt,30pt);
-                \draw [fill=black] (0,30pt) -- (10pt,38pt) -- (20pt,30pt) -- cycle;
-                \draw [fill=white] (7pt,15pt) rectangle (13pt,25pt);
-                \draw (10pt,15pt) -- (10pt,25pt) (7pt,20pt) -- (13pt,20pt);
-
-                \draw [thick] (20pt,25pt) -- node [pos=.5,rotate=-67,yshift=5pt] { 24 ft} (30pt,0);
-
-                \draw [thick] (0,0) -- (35pt,0);
-                \draw [-&gt;,&gt;=latex] (34pt,2pt) -- node [above right,pos=.5] { 1 ft/s} (50pt,2pt);
+                  \draw [top color=treestump, bottom color=treestump!50!white,draw=black] (0,0) rectangle (20pt,30pt);
+                  \draw [fill=black] (0,30pt) -- (10pt,38pt) -- (20pt,30pt) -- cycle;
+                  \draw [fill=white] (7pt,15pt) rectangle (13pt,25pt);
+                  \draw (10pt,15pt) -- (10pt,25pt) (7pt,20pt) -- (13pt,20pt);
+                  \draw [thick] (20pt,25pt) -- node [pos=.5,rotate=-67,yshift=5pt] { 24 ft} (30pt,0);
+                  \draw [thick] (0,0) -- (35pt,0);
+                  \draw [-&gt;,&gt;=latex] (34pt,2pt) -- node [above right,pos=.5] { 1 ft/s} (50pt,2pt);
                 \end{tikzpicture}
-
-                </latex-image>
-              </image>
-
+              </latex-image>
+            </image>
             <p>
               At what rate is the top of the ladder sliding down the side of
               the house when the base is:
             </p>
-
             <p>
               <ol>
                 <li>
                   <p>
                     <m>1</m> foot from the house?
                   </p>
-
                   <!-- <p>
                     <var name="$a" width="20"/>
                   </p> -->
                 </li>
-
                 <li>
                   <p>
                     <m>10</m> feet from the house?
                   </p>
-
                   <!-- <p>
                     <var name="$b" width="20"/>
                   </p> -->
                 </li>
-
                 <li>
                   <p>
                     <m>23</m> feet from the house?
@@ -1215,12 +1146,10 @@
                     <var name="$c" width="20"/>
                   </p> -->
                 </li>
-
                 <li>
                   <p>
                     <m>24</m> feet from the house?
                   </p>
-
                   <!-- <p>
                     <var name="$d" width="20"/>
                   </p> -->
@@ -1230,7 +1159,7 @@
           </statement>
         <!-- </webwork> -->
       </exercise>
-<!--Exercise 10: Winch that boat in-->
+      <!--Exercise 10: Winch that boat in-->
       <exercise>
         <!-- <webwork>
           <pg-code>
@@ -1251,63 +1180,47 @@
               by a winch located <quantity><mag>10</mag><unit base="foot"/></quantity>
               above the deck of the boat.
             </p>
-
-              <image xml:id="img_04_02_ex_10" width="47%">
-                <description></description>
-                <latex-image>
-
+            <image xml:id="img_04_02_ex_10" width="47%">
+              <description></description>
+              <latex-image>
                 \begin{tikzpicture}[&gt;=latex]
-
-                \draw [top color=firstcolor!60!white, bottom color=firstcolor!10!white,draw=firstcolor] (-5pt,5pt) rectangle (100pt,-5pt);
-                \draw [thick,fill=treestump] (-10pt,20pt) rectangle (8pt,22pt);
-                \draw [top color=treestump!30!black, bottom color=treestump!70!white,draw=black] (0,0) rectangle (5pt,30pt);
-
-                \draw [fill=white] (50pt,0pt) -- (90pt,0pt) -- (90pt, 15pt) -- (45pt,15pt) -- cycle;
-                \draw [fill=black] (65pt,15pt) rectangle (67pt,20pt);
-                \draw [fill=yellowcolfill] (55pt,20pt) -- (80pt,20pt) -- (65pt,40pt) -- cycle;
-
-                \draw [fill=black] (8pt,35pt) circle (2pt);
-                \draw (45pt,15pt) [dashed] -- (8pt,15pt) -- (8pt,35pt) node [pos=.4,xshift=7pt] { 10ft};
-
-                \draw [-,thick] (8pt,35pt) -- (45pt,15pt);
-
+                  \draw [top color=firstcolor!60!white, bottom color=firstcolor!10!white,draw=firstcolor] (-5pt,5pt) rectangle (100pt,-5pt);
+                  \draw [thick,fill=treestump] (-10pt,20pt) rectangle (8pt,22pt);
+                  \draw [top color=treestump!30!black, bottom color=treestump!70!white,draw=black] (0,0) rectangle (5pt,30pt);
+                  \draw [fill=white] (50pt,0pt) -- (90pt,0pt) -- (90pt, 15pt) -- (45pt,15pt) -- cycle;
+                  \draw [fill=black] (65pt,15pt) rectangle (67pt,20pt);
+                  \draw [fill=yellowcolfill] (55pt,20pt) -- (80pt,20pt) -- (65pt,40pt) -- cycle;
+                  \draw [fill=black] (8pt,35pt) circle (2pt);
+                  \draw (45pt,15pt) [dashed] -- (8pt,15pt) -- (8pt,35pt) node [pos=.4,xshift=7pt] { 10ft};
+                  \draw [-,thick] (8pt,35pt) -- (45pt,15pt);
                 \end{tikzpicture}
-
-                </latex-image>
-              </image>
-
-
+              </latex-image>
+            </image>
             <p>
               At what rate is the boat approaching the dock when the boat is:
             </p>
-
             <p>
               <ol>
                 <li>
                   <p>
                     <m>50</m> feet out?
                   </p>
-
                   <!-- <p>
                     <var name="$a" width="20"/>
                   </p> -->
                 </li>
-
                 <li>
                   <p>
                     <m>15</m> feet out?
                   </p>
-
                   <!-- <p>
                     <var name="$b" width="20"/>
                   </p> -->
                 </li>
-
                 <li>
                   <p>
                     <m>1</m> foot from the dock?
                   </p>
-
                   <!-- <p>
                     <var name="$c" width="20"/>
                   </p> -->
@@ -1320,79 +1233,68 @@
           </statement>
         <!-- </webwork> -->
       </exercise>
-<!--Exercise 11: Inverted cylindrical cone-->
+      <!--Exercise 11: Inverted cylindrical cone-->
       <exercise>
-        <webwork>
+        <webwork seed="1">
           <pg-code>
-            $f = Compute("160/(pi*x^2)");
-            $a = Compute($f->eval(x=>1));
-            $a = NumberWithUnits("$a ft/min");
-            $b = Compute($f->eval(x=>10));
-            $b = NumberWithUnits("$b ft/min");
-            $c = Compute($f->eval(x=>19));
-            $c = NumberWithUnits("$c ft/min");
-            $d = Compute("(1/3*pi*5^2*20)/10");
-            $d = NumberWithUnits("$d min");
+            ($depth,$diameter) = (10..30)[NchooseK(21,2)];
+            $rate = random(8,12,1);
+            @a=(1,random(8,15,1),random(18,25,1));
+            if($envir{problemSeed}==1){$depth=20; $diameter=10; $rate=10; $a[1]=10; $a[2]= 19;};
+            $depthU = NumberWithUnits("$depth ft");
+            $diameterU = NumberWithUnits("$diameter ft");
+            $rateU = NumberWithUnits("$rate ft^3/s");
+            @b = map{$rate * 4 / pi * $depth**2 / $diameter**2 / $_**2}(@a);
+            @bU = map{NumberWithUnits("$_ ft/s")}(@b);
+            $T = pi/12 * $diameter**2 * $depth / $rate;
+            $TU = NumberWithUnits("$T s");
           </pg-code>
           <statement>
             <p>
               An inverted cylindrical cone,
-              <quantity><mag>20</mag><unit base="foot"/></quantity> deep and
-              <quantity><mag>10</mag><unit base="foot"/></quantity> across
+              <m><var name="$depthU"/></m> deep and
+              <m><var name="$diameterU"/></m> across
               at the top, is being filled with water at a rate of
-              <!-- <quantity>
-                <mag>10</mag><unit base="foot" exp="3"/><per base="minute"/>
-              </quantity> -->
-              <m>10\text{ ft}^3/\text{s}</m>
+              <m><var name="$rateU"/></m>.
               At what rate is the water rising in the tank when the depth of
               the water is:
-            </p>
-
-            <p>
               <ol>
                 <li>
                   <p>
-                    <m>1</m> foot?
+                    <m><var name="$a[0]"/></m> foot?
                   </p>
-
                   <p>
-                    <var name="$a" width="20"/>
-                  </p>
-                </li>
-
-                <li>
-                  <p>
-                    <m>10</m> feet?
-                  </p>
-
-                  <p>
-                    <var name="$b" width="20"/>
+                    <var name="$bU[0]" width="20"/>
                   </p>
                 </li>
-
                 <li>
                   <p>
-                    <m>19</m> feet?
+                    <m><var name="$a[1]"/></m> feet?
                   </p>
-
                   <p>
-                    <var name="$c" width="20"/>
+                    <var name="$bU[1]" width="20"/>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <m><var name="$a[2]"/></m> feet?
+                  </p>
+                  <p>
+                    <var name="$bU[2]" width="20"/>
                   </p>
                 </li>
               </ol>
             </p>
-
-              <p>
-                How long will the tank take to fill when starting at empty?
-              </p>
-
-              <p>
-                <var name="$d" width="20"/>
-              </p>
+            <p>
+              How long will the tank take to fill when starting at empty?
+            </p>
+            <p>
+              <var name="$TU" width="20"/>
+            </p>
           </statement>
         </webwork>
       </exercise>
-<!--Exercise 12: Rope, pulley, man standing next to the weight and walking away-->
+      <!--Exercise 12: Rope, pulley, man standing next to the weight and walking away-->
       <exercise xml:id="exer_04_02_ex_12">
         <!-- <webwork>
           <pg-code>
@@ -1411,32 +1313,24 @@
               The man holds the rope at the same height as the connection
               point between rope and weight.
             </p>
-
-              <image xml:id="img_04_02_ex_12" width="47%">
-                <description></description>
-                <latex-image>
-
+            <image xml:id="img_04_02_ex_12" width="47%">
+              <description></description>
+              <latex-image>
                 \begin{tikzpicture}[&gt;=latex,x=1pt,y=1pt]
-
-                \draw [thick](0,40) -- (55,40);
-                \draw [thick] (0,0) -- (55,0);
-                \draw (2,0) -- (12,0) -- (9,5) -- (5,5)--cycle;
-                \draw (7,5) -- (7,35) -- (33,5);
-                \draw (7,35) -- (7,40);
-                \draw [fill=gray] (7,35) circle (2pt);
-                \draw (35,10) circle (2pt);
-                \draw (35,8) -- (35,4) -- (33,0) (35,4) -- (37,0) (33,6) -- (37,6);
-
-                \draw (-4,5) -- (-1,5)  (-2.5,5) -- (-2.5,35) node [pos=.5,draw,fill=white,draw=white,rotate=90] { 30 ft}
-                (-4,35) -- (-1,35);
-
-                \draw [thick,-&gt;](40,5) --(55,5) node[pos=.5,above] { 2 ft/s};
+                  \draw [thick](0,40) -- (55,40);
+                  \draw [thick] (0,0) -- (55,0);
+                  \draw (2,0) -- (12,0) -- (9,5) -- (5,5)--cycle;
+                  \draw (7,5) -- (7,35) -- (33,5);
+                  \draw (7,35) -- (7,40);
+                  \draw [fill=gray] (7,35) circle (2pt);
+                  \draw (35,10) circle (2pt);
+                  \draw (35,8) -- (35,4) -- (33,0) (35,4) -- (37,0) (33,6) -- (37,6);
+                  \draw (-4,5) -- (-1,5)  (-2.5,5) -- (-2.5,35) node [pos=.5,draw,fill=white,draw=white,rotate=90] { 30 ft}
+                  (-4,35) -- (-1,35);
+                  \draw [thick,-&gt;](40,5) --(55,5) node[pos=.5,above] { 2 ft/s};
                 \end{tikzpicture}
-
-                </latex-image>
-              </image>
-
-
+              </latex-image>
+            </image>
             <p>
               Suppose the man stands directly next to the weight
               (<ie/>, a total rope length of <m>60</m> feet) and begins to
@@ -1446,109 +1340,101 @@
               </quantity>.
               How fast is the weight rising when the man has walked:
             </p>
-
             <p>
               <ol>
                 <li>
                   <p>
                     <m>10</m> feet?
                   </p>
-
                   <!-- <p>
                     <var name="$a" width="20"/>
                   </p> -->
                 </li>
-
                 <li>
                   <p>
                     <m>40</m> feet?
                   </p>
-
                   <!-- <p>
                     <var name="$b" width="20"/>
                   </p> -->
                 </li>
               </ol>
             </p>
-
             <p>
               How far must the man walk to raise the weight all the way to
               the pulley?
             </p>
-
             <!-- <p>
               <var name="$c" width="20"/>
             </p> -->
           </statement>
         <!-- </webwork> -->
       </exercise>
-<!--Exercise 13: Same setup, but starting further away-->
+      <!--Exercise 13: Same setup, but starting further away-->
       <exercise>
-        <webwork>
+        <webwork seed="1">
           <pg-code>
-            $a = Compute("sqrt(30^2+40^2)+30");
-            $a = NumberWithUnits("$a ft");
-            $f = Compute("(40 + x)/sqrt(30^2 + (40+x)^2)*2");
-            $b = Compute($f->eval(x=>10));
-            $b = NumberWithUnits("$b ft/s");
-            $c = Compute($f->eval(x=>30));
-            $c = NumberWithUnits("$c ft/s");
-            $d = Compute("sqrt(80^2-30^2)-40");
-            $d = NumberWithUnits("$d ft");
+            # Height is fixed at 30 ft
+            # Need an initial distance that makes a Pythagorean triple with 30
+            $b = random(40,72,224);
+            $speed = random(2,4,1);
+            if($envir{problemSeed}==1){$b=40;$speed=2;};
+            $bU = NumberWithUnits("$b ft");
+            $speedU = NumberWithUnits("$speed ft/s");
+            $c = sqrt(30**2 + $b**2);
+            $length = 30 + $c;
+            $lengthU = NumberWithUnits("$length ft");
+            $newb = $b+10;
+            $newc = sqrt(30**2 + $newb**2);
+            $newrate = $newb/$newc * $speed;
+            $newrateU = NumberWithUnits("$newrate ft/s");
+            $newnewb = $b+30;
+            $newnewc = sqrt(30**2 + $newnewb**2);
+            $newnewrate = $newnewb/$newnewc * $speed;
+            $newnewrateU = NumberWithUnits("$newnewrate ft/s");
+            $far = sqrt($length**2 - 30**2);
+            $farU = NumberWithUnits("$far ft");
           </pg-code>
           <statement>
             <p>
               Consider the situation described in
               <xref ref="exer_04_02_ex_12">Exercise</xref>.
-              Suppose the man starts <m>40</m> feet from the weight and begins
-              to walk away at a rate of
-              <quantity>
-                <mag>2</mag><unit base="foot"/><per base="second"/>
-              </quantity>.
-            </p>
-
-            <p>
+              Suppose the man starts <m><var name="$bU"/></m> from the weight and begins
+              to walk away at a rate of <m><var name="$speedU"/></m>.
               <ol>
                 <li>
                   <p>
                     How long is the rope?
                   </p>
-
                   <p>
-                    <var name="$a" width="20"/>
+                    <var name="$lengthU" width="20"/>
                   </p>
                 </li>
-
                 <li>
                   <p>
                     How fast is the weight rising after the man has walked
                     <m>10</m> feet?
                   </p>
-
                   <p>
-                    <var name="$b" width="20"/>
+                    <var name="$newrateU" width="20"/>
                   </p>
                 </li>
-
                 <li>
                   <p>
                     How fast is the weight rising after the man has walked
                     <m>30</m> feet?
                   </p>
-
                   <p>
-                    <var name="$c" width="20"/>
+                    <var name="$newnewrateU" width="20"/>
                   </p>
                 </li>
-
                 <li>
                   <p>
                     How far must the man walk to raise the weight all the way
                     to the pulley?
                   </p>
-
                   <p>
-                    <var name="$d" width="20"/>
+                    <var name="$farU" width="20"/>
                   </p>
                 </li>
               </ol>
@@ -1556,45 +1442,44 @@
           </statement>
         </webwork>
       </exercise>
-<!--Exercise 14: Hot air balloon rising while being tracked-->
+      <!--Exercise 14: Hot air balloon rising while being tracked-->
       <exercise>
-        <webwork>
+        <webwork seed="1">
           <pg-code>
-            $a = Compute("100+5");
-            $a = NumberWithUnits("$a ft");
-            $b = Compute("100*5*pi/180/cos(45*pi/180)^2");
-            $b = NumberWithUnits("$b ft/min");
+            $distance = random(80,120,5);
+            $height = random(5,6,1);
+            $rate = random(3,8,1);
+            if($envir{problemSeed}==1){$distance=100;$height=5;};
+            $heightU = NumberWithUnits("$height ft");
+            $elev = $distance + $height;
+            $elevU = NumberWithUnits("$elev ft");
+            $speed = 2*$distance*$rate*pi/180;
+            $speedU = NumberWithUnits("$speed ft/s");
           </pg-code>
           <statement>
             <p>
               A hot air balloon lifts off from ground rising vertically.
-              From <m>100</m> feet away, a
-              <quantity><mag>5</mag><unit base="foot"/></quantity> woman
+              From <m><var name="$distance"/></m> feet away, a
+              <m><var name="$heightU"/></m> tall woman
               tracks the path of the balloon.
               When her sightline with the balloon makes a
               <m>45^\circ</m> angle with the horizontal, she notes the angle
-              is increasing at about <m>5^\circ/\text{ min }</m>.
-            </p>
-
-            <p>
+              is increasing at about <m><var name="$rate"/>^\circ</m> per minute.
               <ol>
                 <li>
                   <p>
                     What is the elevation of the balloon?
                   </p>
-
                   <p>
-                    <var name="$a" width="20"/>
+                    <var name="$elevU" width="20"/>
                   </p>
                 </li>
-
                 <li>
                   <p>
                     How fast is it rising?
                   </p>
-
                   <p>
-                    <var name="$b" width="20"/>
+                    <var name="$speedU" width="20"/>
                   </p>
                 </li>
               </ol>
@@ -1602,39 +1487,41 @@
           </statement>
         </webwork>
       </exercise>
-<!--Exercise 15: Sand being dumped into a conical pile-->
+      <!--Exercise 15: Sand being dumped into a conical pile-->
       <exercise>
-        <webwork>
+        <webwork seed="1">
           <pg-code>
-            $a = Compute("5*16/(9*pi*30^2)");
-            $a = NumberWithUnits("$a ft/s");
+            $rate = random(3,8,1);
+            $nd = list_random([2,3],[4,5],[4,7],[5,6],[5,7],[5,8]);
+            $height = random(20,40,5);
+            if($envir{problemSeed}==1){$rate=5;$nd=[2,3];$height=30;};
+            $rateU = NumberWithUnits("$rate ft^3/s");
+            Context("Fraction");
+            $frac = Fraction($nd->[0],$nd->[1]);
+            Context("Numeric");
+            $speed = 4*$frac**2/pi/$height**2*$rate;
+            $speedU = NumberWithUnits("$speed ft/s");
           </pg-code>
           <statement>
             <p>
               A company that produces landscaping materials is dumping sand
               into a conical pile.
               The sand is being poured at a rate of
-              <!-- <quantity>
-                <mag>5</mag><unit base="foot" exp="3"/><per base="second"/>
-              </quantity> -->
-              <m>5\text{ ft}^3/\text{s}</m>;
-              the physical properties of the sand,
+              <m><var name="$rateU"/></m>.
+              The physical properties of the sand,
               in conjunction with gravity,
-              ensure that the cone's height is roughly <m>2/3</m> the length
+              ensure that the cone's height is roughly <m><var name="$frac"/></m> the length
               of the diameter of the circular base.
             </p>
-
             <p>
-              How fast is the cone rising when it has a height of <m>30</m> feet?
+              How fast is the cone rising when it has a height of <m><var name="$height"/></m> feet?
             </p>
-
             <p>
-              <var name="$a" width="20"/>
+              <var name="$speedU" width="20"/>
             </p>
           </statement>
         </webwork>
       </exercise>
-
-    </exercisegroup>
+    </subexercises>
   </exercises>
 </section>

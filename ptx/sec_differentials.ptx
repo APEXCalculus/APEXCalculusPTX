@@ -631,15 +631,8 @@
   </example>
 
   <exercises>
-<!-- Group 1: T/F and Text -->
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          Terms and Concepts
-        </p>
-      </introduction>
-
+    <subexercises>
+      <title>Terms and Concepts</title>
       <exercise>
         <webwork>
           <pg-code>
@@ -648,14 +641,11 @@
           </pg-code>
           <statement>
             <p>
+              <var name="$true" form="popup"/>
               Given a differentiable function <m>y=f(x)</m>,
               we are generally free to choose a value for <m>dx</m>,
               which then determines the value of <m>dy</m>.
             </p>
-
-            <p>
-              <var name="$true" form="popup"/>
-            </p>
           </statement>
         </webwork>
       </exercise>
@@ -667,18 +657,11 @@
             $false=PopUp(['?','True','False'],2);
           </pg-code>
           <statement>
-
-            <!-- <todo>In this question and the next, the book shows delta but this renders as d</todo> -->
-
             <p>
+              <var name="$true" form="popup"/>
               The symbols <q><m>dx</m></q> and <q><m>\dx</m></q>
               represent the same concept.
             </p>
-
-            <p>
-              <var name="$true" form="popup"/>
-            </p>
-
           </statement>
         </webwork>
       </exercise>
@@ -689,16 +672,12 @@
             $true=PopUp(['?','True','False'],1);
             $false=PopUp(['?','True','False'],2);
           </pg-code>
-
           <statement>
             <p>
+              <var name="$false" form="popup"/>
               The symbols <q><m>dy</m></q> and <q><m>\dy</m></q>
               represent the same concept.
             </p>
-
-            <p>
-              <var name="$false" form="popup"/>
-            </p>
           </statement>
         </webwork>
       </exercise>
@@ -711,11 +690,8 @@
           </pg-code>
           <statement>
             <p>
-              Differentials are important in the study of integration.
-            </p>
-
-            <p>
               <var name="$true" form="popup"/>
+              Differentials are important in the study of integration.
             </p>
           </statement>
         </webwork>
@@ -723,13 +699,10 @@
 
       <exercise>
         <webwork>
-          <pg-code>
-          </pg-code>
           <statement>
             <p>
               How are differentials and tangent lines related?
             </p>
-
             <p>
               <var form="essay"/>
             </p>
@@ -737,7 +710,6 @@
         </webwork>
       </exercise>
 
-<!--ToDo: WeBWorK code for this new problem-->
       <exercise>
         <webwork>
           <pg-code>
@@ -746,729 +718,742 @@
           </pg-code>
           <statement>
             <p>
-              In real life,
-              differentials are used to approximate function values when the function itself is not known.
-            </p>
-
-            <p>
               <var name="$true" form="popup"/>
+              In real life,
+              differentials are used to approximate function values
+              when the function itself is not known.
             </p>
           </statement>
         </webwork>
       </exercise>
+    </subexercises>
 
-    </exercisegroup>
-<!-- Group 2: Approximate with differentials -->
-    <exercisegroup xml:id="lastdefcount1">
+    <subexercises>
+      <title>Problems</title>
+      <!-- Group 2: Approximate with differentials -->
+      <exercisegroup xml:id="lastdefcount1" cols="2">
+        <introduction>
+          <p>
+            Use differentials to approximate the given value by hand.
+          </p>
+        </introduction>
+        <!-- Exercises 7 & 8: Square function -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $x0 = random(2,9,1);
+              $dx = random(0.03,0.09,0.01);
+              if($envir{problemSeed}==1){$x0=2;$dx=0.05};
+              Context()->flags->set(tolType=>'absolute',tolerance=>10**-8);
+              $f = Compute("x^2");
+              $df = $f->D('x');
+              $x1 = $x0 + $dx;
+              $dy = $dx * $df->eval(x=>$x0);
+              $y = $f->eval(x=>$x0);
+              $r = $y+$dy;
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $given = $f->substitute(x=>Formula("$x1"));
+            </pg-code>
+            <statement>
+              <p>
+                <m><var name="$given"/></m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Use <m>y = <var name="$f"/></m>;
+                <m>dy = <var name="$df"/>\cdot dx</m> with <m>x=<var name="$x0"/></m>
+                and <m>dx = <var name="$dx"/></m>.
+                Thus <m>dy = <var name="$dy"/></m>; knowing
+                <m><var name="$given"/>=<var name="$y"/></m>,
+                we have <m><var name="$given"/> \approx <var name="$r"/></m>.
+              </p>
+            </solution>
+          </webwork>
+        </exercise>
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $x0 = random(2,9,1);
+              $dx = -random(0.03,0.09,0.01);
+              if($envir{problemSeed}==1){$x0=6;$dx=-0.07};
+              Context()->flags->set(tolType=>'absolute',tolerance=>10**-8);
+              $f = Compute("x^2");
+              $df = $f->D('x');
+              $x1 = $x0 + $dx;
+              $dy = $dx * $df->eval(x=>$x0);
+              $y = $f->eval(x=>$x0);
+              $r = $y+$dy;
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $given = $f->substitute(x=>Formula("$x1"));
+            </pg-code>
+            <statement>
+              <p>
+                <m><var name="$given"/></m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Use <m>y = <var name="$f"/></m>;
+                <m>dy = <var name="$df"/>\cdot dx</m> with <m>x=<var name="$x0"/></m>
+                and <m>dx = <var name="$dx"/></m>.
+                Thus <m>dy = <var name="$dy"/></m>; knowing
+                <m><var name="$given"/>=<var name="$y"/></m>,
+                we have <m><var name="$given"/> \approx <var name="$r"/></m>.
+              </p>
+            </solution>
+          </webwork>
+        </exercise>
+        <!-- Exercises 9 & 10: Cube function -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $x0 = random(2,9,1);
+              $dx = random(0.1,0.4,0.1);
+              if($envir{problemSeed}==1){$x0=5;$dx=0.1};
+              Context()->flags->set(tolType=>'absolute',tolerance=>10**-8);
+              $f = Compute("x^3");
+              $df = $f->D('x');
+              $x1 = $x0 + $dx;
+              $dy = $dx * $df->eval(x=>$x0);
+              $y = $f->eval(x=>$x0);
+              $r = $y+$dy;
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $given = $f->substitute(x=>Formula("$x1"));
+            </pg-code>
+            <statement>
+              <p>
+                <m><var name="$given"/></m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Use <m>y = <var name="$f"/></m>;
+                <m>dy = <var name="$df"/>\cdot dx</m> with <m>x=<var name="$x0"/></m>
+                and <m>dx = <var name="$dx"/></m>.
+                Thus <m>dy = <var name="$dy"/></m>; knowing
+                <m><var name="$given"/>=<var name="$y"/></m>,
+                we have <m><var name="$given"/> \approx <var name="$r"/></m>.
+              </p>
+            </solution>
+          </webwork>
+        </exercise>
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $x0 = random(2,9,1);
+              $dx = -random(0.1,0.4,0.1);
+              if($envir{problemSeed}==1){$x0=7;$dx=-0.2};
+              Context()->flags->set(tolType=>'absolute',tolerance=>10**-8);
+              $f = Compute("x^3");
+              $df = $f->D('x');
+              $x1 = $x0 + $dx;
+              $dy = $dx * $df->eval(x=>$x0);
+              $y = $f->eval(x=>$x0);
+              $r = $y+$dy;
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $given = $f->substitute(x=>Formula("$x1"));
+            </pg-code>
+            <statement>
+              <p>
+                <m><var name="$given"/></m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Use <m>y = <var name="$f"/></m>;
+                <m>dy = <var name="$df"/>\cdot dx</m> with <m>x=<var name="$x0"/></m>
+                and <m>dx = <var name="$dx"/></m>.
+                Thus <m>dy = <var name="$dy"/></m>; knowing
+                <m><var name="$given"/>=<var name="$y"/></m>,
+                we have <m><var name="$given"/> \approx <var name="$r"/></m>.
+              </p>
+            </solution>
+          </webwork>
+        </exercise>
+        <!-- Exercises 11 & 12: Square root function -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $x0 = list_random(9,16,25,36,49);
+              $dx = random(0.3,0.9,0.1);
+              if($envir{problemSeed}==1){$x0=16;$dx=0.5};
+              Context()->flags->set(tolType=>'absolute',tolerance=>10**-8);
+              $f = Compute("sqrt(x)");
+              $df = $f->D('x');
+              $x1 = $x0 + $dx;
+              $dy = $dx * $df->eval(x=>$x0);
+              $y = $f->eval(x=>$x0);
+              $r = $y+$dy;
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $given = $f->substitute(x=>Formula("$x1"));
+            </pg-code>
+            <statement>
+              <p>
+                <m><var name="$given"/></m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Use <m>y = <var name="$f"/></m>;
+                <m>dy = <var name="$df"/>\cdot dx</m> with <m>x=<var name="$x0"/></m>
+                and <m>dx = <var name="$dx"/></m>.
+                Thus <m>dy = <var name="$dy"/></m>; knowing
+                <m><var name="$given"/>=<var name="$y"/></m>,
+                we have <m><var name="$given"/> \approx <var name="$r"/></m>.
+              </p>
+            </solution>
+          </webwork>
+        </exercise>
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $x0 = list_random(9,16,25,36,49);
+              $dx = -random(0.3,1.5,0.1);
+              if($envir{problemSeed}==1){$x0=25;$dx=-1};
+              Context()->flags->set(tolType=>'absolute',tolerance=>10**-8);
+              $f = Compute("sqrt(x)");
+              $df = $f->D('x');
+              $x1 = $x0 + $dx;
+              $dy = $dx * $df->eval(x=>$x0);
+              $y = $f->eval(x=>$x0);
+              $r = $y+$dy;
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $given = $f->substitute(x=>Formula("$x1"));
+            </pg-code>
+            <statement>
+              <p>
+                <m><var name="$given"/></m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Use <m>y = <var name="$f"/></m>;
+                <m>dy = <var name="$df"/>\cdot dx</m> with <m>x=<var name="$x0"/></m>
+                and <m>dx = <var name="$dx"/></m>.
+                Thus <m>dy = <var name="$dy"/></m>; knowing
+                <m><var name="$given"/>=<var name="$y"/></m>,
+                we have <m><var name="$given"/> \approx <var name="$r"/></m>.
+              </p>
+            </solution>
+          </webwork>
+        </exercise>
+        <!-- Exercises 13 & 14: Cube root -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $x0 = list_random(8,27,64,125,216);
+              $dx = -random(0.3,1.5,0.1);
+              if($envir{problemSeed}==1){$x0=64;$dx=-1};
+              Context()->flags->set(tolType=>'absolute',tolerance=>10**-8);
+              parser::Root->Enable;
+              $f = Compute("root(3,x)");
+              $df = $f->D('x');
+              $x1 = $x0 + $dx;
+              $dy = $dx * $df->eval(x=>$x0);
+              $y = $f->eval(x=>$x0);
+              $r = $y+$dy;
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $given = $f->substitute(x=>Formula("$x1"));
+            </pg-code>
+            <statement>
+              <p>
+                <m><var name="$given"/></m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Use <m>y = <var name="$f"/></m>;
+                <m>dy = <var name="$df"/>\cdot dx</m> with <m>x=<var name="$x0"/></m>
+                and <m>dx = <var name="$dx"/></m>.
+                Thus <m>dy = <var name="$dy"/></m>; knowing
+                <m><var name="$given"/>=<var name="$y"/></m>,
+                we have <m><var name="$given"/> \approx <var name="$r"/></m>.
+              </p>
+            </solution>
+          </webwork>
+        </exercise>
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $x0 = list_random(8,27,64,125,216);
+              $dx = random(0.3,1.5,0.1);
+              if($envir{problemSeed}==1){$x0=8;$dx=0.5};
+              Context()->flags->set(tolType=>'absolute',tolerance=>10**-8);
+              parser::Root->Enable;
+              $f = Compute("root(3,x)");
+              $df = $f->D('x');
+              $x1 = $x0 + $dx;
+              $dy = $dx * $df->eval(x=>$x0);
+              $y = $f->eval(x=>$x0);
+              $r = $y+$dy;
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $given = $f->substitute(x=>Formula("$x1"));
+            </pg-code>
+            <statement>
+              <p>
+                <m><var name="$given"/></m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Use <m>y = <var name="$f"/></m>;
+                <m>dy = <var name="$df"/>\cdot dx</m> with <m>x=<var name="$x0"/></m>
+                and <m>dx = <var name="$dx"/></m>.
+                Thus <m>dy = <var name="$dy"/></m>; knowing
+                <m><var name="$given"/>=<var name="$y"/></m>,
+                we have <m><var name="$given"/> \approx <var name="$r"/></m>.
+              </p>
+            </solution>
+          </webwork>
+        </exercise>
+        <!-- Exercise 15: sin(x) -->
+        <exercise>
+          <webwork>
+            <pg-code>
+              $x0 = Compute("pi");
+              $dx = 3-$x0;
+              Context()->flags->set(tolType=>'absolute',tolerance=>10**-8);
+              $f = Compute("sin(x)");
+              $df = $f->D('x');
+              $x1 = 3;
+              $dy = $dx * $df->eval(x=>$x0);
+              $y = $f->eval(x=>$x0);
+              $r = $y+$dy;
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $given = $f->substitute(x=>Formula("$x1"));
+            </pg-code>
+            <statement>
+              <p>
+                <m><var name="$given"/></m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Use <m>y = <var name="$f"/></m>;
+                <m>dy = <var name="$df"/>\cdot dx</m> with <m>x=<var name="$x0"/></m>
+                and <m>dx = <var name="$dx"/></m>.
+                Thus <m>dy = <var name="$dy"/></m>; knowing
+                <m><var name="$given"/>=<var name="$y"/></m>,
+                we have <m><var name="$given"/> \approx <var name="$r"/></m>.
+              </p>
+            </solution>
+          </webwork>
+        </exercise>
+        <!-- Exercise 16: e^x -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $x0 = 0;
+              $dx = random(0.1,0.5,0.1);
+              if($envir{problemSeed}==1){$dx=0.1};
+              Context()->flags->set(tolType=>'absolute',tolerance=>10**-8);
+              parser::Root->Enable;
+              $f = Compute("e^x");
+              $df = $f->D('x');
+              $x1 = $x0 + $dx;
+              $dy = $dx * $df->eval(x=>$x0);
+              $y = $f->eval(x=>$x0);
+              $r = $y+$dy;
+              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+              $given = $f->substitute(x=>Formula("$x1"));
+            </pg-code>
+            <statement>
+              <p>
+                <m><var name="$given"/></m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
+            <solution>
+              <p>
+                Use <m>y = <var name="$f"/></m>;
+                <m>dy = <var name="$df"/>\cdot dx</m> with <m>x=<var name="$x0"/></m>
+                and <m>dx = <var name="$dx"/></m>.
+                Thus <m>dy = <var name="$dy"/></m>; knowing
+                <m><var name="$given"/>=<var name="$y"/></m>,
+                we have <m><var name="$given"/> \approx <var name="$r"/></m>.
+              </p>
+            </solution>
+          </webwork>
+        </exercise>
+      </exercisegroup>
 
-      <introduction>
-        <p>
-          In the following exercises,
-          use differentials to approximate the given value by hand.
-        </p>
-      </introduction>
-<!-- Exercises 6 & 7: Square function -->
+      <!-- Exercise 17 - 30: Compute differential -->
+      <exercisegroup cols="2">
+        <introduction>
+          <p>
+            Compute the differential <m>dy</m>.
+          </p>
+        </introduction>
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $b = non_zero_random(-9,9,1);
+              $c = non_zero_random(-9,9,1);
+              if($envir{problemSeed}==1){$b=3;$c=-5;};
+              Context()->variables->add(dx=>"Real");
+              $f = Compute("x^2+$b x + $c")->reduce;
+              $df = $f->D('x')->reduce;
+              $A = Formula("$df dx");
+            </pg-code>
+            <statement>
+              <p>
+                <m>y=<var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$A" width="20"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 18 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              ($m,$n) = (3..9)[NchooseK(7,2)];
+              $c = list_random(1,-1);
+              if($envir{problemSeed}==1){$m=7;$n=5;$c=-1};
+              Context()->variables->add(dx=>"Real");
+              $f = Compute("x^$m+$c x^$n")->reduce;
+              $df = $f->D('x')->reduce;
+              $A = Formula("$df dx");
+            </pg-code>
+            <statement>
+              <p>
+                <m>y=<var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$A" width="20"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 19 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              ($m,$n) = (1..9)[NchooseK(9,2)];
+              if($envir{problemSeed}==1){$m=4;$n=2;};
+              Context()->variables->add(dx=>"Real");
+              $f = Compute("1/($m x^$n)")->reduce;
+              $df = $f->D('x')->reduce;
+              $A = Formula("$df dx");
+            </pg-code>
+            <statement>
+              <p>
+                <m>y=\displaystyle<var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$A" width="20"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 20 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $a = random(2,9,1);
+              $n = random(2,3,1);
+              if($envir{problemSeed}==1){$a=2;$n=2;};
+              Context()->variables->add(dx=>"Real");
+              $f = Compute("($a x + sin(x))^$n")->reduce;
+              $df = $f->D('x')->reduce;
+              $A = Formula("$df dx");
+            </pg-code>
+            <statement>
+              <p>
+                <m>y=<var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$A" width="20"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 21 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              ($m,$n) = (2..9)[NchooseK(8,2)];
+              if($envir{problemSeed}==1){$m=2;$n=3;};
+              Context()->variables->add(dx=>"Real");
+              $f = Compute("x^$m + e^($n x)")->reduce;
+              $df = $f->D('x')->reduce;
+              $A = Formula("$df dx");
+            </pg-code>
+            <statement>
+              <p>
+                <m>y=<var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$A" width="20"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 22       -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $a = random(2,9,1);
+              $b = random(2,9,1);
+              if($envir{problemSeed}==1){$a=4;$b=4;};
+              Context()->variables->add(dx=>"Real");
+              $f = Compute("$a/x^$b")->reduce;
+              $df = $f->D('x')->reduce;
+              $A = Formula("$df dx");
+            </pg-code>
+            <statement>
+              <p>
+                <m>y=\displaystyle<var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$A" width="20"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 23 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $a = random(2,9,1);
+              $b = random(1,9,1);
+              if($envir{problemSeed}==1){$a=2;$b=1;};
+              Context()->variables->add(dx=>"Real");
+              $f = Compute("($a x)/(tan(x) + $b)")->reduce;
+              $df = $f->D('x')->reduce;
+              $A = Formula("$df dx");
+            </pg-code>
+            <statement>
+              <p>
+                <m>y=\displaystyle<var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$A" width="20"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 24 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $a = random(2,9,1);
+              if($envir{problemSeed}==1){$a=5;};
+              Context()->variables->add(dx=>"Real");
+              $f = Compute("ln($a x)")->reduce;
+              $df = $f->D('x')->reduce;
+              $A = Formula("$df dx");
+            </pg-code>
+            <statement>
+              <p>
+                <m>y=<var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$A" width="20"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 25 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $trig = list_random('sin','cos','tan','sec','csc','cot');
+              if($envir{problemSeed}==1){$trig='sin';};
+              Context()->variables->add(dx=>"Real");
+              $f = Compute("e^x $trig(x)")->reduce;
+              $df = $f->D('x')->reduce;
+              $A = Formula("$df dx");
+            </pg-code>
+            <statement>
+              <p>
+                <m>y=<var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$A" width="20"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 26 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              ($trig1,$trig2) = ('sin','cos','tan','sec','csc','cot')[NchooseK(6,2)];
+              if($envir{problemSeed}==1){$trig1='cos';$trig2='sin';};
+              Context()->variables->add(dx=>"Real");
+              $f = Compute("$trig1($trig2(x))")->reduce;
+              $df = $f->D('x')->reduce;
+              $A = Formula("$df dx");
+            </pg-code>
+            <statement>
+              <p>
+                <m>y=<var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$A" width="20"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 27 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              ($a,$b) = (-9..-1,1..9)[NchooseK(18,2)];
+              if($envir{problemSeed}==1){$a=1;$b=2;};
+              Context()->variables->add(dx=>"Real");
+              $f = Compute("(x+$a)/(x+$b)")->reduce;
+              $df = $f->D('x')->reduce;
+              $A = Formula("$df dx");
+            </pg-code>
+            <statement>
+              <p>
+                <m>y=\displaystyle<var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$A" width="20"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 28 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $a = random(2,9,1);
+              if($envir{problemSeed}==1){$a=3;};
+              Context()->variables->add(dx=>"Real");
+              $f = Compute("$a^x ln(x)")->reduce;
+              $df = $f->D('x')->reduce;
+              $A = Formula("$df dx");
+            </pg-code>
+            <statement>
+              <p>
+                <m>y=<var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$A" width="20"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 29 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $fstring = list_random('x ln(x) - x','x arctan(x) - (1/2) ln(1+x^2)');
+              if($envir{problemSeed}==1){$fstring='x ln(x) - x';};
+              Context()->variables->add(dx=>"Real");
+              $f = Compute("$fstring")->reduce;
+              $df = ($fstring eq 'x ln(x) - x') ? Compute("ln(x)") : Compute("arctan(x)");
+              $A = Formula("$df dx");
+            </pg-code>
+            <statement>
+              <p>
+                <m>y=<var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$A" width="20"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 30 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $fstring = list_random('ln(sec(x))','ln(sin(x))',);
+              if($envir{problemSeed}==1){$fstring='ln(sec(x))';};
+              Context()->variables->add(dx=>"Real");
+              $f = Compute("$fstring")->reduce;
+              $df = ($fstring eq 'ln(sec(x))') ? Compute("tan(x)") : Compute("cot(x)");
+              $A = Formula("$df dx");
+            </pg-code>
+            <statement>
+              <p>
+                <m>y=<var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$A" width="20"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+      </exercisegroup>
+
+      <!-- Exercise 31: Propogated error in a plastic sphere -->
       <exercise>
-        <webwork>
+        <webwork seed="1">
           <pg-code>
-            $f = Compute("x^2");
+            $diameter = random(1,5,1);
+            $dx = random(1,$diameter,1);
+            if($envir{problemSeed}==1){$diamter=1;$dx=1;};
+            $diameterU = NumberWithUnits("$diameter cm");
+            $dxU = NumberWithUnits("$dx mm");
+            $f = Compute("1/6*pi*x^3");
             $df = $f->D('x');
-            $x0 = Compute("2");
-            $dx = Compute("0.05");
-            $x1 = Compute($x0 + $dx);
-            $dy = Compute($df->eval(x=>$x0)*$dx);
-            $y = Compute($f->eval(x=>$x0));
-            $r = Compute($dy + $f->eval(x=>$x0)); <!--4.2-->
+            $err = $df->eval(x=>$diameter) * $dx/10;
+            $errU = NumberWithUnits("$err cm^3");
           </pg-code>
           <statement>
             <p>
-              Use differentials to approximate the value of <m><var name="$x1"/>^2</m>
-            </p>
-
-            <p>
-              <var name="$r" width="10"/>
-            </p>
-          </statement>
-          <solution>
-            <p>
-              Use <m>y = <var name="$f"/></m>;
-              <m>dy = <var name="$df"/>\cdot dx</m> with <m>x=<var name="$x0"/></m>
-              and <m>dx = <var name="$dx"/></m>.
-              Thus <m>dy = <var name="$dy"/></m>; knowing
-              <m><var name="$x0"/>^2=<var name="$y"/></m>,
-              we have <m><var name="$x1"/>^2 \approx <var name="$r"/></m>.
-            </p>
-          </solution>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork>
-          <pg-code>
-            $f = Compute("x^2");
-            $df = $f->D('x');
-            $x0 = Compute("6");
-            $dx = Compute("-0.07");
-            $x1 = Compute($x0 + $dx);
-            $dy = Compute($df->eval(x=>$x0)*$dx);
-            $y = Compute($f->eval(x=>$x0));
-            $r = Compute($dy + $f->eval(x=>$x0)); <!--35.16-->
-          </pg-code>
-          <statement>
-            <p>
-              Use differentials to approximate the value of <m><var name="$x1"/>^2</m>
-            </p>
-
-            <p>
-              <var name="$r" width="10"/>
-            </p>
-          </statement>
-          <solution>
-            <p>
-              Use <m>y = <var name="$f"/></m>;
-              <m>dy = <var name="$df"/>\cdot dx</m> with <m>x=<var name="$x0"/></m>
-              and <m>dx = <var name="$dx"/></m>.
-              Thus <m>dy = <var name="$dy"/></m>; knowing
-              <m><var name="$x0"/>^2=<var name="$y"/></m>,
-              we have <m><var name="$x1"/>^2 \approx <var name="$r"/></m>.
-            </p>
-          </solution>
-        </webwork>
-      </exercise>
-<!-- Exercises 8 & 9: Cube function -->
-      <exercise>
-        <webwork>
-          <pg-code>
-            $f = Compute("x^3");
-            $df = $f->D('x');
-            $x0 = Compute("5");
-            $dx = Compute("0.1");
-            $x1 = Compute($x0 + $dx);
-            $dy = Compute($df->eval(x=>$x0)*$dx);
-            $y = Compute($f->eval(x=>$x0));
-            $r = Compute($dy + $f->eval(x=>$x0)); <!--132.5-->
-          </pg-code>
-          <statement>
-            <p>
-              Use differentials to approximate the value of <m><var name="$x1"/>^3</m>
-            </p>
-
-            <p>
-              <var name="$r" width="10"/>
-            </p>
-          </statement>
-          <solution>
-            <p>
-              Use <m>y = <var name="$f"/></m>;
-              <m>dy = <var name="$df"/>\cdot dx</m> with <m>x=<var name="$x0"/></m>
-              and <m>dx = <var name="$dx"/></m>.
-              Thus <m>dy = <var name="$dy"/></m>; knowing
-              <m><var name="$x0"/>^3=<var name="$y"/></m>,
-              we have <m><var name="$x1"/>^3 \approx <var name="$r"/></m>.
-            </p>
-          </solution>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork>
-          <pg-code>
-            $f = Compute("x^3");
-            $df = $f->D('x');
-            $x0 = Compute("7");
-            $dx = Compute("-0.2");
-            $x1 = Compute($x0 + $dx);
-            $dy = Compute($df->eval(x=>$x0)*$dx);
-            $y = Compute($f->eval(x=>$x0));
-            $r = Compute($dy + $f->eval(x=>$x0)); <!--313.6-->
-          </pg-code>
-          <statement>
-            <p>
-              Use differentials to approximate the value of <m><var name="$x1"/>^3</m>
-            </p>
-
-            <p>
-              <var name="$r" width="10"/>
-            </p>
-          </statement>
-          <solution>
-            <p>
-              Use <m>y = <var name="$f"/></m>;
-              <m>dy = <var name="$df"/>\cdot dx</m> with <m>x=<var name="$x0"/></m>
-              and <m>dx = <var name="$dx"/></m>.
-              Thus <m>dy = <var name="$dy"/></m>; knowing
-              <m><var name="$x0"/>^3=<var name="$y"/></m>,
-              we have <m><var name="$x1"/>^3 \approx <var name="$r"/></m>.
-            </p>
-          </solution>
-        </webwork>
-      </exercise>
-<!-- Exercises 10 & 11: Square root function -->
-      <exercise>
-        <webwork>
-          <pg-code>
-            $f = Compute("x^0.5");
-            $df = $f->D('x');
-            $x0 = Compute("16");
-            $dx = Compute("0.5");
-            $x1 = Compute($x0 + $dx);
-            $dy = Compute($df->eval(x=>$x0)*$dx);
-            $y = Compute($f->eval(x=>$x0));
-            $r = Compute($dy + $f->eval(x=>$x0)); <!--4.0625-->
-          </pg-code>
-          <statement>
-            <p>
-              Use differentials to approximate the value of <m>\sqrt{<var name="$x1"/>}</m>
-            </p>
-
-            <p>
-              <var name="$r" width="10"/>
-            </p>
-          </statement>
-          <solution>
-            <p>
-              Use <m>y = <var name="$f"/></m>;
-              <m>dy = <var name="$df"/>\cdot dx</m> with <m>x=<var name="$x0"/></m>
-              and <m>dx = <var name="$dx"/></m>.
-              Thus <m>dy = <var name="$dy"/></m>; knowing
-              <m>\sqrt{<var name="$x0"/>}=<var name="$y"/></m>,
-              we have <m>\sqrt{<var name="$x1"/>} \approx <var name="$r"/></m>.
-            </p>
-          </solution>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork>
-          <pg-code>
-            $f = Compute("x^0.5");
-            $df = $f->D('x');
-            $x0 = Compute("25");
-            $dx = Compute("-1");
-            $x1 = Compute($x0 + $dx);
-            $dy = Compute($df->eval(x=>$x0)*$dx);
-            $y = Compute($f->eval(x=>$x0));
-            $r = Compute($dy + $f->eval(x=>$x0)); <!--4.9-->
-          </pg-code>
-          <statement>
-            <p>
-              Use differentials to approximate the value of <m>\sqrt{<var name="$x1"/>}</m>
-            </p>
-
-            <p>
-              <var name="$r" width="10"/>
-            </p>
-          </statement>
-          <solution>
-            <p>
-              Use <m>y = <var name="$f"/></m>;
-              <m>dy = <var name="$df"/>\cdot dx</m> with <m>x=<var name="$x0"/></m>
-              and <m>dx = <var name="$dx"/></m>.
-              Thus <m>dy = <var name="$dy"/></m>; knowing
-              <m>\sqrt{<var name="$x0"/>}=<var name="$y"/></m>,
-              we have <m>\sqrt{<var name="$x1"/>} \approx <var name="$r"/></m>.
-            </p>
-          </solution>
-        </webwork>
-      </exercise>
-<!-- Exercises 12 & 13: Cube root -->
-      <exercise>
-        <webwork>
-          <pg-code>
-            $f = Compute("x^(1/3)");
-            $df = $f->D('x');
-            $x0 = Compute("64");
-            $dx = Compute("-1");
-            $x1 = Compute($x0 + $dx);
-            $dy = Compute($df->eval(x=>$x0)*$dx);
-            $y = Compute($f->eval(x=>$x0));
-            $r = Compute($dy + $f->eval(x=>$x0)); <!--3.98-->
-          </pg-code>
-          <statement>
-            <p>
-              Use differentials to approximate the value of <m>\sqrt[3]{<var name="$x1"/>}</m>
-            </p>
-
-            <p>
-              <var name="$r" width="10"/>
-            </p>
-          </statement>
-          <solution>
-            <p>
-              Use <m>y = <var name="$f"/></m>;
-              <m>dy = <var name="$df"/>\cdot dx</m> with <m>x=<var name="$x0"/></m>
-              and <m>dx = <var name="$dx"/></m>.
-              Thus <m>dy = <var name="$dy"/></m>; knowing
-              <m>\sqrt[3]{<var name="$x0"/>}=<var name="$y"/></m>,
-              we have <m>\sqrt[3]{<var name="$x1"/>} \approx <var name="$r"/></m>.
-            </p>
-          </solution>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork>
-          <pg-code>
-            $f = Compute("x^(1/3)");
-            $df = $f->D('x');
-            $x0 = Compute("8");
-            $dx = Compute("0.5");
-            $x1 = Compute($x0 + $dx);
-            $dy = Compute($df->eval(x=>$x0)*$dx);
-            $y = Compute($f->eval(x=>$x0));
-            $r = Compute($dy + $f->eval(x=>$x0));   <!--2.04-->
-          </pg-code>
-          <statement>
-            <p>
-              Use differentials to approximate the value of <m>\sqrt[3]{<var name="$x1"/>}</m>
-            </p>
-
-            <p>
-              <var name="$r" width="10"/>
-            </p>
-          </statement>
-          <solution>
-            <p>
-              Use <m>y = <var name="$f"/></m>;
-              <m>dy = <var name="$df"/>\cdot dx</m> with <m>x=<var name="$x0"/></m>
-              and <m>dx = <var name="$dx"/></m>.
-              Thus <m>dy = <var name="$dy"/></m>; knowing
-              <m>\sqrt[3]{<var name="$x0"/>}=<var name="$y"/></m>,
-              we have <m>\sqrt[3]{<var name="$x1"/>} \approx <var name="$r"/></m>.
-            </p>
-          </solution>
-        </webwork>
-      </exercise>
-<!-- Exercise 14: sin(x) -->
-      <exercise>
-        <webwork>
-          <pg-code>
-            Context()->flags->set(ReducedConstants=>0);
-            $f = Compute("sin(x)");
-            $df = $f->D('x');
-            $x0 = Compute("pi");
-            $dx = Compute("3 - pi");
-            $x1 = Compute($x0 + $dx);
-            $dy = Compute($df->eval(x=>$x0)*$dx);
-            $y = Compute($f->eval(x=>$x0));
-            $r = Compute($dy + $f->eval(x=>$x0));   <!--0.1416-->
-          </pg-code>
-          <statement>
-            <p>
-              Use differentials to approximate the value of <m>\sin(<var name="$x1"/>)</m>
-            </p>
-
-            <p>
-              <var name="$r" width="10"/>
-            </p>
-          </statement>
-          <solution>
-            <p>
-              Use <m>y = <var name="$f"/></m>;
-              <m>dy = <var name="$df"/>\cdot dx</m> with <m>x=<var name="$x0"/></m>
-              and <m>dx = <var name="$dx"/></m>.
-              Thus <m>dy = <var name="$dy"/></m>; knowing
-              <m>\sin(<var name="$x0"/>)=<var name="$y"/></m>,
-              we have <m>\sin(<var name="$x1"/>) \approx <var name="$r"/></m>.
-            </p>
-          </solution>
-        </webwork>
-      </exercise>
-<!-- Exercise 15: cos(x) -->
-<!-- Note: problem was removed in APEX V4-->
-      <exercise>
-        <webwork>
-          <pg-code>
-            Context()->flags->set(ReducedConstants=>0);
-            $f = Compute("cos(x)");
-            $df = $f->D('x');
-            $x0 = Compute("pi/2");
-            $dx = Compute("1.5 - pi/2");
-            $x1 = Compute($x0 + $dx);
-            $dy = Compute($df->eval(x=>$x0)*$dx);
-            $y = Compute($f->eval(x=>$x0));
-            $r = Compute($dy + $f->eval(x=>$x0));   <!--0.07080-->
-          </pg-code>
-          <statement>
-            <p>
-              Use differentials to approximate the value of <m>\cos(<var name="$x1"/>)</m>
-            </p>
-
-            <p>
-              <var name="$r" width="10"/>
-            </p>
-          </statement>
-          <solution>
-            <p>
-              Use <m>y = <var name="$f"/></m>;
-              <m>dy = <var name="$df"/>\cdot dx</m> with <m>x=<var name="$x0"/></m>
-              and <m>dx = <var name="$dx"/></m>.
-              Thus <m>dy = <var name="$dy"/></m>; knowing
-              <m>\cos(<var name="$x0"/>)=<var name="$y"/></m>,
-              we have <m>\cos(<var name="$x1"/>) \approx <var name="$r"/></m>.
-            </p>
-          </solution>
-        </webwork>
-      </exercise>
-<!-- Exercise 16: e^x -->
-      <exercise>
-        <webwork>
-          <pg-code>
-            $f = Compute("e^x");
-            $df = $f->D('x');
-            $x0 = Compute("0");
-            $dx = Compute("0.1");
-            $x1 = Compute($x0 + $dx);
-            $dy = Compute($df->eval(x=>$x0)*$dx);
-            $y = Compute($f->eval(x=>$x0));
-            $r = Compute($dy + $f->eval(x=>$x0));   <!--1.100-->
-          </pg-code>
-          <statement>
-            <p>
-              Use differentials to approximate the value of <m>e^{<var name="$x1"/>}</m>
-            </p>
-
-            <p>
-              <var name="$r" width="10"/>
-            </p>
-          </statement>
-          <solution>
-            <p>
-              Use <m>y = <var name="$f"/></m>;
-              <m>dy = <var name="$df"/>\cdot dx</m> with <m>x=<var name="$x0"/></m>
-              and <m>dx = <var name="$dx"/></m>.
-              Thus <m>dy = <var name="$dy"/></m>; knowing
-              <m>e^{<var name="$x0"/>}=<var name="$y"/></m>,
-              we have <m>e^{<var name="$x1"/>} \approx <var name="$r"/></m>.
-            </p>
-          </solution>
-        </webwork>
-      </exercise>
-
-    </exercisegroup>
-<!-- Exercise 17 - 29: Compute differential -->
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          In the following exercises, compute the differential <m>dy</m>.
-        </p>
-      </introduction>
-
-      <exercise>
-        <webwork>
-          <pg-code>
-            Context()->variables->add(dx=>"Real");
-            $f = Compute("x^2+3x-5");
-            $df = $f->D('x');
-            $A = Formula("$df dx");
-          </pg-code>
-          <statement>
-            <p>
-              Compute the differential <m>dy</m>, where <m>y=x^2+3x-5</m>.
-            </p>
-
-            <p>
-              <var name="$A" width="20"/>
-            </p>
-          </statement>
-        </webwork>
-      </exercise>
-<!-- Exercise 18 -->
-      <exercise>
-        <webwork>
-          <pg-code>
-            Context()->variables->add(dx=>"Real");
-            $f = Compute("x^7-x^5");
-            $df = $f->D('x');
-            $A = Formula("$df dx");
-          </pg-code>
-          <statement>
-            <p>
-              Compute the differential <m>dy</m>, where <m>y=x^7-x^5</m>.
-            </p>
-
-            <p>
-              <var name="$A" width="20"/>
-            </p>
-          </statement>
-        </webwork>
-      </exercise>
-<!-- Exercise 19 -->
-      <exercise>
-        <webwork>
-          <pg-code>
-            Context()->variables->add(dx=>"Real");
-            $f = Compute("1/(4x^2)");
-            $df = $f->D('x');
-            $A = Formula("$df dx");
-          </pg-code>
-          <statement>
-            <p>
-              Compute the differential <m>dy</m>, where <m>\ds y=\frac{1}{4x^2}</m>.
-            </p>
-
-            <p>
-              <var name="$A" width="20"/>
-            </p>
-          </statement>
-        </webwork>
-      </exercise>
-<!-- Exercise 20 -->
-      <exercise>
-        <webwork>
-          <pg-code>
-            Context()->variables->add(dx=>"Real");
-            $f = Compute("(2x + sin(x))^2");
-            $df = $f->D('x');
-            $A = Formula("$df dx");
-          </pg-code>
-          <statement>
-            <p>
-              Compute the differential <m>dy</m>, where <m>\ds y=(2x+\sin(x) )^2</m>.
-            </p>
-
-            <p>
-              <var name="$A" width="20"/>
-            </p>
-          </statement>
-        </webwork>
-      </exercise>
-<!-- Exercise 21 -->
-      <exercise>
-        <webwork>
-          <pg-code>
-            Context()->variables->add(dx=>"Real");
-            $f = Compute("x^2*e^(3x)");
-            $df = $f->D('x');
-            $A = Formula("$df dx");
-          </pg-code>
-          <statement>
-            <p>
-              Compute the differential <m>dy</m>, where <m>\ds y=x^2e^{3x}</m>.
-            </p>
-
-            <p>
-              <var name="$A" width="20"/>
-            </p>
-          </statement>
-        </webwork>
-      </exercise>
-<!-- Exercise 22       -->
-      <exercise>
-        <webwork>
-          <pg-code>
-            Context()->variables->add(dx=>"Real");
-            $f = Compute("4/x^4");
-            $df = $f->D('x');
-            $A = Formula("$df dx");
-          </pg-code>
-          <statement>
-            <p>
-              Compute the differential <m>dy</m>, where <m>\ds y=\frac{4}{x^4}</m>.
-            </p>
-
-            <p>
-              <var name="$A" width="20"/>
-            </p>
-          </statement>
-        </webwork>
-      </exercise>
-<!-- Exercise 23 -->
-      <exercise>
-        <webwork>
-          <pg-code>
-            Context()->variables->add(dx=>"Real");
-            $f = Compute("2x/(tan(x)+1)");
-            $df = $f->D('x');
-            $A = Formula("$df dx");
-          </pg-code>
-          <statement>
-            <p>
-              Compute the differential <m>dy</m>, where <m>\ds y=\frac{2x}{\tan(x) + 1}</m>.
-            </p>
-
-            <p>
-              <var name="$A" width="40"/>
-            </p>
-          </statement>
-        </webwork>
-      </exercise>
-<!-- Exercise 24 -->
-      <exercise>
-        <webwork>
-          <pg-code>
-            Context()->variables->add(dx=>"Real");
-            $f = Compute("ln(5x)");
-            $df = $f->D('x');
-            $A = Formula("$df dx");
-          </pg-code>
-          <statement>
-            <p>
-              Compute the differential <m>dy</m>, where <m>\ds y=\ln(5x)</m>.
-            </p>
-
-            <p>
-              <var name="$A" width="20"/>
-            </p>
-          </statement>
-        </webwork>
-      </exercise>
-<!-- Exercise 25 -->
-      <exercise>
-        <webwork>
-          <pg-code>
-            Context()->variables->add(dx=>"Real");
-            $f = Compute("e^x*sin(x)");
-            $df = $f->D('x');
-            $A = Formula("$df dx");
-          </pg-code>
-          <statement>
-            <p>
-              Compute the differential <m>dy</m>, where <m>\ds y=e^x\sin(x)</m>.
-            </p>
-
-            <p>
-              <var name="$A" width="20"/>
-            </p>
-          </statement>
-        </webwork>
-      </exercise>
-<!-- Exercise 26 -->
-      <exercise>
-        <webwork>
-          <pg-code>
-            Context()->variables->add(dx=>"Real");
-            $f = Compute("cos(sin(x))");
-            $df = $f->D('x');
-            $A = Formula("$df dx");
-          </pg-code>
-          <statement>
-            <p>
-              Compute the differential <m>dy</m>, where <m>\ds y=\cos(\sin(x) )</m>.
-            </p>
-
-            <p>
-              <var name="$A" width="20"/>
-            </p>
-          </statement>
-        </webwork>
-      </exercise>
-<!-- Exercise 27 -->
-      <exercise>
-        <webwork>
-          <pg-code>
-            Context()->variables->add(dx=>"Real");
-            $f = Compute("(x+1)/(x+2)");
-            $df = $f->D('x');
-            $A = Formula("$df dx");
-          </pg-code>
-          <statement>
-            <p>
-              Compute the differential <m>dy</m>, where <m>\ds y=\frac{x+1}{x+2}</m>.
-            </p>
-
-            <p>
-              <var name="$A" width="20"/>
-            </p>
-          </statement>
-        </webwork>
-      </exercise>
-<!-- Exercise 28 -->
-      <exercise>
-        <webwork>
-          <pg-code>
-            Context()->variables->add(dx=>"Real");
-            $f = Compute("3^x*ln(x)");
-            $df = $f->D('x');
-            $A = Formula("$df dx");
-          </pg-code>
-          <statement>
-            <p>
-              Compute the differential <m>dy</m>, where <m>\ds y=3^x\ln(x)</m>.
-            </p>
-
-            <p>
-              <var name="$A" width="20"/>
-            </p>
-          </statement>
-        </webwork>
-      </exercise>
-<!-- Exercise 29 -->
-      <exercise>
-        <webwork>
-          <pg-code>
-            Context()->variables->add(dx=>"Real");
-            $f = Compute("x*ln(x)-x");
-            $df = $f->D('x');
-            $A = Formula("$df dx");
-          </pg-code>
-          <statement>
-            <p>
-              Compute the differential <m>dy</m>, where <m>\ds y=x\ln(x) -x</m>.
-            </p>
-
-            <p>
-              <var name="$A" width="20"/>
-            </p>
-          </statement>
-        </webwork>
-      </exercise>
-
-<!--ToDo: WeBWorK code for this new problem -->
-    <exercise>
-      <statement>
-        <p>
-          Compute the differential <m>dy</m>, where <m>y = \ln\big(\sec x\big)</m>.
-        </p>
-      </statement>
-      <answer>
-        <p>
-          <m>dy = \big(\tan x\big)dx</m>
-        </p>
-      </answer>
-    </exercise>
-
-    </exercisegroup>
-    <exercisegroup>
-<!-- Exercise 30: Propogated error in a plastic sphere -->
-      <exercise>
-        <webwork>
-          <pg-code>
-            $f = Compute("4/3*pi*x^3");
-            $df = $f->D('x');
-            $x0 = Compute("1/2");
-            $dx = Compute("0.1/2");
-            $err = $df->eval(x=>$x0) * $dx;
-            $err = NumberWithUnits("$err cm^3");    <!--pi/20-->
-          </pg-code>
-          <statement>
-            <p>
-              A set of plastic spheres are to be made with a diameter of 1 cm.
-              If the manufacturing process is accurate to 1 mm,
+              A set of plastic spheres are to be made with a diameter of <m><var name="$diameterU"/></m>.
+              If the manufacturing process is accurate to <m><var name="$dxU"/></m>,
               what is the propagated error in volume of the spheres?
             </p>
-
             <p>
-              <var name="$err" width="20"/>
+              <var name="$errU" width="20"/>
             </p>
           </statement>
         </webwork>
       </exercise>
-<!-- Exercise 31: Propagated error dropping a stone into a hole -->
+      <!-- Exercise 32: Propagated error dropping a stone into a hole -->
       <exercise>
-        <webwork>
+        <webwork seed="1">
           <pg-code>
+            $dx = random(1,4,1);
+            $a = random(2,4,1);
+            $b = random(5,8,1);
+            if($envir{problemSeed}==1){$dx=2;$a=2;$b=5;};
             $f = Compute("16*x^2");
             $df = $f->D('x');
-            $dx = Compute("2/10");
-            $x0_a = Compute("2");
-            $x0_b = Compute("5");
-
-            $err_a = $df->eval(x=>$x0_a) * $dx;
-            $err_a = NumberWithUnits("$err_a ft");  <!--12.8 ft-->
-            $err_b = $df->eval(x=>$x0_b) * $dx;
-            $err_b = NumberWithUnits("$err_b ft"); <!--32 ft-->
+            $err_a = $df->eval(x=>$a) * $dx/10;
+            $err_aU = NumberWithUnits("$err_a ft");
+            $err_b = $df->eval(x=>$b) * $dx/10;
+            $err_bU = NumberWithUnits("$err_b ft");
           </pg-code>
           <statement>
             <p>
@@ -1476,26 +1461,20 @@
               a stone drops in <m>t</m> seconds is given by <m>d(t) = 16t^2</m>.
               The depth of a hole is to be approximated by dropping a rock and listening for it to hit the bottom.
               What is the propagated error if the time measurement is accurate to
-              <m>2/10^{\text{ ths } }</m> of a second and the measured time is:
-            </p>
-
-            <p>
+              <m><var name="$dx"/>/10</m> of a second and the measured time is:
               <ol>
                 <li>
                   <p>
-                    2 seconds?
+                    <m><var name="$a"/></m> seconds?
                   </p>
-
                   <p>
                     <var name="$err_a" width="20"/>
                   </p>
                 </li>
-
                 <li>
                   <p>
-                    5 seconds?
+                    <m><var name="$b"/></m> seconds?
                   </p>
-
                   <p>
                     <var name="$err_b" width="20"/>
                   </p>
@@ -1505,323 +1484,378 @@
           </statement>
         </webwork>
       </exercise>
-<!-- Exercise 32: Propagated error in cross-sectional area of a log -->
+      <!-- Exercise 33: Propagated error in cross-sectional area of a log -->
       <exercise>
-        <webwork>
+        <webwork seed="1">
           <pg-code>
-            $f = Compute("pi*x^2");
+            $diameter = random(12,20,1);
+            $dx = list_random(2,4,8,16);
+            if($envir{problemSeed}==1){$diameter=15;$dx=4};
+            $f = Compute("pi/4*x^2");
             $df = $f->D('x');
-            $r = Compute("15/2");
-            $dr = Compute("1/8");
-            $err = $df->eval(x=>$r) * $dr;    <!--15pi/8-->
-            $err = NumberWithUnits("$err in^2");
+            $err = $df->eval(x=>$diameter) * 1/$dx;
+            $errU = NumberWithUnits("$err in^2");
           </pg-code>
           <statement>
             <p>
-              What is the propagated error in the measurement of the cross sectional area of a circular log if the diameter is measured at <m>15''</m>,
-              accurate to <m>1/4''</m>?
+              What is the propagated error in the measurement of the cross sectional area
+              of a circular log if the diameter is measured at <m><var name="$diameter"/>''</m>,
+              accurate to <m>1/<var name="$dx"/>''</m>?
             </p>
-
             <p>
               <var name="$err" width="20"/>
             </p>
           </statement>
         </webwork>
       </exercise>
-<!-- Exercise 33: Propagated error in SA of wall -->
+      <!-- Exercise 34: Propagated error in SA of wall -->
       <exercise>
         <webwork>
           <pg-code>
-            $f = Compute("8*x");
+            $h = random(8,10,1);
+            $lft = random(10,20,1);
+            $lin = random(1,11);
+            $dx = list-random(2,4,8,16);
+            if($envir{problemSeed}==1){$h=8;$lft=10;$lin=7;$dx=2};
+            $f = Compute("$h*x");
             $df = $f->D('x');
-            $dx = Compute("1/24");
-            $x = Compute("10 + 7/12");
-            $err = $df->eval(x=>$x) * $dx;
-            $err = NumberWithUnits("$err ft^2");
+            $x = $lft + $lin/12;
+            $err = $df->eval(x=>$x) * 1/$dx;
+            $errU = NumberWithUnits("$err ft^2");
           </pg-code>
           <statement>
             <p>
-              A wall is to be painted that is <m>8'</m> high and is measured to be <m>10',\, 7''</m> long.
-              Find the propagated error in the measurement of the wall's surface area if the measurement is accurate to <m>1/2''</m>.
+              A wall is to be painted that is <m><var name="$h"/>'</m> high and is measured
+              to be <m><var name="$lft"/>',\,<var name="$lin"/>''</m> long.
+              Find the propagated error in the measurement of the wall's surface area
+              if the measurement is accurate to <m>1/<var name="$dx"/>''</m>.
             </p>
-
             <p>
-              <var name="$err" width="10"/>
+              <var name="$errU" width="10"/>
             </p>
           </statement>
         </webwork>
       </exercise>
+    </subexercises>
 
-    </exercisegroup>
-    <exercisegroup>
-
+    <subexercises>
       <introduction>
         <p>
-          The following exercises explore some issues related to surveying in which distances are approximated using other measured distances and measured angles.
+          The following exercises explore some issues related to surveying in which
+          distances are approximated using other measured distances and measured angles.
           <em>(Hint: Convert all angles to radians before computing.)</em>
         </p>
       </introduction>
-<!-- Exercise 34: Error in length of wall -->
-      <exercise xml:id="exer_04_04_ex_35">
-        <!-- <webwork>
-          <pg-macros><macro-file>contextPercent.pl</macro-file></pg-macros>
-          <pg-code>
-            Context("Percent");
-            $theta = Compute("85.2*pi/180");
-            $dtheta = Compute("1*pi/180");
-            $f = Compute("25*tan(x)");
-            $df = $f->D('x');
-            $l = $f->eval(x=>$theta);
-            $err = $df->eval(x=>$theta) * $dtheta;
-            $err_pct = Compute("$err/$l");-->  <!--20.92%-->
-            <!--$l = NumberWithUnits("$l ft");-->  <!--297.8 ft-->
-            <!--$err = NumberWithUnits("$err ft");-->  <!--62.32 ft%-->
-          <!--</pg-code> -->
-          <statement>
-            <p>
-              The length <m>l</m> of a long wall is to be approximated.
-              The angle <m>\theta</m>, as shown in the diagram
-              (not to scale),
-              is measured to be <m>85.2^\circ</m>,
-              accurate to <m>1^\circ</m>.
-              Assume that the triangle formed is a right triangle.
-            </p>
-
-            <image xml:id="img_diffal1X" width="33%">
-              <description></description>
-              <latex-image>
-              \begin{tikzpicture}
-
-              \draw [ultra thick] (1,-1) -- node [pos=.5,right] { \(l=\)?} (1,1);
-              \draw [dashed] (1,1) -- (-1,-1) node [xshift=10pt,yshift=5pt] { \(\theta\)} -- node [pos=.5,below] { \(25'\)} (1,-1);
-
-              \end{tikzpicture}
-              </latex-image>
-            </image>
-
-            <p>
-              <ol>
-                <li>
-                  <p>
-                    What is the measured length <m>l</m> of the wall?
-                  </p>
-
-                  <!-- <p>
-                    <var name="$l" width="20"/>
-                  </p> -->
-                </li>
-
-                <li>
-                  <p>
-                    What is the propagated error?
-                  </p>
-
-                  <!-- <p>
-                    <var name="$err" width="20"/>
-                  </p> -->
-                </li>
-
-                <li>
-                  <p>
-                    What is the percent error?
-                  </p>
-
-                  <!-- <p>
-                    <var name="$err_pct" width="20"/>
-                  </p> -->
-                </li>
-              </ol>
-            </p>
-          </statement>
-        <!-- </webwork> -->
-      </exercise>
-<!-- Exercise 35: Length of the wall with a different angle and distance -->
-      <exercise xml:id="exer_04_04_ex_36">
-        <!-- <webwork>
-          <pg-macros><macro-file>contextPercent.pl</macro-file></pg-macros>
-          <pg-code>
-            Context("Percent");
-            $theta = Compute("71.5*pi/180");
-            $dtheta = Compute("1*pi/180");
-            $f = Compute("100*tan(x)");
-            $df = $f->D('x');
-            $l = $f->eval(x=>$theta);
-            $err = $df->eval(x=>$theta) * $dtheta;
-            $err_pct = Compute("$err/$l");-->  <!--0.058002-->
-            <!--$l = NumberWithUnits("$l ft");-->  <!--298.87 ft-->
-            <!--$err = NumberWithUnits("$err ft");-->  <!--17.335 ft%-->
-          <!--</pg-code> -->
-          <statement>
-            <p>
-              Answer the questions of <xref ref="exer_04_04_ex_35">Exercise</xref>,
-              but with a measured angle of <m>71.5^\circ</m>,
-              accurate to <m>1^\circ</m>, measured from a point <m>100'</m> from the wall.
-            </p>
-
-            <p>
-              <ol>
-                <li>
-                  <p>
-                    What is the measured length <m>l</m> of the wall?
-                  </p>
-
-                  <!-- <p>
-                    <var name="$l" width="20"/>
-                  </p> -->
-                </li>
-
-                <li>
-                  <p>
-                    What is the propagated error?
-                  </p>
-
-                  <!-- <p>
-                    <var name="$err" width="20"/>
-                  </p> -->
-                </li>
-
-                <li>
-                  <p>
-                    What is the percent error?
-                  </p>
-
-                  <!-- <p>
-                    <var name="$err_pct" width="20"/>
-                  </p> -->
-                </li>
-              </ol>
-            </p>
-          </statement>
-        <!-- </webwork> -->
-      </exercise>
-<!-- Exercise 36: Length of the wall if an isosceles triangle -->
-      <exercise xml:id="exer_04_04_ex_34">
-        <!-- <webwork>
-          <pg-macros><macro-file>contextPercent.pl</macro-file></pg-macros>
-          <pg-code>
-            Context("Percent");
-            $theta = Compute("143*pi/180");
-            $dtheta = Compute("1*pi/180");
-            $f = Compute("100*tan(x/2)");
-            $df = $f->D('x');
-            $l = $f->eval(x=>$theta);
-            $err = $df->eval(x=>$theta) * $dtheta;
-            $err_pct = Compute("$err/$l");-->  <!--2.900%-->
-            <!--$l = NumberWithUnits("$l ft"); --> <!--298.87 ft-->
-            <!--$err = NumberWithUnits("$err ft");-->  <!--8.6675 ft-->
-          <!--</pg-code> -->
-          <statement>
-            <p>
-              The length <m>l</m> of a long wall is to be calculated by measuring the angle <m>\theta</m> shown in the diagram
-              (not to scale).
-              Assume the formed triangle is an isosceles triangle.
-              The measured angle is <m>143^\circ</m>,
-              accurate to <m>1^\circ</m>.
-            </p>
-
-            <image xml:id="img_diffal1X1" width="33%">
-              <description></description>
-              <latex-image>
-
-              \begin{tikzpicture}
-
-              \draw [ultra thick] (1,-1) -- node [pos=.5,right] { \(l=\)?} (1,1);
-              \draw [dashed] (1,1) -- (-1,0) node [xshift=10pt] { \(\theta\)} -- (1,-1);
-              \draw (-.5,0) -- node [pos=.5,draw=white,fill=white] { \(50'\)} (1,0);
-
-              \end{tikzpicture}
-
-              </latex-image>
-            </image>
-
-            <p>
-              <ol>
-                <li>
-                  <p>
-                    What is the measured length of the wall?
-                  </p>
-
-                  <!-- <p>
-                    <var name="$l" width="20"/>
-                  </p> -->
-                </li>
-
-                <li>
-                  <p>
-                    What is the propagated error?
-                  </p>
-
-                  <!-- <p>
-                    <var name="$err" width="20"/>
-                  </p> -->
-                </li>
-
-                <li>
-                  <p>
-                    What is the percent error?
-                  </p>
-
-                  <!-- <p>
-                    <var name="$err_pct" width="20"/>
-                  </p> -->
-                </li>
-              </ol>
-            </p>
-          </statement>
-        <!-- </webwork> -->
-      </exercise>
-<!-- Exercise 37: Compare errors in wall measurements from previous exercises -->
-      <exercise>
-        <!-- <webwork>
-          <pg-code>-->
-          <!--Change these to reference the actual problems using xref -->
-          <!--  $A=PopUp(['?','Exercise 34','Exercise 35','Exercise 36'],3);
-          </pg-code> -->
-          <statement>
-            <p>
-              The length of the walls in <xref ref="exer_04_04_ex_35">Exercises</xref>
-              <mdash/> <xref ref="exer_04_04_ex_34"/> are essentially the same.
-              Which setup gives the most accurate result?
-            </p>
-
-            <!-- <p>
-              <var name="$A" form="popup"/>
-            </p> -->
-          </statement>
-        <!-- </webwork> -->
-      </exercise>
-<!-- Exercise 38: Length of wall if the distance has the error instead of the angle -->
-      <exercise>
-        <!-- <webwork>
-          <pg-macros><macro-file>contextPercent.pl</macro-file></pg-macros>
-          <pg-code>
-            Context("Percent");
-            $theta = Compute("143*pi/180");
-            $d = Compute("50");
-            $dd = Compute("1/2");
-            $f = Compute("2*x*tan($theta/2)");
-            $df = $f->D('x');
-            $l = $f->eval(x=>$d);
-            $err = $df->eval(x=>$d) * $dd;
-            $err_pct = Compute("$err/$l");-->  <!--1.000%-->
-            <!--$l = NumberWithUnits("$l ft");-->  <!--298.87 ft-->
-            <!--$err = NumberWithUnits("$err ft");-->  <!--2.9887 ft-->
-          <!--</pg-code> -->
-          <statement>
-            <p>
-              Consider the setup in <xref ref="exer_04_04_ex_34">Exercise</xref>.
-              This time, assume the angle measurement of
-              <m>143^\circ</m> is exact but the measured <m>50'</m> from the wall is accurate to <m>6''</m>.
-            </p>
-
-            <p>
-              What is the approximate percent error?
-              <!-- <var name="$err_pct" width="20"/> -->
-            </p>
-          </statement>
-        <!-- </webwork> -->
-      </exercise>
-
-    </exercisegroup>
+      <exercisegroup cols="2">
+        <!-- Exercise 35: Error in length of wall -->
+        <exercise xml:id="exer_04_04_ex_35">
+           <webwork>
+            <pg-code>
+              $theta = 85.2;
+              $d = 25;
+              $f = Compute("$d*tan(x)");
+              $l = $f->eval(x=>$theta*pi/180);
+              $lU = NumberWithUnits("$l ft");
+              $df = $f->D('x');
+              $err = $df->eval(x=>$theta*pi/180) * pi/180;
+              $errU = NumberWithUnits("$err ft");
+              Context("Percent");
+              $err_pct = Percent("$err/$l");
+              $gr = init_graph(-1,-1,26,26, size=>[240,240]);
+              $gr->moveTo(0,0);
+              $gr->lineTo(25,0,'black',1,'dashed');
+              $gr->lineTo(25,25,'black',3);
+              $gr->lineTo(0,0,'black',1,'dashed');
+              $gr->lb( new Label(12.5,0,$d."'",'black','center','bottom','large'));
+              $gr->lb( new Label(25,12.5,' L','black','left','middle','large'));
+              $xfunc = sub { my $t = shift();
+                return 3*cos($t); };
+              $yfunc = sub { my $t = shift();
+                return 3*sin($t); };
+              $fn = new Fun( $xfunc, $yfunc, $gr );
+              $fn->domain(0,pi/4);
+              $fn->color('black');
+            </pg-code>
+            <statement>
+              <p>
+                The length <m>L</m> of a long wall is to be approximated.
+                The angle <m>\theta</m>, as shown in the diagram
+                (not to scale),
+                is measured to be <m><var name="$theta"/>^\circ</m>,
+                accurate to <m>1^\circ</m>.
+                Assume that the triangle formed is a right triangle.
+              </p>
+              <image pg-name="$gr" width="40%"/>
+                <!-- <latex-image>
+                  \begin{tikzpicture}
+                    \draw [ultra thick] (1,-1) -&#x2D; node [pos=.5,right] { \(l=\)?} (1,1);
+                    \draw [dashed] (1,1) -&#x2D; (-1,-1) node [xshift=10pt,yshift=5pt] { \(\theta\)} -&#x2D; node [pos=.5,below] { \(25'\)} (1,-1);
+                  \end{tikzpicture}
+                </latex-image> -->
+              <p>
+                <ol>
+                  <li>
+                    <p>
+                      What is the measured length <m>L</m> of the wall?
+                    </p>
+                    <p>
+                      <var name="$lU" width="20"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      What is the propagated error?
+                    </p>
+                    <p>
+                      <var name="$errU" width="20"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      What is the percent error?
+                    </p>
+                    <p>
+                      <var name="$err_pct" width="20"/>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 36: Length of the wall with a different angle and distance -->
+        <exercise>
+           <webwork>
+            <pg-code>
+              $theta = 71.5;
+              $d = 100;
+              $f = Compute("$d*tan(x)");
+              $l = $f->eval(x=>$theta*pi/180);
+              $lU = NumberWithUnits("$l ft");
+              $df = $f->D('x');
+              $err = $df->eval(x=>$theta*pi/180) * pi/180;
+              $errU = NumberWithUnits("$err ft");
+              Context("Percent");
+              $err_pct = Percent("$err/$l");
+              $gr = init_graph(-1,-1,26,26, size=>[240,240]);
+              $gr->moveTo(0,0);
+              $gr->lineTo(25,0,'black',1,'dashed');
+              $gr->lineTo(25,25,'black',3);
+              $gr->lineTo(0,0,'black',1,'dashed');
+              $gr->lb( new Label(12.5,0,$d."'",'black','center','bottom','large'));
+              $gr->lb( new Label(25,12.5,' L','black','left','middle','large'));
+              $xfunc = sub { my $t = shift();
+                return 3*cos($t); };
+              $yfunc = sub { my $t = shift();
+                return 3*sin($t); };
+              $fn = new Fun( $xfunc, $yfunc, $gr );
+              $fn->domain(0,pi/4);
+              $fn->color('black');
+            </pg-code>
+            <statement>
+              <p>
+                The length <m>L</m> of a long wall is to be approximated.
+                The angle <m>\theta</m>, as shown in the diagram
+                (not to scale),
+                is measured to be <m><var name="$theta"/>^\circ</m>,
+                accurate to <m>1^\circ</m>.
+                Assume that the triangle formed is a right triangle.
+              </p>
+              <image pg-name="$gr" width="40%"/>
+                <!-- <latex-image>
+                  \begin{tikzpicture}
+                    \draw [ultra thick] (1,-1) -&#x2D; node [pos=.5,right] { \(l=\)?} (1,1);
+                    \draw [dashed] (1,1) -&#x2D; (-1,-1) node [xshift=10pt,yshift=5pt] { \(\theta\)} -&#x2D; node [pos=.5,below] { \(25'\)} (1,-1);
+                  \end{tikzpicture}
+                </latex-image> -->
+              <p>
+                <ol>
+                  <li>
+                    <p>
+                      What is the measured length <m>L</m> of the wall?
+                    </p>
+                    <p>
+                      <var name="$lU" width="20"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      What is the propagated error?
+                    </p>
+                    <p>
+                      <var name="$errU" width="20"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      What is the percent error?
+                    </p>
+                    <p>
+                      <var name="$err_pct" width="20"/>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 37: Length of the wall if an isosceles triangle -->
+        <exercise xml:id="exer_04_04_ex_37">
+           <webwork>
+            <pg-code>
+              $theta = 143;
+              $d = 50;
+              $f = Compute("2*$d*tan(x/2)");
+              $l = $f->eval(x=>$theta*pi/180);
+              $lU = NumberWithUnits("$l ft");
+              $df = $f->D('x');
+              $err = $df->eval(x=>$theta*pi/180) * pi/180;
+              $errU = NumberWithUnits("$err ft");
+              Context("Percent");
+              $err_pct = Percent("$err/$l");
+              $gr = init_graph(-1,-1,51,51, size=>[240,240]);
+              $gr->moveTo(0,25);
+              $gr->lineTo(50,0,'black',1,'dashed');
+              $gr->lineTo(50,50,'black',3);
+              $gr->lineTo(0,25,'black',1,'dashed');
+              $gr->moveTo(2,25);
+              $gr->lineTo(50,25,'black',1);
+              $gr->lb( new Label(25,25,$d."'",'black','center','bottom','large'));
+              $gr->lb( new Label(50,25,' L','black','left','middle','large'));
+              $xfunc = sub { my $t = shift();
+                return 6*cos($t); };
+              $yfunc = sub { my $t = shift();
+                return 25 + 6*sin($t); };
+              $fn = new Fun( $xfunc, $yfunc, $gr );
+              $fn->domain(atan(-0.5),atan(0.5));
+              $fn->color('black');
+            </pg-code>
+            <statement>
+              <p>
+                The length <m>L</m> of a long wall is to be calculated
+                by measuring the angle <m>\theta</m> shown in the diagram
+                (not to scale).
+                Assume the formed triangle is an isosceles triangle.
+                The measured angle is <m><var name="$theta"/>^\circ</m>,
+                accurate to <m>1^\circ</m>.
+              </p>
+              <image pg-name="$gr" width="40%"/>
+                <!-- <latex-image>
+                  \begin{tikzpicture}
+                    \draw [ultra thick] (1,-1) -&#x2D; node [pos=.5,right] { \(l=\)?} (1,1);
+                    \draw [dashed] (1,1) -&#x2D; (-1,-1) node [xshift=10pt,yshift=5pt] { \(\theta\)} -&#x2D; node [pos=.5,below] { \(25'\)} (1,-1);
+                  \end{tikzpicture}
+                </latex-image> -->
+              <p>
+                <ol>
+                  <li>
+                    <p>
+                      What is the measured length <m>L</m> of the wall?
+                    </p>
+                    <p>
+                      <var name="$lU" width="20"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      What is the propagated error?
+                    </p>
+                    <p>
+                      <var name="$errU" width="20"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      What is the percent error?
+                    </p>
+                    <p>
+                      <var name="$err_pct" width="20"/>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 37: Compare errors in wall measurements from previous exercises -->
+        <exercise>
+          <webwork>
+            <pg-code>
+              $buttons = RadioButtons(
+                [
+                  'Right triangle at 25 feet',
+                  'Right triangle at 100 feet',
+                  'Isosceles triangle at 50 feet',
+                ],2);
+            </pg-code>
+            <statement>
+              <p>
+                The length of the walls in
+                <xref ref="exer_04_04_ex_35" text="custom">Exercises</xref>
+                <ndash/><xref ref="exer_04_04_ex_37" text="custom"/>
+                are essentially the same.
+                Which setup gives the most accurate result?
+              </p>
+              <p>
+                <var name="$buttons" form="buttons"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 38: Length of wall if the distance has the error instead of the angle -->
+        <exercise>
+           <webwork>
+            <pg-code>
+              $theta = 143;
+              $d = 50;
+              $f = Compute("2*x*tan( ($theta*pi/180) /2)");
+              $l = $f->eval(x=>$d);
+              $lU = NumberWithUnits("$l ft");
+              $df = $f->D('x');
+              $err = $df->eval(x=>$d) * 0.5;
+              $errU = NumberWithUnits("$err ft");
+              Context("Percent");
+              $err_pct = Percent("$err/$l");
+              $gr = init_graph(-1,-1,51,51, size=>[240,240]);
+              $gr->moveTo(0,25);
+              $gr->lineTo(50,0,'black',1,'dashed');
+              $gr->lineTo(50,50,'black',3);
+              $gr->lineTo(0,25,'black',1,'dashed');
+              $gr->moveTo(2,25);
+              $gr->lineTo(50,25,'black',1);
+              $gr->lb( new Label(25,25,$d."'",'black','center','top','large'));
+              $gr->lb( new Label(50,25,' L','black','left','middle','large'));
+              $xfunc = sub { my $t = shift();
+                return 6*cos($t); };
+              $yfunc = sub { my $t = shift();
+                return 25 + 6*sin($t); };
+              $fn = new Fun( $xfunc, $yfunc, $gr );
+              $fn->domain(atan(-0.5),atan(0.5));
+              $fn->color('black');
+            </pg-code>
+            <statement>
+              <p>
+                Consider the setup in <xref ref="exer_04_04_ex_37">Exercise</xref>.
+                This time, assume the angle measurement of
+                <m>143^\circ</m> is exact but the measured <m>50'</m> from the wall is accurate to <m>6''</m>.
+              </p>
+              <image pg-name="$gr" width="40%"/>
+                <!-- <latex-image>
+                  \begin{tikzpicture}
+                    \draw [ultra thick] (1,-1) -&#x2D; node [pos=.5,right] { \(l=\)?} (1,1);
+                    \draw [dashed] (1,1) -&#x2D; (-1,-1) node [xshift=10pt,yshift=5pt] { \(\theta\)} -&#x2D; node [pos=.5,below] { \(25'\)} (1,-1);
+                  \end{tikzpicture}
+                </latex-image> -->
+              <p>
+                What is the approximate percent error?
+              </p>
+              <p>
+                <var name="$err_pct" width="20"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+      </exercisegroup>
+    </subexercises>
   </exercises>
 </section>
