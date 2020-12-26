@@ -955,14 +955,8 @@
   </subsection>
 
   <exercises>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          Terms and Concepts
-        </p>
-      </introduction>
-
+    <subexercises>
+      <title>Terms and Concepts</title>
       <exercise>
         <!--<webwork>
             <pg-code>
@@ -999,163 +993,1122 @@
             </answer>
         <!-- </webwork> -->
       </exercise>
+    </subexercises>
+    <subexercises>
+      <title>Problems</title>
+      <exercisegroup cols="2">
 
-    </exercisegroup>
-    <exercisegroup>
+        <introduction>
+          <p>
+            In the following exercises, give any two points in the given plane.
+          </p>
+        </introduction>
 
-      <introduction>
-        <p>
-          In the following exercises, give any two points in the given plane.
-        </p>
-      </introduction>
+        <exercise>
+          <!--<webwork>
+              <pg-code>
+              </pg-code>
+              -->
+              <statement>
+                <p>
+                  <m>2x-4y+7z=2</m>
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  Answers will vary.
+                </p>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
 
-      <exercise>
-        <!--<webwork>
-            <pg-code>
-            </pg-code>
-            -->
-            <statement>
-              <p>
-                <m>2x-4y+7z=2</m>
-              </p>
-            </statement>
-            <answer>
-              <p>
-                Answers will vary.
-              </p>
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context("Point");
-              $points=List("(-2,9,0),(2,9,3)");
-              $pev=$points->cmp(list_checker => sub {
-                my ($correct,$student,$ansHash,$value) = @_;
-                my $n = scalar(@$student);
-                my $score = 0;
-                my @errors = ();
-                my $i, $j;
-                for ($i = 0; $i &lt; $n; $i++) {
-                  my $ith = Value::List->NameForNumber($i+1);
-                  my $p = $student->[$i];   # i-th student answer
-                  if ($p->type ne "Point") {
-                     push(@errors,"Your $ith entry is not a point");
-                     next;
-                  }
-                  for ($j = 0, $used = 0; $j &lt; $i; $j++) {
-                    if ($student->[$j]->type eq "Point" and $student->[$j] == $p) {
-                      push(@errors,"Your $ith point is the same as a previous one") unless $ansHash->{isPreview};
-                      $used = 1; last;
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context("Point");
+                $points=List("(-2,9,0),(2,9,3)");
+                $pev=$points->cmp(list_checker => sub {
+                  my ($correct,$student,$ansHash,$value) = @_;
+                  my $n = scalar(@$student);
+                  my $score = 0;
+                  my @errors = ();
+                  my $i, $j;
+                  for ($i = 0; $i &lt; $n; $i++) {
+                    my $ith = Value::List->NameForNumber($i+1);
+                    my $p = $student->[$i];   # i-th student answer
+                    if ($p->type ne "Point") {
+                       push(@errors,"Your $ith entry is not a point");
+                       next;
+                    }
+                    for ($j = 0, $used = 0; $j &lt; $i; $j++) {
+                      if ($student->[$j]->type eq "Point" and $student->[$j] == $p) {
+                        push(@errors,"Your $ith point is the same as a previous one") unless $ansHash->{isPreview};
+                        $used = 1; last;
+                      }
+                    }
+                    if (!$used) {
+                      my ($a,$b,$c) = $p->value;
+                      if (3*($a+2)+5*($b-9)-4*$c==0) {$score++} else {
+                        push(@errors,"Your $ith point is not correct") unless $ansHash->{isPreview}
+                      }
                     }
                   }
-                  if (!$used) {
-                    my ($a,$b,$c) = $p->value;
-                    if (3*($a+2)+5*($b-9)-4*$c==0) {$score++} else {
-                      push(@errors,"Your $ith point is not correct") unless $ansHash->{isPreview}
+                  if (!$ansHash->{isPreview}) {
+                    push(@errors,"You need to provide more points") if $i &lt; 2;
+                    push(@errors,"You have given too many points") if $score > 2 and $i != $score;
+                  }
+                  return ($score,@errors);
+                });
+              </pg-code>
+
+              <statement>
+                <p>
+                  List any two points in the plane with equation <m>3(x+2)+5(y-9)-4z=0</m>.
+                </p>
+
+                <p>
+                  <var name="$points" evaluator="$pev" width="20"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <!--<webwork>
+              <pg-code>
+              </pg-code>
+              -->
+              <statement>
+                <p>
+                  <m>x=2</m>
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  Answers will vary.
+                </p>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context("Point");
+                $points=List("(0,-2,6),(1,-2,6)");
+                $pev=$points->cmp(list_checker => sub {
+                  my ($correct,$student,$ansHash,$value) = @_;
+                  my $n = scalar(@$student);
+                  my $score = 0;
+                  my @errors = ();
+                  my $i, $j;
+                  for ($i = 0; $i &lt; $n; $i++) {
+                    my $ith = Value::List->NameForNumber($i+1);
+                    my $p = $student->[$i];   # i-th student answer
+                    if ($p->type ne "Point") {
+                       push(@errors,"Your $ith entry is not a point");
+                       next;
+                    }
+                    for ($j = 0, $used = 0; $j &lt; $i; $j++) {
+                      if ($student->[$j]->type eq "Point" and $student->[$j] == $p) {
+                        push(@errors,"Your $ith point is the same as a previous one") unless $ansHash->{isPreview};
+                        $used = 1; last;
+                      }
+                    }
+                    if (!$used) {
+                      my ($a,$b,$c) = $p->value;
+                      if (4*($b+2)-($c-6)==0) {$score++} else {
+                        push(@errors,"Your $ith point is not correct") unless $ansHash->{isPreview}
+                      }
                     }
                   }
-                }
-                if (!$ansHash->{isPreview}) {
-                  push(@errors,"You need to provide more points") if $i &lt; 2;
-                  push(@errors,"You have given too many points") if $score > 2 and $i != $score;
-                }
-                return ($score,@errors);
-              });
-            </pg-code>
-
-            <statement>
-              <p>
-                List any two points in the plane with equation <m>3(x+2)+5(y-9)-4z=0</m>.
-              </p>
-
-              <p>
-                <var name="$points" evaluator="$pev" width="20"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <!--<webwork>
-            <pg-code>
-            </pg-code>
-            -->
-            <statement>
-              <p>
-                <m>x=2</m>
-              </p>
-            </statement>
-            <answer>
-              <p>
-                Answers will vary.
-              </p>
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context("Point");
-              $points=List("(0,-2,6),(1,-2,6)");
-              $pev=$points->cmp(list_checker => sub {
-                my ($correct,$student,$ansHash,$value) = @_;
-                my $n = scalar(@$student);
-                my $score = 0;
-                my @errors = ();
-                my $i, $j;
-                for ($i = 0; $i &lt; $n; $i++) {
-                  my $ith = Value::List->NameForNumber($i+1);
-                  my $p = $student->[$i];   # i-th student answer
-                  if ($p->type ne "Point") {
-                     push(@errors,"Your $ith entry is not a point");
-                     next;
+                  if (!$ansHash->{isPreview}) {
+                    push(@errors,"You need to provide more points") if $i &lt; 2;
+                    push(@errors,"You have given too many points") if $score > 2 and $i != $score;
                   }
-                  for ($j = 0, $used = 0; $j &lt; $i; $j++) {
-                    if ($student->[$j]->type eq "Point" and $student->[$j] == $p) {
-                      push(@errors,"Your $ith point is the same as a previous one") unless $ansHash->{isPreview};
-                      $used = 1; last;
-                    }
-                  }
-                  if (!$used) {
-                    my ($a,$b,$c) = $p->value;
-                    if (4*($b+2)-($c-6)==0) {$score++} else {
-                      push(@errors,"Your $ith point is not correct") unless $ansHash->{isPreview}
-                    }
-                  }
-                }
-                if (!$ansHash->{isPreview}) {
-                  push(@errors,"You need to provide more points") if $i &lt; 2;
-                  push(@errors,"You have given too many points") if $score > 2 and $i != $score;
-                }
-                return ($score,@errors);
-              });
-            </pg-code>
+                  return ($score,@errors);
+                });
+              </pg-code>
 
-            <statement>
-              <p>
-                List any two points in the plane with equation <m>4(y+2)-(z-6)=0</m>.
-              </p>
+              <statement>
+                <p>
+                  List any two points in the plane with equation <m>4(y+2)-(z-6)=0</m>.
+                </p>
 
-              <p>
-                <var name="$points" evaluator="$pev" width="20"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
+                <p>
+                  <var name="$points" evaluator="$pev" width="20"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
 
-    </exercisegroup>
-    <exercisegroup>
+      </exercisegroup>
+      <exercisegroup cols="2">
 
-      <introduction>
-        <p>
-          In the following exercises,
-          give the equation of the described plane in standard and general forms.
-        </p>
-      </introduction>
+        <introduction>
+          <p>
+            In the following exercises,
+            give the equation of the described plane in standard and general forms.
+          </p>
+        </introduction>
+
+        <exercise>
+          <!--<webwork>
+              <pg-code>
+              </pg-code>
+              -->
+              <statement>
+                <p>
+                  Passes through <m>(2,3,4)</m> and has normal vector
+                </p>
+
+                <p>
+                  <m>\vec n= \la 3,-1,7\ra</m>.
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  Standard form: <m>3(x-2)-(y-3)+7(z-4)=0</m>
+                </p>
+
+                <p>
+                  general form: <m>3x-y+7z=31</m>
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                sub grouped {
+                  my $op = shift;
+                  return 1 if ($op->{name} or $op->{isConstant});
+                  if ($op->{uop}) {return grouped($op->{op});};
+                  my $context=Context();
+                  my $lft=$context->Package("Formula")->new($context,$op->{lop});
+                  my $rgt=$context->Package("Formula")->new($context,$op->{rop});
+                  return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
+                  if ($op->{bop} eq '+' or $op->{bop} eq '-') {
+                    return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
+                  };
+                  return (grouped($op->{lop}) and grouped($op->{rop}));
+                };
+                Context("ImplicitEquation");
+                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
+                Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
+                $st=ImplicitEquation("2(y-3)+4(z-5)=0");
+                $stev=$st->cmp(checker=>sub{
+                  my ( $correct, $student, $ansHash ) = @_;
+                  #return 0 if $ansHash->{isPreview} || $correct != $student;
+                  my $context = Context();
+                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
+                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
+                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
+                  return $correct == $student;
+                });
+                $ge=ImplicitEquation("2y+4z=26");
+                $geev=$ge->cmp(checker=>sub{
+                  my ( $correct, $student, $ansHash ) = @_;
+                  return 0 if $ansHash->{isPreview} || $correct != $student;
+                  my $context = Context();
+                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
+                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
+                  Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
+                  Value::Error("Your answer is not in general form") unless $right->isConstant;
+                  return $correct == $student;
+                });
+              </pg-code>
+
+              <statement>
+                <p>
+                  A plane passes through <m>(1,3,5)</m> and has normal vector <m>\vec n= \la 0,2,4\ra</m>.
+                </p>
+
+                <p>
+                  An equation for this plane in standard form is <var name="$st" evaluator="$stev" width="30"/>.
+                </p>
+
+                <p>
+                  An equation for this plane in general form is <var name="$ge" evaluator="$geev" width="30"/>.
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <!--<webwork>
+              <pg-code>
+              </pg-code>
+              -->
+              <statement>
+                <p>
+                  Passes through the points <m>(1,2,3)</m>,
+                  <m>(3,-1,4)</m> and <m>(1,0,1)</m>.
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  Answers may vary;
+                </p>
+
+                <p>
+                  Standard form: <m>8(x-1)+4(y-2)-4(z-3)=0</m>
+                </p>
+
+                <p>
+                  general form: <m>8x+4y-4z=4</m>
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <webwork>
+
+              <pg-code>
+                sub grouped {
+                  my $op = shift;
+                  return 1 if ($op->{name} or $op->{isConstant});
+                  if ($op->{uop}) {return grouped($op->{op});};
+                  my $context=Context();
+                  my $lft=$context->Package("Formula")->new($context,$op->{lop});
+                  my $rgt=$context->Package("Formula")->new($context,$op->{rop});
+                  return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
+                  if ($op->{bop} eq '+' or $op->{bop} eq '-') {
+                    return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
+                  };
+                  return (grouped($op->{lop}) and grouped($op->{rop}));
+                };
+                Context("ImplicitEquation");
+                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
+                Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
+                $st=ImplicitEquation("-5(x-5)+3(y-3)+2(z-8)=0");
+                $stev=$st->cmp(checker=>sub{
+                  my ( $correct, $student, $ansHash ) = @_;
+                  #return 0 if $ansHash->{isPreview} || $correct != $student;
+                  my $context = Context();
+                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
+                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
+                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
+                  return $correct == $student;
+                });
+                $ge=ImplicitEquation("-5x+3y+2z=0");
+                $geev=$ge->cmp(checker=>sub{
+                  my ( $correct, $student, $ansHash ) = @_;
+                  return 0 if $ansHash->{isPreview} || $correct != $student;
+                  my $context = Context();
+                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
+                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
+                  Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
+                  Value::Error("Your answer is not in general form") unless $right->isConstant;
+                  return $correct == $student;
+                });
+              </pg-code>
+
+              <statement>
+                <p>
+                  A plane passes through the points <m>(5,3,8)</m>,
+                  <m>(6,4,9)</m> and <m>(3,3,3)</m>.
+                </p>
+
+                <p>
+                  An equation for this plane in standard form is <var name="$st" evaluator="$stev" width="30"/>.
+                </p>
+
+                <p>
+                  An equation for this plane in general form is <var name="$ge" evaluator="$geev" width="30"/>.
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <!--<webwork>
+              <pg-code>
+              </pg-code>
+              -->
+              <statement>
+                <p>
+                  Contains the intersecting lines
+                </p>
+
+                <p>
+                  <m>\vec\ell_1(t) = \la 2,1,2\ra + t\la 1,2,3\ra</m> and
+                </p>
+
+                <p>
+                  <m>\vec\ell_2(t) = \la 2,1,2\ra + t\la 2,5,4\ra</m>.
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  Answers may vary;
+                </p>
+
+                <p>
+                  Standard form: <m>-7(x-2)+2(y-1)+(z-2)=0</m>
+                </p>
+
+                <p>
+                  general form: <m>-7x+2y+z=-10</m>
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <webwork>
+
+              <pg-code>
+                sub grouped {
+                  my $op = shift;
+                  return 1 if ($op->{name} or $op->{isConstant});
+                  if ($op->{uop}) {return grouped($op->{op});};
+                  my $context=Context();
+                  my $lft=$context->Package("Formula")->new($context,$op->{lop});
+                  my $rgt=$context->Package("Formula")->new($context,$op->{rop});
+                  return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
+                  if ($op->{bop} eq '+' or $op->{bop} eq '-') {
+                    return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
+                  };
+                  return (grouped($op->{lop}) and grouped($op->{rop}));
+                };
+                Context("ImplicitEquation");
+                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
+                Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
+                $st=ImplicitEquation("3(x-5)+3(z-3)=0");
+                $stev=$st->cmp(checker=>sub{
+                  my ( $correct, $student, $ansHash ) = @_;
+                  #return 0 if $ansHash->{isPreview} || $correct != $student;
+                  my $context = Context();
+                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
+                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
+                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
+                  return $correct == $student;
+                });
+                $ge=ImplicitEquation("3x+3z=24");
+                $geev=$ge->cmp(checker=>sub{
+                  my ( $correct, $student, $ansHash ) = @_;
+                  return 0 if $ansHash->{isPreview} || $correct != $student;
+                  my $context = Context();
+                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
+                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
+                  Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
+                  Value::Error("Your answer is not in general form") unless $right->isConstant;
+                  return $correct == $student;
+                });
+              </pg-code>
+
+              <statement>
+                <p>
+                  A plane contains the intersecting lines
+                  <m>\vec\ell_1(t) = \la 5,0,3\ra + t\la -1,1,1\ra</m> and <m>\vec\ell_2(t) = \la 1,4,7\ra + t\la 3,0,-3\ra</m>.
+                </p>
+
+                <p>
+                  An equation for this plane in standard form is <var name="$st" evaluator="$stev" width="30"/>.
+                </p>
+
+                <p>
+                  An equation for this plane in general form is <var name="$ge" evaluator="$geev" width="30"/>.
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <!--<webwork>
+              <pg-code>
+              </pg-code>
+              -->
+              <statement>
+                <p>
+                  Contains the parallel lines
+                </p>
+
+                <p>
+                  <m>\vec\ell_1(t) = \la 1,1,1\ra + t\la 1,2,3\ra</m> and
+                </p>
+
+                <p>
+                  <m>\vec\ell_2(t) = \la 1,1,2\ra + t\la 1,2,3\ra</m>.
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  Answers may vary;
+                </p>
+
+                <p>
+                  Standard form: <m>2(x-1)-(y-1)=0</m>
+                </p>
+
+                <p>
+                  general form: <m>2x-y=1</m>
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <webwork>
+
+              <pg-code>
+                sub grouped {
+                  my $op = shift;
+                  return 1 if ($op->{name} or $op->{isConstant});
+                  if ($op->{uop}) {return grouped($op->{op});};
+                  my $context=Context();
+                  my $lft=$context->Package("Formula")->new($context,$op->{lop});
+                  my $rgt=$context->Package("Formula")->new($context,$op->{rop});
+                  return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
+                  if ($op->{bop} eq '+' or $op->{bop} eq '-') {
+                    return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
+                  };
+                  return (grouped($op->{lop}) and grouped($op->{rop}));
+                };
+                Context("ImplicitEquation");
+                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
+                Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
+                $st=ImplicitEquation("2(x-1)+(y-1)-3(z-1)=0");
+                $stev=$st->cmp(checker=>sub{
+                  my ( $correct, $student, $ansHash ) = @_;
+                  #return 0 if $ansHash->{isPreview} || $correct != $student;
+                  my $context = Context();
+                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
+                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
+                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
+                  return $correct == $student;
+                });
+                $ge=ImplicitEquation("2x+y-3z=0");
+                $geev=$ge->cmp(checker=>sub{
+                  my ( $correct, $student, $ansHash ) = @_;
+                  return 0 if $ansHash->{isPreview} || $correct != $student;
+                  my $context = Context();
+                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
+                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
+                  Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
+                  Value::Error("Your answer is not in general form") unless $right->isConstant;
+                  return $correct == $student;
+                });
+              </pg-code>
+
+              <statement>
+                <p>
+                  A plane contains the parallel lines
+                  <m>\vec\ell_1(t) = \la 1,1,1\ra + t\la 4,1,3\ra</m> and <m>\vec\ell_2(t) = \la 2,2,2\ra + t\la 4,1,3\ra</m>.
+                </p>
+
+                <p>
+                  An equation for this plane in standard form is <var name="$st" evaluator="$stev" width="30"/>.
+                </p>
+
+                <p>
+                  An equation for this plane in general form is <var name="$ge" evaluator="$geev" width="30"/>.
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <!--<webwork>
+              <pg-code>
+              </pg-code>
+              -->
+              <statement>
+                <p>
+                  Contains the point <m>(2,-6,1)</m> and the line
+                </p>
+
+                <p>
+                  <m>\vec\ell(t) = \left\{\begin{aligned}x\amp =2+5t \\
+  																	y\amp =2+2t \\
+  																	z\amp =-1+2t
+                  \end{aligned} \right.</m>
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  Answers may vary;
+                </p>
+
+                <p>
+                  Standard form: <m>2(x-2)-(y+6)-4(z-1)=0</m>
+                </p>
+
+                <p>
+                  general form: <m>2x-y-4z=6</m>
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <webwork>
+
+              <pg-code>
+                sub grouped {
+                  my $op = shift;
+                  return 1 if ($op->{name} or $op->{isConstant});
+                  if ($op->{uop}) {return grouped($op->{op});};
+                  my $context=Context();
+                  my $lft=$context->Package("Formula")->new($context,$op->{lop});
+                  my $rgt=$context->Package("Formula")->new($context,$op->{rop});
+                  return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
+                  if ($op->{bop} eq '+' or $op->{bop} eq '-') {
+                    return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
+                  };
+                  return (grouped($op->{lop}) and grouped($op->{rop}));
+                };
+                Context("ImplicitEquation");
+                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
+                Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
+                $st=ImplicitEquation("4(x-5)-2(y-7)-2(z-3)=0");
+                $stev=$st->cmp(checker=>sub{
+                  my ( $correct, $student, $ansHash ) = @_;
+                  #return 0 if $ansHash->{isPreview} || $correct != $student;
+                  my $context = Context();
+                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
+                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
+                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
+                  return $correct == $student;
+                });
+                $ge=ImplicitEquation("4x-2y-2z=0");
+                $geev=$ge->cmp(checker=>sub{
+                  my ( $correct, $student, $ansHash ) = @_;
+                  return 0 if $ansHash->{isPreview} || $correct != $student;
+                  my $context = Context();
+                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
+                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
+                  Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
+                  Value::Error("Your answer is not in general form") unless $right->isConstant;
+                  return $correct == $student;
+                });
+              </pg-code>
+
+              <statement>
+                <p>
+                  A plane contains the point <m>(5,7,3)</m> and the line <m>\vec\ell(t) = \begin{cases}x\amp=t\\y\amp=t\\z\amp=t\end{cases}</m>.
+                </p>
+
+                <p>
+                  An equation for this plane in standard form is <var name="$st" evaluator="$stev" width="30"/>.
+                </p>
+
+                <p>
+                  An equation for this plane in general form is <var name="$ge" evaluator="$geev" width="30"/>.
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork>
+
+              <pg-code>
+                sub grouped {
+                  my $op = shift;
+                  return 1 if ($op->{name} or $op->{isConstant});
+                  if ($op->{uop}) {return grouped($op->{op});};
+                  my $context=Context();
+                  my $lft=$context->Package("Formula")->new($context,$op->{lop});
+                  my $rgt=$context->Package("Formula")->new($context,$op->{rop});
+                  return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
+                  if ($op->{bop} eq '+' or $op->{bop} eq '-') {
+                    return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
+                  };
+                  return (grouped($op->{lop}) and grouped($op->{rop}));
+                };
+                Context("ImplicitEquation");
+                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
+                Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
+                $st=ImplicitEquation("(x-5)+(y-7)+(z-3)=0");
+                $stev=$st->cmp(checker=>sub{
+                  my ( $correct, $student, $ansHash ) = @_;
+                  #return 0 if $ansHash->{isPreview} || $correct != $student;
+                  my $context = Context();
+                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
+                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
+                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
+                  return $correct == $student;
+                });
+                $ge=ImplicitEquation("x+y+z=15");
+                $geev=$ge->cmp(checker=>sub{
+                  my ( $correct, $student, $ansHash ) = @_;
+                  return 0 if $ansHash->{isPreview} || $correct != $student;
+                  my $context = Context();
+                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
+                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
+                  Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
+                  Value::Error("Your answer is not in general form") unless $right->isConstant;
+                  return $correct == $student;
+                });
+              </pg-code>
+
+              <statement>
+                <p>
+                  A plane contains the point <m>(5,7,3)</m> and is orthogonal to the line <m>\vec\ell(t) = \la 4,5,6\ra+ t\la 1,1,1\ra</m>.
+                </p>
+
+                <p>
+                  An equation for this plane in standard form is <var name="$st" evaluator="$stev" width="30"/>.
+                </p>
+
+                <p>
+                  An equation for this plane in general form is <var name="$ge" evaluator="$geev" width="30"/>.
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork>
+
+              <pg-code>
+                sub grouped {
+                  my $op = shift;
+                  return 1 if ($op->{name} or $op->{isConstant});
+                  if ($op->{uop}) {return grouped($op->{op});};
+                  my $context=Context();
+                  my $lft=$context->Package("Formula")->new($context,$op->{lop});
+                  my $rgt=$context->Package("Formula")->new($context,$op->{rop});
+                  return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
+                  if ($op->{bop} eq '+' or $op->{bop} eq '-') {
+                    return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
+                  };
+                  return (grouped($op->{lop}) and grouped($op->{rop}));
+                };
+                Context("ImplicitEquation");
+                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
+                Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
+                $st=ImplicitEquation("4(x-4)+(y-1)+(z-1)=0");
+                $stev=$st->cmp(checker=>sub{
+                  my ( $correct, $student, $ansHash ) = @_;
+                  #return 0 if $ansHash->{isPreview} || $correct != $student;
+                  my $context = Context();
+                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
+                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
+                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
+                  return $correct == $student;
+                });
+                $ge=ImplicitEquation("4x+y+z=18");
+                $geev=$ge->cmp(checker=>sub{
+                  my ( $correct, $student, $ansHash ) = @_;
+                  return 0 if $ansHash->{isPreview} || $correct != $student;
+                  my $context = Context();
+                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
+                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
+                  Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
+                  Value::Error("Your answer is not in general form") unless $right->isConstant;
+                  return $correct == $student;
+                });
+              </pg-code>
+
+              <statement>
+                <p>
+                  A plane contains the point <m>(4,1,1)</m> and is orthogonal to the line <m>\begin{cases}x\amp=4+4t\\y\amp=1+t\\z\amp=1+t\end{cases}</m>.
+                </p>
+
+                <p>
+                  An equation for this plane in standard form is <var name="$st" evaluator="$stev" width="30"/>.
+                </p>
+
+                <p>
+                  An equation for this plane in general form is <var name="$ge" evaluator="$geev" width="30"/>.
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork>
+
+              <pg-code>
+                sub grouped {
+                  my $op = shift;
+                  return 1 if ($op->{name} or $op->{isConstant});
+                  if ($op->{uop}) {return grouped($op->{op});};
+                  my $context=Context();
+                  my $lft=$context->Package("Formula")->new($context,$op->{lop});
+                  my $rgt=$context->Package("Formula")->new($context,$op->{rop});
+                  return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
+                  if ($op->{bop} eq '+' or $op->{bop} eq '-') {
+                    return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
+                  };
+                  return (grouped($op->{lop}) and grouped($op->{rop}));
+                };
+                Context("ImplicitEquation");
+                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
+                Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
+                $st=ImplicitEquation("3(x+4)+8(y-7)-10(z-2)=0");
+                $stev=$st->cmp(checker=>sub{
+                  my ( $correct, $student, $ansHash ) = @_;
+                  #return 0 if $ansHash->{isPreview} || $correct != $student;
+                  my $context = Context();
+                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
+                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
+                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
+                  return $correct == $student;
+                });
+                $ge=ImplicitEquation("3x+8y-10z=24");
+                $geev=$ge->cmp(checker=>sub{
+                  my ( $correct, $student, $ansHash ) = @_;
+                  return 0 if $ansHash->{isPreview} || $correct != $student;
+                  my $context = Context();
+                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
+                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
+                  Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
+                  Value::Error("Your answer is not in general form") unless $right->isConstant;
+                  return $correct == $student;
+                });
+              </pg-code>
+
+              <statement>
+                <p>
+                  A plane contains the point
+                  <m>(-4,7,2)</m> and is parallel to the plane <m>3(x-2)+8(y+1) -10z=0</m>.
+                </p>
+
+                <p>
+                  An equation for this plane in standard form is <var name="$st" evaluator="$stev" width="30"/>.
+                </p>
+
+                <p>
+                  An equation for this plane in general form is <var name="$ge" evaluator="$geev" width="30"/>.
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork>
+
+              <pg-code>
+                sub grouped {
+                  my $op = shift;
+                  return 1 if ($op->{name} or $op->{isConstant});
+                  if ($op->{uop}) {return grouped($op->{op});};
+                  my $context=Context();
+                  my $lft=$context->Package("Formula")->new($context,$op->{lop});
+                  my $rgt=$context->Package("Formula")->new($context,$op->{rop});
+                  return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
+                  if ($op->{bop} eq '+' or $op->{bop} eq '-') {
+                    return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
+                  };
+                  return (grouped($op->{lop}) and grouped($op->{rop}));
+                };
+                Context("ImplicitEquation");
+                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
+                Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
+                $st=ImplicitEquation("x-1=0");
+                $stev=$st->cmp(checker=>sub{
+                  my ( $correct, $student, $ansHash ) = @_;
+                  #return 0 if $ansHash->{isPreview} || $correct != $student;
+                  my $context = Context();
+                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
+                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
+                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
+                  return $correct == $student;
+                });
+                $ge=ImplicitEquation("x=1");
+                $geev=$ge->cmp(checker=>sub{
+                  my ( $correct, $student, $ansHash ) = @_;
+                  return 0 if $ansHash->{isPreview} || $correct != $student;
+                  my $context = Context();
+                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
+                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
+                  Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
+                  Value::Error("Your answer is not in general form") unless $right->isConstant;
+                  return $correct == $student;
+                });
+              </pg-code>
+
+              <statement>
+                <p>
+                  A plane contains the point <m>(1,2,3)</m> and is parallel to the plane <m>x=5</m>.
+                </p>
+
+                <p>
+                  An equation for this plane in standard form is <var name="$st" evaluator="$stev" width="30"/>.
+                </p>
+
+                <p>
+                  An equation for this plane in general form is <var name="$ge" evaluator="$geev" width="30"/>.
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+      </exercisegroup>
+      <exercisegroup cols="2">
+
+        <introduction>
+          <p>
+            In the following exercises,
+            give the equation of the line that is the intersection of the given planes.
+          </p>
+        </introduction>
+
+        <exercise>
+          <!--<webwork>
+              <pg-code>
+              </pg-code>
+              -->
+              <statement>
+                <p>
+                  <m>p1:\ 3 (x - 2) + (y - 1) + 4 z=0</m>, and
+                </p>
+
+                <p>
+                  <m>p2:\ 2 (x - 1) - 2 (y + 3) + 6 (z - 1)=0</m>.
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  Answers may vary:
+                </p>
+
+                <p>
+                  <m>\ell = \left\{\begin{aligned}x \amp = 14t\\
+                  y \amp = -1-10t\\
+                  z\amp = 2-8t
+                  \end{aligned} \right.</m>
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context("Vector");
+                Context()->variables->are(t=>"Real");
+                $v=Compute("(1,3,3.5)+t&lt;20,2,-26>");
+                $vev=$v->cmp(checker=>sub{my($c,$st,$aH)=@_;
+                  $ds=Formula($st)->D('t')->reduce;
+                  if($ds->isConstant){$ds=Vector("$ds");}else{return 0;};
+                  $dc=$c->D('t')->reduce;$dc=Vector("$dc");$par=$ds->isParallel($dc);
+                  $sp=Formula($st)->eval(t=>0);$cp=$c->eval(t=>0);
+                  $tch=(($sp==$cp) or $dc->isParallel($sp-$cp));
+                  return ($par and $tch);
+                });
+              </pg-code>
+
+              <statement>
+                <p>
+                  Give the equation of the line
+                  (in vector form)
+                  that is the intersection of the planes <m>5 (x - 5) + 2 (y + 2) + 4 (z - 1)=0</m>,
+                  and <m>3 x - 4 (y - 1) + 2 (z - 1)=0</m>.
+                </p>
+
+                <p>
+                  <var name="$v" evaluator="$vev" width="30"/>.
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+      </exercisegroup>
+      <exercisegroup cols="2">
+
+        <introduction>
+          <p>
+            In the following exercises,
+            find the point of intersection between the line and the plane.
+          </p>
+        </introduction>
+
+        <exercise>
+          <!--<webwork>
+              <pg-code>
+              </pg-code>
+              -->
+              <statement>
+                <p>
+                  line: <m>\la 5,1,-1\ra + t\la 2,2,1\ra</m>,
+                </p>
+
+                <p>
+                  plane: <m>5x-y-z=-3</m>
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  <m>(-3,-7,-5)</m>
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context("Point");
+                Context()->strings->add('the entire line'=>{});
+                $point=Point("(3,1,1)");
+              </pg-code>
+
+              <statement>
+                <p>
+                  Find the point of intersection between the line
+                  <m>\la 4,1,0\ra + t\la 1,0,-1\ra</m> and the plane <m>3x+y-2z=8</m>.
+                  (If the plane contains the line,
+                  enter <q>the entire line</q>.
+                  If the line does not intersect the plane at all, enter <q>none</q>.)
+                </p>
+
+                <p>
+                  <var name="$point" width="10"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <!--<webwork>
+              <pg-code>
+              </pg-code>
+              -->
+              <statement>
+                <p>
+                  line: <m>\la 1,2,3\ra + t\la 3,5,-1\ra</m>,
+                </p>
+
+                <p>
+                  plane: <m>3x-2y-z=4</m>
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  No point of intersection; the plane and line are parallel.
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context("Point");
+                Context()->strings->add('the entire line'=>{});
+                $point=Compute('the entire line');
+              </pg-code>
+
+              <statement>
+                <p>
+                  Find the point of intersection between the line
+                  <m>\la 1,2,3\ra + t\la 3,5,-1\ra</m> and the plane <m>3x-2y-z=-4</m>.
+                  (If the plane contains the line,
+                  enter <q>the entire line</q>.
+                  If the line does not intersect the plane at all, enter <q>none</q>.)
+                </p>
+
+                <p>
+                  <var name="$point" width="10"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+      </exercisegroup>
+      <exercisegroup cols="2">
+
+        <introduction>
+          <p>
+            In the following exercises, find the given distances.
+          </p>
+        </introduction>
+
+        <exercise>
+          <!--<webwork>
+              <pg-code>
+              </pg-code>
+              -->
+              <statement>
+                <p>
+                  The distance from the point <m>(1,2,3)</m> to the plane
+                </p>
+
+                <p>
+                  <m>3(x-1)+(y-2)+5(z-2)=0</m>.
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  <m>\sqrt{5/7}</m>
+                </p>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+                $distance=Formula("8/sqrt(21)");
+              </pg-code>
+
+              <statement>
+                <p>
+                  Find the distance from the point <m>(2,6,2)</m> to the plane <m>2(x-1)-y+4(z+1)=0</m>.
+                </p>
+
+                <p>
+                  <var name="$distance" width="10"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <!--<webwork>
+              <pg-code>
+              </pg-code>
+              -->
+              <statement>
+                <p>
+                  The distance between the parallel planes
+                </p>
+
+                <p>
+                  <m>x+y+z=0</m> and
+                </p>
+
+                <p>
+                  <m>(x-2)+(y-3)+(z+4)=0</m>
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  <m>1/\sqrt{3}</m>
+                </p>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+                $distance=Formula("3");
+              </pg-code>
+
+              <statement>
+                <p>
+                  Find the distance between the parallel planes
+                  <m>2(x-1)+2(y+1)+(z-2)=0</m> and <m>2(x-3)+2(y-1)+(z-3)=0</m>.
+                </p>
+
+                <p>
+                  <var name="$distance" width="10"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+      </exercisegroup>
 
       <exercise>
         <!--<webwork>
@@ -1164,1004 +2117,46 @@
             -->
             <statement>
               <p>
-                Passes through <m>(2,3,4)</m> and has normal vector
-              </p>
-
-              <p>
-                <m>\vec n= \la 3,-1,7\ra</m>.
+                Show why if the point <m>Q</m> lies in a plane,
+                then the distance formula correctly gives the distance from the point to the plane as <m>0</m>.
               </p>
             </statement>
             <solution>
               <p>
-                Standard form: <m>3(x-2)-(y-3)+7(z-4)=0</m>
-              </p>
-
-              <p>
-                general form: <m>3x-y+7z=31</m>
+                If <m>P</m> is any point in the plane,
+                and <m>Q</m> is also in the plane,
+                then <m>\overrightarrow{PQ}</m> lies parallel to the plane and is orthogonal to <m>\vec n</m>,
+                the normal vector.
+                Thus <m>\vec n\cdot \overrightarrow{PQ}=0</m>, giving the distance as 0.
               </p>
             </solution>
         <!-- </webwork> -->
       </exercise>
 
       <exercise>
-        <webwork>
-            <pg-code>
-              sub grouped {
-                my $op = shift;
-                return 1 if ($op->{name} or $op->{isConstant});
-                if ($op->{uop}) {return grouped($op->{op});};
-                my $context=Context();
-                my $lft=$context->Package("Formula")->new($context,$op->{lop});
-                my $rgt=$context->Package("Formula")->new($context,$op->{rop});
-                return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
-                if ($op->{bop} eq '+' or $op->{bop} eq '-') {
-                  return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
-                };
-                return (grouped($op->{lop}) and grouped($op->{rop}));
-              };
-              Context("ImplicitEquation");
-              Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-              Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
-              $st=ImplicitEquation("2(y-3)+4(z-5)=0");
-              $stev=$st->cmp(checker=>sub{
-                my ( $correct, $student, $ansHash ) = @_;
-                #return 0 if $ansHash->{isPreview} || $correct != $student;
-                my $context = Context();
-                my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
-                return $correct == $student;
-              });
-              $ge=ImplicitEquation("2y+4z=26");
-              $geev=$ge->cmp(checker=>sub{
-                my ( $correct, $student, $ansHash ) = @_;
-                return 0 if $ansHash->{isPreview} || $correct != $student;
-                my $context = Context();
-                my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
-                Value::Error("Your answer is not in general form") unless $right->isConstant;
-                return $correct == $student;
-              });
-            </pg-code>
-
-            <statement>
-              <p>
-                A plane passes through <m>(1,3,5)</m> and has normal vector <m>\vec n= \la 0,2,4\ra</m>.
-              </p>
-
-              <p>
-                An equation for this plane in standard form is <var name="$st" evaluator="$stev" width="30"/>.
-              </p>
-
-              <p>
-                An equation for this plane in general form is <var name="$ge" evaluator="$geev" width="30"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
         <!--<webwork>
             <pg-code>
             </pg-code>
             -->
             <statement>
               <p>
-                Passes through the points <m>(1,2,3)</m>,
-                <m>(3,-1,4)</m> and <m>(1,0,1)</m>.
+                How is <xref ref="x10_05_ex_30">Exercise</xref>
+                in <xref ref="sec_lines">Section</xref>
+                easier to answer once we have an understanding of planes?
               </p>
             </statement>
             <solution>
               <p>
-                Answers may vary;
-              </p>
-
-              <p>
-                Standard form: <m>8(x-1)+4(y-2)-4(z-3)=0</m>
-              </p>
-
-              <p>
-                general form: <m>8x+4y-4z=4</m>
+                The intersecting lines define a plane with normal vector <m>\vec n = \vec c = \vec d_1\times \vec d_2</m>.
+                Since points <m>P_1</m> and <m>P_2</m> lie in the plane,
+                <m>\vec c</m> is orthogonal to <m>\overrightarrow{P_1P_2}</m>,
+                hence <m>\overrightarrow{P_1P_2}\cdot\vec c = 0</m>, giving a distance of 0.
+                Knowing the principles of planes,
+                especially their normal vectors, makes this simpler.
               </p>
             </solution>
         <!-- </webwork> -->
       </exercise>
-
-      <exercise>
-        <webwork>
-
-            <pg-code>
-              sub grouped {
-                my $op = shift;
-                return 1 if ($op->{name} or $op->{isConstant});
-                if ($op->{uop}) {return grouped($op->{op});};
-                my $context=Context();
-                my $lft=$context->Package("Formula")->new($context,$op->{lop});
-                my $rgt=$context->Package("Formula")->new($context,$op->{rop});
-                return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
-                if ($op->{bop} eq '+' or $op->{bop} eq '-') {
-                  return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
-                };
-                return (grouped($op->{lop}) and grouped($op->{rop}));
-              };
-              Context("ImplicitEquation");
-              Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-              Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
-              $st=ImplicitEquation("-5(x-5)+3(y-3)+2(z-8)=0");
-              $stev=$st->cmp(checker=>sub{
-                my ( $correct, $student, $ansHash ) = @_;
-                #return 0 if $ansHash->{isPreview} || $correct != $student;
-                my $context = Context();
-                my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
-                return $correct == $student;
-              });
-              $ge=ImplicitEquation("-5x+3y+2z=0");
-              $geev=$ge->cmp(checker=>sub{
-                my ( $correct, $student, $ansHash ) = @_;
-                return 0 if $ansHash->{isPreview} || $correct != $student;
-                my $context = Context();
-                my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
-                Value::Error("Your answer is not in general form") unless $right->isConstant;
-                return $correct == $student;
-              });
-            </pg-code>
-
-            <statement>
-              <p>
-                A plane passes through the points <m>(5,3,8)</m>,
-                <m>(6,4,9)</m> and <m>(3,3,3)</m>.
-              </p>
-
-              <p>
-                An equation for this plane in standard form is <var name="$st" evaluator="$stev" width="30"/>.
-              </p>
-
-              <p>
-                An equation for this plane in general form is <var name="$ge" evaluator="$geev" width="30"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <!--<webwork>
-            <pg-code>
-            </pg-code>
-            -->
-            <statement>
-              <p>
-                Contains the intersecting lines
-              </p>
-
-              <p>
-                <m>\vec\ell_1(t) = \la 2,1,2\ra + t\la 1,2,3\ra</m> and
-              </p>
-
-              <p>
-                <m>\vec\ell_2(t) = \la 2,1,2\ra + t\la 2,5,4\ra</m>.
-              </p>
-            </statement>
-            <solution>
-              <p>
-                Answers may vary;
-              </p>
-
-              <p>
-                Standard form: <m>-7(x-2)+2(y-1)+(z-2)=0</m>
-              </p>
-
-              <p>
-                general form: <m>-7x+2y+z=-10</m>
-              </p>
-            </solution>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <webwork>
-
-            <pg-code>
-              sub grouped {
-                my $op = shift;
-                return 1 if ($op->{name} or $op->{isConstant});
-                if ($op->{uop}) {return grouped($op->{op});};
-                my $context=Context();
-                my $lft=$context->Package("Formula")->new($context,$op->{lop});
-                my $rgt=$context->Package("Formula")->new($context,$op->{rop});
-                return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
-                if ($op->{bop} eq '+' or $op->{bop} eq '-') {
-                  return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
-                };
-                return (grouped($op->{lop}) and grouped($op->{rop}));
-              };
-              Context("ImplicitEquation");
-              Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-              Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
-              $st=ImplicitEquation("3(x-5)+3(z-3)=0");
-              $stev=$st->cmp(checker=>sub{
-                my ( $correct, $student, $ansHash ) = @_;
-                #return 0 if $ansHash->{isPreview} || $correct != $student;
-                my $context = Context();
-                my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
-                return $correct == $student;
-              });
-              $ge=ImplicitEquation("3x+3z=24");
-              $geev=$ge->cmp(checker=>sub{
-                my ( $correct, $student, $ansHash ) = @_;
-                return 0 if $ansHash->{isPreview} || $correct != $student;
-                my $context = Context();
-                my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
-                Value::Error("Your answer is not in general form") unless $right->isConstant;
-                return $correct == $student;
-              });
-            </pg-code>
-
-            <statement>
-              <p>
-                A plane contains the intersecting lines
-                <m>\vec\ell_1(t) = \la 5,0,3\ra + t\la -1,1,1\ra</m> and <m>\vec\ell_2(t) = \la 1,4,7\ra + t\la 3,0,-3\ra</m>.
-              </p>
-
-              <p>
-                An equation for this plane in standard form is <var name="$st" evaluator="$stev" width="30"/>.
-              </p>
-
-              <p>
-                An equation for this plane in general form is <var name="$ge" evaluator="$geev" width="30"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <!--<webwork>
-            <pg-code>
-            </pg-code>
-            -->
-            <statement>
-              <p>
-                Contains the parallel lines
-              </p>
-
-              <p>
-                <m>\vec\ell_1(t) = \la 1,1,1\ra + t\la 1,2,3\ra</m> and
-              </p>
-
-              <p>
-                <m>\vec\ell_2(t) = \la 1,1,2\ra + t\la 1,2,3\ra</m>.
-              </p>
-            </statement>
-            <solution>
-              <p>
-                Answers may vary;
-              </p>
-
-              <p>
-                Standard form: <m>2(x-1)-(y-1)=0</m>
-              </p>
-
-              <p>
-                general form: <m>2x-y=1</m>
-              </p>
-            </solution>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <webwork>
-
-            <pg-code>
-              sub grouped {
-                my $op = shift;
-                return 1 if ($op->{name} or $op->{isConstant});
-                if ($op->{uop}) {return grouped($op->{op});};
-                my $context=Context();
-                my $lft=$context->Package("Formula")->new($context,$op->{lop});
-                my $rgt=$context->Package("Formula")->new($context,$op->{rop});
-                return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
-                if ($op->{bop} eq '+' or $op->{bop} eq '-') {
-                  return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
-                };
-                return (grouped($op->{lop}) and grouped($op->{rop}));
-              };
-              Context("ImplicitEquation");
-              Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-              Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
-              $st=ImplicitEquation("2(x-1)+(y-1)-3(z-1)=0");
-              $stev=$st->cmp(checker=>sub{
-                my ( $correct, $student, $ansHash ) = @_;
-                #return 0 if $ansHash->{isPreview} || $correct != $student;
-                my $context = Context();
-                my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
-                return $correct == $student;
-              });
-              $ge=ImplicitEquation("2x+y-3z=0");
-              $geev=$ge->cmp(checker=>sub{
-                my ( $correct, $student, $ansHash ) = @_;
-                return 0 if $ansHash->{isPreview} || $correct != $student;
-                my $context = Context();
-                my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
-                Value::Error("Your answer is not in general form") unless $right->isConstant;
-                return $correct == $student;
-              });
-            </pg-code>
-
-            <statement>
-              <p>
-                A plane contains the parallel lines
-                <m>\vec\ell_1(t) = \la 1,1,1\ra + t\la 4,1,3\ra</m> and <m>\vec\ell_2(t) = \la 2,2,2\ra + t\la 4,1,3\ra</m>.
-              </p>
-
-              <p>
-                An equation for this plane in standard form is <var name="$st" evaluator="$stev" width="30"/>.
-              </p>
-
-              <p>
-                An equation for this plane in general form is <var name="$ge" evaluator="$geev" width="30"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <!--<webwork>
-            <pg-code>
-            </pg-code>
-            -->
-            <statement>
-              <p>
-                Contains the point <m>(2,-6,1)</m> and the line
-              </p>
-
-              <p>
-                <m>\vec\ell(t) = \left\{\begin{aligned}x\amp =2+5t \\
-																	y\amp =2+2t \\
-																	z\amp =-1+2t
-                \end{aligned} \right.</m>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                Answers may vary;
-              </p>
-
-              <p>
-                Standard form: <m>2(x-2)-(y+6)-4(z-1)=0</m>
-              </p>
-
-              <p>
-                general form: <m>2x-y-4z=6</m>
-              </p>
-            </solution>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <webwork>
-
-            <pg-code>
-              sub grouped {
-                my $op = shift;
-                return 1 if ($op->{name} or $op->{isConstant});
-                if ($op->{uop}) {return grouped($op->{op});};
-                my $context=Context();
-                my $lft=$context->Package("Formula")->new($context,$op->{lop});
-                my $rgt=$context->Package("Formula")->new($context,$op->{rop});
-                return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
-                if ($op->{bop} eq '+' or $op->{bop} eq '-') {
-                  return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
-                };
-                return (grouped($op->{lop}) and grouped($op->{rop}));
-              };
-              Context("ImplicitEquation");
-              Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-              Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
-              $st=ImplicitEquation("4(x-5)-2(y-7)-2(z-3)=0");
-              $stev=$st->cmp(checker=>sub{
-                my ( $correct, $student, $ansHash ) = @_;
-                #return 0 if $ansHash->{isPreview} || $correct != $student;
-                my $context = Context();
-                my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
-                return $correct == $student;
-              });
-              $ge=ImplicitEquation("4x-2y-2z=0");
-              $geev=$ge->cmp(checker=>sub{
-                my ( $correct, $student, $ansHash ) = @_;
-                return 0 if $ansHash->{isPreview} || $correct != $student;
-                my $context = Context();
-                my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
-                Value::Error("Your answer is not in general form") unless $right->isConstant;
-                return $correct == $student;
-              });
-            </pg-code>
-
-            <statement>
-              <p>
-                A plane contains the point <m>(5,7,3)</m> and the line <m>\vec\ell(t) = \begin{cases}x\amp=t\\y\amp=t\\z\amp=t\end{cases}</m>.
-              </p>
-
-              <p>
-                An equation for this plane in standard form is <var name="$st" evaluator="$stev" width="30"/>.
-              </p>
-
-              <p>
-                An equation for this plane in general form is <var name="$ge" evaluator="$geev" width="30"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork>
-
-            <pg-code>
-              sub grouped {
-                my $op = shift;
-                return 1 if ($op->{name} or $op->{isConstant});
-                if ($op->{uop}) {return grouped($op->{op});};
-                my $context=Context();
-                my $lft=$context->Package("Formula")->new($context,$op->{lop});
-                my $rgt=$context->Package("Formula")->new($context,$op->{rop});
-                return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
-                if ($op->{bop} eq '+' or $op->{bop} eq '-') {
-                  return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
-                };
-                return (grouped($op->{lop}) and grouped($op->{rop}));
-              };
-              Context("ImplicitEquation");
-              Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-              Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
-              $st=ImplicitEquation("(x-5)+(y-7)+(z-3)=0");
-              $stev=$st->cmp(checker=>sub{
-                my ( $correct, $student, $ansHash ) = @_;
-                #return 0 if $ansHash->{isPreview} || $correct != $student;
-                my $context = Context();
-                my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
-                return $correct == $student;
-              });
-              $ge=ImplicitEquation("x+y+z=15");
-              $geev=$ge->cmp(checker=>sub{
-                my ( $correct, $student, $ansHash ) = @_;
-                return 0 if $ansHash->{isPreview} || $correct != $student;
-                my $context = Context();
-                my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
-                Value::Error("Your answer is not in general form") unless $right->isConstant;
-                return $correct == $student;
-              });
-            </pg-code>
-
-            <statement>
-              <p>
-                A plane contains the point <m>(5,7,3)</m> and is orthogonal to the line <m>\vec\ell(t) = \la 4,5,6\ra+ t\la 1,1,1\ra</m>.
-              </p>
-
-              <p>
-                An equation for this plane in standard form is <var name="$st" evaluator="$stev" width="30"/>.
-              </p>
-
-              <p>
-                An equation for this plane in general form is <var name="$ge" evaluator="$geev" width="30"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork>
-
-            <pg-code>
-              sub grouped {
-                my $op = shift;
-                return 1 if ($op->{name} or $op->{isConstant});
-                if ($op->{uop}) {return grouped($op->{op});};
-                my $context=Context();
-                my $lft=$context->Package("Formula")->new($context,$op->{lop});
-                my $rgt=$context->Package("Formula")->new($context,$op->{rop});
-                return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
-                if ($op->{bop} eq '+' or $op->{bop} eq '-') {
-                  return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
-                };
-                return (grouped($op->{lop}) and grouped($op->{rop}));
-              };
-              Context("ImplicitEquation");
-              Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-              Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
-              $st=ImplicitEquation("4(x-4)+(y-1)+(z-1)=0");
-              $stev=$st->cmp(checker=>sub{
-                my ( $correct, $student, $ansHash ) = @_;
-                #return 0 if $ansHash->{isPreview} || $correct != $student;
-                my $context = Context();
-                my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
-                return $correct == $student;
-              });
-              $ge=ImplicitEquation("4x+y+z=18");
-              $geev=$ge->cmp(checker=>sub{
-                my ( $correct, $student, $ansHash ) = @_;
-                return 0 if $ansHash->{isPreview} || $correct != $student;
-                my $context = Context();
-                my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
-                Value::Error("Your answer is not in general form") unless $right->isConstant;
-                return $correct == $student;
-              });
-            </pg-code>
-
-            <statement>
-              <p>
-                A plane contains the point <m>(4,1,1)</m> and is orthogonal to the line <m>\begin{cases}x\amp=4+4t\\y\amp=1+t\\z\amp=1+t\end{cases}</m>.
-              </p>
-
-              <p>
-                An equation for this plane in standard form is <var name="$st" evaluator="$stev" width="30"/>.
-              </p>
-
-              <p>
-                An equation for this plane in general form is <var name="$ge" evaluator="$geev" width="30"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork>
-
-            <pg-code>
-              sub grouped {
-                my $op = shift;
-                return 1 if ($op->{name} or $op->{isConstant});
-                if ($op->{uop}) {return grouped($op->{op});};
-                my $context=Context();
-                my $lft=$context->Package("Formula")->new($context,$op->{lop});
-                my $rgt=$context->Package("Formula")->new($context,$op->{rop});
-                return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
-                if ($op->{bop} eq '+' or $op->{bop} eq '-') {
-                  return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
-                };
-                return (grouped($op->{lop}) and grouped($op->{rop}));
-              };
-              Context("ImplicitEquation");
-              Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-              Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
-              $st=ImplicitEquation("3(x+4)+8(y-7)-10(z-2)=0");
-              $stev=$st->cmp(checker=>sub{
-                my ( $correct, $student, $ansHash ) = @_;
-                #return 0 if $ansHash->{isPreview} || $correct != $student;
-                my $context = Context();
-                my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
-                return $correct == $student;
-              });
-              $ge=ImplicitEquation("3x+8y-10z=24");
-              $geev=$ge->cmp(checker=>sub{
-                my ( $correct, $student, $ansHash ) = @_;
-                return 0 if $ansHash->{isPreview} || $correct != $student;
-                my $context = Context();
-                my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
-                Value::Error("Your answer is not in general form") unless $right->isConstant;
-                return $correct == $student;
-              });
-            </pg-code>
-
-            <statement>
-              <p>
-                A plane contains the point
-                <m>(-4,7,2)</m> and is parallel to the plane <m>3(x-2)+8(y+1) -10z=0</m>.
-              </p>
-
-              <p>
-                An equation for this plane in standard form is <var name="$st" evaluator="$stev" width="30"/>.
-              </p>
-
-              <p>
-                An equation for this plane in general form is <var name="$ge" evaluator="$geev" width="30"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork>
-
-            <pg-code>
-              sub grouped {
-                my $op = shift;
-                return 1 if ($op->{name} or $op->{isConstant});
-                if ($op->{uop}) {return grouped($op->{op});};
-                my $context=Context();
-                my $lft=$context->Package("Formula")->new($context,$op->{lop});
-                my $rgt=$context->Package("Formula")->new($context,$op->{rop});
-                return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
-                if ($op->{bop} eq '+' or $op->{bop} eq '-') {
-                  return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
-                };
-                return (grouped($op->{lop}) and grouped($op->{rop}));
-              };
-              Context("ImplicitEquation");
-              Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-              Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
-              $st=ImplicitEquation("x-1=0");
-              $stev=$st->cmp(checker=>sub{
-                my ( $correct, $student, $ansHash ) = @_;
-                #return 0 if $ansHash->{isPreview} || $correct != $student;
-                my $context = Context();
-                my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
-                return $correct == $student;
-              });
-              $ge=ImplicitEquation("x=1");
-              $geev=$ge->cmp(checker=>sub{
-                my ( $correct, $student, $ansHash ) = @_;
-                return 0 if $ansHash->{isPreview} || $correct != $student;
-                my $context = Context();
-                my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
-                Value::Error("Your answer is not in general form") unless $right->isConstant;
-                return $correct == $student;
-              });
-            </pg-code>
-
-            <statement>
-              <p>
-                A plane contains the point <m>(1,2,3)</m> and is parallel to the plane <m>x=5</m>.
-              </p>
-
-              <p>
-                An equation for this plane in standard form is <var name="$st" evaluator="$stev" width="30"/>.
-              </p>
-
-              <p>
-                An equation for this plane in general form is <var name="$ge" evaluator="$geev" width="30"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-    </exercisegroup>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          In the following exercises,
-          give the equation of the line that is the intersection of the given planes.
-        </p>
-      </introduction>
-
-      <exercise>
-        <!--<webwork>
-            <pg-code>
-            </pg-code>
-            -->
-            <statement>
-              <p>
-                <m>p1:\ 3 (x - 2) + (y - 1) + 4 z=0</m>, and
-              </p>
-
-              <p>
-                <m>p2:\ 2 (x - 1) - 2 (y + 3) + 6 (z - 1)=0</m>.
-              </p>
-            </statement>
-            <solution>
-              <p>
-                Answers may vary:
-              </p>
-
-              <p>
-                <m>\ell = \left\{\begin{aligned}x \amp = 14t\\
-                y \amp = -1-10t\\
-                z\amp = 2-8t
-                \end{aligned} \right.</m>
-              </p>
-            </solution>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context("Vector");
-              Context()->variables->are(t=>"Real");
-              $v=Compute("(1,3,3.5)+t&lt;20,2,-26>");
-              $vev=$v->cmp(checker=>sub{my($c,$st,$aH)=@_;
-                $ds=Formula($st)->D('t')->reduce;
-                if($ds->isConstant){$ds=Vector("$ds");}else{return 0;};
-                $dc=$c->D('t')->reduce;$dc=Vector("$dc");$par=$ds->isParallel($dc);
-                $sp=Formula($st)->eval(t=>0);$cp=$c->eval(t=>0);
-                $tch=(($sp==$cp) or $dc->isParallel($sp-$cp));
-                return ($par and $tch);
-              });
-            </pg-code>
-
-            <statement>
-              <p>
-                Give the equation of the line
-                (in vector form)
-                that is the intersection of the planes <m>5 (x - 5) + 2 (y + 2) + 4 (z - 1)=0</m>,
-                and <m>3 x - 4 (y - 1) + 2 (z - 1)=0</m>.
-              </p>
-
-              <p>
-                <var name="$v" evaluator="$vev" width="30"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-    </exercisegroup>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          In the following exercises,
-          find the point of intersection between the line and the plane.
-        </p>
-      </introduction>
-
-      <exercise>
-        <!--<webwork>
-            <pg-code>
-            </pg-code>
-            -->
-            <statement>
-              <p>
-                line: <m>\la 5,1,-1\ra + t\la 2,2,1\ra</m>,
-              </p>
-
-              <p>
-                plane: <m>5x-y-z=-3</m>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                <m>(-3,-7,-5)</m>
-              </p>
-            </solution>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context("Point");
-              Context()->strings->add('the entire line'=>{});
-              $point=Point("(3,1,1)");
-            </pg-code>
-
-            <statement>
-              <p>
-                Find the point of intersection between the line
-                <m>\la 4,1,0\ra + t\la 1,0,-1\ra</m> and the plane <m>3x+y-2z=8</m>.
-                (If the plane contains the line,
-                enter <q>the entire line</q>.
-                If the line does not intersect the plane at all, enter <q>none</q>.)
-              </p>
-
-              <p>
-                <var name="$point" width="10"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <!--<webwork>
-            <pg-code>
-            </pg-code>
-            -->
-            <statement>
-              <p>
-                line: <m>\la 1,2,3\ra + t\la 3,5,-1\ra</m>,
-              </p>
-
-              <p>
-                plane: <m>3x-2y-z=4</m>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                No point of intersection; the plane and line are parallel.
-              </p>
-            </solution>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context("Point");
-              Context()->strings->add('the entire line'=>{});
-              $point=Compute('the entire line');
-            </pg-code>
-
-            <statement>
-              <p>
-                Find the point of intersection between the line
-                <m>\la 1,2,3\ra + t\la 3,5,-1\ra</m> and the plane <m>3x-2y-z=-4</m>.
-                (If the plane contains the line,
-                enter <q>the entire line</q>.
-                If the line does not intersect the plane at all, enter <q>none</q>.)
-              </p>
-
-              <p>
-                <var name="$point" width="10"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-    </exercisegroup>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          In the following exercises, find the given distances.
-        </p>
-      </introduction>
-
-      <exercise>
-        <!--<webwork>
-            <pg-code>
-            </pg-code>
-            -->
-            <statement>
-              <p>
-                The distance from the point <m>(1,2,3)</m> to the plane
-              </p>
-
-              <p>
-                <m>3(x-1)+(y-2)+5(z-2)=0</m>.
-              </p>
-            </statement>
-            <answer>
-              <p>
-                <m>\sqrt{5/7}</m>
-              </p>
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
-              $distance=Formula("8/sqrt(21)");
-            </pg-code>
-
-            <statement>
-              <p>
-                Find the distance from the point <m>(2,6,2)</m> to the plane <m>2(x-1)-y+4(z+1)=0</m>.
-              </p>
-
-              <p>
-                <var name="$distance" width="10"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <!--<webwork>
-            <pg-code>
-            </pg-code>
-            -->
-            <statement>
-              <p>
-                The distance between the parallel planes
-              </p>
-
-              <p>
-                <m>x+y+z=0</m> and
-              </p>
-
-              <p>
-                <m>(x-2)+(y-3)+(z+4)=0</m>
-              </p>
-            </statement>
-            <answer>
-              <p>
-                <m>1/\sqrt{3}</m>
-              </p>
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
-              $distance=Formula("3");
-            </pg-code>
-
-            <statement>
-              <p>
-                Find the distance between the parallel planes
-                <m>2(x-1)+2(y+1)+(z-2)=0</m> and <m>2(x-3)+2(y-1)+(z-3)=0</m>.
-              </p>
-
-              <p>
-                <var name="$distance" width="10"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-    </exercisegroup>
-
-    <exercise>
-      <!--<webwork>
-          <pg-code>
-          </pg-code>
-          -->
-          <statement>
-            <p>
-              Show why if the point <m>Q</m> lies in a plane,
-              then the distance formula correctly gives the distance from the point to the plane as <m>0</m>.
-            </p>
-          </statement>
-          <solution>
-            <p>
-              If <m>P</m> is any point in the plane,
-              and <m>Q</m> is also in the plane,
-              then <m>\overrightarrow{PQ}</m> lies parallel to the plane and is orthogonal to <m>\vec n</m>,
-              the normal vector.
-              Thus <m>\vec n\cdot \overrightarrow{PQ}=0</m>, giving the distance as 0.
-            </p>
-          </solution>
-      <!-- </webwork> -->
-    </exercise>
-
-    <exercise>
-      <!--<webwork>
-          <pg-code>
-          </pg-code>
-          -->
-          <statement>
-            <p>
-              How is <xref ref="x10_05_ex_30">Exercise</xref>
-              in <xref ref="sec_lines">Section</xref>
-              easier to answer once we have an understanding of planes?
-            </p>
-          </statement>
-          <solution>
-            <p>
-              The intersecting lines define a plane with normal vector <m>\vec n = \vec c = \vec d_1\times \vec d_2</m>.
-              Since points <m>P_1</m> and <m>P_2</m> lie in the plane,
-              <m>\vec c</m> is orthogonal to <m>\overrightarrow{P_1P_2}</m>,
-              hence <m>\overrightarrow{P_1P_2}\cdot\vec c = 0</m>, giving a distance of 0.
-              Knowing the principles of planes,
-              especially their normal vectors, makes this simpler.
-            </p>
-          </solution>
-      <!-- </webwork> -->
-    </exercise>
-
+    </subexercises>
   </exercises>
 </section>

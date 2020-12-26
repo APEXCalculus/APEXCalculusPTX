@@ -3617,13 +3617,8 @@
   </subsection>
 
   <exercises>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          Terms and Concepts
-        </p>
-      </introduction>
+    <subexercises>
+      <title>Terms and Concepts</title>
 
       <exercise>
         <!-- <webwork>
@@ -3749,182 +3744,60 @@
             </solution>
         <!-- </webwork> -->
       </exercise>
-
-    </exercisegroup>
-
-    <exercise>
-      <webwork>
-          <pg-code>
-            Context("Point");
-            $A=Point("(1,4,2)");
-            $B=Point("(2,6,3)");
-            $C=Point("(4,3,1)");
-            $AB=$B-$A;
-            $BC=$C-$B;
-            $CA=$A-$C;
-            @ABcoords=$AB->value;
-            @BCcoords=$BC->value;
-            @CAcoords=$CA->value;
-            Context()->flags->set(reduceConstantFunctions=>0);
-            $magAB=Formula("sqrt(($ABcoords[0])^2+($ABcoords[1])^2+($ABcoords[2])^2)");
-            $magBC=Formula("sqrt(($BCcoords[0])^2+($BCcoords[1])^2+($BCcoords[2])^2)");
-            $magCA=Formula("sqrt(($CAcoords[0])^2+($CAcoords[1])^2+($CAcoords[2])^2)");
-            ($a,$b,$c)=num_sort($magAB,$magBC,$magCA);
-            $dodonot=(($a)**2+($b)**2==($c)**2)?'do':'do not';
-            $yn=PopUp(['?','do','do not'],$dodonot);
-          </pg-code>
-
-          <statement>
-            <p>
-              The points <m>A=(1,4,2)</m>,
-              <m>B=(2,6,3)</m> and <m>C=(4,3,1)</m> form a triangle in space.
-              Find the distances between each pair of points and determine if the triangle is a right triangle.
-            </p>
-
-            <p>
-              <m>\left\lVert\overline{AB}\right\rVert=</m><var name="$magAB" width="10"/>
-            </p>
-
-            <p>
-              <m>\left\lVert\overline{BC}\right\rVert=</m><var name="$magBC" width="10"/>
-            </p>
-
-            <p>
-              <m>\left\lVert\overline{CA}\right\rVert=</m><var name="$magCA" width="10"/>
-            </p>
-
-            <p>
-              The three points <var name="$yn" form="popup"/> form a right triangle.
-            </p>
-          </statement>
-          <solution>
-            <p>
-              <m>\norm{\overline{AB}} = \sqrt{6}</m>;
-              <m>\norm{\overline{BC}} = \sqrt{17}</m>;
-              <m>\norm{\overline{AC}} = \sqrt{11}</m>.
-              Yes, it is a right triangle as <m>\norm{\overline{AB}}^2+\norm{\overline{AC}}^2=\norm{\overline{BC}}^2</m>.
-            </p>
-          </solution>
-      </webwork>
-    </exercise>
-
-    <exercise>
-      <!-- <webwork>
-          <pg-code>
-          </pg-code> -->
-          <statement>
-            <p>
-              The points <m>A=(1,1,3)</m>, <m>B=(3,2,7)</m>,
-              <m>C=(2,0,8)</m> and <m>D = (0,-1,4)</m> form a quadrilateral <m>ABCD</m> in space.
-              Is this a parallelogram?
-            </p>
-          </statement>
-          <solution>
-            <p>
-              Yes, as opposite sides have equal length.
-              <m>\norm{\overline{AB}} = \sqrt{21}=\norm{\overline{CD}}</m>;
-              <m>\norm{\overline{BC}} = \sqrt{6}=\norm{\overline{AD}}</m>.
-            </p>
-          </solution>
-      <!-- </webwork> -->
-    </exercise>
-
-    <exercise>
-      <webwork>
-          <pg-code>
-            Context("Point");
-            $center=Point("(4,-1,0)");
-            $radius=Real("3");
-          </pg-code>
-
-          <statement>
-            <p>
-              Find the center and radius of the sphere defined by
-              <me>
-                x^2-8x+y^2+2y+z^2+8=0:
-              </me>
-            </p>
-
-            <p>
-              Center at <var name="$center" width="10"/>.
-            </p>
-
-            <p>
-              Radius of <var name="$radius" width="10"/>.
-            </p>
-          </statement>
-      </webwork>
-    </exercise>
-
-    <exercise>
-      <webwork>
-          <pg-code>
-            Context("Point");
-            $center=Point("(-2,1,2)");
-            Context()->flags->set(reduceConstantFunctions=>0);
-            $radius=Formula("sqrt(5)");
-          </pg-code>
-
-          <statement>
-            <p>
-              Find the center and radius of the sphere defined by
-              <me>
-                x^2+y^2+z^2+4x-2y-4z+4=0:
-              </me>
-            </p>
-
-            <p>
-              Center at <var name="$center" width="10"/>.
-            </p>
-
-            <p>
-              Radius of <var name="$radius" width="10"/>.
-            </p>
-          </statement>
-      </webwork>
-    </exercise>
-
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          In the following exercises,
-          describe the region in space defined by the inequalities.
-        </p>
-      </introduction>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>x^2+y^2+z^2\lt 1</m>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                Interior of a sphere with radius 1 centered at the origin.
-              </p>
-            </solution>
-        <!-- </webwork> -->
-      </exercise>
-
+    </subexercises>
+    <subexercises>
+      <title>Problems</title>
       <exercise>
         <webwork>
             <pg-code>
+              Context("Point");
+              $A=Point("(1,4,2)");
+              $B=Point("(2,6,3)");
+              $C=Point("(4,3,1)");
+              $AB=$B-$A;
+              $BC=$C-$B;
+              $CA=$A-$C;
+              @ABcoords=$AB->value;
+              @BCcoords=$BC->value;
+              @CAcoords=$CA->value;
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $magAB=Formula("sqrt(($ABcoords[0])^2+($ABcoords[1])^2+($ABcoords[2])^2)");
+              $magBC=Formula("sqrt(($BCcoords[0])^2+($BCcoords[1])^2+($BCcoords[2])^2)");
+              $magCA=Formula("sqrt(($CAcoords[0])^2+($CAcoords[1])^2+($CAcoords[2])^2)");
+              ($a,$b,$c)=num_sort($magAB,$magBC,$magCA);
+              $dodonot=(($a)**2+($b)**2==($c)**2)?'do':'do not';
+              $yn=PopUp(['?','do','do not'],$dodonot);
             </pg-code>
 
             <statement>
               <p>
-                <m>0\leq x\leq 3</m>
+                The points <m>A=(1,4,2)</m>,
+                <m>B=(2,6,3)</m> and <m>C=(4,3,1)</m> form a triangle in space.
+                Find the distances between each pair of points and determine if the triangle is a right triangle.
+              </p>
+
+              <p>
+                <m>\left\lVert\overline{AB}\right\rVert=</m><var name="$magAB" width="10"/>
+              </p>
+
+              <p>
+                <m>\left\lVert\overline{BC}\right\rVert=</m><var name="$magBC" width="10"/>
+              </p>
+
+              <p>
+                <m>\left\lVert\overline{CA}\right\rVert=</m><var name="$magCA" width="10"/>
+              </p>
+
+              <p>
+                The three points <var name="$yn" form="popup"/> form a right triangle.
               </p>
             </statement>
             <solution>
               <p>
-                Region bounded between the planes <m>x=0</m>
-                (the <m>y-z</m> coordinate plane)
-                and <m>x=3</m>.
+                <m>\norm{\overline{AB}} = \sqrt{6}</m>;
+                <m>\norm{\overline{BC}} = \sqrt{17}</m>;
+                <m>\norm{\overline{AC}} = \sqrt{11}</m>.
+                Yes, it is a right triangle as <m>\norm{\overline{AB}}^2+\norm{\overline{AC}}^2=\norm{\overline{BC}}^2</m>.
               </p>
             </solution>
         </webwork>
@@ -3936,400 +3809,43 @@
             </pg-code> -->
             <statement>
               <p>
-                <m>x\geq 0,\ y\geq0, \ z\geq0</m>
+                The points <m>A=(1,1,3)</m>, <m>B=(3,2,7)</m>,
+                <m>C=(2,0,8)</m> and <m>D = (0,-1,4)</m> form a quadrilateral <m>ABCD</m> in space.
+                Is this a parallelogram?
               </p>
             </statement>
             <solution>
               <p>
-                The first octant of space;
-                all points <m>(x,y,z)</m> where each of <m>x</m>,
-                <m>y</m> and <m>z</m> are positive.
-                (Analogous to the first quadrant in the plane.)
+                Yes, as opposite sides have equal length.
+                <m>\norm{\overline{AB}} = \sqrt{21}=\norm{\overline{CD}}</m>;
+                <m>\norm{\overline{BC}} = \sqrt{6}=\norm{\overline{AD}}</m>.
               </p>
             </solution>
         <!-- </webwork> -->
       </exercise>
 
       <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>y\geq 3</m>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                All points in space where the <m>y</m> value is greater than 3;
-                viewing space as often depicted in this text,
-                this is the region <q>to the right</q>
-                of the plane <m>y=3</m> (which is parallel to the <m>x-z</m> coordinate plane.)
-              </p>
-            </solution>
-        <!-- </webwork> -->
-      </exercise>
-
-    </exercisegroup>
-
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          In the following exercises, sketch the cylinder in space.
-        </p>
-      </introduction>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>z=x^3</m>
-              </p>
-            </statement>
-            <answer>
-                  <!-- START figures/fig10_01_ex_15_3D.asy -->
-                <image xml:id="img_10_01_ex_15_3DX" width="47%">
-                  <description></description>
-                  <asymptote>
-
-
-
-                    //ASY file for fig10_01_ex_153D.asy in Chapter 10
-
-                    size(282,282,IgnoreAspect);
-                    //currentprojection=perspective(7,2,1);
-                    currentprojection=orthographic(4,4,2);
-                    defaultrender.merge=true;
-
-                    // setup and draw the axes
-                    real[] myxchoice={-1,1};
-                    real[] myychoice={};
-                    real[] myzchoice={};
-                    defaultpen(0.5mm);
-                    pair xbounds=(-1.25,1.25);
-                    pair ybounds=(-1.25,1.25);
-                    pair zbounds=(-1.25,1.25);
-
-                    xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                    yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                    zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                    label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                    label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                    label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                    //Draw the parabola z=x^3 for t from -2 to 2
-                    triple g(real t) {return (t,0,t^3);}
-                    path3 mypath=graph(g,-1,1,operator ..); draw(mypath,bluepen);
-
-                    //Draw the cylinder z=x^3
-                    triple f(pair t) {
-                      return (t.x,t.y,(t.x)^3);
-                    }
-                    surface s=surface(f,(-1,-1),(1,1),16,16,Spline);
-                    pen p=apexmeshpen;
-                    draw(s,surfacepen,meshpen=p);
-
-                    //Draw the traces (in this case lines)
-                    triple g(real t) {return (-0.2,t,(-0.2)^3);}
-                    path3 mypath=graph(g,-1,1,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (-0.4,t,(-0.4)^3);}
-                    path3 mypath=graph(g,-1,1,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (-0.6,t,(-0.6)^3);}
-                    path3 mypath=graph(g,-1,1,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (-0.8,t,(-0.8)^3);}
-                    path3 mypath=graph(g,-1,1,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (-1,t,(-1)^3);}
-                    path3 mypath=graph(g,-1,1,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (0.2,t,(0.2)^3);}
-                    path3 mypath=graph(g,-1,1,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (0.4,t,(0.4)^3);}
-                    path3 mypath=graph(g,-1,1,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (0.6,t,(0.6)^3);}
-                    path3 mypath=graph(g,-1,1,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (0.8,t,(0.8)^3);}
-                    path3 mypath=graph(g,-1,1,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (1,t,(1)^3);}
-                    path3 mypath=graph(g,-1,1,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (t,0,(t)^3);}
-                    path3 mypath=graph(g,-1,1,operator ..); draw(mypath,bluepen);
-
-                  </asymptote>
-                </image>
-            <!-- figures/fig10_01_ex_15_3D.asy END -->
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>y=\cos(z)</m>
-              </p>
-            </statement>
-            <answer>
-                  <!-- START figures/fig10_01_ex_16_3D.asy -->
-                <image xml:id="img_10_01_ex_16_3DX" width="47%">
-                  <description></description>
-                  <asymptote>
-
-
-
-                    //ASY file for fig10_01_ex_173D.pdf in Chapter 10
-
-                    size(282,282,IgnoreAspect);
-                    //currentprojection=perspective(7,2,1);
-                    currentprojection=orthographic(4,4,2);
-                    defaultrender.merge=true;
-
-                    // setup and draw the axes
-                    real[] myxchoice={};
-                    real[] myychoice={-3,3};
-                    real[] myzchoice={-6,6};
-                    defaultpen(0.5mm);
-                    pair xbounds=(-2,2);
-                    pair ybounds=(-2,2);
-                    pair zbounds=(-2*pi,2*pi);
-
-                    xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                    yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                    zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                    label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                    label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                    label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                    //Draw the cylinder on top
-                    triple f(pair t) {
-                      return (t.x,cos(t.y),t.y);
-                    }
-                    surface s=surface(f,(-2,-2*pi),(2,2*pi),8,32,Spline);
-                    pen p=apexmeshpen;
-                    draw(s,surfacepen,meshpen=p);
-
-                    //Draw the traces (in this case vertical lines)
-                    triple g(real t) {return (t,cos(-3*pi/2),-3*pi/2);}
-                    path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (t,cos(-pi/2),-pi/2);}
-                    path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (t,cos(0),0);}
-                    path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (t,cos(3*pi/2),3*pi/2);}
-                    path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (t,cos(pi/2),pi/2);}
-                    path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (0,cos(t),t);}
-                    path3 mypath=graph(g,-2*pi,pi*2,operator ..); draw(mypath,bluepen);
-
-                  </asymptote>
-                </image>
-               <!-- figures/fig10_01_ex_16_3D.asy END -->
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>\ds \frac{x^2}{4}+\frac{y^2}{9}=1</m>
-              </p>
-            </statement>
-            <answer>
-                  <!-- START figures/fig10_01_ex_17_3D.asy -->
-                <image xml:id="img_10_01_ex_17_3DX" width="47%">
-                  <description></description>
-                  <asymptote>
-
-
-
-                    //ASY file for fig10_01_ex_173D.pdf in Chapter 10
-
-                    size(282,282,IgnoreAspect);
-                    //currentprojection=perspective(7,2,1);
-                    currentprojection=orthographic(4,4,2);
-                    defaultrender.merge=true;
-
-                    // setup and draw the axes
-                    real[] myxchoice={-2,2};
-                    real[] myychoice={-3,3};
-                    real[] myzchoice={};
-                    defaultpen(0.5mm);
-                    pair xbounds=(-4,4);
-                    pair ybounds=(-4,4);
-                    pair zbounds=(-4,4);
-
-                    xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                    yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                    zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                    label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                    label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                    label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                    //Draw the cylinder on top
-                    triple f(pair t) {
-                      return (2*cos(t.x),3*sin(t.x),t.y);
-                    }
-                    surface s=surface(f,(0,-2),(2*pi,2),32,8,Spline);
-                    pen p=apexmeshpen;
-                    draw(s,surfacepen,meshpen=p);
-
-                    //Draw the traces (in this case vertical lines)
-                    triple g(real t) {return (2*cos(0),3*sin(0),t);}
-                    path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (2*cos(2*pi/10),3*sin(2*pi/10),t);}
-                    path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (2*cos(2*2*pi/10),3*sin(2*2*pi/10),t);}
-                    path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (2*cos(3*2*pi/10),3*sin(3*2*pi/10),t);}
-                    path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (2*cos(4*2*pi/10),3*sin(4*2*pi/10),t);}
-                    path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (2*cos(5*2*pi/10),3*sin(5*2*pi/10),t);}
-                    path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (2*cos(6*2*pi/10),3*sin(6*2*pi/10),t);}
-                    path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (2*cos(7*2*pi/10),3*sin(7*2*pi/10),t);}
-                    path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (2*cos(8*2*pi/10),3*sin(8*2*pi/10),t);}
-                    path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (2*cos(9*2*pi/10),3*sin(9*2*pi/10),t);}
-                    path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
-
-                    triple g(real t) {return (2*cos(t),3*sin(t),0);}
-                    path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,bluepen);
-
-                  </asymptote>
-                </image>
-            <!-- figures/fig10_01_ex_17_3D.asy END -->
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>\ds y=\frac1x</m>
-              </p>
-            </statement>
-            <answer>
-              <!-- START figures/fig10_01_ex_18_3D.asy -->
-                <image xml:id="img_10_01_ex_18_3DX" width="47%">
-                  <description></description>
-                  <asymptote>
-
-
-
-                    //ASY file for fig10_01_ex_20.pdf in Chapter 10.1
-
-                    size(282,282,IgnoreAspect);
-                    //currentprojection=perspective(7,2,1);
-                    currentprojection=orthographic(-8,41,2.5);
-                    defaultrender.merge=true;
-
-                    // setup and draw the axes
-                    real[] myxchoice={-10,10};
-                    real[] myychoice={-10,10};
-                    real[] myzchoice={-5,5};
-                    defaultpen(0.5mm);
-
-                    pair xbounds=(-12,12);
-                    pair ybounds=(-12,12);
-                    pair zbounds=(-6,6);
-
-                    xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                    yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                    zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                    label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                    label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                    label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                    //Draw the surface y=1/x
-                    triple f(pair t) {
-                      return (t.x,1/t.x,t.y);//({y^2},{cos(x)*y},{3*sin(x)*y});
-                    }
-                    surface s=surface(f,(0.1,-3),(10,3),16,8);
-                    pen p=apexmeshpen;
-                    draw(s,surfacepen,meshpen=p);
-
-                    triple f(pair t) {
-                      return (t.x,1/t.x,t.y);//({y^2},{cos(x)*y},{3*sin(x)*y});
-                    }
-                    surface s=surface(f,(-10,-3),(-.1,3),16,8);
-                    pen p=apexmeshpen;
-                    draw(s,surfacepen,meshpen=p);
-
-                    //Draw the traces (in this case vertical lines)
-                    triple g(real t) {return (1,1,t);}
-                    path3 mypath=graph(g,-3,3,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (-1,-1,t);}
-                    path3 mypath=graph(g,-3,3,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (5,.2,t);}
-                    path3 mypath=graph(g,-3,3,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (-5,-.2,t);}
-                    path3 mypath=graph(g,-3,3,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (10,.1,t);}
-                    path3 mypath=graph(g,-3,3,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (-10,-.1,t);}
-                    path3 mypath=graph(g,-3,3,operator ..); draw(mypath,redpen);
-                    triple g(real t) {return (t,1/t,0);}
-                    path3 mypath=graph(g,.1,10,operator ..); draw(mypath,bluepen);
-                    triple g(real t) {return (t,1/t,0);}
-                    path3 mypath=graph(g,-10,-.1,operator ..); draw(mypath,bluepen);
-
-                    //Add labels
-                    //label("In plane $y=0$",(0,4,1.5),E);
-                    //draw((0,4,1.5)--(3,0,2),linewidth(.75),Arrow3);
-                    //draw((0,5,1.75)--(-3,0,2),linewidth(.75),Arrow3);
-                    //label("In plane $z=d$",(4,0,-1),W);
-                    //draw((-1,3,1.75)--(-2.1,1.1,2),linewidth(.75),Arrow3);
-
-                  </asymptote>
-                </image>
-            <!-- figures/fig10_01_ex_18_3D.asy END -->
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-    </exercisegroup>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          In the following exercises,
-          give the equation of the surface of revolution described.
-        </p>
-      </introduction>
-
-      <exercise>
         <webwork>
             <pg-code>
-              Context("ImplicitEquation");
-              Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-              $eq=ImplicitEquation("x^2+z^2=(1/(1+y^2))^2");
+              Context("Point");
+              $center=Point("(4,-1,0)");
+              $radius=Real("3");
             </pg-code>
 
             <statement>
               <p>
-                Give the equation of the surface formed by revolving
-                <m>z=\frac{1}{1+y^2}</m> in the <m>yz</m>-plane about the <m>y</m>-axis.
+                Find the center and radius of the sphere defined by
+                <me>
+                  x^2-8x+y^2+2y+z^2+8=0:
+                </me>
               </p>
 
               <p>
-                <var name="$eq" width="40"/>
+                Center at <var name="$center" width="10"/>.
+              </p>
+
+              <p>
+                Radius of <var name="$radius" width="10"/>.
               </p>
             </statement>
         </webwork>
@@ -4338,708 +3854,1188 @@
       <exercise>
         <webwork>
             <pg-code>
-              Context("ImplicitEquation");
-              Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-              $eq=ImplicitEquation("y^2+z^2=x^4");
+              Context("Point");
+              $center=Point("(-2,1,2)");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $radius=Formula("sqrt(5)");
             </pg-code>
 
             <statement>
               <p>
-                Give the equation of the surface formed by revolving <m>y=x^2</m> in the <m>xy</m>-plane about the <m>x</m>-axis.
+                Find the center and radius of the sphere defined by
+                <me>
+                  x^2+y^2+z^2+4x-2y-4z+4=0:
+                </me>
               </p>
 
               <p>
-                <var name="$eq" width="40"/>
+                Center at <var name="$center" width="10"/>.
+              </p>
+
+              <p>
+                Radius of <var name="$radius" width="10"/>.
               </p>
             </statement>
         </webwork>
       </exercise>
 
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context("ImplicitEquation");
-              Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-              $eq=ImplicitEquation("x^2+y^2=z");
-            </pg-code>
-
-            <statement>
-              <p>
-                Give the equation of the surface formed by revolving <m>z=x^2</m> in the <m>xz</m>-plane about the <m>z</m>-axis.
-              </p>
-
-              <p>
-                <var name="$eq" width="40"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context("ImplicitEquation");
-              Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-              $eq=ImplicitEquation("x^2+y^2=1/z^2");
-            </pg-code>
-
-            <statement>
-              <p>
-                Give the equation of the surface formed by revolving <m>z=1/x</m> in the <m>xz</m>-plane about the <m>z</m>-axis.
-              </p>
-
-              <p>
-                <var name="$eq" width="40"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-    </exercisegroup>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          In the following exercises, a quadric surface is sketched.
-          Determine which of the given equations best fits the graph.
-        </p>
-      </introduction>
-      <!--TODO: probably should use an ordered list for the two options in each problem here.-->
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <!-- START figures/fig10_01_ex_19_3D.asy -->
-                <image xml:id="img_10_01_ex_19_3D" width="47%">
-                  <description></description>
-                  <asymptote>
-
-
-
-                    //ASY file for fig10_01_ex_19.pdf in Chapter 10.1
-
-                    size(282,282,IgnoreAspect);
-                    //currentprojection=perspective(7,2,1);
-                    currentprojection=orthographic(3,12,2);
-                    defaultrender.merge=true;
-
-                    // setup and draw the axes
-                    real[] myxchoice={1};
-                    real[] myychoice={-3,3};
-                    real[] myzchoice={-3,3};
-                    defaultpen(0.5mm);
-
-                    pair xbounds=(-.5,1.5);
-                    pair ybounds=(-3.5,3.5);
-                    pair zbounds=(-3.5,3.5);
-
-                    xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                    yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                    zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                    label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                    label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                    label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                    //Draw the surface x^2 + y^2/9 + z^2/4 = 1
-                    triple f(pair t) {
-                      return (t.y^2,cos(t.x)*t.y,3*sin(t.x)*t.y);//({y^2},{cos(x)*y},{3*sin(x)*y});
-                    }
-                    surface s=surface(f,(0,0),(2*pi,1),16,16,Spline);
-                    pen p=apexmeshpen;
-                    draw(s,surfacepen,meshpen=p);
-
-                    //Add labels
-                    //label("In plane $y=0$",(0,4,1.5),E);
-                    //draw((0,4,1.5)--(3,0,2),linewidth(.75),Arrow3);
-                    //draw((0,5,1.75)--(-3,0,2),linewidth(.75),Arrow3);
-                    //label("In plane $z=d$",(4,0,-1),W);
-                    //draw((-1,3,1.75)--(-2.1,1.1,2),linewidth(.75),Arrow3);
-
-                  </asymptote>
-                </image>
-              <!-- figures/fig10_01_ex_19_3D.asy END -->
-              <p>
-                (a)  <m>\ds x=y^2+\frac{z^2}{9}</m>    (b)  <m>\ds x=y^2+\frac{z^2}{3}</m>
-              </p>
-            </statement>
-            <answer>
-              <p>
-                (a)<m>\ds x=y^2+\frac{z^2}{9}</m>
-              </p>
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <!-- START figures/fig10_01_ex_20_3D.asy -->
-                <image xml:id="img_10_01_ex_20_3D" width="47%">
-                  <description></description>
-                  <asymptote>
-
-
-
-                    //ASY file for fig10_01_ex_20.pdf in Chapter 10.1
-
-                    size(282,282,IgnoreAspect);
-                    //currentprojection=perspective(7,2,1);
-                    currentprojection=orthographic(5,3,2);
-                    defaultrender.merge=true;
-
-                    // setup and draw the axes
-                    real[] myxchoice={-1,1};
-                    real[] myychoice={-1,1};
-                    real[] myzchoice={-1,1};
-                    defaultpen(0.5mm);
-
-                    pair xbounds=(-1.5,1.5);
-                    pair ybounds=(-1.5,1.5);
-                    pair zbounds=(-1.5,1.5);
-
-                    xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                    yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                    zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                    label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                    label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                    label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                    //Draw the surface x^2 + y^2/9 + z^2/4 = 1
-                    triple f(pair t) {
-                      return (cos(t.x)*(t.y)^2,(t.y)^2,sin(t.x)*(t.y)^2);//({cos(x)*(y)^2},{y^2},{sin(x)*(y)^2});
-                    }
-                    surface s=surface(f,(0,0),(2*pi,1),32,16,Spline);
-                    pen p=apexmeshpen;
-                    draw(s,surfacepen,meshpen=p);
-
-                    triple f(pair t) {
-                      return (cos(t.x)*(t.y)^2,-(t.y)^2,sin(t.x)*(t.y)^2);//({cos(x)*(y)^2},{y^2},{sin(x)*(y)^2});
-                    }
-                    surface s=surface(f,(0,0),(2*pi,1),32,16,Spline);
-                    pen p=apexmeshpen;
-                    draw(s,surfacepen,meshpen=p);
-
-                    //Add labels
-                    //label("In plane $y=0$",(0,4,1.5),E);
-                    //draw((0,4,1.5)--(3,0,2),linewidth(.75),Arrow3);
-                    //draw((0,5,1.75)--(-3,0,2),linewidth(.75),Arrow3);
-                    //label("In plane $z=d$",(4,0,-1),W);
-                    //draw((-1,3,1.75)--(-2.1,1.1,2),linewidth(.75),Arrow3);
-
-                  </asymptote>
-                </image>
-              <!-- figures/fig10_01_ex_20_3D.asy END -->
-              <p>
-                (a)  <m>\ds x^2-y^2-z^2=0</m>    (b)  <m>x^2-y^2+z^2=0</m>
-              </p>
-            </statement>
-            <answer>
-              <p>
-                (b) <m>x^2-y^2+z^2=0</m>
-              </p>
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <!-- START figures/fig10_01_ex_21_3D.asy -->
-                <image xml:id="img_10_01_ex_21_3D" width="47%">
-                  <description></description>
-                  <asymptote>
-
-
-
-                    //ASY file for fig10_01_ex_21.pdf in Chapter 10.1
-
-                    size(282,282,IgnoreAspect);
-                    //currentprojection=perspective(7,2,1);
-                    currentprojection=orthographic(4,4,2);
-                    defaultrender.merge=true;
-
-                    // setup and draw the axes
-                    real[] myxchoice={-1,1};
-                    real[] myychoice={-3,3};
-                    real[] myzchoice={-2,2};
-                    defaultpen(0.5mm);
-
-                    pair xbounds=(-3.5,3.5);
-                    pair ybounds=(-3.5,3.5);
-                    pair zbounds=(-3.5,3.5);
-
-                    xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                    yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                    zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                    label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                    label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                    label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                    //Draw the surface x^2 + y^2/9 + z^2/4 = 1
-                    triple f(pair t) {
-                      return (cos(t.x)*cos(t.y),3*sin(t.x)*cos(t.y),2*sin(t.y));//({cos(x)*cos(y)},{sin(x)*3*cos(y)},{2*sin(y)});
-                    }
-                    surface s=surface(f,(-pi,-pi/2),(pi,pi/2),32,16,Spline);
-                    pen p=apexmeshpen;
-                    draw(s,surfacepen,meshpen=p);
-
-                    //Add labels
-                    //label("In plane $y=0$",(0,4,1.5),E);
-                    //draw((0,4,1.5)--(3,0,2),linewidth(.75),Arrow3);
-                    //draw((0,5,1.75)--(-3,0,2),linewidth(.75),Arrow3);
-                    //label("In plane $z=d$",(4,0,-1),W);
-                    //draw((-1,3,1.75)--(-2.1,1.1,2),linewidth(.75),Arrow3);
-
-                  </asymptote>
-                </image>
-              <!-- figures/fig10_01_ex_21_3D.asy END -->
-              <p>
-                (a)  <m>\ds x^2+\frac{y^2}3+\frac{z^2}2=1</m>    (b)  <m>\ds x^2+\frac{y^2}9+\frac{z^2}4=1</m>
-              </p>
-            </statement>
-            <answer>
-              <p>
-                (b) <m>\ds x^2+\frac{y^2}9+\frac{z^2}4=1</m>
-              </p>
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <!-- START figures/fig10_01_ex_22_3D.asy -->
-                <image xml:id="img_10_01_ex_22_3D" width="47%">
-                  <description></description>
-                  <asymptote>
-
-
-
-                    //ASY file for fig10_01_ex_22.pdf in Chapter 10.1
-
-                    size(282,282,IgnoreAspect);
-                    //currentprojection=perspective(7,2,1);
-                    currentprojection=orthographic(4,4,2);
-                    defaultrender.merge=true;
-
-                    // setup and draw the axes
-                    real[] myxchoice={-2,2};
-                    real[] myychoice={-2,2};
-                    real[] myzchoice={-2,2};
-                    defaultpen(0.5mm);
-
-                    pair xbounds=(-2.5,2.5);
-                    pair ybounds=(-2.5,2.5);
-                    pair zbounds=(-2.5,2.5);
-
-                    xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                    yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                    zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                    label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                    label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                    label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                    //Draw the surface 4x^2 - y^2 - z^2/9 = 1
-                    triple f(pair t) {
-                      return (cos(t.y)*tan(t.x),1/cos(t.x),sin(t.y)*tan(t.x));//({cos(y)*tan(x)},{sec(x)},{tan(x)*sin(y)});
-                    }
-                    surface s=surface(f,(0,0),(1,2*pi),16,16,Spline);
-                    pen p=apexmeshpen;
-                    draw(s,surfacepen,meshpen=p);
-
-                    triple f(pair t) {
-                      return (cos(t.y)*tan(t.x),-1/cos(t.x),sin(t.y)*tan(t.x));//({cos(y)*tan(x)},{sec(x)},{tan(x)*sin(y)});
-                    }
-                    surface s=surface(f,(0,0),(1,2*pi),16,16,Spline);
-                    pen p=apexmeshpen;
-                    draw(s,surfacepen,meshpen=p);
-
-                    //Add labels
-                    //label("In plane $y=0$",(0,4,1.5),E);
-                    //draw((0,4,1.5)--(3,0,2),linewidth(.75),Arrow3);
-                    //draw((0,5,1.75)--(-3,0,2),linewidth(.75),Arrow3);
-                    //label("In plane $z=d$",(4,0,-1),W);
-                    //draw((-1,3,1.75)--(-2.1,1.1,2),linewidth(.75),Arrow3);
-
-                  </asymptote>
-                </image>
-              <!-- figures/fig10_01_ex_22_3D.asy END -->
-              <p>
-                (a)  <m>y^2-x^2-z^2=1</m>    (b)  <m>y^2+x^2-z^2=1</m>
-              </p>
-            </statement>
-            <answer>
-              <p>
-                (a) <m>y^2-x^2-z^2=1</m>
-              </p>
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-    </exercisegroup>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          In the following exercises, sketch the quadric surface.
-        </p>
-      </introduction>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>\ds z-y^2+x^2=0</m>
-              </p>
-            </statement>
-            <answer>
-              <!-- START figures/fig10_01_ex_28_3D.asy -->
-                <image xml:id="img_10_01_ex_28_3DX" width="47%">
-                  <description></description>
-                  <asymptote>
-
-
-
-                    //ASY file for fig10_01_ex_283D.asy in Chapter 10
-
-                    size(282,282,IgnoreAspect);
-                    //currentprojection=perspective(7,2,1);
-                    currentprojection=orthographic(5,3,1);
-                    defaultrender.merge=true;
-
-                    // setup and draw the axes
-                    real[] myxchoice={-1,1};
-                    real[] myychoice={-1,1};
-                    real[] myzchoice={-1,1};
-                    defaultpen(0.5mm);
-                    pair xbounds=(-1.5,1.5);
-                    pair ybounds=(-1.5,1.5);
-                    pair zbounds=(-1.25,1.25);
-
-                    xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                    yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                    zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                    label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                    label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                    label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                    //Draw the hyp par on top
-                    //Draw the surface z^2 - y^2 - x^2=0
-                    triple f(pair t) {
-                      return (t.x,t.y,-(t.x)^2+(t.y)^2);
-                    }
-                    surface s=surface(f,(-1,-1),(1,1),32,16);
-                    pen p=apexmeshpen;
-                    draw(s,surfacepen,meshpen=p);
-
-                  </asymptote>
-                </image>
-            <!-- figures/fig10_01_ex_28_3D.asy END -->
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>\ds z^2=x^2+\frac{y^2}4</m>
-              </p>
-            </statement>
-            <answer>
-              <!-- START figures/fig10_01_ex_24_3D.asy -->
-                <image xml:id="img_10_01_ex_24_3DX" width="47%">
-                  <description></description>
-                  <asymptote>
-
-
-
-                    //ASY file for fig10_01_ex_263D.asy in Chapter 10
-
-                    size(282,282,IgnoreAspect);
-                    //currentprojection=perspective(7,2,1);
-                    currentprojection=orthographic(5,5,1);
-                    defaultrender.merge=true;
-
-                    // setup and draw the axes
-                    real[] myxchoice={-1,1};
-                    real[] myychoice={-4,4};
-                    real[] myzchoice={-2,2};
-                    defaultpen(0.5mm);
-                    pair xbounds=(-5,5);
-                    pair ybounds=(-5,5);
-                    pair zbounds=(-3,3);
-
-                    xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                    yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                    zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                    label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                    label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                    label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                    //Draw the surface x^2/9 - y^2 + z^2/25 = 1
-                    triple f(pair t) {
-                      return (t.y*cos(t.x),2*t.y*sin(t.x),t.y);//
-                    }
-                    surface s=surface(f,(0,-2),(2*pi,2),32,16,Spline);
-                    pen p=apexmeshpen;
-                    draw(s,surfacepen,meshpen=p);
-
-                  </asymptote>
-                </image>
-            <!-- figures/fig10_01_ex_24_3D.asy END -->
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>x=-y^2-z^2</m>
-              </p>
-            </statement>
-            <answer>
-              <!-- START figures/fig10_01_ex_23_3D.asy -->
-                <image xml:id="img_10_01_ex_23_3DX" width="47%">
-                  <description></description>
-                  <asymptote>
-
-
-
-                    //ASY file for fig10_01_ex_233D.asy in Chapter 10
-
-                    size(282,282,IgnoreAspect);
-                    //currentprojection=perspective(7,2,1);
-                    currentprojection=orthographic(4,4,2);
-                    defaultrender.merge=true;
-
-                    // setup and draw the axes
-                    real[] myxchoice={-1,1};
-                    real[] myychoice={-1,1};
-                    real[] myzchoice={-1,1};
-                    defaultpen(0.5mm);
-                    pair xbounds=(-1.5,1.5);
-                    pair ybounds=(-1.5,1.5);
-                    pair zbounds=(-1.25,1.25);
-
-                    xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                    yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                    zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                    label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                    label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                    label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                    //Draw the surface x=-y^2-z^2
-                    triple f(pair t) {
-                      return (-t.x,sqrt(t.x)*cos(t.y),sqrt(t.x)*sin(t.y));
-                    }
-                    surface s=surface(f,(0,0),(1,2*pi),16,16,Spline);
-                    pen p=apexmeshpen;
-                    draw(s,surfacepen,meshpen=p);
-
-                  </asymptote>
-                </image>
-            <!-- figures/fig10_01_ex_23_3D.asy END -->
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>\ds 16x^2-16y^2-16z^2=1</m>
-              </p>
-            </statement>
-            <answer>
-              <!-- START figures/fig10_01_ex_27_3D.asy -->
-                <image xml:id="img_10_01_ex_27_3DX" width="47%">
-                  <description></description>
-                  <asymptote>
-
-
-
-                    //ASY file for fig10_01_ex_263D.asy in Chapter 10
-
-                    size(282,282,IgnoreAspect);
-                    //currentprojection=perspective(7,2,1);
-                    currentprojection=orthographic(5,5,2);
-                    defaultrender.merge=true;
-
-                    // setup and draw the axes
-                    real[] myxchoice={-.25,.25};
-                    real[] myychoice={-.5,.5};
-                    real[] myzchoice={-.5,.5};
-                    defaultpen(0.5mm);
-                    pair xbounds=(-1,1);
-                    pair ybounds=(-1,1);
-                    pair zbounds=(-1,1);
-
-                    xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                    yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                    zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                    label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                    label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                    label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                    //Draw the surface x^2/9 - y^2 + z^2/25 = 1
-                    triple f(pair t) {
-                      return (.25/cos(t.x),.25*cos(t.y)*tan(t.x),.25*sin(t.y)*tan(t.x));//({cos(y)*tan(x)},{tan(x)*sin(y)},{sec(x)})
-                    }
-                    surface s=surface(f,(-pi/3,0),(pi/3,pi),32,16);
-                    pen p=apexmeshpen;
-                    draw(s,surfacepen,meshpen=p);
-
-                    triple f(pair t) {
-                      return (-.25/cos(t.x),.25*cos(t.y)*tan(t.x),.25*sin(t.y)*tan(t.x));//({cos(y)*tan(x)},{tan(x)*sin(y)},{sec(x)})
-                    }
-                    surface s=surface(f,(-pi/3,0),(pi/3,pi),32,16);
-                    pen p=apexmeshpen;
-                    draw(s,surfacepen,meshpen=p);
-
-                  </asymptote>
-                </image>
-            <!-- figures/fig10_01_ex_27_3D.asy END -->
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>\ds \frac{x^2}9-y^2+\frac{z^2}{25}=1</m>
-              </p>
-            </statement>
-            <answer>
-              <!-- START figures/fig10_01_ex_26_3D.asy -->
-                <image xml:id="img_10_01_ex_26_3DX" width="47%">
-                  <description></description>
-                  <asymptote>
-
-
-
-                    //ASY file for fig10_01_ex_263D.asy in Chapter 10
-
-                    size(282,282,IgnoreAspect);
-                    //currentprojection=perspective(7,2,1);
-                    currentprojection=orthographic(13,5,2);
-                    defaultrender.merge=true;
-
-                    // setup and draw the axes
-                    real[] myxchoice={-3,3};
-                    real[] myychoice={-1,1};
-                    real[] myzchoice={-5,5};
-                    defaultpen(0.5mm);
-                    pair xbounds=(-6,6);
-                    pair ybounds=(-1.5,1.5);
-                    pair zbounds=(-6,6);
-
-                    xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                    yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                    zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                    label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                    label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                    label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                    //Draw the surface x^2/9 - y^2 + z^2/25 = 1
-                    triple f(pair t) {
-                      return (3*cos(t.y)/cos(t.x),tan(t.x),5*sin(t.y)/cos(t.x));
-                    }
-                    surface s=surface(f,(-1,0),(1,2*pi),32,16,Spline);
-                    pen p=apexmeshpen;
-                    draw(s,surfacepen,meshpen=p);
-
-                  </asymptote>
-                </image>
-            <!-- figures/fig10_01_ex_26_3D.asy END -->
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>\ds 4x^2+2y^2+z^2=4</m>
-              </p>
-            </statement>
-            <answer>
-              <!-- START figures/fig10_01_ex_25_3D.asy -->
-                <image xml:id="img_10_01_ex_25_3DX" width="47%">
-                  <description></description>
-                  <asymptote>
-
-
-
-                    //ASY file for fig10_01_ex_263D.asy in Chapter 10
-
-                    size(282,282,IgnoreAspect);
-                    //currentprojection=perspective(7,2,1);
-                    currentprojection=orthographic(5,5,2);
-                    defaultrender.merge=true;
-
-                    // setup and draw the axes
-                    real[] myxchoice={-1,1};
-                    real[] myychoice={-sqrt(2),sqrt(2)};
-                    real[] myzchoice={-2,2};
-                    defaultpen(0.5mm);
-                    pair xbounds=(-2.5,2.5);
-                    pair ybounds=(-2.5,2.5);
-                    pair zbounds=(-2.5,2.5);
-
-                    xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                    yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                    zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                    label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                    label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                    label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                    //Draw the surface x^2/9 - y^2 + z^2/25 = 1
-                    triple f(pair t) {
-                      return (cos(t.y)*cos(t.x),sqrt(2)*cos(t.y)*sin(t.x),2*sin(t.y));//({cos(x)*1.5*cos(y)},{sin(x)*cos(y)},{sin(y)})
-                    }
-                    surface s=surface(f,(-pi,-pi/2),(1*pi,pi/2),32,16,Spline);
-                    pen p=apexmeshpen;
-                    draw(s,surfacepen,meshpen=p);
-
-                  </asymptote>
-                </image>
-            <!-- figures/fig10_01_ex_25_3D.asy END -->
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-    </exercisegroup>
+      <exercisegroup cols="2">
+
+        <introduction>
+          <p>
+            In the following exercises,
+            describe the region in space defined by the inequalities.
+          </p>
+        </introduction>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>x^2+y^2+z^2\lt 1</m>
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  Interior of a sphere with radius 1 centered at the origin.
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+              </pg-code>
+
+              <statement>
+                <p>
+                  <m>0\leq x\leq 3</m>
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  Region bounded between the planes <m>x=0</m>
+                  (the <m>y-z</m> coordinate plane)
+                  and <m>x=3</m>.
+                </p>
+              </solution>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>x\geq 0,\ y\geq0, \ z\geq0</m>
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  The first octant of space;
+                  all points <m>(x,y,z)</m> where each of <m>x</m>,
+                  <m>y</m> and <m>z</m> are positive.
+                  (Analogous to the first quadrant in the plane.)
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>y\geq 3</m>
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  All points in space where the <m>y</m> value is greater than 3;
+                  viewing space as often depicted in this text,
+                  this is the region <q>to the right</q>
+                  of the plane <m>y=3</m> (which is parallel to the <m>x-z</m> coordinate plane.)
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
+
+      </exercisegroup>
+
+      <exercisegroup cols="2">
+
+        <introduction>
+          <p>
+            In the following exercises, sketch the cylinder in space.
+          </p>
+        </introduction>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>z=x^3</m>
+                </p>
+              </statement>
+              <answer>
+                    <!-- START figures/fig10_01_ex_15_3D.asy -->
+                  <image xml:id="img_10_01_ex_15_3DX">
+                    <description></description>
+                    <asymptote>
+
+
+
+                      //ASY file for fig10_01_ex_153D.asy in Chapter 10
+
+                      size(282,282,IgnoreAspect);
+                      //currentprojection=perspective(7,2,1);
+                      currentprojection=orthographic(4,4,2);
+                      defaultrender.merge=true;
+
+                      // setup and draw the axes
+                      real[] myxchoice={-1,1};
+                      real[] myychoice={};
+                      real[] myzchoice={};
+                      defaultpen(0.5mm);
+                      pair xbounds=(-1.25,1.25);
+                      pair ybounds=(-1.25,1.25);
+                      pair zbounds=(-1.25,1.25);
+
+                      xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                      yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                      zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                      label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                      label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                      label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                      //Draw the parabola z=x^3 for t from -2 to 2
+                      triple g(real t) {return (t,0,t^3);}
+                      path3 mypath=graph(g,-1,1,operator ..); draw(mypath,bluepen);
+
+                      //Draw the cylinder z=x^3
+                      triple f(pair t) {
+                        return (t.x,t.y,(t.x)^3);
+                      }
+                      surface s=surface(f,(-1,-1),(1,1),16,16,Spline);
+                      pen p=apexmeshpen;
+                      draw(s,surfacepen,meshpen=p);
+
+                      //Draw the traces (in this case lines)
+                      triple g(real t) {return (-0.2,t,(-0.2)^3);}
+                      path3 mypath=graph(g,-1,1,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (-0.4,t,(-0.4)^3);}
+                      path3 mypath=graph(g,-1,1,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (-0.6,t,(-0.6)^3);}
+                      path3 mypath=graph(g,-1,1,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (-0.8,t,(-0.8)^3);}
+                      path3 mypath=graph(g,-1,1,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (-1,t,(-1)^3);}
+                      path3 mypath=graph(g,-1,1,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (0.2,t,(0.2)^3);}
+                      path3 mypath=graph(g,-1,1,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (0.4,t,(0.4)^3);}
+                      path3 mypath=graph(g,-1,1,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (0.6,t,(0.6)^3);}
+                      path3 mypath=graph(g,-1,1,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (0.8,t,(0.8)^3);}
+                      path3 mypath=graph(g,-1,1,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (1,t,(1)^3);}
+                      path3 mypath=graph(g,-1,1,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (t,0,(t)^3);}
+                      path3 mypath=graph(g,-1,1,operator ..); draw(mypath,bluepen);
+
+                    </asymptote>
+                  </image>
+              <!-- figures/fig10_01_ex_15_3D.asy END -->
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>y=\cos(z)</m>
+                </p>
+              </statement>
+              <answer>
+                    <!-- START figures/fig10_01_ex_16_3D.asy -->
+                  <image xml:id="img_10_01_ex_16_3DX">
+                    <description></description>
+                    <asymptote>
+
+
+
+                      //ASY file for fig10_01_ex_173D.pdf in Chapter 10
+
+                      size(282,282,IgnoreAspect);
+                      //currentprojection=perspective(7,2,1);
+                      currentprojection=orthographic(4,4,2);
+                      defaultrender.merge=true;
+
+                      // setup and draw the axes
+                      real[] myxchoice={};
+                      real[] myychoice={-3,3};
+                      real[] myzchoice={-6,6};
+                      defaultpen(0.5mm);
+                      pair xbounds=(-2,2);
+                      pair ybounds=(-2,2);
+                      pair zbounds=(-2*pi,2*pi);
+
+                      xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                      yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                      zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                      label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                      label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                      label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                      //Draw the cylinder on top
+                      triple f(pair t) {
+                        return (t.x,cos(t.y),t.y);
+                      }
+                      surface s=surface(f,(-2,-2*pi),(2,2*pi),8,32,Spline);
+                      pen p=apexmeshpen;
+                      draw(s,surfacepen,meshpen=p);
+
+                      //Draw the traces (in this case vertical lines)
+                      triple g(real t) {return (t,cos(-3*pi/2),-3*pi/2);}
+                      path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (t,cos(-pi/2),-pi/2);}
+                      path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (t,cos(0),0);}
+                      path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (t,cos(3*pi/2),3*pi/2);}
+                      path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (t,cos(pi/2),pi/2);}
+                      path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (0,cos(t),t);}
+                      path3 mypath=graph(g,-2*pi,pi*2,operator ..); draw(mypath,bluepen);
+
+                    </asymptote>
+                  </image>
+                 <!-- figures/fig10_01_ex_16_3D.asy END -->
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\ds \frac{x^2}{4}+\frac{y^2}{9}=1</m>
+                </p>
+              </statement>
+              <answer>
+                    <!-- START figures/fig10_01_ex_17_3D.asy -->
+                  <image xml:id="img_10_01_ex_17_3DX">
+                    <description></description>
+                    <asymptote>
+
+
+
+                      //ASY file for fig10_01_ex_173D.pdf in Chapter 10
+
+                      size(282,282,IgnoreAspect);
+                      //currentprojection=perspective(7,2,1);
+                      currentprojection=orthographic(4,4,2);
+                      defaultrender.merge=true;
+
+                      // setup and draw the axes
+                      real[] myxchoice={-2,2};
+                      real[] myychoice={-3,3};
+                      real[] myzchoice={};
+                      defaultpen(0.5mm);
+                      pair xbounds=(-4,4);
+                      pair ybounds=(-4,4);
+                      pair zbounds=(-4,4);
+
+                      xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                      yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                      zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                      label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                      label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                      label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                      //Draw the cylinder on top
+                      triple f(pair t) {
+                        return (2*cos(t.x),3*sin(t.x),t.y);
+                      }
+                      surface s=surface(f,(0,-2),(2*pi,2),32,8,Spline);
+                      pen p=apexmeshpen;
+                      draw(s,surfacepen,meshpen=p);
+
+                      //Draw the traces (in this case vertical lines)
+                      triple g(real t) {return (2*cos(0),3*sin(0),t);}
+                      path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (2*cos(2*pi/10),3*sin(2*pi/10),t);}
+                      path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (2*cos(2*2*pi/10),3*sin(2*2*pi/10),t);}
+                      path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (2*cos(3*2*pi/10),3*sin(3*2*pi/10),t);}
+                      path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (2*cos(4*2*pi/10),3*sin(4*2*pi/10),t);}
+                      path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (2*cos(5*2*pi/10),3*sin(5*2*pi/10),t);}
+                      path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (2*cos(6*2*pi/10),3*sin(6*2*pi/10),t);}
+                      path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (2*cos(7*2*pi/10),3*sin(7*2*pi/10),t);}
+                      path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (2*cos(8*2*pi/10),3*sin(8*2*pi/10),t);}
+                      path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (2*cos(9*2*pi/10),3*sin(9*2*pi/10),t);}
+                      path3 mypath=graph(g,-2,2,operator ..); draw(mypath,redpen);
+
+                      triple g(real t) {return (2*cos(t),3*sin(t),0);}
+                      path3 mypath=graph(g,0,2*pi,operator ..); draw(mypath,bluepen);
+
+                    </asymptote>
+                  </image>
+              <!-- figures/fig10_01_ex_17_3D.asy END -->
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\ds y=\frac1x</m>
+                </p>
+              </statement>
+              <answer>
+                <!-- START figures/fig10_01_ex_18_3D.asy -->
+                  <image xml:id="img_10_01_ex_18_3DX">
+                    <description></description>
+                    <asymptote>
+
+
+
+                      //ASY file for fig10_01_ex_20.pdf in Chapter 10.1
+
+                      size(282,282,IgnoreAspect);
+                      //currentprojection=perspective(7,2,1);
+                      currentprojection=orthographic(-8,41,2.5);
+                      defaultrender.merge=true;
+
+                      // setup and draw the axes
+                      real[] myxchoice={-10,10};
+                      real[] myychoice={-10,10};
+                      real[] myzchoice={-5,5};
+                      defaultpen(0.5mm);
+
+                      pair xbounds=(-12,12);
+                      pair ybounds=(-12,12);
+                      pair zbounds=(-6,6);
+
+                      xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                      yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                      zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                      label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                      label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                      label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                      //Draw the surface y=1/x
+                      triple f(pair t) {
+                        return (t.x,1/t.x,t.y);//({y^2},{cos(x)*y},{3*sin(x)*y});
+                      }
+                      surface s=surface(f,(0.1,-3),(10,3),16,8);
+                      pen p=apexmeshpen;
+                      draw(s,surfacepen,meshpen=p);
+
+                      triple f(pair t) {
+                        return (t.x,1/t.x,t.y);//({y^2},{cos(x)*y},{3*sin(x)*y});
+                      }
+                      surface s=surface(f,(-10,-3),(-.1,3),16,8);
+                      pen p=apexmeshpen;
+                      draw(s,surfacepen,meshpen=p);
+
+                      //Draw the traces (in this case vertical lines)
+                      triple g(real t) {return (1,1,t);}
+                      path3 mypath=graph(g,-3,3,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (-1,-1,t);}
+                      path3 mypath=graph(g,-3,3,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (5,.2,t);}
+                      path3 mypath=graph(g,-3,3,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (-5,-.2,t);}
+                      path3 mypath=graph(g,-3,3,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (10,.1,t);}
+                      path3 mypath=graph(g,-3,3,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (-10,-.1,t);}
+                      path3 mypath=graph(g,-3,3,operator ..); draw(mypath,redpen);
+                      triple g(real t) {return (t,1/t,0);}
+                      path3 mypath=graph(g,.1,10,operator ..); draw(mypath,bluepen);
+                      triple g(real t) {return (t,1/t,0);}
+                      path3 mypath=graph(g,-10,-.1,operator ..); draw(mypath,bluepen);
+
+                      //Add labels
+                      //label("In plane $y=0$",(0,4,1.5),E);
+                      //draw((0,4,1.5)--(3,0,2),linewidth(.75),Arrow3);
+                      //draw((0,5,1.75)--(-3,0,2),linewidth(.75),Arrow3);
+                      //label("In plane $z=d$",(4,0,-1),W);
+                      //draw((-1,3,1.75)--(-2.1,1.1,2),linewidth(.75),Arrow3);
+
+                    </asymptote>
+                  </image>
+              <!-- figures/fig10_01_ex_18_3D.asy END -->
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+      </exercisegroup>
+      <exercisegroup cols="2">
+
+        <introduction>
+          <p>
+            In the following exercises,
+            give the equation of the surface of revolution described.
+          </p>
+        </introduction>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context("ImplicitEquation");
+                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
+                $eq=ImplicitEquation("x^2+z^2=(1/(1+y^2))^2");
+              </pg-code>
+
+              <statement>
+                <p>
+                  Give the equation of the surface formed by revolving
+                  <m>z=\frac{1}{1+y^2}</m> in the <m>yz</m>-plane about the <m>y</m>-axis.
+                </p>
+
+                <p>
+                  <var name="$eq" width="40"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context("ImplicitEquation");
+                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
+                $eq=ImplicitEquation("y^2+z^2=x^4");
+              </pg-code>
+
+              <statement>
+                <p>
+                  Give the equation of the surface formed by revolving <m>y=x^2</m> in the <m>xy</m>-plane about the <m>x</m>-axis.
+                </p>
+
+                <p>
+                  <var name="$eq" width="40"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context("ImplicitEquation");
+                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
+                $eq=ImplicitEquation("x^2+y^2=z");
+              </pg-code>
+
+              <statement>
+                <p>
+                  Give the equation of the surface formed by revolving <m>z=x^2</m> in the <m>xz</m>-plane about the <m>z</m>-axis.
+                </p>
+
+                <p>
+                  <var name="$eq" width="40"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context("ImplicitEquation");
+                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
+                $eq=ImplicitEquation("x^2+y^2=1/z^2");
+              </pg-code>
+
+              <statement>
+                <p>
+                  Give the equation of the surface formed by revolving <m>z=1/x</m> in the <m>xz</m>-plane about the <m>z</m>-axis.
+                </p>
+
+                <p>
+                  <var name="$eq" width="40"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+      </exercisegroup>
+      <exercisegroup cols="2">
+
+        <introduction>
+          <p>
+            In the following exercises, a quadric surface is sketched.
+            Determine which of the given equations best fits the graph.
+          </p>
+        </introduction>
+        <!--TODO: probably should use an ordered list for the two options in each problem here.-->
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <!-- START figures/fig10_01_ex_19_3D.asy -->
+                  <image xml:id="img_10_01_ex_19_3D">
+                    <description></description>
+                    <asymptote>
+
+
+
+                      //ASY file for fig10_01_ex_19.pdf in Chapter 10.1
+
+                      size(282,282,IgnoreAspect);
+                      //currentprojection=perspective(7,2,1);
+                      currentprojection=orthographic(3,12,2);
+                      defaultrender.merge=true;
+
+                      // setup and draw the axes
+                      real[] myxchoice={1};
+                      real[] myychoice={-3,3};
+                      real[] myzchoice={-3,3};
+                      defaultpen(0.5mm);
+
+                      pair xbounds=(-.5,1.5);
+                      pair ybounds=(-3.5,3.5);
+                      pair zbounds=(-3.5,3.5);
+
+                      xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                      yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                      zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                      label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                      label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                      label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                      //Draw the surface x^2 + y^2/9 + z^2/4 = 1
+                      triple f(pair t) {
+                        return (t.y^2,cos(t.x)*t.y,3*sin(t.x)*t.y);//({y^2},{cos(x)*y},{3*sin(x)*y});
+                      }
+                      surface s=surface(f,(0,0),(2*pi,1),16,16,Spline);
+                      pen p=apexmeshpen;
+                      draw(s,surfacepen,meshpen=p);
+
+                      //Add labels
+                      //label("In plane $y=0$",(0,4,1.5),E);
+                      //draw((0,4,1.5)--(3,0,2),linewidth(.75),Arrow3);
+                      //draw((0,5,1.75)--(-3,0,2),linewidth(.75),Arrow3);
+                      //label("In plane $z=d$",(4,0,-1),W);
+                      //draw((-1,3,1.75)--(-2.1,1.1,2),linewidth(.75),Arrow3);
+
+                    </asymptote>
+                  </image>
+                <!-- figures/fig10_01_ex_19_3D.asy END -->
+                <p>
+                  (a)  <m>\ds x=y^2+\frac{z^2}{9}</m>    (b)  <m>\ds x=y^2+\frac{z^2}{3}</m>
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  (a)<m>\ds x=y^2+\frac{z^2}{9}</m>
+                </p>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <!-- START figures/fig10_01_ex_20_3D.asy -->
+                  <image xml:id="img_10_01_ex_20_3D">
+                    <description></description>
+                    <asymptote>
+
+
+
+                      //ASY file for fig10_01_ex_20.pdf in Chapter 10.1
+
+                      size(282,282,IgnoreAspect);
+                      //currentprojection=perspective(7,2,1);
+                      currentprojection=orthographic(5,3,2);
+                      defaultrender.merge=true;
+
+                      // setup and draw the axes
+                      real[] myxchoice={-1,1};
+                      real[] myychoice={-1,1};
+                      real[] myzchoice={-1,1};
+                      defaultpen(0.5mm);
+
+                      pair xbounds=(-1.5,1.5);
+                      pair ybounds=(-1.5,1.5);
+                      pair zbounds=(-1.5,1.5);
+
+                      xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                      yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                      zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                      label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                      label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                      label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                      //Draw the surface x^2 + y^2/9 + z^2/4 = 1
+                      triple f(pair t) {
+                        return (cos(t.x)*(t.y)^2,(t.y)^2,sin(t.x)*(t.y)^2);//({cos(x)*(y)^2},{y^2},{sin(x)*(y)^2});
+                      }
+                      surface s=surface(f,(0,0),(2*pi,1),32,16,Spline);
+                      pen p=apexmeshpen;
+                      draw(s,surfacepen,meshpen=p);
+
+                      triple f(pair t) {
+                        return (cos(t.x)*(t.y)^2,-(t.y)^2,sin(t.x)*(t.y)^2);//({cos(x)*(y)^2},{y^2},{sin(x)*(y)^2});
+                      }
+                      surface s=surface(f,(0,0),(2*pi,1),32,16,Spline);
+                      pen p=apexmeshpen;
+                      draw(s,surfacepen,meshpen=p);
+
+                      //Add labels
+                      //label("In plane $y=0$",(0,4,1.5),E);
+                      //draw((0,4,1.5)--(3,0,2),linewidth(.75),Arrow3);
+                      //draw((0,5,1.75)--(-3,0,2),linewidth(.75),Arrow3);
+                      //label("In plane $z=d$",(4,0,-1),W);
+                      //draw((-1,3,1.75)--(-2.1,1.1,2),linewidth(.75),Arrow3);
+
+                    </asymptote>
+                  </image>
+                <!-- figures/fig10_01_ex_20_3D.asy END -->
+                <p>
+                  (a)  <m>\ds x^2-y^2-z^2=0</m>    (b)  <m>x^2-y^2+z^2=0</m>
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  (b) <m>x^2-y^2+z^2=0</m>
+                </p>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <!-- START figures/fig10_01_ex_21_3D.asy -->
+                  <image xml:id="img_10_01_ex_21_3D">
+                    <description></description>
+                    <asymptote>
+
+
+
+                      //ASY file for fig10_01_ex_21.pdf in Chapter 10.1
+
+                      size(282,282,IgnoreAspect);
+                      //currentprojection=perspective(7,2,1);
+                      currentprojection=orthographic(4,4,2);
+                      defaultrender.merge=true;
+
+                      // setup and draw the axes
+                      real[] myxchoice={-1,1};
+                      real[] myychoice={-3,3};
+                      real[] myzchoice={-2,2};
+                      defaultpen(0.5mm);
+
+                      pair xbounds=(-3.5,3.5);
+                      pair ybounds=(-3.5,3.5);
+                      pair zbounds=(-3.5,3.5);
+
+                      xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                      yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                      zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                      label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                      label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                      label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                      //Draw the surface x^2 + y^2/9 + z^2/4 = 1
+                      triple f(pair t) {
+                        return (cos(t.x)*cos(t.y),3*sin(t.x)*cos(t.y),2*sin(t.y));//({cos(x)*cos(y)},{sin(x)*3*cos(y)},{2*sin(y)});
+                      }
+                      surface s=surface(f,(-pi,-pi/2),(pi,pi/2),32,16,Spline);
+                      pen p=apexmeshpen;
+                      draw(s,surfacepen,meshpen=p);
+
+                      //Add labels
+                      //label("In plane $y=0$",(0,4,1.5),E);
+                      //draw((0,4,1.5)--(3,0,2),linewidth(.75),Arrow3);
+                      //draw((0,5,1.75)--(-3,0,2),linewidth(.75),Arrow3);
+                      //label("In plane $z=d$",(4,0,-1),W);
+                      //draw((-1,3,1.75)--(-2.1,1.1,2),linewidth(.75),Arrow3);
+
+                    </asymptote>
+                  </image>
+                <!-- figures/fig10_01_ex_21_3D.asy END -->
+                <p>
+                  (a)  <m>\ds x^2+\frac{y^2}3+\frac{z^2}2=1</m>    (b)  <m>\ds x^2+\frac{y^2}9+\frac{z^2}4=1</m>
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  (b) <m>\ds x^2+\frac{y^2}9+\frac{z^2}4=1</m>
+                </p>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <!-- START figures/fig10_01_ex_22_3D.asy -->
+                  <image xml:id="img_10_01_ex_22_3D">
+                    <description></description>
+                    <asymptote>
+
+
+
+                      //ASY file for fig10_01_ex_22.pdf in Chapter 10.1
+
+                      size(282,282,IgnoreAspect);
+                      //currentprojection=perspective(7,2,1);
+                      currentprojection=orthographic(4,4,2);
+                      defaultrender.merge=true;
+
+                      // setup and draw the axes
+                      real[] myxchoice={-2,2};
+                      real[] myychoice={-2,2};
+                      real[] myzchoice={-2,2};
+                      defaultpen(0.5mm);
+
+                      pair xbounds=(-2.5,2.5);
+                      pair ybounds=(-2.5,2.5);
+                      pair zbounds=(-2.5,2.5);
+
+                      xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                      yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                      zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                      label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                      label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                      label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                      //Draw the surface 4x^2 - y^2 - z^2/9 = 1
+                      triple f(pair t) {
+                        return (cos(t.y)*tan(t.x),1/cos(t.x),sin(t.y)*tan(t.x));//({cos(y)*tan(x)},{sec(x)},{tan(x)*sin(y)});
+                      }
+                      surface s=surface(f,(0,0),(1,2*pi),16,16,Spline);
+                      pen p=apexmeshpen;
+                      draw(s,surfacepen,meshpen=p);
+
+                      triple f(pair t) {
+                        return (cos(t.y)*tan(t.x),-1/cos(t.x),sin(t.y)*tan(t.x));//({cos(y)*tan(x)},{sec(x)},{tan(x)*sin(y)});
+                      }
+                      surface s=surface(f,(0,0),(1,2*pi),16,16,Spline);
+                      pen p=apexmeshpen;
+                      draw(s,surfacepen,meshpen=p);
+
+                      //Add labels
+                      //label("In plane $y=0$",(0,4,1.5),E);
+                      //draw((0,4,1.5)--(3,0,2),linewidth(.75),Arrow3);
+                      //draw((0,5,1.75)--(-3,0,2),linewidth(.75),Arrow3);
+                      //label("In plane $z=d$",(4,0,-1),W);
+                      //draw((-1,3,1.75)--(-2.1,1.1,2),linewidth(.75),Arrow3);
+
+                    </asymptote>
+                  </image>
+                <!-- figures/fig10_01_ex_22_3D.asy END -->
+                <p>
+                  (a)  <m>y^2-x^2-z^2=1</m>    (b)  <m>y^2+x^2-z^2=1</m>
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  (a) <m>y^2-x^2-z^2=1</m>
+                </p>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+      </exercisegroup>
+      <exercisegroup cols="2">
+
+        <introduction>
+          <p>
+            In the following exercises, sketch the quadric surface.
+          </p>
+        </introduction>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\ds z-y^2+x^2=0</m>
+                </p>
+              </statement>
+              <answer>
+                <!-- START figures/fig10_01_ex_28_3D.asy -->
+                  <image xml:id="img_10_01_ex_28_3DX">
+                    <description></description>
+                    <asymptote>
+
+
+
+                      //ASY file for fig10_01_ex_283D.asy in Chapter 10
+
+                      size(282,282,IgnoreAspect);
+                      //currentprojection=perspective(7,2,1);
+                      currentprojection=orthographic(5,3,1);
+                      defaultrender.merge=true;
+
+                      // setup and draw the axes
+                      real[] myxchoice={-1,1};
+                      real[] myychoice={-1,1};
+                      real[] myzchoice={-1,1};
+                      defaultpen(0.5mm);
+                      pair xbounds=(-1.5,1.5);
+                      pair ybounds=(-1.5,1.5);
+                      pair zbounds=(-1.25,1.25);
+
+                      xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                      yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                      zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                      label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                      label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                      label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                      //Draw the hyp par on top
+                      //Draw the surface z^2 - y^2 - x^2=0
+                      triple f(pair t) {
+                        return (t.x,t.y,-(t.x)^2+(t.y)^2);
+                      }
+                      surface s=surface(f,(-1,-1),(1,1),32,16);
+                      pen p=apexmeshpen;
+                      draw(s,surfacepen,meshpen=p);
+
+                    </asymptote>
+                  </image>
+              <!-- figures/fig10_01_ex_28_3D.asy END -->
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\ds z^2=x^2+\frac{y^2}4</m>
+                </p>
+              </statement>
+              <answer>
+                <!-- START figures/fig10_01_ex_24_3D.asy -->
+                  <image xml:id="img_10_01_ex_24_3DX">
+                    <description></description>
+                    <asymptote>
+
+
+
+                      //ASY file for fig10_01_ex_263D.asy in Chapter 10
+
+                      size(282,282,IgnoreAspect);
+                      //currentprojection=perspective(7,2,1);
+                      currentprojection=orthographic(5,5,1);
+                      defaultrender.merge=true;
+
+                      // setup and draw the axes
+                      real[] myxchoice={-1,1};
+                      real[] myychoice={-4,4};
+                      real[] myzchoice={-2,2};
+                      defaultpen(0.5mm);
+                      pair xbounds=(-5,5);
+                      pair ybounds=(-5,5);
+                      pair zbounds=(-3,3);
+
+                      xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                      yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                      zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                      label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                      label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                      label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                      //Draw the surface x^2/9 - y^2 + z^2/25 = 1
+                      triple f(pair t) {
+                        return (t.y*cos(t.x),2*t.y*sin(t.x),t.y);//
+                      }
+                      surface s=surface(f,(0,-2),(2*pi,2),32,16,Spline);
+                      pen p=apexmeshpen;
+                      draw(s,surfacepen,meshpen=p);
+
+                    </asymptote>
+                  </image>
+              <!-- figures/fig10_01_ex_24_3D.asy END -->
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>x=-y^2-z^2</m>
+                </p>
+              </statement>
+              <answer>
+                <!-- START figures/fig10_01_ex_23_3D.asy -->
+                  <image xml:id="img_10_01_ex_23_3DX">
+                    <description></description>
+                    <asymptote>
+
+
+
+                      //ASY file for fig10_01_ex_233D.asy in Chapter 10
+
+                      size(282,282,IgnoreAspect);
+                      //currentprojection=perspective(7,2,1);
+                      currentprojection=orthographic(4,4,2);
+                      defaultrender.merge=true;
+
+                      // setup and draw the axes
+                      real[] myxchoice={-1,1};
+                      real[] myychoice={-1,1};
+                      real[] myzchoice={-1,1};
+                      defaultpen(0.5mm);
+                      pair xbounds=(-1.5,1.5);
+                      pair ybounds=(-1.5,1.5);
+                      pair zbounds=(-1.25,1.25);
+
+                      xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                      yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                      zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                      label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                      label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                      label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                      //Draw the surface x=-y^2-z^2
+                      triple f(pair t) {
+                        return (-t.x,sqrt(t.x)*cos(t.y),sqrt(t.x)*sin(t.y));
+                      }
+                      surface s=surface(f,(0,0),(1,2*pi),16,16,Spline);
+                      pen p=apexmeshpen;
+                      draw(s,surfacepen,meshpen=p);
+
+                    </asymptote>
+                  </image>
+              <!-- figures/fig10_01_ex_23_3D.asy END -->
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\ds 16x^2-16y^2-16z^2=1</m>
+                </p>
+              </statement>
+              <answer>
+                <!-- START figures/fig10_01_ex_27_3D.asy -->
+                  <image xml:id="img_10_01_ex_27_3DX">
+                    <description></description>
+                    <asymptote>
+
+
+
+                      //ASY file for fig10_01_ex_263D.asy in Chapter 10
+
+                      size(282,282,IgnoreAspect);
+                      //currentprojection=perspective(7,2,1);
+                      currentprojection=orthographic(5,5,2);
+                      defaultrender.merge=true;
+
+                      // setup and draw the axes
+                      real[] myxchoice={-.25,.25};
+                      real[] myychoice={-.5,.5};
+                      real[] myzchoice={-.5,.5};
+                      defaultpen(0.5mm);
+                      pair xbounds=(-1,1);
+                      pair ybounds=(-1,1);
+                      pair zbounds=(-1,1);
+
+                      xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                      yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                      zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                      label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                      label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                      label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                      //Draw the surface x^2/9 - y^2 + z^2/25 = 1
+                      triple f(pair t) {
+                        return (.25/cos(t.x),.25*cos(t.y)*tan(t.x),.25*sin(t.y)*tan(t.x));//({cos(y)*tan(x)},{tan(x)*sin(y)},{sec(x)})
+                      }
+                      surface s=surface(f,(-pi/3,0),(pi/3,pi),32,16);
+                      pen p=apexmeshpen;
+                      draw(s,surfacepen,meshpen=p);
+
+                      triple f(pair t) {
+                        return (-.25/cos(t.x),.25*cos(t.y)*tan(t.x),.25*sin(t.y)*tan(t.x));//({cos(y)*tan(x)},{tan(x)*sin(y)},{sec(x)})
+                      }
+                      surface s=surface(f,(-pi/3,0),(pi/3,pi),32,16);
+                      pen p=apexmeshpen;
+                      draw(s,surfacepen,meshpen=p);
+
+                    </asymptote>
+                  </image>
+              <!-- figures/fig10_01_ex_27_3D.asy END -->
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\ds \frac{x^2}9-y^2+\frac{z^2}{25}=1</m>
+                </p>
+              </statement>
+              <answer>
+                <!-- START figures/fig10_01_ex_26_3D.asy -->
+                  <image xml:id="img_10_01_ex_26_3DX">
+                    <description></description>
+                    <asymptote>
+
+
+
+                      //ASY file for fig10_01_ex_263D.asy in Chapter 10
+
+                      size(282,282,IgnoreAspect);
+                      //currentprojection=perspective(7,2,1);
+                      currentprojection=orthographic(13,5,2);
+                      defaultrender.merge=true;
+
+                      // setup and draw the axes
+                      real[] myxchoice={-3,3};
+                      real[] myychoice={-1,1};
+                      real[] myzchoice={-5,5};
+                      defaultpen(0.5mm);
+                      pair xbounds=(-6,6);
+                      pair ybounds=(-1.5,1.5);
+                      pair zbounds=(-6,6);
+
+                      xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                      yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                      zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                      label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                      label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                      label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                      //Draw the surface x^2/9 - y^2 + z^2/25 = 1
+                      triple f(pair t) {
+                        return (3*cos(t.y)/cos(t.x),tan(t.x),5*sin(t.y)/cos(t.x));
+                      }
+                      surface s=surface(f,(-1,0),(1,2*pi),32,16,Spline);
+                      pen p=apexmeshpen;
+                      draw(s,surfacepen,meshpen=p);
+
+                    </asymptote>
+                  </image>
+              <!-- figures/fig10_01_ex_26_3D.asy END -->
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\ds 4x^2+2y^2+z^2=4</m>
+                </p>
+              </statement>
+              <answer>
+                <!-- START figures/fig10_01_ex_25_3D.asy -->
+                  <image xml:id="img_10_01_ex_25_3DX">
+                    <description></description>
+                    <asymptote>
+
+
+
+                      //ASY file for fig10_01_ex_263D.asy in Chapter 10
+
+                      size(282,282,IgnoreAspect);
+                      //currentprojection=perspective(7,2,1);
+                      currentprojection=orthographic(5,5,2);
+                      defaultrender.merge=true;
+
+                      // setup and draw the axes
+                      real[] myxchoice={-1,1};
+                      real[] myychoice={-sqrt(2),sqrt(2)};
+                      real[] myzchoice={-2,2};
+                      defaultpen(0.5mm);
+                      pair xbounds=(-2.5,2.5);
+                      pair ybounds=(-2.5,2.5);
+                      pair zbounds=(-2.5,2.5);
+
+                      xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                      yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                      zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                      label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                      label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                      label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                      //Draw the surface x^2/9 - y^2 + z^2/25 = 1
+                      triple f(pair t) {
+                        return (cos(t.y)*cos(t.x),sqrt(2)*cos(t.y)*sin(t.x),2*sin(t.y));//({cos(x)*1.5*cos(y)},{sin(x)*cos(y)},{sin(y)})
+                      }
+                      surface s=surface(f,(-pi,-pi/2),(1*pi,pi/2),32,16,Spline);
+                      pen p=apexmeshpen;
+                      draw(s,surfacepen,meshpen=p);
+
+                    </asymptote>
+                  </image>
+              <!-- figures/fig10_01_ex_25_3D.asy END -->
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+      </exercisegroup>
+    </subexercises>
   </exercises>
 </section>
