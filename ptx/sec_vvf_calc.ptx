@@ -1309,14 +1309,8 @@
   </subsection>
 
   <exercises>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          Terms and Concepts
-        </p>
-      </introduction>
-
+    <subexercises>
+      <title>Terms and Concepts</title>
       <exercise>
         <!-- <webwork>
             <pg-code>
@@ -1382,692 +1376,939 @@
             A scalar-vector product, a dot product and a cross product.
           </p>
         </answer>
-    </exercise>
-
-    </exercisegroup>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          In the following exercises, evaluate the given limit.
-        </p>
-      </introduction>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context("Vector");
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
-              $L=Compute("&lt;11,74,sin(5)>");
-            </pg-code>
-
-            <statement>
-              <p>
-                <m>\lim\limits_{t\to 5} \la 2t+1,3t^2-1,\sin(t) \ra=</m><var name="$L" width="15"/>
-              </p>
-            </statement>
-        </webwork>
       </exercise>
+    </subexercises>
+    <subexercises>
+      <title>Problems</title>
 
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
+      <exercisegroup cols="2">
+
+        <introduction>
+          <p>
+            In the following exercises, evaluate the given limit.
+          </p>
+        </introduction>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context("Vector");
+                Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+                $L=Compute("&lt;11,74,sin(5)>");
+              </pg-code>
+
+              <statement>
+                <p>
+                  <m>\lim\limits_{t\to 5} \la 2t+1,3t^2-1,\sin(t) \ra=</m><var name="$L" width="15"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\lim\limits_{t\to 3} \la e^t,\frac{t^2-9}{t+3}\ra</m>
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  <m>\la e^3,0\ra</m>
+                </p>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context("Vector2D");
+                Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+                $L=Compute("&lt;1,e>");
+              </pg-code>
+
+              <statement>
+                <p>
+                  <m>\lim\limits_{t\to 0} \la \frac{t}{\sin(t) }, (1+t)^{\frac1t}\ra=</m><var name="$L" width="15"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\lim\limits_{h\to 0} \frac{\vec r(t+h)-\vec r(t)}{h}</m>, where
+                  <m>\vec r(t) = \la t^2,t,1\ra</m>.
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  <m>\la2t,1,0\ra</m>
+                </p>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+      </exercisegroup>
+      <exercisegroup cols="2">
+
+        <introduction>
+          <p>
+            In the following exercises,
+            identify the interval or union of intervals on which <m>\vec r(t)</m> is continuous.
+          </p>
+        </introduction>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context("Interval");
+                $dom=Compute("(-inf,0)U(0,inf)");
+              </pg-code>
+
+              <statement>
+                <p>
+                  On which interval or union of intervals is <m>\vec r(t) = \la t^2,1/t\ra</m> continuous?
+                </p>
+
+                <p>
+                  <var name="$dom" width="15"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\vec r(t) = \la \cos(t) , e^t, \ln(t) \ra</m>
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  <m>(0,\infty)</m>
+                </p>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+      </exercisegroup>
+      <exercisegroup cols="2">
+
+        <introduction>
+          <p>
+            In the following exercises, find the derivative of the given function.
+          </p>
+        </introduction>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context("Vector");
+                Context()->variables->are(t=>'Real');
+                Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+                $d = Compute("&lt; -sin(t), e^t, 1/t>");
+              </pg-code>
+
+              <statement>
+                <p>
+                  The derivative of <m>\vec r(t) = \la \cos(t) , e^t, \ln(t) \ra</m> is
+                </p>
+
+                <p>
+                  <m>\vrp(t)=</m><var name="$d" width="30"/>.
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\ds \vec r(t) = \la \frac 1t, \frac {2t-1}{3t+1}, \tan(t) \ra</m>
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  <m>\vrp(t) = \la -1/t^2, 5/(3t+1)^2, \sec^2(t) \ra</m>
+                </p>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context("Vector2D");
+                Context()->variables->are(t=>'Real');
+                Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+                $d = Compute("&lt; 2t sin(t)+t^2cos(t), 6t^2+10t>");
+              </pg-code>
+
+              <statement>
+                <p>
+                  The derivative of <m>\vec r(t) = (t^2)\la \sin(t) , 2t+5\ra</m> is
+                </p>
+
+                <p>
+                  <m>\vrp(t)=</m><var name="$d" width="30"/>.
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context("Numeric");
+                Context()->variables->are(t=>'Real');
+                Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+                $d = Compute("(t^2+1)cos(t) +2tsin(t) + 4t+3");
+              </pg-code>
+
+              <statement>
+                <p>
+                  The derivative of <m>\vec r(t) = \la t^2+1, t-1\ra\cdot \la \sin(t) , 2t+5\ra</m> is
+                </p>
+
+                <p>
+                  <m>\vrp(t)=</m><var name="$d" width="30"/>.
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context("Vector");
+                Context()->variables->are(t=>'Real');
+                Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+                $d = Compute("&lt;-1,cos(t)-2t,6t^2+10t+2+cos(t)-sin(t)-tcos(t)>");
+              </pg-code>
+
+              <statement>
+                <p>
+                  The derivative of <m>\vec r(t) = \la t^2+1, t-1,1\ra\times \la \sin(t) , 2t+5,1\ra</m> is
+                </p>
+
+                <p>
+                  <m>\vrp(t)=</m><var name="$d" width="30"/>.
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+         <exercise>
             <statement>
               <p>
-                <m>\lim\limits_{t\to 3} \la e^t,\frac{t^2-9}{t+3}\ra</m>
+                <m>\ds \vec r(t) = \la \cosh t, \sinh t\ra</m>
               </p>
             </statement>
             <answer>
               <p>
-                <m>\la e^3,0\ra</m>
+                <m>\vrp(t) = \la \sinh t,\cosh t\ra</m>
               </p>
             </answer>
-        <!-- </webwork> -->
-      </exercise>
+          </exercise>
 
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context("Vector2D");
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
-              $L=Compute("&lt;1,e>");
-            </pg-code>
+      </exercisegroup>
+      <exercisegroup cols="2">
 
-            <statement>
-              <p>
-                <m>\lim\limits_{t\to 0} \la \frac{t}{\sin(t) }, (1+t)^{\frac1t}\ra=</m><var name="$L" width="15"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
+        <introduction>
+          <p>
+            In the following exercises, find <m>\vrp (t)</m>.
+            Sketch <m>\vec r(t)</m> and <m>\vrp(1)</m>,
+            with the initial point of <m>\vrp(1)</m> at <m>\vec r(1)</m>.
+          </p>
+        </introduction>
 
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>\lim\limits_{h\to 0} \frac{\vec r(t+h)-\vec r(t)}{h}</m>, where
-                <m>\vec r(t) = \la t^2,t,1\ra</m>.
-              </p>
-            </statement>
-            <answer>
-              <p>
-                <m>\la2t,1,0\ra</m>
-              </p>
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\ds \vec r(t) = \la t^2+t, t^2-t\ra</m>
+                </p>
+              </statement>
+              <solution>
+                  <!-- START figures/fig_11_02_ex_15.tex -->
+                  <image xml:id="img_11_02_ex_15X">
+                    <description></description>
+                    <latex-image>
 
-    </exercisegroup>
-    <exercisegroup>
+                    \begin{tikzpicture}
 
-      <introduction>
-        <p>
-          In the following exercises,
-          identify the interval or union of intervals on which <m>\vec r(t)</m> is continuous.
-        </p>
-      </introduction>
+                    \begin{axis}[
+                    ymin=-1.5,ymax=6.5,
+                    xmin=-1.5,xmax=6.5
+                    ]
 
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context("Interval");
-              $dom=Compute("(-inf,0)U(0,inf)");
-            </pg-code>
+                    \addplot+ [-,domain=-2:2,samples=40] ({x^2+x},{x^2-x});
 
-            <statement>
-              <p>
-                On which interval or union of intervals is <m>\vec r(t) = \la t^2,1/t\ra</m> continuous?
-              </p>
+                    \draw [thick,secondcolor,-&gt;,&gt;=stealth] (axis cs: 2,0) -- (axis cs:5,1) node [black,right] { $\vrp(1)$};
 
-              <p>
-                <var name="$dom" width="15"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
+                    \end{axis}
 
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>\vec r(t) = \la \cos(t) , e^t, \ln(t) \ra</m>
-              </p>
-            </statement>
-            <answer>
-              <p>
-                <m>(0,\infty)</m>
-              </p>
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
+                    \end{tikzpicture}
 
-    </exercisegroup>
-    <exercisegroup>
+                    </latex-image>
+                  </image>
+                  <!-- figures/fig_11_02_ex_15.tex END -->
 
-      <introduction>
-        <p>
-          In the following exercises, find the derivative of the given function.
-        </p>
-      </introduction>
+                <p>
+                  <m>\vrp(t) = \la 2t+1,2t-1\ra</m>
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
 
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context("Vector");
-              Context()->variables->are(t=>'Real');
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
-              $d = Compute("&lt; -sin(t), e^t, 1/t>");
-            </pg-code>
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\ds \vec r(t) = \la t^2-2t+2,t^3-3t^2+2t\ra</m>
+                </p>
+              </statement>
+              <solution>
+                  <!-- START figures/fig_11_02_ex_16.tex -->
+                  <image xml:id="img_11_02_ex_16X">
+                    <description></description>
+                    <latex-image>
 
-            <statement>
-              <p>
-                The derivative of <m>\vec r(t) = \la \cos(t) , e^t, \ln(t) \ra</m> is
-              </p>
+                    \begin{tikzpicture}
 
-              <p>
-                <m>\vrp(t)=</m><var name="$d" width="30"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
+                    \begin{axis}[
+                    ymin=-1.5,ymax=1.5,
+                    xmin=-.5,xmax=3.5
+                    ]
 
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>\ds \vec r(t) = \la \frac 1t, \frac {2t-1}{3t+1}, \tan(t) \ra</m>
-              </p>
-            </statement>
-            <answer>
-              <p>
-                <m>\vrp(t) = \la -1/t^2, 5/(3t+1)^2, \sec^2(t) \ra</m>
-              </p>
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
+                    \addplot+ [-,domain=-.5:2.5,samples=60] ({x^2-2*x+2},{x^3-3*x^2+2*x});
 
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context("Vector2D");
-              Context()->variables->are(t=>'Real');
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
-              $d = Compute("&lt; 2t sin(t)+t^2cos(t), 6t^2+10t>");
-            </pg-code>
+                    \draw [thick,secondcolor,-&gt;,&gt;=stealth] (axis cs: 1,0) -- (axis cs:1,-1) node [black,right] { $\vrp(1)$};
 
-            <statement>
-              <p>
-                The derivative of <m>\vec r(t) = (t^2)\la \sin(t) , 2t+5\ra</m> is
-              </p>
+                    \end{axis}
 
-              <p>
-                <m>\vrp(t)=</m><var name="$d" width="30"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
+                    \end{tikzpicture}
 
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context("Numeric");
-              Context()->variables->are(t=>'Real');
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
-              $d = Compute("(t^2+1)cos(t) +2tsin(t) + 4t+3");
-            </pg-code>
+                    </latex-image>
+                  </image>
+                  <!-- figures/fig_11_02_ex_16.tex END -->
 
-            <statement>
-              <p>
-                The derivative of <m>\vec r(t) = \la t^2+1, t-1\ra\cdot \la \sin(t) , 2t+5\ra</m> is
-              </p>
+                <p>
+                  <m>\vrp(t) = \la 2t-2,3t^2-6t+2\ra</m>
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
 
-              <p>
-                <m>\vrp(t)=</m><var name="$d" width="30"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\ds \vec r(t) = \la t^2+1,t^3-t\ra</m>
+                </p>
+              </statement>
+              <solution>
+                  <!-- START figures/fig_11_02_ex_17.tex -->
+                  <image xml:id="img_11_02_ex_17X">
+                    <description></description>
+                    <latex-image>
 
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context("Vector");
-              Context()->variables->are(t=>'Real');
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
-              $d = Compute("&lt;-1,cos(t)-2t,6t^2+10t+2+cos(t)-sin(t)-tcos(t)>");
-            </pg-code>
+                    \begin{tikzpicture}
 
-            <statement>
-              <p>
-                The derivative of <m>\vec r(t) = \la t^2+1, t-1,1\ra\times \la \sin(t) , 2t+5,1\ra</m> is
-              </p>
+                    \begin{axis}[
+                    ymin=-2.5,ymax=2.5,
+                    xmin=-.5,xmax=4.5
+                    ]
 
-              <p>
-                <m>\vrp(t)=</m><var name="$d" width="30"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
+                    \addplot+[domain=-.5:2.5,samples=50] ({x^2-2*x+2},{x^3-3*x^2+2*x});
 
-       <exercise>
+                    \draw [thick,secondcolor,-&gt;,&gt;=stealth] (axis cs: 2,0) -- (axis cs:4,2) node [black,above] { $\vrp(1)$};
+
+                    \end{axis}
+
+                    \end{tikzpicture}
+
+                    </latex-image>
+                  </image>
+                  <!-- figures/fig_11_02_ex_17.tex END -->
+
+                <p>
+                  <m>\vrp(t) = \la 2t,3t^2-1\ra</m>
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\ds \vec r(t) = \la t^2-4t+5,t^3-6t^2+11t-6\ra</m>
+                </p>
+              </statement>
+              <solution>
+                  <!-- START figures/fig_11_02_ex_18.tex -->
+                  <image xml:id="img_11_02_ex_18X">
+                    <description></description>
+                    <latex-image>
+
+                    \begin{tikzpicture}
+
+                    \begin{axis}[
+                    ymin=-2.5,ymax=2.5,
+                    xmin=-.5,xmax=4.5
+                    ]
+
+                    \addplot+ [-,domain=-.5:2.5,samples=40] ({x^2-2*x+2},{x^3-3*x^2+2*x});
+
+                    \draw [thick,secondcolor,-&gt;,&gt;=stealth] (axis cs: 2,0) -- (axis cs:0,2) node [black,right] { $\vrp(1)$};
+
+                    \end{axis}
+
+                    \end{tikzpicture}
+
+                    </latex-image>
+                  </image>
+                  <!-- figures/fig_11_02_ex_18.tex END -->
+
+                <p>
+                  <m>\vrp(t) = \la 2t-4,3t^2-12t+11\ra</m>
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
+
+      </exercisegroup>
+      <exercisegroup cols="2">
+
+        <introduction>
+          <p>
+            In the following exercises,
+            give the equation of the line tangent to the graph of
+            <m>\vec r(t)</m> at the given <m>t</m> value.
+          </p>
+        </introduction>
+
+        <exercise>
+          <webwork>
+              <!-- <pg-macros><macro-file>parserParametricLine.pl</macro-file></pg-macros> -->
+              <pg-code>
+                Context("Vector2D");
+                Context()->variables->are(t=>'Real');
+                $L=ParametricLine("&lt;2+3t, t>");
+              </pg-code>
+
+              <statement>
+                <p>
+                  Give the vector equation of the line tangent to <m>\vec r(t) = \la t^2+t, t^2-t\ra</m> at <m>t=1</m>.
+                </p>
+
+                <p>
+                  <m>\vec\ell(t)=</m><var name="$L" width="40"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <!-- <pg-macros><macro-file>parserParametricLine.pl</macro-file></pg-macros> -->
+              <pg-code>
+                Context("Vector2D");
+                Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+                Context()->variables->are(t=>'Real');
+                $L=ParametricLine("(3sqrt(2)/2,sqrt(2)/2) + t&lt;-3sqrt(2)/2,sqrt(2)/2 >");
+              </pg-code>
+
+              <statement>
+                <p>
+                  Give the vector equation of the line tangent to <m>\vec r(t) = \la 3\cos(t) ,\sin(t) \ra</m> at <m>t=\pi/4</m>.
+                </p>
+
+                <p>
+                  <m>\vec\ell(t)=</m><var name="$L" width="40"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\ds \vec r(t) = \la 3\cos(t) ,3\sin(t) ,t\ra</m> at <m>t=\pi</m>.
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  <m>\ell(t) = \la -3,0,\pi\ra + t\la0,-3,1\ra</m>
+                </p>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <!-- <pg-macros><macro-file>parserParametricLine.pl</macro-file></pg-macros> -->
+              <pg-code>
+                Context("Vector");
+                Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+                Context()->variables->are(t=>'Real');
+                $L=ParametricLine("(1,0,0) + t&lt;1,1,1 >");
+              </pg-code>
+
+              <statement>
+                <p>
+                  Give the vector equation of the line tangent to <m>\vec r(t) = \la e^t,\tan(t) ,t\ra</m> at <m>t=0</m>.
+                </p>
+
+                <p>
+                  <m>\vec\ell(t)=</m><var name="$L" width="40"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+      </exercisegroup>
+      <exercisegroup cols="2">
+
+        <introduction>
+          <p>
+            In the following exercises,
+            find the value(s) of <m>t</m> for which <m>\vec r(t)</m> is not smooth.
+          </p>
+        </introduction>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\ds \vec r(t) = \la \cos(t) ,\sin(t) - t\ra</m>
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  <m>t=2n\pi</m>, where <m>n</m> is an integer;
+                  so <m>t = \ldots-4\pi,-2\pi,0,2\pi,4\pi,\ldots</m>
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                $notsmooth=List("1");
+              </pg-code>
+
+              <statement>
+                <p>
+                  List the value(s) of <m>t</m> for which <m>\vec r(t) = \la t^2-2t+1,t^3+t^2-5t+3\ra</m> is not smooth.
+                </p>
+
+                <p>
+                  <var name="$notsmooth" width="10"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\ds \vec r(t) = \la \cos(t) -\sin(t) , \sin(t) - \cos(t) ,\cos(4t)\ra</m>
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  <m>\vec r(t)</m> is not smooth at <m>t=3\pi/4+n\pi</m>,
+                  where <m>n</m> is an integer
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                $notsmooth=List("1,-1");
+              </pg-code>
+
+              <statement>
+                <p>
+                  List the value(s) of <m>t</m> for which <m>\vec r(t) = \la t^3-3t+2, -\cos(\pi t),\sin^2(\pi t) \ra</m> is not smooth.
+                </p>
+
+                <p>
+                  <var name="$notsmooth" width="10"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+      </exercisegroup>
+      <exercisegroup cols="2">
+
+        <introduction>
+          <p>
+            The following exercises ask you to verify parts of <xref ref="thm_vvf_deriv_prop">Theorem</xref>.
+            In each let <m>f(t) = t^3</m>,
+            <m>\vec r(t) =\la t^2,t-1,1\ra</m> and <m>\vec s(t) = \la \sin(t) , e^t,t\ra</m>.
+            Compute the various derivatives as indicated.
+          </p>
+        </introduction>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  Simplify <m>f(t)\vec r(t)</m>, then find its derivative;
+                  show this is the same as <m>\fp(t)\vec r(t) + f(t)\vrp(t)</m>.
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  Both derivatives return <m>\la 5t^4,4t^3-3t^2,3t^2\ra</m>.
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  Simplify <m>\vec r(t)\cdot\vec s(t)</m>, then find its derivative;
+                  show this is the same as <m>\vrp(t)\cdot\vec s(t) + \vec r(t)\cdot\vec s\,'(t)</m>.
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  Both derivatives return <m>2\sin(t) +t^2\cos(t) + te^t+1</m>.
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  Simplify <m>\vec r(t)\times\vec s(t)</m>, then find its derivative;
+                  show this is the same as <m>\vrp(t)\times\vec s(t) + \vec r(t)\times\vec s\,'(t)</m>.
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  Both derivatives return <m>\la 2t-e^t-1,\cos(t) -3t^2,(t^2+2t)e^t-(t-1)\cos(t) -\sin(t) \ra</m>.
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
           <statement>
             <p>
-              <m>\ds \vec r(t) = \la \cosh t, \sinh t\ra</m>
+              Simplify <m>\ds \vec r\big(f(t)\big)</m>, then find its derivative;
+              show this is the same as <m>\ds \vrp\big(f(t)\big)\fp(t)</m>.
             </p>
           </statement>
           <answer>
             <p>
-              <m>\vrp(t) = \la \sinh t,\cosh t\ra</m>
+              Both derivatives return <m>\la 6t^5,3t^2,0\ra</m>
             </p>
           </answer>
         </exercise>
 
-    </exercisegroup>
-    <exercisegroup>
+      </exercisegroup>
+      <exercisegroup cols="2">
 
-      <introduction>
-        <p>
-          In the following exercises, find <m>\vrp (t)</m>.
-          Sketch <m>\vec r(t)</m> and <m>\vrp(1)</m>,
-          with the initial point of <m>\vrp(1)</m> at <m>\vec r(1)</m>.
-        </p>
-      </introduction>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>\ds \vec r(t) = \la t^2+t, t^2-t\ra</m>
-              </p>
-            </statement>
-            <solution>
-                <!-- START figures/fig_11_02_ex_15.tex -->
-                <image xml:id="img_11_02_ex_15X" width="47%">
-                  <description></description>
-                  <latex-image>
-
-                  \begin{tikzpicture}
-
-                  \begin{axis}[
-                  ymin=-1.5,ymax=6.5,
-                  xmin=-1.5,xmax=6.5
-                  ]
-
-                  \addplot+ [-,domain=-2:2,samples=40] ({x^2+x},{x^2-x});
-
-                  \draw [thick,secondcolor,-&gt;,&gt;=stealth] (axis cs: 2,0) -- (axis cs:5,1) node [black,right] { $\vrp(1)$};
-
-                  \end{axis}
-
-                  \end{tikzpicture}
-
-                  </latex-image>
-                </image>
-                <!-- figures/fig_11_02_ex_15.tex END -->
-
-              <p>
-                <m>\vrp(t) = \la 2t+1,2t-1\ra</m>
-              </p>
-            </solution>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>\ds \vec r(t) = \la t^2-2t+2,t^3-3t^2+2t\ra</m>
-              </p>
-            </statement>
-            <solution>
-                <!-- START figures/fig_11_02_ex_16.tex -->
-                <image xml:id="img_11_02_ex_16X" width="47%">
-                  <description></description>
-                  <latex-image>
-
-                  \begin{tikzpicture}
-
-                  \begin{axis}[
-                  ymin=-1.5,ymax=1.5,
-                  xmin=-.5,xmax=3.5
-                  ]
-
-                  \addplot+ [-,domain=-.5:2.5,samples=60] ({x^2-2*x+2},{x^3-3*x^2+2*x});
-
-                  \draw [thick,secondcolor,-&gt;,&gt;=stealth] (axis cs: 1,0) -- (axis cs:1,-1) node [black,right] { $\vrp(1)$};
-
-                  \end{axis}
-
-                  \end{tikzpicture}
-
-                  </latex-image>
-                </image>
-                <!-- figures/fig_11_02_ex_16.tex END -->
-
-              <p>
-                <m>\vrp(t) = \la 2t-2,3t^2-6t+2\ra</m>
-              </p>
-            </solution>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>\ds \vec r(t) = \la t^2+1,t^3-t\ra</m>
-              </p>
-            </statement>
-            <solution>
-                <!-- START figures/fig_11_02_ex_17.tex -->
-                <image xml:id="img_11_02_ex_17X" width="47%">
-                  <description></description>
-                  <latex-image>
-
-                  \begin{tikzpicture}
-
-                  \begin{axis}[
-                  ymin=-2.5,ymax=2.5,
-                  xmin=-.5,xmax=4.5
-                  ]
-
-                  \addplot+[domain=-.5:2.5,samples=50] ({x^2-2*x+2},{x^3-3*x^2+2*x});
-
-                  \draw [thick,secondcolor,-&gt;,&gt;=stealth] (axis cs: 2,0) -- (axis cs:4,2) node [black,above] { $\vrp(1)$};
-
-                  \end{axis}
-
-                  \end{tikzpicture}
-
-                  </latex-image>
-                </image>
-                <!-- figures/fig_11_02_ex_17.tex END -->
-
-              <p>
-                <m>\vrp(t) = \la 2t,3t^2-1\ra</m>
-              </p>
-            </solution>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>\ds \vec r(t) = \la t^2-4t+5,t^3-6t^2+11t-6\ra</m>
-              </p>
-            </statement>
-            <solution>
-                <!-- START figures/fig_11_02_ex_18.tex -->
-                <image xml:id="img_11_02_ex_18X" width="47%">
-                  <description></description>
-                  <latex-image>
-
-                  \begin{tikzpicture}
-
-                  \begin{axis}[
-                  ymin=-2.5,ymax=2.5,
-                  xmin=-.5,xmax=4.5
-                  ]
-
-                  \addplot+ [-,domain=-.5:2.5,samples=40] ({x^2-2*x+2},{x^3-3*x^2+2*x});
-
-                  \draw [thick,secondcolor,-&gt;,&gt;=stealth] (axis cs: 2,0) -- (axis cs:0,2) node [black,right] { $\vrp(1)$};
-
-                  \end{axis}
-
-                  \end{tikzpicture}
-
-                  </latex-image>
-                </image>
-                <!-- figures/fig_11_02_ex_18.tex END -->
-
-              <p>
-                <m>\vrp(t) = \la 2t-4,3t^2-12t+11\ra</m>
-              </p>
-            </solution>
-        <!-- </webwork> -->
-      </exercise>
-
-    </exercisegroup>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          In the following exercises,
-          give the equation of the line tangent to the graph of
-          <m>\vec r(t)</m> at the given <m>t</m> value.
-        </p>
-      </introduction>
-
-      <exercise>
-        <webwork>
-            <!-- <pg-macros><macro-file>parserParametricLine.pl</macro-file></pg-macros> -->
-            <pg-code>
-              Context("Vector2D");
-              Context()->variables->are(t=>'Real');
-              $L=ParametricLine("&lt;2+3t, t>");
-            </pg-code>
-
-            <statement>
-              <p>
-                Give the vector equation of the line tangent to <m>\vec r(t) = \la t^2+t, t^2-t\ra</m> at <m>t=1</m>.
-              </p>
-
-              <p>
-                <m>\vec\ell(t)=</m><var name="$L" width="40"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <!-- <pg-macros><macro-file>parserParametricLine.pl</macro-file></pg-macros> -->
-            <pg-code>
-              Context("Vector2D");
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
-              Context()->variables->are(t=>'Real');
-              $L=ParametricLine("(3sqrt(2)/2,sqrt(2)/2) + t&lt;-3sqrt(2)/2,sqrt(2)/2 >");
-            </pg-code>
-
-            <statement>
-              <p>
-                Give the vector equation of the line tangent to <m>\vec r(t) = \la 3\cos(t) ,\sin(t) \ra</m> at <m>t=\pi/4</m>.
-              </p>
-
-              <p>
-                <m>\vec\ell(t)=</m><var name="$L" width="40"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>\ds \vec r(t) = \la 3\cos(t) ,3\sin(t) ,t\ra</m> at <m>t=\pi</m>.
-              </p>
-            </statement>
-            <answer>
-              <p>
-                <m>\ell(t) = \la -3,0,\pi\ra + t\la0,-3,1\ra</m>
-              </p>
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <!-- <pg-macros><macro-file>parserParametricLine.pl</macro-file></pg-macros> -->
-            <pg-code>
-              Context("Vector");
-              Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
-              Context()->variables->are(t=>'Real');
-              $L=ParametricLine("(1,0,0) + t&lt;1,1,1 >");
-            </pg-code>
-
-            <statement>
-              <p>
-                Give the vector equation of the line tangent to <m>\vec r(t) = \la e^t,\tan(t) ,t\ra</m> at <m>t=0</m>.
-              </p>
-
-              <p>
-                <m>\vec\ell(t)=</m><var name="$L" width="40"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-    </exercisegroup>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          In the following exercises,
-          find the value(s) of <m>t</m> for which <m>\vec r(t)</m> is not smooth.
-        </p>
-      </introduction>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>\ds \vec r(t) = \la \cos(t) ,\sin(t) - t\ra</m>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                <m>t=2n\pi</m>, where <m>n</m> is an integer;
-                so <m>t = \ldots-4\pi,-2\pi,0,2\pi,4\pi,\ldots</m>
-              </p>
-            </solution>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              $notsmooth=List("1");
-            </pg-code>
-
-            <statement>
-              <p>
-                List the value(s) of <m>t</m> for which <m>\vec r(t) = \la t^2-2t+1,t^3+t^2-5t+3\ra</m> is not smooth.
-              </p>
-
-              <p>
-                <var name="$notsmooth" width="10"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>\ds \vec r(t) = \la \cos(t) -\sin(t) , \sin(t) - \cos(t) ,\cos(4t)\ra</m>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                <m>\vec r(t)</m> is not smooth at <m>t=3\pi/4+n\pi</m>,
-                where <m>n</m> is an integer
-              </p>
-            </solution>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              $notsmooth=List("1,-1");
-            </pg-code>
-
-            <statement>
-              <p>
-                List the value(s) of <m>t</m> for which <m>\vec r(t) = \la t^3-3t+2, -\cos(\pi t),\sin^2(\pi t) \ra</m> is not smooth.
-              </p>
-
-              <p>
-                <var name="$notsmooth" width="10"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-    </exercisegroup>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          The following exercises ask you to verify parts of <xref ref="thm_vvf_deriv_prop">Theorem</xref>.
-          In each let <m>f(t) = t^3</m>,
-          <m>\vec r(t) =\la t^2,t-1,1\ra</m> and <m>\vec s(t) = \la \sin(t) , e^t,t\ra</m>.
-          Compute the various derivatives as indicated.
-        </p>
-      </introduction>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                Simplify <m>f(t)\vec r(t)</m>, then find its derivative;
-                show this is the same as <m>\fp(t)\vec r(t) + f(t)\vrp(t)</m>.
-              </p>
-            </statement>
-            <solution>
-              <p>
-                Both derivatives return <m>\la 5t^4,4t^3-3t^2,3t^2\ra</m>.
-              </p>
-            </solution>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                Simplify <m>\vec r(t)\cdot\vec s(t)</m>, then find its derivative;
-                show this is the same as <m>\vrp(t)\cdot\vec s(t) + \vec r(t)\cdot\vec s\,'(t)</m>.
-              </p>
-            </statement>
-            <solution>
-              <p>
-                Both derivatives return <m>2\sin(t) +t^2\cos(t) + te^t+1</m>.
-              </p>
-            </solution>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                Simplify <m>\vec r(t)\times\vec s(t)</m>, then find its derivative;
-                show this is the same as <m>\vrp(t)\times\vec s(t) + \vec r(t)\times\vec s\,'(t)</m>.
-              </p>
-            </statement>
-            <solution>
-              <p>
-                Both derivatives return <m>\la 2t-e^t-1,\cos(t) -3t^2,(t^2+2t)e^t-(t-1)\cos(t) -\sin(t) \ra</m>.
-              </p>
-            </solution>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <statement>
+        <introduction>
           <p>
-            Simplify <m>\ds \vec r\big(f(t)\big)</m>, then find its derivative;
-            show this is the same as <m>\ds \vrp\big(f(t)\big)\fp(t)</m>.
+            In the following exercises,
+            evaluate the given definite or indefinite integral.
           </p>
-        </statement>
-        <answer>
+        </introduction>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\ds \int \la t^3,\cos(t) , te^t\ra\,dt</m>
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  <m>\la \frac14t^4,\sin(t) ,te^t-e^t\ra + \vec C</m>
+                </p>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\ds \int \la \frac{1}{1+t^2},\sec^2(t) \ra\,dt</m>
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  <m>\la \tan^{-1}(t) ,\tan(t) \ra + \vec C</m>
+                </p>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context("Vector2D");
+                $int=Compute("&lt;-2,0>");
+              </pg-code>
+
+              <statement>
+                <p>
+                  <m>\displaystyle\int_0^{\pi} \la -\sin(t) ,\cos(t) \ra\,dt=</m><var name="$int" width="30"/>.
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\ds \int_{-2}^{2} \la 2t+1,2t-1\ra\,dt</m>
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  <m>\la4,-4 \ra</m>
+                </p>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+      </exercisegroup>
+      <exercisegroup cols="2">
+
+        <introduction>
           <p>
-            Both derivatives return <m>\la 6t^5,3t^2,0\ra</m>
+            In the following exercises, solve the given initial value problems.
           </p>
-        </answer>
-      </exercise>
+        </introduction>
 
-    </exercisegroup>
-    <exercisegroup>
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context("Vector2D");
+                Context()->variables->are(t=>'Real');
+                $r=Compute("&lt;t^2/2+2,-cos(t)+3>");
+              </pg-code>
 
-      <introduction>
-        <p>
-          In the following exercises,
-          evaluate the given definite or indefinite integral.
-        </p>
-      </introduction>
+              <statement>
+                <p>
+                  Find <m>\vec r(t)</m>, given that
+                  <m>\vrp(t) = \la t,\sin(t) \ra</m> and <m>\vec r(0) = \la 2,2\ra</m>.
+                </p>
+
+                <p>
+                  <m>\vec r(t)=</m><var name="$r" width="40"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  Find <m>\vec r(t)</m>,
+                  given that <m>\vrp(t) = \la 1/(t+1),\tan(t) \ra</m> and
+                </p>
+
+                <p>
+                  <m>\vec r(0) = \la 1,2\ra</m>.
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  <m>\vec r(t) = \la \ln\abs{t+1} + 1, -\ln\abs{\cos(t) } + 2\ra</m>
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context("Vector");
+                Context()->variables->are(t=>'Real');
+                $r=Compute("&lt;t^4/12+t+4,t^3/6+2t+5,t^2/2+3t+6>");
+              </pg-code>
+
+              <statement>
+                <p>
+                  Find <m>\vec r(t)</m>, given that <m>\vrp'(t) = \la t^2,t,1\ra</m>,
+                  <m>\vrp(0) = \la 1,2,3\ra</m> and <m>\vec r(0) = \la 4,5,6\ra</m>.
+                </p>
+
+                <p>
+                  <m>\vec r(t)=</m><var name="$r" width="40"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  Find <m>\vec r(t)</m>,
+                  given that <m>\vrp'(t) = \la \cos(t) ,\sin(t) ,e^t\ra</m>,
+                </p>
+
+                <p>
+                  <m>\vrp(0) = \la 0,0,0\ra</m> and <m>\vec r(0) = \la 0,0,0\ra</m>.
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  <m>\vec r(t) = \la-\cos(t) +1,t-\sin(t) ,e^t-t-1 \ra</m>
+                </p>
+              </solution>
+          <!-- </webwork> -->
+        </exercise>
+
+      </exercisegroup>
+      <exercisegroup cols="2">
+
+        <introduction>
+          <p>
+            In the following exercises,
+            find the arc length of <m>\vec r(t)</m> on the indicated interval.
+          </p>
+        </introduction>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context()->flags->set(reduceConstants=>0,reduceConstatnFunctions=>0);
+                $l=Formula("2sqrt(13)pi");
+              </pg-code>
+
+              <statement>
+                <p>
+                  Find the arc length of <m>\vec r(t) = \la 2\cos(t) , 2\sin(t) , 3t \ra</m> on <m>[0,2\pi]</m>.
+                </p>
+
+                <p>
+                  <var name="$l" width="10"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\vec r(t) = \la 5\cos(t) , 3\sin(t) , 4\sin(t) \ra</m> on <m>[0,2\pi]</m>.
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  <m>10\pi</m>
+                </p>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise>
+          <webwork>
+              <pg-code>
+                Context()->flags->set(reduceConstants=>0,reduceConstatnFunctions=>0);
+                $l=Formula("1/54(22^(3/2)-8)");
+              </pg-code>
+
+              <statement>
+                <p>
+                  Find the arc length of <m>\vec r(t) = \la t^3,t^2,t^3 \ra</m> on <m>[0,1]</m>.
+                </p>
+
+                <p>
+                  <var name="$l" width="10"/>
+                </p>
+              </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <!-- <webwork>
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  <m>\vec r(t) = \la e^{-t}\cos(t) ,e^{-t}\sin(t) \ra</m> on <m>[0,1]</m>.
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  <m>\sqrt{2}(1-e^{-1})</m>
+                </p>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+      </exercisegroup>
 
       <exercise>
         <!-- <webwork>
@@ -2075,273 +2316,28 @@
             </pg-code> -->
             <statement>
               <p>
-                <m>\ds \int \la t^3,\cos(t) , te^t\ra\,dt</m>
-              </p>
-            </statement>
-            <answer>
-              <p>
-                <m>\la \frac14t^4,\sin(t) ,te^t-e^t\ra + \vec C</m>
-              </p>
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>\ds \int \la \frac{1}{1+t^2},\sec^2(t) \ra\,dt</m>
-              </p>
-            </statement>
-            <answer>
-              <p>
-                <m>\la \tan^{-1}(t) ,\tan(t) \ra + \vec C</m>
-              </p>
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context("Vector2D");
-              $int=Compute("&lt;-2,0>");
-            </pg-code>
-
-            <statement>
-              <p>
-                <m>\displaystyle\int_0^{\pi} \la -\sin(t) ,\cos(t) \ra\,dt=</m><var name="$int" width="30"/>.
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>\ds \int_{-2}^{2} \la 2t+1,2t-1\ra\,dt</m>
-              </p>
-            </statement>
-            <answer>
-              <p>
-                <m>\la4,-4 \ra</m>
-              </p>
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-    </exercisegroup>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          In the following exercises, solve the given initial value problems.
-        </p>
-      </introduction>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context("Vector2D");
-              Context()->variables->are(t=>'Real');
-              $r=Compute("&lt;t^2/2+2,-cos(t)+3>");
-            </pg-code>
-
-            <statement>
-              <p>
-                Find <m>\vec r(t)</m>, given that
-                <m>\vrp(t) = \la t,\sin(t) \ra</m> and <m>\vec r(0) = \la 2,2\ra</m>.
-              </p>
-
-              <p>
-                <m>\vec r(t)=</m><var name="$r" width="40"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                Find <m>\vec r(t)</m>,
-                given that <m>\vrp(t) = \la 1/(t+1),\tan(t) \ra</m> and
-              </p>
-
-              <p>
-                <m>\vec r(0) = \la 1,2\ra</m>.
+                Prove <xref ref="thm_vects_of_constant_length">Theorem</xref>;
+                that is, show if <m>\vec r(t)</m> has constant length and is differentiable,
+                then <m>\vec r(t)\cdot \vrp(t)=0</m>. (Hint:
+                use the Product Rule to compute <m>\frac{d}{dt}\big(\vec r(t)\cdot\vec r(t)\big)</m>.)
               </p>
             </statement>
             <solution>
               <p>
-                <m>\vec r(t) = \la \ln\abs{t+1} + 1, -\ln\abs{\cos(t) } + 2\ra</m>
+                As <m>\vec r(t)</m> has constant length,
+                <m>\vec r(t)\cdot\vec r(t)=c^2</m> for some constant <m>c</m>.
+                Thus
+                <md>
+                  <mrow>\vec r(t)\cdot\vec r(t) \amp = c^2</mrow>
+                  <mrow>\frac{d}{dt}\big(\vec r(t)\cdot\vec r(t)\big) \amp = \frac{d}{dt}\big(c^2\big)</mrow>
+                  <mrow>\vrp(t)\cdot \vec r(t)+\vec r(t)\cdot \vrp(t) \amp = 0</mrow>
+                  <mrow>2\vec r(t)\cdot \vrp(t) \amp =0</mrow>
+                  <mrow>\vec r(t)\cdot \vrp(t) \amp =0</mrow>
+                </md>.
               </p>
             </solution>
         <!-- </webwork> -->
       </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context("Vector");
-              Context()->variables->are(t=>'Real');
-              $r=Compute("&lt;t^4/12+t+4,t^3/6+2t+5,t^2/2+3t+6>");
-            </pg-code>
-
-            <statement>
-              <p>
-                Find <m>\vec r(t)</m>, given that <m>\vrp'(t) = \la t^2,t,1\ra</m>,
-                <m>\vrp(0) = \la 1,2,3\ra</m> and <m>\vec r(0) = \la 4,5,6\ra</m>.
-              </p>
-
-              <p>
-                <m>\vec r(t)=</m><var name="$r" width="40"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                Find <m>\vec r(t)</m>,
-                given that <m>\vrp'(t) = \la \cos(t) ,\sin(t) ,e^t\ra</m>,
-              </p>
-
-              <p>
-                <m>\vrp(0) = \la 0,0,0\ra</m> and <m>\vec r(0) = \la 0,0,0\ra</m>.
-              </p>
-            </statement>
-            <solution>
-              <p>
-                <m>\vec r(t) = \la-\cos(t) +1,t-\sin(t) ,e^t-t-1 \ra</m>
-              </p>
-            </solution>
-        <!-- </webwork> -->
-      </exercise>
-
-    </exercisegroup>
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          In the following exercises,
-          find the arc length of <m>\vec r(t)</m> on the indicated interval.
-        </p>
-      </introduction>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context()->flags->set(reduceConstants=>0,reduceConstatnFunctions=>0);
-              $l=Formula("2sqrt(13)pi");
-            </pg-code>
-
-            <statement>
-              <p>
-                Find the arc length of <m>\vec r(t) = \la 2\cos(t) , 2\sin(t) , 3t \ra</m> on <m>[0,2\pi]</m>.
-              </p>
-
-              <p>
-                <var name="$l" width="10"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>\vec r(t) = \la 5\cos(t) , 3\sin(t) , 4\sin(t) \ra</m> on <m>[0,2\pi]</m>.
-              </p>
-            </statement>
-            <answer>
-              <p>
-                <m>10\pi</m>
-              </p>
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-      <exercise>
-        <webwork>
-            <pg-code>
-              Context()->flags->set(reduceConstants=>0,reduceConstatnFunctions=>0);
-              $l=Formula("1/54(22^(3/2)-8)");
-            </pg-code>
-
-            <statement>
-              <p>
-                Find the arc length of <m>\vec r(t) = \la t^3,t^2,t^3 \ra</m> on <m>[0,1]</m>.
-              </p>
-
-              <p>
-                <var name="$l" width="10"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
-      <exercise>
-        <!-- <webwork>
-            <pg-code>
-            </pg-code> -->
-            <statement>
-              <p>
-                <m>\vec r(t) = \la e^{-t}\cos(t) ,e^{-t}\sin(t) \ra</m> on <m>[0,1]</m>.
-              </p>
-            </statement>
-            <answer>
-              <p>
-                <m>\sqrt{2}(1-e^{-1})</m>
-              </p>
-            </answer>
-        <!-- </webwork> -->
-      </exercise>
-
-    </exercisegroup>
-
-    <exercise>
-      <!-- <webwork>
-          <pg-code>
-          </pg-code> -->
-          <statement>
-            <p>
-              Prove <xref ref="thm_vects_of_constant_length">Theorem</xref>;
-              that is, show if <m>\vec r(t)</m> has constant length and is differentiable,
-              then <m>\vec r(t)\cdot \vrp(t)=0</m>. (Hint:
-              use the Product Rule to compute <m>\frac{d}{dt}\big(\vec r(t)\cdot\vec r(t)\big)</m>.)
-            </p>
-          </statement>
-          <solution>
-            <p>
-              As <m>\vec r(t)</m> has constant length,
-              <m>\vec r(t)\cdot\vec r(t)=c^2</m> for some constant <m>c</m>.
-              Thus
-              <md>
-                <mrow>\vec r(t)\cdot\vec r(t) \amp = c^2</mrow>
-                <mrow>\frac{d}{dt}\big(\vec r(t)\cdot\vec r(t)\big) \amp = \frac{d}{dt}\big(c^2\big)</mrow>
-                <mrow>\vrp(t)\cdot \vec r(t)+\vec r(t)\cdot \vrp(t) \amp = 0</mrow>
-                <mrow>2\vec r(t)\cdot \vrp(t) \amp =0</mrow>
-                <mrow>\vec r(t)\cdot \vrp(t) \amp =0</mrow>
-              </md>.
-            </p>
-          </solution>
-      <!-- </webwork> -->
-    </exercise>
-
+    </subexercises>
   </exercises>
 </section>
