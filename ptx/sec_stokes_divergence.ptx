@@ -1091,13 +1091,8 @@
   </subsection>
 
   <exercises>
-    <exercisegroup>
-      <introduction>
-        <p>
-          Terms and Concepts
-        </p>
-      </introduction>
-
+    <subexercises>
+      <title>Terms and Concepts</title>
       <exercise>
         <statement>
           <p>
@@ -1151,1499 +1146,1502 @@
           </p>
         </answer>
       </exercise>
-    </exercisegroup>
+    </subexercises>
+    <subexercises>
+      <title>Problems</title>
 
-    <exercisegroup>
-      <introduction>
-        <p>
-          In the following exercises,
-          a closed surface <m>\surfaceS</m> enclosing a domain <m>D</m> and a vector field <m>\vec F</m> are given.
-          Verify the Divergence Theorem on <m>\surfaceS</m>; that is,
-          show <m>\iint_\surfaceS \vec F\cdot \vec n\, dS = \iiint_D\divv \vec F\, dV</m>.
-        </p>
-      </introduction>
-
-      <exercise>
-        <statement>
+      <exercisegroup cols="2">
+        <introduction>
           <p>
-            <m>\surfaceS</m> is the surface bounding the domain <m>D</m> enclosed by the plane
-            <m>z=2-x/2-2y/3</m> and the coordinate planes in the first octant;
-            <m>\vec F = \langle x^2,y^2,x\rangle</m>.
+            In the following exercises,
+            a closed surface <m>\surfaceS</m> enclosing a domain <m>D</m> and a vector field <m>\vec F</m> are given.
+            Verify the Divergence Theorem on <m>\surfaceS</m>; that is,
+            show <m>\iint_\surfaceS \vec F\cdot \vec n\, dS = \iiint_D\divv \vec F\, dV</m>.
           </p>
+        </introduction>
 
-            <image xml:id="img_14_07_ex_05_3D" width="47%">
-              <description></description>
-              <asymptote>
+        <exercise>
+          <statement>
+            <p>
+              <m>\surfaceS</m> is the surface bounding the domain <m>D</m> enclosed by the plane
+              <m>z=2-x/2-2y/3</m> and the coordinate planes in the first octant;
+              <m>\vec F = \langle x^2,y^2,x\rangle</m>.
+            </p>
+
+              <image xml:id="img_14_07_ex_05_3D">
+                <description></description>
+                <asymptote>
 
 
 
-                //ASY file for fig14_07_ex_05_3D.asy in Chapter 13
+                  //ASY file for fig14_07_ex_05_3D.asy in Chapter 13
 
-                size(282,282,IgnoreAspect);
-                //currentprojection=perspective(7,2,1);
-                currentprojection=orthographic(12,12,10);
-                defaultrender.merge=true;
+                  size(282,282,IgnoreAspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(12,12,10);
+                  defaultrender.merge=true;
 
-                // setup and draw the axes
-                real[] myxchoice={4};
-                real[] myychoice={3};
-                real[] myzchoice={2};
-                defaultpen(0.5mm);
+                  // setup and draw the axes
+                  real[] myxchoice={4};
+                  real[] myychoice={3};
+                  real[] myzchoice={2};
+                  defaultpen(0.5mm);
 
-                pair xbounds=(-.5,4.5);
-                pair ybounds=(-.5,4.5);
-                pair zbounds=(-0.25,3);
+                  pair xbounds=(-.5,4.5);
+                  pair ybounds=(-.5,4.5);
+                  pair zbounds=(-0.25,3);
 
-                xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
 
-                label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
 
-                //parabola in plane
-                //triple g(real t) {return (2cos(t),2sin(t),0);}
-                //path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
-                //triple g(real t) {return (t,4-t^2,2*(4-t^2));}
-                //path3 mypath=graph(g,-2,2,operator ..);
-                draw((4,0,0)--(0,3,0)--(0,0,2)--cycle,bluepen+linewidth(2));
-                draw((4,0,0)--(0,0,0),bluepen+linewidth(2));
-                draw((0,3,0)--(0,0,0),bluepen+linewidth(2));
-                draw((0,0,2)--(0,0,0),bluepen+linewidth(2));
+                  //parabola in plane
+                  //triple g(real t) {return (2cos(t),2sin(t),0);}
+                  //path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
+                  //triple g(real t) {return (t,4-t^2,2*(4-t^2));}
+                  //path3 mypath=graph(g,-2,2,operator ..);
+                  draw((4,0,0)--(0,3,0)--(0,0,2)--cycle,bluepen+linewidth(2));
+                  draw((4,0,0)--(0,0,0),bluepen+linewidth(2));
+                  draw((0,3,0)--(0,0,0),bluepen+linewidth(2));
+                  draw((0,0,2)--(0,0,0),bluepen+linewidth(2));
 
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.x,t.y*(3-3t.x/4),2-t.x/2-2t.y*(3-3t.x/4)/3);//
-                }
-                surface s=surface(f,(0,0),(4,1),1,1,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.x,t.y*(3-3t.x/4),2-t.x/2-2t.y*(3-3t.x/4)/3);//
+                  }
+                  surface s=surface(f,(0,0),(4,1),1,1,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
 
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.x,t.y*(3-3t.x/4),0);//
-                }
-                surface s=surface(f,(0,0),(4,1),1,1,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.x,t.y*(3-3t.x/4),0);//
+                  }
+                  surface s=surface(f,(0,0),(4,1),1,1,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
 
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.x,0,t.y*(2-t.x/2));//
-                }
-                surface s=surface(f,(0,0),(4,1),1,1,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.x,0,t.y*(2-t.x/2));//
+                  }
+                  surface s=surface(f,(0,0),(4,1),1,1,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
 
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (0,t.x,t.y*(2-2t.x/3));//
-                }
-                surface s=surface(f,(0,0),(3,1),1,1,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (0,t.x,t.y*(2-2t.x/3));//
+                  }
+                  surface s=surface(f,(0,0),(3,1),1,1,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
 
-                //label and arrow
-                //label("$z=2y$",(-2,2,7));
-                //draw((-1.8,2,6.8)--(-1,2,4.1),Arrow3(size=2mm));
-                //label("$y=4-x^2$",(2.5,2,0));
-                //draw((2.3,2.5,0.2)--(1.55,2.25,2.5),Arrow3(size=2mm));
+                  //label and arrow
+                  //label("$z=2y$",(-2,2,7));
+                  //draw((-1.8,2,6.8)--(-1,2,4.1),Arrow3(size=2mm));
+                  //label("$y=4-x^2$",(2.5,2,0));
+                  //draw((2.3,2.5,0.2)--(1.55,2.25,2.5),Arrow3(size=2mm));
 
-              </asymptote>
-            </image>
-        </statement>
-        <answer>
+                </asymptote>
+              </image>
+          </statement>
+          <answer>
+            <p>
+              Outward flux across the plane <m>z=2-x/2-2y/3</m> is 14;
+              across the plane <m>z=0</m> the outward flux is <m>-8</m>;
+              across the planes <m>x=0</m> and <m>y=0</m> the outward flux is 0.
+            </p>
+
+            <p>
+              Total outward flux: <m>14</m>.
+            </p>
+
+            <p>
+              <m>\iint_D\divv\vec F\, dV = \int_0^{4}\int_0^{3-3x/4}\int_0^{2-x/2-2y/3}(2x+2y)\, dz\, dy\, dx = 14</m>.
+            </p>
+          </answer>
+        </exercise>
+
+        <exercise>
+          <statement>
+            <p>
+              <m>\surfaceS</m> is the surface bounding the domain <m>D</m> enclosed by the cylinder
+              <m>x^2+y^2=1</m> and the planes <m>z=-3</m> and <m>z=3</m>;
+              <m>\vec F = \langle -x,y,z\rangle</m>.
+            </p>
+
+              <image xml:id="img_14_07_ex_06_3D">
+                <description></description>
+                <asymptote>
+
+
+
+                  //ASY file for fig14_07_ex_06_3D.asy in Chapter 13
+
+                  size(282,282,IgnoreAspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(12,12,10);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={-1,1};
+                  real[] myychoice={-1,1};
+                  real[] myzchoice={-3,3};
+                  defaultpen(0.5mm);
+
+                  pair xbounds=(-3.5,3.5);
+                  pair ybounds=(-3.5,3.5);
+                  pair zbounds=(-3.5,3.5);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //parabola in plane
+                  triple g(real t) {return (cos(t),sin(t),3);}
+                  path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
+                  triple g(real t) {return (cos(t),sin(t),-3);}
+                  path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (cos(t.x),sin(t.x),t.y);//
+                  }
+                  surface s=surface(f,(0,-3),(2pi,3),16,2,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.y*cos(t.x),t.y*sin(t.x),3);//
+                  }
+                  surface s=surface(f,(0,0),(2pi,1),8,2,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.y*cos(t.x),t.y*sin(t.x),-3);//
+                  }
+                  surface s=surface(f,(0,0),(2pi,1),8,2,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //label and arrow
+                  //label("$z=2y$",(-2,2,7));
+                  //draw((-1.8,2,6.8)--(-1,2,4.1),Arrow3(size=2mm));
+                  //label("$y=4-x^2$",(2.5,2,0));
+                  //draw((2.3,2.5,0.2)--(1.55,2.25,2.5),Arrow3(size=2mm));
+
+                </asymptote>
+              </image>
+          </statement>
+          <answer>
+            <p>
+              Outward flux across the cylinder <m>x^2+y^2=1</m> is 0;
+              across the plane <m>z=3</m> the outward flux is <m>3\pi</m>;
+              across the plane <m>z=-3</m> the outward flux is <m>3\pi</m>.
+            </p>
+
+            <p>
+              Total outward flux: <m>6\pi</m>.
+            </p>
+
+            <p>
+              <m>\iint_D\divv\vec F\, dV = \int_0^{2\pi}\int_0^{1}\int_{-3}^{3}r\, dz\, dr\, d\theta = 6\pi</m>.
+            </p>
+          </answer>
+        </exercise>
+
+        <exercise>
+          <statement>
+            <p>
+              <m>\surfaceS</m> is the surface bounding the domain <m>D</m> enclosed by
+              <m>z=xy(3-x)(3-y)</m> and the plane <m>z=0</m>;
+              <m>\vec F = \langle 3x,4y,5z+1\rangle</m>.
+            </p>
+
+              <image xml:id="img_14_07_ex_07_3D">
+                <description></description>
+                <asymptote>
+
+
+
+                  //ASY file for fig14_07_ex_07_3D.asy in Chapter 13
+
+                  size(282,282,IgnoreAspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(12,12,10);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={3};
+                  real[] myychoice={3};
+                  real[] myzchoice={4};
+                  defaultpen(0.5mm);
+
+                  pair xbounds=(-.5,3.5);
+                  pair ybounds=(-.5,3.5);
+                  pair zbounds=(-.5,4.5);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //parabola in plane
+                  //triple g(real t) {return (cos(t),sin(t),3);}
+                  //path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
+                  //triple g(real t) {return (cos(t),sin(t),-3);}
+                  //path3 mypath=graph(g,0,2pi,operator ..);
+                  draw((0,0,0) -- (3,0,0) -- (3,3,0) -- (0,3,0)--cycle,bluepen+linewidth(2));
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.x,t.y,t.x*t.y*(3-t.x)*(3-t.y));//
+                  }
+                  surface s=surface(f,(0,0),(3,3),8,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.x,t.y,0);//
+                  }
+                  surface s=surface(f,(0,0),(3,3),1,1,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //label and arrow
+                  //label("$z=2y$",(-2,2,7));
+                  //draw((-1.8,2,6.8)--(-1,2,4.1),Arrow3(size=2mm));
+                  //label("$y=4-x^2$",(2.5,2,0));
+                  //draw((2.3,2.5,0.2)--(1.55,2.25,2.5),Arrow3(size=2mm));
+
+                </asymptote>
+              </image>
+          </statement>
+          <answer>
+            <p>
+              Outward flux across the surface <m>z=xy(3-x)(3-y)</m> is 252;
+              across the plane <m>z=0</m> the outward flux is <m>-9</m>.
+            </p>
+
+            <p>
+              Total outward flux: <m>243</m>.
+            </p>
+
+            <p>
+              <m>\iint_D\divv\vec F\, dV = \int_0^{3}\int_0^{3}\int_{0}^{xy(3-x)(3-y)}12\, dz\, dy\, dx = 243</m>.
+            </p>
+          </answer>
+        </exercise>
+
+        <exercise>
+          <statement>
+            <p>
+              <m>\surfaceS</m> is the surface composed of <m>\surfaceS_1</m>,
+              the paraboloid <m>z=4-x^2-y^2</m> for <m>z\geq 0</m>,
+              and <m>\surfaceS_2</m>, the disk of radius 2 centered at the origin;
+              <m>\vec F = \langle x,y,z^2\rangle</m>.
+            </p>
+
+              <image xml:id="img_14_07_ex_08_3D">
+                <description></description>
+                <asymptote>
+
+
+
+                  //ASY file for fig14_07_ex_08_3D.asy in Chapter 14
+
+                  size(282,282,IgnoreAspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(12,12,10);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={-2,2};
+                  real[] myychoice={-2,2};
+                  real[] myzchoice={4};
+                  defaultpen(0.5mm);
+
+                  pair xbounds=(-2.5,2.5);
+                  pair ybounds=(-2.5,2.5);
+                  pair zbounds=(-0.25,5);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //parabola in plane
+                  triple g(real t) {return (2cos(t),2sin(t),0);}
+                  path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
+                  //triple g(real t) {return (t,4-t^2,2*(4-t^2));}
+                  //path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (2*t.y*cos(t.x),t.y*2*sin(t.x),4-4*t.y^2);//
+                  }
+                  surface s=surface(f,(0,0),(2pi,1),16,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (2*t.y*cos(t.x),2*t.y*sin(t.x),0);//
+                  }
+                  surface s=surface(f,(0,0),(2pi,1),8,4,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //label and arrow
+                  //label("$z=2y$",(-2,2,7));
+                  //draw((-1.8,2,6.8)--(-1,2,4.1),Arrow3(size=2mm));
+                  //label("$y=4-x^2$",(2.5,2,0));
+                  //draw((2.3,2.5,0.2)--(1.55,2.25,2.5),Arrow3(size=2mm));
+
+                </asymptote>
+              </image>
+          </statement>
+          <answer>
+            <p>
+              Outward flux across the paraboloid is <m>112\pi/3</m>;
+              across the disk the outward flux is 0.
+            </p>
+
+            <p>
+              Total outward flux: <m>112\pi/3</m>.
+            </p>
+
+            <p>
+              <m>\iint_D\divv\vec F\, dV = \int_0^{2\pi}\int_0^2\int_0^{4-r^2}(2z+2)r\, dz\, dr\, d\theta = 112\pi/3</m>.
+            </p>
+          </answer>
+        </exercise>
+      </exercisegroup>
+
+      <exercisegroup cols="2">
+        <introduction>
           <p>
-            Outward flux across the plane <m>z=2-x/2-2y/3</m> is 14;
-            across the plane <m>z=0</m> the outward flux is <m>-8</m>;
-            across the planes <m>x=0</m> and <m>y=0</m> the outward flux is 0.
+            In the following exercises,
+            a closed curve <m>C</m> that is the boundary of a surface <m>\surfaceS</m> is given along with a vector field <m>\vec F</m>.
+            Verify Stokes' Theorem on <m>C</m>;
+            that is, show <m>\oint_C \vec F\cdot d\vec r = \iint_\surfaceS\big(\curl \vec F\,\big)\cdot\vec n\, dS</m>.
           </p>
+        </introduction>
 
+        <exercise>
+          <statement>
+            <p>
+              <m>C</m> is the curve parametrized by
+              <m>\vec r(t) = \langle \cos t, \sin t, 1\rangle</m> and <m>\surfaceS</m> is the portion of
+              <m>z=x^2+y^2</m> enclosed by <m>C</m>;
+              <m>\vec F = \langle z,-x,y\rangle</m>.
+            </p>
+
+              <image xml:id="img_14_07_ex_09_3D">
+                <description></description>
+                <asymptote>
+
+
+
+                  //ASY file for fig14_07_ex_09_3D.asy in Chapter 14
+
+                  size(282,282,IgnoreAspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(12,12,10);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={-1,1};
+                  real[] myychoice={-1,1};
+                  real[] myzchoice={1};
+                  defaultpen(0.5mm);
+
+                  pair xbounds=(-1.5,1.5);
+                  pair ybounds=(-1.5,1.5);
+                  pair zbounds=(-0.25,2);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //parabola in plane
+                  triple g(real t) {return (cos(t),sin(t),1);}
+                  path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
+                  //triple g(real t) {return (t,4-t^2,2*(4-t^2));}
+                  //path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.y*cos(t.x),t.y*sin(t.x),t.y^2);//
+                  }
+                  surface s=surface(f,(0,0),(2pi,1),16,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //label and arrow
+                  //label("$z=2y$",(-2,2,7));
+                  //draw((-1.8,2,6.8)--(-1,2,4.1),Arrow3(size=2mm));
+                  //label("$y=4-x^2$",(2.5,2,0));
+                  //draw((2.3,2.5,0.2)--(1.55,2.25,2.5),Arrow3(size=2mm));
+
+                </asymptote>
+              </image>
+          </statement>
+          <answer>
+            <p>
+              Circulation on <m>C</m>: <m>\oint_C \vec F\cdot d\vec r = \pi</m>
+            </p>
+
+            <p>
+              <m>\iint_\surfaceS\big(\curl \vec F\big)\cdot\vec n\, dS = \pi</m>.
+            </p>
+          </answer>
+        </exercise>
+
+        <exercise>
+          <statement>
+            <p>
+              <m>C</m> is the curve parametrized by
+              <m>\vec r(t) = \langle \cos t, \sin t, e^{-1}\rangle</m> and <m>\surfaceS</m> is the portion of
+              <m>z=e^{-x^2-y^2}</m> enclosed by <m>C</m>;
+              <m>\vec F = \langle -y,x,1\rangle</m>.
+            </p>
+
+              <image xml:id="img_14_07_ex_10_3D">
+                <description></description>
+                <asymptote>
+
+
+
+                  //ASY file for fig14_07_ex_10_3D.asy in Chapter 14
+
+                  size(282,282,IgnoreAspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(12,12,10);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={-1,1};
+                  real[] myychoice={-1,1};
+                  real[] myzchoice={1};
+                  defaultpen(0.5mm);
+
+                  pair xbounds=(-1.5,1.5);
+                  pair ybounds=(-1.5,1.5);
+                  pair zbounds=(-0.25,1.5);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //parabola in plane
+                  triple g(real t) {return (cos(t),sin(t),exp(-1));}
+                  path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
+                  //triple g(real t) {return (t,4-t^2,2*(4-t^2));}
+                  //path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.y*cos(t.x),t.y*sin(t.x),exp(-t.y^2));//
+                  }
+                  surface s=surface(f,(0,0),(2pi,1),16,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //label and arrow
+                  //label("$z=2y$",(-2,2,7));
+                  //draw((-1.8,2,6.8)--(-1,2,4.1),Arrow3(size=2mm));
+                  //label("$y=4-x^2$",(2.5,2,0));
+                  //draw((2.3,2.5,0.2)--(1.55,2.25,2.5),Arrow3(size=2mm));
+
+                </asymptote>
+              </image>
+          </statement>
+          <answer>
+            <p>
+              Circulation on <m>C</m>: <m>\oint_C \vec F\cdot d\vec r = \pi</m>
+            </p>
+
+            <p>
+              <m>\iint_\surfaceS\big(\curl \vec F\big)\cdot\vec n\, dS = \pi</m>.
+            </p>
+          </answer>
+        </exercise>
+
+        <exercise>
+          <statement>
+            <p>
+              <m>C</m> is the curve that follows the triangle with vertices at <m>(0,0,2)</m>,
+              <m>(4,0,0)</m> and <m>(0,3,0)</m>,
+              traversing the the vertices in that order and returning to <m>(0,0,2)</m>,
+              and <m>\surfaceS</m> is the portion of the plane
+              <m>z=2-x/2-2y/3</m> enclosed by <m>C</m>;
+              <m>\vec F = \langle y,-z,y\rangle</m>.
+            </p>
+
+              <image xml:id="img_14_07_ex_11_3D">
+                <description></description>
+                <asymptote>
+
+
+
+                  //ASY file for fig14_07_ex_10_3D.asy in Chapter 14
+
+                  size(282,282,IgnoreAspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(12,12,10);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={4};
+                  real[] myychoice={3};
+                  real[] myzchoice={2};
+                  defaultpen(0.5mm);
+
+                  pair xbounds=(-.5,4.5);
+                  pair ybounds=(-.5,4.5);
+                  pair zbounds=(-0.25,2.5);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //parabola in plane
+                  //triple g(real t) {return (cos(t),sin(t),exp(-1));}
+                  //path3 mypath=graph(g,0,2pi,operator ..);
+                  draw((0,0,2)--(4,0,0)--(0,3,0)--cycle,bluepen+linewidth(2));
+                  //triple g(real t) {return (t,4-t^2,2*(4-t^2));}
+                  //path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.x,t.y*(3-3t.x/4),2-t.x/2-2*(t.y*(3-3t.x/4))/3);//
+                  }
+                  surface s=surface(f,(0,0),(4,1),1,1,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //label and arrow
+                  //label("$z=2y$",(-2,2,7));
+                  //draw((-1.8,2,6.8)--(-1,2,4.1),Arrow3(size=2mm));
+                  //label("$y=4-x^2$",(2.5,2,0));
+                  //draw((2.3,2.5,0.2)--(1.55,2.25,2.5),Arrow3(size=2mm));
+
+                </asymptote>
+              </image>
+          </statement>
+          <answer>
+            <p>
+              Circulation on <m>C</m>: The flow along the line from <m>(0,0,2)</m> to <m>(4,0,0)</m> is 0;
+              from <m>(4,0,0)</m> to <m>(0,3,0)</m> it is <m>-6</m>,
+              and from <m>(0,3,0)</m> to <m>(0,0,2)</m> it is 6.
+              The total circulation is <m>0+(-6)+6=0</m>.
+            </p>
+
+            <p>
+              <m>\iint_\surfaceS\big(\curl \vec F\big)\cdot\vec n\, dS = \iint_\surfaceS 0 \, dS = 0</m>.
+            </p>
+          </answer>
+        </exercise>
+
+        <exercise>
+          <statement>
+            <p>
+              <m>C</m> is the curve whose <m>x</m> and <m>y</m> coordinates follow the parabola <m>y=1-x^2</m> from <m>x=1</m> to <m>x=-1</m>,
+              then follow the line from <m>(-1,0)</m> back to <m>(1,0)</m>,
+              where the <m>z</m> coordinates of <m>C</m> are determined by <m>f(x,y) = 2x^2+y^2</m>,
+              and <m>\surfaceS</m> is the portion of
+              <m>z=2x^2+y^2</m> enclosed by <m>C</m>;
+              <m>\vec F = \langle y^2+z,x,x^2-y\rangle</m>.
+            </p>
+
+              <image xml:id="img_14_07_ex_12_3D">
+                <description></description>
+                <asymptote>
+
+
+
+                  //ASY file for fig14_07_ex_10_3D.asy in Chapter 14
+
+                  size(282,282,IgnoreAspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(12,12,10);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={-1,1};
+                  real[] myychoice={1};
+                  real[] myzchoice={2};
+                  defaultpen(0.5mm);
+
+                  pair xbounds=(-1.5,1.5);
+                  pair ybounds=(-1.5,1.5);
+                  pair zbounds=(-0.25,2.5);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //parabola in plane
+                  triple g(real t) {return (t,1-t^2,2t^2+(1-t^2)^2);}
+                  path3 mypath=graph(g,-1,1,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  triple g(real t) {return (t,0,2t^2);}
+                  path3 mypath=graph(g,-1,1,operator ..);draw(mypath,bluepen+linewidth(2));
+                  //triple g(real t) {return (t,4-t^2,2*(4-t^2));}
+                  //path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.x,t.y*(1-t.x^2),2t.x^2+(t.y*(1-t.x^2))^2);//
+                  }
+                  surface s=surface(f,(-1,0),(1,1),8,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //label and arrow
+                  //label("$z=2y$",(-2,2,7));
+                  //draw((-1.8,2,6.8)--(-1,2,4.1),Arrow3(size=2mm));
+                  //label("$y=4-x^2$",(2.5,2,0));
+                  //draw((2.3,2.5,0.2)--(1.55,2.25,2.5),Arrow3(size=2mm));
+
+                </asymptote>
+              </image>
+          </statement>
+          <answer>
+            <p>
+              Circulation on <m>C</m>: The flow along the parabola is <m>-32/15</m>;
+              the flow along the line is <m>4/3</m>.
+              The total circulation is <m>4/3-32/15 = -4/5</m>.
+            </p>
+
+            <p>
+              <m>\iint_\surfaceS\big(\curl \vec F\big)\cdot\vec n\, dS = -4/5</m>.
+            </p>
+          </answer>
+        </exercise>
+      </exercisegroup>
+
+      <exercisegroup cols="2">
+        <introduction>
           <p>
-            Total outward flux: <m>14</m>.
+            In the following exercises,
+            a closed surface <m>\surfaceS</m> and a vector field <m>\vec F</m> are given.
+            Find the outward flux of <m>\vec F</m> over <m>\surfaceS</m> either through direct computation or through the Divergence Theorem.
           </p>
+        </introduction>
 
+        <exercise>
+          <statement>
+            <p>
+              <m>\surfaceS</m> is the surface formed by the intersections of <m>z=0</m> and <m>z=(x^2-1)(y^2-1)</m>;
+              <m>\vec F = \langle x^2+1,yz,xz^2\rangle</m>.
+            </p>
+
+              <image xml:id="img_14_07_ex_13_3D">
+                <description></description>
+                <asymptote>
+
+
+
+                  //ASY file for fig14_07_ex_13_3D.asy in Chapter 13
+
+                  size(282,282,IgnoreAspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(12,12,5);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={-1,1};
+                  real[] myychoice={-1,1};
+                  real[] myzchoice={-1,1};
+                  defaultpen(0.5mm);
+
+                  pair xbounds=(-1.25,1.25);
+                  pair ybounds=(-1.25,1.25);
+                  pair zbounds=(-0.25,1.25);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //parabola in plane
+                  //triple g(real t) {return (cos(t),sin(t),3);}
+                  //path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
+                  //triple g(real t) {return (cos(t),sin(t),-3);}
+                  //path3 mypath=graph(g,0,2pi,operator ..);
+                  draw((-1,-1,0) -- (-1,1,0) -- (1,1,0) -- (1,-1,0)--cycle,bluepen+linewidth(2));
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.x,t.y,(t.x^2-1)*(t.y^2-1));//
+                  }
+                  surface s=surface(f,(-1,-1),(1,1),8,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.x,t.y,0);//
+                  }
+                  surface s=surface(f,(-1,-1),(1,1),1,1,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //label and arrow
+                  //label("$z=2y$",(-2,2,7));
+                  //draw((-1.8,2,6.8)--(-1,2,4.1),Arrow3(size=2mm));
+                  //label("$y=4-x^2$",(2.5,2,0));
+                  //draw((2.3,2.5,0.2)--(1.55,2.25,2.5),Arrow3(size=2mm));
+
+                </asymptote>
+              </image>
+          </statement>
+          <answer>
+            <p>
+              <m>128/225</m>
+            </p>
+          </answer>
+        </exercise>
+
+        <exercise>
+          <statement>
+            <p>
+              <m>\surfaceS</m> is the surface formed by the intersections of the planes <m>z=\frac12(3-x)</m>,
+              <m>x=1</m>,
+              <m>y=0</m>, <m>y=2</m> and <m>z=0</m>;
+              <m>\vec F = \langle x,y^2,z\rangle</m>.
+            </p>
+
+              <image xml:id="img_14_07_ex_14_3D">
+                <description></description>
+                <asymptote>
+
+
+
+                  //ASY file for fig13_06_ex_083D.asy in Chapter 13
+
+                  size(282,282,IgnoreAspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(8.8,7.8,3);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={1,2,3};
+                  real[] myychoice={1,2,3};
+                  real[] myzchoice={1};
+                  defaultpen(0.5mm);
+
+                  pair xbounds=(-0.5,3.5);
+                  pair ybounds=(-0.5,3.5);
+                  pair zbounds=(-0.5,1.75);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //edges of object
+                  draw((1,0,0)--(1,2,0)--(3,2,0)--(3,0,0)--cycle,bluepen+linewidth(2));
+                  draw((3,0,0)--(1,0,1)--(1,2,1)--(3,2,0),bluepen+linewidth(2));
+                  draw((3,0,0)--(1,0,1),bluepen+linewidth(2));
+                  draw((1,0,0)--(1,0,1),bluepen+linewidth(2));
+                  draw((1,2,0)--(1,2,1),bluepen+linewidth(2));
+
+                  //shade faces
+                  import three;
+                  path3 p=(1,0,0)--(1,2,0)--(3,2,0)--(3,0,0);
+                  draw(surface(p -- cycle), surfacepen);
+                  path3 p=(1,0,1)--(1,2,1)--(3,2,0)--(3,0,0);
+                  draw(surface(p -- cycle), surfacepen);
+                  path3 p=(1,0,0)--(1,2,0)--(1,2,1)--(1,0,1);
+                  draw(surface(p -- cycle), surfacepen);
+                  path3 p=(1,0,0)--(3,0,0)--(1,0,1);
+                  draw(surface(p -- cycle), surfacepen);
+                  path3 p=(1,2,0)--(3,2,0)--(1,2,1);
+                  draw(surface(p -- cycle), surfacepen);
+
+                  //labels and arrow
+                  label("$z=\frac{1}{2}(3-x)$",(3,0,1.1));
+                  draw((3,0.25,1)--(2,1,0.45),Arrow3(size=2mm));
+
+                </asymptote>
+              </image>
+          </statement>
+          <answer>
+            <p>
+              <m>8</m>
+            </p>
+          </answer>
+        </exercise>
+
+        <exercise>
+          <statement>
+            <p>
+              <m>\surfaceS</m> is the surface formed by the intersections of the planes <m>z=2y</m>,
+              <m>y=4-x^2</m> and <m>z=0</m>;
+              <m>\vec F = \langle xz,0,xz\rangle</m>.
+            </p>
+
+              <image xml:id="img_14_07_ex_15_3D">
+                <description></description>
+                <asymptote>
+
+
+
+                  //ASY file for fig13_06_ex_123D.asy in Chapter 13
+
+                  size(282,282,IgnoreAspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(12.1,-7.1,16);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={-2,-1,1,2};
+                  real[] myychoice={1,2,3,4};
+                  real[] myzchoice={2,4,6,8};
+                  defaultpen(0.5mm);
+
+                  pair xbounds=(-2.5,2.5);
+                  pair ybounds=(-0.25,5);
+                  pair zbounds=(-0.25,10);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //parabola in plane
+                  triple g(real t) {return (t,4-t^2,0);}
+                  path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
+                  triple g(real t) {return (t,4-t^2,2*(4-t^2));}
+                  path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  //shade object
+                  //import three;
+                  //int k=12;
+                  //for (int i=-2*k; i&lt;2*k; ++i)
+                  //{
+                  //path3 p=(i/k,4-(i/k)^2,0)--((i+1)/k,4-((i+1)/k)^2,0)--((i+1)/k,4-((i+1)/k)^2,2*(4-((i+1)/k)^2))--((i)/k,4-((i)/k)^2,2*(4-((i)/k)^2));
+                  //draw(surface(p -- cycle), simplesurfacepen2);
+                  //path3 p=(i/k,0,0)--(i/k,4-(i/k)^2,2*(4-(i/k)^2))--((i+1)/k,4-((i+1)/k)^2,2*(4-((i+1)/k)^2))--((i+1//)/k,0,0);
+                  //draw(surface(p -- cycle), simplesurfacepen);
+                  //}
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.x,t.y*(4-t.x^2),2*t.y*(4-t.x^2));//
+                  }
+                  surface s=surface(f,(-2,0),(2,1),16,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.x,(4-t.x^2),2*t.y*(4-t.x^2));//
+                  }
+                  surface s=surface(f,(-2,0),(2,1),16,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.x,t.y*(4-t.x^2),0);//
+                  }
+                  surface s=surface(f,(-2,0),(2,1),16,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //label and arrow
+                  label("$z=2y$",(-2,2,7));
+                  draw((-1.8,2,6.8)--(-1,2,4.1),Arrow3(size=2mm));
+                  label("$y=4-x^2$",(2.5,2,0));
+                  draw((2.3,2.5,0.2)--(1.55,2.25,2.5),Arrow3(size=2mm));
+
+                </asymptote>
+              </image>
+          </statement>
+          <answer>
+            <p>
+              <m>8192/105\approx 78.019</m>
+            </p>
+          </answer>
+        </exercise>
+
+        <exercise>
+          <statement>
+            <p>
+              <m>\surfaceS</m> is the surface formed by the intersections of the cylinder <m>z=1-x^2</m> and the planes <m>y=-2</m>,
+              <m>y=2</m> and <m>z=0</m>;
+              <m>\vec F = \langle 0,y^3,0\rangle</m>.
+            </p>
+
+              <image xml:id="img_14_07_ex_16_3D">
+                <description></description>
+                <asymptote>
+
+
+
+                  //ASY file for fig14_05_ex_23_3D.asy in Chapter 14
+
+                  size(282,282,IgnoreAspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(14,14,4);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={-1,1};
+                  real[] myychoice={-2,2};
+                  real[] myzchoice={1};
+                  defaultpen(0.5mm);
+
+                  pair xbounds=(-2.5,2.5);
+                  pair ybounds=(-2.5,2.5);
+                  pair zbounds=(-0.25,1.5);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.x,t.y,1-t.x^2);//
+                  }
+                  surface s=surface(f,(-1,-2),(1,2),8,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.x,-2,t.y*(1-t.x^2));//
+                  }
+                  surface s=surface(f,(-1,0),(1,1),8,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.x,2,t.y*(1-t.x^2));//
+                  }
+                  surface s=surface(f,(-1,0),(1,1),8,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  triple f(pair t) {
+                    return (t.x,t.y,0);//
+                  }
+                  surface s=surface(f,(-1,-2),(1,2),2,2,Spline);
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  triple g(real t) {return (t,-2,1-t^2);}
+                  path3 mypath=graph(g,-1,1,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  triple g(real t) {return (t,2,1-t^2);}
+                  path3 mypath=graph(g,-1,1,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  draw((1,-2,0)--(1,2,0)--(-1,2,0)--(-1,-2,0)--cycle,bluepen+linewidth(2));
+
+                  //label and arrow
+                  label("$z=1-x^2$",(0,1,1.55));
+                  draw((0,.9,1.45)--(0,.5,1.05),Arrow3(size=2mm));
+
+                  //triple g(real t) {return (0,t,6-t^2);}
+                  //path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                </asymptote>
+              </image>
+          </statement>
+          <answer>
+            <p>
+              <m>64/3</m>
+            </p>
+          </answer>
+        </exercise>
+      </exercisegroup>
+
+      <exercisegroup cols="2">
+        <introduction>
           <p>
-            <m>\iint_D\divv\vec F\, dV = \int_0^{4}\int_0^{3-3x/4}\int_0^{2-x/2-2y/3}(2x+2y)\, dz\, dy\, dx = 14</m>.
+            In the following exercises,
+            a closed curve <m>C</m> that is the boundary of a surface <m>\surfaceS</m> is given along with a vector field <m>\vec F</m>.
+            Find the circulation of <m>\vec F</m> around <m>C</m> either through direct computation or through Stokes' Theorem.
           </p>
-        </answer>
-      </exercise>
+        </introduction>
 
-      <exercise>
-        <statement>
+        <exercise>
+          <statement>
+            <p>
+              <m>C</m> is the curve whose <m>x</m>- and <m>y</m>-values are determined by the three sides of a triangle with vertices at <m>(-1,0)</m>,
+              <m>(1,0)</m> and <m>(0,1)</m>, traversed in that order,
+              and the <m>z</m>-values are determined by the function <m>z=xy</m>;
+              <m>\vec F = \langle z-y^2,x,z\rangle</m>.
+            </p>
+
+              <image xml:id="img_14_07_ex_17_3D">
+                <description></description>
+                <asymptote>
+
+
+
+                  //ASY file for fig14_07_ex_23_3D.asy in Chapter 14
+
+                  size(282,282,IgnoreAspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(-10,22,1);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={-1,1};
+                  real[] myychoice={1};
+                  real[] myzchoice={.25};
+                  defaultpen(0.5mm);
+
+                  pair xbounds=(-1.25,1.25);
+                  pair ybounds=(-.25,1.25);
+                  pair zbounds=(-.25,.3);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.x-1+t.y*(2-2*t.x),t.x,(t.x-1+t.y*(2-2*t.x))*t.x);//
+                  }
+                  surface s=surface(f,(0,0),(1,1),8,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //triple g(real t) {return (t,-2,1-t^2);}
+                  //path3 mypath=graph(g,-1,1,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  triple g(real t) {return (t,0,0);}
+                  path3 mypath=graph(g,-1,1,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  triple g(real t) {return (t,1-t,t*(1-t));}
+                  path3 mypath=graph(g,0,1,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  triple g(real t) {return (t,t+1,t*(t+1));}
+                  path3 mypath=graph(g,-1,0,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  //draw((-1,0,0)--(1,0,0)--(0,1,0)--cycle,bluepen+linewidth(2));
+
+                  //label and arrow
+                  //label("$z=1-x^2$",(0,1,1.55));
+                  //draw((0,.9,1.45)--(0,.5,1.05),Arrow3(size=2mm));
+
+                  //triple g(real t) {return (0,t,6-t^2);}
+                  //path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                </asymptote>
+              </image>
+          </statement>
+          <answer>
+            <p>
+              <m>5/3</m>
+            </p>
+          </answer>
+        </exercise>
+
+        <exercise>
+          <statement>
+            <p>
+              <m>C</m> is the curve whose <m>x</m>- and <m>y</m>-values are given by
+              <m>\vec r(t) = \langle 2\cos t,2\sin t\rangle</m> and the <m>z</m>-values are determined by the function <m>z=x^2+y^3-3y+1</m>;
+              <m>\vec F = \langle -y,x,z\rangle</m>.
+            </p>
+
+              <image xml:id="img_14_07_ex_18_3D">
+                <description></description>
+                <asymptote>
+
+
+
+                  //ASY file for fig14_07_ex_18_3D.asy in Chapter 14
+
+                  size(282,282,IgnoreAspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(14,14,10);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={-2,2};
+                  real[] myychoice={-2,2};
+                  real[] myzchoice={6};
+                  defaultpen(0.5mm);
+
+                  pair xbounds=(-2.5,2.5);
+                  pair ybounds=(-2.5,2.5);
+                  pair zbounds=(-.25,6.5);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.y*cos(t.x),t.y*sin(t.x),(t.y*cos(t.x))^2+(t.y*sin(t.x))^3-3t.y*sin(t.x)+1);//
+                  }
+                  surface s=surface(f,(0,0),(2pi,2),16,8,Spline);
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //triple g(real t) {return (t,-2,1-t^2);}
+                  //path3 mypath=graph(g,-1,1,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  triple g(real t) {return (2cos(t),2sin(t),4cos(t)^2+8sin(t)^3-6sin(t)+1);}
+                  path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  //triple g(real t) {return (t,1-t,t*(1-t));}
+                  //path3 mypath=graph(g,0,1,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  //triple g(real t) {return (t,t+1,t*(t+1));}
+                  //path3 mypath=graph(g,-1,0,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  //draw((-1,0,0)--(1,0,0)--(0,1,0)--cycle,bluepen+linewidth(2));
+
+                  //label and arrow
+                  //label("$z=1-x^2$",(0,1,1.55));
+                  //draw((0,.9,1.45)--(0,.5,1.05),Arrow3(size=2mm));
+
+                  //triple g(real t) {return (0,t,6-t^2);}
+                  //path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                </asymptote>
+              </image>
+          </statement>
+          <answer>
+            <p>
+              <m>8\pi</m>
+            </p>
+          </answer>
+        </exercise>
+
+        <exercise>
+          <statement>
+            <p>
+              <m>C</m> is the curve whose <m>x</m>- and <m>y</m>-values are given by
+              <m>\vec r(t) = \langle \cos t,3\sin t\rangle</m> and the <m>z</m>-values are determined by the function <m>z=5-2x-y</m>;
+              <m>\vec F = \langle -\frac13y,3x,\frac23y-3x\rangle</m>.
+            </p>
+
+              <image xml:id="img_14_07_ex_19_3D">
+                <description></description>
+                <asymptote>
+
+
+
+                  //ASY file for fig14_07_ex_18_3D.asy in Chapter 14
+
+                  size(282,282,IgnoreAspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(14,14,10);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={-2,2};
+                  real[] myychoice={-2,2};
+                  real[] myzchoice={10};
+                  defaultpen(0.5mm);
+
+                  pair xbounds=(-2.5,2.5);
+                  pair ybounds=(-2.5,2.5);
+                  pair zbounds=(-.25,11);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.y*cos(t.x),3*t.y*sin(t.x),-(t.y*cos(t.x))*2-3*(t.y*sin(t.x))+5);//
+                  }
+                  surface s=surface(f,(0,0),(2pi,1),16,8,Spline);
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //triple g(real t) {return (t,-2,1-t^2);}
+                  //path3 mypath=graph(g,-1,1,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  triple g(real t) {return (cos(t),3sin(t),-2cos(t)-3sin(t)+5);}
+                  path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  //triple g(real t) {return (t,1-t,t*(1-t));}
+                  //path3 mypath=graph(g,0,1,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  //triple g(real t) {return (t,t+1,t*(t+1));}
+                  //path3 mypath=graph(g,-1,0,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  //draw((-1,0,0)--(1,0,0)--(0,1,0)--cycle,bluepen+linewidth(2));
+
+                  //label and arrow
+                  //label("$z=1-x^2$",(0,1,1.55));
+                  //draw((0,.9,1.45)--(0,.5,1.05),Arrow3(size=2mm));
+
+                  //triple g(real t) {return (0,t,6-t^2);}
+                  //path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                </asymptote>
+              </image>
+          </statement>
+          <answer>
+            <p>
+              <m>23\pi</m>
+            </p>
+          </answer>
+        </exercise>
+
+        <exercise>
+          <statement>
+            <p>
+              <m>C</m> is the curve whose <m>x</m>- and <m>y</m>-values are sides of the square with vertices at <m>(1,1)</m>,
+              <m>(-1,1)</m>,
+              <m>(-1,-1)</m> and <m>(1,-1)</m>, traversed in that order,
+              and the <m>z</m>-values are determined by the function <m>z=10-5x-2y</m>;
+              <m>\vec F = \langle 5y^2,2y^2,y^2\rangle</m>.
+            </p>
+
+              <image xml:id="img_14_07_ex_20_3D">
+                <description></description>
+                <asymptote>
+
+
+
+                  //ASY file for fig14_07_ex_20_3D.asy in Chapter 14
+
+                  size(282,282,IgnoreAspect);
+                  //currentprojection=perspective(7,2,1);
+                  currentprojection=orthographic(11,11,80);
+                  defaultrender.merge=true;
+
+                  // setup and draw the axes
+                  real[] myxchoice={-1,1};
+                  real[] myychoice={-1,1};
+                  real[] myzchoice={5,10,15};
+                  defaultpen(0.5mm);
+
+                  pair xbounds=(-1.25,1.25);
+                  pair ybounds=(-1.25,1.25);
+                  pair zbounds=(-.25,18);
+
+                  xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
+                  yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
+                  zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
+
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
+                  label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
+
+                  //Draw paraboloid over unit disk
+                  triple f(pair t) {
+                    return (t.x,t.y,10-5t.x-2t.y);//
+                  }
+                  surface s=surface(f,(-1,-1),(1,1),3,3,Spline);
+                  pen p=apexmeshpen;
+                  draw(s,surfacepen,meshpen=p);
+
+                  //triple g(real t) {return (t,-2,1-t^2);}
+                  //path3 mypath=graph(g,-1,1,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  //triple g(real t) {return (cos(t),3sin(t),-2cos(t)-3sin(t)+5);}
+                  //path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  //triple g(real t) {return (t,1-t,t*(1-t));}
+                  //path3 mypath=graph(g,0,1,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  //triple g(real t) {return (t,t+1,t*(t+1));}
+                  //path3 mypath=graph(g,-1,0,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                  draw((1,1,3)--(-1,1,13)--(-1,-1,17)--(1,-1,7)--cycle,bluepen+linewidth(2));
+
+                  //label and arrow
+                  //label("$z=1-x^2$",(0,1,1.55));
+                  //draw((0,.9,1.45)--(0,.5,1.05),Arrow3(size=2mm));
+
+                  //triple g(real t) {return (0,t,6-t^2);}
+                  //path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
+
+                </asymptote>
+              </image>
+          </statement>
+          <answer>
+            <p>
+              <m>0</m>
+            </p>
+          </answer>
+        </exercise>
+      </exercisegroup>
+
+      <exercisegroup cols="2">
+        <introduction>
           <p>
-            <m>\surfaceS</m> is the surface bounding the domain <m>D</m> enclosed by the cylinder
-            <m>x^2+y^2=1</m> and the planes <m>z=-3</m> and <m>z=3</m>;
-            <m>\vec F = \langle -x,y,z\rangle</m>.
+            The following exercises<nbsp/>are designed to challenge your understanding and require no computation.
           </p>
-
-            <image xml:id="img_14_07_ex_06_3D" width="47%">
-              <description></description>
-              <asymptote>
-
-
-
-                //ASY file for fig14_07_ex_06_3D.asy in Chapter 13
-
-                size(282,282,IgnoreAspect);
-                //currentprojection=perspective(7,2,1);
-                currentprojection=orthographic(12,12,10);
-                defaultrender.merge=true;
-
-                // setup and draw the axes
-                real[] myxchoice={-1,1};
-                real[] myychoice={-1,1};
-                real[] myzchoice={-3,3};
-                defaultpen(0.5mm);
-
-                pair xbounds=(-3.5,3.5);
-                pair ybounds=(-3.5,3.5);
-                pair zbounds=(-3.5,3.5);
-
-                xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                //parabola in plane
-                triple g(real t) {return (cos(t),sin(t),3);}
-                path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
-                triple g(real t) {return (cos(t),sin(t),-3);}
-                path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (cos(t.x),sin(t.x),t.y);//
-                }
-                surface s=surface(f,(0,-3),(2pi,3),16,2,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.y*cos(t.x),t.y*sin(t.x),3);//
-                }
-                surface s=surface(f,(0,0),(2pi,1),8,2,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.y*cos(t.x),t.y*sin(t.x),-3);//
-                }
-                surface s=surface(f,(0,0),(2pi,1),8,2,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //label and arrow
-                //label("$z=2y$",(-2,2,7));
-                //draw((-1.8,2,6.8)--(-1,2,4.1),Arrow3(size=2mm));
-                //label("$y=4-x^2$",(2.5,2,0));
-                //draw((2.3,2.5,0.2)--(1.55,2.25,2.5),Arrow3(size=2mm));
-
-              </asymptote>
-            </image>
-        </statement>
-        <answer>
-          <p>
-            Outward flux across the cylinder <m>x^2+y^2=1</m> is 0;
-            across the plane <m>z=3</m> the outward flux is <m>3\pi</m>;
-            across the plane <m>z=-3</m> the outward flux is <m>3\pi</m>.
-          </p>
-
-          <p>
-            Total outward flux: <m>6\pi</m>.
-          </p>
-
-          <p>
-            <m>\iint_D\divv\vec F\, dV = \int_0^{2\pi}\int_0^{1}\int_{-3}^{3}r\, dz\, dr\, d\theta = 6\pi</m>.
-          </p>
-        </answer>
-      </exercise>
-
-      <exercise>
-        <statement>
-          <p>
-            <m>\surfaceS</m> is the surface bounding the domain <m>D</m> enclosed by
-            <m>z=xy(3-x)(3-y)</m> and the plane <m>z=0</m>;
-            <m>\vec F = \langle 3x,4y,5z+1\rangle</m>.
-          </p>
-
-            <image xml:id="img_14_07_ex_07_3D" width="47%">
-              <description></description>
-              <asymptote>
-
-
-
-                //ASY file for fig14_07_ex_07_3D.asy in Chapter 13
-
-                size(282,282,IgnoreAspect);
-                //currentprojection=perspective(7,2,1);
-                currentprojection=orthographic(12,12,10);
-                defaultrender.merge=true;
-
-                // setup and draw the axes
-                real[] myxchoice={3};
-                real[] myychoice={3};
-                real[] myzchoice={4};
-                defaultpen(0.5mm);
-
-                pair xbounds=(-.5,3.5);
-                pair ybounds=(-.5,3.5);
-                pair zbounds=(-.5,4.5);
-
-                xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                //parabola in plane
-                //triple g(real t) {return (cos(t),sin(t),3);}
-                //path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
-                //triple g(real t) {return (cos(t),sin(t),-3);}
-                //path3 mypath=graph(g,0,2pi,operator ..);
-                draw((0,0,0) -- (3,0,0) -- (3,3,0) -- (0,3,0)--cycle,bluepen+linewidth(2));
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.x,t.y,t.x*t.y*(3-t.x)*(3-t.y));//
-                }
-                surface s=surface(f,(0,0),(3,3),8,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.x,t.y,0);//
-                }
-                surface s=surface(f,(0,0),(3,3),1,1,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //label and arrow
-                //label("$z=2y$",(-2,2,7));
-                //draw((-1.8,2,6.8)--(-1,2,4.1),Arrow3(size=2mm));
-                //label("$y=4-x^2$",(2.5,2,0));
-                //draw((2.3,2.5,0.2)--(1.55,2.25,2.5),Arrow3(size=2mm));
-
-              </asymptote>
-            </image>
-        </statement>
-        <answer>
-          <p>
-            Outward flux across the surface <m>z=xy(3-x)(3-y)</m> is 252;
-            across the plane <m>z=0</m> the outward flux is <m>-9</m>.
-          </p>
-
-          <p>
-            Total outward flux: <m>243</m>.
-          </p>
-
-          <p>
-            <m>\iint_D\divv\vec F\, dV = \int_0^{3}\int_0^{3}\int_{0}^{xy(3-x)(3-y)}12\, dz\, dy\, dx = 243</m>.
-          </p>
-        </answer>
-      </exercise>
-
-      <exercise>
-        <statement>
-          <p>
-            <m>\surfaceS</m> is the surface composed of <m>\surfaceS_1</m>,
-            the paraboloid <m>z=4-x^2-y^2</m> for <m>z\geq 0</m>,
-            and <m>\surfaceS_2</m>, the disk of radius 2 centered at the origin;
-            <m>\vec F = \langle x,y,z^2\rangle</m>.
-          </p>
-
-            <image xml:id="img_14_07_ex_08_3D" width="47%">
-              <description></description>
-              <asymptote>
-
-
-
-                //ASY file for fig14_07_ex_08_3D.asy in Chapter 14
-
-                size(282,282,IgnoreAspect);
-                //currentprojection=perspective(7,2,1);
-                currentprojection=orthographic(12,12,10);
-                defaultrender.merge=true;
-
-                // setup and draw the axes
-                real[] myxchoice={-2,2};
-                real[] myychoice={-2,2};
-                real[] myzchoice={4};
-                defaultpen(0.5mm);
-
-                pair xbounds=(-2.5,2.5);
-                pair ybounds=(-2.5,2.5);
-                pair zbounds=(-0.25,5);
-
-                xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                //parabola in plane
-                triple g(real t) {return (2cos(t),2sin(t),0);}
-                path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
-                //triple g(real t) {return (t,4-t^2,2*(4-t^2));}
-                //path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (2*t.y*cos(t.x),t.y*2*sin(t.x),4-4*t.y^2);//
-                }
-                surface s=surface(f,(0,0),(2pi,1),16,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (2*t.y*cos(t.x),2*t.y*sin(t.x),0);//
-                }
-                surface s=surface(f,(0,0),(2pi,1),8,4,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //label and arrow
-                //label("$z=2y$",(-2,2,7));
-                //draw((-1.8,2,6.8)--(-1,2,4.1),Arrow3(size=2mm));
-                //label("$y=4-x^2$",(2.5,2,0));
-                //draw((2.3,2.5,0.2)--(1.55,2.25,2.5),Arrow3(size=2mm));
-
-              </asymptote>
-            </image>
-        </statement>
-        <answer>
-          <p>
-            Outward flux across the paraboloid is <m>112\pi/3</m>;
-            across the disk the outward flux is 0.
-          </p>
-
-          <p>
-            Total outward flux: <m>112\pi/3</m>.
-          </p>
-
-          <p>
-            <m>\iint_D\divv\vec F\, dV = \int_0^{2\pi}\int_0^2\int_0^{4-r^2}(2z+2)r\, dz\, dr\, d\theta = 112\pi/3</m>.
-          </p>
-        </answer>
-      </exercise>
-    </exercisegroup>
-
-    <exercisegroup>
-      <introduction>
-        <p>
-          In the following exercises,
-          a closed curve <m>C</m> that is the boundary of a surface <m>\surfaceS</m> is given along with a vector field <m>\vec F</m>.
-          Verify Stokes' Theorem on <m>C</m>;
-          that is, show <m>\oint_C \vec F\cdot d\vec r = \iint_\surfaceS\big(\curl \vec F\,\big)\cdot\vec n\, dS</m>.
-        </p>
-      </introduction>
-
-      <exercise>
-        <statement>
-          <p>
-            <m>C</m> is the curve parametrized by
-            <m>\vec r(t) = \langle \cos t, \sin t, 1\rangle</m> and <m>\surfaceS</m> is the portion of
-            <m>z=x^2+y^2</m> enclosed by <m>C</m>;
-            <m>\vec F = \langle z,-x,y\rangle</m>.
-          </p>
-
-            <image xml:id="img_14_07_ex_09_3D" width="47%">
-              <description></description>
-              <asymptote>
-
-
-
-                //ASY file for fig14_07_ex_09_3D.asy in Chapter 14
-
-                size(282,282,IgnoreAspect);
-                //currentprojection=perspective(7,2,1);
-                currentprojection=orthographic(12,12,10);
-                defaultrender.merge=true;
-
-                // setup and draw the axes
-                real[] myxchoice={-1,1};
-                real[] myychoice={-1,1};
-                real[] myzchoice={1};
-                defaultpen(0.5mm);
-
-                pair xbounds=(-1.5,1.5);
-                pair ybounds=(-1.5,1.5);
-                pair zbounds=(-0.25,2);
-
-                xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                //parabola in plane
-                triple g(real t) {return (cos(t),sin(t),1);}
-                path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
-                //triple g(real t) {return (t,4-t^2,2*(4-t^2));}
-                //path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.y*cos(t.x),t.y*sin(t.x),t.y^2);//
-                }
-                surface s=surface(f,(0,0),(2pi,1),16,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //label and arrow
-                //label("$z=2y$",(-2,2,7));
-                //draw((-1.8,2,6.8)--(-1,2,4.1),Arrow3(size=2mm));
-                //label("$y=4-x^2$",(2.5,2,0));
-                //draw((2.3,2.5,0.2)--(1.55,2.25,2.5),Arrow3(size=2mm));
-
-              </asymptote>
-            </image>
-        </statement>
-        <answer>
-          <p>
-            Circulation on <m>C</m>: <m>\oint_C \vec F\cdot d\vec r = \pi</m>
-          </p>
-
-          <p>
-            <m>\iint_\surfaceS\big(\curl \vec F\big)\cdot\vec n\, dS = \pi</m>.
-          </p>
-        </answer>
-      </exercise>
-
-      <exercise>
-        <statement>
-          <p>
-            <m>C</m> is the curve parametrized by
-            <m>\vec r(t) = \langle \cos t, \sin t, e^{-1}\rangle</m> and <m>\surfaceS</m> is the portion of
-            <m>z=e^{-x^2-y^2}</m> enclosed by <m>C</m>;
-            <m>\vec F = \langle -y,x,1\rangle</m>.
-          </p>
-
-            <image xml:id="img_14_07_ex_10_3D" width="47%">
-              <description></description>
-              <asymptote>
-
-
-
-                //ASY file for fig14_07_ex_10_3D.asy in Chapter 14
-
-                size(282,282,IgnoreAspect);
-                //currentprojection=perspective(7,2,1);
-                currentprojection=orthographic(12,12,10);
-                defaultrender.merge=true;
-
-                // setup and draw the axes
-                real[] myxchoice={-1,1};
-                real[] myychoice={-1,1};
-                real[] myzchoice={1};
-                defaultpen(0.5mm);
-
-                pair xbounds=(-1.5,1.5);
-                pair ybounds=(-1.5,1.5);
-                pair zbounds=(-0.25,1.5);
-
-                xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                //parabola in plane
-                triple g(real t) {return (cos(t),sin(t),exp(-1));}
-                path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
-                //triple g(real t) {return (t,4-t^2,2*(4-t^2));}
-                //path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.y*cos(t.x),t.y*sin(t.x),exp(-t.y^2));//
-                }
-                surface s=surface(f,(0,0),(2pi,1),16,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //label and arrow
-                //label("$z=2y$",(-2,2,7));
-                //draw((-1.8,2,6.8)--(-1,2,4.1),Arrow3(size=2mm));
-                //label("$y=4-x^2$",(2.5,2,0));
-                //draw((2.3,2.5,0.2)--(1.55,2.25,2.5),Arrow3(size=2mm));
-
-              </asymptote>
-            </image>
-        </statement>
-        <answer>
-          <p>
-            Circulation on <m>C</m>: <m>\oint_C \vec F\cdot d\vec r = \pi</m>
-          </p>
-
-          <p>
-            <m>\iint_\surfaceS\big(\curl \vec F\big)\cdot\vec n\, dS = \pi</m>.
-          </p>
-        </answer>
-      </exercise>
-
-      <exercise>
-        <statement>
-          <p>
-            <m>C</m> is the curve that follows the triangle with vertices at <m>(0,0,2)</m>,
-            <m>(4,0,0)</m> and <m>(0,3,0)</m>,
-            traversing the the vertices in that order and returning to <m>(0,0,2)</m>,
-            and <m>\surfaceS</m> is the portion of the plane
-            <m>z=2-x/2-2y/3</m> enclosed by <m>C</m>;
-            <m>\vec F = \langle y,-z,y\rangle</m>.
-          </p>
-
-            <image xml:id="img_14_07_ex_11_3D" width="47%">
-              <description></description>
-              <asymptote>
-
-
-
-                //ASY file for fig14_07_ex_10_3D.asy in Chapter 14
-
-                size(282,282,IgnoreAspect);
-                //currentprojection=perspective(7,2,1);
-                currentprojection=orthographic(12,12,10);
-                defaultrender.merge=true;
-
-                // setup and draw the axes
-                real[] myxchoice={4};
-                real[] myychoice={3};
-                real[] myzchoice={2};
-                defaultpen(0.5mm);
-
-                pair xbounds=(-.5,4.5);
-                pair ybounds=(-.5,4.5);
-                pair zbounds=(-0.25,2.5);
-
-                xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                //parabola in plane
-                //triple g(real t) {return (cos(t),sin(t),exp(-1));}
-                //path3 mypath=graph(g,0,2pi,operator ..);
-                draw((0,0,2)--(4,0,0)--(0,3,0)--cycle,bluepen+linewidth(2));
-                //triple g(real t) {return (t,4-t^2,2*(4-t^2));}
-                //path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.x,t.y*(3-3t.x/4),2-t.x/2-2*(t.y*(3-3t.x/4))/3);//
-                }
-                surface s=surface(f,(0,0),(4,1),1,1,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //label and arrow
-                //label("$z=2y$",(-2,2,7));
-                //draw((-1.8,2,6.8)--(-1,2,4.1),Arrow3(size=2mm));
-                //label("$y=4-x^2$",(2.5,2,0));
-                //draw((2.3,2.5,0.2)--(1.55,2.25,2.5),Arrow3(size=2mm));
-
-              </asymptote>
-            </image>
-        </statement>
-        <answer>
-          <p>
-            Circulation on <m>C</m>: The flow along the line from <m>(0,0,2)</m> to <m>(4,0,0)</m> is 0;
-            from <m>(4,0,0)</m> to <m>(0,3,0)</m> it is <m>-6</m>,
-            and from <m>(0,3,0)</m> to <m>(0,0,2)</m> it is 6.
-            The total circulation is <m>0+(-6)+6=0</m>.
-          </p>
-
-          <p>
-            <m>\iint_\surfaceS\big(\curl \vec F\big)\cdot\vec n\, dS = \iint_\surfaceS 0 \, dS = 0</m>.
-          </p>
-        </answer>
-      </exercise>
-
-      <exercise>
-        <statement>
-          <p>
-            <m>C</m> is the curve whose <m>x</m> and <m>y</m> coordinates follow the parabola <m>y=1-x^2</m> from <m>x=1</m> to <m>x=-1</m>,
-            then follow the line from <m>(-1,0)</m> back to <m>(1,0)</m>,
-            where the <m>z</m> coordinates of <m>C</m> are determined by <m>f(x,y) = 2x^2+y^2</m>,
-            and <m>\surfaceS</m> is the portion of
-            <m>z=2x^2+y^2</m> enclosed by <m>C</m>;
-            <m>\vec F = \langle y^2+z,x,x^2-y\rangle</m>.
-          </p>
-
-            <image xml:id="img_14_07_ex_12_3D" width="47%">
-              <description></description>
-              <asymptote>
-
-
-
-                //ASY file for fig14_07_ex_10_3D.asy in Chapter 14
-
-                size(282,282,IgnoreAspect);
-                //currentprojection=perspective(7,2,1);
-                currentprojection=orthographic(12,12,10);
-                defaultrender.merge=true;
-
-                // setup and draw the axes
-                real[] myxchoice={-1,1};
-                real[] myychoice={1};
-                real[] myzchoice={2};
-                defaultpen(0.5mm);
-
-                pair xbounds=(-1.5,1.5);
-                pair ybounds=(-1.5,1.5);
-                pair zbounds=(-0.25,2.5);
-
-                xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                //parabola in plane
-                triple g(real t) {return (t,1-t^2,2t^2+(1-t^2)^2);}
-                path3 mypath=graph(g,-1,1,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                triple g(real t) {return (t,0,2t^2);}
-                path3 mypath=graph(g,-1,1,operator ..);draw(mypath,bluepen+linewidth(2));
-                //triple g(real t) {return (t,4-t^2,2*(4-t^2));}
-                //path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.x,t.y*(1-t.x^2),2t.x^2+(t.y*(1-t.x^2))^2);//
-                }
-                surface s=surface(f,(-1,0),(1,1),8,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //label and arrow
-                //label("$z=2y$",(-2,2,7));
-                //draw((-1.8,2,6.8)--(-1,2,4.1),Arrow3(size=2mm));
-                //label("$y=4-x^2$",(2.5,2,0));
-                //draw((2.3,2.5,0.2)--(1.55,2.25,2.5),Arrow3(size=2mm));
-
-              </asymptote>
-            </image>
-        </statement>
-        <answer>
-          <p>
-            Circulation on <m>C</m>: The flow along the parabola is <m>-32/15</m>;
-            the flow along the line is <m>4/3</m>.
-            The total circulation is <m>4/3-32/15 = -4/5</m>.
-          </p>
-
-          <p>
-            <m>\iint_\surfaceS\big(\curl \vec F\big)\cdot\vec n\, dS = -4/5</m>.
-          </p>
-        </answer>
-      </exercise>
-    </exercisegroup>
-
-    <exercisegroup>
-      <introduction>
-        <p>
-          In the following exercises,
-          a closed surface <m>\surfaceS</m> and a vector field <m>\vec F</m> are given.
-          Find the outward flux of <m>\vec F</m> over <m>\surfaceS</m> either through direct computation or through the Divergence Theorem.
-        </p>
-      </introduction>
-
-      <exercise>
-        <statement>
-          <p>
-            <m>\surfaceS</m> is the surface formed by the intersections of <m>z=0</m> and <m>z=(x^2-1)(y^2-1)</m>;
-            <m>\vec F = \langle x^2+1,yz,xz^2\rangle</m>.
-          </p>
-
-            <image xml:id="img_14_07_ex_13_3D" width="47%">
-              <description></description>
-              <asymptote>
-
-
-
-                //ASY file for fig14_07_ex_13_3D.asy in Chapter 13
-
-                size(282,282,IgnoreAspect);
-                //currentprojection=perspective(7,2,1);
-                currentprojection=orthographic(12,12,5);
-                defaultrender.merge=true;
-
-                // setup and draw the axes
-                real[] myxchoice={-1,1};
-                real[] myychoice={-1,1};
-                real[] myzchoice={-1,1};
-                defaultpen(0.5mm);
-
-                pair xbounds=(-1.25,1.25);
-                pair ybounds=(-1.25,1.25);
-                pair zbounds=(-0.25,1.25);
-
-                xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                //parabola in plane
-                //triple g(real t) {return (cos(t),sin(t),3);}
-                //path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
-                //triple g(real t) {return (cos(t),sin(t),-3);}
-                //path3 mypath=graph(g,0,2pi,operator ..);
-                draw((-1,-1,0) -- (-1,1,0) -- (1,1,0) -- (1,-1,0)--cycle,bluepen+linewidth(2));
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.x,t.y,(t.x^2-1)*(t.y^2-1));//
-                }
-                surface s=surface(f,(-1,-1),(1,1),8,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.x,t.y,0);//
-                }
-                surface s=surface(f,(-1,-1),(1,1),1,1,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //label and arrow
-                //label("$z=2y$",(-2,2,7));
-                //draw((-1.8,2,6.8)--(-1,2,4.1),Arrow3(size=2mm));
-                //label("$y=4-x^2$",(2.5,2,0));
-                //draw((2.3,2.5,0.2)--(1.55,2.25,2.5),Arrow3(size=2mm));
-
-              </asymptote>
-            </image>
-        </statement>
-        <answer>
-          <p>
-            <m>128/225</m>
-          </p>
-        </answer>
-      </exercise>
-
-      <exercise>
-        <statement>
-          <p>
-            <m>\surfaceS</m> is the surface formed by the intersections of the planes <m>z=\frac12(3-x)</m>,
-            <m>x=1</m>,
-            <m>y=0</m>, <m>y=2</m> and <m>z=0</m>;
-            <m>\vec F = \langle x,y^2,z\rangle</m>.
-          </p>
-
-            <image xml:id="img_14_07_ex_14_3D" width="47%">
-              <description></description>
-              <asymptote>
-
-
-
-                //ASY file for fig13_06_ex_083D.asy in Chapter 13
-
-                size(282,282,IgnoreAspect);
-                //currentprojection=perspective(7,2,1);
-                currentprojection=orthographic(8.8,7.8,3);
-                defaultrender.merge=true;
-
-                // setup and draw the axes
-                real[] myxchoice={1,2,3};
-                real[] myychoice={1,2,3};
-                real[] myzchoice={1};
-                defaultpen(0.5mm);
-
-                pair xbounds=(-0.5,3.5);
-                pair ybounds=(-0.5,3.5);
-                pair zbounds=(-0.5,1.75);
-
-                xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                //edges of object
-                draw((1,0,0)--(1,2,0)--(3,2,0)--(3,0,0)--cycle,bluepen+linewidth(2));
-                draw((3,0,0)--(1,0,1)--(1,2,1)--(3,2,0),bluepen+linewidth(2));
-                draw((3,0,0)--(1,0,1),bluepen+linewidth(2));
-                draw((1,0,0)--(1,0,1),bluepen+linewidth(2));
-                draw((1,2,0)--(1,2,1),bluepen+linewidth(2));
-
-                //shade faces
-                import three;
-                path3 p=(1,0,0)--(1,2,0)--(3,2,0)--(3,0,0);
-                draw(surface(p -- cycle), surfacepen);
-                path3 p=(1,0,1)--(1,2,1)--(3,2,0)--(3,0,0);
-                draw(surface(p -- cycle), surfacepen);
-                path3 p=(1,0,0)--(1,2,0)--(1,2,1)--(1,0,1);
-                draw(surface(p -- cycle), surfacepen);
-                path3 p=(1,0,0)--(3,0,0)--(1,0,1);
-                draw(surface(p -- cycle), surfacepen);
-                path3 p=(1,2,0)--(3,2,0)--(1,2,1);
-                draw(surface(p -- cycle), surfacepen);
-
-                //labels and arrow
-                label("$z=\frac{1}{2}(3-x)$",(3,0,1.1));
-                draw((3,0.25,1)--(2,1,0.45),Arrow3(size=2mm));
-
-              </asymptote>
-            </image>
-        </statement>
-        <answer>
-          <p>
-            <m>8</m>
-          </p>
-        </answer>
-      </exercise>
-
-      <exercise>
-        <statement>
-          <p>
-            <m>\surfaceS</m> is the surface formed by the intersections of the planes <m>z=2y</m>,
-            <m>y=4-x^2</m> and <m>z=0</m>;
-            <m>\vec F = \langle xz,0,xz\rangle</m>.
-          </p>
-
-            <image xml:id="img_14_07_ex_15_3D" width="47%">
-              <description></description>
-              <asymptote>
-
-
-
-                //ASY file for fig13_06_ex_123D.asy in Chapter 13
-
-                size(282,282,IgnoreAspect);
-                //currentprojection=perspective(7,2,1);
-                currentprojection=orthographic(12.1,-7.1,16);
-                defaultrender.merge=true;
-
-                // setup and draw the axes
-                real[] myxchoice={-2,-1,1,2};
-                real[] myychoice={1,2,3,4};
-                real[] myzchoice={2,4,6,8};
-                defaultpen(0.5mm);
-
-                pair xbounds=(-2.5,2.5);
-                pair ybounds=(-0.25,5);
-                pair zbounds=(-0.25,10);
-
-                xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                //parabola in plane
-                triple g(real t) {return (t,4-t^2,0);}
-                path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
-                triple g(real t) {return (t,4-t^2,2*(4-t^2));}
-                path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                //shade object
-                //import three;
-                //int k=12;
-                //for (int i=-2*k; i&lt;2*k; ++i)
-                //{
-                //path3 p=(i/k,4-(i/k)^2,0)--((i+1)/k,4-((i+1)/k)^2,0)--((i+1)/k,4-((i+1)/k)^2,2*(4-((i+1)/k)^2))--((i)/k,4-((i)/k)^2,2*(4-((i)/k)^2));
-                //draw(surface(p -- cycle), simplesurfacepen2);
-                //path3 p=(i/k,0,0)--(i/k,4-(i/k)^2,2*(4-(i/k)^2))--((i+1)/k,4-((i+1)/k)^2,2*(4-((i+1)/k)^2))--((i+1//)/k,0,0);
-                //draw(surface(p -- cycle), simplesurfacepen);
-                //}
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.x,t.y*(4-t.x^2),2*t.y*(4-t.x^2));//
-                }
-                surface s=surface(f,(-2,0),(2,1),16,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.x,(4-t.x^2),2*t.y*(4-t.x^2));//
-                }
-                surface s=surface(f,(-2,0),(2,1),16,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.x,t.y*(4-t.x^2),0);//
-                }
-                surface s=surface(f,(-2,0),(2,1),16,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //label and arrow
-                label("$z=2y$",(-2,2,7));
-                draw((-1.8,2,6.8)--(-1,2,4.1),Arrow3(size=2mm));
-                label("$y=4-x^2$",(2.5,2,0));
-                draw((2.3,2.5,0.2)--(1.55,2.25,2.5),Arrow3(size=2mm));
-
-              </asymptote>
-            </image>
-        </statement>
-        <answer>
-          <p>
-            <m>8192/105\approx 78.019</m>
-          </p>
-        </answer>
-      </exercise>
-
-      <exercise>
-        <statement>
-          <p>
-            <m>\surfaceS</m> is the surface formed by the intersections of the cylinder <m>z=1-x^2</m> and the planes <m>y=-2</m>,
-            <m>y=2</m> and <m>z=0</m>;
-            <m>\vec F = \langle 0,y^3,0\rangle</m>.
-          </p>
-
-            <image xml:id="img_14_07_ex_16_3D" width="47%">
-              <description></description>
-              <asymptote>
-
-
-
-                //ASY file for fig14_05_ex_23_3D.asy in Chapter 14
-
-                size(282,282,IgnoreAspect);
-                //currentprojection=perspective(7,2,1);
-                currentprojection=orthographic(14,14,4);
-                defaultrender.merge=true;
-
-                // setup and draw the axes
-                real[] myxchoice={-1,1};
-                real[] myychoice={-2,2};
-                real[] myzchoice={1};
-                defaultpen(0.5mm);
-
-                pair xbounds=(-2.5,2.5);
-                pair ybounds=(-2.5,2.5);
-                pair zbounds=(-0.25,1.5);
-
-                xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.x,t.y,1-t.x^2);//
-                }
-                surface s=surface(f,(-1,-2),(1,2),8,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.x,-2,t.y*(1-t.x^2));//
-                }
-                surface s=surface(f,(-1,0),(1,1),8,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.x,2,t.y*(1-t.x^2));//
-                }
-                surface s=surface(f,(-1,0),(1,1),8,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                triple f(pair t) {
-                  return (t.x,t.y,0);//
-                }
-                surface s=surface(f,(-1,-2),(1,2),2,2,Spline);
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                triple g(real t) {return (t,-2,1-t^2);}
-                path3 mypath=graph(g,-1,1,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                triple g(real t) {return (t,2,1-t^2);}
-                path3 mypath=graph(g,-1,1,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                draw((1,-2,0)--(1,2,0)--(-1,2,0)--(-1,-2,0)--cycle,bluepen+linewidth(2));
-
-                //label and arrow
-                label("$z=1-x^2$",(0,1,1.55));
-                draw((0,.9,1.45)--(0,.5,1.05),Arrow3(size=2mm));
-
-                //triple g(real t) {return (0,t,6-t^2);}
-                //path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
-
-              </asymptote>
-            </image>
-        </statement>
-        <answer>
-          <p>
-            <m>64/3</m>
-          </p>
-        </answer>
-      </exercise>
-    </exercisegroup>
-
-    <exercisegroup>
-      <introduction>
-        <p>
-          In the following exercises,
-          a closed curve <m>C</m> that is the boundary of a surface <m>\surfaceS</m> is given along with a vector field <m>\vec F</m>.
-          Find the circulation of <m>\vec F</m> around <m>C</m> either through direct computation or through Stokes' Theorem.
-        </p>
-      </introduction>
-
-      <exercise>
-        <statement>
-          <p>
-            <m>C</m> is the curve whose <m>x</m>- and <m>y</m>-values are determined by the three sides of a triangle with vertices at <m>(-1,0)</m>,
-            <m>(1,0)</m> and <m>(0,1)</m>, traversed in that order,
-            and the <m>z</m>-values are determined by the function <m>z=xy</m>;
-            <m>\vec F = \langle z-y^2,x,z\rangle</m>.
-          </p>
-
-            <image xml:id="img_14_07_ex_17_3D" width="47%">
-              <description></description>
-              <asymptote>
-
-
-
-                //ASY file for fig14_07_ex_23_3D.asy in Chapter 14
-
-                size(282,282,IgnoreAspect);
-                //currentprojection=perspective(7,2,1);
-                currentprojection=orthographic(-10,22,1);
-                defaultrender.merge=true;
-
-                // setup and draw the axes
-                real[] myxchoice={-1,1};
-                real[] myychoice={1};
-                real[] myzchoice={.25};
-                defaultpen(0.5mm);
-
-                pair xbounds=(-1.25,1.25);
-                pair ybounds=(-.25,1.25);
-                pair zbounds=(-.25,.3);
-
-                xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.x-1+t.y*(2-2*t.x),t.x,(t.x-1+t.y*(2-2*t.x))*t.x);//
-                }
-                surface s=surface(f,(0,0),(1,1),8,8,usplinetype=new splinetype[] {notaknot,notaknot,monotonic});
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //triple g(real t) {return (t,-2,1-t^2);}
-                //path3 mypath=graph(g,-1,1,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                triple g(real t) {return (t,0,0);}
-                path3 mypath=graph(g,-1,1,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                triple g(real t) {return (t,1-t,t*(1-t));}
-                path3 mypath=graph(g,0,1,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                triple g(real t) {return (t,t+1,t*(t+1));}
-                path3 mypath=graph(g,-1,0,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                //draw((-1,0,0)--(1,0,0)--(0,1,0)--cycle,bluepen+linewidth(2));
-
-                //label and arrow
-                //label("$z=1-x^2$",(0,1,1.55));
-                //draw((0,.9,1.45)--(0,.5,1.05),Arrow3(size=2mm));
-
-                //triple g(real t) {return (0,t,6-t^2);}
-                //path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
-
-              </asymptote>
-            </image>
-        </statement>
-        <answer>
-          <p>
-            <m>5/3</m>
-          </p>
-        </answer>
-      </exercise>
-
-      <exercise>
-        <statement>
-          <p>
-            <m>C</m> is the curve whose <m>x</m>- and <m>y</m>-values are given by
-            <m>\vec r(t) = \langle 2\cos t,2\sin t\rangle</m> and the <m>z</m>-values are determined by the function <m>z=x^2+y^3-3y+1</m>;
-            <m>\vec F = \langle -y,x,z\rangle</m>.
-          </p>
-
-            <image xml:id="img_14_07_ex_18_3D" width="47%">
-              <description></description>
-              <asymptote>
-
-
-
-                //ASY file for fig14_07_ex_18_3D.asy in Chapter 14
-
-                size(282,282,IgnoreAspect);
-                //currentprojection=perspective(7,2,1);
-                currentprojection=orthographic(14,14,10);
-                defaultrender.merge=true;
-
-                // setup and draw the axes
-                real[] myxchoice={-2,2};
-                real[] myychoice={-2,2};
-                real[] myzchoice={6};
-                defaultpen(0.5mm);
-
-                pair xbounds=(-2.5,2.5);
-                pair ybounds=(-2.5,2.5);
-                pair zbounds=(-.25,6.5);
-
-                xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.y*cos(t.x),t.y*sin(t.x),(t.y*cos(t.x))^2+(t.y*sin(t.x))^3-3t.y*sin(t.x)+1);//
-                }
-                surface s=surface(f,(0,0),(2pi,2),16,8,Spline);
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //triple g(real t) {return (t,-2,1-t^2);}
-                //path3 mypath=graph(g,-1,1,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                triple g(real t) {return (2cos(t),2sin(t),4cos(t)^2+8sin(t)^3-6sin(t)+1);}
-                path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                //triple g(real t) {return (t,1-t,t*(1-t));}
-                //path3 mypath=graph(g,0,1,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                //triple g(real t) {return (t,t+1,t*(t+1));}
-                //path3 mypath=graph(g,-1,0,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                //draw((-1,0,0)--(1,0,0)--(0,1,0)--cycle,bluepen+linewidth(2));
-
-                //label and arrow
-                //label("$z=1-x^2$",(0,1,1.55));
-                //draw((0,.9,1.45)--(0,.5,1.05),Arrow3(size=2mm));
-
-                //triple g(real t) {return (0,t,6-t^2);}
-                //path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
-
-              </asymptote>
-            </image>
-        </statement>
-        <answer>
-          <p>
-            <m>8\pi</m>
-          </p>
-        </answer>
-      </exercise>
-
-      <exercise>
-        <statement>
-          <p>
-            <m>C</m> is the curve whose <m>x</m>- and <m>y</m>-values are given by
-            <m>\vec r(t) = \langle \cos t,3\sin t\rangle</m> and the <m>z</m>-values are determined by the function <m>z=5-2x-y</m>;
-            <m>\vec F = \langle -\frac13y,3x,\frac23y-3x\rangle</m>.
-          </p>
-
-            <image xml:id="img_14_07_ex_19_3D" width="47%">
-              <description></description>
-              <asymptote>
-
-
-
-                //ASY file for fig14_07_ex_18_3D.asy in Chapter 14
-
-                size(282,282,IgnoreAspect);
-                //currentprojection=perspective(7,2,1);
-                currentprojection=orthographic(14,14,10);
-                defaultrender.merge=true;
-
-                // setup and draw the axes
-                real[] myxchoice={-2,2};
-                real[] myychoice={-2,2};
-                real[] myzchoice={10};
-                defaultpen(0.5mm);
-
-                pair xbounds=(-2.5,2.5);
-                pair ybounds=(-2.5,2.5);
-                pair zbounds=(-.25,11);
-
-                xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.y*cos(t.x),3*t.y*sin(t.x),-(t.y*cos(t.x))*2-3*(t.y*sin(t.x))+5);//
-                }
-                surface s=surface(f,(0,0),(2pi,1),16,8,Spline);
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //triple g(real t) {return (t,-2,1-t^2);}
-                //path3 mypath=graph(g,-1,1,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                triple g(real t) {return (cos(t),3sin(t),-2cos(t)-3sin(t)+5);}
-                path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                //triple g(real t) {return (t,1-t,t*(1-t));}
-                //path3 mypath=graph(g,0,1,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                //triple g(real t) {return (t,t+1,t*(t+1));}
-                //path3 mypath=graph(g,-1,0,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                //draw((-1,0,0)--(1,0,0)--(0,1,0)--cycle,bluepen+linewidth(2));
-
-                //label and arrow
-                //label("$z=1-x^2$",(0,1,1.55));
-                //draw((0,.9,1.45)--(0,.5,1.05),Arrow3(size=2mm));
-
-                //triple g(real t) {return (0,t,6-t^2);}
-                //path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
-
-              </asymptote>
-            </image>
-        </statement>
-        <answer>
-          <p>
-            <m>23\pi</m>
-          </p>
-        </answer>
-      </exercise>
-
-      <exercise>
-        <statement>
-          <p>
-            <m>C</m> is the curve whose <m>x</m>- and <m>y</m>-values are sides of the square with vertices at <m>(1,1)</m>,
-            <m>(-1,1)</m>,
-            <m>(-1,-1)</m> and <m>(1,-1)</m>, traversed in that order,
-            and the <m>z</m>-values are determined by the function <m>z=10-5x-2y</m>;
-            <m>\vec F = \langle 5y^2,2y^2,y^2\rangle</m>.
-          </p>
-
-            <image xml:id="img_14_07_ex_20_3D" width="47%">
-              <description></description>
-              <asymptote>
-
-
-
-                //ASY file for fig14_07_ex_20_3D.asy in Chapter 14
-
-                size(282,282,IgnoreAspect);
-                //currentprojection=perspective(7,2,1);
-                currentprojection=orthographic(11,11,80);
-                defaultrender.merge=true;
-
-                // setup and draw the axes
-                real[] myxchoice={-1,1};
-                real[] myychoice={-1,1};
-                real[] myzchoice={5,10,15};
-                defaultpen(0.5mm);
-
-                pair xbounds=(-1.25,1.25);
-                pair ybounds=(-1.25,1.25);
-                pair zbounds=(-.25,18);
-
-                xaxis3("",xbounds.x,xbounds.y,black,OutTicks(myxchoice),Arrow3(size=3mm));
-                yaxis3("",ybounds.x,ybounds.y,black,OutTicks(myychoice),Arrow3(size=3mm));
-                zaxis3("",zbounds.x,zbounds.y,black,OutTicks(myzchoice),Arrow3(size=3mm));
-
-                label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0,0));
-                label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x),0));
-                label("$z$",(0,0,zbounds.y+0.05*(zbounds.y-zbounds.x)));
-
-                //Draw paraboloid over unit disk
-                triple f(pair t) {
-                  return (t.x,t.y,10-5t.x-2t.y);//
-                }
-                surface s=surface(f,(-1,-1),(1,1),3,3,Spline);
-                pen p=apexmeshpen;
-                draw(s,surfacepen,meshpen=p);
-
-                //triple g(real t) {return (t,-2,1-t^2);}
-                //path3 mypath=graph(g,-1,1,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                //triple g(real t) {return (cos(t),3sin(t),-2cos(t)-3sin(t)+5);}
-                //path3 mypath=graph(g,0,2pi,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                //triple g(real t) {return (t,1-t,t*(1-t));}
-                //path3 mypath=graph(g,0,1,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                //triple g(real t) {return (t,t+1,t*(t+1));}
-                //path3 mypath=graph(g,-1,0,operator ..);draw(mypath,bluepen+linewidth(2));
-
-                draw((1,1,3)--(-1,1,13)--(-1,-1,17)--(1,-1,7)--cycle,bluepen+linewidth(2));
-
-                //label and arrow
-                //label("$z=1-x^2$",(0,1,1.55));
-                //draw((0,.9,1.45)--(0,.5,1.05),Arrow3(size=2mm));
-
-                //triple g(real t) {return (0,t,6-t^2);}
-                //path3 mypath=graph(g,-2,2,operator ..);draw(mypath,bluepen+linewidth(2));
-
-              </asymptote>
-            </image>
-        </statement>
-        <answer>
-          <p>
-            <m>0</m>
-          </p>
-        </answer>
-      </exercise>
-    </exercisegroup>
-
-    <exercisegroup>
-      <introduction>
-        <p>
-          The following exercises<nbsp/>are designed to challenge your understanding and require no computation.
-        </p>
-      </introduction>
-
-
-      <exercise>
-        <statement>
-          <p>
-            Let <m>\surfaceS</m> be any closed surface enclosing a domain <m>D</m>.
-            Consider <m>\vec F_1 = \langle x,0,0\rangle</m> and <m>\vec F_2=\langle y,y^2,z-2yz\rangle</m>.
-          </p>
-
-          <p>
-            These fields are clearly very different.
-            Why is it that the total outward flux of each field across <m>\surfaceS</m> is the same?
-          </p>
-        </statement>
-        <answer>
-          <p>
-            Each field has a divergence of 1;
-            by the Divergence Theorem,
-            the total outward flux across <m>\surfaceS</m> is <m>\iint_D 1\, dS</m> for each field.
-          </p>
-        </answer>
-      </exercise>
-
-      <exercise>
-        <statement>
-          <p>
-            <ol>
-              <li>
-                <p>
-                  Green's Theorem can be used to find the area of a region enclosed by a curve by evaluating a line integral with the appropriate choice of vector field <m>\vec F</m>.
-                  What condition on <m>\vec F</m> makes this possible?
-                </p>
-              </li>
-
-              <li>
-                <p>
-                  Likewise, Stokes' Theorem can be used to find the surface area of a region enclosed by a curve in space by evaluating a line integral with the appropriate choice of vector field <m>\vec F</m>.
-                  What condition on <m>\vec F</m> makes this possible?
-                </p>
-              </li>
-            </ol>
-          </p>
-        </statement>
-        <answer>
-          <p>
-            <ol>
-              <li>
-                <p>
-                  <m>\curl\vec F = 1</m>.
-                </p>
-              </li>
-
-              <li>
-                <p>
-                  <m>\curl\vec F\cdot \vec n = 1</m>,
-                  where <m>\vec n</m> is a unit vector normal to <m>\surfaceS</m>.
-                </p>
-              </li>
-            </ol>
-          </p>
-        </answer>
-      </exercise>
-
-      <exercise>
-        <statement>
-          <p>
-            The Divergence Theorem establishes equality between a particular double integral and a particular triple integral.
-            What types of circumstances would lead one to choose to evaluate the triple integral over the double integral?
-          </p>
-        </statement>
-        <answer>
-          <p>
-            Answers will vary.
-            Often the closed surface <m>\surfaceS</m> is composed of several smooth surfaces.
-            To measure total outward flux,
-            this may require evaluating multiple double integrals.
-            Each double integral requires the parametrization of a surface and the computation of the cross product of partial derivatives.
-            One triple integral may require less work,
-            especially as the divergence of a vector field is generally easy to compute.
-          </p>
-        </answer>
-      </exercise>
-
-      <exercise>
-        <statement>
-          <p>
-            Stokes' Theorem establishes equality between a particular line integral and a particular double integral.
-            What types of circumstances would lead one to choose to evaluate the double integral over the line integral?
-          </p>
-        </statement>
-        <answer>
-          <p>
-            Answers will vary.
-            Often the closed curve <m>C</m> is composed of several smooth curves.
-            To measure the total circulation,
-            one may have to evaluate line integrals along each curve.
-            Each line integral requires the parametrization of its curve.
-            It may be less work to evaluate one single double (<ie/>, surface) integral.
-          </p>
-        </answer>
-      </exercise>
-    </exercisegroup>
+        </introduction>
+
+
+        <exercise>
+          <statement>
+            <p>
+              Let <m>\surfaceS</m> be any closed surface enclosing a domain <m>D</m>.
+              Consider <m>\vec F_1 = \langle x,0,0\rangle</m> and <m>\vec F_2=\langle y,y^2,z-2yz\rangle</m>.
+            </p>
+
+            <p>
+              These fields are clearly very different.
+              Why is it that the total outward flux of each field across <m>\surfaceS</m> is the same?
+            </p>
+          </statement>
+          <answer>
+            <p>
+              Each field has a divergence of 1;
+              by the Divergence Theorem,
+              the total outward flux across <m>\surfaceS</m> is <m>\iint_D 1\, dS</m> for each field.
+            </p>
+          </answer>
+        </exercise>
+
+        <exercise>
+          <statement>
+            <p>
+              <ol>
+                <li>
+                  <p>
+                    Green's Theorem can be used to find the area of a region enclosed by a curve by evaluating a line integral with the appropriate choice of vector field <m>\vec F</m>.
+                    What condition on <m>\vec F</m> makes this possible?
+                  </p>
+                </li>
+
+                <li>
+                  <p>
+                    Likewise, Stokes' Theorem can be used to find the surface area of a region enclosed by a curve in space by evaluating a line integral with the appropriate choice of vector field <m>\vec F</m>.
+                    What condition on <m>\vec F</m> makes this possible?
+                  </p>
+                </li>
+              </ol>
+            </p>
+          </statement>
+          <answer>
+            <p>
+              <ol>
+                <li>
+                  <p>
+                    <m>\curl\vec F = 1</m>.
+                  </p>
+                </li>
+
+                <li>
+                  <p>
+                    <m>\curl\vec F\cdot \vec n = 1</m>,
+                    where <m>\vec n</m> is a unit vector normal to <m>\surfaceS</m>.
+                  </p>
+                </li>
+              </ol>
+            </p>
+          </answer>
+        </exercise>
+
+        <exercise>
+          <statement>
+            <p>
+              The Divergence Theorem establishes equality between a particular double integral and a particular triple integral.
+              What types of circumstances would lead one to choose to evaluate the triple integral over the double integral?
+            </p>
+          </statement>
+          <answer>
+            <p>
+              Answers will vary.
+              Often the closed surface <m>\surfaceS</m> is composed of several smooth surfaces.
+              To measure total outward flux,
+              this may require evaluating multiple double integrals.
+              Each double integral requires the parametrization of a surface and the computation of the cross product of partial derivatives.
+              One triple integral may require less work,
+              especially as the divergence of a vector field is generally easy to compute.
+            </p>
+          </answer>
+        </exercise>
+
+        <exercise>
+          <statement>
+            <p>
+              Stokes' Theorem establishes equality between a particular line integral and a particular double integral.
+              What types of circumstances would lead one to choose to evaluate the double integral over the line integral?
+            </p>
+          </statement>
+          <answer>
+            <p>
+              Answers will vary.
+              Often the closed curve <m>C</m> is composed of several smooth curves.
+              To measure the total circulation,
+              one may have to evaluate line integrals along each curve.
+              Each line integral requires the parametrization of its curve.
+              It may be less work to evaluate one single double (<ie/>, surface) integral.
+            </p>
+          </answer>
+        </exercise>
+      </exercisegroup>
+    </subexercises>
   </exercises>
 </section>
