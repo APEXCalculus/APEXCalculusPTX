@@ -688,15 +688,8 @@
   </p>
 
   <exercises>
-<!--Group 1: T/F -->
-    <exercisegroup>
-
-      <introduction>
-        <p>
-          Terms and Concepts
-        </p>
-      </introduction>
-
+    <subexercises>
+      <title>Terms and Concepts</title>
       <exercise>
         <webwork>
           <pg-code>
@@ -705,10 +698,10 @@
           </pg-code>
           <statement>
             <p>
+              <var name="$true" form="popup"/>
               An <q>optimization problem</q>
               is essentially an <q>extreme values</q>
               problem in a <q>story problem</q> setting.
-              <var name="$true" form="popup"/>
             </p>
           </statement>
         </webwork>
@@ -722,514 +715,629 @@
           </pg-code>
           <statement>
             <p>
+              <var name="$false" form="popup"/>
               This section teaches one to find the extreme values of a
               function that has more than one variable.
-              <var name="$false" form="popup"/>
             </p>
           </statement>
         </webwork>
       </exercise>
+    </subexercises>
 
-    </exercisegroup>
-<!--Group 2: 15 optimization problems -->
-    <exercisegroup>
+    <subexercises>
       <title>Problems</title>
-<!--Exercise 3: Maximize product of two numbers-->
-      <introduction>
-        <p>
-          Problems
-        </p>
-      </introduction>
-
+      <!--Exercise 3: Maximize product of two numbers-->
       <exercise>
-        <webwork>
+        <webwork seed="1">
           <pg-code>
-            $a = Compute("100/2");
-            $b = Compute("100-$a");
-            $P = Compute("$a * $b");
+            $sum = random(50,200,2);
+            if($envir{problemSeed}==1){$sum=100;};
+            $maxprod = ($sum/2)**2;
           </pg-code>
           <statement>
             <p>
               Find the maximum product of two numbers
               (not necessarily integers)
-              that have a sum of 100.
+              that have a sum of <var name="$sum"/>.
             </p>
-
+            <instruction>
+              If there is no maximum product, enter <c>DNE</c>.
+            </instruction>
             <p>
-              <var name="$P" width="20"/>
+              <var name="$maxprod" width="20"/>
             </p>
           </statement>
         </webwork>
       </exercise>
-<!-- Exercise 4: Minimize sum of two numbers       -->
+      <!-- Exercise 4: Minimize sum of two numbers       -->
       <exercise>
-        <webwork>
+        <webwork seed="1">
           <pg-code>
-            $a = Compute("sqrt(500)");
-            $b = Compute("500/$a");
-            $S = Compute("$a + $b");
+            $prod = random(400,600,10);
+            if($envir{problemSeed}==1){$prod=500;};
+            $minsum = Compute("2 sqrt($prod)");
           </pg-code>
           <statement>
             <p>
-              Find the minimum sum of two positive numbers whose product is 500.
+              Find the minimum sum of two positive numbers
+              whose product is <var name="$prod"/>.
             </p>
-
+            <instruction>
+              If there is no minimum sum, enter <c>DNE</c>.
+            </instruction>
             <p>
-              <var name="$S" width="20"/>
+              <var name="$minsum" width="20"/>
             </p>
           </statement>
         </webwork>
       </exercise>
-<!-- Exercise 5: Maximum sum of two numbers -->
-<!-- FUNGUS: What do I do with this question? Multiple choice? -->
+      <!-- Exercise 5: Maximum sum of two numbers -->
       <exercise>
-        <!-- <webwork>
+        <webwork seed="1">
           <pg-code>
-
-          </pg-code> -->
-
+            $prod = random(400,600,10);
+            if($envir{problemSeed}==1){$prod=500;};
+            $maxsum = Compute("DNE");
+          </pg-code>
           <statement>
             <p>
-              Find the maximum sum of two numbers whose product is 500.
+              Find the maximum sum of two positive numbers
+              whose product is <var name="$prod"/>.
+            </p>
+            <instruction>
+              If there is no maximum sum, enter <c>DNE</c>.
+            </instruction>
+            <p>
+              <var name="$maxsum" width="20"/>
             </p>
           </statement>
-          <!-- <solution> -->
-          <answer>
+          <solution>
             <p>
               There is no maximum sum;
               the fundamental equation has only 1 critical value that
               corresponds to a minimum.
             </p>
-          </answer>
-          <!-- </solution> -->
-        <!-- </webwork> -->
+          </solution>
+        </webwork>
       </exercise>
-<!-- Exercise 6: Maximum sum with a boundary condition -->
+      <!-- Exercise 6: Maximum sum with a boundary condition -->
       <exercise>
-        <webwork>
+        <webwork seed="1">
           <pg-code>
-            $a = Compute("300");
-            $b = Compute("500/$a");
-            $S = Compute("$a + $b");
+            $prod = random(400,600,10);
+            $upper = random(200,500,10);
+            if($envir{problemSeed}==1){$prod=500;$upper=300;};
+            Context("Fraction");
+            $maxsum = Fraction("$upper + $prod/$upper");
           </pg-code>
           <statement>
             <p>
               Find the maximum sum of two numbers,
-              each of which is in <m>[0,300]</m> whose product is 500.
+              each of which is in <m>[0,<var name="$upper"/>]</m>,
+              whose product is <var name="$prod"/>.
             </p>
-
+            <instruction>
+              If there is no maximum sum, enter <c>DNE</c>.
+            </instruction>
             <p>
-              <var name="$S" width="20"/>
+              <var name="$maxsum" width="20"/>
             </p>
           </statement>
         </webwork>
       </exercise>
-<!-- Exercise 7: Maximum area of a right triangle -->
+      <!-- Exercise 7: Maximum area of a right triangle -->
       <exercise>
-        <webwork>
+        <webwork seed="1">
           <pg-code>
-            $a = Compute("1/sqrt(2)");
-            $b = Compute("sqrt(1-$a^2)");
-            $Area = Compute("$a*$b/2");
+            $hyp = random(1,9,1);
+            if($envir{problemSeed}==1){$hyp=1;};
+            Context("Fraction");
+            $maxarea=Fraction($hyp**2,4);
           </pg-code>
           <statement>
             <p>
               Find the maximal area of a right triangle with hypotenuse of
-              length <m>1</m>.
+              length <m><var name="$hyp"/></m>.
             </p>
-
             <p>
-              <var name="$Area" width="20"/>
+              <var name="$maxarea" width="20"/>
             </p>
           </statement>
         </webwork>
       </exercise>
-<!--Exercise 8: Two adjacent rectangular pens-->
+      <!--Exercise 8: Two adjacent rectangular pens-->
       <exercise>
-        <!--<webwork>
+        <webwork seed="1">
           <pg-code>
-            $l = Compute("1000/6");
-            $w = Compute("(1000-3*$l)/4");
-            $l = NumberWithUnits("$l ft");
-            $w = NumberWithUnits("$w ft");
-          </pg-code> -->
-
+            $total = random(800,1500,100);
+            if($envir{problemSeed}==1){$total=1000;};
+            Context("Fraction");
+            $length=Fraction($total,6);
+            $width=Fraction($total-3*$length,4);
+            $l = FormulaWithUnits("$length ft");
+            $w = FormulaWithUnits("$width ft");
+            $gr = init_graph(-1,-1,26,11, size=>[240,240*12/27]);
+            $gr->moveTo(12.5,10);
+            $gr->lineTo(12.5,0);
+            $gr->lineTo(25,0);
+            $gr->lineTo(25,10);
+            $gr->lineTo(0,10);
+            $gr->lineTo(0,0);
+            $gr->lineTo(12.5,0);
+            $multians = MultiAnswer($l, $w)->with(
+              singleResult => 1,
+              checker => sub {
+                my ( $correct, $student, $self ) = @_;
+                my ( $stu1, $stu2 ) = @{$student};
+                my ( $cor1, $cor2 ) = @{$correct};
+                if ( ($cor1 == $stu1 &amp;&amp; $cor2 == $stu2) ||
+                     ($cor1 == $stu2 &amp;&amp; $cor2 == $stu1) ) {
+                    return 1;
+                } else {
+                    if ($cor1 == $stu1 || $cor1 == $stu2 || $cor2 == $stu1 || $cor2 == $stu2) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+              }
+            );
+          </pg-code>
           <statement>
             <p>
-              A rancher has <m>1000</m> feet of fencing in which to construct
+              A rancher has <m><var name="$total"/></m> feet of fencing in which to construct
               adjacent, equally sized rectangular pens.
               What dimensions should these pens have to maximize the enclosed area?
             </p>
-
-              <image xml:id="img_opt3cX" width="33%">
-                <description></description>
-                <latex-image>
-
-                \begin{tikzpicture}
-
+            <image width="40%" pg-name="$gr"/>
+            <!-- <latex-image>
+              \begin{tikzpicture}
                 \draw [thick] (0,0) rectangle (3,2);
-                \draw [thick] (1.5,0) -- (1.5,2);
-
-                \end{tikzpicture}
-
-                </latex-image>
-              </image>
-
+                \draw [thick] (1.5,0) -&#x2D; (1.5,2);
+              \end{tikzpicture}
+            </latex-image> -->
             <p>
-              Longer side: <fillin/><!--<var name="$l" width="20"/>-->
+              <var name="$multians" width="20"/>
             </p>
-
             <p>
-              Shorter side: <fillin/><!--<var name="$w" width="20"/>-->
+              <var name="$multians" width="20"/>
             </p>
           </statement>
-        <!-- </webwork> -->
+        </webwork>
       </exercise>
-<!-- Exercise 9: Dimensions of the optimal cylindrical can -->
+      <!-- Exercise 9: Dimensions of the optimal cylindrical can -->
       <exercise>
         <webwork>
           <pg-code>
-            Context()->flags->set(ReducedConstants=>0);
-            $r = Compute("(2*355/(4*pi))^(1/3)");
-            $h = Compute("355/(pi*$r^2)"); <!--Or h = 2r, but I don't see why that's true-->
-            $r = NumberWithUnits("$r cm");
-            $h = NumberWithUnits("$h cm");
-            $close=PopUp(['?','Yes','No'],2);
+            $V = NumberWithUnits("355 cm^3");
+            parser::Root->Enable;
+            $r = Compute("root(3,355/(2pi))");
+            $h = Compute("root(3,1420/pi)");
+            $rU = NumberWithUnits("$r cm");
+            $hU = NumberWithUnits("$h cm");
+            $showwork = '[@ explanation_box(message => "Discuss whether or not your calculation suggests that a real world soda can is designed to minimize the materials cost.") @]*';
           </pg-code>
           <statement>
             <p>
               A standard soda can is roughly cylindrical and holds
-              <quantity>
-                <mag>355</mag><unit prefix="centi" base="meter" exp="3"/>
-              </quantity> of liquid.
-              What dimensions should the cylinder be to minimize the material
+              <m><var name="$V"/></m> of liquid.
+              What dimensions should the cylinder have to minimize the material
               needed to produce the can?
               Based on your dimensions,
               determine whether or not the standard can is produced to
               minimize the material costs.
             </p>
-
+            <instruction>
+              Enter its radius here.
+            </instruction>
             <p>
-              Radius: <var name="$r" width="20"/>
+              <var name="$rU" width="20"/>
             </p>
-
+            <instruction>
+              Enter its height here.
+            </instruction>
             <p>
-              Height: <var name="$h" width="20"/>
+              <var name="$hU" width="20"/>
             </p>
-
             <p>
-              Does a soda can roughly minimize material costs?
-              <var name="$close" form="popup"/>
+              <var name="$showwork" data="pgml"/>
             </p>
           </statement>
         </webwork>
       </exercise>
-<!-- Exercise 10: Optimal different cylindrical can -->
+      <!-- Exercise 10: Optimal different cylindrical can -->
       <exercise>
         <webwork>
           <pg-code>
-            Context()->flags->set(ReducedConstants=>0);
-            $r = Compute("(2*206/(4*pi))^(1/3)");
-            $h = Compute("206/(pi*$r^2)"); <!--Or h = 2r, but I don't see why that's true-->
-            $r = NumberWithUnits("$r in");
-            $h = NumberWithUnits("$h in");
-            $close=PopUp(['?','Yes','No'],1);
+            $V = NumberWithUnits("206 in^3");
+            parser::Root->Enable;
+            $r = Compute("root(3,206/(2pi))");
+            $h = Compute("root(3,824/pi)");
+            $rU = NumberWithUnits("$r in");
+            $hU = NumberWithUnits("$h in");
+            $showwork = '[@ explanation_box(message => "Discuss whether or not your calculation suggests that a #10 can is designed to minimize the materials cost.") @]*';
           </pg-code>
           <statement>
             <p>
               Find the dimensions of a cylindrical can with a volume of
-              <quantity><mag>206</mag><unit base="inch" exp="3"/></quantity>
-              that minimizes the surface area.
+              <m><var name="$V"/></m> that minimizes the surface area.
             </p>
-
+            <instruction>
+              Enter its radius here.
+            </instruction>
+            <p>
+              <var name="$rU" width="20"/>
+            </p>
+            <instruction>
+              Enter its height here.
+            </instruction>
+            <p>
+              <var name="$hU" width="20"/>
+            </p>
             <p>
               The <q>#10 can</q>is a standard sized can used by the restaurant
               industry that holds about
-              <quantity><mag>206</mag><unit base="inch" exp="3"/></quantity>
-              with a diameter of
-              <quantity><mag>6 3/16</mag><unit base="inch"/></quantity>
+              <m><var name="$V"/></m> with a diameter of
+              <m>6\,\frac{3}{16}\,\text{in}</m>
               and height of
-              <quantity><mag>7</mag><unit base="inch"/></quantity>.
+              <m>7\,\text{in}</m>.
               Does it seem these dimensions where chosen with minimization in mind?
             </p>
-
             <p>
-              Radius: <var name="$r" width="20"/>
-            </p>
-
-            <p>
-              Height: <var name="$h" width="20"/>
-            </p>
-
-            <p>
-              Does a #10 can roughly minimize material costs?
-              <var name="$close" form="popup"/>
+              <var name="$showwork" data="pgml"/>
             </p>
           </statement>
         </webwork>
       </exercise>
-<!-- Exercise 11: USPS shipping box -->
+      <!-- Exercise 11: Dimensions of the optimal cylindrical can, part 2 -->
       <exercise>
         <webwork>
           <pg-code>
-            $w = Compute("108/6");
-            $l = Compute("108 - 4*$w");
-            $V = Compute("$l * $w^2");
-            $V = NumberWithUnits("$V in^3");
+            $V = NumberWithUnits("355 cm^3");
+            parser::Root->Enable;
+            $r = Compute("root(3,355/(4pi))");
+            $h = Compute("root(3,5680/pi)");
+            $rU = NumberWithUnits("$r cm");
+            $hU = NumberWithUnits("$h cm");
+            $showwork = '[@ explanation_box(message => "Discuss whether or not your calculation suggests that a real world soda can is designed to minimize the materials cost.") @]*';
+          </pg-code>
+          <statement>
+            <p>
+              A standard soda can is roughly cylindrical and holds
+              <m><var name="$V"/></m> of liquid.
+              A real-world soda can has material on the top and bottom that is thicker
+              than the material around the side.
+              Assume that the top/bottom material is twice as thick as the material around the side.
+              What dimensions should the cylinder have to minimize the material
+              needed to produce the can?
+              Based on your dimensions and the assumption about material thickness,
+              determine whether or not the standard can is produced to
+              minimize the material costs.
+            </p>
+            <instruction>
+              Enter its radius here.
+            </instruction>
+            <p>
+              <var name="$rU" width="20"/>
+            </p>
+            <instruction>
+              Enter its height here.
+            </instruction>
+            <p>
+              <var name="$hU" width="20"/>
+            </p>
+            <p>
+              <var name="$showwork" data="pgml"/>
+            </p>
+          </statement>
+        </webwork>
+      </exercise>
+      <!-- Exercise 12: USPS shipping box -->
+      <exercise>
+        <webwork>
+          <pg-code>
+            $V = NumberWithUnits("36*18**2 in^3");
           </pg-code>
           <statement>
             <p>
               The United States Postal Service charges more for boxes whose
-              combined length and girth exceeds
-              <quantity><mag>108</mag><unit base="inch"/></quantity>
-              (the <q>length</q> of a package is the length of its longest side;
-              the girth is the perimeter of the cross section, <ie/>, <m>2w+2h</m>).
+              combined length and girth exceeds <m>108</m> inches.
+              (The <q>length</q> of a package is the length of its longest side;
+              the girth is the perimeter of the cross section, i.e., <m>2w+2h</m>).
             </p>
-
             <p>
               What is the maximum volume of a package with a square cross
               section (<m>w=h</m>) that does not exceed the
-              <quantity><mag>108</mag><unit base="inch"/></quantity> standard?
+              <m>108</m> inch standard?
             </p>
-
             <p>
-              Volume: <var name="$V" width="20"/>
+              <var name="$V" width="20"/>
             </p>
           </statement>
         </webwork>
       </exercise>
-<!-- Exercise 12: Strength of a beam -->
+      <!-- Exercise 13: Strength of a beam -->
       <exercise>
-        <!--<webwork>
+        <webwork seed="1">
           <pg-code>
-            $w = Compute("12/sqrt(3)");
-            $h = Compute("sqrt(12^2 - $w^2)");
-            $w = NumberWithUnits("$w in");
-            $h = NumberWithUnits("$h in");
-          </pg-code> -->
-
+            $D = random(10,20,1);
+            if($envir{problemSeed}==1){$D=12;};
+            $w = Compute("$D/sqrt(3)");
+            $h = Compute("sqrt($D^2 - $w^2)");
+            $wU = NumberWithUnits("$w in");
+            $hU = NumberWithUnits("$h in");
+            $multians = MultiAnswer($wU, $hU)->with(
+              singleResult => 1,
+              checker => sub {
+                my ( $correct, $student, $self ) = @_;
+                my ( $stu1, $stu2 ) = @{$student};
+                my ( $cor1, $cor2 ) = @{$correct};
+                if ( ($cor1 == $stu1 &amp;&amp; $cor2 == $stu2) ||
+                     ($cor1 == $stu2 &amp;&amp; $cor2 == $stu1) ) {
+                    return 1;
+                } else {
+                    if ($cor1 == $stu1 || $cor1 == $stu2 || $cor2 == $stu1 || $cor2 == $stu2) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+              }
+            );
+            $gr = init_graph(-$D/2-1,-$D/2-1,$D/2+1,$D/2+1, size=>[180,180]);
+            $gr->moveTo(-$w/2,$h/2);
+            $gr->lineTo($w/2,$h/2);
+            $gr->lineTo($w/2,-$h/2);
+            $gr->lineTo(-$w/2,$h/2);
+            $gr->lineTo(-$w/2,-$h/2);
+            $gr->lineTo($w/2,-$h/2);
+            $gr->lb( new Label(0,$h/2,'w','black','center','top','large'));
+            $gr->lb( new Label($w/2,0,'h','black','right','middle','large'));
+            $gr->lb( new Label(0,0,$D,'black','left','bottom','large'));
+            $xfunc = sub { my $t = shift();
+              return $D/2*cos($t); };
+            $yfunc = sub { my $t = shift();
+              return $D/2*sin($t); };
+            $fn = new Fun( $xfunc, $yfunc, $gr );
+            $fn->domain(0,6.2832);
+            $fn->color('black');
+          </pg-code>
           <statement>
             <p>
               The strength <m>S</m> of a wooden beam is directly proportional
               to its cross sectional width <m>w</m> and the square of its
-              height <m>h</m>;
+              height <m>h</m>.
               that is, <m>S = kwh^2</m> for some constant <m>k</m>.
             </p>
-
-              <image xml:id="img_opt3cX1" width="33%">
-                <description></description>
-                <latex-image>
-
+            <image width="30%" pg-name="$gr"/>
+              <!-- <latex-image>
                 \begin{tikzpicture}
-
-                \draw [thick] (0,0) circle (1cm);
-                \draw [thick] (-.6,.8) -- node [pos=.5,right] { \(12\)} (.6,-.8);
-                \draw [thick] (-.6,-.8) rectangle (.6,.8);
-                \draw (.7,0) node { \(h\)} (0,.7) node { \(w\)};
-
+                  \draw [thick] (0,0) circle (1cm);
+                  \draw [thick] (-.6,.8) -&#x2D; node [pos=.5,right] { \(12\)} (.6,-.8);
+                  \draw [thick] (-.6,-.8) rectangle (.6,.8);
+                  \draw (.7,0) node { \(h\)} (0,.7) node { \(w\)};
                 \end{tikzpicture}
-
-                </latex-image>
-              </image>
-
+              </latex-image> -->
             <p>
-              Given a circular log with diameter of <m>12</m> inches,
+              Given a circular log with diameter of <m><var name="$D"/></m> inches,
               what sized beam can be cut from the log with maximum strength?
             </p>
-
+            <instruction>
+              Enter the cross-sectional dimensions here.
+            </instruction>
             <p>
-              w = <fillin/><!--<var name="$w" width="20"/>-->
+              <var name="$multians" width="20"/>
             </p>
-
             <p>
-              h = <fillin/><!--<var name="$h" width="20"/>-->
+              <var name="$multians" width="20"/>
             </p>
           </statement>
-        <!-- </webwork> -->
+        </webwork>
       </exercise>
-<!-- Exercise 13: Power line by land and by sea -->
+      <!-- Exercise 14: Power line by land and by sea -->
       <exercise>
-        <webwork>
+        <webwork seed="1">
           <pg-code>
+            do {
+              ($x,$y) = (2,3,4,5,6)[NchooseK(5,2)];
+              $ycost=random(30000,50000,5000);
+              $xcost=$ycost + random(30000,50000,5000);
+            } until ($y - $ycost*$x/sqrt($xcost**2 - $ycost**2) > 0);
+            if($envir{problemSeed}==1){$x=2;$y=5;$xcost=80000;$ycost=50000};
+            Context("Currency")->flags->set(trimTrailingZeros=>1,tolerance=>1);
+            $xC = Currency($xcost);
+            $yC = Currency($ycost);
             $g = Compute("50000");
             $s = Compute("80000");
             $a = Compute("5");
             $b = Compute("2");
-            $x = Compute("$a - $g*$b/sqrt($s^2 - $g^2)");
-            $C = Compute("$x*$g + $s*sqrt($b^2+($a - $x)^2)");
-            $x = NumberWithUnits("$x mi");
+            $z = max(0,$y - $ycost*$x/sqrt($xcost**2 - $ycost**2));
+            $zU = NumberWithUnits("$z mi");
+            $C = Currency($z*$ycost + $xcost*sqrt($x**2+($y - $z)**2));
           </pg-code>
           <statement>
             <p>
               A power line is to be run to an offshore facility in the manner
               described in <xref ref="ex_opt3">Example</xref>.
-              The offshore facility is <m>2</m> miles at sea and <m>5</m>
-              miles along the shoreline from the power plant.
-              It costs $50,000 per mile to lay a power line underground and
-              $80,000 to run the line underwater.
+              The offshore facility is <m><var name="$x"/></m> miles at sea and
+              <m><var name="$y"/></m> miles along the shoreline from the power plant.
+              It costs <m><var name="$yC"/></m> per mile to lay a power line underground and
+              <m><var name="$xC"/></m> to run the line underwater.
             </p>
-
             <p>
               How much of the power line should be run underground?
               What is the minimum overall cost?
             </p>
-
+            <instruction>
+              Enter the length of line under ground here.
+            </instruction>
             <p>
-              Length of line under ground:
-              <var name="$x" width="20"/>
+              <var name="$zU" width="20"/>
             </p>
-
+            <instruction>
+              Enter the minimum overall cost here.
+            </instruction>
             <p>
-              Minimum total cost ($): <var name="$C" width="20"/>
+              <var name="$C" width="20"/>
             </p>
           </statement>
         </webwork>
       </exercise>
-<!-- Exercise 14: Different power line by land and by sea - boundary condition -->
+      <!-- Exercise 15: Different power line by land and by sea, this time boundary condition will matter  -->
       <exercise>
-        <webwork>
+        <webwork seed="1">
           <pg-code>
+            do {
+              ($x,$y) = (2,3,4,5,6)[NchooseK(5,2)];
+              $ycost=random(30000,50000,5000);
+              $xcost=$ycost + random(30000,50000,5000);
+            } until ($y - $ycost*$x/sqrt($xcost**2 - $ycost**2) &lt; 0);
+            if($envir{problemSeed}==1){$x=5;$y=2;$xcost=80000;$ycost=50000};
+            Context("Currency")->flags->set(trimTrailingZeros=>1,tolerance=>1);
+            $xC = Currency($xcost);
+            $yC = Currency($ycost);
             $g = Compute("50000");
             $s = Compute("80000");
-            $a = Compute("2");
-            $b = Compute("5");
-            $x = Compute("0"); <!--x = -2 is the formula answer -->
-            $C = Compute("$x*$g + $s*sqrt($b^2+($a - $x)^2)");
-            $x = NumberWithUnits("$x mi");
+            $a = Compute("5");
+            $b = Compute("2");
+            $z = max(0,$y - $ycost*$x/sqrt($xcost**2 - $ycost**2));
+            $zU = NumberWithUnits("$z mi");
+            $C = Currency($z*$ycost + $xcost*sqrt($x**2+($y - $z)**2));
           </pg-code>
           <statement>
             <p>
               A power line is to be run to an offshore facility in the manner
               described in <xref ref="ex_opt3">Example</xref>.
-              The offshore facility is <m>5</m> miles at sea and <m>2</m>
-              miles along the shoreline from the power plant.
-              It costs $50,000 per mile to lay a power line underground and
-              $80,000 to run the line underwater.
+              The offshore facility is <m><var name="$x"/></m> miles at sea and
+              <m><var name="$y"/></m> miles along the shoreline from the power plant.
+              It costs <m><var name="$yC"/></m> per mile to lay a power line underground and
+              <m><var name="$xC"/></m> to run the line underwater.
             </p>
-
             <p>
-              How much of the power line should be run underground to minimize
-              the overall costs?
+              How much of the power line should be run underground?
+              What is the minimum overall cost?
             </p>
-
+            <instruction>
+              Enter the length of line under ground here.
+            </instruction>
             <p>
-              Length of line under ground:
-              <var name="$x" width="20"/>
+              <var name="$zU" width="20"/>
             </p>
-
+            <instruction>
+              Enter the minimum overall cost here.
+            </instruction>
             <p>
-              Minimum total cost ($): <var name="$C" width="20"/>
+              <var name="$C" width="20"/>
             </p>
           </statement>
         </webwork>
       </exercise>
-<!--Exercise 15: Dog, stick, water: Classic -->
+      <!--Exercise 16: Dog, stick, water: Classic -->
       <exercise>
-        <webwork>
+        <webwork seed="1">
           <pg-code>
-            $g = Compute("1/22");    <!--recip. rate make this situation identical to above 2-->
-            $s = Compute("1/1.5");
-            $a = Compute("20");
-            $b = Compute("15");
-            $x = Compute("$a - $g*$b/sqrt($s^2 - $g^2)");
-            $x = NumberWithUnits("$x ft");
+            ($x,$y) = (10..40)[NchooseK(31,2)];
+            $run = random(18,25,1);
+            $swim = random(1.2,2.4,0.1);
+            if($envir{problemSeed}==1){$x=15;$y=20;$run=22;$swim=1.5;};
+            $runU = NumberWithUnits("$run ft/s");
+            $swimU = NumberWithUnits("$swim ft/s");
+            $z = max(0,$y - $swim*$x/sqrt($run**2 - $swim**2));
+            $zU = NumberWithUnits("$z ft");
           </pg-code>
           <statement>
             <p>
               A woman throws a stick into a lake for her dog to fetch;
-              the stick is <m>20</m> feet down the shore line and <m>15</m>
-              feet into the water from there.
+              the stick is <m><var name="$y"/></m> feet down the shore line
+              and <m><var name="$x"/></m> feet into the water from there.
               The dog may jump directly into the water and swim,
               or run along the shore line to get closer to the stick before
-              swimming. The dog runs about
-              <quantity>
-                <mag>22</mag><unit base="foot"/><per base="second"/>
-              </quantity>
-              and swims about
-              <quantity>
-                <mag>1.5</mag><unit base="foot"/><per base="second"/>
-              </quantity>.
+              swimming. The dog runs about <m><var name="$runU"/></m>
+              and swims about <m><var name="$swimU"/></m>.
             </p>
-
             <p>
               How far along the shore should the dog run to minimize the
               time it takes to get to the stick? (Hint: the figure from
               <xref ref="ex_opt3">Example</xref> can be useful.)
             </p>
-
             <p>
-              Distance along shore: <var name="$x" width="20"/>
+              <var name="$zU" width="20"/>
             </p>
           </statement>
         </webwork>
       </exercise>
-<!--Exercise 16: Dog, stick, water 2-->
+      <!--Exercise 17: Dog, stick, water 2-->
       <exercise>
-        <webwork>
+        <webwork seed="1">
           <pg-code>
-            $g = Compute("1/22");
-            $s = Compute("1/1.5");
-            $a = Compute("15");
-            $b = Compute("30");
-            $x = Compute("$a - $g*$b/sqrt($s^2 - $g^2)");
-            $x = NumberWithUnits("$x ft");
+            ($x,$y) = (10..40)[NchooseK(31,2)];
+            $run = random(18,25,1);
+            $swim = random(1.2,2.4,0.1);
+            if($envir{problemSeed}==1){$x=30;$y=15;$run=22;$swim=1.5;};
+            $runU = NumberWithUnits("$run ft/s");
+            $swimU = NumberWithUnits("$swim ft/s");
+            $z = max(0,$y - $swim*$x/sqrt($run**2 - $swim**2));
+            $zU = NumberWithUnits("$z ft");
           </pg-code>
           <statement>
             <p>
               A woman throws a stick into a lake for her dog to fetch;
-              the stick is <m>15</m> feet down the shore line and <m>30</m>
-              feet into the water from there.
+              the stick is <m><var name="$y"/></m> feet down the shore line
+              and <m><var name="$x"/></m> feet into the water from there.
               The dog may jump directly into the water and swim,
               or run along the shore line to get closer to the stick before
-              swimming. The dog runs about
-              <quantity>
-                <mag>22</mag><unit base="foot"/><per base="second"/>
-              </quantity>
-              and swims about
-              <quantity>
-                <mag>1.5</mag><unit base="foot"/><per base="second"/>
-              </quantity>.
+              swimming. The dog runs about <m><var name="$runU"/></m>
+              and swims about <m><var name="$swimU"/></m>.
             </p>
-
             <p>
-              How far along the shore should the dog run to minimize the time
-              it takes to get to the stick?
-              <em> (Google <q>calculus dog</q>
-              to learn more about a dog's ability to minimize times.)</em>
+              How far along the shore should the dog run to minimize the
+              time it takes to get to the stick?
+              (Google <q>calculus dog</q> to learn more about a dog's ability to minimize times.)
             </p>
-
             <p>
-              Distance along shore: <var name="$x" width="20"/>
+              <var name="$zU" width="20"/>
             </p>
           </statement>
         </webwork>
       </exercise>
-<!-- Exercise 17: Rectangle inside the unit circle -->
+      <!-- Exercise 18: Rectangle inside the unit circle -->
       <exercise>
         <webwork>
           <pg-code>
-            $y = Compute("sqrt(2)/2");
-            $x = Compute("sqrt(1-$y^2)");
-            $w = Compute("2 * $x");
-            $h = Compute("2 * $y");
+            $w = Compute("sqrt(2)");
+            $multians = MultiAnswer($w,$w)->with(
+              singleResult => 1,
+              checker => sub {
+                my ( $correct, $student, $self ) = @_;
+                my ( $stu1, $stu2 ) = @{$student};
+                my ( $cor1, $cor2 ) = @{$correct};
+                if ( ($cor1 == $stu1 &amp;&amp; $cor2 == $stu2) ||
+                     ($cor1 == $stu2 &amp;&amp; $cor2 == $stu1) ) {
+                    return 1;
+                } else {
+                    if ($cor1 == $stu1 || $cor1 == $stu2 || $cor2 == $stu1 || $cor2 == $stu2) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+              }
+            );
           </pg-code>
           <statement>
             <p>
               What are the dimensions of the rectangle with largest area that
               can be drawn inside the unit circle?
             </p>
-
             <p>
-              Width: <var name="$w" width="20"/>
+              <var name="$multians" width="20"/>
             </p>
-
             <p>
-              Height: <var name="$h" width="20"/>
+              <var name="$multians" width="20"/>
             </p>
           </statement>
         </webwork>
       </exercise>
-
-    </exercisegroup>
+    </subexercises>
   </exercises>
 </section>
