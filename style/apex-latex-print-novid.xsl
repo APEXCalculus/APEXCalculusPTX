@@ -45,10 +45,9 @@
 
 <!-- define tcolorboxes for theorem and friends -->
 
-<!-- don't colour a list if it's inside an insight -->
-<!-- <xsl:template match="list[not(parent::insight)]" mode="tcb-style">
-    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
-</xsl:template> -->
+<xsl:template match="list" mode="tcb-style">
+    <xsl:text>listptxstyle/.style={enhanced jigsaw,middle=1ex, blockspacingstyle, opacityback=0, opacitybacktitle=0, coltitle=black, frame hidden, titlerule=-0.3pt,</xsl:text>
+</xsl:template>
 
 <xsl:template match="insight" mode="tcb-style">
     <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
@@ -93,7 +92,7 @@
 </xsl:template>
 
 <!-- use original APEX geometry definitions -->
-<xsl:param name="latex.geometry" select="'inner=1in,textheight=9in,textwidth=320pt,marginparwidth=150pt,marginparsep=32pt,bottom=1in,footskip=29pt'"/>
+<xsl:param name="latex.geometry" select="'inner=1in,textheight=9in,textwidth=320pt,marginparwidth=150pt,marginparsep=20pt,bottom=1in,footskip=29pt'"/>
 
 <!-- apply exercise geometry -->
 <xsl:template match="exercises" mode="latex-division-heading">
@@ -161,7 +160,7 @@
 </xsl:template>
 
 <!-- define exercise geometry -->
-<xsl:template match="exercises|appendix" mode="new-geometry">
+<xsl:template match="exercises|appendix|solutions" mode="new-geometry">
     <xsl:text>\newgeometry{</xsl:text>
     <xsl:text>inner=72pt</xsl:text>
     <xsl:text>, outer=72pt</xsl:text>
@@ -173,18 +172,22 @@
 </xsl:template>
 
 <!-- restore geometry for next section -->
-<xsl:template match="exercises" mode="latex-division-footing">
+<xsl:template match="exercises|appendix|solutions" mode="latex-division-footing">
     <xsl:text>\end{</xsl:text>
     <xsl:apply-templates select="." mode="division-environment-name" />
     <!-- possibly numberless -->
     <xsl:apply-templates select="." mode="division-environment-name-suffix" />
     <xsl:text>}&#xa;</xsl:text>
-    <xsl:if test="self::exercises">
-        <!-- \restoregeometry includes a \clearpage -->
-        <xsl:text>\restoregeometry&#xa;</xsl:text>
-    </xsl:if>
+      <!-- \restoregeometry includes a \clearpage -->
+    <xsl:text>\restoregeometry&#xa;</xsl:text>
 </xsl:template>
 
+<!-- tabular in sidebyside without scaling -->
+<xsl:template match="tabular[ancestor::sidebyside]">
+    <xsl:text>{%&#xa;</xsl:text>
+    <xsl:apply-templates select="." mode="tabular-inclusion"/>
+    <xsl:text>}%&#xa;</xsl:text>
+</xsl:template>
 
 <!-- figures in the margin -->
 <!-- load marginnote package -->
@@ -204,7 +207,7 @@
 </xsl:template>
 
 <!-- latex-image, asymptote, and tabular can all go in margin -->
-<xsl:template match="figure[not(ancestor::sidebyside) and not(descendant::sidebyside) and (descendant::latex-image or descendant::asymptote or descendant::tabular) and not(ancestor::exercise)]">
+<xsl:template match="figure[not(ancestor::sidebyside) and not(ancestor::aside) and not(descendant::sidebyside) and (descendant::latex-image or descendant::asymptote or descendant::tabular) and not(ancestor::exercise)]">
     <xsl:text>\marginnote{%&#xa;</xsl:text>
     <xsl:text>\begin{</xsl:text>
     <xsl:apply-templates select="." mode="environment-name"/>
