@@ -160,6 +160,40 @@
 <!-- load marginnote package -->
 <xsl:param name="latex.preamble.early" select="'\usepackage{marginnote}'"/>
 
+<!-- margin figures within a tcolorbox get shifted with xelatex -->
+<!-- this shifts them back into place -->
+<xsl:param name="latex.preamble.late" select="'
+\makeatletter
+\def\pgfsys@hboxsynced#1{%
+  {%
+    \pgfsys@beginscope%
+    \setbox\pgf@hbox=\hbox{%
+      \hskip\pgf@pt@x%
+      \raise\pgf@pt@y\hbox{%
+        \pgf@pt@x=0pt%
+        \pgf@pt@y=0pt%
+        \special{pdf: content q}%
+        \pgflowlevelsynccm%
+        \pgfsys@invoke{q -1 0 0 -1 0 0 cm}%
+        \special{pdf: content -1 0 0 -1 0 0 cm q}% translate to original coordinate system
+        \pgfsys@invoke{0 J [] 0 d}% reset line cap and dash
+        \wd#1=0pt%
+        \ht#1=0pt%
+        \dp#1=0pt%
+        \box#1%
+        \pgfsys@invoke{n Q Q Q}%
+      }%
+      \hss%
+    }%
+    \wd\pgf@hbox=0pt%
+    \ht\pgf@hbox=0pt%
+    \dp\pgf@hbox=0pt%
+    \pgfsys@hbox\pgf@hbox%
+    \pgfsys@endscope%
+  }%
+}
+\makeatother'"/>
+
 <!-- we want images in margin to be the full margin width -->
 <xsl:template match="figure/image[not(ancestor::sidebyside) and (descendant::latex-image or descendant::asymptote) and not(ancestor::exercise)]">
     <xsl:text>\begin{image}</xsl:text>
