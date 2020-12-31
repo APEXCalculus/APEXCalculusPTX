@@ -46,7 +46,7 @@
 <!-- define tcolorboxes for theorem and friends -->
 
 <xsl:template match="list" mode="tcb-style">
-    <xsl:text>listptxstyle/.style={enhanced jigsaw,middle=1ex, blockspacingstyle, opacityback=0, opacitybacktitle=0, coltitle=black, frame hidden, titlerule=-0.3pt,</xsl:text>
+    <xsl:text>enhanced jigsaw,middle=1ex, blockspacingstyle, opacityback=0, opacitybacktitle=0, coltitle=black, frame hidden, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
 <xsl:template match="insight" mode="tcb-style">
