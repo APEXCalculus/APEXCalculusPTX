@@ -1459,1399 +1459,1304 @@
       <title>Terms and Concepts</title>
       <exercise>
         <webwork>
-            <pg-code>
-            </pg-code>
-
-            <statement>
-              <p>
-                How are definite and indefinite integrals related?
-              </p>
-
-              <p>
-                <var form="essay"/>
-              </p>
-            </statement>
+          <statement>
+            <p>
+              How are definite and indefinite integrals related?
+            </p>
+            <p>
+              <var form="essay"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
-<!-- Exercise 2 -->
+      <!-- Exercise 2 -->
       <exercise>
         <webwork>
-            <pg-code>
-            </pg-code>
-
-            <statement>
-              <p>
-                What constant of integration is most commonly used when evaluating definite integrals?
-              </p>
-            </statement>
+          <statement>
+            <p>
+              What constant of integration is most commonly used when evaluating definite integrals?
+            </p>
+            <p>
+              <var name="'0'" width="10"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
-<!-- Exercise 3 -->
+      <!-- Exercise 3 -->
       <exercise>
         <webwork>
-            <pg-code>
-              $true=PopUp(['?','True','False'],1);
-            </pg-code>
-
-            <statement>
-              <p>
-                If <m>f</m> is a continuous function,
-                then <m>\ds F(x) = \int_a^x f(t)\, dt</m> is also a continuous function.<var name="$true" form="popup"/>
-              </p>
-            </statement>
+          <pg-code>
+            $true=PopUp(['?','True','False'],1);
+          </pg-code>
+          <statement>
+            <p>
+              <var name="$true" form="popup"/>
+              If <m>f</m> is a continuous function,
+              then <m>\ds F(x) = \int_a^x f(t)\, dt</m> is also a continuous function.
+            </p>
+          </statement>
         </webwork>
       </exercise>
-<!-- Exercise 4 -->
+      <!-- Exercise 4 -->
       <exercise>
         <webwork>
-            <pg-code>
-            </pg-code>
-
-            <statement>
-              <p>
-                The definite integral can be used to find
-                <q>the area under a curve.</q>
-                Give two other uses for definite integrals.
-              </p>
-
-              <p>
-                <var form="essay"/>
-              </p>
-            </statement>
+          <statement>
+            <p>
+              The definite integral can be used to find
+              <q>the area under a curve.</q>
+              Give two other uses for definite integrals.
+            </p>
+            <p>
+              <var form="essay"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
     </subexercises>
+
     <subexercises>
       <title>Problems</title>
       <exercisegroup cols="2">
-
         <introduction>
           <p>
-            In the following exercises, evaluate the definite integral.
+            Evaluate the definite integral.
           </p>
         </introduction>
-  <!-- Exercise 5 -->
+        <!-- Exercise 5 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 1;
-                $b = 3;
-                $F = Formula("x^3-x^2+x");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_1^3 (3x^2-2x+1)\, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- 20 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $b = list_random(-1,1);
+              $c = non_zero_random(-9,9,1);
+              $low = random(1,2,1);
+              $high = $low + random(1,3,1);
+              if($envir{problemSeed}==1){$b=-1;$c=1;$low=1;$high=3};
+              Context()->noreduce('(-x)-y','(-x)+y');
+              $F = Formula("x^3 + $b x^2 + $c x")->reduce;
+              $f = $F->D('x')->reduce;
+              $r = $F->eval(x=>$high) - $F->eval(x=>$low);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} \left(<var name="$f"/>\right)\, dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 6 -->
+        <!-- Exercise 6 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 4;
-                $F = Formula("x^3/3-x^2+x");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_0^4 (x-1)^2\, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- 28/3 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $c = non_zero_random(-9,9,1);
+              $low = 0;
+              $high = random(2,6,1);
+              if($envir{problemSeed}==1){$c=-1;$high=4;};
+              Context("Fraction");
+              Context()->noreduce('(-x)-y','(-x)+y');
+              $F = Formula("1/3(x + $c)^3")->reduce;
+              $f = Formula("(x + $c)^2")->reduce;
+              $r = Fraction($F->eval(x=>$high) - $F->eval(x=>$low));
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 7 -->
+        <!-- Exercise 7 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = -1;
-                $b = 1;
-                $F = Formula("x^4/4-x^6/6");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_{-1}^1 (x^3-x^5)\, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- 0 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $b = list_random(-1,1);
+              $low = random(-4,-1,1);
+              ($m,$n) = (3,5,7)[NchooseK(3,2)];
+              if($envir{problemSeed}==1){$b=-1;$low=-1;};
+              $high = -$low;
+              Context("Fraction");
+              Context()->noreduce('(-x)-y','(-x)+y');
+              $F = Formula("x^($m+1)/($m+1) + $b x^($n+1)/($n+1)")->reduce;
+              $f = Formula("x^($m) + $b x^($n)")->reduce;
+              $r = $F->eval(x=>$high) - $F->eval(x=>$low);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} \left(<var name="$f"/>\right)\, dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 8 -->
+        <!-- Exercise 8 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = pi/2;
-                $b = pi;
-                $F = Formula("sin(x)");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_{\pi/2}^\pi \cos(x) \, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- -1 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $trig = list_random('sin','cos');
+              $lh = list_random(['0','pi/2'],['0','pi'],['pi/2','pi']);
+              if($envir{problemSeed}==1){$trig='cos';$lh=['pi/2','pi'];};
+              $low = Formula($lh->[0]);
+              $high = Formula($lh->[1]);
+              $f = Formula("$trig(x)");
+              $F = -$f->D('x')->reduce;
+              $r = $F->eval(x=>Real("$high")) - $F->eval(x=>Real("$low"));
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 9 -->
+        <!-- Exercise 9 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 0;
-                $b = pi/4;
-                $F = Formula("tan(x)");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_{0}^{\pi/4} \sec^2(x) \, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- 1 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $trig = list_random('tan','sec');
+              $lh = list_random(['0','pi/4'],['0','pi/3'],['pi/4','pi/3']);
+              if($envir{problemSeed}==1){$trig='tan';$lh=['0','pi/4'];};
+              $low = Formula($lh->[0]);
+              $high = Formula($lh->[1]);
+              $F = Formula("$trig(x)");
+              $f = $F->D('x')->reduce;
+              $r = $F->eval(x=>Real("$high")) - $F->eval(x=>Real("$low"));
+              Context()->flags->set(reduceConstantFunctions=>0);
+              if ($r == 1) {$r = 1;}
+              elsif ($r == sqrt(3)) {$r = Formula("sqrt(3)");}
+              elsif ($r == sqrt(3) - 1) {$r = Formula("sqrt(3) - 1");}
+              elsif ($r == sqrt(2) - 1) {$r = Formula("sqrt(2) - 1");}
+              elsif ($r == 2 - sqrt(2)) {$r = Formula("2 - sqrt(2)");};
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 10 -->
+        <!-- Exercise 10 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 1;
-                $b = Compute("e^1");
-                $F = Formula("ln(x)");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_{1}^{e} \frac1x \, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- 1 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $n = random(1,9,1);
+              if($envir{problemSeed}==1){$n=1;};
+              $low = 1;
+              $high = Formula("e^$n")->reduce;
+              $F = Formula("ln(x)")->reduce;
+              $f = Formula("1/x")->reduce;
+              $r = $n;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 11 -->
+        <!-- Exercise 11 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = -1;
-                $b = 1;
-                $F = Formula("5^x/ln(5)");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_{-1}^{1} 5^x \, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- (5-1/5)/ln(5) -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $b = random(2,9,1);
+              $low = random(-3,-1,1);
+              $high = random(1,3,1);
+              if($envir{problemSeed}==1){$b=5;$low=-1;$high=1;};
+              $f = Formula("$b^x")->reduce;
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $r = Formula("($b**$high - 1/$b**(-$low))/ln($b)");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 12 -->
+        <!-- Exercise 12 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = -2;
-                $b = -1;
-                $F = Formula("4x-x^4/2");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_{-2}^{-1} (4-2x^3) \, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- 23/2 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              ($low,$high) = num_sort((-4..-1)[NchooseK(4,2)]);
+              ($a,$b) = (-9..-1,1..9)[NchooseK(18,2)];
+              $m = random(2,5,1);
+              if($envir{problemSeed}==1){$low=-2;$high=-1;$a=4,$b=-2;$m=3;};
+              $f = Formula("$a + $b x^$m")->reduce;
+              Context("Fraction");
+              $r = Fraction(($a*$high + $b/($m+1)*$high**($m+1)) - ($a*$low + $b/($m+1)*$low**($m+1)));
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} \left(<var name="$f"/>\right)\, dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 13 -->
+        <!-- Exercise 13 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 0;
-                $b = pi;
-                $F = Formula("2*sin(x) + 2*cos(x)");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_{0}^{\pi} (2\cos(x) - 2\sin(x) ) \, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- -4 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              ($a,$b) = (-9..-1,1..9)[NchooseK(18,2)];
+              if($envir{problemSeed}==1){$a=2;$b=-2;};
+              $f = Formula("$a cos(x) + $b sin(x)")->reduce;
+              $r = 2*$b;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{0}^{\pi} \left(<var name="$f"/>\right)\, dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 14 -->
+        <!-- Exercise 14 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 1;
-                $b = 3;
-                $F = Formula("e^x");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_{1}^{3} e^x \, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- e^3-e -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              ($low,$high) = num_sort((1..4)[NchooseK(4,2)]);
+              if($envir{problemSeed}==1){$low=1;$high=4;};
+              $f = Formula("e^x")->reduce;
+              $r = Formula("e^$high - e^$low");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 15 -->
+        <!-- Exercise 15 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 4;
-                $F = Formula("2/3*x^(3/2)");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_{0}^{4} \sqrt{t} \, dt</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- 16/3 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              ($low,$high) = num_sort((0,1,4,9,16,25)[NchooseK(6,2)]);
+              if($envir{problemSeed}==1){$low=0;$high=4;};
+              Context()->variables->are(t=>'Real');
+              $f = Formula("sqrt(t)")->reduce;
+              Context("Fraction");
+              $r = Fraction(2/3 * ($high**(3/2) - $low**(3/2)));
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dt</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 16 -->
+        <!-- Exercise 16 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 9;
-                $b = 25;
-                $F = Formula("2*sqrt(x)");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_{9}^{25} \frac{1}{\sqrt{t}} \, dt</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- 4 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              ($low,$high) = num_sort((0,1,4,9,16,25)[NchooseK(6,2)]);
+              if($envir{problemSeed}==1){$low=9;$high=25;};
+              Context()->variables->are(t=>'Real');
+              $f = Formula("1/sqrt(t)")->reduce;
+              Context("Fraction");
+              $r = Fraction(2 * ($high**(1/2) - $low**(1/2)));
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dt</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 17 -->
+        <!-- Exercise 17 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 1;
-                $b = 8;
-                $F = Formula("3/4*x^(4/3)");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_{1}^{8} \sqrt[3]{x} \, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- 45/4 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $n = random(3,5,1);
+              ($low,$high) = num_sort((0**$n,1**$n,2**$n,3**$n,4**$n)[NchooseK(5,2)]);
+              if($envir{problemSeed}==1){$n=3;$low=1;$high=8;};
+              parser::Root->Enable;
+              $f = Formula("root($n,x)")->reduce;
+              Context("Fraction");
+              $r = Fraction($high**(1/$n + 1)/(1/$n + 1) - $low**(1/$n + 1)/(1/$n + 1));
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 18 -->
+        <!-- Exercise 18 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 1;
-                $b = 2;
-                $F = Formula("ln(x)");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_{1}^{2} \frac1{x} \, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- ln(2) -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $low = 1;
+              $high = random(2,9,1);
+              if($envir{problemSeed}==1){$high=2;};
+              $f = Formula("1/x")->reduce;
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $r = Formula("ln($high)");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 19 -->
+        <!-- Exercise 19 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 1;
-                $b = 2;
-                $F = Formula("-1/x");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_{1}^{2} \frac1{x^2} \, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- 1/2 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $low = 1;
+              $high = random(2,9,1);
+              if($envir{problemSeed}==1){$high=2;};
+              $f = Formula("1/x^2")->reduce;
+              Context("Fraction");
+              $r = Fraction(1/$low - 1/$high);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 20 -->
+        <!-- Exercise 20 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 1;
-                $b = 2;
-                $F = Formula("-1/2*x^(-2)");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_{1}^{2} \frac1{x^3} \, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- 3/8 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $n = random(3,6,1);
+              $low = 1;
+              $high = random(2,9,1);
+              if($envir{problemSeed}==1){$n=3;$high=2;};
+              $f = Formula("1/x^$n")->reduce;
+              Context("Fraction");
+              $r = Fraction($high**(-$n+1)/(-$n+1) - $low**(-$n+1)/(-$n+1));
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 21 -->
+        <!-- Exercise 21 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 1;
-                $F = Formula("x^2/2");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_{0}^{1} x \, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- 1/2 -->
-              </statement>
+            <pg-code>
+              $low = 0;
+              $high = 1;
+              $f = Formula("x")->reduce;
+              Context("Fraction");
+              $r = Fraction(1/2);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 22 -->
+        <!-- Exercise 22 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 1;
-                $F = Formula("x^3/3");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_{0}^{1} x^2 \, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- 1/3 -->
-              </statement>
+            <pg-code>
+              $low = 0;
+              $high = 1;
+              $f = Formula("x^2")->reduce;
+              Context("Fraction");
+              $r = Fraction(1/3);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 23 -->
+        <!-- Exercise 23 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 1;
-                $F = Formula("x^4/4");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_{0}^{1} x^3 \, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- 1/4 -->
-              </statement>
+            <pg-code>
+              $low = 0;
+              $high = 1;
+              $f = Formula("x^3")->reduce;
+              Context("Fraction");
+              $r = Fraction(1/4);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 24 -->
+        <!-- Exercise 24 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 1;
-                $F = Formula("x^101/101");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_{0}^{1} x^{100} \, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- 1/101 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $n = random(80,120,1);
+              if($envir{problemSeed}==1){$n=100;};
+              $low = 0;
+              $high = 1;
+              $f = Formula("x^$n")->reduce;
+              Context("Fraction");
+              $r = Fraction(1/($n+1));
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 25 -->
+        <!-- Exercise 25 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = -4;
-                $b = 4;
-                $F = Formula("x");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_{-4}^{4} \, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- 8 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $low = random(-9,-2,1);
+              if($envir{problemSeed}==1){$low=-4;};
+              $high = -$low;
+              $r = Real(2*$high);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 26 -->
+        <!-- Exercise 26 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = -10;
-                $b = -5;
-                $F = Formula("3x");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_{-10}^{-5} 3\, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- 15 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              ($low,$high) = num_sort((-9..-1)[NchooseK(9,2)]);
+              $c = random(2,9,1);
+              if($envir{problemSeed}==1){$low=-10;$high=-5;$c=3;};
+              $f = Formula("$c")->reduce;
+              $r = Real($c*($high - $low));
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 27 -->
+        <!-- Exercise 27 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = -2;
-                $b = 2;
-                $F = Formula("1");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds\int_{-2}^{2} 0\, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- 0 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $low = random(-9,-2,1);
+              if($envir{problemSeed}==1){$low=-2;};
+              $high = -$low;
+              $f = Formula("0")->reduce;
+              $r = Real(0);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 28 -->
+        <!-- Exercise 28 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = pi/6;
-                $b = pi/3;
-                $F = Formula("-csc(x)");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds \int_{\pi/6}^{\pi/3} \csc(x) \cot(x) \, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="10"/>
-                </p>
-     <!-- 2-2/sqrt(3) -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $trig = list_random('-cot','-csc');
+              $lh = list_random(['pi/6','pi/4'],['pi/6','pi/3'],['pi/6','pi/2'],['pi/4','pi/3'],['pi/4','pi/2'],['pi/3','pi/2']);
+              if($envir{problemSeed}==1){$trig='-csc';$lh=['pi/6','pi/3'];};
+              $low = Formula($lh->[0]);
+              $high = Formula($lh->[1]);
+              $F = Formula("$trig(x)");
+              $f = $F->D('x')->reduce;
+              $r = $F->eval(x=>Real("$high")) - $F->eval(x=>Real("$low"));
+              Context()->flags->set(reduceConstantFunctions=>0);
+              if ($r == 1) {$r = 1;}
+              elsif ($r == sqrt(3) - 1) {$r = Formula("sqrt(3) - 1");}
+              elsif ($r == sqrt(3) - 1/sqrt(3)) {$r = Formula("sqrt(3) - 1/sqrt(3)");}
+              elsif ($r == sqrt(3)) {$r = Formula("sqrt(3)");}
+              elsif ($r == 1 - 1/sqrt(3)) {$r = Formula("1 - 1/sqrt(3)");}
+              elsif ($r == 1/sqrt(3)) {$r = Formula("1/sqrt(3)");}
+              elsif ($r == 2 - sqrt(2)) {$r = Formula("2 - sqrt(2)");}
+              elsif ($r == 2 - 2/sqrt(3)) {$r = Formula("2 - 2/sqrt(3)");}
+              elsif ($r == sqrt(2) - 2/sqrt(3)) {$r = Formula("sqrt(2) - 2/sqrt(3)");}
+              elsif ($r == sqrt(2) - 1) {$r = Formula("sqrt(2) - 1");}
+              elsif ($r == 2/sqrt(3) - 1) {$r = Formula("2/sqrt(3) - 1");}
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dx</m>
+              </p>
+              <p>
+                <var name="$r" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-
       </exercisegroup>
-      <exercisegroup cols="2">
-  <!-- Exercise 29 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-              </pg-code>
 
-              <statement>
-                <p>
-                  Explain why:
-                </p>
-
-                <p>
-                  <ol>
-                    <li>
-                      <p>
-                        <m>\ds \int_{-1}^1 x^n\, dx=0</m>,
-                        when <m>n</m> is a positive, odd integer, and
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_{-1}^1 x^n\, dx = 2\int_{0}^1 x^n\, dx</m> when <m>n</m> is a positive,
-                        even integer.
-                      </p>
-                    </li>
-                  </ol>
-                </p>
-
-                <p>
-                  <var form="essay"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-
-  <!--ToDo: WW code for this exercise-->
+      <!-- Exercise 29 -->
       <exercise>
-        <statement>
-          <p>
-            Explain why <m>\ds \int_{a}^{a+2\pi} \sin t\, dt = 0</m> for all values of <m>a</m>.
-          </p>
-        </statement>
-        <answer>
-          <p>
-            <m>\int_{a}^{a+2\pi} \sin t\, dt = \cos(a+2\pi)-\cos(a)</m>.
-            Since cosine is periodic with period <m>2\pi</m>,
-            <m>\cos(a+2\pi) = \cos(a)</m>,
-            and hence the integral is 0.
-          </p>
-        </answer>
+        <webwork>
+          <statement>
+            <p>
+              Explain why:
+              <ol>
+                <li>
+                  <p>
+                    <m>\ds\int_{-1}^1 x^n\, dx=0</m>,
+                    when <m>n</m> is a positive, odd integer, and
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <m>\ds\int_{-1}^1 x^n\, dx = 2\int_{0}^1 x^n\, dx</m> when <m>n</m> is a positive,
+                    even integer.
+                  </p>
+                </li>
+              </ol>
+            </p>
+            <p>
+              <var form="essay"/>
+            </p>
+          </statement>
+        </webwork>
+      </exercise>
+      <!-- Exercise 30 -->
+      <exercise>
+        <webwork>
+          <statement>
+            <p>
+              Explain why <m>\ds\int_{a}^{a+2\pi} \sin t\, dt = 0</m> for all values of <m>a</m>.
+            </p>
+            <p>
+              <var form="essay"/>
+            </p>
+          </statement>
+        </webwork>
       </exercise>
 
-      </exercisegroup>
       <exercisegroup cols="2">
-
         <introduction>
           <p>
-            In the following exercises,
-            find a value <m>c</m> such that <m>\int_a^b f(x)\, dx = f(c)(b-a)</m>,
+            Find all values <m>c</m> such that <m>\int_a^b f(x)\, dx = f(c)(b-a)</m>,
             as guaranteed by the <xref ref="thm_mvt2"/>.
           </p>
         </introduction>
-
-  <!-- Exercise 30 -->
+        <!-- Exercise 31 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 2;
-                $f = Formula("x^2");
-                $F = Formula("x^3/3");
-                $f_inv = Formula("sqrt(x)");
-                $f_c = ($F->eval(x=>$b) - $F->eval(x=>$a))/($b-$a);
-                $c = $f_inv->eval(x=>$f_c);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find a value <m>c</m> such that <m>\int_{<var name="$a"/>}^{<var name="$b"/>}<var name="$f"/> \, dx = f(c)(<var name="$b"/> - <var name="$a"/>)</m>,
-                  as guaranteed by the Mean Value Theorem for Integrals.
-                </p>
-
-                <p>
-                  <m>c = </m><var name="$c" width="10"/>
-                </p>
-     <!-- 2/sqrt(3) -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $low = 0;
+              $high = random(2,4,1);
+              if($envir{problemSeed}==1){$high=2;};
+              $f = Formula("x^2");
+              $D = $high - $low;
+              $F = Formula("x^3/3");
+              $f_inv = Formula("sqrt(x)");
+              $f_c = ($F->eval(x=>$high) - $F->eval(x=>$low))/$D;
+              $c = List($f_inv->eval(x=>$f_c));
+            </pg-code>
+            <statement>
+              <p>
+                <m>\int_{<var name="$a"/>}^{<var name="$b"/>}<var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$c" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 31 -->
+        <!-- Exercise 32 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = -2;
-                $b = 2;
-                $f = Formula("x^2");
-                $F = Formula("x^3/3");
-                $f_inv = Formula("sqrt(x)");
-                $f_c = ($F->eval(x=>$b) - $F->eval(x=>$a))/($b-$a);
-                $c = $f_inv->eval(x=>$f_c);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find a value <m>c</m> such that <m>\int_{<var name="$a"/>}^{<var name="$b"/>}<var name="$f"/> \, dx = f(c)(<var name="$b"/> - <var name="$a"/>)</m>,
-                  as guaranteed by the Mean Value Theorem for Integrals.
-                </p>
-
-                <p>
-                  <m>c = </m><var name="$c" width="10"/>
-                </p>
-     <!-- +/- 2/sqrt(3) -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $low = random(-9,-1,1);
+              if($envir{problemSeed}==1){$low=-2;};
+              $high = -$low;
+              $f = Formula("x^2");
+              $D = $high - $low;
+              $F = Formula("x^3/3");
+              $f_inv = Formula("sqrt(x)");
+              $f_c = ($F->eval(x=>$high) - $F->eval(x=>$low))/$D;
+              $c = $f_inv->eval(x=>$f_c);
+              $c = List(-$c,$c);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\int_{<var name="$a"/>}^{<var name="$b"/>}<var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$c" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 32 -->
+        <!-- Exercise 33 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 1;
-                $f = Formula("e^x");
-                $F = Formula("e^x");
-                $f_inv = Formula("ln(x)");
-                $f_c = ($F->eval(x=>$b) - $F->eval(x=>$a))/($b-$a);
-                $c = $f_inv->eval(x=>$f_c);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find a value <m>c</m> such that <m>\int_{<var name="$a"/>}^{<var name="$b"/>}<var name="$f"/> \, dx = f(c)(<var name="$b"/> - <var name="$a"/>)</m>,
-                  as guaranteed by the Mean Value Theorem for Integrals.
-                </p>
-
-                <p>
-                  <m>c = </m><var name="$c" width="10"/>
-                </p>
-     <!-- ln(e-1), approx 0.5413-->
-              </statement>
+            <pg-code>
+              $low = 0;
+              $high = 1;
+              $f = Formula("e^x");
+              $D = $high - $low;
+              $F = Formula("e^x");
+              $f_inv = Formula("ln(x)");
+              $f_c = ($F->eval(x=>$high) - $F->eval(x=>$low))/$D;
+              $c = $f_inv->eval(x=>$f_c);
+              $c = List($c);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\int_{<var name="$a"/>}^{<var name="$b"/>}<var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$c" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 33 -->
+        <!-- Exercise 34 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 16;
-                $f = Formula("sqrt(x)");
-                $F = Formula("2/3*x^(3/2)");
-                $f_inv = Formula("x^2");
-                $f_c = ($F->eval(x=>$b) - $F->eval(x=>$a))/($b-$a);
-                $c = $f_inv->eval(x=>$f_c);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find a value <m>c</m> such that <m>\int_{<var name="$a"/>}^{<var name="$b"/>}<var name="$f"/> \, dx = f(c)(<var name="$b"/> - <var name="$a"/>)</m>,
-                  as guaranteed by the Mean Value Theorem for Integrals.
-                </p>
-
-                <p>
-                  <m>c = </m><var name="$c" width="10"/>
-                </p>
-     <!-- 64/9 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $low = 0;
+              $high = list_random(1,4,9,16,25,36,49);
+              if($envir{problemSeed}==1){$high=16;};
+              $f = Formula("sqrt(x)");
+              $D = $high - $low;
+              $F = Formula("2/3 x^(3/2)");
+              $f_inv = Formula("x^2");
+              $f_c = ($F->eval(x=>$high) - $F->eval(x=>$low))/$D;
+              $c = $f_inv->eval(x=>$f_c);
+              $c = List($c);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\int_{<var name="$a"/>}^{<var name="$b"/>}<var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$c" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-
       </exercisegroup>
-      <exercisegroup cols="2">
 
+      <exercisegroup cols="2">
         <introduction>
           <p>
-            In the following exercises,
-            find the average value of the function on the given interval.
+            Find the average value of the function on the given interval.
           </p>
         </introduction>
-  <!-- Exercise 34 -->
+        <!-- Exercise 35 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 0;
-                $b = pi/2;
-                $F = Formula("-cos(x)");
-                $f_avg = ($F->eval(x=>$b) - $F->eval(x=>$a))/($b-$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find the average value of <m>f(x)=\sin(x)</m> on <m>[0,\pi/2]</m>
-                </p>
-
-                <p>
-                  <var name="$f_avg" width="10"/>
-                </p>
-     <!-- 2/pi -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $trig = list_random('sin','cos');
+              $lh = list_random(['0','pi/2'],['0','pi'],['pi/2','pi']);
+              if($envir{problemSeed}==1){$trig='sin';$lh=['0','pi/2'];};
+              $low = Formula($lh->[0]);
+              $high = Formula($lh->[1]);
+              $D = $high - $low;
+              $f = Formula("$trig(x)");
+              $F = -$f->D('x')->reduce;
+              $A = ($F->eval(x=>Real("$high")) - $F->eval(x=>Real("$low")))/$D;
+              $num = Real($A*pi);
+              $A = Formula("$num/pi");
+            </pg-code>
+            <statement>
+              <p>
+                <m>f(x)=<var name="$f"/></m> on <m>\left[<var name="$low"/>,<var name="$high"/>\right]</m>
+              </p>
+              <p>
+                <var name="$A" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 35 -->
+        <!-- Exercise 36 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 0;
-                $b = pi;
-                $F = Formula("-cos(x)");
-                $f_avg = ($F->eval(x=>$b) - $F->eval(x=>$a))/($b-$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find the average value of <m>y=\sin(x)</m> on <m>[0,\pi]</m>
-                </p>
-
-                <p>
-                  <var name="$f_avg" width="10"/>
-                </p>
-     <!-- 2/pi -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $trig = list_random('sin','cos');
+              $lh = list_random(['0','pi/2'],['0','pi'],['pi/2','pi']);
+              if($envir{problemSeed}==1){$trig='sin';$lh=['0','pi'];};
+              $low = Formula($lh->[0]);
+              $high = Formula($lh->[1]);
+              $D = $high - $low;
+              $f = Formula("$trig(x)");
+              $F = -$f->D('x')->reduce;
+              $A = ($F->eval(x=>Real("$high")) - $F->eval(x=>Real("$low")))/$D;
+              $num = Real($A*pi);
+              $A = Formula("$num/pi");
+            </pg-code>
+            <statement>
+              <p>
+                <m>y=<var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>
+              </p>
+              <p>
+                <var name="$A" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 36 -->
+        <!-- Exercise 37 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 4;
-                $F = Formula("x^2/2");
-                $f_avg = ($F->eval(x=>$b) - $F->eval(x=>$a))/($b-$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find the average value of <m>y=x</m> on <m>[0,4]</m>
-                </p>
-
-                <p>
-                  <var name="$f_avg" width="10"/>
-                </p>
-     <!-- 2 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $low = 0;
+              $high = random(1,9,1);
+              if($envir{problemSeed}==1){$high=4;};
+              $D = $high - $low;
+              $f = Formula("x");
+              $F = Formula("x^2/2");
+              Context("Fraction");
+              $A = Fraction(($F->eval(x=>Real($high)) - $F->eval(x=>Real($low)))/$D);
+            </pg-code>
+            <statement>
+              <p>
+                <m>y=<var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>
+              </p>
+              <p>
+                <var name="$A" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 37 -->
+        <!-- Exercise 38 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 4;
-                $F = Formula("x^3/3");
-                $f_avg = ($F->eval(x=>$b) - $F->eval(x=>$a))/($b-$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find the average value of <m>y=x^2</m> on <m>[0,4]</m>
-                </p>
-
-                <p>
-                  <var name="$f_avg" width="10"/>
-                </p>
-     <!-- 16/3 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $low = 0;
+              $high = random(1,9,1);
+              if($envir{problemSeed}==1){$high=4;};
+              $D = $high - $low;
+              $f = Formula("x^2");
+              $F = Formula("x^3/3");
+              Context("Fraction");
+              $A = Fraction(($F->eval(x=>Real($high)) - $F->eval(x=>Real($low)))/$D);
+            </pg-code>
+            <statement>
+              <p>
+                <m>y=<var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>
+              </p>
+              <p>
+                <var name="$A" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 38 -->
+        <!-- Exercise 39 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 4;
-                $F = Formula("x^4/4");
-                $f_avg = ($F->eval(x=>$b) - $F->eval(x=>$a))/($b-$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find the average value of <m>y=x^3</m> on <m>[0,4]</m>
-                </p>
-
-                <p>
-                  <var name="$f_avg" width="10"/>
-                </p>
-     <!-- 16 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $low = 0;
+              $high = random(1,9,1);
+              if($envir{problemSeed}==1){$high=4;};
+              $D = $high - $low;
+              $f = Formula("x^3");
+              $F = Formula("x^4/4");
+              Context("Fraction");
+              $A = Fraction(($F->eval(x=>Real($high)) - $F->eval(x=>Real($low)))/$D);
+            </pg-code>
+            <statement>
+              <p>
+                <m>y=<var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>
+              </p>
+              <p>
+                <var name="$A" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 39 -->
+        <!-- Exercise 40 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 1;
-                $b = Compute("e^1");
-                $F = Formula("ln(x)");
-                $f_avg = ($F->eval(x=>$b) - $F->eval(x=>$a))/($b-$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find the average value of <m>g(t) = 1/t</m> on <m>[1,e]</m>
-                </p>
-
-                <p>
-                  <var name="$f_avg" width="10"/>
-                </p>
-     <!-- 1/(e-1) -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $low = 1;
+              $m = random(1,9,1);
+              if($envir{problemSeed}==1){$m=1;};
+              $high = Formula("e^$m")->reduce;
+              $D = $high - $low;
+              Context("Fraction");
+              Context()->variables->are(t=>'Real');
+              $f = Formula("1/t");
+              $F = Formula("ln(t)");
+              $A = Formula("$m/(e^$m - 1)");
+            </pg-code>
+            <statement>
+              <p>
+                <m>y=\ds<var name="$f"/></m> on <m>\left[<var name="$low"/>,<var name="$high"/>\right]</m>
+              </p>
+              <p>
+                <var name="$A" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-
       </exercisegroup>
-      <exercisegroup cols="2">
 
+      <exercisegroup cols="2">
         <introduction>
           <p>
-            In the following exercises,
-            a velocity function is given for an object moving along a straight line.
+            A velocity function is given for an object moving along a straight line.
             Find the displacement of the object over the given time interval.
           </p>
         </introduction>
-  <!-- Exercise 40 -->
+        <!-- Exercise 41 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                Context()->variables->add(t=>"Real");
-                $a = -16;
-                $v0 = 20;
-                $t0 = 0;
-                $t1 = 5;
-                $s = Formula("$a*t^2+$v0*t");
-                $disp = $s->eval(t=>$t1) - $s->eval(t=>$t0);
-                $disp = NumberWithUnits("$disp ft");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find the displacement of the object whose velocity is given by
-                  <m>v(t) = -32t+20</m> <quantity><unit base="foot"/><per base="second"/></quantity>,
-                  for <m>t\in [0,5]</m>.
-                </p>
-
-                <p>
-                  Displacement: <var name="$disp" width="20"/>
-                </p>
-    <!-- -300ft -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $low = 0;
+              $high = random(4,8,1);
+              $v0 = random(10,30,2);
+              if($envir{problemSeed}==1){$high=5;$v0=20};
+              $a = -32;
+              Context("Fraction");
+              Context()->variables->are(t=>'Real');
+              $f = FormulaWithUnits("$a t + $v0 ft/s");
+              $F = Formula("$a/2 t^2 + $v0 t");
+              $D = FormulaWithUnits(Fraction($F->eval(t=>Real($high)) - $F->eval(t=>Real($low))), 'ft');
+            </pg-code>
+            <statement>
+              <p>
+                <m>v(t)=<var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>
+              </p>
+              <p>
+                <var name="$D" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 41 -->
+        <!-- Exercise 42 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                Context()->variables->add(t=>"Real");
-                $a = -16;
-                $v0 = 200;
-                $t0 = 0;
-                $t1 = 10;
-                $s = Formula("$a*t^2+$v0*t");
-                $disp = $s->eval(t=>$t1) - $s->eval(t=>$t0);
-                $disp = NumberWithUnits("$disp ft");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find the displacement of the object whose velocity is given by
-                  <m>v(t) = -32t+200</m> <quantity><unit base="foot"/><per base="second"/></quantity>,
-                  for <m>t\in [0,10]</m>.
-                </p>
-
-                <p>
-                  Displacement: <var name="$disp" width="20"/>
-                </p>
-    <!-- 400ft -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $low = 0;
+              $high = random(7,15,1);
+              $v0 = random(100,300,20);
+              if($envir{problemSeed}==1){$high=10;$v0=200};
+              $a = -32;
+              Context("Fraction");
+              Context()->variables->are(t=>'Real');
+              $f = FormulaWithUnits("$a t + $v0 ft/s");
+              $F = Formula("$a/2 t^2 + $v0 t");
+              $D = FormulaWithUnits(Fraction($F->eval(t=>Real($high)) - $F->eval(t=>Real($low))), 'ft');
+            </pg-code>
+            <statement>
+              <p>
+                <m>v(t)=<var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>
+              </p>
+              <p>
+                <var name="$D" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-
-  <!--ToDO: WW code for this problem-->
-      <exercise>
-        <statement>
-          <p>
-            Find the displacement of the object whose velocity is given by
-            <m>v(t) = 10</m> <quantity><unit base="foot"/><per base="second"/></quantity>,
-            for <m>t\in [0,3]</m>.
-          </p>
-        </statement>
-        <answer>
-          <p>
-            <m>30</m>ft
-          </p>
-        </answer>
-      </exercise>
-
-  <!-- Exercise 42 -->
+        <!-- Exercise 43 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                Context()->variables->add(t=>"Real");
-                $t0 = -1;
-                $t1 = 1;
-                $s = Formula("2^t/ln(2)");
-                $disp = $s->eval(t=>$t1) - $s->eval(t=>$t0);
-                $disp = NumberWithUnits("$disp mi");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find the displacement of the object whose velocity is given by
-                  <m>v(t) = 2^t</m> <quantity><unit base="mileperhour"/></quantity>,
-                  for <m>t\in [-1,1]</m>.
-                </p>
-
-                <p>
-                  Displacement: <var name="$disp" width="20"/>
-                </p>
-    <!-- 1.5/ln(2) miles -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $low = 0;
+              $high = random(2,9,1);
+              $v0 = random(5,20,1);
+              if($envir{problemSeed}==1){$high=3;$v0=10};
+              Context("Fraction");
+              Context()->variables->are(t=>'Real');
+              $f = FormulaWithUnits("$v0 ft/s");
+              $F = Formula("$v0 t");
+              $D = FormulaWithUnits(Fraction($F->eval(t=>Real($high)) - $F->eval(t=>Real($low))), 'ft');
+            </pg-code>
+            <statement>
+              <p>
+                <m>v(t)=<var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>
+              </p>
+              <p>
+                <var name="$D" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 43 -->
+        <!-- Exercise 44 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                Context()->variables->add(t=>"Real");
-                $t0 = 0;
-                $t1 = 3*pi/2;
-                $s = Formula("sin(t)");
-                $disp = $s->eval(t=>$t1) - $s->eval(t=>$t0);
-                $disp = NumberWithUnits("$disp ft");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find the displacement of the object whose velocity is given by
-                  <m>v(t) = \cos(t)</m> <quantity><unit base="foot"/><per base="second"/></quantity>,
-                  for <m>t\in [0,3\pi/2]</m>.
-                </p>
-
-                <p>
-                  Displacement: <var name="$disp" width="20"/>
-                </p>
-    <!-- -1 ft -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $low = random(-3,-1,1);
+              $high = random(1,3,1);
+              $b = random(1,9,1);
+              if($envir{problemSeed}==1){$low=-1;$high=1;$b=2;};
+              Context()->variables->are(t=>'Real');
+              $f = FormulaWithUnits("$b^t mph");
+              $F = Formula("$b^t/ln($b)");
+              $D = FormulaWithUnits($F->eval(t=>Real($high)) - $F->eval(t=>Real($low)), 'mi');
+            </pg-code>
+            <statement>
+              <p>
+                <m>v(t)=<var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>
+              </p>
+              <p>
+                <var name="$D" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 44 -->
+        <!-- Exercise 45 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                Context()->variables->add(t=>"Real");
-                $t0 = 0;
-                $t1 = 16;
-                $s = Formula("4/5*t^(5/4)");
-                $disp = $s->eval(t=>$t1) - $s->eval(t=>$t0);
-                $disp = NumberWithUnits("$disp ft");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find the displacement of the object whose velocity is given by
-                  <m>v(t) = \sqrt[4]{t}</m> <quantity><unit base="foot"/><per base="second"/></quantity>,
-                  for <m>t\in [0,16]</m>.
-                </p>
-
-                <p>
-                  Displacement: <var name="$disp" width="20"/>
-                </p>
-    <!-- 128/5ft -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $trig = list_random('sin','cos');
+              $lh = list_random(['0','pi/2'],['0','pi'],['0','3*pi/2'],['pi/2','pi'],['pi/2','3*pi/2'],['pi','3*pi/2']);
+              if($envir{problemSeed}==1){$trig='cos';$lh=['0','3*pi/2'];};
+              $low = Formula($lh->[0]);
+              $high = Formula($lh->[1]);
+              Context()->variables->are(t=>'Real');
+              $f = FormulaWithUnits("$trig(t) ft/s");
+              $F = Formula("-$trig(t)")->D('t')->reduce;
+              $D = FormulaWithUnits($F->eval(t=>Real("$high")) - $F->eval(t=>Real("$low")), 'ft');
+            </pg-code>
+            <statement>
+              <p>
+                <m>v(t)=<var name="$f"/></m> on <m>\left[<var name="$low"/>,<var name="$high"/>\right]</m>
+              </p>
+              <p>
+                <var name="$D" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-
+        <!-- Exercise 46 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $low = 0;
+              $n = random(3,5,1);
+              $high = list_random(2**$n,3**$n,4**$n);
+              if($envir{problemSeed}==1){$high=1;$n=4;$high=16;};
+              Context("Fraction");
+              Context()->variables->are(t=>'Real');
+              parser::Root->Enable;
+              $f = FormulaWithUnits("root($n,t) ft/s");
+              $F = Formula("t^(1/$n+1)/(1/$n+1)");
+              $D = FormulaWithUnits(Fraction($F->eval(t=>Real($high)) - $F->eval(t=>Real($low))), 'ft');
+            </pg-code>
+            <statement>
+              <p>
+                <m>v(t)=<var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>
+              </p>
+              <p>
+                <var name="$D" width="10"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
       </exercisegroup>
-      <exercisegroup cols="2">
 
+      <exercisegroup cols="2">
         <introduction>
           <p>
-            In the following exercises,
-            an acceleration function of an object moving along a straight line is given.
+            An acceleration function of an object moving along a straight line is given.
             Find the change of the object's velocity over the given time interval.
           </p>
         </introduction>
-  <!-- Exercise 45 -->
+        <!-- Exercise 47 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                Context()->variables->add(t=>"Real");
-                $t0 = 0;
-                $t1 = 2;
-                $v = Formula("-32t");
-                $delta_v = $v->eval(t=>$t1) - $v->eval(t=>$t0);
-                $delta_v = NumberWithUnits("$delta_v ft/s");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find the change in velocity for an object whose acceleration is given by
-                  <m>a(t) = -32 \text{ ft/s}^2</m> on <m>[0,2]</m>.
-                </p>
-
-                <p>
-                  Change in velocity: <var name="$delta_v" width="20"/>
-                </p>
-    <!-- -64 ft/s -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $low = 0;
+              $high = random(1,9,1);
+              if($envir{problemSeed}==1){$high=2;};
+              $a = -32;
+              Context("Fraction");
+              Context()->variables->are(t=>'Real');
+              $f = FormulaWithUnits("$a ft/s^2");
+              $F = Formula("$a t");
+              $D = FormulaWithUnits(Fraction($F->eval(t=>Real($high)) - $F->eval(t=>Real($low))), 'ft/s');
+            </pg-code>
+            <statement>
+              <p>
+                <m>a(t)=<var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>
+              </p>
+              <p>
+                <var name="$D" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 46 -->
+        <!-- Exercise 48 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                Context()->variables->add(t=>"Real");
-                $t0 = 0;
-                $t1 = 5;
-                $v = Formula("10t");
-                $delta_v = $v->eval(t=>$t1) - $v->eval(t=>$t0);
-                $delta_v = NumberWithUnits("$delta_v ft/s");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find the change in velocity for an object whose acceleration is given by
-                  <m>a(t) = 10 \text{ ft/s}^2</m> on <m>[0,5]</m>.
-                </p>
-
-                <p>
-                  Change in velocity: <var name="$delta_v" width="20"/>
-                </p>
-    <!-- 50 ft/s -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $low = 0;
+              $high = random(1,9,1);
+              $a = random(5,20,1);
+              if($envir{problemSeed}==1){$high=5;$a=10;};
+              Context("Fraction");
+              Context()->variables->are(t=>'Real');
+              $f = FormulaWithUnits("$a ft/s^2");
+              $F = Formula("$a t");
+              $D = FormulaWithUnits(Fraction($F->eval(t=>Real($high)) - $F->eval(t=>Real($low))), 'ft/s');
+            </pg-code>
+            <statement>
+              <p>
+                <m>a(t)=<var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>
+              </p>
+              <p>
+                <var name="$D" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 47 -->
+        <!-- Exercise 49 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                Context()->variables->add(t=>"Real");
-                $t0 = 0;
-                $t1 = 2;
-                $v = Formula("t^2/2");
-                $delta_v = $v->eval(t=>$t1) - $v->eval(t=>$t0);
-                $delta_v = NumberWithUnits("$delta_v ft/s");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find the change in velocity for an object whose acceleration is given by
-                  <m>a(t) = t \text{ ft/s}^2</m> on <m>[0,2]</m>.
-                </p>
-
-                <p>
-                  Change in velocity: <var name="$delta_v" width="20"/>
-                </p>
-    <!-- 2 ft/s -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $low = 0;
+              $high = random(1,9,1);
+              if($envir{problemSeed}==1){$high=2;};
+              Context("Fraction");
+              Context()->variables->are(t=>'Real');
+              $f = FormulaWithUnits("t ft/s^2");
+              $F = Formula("t^2/2");
+              $D = FormulaWithUnits(Fraction($F->eval(t=>Real($high)) - $F->eval(t=>Real($low))), 'ft/s');
+            </pg-code>
+            <statement>
+              <p>
+                <m>a(t)=<var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>
+              </p>
+              <p>
+                <var name="$D" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 48 -->
+        <!-- Exercise 50 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                Context()->variables->add(t=>"Real");
-                $t0 = 0;
-                $t1 = pi;
-                $v = Formula("sin(t)");
-                $delta_v = $v->eval(t=>$t1) - $v->eval(t=>$t0);
-                $delta_v = NumberWithUnits("$delta_v ft/s");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find the change in velocity for an object whose acceleration is given by
-                  <m>a(t) = \cos(t) \text{ ft/s}^2</m> on <m>[0,\pi]</m>.
-                </p>
-
-                <p>
-                  Change in velocity: <var name="$delta_v" width="20"/>
-                </p>
-    <!-- 0 ft/s -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $trig = list_random('sin','cos');
+              $lh = list_random(['0','pi/2'],['0','pi'],['0','3*pi/2'],['pi/2','pi'],['pi/2','3*pi/2'],['pi','3*pi/2']);
+              if($envir{problemSeed}==1){$trig='cos';$lh=['0','pi/2'];};
+              $low = Formula($lh->[0]);
+              $high = Formula($lh->[1]);
+              Context()->variables->are(t=>'Real');
+              $f = FormulaWithUnits("$trig(t) ft/s^2");
+              $F = Formula("-$trig(t)")->D('t')->reduce;
+              $D = FormulaWithUnits($F->eval(t=>Real("$high")) - $F->eval(t=>Real("$low")), 'ft/s');
+            </pg-code>
+            <statement>
+              <p>
+                <m>a(t)=<var name="$f"/></m> on <m>\left[<var name="$low"/>,<var name="$high"/>\right]</m>
+              </p>
+              <p>
+                <var name="$D" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-
       </exercisegroup>
-      <exercisegroup cols="2">
 
+      <exercisegroup cols="2">
         <introduction>
           <p>
-            In the following exercises,
-            sketch the given relations and find the area of the enclosed region.
+            Sketch the given relations and find the area of the enclosed region.
           </p>
         </introduction>
-  <!-- Exercise 49 -->
+        <!-- Exercise 51 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 3;
-                $F = Formula("5x^2/2");
-                $G = Formula("x^2");
-                $D = Formula("$F - $G");
-                $r = $D->eval(x=>$b) - $D->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Sketch the curves
-                  <m>y=2x</m>, <m>y=5x</m>, and <m>x= 3</m>,
-                  then find the area of the region they enclose.
-                </p>
-
-                <p>
-                  Enclosed area: <var name="$r" width="10"/>
-                </p>
-     <!-- 27/2 -->
-              </statement>
-          </webwork>
+          <statement>
+            <p>
+              <m>y=2x</m>, <m>y=5x</m>, and <m>x= 3</m>
+            </p>
+          </statement>
         </exercise>
-  <!-- Exercise 50 -->
+        <!-- Exercise 52 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = -1;
-                $b = 2;
-                $F = Formula("3x^2/2+6x");
-                $G = Formula("-x^2/2+x");
-                $D = Formula("$F - $G");
-                $r = $D->eval(x=>$b) - $D->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Sketch the curves
-                  <m>y=-x+1</m>, <m>y=3x+6</m>,
-                  <m>x=2</m> and <m>x= -1</m>,
-                  then find the area of the region they enclose.
-                </p>
-
-                <p>
-                  Enclosed area: <var name="$r" width="10"/>
-                </p>
-     <!-- 21 -->
-              </statement>
-          </webwork>
+          <statement>
+            <p>
+              <m>y=-x+1</m>, <m>y=3x+6</m>,
+              <m>x=2</m> and <m>x= -1</m>
+            </p>
+          </statement>
         </exercise>
-  <!-- Exercise 51 -->
+        <!-- Exercise 53 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 2;
-                $b = 5;
-                $F = Formula("x^3/3-x^2+5x");
-                $G = Formula("5x^2/2-5x");
-                $D = Formula("$F - $G");
-                $r = $D->eval(x=>$b) - $D->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Sketch the curves
-                  <m>y=x^2-2x+5</m>, <m>y=5x-5</m>,
-                  then find the area of the region they enclose.
-                </p>
-
-                <p>
-                  Enclosed area: <var name="$r" width="10"/>
-                </p>
-     <!-- 9/2 -->
-              </statement>
-          </webwork>
+          <statement>
+            <p>
+              <m>y=x^2-2x+5</m>, <m>y=5x-5</m>
+            </p>
+          </statement>
         </exercise>
-  <!-- Exercise 52 -->
+        <!-- Exercise 54 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = -2;
-                $b = 4;
-                $F = Formula("x^3/3+3x^2/2+7x");
-                $G = Formula("2x^3/3+x^2-5x");
-                $D = Formula("$F - $G");
-                $r = $D->eval(x=>$b) - $D->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Sketch the curves
-                  <m>y=2x^2+2x-5</m>, <m>y=x^2+3x+7</m>,
-                  then find the area of the region they enclose.
-                </p>
-
-                <p>
-                  Enclosed area: <var name="$r" width="10"/>
-                </p>
-     <!-- 54 -->
-              </statement>
-          </webwork>
+          <statement>
+            <p>
+              <m>y=2x^2+2x-5</m>, <m>y=x^2+3x+7</m>,
+            </p>
+          </statement>
         </exercise>
-
       </exercisegroup>
-      <exercisegroup cols="2">
 
+      <exercisegroup cols="2">
         <introduction>
           <p>
-            In the following exercises, find <m>\Fp(x)</m>.
+            Find <m>F'(x)</m>.
           </p>
         </introduction>
-  <!-- Exercise 53 -->
+        <!-- Exercise 55 -->
         <exercise>
-          <webwork>
-              <pg-code>
-              <!-- Context()->variables->add(t=>"Real");
-              $Ft = Formula("ln(t)");
-              $fx0 = Formula("2");
-              $fx1 = Formula("x^3+x");
-              $Fx = $Ft->eval(t=>$fx1)-$Ft->eval(t=>$fx0);
-              $fx = $Fx->D('x'); -->
-              <!-- The above fails because "the value of 't' can't be a formula" -->
-                $fx = Formula("(3x^2+1)/(x^3+x)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Compute the derivative of
-                  <m>\ds F(x) = \int_2^{x^3+x} \frac{1}{t}\, dt</m>.
-                </p>
-
-                <p>
-                  <m>F'(x)</m>: <var name="$fx" width="30"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $m = random(3,5,1);
+              $b = non_zero_random(-9,9,1);
+              $low = random(1,9,1);
+              if($envir{problemSeed}==1){$m=3;$b=1;$low=2;};
+              Context()->variables->add(t=>'Real');
+              $high = Formula("x^$m + $b x")->reduce;
+              $f = Formula("1/t");
+              $D = $high->D('x')->reduce / $high;
+            </pg-code>
+            <statement>
+              <p>
+                <m>F(x) = \ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dt</m>
+              </p>
+              <p>
+                <var name="$D" width="30"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 54 -->
+        <!-- Exercise 56 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $fx = Formula("-3x^11");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Compute the derivative of
-                  <m>\ds F(x) = \int_{x^3}^{0} t^3\, dt</m>.
-                </p>
-
-                <p>
-                  <m>F'(x)</m>: <var name="$fx" width="30"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $m = random(2,5,1);
+              $high = random(-9,9,1);
+              if($envir{problemSeed}==1){$m=3;$high=0;};
+              Context()->variables->add(t=>'Real');
+              $low = Formula("x^$m");
+              $f = Formula("t^$m");
+              $D = Formula("-$m x^($m**2+$m-1)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>F(x) = \ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dt</m>
+              </p>
+              <p>
+                <var name="$D" width="30"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 55 -->
+        <!-- Exercise 57 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $fx = Formula("2x^3+3x-2");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Compute the derivative of
-                  <m>\ds F(x) = \int_{x}^{x^2} (t+2)\, dt</m>.
-                </p>
-
-                <p>
-                  <m>F'(x)</m>: <var name="$fx" width="30"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $b = non_zero_random(-9,9,1);
+              $m = random(2,4,1);
+              if($envir{problemSeed}==1){$b=1;$m=2};
+              Context()->variables->add(t=>'Real');
+              $low = Formula("x");
+              $high = Formula("x^$m");
+              $f = Formula("t+$b")->reduce;
+              $D = Formula("$m x^($m-1)(x^$m+$b) - (x+$b)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>F(x) = \ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dt</m>
+              </p>
+              <p>
+                <var name="$D" width="30"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 56 -->
+        <!-- Exercise 58 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $fx = Formula("e^x*sin(e^x) - 1/x*sin(ln(x))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Compute the derivative of
-                  <m>\ds F(x) = \int_{\ln(x) }^{e^x} \sin(t) \, dt</m>.
-                </p>
-
-                <p>
-                  <m>F'(x)</m>: <var name="$fx" width="30"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              ($low,$high,$f) = ('e^','ln','sin','cos','sqrt')[NchooseK(5,3)];
+              if($envir{problemSeed}==1){$low='ln';$high='e^';$f='sin';};
+              Context()->variables->add(t=>'Real');
+              $low = Formula("$low(x)");
+              $high = Formula("$high(x)");
+              $f = Formula("$f(t)");
+              $D = $high->D('x') * Formula("$f($high)") - $low->D('x') * Formula("$f($low)");
+              $D = $D->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>F(x) = \ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dt</m>
+              </p>
+              <p>
+                <var name="$D" width="30"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-
       </exercisegroup>
     </subexercises>
   </exercises>

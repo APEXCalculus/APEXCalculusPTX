@@ -963,535 +963,606 @@
 
       <exercise>
         <webwork>
-            <statement>
-              <p>
-                What is <q>total signed area</q>?
-              </p>
-
-              <p>
-                <var form="essay"/>
-              </p>
-            </statement>
+          <statement>
+            <p>
+              What is <q>total signed area</q>?
+            </p>
+            <p>
+              <var form="essay"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
 
       <exercise>
         <webwork>
-            <statement>
-              <p>
-                What is <q>displacement</q>?
-              </p>
-
-              <p>
-                <var form="essay"/>
-              </p>
-            </statement>
+          <statement>
+            <p>
+              What is <q>displacement</q>?
+            </p>
+            <p>
+              <var form="essay"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
 
       <exercise>
         <webwork>
-            <pg-code>
-              $A = Formula("0");
-            </pg-code>
-
-            <statement>
-              <p>
-                What is <m>\ds \int_3^3 \sin(x) \, dx</m>?
-              </p>
-
-              <p>
-                <var name="$A" width="10"/>
-              </p>
-            </statement>
+          <statement>
+            <p>
+              What is <m>\ds \int_3^3 \sin(x) \, dx</m>?
+            </p>
+            <p>
+              <var name="'0'" width="10"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
 
       <exercise>
-        <webwork>
-            <pg-code>
-<!-- FUNGUS: Come back to this when I figure out how to enter a definite integral as a solution -->
-              Context("Numeric")->flags->set(
-              formatStudentAnswer => parsed,
-              reduceConstants => 0,
-              reduceConstantFunctions => 0,);
-              <!-- Context()->variables->add(x => "Real"); -->
-              <!-- Context()->variables->set(t => {limits => [0,2]}); -->
-
-              Parser::Number::NoDecimals;
-
-              $a = Formula("0");
-              $b = Formula("2");
-              $f = Formula("2x+3");
-            </pg-code>
-
-            <statement>
-              <p>
-                Give a single definite integral that has the same value as
-              </p>
-
-              <p>
-                <m>\ds I = \int_0^1(2x+3)\, dx + \int_1^2 (2x+3)\, dx</m>.
-              </p>
-
-              <p>
-                <m>I = \int_a^b f(x)\, dx</m>, where:
-              </p>
-
-              <p>
-                <m>a=</m><var name="$a" width="5"/>
-              </p>
-              <p>
-                <m>b=</m><var name="$b" width="5"/>
-              </p>
-              <p>
-                <m>f(x)=</m><var name="$f" width="15"/>
-              </p>
-            </statement>
-            <solution>
-              <p>
-                <m>\int 0^2 (2x+3)\, dx</m>
-              </p>
-            </solution>
-        </webwork>
+        <statement>
+          <p>
+            Give a single definite integral that has the same value as
+            <me>I = \int_0^1(2x+3)\, dx + \int_1^2 (2x+3)\, dx</me>.
+          </p>
+        </statement>
+        <answer>
+          <p>
+            <m>\int 0^2 (2x+3)\, dx</m>
+          </p>
+        </answer>
       </exercise>
     </subexercises>
 
     <subexercises>
+      <title>Problems</title>
       <exercisegroup cols="2">
         <introduction>
           <p>
-            In the following exercises, a graph of a function <m>f(x)</m> is given.
+            A graph of a function <m>f(x)</m> is given.
             Using the geometry of the graph,
             evaluate the definite integrals.
           </p>
         </introduction>
-  <!-- Exercise 5 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $gr = init_graph(-1,-5,5,5,axes=>[0,0],ticks=>[6,10],size=>[400,400]);
-                $gr->lb('reset');
-                add_functions($gr, "-2x+4 for x in &lt;0,4>" . " using color:blue and weight:2");
-                ($gr->fn)[0]->steps(1000);
-                $gr->lb( new Label(2,2,'y = -2x + 4','black','center','middle'));
-                $gr->lb( new Label(4.75,0.4,'x','black','center','middle'));
-                $gr->lb( new Label(0.2,4.75,'y','black','center','middle'));
-                foreach my $i (1..4) {
-                  $gr->lb( new Label($i,-0.25,$i,'black','center','middle'));
-                  $gr->lb( new Label(-0.15,$i,$i,'black','center','middle'));
-                }
-                foreach my $i (-4..-1) {
-                  $gr->lb( new Label(-0.20,$i,$i,'black','center','middle'));
-                }
-
-                $a = Formula("3");
-                $b = Formula("4");
-                $c = Formula("3");
-                $d = Formula("0");
-                $e = Formula("-4");
-                $f = Formula("9");
-              </pg-code>
-
-              <statement>
-                <image pg-name="$gr"/>
-                  <!-- <image xml:id="img_05_02_ex_05">
-                    <description></description>
-                    <latex-image>
-
-                    \begin{tikzpicture}
-
-                    \begin{axis}[
-                    ymin=-4.5,ymax=4.5,
-                    xmin=-.9,xmax=4.5
-                    ]
-
-                    \addplot+ [-,domain=0:4] {-2*x+4};
-
-                    \draw (axis cs:2,2.5) node { $y = -2x+4$};
-
-                    \end{axis}
-
-                    \end{tikzpicture}
-
-                    </latex-image>
-                  </image> -->
-
-                  <p>
-                    Use the geometry of the graph above to evaluate the following definite integrals:
-                    <ol cols="2">
-                      <li><m>\int_0^1 (-2x+4)\, dx = </m><var name="$a" width="3"/></li>
-
-                      <li><m>\int_0^2 (-2x+4)\, dx = </m><var name="$b" width="3"/></li>
-
-                      <li><m>\int_0^3 (-2x+4)\, dx = </m><var name="$c" width="3"/></li>
-
-                      <li><m>\int_1^3 (-2x+4)\, dx = </m><var name="$d" width="3"/></li>
-
-                      <li><m>\int_2^4 (-2x+4)\, dx = </m><var name="$e" width="3"/></li>
-
-                      <li><m>\int_0^1 (-6x+12)\, dx = </m><var name="$f" width="3"/></li>
-                    </ol>
-                  </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 6       -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $gr = init_graph(-1,-3,6,3,axes=>[0,0],ticks=>[7,6],size=>[400,400]);
-                $gr->lb('reset');
-                add_functions($gr, "-2 for x in &lt;0,2>" . " using color:blue and weight:2",
-                                   "2x-6 for x in &lt;2,3>" . " using color:blue and weight:2",
-                                   "x-3 for x in &lt;3,5>" . " using color:blue and weight:2");
-                ($gr->fn)[1]->steps(1000);
-                ($gr->fn)[2]->steps(1000);
-                $gr->lb( new Label(3,-1.5,'y = f(x)','black','center','middle'));
-                $gr->lb( new Label(5.8,0.3,'x','black','center','middle'));
-                $gr->lb( new Label(0.2,2.8,'y','black','center','middle'));
-                foreach my $i (1..5) {
-                  $gr->lb( new Label($i,-0.25,$i,'black','center','middle'));
-                }
-                foreach my $i (-2..-1) {
-                  $gr->lb( new Label(-0.20,$i,$i,'black','center','middle'));
-                }
-                foreach my $i (1..2) {
-                  $gr->lb( new Label(-0.20,$i,$i,'black','center','middle'));
-                }
-
-                $a = Formula("-4");
-                $b = Formula("-5");
-                $c = Formula("-3");
-                $d = Formula("1");
-                $e = Formula("-2");
-                $f = Formula("10");
-              </pg-code>
-
-              <statement>
-                <image pg-name="$gr"/>
-                  <!-- <image xml:id="img_05_02_ex_06">
-                    <description></description>
-                    <latex-image>
-
-                    \begin{tikzpicture}
-
-                    \begin{axis}[
-                    xtick={1,2,3,4,5},
-                    ymin=-2.2,ymax=2.2,
-                    xmin=-.9,xmax=5.5
-                    ]
-
-                    \addplot+ [-,domain=0:2] {-2};
-                    \addplot [firstcurvestyle,-,domain=2:3] {2*x-6};
-                    \addplot [firstcurvestyle,-,domain=3:5] {x-3};
-
-                    \draw (axis cs:3.2,-1.5) node { $y = f(x)$};
-
-                    \end{axis}
-
-                    \end{tikzpicture}
-
-                    </latex-image>
-                  </image> -->
-
-                <p>
-                  Use the geometry of the graph above to evaluate the following definite integrals:
-                  <ol cols="2">
-                    <li><m>\int_0^2 f(x)\, dx = </m><var name="$a" width="3"/></li>
-
-                    <li><m>\int_0^3 f(x)\, dx = </m><var name="$b" width="3"/></li>
-
-                    <li><m>\int_0^5 f(x)\, dx = </m><var name="$c" width="3"/></li>
-
-                    <li><m>\int_2^5 f(x)\, dx = </m><var name="$d" width="3"/></li>
-
-                    <li><m>\int_5^3 f(x)\, dx = </m><var name="$e" width="3"/></li>
-
-                    <li><m>\int_0^3 -2f(x)\, dx = </m><var name="$f" width="3"/></li>
-                  </ol>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 7 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $gr = init_graph(-1,-1,5,5,axes=>[0,0],ticks=>[6,6],size=>[400,400]);
-                $gr->lb('reset');
-                add_functions($gr, "4x for x in &lt;0,1>" . " using color:blue and weight:2",
-                                   "-4*(x-2) for x in &lt;1,2>" . " using color:blue and weight:2",
-                                   "2*(x-2) for x in &lt;2,3>" . " using color:blue and weight:2",
-                                   "-2*(x-4) for x in &lt;3,4>" . " using color:blue and weight:2");
-                ($gr->fn)[0]->steps(1000);
-                ($gr->fn)[1]->steps(1000);
-                ($gr->fn)[2]->steps(1000);
-                ($gr->fn)[3]->steps(1000);
-                $gr->lb( new Label(3,2.5,'y = f(x)','black','center','middle'));
-                $gr->lb( new Label(4.75,0.4,'x','black','center','middle'));
-                $gr->lb( new Label(0.2,4.75,'y','black','center','middle'));
-                foreach my $i (1..4) {
-                  $gr->lb( new Label($i,-0.25,$i,'black','center','middle'));
-                  $gr->lb( new Label(-0.15,$i,$i,'black','center','middle'));
-                }
-
-                $a = Formula("4");
-                $b = Formula("2");
-                $c = Formula("4");
-                $d = Formula("2");
-                $e = Formula("1");
-                $f = Formula("2");
-              </pg-code>
-
-              <statement>
-                <image pg-name="$gr"/>
-                  <!-- <image xml:id="img_05_02_ex_07">
-                    <description></description>
-                    <latex-image>
-
-                    \begin{tikzpicture}
-
-                    \begin{axis}[
-                    xtick={1,2,3,4,5},
-                    ymin=-.5,ymax=4.5,
-                    xmin=-.9,xmax=4.5
-                    ]
-
-                    \addplot+ [-,domain=0:1] {4*x};
-                    \addplot [firstcurvestyle,-,domain=1:2] {-4*(x-2)};
-                    \addplot [firstcurvestyle,-,domain=2:3] {2*(x-2)};
-                    \addplot [firstcurvestyle,-,domain=3:4] {-2*(x-4)};
-
-                    \draw (axis cs:3,2.5) node { $y = f(x)$};
-
-                    \end{axis}
-
-                    \end{tikzpicture}
-
-                    </latex-image>
-                  </image> -->
-
-                <p>
-                  Use the geometry of the graph above to evaluate the following definite integrals:
-                  <ol cols="2">
-                    <li><m>\int_0^2 f(x)\, dx = </m><var name="$a" width="3"/></li>
-
-                    <li><m>\int_2^4 f(x)\, dx = </m><var name="$b" width="3"/></li>
-
-                    <li><m>\int_2^4 2f(x)\, dx = </m><var name="$c" width="3"/></li>
-
-                    <li><m>\int_0^1 4x\, dx = </m><var name="$d" width="3"/></li>
-
-                    <li><m>\int_2^3 (2x-4)\, dx = </m><var name="$e" width="3"/></li>
-
-                    <li><m>\int_2^3 (4x-8)\, dx = </m><var name="$f" width="3"/></li>
-                  </ol>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 8 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $gr = init_graph(-1,-2,5,4,axes=>[0,0],ticks=>[6,6],size=>[400,400]);
-                $gr->lb('reset');
-                add_functions($gr, "x-1 for x in &lt;0,4>" . " using color:blue and weight:2");
-                ($gr->fn)[0]->steps(1000);
-                $gr->lb( new Label(2,2.5,'y = x - 1','black','center','middle'));
-                $gr->lb( new Label(4.75,0.4,'x','black','center','middle'));
-                $gr->lb( new Label(0.2,3.75,'y','black','center','middle'));
-                foreach my $i (1..4) {
-                  $gr->lb( new Label($i,-0.25,$i,'black','center','middle'));
-                }
-                $gr->lb( new Label(-0.20,-1,-1,'black','center','middle'));
-
-                foreach my $i (1..3) {
-                  $gr->lb( new Label(-0.20,$i,$i,'black','center','middle'));
-                }
-
-                $a = Formula("-1/2");
-                $b = Formula("0");
-                $c = Formula("3/2");
-                $d = Formula("3/2");
-                $e = Formula("9/2");
-                $f = Formula("15/2");
-              </pg-code>
-
-              <statement>
-                <image pg-name="$gr"/>
-                  <!-- <image xml:id="img_05_02_ex_08">
-                    <description></description>
-                    <latex-image>
-
-                    \begin{tikzpicture}
-
-                    \begin{axis}[
-                    xtick={1,2,3,4,5},
-                    ytick={-1,1,2,3},
-                    ymin=-1.5,ymax=3.5,
-                    xmin=-.9,xmax=4.5
-                    ]
-
-                    \addplot+ [-,domain=0:4] {x-1};
-
-                    \draw (axis cs:2,2.5) node { $y = x-1$};
-
-                    \end{axis}
-
-                    \end{tikzpicture}
-
-                    </latex-image>
-                  </image> -->
-
-                <p>
-                  Use the geometry of the graph above to evaluate the following definite integrals:
-                  <ol cols="2">
-                    <li><m>\int_0^1 (x-1)\, dx = </m><var name="$a" width="3"/></li>
-
-                    <li><m>\int_0^2 (x-1)\, dx = </m><var name="$b" width="3"/></li>
-
-                    <li><m>\int_0^3 (x-1)\, dx = </m><var name="$c" width="3"/></li>
-
-                    <li><m>\int_2^3 (x-1)\, dx = </m><var name="$d" width="3"/></li>
-
-                    <li><m>\int_1^4 (x-1)\, dx = </m><var name="$e" width="3"/></li>
-
-                    <li><m>\int_1^4 \big((x-1)+1\big)\, dx = </m><var name="$f" width="3"/></li>
-                  </ol>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 9 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $gr = init_graph(-1,-1,5,4,axes=>[0,0],ticks=>[6,5],size=>[400,400]);
-                $gr->lb('reset');
-                add_functions($gr, "sqrt(4-(x-2)^2) for x in &lt;0,4>" . " using color:blue and weight:2");
-                ($gr->fn)[0]->steps(1000);
-                $gr->lb( new Label(3,2.5,'y = f(x)','black','center','middle'));
-                $gr->lb( new Label(4.75,0.4,'x','black','center','middle'));
-                $gr->lb( new Label(0.2,3.75,'y','black','center','middle'));
-                foreach my $i (1..4) {
-                  $gr->lb( new Label($i,-0.25,$i,'black','center','middle'));
-                }
-                foreach my $i (1..3) {
-                  $gr->lb( new Label(-0.20,$i,$i,'black','center','middle'));
-                }
-
-                $r = Formula("2");
-                $a = Formula("1/4*pi*$r^2");
-                $b = Formula("1/4*pi*$r^2");
-                $c = Formula("1/2*pi*$r^2");
-                $d = Formula("5*1/2*pi*$r^2");
-              </pg-code>
-
-              <statement>
-                <image pg-name="$gr"/>
-                  <!-- <image xml:id="img_05_02_ex_09">
-                    <description></description>
-                    <latex-image>
-
-                    \begin{tikzpicture}
-
-                    \begin{axis}[
-                    xtick={1,2,3,4},
-                    ytick={1,2,3},
-                    ymin=-.5,ymax=3.5,
-                    xmin=-.9,xmax=4.5
-                    ]
-
-                    \addplot+ [-,samples=40,domain=0:3.14159] ({2*cos(deg(x))+2}, {2*sin(deg(x))});
-
-                    \draw (axis cs:3,2.4) node { $f(x) = \sqrt{4-(x-2)^2}$};
-
-                    \end{axis}
-
-                    \end{tikzpicture}
-
-                    </latex-image>
-                  </image> -->
-
-                <p>
-                  Use the geometry of the graph above to evaluate the following definite integrals:
-                  <ol cols="2">
-                    <li><m>\int_0^2 f(x)\, dx</m><var name="$a" width="3"/></li>
-
-                    <li><m>\int_2^4 f(x)\, dx</m><var name="$b" width="3"/></li>
-
-                    <li><m>\int_0^4 f(x)\, dx</m><var name="$c" width="3"/></li>
-
-                    <li><m>\int_0^4 5f(x)\, dx</m><var name="$d" width="3"/></li>
-                  </ol>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 10 -->
+        <!-- Exercise 5 -->
         <exercise>
           <webwork>
             <pg-code>
-              $gr = init_graph(-1,-1,11,4,axes=>[0,0],ticks=>[12,5],size=>[400,400]);
-              $gr->lb('reset');
-              add_functions($gr, "3 for x in &lt;0,10>" . " using color:blue and weight:2");
-              ($gr->fn)[0]->steps(1000);
-              $gr->lb( new Label(5,3.5,'y = 3','black','center','middle'));
-              $gr->lb( new Label(10.75,0.15,'x','black','center','middle'));
-              $gr->lb( new Label(0.4,3.9,'y','black','center','middle'));
-              foreach my $i (1..10) {
-                $gr->lb( new Label($i,-0.15,$i,'black','center','middle'));
+              $gr = init_graph(-1,-5,5,5,axes=>[0,0],size=>[240,144]);
+              add_functions($gr, "-2x+4 for x in &lt;0,4>" . " using color:blue and weight:1");
+              $gr->lb( new Label(1,2,'y = -2x + 4','black','left','bottom','large'));
+              $gr->lb( new Label(5,0,'x','black','right','bottom','large'));
+              $gr->lb( new Label(0,5,'y','black','left','top','large'));
+              $gr->h_ticks(0,"black",2,4);
+              $gr->v_ticks(0,"black",-4,-2,2,4);
+              for my $i (2,4) {
+                $gr->lb( new Label($i,0,$i,'black','center','top','large'));
+              }
+              for my $i (-4,-2,2,4) {
+                $gr->lb( new Label(0,$i,$i,'black','right','middle','large'));
+              }
+              @a = (3,4,3,0,-4,9);
+            </pg-code>
+            <statement>
+              <image pg-name="$gr"/>
+                <!-- <image xml:id="img_05_02_ex_05">
+                  <description></description>
+                  <latex-image>
+                    \begin{tikzpicture}
+                      \begin{axis}[
+                          ymin=-4.5,
+                          ymax=4.5,
+                          xmin=-.9,
+                          xmax=4.5
+                        ]
+                        \addplot+ [-,domain=0:4] {-2*x+4};
+                        \draw (axis cs:2,2.5) node { $y = -2x+4$};
+                      \end{axis}
+                    \end{tikzpicture}
+                  </latex-image>
+                </image> -->
+              <p>
+                <ol cols="2">
+                  <li>
+                    <p>
+                      <m>\int_0^1 (-2x+4)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[0]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_0^2 (-2x+4)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[1]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_0^3 (-2x+4)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[2]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_1^3 (-2x+4)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[3]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_2^4 (-2x+4)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[4]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_0^1 (-6x+12)\, d </m>
+                    </p>
+                    <p>
+                      <var name="$a[5]" width="3"/>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 6       -->
+        <exercise>
+          <webwork>
+            <pg-code>
+              $gr = init_graph(-1,-3,6,3,axes=>[0,0],size=>[240,144]);
+              add_functions($gr, "-2 for x in &lt;0,2>" . " using color:blue and weight:1",
+                                 "2x-6 for x in &lt;2,3>" . " using color:blue and weight:1",
+                                 "x-3 for x in &lt;3,5>" . " using color:blue and weight:1");
+              $gr->lb( new Label(2.5,-1,'y = f(x)','black','left','top','large'));
+              $gr->lb( new Label(6,0,'x','black','right','bottom','large'));
+              $gr->lb( new Label(0,3,'y','black','left','top','large'));
+              $gr->h_ticks(0,"black",1..5);
+              $gr->v_ticks(0,"black",-2,-1,1,2);
+              for my $i (1..5) {
+                $gr->lb( new Label($i,0,$i,'black','center','top','large'));
+              }
+              for my $i (-2,-1,1,2) {
+                $gr->lb( new Label(0,$i,$i,'black','right','middle','large'));
+              }
+              @a = (-4,-5,-3,1,-2,10);
+            </pg-code>
+            <statement>
+              <image pg-name="$gr"/>
+                <!-- <image xml:id="img_05_02_ex_06">
+                  <description></description>
+                  <latex-image>
+                    \begin{tikzpicture}
+                      \begin{axis}[
+                          xtick={1,2,3,4,5},
+                          ymin=-2.2,
+                          ymax=2.2,
+                          xmin=-.9,
+                          xmax=5.5
+                        ]
+                        \addplot+ [-,domain=0:2] {-2};
+                        \addplot [firstcurvestyle,-,domain=2:3] {2*x-6};
+                        \addplot [firstcurvestyle,-,domain=3:5] {x-3};
+                        \draw (axis cs:3.2,-1.5) node { $y = f(x)$};
+                      \end{axis}
+                    \end{tikzpicture}
+                  </latex-image>
+                </image> -->
+              <p>
+                <ol cols="2">
+                  <li>
+                    <p>
+                      <m>\int_0^2 f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[0]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_0^3 f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[1]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_0^5 f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[2]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_2^5 f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[3]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_5^3 f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[4]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_0^3 -2f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[5]" width="3"/>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 7 -->
+        <exercise>
+          <webwork>
+            <pg-code>
+              $gr = init_graph(-1,-1,5,5,axes=>[0,0],size=>[240,144]);
+              add_functions($gr, "4x for x in &lt;0,1>" . " using color:blue and weight:1",
+                                 "-4*(x-2) for x in &lt;1,2>" . " using color:blue and weight:1",
+                                 "2*(x-2) for x in &lt;2,3>" . " using color:blue and weight:1",
+                                 "-2*(x-4) for x in &lt;3,4>" . " using color:blue and weight:1");
+              $gr->lb( new Label(3,2,'y = f(x)','black','center','bottom','large'));
+              $gr->lb( new Label(5,0,'x','black','right','bottom','large'));
+              $gr->lb( new Label(0,5,'y','black','left','top','large'));
+              $gr->h_ticks(0,"black",1..4);
+              $gr->v_ticks(0,"black",1..4);
+              foreach my $i (1..4) {
+                $gr->lb( new Label($i,0,$i,'black','center','top','large'));
+                $gr->lb( new Label(0,$i,$i,'black','right','middle','large'));
+              }
+              @a = (4,2,4,2,1,2);
+            </pg-code>
+            <statement>
+              <image pg-name="$gr"/>
+                <!-- <image xml:id="img_05_02_ex_07">
+                  <description></description>
+                  <latex-image>
+                    \begin{tikzpicture}
+                      \begin{axis}[
+                          xtick={1,2,3,4,5},
+                          ymin=-.5,
+                          ymax=4.5,
+                          xmin=-.9,
+                          xmax=4.5
+                        ]
+                        \addplot+ [-,domain=0:1] {4*x};
+                        \addplot [firstcurvestyle,-,domain=1:2] {-4*(x-2)};
+                        \addplot [firstcurvestyle,-,domain=2:3] {2*(x-2)};
+                        \addplot [firstcurvestyle,-,domain=3:4] {-2*(x-4)};
+                        \draw (axis cs:3,2.5) node { $y = f(x)$};
+                      \end{axis}
+                    \end{tikzpicture}
+                  </latex-image>
+                </image> -->
+              <p>
+                <ol cols="2">
+                  <li>
+                    <p>
+                      <m>\int_0^2 f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[0]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_2^4 f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[1]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_2^4 2f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[2]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_0^1 4x\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[3]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_2^3 (2x-4)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[4]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_2^3 (4x-8)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[5]" width="3"/>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 8 -->
+        <exercise>
+          <webwork>
+            <pg-code>
+              $gr = init_graph(-1,-2,5,4,axes=>[0,0],size=>[240,144]);
+              add_functions($gr, "x-1 for x in &lt;0,4>" . " using color:blue and weight:1");
+              $gr->lb( new Label(3,2,'y = x - 1','black','right','bottom','large'));
+              $gr->lb( new Label(5,0,'x','black','right','bottom','large'));
+              $gr->lb( new Label(0,4,'y','black','left','top','large'));
+              $gr->h_ticks(0,"black",1..4);
+              $gr->v_ticks(0,"black",1..3);
+              foreach my $i (1..4) {
+                $gr->lb( new Label($i,0,$i,'black','center','top','large'));
               }
               foreach my $i (1..3) {
-                $gr->lb( new Label(-0.4,$i,$i,'black','center','middle'));
+                $gr->lb( new Label(0,$i,$i,'black','right','middle','large'));
               }
-
-              $a = Formula("15");
-              $b = Formula("12");
-              $c = Formula("0");
-              $d = "3(b-a)";
+              Context("Fraction");
+              @a = (Fraction(-1/2),Fraction(0),Fraction(3/2),Fraction(3/2),Fraction(9/2),Fraction(15/2));
             </pg-code>
-
+            <statement>
+              <image pg-name="$gr"/>
+                <!-- <image xml:id="img_05_02_ex_08">
+                  <description></description>
+                  <latex-image>
+                    \begin{tikzpicture}
+                      \begin{axis}[
+                          xtick={1,2,3,4,5},
+                          ytick={-1,1,2,3},
+                          ymin=-1.5,
+                          ymax=3.5,
+                          xmin=-.9,
+                          xmax=4.5
+                        ]
+                        \addplot+ [-,domain=0:4] {x-1};
+                        \draw (axis cs:2,2.5) node { $y = x-1$};
+                      \end{axis}
+                    \end{tikzpicture}
+                  </latex-image>
+                </image> -->
+              <p>
+                <ol cols="2">
+                  <li>
+                    <p>
+                      <m>\int_0^1 (x-1)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[0]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_0^2 (x-1)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[1]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_0^3 (x-1)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[2]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_2^3 (x-1)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[3]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_1^4 (x-1)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[4]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_1^4 \big((x-1)+1\big)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[5]" width="3"/>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 9 -->
+        <exercise>
+          <webwork>
+            <pg-code>
+              $gr = init_graph(-1,-0.5,5,3.1,axes=>[0,0],size=>[240,144]);
+              $xfunc = sub { my $t = shift();
+                              return 2+2*cos($t); };
+              $yfunc = sub { my $t = shift();
+                              return 2*sin($t); };
+              $fn = new Fun( $xfunc, $yfunc, $gr );
+              $fn->domain(0,pi);
+              $fn->color('blue');
+              $fn->weight(1);
+              $gr->lb( new Label(2.5,2,'f(x) = sqrt(4-(x-2)^2)','black','center','bottom','large'));
+              $gr->lb( new Label(5,0,'x','black','right','bottom','large'));
+              $gr->lb( new Label(0,4,'y','black','left','top','large'));
+              $gr->h_ticks(0,"black",1..4);
+              $gr->v_ticks(0,"black",1..3);
+              foreach my $i (1..4) {
+                $gr->lb( new Label($i,0,$i,'black','center','top','large'));
+              }
+              foreach my $i (1..3) {
+                $gr->lb( new Label(0,$i,$i,'black','right','middle','large'));
+              }
+              @a = (Formula("pi"),Formula("pi"),Formula("2 pi"),Formula("10 pi"));
+            </pg-code>
+            <statement>
+              <image pg-name="$gr"/>
+                <!-- <image xml:id="img_05_02_ex_09">
+                  <description></description>
+                  <latex-image>
+                    \begin{tikzpicture}
+                      \begin{axis}[
+                          xtick={1,2,3,4},
+                          ytick={1,2,3},
+                          ymin=-.5,
+                          ymax=3.5,
+                          xmin=-.9,
+                          xmax=4.5
+                        ]
+                        \addplot+ [-,samples=40,domain=0:3.14159] ({2*cos(deg(x))+2}, {2*sin(deg(x))});
+                        \draw (axis cs:3,2.4) node { $f(x) = \sqrt{4-(x-2)^2}$};
+                      \end{axis}
+                    \end{tikzpicture}
+                  </latex-image>
+                </image> -->
+              <p>
+                <ol cols="2">
+                  <li>
+                    <p>
+                      <m>\int_0^2 f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[0]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_2^4 f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[1]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_0^4 f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[2]" width="3"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_0^4 5f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[3]" width="3"/>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 10 -->
+        <exercise>
+          <webwork>
+            <pg-code>
+              $gr = init_graph(-1,-1,11,4,axes=>[0,0],size=>[240,144]);
+              add_functions($gr, "3 for x in &lt;0,10>" . " using color:blue and weight:1");
+              $gr->lb( new Label(5,3,'f(x) = 3','black','center','bottom','large'));
+              $gr->lb( new Label(10,0,'x','black','right','bottom','large'));
+              $gr->lb( new Label(0,4,'y','black','left','top','large'));
+              $gr->h_ticks(0,"black",1..10);
+              $gr->v_ticks(0,"black",1..3);
+              foreach my $i (1..10) {
+                $gr->lb( new Label($i,0,$i,'black','center','top','large'));
+              }
+              foreach my $i (1..3) {
+                $gr->lb( new Label(0,$i,$i,'black','right','middle','large'));
+              }
+              Context()->variables->add(a=>'Real',b=>'Real');
+              @a = (15,12,0,Formula("3(b-a)"));
+            </pg-code>
             <statement>
                 <image pg-name="$gr"/>
                   <!-- <image xml:id="img_05_02_ex_10">
                     <latex-image>
-
                       \begin{tikzpicture}
-
-                      \begin{axis}[
-                        axis on top,
-                        ytick={1,2,3},
-                        ymin=-.5,ymax=3.5,
-                        xmin=-1,xmax=10.9
-                        ]
-
-                      \addplot+[-,domain=0:10] ({x}, {3});
-
-                      \draw (axis cs:5,3.4) node { $f(x) = 3$};
-
-                      \end{axis}
-
+                        \begin{axis}[
+                            axis on top,
+                            ytick={1,2,3},
+                            ymin=-.5,
+                            ymax=3.5,
+                            xmin=-1,
+                            xmax=10.9
+                          ]
+                        \addplot+[-,domain=0:10] ({x}, {3});
+                        \draw (axis cs:5,3.4) node { $f(x) = 3$};
+                        \end{axis}
                       \end{tikzpicture}
-
                     </latex-image>
                   </image> -->
-
                 <p>
-                  Use the geometry of the graph above to evaluate the following definite integrals:
                   <ol cols="2">
-                    <li><m>\int_0^5 f(x)\, dx</m><var name="$a" width="3"/></li>
-
-                    <li><m>\int_3^7 f(x)\, dx</m><var name="$b" width="3"/></li>
-
-                    <li><m>\int_0^0 f(x)\, dx</m><var name="$c" width="3"/></li>
-
+                    <li>
+                      <p>
+                        <m>\int_0^5 f(x)\, dx</m>
+                      </p>
+                      <p>
+                        <var name="$a[0]" width="3"/>
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        <m>\int_3^7 f(x)\, dx</m>
+                      </p>
+                      <p>
+                        <var name="$a[1]" width="3"/>
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        <m>\int_0^0 f(x)\, dx</m>
+                      </p>
+                      <p>
+                        <var name="$a[2]" width="3"/>
+                      </p>
+                    </li>
                     <li>
                       <p>
                         <m>\ds \int_a^b f(x)\, dx</m>, where
-                        <m>0\leq a\leq b\leq 10</m><var name="$d" width="3"/>
+                        <m>0\leq a\leq b\leq 10</m>
+                      </p>
+                      <p>
+                        <var name="$a[3]" width="3"/>
                       </p>
                     </li>
                   </ol>
@@ -1499,1132 +1570,906 @@
             </statement>
           </webwork>
         </exercise>
-
       </exercisegroup>
+
       <exercisegroup cols="2">
         <introduction>
           <p>
-            In the following exercises, a graph of a function <m>f(x)</m> is given;
+            A graph of a function <m>f(x)</m> is given;
             the numbers inside the shaded regions give the area of that region.
             Evaluate the definite integrals using this area information.
           </p>
         </introduction>
-  <!-- Exercise 11 -->
+        <!-- Exercise 11 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $gr = init_graph(-1,-125,4,75,axes=>[0,0],ticks=>[5,8],size=>[400,400]);
-                $gr->lb('reset');
-                $gr->new_color("lightblue", 191,191,255);
-                add_functions($gr, "60*x*(1-x)*(x-2)*(x-2)*(x-3) for x in &lt;0,3>" . " using color:blue and weight:2",
-                                   "0 for x in &lt;0,3>" . " using color:blue and weight:1");
-                ($gr->fn)[0]->steps(1000);
-                $gr->fillRegion([0.5,-50,"lightblue"]);
-                $gr->fillRegion([1.5,10,"lightblue"]);
-                $gr->fillRegion([2.5,10,"lightblue"]);
-                add_functions($gr, "0 for x in &lt;0,3>" . " using color:black and weight:1");
-                $gr->lb( new Label(1.5,30,'y = f(x)','black','center','middle'));
-                $gr->lb( new Label(3.8,5,'x','black','center','middle'));
-                $gr->lb( new Label(0.15,70,'y','black','center','middle'));
-                $gr->lb( new Label(0.5,-12,'59','black','center','middle'));
-                $gr->lb( new Label(1.35,12,'11','black','center','middle'));
-                $gr->lb( new Label(2.6,12,'21','black','center','middle'));
-                foreach my $i (1..3) {
-                  $gr->lb( new Label($i,-5,$i,'black','center','middle'));
-                }
-                foreach my $i (1..2) {
-                  $gr->lb( new Label(-0.25,$i*-50,$i*-50,'black','center','middle'));
-                }
-                $gr->lb( new Label(-0.15,50,50,'black','center','middle'));
-
-                $a = Formula("-59");
-                $b = Formula("-48");
-                $c = Formula("-27");
-                $d = Formula("-33");
-              </pg-code>
-
-              <statement>
-                <image pg-name="$gr"/>
-                  <!-- <image xml:id="img_05_02_ex_11">
-                    <description></description>
-                    <latex-image>
-
+            <pg-code>
+              $gr = init_graph(-1,-125,3.5,75,axes=>[0,0],size=>[240,144]);
+              $gr->new_color("lightblue", 191,191,255);
+              add_functions($gr, "60*x*(1-x)*(x-2)*(x-2)*(x-3) for x in &lt;0,3> using color:blue and weight:1",
+                                 "0 for x in &lt;0,3>" . " using color:blue and weight:1");
+              $gr->fillRegion([0.5,-50,"lightblue"]);
+              $gr->fillRegion([1.5,10,"lightblue"]);
+              $gr->fillRegion([2.5,10,"lightblue"]);
+              add_functions($gr, "0 for x in &lt;0,3>" . " using color:black and weight:1");
+              $gr->lb( new Label(2.7,41,'y = f(x)','black','right','bottom','large'));
+              $gr->lb( new Label(3.5,0,'x','black','right','bottom','large'));
+              $gr->lb( new Label(0,75,'y','black','left','top','large'));
+              # values centered at centroids
+              $gr->lb( new Label(0.42,-38,'59','black','center','middle','large'));
+              $gr->lb( new Label(1.4,7.6,'11','black','center','middle','large'));
+              $gr->lb( new Label(2.64,15.4,'21','black','center','middle','large'));
+              $gr->h_ticks(0,"black",1..3);
+              $gr->v_ticks(0,"black",-100,-50,50);
+              for my $i (1..3) {
+                $gr->lb( new Label($i,0,$i,'black','center','top','large'));
+              }
+              for my $i (-100,-50,50) {
+                $gr->lb( new Label(0,$i,$i,'black','right','middle','large'));
+              }
+              @a = (-59,-48,-27,-33);
+            </pg-code>
+            <statement>
+              <image pg-name="$gr"/>
+                <!-- <image xml:id="img_05_02_ex_11">
+                  <description></description>
+                  <latex-image>
                     \begin{tikzpicture}
-
-                    \begin{axis}[
-                    axis on top,
-                    xtick={1,2,3},
-                    ymin=-105,ymax=55,
-                    xmin=-.9,xmax=3.5
-                    ]
-
-                    \addplot [firstcurvestyle,areastyle,domain=0:3,samples=40] {60*x*(1-x)*(x-2)*(x-2)*(x-3)} \closedcycle;
-                    \addplot [firstcurvestyle,-,domain=0:3,samples=90] {60*x*(1-x)*(x-2)*(x-2)*(x-3)};
-
-                    \draw (axis cs:1.5,30) node { $y=f(x)$};
-                    \draw (axis cs:.45,-10) node { $59$};
-                    \draw (axis cs:1.4,10) node { $11$};
-                    \draw (axis cs:2.6,10) node { $21$};
-
-                    \end{axis}
-
+                      \begin{axis}[
+                          axis on top,
+                          xtick={1,2,3},
+                          ymin=-105,
+                          ymax=55,
+                          xmin=-.9,
+                          xmax=3.5
+                        ]
+                        \addplot [firstcurvestyle,areastyle,domain=0:3,samples=40] {60*x*(1-x)*(x-2)*(x-2)*(x-3)} \closedcycle;
+                        \addplot [firstcurvestyle,-,domain=0:3,samples=90] {60*x*(1-x)*(x-2)*(x-2)*(x-3)};
+                        \draw (axis cs:1.5,30) node { $y=f(x)$};
+                        \draw (axis cs:.45,-10) node { $59$};
+                        \draw (axis cs:1.4,10) node { $11$};
+                        \draw (axis cs:2.6,10) node { $21$};
+                      \end{axis}
                     \end{tikzpicture}
-
-                    </latex-image>
-                  </image> -->
-
-                <p>
-                  The numbers inside the shaded regions of the above graph give the area of that region.
-                  Evaluate the following definite integrals using this area information.
-                  <ol cols="2">
-                    <li><m>\int_0^1 f(x)\, dx = </m><var name="$a" width="4"/></li>
-
-                    <li><m>\int_0^2 f(x)\, dx = </m><var name="$b" width="4"/></li>
-
-                    <li><m>\int_0^3 f(x)\, dx = </m><var name="$c" width="4"/></li>
-
-                    <li><m>\int_1^2 -3f(x)\, dx = </m><var name="$d" width="4"/></li>
-                  </ol>
-                </p>
-              </statement>
+                  </latex-image>
+                </image> -->
+              <p>
+                <ol cols="2">
+                  <li>
+                    <p>
+                      <m>\int_0^1 f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[0]" width="4"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_0^2 f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[1]" width="4"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_0^3 f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[2]" width="4"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_1^2 -3f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[3]" width="4"/>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 12 -->
+        <!-- Exercise 12 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $gr = init_graph(-1,-2,5,2,axes=>[0,0],ticks=>[6,8],size=>[400,400]);
-                $gr->lb('reset');
-                $gr->new_color("lightblue", 191,191,255);
-                add_functions($gr, "sin(3.14159x/2) for x in &lt;0,4>" . " using color:blue and weight:2",
-                                   "0 for x in &lt;0,4>" . " using color:blue and weight:1");
-                ($gr->fn)[0]->steps(1000);
-                $gr->fillRegion([1,0.5,"lightblue"]);
-                $gr->fillRegion([3,-0.5,"lightblue"]);
-                add_functions($gr, "0 for x in &lt;0,4>" . " using color:black and weight:1");
-                $gr->lb( new Label(3,0.75,'f(x) = sin(pi*x / 2)','black','center','middle'));
-                $gr->lb( new Label(4.8,0.1,'x','black','center','middle'));
-                $gr->lb( new Label(0.15,1.9,'y','black','center','middle'));
-                $gr->lb( new Label(1,0.5,'4/pi','black','center','middle'));
-                $gr->lb( new Label(3,-0.5,'4/pi','black','center','middle'));
-                foreach my $i (1..4) {
-                  $gr->lb( new Label($i,-0.2,$i,'black','center','middle'));
-                }
-                $gr->lb( new Label(-0.3,-1,-1,'black','center','middle'));
-                $gr->lb( new Label(-0.3,1,1,'black','center','middle'));
-
-                $gr->lb( new Label(-0.15,50,50,'black','center','middle'));
-                $a = Formula("4/pi");
-                $b = Formula("-4/pi");
-                $c = Formula("0");
-                $d = Formula("2/pi");
-              </pg-code>
-
-              <statement>
-                <image pg-name="$gr"/>
-                  <!-- <image xml:id="img_05_02_ex_12">
-                    <description></description>
-                    <latex-image>
-
+            <pg-code>
+              $gr = init_graph(-1,-2,4.5,2,axes=>[0,0],size=>[240,144]);
+              $gr->new_color("lightblue", 191,191,255);
+              add_functions($gr, "sin(pi*x/2) for x in &lt;0,4>" . " using color:blue and weight:1",
+                                 "0 for x in &lt;0,4>" . " using color:blue and weight:1");
+              $gr->fillRegion([1,0.5,"lightblue"]);
+              $gr->fillRegion([3,-0.5,"lightblue"]);
+              add_functions($gr, "0 for x in &lt;0,4>" . " using color:black and weight:1");
+              $gr->lb( new Label(1,1,'f(x) = sin(pi x/2)','black','left','bottom','large'));
+              $gr->lb( new Label(4.5,0,'x','black','right','bottom','large'));
+              $gr->lb( new Label(0,2,'y','black','left','top','large'));
+              # values centered at centroids
+              $gr->lb( new Label(1,0.39,'4/pi','black','center','middle','large'));
+              $gr->lb( new Label(3,-0.39,'4/pi','black','center','middle','large'));
+              $gr->h_ticks(0,"black",1..4);
+              $gr->v_ticks(0,"black",-1,1);
+              for my $i (1,2,4) {
+                $gr->lb( new Label($i,0,$i,'black','center','top','large'));
+              }
+              for my $i (-1,1) {
+                $gr->lb( new Label(0,$i,$i,'black','right','middle','large'));
+              }
+              @a = (Formula("4/pi"),Formula("-4/pi"),Formula("0"),Formula("2/pi"));
+            </pg-code>
+            <statement>
+              <image pg-name="$gr"/>
+                <!-- <image xml:id="img_05_02_ex_12">
+                  <description></description>
+                  <latex-image>
                     \begin{tikzpicture}
-
-                    \begin{axis}[
-                    axis on top,
-                    xtick={1,2,3,4},
-                    ymin=-1.5,ymax=1.5,
-                    xmin=-.9,xmax=4.5
-                    ]
-
-                    \addplot [firstcurvestyle,areastyle,domain=0:4] {sin(deg(3.14159*x/2))} \closedcycle;
-                    \addplot [firstcurvestyle,-,domain=0:4,samples=50] {sin(deg(3.14159*x/2))};
-
-                    \draw (axis cs:3,0.75) node { $f(x)=\sin(\pi x/2)$};
-                    \draw (axis cs:1,.6) node { $4/\pi$};
-                    \draw (axis cs:3,-.6) node { $4/\pi$};
-
-                    \end{axis}
-
+                      \begin{axis}[
+                          axis on top,
+                          xtick={1,2,3,4},
+                          ymin=-1.5,
+                          ymax=1.5,
+                          xmin=-.9,
+                          xmax=4.5
+                        ]
+                        \addplot [firstcurvestyle,areastyle,domain=0:4] {sin(deg(3.14159*x/2))} \closedcycle;
+                        \addplot [firstcurvestyle,-,domain=0:4,samples=50] {sin(deg(3.14159*x/2))};
+                        \draw (axis cs:3,0.75) node { $f(x)=\sin(\pi x/2)$};
+                        \draw (axis cs:1,.6) node { $4/\pi$};
+                        \draw (axis cs:3,-.6) node { $4/\pi$};
+                      \end{axis}
                     \end{tikzpicture}
-
-                    </latex-image>
-                  </image> -->
-
-                <p>
-                  The numbers inside the shaded regions of the above graph give the area of that region.
-                  Evaluate the following definite integrals using this area information.
-                  <ol cols="2">
-                    <li><m>\int_0^2 f(x)\, dx = </m><var name="$a" width="4"/></li>
-
-                    <li><m>\int_2^4 f(x)\, dx=</m><var name="$b" width="4"/></li>
-
-                    <li><m>\int_0^4 f(x)\, dx =</m><var name="$c" width="4"/></li>
-
-                    <li><m>\int_0^1 f(x)\, dx= </m><var name="$d" width="4"/></li>
-                  </ol>
-                </p>
-              </statement>
+                  </latex-image>
+                </image> -->
+              <p>
+                <ol cols="2">
+                  <li>
+                    <p>
+                      <m>\int_0^2 f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[0]" width="4"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_2^4 f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[1]" width="4"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_0^4 f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[2]" width="4"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_0^1 f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[3]" width="4"/>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 13 -->
+        <!-- Exercise 13 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $gr = init_graph(-3,-6,3,12,axes=>[0,0],ticks=>[6,9],size=>[400,400]);
-                $gr->lb('reset');
-                $gr->new_color("lightblue", 191,191,255);
-                add_functions($gr, "3x^2-3 for x in &lt;-2,2>" . " using color:blue and weight:2",
-                                   "0 for x in &lt;-2,2>" . " using color:blue and weight:1");
-                ($gr->fn)[0]->steps(1000);
-                $gr->moveTo(-2,0);
-                $gr->lineTo(-2,10,"blue",1);
-                $gr->moveTo(2,0);
-                $gr->lineTo(2,10,"blue",1);
-                $gr->fillRegion([-1.5,1,"lightblue"]);
-                $gr->fillRegion([0,-1,"lightblue"]);
-                $gr->fillRegion([1.5,1,"lightblue"]);
-                $gr->moveTo(-2,0);
-                $gr->lineTo(-2,10,"white",1);
-                $gr->moveTo(2,0);
-                $gr->lineTo(2,10,"white",1);
-                add_functions($gr, "0 for x in &lt;-2,2>" . " using color:black and weight:1");
-                $gr->lb( new Label(1.5,10,'f(x) = 3x^2 - 3','black','center','middle'));
-                $gr->lb( new Label(2.8,0.4,'x','black','center','middle'));
-                $gr->lb( new Label(0.15,11.5,'y','black','center','middle'));
-                $gr->lb( new Label(-1.5,1,'4','black','center','middle'));
-                $gr->lb( new Label(0.5,-1,'-4','black','center','middle'));
-                $gr->lb( new Label(1.5,1,'4','black','center','middle'));
-                foreach my $i (-2..-1) {
-                  $gr->lb( new Label($i,-0.4,$i,'black','center','middle'));
-                }
-                foreach my $i (1..2) {
-                  $gr->lb( new Label($i,-0.4,$i,'black','center','middle'));
-                }
-                $gr->lb( new Label(-0.2,-5,-5,'black','center','middle'));
-                $gr->lb( new Label(-0.2,5,5,'black','center','middle'));
-                $gr->lb( new Label(-0.2,10,10,'black','center','middle'));
-
-                $a = Formula("4");
-                $b = Formula("4");
-                $c = Formula("-4");
-                $d = Formula("-2");
-              </pg-code>
-
-              <statement>
-                <image pg-name="$gr"/>
-                  <!-- <image xml:id="img_05_02_ex_13">
-                    <description></description>
-                    <latex-image>
-
+            <pg-code>
+              $gr = init_graph(-2.5,-6,2.5,12,axes=>[0,0],size=>[240,144]);
+              $gr->new_color("lightblue", 191,191,255);
+              add_functions($gr, "3*x^2-3 for x in &lt;-2,2>" . " using color:blue and weight:1",
+                                 "0 for x in &lt;-2,2>" . " using color:blue and weight:1");
+              $gr->moveTo(-2,0);
+              $gr->lineTo(-2,10,"blue",1);
+              $gr->moveTo(2,0);
+              $gr->lineTo(2,10,"blue",1);
+              $gr->fillRegion([-1.5,1,"lightblue"]);
+              $gr->fillRegion([0,-1,"lightblue"]);
+              $gr->fillRegion([1.5,1,"lightblue"]);
+              $gr->moveTo(-2,0);
+              $gr->lineTo(-2,10,"white",1);
+              $gr->moveTo(2,0);
+              $gr->lineTo(2,10,"white",1);
+              add_functions($gr, "0 for x in &lt;-2,2>" . " using color:black and weight:1");
+              $gr->lb( new Label(0,10,'f(x) = 3x^2 - 3','black','left','top','large'));
+              $gr->lb( new Label(2.5,0,'x','black','right','bottom','large'));
+              $gr->lb( new Label(0,12,'y','black','left','top','large'));
+              # values centered at centroids
+              $gr->lb( new Label(-1.69,2.85,'4','black','center','middle','large'));
+              $gr->lb( new Label(0.1875,-1.2,'4','black','left','middle','large'));
+              $gr->lb( new Label(1.69,2.85,'4','black','center','middle','large'));
+              $gr->h_ticks(0,"black",1..4);
+              $gr->v_ticks(0,"black",-1,1);
+              for my $i (-2,-1,1,2) {
+                $gr->lb( new Label($i,0,$i,'black','center','top','large'));
+              }
+              for my $i (-5,5,10) {
+                $gr->lb( new Label(0,$i,$i,'black','right','middle','large'));
+              }
+              @a = (4,4,-4,-2);
+            </pg-code>
+            <statement>
+              <image pg-name="$gr"/>
+                <!-- <image xml:id="img_05_02_ex_13">
+                  <description></description>
+                  <latex-image>
                     \begin{tikzpicture}
-
-                    \begin{axis}[
-                    axis on top,
-                    xtick={-2,-1,1,2},
-                    ymin=-5.5,ymax=11,
-                    xmin=-2.5,xmax=2.5
-                    ]
-
-                    \addplot [firstcurvestyle,areastyle,domain=-2:2] {3*x^2-3} \closedcycle;
-                    \addplot [firstcurvestyle,-,domain=-2:2,samples=40] {3*x^2-3};
-
-                    \draw (axis cs:1.5,10) node { $f(x)=3x^2-3$};
-                    \draw (axis cs:-1.5,1) node { $4$};
-                    \draw (axis cs:1.5,1) node { $4$};
-                    \draw (axis cs:.3,-1) node { $-4$};
-
-                    \end{axis}
-
+                      \begin{axis}[
+                          axis on top,
+                          xtick={-2,-1,1,2},
+                          ymin=-5.5,
+                          ymax=11,
+                          xmin=-2.5,
+                          xmax=2.5
+                        ]
+                        \addplot [firstcurvestyle,areastyle,domain=-2:2] {3*x^2-3} \closedcycle;
+                        \addplot [firstcurvestyle,-,domain=-2:2,samples=40] {3*x^2-3};
+                        \draw (axis cs:1.5,10) node { $f(x)=3x^2-3$};
+                        \draw (axis cs:-1.5,1) node { $4$};
+                        \draw (axis cs:1.5,1) node { $4$};
+                        \draw (axis cs:.3,-1) node { $-4$};
+                      \end{axis}
                     \end{tikzpicture}
-
-                    </latex-image>
-                  </image> -->
-
-                <p>
-                  The numbers inside the shaded regions of the above graph give the area of that region.
-                  Evaluate the following definite integrals using this area information.
-                  <ol cols="2">
-                    <li><m>\int_{-2}^{-1} f(x)\, dx = </m><var name="$a" width="4"/></li>
-
-                    <li><m>\int_1^2 f(x)\, dx = </m><var name="$b" width="4"/></li>
-
-                    <li><m>\int_{-1}^1 f(x)\, dx = </m><var name="$c" width="4"/></li>
-
-                    <li><m>\int_0^1 f(x)\, dx = </m><var name="$d" width="4"/></li>
-                  </ol>
-                </p>
-              </statement>
+                  </latex-image>
+                </image> -->
+              <p>
+                <ol cols="2">
+                  <li>
+                    <p>
+                      <m>\int_{-2}^{-1} f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[0]" width="4"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_1^2 f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[1]" width="4"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_{-1}^1 f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[2]" width="4"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_0^1 f(x)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[3]" width="4"/>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 14 -->
+        <!-- Exercise 14 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $gr = init_graph(-1,-1,2.5,5,axes=>[0,0],ticks=>[7,6],size=>[400,400]);
-                $gr->lb('reset');
-                $gr->new_color("lightblue", 191,191,255);
-                add_functions($gr, "x^2 for x in &lt;0,2>" . " using color:blue and weight:2",
-                                   "0 for x in &lt;0,2>" . " using color:blue and weight:1");
-                ($gr->fn)[0]->steps(1000);
-                $gr->moveTo(2,0);
-                $gr->lineTo(2,5,"blue",1);
-                $gr->fillRegion([-1.5,1,"lightblue"]);
-                $gr->fillRegion([0,-1,"lightblue"]);
-                $gr->fillRegion([1.5,1,"lightblue"]);
-                $gr->moveTo(2,0);
-                $gr->lineTo(2,5,"white",1);
-                $gr->moveTo(1,0);
-                $gr->lineTo(1,1,"blue",2,dashed);
-                add_functions($gr, "0 for x in &lt;0,2>" . " using color:black and weight:1");
-                $gr->lb( new Label(1,3,'f(x) = x^2','black','center','middle'));
-                $gr->lb( new Label(2.4,0.2,'x','black','center','middle'));
-                $gr->lb( new Label(0.1,4.8,'y','black','center','middle'));
-                $gr->lb( new Label(1.5,0.25,'7/3','black','center','middle'));
-                $gr->lb( new Label(0.8,0.25,'1/3','black','center','middle'));
-                foreach my $i (1..2) {
-                  $gr->lb( new Label($i,-0.2,$i,'black','center','middle'));
-                }
-                foreach my $i (1..4) {
-                  $gr->lb( new Label(-0.15,$i,$i,'black','center','middle'));
-                }
-
-                $a = Formula("40/3");
-                $b = Formula("26/3");
-                $c = Formula("8/3");
-                $d = Formula("38/3");
-              </pg-code>
-
-              <statement>
-                <image pg-name="$gr"/>
-                  <!-- <image xml:id="img_05_02_ex_14">
-                    <description></description>
-                    <latex-image>
-
+            <pg-code>
+              $gr = init_graph(-0.2,-1,2.1,5,axes=>[0,0],size=>[240,144]);
+              $gr->new_color("lightblue", 191,191,255);
+              add_functions($gr, "x^2 for x in &lt;0,2>" . " using color:blue and weight:1",
+                                 "0 for x in &lt;0,2>" . " using color:blue and weight:1");
+              $gr->moveTo(2,0);
+              $gr->lineTo(2,5,"blue",1);
+              $gr->fillRegion([-1.5,1,"lightblue"]);
+              $gr->fillRegion([0,-1,"lightblue"]);
+              $gr->fillRegion([1.5,1,"lightblue"]);
+              $gr->moveTo(2,0);
+              $gr->lineTo(2,5,"white",1);
+              $gr->moveTo(1,0);
+              $gr->lineTo(1,1,"blue",2,dashed);
+              add_functions($gr, "0 for x in &lt;0,2>" . " using color:black and weight:1");
+              $gr->lb( new Label(1,3,'f(x) = x^2','black','center','middle','large'));
+              $gr->lb( new Label(2.1,0,'x','black','right','bottom','large'));
+              $gr->lb( new Label(0,5,'y','black','left','top','large'));
+              # values centered at centroids
+              $gr->lb( new Label(1.61,1.33,'7/3','black','center','middle','large'));
+              $gr->lb( new Label(0.75,0.3,'1/3','black','center','middle','large'));
+              $gr->h_ticks(0,"black",1,2);
+              $gr->v_ticks(0,"black",1..4);
+              for my $i (1,2) {
+                $gr->lb( new Label($i,0,$i,'black','center','top','large'));
+              }
+              for my $i (1..4) {
+                $gr->lb( new Label(0,$i,$i,'black','right','middle','large'));
+              }
+              Context("Fraction");
+              @a = (Fraction("40/3"),Fraction("26/3"),Fraction("8/3"),Fraction("38/3"));
+            </pg-code>
+            <statement>
+              <image pg-name="$gr"/>
+                <!-- <image xml:id="img_05_02_ex_14">
+                  <description></description>
+                  <latex-image>
                     \begin{tikzpicture}
-
-                    \begin{axis}[
-                    axis on top,
-                    xtick={1,2},
-                    ymin=-.1,ymax=4.2,
-                    xmin=-.2,xmax=2.1
-                    ]
-
-                    \addplot [firstcurvestyle,areastyle,domain=0:2] {x^2} \closedcycle;
-                    \addplot [firstcurvestyle,-,domain=0:2] {x^2};
-
-                    \draw [thick,firstcolor,dashed] (axis cs:1,0) &dash;&dash;  (axis cs:1,1); % add double dash back on this line when uncommenting
-
-                    \draw (axis cs:1,3) node { $f(x)=x^2$};
-                    \draw (axis cs:.7,.2) node { $1/3$};
-                    \draw (axis cs:1.5,.2) node { $7/3$};
-
-                    \end{axis}
-
+                      \begin{axis}[
+                          axis on top,
+                          xtick={1,2},
+                          ymin=-.1,
+                          ymax=4.2,
+                          xmin=-.2,
+                          xmax=2.1
+                        ]
+                        \addplot [firstcurvestyle,areastyle,domain=0:2] {x^2} \closedcycle;
+                        \addplot [firstcurvestyle,-,domain=0:2] {x^2};
+                        \draw [thick,firstcolor,dashed] (axis cs:1,0) -&#x2D; (axis cs:1,1);
+                        \draw (axis cs:1,3) node { $f(x)=x^2$};
+                        \draw (axis cs:.7,.2) node { $1/3$};
+                        \draw (axis cs:1.5,.2) node { $7/3$};
+                      \end{axis}
                     \end{tikzpicture}
-
-                    </latex-image>
-                  </image> -->
-
-                <p>
-                  The numbers inside the shaded regions of the above graph give the area of that region.
-                  Evaluate the following definite integrals using this area information.
-                  <ol cols="2">
-                    <li><m>\int_{0}^{2} 5x^2\, dx = </m><var name="$a" width="4"/></li>
-
-                    <li><m>\int_0^2 (x^2+3)\, dx = </m><var name="$b" width="4"/></li>
-
-                    <li><m>\int_{1}^3 (x-1)^2\, dx = </m><var name="$c" width="4"/></li>
-
-                    <li><m>\int_2^4 \big((x-2)^2+5\big)\, dx = </m><var name="$d" width="4"/></li>
-                  </ol>
-                </p>
-              </statement>
+                  </latex-image>
+                </image> -->
+              <p>
+                <ol cols="2">
+                  <li>
+                    <p>
+                      <m>\int_{0}^{2} 5x^2\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[0]" width="4"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_0^2 (x^2+3)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[1]" width="4"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_{1}^3 (x-1)^2\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[2]" width="4"/>
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <m>\int_2^4 \big((x-2)^2+5\big)\, dx</m>
+                    </p>
+                    <p>
+                      <var name="$a[3]" width="4"/>
+                    </p>
+                  </li>
+                </ol>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-
       </exercisegroup>
-      <exercisegroup cols="2">
 
+      <exercisegroup cols="2">
         <introduction>
           <p>
-            In the following exercises,
-            a graph of the velocity function of an object moving in a straight line is given.
-            Answer the questions based on that graph.
+            A graph is given of the velocity function of an object moving in a straight line.
+            Answer the questions based on the graph.
           </p>
         </introduction>
-  <!-- Exercise 15 -->
+        <!-- Exercise 15 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $gr = init_graph(-1,-2,4,3,axes=>[0,0],ticks=>[5,5],size=>[400,400]);
-                $gr->lb('reset');
-                add_functions($gr, "-x+2 for x in &lt;0,3>" . " using color:blue and weight:2");
-                ($gr->fn)[0]->steps(1000);
-                $gr->lb( new Label(2,1,'y = -x + 2','black','center','middle'));
-                $gr->lb( new Label(3.8,0.1,'x','black','center','middle'));
-                $gr->lb( new Label(0.1,2.85,'y','black','center','middle'));
-                $gr->lb( new Label(3.75,-0.1,'t (s)','black','center','middle'));
-                $gr->lb( new Label(-0.375,2.85,'y (ft/s)','black','center','middle'));
-                foreach my $i (1..3) {
-                  $gr->lb( new Label($i,-0.2,$i,'black','center','middle'));
-                }
-                foreach my $i (1..2) {
-                  $gr->lb( new Label(-0.20,$i,$i,'black','center','middle'));
-                }
-                $gr->lb( new Label(-0.20,-1,-1,'black','center','middle'));
-
-                $mv = Formula("2");
-                $mv = NumberWithUnits("$mv ft/s");
-                $md = Formula("2");
-                $md = NumberWithUnits("$md ft");
-                $td = Formula("1.5");
-                $td = NumberWithUnits("$td ft");
-              </pg-code>
-
-              <statement>
-                <image pg-name="$gr"/>
-                  <!-- <image xml:id="img_05_02_ex_15">
-                    <description></description>
-                    <latex-image>
-
-                    \begin{tikzpicture}
-
-                    \begin{axis}[
-                    xtick={1,2,3},
-                    ymin=-1.1,ymax=2.2,
-                    xmin=-.2,xmax=3.1,
-                    xlabel={$t$ (s)},
-                    ylabel={$y$ (ft/s)}
-                    ]
-
-                    \addplot+ [-,domain=0:3] {-x+2};
-
-                    \end{axis}
-
-                    \end{tikzpicture}
-
-                    </latex-image>
-                  </image> -->
-
-                <p>
-                  The graph of the velocity function of an object moving in a straight line is given above.
-                  Use this graph to answer the questions below.
-                  <ol>
-                    <li>
-                      <p>
-                        What is the object's maximum velocity?
-                      </p>
-
-                      <p>
-                        <var name="$mv" width="20"/>
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        What is the object's maximum displacement?
-                      </p>
-
-                      <p>
-                        <var name="$md" width="20"/>
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        What is the object's total displacement on <m>[0,3]</m>?
-                      </p>
-
-                      <p>
-                        <var name="$td" width="20"/>
-                      </p>
-                    </li>
-                  </ol>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 16 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $gr = init_graph(-1,-1,6,4,axes=>[0,0],ticks=>[7,5],size=>[400,400]);
-                $gr->lb('reset');
-                add_functions($gr, "3 for x in &lt;0,1>" . " using color:blue and weight:2",
-                                   "-3(x-2) for x in &lt;1,2>" . " using color:blue and weight:2",
-                                   "2(x-2) for x in &lt;2,3>" . " using color:blue and weight:2",
-                                   "2 for x in &lt;3,5>" . " using color:blue and weight:2");
-                ($gr->fn)[1]->steps(1000);
-                ($gr->fn)[2]->steps(1000);
-                $gr->lb( new Label(4,3,'y = f(x)','black','center','middle'));
-                $gr->lb( new Label(5.7,0.1,'x','black','center','middle'));
-                $gr->lb( new Label(0.2,3.85,'y','black','center','middle'));
-                $gr->lb( new Label(5.7,-0.1,'t (s)','black','center','middle'));
-                $gr->lb( new Label(-0.48,3.85,'y (ft/s)','black','center','middle'));
-                foreach my $i (1..5) {
-                  $gr->lb( new Label($i,-0.2,$i,'black','center','middle'));
-                }
-                foreach my $i (1..3) {
-                  $gr->lb( new Label(-0.20,$i,$i,'black','center','middle'));
-                }
-
-                $mv = Formula("3");
-                $mv = NumberWithUnits("$mv ft/s");
-                $md = Formula("9.5");
-                $md = NumberWithUnits("$md ft");
-                $td = Formula("9.5");
-                $td = NumberWithUnits("$td ft");
-              </pg-code>
-
-              <statement>
-                <image pg-name="$gr"/>
-                  <!-- <image xml:id="img_05_02_ex_16">
-                    <description></description>
-                    <latex-image>
-
-                    \begin{tikzpicture}
-
-                    \begin{axis}[
-                    axis on top,
-                    xtick={1,2,3,4,5},
-                    ymin=-.5,ymax=3.2,
-                    xmin=-.2,xmax=5.3,
-                    xlabel={$t$ (s)},
-                    ylabel={$y$ (ft/s)}
-                    ]
-
-                    \addplot+ [-,domain=0:1] {3};
-                    \addplot [firstcurvestyle,-,domain=1:2] {-3*(x-2)};
-                    \addplot [firstcurvestyle,-,domain=2:3] {2*(x-2)};
-                    \addplot [firstcurvestyle,-,domain=3:5] {2};
-
-                    \end{axis}
-
-
-                    \end{tikzpicture}
-
-                    </latex-image>
-                  </image> -->
-
-                <p>
-                  The graph of the velocity function of an object moving in a straight line is given above.
-                  Use this graph to answer the questions below.
-                  <ol>
-                    <li>
-                      <p>
-                        What is the object's maximum velocity?
-                      </p>
-
-                      <p>
-                        <var name="$mv" width="20"/>
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        What is the object's maximum displacement?
-                      </p>
-
-                      <p>
-                        <var name="$md" width="20"/>
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        What is the object's total displacement on <m>[0,5]</m>?
-                      </p>
-
-                      <p>
-                        <var name="$td" width="20"/>
-                      </p>
-                    </li>
-                  </ol>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-      </exercisegroup>
-<!-- Exercise 17 -->
-      <exercise>
-        <webwork>
             <pg-code>
-              $mv = Formula("64");
-              $mv = NumberWithUnits("$mv ft/s");
-              $md = Formula("64");
-              $md = NumberWithUnits("$md ft");
-              $md_t = Formula("2");
-              $md_t = NumberWithUnits("$md_t s");
-              $h0_t = Formula("2+sqrt(7)");
-              $h0_t = NumberWithUnits("$h0_t s");
+              $gr = init_graph(-0.2,-1.1,3.1,2.5,axes=>[0,0],size=>[240,144]);
+              add_functions($gr, "-x+2 for x in &lt;0,3>" . " using color:blue and weight:1");
+              $gr->lb( new Label(3.1,0,'t (s)','black','right','bottom','large'));
+              $gr->lb( new Label(0,2.5,'y (ft/s)','black','left','top','large'));
+              $gr->h_ticks(0,"black",1..3);
+              $gr->v_ticks(0,"black",-1,1,2);
+              foreach my $i (1..3) {
+                $gr->lb( new Label($i,0,$i,'black','center','top','large'));
+              }
+              foreach my $i (-1,1,2) {
+                $gr->lb( new Label(0,$i,$i,'black','right','middle','large'));
+              }
+              $mv = NumberWithUnits("2 ft/s");
+              $md = NumberWithUnits("2 ft");
+              $td = NumberWithUnits("1.5 ft");
             </pg-code>
-
             <statement>
-              <p>
-                An object is thrown straight up with a velocity,
-                in ft/s, given by <m>v(t) = -32t+64</m>,
-                where <m>t</m> is in seconds, from a height of 48 feet.
-              </p>
-
+              <image pg-name="$gr"/>
+                <!-- <image xml:id="img_05_02_ex_15">
+                  <description></description>
+                  <latex-image>
+                    \begin{tikzpicture}
+                      \begin{axis}[
+                          xtick={1,2,3},
+                          ymin=-1.1,
+                          ymax=2.2,
+                          xmin=-.2,
+                          xmax=3.1,
+                          xlabel={$t$ (s)},
+                          ylabel={$y$ (ft/s)}
+                        ]
+                        \addplot+ [-,domain=0:3] {-x+2};
+                      \end{axis}
+                    \end{tikzpicture}
+                  </latex-image>
+                </image> -->
               <p>
                 <ol>
                   <li>
                     <p>
                       What is the object's maximum velocity?
                     </p>
-
                     <p>
                       <var name="$mv" width="20"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
                       What is the object's maximum displacement?
                     </p>
-
                     <p>
                       <var name="$md" width="20"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      When does the maximum displacement occur?
+                      What is the object's total displacement on <m>[0,3]</m>?
                     </p>
-
                     <p>
-                      At t = <var name="$md_t" width="20"/>
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      When will the object reach a height of 0? (Hint:
-                      find when the displacement is <m>-48</m>ft.)
-                    </p>
-
-                    <p>
-                      At t = <var name="$h0_t" width="20"/>
+                      <var name="$td" width="20"/>
                     </p>
                   </li>
                 </ol>
               </p>
             </statement>
-        </webwork>
-      </exercise>
-<!-- Exercise 18 -->
-      <exercise>
-        <webwork>
+          </webwork>
+        </exercise>
+        <!-- Exercise 16 -->
+        <exercise>
+          <webwork>
             <pg-code>
-              $v0 = Formula("96");
-              $v0 = NumberWithUnits("$v0 ft/s");
-              $d = Formula("6");
-              $d = NumberWithUnits("$d s");
-              $h0_2 = Formula("6");
-              $h0_2 = NumberWithUnits("$h0_2 s");
-              $hmax = Formula("-16*3^2+96*3+64");
-              $hmax = NumberWithUnits("$hmax ft");
+              $gr = init_graph(-0.2,-0.5,5.2,3.5,axes=>[0,0],size=>[240,144]);
+              add_functions($gr, "3 for x in &lt;0,1>" . " using color:blue and weight:1",
+                                 "-3(x-2) for x in &lt;1,2>" . " using color:blue and weight:1",
+                                 "2(x-2) for x in &lt;2,3>" . " using color:blue and weight:1",
+                                 "2 for x in &lt;3,5>" . " using color:blue and weight:1");
+              $gr->lb( new Label(5.2,0,'t (s)','black','right','bottom','large'));
+              $gr->lb( new Label(0,3.5,'y (ft/s)','black','left','top','large'));
+              $gr->h_ticks(0,"black",1..5);
+              $gr->v_ticks(0,"black",1..3);
+              foreach my $i (1..5) {
+                $gr->lb( new Label($i,0,$i,'black','center','top','large'));
+              }
+              foreach my $i (1..3) {
+                $gr->lb( new Label(0,$i,$i,'black','right','middle','large'));
+              }
+              $mv = NumberWithUnits("3 ft/s");
+              $md = NumberWithUnits("9.5 ft");
+              $td = NumberWithUnits("9.5 ft");
             </pg-code>
-
             <statement>
-              <p>
-                An object is thrown straight up with a velocity,
-                in ft/s, given by <m>v(t) = -32t+96</m>,
-                where <m>t</m> is in seconds, from a height of 64 feet.
-              </p>
-
+              <image pg-name="$gr"/>
+                <!-- <image xml:id="img_05_02_ex_16">
+                  <description></description>
+                  <latex-image>
+                    \begin{tikzpicture}
+                      \begin{axis}[
+                          axis on top,
+                          xtick={1,2,3,4,5},
+                          ymin=-.5,
+                          ymax=3.2,
+                          xmin=-.2,
+                          xmax=5.3,
+                          xlabel={$t$ (s)},
+                          ylabel={$y$ (ft/s)}
+                        ]
+                        \addplot+ [-,domain=0:1] {3};
+                        \addplot [firstcurvestyle,-,domain=1:2] {-3*(x-2)};
+                        \addplot [firstcurvestyle,-,domain=2:3] {2*(x-2)};
+                        \addplot [firstcurvestyle,-,domain=3:5] {2};
+                      \end{axis}
+                    \end{tikzpicture}
+                  </latex-image>
+                </image> -->
               <p>
                 <ol>
                   <li>
                     <p>
-                      What is the object's initial velocity?
+                      What is the object's maximum velocity?
                     </p>
-
                     <p>
-                      <var name="$v0" width="20"/>
-                    </p>
-                  </li>
-
-                  <li>
-                    <p>
-                      When is the object's displacement 0?
-                    </p>
-
-                    <p>
-                      <var name="$d" width="20"/>
+                      <var name="$mv" width="20"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      How long does it take for the object to return to its initial height?
+                      What is the object's maximum displacement?
                     </p>
-
                     <p>
-                      <var name="$h0_2" width="20"/>
+                      <var name="$md" width="20"/>
                     </p>
                   </li>
-
                   <li>
                     <p>
-                      What is the maximum height the object reaches?
+                      What is the object's total displacement on <m>[0,5]</m>?
                     </p>
-
                     <p>
-                      <var name="$hmax" width="20"/>
+                      <var name="$td" width="20"/>
                     </p>
                   </li>
                 </ol>
               </p>
             </statement>
+          </webwork>
+        </exercise>
+      </exercisegroup>
+      <!-- Exercise 17 -->
+      <exercise>
+        <webwork>
+          <pg-code>
+            $mv = NumberWithUnits("64 ft/s");
+            $md = NumberWithUnits("64 ft");
+            $md_t = NumberWithUnits("2 s");
+            $h0_t = FormulaWithUnits("2+sqrt(7) s");
+          </pg-code>
+          <statement>
+            <p>
+              An object is thrown straight up with a velocity,
+              in ft/s, given by <m>v(t) = -32t+64</m>,
+              where <m>t</m> is in seconds, from a height of <m>48</m> feet.
+              <ol>
+                <li>
+                  <p>
+                    What is the object's maximum velocity?
+                  </p>
+                  <p>
+                    <var name="$mv" width="20"/>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    What is the object's maximum displacement?
+                  </p>
+                  <p>
+                    <var name="$md" width="20"/>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    When does the maximum displacement occur?
+                  </p>
+                  <p>
+                    <var name="$md_t" width="20"/>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    When will the object reach a height of <m>0</m>? (Hint:
+                    find when the displacement is <m>-48</m>ft.)
+                  </p>
+                  <p>
+                    <var name="$h0_t" width="20"/>
+                  </p>
+                </li>
+              </ol>
+            </p>
+          </statement>
+        </webwork>
+      </exercise>
+      <!-- Exercise 18 -->
+      <exercise>
+        <webwork>
+          <pg-code>
+            $v0 = NumberWithUnits("96 ft/s");
+            $d = NumberWithUnits("6 s");
+            $h0_2 = NumberWithUnits("6 s");
+            $hmax = NumberWithUnits("-16*3^2+96*3+64 ft");
+          </pg-code>
+          <statement>
+            <p>
+              An object is thrown straight up with a velocity,
+              in ft/s, given by <m>v(t) = -32t+96</m>,
+              where <m>t</m> is in seconds, from a height of <m>64</m> feet.
+            </p>
+            <p>
+              <ol>
+                <li>
+                  <p>
+                    What is the object's initial velocity?
+                  </p>
+                  <p>
+                    <var name="$v0" width="20"/>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    When is the object's displacement 0?
+                  </p>
+                  <p>
+                    <var name="$d" width="20"/>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    How long does it take for the object to return to its initial height?
+                  </p>
+                  <p>
+                    <var name="$h0_2" width="20"/>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    What is the maximum height the object reaches?
+                  </p>
+                  <p>
+                    <var name="$hmax" width="20"/>
+                  </p>
+                </li>
+              </ol>
+            </p>
+          </statement>
         </webwork>
       </exercise>
 
       <exercisegroup cols="2">
         <introduction>
           <p>
-            In the following exercises, the values of several definite integrals are given.
-            Use these values and properties of definite integrals to evaluate the indicated definite integrals.
+            The values of several definite integrals are given as follows:
+            <me>\int_0^2f(x)\,dx = 5 \quad \int_0^3f(x)\,dx = 7 \quad \int_0^2g(x)\,dx = -3 \quad \int_2^3g(x)\,dx = 5</me>
+            Use these values and properties of definite integrals to evaluate the indicated definite integral.
           </p>
         </introduction>
-  <!-- Exercise 19-->
+        <!-- Exercise 19-->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = Formula("2");
-              </pg-code>
-
-              <statement>
-                <p>
-                  The values of several definite integrals are given as follows:
-                  <ul>
-                    <li>
-                      <p>
-                        <m>\ds \int_0^2 f(x)\, dx = 5</m>,
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_0^3 f(x) \, dx=7</m>,
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_0^2 g(x)\, dx = -3</m>, and
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_2^3 g(x)\, dx = 5</m>.
-                      </p>
-                    </li>
-                  </ul>
-                  Using these values, evaluate the integral
-                  <m>\ds \int_0^2 \big(f(x)+g(x)\big) \, dx</m>
-                </p>
-
-                <p>
-                  <var name="$a" width="10"/>
-                </p>
-              </statement>
+            <statement>
+              <p>
+                <m>\int_0^2 \big(f(x)+g(x)\big) \, dx</m>
+              </p>
+              <p>
+                <var name="'2'" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 20 -->
+        <!-- Exercise 20 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = Formula("5");
-              </pg-code>
-
-              <statement>
-                <p>
-                  The values of several definite integrals are given as follows:
-                  <ul>
-                    <li>
-                      <p>
-                        <m>\ds \int_0^2 f(x)\, dx = 5</m>,
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_0^3 f(x) \, dx=7</m>,
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_0^2 g(x)\, dx = -3</m>, and
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_2^3 g(x)\, dx = 5</m>.
-                      </p>
-                    </li>
-                  </ul>
-                  Using these values, evaluate the integral
-                  <m>\ds \int_0^3 \big(f(x)-g(x)\big) \, dx</m>
-                </p>
-
-                <p>
-                  <var name="$a" width="10"/>
-                </p>
-              </statement>
+            <statement>
+              <p>
+                <m>\int_0^3 \big(f(x)-g(x)\big) \, dx</m>
+              </p>
+              <p>
+                <var name="'5'" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 21 -->
+        <!-- Exercise 21 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = Formula("16");
-              </pg-code>
-
-              <statement>
-                <p>
-                  The values of several definite integrals are given as follows:
-                  <ul>
-                    <li>
-                      <p>
-                        <m>\ds \int_0^2 f(x)\, dx = 5</m>,
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_0^3 f(x) \, dx=7</m>,
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_0^2 g(x)\, dx = -3</m>, and
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_2^3 g(x)\, dx = 5</m>.
-                      </p>
-                    </li>
-                  </ul>
-                  Using these values, evaluate the integral
-                  <m>\ds \int_2^3 \big(3f(x)+2g(x)\big) \, dx</m>
-                </p>
-
-                <p>
-                  <var name="$a" width="10"/>
-                </p>
-              </statement>
+            <statement>
+              <p>
+                <m>\int_2^3 \big(3f(x)+2g(x)\big) \, dx</m>
+              </p>
+              <p>
+                <var name="'16'" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 22 -->
+        <!-- Exercise 22 -->
         <exercise>
           <webwork>
-              <pg-code>
-                Context()->variables->set(b=>"Real");
-                $a = Formula("-2/7*b");
-              </pg-code>
-
-              <statement>
-                <p>
-                  The values of several definite integrals are given as follows:
-                  <ul>
-                    <li>
-                      <p>
-                        <m>\ds \int_0^2 f(x)\, dx = 5</m>,
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_0^3 f(x) \, dx=7</m>,
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_0^2 g(x)\, dx = -3</m>, and
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_2^3 g(x)\, dx = 5</m>.
-                      </p>
-                    </li>
-                  </ul>
-                  Using these values,
-                  find a formula for <m>a</m> in terms of <m>b</m> such that
-                </p>
-
-                <p>
-                  <m>\ds \int_0^3 \big(af(x)+bg(x)\big) \, dx=0</m>
-                </p>
-
-                <p>
-                  <m>a = </m><var name="$a" width="20"/>
-                </p>
-              </statement>
+            <pg-code>
+              Context("Fraction");
+              Context()->variables->set(a=>"Real",b=>"Real");
+              parser::Assignment->Allow;
+              $a = Formula("a = -2/7*b");
+            </pg-code>
+            <statement>
+              <p>
+                Find a formula for <m>a</m> in terms of <m>b</m> such that
+                <m>\ds \int_0^3 \big(af(x)+bg(x)\big) \, dx=0</m>.
+              </p>
+              <p>
+                <var name="$a" width="20"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-
       </exercisegroup>
-      <exercisegroup cols="2">
 
+      <exercisegroup cols="2">
         <introduction>
           <p>
-            In the following exercises, the values of several definite integrals are given.
-            Use these values to evaluate the given definite integrals.
+            The values of several definite integrals are given as follows:
+            <me>\int_0^3s(t)\,dt = 10 \quad \int_3^5s(t)\,dt = 8 \quad \int_3^5r(t)\,dt = -1 \quad \int_0^5r(t)\,dt = 11</me>
+            Use these values and properties of definite integrals to evaluate the indicated definite integral.
           </p>
         </introduction>
-  <!-- Exercise 23 -->
+        <!-- Exercise 23 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = Formula("22");
-              </pg-code>
-
-              <statement>
-                <p>
-                  The values of several definite integrals are given as follows:
-                  <ul>
-                    <li>
-                      <p>
-                        <m>\ds \int_0^3 s(t)\, dt = 10</m>,
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_3^5 s(t) \, dt=8</m>,
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_3^5 r(t)\, dt = -1</m>, and
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_0^5 r(t)\, dt = 11</m>.
-                      </p>
-                    </li>
-                  </ul>
-                  Using these values, evaluate the integral
-                  <m>\ds \int_0^3 \big(s(t) + r(t)\big)\, dt</m>
-                </p>
-
-                <p>
-                  <var name="$a" width="10"/>
-                </p>
-              </statement>
+            <statement>
+              <p>
+                <m>\int_0^3 \big(s(t) + r(t)\big)\, dt</m>
+              </p>
+              <p>
+                <var name="'22'" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 24 -->
+        <!-- Exercise 24 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = Formula("-7");
-              </pg-code>
-
-              <statement>
-                <p>
-                  <m>\ds \int_5^0 \big(s(t) - r(t)\big)\, dt</m>
-                </p>
-
-                <p>
-                  <var name="$a" width="10"/>
-                </p>
-              </statement>
+            <statement>
+              <p>
+                <m>\int_5^0 \big(s(t) - r(t)\big)\, dt</m>
+              </p>
+              <p>
+                <var name="'-7'" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 25 -->
+        <!-- Exercise 25 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = Formula("0");
-              </pg-code>
-
-              <statement>
-                <p>
-                  The values of several definite integrals are given as follows:
-                  <ul>
-                    <li>
-                      <p>
-                        <m>\ds \int_0^3 s(t)\, dt = 10</m>,
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_3^5 s(t) \, dt=8</m>,
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_3^5 r(t)\, dt = -1</m>, and
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_0^5 r(t)\, dt = 11</m>.
-                      </p>
-                    </li>
-                  </ul>
-                  Using these values, evaluate the integral
-                  <m>\ds \int_3^3 \big(\pi s(t) - 7r(t)\big)\, dt</m>
-                </p>
-
-                <p>
-                  <m>a = </m><var name="$a" width="10"/>
-                </p>
-              </statement>
+            <statement>
+              <p>
+                <m>\int_3^3 \big(\pi s(t) - 7r(t)\big)\, dt</m>
+              </p>
+              <p>
+                <var name="'0'" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 26 -->
+        <!-- Exercise 26 -->
         <exercise>
           <webwork>
-              <pg-code>
-                Context()->variables->set(b=>"Real");
-                $a = Formula("-18/11*b");
-              </pg-code>
-
-              <statement>
-                <p>
-                  The values of several definite integrals are given as follows:
-                  <ul>
-                    <li>
-                      <p>
-                        <m>\ds \int_0^3 s(t)\, dt = 10</m>,
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_3^5 s(t) \, dt=8</m>,
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_3^5 r(t)\, dt = -1</m>, and
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \int_0^5 r(t)\, dt = 11</m>.
-                      </p>
-                    </li>
-                  </ul>
-                  Using these values,
-                  find a formula for <m>a</m> in terms of <m>b</m> such that
-                </p>
-
-                <p>
-                  <m>\ds \int_0^5 \big(ar(t)+bs(t)\big) \, dt=0</m>
-                </p>
-
-                <p>
-                  <var name="$a" width="10"/>
-                </p>
-              </statement>
+            <pg-code>
+              Context("Fraction");
+              Context()->variables->set(a=>"Real",b=>"Real");
+              parser::Assignment->Allow;
+              $a = Formula("a = -18/11*b");
+            </pg-code>
+            <statement>
+              <p>
+                Find a formula for <m>a</m> in terms of <m>b</m> such that
+                <m>\ds \int_0^5 \big(ar(t)+bs(t)\big) \, dt=0</m>.
+              </p>
+              <p>
+                <var name="$a" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-
       </exercisegroup>
     </subexercises>
+
     <subexercises>
       <title>Review</title>
-        <exercisegroup cols="2">
+      <exercisegroup cols="2">
         <introduction>
           <p>
-            In the following exercises, evaluate the given indefinite integral.
+            Evaluate the given indefinite integral.
           </p>
         </introduction>
-  <!-- Exercise 27 -->
+        <!-- Exercise 27 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("1/4*x^4-2/3*x^3+7/2*x^2-9x");
-              </pg-code>
-
-              <statement>
-                <p>
-                  <m>\ds \int \big(x^3-2x^2+7x-9\big)\, dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              ($b,$c,$d) = (-9..-1,1..9)[NchooseK(18,3)];
+              if($envir{problemSeed}==1){$b=-2;$c=7;$d=-9;};
+              Context("Fraction");
+              Context()->noreduce('(-x)+y');
+              Context()->noreduce('(-x)-y');
+              $f = Formula("x^3 + $b x^2 + $c x + $d")->reduce;
+              $B = Fraction($b,3);
+              $C = Fraction($c,2);
+              $F = FormulaUpToConstant("1/4 x^4 + $B x^3 + $C x^2 + $d x");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\int \left(<var name="$f"/>\right)\, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 28 -->
+        <!-- Exercise 28 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("-cos(x) - sin(x) + tan(x)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  <m>\ds \int \big(\sin(x) - \cos(x) + \sec^2(x) \big)\, dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              ($s,$t,$u) = ('sin','cos','tan','sec','cot','csc')[NchooseK(6,3)];
+              $a = list_random(-1,1);
+              $b = list_random(-1,1);
+              $c = list_random(-1,1);
+              if($envir{problemSeed}==1){$s='cos';$c='sin';$d='tan';$a=-1;$b=-1;$c=1;};
+              Context()->noreduce('(-x)+y');
+              Context()->noreduce('(-x)-y');
+              $F = Formula("$a $s(x) + $b $t(x) + $c $u(x)")->reduce;
+              $f = $F->D('x')->reduce;
+              $F = FormulaUpToConstant("$F");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\int \left(<var name="$f"/>\right)\, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 29 -->
+        <!-- Exercise 29 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                Context()->variables->add(t=>"Real");
-                $F = FormulaUpToConstant("3/4*t^(4/3) - 1/t + 2^t/ln(2)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  <m>\ds \int \big(\sqrt[3]{t} + \frac{1}{t^2}+ 2^t\big)\, dt</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $m = random(3,6,1);
+              $n = random(2,8,1);
+              $b = random(2,8,1);
+              if($envir{problemSeed}==1){$m=3;$n=2;$b=2;};
+              Context("Fraction");
+              Context()->variables->add(t=>"Real");
+              parser::Root->Enable;
+              $f = Formula("root($m,t) + 1/t^$n + $b^t");
+              $A = Fraction(1/(1/$m + 1));
+              $M = Fraction(1/$m + 1);
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $F = FormulaUpToConstant("$A*t^($M) - 1/(($n-1) t^($n-1)) + $b^t/ln($b)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\int \left(<var name="$f"/>\right)\, dt</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 30 -->
+        <!-- Exercise 30 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("ln(abs(x)) + csc(x)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  <m>\ds \int \left(\frac{1}{x} -\csc(x) \cot(x) \right)\, dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $t = list_random('sec','csc','cot','tan');
+              if($envir{problemSeed}==1){$t='csc';};
+              $F = Formula("$t(x)");
+              $f = Formula("1/x") + $F->D('x');
+              $f = $f->reduce;
+              $F = FormulaUpToConstant("ln(abs(x)) + $t(x)");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\int \left(<var name="$f"/>\right)\, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-
       </exercisegroup>
     </subexercises>
   </exercises>
