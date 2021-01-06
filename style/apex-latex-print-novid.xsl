@@ -62,9 +62,7 @@
 </xsl:template>
 
 <xsl:template match="assemblage" mode="tcb-style">
-    <xsl:text>enhanced, arc=2ex, colback=white, colframe=black,&#xa;</xsl:text>
-    <xsl:text>colbacktitle=white, coltitle=black, boxed title style={sharp corners, frame hidden},&#xa;</xsl:text>
-    <xsl:text>fonttitle=\bfseries, attach boxed title to top left={xshift=4mm,yshift=-3mm}, top=3mm,&#xa;</xsl:text>
+    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
 <!-- <xsl:template match="&ASIDE-LIKE;" mode="tcb-style">
@@ -95,11 +93,9 @@
 <xsl:param name="latex.geometry" select="'inner=1in,textheight=9in,textwidth=320pt,marginparwidth=150pt,marginparsep=20pt,bottom=1in,footskip=29pt'"/>
 
 <!-- apply exercise geometry -->
-<xsl:template match="exercises" mode="latex-division-heading">
-    <xsl:if test="self::exercises">
-        <!-- \newgeometry includes a \clearpage -->
-        <xsl:apply-templates select="." mode="new-geometry"/>
-    </xsl:if>
+<xsl:template match="exercises|appendix|solutions" mode="latex-division-heading">
+    <!-- \newgeometry includes a \clearpage -->
+    <xsl:apply-templates select="." mode="new-geometry"/>
     <xsl:text>\begin{</xsl:text>
     <xsl:apply-templates select="." mode="division-environment-name" />
     <!-- possibly numberless -->
@@ -126,38 +122,6 @@
     <xsl:text>&#xa;</xsl:text>
 </xsl:template>
 
-<!-- exercise geometry for backmatter appendix -->
-<xsl:template match="appendix" mode="latex-division-heading">
-  <xsl:if test="self::appendix">
-      <!-- \newgeometry includes a \clearpage -->
-      <xsl:apply-templates select="." mode="new-geometry"/>
-  </xsl:if>
-    <xsl:text>\begin{</xsl:text>
-    <xsl:apply-templates select="." mode="division-environment-name" />
-    <!-- possibly numberless -->
-    <xsl:apply-templates select="." mode="division-environment-name-suffix" />
-    <xsl:text>}</xsl:text>
-    <xsl:text>{</xsl:text>
-    <xsl:apply-templates select="." mode="title-full"/>
-    <xsl:text>}</xsl:text>
-    <xsl:text>{</xsl:text>
-    <!-- subtitle here -->
-    <xsl:text>}</xsl:text>
-    <xsl:text>{</xsl:text>
-    <xsl:apply-templates select="." mode="title-short"/>
-    <xsl:text>}</xsl:text>
-    <xsl:text>{</xsl:text>
-    <xsl:apply-templates select="author" mode="name-list"/>
-    <xsl:text>}</xsl:text>
-    <xsl:text>{</xsl:text>
-    <!-- subtitle here -->
-    <!-- <xsl:text>An epigraph here\\with two lines\\-Rob</xsl:text> -->
-    <xsl:text>}</xsl:text>
-    <xsl:text>{</xsl:text>
-    <xsl:apply-templates select="." mode="latex-id" />
-    <xsl:text>}</xsl:text>
-    <xsl:text>&#xa;</xsl:text>
-</xsl:template>
 
 <!-- define exercise geometry -->
 <xsl:template match="exercises|appendix|solutions" mode="new-geometry">
