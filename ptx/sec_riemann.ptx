@@ -1550,820 +1550,1021 @@
   <exercises>
     <subexercises>
       <title>Terms and Concepts</title>
-
       <exercise>
         <webwork>
-            <pg-code>
-              Context("ArbitraryString");
-              $ans=Compute("limits");
-              $ev=$ans->cmp(checker => sub {
-              my ($correct,$student,$ans) = @_;
-              $correct = $correct->value;
-              $student = $student->value;
-              $student =~ s/^~~W+|~~W+$//g;
-              return (uc($correct) eq uc($student));
-              });
-            </pg-code>
-
-            <statement>
-              <p>
-                A fundamental calculus technique is to use <var name="$ans" width="15"/> to refine approximations to get an exact answer.
-              </p>
-            </statement>
-            <solution>
-              <p>
-                limits
-              </p>
-            </solution>
+          <pg-code>
+            Context()->strings->add('limits'=>{});
+            Context()->strings->add('limit'=>{alias=>'limits'});
+          </pg-code>
+          <statement>
+            <p>
+              A fundamental calculus technique is to use <var name="'limits'" width="10"/>
+              to refine approximations to get an exact answer.
+            </p>
+          </statement>
         </webwork>
       </exercise>
-<!-- Exercise 2 -->
+      <!-- Exercise 2 -->
+      <exercise>
+        <webwork seed="1">
+          <pg-code>
+            $lb = random(2,9,1);
+            $ub = random(12,20,1);
+            $m = random(30,60,1);
+            $b = non_zero_random(-300,300,1);
+            if($envir{problemSeed}==1){$lb=7;$ub=14;$m=48;$b=-201;};
+            Context()->variables->are(i=>'Real');
+            $f = Formula("$m i + $b")->reduce;
+          </pg-code>
+          <statement>
+            <p>
+              What is the upper bound in the summation
+              <m>\sum\limits_{i=<var name="$lb"/>}^{<var name="$ub"/>} (<var name="$f"/>)</m>?
+            </p>
+            <p>
+              <var name="$ub" width="10"/>
+            </p>
+          </statement>
+        </webwork>
+      </exercise>
+      <!-- Exercise 3 -->
       <exercise>
         <webwork>
-            <pg-code>
-              $ub = 14;
-            </pg-code>
-
-            <statement>
-              <p>
-                What is the upper bound in the summation <m>\ds \sum_{i=7}^{14} (48i-201)</m>?
-              </p>
-
-              <p>
-                <var name="$ub" width="10"/>
-              </p>
-            </statement>
+          <pg-code>
+            Context()->strings->add('rectangles'=>{});
+            Context()->strings->add('rectangle'=>{alias=>'rectangles'});
+          </pg-code>
+          <statement>
+            <p>
+              This section approximates definite integrals using what geometric shape?
+            </p>
+            <p>
+              <var name="'rectangles'" width="10"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
-<!-- Exercise 3 -->
+      <!-- Exercise 4 -->
       <exercise>
         <webwork>
-            <pg-code>
-            <!-- FUNGUS: Here too -->
-            </pg-code>
-
-            <statement>
-              <p>
-                This section approximates definite integrals using what geometric shape?
-              </p>
-            </statement>
-            <solution>
-              <p>
-                Rectangles.
-              </p>
-            </solution>
+          <pg-code>
+            $true=PopUp(['?','True','False'],1);
+            $false=PopUp(['?','True','False'],2);
+          </pg-code>
+          <statement>
+            <p>
+              <var name="$true" form="popup"/>
+              A sum using the Right Hand Rule is an example of a Riemann Sum.
+            </p>
+          </statement>
         </webwork>
       </exercise>
-<!-- Exercise 4 -->
-      <exercise>
-        <webwork>
-            <pg-code>
-              $true=PopUp(['?','True','False'],1);
-              $false=PopUp(['?','True','False'],2);
-            </pg-code>
-
-            <statement>
-              <p>
-                T/F: A sum using the Right Hand Rule is an example of a Riemann Sum.
-              </p>
-
-              <p>
-                <var name="$true" form="popup"/>
-              </p>
-            </statement>
-        </webwork>
-      </exercise>
-
     </subexercises>
+
     <subexercises>
       <title>Problems</title>
       <exercisegroup cols="2">
         <introduction>
           <p>
-            In the following exercises,
-            write out each term of the summation and compute the sum.
+            Write out each term of the summation and compute the sum.
           </p>
         </introduction>
-  <!-- Exercise 5 -->
+        <!-- Exercise 5 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                @l = (2..4);
-                @l2 = ();
-                $sum = 0;
-                foreach $i (@l) {
-                    $n = $i**2;
-                    $sum += $n;
-                    push @l2, $n;
-                }
-                $list = List(@l2);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Write out each term of the sum
-                  <m>\ds \sum_{i=2}^{4} i^2</m>. Then, compute the sum.
-                </p>
-
-                <p>
-                  Terms: <var name="$list" width="20"/>
-                </p>
-
-                <p>
-                  Sum: <var name="$sum" width="20"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-macros>
+              <macro-file>contextForm.pl</macro-file>
+            </pg-macros>
+            <pg-code>
+              $lb = random(2,5,1);
+              $ub = $lb + random(2,3,1);
+              if($envir{problemSeed}==1){$lb=2;$ub=4;};
+              @i = ($lb..$ub);
+              @fi = map{$_**2}(@i);
+              $string = join('+',@fi);
+              $sum = Real($string);
+              Context("Form");
+              Context()->operators->set(
+                '+' => {class => 'bizarro::BOP::add', isCommand => 1},
+                '-' => {class => 'bizarro::BOP::subtract', isCommand => 1},
+              );
+              $terms = Formula("$string");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\sum\limits_{i=<var name="$lb"/>}^{<var name="$ub"/>} i^2</m>
+              </p>
+              <instruction>
+                Enter the sum of terms here. For example, <c>1+2+3</c>.
+              </instruction>
+              <p>
+                <var name="$terms" width="20"/>
+              </p>
+              <instruction>
+                Enter the actual sum here.
+              </instruction>
+              <p>
+                <var name="$sum" width="20"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 6 -->
+        <!-- Exercise 6 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                @l = (-1..3);
-                @l2 = ();
-                $sum = 0;
-                foreach $i (@l) {
-                    $n = 4*$i-2;
-                    $sum += $n;
-                    push @l2, $n;
-                }
-                $list = List(@l2);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Write out each term of the sum <m>\ds \sum_{i=-1}^{3} (4i-2)</m>. Then, compute the sum.
-                </p>
-
-                <p>
-                  Terms: <var name="$list" width="20"/>
-                </p>
-
-                <p>
-                  Sum: <var name="$sum" width="20"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-macros>
+              <macro-file>contextForm.pl</macro-file>
+            </pg-macros>
+            <pg-code>
+              $lb = random(-3,-1,1);
+              $ub = random(1,3,1);
+              $m = random(2,5,1);
+              $b = non_zero_random(-3,3,1);
+              if($envir{problemSeed}==1){$lb=-1;$ub=3;$m=4;$b=-2;};
+              Context()->variables->are(i=>'Real');
+              $f = Formula("$m i + $b")->reduce;
+              @i = ($lb..$ub);
+              @fi = map{$m*$_ + $b}(@i);
+              $string = join('+',@fi);
+              $sum = Real($string);
+              Context("Form");
+              Context()->operators->set(
+                '+' => {class => 'bizarro::BOP::add', isCommand => 1},
+                '-' => {class => 'bizarro::BOP::subtract', isCommand => 1},
+              );
+              $terms = Formula("$string");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\sum\limits_{i=<var name="$lb"/>}^{<var name="$ub"/>} \left(<var name="$f"/>\right)</m>
+              </p>
+              <instruction>
+                Enter the sum of terms here. For example, <c>1+2+3</c>.
+              </instruction>
+              <p>
+                <var name="$terms" width="20"/>
+              </p>
+              <instruction>
+                Enter the actual sum here.
+              </instruction>
+              <p>
+                <var name="$sum" width="20"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 7 -->
+        <!-- Exercise 7 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                @l = (-2..2);
-                @l2 = ();
-                $sum = 0;
-                foreach $i (@l) {
-                    $n = sin(pi*$i/2);
-                    $sum += $n;
-                    push @l2, $n;
-                }
-                $list = List(@l2);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Write out each term of the sum <m>\ds \sum_{i=-2}^{2} \sin(\pi i/2)</m>. Then, compute the sum.
-                </p>
-
-                <p>
-                  Terms: <var name="$list" width="20"/>
-                </p>
-
-                <p>
-                  Sum: <var name="$sum" width="20"/>
-                </p>
-              </statement>
-              <solution>
-                <p>
-                  <m>0-1+0+1+0 = 0</m>
-                </p>
-              </solution>
+          <webwork seed="1">
+            <pg-macros>
+              <macro-file>contextForm.pl</macro-file>
+            </pg-macros>
+            <pg-code>
+              $lb = random(-3,-1,1);
+              $ub = random(1,3,1);
+              $trig = list_random('sin','cos');
+              if($envir{problemSeed}==1){$lb=-2;$ub=2;$trig='sin';};
+              Context()->variables->are(i=>'Real');
+              $f = Formula("sin(pi i /2)")->reduce;
+              @i = ($lb..$ub);
+              @fi = map{$f->eval(i=>$_)}(@i);
+              $string = join('+',@fi);
+              $sum = Real($string);
+              Context("Form");
+              Context()->operators->set(
+                '+' => {class => 'bizarro::BOP::add', isCommand => 1},
+                '-' => {class => 'bizarro::BOP::subtract', isCommand => 1},
+              );
+              $terms = Formula("$string");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\sum\limits_{i=<var name="$lb"/>}^{<var name="$ub"/>} <var name="$f"/></m>
+              </p>
+              <instruction>
+                Enter the sum of terms here. For example, <c>1+2+3</c>.
+              </instruction>
+              <p>
+                <var name="$terms" width="20"/>
+              </p>
+              <instruction>
+                Enter the actual sum here.
+              </instruction>
+              <p>
+                <var name="$sum" width="20"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!--ToDo: WW code for this problem-->
-      <exercise>
-        <statement>
-          <p>
-            Write out each term of the sum <m>\ds \sum_{i=1}^{10} 5</m>. Then, compute the sum.
-          </p>
-        </statement>
-        <answer>
-          <p>
-            <m>5+5+\ldots+5=50</m>
-          </p>
-        </answer>
-      </exercise>
-
-  <!-- Exercise 8 -->
+        <!-- Exercise 8 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                @l = (1..5);
-                @l2 = ();
-                $sum = 0;
-                foreach $i (@l) {
-                    $n = 1/$i;
-                    $sum += $n;
-                    push @l2, $n;
-                }
-                $list = List(@l2);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Write out each term of the sum <m>\ds \sum_{i=1}^{5} \frac1i</m>. Then, compute the sum.
-                </p>
-
-                <p>
-                  Terms: <var name="$list" width="20"/>
-                </p>
-
-                <p>
-                  Sum: <var name="$sum" width="20"/>
-                </p>
-              </statement>
-              <solution>
-                <p>
-                  <m>1+1/2+1/3+1/4+1/5 = 137/60</m>
-                </p>
-              </solution>
+          <webwork seed="1">
+            <pg-macros>
+              <macro-file>contextForm.pl</macro-file>
+            </pg-macros>
+            <pg-code>
+              $lb = 1;
+              ($ub,$c) = (5..10)[NchooseK(5,2)];
+              if($envir{problemSeed}==1){$ub=10;$c=5;};
+              Context()->variables->are(i=>'Real');
+              $f = Formula("$c")->reduce;
+              @i = ($lb..$ub);
+              @fi = map{$f->eval(i=>$_)}(@i);
+              $string = join('+',@fi);
+              $sum = Real($string);
+              Context("Form");
+              Context()->operators->set(
+                '+' => {class => 'bizarro::BOP::add', isCommand => 1},
+                '-' => {class => 'bizarro::BOP::subtract', isCommand => 1},
+              );
+              $terms = Formula("$string");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\sum\limits_{i=<var name="$lb"/>}^{<var name="$ub"/>} <var name="$f"/></m>
+              </p>
+              <instruction>
+                Enter the sum of terms here. For example, <c>1+2+3</c>.
+              </instruction>
+              <p>
+                <var name="$terms" width="20"/>
+              </p>
+              <instruction>
+                Enter the actual sum here.
+              </instruction>
+              <p>
+                <var name="$sum" width="20"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 9 -->
+        <!-- Exercise 9 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                @l = (1..6);
-                @l2 = ();
-                $sum = 0;
-                foreach $i (@l) {
-                    $n = (-1)**$i * $i;
-                    $sum += $n;
-                    push @l2, $n;
-                }
-                $list = List(@l2);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Write out each term of the sum <m>\ds \sum_{i=1}^{6} (-1)^ii</m>. Then, compute the sum.
-                </p>
-
-                <p>
-                  Terms: <var name="$list" width="20"/>
-                </p>
-
-                <p>
-                  Sum: <var name="$sum" width="20"/>
-                </p>
-              </statement>
-              <solution>
-                <p>
-                  <m>-1+2-3+4-5+6=3</m>
-                </p>
-              </solution>
+          <webwork seed="1">
+            <pg-macros>
+              <macro-file>contextForm.pl</macro-file>
+            </pg-macros>
+            <pg-code>
+              $lb = 1;
+              $ub = random(4,6,1);
+              if($envir{problemSeed}==1){$ub=5;};
+              Context("Fraction");
+              Context()->variables->are(i=>'Real');
+              $f = Formula("1/i")->reduce;
+              @i = ($lb..$ub);
+              @fi = map{Fraction($f->eval(i=>$_))}(@i);
+              $string = join('+',@fi);
+              $sum = Fraction($string);
+              Context("Form");
+              Context()->operators->set(
+                '+' => {class => 'bizarro::BOP::add', isCommand => 1},
+                '-' => {class => 'bizarro::BOP::subtract', isCommand => 1},
+              );
+              $terms = Formula("$string");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\sum\limits_{i=<var name="$lb"/>}^{<var name="$ub"/>} <var name="$f"/></m>
+              </p>
+              <instruction>
+                Enter the sum of terms here. For example, <c>1+2+3</c>.
+              </instruction>
+              <p>
+                <var name="$terms" width="20"/>
+              </p>
+              <instruction>
+                Enter the actual sum here.
+              </instruction>
+              <p>
+                <var name="$sum" width="20"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 10 -->
+        <!-- Exercise 10 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                @l = (1..4);
-                @l2 = ();
-                $sum = 0;
-                foreach $i (@l) {
-                    $n = 1/$i - 1/($i + 1);
-                    $sum += $n;
-                    push @l2, $n;
-                }
-                $list = List(@l2);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Write out each term of the sum <m>\ds \sum_{i=1}^{4} \left(\frac{1}{i} - \frac{1}{i+1}\right)</m>. Then, compute the sum.
-                </p>
-
-                <p>
-                  Terms: <var name="$list" width="20"/>
-                </p>
-
-                <p>
-                  Sum: <var name="$sum" width="20"/>
-                </p>
-              </statement>
-              <solution>
-                <p>
-                  <m>1/2+1/6+1/12+1/20=4/5</m>
-                </p>
-              </solution>
+          <webwork seed="1">
+            <pg-macros>
+              <macro-file>contextForm.pl</macro-file>
+            </pg-macros>
+            <pg-code>
+              $lb = 1;
+              $ub = random(4,8,1);
+              if($envir{problemSeed}==1){$ub=6;};
+              Context()->variables->are(i=>'Real');
+              $f = Formula("(-1)^i i")->reduce;
+              @i = ($lb..$ub);
+              @fi = map{$f->eval(i=>$_)}(@i);
+              $string = join('+',@fi);
+              $sum = Real($string);
+              Context("Form");
+              Context()->operators->set(
+                '+' => {class => 'bizarro::BOP::add', isCommand => 1},
+                '-' => {class => 'bizarro::BOP::subtract', isCommand => 1},
+              );
+              $terms = Formula("$string");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\sum\limits_{i=<var name="$lb"/>}^{<var name="$ub"/>} <var name="$f"/></m>
+              </p>
+              <instruction>
+                Enter the sum of terms here. For example, <c>1+2+3</c>.
+              </instruction>
+              <p>
+                <var name="$terms" width="20"/>
+              </p>
+              <instruction>
+                Enter the actual sum here.
+              </instruction>
+              <p>
+                <var name="$sum" width="20"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 11 -->
+        <!-- Exercise 11 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                @l = (0..5);
-                @l2 = ();
-                $sum = 0;
-                foreach $i (@l) {
-                    $n = (-1)**$i * cos(pi*$i);
-                    $sum += $n;
-                    push @l2, $n;
-                }
-                $list = List(@l2);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Write out each term of the sum <m>\ds \sum_{i=0}^{5} (-1)^i\cos(\pi i)</m>. Then, compute the sum.
-                </p>
-
-                <p>
-                  Terms: <var name="$list" width="20"/>
-                </p>
-
-                <p>
-                  Sum: <var name="$sum" width="20"/>
-                </p>
-              </statement>
-              <solution>
-                <p>
-                  <m>1+1+1+1+1+1=6</m>
-                </p>
-              </solution>
+          <webwork seed="1">
+            <pg-macros>
+              <macro-file>contextForm.pl</macro-file>
+            </pg-macros>
+            <pg-code>
+              $lb = 1;
+              $ub = random(3,5,1);
+              if($envir{problemSeed}==1){$ub=4;};
+              Context()->variables->are(i=>'Real');
+              $f = Formula("1/i - 1/(i+1)")->reduce;
+              @i = ($lb..$ub);
+              Context("Fraction");
+              @fi = map{Fraction($f->eval(i=>$_))}(@i);
+              $string = join('+',@fi);
+              $sum = Fraction($string);
+              Context("Form");
+              Context()->operators->set(
+                '+' => {class => 'bizarro::BOP::add', isCommand => 1},
+                '-' => {class => 'bizarro::BOP::subtract', isCommand => 1},
+              );
+              $terms = Formula("$string");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\sum\limits_{i=<var name="$lb"/>}^{<var name="$ub"/>} \left(<var name="$f"/>\right)</m>
+              </p>
+              <instruction>
+                Enter the sum of terms here. For example, <c>1+2+3</c>.
+              </instruction>
+              <p>
+                <var name="$terms" width="20"/>
+              </p>
+              <instruction>
+                Enter the actual sum here.
+              </instruction>
+              <p>
+                <var name="$sum" width="20"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-
+        <!-- Exercise 12 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-macros>
+              <macro-file>contextForm.pl</macro-file>
+            </pg-macros>
+            <pg-code>
+              $lb = random(0,1,1);
+              $ub = random(4,6,1);
+              if($envir{problemSeed}==1){$lb=0;$ub=5;};
+              Context()->variables->are(i=>'Real');
+              $f = Formula("(-1)^i cos(pi i)")->reduce;
+              @i = ($lb..$ub);
+              @fi = map{$f->eval(i=>$_)}(@i);
+              $string = join('+',@fi);
+              $sum = Real($string);
+              Context("Form");
+              Context()->operators->set(
+                '+' => {class => 'bizarro::BOP::add', isCommand => 1},
+                '-' => {class => 'bizarro::BOP::subtract', isCommand => 1},
+              );
+              $terms = Formula("$string");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\sum\limits_{i=<var name="$lb"/>}^{<var name="$ub"/>} <var name="$f"/></m>
+              </p>
+              <instruction>
+                Enter the sum of terms here. For example, <c>1+2+3</c>.
+              </instruction>
+              <p>
+                <var name="$terms" width="20"/>
+              </p>
+              <instruction>
+                Enter the actual sum here.
+              </instruction>
+              <p>
+                <var name="$sum" width="20"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
       </exercisegroup>
+
       <exercisegroup cols="2">
         <introduction>
           <p>
-            In the following exercises, write each sum in summation notation.
+            Write the sum in summation notation.
           </p>
         </introduction>
-  <!-- Exercise 12 -->
-  <!-- FUNGUS: How to enter in summation notation? -->
+        <!-- Exercise 13 -->
         <exercise>
-          <webwork>
-              <pg-code>
-              </pg-code>
-
-              <statement>
-                <p>
-                  Rewrite the sum using summation notation:
-                </p>
-
-                <p>
-                  <m>\displaystyle 3+6+9+12+15</m>
-                </p>
-              </statement>
-              <solution>
-                <p>
-                  Answers may vary; <m>\sum_{i=1}^5 3i</m>
-                </p>
-              </solution>
+          <webwork seed="1">
+            <pg-code>
+              $lb = 1;
+              $ub = random(4,6,1);
+              $m = random(2,9,1);
+              if($envir{problemSeed}==1){$ub=5;$m=3;};
+              Context()->variables->are(i=>'Real');
+              $f = Formula("$m i")->reduce;
+              @i = ($lb..$ub);
+              @fi = map{$f->eval(i=>$_)}(@i);
+              $string = join('+',@fi);
+              Context()->flags->set(reduceConstants=>0);
+              $terms = Formula("$string");
+              $multians = MultiAnswer($lb, $ub, $f)->with(
+                singleResult => 1,
+                checker => sub {
+                    my ( $correct, $student, $self ) = @_;
+                    my ( $stulb, $stuub, $stuf ) = @{$student};
+                    my ( $corlb, $corub, $corf ) = @{$correct};
+                    if ($stuub - $stulb != $corub - $corlb) {Value::Error("Your sum does not have the correct number of terms");};
+                    @stui = ($stulb..$stuub);
+                    @stufi = map{$stuf->eval(i=>$_)}(@stui);
+                    @cori = ($corlb..$corub);
+                    @corfi = map{$corf->eval(i=>$_)}(@cori);
+                    $score = 1;
+                    for $j (0..$#corfi) {
+                      if ($stufi[$j] != $corfi[$j]) {
+                        $score = 0;
+                        last;
+                      }
+                    }
+                    return $score;
+                  }
+              );
+            </pg-code>
+            <statement>
+              <p>
+                <m><var name="$terms"/></m>
+              </p>
+              <instruction>
+                If the sum were in sigma notation, <m>\sum\limits_{i=\text{start}}^{\text{end}}(\text{summand expression})</m>, enter the start value here.
+              </instruction>
+              <p>
+                <var name="$multians" width="20"/>
+              </p>
+              <instruction>
+                If the sum were in sigma notation, <m>\sum\limits_{i=\text{start}}^{\text{end}}(\text{summand expression})</m>, enter the end value here.
+              </instruction>
+              <p>
+                <var name="$multians" width="20"/>
+              </p>
+              <instruction>
+                If the sum were in sigma notation, <m>\sum\limits_{i=\text{start}}^{\text{end}}(\text{summand expression})</m>, enter the summand expression here.
+              </instruction>
+              <p>
+                <var name="$multians" width="20"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
 
         <exercise>
-          <webwork>
-              <pg-code>
-              </pg-code>
-
-              <statement>
-                <p>
-                  Rewrite the sum using summation notation:
-                </p>
-
-                <p>
-                  <m>-1+0+3+8+15+24+35+48+63</m>
-                </p>
-              </statement>
-              <solution>
-                <p>
-                  Answers may vary; <m>\sum_{i=0}^8 (i^2-1)</m>
-                </p>
-              </solution>
+          <webwork seed="1">
+            <pg-code>
+              $lb = 0;
+              $ub = random(5,9,1);
+              $b = non_zero_random(-2,2,1);
+              if($envir{problemSeed}==1){$ub=8;$b=-1;};
+              Context()->variables->are(i=>'Real');
+              $f = Formula("i^2 + $b")->reduce;
+              @i = ($lb..$ub);
+              @fi = map{$f->eval(i=>$_)}(@i);
+              $string = join('+',@fi);
+              Context()->flags->set(reduceConstants=>0);
+              $terms = Formula("$string");
+              $multians = MultiAnswer($lb, $ub, $f)->with(
+                singleResult => 1,
+                checker => sub {
+                    my ( $correct, $student, $self ) = @_;
+                    my ( $stulb, $stuub, $stuf ) = @{$student};
+                    my ( $corlb, $corub, $corf ) = @{$correct};
+                    if ($stuub - $stulb != $corub - $corlb) {Value::Error("Your sum does not have the correct number of terms");};
+                    @stui = ($stulb..$stuub);
+                    @stufi = map{$stuf->eval(i=>$_)}(@stui);
+                    @cori = ($corlb..$corub);
+                    @corfi = map{$corf->eval(i=>$_)}(@cori);
+                    $score = 1;
+                    for $j (0..$#corfi) {
+                      if ($stufi[$j] != $corfi[$j]) {
+                        $score = 0;
+                        last;
+                      }
+                    }
+                    return $score;
+                  }
+              );
+            </pg-code>
+            <statement>
+              <p>
+                <m><var name="$terms"/></m>
+              </p>
+              <instruction>
+                If the sum were in sigma notation, <m>\sum\limits_{i=\text{start}}^{\text{end}}(\text{summand expression}</m>, enter the start value here.
+              </instruction>
+              <p>
+                <var name="$multians" width="20"/>
+              </p>
+              <instruction>
+                If the sum were in sigma notation, <m>\sum\limits_{i=\text{start}}^{\text{end}}(\text{summand expression}</m>, enter the end value here.
+              </instruction>
+              <p>
+                <var name="$multians" width="20"/>
+              </p>
+              <instruction>
+                If the sum were in sigma notation, <m>\sum\limits_{i=\text{start}}^{\text{end}}(\text{summand expression}</m>, enter the summand expression here.
+              </instruction>
+              <p>
+                <var name="$multians" width="20"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
 
         <exercise>
-          <webwork>
-              <pg-code>
-              </pg-code>
-
-              <statement>
-                <p>
-                  Rewrite the sum using summation notation:
-                </p>
-
-                <p>
-                  <m>\ds \frac12+\frac23+\frac34+\frac45</m>
-                </p>
-              </statement>
-              <solution>
-                <p>
-                  Answers may vary; <m>\sum_{i=1}^4 \frac{i}{i+1}</m>
-                </p>
-              </solution>
+          <webwork seed="1">
+            <pg-code>
+              $lb = 1;
+              $ub = random(4,6,1);
+              $b = random(1,5,1);
+              if($envir{problemSeed}==1){$ub=4;$b=1;};
+              Context("Fraction");
+              Context()->flags->set(reduceFractions=>0);
+              Context()->variables->are(i=>'Real');
+              $f = Formula("i/(i+$b)")->reduce;
+              @i = ($lb..$ub);
+              @fi = map{Fraction($_,$_+$b)}(@i);
+              $string = join('+',@fi);
+              Context()->flags->set(reduceConstants=>0);
+              $terms = Formula("$string");
+              $multians = MultiAnswer($lb, $ub, $f)->with(
+                singleResult => 1,
+                checker => sub {
+                    my ( $correct, $student, $self ) = @_;
+                    my ( $stulb, $stuub, $stuf ) = @{$student};
+                    my ( $corlb, $corub, $corf ) = @{$correct};
+                    if ($stuub - $stulb != $corub - $corlb) {Value::Error("Your sum does not have the correct number of terms");};
+                    @stui = ($stulb..$stuub);
+                    @stufi = map{$stuf->eval(i=>$_)}(@stui);
+                    @cori = ($corlb..$corub);
+                    @corfi = map{$corf->eval(i=>$_)}(@cori);
+                    $score = 1;
+                    for $j (0..$#corfi) {
+                      if ($stufi[$j] != $corfi[$j]) {
+                        $score = 0;
+                        last;
+                      }
+                    }
+                    return $score;
+                  }
+              );
+            </pg-code>
+            <statement>
+              <p>
+                <m><var name="$terms"/></m>
+              </p>
+              <instruction>
+                If the sum were in sigma notation, <m>\sum\limits_{i=\text{start}}^{\text{end}}(\text{summand expression}</m>, enter the start value here.
+              </instruction>
+              <p>
+                <var name="$multians" width="20"/>
+              </p>
+              <instruction>
+                If the sum were in sigma notation, <m>\sum\limits_{i=\text{start}}^{\text{end}}(\text{summand expression}</m>, enter the end value here.
+              </instruction>
+              <p>
+                <var name="$multians" width="20"/>
+              </p>
+              <instruction>
+                If the sum were in sigma notation, <m>\sum\limits_{i=\text{start}}^{\text{end}}(\text{summand expression}</m>, enter the summand expression here.
+              </instruction>
+              <p>
+                <var name="$multians" width="20"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
 
         <exercise>
-          <webwork>
-              <pg-code>
-              </pg-code>
-
-              <statement>
-                <p>
-                  Rewrite the sum using summation notation:
-                </p>
-
-                <p>
-                  <m>\ds 1-e+e^2-e^3+e^4</m>
-                </p>
-              </statement>
-              <solution>
-                <p>
-                  Answers may vary; <m>\sum_{i=0}^4 (-1)^ie^i</m>
-                </p>
-              </solution>
+          <webwork seed="1">
+            <pg-code>
+              $lb = list_random(0,1);
+              $ub = $lb + 4;
+              if($envir{problemSeed}==1){$lb=0;};
+              Context()->variables->are(i=>'Real');
+              $f = ($lb == 0) ? Formula("(-1)^i") : Formula("(-1)^(i+1)");
+              @i = ($lb..$ub);
+              @fi = map{$f->eval(i=>$_) * Formula("e^$_")}(@i);
+              $string = join('+',@fi);
+              Context()->flags->set(reduceConstants=>0);
+              $terms = Formula("$string")->reduce;
+              $multians = MultiAnswer($lb, $ub, $f)->with(
+                singleResult => 1,
+                checker => sub {
+                    my ( $correct, $student, $self ) = @_;
+                    my ( $stulb, $stuub, $stuf ) = @{$student};
+                    my ( $corlb, $corub, $corf ) = @{$correct};
+                    if ($stuub - $stulb != $corub - $corlb) {Value::Error("Your sum does not have the correct number of terms");};
+                    @stui = ($stulb..$stuub);
+                    @stufi = map{$stuf->eval(i=>$_)}(@stui);
+                    @cori = ($corlb..$corub);
+                    @corfi = map{$corf->eval(i=>$_)}(@cori);
+                    $score = 1;
+                    for $j (0..$#corfi) {
+                      if ($stufi[$j] != $corfi[$j]) {
+                        $score = 0;
+                        last;
+                      }
+                    }
+                    return $score;
+                  }
+              );
+            </pg-code>
+            <statement>
+              <p>
+                <m><var name="$terms"/></m>
+              </p>
+              <instruction>
+                If the sum were in sigma notation, <m>\sum\limits_{i=\text{start}}^{\text{end}}(\text{summand expression}</m>, enter the start value here.
+              </instruction>
+              <p>
+                <var name="$multians" width="20"/>
+              </p>
+              <instruction>
+                If the sum were in sigma notation, <m>\sum\limits_{i=\text{start}}^{\text{end}}(\text{summand expression}</m>, enter the end value here.
+              </instruction>
+              <p>
+                <var name="$multians" width="20"/>
+              </p>
+              <instruction>
+                If the sum were in sigma notation, <m>\sum\limits_{i=\text{start}}^{\text{end}}(\text{summand expression}</m>, enter the summand expression here.
+              </instruction>
+              <p>
+                <var name="$multians" width="20"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-
       </exercisegroup>
-      <exercisegroup cols="2">
 
+      <exercisegroup cols="2">
         <introduction>
           <p>
-            In the following exercises,
-            evaluate the summation using <xref ref="thm_summation">Theorem</xref>.
+            Evaluate the summation using <xref ref="thm_summation">Theorem</xref>.
           </p>
         </introduction>
-  <!--ToDo: WW code for this problem-->
-      <exercise>
-        <statement>
-          <p>
-            Use properties of summation notation to evaluate the sum:
-          </p>
 
-          <p>
-            <m>\ds \sum_{i=1}^{10} 5</m>
-          </p>
-        </statement>
-        <answer>
-          <p>
-            <m>5\cdot 10=50</m>
-          </p>
-        </answer>
-      </exercise>
-
-  <!-- Exercise 16 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                @l = (1..25);
-                $sum = 0;
-                foreach $i (@l) {
-                    $sum += $i;
-                }
-              </pg-code>
-
-              <statement>
-                <p>
-                  Use properties of summation notation to evaluate the sum:
-                </p>
-
-                <p>
-                  <m>\ds \sum_{i=1}^{25} i</m>
-                </p>
-
-                <p>
-                  <var name="$sum" width="20"/>
-                </p>
-     <!-- 325 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $lb = 1;
+              ($ub,$c) = (5..10)[NchooseK(5,2)];
+              if($envir{problemSeed}==1){$ub=10;$c=5;};
+              Context()->variables->are(i=>'Real');
+              $f = Formula("$c")->reduce;
+              @i = ($lb..$ub);
+              @fi = map{$f->eval(i=>$_)}(@i);
+              $string = join('+',@fi);
+              $sum = Real($string);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\sum\limits_{i=<var name="$lb"/>}^{<var name="$ub"/>} <var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$sum" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 17 -->
+        <!-- Exercise 18 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                @l = (1..10);
-                $sum = 0;
-                foreach $i (@l) {
-                    $sum += 3*$i**2 - 2*$i;
-                }
-              </pg-code>
-
-              <statement>
-                <p>
-                  Use properties of summation notation to evaluate the sum:
-                </p>
-
-                <p>
-                  <m>\ds \sum_{i=1}^{10} (3i^2-2i)</m>
-                </p>
-
-                <p>
-                  <var name="$sum" width="20"/>
-                </p>
-     <!-- 1045 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $lb = 1;
+              $ub = random(20,30,1);
+              if($envir{problemSeed}==1){$ub=25;};
+              Context()->variables->are(i=>'Real');
+              $f = Formula("i")->reduce;
+              @i = ($lb..$ub);
+              @fi = map{$f->eval(i=>$_)}(@i);
+              $string = join('+',@fi);
+              $sum = Real($string);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\sum\limits_{i=<var name="$lb"/>}^{<var name="$ub"/>} <var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$sum" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 18 -->
+        <!-- Exercise 19 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                @l = (1..15);
-                $sum = 0;
-                foreach $i (@l) {
-                    $sum += 2*$i**3 - 10;
-                }
-              </pg-code>
-
-              <statement>
-                <p>
-                  Use properties of summation notation to evaluate the sum:
-                </p>
-
-                <p>
-                  <m>\ds \sum_{i=1}^{15} (2i^3-10)</m>
-                </p>
-
-                <p>
-                  <var name="$sum" width="20"/>
-                </p>
-     <!-- 28650 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $lb = 1;
+              $ub = random(8,12,1);
+              $a = random(2,6,1);
+              $b = non_zero_random(-4,4,1);
+              if($envir{problemSeed}==1){$ub=10;$a=3;$b=-2;};
+              Context()->variables->are(i=>'Real');
+              $f = Formula("$a i^2 + $b i")->reduce;
+              @i = ($lb..$ub);
+              @fi = map{$f->eval(i=>$_)}(@i);
+              $string = join('+',@fi);
+              $sum = Real($string);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\sum\limits_{i=<var name="$lb"/>}^{<var name="$ub"/>} \left(<var name="$f"/>\right)</m>
+              </p>
+              <p>
+                <var name="$sum" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 19 -->
+        <!-- Exercise 20 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                @l = (1..10);
-                $sum = 0;
-                foreach $i (@l) {
-                    $sum += -4*$i**3 + 10*$i**2 - 7*$i + 11;
-                }
-              </pg-code>
-
-              <statement>
-                <p>
-                  Use properties of summation notation to evaluate the sum:
-                </p>
-
-                <p>
-                  <m>\ds \sum_{i=1}^{10} (-4i^3+10i^2-7i+11)</m>
-                </p>
-
-                <p>
-                  <var name="$sum" width="20"/>
-                </p>
-     <!-- -8525 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $lb = 1;
+              $ub = random(12,20,1);
+              $a = random(2,6,1);
+              $b = non_zero_random(-10,10,1);
+              if($envir{problemSeed}==1){$ub=15;$a=2;$b=-10;};
+              Context()->variables->are(i=>'Real');
+              $f = Formula("$a i^3 + $b")->reduce;
+              @i = ($lb..$ub);
+              @fi = map{$f->eval(i=>$_)}(@i);
+              $string = join('+',@fi);
+              $sum = Real($string);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\sum\limits_{i=<var name="$lb"/>}^{<var name="$ub"/>} \left(<var name="$f"/>\right)</m>
+              </p>
+              <p>
+                <var name="$sum" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 20 -->
+        <!-- Exercise 21 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                @l = (1..10);
-                $sum = 0;
-                foreach $i (@l) {
-                    $sum += $i**3 - 3*$i**2 + 2*$i + 7;
-                }
-              </pg-code>
-
-              <statement>
-                <p>
-                  Use properties of summation notation to evaluate the sum:
-                </p>
-
-                <p>
-                  <m>\ds \sum_{i=1}^{10} (i^3-3i^2+2i+7)</m>
-                </p>
-
-                <p>
-                  <var name="$sum" width="20"/>
-                </p>
-     <!-- 2050 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $lb = 1;
+              $ub = random(8,12,1);
+              ($a,$b,$c,$d) = (-12..-1,1..12)[NchooseK(24,4)];
+              if($envir{problemSeed}==1){$ub=10;$a=-4;$b=10;$c=-7;$d=11;};
+              Context()->variables->are(i=>'Real');
+              Context()->noreduce('(-x)+y','(-x)-y');
+              $f = Formula("$a i^3 + $b i^2 + $c i + $d")->reduce;
+              @i = ($lb..$ub);
+              @fi = map{$f->eval(i=>$_)}(@i);
+              $string = join('+',@fi);
+              $sum = Real($string);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\sum\limits_{i=<var name="$lb"/>}^{<var name="$ub"/>} \left(<var name="$f"/>\right)</m>
+              </p>
+              <p>
+                <var name="$sum" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 21 -->
+        <!-- Exercise 22 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $sum = 0;
-                foreach $i (1..100) {
-                    $sum += $i;
-                }
-              </pg-code>
-
-              <statement>
-                <p>
-                  Use properties of summation notation to evaluate the sum:
-                </p>
-
-                <p>
-                  <m>1+2+3+ \ldots + 99+100</m>
-                </p>
-
-                <p>
-                  <var name="$sum" width="20"/>
-                </p>
-     <!-- 5050 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $lb = 1;
+              $ub = random(8,12,1);
+              ($b,$c,$d) = (-9..-1,1..9)[NchooseK(18,3)];
+              if($envir{problemSeed}==1){$ub=10;$b=-3;$c=2;$d=7;};
+              Context()->variables->are(i=>'Real');
+              Context()->noreduce('(-x)+y','(-x)-y');
+              $f = Formula("i^3 + $b i^2 + $c i + $d")->reduce;
+              @i = ($lb..$ub);
+              @fi = map{$f->eval(i=>$_)}(@i);
+              $string = join('+',@fi);
+              $sum = Real($string);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\sum\limits_{i=<var name="$lb"/>}^{<var name="$ub"/>} \left(<var name="$f"/>\right)</m>
+              </p>
+              <p>
+                <var name="$sum" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 22 -->
+        <!-- Exercise 23 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $sum = 0;
-                foreach $i (1..20) {
-                    $sum += $i**2;
-                }
-              </pg-code>
-
-              <statement>
-                <p>
-                  Use properties of summation notation to evaluate the sum:
-                </p>
-
-                <p>
-                  <m>1+4+9+ \ldots +361+400</m>
-                </p>
-
-                <p>
-                  <var name="$sum" width="20"/>
-                </p>
-     <!-- 2870 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $lb = 1;
+              $ub = random(80,120,5);
+              if($envir{problemSeed}==1){$ub=100;};
+              Context()->variables->are(i=>'Real');
+              $f = Formula("i")->reduce;
+              @i = ($lb..$ub);
+              @fi = map{$f->eval(i=>$_)}(@i);
+              $string = join('+',@fi);
+              $sum = Real($string);
+              $penultimate = $ub - 1;
+            </pg-code>
+            <statement>
+              <p>
+                <m>1+2+3+\cdots+<var name="$penultimate"/>+<var name="$ub"/></m>
+              </p>
+              <p>
+                <var name="$sum" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-
+        <!-- Exercise 24 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $lb = 1;
+              $ub = random(16,30,1);
+              if($envir{problemSeed}==1){$ub=20;};
+              Context()->variables->are(i=>'Real');
+              $f = Formula("i^2")->reduce;
+              @i = ($lb..$ub);
+              @fi = map{$f->eval(i=>$_)}(@i);
+              $string = join('+',@fi);
+              $sum = Real($string);
+              $last = $ub**2;
+              $penultimate = ($ub - 1)**2;
+            </pg-code>
+            <statement>
+              <p>
+                <m>1+4+9+\cdots+<var name="$penultimate"/>+<var name="$last"/></m>
+              </p>
+              <p>
+                <var name="$sum" width="10"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
       </exercisegroup>
-      <exercisegroup cols="2">
 
+      <exercisegroup cols="2">
         <introduction>
           <p>
             <xref ref="thm_summation">Theorem</xref> states
-          </p>
-
-          <p>
-            <m>\ds \sum_{i=1}^na_i = \sum_{i=1}^k a_i + \sum_{i=k+1}^n a_i</m><nbsp/>, so
-          </p>
-
-          <p>
-            <m>\ds \sum_{i=k+1}^na_i = \sum_{i=1}^n a_i - \sum_{i=1}^k a_i</m><nbsp/>.
-          </p>
-
-          <p>
+            <m>\sum\limits_{i=1}^na_i = \sum\limits_{i=1}^k a_i + \sum\limits_{i=k+1}^n a_i</m>,
+            so
+            <m>\sum\limits_{i=k+1}^na_i = \sum\limits_{i=1}^n a_i - \sum\limits_{i=1}^k a_i</m>.
             Use this fact,
             along with other parts of <xref ref="thm_summation">Theorem</xref>,
-            to evaluate the summations given in the following exercises.
+            to evaluate the summation.
           </p>
         </introduction>
-  <!-- Exercise 23 -->
+        <!-- Exercise 25 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $sum = 0;
-                foreach $i (11..20) {
-                    $sum += $i;
-                }
-              </pg-code>
-
-              <statement>
-                <p>
-                  Use the fact that <m>\ds \sum_{i=k+1}^na_i = \sum_{i=1}^n a_i - \sum_{i=1}^k a_i</m>,
-                  along with other summation properties, to evaluate the sum.
-                </p>
-
-                <p>
-                  <m>\ds \sum_{i=11}^{20} i</m>
-                </p>
-
-                <p>
-                  <var name="$sum" width="20"/>
-                </p>
-     <!-- 155 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $lb = random(7,13,1);
+              $ub = $lb + random(8,12,1);
+              if($envir{problemSeed}==1){$lb=11;$ub=20;};
+              Context()->variables->are(i=>'Real');
+              $f = Formula("i")->reduce;
+              @i = ($lb..$ub);
+              @fi = map{$f->eval(i=>$_)}(@i);
+              $string = join('+',@fi);
+              $sum = Real($string);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\sum\limits_{i=<var name="$lb"/>}^{<var name="$ub"/>} <var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$sum" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 24 -->
+        <!-- Exercise 26 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $sum = 0;
-                foreach $i (16..25) {
-                    $sum += $i**3;
-                }
-              </pg-code>
-
-              <statement>
-                <p>
-                  Use the fact that <m>\ds \sum_{i=k+1}^na_i = \sum_{i=1}^n a_i - \sum_{i=1}^k a_i</m>,
-                  along with other summation properties, to evaluate the sum.
-                </p>
-
-                <p>
-                  <m>\ds \sum_{i=16}^{25} i^3</m>
-                </p>
-
-                <p>
-                  <var name="$sum" width="20"/>
-                </p>
-     <!-- 91225 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $lb = random(14,18,1);
+              $ub = $lb + random(8,12,1);
+              if($envir{problemSeed}==1){$lb=16;$ub=25;};
+              Context()->variables->are(i=>'Real');
+              $f = Formula("i**3")->reduce;
+              @i = ($lb..$ub);
+              @fi = map{$f->eval(i=>$_)}(@i);
+              $string = join('+',@fi);
+              $sum = Real($string);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\sum\limits_{i=<var name="$lb"/>}^{<var name="$ub"/>} <var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$sum" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 25 -->
+        <!-- Exercise 27 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $sum = 0;
-                foreach $i (7..12) {
-                    $sum += 4;
-                }
-              </pg-code>
-
-              <statement>
-                <p>
-                  Use the fact that <m>\ds \sum_{i=k+1}^na_i = \sum_{i=1}^n a_i - \sum_{i=1}^k a_i</m>,
-                  along with other summation properties, to evaluate the sum.
-                </p>
-
-                <p>
-                  <m>\ds \sum_{i=7}^{12} 4</m>
-                </p>
-
-                <p>
-                  <var name="$sum" width="20"/>
-                </p>
-     <!-- 24 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $lb = random(5,8,1);
+              $ub = $lb + random(5,8,1);
+              $c = random(3,8,1);
+              if($envir{problemSeed}==1){$lb=7;$ub=12;$c=4;};
+              Context()->variables->are(i=>'Real');
+              $f = Formula("$c")->reduce;
+              @i = ($lb..$ub);
+              @fi = map{$f->eval(i=>$_)}(@i);
+              $string = join('+',@fi);
+              $sum = Real($string);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\sum\limits_{i=<var name="$lb"/>}^{<var name="$ub"/>} <var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$sum" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 26 -->
+        <!-- Exercise 28 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $sum = 0;
-                foreach $i (5..10) {
-                    $sum += 4*$i**3;
-                }
-              </pg-code>
-
-              <statement>
-                <p>
-                  Use the fact that <m>\ds \sum_{i=k+1}^na_i = \sum_{i=1}^n a_i - \sum_{i=1}^k a_i</m>,
-                  along with other summation properties, to evaluate the sum.
-                </p>
-
-                <p>
-                  <m>\ds \sum_{i=5}^{10} 4i^3</m>
-                </p>
-
-                <p>
-                  <var name="$sum" width="20"/>
-                </p>
-     <!-- 11700 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $lb = random(5,8,1);
+              $ub = $lb + random(5,8,1);
+              $c = random(3,8,1);
+              if($envir{problemSeed}==1){$lb=5;$ub=10;$c=4;};
+              Context()->variables->are(i=>'Real');
+              $f = Formula("$c i**3")->reduce;
+              @i = ($lb..$ub);
+              @fi = map{$f->eval(i=>$_)}(@i);
+              $string = join('+',@fi);
+              $sum = Real($string);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\sum\limits_{i=<var name="$lb"/>}^{<var name="$ub"/>} <var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$sum" width="10"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-
       </exercisegroup>
-      <exercisegroup cols="2">
 
+      <exercisegroup cols="2">
         <introduction>
           <p>
-            In the following exercises, a definite integral
-          </p>
-
-          <p>
-            <m>\ds \int_a^b f(x) \, dx</m> is given.
-          </p>
-
-          <p>
+            In the following exercises, a definite integral <m>\ds \int_a^b f(x) \, dx</m> is given.
             <ol>
               <li>
                 <p>
                   Graph <m>f(x)</m> on <m>[a,b]</m>.
                 </p>
               </li>
-
               <li>
                 <p>
                   Add to the sketch rectangles using the provided rule.
                 </p>
               </li>
-
               <li>
                 <p>
                   Approximate <m>\ds \int_a^b f(x) \, dx</m> by summing the areas of the rectangles.
@@ -2372,293 +2573,68 @@
             </ol>
           </p>
         </introduction>
-  <!-- Exercise 27 -->
+        <!-- Exercise 29 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $n = 6;
-                $a = -3;
-                $b = 3;
-                $f = Formula("x^2");
-                $delta_x = ($b - $a)/$n;
-                $left = 0;
-                $right = 0;
-                $mid = 0;
-                @l = ();
-              <!-- for loop fails but works in perl online, use two foreach instead -->
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
-                }
-                foreach $i (@l) {
-                  $left += $f->eval(x=>$i);
-                  $right += $f->eval(x=>($i+$delta_x));
-                  $mid += $f->eval(x=>($i + $delta_x/2));
-                }
-                $left = $left * $delta_x;
-                $right = $right * $delta_x;
-                $mid = $mid * $delta_x;
-              </pg-code>
-
-              <statement>
-                <p>
-                  For the integral below, first sketch the graph of the function in the integral.
-                  Then, add rectangles to your sketch for the partition as indicated.
-                  Finally, approximate the integral by summing the areas of the rectangles.
-                </p>
-
-                <p>
-                  <m>\ds \int_{-3}^3 x^2\, dx</m>,
-                  with 6 rectangles using the Left Hand Rule.
-                </p>
-
-                <p>
-                  Sum of areas: <var name="$left" width="10"/>
-                </p>
-     <!-- 19 -->
-              </statement>
-          </webwork>
+          <statement>
+            <p>
+              <m>\ds \int_{-3}^3 x^2\, dx</m>,
+              with <m>6</m> rectangles using the Left Hand Rule.
+            </p>
+          </statement>
         </exercise>
-  <!-- Exercise 28 -->
+        <!-- Exercise 30 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $n = 4;
-                $a = 0;
-                $b = 2;
-                $f = Formula("5-x^2");
-                $delta_x = ($b - $a)/$n;
-                $left = 0;
-                $right = 0;
-                $mid = 0;
-                @l = ();
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
-                }
-                foreach $i (@l) {
-                  $left += $f->eval(x=>$i);
-                  $right += $f->eval(x=>($i+$delta_x));
-                  $mid += $f->eval(x=>($i + $delta_x/2));
-                }
-                $left = $left * $delta_x;
-                $right = $right * $delta_x;
-                $mid = $mid * $delta_x;
-              </pg-code>
-
-              <statement>
-                <p>
-                  For the integral below, first sketch the graph of the function in the integral.
-                  Then, add rectangles to your sketch for the partition as indicated.
-                  Finally, approximate the integral by summing the areas of the rectangles.
-                </p>
-
-                <p>
-                  <m>\ds \int_{0}^2 (5-x^2)\, dx</m>,
-                  with 4 rectangles using the Midpoint Rule.
-                </p>
-
-                <p>
-                  Sum of areas: <var name="$mid" width="10"/>
-                </p>
-     <!-- 59/8 -->
-              </statement>
-          </webwork>
+          <statement>
+            <p>
+              <m>\ds \int_{0}^2 (5-x^2)\, dx</m>,
+              with <m>4</m> rectangles using the Midpoint Rule.
+            </p>
+          </statement>
         </exercise>
-  <!-- Exercise 29 -->
+        <!-- Exercise 31 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $n = 6;
-                $a = 0;
-                $b = pi;
-                $f = Formula("sin(x)");
-                $delta_x = ($b - $a)/$n;
-                $left = 0;
-                $right = 0;
-                $mid = 0;
-                @l = ();
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
-                }
-                foreach $i (@l) {
-                  $left += $f->eval(x=>$i);
-                  $right += $f->eval(x=>($i+$delta_x));
-                  $mid += $f->eval(x=>($i + $delta_x/2));
-                }
-                $left = $left * $delta_x;
-                $right = $right * $delta_x;
-                $mid = $mid * $delta_x;
-              </pg-code>
-
-              <statement>
-                <p>
-                  For the integral below, first sketch the graph of the function in the integral.
-                  Then, add rectangles to your sketch for the partition as indicated.
-                  Finally, approximate the integral by summing the areas of the rectangles.
-                </p>
-
-                <p>
-                  <m>\ds \int_{0}^\pi \sin(x) \, dx</m>,
-                  with 6 rectangles using the Right Hand Rule.
-                </p>
-
-                <p>
-                  Sum of areas: <var name="$right" width="10"/>
-                </p>
-     <!-- pi/3 + pi/(2*sqrt(3)), 1.954 -->
-              </statement>
-          </webwork>
+          <statement>
+            <p>
+              <m>\ds \int_{0}^\pi \sin(x) \, dx</m>,
+              with <m>6</m> rectangles using the Right Hand Rule.
+            </p>
+          </statement>
         </exercise>
-  <!-- Exercise 30 -->
+        <!-- Exercise 32 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $n = 5;
-                $a = 0;
-                $b = 3;
-                $f = Formula("2^x");
-                $delta_x = ($b - $a)/$n;
-                $left = 0;
-                $right = 0;
-                $mid = 0;
-                @l = ();
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
-                }
-                foreach $i (@l) {
-                  $left += $f->eval(x=>$i);
-                  $right += $f->eval(x=>($i+$delta_x));
-                  $mid += $f->eval(x=>($i + $delta_x/2));
-                }
-                $left = $left * $delta_x;
-                $right = $right * $delta_x;
-                $mid = $mid * $delta_x;
-              </pg-code>
-
-              <statement>
-                <p>
-                  For the integral below, first sketch the graph of the function in the integral.
-                  Then, add rectangles to your sketch for the partition as indicated.
-                  Finally, approximate the integral by summing the areas of the rectangles.
-                </p>
-
-                <p>
-                  <m>\ds \int_{0}^3 2^x\, dx</m>,
-                  with 5 rectangles using the Left Hand Rule.
-                </p>
-
-                <p>
-                  Sum of areas: <var name="$left" width="10"/>
-                </p>
-     <!-- 8.144 -->
-              </statement>
-          </webwork>
+          <statement>
+            <p>
+              <m>\ds \int_{0}^3 2^x\, dx</m>,
+              with <m>5</m> rectangles using the Left Hand Rule.
+            </p>
+          </statement>
         </exercise>
-  <!-- Exercise 31 -->
+        <!-- Exercise 33 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $n = 3;
-                $a = 1;
-                $b = 2;
-                $f = Formula("ln(x)");
-                $delta_x = ($b - $a)/$n;
-                $left = 0;
-                $right = 0;
-                $mid = 0;
-                @l = ();
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
-                }
-                foreach $i (@l) {
-                  $left += $f->eval(x=>$i);
-                  $right += $f->eval(x=>($i+$delta_x));
-                  $mid += $f->eval(x=>($i + $delta_x/2));
-                }
-                $left = $left * $delta_x;
-                $right = $right * $delta_x;
-                $mid = $mid * $delta_x;
-              </pg-code>
-
-              <statement>
-                <p>
-                  For the integral below, first sketch the graph of the function in the integral.
-                  Then, add rectangles to your sketch for the partition as indicated.
-                  Finally, approximate the integral by summing the areas of the rectangles.
-                </p>
-
-                <p>
-                  <m>\ds \int_{1}^2 \ln(x) \, dx</m>,
-                  with 3 rectangles using the Midpoint Rule.
-                </p>
-
-                <p>
-                  Sum of areas: <var name="$mid" width="10"/>
-                </p>
-     <!-- 0.388584 -->
-              </statement>
-          </webwork>
+          <statement>
+            <p>
+              <m>\ds \int_{1}^2 \ln(x) \, dx</m>,
+              with <m>3</m> rectangles using the Midpoint Rule.
+            </p>
+          </statement>
         </exercise>
-  <!-- Exercise 32 -->
+        <!-- Exercise 34 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $n = 4;
-                $a = 1;
-                $b = 9;
-                $f = Formula("1/x");
-                $delta_x = ($b - $a)/$n;
-                $left = 0;
-                $right = 0;
-                $mid = 0;
-                @l = ();
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
-                }
-                foreach $i (@l) {
-                  $left += $f->eval(x=>$i);
-                  $right += $f->eval(x=>($i+$delta_x));
-                  $mid += $f->eval(x=>($i + $delta_x/2));
-                }
-                $left = $left * $delta_x;
-                $right = $right * $delta_x;
-                $mid = $mid * $delta_x;
-              </pg-code>
-
-              <statement>
-                <p>
-                  For the integral below, first sketch the graph of the function in the integral.
-                  Then, add rectangles to your sketch for the partition as indicated.
-                  Finally, approximate the integral by summing the areas of the rectangles.
-                </p>
-
-                <p>
-                  <m>\ds \int_{1}^9 \frac1x\, dx</m>,
-                  with 4 rectangles using the Right Hand Rule.
-                </p>
-
-                <p>
-                  Sum of areas: <var name="$right" width="10"/>
-                </p>
-     <!-- 496/315, 1.5746 -->
-              </statement>
-          </webwork>
+          <statement>
+            <p>
+              <m>\ds \int_{1}^9 \frac1x\, dx</m>,
+              with <m>4</m> rectangles using the Right Hand Rule.
+            </p>
+          </statement>
         </exercise>
-
       </exercisegroup>
-      <exercisegroup cols="2">
 
+      <exercisegroup cols="2">
         <introduction>
           <p>
-            In the following exercises, a definite integral
-          </p>
-
-          <p>
-            <m>\ds \int_a^b f(x) \, dx</m> is given.
+            A definite integral <m>\ds \int_a^b f(x) \, dx</m> is given.
             As demonstrated in <xref ref="ex_rie9">Examples</xref>
             and <xref ref="ex_rie10"/>, do the following:
-          </p>
-
-          <p>
             <ol>
               <li>
                 <p>
@@ -2666,14 +2642,12 @@
                   <m>\ds \int_a^bf(x)\, dx</m> using <m>n</m> subintervals and the provided rule.
                 </p>
               </li>
-
               <li>
                 <p>
                   Evaluate the formula using <m>n=10</m>,
-                  <m>100</m>, and <m>1,000</m>.
+                  <m>100</m>, and <m>1000</m>.
                 </p>
               </li>
-
               <li>
                 <p>
                   Find the limit of the formula, as <m>n\to \infty</m>,
@@ -2683,434 +2657,480 @@
             </ol>
           </p>
         </introduction>
-  <!-- Exercise 33 -->
+        <!-- Exercise 35 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                Context()->variables->add(n=>"Real");
-                $f = Formula("(n+1)^2/(4*n^2)");
-                $sum10 = $f->eval(n=>10);
-                $sum100 = $f->eval(n=>100);
-                $sum1000 = $f->eval(n=>1000);
-                $exact = Formula("1/4");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find a formula to approximate the integral
-                  <m>\ds \int_{0}^1 x^3\, dx</m>,
-                  using <m>n</m> rectangles, and the Right Hand Rule.
-                </p>
-
-                <p>
-                  Sum in terms of n: <var name="$f" width="30"/>
-                </p>
-
-                <p>
-                  Next, use this formula to approximate the value of the integral using
-                  <m>10</m>, <m>100</m>, and <m>1000</m> rectangles.
-                </p>
-
-                <p>
-                  n = 10: <var name="$sum10" width="20"/>
-                </p>
-     <!-- 121/400 -->
-                <p>
-                  n = 100: <var name="$sum100" width="20"/>
-                </p>
-     <!-- 10201/40000 -->
-                <p>
-                  n = 1000: <var name="$sum1000" width="20"/>
-                </p>
-     <!-- 1002001/4000000 -->
-
-                <p>
-                  Finally, compute the limit as <m>n\to\infty</m> to determine the area.
-                </p>
-
-                <p>
-                  Area in limit: <var name="$exact" width="20"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $rule = list_random('Left Hand Rule','Right Hand Rule');
+              if($envir{problemSeed}==1){$rule = 'Right Hand Rule';};
+              Context()->variables->are(n=>"Real");
+              if ($rule eq 'Left Hand Rule') {
+                $sum = Formula("(n-1)^2/(4n^2)");
+              }
+              elsif ($rule eq 'Right Hand Rule') {
+                $sum = Formula("(n+1)^2/(4n^2)");
+              };
+              $sum10 = $sum->eval(n=>10);
+              $sum100 = $sum->eval(n=>100);
+              $sum1000 = $sum->eval(n=>1000);
+              Context("Fraction");
+              $exact = Fraction(1,4);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int_{0}^1 x^3\, dx</m>, using the <var name="$rule"/>.
+              </p>
+              <instruction>
+                Enter the formula in terms of <m>n</m> here.
+              </instruction>
+              <p>
+                <var name="$sum" width="30"/>
+              </p>
+              <instruction>
+                Evaluate the formula using <m>n=10</m> here.
+              </instruction>
+              <p>
+                <var name="$sum10" width="10"/>
+              </p>
+              <instruction>
+                Evaluate the formula using <m>n=100</m> here.
+              </instruction>
+              <p>
+                <var name="$sum100" width="10"/>
+              </p>
+              <instruction>
+                Evaluate the formula using <m>n=1000</m> here.
+              </instruction>
+              <p>
+                <var name="$sum1000" width="10"/>
+              </p>
+              <instruction>
+                Enter the limit here.
+              </instruction>
+              <p>
+                <var name="$exact" width="20"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 34 -->
+        <!-- Exercise 36 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                Context()->variables->add(n=>"Real");
-                $f = Formula("(2*n^2+4)/n^2");
-                $sum10 = $f->eval(n=>10);
-                $sum100 = $f->eval(n=>100);
-                $sum1000 = $f->eval(n=>1000);
-                $exact = Formula("2");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find a formula to approximate the integral
-                  <m>\ds \int_{-1}^1 3x^2\, dx</m>,
-                  using <m>n</m> rectangles, and the Left Hand Rule.
-                </p>
-
-                <p>
-                  Sum in terms of n: <var name="$f" width="30"/>
-                </p>
-
-                <p>
-                  Next, use this formula to approximate the value of the integral using
-                  <m>10</m>, <m>100</m>, and <m>1000</m> rectangles.
-                </p>
-
-                <p>
-                  n = 10: <var name="$sum10" width="20"/>
-                </p>
-     <!-- 51/25 -->
-                <p>
-                  n = 100: <var name="$sum100" width="20"/>
-                </p>
-     <!-- 5001/2500 -->
-                <p>
-                  n = 1000: <var name="$sum1000" width="20"/>
-                </p>
-     <!-- 500001/250000 -->
-
-                <p>
-                  Finally, compute the limit as <m>n\to\infty</m> to determine the area.
-                </p>
-
-                <p>
-                  Area in limit: <var name="$exact" width="20"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $rule = list_random('Left Hand Rule','Right Hand Rule');
+              $lb = random(-2,-1,1);
+              $ub = random(1,2,1);
+              $c = random(2,5,1);
+              if($envir{problemSeed}==1){$rule = 'Left Hand Rule';$lb=-1;$ub=1;$c=3;};
+              Context("Fraction");
+              Context()->variables->are(n=>"Real");
+              $A = Fraction($c*($ub - $lb)*(6*$lb*$ub + 2*($ub - $lb)**2),6);
+              $B = Fraction($c*($ub - $lb)*(6*$lb*($ub - $lb) + 3*($ub - $lb)**2),6);
+              if ($rule eq 'Left Hand Rule') {$B = -$B;};
+              $C = Fraction($c*($ub - $lb)**3,6);
+              ($Bn,$Bd)=$A->value;
+              ($Cn,$Cd)=$A->value;
+              $sum = Formula("$A + $Bn/($Bd n) + $Cn/($Cd n^2)");
+              $sum10 = $sum->eval(n=>10);
+              $sum100 = $sum->eval(n=>100);
+              $sum1000 = $sum->eval(n=>1000);
+              $exact = $A;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int_{<var name="$lb"/>}^{<var name="$ub"/>} <var name="$c"/>x^2\, dx</m>, using the <var name="$rule"/>.
+              </p>
+              <instruction>
+                Enter the formula in terms of <m>n</m> here.
+              </instruction>
+              <p>
+                <var name="$sum" width="30"/>
+              </p>
+              <instruction>
+                Evaluate the formula using <m>n=10</m> here.
+              </instruction>
+              <p>
+                <var name="$sum10" width="10"/>
+              </p>
+              <instruction>
+                Evaluate the formula using <m>n=100</m> here.
+              </instruction>
+              <p>
+                <var name="$sum100" width="10"/>
+              </p>
+              <instruction>
+                Evaluate the formula using <m>n=1000</m> here.
+              </instruction>
+              <p>
+                <var name="$sum1000" width="10"/>
+              </p>
+              <instruction>
+                Enter the limit here.
+              </instruction>
+              <p>
+                <var name="$exact" width="20"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 35 -->
+        <!-- Exercise 37 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                Context()->variables->add(n=>"Real");
-                $f = Formula("8");
-                $sum10 = $f->eval(n=>10);
-                $sum100 = $f->eval(n=>100);
-                $sum1000 = $f->eval(n=>1000);
-                $exact = Formula("8");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find a formula to approximate the integral
-                  <m>\ds \int_{-1}^3 (3x-1)\, dx</m>,
-                  using <m>n</m> rectangles, and the Midpoint Rule.
-                </p>
-
-                <p>
-                  Sum in terms of n: <var name="$f" width="30"/>
-                </p>
-
-                <p>
-                  Next, use this formula to approximate the value of the integral using
-                  <m>10</m>, <m>100</m>, and <m>1000</m> rectangles.
-                </p>
-
-                <p>
-                  n = 10: <var name="$sum10" width="20"/>
-                </p>
-     <!-- 8 -->
-                <p>
-                  n = 100: <var name="$sum100" width="20"/>
-                </p>
-     <!-- 8 -->
-                <p>
-                  n = 1000: <var name="$sum1000" width="20"/>
-                </p>
-     <!-- 8 -->
-
-                <p>
-                  Finally, compute the limit as <m>n\to\infty</m> to determine the area.
-                </p>
-
-                <p>
-                  Area in limit: <var name="$exact" width="20"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $lb = random(-2,-1,1);
+              $ub = random(1,4,1);
+              $m = random(2,5,1);
+              $b = non_zero_random(-2,2,1);
+              if($envir{problemSeed}==1){$lb=-1;$ub=3;$m=3;$b=-1;};
+              $f = Formula("$m x + $b")->reduce;
+              Context("Fraction");
+              Context()->variables->are(n=>"Real");
+              $sum = Fraction(($ub-$lb)*($m*($ub+$lb)+2*$b),2);
+              $sum = Formula("$sum");
+              $sum10 = $sum->eval(n=>10);
+              $sum100 = $sum->eval(n=>100);
+              $sum1000 = $sum->eval(n=>1000);
+              $exact = Fraction("$sum");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int_{<var name="$lb"/>}^{<var name="$ub"/>} \left(<var name="$f"/>\right)\, dx</m>, using the Midpoint Rule.
+              </p>
+              <instruction>
+                Enter the formula in terms of <m>n</m> here.
+              </instruction>
+              <p>
+                <var name="$sum" width="30"/>
+              </p>
+              <instruction>
+                Evaluate the formula using <m>n=10</m> here.
+              </instruction>
+              <p>
+                <var name="$sum10" width="10"/>
+              </p>
+              <instruction>
+                Evaluate the formula using <m>n=100</m> here.
+              </instruction>
+              <p>
+                <var name="$sum100" width="10"/>
+              </p>
+              <instruction>
+                Evaluate the formula using <m>n=1000</m> here.
+              </instruction>
+              <p>
+                <var name="$sum1000" width="10"/>
+              </p>
+              <instruction>
+                Enter the limit here.
+              </instruction>
+              <p>
+                <var name="$exact" width="20"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 36 -->
+        <!-- Exercise 38 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                Context()->variables->add(n=>"Real");
-                $f = Formula("3/n^2*(11n^2-15n+3)");
-                $sum10 = $f->eval(n=>10);
-                $sum100 = $f->eval(n=>100);
-                $sum1000 = $f->eval(n=>1000);
-                $exact = Formula("33");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find a formula to approximate the integral
-                  <m>\ds \int_{1}^4 (2x^2-3)\, dx</m>,
-                  using <m>n</m> rectangles, and the Left Hand Rule.
-                </p>
-
-                <p>
-                  Sum in terms of n: <var name="$f" width="30"/>
-                </p>
-
-                <p>
-                  Next, use this formula to approximate the value of the integral using
-                  <m>10</m>, <m>100</m>, and <m>1000</m> rectangles.
-                </p>
-
-                <p>
-                  n = 10: <var name="$sum10" width="20"/>
-                </p>
-     <!-- 28.59 -->
-                <p>
-                  n = 100: <var name="$sum100" width="20"/>
-                </p>
-     <!-- 32.55 -->
-                <p>
-                  n = 1000: <var name="$sum1000" width="20"/>
-                </p>
-     <!-- 32.96 -->
-
-                <p>
-                  Finally, compute the limit as <m>n\to\infty</m> to determine the area.
-                </p>
-
-                <p>
-                  Area in limit: <var name="$exact" width="20"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $rule = list_random('Left Hand Rule','Right Hand Rule');
+              $lb = random(1,2,1);
+              $ub = $lb + random(2,4,1);
+              $m = random(2,5,1);
+              $b = non_zero_random(-4,4,1);
+              if($envir{problemSeed}==1){$rule='Left Hand Rule';$lb=1;$ub=4;$m=2;$b=-3;};
+              $f = Formula("$m x^2 + $b")->reduce;
+              Context("Fraction");
+              $A = Fraction(($ub - $lb)*($m*$ub**2 + $m*$ub*$lb + $m*$lb**2 + 3*$b),3);
+              $B = Fraction($m*($ub - $lb)**2*($ub + $lb),2);
+              if ($rule eq 'Left Hand Rule') {$B = -$B;};
+              $C = Fraction($m*($ub - $lb)**3,6);
+              ($Bn,$Bd)=$A->value;
+              ($Cn,$Cd)=$A->value;
+              Context()->variables->are(n=>"Real");
+              $sum = Formula("$A + $Bn/($Bd n) + $Cn/($Cd n^2)");
+              $sum10 = $sum->eval(n=>10);
+              $sum100 = $sum->eval(n=>100);
+              $sum1000 = $sum->eval(n=>1000);
+              $exact = $A;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int_{<var name="$lb"/>}^{<var name="$ub"/>} \left(<var name="$f"/>\right)\, dx</m>, using the <var name="$rule"/>.
+              </p>
+              <instruction>
+                Enter the formula in terms of <m>n</m> here.
+              </instruction>
+              <p>
+                <var name="$sum" width="30"/>
+              </p>
+              <instruction>
+                Evaluate the formula using <m>n=10</m> here.
+              </instruction>
+              <p>
+                <var name="$sum10" width="10"/>
+              </p>
+              <instruction>
+                Evaluate the formula using <m>n=100</m> here.
+              </instruction>
+              <p>
+                <var name="$sum100" width="10"/>
+              </p>
+              <instruction>
+                Evaluate the formula using <m>n=1000</m> here.
+              </instruction>
+              <p>
+                <var name="$sum1000" width="10"/>
+              </p>
+              <instruction>
+                Enter the limit here.
+              </instruction>
+              <p>
+                <var name="$exact" width="20"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 37 -->
+        <!-- Exercise 39 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                Context()->variables->add(n=>"Real");
-                $f = Formula("100-200/n");
-                $sum10 = $f->eval(n=>10);
-                $sum100 = $f->eval(n=>100);
-                $sum1000 = $f->eval(n=>1000);
-                $exact = Formula("100");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find a formula to approximate the integral
-                  <m>\ds \int_{-10}^{10} (5-x)\, dx</m>,
-                  using <m>n</m> rectangles, and the Right Hand Rule.
-                </p>
-
-                <p>
-                  Sum in terms of n: <var name="$f" width="30"/>
-                </p>
-
-                <p>
-                  Next, use this formula to approximate the value of the integral using
-                  <m>10</m>, <m>100</m>, and <m>1000</m> rectangles.
-                </p>
-
-                <p>
-                  n = 10: <var name="$sum10" width="20"/>
-                </p>
-     <!-- 80.00 -->
-                <p>
-                  n = 100: <var name="$sum100" width="20"/>
-                </p>
-     <!-- 98.00 -->
-                <p>
-                  n = 1000: <var name="$sum1000" width="20"/>
-                </p>
-     <!-- 99.80 -->
-                <p>
-                  Finally, compute the limit as <m>n\to\infty</m> to determine the area.
-                </p>
-
-                <p>
-                  Area in limit: <var name="$exact" width="20"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $rule = list_random('Left Hand Rule','Right Hand Rule');
+              $lb = random(-12,-7,1);
+              $ub = -$lb;
+              $b = non_zero_random(3,8,1);
+              if($envir{problemSeed}==1){$rule='Right Hand Rule';$lb=-10;$ub=10;$b=5;};
+              $f = Formula("$b - x")->reduce;
+              Context()->variables->are(n=>"Real");
+              $sum = Formula("2*$ub*$b + (2*$ub**2)/n")->reduce;
+              if ($rule eq 'Left Hand Rule') {
+                $sum = Formula("2*$ub*$b - (2*$ub**2)/n")->reduce;
+              };
+              $sum10 = $sum->eval(n=>10);
+              $sum100 = $sum->eval(n=>100);
+              $sum1000 = $sum->eval(n=>1000);
+              $exact = Real(2*$ub*$b);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int_{<var name="$lb"/>}^{<var name="$ub"/>} \left(<var name="$f"/>\right)\, dx</m>, using the <var name="$rule"/>.
+              </p>
+              <instruction>
+                Enter the formula in terms of <m>n</m> here.
+              </instruction>
+              <p>
+                <var name="$sum" width="30"/>
+              </p>
+              <instruction>
+                Evaluate the formula using <m>n=10</m> here.
+              </instruction>
+              <p>
+                <var name="$sum10" width="10"/>
+              </p>
+              <instruction>
+                Evaluate the formula using <m>n=100</m> here.
+              </instruction>
+              <p>
+                <var name="$sum100" width="10"/>
+              </p>
+              <instruction>
+                Evaluate the formula using <m>n=1000</m> here.
+              </instruction>
+              <p>
+                <var name="$sum1000" width="10"/>
+              </p>
+              <instruction>
+                Enter the limit here.
+              </instruction>
+              <p>
+                <var name="$exact" width="20"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 38 -->
+        <!-- Exercise 40 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                Context()->variables->add(n=>"Real");
-                $f = Formula("-1/12*(1-1/n^2)");
-                $sum10 = $f->eval(n=>10);
-                $sum100 = $f->eval(n=>100);
-                $sum1000 = $f->eval(n=>1000);
-                $exact = Formula("-1/12");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Find a formula to approximate the integral
-                  <m>\ds \int_{0}^{1} (x^3-x^2)\, dx</m>,
-                  using <m>n</m> rectangles, and the Right Hand Rule.
-                </p>
-
-                <p>
-                  Sum in terms of n: <var name="$f" width="30"/>
-                </p>
-
-                <p>
-                  Next, use this formula to approximate the value of the integral using
-                  <m>10</m>, <m>100</m>, and <m>1000</m> rectangles.
-                </p>
-
-                <p>
-                  n = 10: <var name="$sum10" width="20"/>
-                </p>
-     <!-- -33/400 -->
-                <p>
-                  n = 100: <var name="$sum100" width="20"/>
-                </p>
-     <!-- -3333/40000 -->
-                <p>
-                  n = 1000: <var name="$sum1000" width="20"/>
-                </p>
-     <!-- -333333/4000000 -->
-                <p>
-                  Finally, compute the limit as <m>n\to\infty</m> to determine the area.
-                </p>
-
-                <p>
-                  Area in limit: <var name="$exact" width="20"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $rule = list_random('Left Hand Rule','Right Hand Rule');
+              if($envir{problemSeed}==1){$rule='Right Hand Rule';};
+              $f = Formula("x^3 - x^2")->reduce;
+              Context("Fraction");
+              Context()->variables->are(n=>"Real");
+              $sum = Formula("-1/12+1/(12n^2)");
+              $sum10 = $sum->eval(n=>10);
+              $sum100 = $sum->eval(n=>100);
+              $sum1000 = $sum->eval(n=>1000);
+              $exact = Fraction(-1,12);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int_{0}^{1} \left(<var name="$f"/>\right)\, dx</m>, using the <var name="$rule"/>.
+              </p>
+              <instruction>
+                Enter the formula in terms of <m>n</m> here.
+              </instruction>
+              <p>
+                <var name="$sum" width="30"/>
+              </p>
+              <instruction>
+                Evaluate the formula using <m>n=10</m> here.
+              </instruction>
+              <p>
+                <var name="$sum10" width="10"/>
+              </p>
+              <instruction>
+                Evaluate the formula using <m>n=100</m> here.
+              </instruction>
+              <p>
+                <var name="$sum100" width="10"/>
+              </p>
+              <instruction>
+                Evaluate the formula using <m>n=1000</m> here.
+              </instruction>
+              <p>
+                <var name="$sum1000" width="10"/>
+              </p>
+              <instruction>
+                Enter the limit here.
+              </instruction>
+              <p>
+                <var name="$exact" width="20"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-
       </exercisegroup>
     </subexercises>
+
     <subexercises>
       <title>Review</title>
       <exercisegroup cols="2">
         <introduction>
           <p>
-            In the following exercises,
-            find the general antiderivative of the given function.
+            Find the general antiderivative of the given function.
           </p>
         </introduction>
-  <!-- Exercise 39 -->
+        <!-- Exercise 41 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("5*tan(x)");
-              </pg-code>
+          <webwork seed="1">
+            <pg-code>
+              $trig = list_random('tan','sec','csc','cot');
+              $c = random(2,9,1);
+              if($envir{problemSeed}==1){$trig='tan';$c=5;};
+              $F = Formula("$c*$trig(x)");
+              $f = $F->D('x')->reduce;
+              $F = FormulaUpToConstant("$c*$trig(x)");
+            </pg-code>
+            <statement>
+              <p>
+                <m>f(x) = <var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
 
-              <statement>
-                <p>
-                  <m>f(x) = 5\sec^2(x)</m>
-                </p>
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $c = random(2,9,1);
+              if($envir{problemSeed}==1){$c=7;};
+              $f = Formula("$c/x");
+              $F = FormulaUpToConstant("$c*ln(abs(x))");
+            </pg-code>
+            <statement>
+              <p>
+                <m>f(x) = <var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
 
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              ($a,$b,$c) = (-9..-1,1..9)[NchooseK(18,3)];
+              ($m,$n,$p) = num_sort((0..5)[NchooseK(6,3)]);
+              if($envir{problemSeed}==1){$a=4;$b=-5;$c=8;$m=5;$n=3;$p=0;};
+              Context()->variables->add(t=>"Real");
+              $f = Formula("$a t^$m + $b t^$n + $c t^$p")->reduce;
+              Context("Fraction");
+              Context()->variables->add(t=>"Real");
+              $A = Fraction($a,$m+1);
+              $B = Fraction($b,$n+1);
+              $C = Fraction($c,$p+1);
+              $F = FormulaUpToConstant("$A t^($m+1) + $B t^($n+1) + $C t^($p+1)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>g(t) = <var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              ($b,$c) = (2..9)[NchooseK(8,2)];
+              if($envir{problemSeed}==1){$b=8;$c=5;};
+              Context()->variables->add(t=>"Real");
+              $f = Formula("$c $b^t")->reduce;
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $F = FormulaUpToConstant("$c/ln($b) $b^t");
+            </pg-code>
+            <statement>
+              <p>
+                <m>g(t) = <var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
 
         <exercise>
           <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("7*ln(abs(x))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  <m>\ds f(x) = \frac7x</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
+            <pg-code>
+              Context()->variables->add(t=>"Real");
+              $F = FormulaUpToConstant("sin(t)-cos(t)");
+            </pg-code>
+            <statement>
+              <p>
+                <m>g(t) = \cos(t) + \sin(t)</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
 
         <exercise>
           <webwork>
-              <pg-code>
-                Context()->variables->add(t=>"Real");
-                $F = FormulaUpToConstant("4/6*t^6-5/4*t^4+8t");
-              </pg-code>
-
-              <statement>
-                <p>
-                  <m>\ds g(t) = 4t^5-5t^3+8</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
+            <pg-code>
+              $F = FormulaUpToConstant("2*sqrt(x)");
+            </pg-code>
+            <statement>
+              <p>
+                <m>f(x) = \frac{1}{\sqrt{x}}</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-
-        <exercise>
-          <webwork>
-              <pg-code>
-                Context()->variables->add(t=>"Real");
-                $F = FormulaUpToConstant("5*8^t/ln(8)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  <m>\ds g(t) = 5\cdot 8^t</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-
-        <exercise>
-          <webwork>
-              <pg-code>
-                Context()->variables->add(t=>"Real");
-                $F = FormulaUpToConstant("sin(t)-cos(t)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  <m>\ds g(t) = \cos(t) + \sin(t)</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("2*sqrt(x)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  <m>\ds f(x) = \frac{1}{\sqrt{x}}</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-
       </exercisegroup>
     </subexercises>
   </exercises>
