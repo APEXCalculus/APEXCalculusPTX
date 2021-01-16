@@ -1318,814 +1318,299 @@
   <exercises>
     <subexercises>
       <title>Terms and Concepts</title>
-
       <exercise>
         <webwork>
-            <pg-code>
-            </pg-code>
-
-            <statement>
-              <p>
-                Substitution <q>undoes</q> what derivative rule?
-              </p>
-
-              <p>
-                <var form="essay"/>
-              </p>
-            </statement>
+          <pg-code>
+            Context()->strings->add('the Chain Rule'=>{});
+            Context()->strings->add('Chain Rule'=>{alias=>'the Chain Rule'});
+            Context()->strings->add('Chain'=>{alias=>'the Chain Rule'});
+          </pg-code>
+          <statement>
+            <p>
+              Substitution <q>undoes</q> what derivative rule?
+            </p>
+            <p>
+              <var name="'the Chain Rule'" width="40"/>
+            </p>
+          </statement>
         </webwork>
       </exercise>
 
       <exercise>
         <webwork>
-            <pg-code>
-              $true=PopUp(['?','True','False'],1);
-            </pg-code>
-
-            <statement>
-              <p>
-                T/F: One can use algebra to rewrite the integrand of an integral to make it easier to evaluate.<var name="$true" form="popup"/>
-              </p>
-            </statement>
+          <pg-code>
+            $true=PopUp(['?','True','False'],1);
+          </pg-code>
+          <statement>
+            <p>
+              <var name="$true" form="popup"/>
+              One can use algebra to rewrite the integrand of an integral to make it easier to evaluate.
+            </p>
+          </statement>
         </webwork>
       </exercise>
-
     </subexercises>
+
     <subexercises>
       <title>Problems</title>
       <exercisegroup cols="2">
-
         <introduction>
           <p>
-            In the following exercises,
-            evaluate the indefinite integral to develop an understanding of Substitution.
+            Evaluate the indefinite integral to develop an understanding of Substitution.
           </p>
         </introduction>
 
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("1/8*(x^3-5)^8");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int 3 x^2 \left(x^3-5\right)^7 dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $m = random(3,4,1);
+              $b = non_zero_random(-9,9,1);
+              $n = random(5,9,1);
+              if($envir{problemSeed}==1){$m=3;$b=-5;$n=7;};
+              Context("Fraction");
+              $u = Formula("x^$m+$b")->reduce;
+              $du = $u->D('x');
+              $f = $du * Formula("($u)^$n");
+              $F = FormulaUpToConstant("1/($n+1)*($u)^($n+1)");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
 
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("1/4*(x^2-5x+7)^4");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int (2 x-5) \left(x^2-5 x+7\right)^3 dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              ($m,$b) = (-9..-1,1..9)[NchooseK(18,2)];
+              $n = random(3,9,1);
+              if($envir{problemSeed}==1){$m=-5;$b=7;$n=3;};
+              Context("Fraction");
+              $u = Formula("x^2+$m x+$b")->reduce;
+              $du = $u->D('x');
+              $f = $du * Formula("($u)^$n");
+              $F = FormulaUpToConstant("1/($n+1)*($u)^($n+1)");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 5 -->
+        <!-- Exercise 5 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("1/18*(x^2+1)^9");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int x \left(x^2+1\right)^8 dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $b = non_zero_random(-9,9,1);
+              $n = random(3,9,1);
+              if($envir{problemSeed}==1){$b=1;$n=8;};
+              Context("Fraction");
+              $u = Formula("x^2+$b")->reduce;
+              $f = Formula("x ($u)^$n");
+              $F = FormulaUpToConstant("1/(2*($n+1))*($u)^($n+1)");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>https://webwork.pcc.edu/webwork2/html2xml?&amp;problemSeed=1&amp;answersSubmitted=0&amp;sourceFilePath=BasicAlgebra/QuadraticEquations/solveQuad90.pg&amp;displayMode=MathJax&amp;courseID=anonymous&amp;userID=anonymous&amp;course_password=open&amp;outputformat=simple
           </webwork>
         </exercise>
-  <!-- Exercise 6 -->
+        <!-- Exercise 6 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("1/3*(3x^2+7x-1)^6");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int (12 x+14) \left(3 x^2+7 x-1\right)^5 dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              ($a,$b,$c) = (-9..-1,1..9)[NchooseK(18,3)];
+              $n = random(3,9,1);
+              $s = random(2,4,1);
+              if($envir{problemSeed}==1){$a=3;$b=7;$c=-1;$n=5;$s=2;};
+              Context("Fraction");
+              $u = Formula("$a x^2 + $b x + $c")->reduce;
+              $f = Formula("(2*$a*$s x + $b*$s) ($u)^$n")->reduce;
+              $frac = Fraction($s,$n+1);
+              $F = FormulaUpToConstant("$frac*($u)^($n+1)");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 7 -->
+        <!-- Exercise 7 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("1/2*ln(abs(2x+7))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{1}{2 x+7} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              ($m,$b) = (2..9)[NchooseK(8,2)];
+              if($envir{problemSeed}==1){$m=2;$b=7;};
+              Context("Fraction");
+              Context()->variables->set(x => {limits => [-$b/$m-2,-$b/$m+2]});
+              $f = Formula("1/($m x + $b)")->reduce;
+              $F = FormulaUpToConstant("1/$m ln(abs($m x + $b))")->reduce;
+              $F->{test_at} = [[-$b/$m-2],[-$b/$m+2]];
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 8-->
+        <!-- Exercise 8-->
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("sqrt(2x+3)");
-                $f = $F->D('x');
-              </pg-code>
-
-              <statement>
-              <!-- <p><m>\ds \int <var name="$f" />dx </m></p> --> <!-- Doesn't reduce this -->
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{1}{\sqrt{2 x+3}} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              ($m,$b) = (2..9)[NchooseK(8,2)];
+              if($envir{problemSeed}==1){$m=2;$b=3;};
+              Context("Fraction");
+              $f = Formula("1/sqrt($m x + $b)")->reduce;
+              $frac = Fraction(2,$m);
+              $F = FormulaUpToConstant("$frac sqrt($m x + $b)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 9 -->
+        <!-- Exercise 9 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("2/3*(x-6)*sqrt(x+3)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{x}{\sqrt{x+3}} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $b = non_zero_random(-9,9,1);
+              if($envir{problemSeed}==1){$b=3;};
+              Context("Fraction");
+              $f = Formula("x/sqrt(x + $b)")->reduce;
+              $F = FormulaUpToConstant("2/3 (x - 2*$b) sqrt(x - $b)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 10 -->
+        <!-- Exercise 10 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("2/21*x^(3/2)*(3x^2-7)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{x^3-x}{\sqrt{x}} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $b = non_zero_random(-9,9,1);
+              $m = random(3,5,1);
+              if($envir{problemSeed}==1){$m=3;$b=-1;};
+              Context("Fraction");
+              $f = Formula("(x^$m+$b x)/sqrt(x)")->reduce;
+              $frac = Fraction(2*$b,3);
+              $F = FormulaUpToConstant("x^(3/2) (2/(2*$m+1) x^($m-1) + $frac )")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 11 -->
+        <!-- Exercise 11 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("2*e^sqrt(x)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{e^{\sqrt{x}}}{\sqrt{x}} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
+            <pg-code>
+              $F = FormulaUpToConstant("2*e^sqrt(x)");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int \frac{e^{\sqrt{x}}}{\sqrt{x}} dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 12 -->
+        <!-- Exercise 12 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("2*sqrt(x^5+1)/5");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{x^4}{\sqrt{x^5+1}} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $b = non_zero_random(-9,9,1);
+              $m = random(4,8,1);
+              if($envir{problemSeed}==1){$m=5;$b=1;};
+              Context("Fraction");
+              $f = Formula("x^($m-1)/sqrt(x^$m+$b)")->reduce;
+              $frac = Fraction(2,$m);
+              $F = FormulaUpToConstant("$frac sqrt(x^$m+$b)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 13 -->
+        <!-- Exercise 13 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("-1/(2x^2)-1/x");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{\frac{1}{x}+1}{x^2} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $b = non_zero_random(-9,9,1);
+              $m = random(1,3,1);
+              if($envir{problemSeed}==1){$m=1;$b=1;};
+              Context("Fraction");
+              $f = Formula("(1/x^$m + $b)/x^($m+1)")->reduce;
+              $frac = Fraction(2,$m);
+              $F = FormulaUpToConstant("-1/(2*$m) (1/x^$m + $b)^2")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 14 -->
+        <!-- Exercise 14 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("ln(x)^2/2");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{\ln(x)}{x} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-
-      </exercisegroup>
-      <exercisegroup cols="2">
-
-        <introduction>
-          <p>
-            In the following exercises,
-            use Substitution to evaluate the indefinite integral involving trigonometric functions.
-          </p>
-        </introduction>
-  <!-- Exercise 15 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("sin(x)^3/3");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \sin^2(x) \cos(x) dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-
-  <!--ToDo: WW code for this exercise-->
-      <exercise>
-        <statement>
-          <p>
-            Evaluate the indefinite integral <m>\ds \int \cos ^3(x) \sin (x) dx</m>
-          </p>
-        </statement>
-        <answer>
-          <p>
-            <m>-\frac{\cos ^4(x)}{4}+C</m>
-          </p>
-        </answer>
-      </exercise>
-
-  <!-- Exercise 16 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("-1/6*sin(3-6x)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \cos(3-6 x) dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 17 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("-tan(4-x)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \sec^2(4-x) dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 18 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("1/2*ln(abs(sec(2x)+tan(2x)))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \sec(2 x) dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 19 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("tan(x)^3/3");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \tan^2(x) \sec^2(x) dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 20 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("sin(x^2)/2");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int x \cos\left(x^2\right) dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 21 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("tan(x)-x");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \tan^2(x) dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 22 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("ln(abs(sin(x)))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \cot(x) \, dx</m>.
-                </p>
-
-                <p>
-                  Do not just refer to <xref ref="thm_triganti">Theorem</xref> for the answer;
-                  justify it through Substitution.
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 23 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("-ln(abs(csc(x) + cot(x)))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \csc(x) \, dx</m>.
-                </p>
-
-                <p>
-                  Do not just refer to <xref ref="thm_triganti">Theorem</xref> for the answer;
-                  justify it through Substitution.
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-
-      </exercisegroup>
-      <exercisegroup cols="2">
-
-        <introduction>
-          <p>
-            In the following exercises,
-            use Substitution to evaluate the indefinite integral involving exponential functions.
-          </p>
-        </introduction>
-  <!-- Exercise 24 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("1/3*e^(3x-1)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int e^{3 x-1} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 25 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("e^(x^3)/3");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int e^{x^3} x^2 dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 26 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("1/2*e^(x-1)^2");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int e^{x^2-2 x+1} (x-1) dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 27 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("x-e^(-x)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{e^x+1}{e^x} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-
-  <!--ToDo: WW code for this exercise-->
-      <exercise>
-        <statement>
-          <p>
-            Evaluate the indefinite integral <m>\ds \int \frac{e^x}{e^x+1}\, dx</m>
-          </p>
-        </statement>
-        <answer>
-          <p>
-            Evaluate the indefinite integral <m>\ln\big(e^x+1\big)+C</m>
-          </p>
-        </answer>
-      </exercise>
-
-  <!-- Exercise 28 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("e^(-3x)/3-e^(-x)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{e^x-e^{-x}}{e^{2x}} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 29 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("27^x/ln(27)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int 3^{3 x} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 30 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("16^x/ln(16)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int 4^{2 x} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-
-      </exercisegroup>
-      <exercisegroup>
-
-        <introduction>
-          <p>
-            In the following exercises,
-            use Substitution to evaluate the indefinite integral involving logarithmic functions.
-          </p>
-        </introduction>
-  <!-- Exercise 31 -->
-  <!-- Repeat of #14 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("1/2*ln(x)^2");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{\ln(x) }{x} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 32 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("ln(x)^3/3");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{\big(\ln(x) \big)^2}{x} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("3/2*ln(x)^2");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{\ln\left(x^3\right)}{x} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 34 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("1/2*ln(abs(ln(x^2)))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{1}{x \ln\left(x^2\right)} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-
-      </exercisegroup>
-      <exercisegroup cols="2">
-
-        <introduction>
-          <p>
-            In the following exercises,
-            use Substitution to evaluate the indefinite integral involving rational functions.
-          </p>
-        </introduction>
-  <!-- Exercise 35 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("x^2/2+3x+ln(abs(x))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{x^2+3 x+1}{x} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 36 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("x^3/3+x^2/2+x+ln(x)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{x^3+x^2+x+1}{x} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 37 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("x^3/3-x^2/2+x-2ln(abs(x+1))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{x^3-1}{x+1} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 38 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("1/2*(x^2+10x+20*ln(abs(x-3)))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{x^2+2 x-5}{x-3} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 39 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("3/2*x^2-8x+15*ln(abs(x+1))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{3 x^2-5 x+7}{x+1} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 40 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("1/3*ln(abs(x^2+3x+3))+ln(abs(x))/3");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{x^2+2 x+1}{x^3+3 x^2+3 x} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
+            <pg-code>
+              $F = FormulaUpToConstant("ln(x)^2/2");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int \frac{\ln(x)}{x} dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
       </exercisegroup>
@@ -2133,853 +1618,1720 @@
       <exercisegroup cols="2">
         <introduction>
           <p>
-            In the following exercises,
-            use Substitution to evaluate the indefinite integral involving inverse trigonometric functions.
+            Use Substitution to evaluate the indefinite integral involving trigonometric functions.
           </p>
         </introduction>
-  <!-- Exercise 41 -->
+        <!-- Exercise 15 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("sqrt(7)*atan(x/sqrt(7))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{7}{x^2+7} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 42 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("3*asin(x/3)+C");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{3}{\sqrt{9-x^2}} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 43 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("14*asin(x/sqrt(5))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{14}{\sqrt{5-x^2}} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 44 -->
-  <!-- Can't generate enough valid points for comparison -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("2/3*asec(abs(x)/3)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{2}{x \sqrt{x^2-9}} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 45 -->
-  <!-- Can't generate enough valid points for comparison -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("5/4*asec(abs(x)/4)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{5}{\sqrt{x^4-16 x^2}} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 46 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("1/2*asin(x^2)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{x}{\sqrt{1-x^4}} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 47 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("atan((x-1)/7)/sqrt(7)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{1}{x^2-2 x+8} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 48 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("2*asin((x-3)/4)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{2}{\sqrt{-x^2+6 x+7}} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 49 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("3*asin((x-4)/5)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{3}{\sqrt{-x^2+8 x+9}} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="20"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 50 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("atan((x+3)/5)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{5}{x^2+6 x+34} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="30"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $m = random(2,9,1);
+              if($envir{problemSeed}==1){$m=2;};
+              Context("Fraction");
+              $f = Formula("sin^$m(x) cos(x)")->reduce;
+              $F = FormulaUpToConstant("sin^($m+1)(x)/($m+1)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int \sin^{<var name="$m"/>}(x) \cos(x) \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
 
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $m = random(2,9,1);
+              if($envir{problemSeed}==1){$m=3;};
+              Context("Fraction");
+              $f = Formula("cos^$m(x) sin(x)")->reduce;
+              $F = FormulaUpToConstant("-cos^($m+1)(x)/($m+1)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int \cos^{<var name="$m"/>}(x) \sin(x) \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 17 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $m = random(-9,-1,1);
+              $b = random(1,9,1);
+              $trig = list_random('sin','cos');
+              if($envir{problemSeed}==1){$m=-6;$b=3;$trig='cos'};
+              Context("Fraction");
+              $f = Formula("$trig($b+$m x)")->reduce;
+              $trigAD =Formula("-$trig(x)")->D('x');
+              $F = $trigAD->substitute(x=>Formula("$b+$m x"));
+              $F = FormulaUpToConstant("$F/$m")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 18 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $m = random(-9,-1,1);
+              $b = random(1,9,1);
+              if($envir{problemSeed}==1){$m=-1;$b=4;};
+              Context("Fraction");
+              $g = Formula("$b + $m x")->reduce;
+              $f = Formula("sec^2($b + $m x)")->reduce;
+              $F = FormulaUpToConstant("tan($b + $m x)/$m")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int \sec^2(<var name="$g"/>) \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 19 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $m = random(2,9,1);
+              if($envir{problemSeed}==1){$m=2;};
+              Context("Fraction");
+              Context()->variables->set(x => {limits => [0,2*pi/$m]});
+              $f = Formula("sec($m x)")->reduce;
+              $F = FormulaUpToConstant("1/$m ln(abs(sec($m x) + tan($m x)))")->reduce;
+              $F->{test_at} = [[pi/4/$m],[3*pi/4/$m],[5*pi/4/$m],[7*pi/4/$m]];
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 20 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $m = random(2,9,1);
+              if($envir{problemSeed}==1){$m=2;};
+              Context("Fraction");
+              $f = Formula("tan^$m(x) sec^2(x)")->reduce;
+              $F = FormulaUpToConstant("1/($m+1) tan^($m+1)(x)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int \tan^2(<var name="$m"/>)\sec^2(x) \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 21 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $m = random(2,9,1);
+              $trig = list_random('sin','cos');
+              if($envir{problemSeed}==1){$m=2;$trig='cos'};
+              Context("Fraction");
+              $f = Formula("x^($m-1) $trig(x^$m)")->reduce;
+              $trigAD = Formula("-$trig(x)")->D('x');
+              $F = $trigAD->substitute(x=>Formula("x^$m"));
+              $F = FormulaUpToConstant("1/($m+1) $F")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 22 -->
+        <exercise>
+          <webwork>
+            <pg-code>
+              $F = FormulaUpToConstant("tan(x)-x");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int \tan^2(x) dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 23 -->
+        <exercise>
+          <webwork>
+            <pg-code>
+              Context()->variables->set(x => {limits => [0,2*pi]});
+              $F = FormulaUpToConstant("ln(abs(sin(x)))");
+              $F->{test_at} = [[pi/4],[3*pi/4],[5*pi/4],[7*pi/4]];
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int \cot(x) \, dx</m>
+              </p>
+              <p>
+                Do not just refer to <xref ref="thm_triganti">Theorem</xref> for the answer;
+                justify it through Substitution.
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 24 -->
+        <exercise>
+          <webwork>
+            <pg-code>
+              Context()->variables->set(x => {limits => [0,2*pi]});
+              $F = FormulaUpToConstant("-ln(abs(csc(x) + cot(x)))");
+              $F->{test_at} = [[pi/4],[3*pi/4],[5*pi/4],[7*pi/4]];
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int \csc(x) \, dx</m>
+              </p>
+              <p>
+                Do not just refer to <xref ref="thm_triganti">Theorem</xref> for the answer;
+                justify it through Substitution.
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
       </exercisegroup>
-      <exercisegroup cols="2">
 
+      <exercisegroup cols="2">
         <introduction>
           <p>
-            In the following exercises, evaluate the indefinite integral.
+            Use Substitution to evaluate the indefinite integral involving exponential functions.
           </p>
         </introduction>
-  <!-- Exercise 51 -->
+        <!-- Exercise 25 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("-1/(3*(x^3+3))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{x^2}{\left(x^3+3\right)^2} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $m = random(2,9,1);
+              $b = non_zero_random(-9,9,1);
+              if($envir{problemSeed}==1){$m=3;$b=-1};
+              Context("Fraction");
+              $f = Formula("e^($m x+$b)")->reduce;
+              $F = FormulaUpToConstant("1/$m e^($m x+$b)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 52 -->
+        <!-- Exercise 26 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("1/45*(5x^3+5x^2+2)^9");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \left(3 x^2+2 x\right) \left(5 x^3+5 x^2+2\right)^8 dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $m = random(2,9,1);
+              if($envir{problemSeed}==1){$m=3;};
+              Context("Fraction");
+              $f = Formula("e^(x^$m)x^($m-1)")->reduce;
+              $F = FormulaUpToConstant("1/$m e^(x^$m)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 53 -->
+        <!-- Exercise 27 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("-sqrt(1-x^2)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{x}{\sqrt{1-x^2}} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $b = non_zero_random(-9,9,1);
+              if($envir{problemSeed}==1){$b=-1};
+              Context("Fraction");
+              $f = Formula("e^(x^2 + 2*$b x + ($b)^2) (x + $b)")->reduce;
+              $F = FormulaUpToConstant("1/2 e^((x+$b)^2)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 54 -->
+        <!-- Exercise 28 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("-1/3*cot(x^3+1)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int x^2 \csc^2\left(x^3+1\right) dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 55 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("-2/3*cos(x)^(3/2)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \sin(x) \sqrt{\cos(x)} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $b = non_zero_random(-9,9,1);
+              if($envir{problemSeed}==1){$b=1};
+              Context("Fraction");
+              $f = Formula("(e^x+$b)/e^x")->reduce;
+              $F = FormulaUpToConstant("x - $b e^(-x)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
 
-  <!--ToDo: WW code for this exercise-->
-      <exercise>
-        <statement>
-          <p>
-            Evaluate the indefinite integral <m>\ds \int \sin\big(5x+1\big)\, dx</m>
-          </p>
-        </statement>
-        <answer>
-          <p>
-            <m>-\cos\big(5x+1\big)/5+C</m>
-          </p>
-        </answer>
-      </exercise>
-
-  <!-- Exercise 56 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("ln(abs(x-5))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{1}{x-5} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $b = non_zero_random(1,9,1);
+              if($envir{problemSeed}==1){$b=1};
+              Context("Fraction");
+              $f = Formula("e^x/(e^x+$b)")->reduce;
+              $F = FormulaUpToConstant("ln(e^x+$b)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 57 -->
+        <!-- Exercise 30 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("7/3*ln(abs(3x+2))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{7}{3 x+2} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $c = list_random(-1,1);
+              $m = random(2,5,1);
+              if($envir{problemSeed}==1){$c=-1;$m=2;};
+              Context("Fraction");
+              $f = Formula("(e^x + $c e^(-x))/e^($m x)")->reduce;
+              $F = FormulaUpToConstant("1/(1-$m) e^((1-$m)x) + $c/(-1-$m) e^((-1-$m)x)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 58 -->
+        <!-- Exercise 31 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("3x^2/2+ln(abs(x^2+3x+5))-5x");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{3 x^3+4 x^2+2 x-22}{x^2+3 x+5} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $b = random(2,9,1);
+              if($envir{problemSeed}==1){$b=3;};
+              Context("Fraction");
+              $f = Formula("$b^($b x)")->reduce;
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $F = FormulaUpToConstant("$b^($b x)/($b ln($b))")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 59 -->
+        <!-- Exercise 32 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("ln(abs(x^2+7x+3))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{2 x+7}{x^2+7 x+3} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              ($b,$c) = (2..9)[NchooseK(8,2)];
+              if($envir{problemSeed}==1){$b=4;$c=2;};
+              Context("Fraction");
+              $f = Formula("$b^($c x)")->reduce;
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $F = FormulaUpToConstant("$b^($c x)/($c ln($b))")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 60 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("3*ln(abs(3x^2+9x+7))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{9 (2 x+3)}{3 x^2+9 x+7} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 61 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("-x^2/2+2*ln(abs(x^2-7x+1))+7x");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{-x^3+14 x^2-46 x-7}{x^2-7 x+1} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 62 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("1/18*atan(x^2/9)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{x}{x^4+81} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 63 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("atan(2x)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{2}{4 x^2+1} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 64 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("asec(abs(2x))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{1}{x \sqrt{4 x^2-1}} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 65 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("1/3*asin(3x/4)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{1}{\sqrt{16-9 x^2}} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 66 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("3/2*ln(abs(x^2-2x+10))+1/3*atan((x-1)/3)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{3 x-2}{x^2-2 x+10} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 67 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("19/5*atan((x+6)/5) - ln(abs(x^2+12x+61))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{7-2 x}{x^2+12 x+61} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 68 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("15/2*ln(abs(x^2-10x+32))+x+41/sqrt(7)*atan((x-5)/sqrt(7))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{x^2+5 x-2}{x^2-10 x+32} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 69 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("x^2/2-9/2*ln(abs(x^2+9))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{x^3}{x^2+9} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 70 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("x^2/2+3*ln(abs(x^2+4x+9))-4x+24/sqrt(5)*atan((x+2)/sqrt(5))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{x^3-x}{x^2+4 x+9} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 71 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("-atan(cos(x))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{\sin(x)}{\cos^2(x)+1} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 72 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("atan(sin(x))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{\cos(x)}{\sin^2(x)+1} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 73 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("ln(abs(sec(x)+tan(x)))");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{\cos(x)}{1-\sin^2(x)} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 74 -->
-  <!-- Can't generate enough valid points for comparison -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("3*sqrt(x^2-2x-6)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{3 x-3}{\sqrt{x^2-2 x-6}} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 75 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $F = FormulaUpToConstant("sqrt(x^2-6x+8)");
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the indefinite integral <m>\ds \int \frac{x-3}{\sqrt{x^2-6 x+8}} dx</m>
-                </p>
-
-                <p>
-                  <var name="$F" width="40"/>
-                </p>
-              </statement>
-          </webwork>
-        </exercise>
-
       </exercisegroup>
-      <exercisegroup cols="2">
 
+      <exercisegroup cols="2">
         <introduction>
           <p>
-            In the following exercises, evaluate the definite integral.
+            Use Substitution to evaluate the indefinite integral involving logarithmic functions.
           </p>
         </introduction>
-  <!-- Exercise 76 -->
+        <!-- Exercise 33 -->
+        <!-- Repeat of #14 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = 1;
-                $b = 3;
-                $F = Formula("ln(abs(x-5))");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds \int_1^3 \frac{1}{x-5} dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="20"/>
-                </p>
-     <!-- -ln(2) -->
-              </statement>
+            <pg-code>
+              $F = FormulaUpToConstant("ln(x)^2/2");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int \frac{\ln(x)}{x} dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
-  <!-- Exercise 77 -->
+        <!-- Exercise 34 -->
         <exercise>
-          <webwork>
-              <pg-code>
-                $a = 2;
-                $b = 6;
-                $F = Formula("2/15*(x-2)^(3/2)*(3x+4)");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds \int_2^6 x\sqrt{x-2} dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="20"/>
-                </p>
-     <!-- 352/15 -->
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 78 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $a = -pi/2;
-                $b = pi/2;
-                $F = Formula("sin(x)^3/3");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds \int_{-\pi/2}^{\pi/2} \sin^2(x) \cos(x) \, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="20"/>
-                </p>
-     <!-- 2/3 -->
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 79 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 1;
-                $F = Formula("1/5*(x^2-1)^5");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds \int_{0}^{1} 2x(1-x^2)^4\, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="20"/>
-                </p>
-     <!-- 1/5 -->
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 80 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $a = -2;
-                $b = -1;
-                $F = Formula("1/2*e^(x+1)^2");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds \int_{-2}^{-1} (x+1)e^{x^2+2x+1}\, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="20"/>
-                </p>
-     <!-- (1-e)/2 -->
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 81 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $a = -1;
-                $b = 1;
-                $F = Formula("atan(x)");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds \int_{-1}^{1} \frac{1}{1+x^2}\, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="20"/>
-                </p>
-     <!-- pi/2 -->
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 82 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $a = 2;
-                $b = 4;
-                $F = Formula("-atan(3-x)");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds \int_{2}^{4} \frac{1}{x^2-6x+10}\, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="20"/>
-                </p>
-     <!-- pi/2 -->
-              </statement>
-          </webwork>
-        </exercise>
-  <!-- Exercise 83 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $a = 1;
-                $b = sqrt(3);
-                $F = Formula("asin(x/2)");
-                $r = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
-
-              <statement>
-                <p>
-                  Evaluate the definite integral <m>\ds \int_{1}^{\sqrt{3}} \frac{1}{\sqrt{4-x^2}}\, dx</m>
-                </p>
-
-                <p>
-                  <var name="$r" width="20"/>
-                </p>
-     <!-- pi/6 -->
-              </statement>
+          <webwork seed="1">
+            <pg-code>
+              $m = random(2,9,1);
+              if($envir{problemSeed}==1){$m=2;};
+              Context("Fraction");
+              Context()->variables->set(x => {limits => [0.1,10]});
+              $f = Formula("(ln(x))^$m/x")->reduce;
+              $F = FormulaUpToConstant("(ln(x))^($m+1)/($m+1)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
           </webwork>
         </exercise>
 
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $m = random(3,9,2);
+              if($envir{problemSeed}==1){$m=3;};
+              Context("Fraction");
+              Context()->variables->set(x => {limits => [0.1,10]});
+              $f = Formula("ln(x^$m)/x")->reduce;
+              $frac = Fraction($m,2);
+              $F = FormulaUpToConstant("$frac (ln(x))^2")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 36 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $m = random(2,8,2);
+              if($envir{problemSeed}==1){$m=2;};
+              Context("Fraction");
+              Context()->variables->set(x => {limits => [0.1,10]});
+              $f = Formula("1/(x ln(x^$m))")->reduce;
+              $F = FormulaUpToConstant("1/$m ln(abs(ln(x^$m)))")->reduce;
+              $F->{test_at} = [[0.5],[2]];
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+      </exercisegroup>
+
+      <exercisegroup cols="2">
+        <introduction>
+          <p>
+            Use Substitution to evaluate the indefinite integral involving rational functions.
+          </p>
+        </introduction>
+        <!-- Exercise 37 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              ($a,$b) = (-9..-1,1..9)[NchooseK(18,2)];
+              if($envir{problemSeed}==1){$a=3;$b=1;};
+              Context("Fraction");
+              $f = Formula("(x^2 + $a x + $b)/x")->reduce;
+              $F = FormulaUpToConstant("x^2/2 + $a x + $b ln(abs(x))")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 38 -->
+        <exercise>
+          <webwork>
+            <pg-code>
+              Context("Fraction");
+              $f = Formula("(x^3 + x^2 + x + 1)/x")->reduce;
+              $F = FormulaUpToConstant("x^3/3 + x^2/2 + x + ln(abs(x))")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 39 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $c = list_random(-1,1);
+              $b = non_zero_random(-9,9,1);
+              if ($b == $c) {$b = list_random(-9..-2,2..9);}
+              if($envir{problemSeed}==1){$c=1;$b=-1};
+              Context("Fraction");
+              Context()->variables->set(x => {limits => [-$c-2,-$c+2]});
+              $f = Formula("(x^3 + $b)/(x + $c)")->reduce;
+              $frac = Fraction(3*$c,2);
+              $F = FormulaUpToConstant("1/3 (x+$c)^3 + $frac (x+$c)^2 + 3*($c)^2 (x+$c) + (($c)^3 + $b) ln(abs(x+$c))")->reduce;
+              $F->{test_at} = [[-$c-2],[-$c+2]];
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 40 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              do {($a,$b,$c) = (-9..-1,1..9)[NchooseK(18,3)];} until ((-$c)^2 + $a*(-$c) + $b != 0);
+              if($envir{problemSeed}==1){$a=2;$b=-5;$c=-3;};
+              Context("Fraction");
+              Context()->variables->set(x => {limits => [-$c-2,-$c+2]});
+              $f = Formula("(x^2 + $a x + $b)/(x + $c)")->reduce;
+              $F = FormulaUpToConstant("(x+$c)^2/2 + ($a-2*$c)(x+$c) + (($c)^2 - $a*$c + $b)ln(abs(x+$c))")->reduce;
+              $F->{test_at} = [[-$c-2],[-$c+2]];
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 41 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              do {($a,$b,$c,$d) = (-9..-1,1..9)[NchooseK(18,4)];} until ($a*(-$d)^2 + $b*(-$d) + $c != 0);
+              if($envir{problemSeed}==1){$a=3;$b=-5;$c=7;$d=1;};
+              Context("Fraction");
+              Context()->variables->set(x => {limits => [-$d-2,-$d+2]});
+              $f = Formula("($a x^2 + $b x + $c)/(x + $d)")->reduce;
+              $frac = Fraction($a,2);
+              $F = FormulaUpToConstant("$frac (x+$d)^2 + ($b - 2*$a*$d)(x+$d) + ($a*($d)^2 - $b*$d + $c)ln(abs(x+$d))")->reduce;
+              $F->{test_at} = [[-$d-2],[-$d+2]];
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 42 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              ($a,$b,$c) = (-9,-6,-3,0,3,6,9)[NchooseK(7,3)];
+              if($envir{problemSeed}==1){$a=3;$b=3;$c=0;};
+              Context("Fraction");
+              $denom = Formula("x^3 + $a x^2 + $b x + $c")->reduce;
+              $A = 2*$a/3;
+              $B = $b/3;
+              $numer = Formula("x^2 + $A x + $B")->reduce;
+              $f = Formula("($numer)/($denom)")->reduce;
+              $F = FormulaUpToConstant("1/3 ln(abs($denom))")->reduce;
+              $bound = abs($c)+abs($b)+abs($a);  # be sure to test where $denom is pos and neg
+              $F->{test_at} = [[-1],[1],[-$bound-1],[$bound+1]];
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+      </exercisegroup>
+
+      <exercisegroup cols="2">
+        <introduction>
+          <p>
+            Use Substitution to evaluate the indefinite integral involving inverse trigonometric functions.
+          </p>
+        </introduction>
+        <!-- Exercise 43 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $a = list_random(2,3,5,6,7,11,13,14,15,17);
+              if($envir{problemSeed}==1){$a=7;};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("$a/(x^2+$a)")->reduce;
+              $F = FormulaUpToConstant("sqrt($a) atan(x/sqrt($a))")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 44 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $a = random(2,9,1);
+              if($envir{problemSeed}==1){$a=3;};
+              Context("Fraction");
+              Context()->variables->set(x => {limits => [-$a,$a]});
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("$a/sqrt($a^2-x^2)")->reduce;
+              $F = FormulaUpToConstant("$a asin(x/$a)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 45 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $a = list_random(2,3,5,6,7,10,11,13,14,15);
+              $b = random(2,20,1);
+              if($envir{problemSeed}==1){$a=5;$b=14;};
+              Context("Fraction");
+              Context()->variables->set(x => {limits => [-sqrt($a),sqrt($a)]});
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("$b/sqrt($a-x^2)")->reduce;
+              $F = FormulaUpToConstant("$b asin(x/sqrt($a))")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 46 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              ($a,$b) = (2..9)[NchooseK(8,2)];
+              if($envir{problemSeed}==1){$a=3;$b=2;};
+              Context("Fraction");
+              Context()->variables->set(x => {limits => [$a,$a+10]});
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("$b/(x sqrt(x^2-$a^2))")->reduce;
+              $frac = Fraction($b,$a);
+              $F = FormulaUpToConstant("$frac asec(abs(x)/$a)")->reduce;
+              $F->{test_at} = [[-$a-1],[-$a-2],[-$a-3],[-$a-4]];
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 47 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              ($a,$b) = (2..9)[NchooseK(8,2)];
+              if($envir{problemSeed}==1){$a=4;$b=5;};
+              Context("Fraction");
+              Context()->variables->set(x => {limits => [$a,$a+10]});
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("($b x)/sqrt(x^6 - ($a)^2 x^4)")->reduce;
+              $frac = Fraction($b,$a);
+              $F = FormulaUpToConstant("$frac asec(abs(x)/$a)")->reduce;
+              $F->{test_at} = [[-$a-1],[-$a-2],[-$a-3],[-$a-4]];
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 48 -->
+        <exercise>
+          <webwork>
+            <pg-code>
+              Context()->variables->set(x => {limits => [-1,1]});
+              $F = FormulaUpToConstant("1/2*asin(x^2)");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int \frac{x}{\sqrt{1-x^4}} dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 49 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $a = non_zero_random(-9,9,1);
+              $b = list_random(2,3,5,6,7,10,11,13,14,15);
+              if($envir{problemSeed}==1){$a=-1;$b=7;};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("1/(x^2 + (2*$a) x + (($a)^2+$b))")->reduce;
+              $F = FormulaUpToConstant("1/sqrt($b) atan((x+$a)/$b)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 50 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $a = non_zero_random(-9,9,1);
+              ($b,$c) = (2..9)[NchooseK(8,2)];
+              if($envir{problemSeed}==1){$a=-3;$b=4;$c=2};
+              Context("Fraction");
+              Context()->noreduce('(-x)-y','(-x)+y');
+              Context()->variables->set(x => {limits => [-$a-$b,-$a+$b]});
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("$c/sqrt(-x^2 - (2*$a) x + (($b)^2-($a)^2))")->reduce;
+              $F = FormulaUpToConstant("$c asin((x+$a)/$b)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 51 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $a = non_zero_random(-9,9,1);
+              ($b,$c) = (2..9)[NchooseK(8,2)];
+              if($envir{problemSeed}==1){$a=-4;$b=5;$c=3};
+              Context("Fraction");
+              Context()->noreduce('(-x)-y','(-x)+y');
+              Context()->variables->set(x => {limits => [-$a-$b,-$a+$b]});
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("$c/sqrt(-x^2 - (2*$a) x + (($b)^2-($a)^2))")->reduce;
+              $F = FormulaUpToConstant("$c asin((x+$a)/$b)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 52 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $a = non_zero_random(-9,9,1);
+              $b = random(2,9,1);
+              if($envir{problemSeed}==1){$a=3;$b=5};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("$b/(x^2+(2*$a)x+(($a)^2+($b)^2))")->reduce;
+              $F = FormulaUpToConstant("atan((x+$a)/$b)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+      </exercisegroup>
+
+      <exercisegroup cols="2">
+        <introduction>
+          <p>
+            Evaluate the indefinite integral.
+          </p>
+        </introduction>
+        <!-- Exercise 53 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $m = random(3,9,1);
+              $b = non_zero_random(-9,9,1);
+              if($envir{problemSeed}==1){$m=3;$b=3};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("x^($m-1)/(x^$m + $b)^2")->reduce;
+              $F = FormulaUpToConstant("-1/($m(x^$m + $b))")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 54 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $a = random(1,9,1);
+              ($b,$c) = (-9..-1,1..9)[NchooseK(18,2)];
+              ($n,$m) = num_sort((2..6)[NchooseK(5,2)]);
+              $p = random(4,9,1);
+              if($envir{problemSeed}==1){$a=5;$b=5;$c=2;$m=3;$n=2;$p=8;};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $u = Formula("$a x^$m + $b x^$n + $c")->reduce;
+              $g = gcd($a*$m,$b*$n);
+              $A = $a*$m/$g;
+              $B = $b*$n/$g;
+              $f = Formula("($A x^($m-1) + $B x^($n-1))($u)^$p")->reduce;
+              $F = FormulaUpToConstant("1/(($p+1)*$g) ($u)^($p+1)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 55 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $a = random(1,9,1);
+              $c = non_zero_random(-9,9,1);
+              if($envir{problemSeed}==1){$a=1;$c=-1;};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("x/sqrt($a + $c x^2)")->reduce;
+              $frac = Fraction(1,$c);
+              $F = FormulaUpToConstant("$frac sqrt($a + $c x^2)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 56 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $m = random(3,9,1);
+              $c = non_zero_random(-9,9,1);
+              $trig = list_random('tan','-cot');
+              if($envir{problemSeed}==1){$m=3;$c=1;$trig='-cot'};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $dt = ($trig eq 'tan') ? '\sec^2' : '\csc^2';
+              $h = Formula("x^$m+$c")->reduce;
+              $g = Formula("$trig(x)")->D('x')->reduce->substitute(x=>$h)->reduce;
+              $f = Formula("x^($m-1) $g")->reduce;
+              $F = FormulaUpToConstant("$trig(x^$m+$c)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int x^{<var name="$m-1"/>} <var name="$dt"/>\left(<var name="$h"/>\right) \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 57 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $trig = list_random('sin','-cos');
+              if($envir{problemSeed}==1){$trig='-cos'};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $g = Formula("$trig(x)")->D('x')->reduce;
+              $f = ($trig eq 'sin') ? Formula("cos(x) sqrt(sin(x))") : Formula("sin(x) sqrt(cos(x))");
+              $F = FormulaUpToConstant("2/3 $trig(x)^(3/2)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $m = random(2,9,1);
+              $b = non_zero_random(-9,9,1);
+              $trig = list_random('sin','cos');
+              if($envir{problemSeed}==1){$trig='sin';$m=5;$b=1;};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("$trig($m x + $b)")->reduce;
+              $F = Formula("-$trig(x)")->D('x')->reduce->substitute(x=>Formula("$m x + $b"));
+              $F = FormulaUpToConstant("1/$m $F")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 59 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $b = non_zero_random(-9,9,1);
+              if($envir{problemSeed}==1){$b=-5};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()->variables->set(x => {limits => [-$b-2,-$b+2]});
+              $f = Formula("1/(x+$b)")->reduce;
+              $F = FormulaUpToConstant("ln(abs(x+$b))")->reduce;
+              $F->{test_at} = [[-$b-2],[-$b+2]];
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 60 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              ($a,$b,$c) = (1..9)[NchooseK(9,3)];
+              if($envir{problemSeed}==1){$a=7;$b=3;$c=2;};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()->variables->set(x => {limits => [-$c/$b-2,-$c/$b+2]});
+              $f = Formula("$a/($b x+$c)")->reduce;
+              $frac = Fraction($a,$b);
+              $F = FormulaUpToConstant("$frac ln(abs($b x+$c))")->reduce;
+              $F->{test_at} = [[-$c/$b-2],[-$c/$b+2]];
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 61 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              do {($b,$c) = (-9..-1,1..9)[NchooseK(18,2)]} until (($b)**2 != 4*$c);
+              $m = random(2,4,1);
+              $k = non_zero_random(-9,9,1);
+              if($envir{problemSeed}==1){$b=3;$c=5;$m=3;$k=-5;};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              if (($b)**2 > 4*$c) {
+                ($min, $max) = num_sort((-$b - sqrt(($b)**2 - 4*$c))/2,(-$b + sqrt(($b)**2 - 4*$c))/2);
+                $D = sqrt(($b)**2 - 4*$c);
+                Context()->variables->set(x => {limits => [$min-$D,$max+$D]});
+              };
+              $denom = Formula("x^2 + $b x + $c")->reduce;
+              $numer = Formula("$m x^3 + ($m*$b + $k)x^2 + ($m*$c + $b*$k + 2) x + ($c*$k + $b)")->reduce;
+              $f = Formula("($numer)/($denom)");
+              $frac = Fraction($m,2);
+              $F = FormulaUpToConstant("$frac x^2 + $k x + ln(abs($denom))")->reduce;
+              if (($b)**2 > 4*$c) {
+                $F->{test_at} = [[$min-$D],[$max+$D]];
+              };
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 62 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              do {($b,$c) = (-9..-1,1..9)[NchooseK(18,2)]} until (($b)**2 != 4*$c);
+              if($envir{problemSeed}==1){$b=7;$c=3;};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              if (($b)**2 > 4*$c) {
+                ($min, $max) = num_sort((-$b - sqrt(($b)**2 - 4*$c))/2,(-$b + sqrt(($b)**2 - 4*$c))/2);
+                $D = sqrt(($b)**2 - 4*$c);
+                Context()->variables->set(x => {limits => [$min-$D,$max+$D]});
+              };
+              $denom = Formula("x^2 + $b x + $c")->reduce;
+              $numer = Formula("2x + $b")->reduce;
+              $f = Formula("($numer)/($denom)");
+              $F = FormulaUpToConstant("ln(abs($denom))")->reduce;
+              if (($b)**2 > 4*$c) {
+                $F->{test_at} = [[$min-$D],[$max+$D]];
+              };
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 63 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              do {($a,$b,$c) = (-9..-1,1..9)[NchooseK(18,3)]} until (($b)**2 != 4*$a*$c);
+              $k = random(2,5,1);
+              if($envir{problemSeed}==1){$a=3;$b=9;$c=7;$k=3;};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              if (($b)**2 > 4*$a*$c) {
+                ($min, $max) = num_sort((-$b - sqrt(($b)**2 - 4*$a*$c))/2,(-$b + sqrt(($b)**2 - 4*$a*$c))/2);
+                $D = sqrt(($b)**2 - 4*$a*$c);
+                Context()->variables->set(x => {limits => [$min-$D,$max+$D]});
+              };
+              $denom = Formula("$a x^2 + $b x + $c")->reduce;
+              $g = gcd(2*$a,$b);
+              $A = 2*$a/$g;
+              $B = $b/$g;
+              $numer = Formula("$g*$k ($A x + $B)")->reduce;
+              $f = Formula("($numer)/($denom)");
+              $F = FormulaUpToConstant("$k ln(abs($denom))")->reduce;
+              if (($b)**2 > 4*$c) {
+                $F->{test_at} = [[$min-$D],[$max+$D]];
+              };
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 64 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              do {($b,$c) = (-9..-1,1..9)[NchooseK(18,2)]} until (($b)**2 != 4*$c);
+              $k = non_zero_random(-9,9,1);
+              if($envir{problemSeed}==1){$b=-7;$c=1;$k=7;};
+              $m = -1;
+              Context("Fraction");
+              Context()->noreduce('(-x)-y','(-x)+y');
+              Context()->flags->set(reduceConstantFunctions=>0);
+              if (($b)**2 > 4*$c) {
+                ($min, $max) = num_sort((-$b - sqrt(($b)**2 - 4*$c))/2,(-$b + sqrt(($b)**2 - 4*$c))/2);
+                $D = sqrt(($b)**2 - 4*$c);
+                Context()->variables->set(x => {limits => [$min-$D,$max+$D]});
+              };
+              $denom = Formula("x^2 + $b x + $c")->reduce;
+              $numer = Formula("$m x^3 + ($m*$b + $k)x^2 + ($m*$c + $b*$k + 2) x + ($c*$k + $b)")->reduce;
+              $f = Formula("($numer)/($denom)");
+              $frac = Fraction($m,2);
+              $F = FormulaUpToConstant("$frac x^2 + $k x + ln(abs($denom))")->reduce;
+              if (($b)**2 > 4*$c) {
+                $F->{test_at} = [[$min-$D],[$max+$D]];
+              };
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 65 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $a = random(2,9,1);
+              if($envir{problemSeed}==1){$a=9;};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("x/(x^4+$a^2)")->reduce;
+              $F = FormulaUpToConstant("1/(2*$a) atan(x^2/$a)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 66 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $a = random(2,9,1);
+              if($envir{problemSeed}==1){$a=2;};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("$a/($a^2x^2+1)")->reduce;
+              $F = FormulaUpToConstant("atan($a x)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 67 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $a = random(2,9,1);
+              if($envir{problemSeed}==1){$a=2;};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()->variables->set(x => {limits => [1/$a,1/$a+4]});
+              $f = Formula("1/(x sqrt($a^2x^2-1))")->reduce;
+              $F = FormulaUpToConstant("asec(abs($a x))")->reduce;
+              $F->{test_at} = [[-1/$a-1],[-1/$a-2],[-1/$a-3],[-1/$a-4]];
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 68 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              ($a,$b) = (2..9)[NchooseK(8,2)];
+              if($envir{problemSeed}==1){$a=4;$b=3;};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()->variables->set(x => {limits => [-$b/$a,$b/$a]});
+              $f = Formula("1/sqrt($a^2 - $b^2 x^2)")->reduce;
+              $F = FormulaUpToConstant("1/$b asin($b x/$a)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 69 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $a = non_zero_random(-9,9,1);
+              $b = random(2,9,1);
+              $c = non_zero_random(-9,9,1);
+              $k = random(2,9,1);
+              if($envir{problemSeed}==1){$a=-1;$b=3;$c=1;$k = 3;};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $denom = Formula("x^2 + 2*$a x + (($a)^2 + $b^2)")->reduce;
+              $numer = Formula("$k x + ($k*$a + $c)")->reduce;
+              $f = Formula("($numer)/($denom)")->reduce;
+              $frac = Fraction($k,2);
+              $frac2 = Fraction($c,$b);
+              $F = FormulaUpToConstant("$frac ln(abs($denom)) + $frac2 atan((x+$a)/$b)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 70 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $a = non_zero_random(-9,9,1);
+              $b = random(2,9,1);
+              $c = non_zero_random(1,19,1);
+              $k = random(2,9,1);
+              if($envir{problemSeed}==1){$a=6;$b=5;$c=19;$k=-2;};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $denom = Formula("x^2 + 2*$a x + (($a)^2 + $b^2)")->reduce;
+              $numer = Formula("$k x + ($k*$a + $c)")->reduce;
+              $f = Formula("($numer)/($denom)")->reduce;
+              $frac = Fraction($k,2);
+              $frac2 = Fraction($c,$b);
+              $F = FormulaUpToConstant("$frac2 atan((x+$a)/$b) + $frac ln(abs($denom))")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 71 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $a = non_zero_random(-9,9,1);
+              $b = list_random(2,3,5,6,7,10,11,13,14,15);
+              $c = non_zero_random(1,50,1);
+              $k = random(2,20,1);
+              if($envir{problemSeed}==1){$a=-5;$b=7;$c=41;$k=15;};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $denom = Formula("x^2 + 2*$a x + (($a)^2 + $b)")->reduce;
+              $numer = Formula("x^2 + (2*$a+$k) x + (($a)^2 + $b + $k*$a + $c)")->reduce;
+              $f = Formula("($numer)/($denom)")->reduce;
+              $frac = Fraction($k,2);
+              $F = FormulaUpToConstant("x+$c/sqrt($b) atan((x+$a)/sqrt($b)) + $frac ln(abs($denom))")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 72 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $b = random(2,9,1);
+              if($envir{problemSeed}==1){$b=3;};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("x^3/(x^2 + $b^2)")->reduce;
+              $frac = Fraction($b**2,2);
+              $F = FormulaUpToConstant("x^2/2 - $frac ln(abs(x^2+$b^2))")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 73 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $a = non_zero_random(-9,9,1);
+              $b = list_random(2,3,5,6,7,10,11,13,14,15);
+              $c = non_zero_random(1,50,1);
+              $k = random(2,20,1);
+              if($envir{problemSeed}==1){$a=2;$b=5;$c=24;$k=6;};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $denom = Formula("x^2 + 2*$a x + (($a)^2 + $b)")->reduce;
+              $numer = Formula("x^3 + ($b - 3*($a)^2 + $k)x + ((($a)^2+$b) (-2*$a) + $a*$k + $c)")->reduce;
+              $f = Formula("($numer)/($denom)")->reduce;
+              $frac = Fraction($k,2);
+              $F = FormulaUpToConstant("1/2 x^2 - (2*$a) x + $frac ln(abs($denom)) + $c/sqrt($b) atan((x+$a)/sqrt($b))")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 74 -->
+        <exercise>
+          <webwork>
+            <pg-code>
+              $F = FormulaUpToConstant("-atan(cos(x))");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int \frac{\sin(x)}{\cos^2(x)+1} dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 75 -->
+        <exercise>
+          <webwork>
+            <pg-code>
+              $F = FormulaUpToConstant("atan(sin(x))");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int \frac{\cos(x)}{\sin^2(x)+1} dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 76 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $trig = list_random('sin','cos');
+              if($envir{problemSeed}==1){$trig='sin'};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $num = ($trig eq 'cos') ? 'sin' : 'cos';
+              $numtex = '\'.$num;
+              $trigtex = '\'.$trig;
+              $f = Formula("$num(x)/(1 - $trig^2(x))")->reduce;
+              $F = FormulaUpToConstant("ln(abs(sec(x) + tan(x)))")->reduce;
+              if ($trig eq 'cos') {
+                $F = FormulaUpToConstant("-ln(abs(csc(x) + cot(x)))")->reduce;
+              };
+              $F->{test_at} = [[pi/4],[3*pi/4],[5*pi/4],[7*pi/4]];
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int \frac{\<var name="$numtex"/>(x)}{1-<var name="$trigtex"/>^2(x)} \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 77 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $h = non_zero_random(-9,9,1);
+              $k = random(-9,-1,1);
+              $c = random(3,9,1);
+              if($envir{problemSeed}==1){$h=1;$k=-7;$c=3;};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()->variables->set(x => {limits => [$h-sqrt(-$k),$h+sqrt(-$k)]});
+              $numer = Formula("$c x - $c*$h")->reduce;
+              $quad = Formula("x^2 - (2*$h) x + (($h)^2+$k)")->reduce;
+              $f = Formula("($numer)/(sqrt($quad))")->reduce;
+              $F = FormulaUpToConstant("$c sqrt($quad)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 78 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $h = non_zero_random(-9,9,1);
+              $k = random(-9,-1,1);
+              if($envir{problemSeed}==1){$h=3;$k=-1;};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()->variables->set(x => {limits => [$h-sqrt(-$k),$h+sqrt(-$k)]});
+              $numer = Formula("x - $h")->reduce;
+              $quad = Formula("x^2 - (2*$h) x + (($h)^2+$k)")->reduce;
+              $f = Formula("($numer)/(sqrt($quad))")->reduce;
+              $F = FormulaUpToConstant("sqrt($quad)")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$F" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+      </exercisegroup>
+
+      <exercisegroup cols="2">
+        <introduction>
+          <p>
+            Evaluate the definite integral.
+          </p>
+        </introduction>
+        <!-- Exercise 79 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $b = non_zero_random(-9,9,1);
+              ($lb,$ub) = num_sort((-$b-9..-$b-1)[NchooseK(9,2)]);
+              if($envir{problemSeed}==1){$b=-5;$lb=1;$ub=3};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("1/(x+$b)")->reduce;
+              $frac = Fraction($ub+$b,$lb+$b);
+              $A = Formula("ln($frac)");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int_{<var name="$lb"/>}^{<var name="$ub"/>} <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$A" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 80 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $b = non_zero_random(-9,9,1);
+              ($lb,$ub) = num_sort((0,1,4,9,16,25,36,49,64,81)[NchooseK(10,2)]);
+              $lb = $lb - $b;
+              $ub = $ub - $b;
+              if($envir{problemSeed}==1){$b=-2;$lb=2;$ub=6};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("x sqrt(x+$b)")->reduce;
+              $fracu = Fraction(2*(($ub+$b)/5 - $b/3));
+              $fracl = Fraction(2*(($lb+$b)/5 - $b/3));
+              $A = Fraction($fracu*($ub + $b)**(3/2) - $fracl*($lb + $b)**(3/2));
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int_{<var name="$lb"/>}^{<var name="$ub"/>} <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$A" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 81 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $trig = list_random('sin','cos');
+              $lb = list_random('-pi','-pi/2');
+              $ub = list_random('pi','pi/2');
+              $n = random(2,5,1);
+              if($envir{problemSeed}==1){$trig='sin';$lb='-pi/2';$ub='pi/2';$n=2;};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("sin^$n(x) cos(x)");
+              $ftex = '\sin^' . $n . '(x)\cos(x)';
+              $A = Fraction(1/($n+1)*sin(Real($ub))**($n+1) - 1/($n+1)*sin(Real($lb))**($n+1));
+              if ($trig eq 'cos') {
+                $f = Formula("cos^$n(x) sin(x)");
+                $ftex = '\cos^' . $n . '(x)\sin(x)';
+                $A = Fraction(-1/($n+1)*cos(Real($ub))**($n+1) + 1/($n+1)*cos(Real($lb))**($n+1));
+              }
+              $lb = Formula("$lb");
+              $ub = Formula("$ub");
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int_{<var name="$lb"/>}^{<var name="$ub"/>} <var name="$ftex"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$A" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 82 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $n = random(3,9,1);
+              if($envir{problemSeed}==1){$n=4;};
+              $lb = 0;
+              $ub = 1;
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("2x (1 - x^2)^$n");
+              $A = Fraction(-1/($n+1)*(1 - $ub^2)^($n+1) + 1/($n+1)*(1 - $lb^2)^($n+1));
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int_{<var name="$lb"/>}^{<var name="$ub"/>} <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$A" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 83 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $b = non_zero_random(-9,9,1);
+              ($lb,$ub) = num_sort((-$b-2..-$b+2)[NchooseK(5,2)]);
+              if($envir{problemSeed}==1){$b=1;$lb=-2;$ub=-1};
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("(x+$b) e^(x^2 + 2*$b x + ($b)^2)")->reduce;
+              $A = Formula("1/2 (e^(($ub + $b)^2) - e^(($lb + $b)^2))")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int_{<var name="$lb"/>}^{<var name="$ub"/>} <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$A" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 84 -->
+        <exercise>
+          <webwork>
+            <pg-code>
+              $A = Formula("pi/2")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int_{-1}^{1} \frac{1}{1+x^2} \, dx</m>
+              </p>
+              <p>
+                <var name="$A" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 85 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              $b = non_zero_random(-9,9,1);
+              if($envir{problemSeed}==1){$b=-3;};
+              $lb = -$b-1;
+              $ub = -$b+1;
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("1/(x^2 + 2*$b x + (($b)^2+1))")->reduce;
+              $A = Formula("pi/2")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int_{<var name="$lb"/>}^{<var name="$ub"/>} <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$A" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <!-- Exercise 86 -->
+        <exercise>
+          <webwork seed="1">
+            <pg-code>
+              ($lbindex,$ubindex) = num_sort((0..8)[NchooseK(9,2)]);
+              if($envir{problemSeed}==1){$lbindex=5;$ubindex=7;};
+              ($lb,$ub) = (-2,'-sqrt(3)','-sqrt(2)',-1,0,1,'sqrt(2)','sqrt(3)',2)[$lbindex,$ubindex];
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $lb = Formula("$lb");
+              $ub = Formula("$ub");
+              Context("Fraction");
+              Context()->flags->set(reduceConstantFunctions=>0);
+              $f = Formula("1/sqrt(4 - x^2)")->reduce;
+              $A = Real("arcsin($ub/2) - arcsin($lb/2)");
+              $frac = Fraction($A/pi);
+              $A = Formula("$frac pi")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>\ds \int_{<var name="$lb"/>}^{<var name="$ub"/>} <var name="$f"/> \, dx</m>
+              </p>
+              <p>
+                <var name="$A" width="40"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
       </exercisegroup>
     </subexercises>
   </exercises>

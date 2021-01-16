@@ -2175,10 +2175,11 @@
               $f = ($lb == 0) ? Formula("(-1)^i") : Formula("(-1)^(i+1)");
               @i = ($lb..$ub);
               @fi = map{$f->eval(i=>$_) * Formula("e^$_")}(@i);
+              $f = ($lb == 0) ? Formula("(-e)^i") : Formula("-(-e)^i");
               $string = join('+',@fi);
               Context()->flags->set(reduceConstants=>0);
               $terms = Formula("$string")->reduce;
-              $multians = MultiAnswer($lb, $ub, $fi)->with(
+              $multians = MultiAnswer($lb, $ub, $f)->with(
                 singleResult => 1,
                 checker => sub {
                     my ( $correct, $student, $self ) = @_;
