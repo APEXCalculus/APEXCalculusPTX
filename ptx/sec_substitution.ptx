@@ -1760,7 +1760,7 @@
               $f = Formula("x^($m-1) $trig(x^$m)")->reduce;
               $trigAD = Formula("-$trig(x)")->D('x');
               $F = $trigAD->substitute(x=>Formula("x^$m"));
-              $F = FormulaUpToConstant("1/($m+1) $F")->reduce;
+              $F = FormulaUpToConstant("1/($m) $F")->reduce;
             </pg-code>
             <statement>
               <p>
@@ -1888,6 +1888,7 @@
               $b = non_zero_random(-9,9,1);
               if($envir{problemSeed}==1){$b=-1};
               Context("Fraction");
+              Context()->variables->set(x => {limits => [-$b-2,-$b+2]});
               $f = Formula("e^(x^2 + 2*$b x + ($b)^2) (x + $b)")->reduce;
               $F = FormulaUpToConstant("1/2 e^((x+$b)^2)")->reduce;
             </pg-code>
@@ -2584,7 +2585,7 @@
               Context()->flags->set(reduceConstantFunctions=>0);
               $g = Formula("$trig(x)")->D('x')->reduce;
               $f = ($trig eq 'sin') ? Formula("cos(x) sqrt(sin(x))") : Formula("sin(x) sqrt(cos(x))");
-              $F = FormulaUpToConstant("2/3 $trig(x)^(3/2)")->reduce;
+              $F = FormulaUpToConstant("2/3*$trig(x)^(3/2)")->reduce;
             </pg-code>
             <statement>
               <p>
@@ -3232,7 +3233,7 @@
               Context("Fraction");
               Context()->flags->set(reduceConstantFunctions=>0);
               $f = Formula("2x (1 - x^2)^$n");
-              $A = Fraction(-1/($n+1)*(1 - $ub^2)^($n+1) + 1/($n+1)*(1 - $lb^2)^($n+1));
+              $A = Fraction(-1/($n+1)*(1 - $ub**2)**($n+1) + 1/($n+1)*(1 - $lb**2)**($n+1));
             </pg-code>
             <statement>
               <p>
