@@ -8,8 +8,8 @@
 
 <!-- html layout options -->
 <xsl:param name="webwork.divisional.static" select="'no'"/>
-<xsl:param name="html.knowl.exercise.sectional" select="'no'"/>
-<xsl:param name="html.knowl.example" select="'no'"/>
+<!-- <xsl:param name="html.knowl.exercise.sectional" select="'no'"/> -->
+<!-- <xsl:param name="html.knowl.example" select="'no'"/> -->
 <!-- uncomment next line to enable hypothesis annotation -->
 <xsl:param name="html.annotation" select="'hypothesis'"/>
 
