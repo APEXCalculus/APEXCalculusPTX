@@ -1484,6 +1484,7 @@
               $f = Formula("1/sqrt($m x + $b)")->reduce;
               $frac = Fraction(2,$m);
               $F = FormulaUpToConstant("$frac sqrt($m x + $b)")->reduce;
+              $F->{limits} = [-$b/$m,-$b/$m+4];
             </pg-code>
             <statement>
               <p>
@@ -1504,6 +1505,7 @@
               Context("Fraction");
               $f = Formula("x/sqrt(x + $b)")->reduce;
               $F = FormulaUpToConstant("2/3 (x - 2*$b) sqrt(x - $b)")->reduce;
+              $F->{limits} = [$b,$b+4];
             </pg-code>
             <statement>
               <p>
@@ -1526,6 +1528,7 @@
               $f = Formula("(x^$m+$b x)/sqrt(x)")->reduce;
               $frac = Fraction(2*$b,3);
               $F = FormulaUpToConstant("x^(3/2) (2/(2*$m+1) x^($m-1) + $frac )")->reduce;
+              $F->{limits} = [0,4];
             </pg-code>
             <statement>
               <p>
@@ -1542,6 +1545,7 @@
           <webwork>
             <pg-code>
               $F = FormulaUpToConstant("2*e^sqrt(x)");
+              $F->{limits} = [0,4];
             </pg-code>
             <statement>
               <p>
@@ -1564,6 +1568,11 @@
               $f = Formula("x^($m-1)/sqrt(x^$m+$b)")->reduce;
               $frac = Fraction(2,$m);
               $F = FormulaUpToConstant("$frac sqrt(x^$m+$b)")->reduce;
+              if ($b &lt; 0) {
+                $absb = abs($b);
+                $F->{limits} = [$absb**(1/$m)+1,$absb**(1/$m)+4];
+                $F->{test_at} = [[-$absb**(1/$m)-1],[-$absb**(1/$m)-2],[-$absb**(1/$m)-3]];
+              }
             </pg-code>
             <statement>
               <p>
@@ -2411,6 +2420,7 @@
               Context()->flags->set(reduceConstantFunctions=>0);
               $f = Formula("$c/sqrt(-x^2 - (2*$a) x + (($b)^2-($a)^2))")->reduce;
               $F = FormulaUpToConstant("$c asin((x+$a)/$b)")->reduce;
+              $F->{limits} = [-$b-$a,$b-$a];
             </pg-code>
             <statement>
               <p>
@@ -2435,6 +2445,7 @@
               Context()->flags->set(reduceConstantFunctions=>0);
               $f = Formula("$c/sqrt(-x^2 - (2*$a) x + (($b)^2-($a)^2))")->reduce;
               $F = FormulaUpToConstant("$c asin((x+$a)/$b)")->reduce;
+              $F->{limits} = [-$b-$a,$b-$a];
             </pg-code>
             <statement>
               <p>
@@ -2538,6 +2549,9 @@
               $f = Formula("x/sqrt($a + $c x^2)")->reduce;
               $frac = Fraction(1,$c);
               $F = FormulaUpToConstant("$frac sqrt($a + $c x^2)")->reduce;
+              if ($c &lt; 0) {
+                $F->{limits} = [-sqrt(-$a/$c),sqrt(-$a/$c)];
+              };
             </pg-code>
             <statement>
               <p>
@@ -2586,6 +2600,7 @@
               $g = Formula("$trig(x)")->D('x')->reduce;
               $f = ($trig eq 'sin') ? Formula("cos(x) sqrt(sin(x))") : Formula("sin(x) sqrt(cos(x))");
               $F = FormulaUpToConstant("2/3*$trig(x)^(3/2)")->reduce;
+              $F->{limits} = [0,pi/2];
             </pg-code>
             <statement>
               <p>
