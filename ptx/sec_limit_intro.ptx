@@ -1392,8 +1392,6 @@
               } until($l != 0);
               @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
               @tabout = map{$f->eval(x => $_)} (@tabin);
-              $solgr = init_graph(-2, -abs($l) - 2, 2, abs($l) + 2, axes => [0,0], grid => [4, 2*abs($l) + 4], size => [282, 282]);
-              add_functions($solgr, "$f for x in &lt;-2,2> using color:blue and weight:2");
             </pg-code>
             <statement>
               <p>
@@ -1444,14 +1442,17 @@
               <p>
                 For a graphical approximation:
               </p>
-              <image pg-name="$solgr"/>
+              <image>
+                <latex-image syntax="PGtikz">
+                  \begin{axis}[grid=both]
+                    \addplot+[domain=-2:2] {$f};
+                  \end{axis}
+                </latex-image>
+              </image>
               <p>
                 It appears that when <m>x</m> is close to <m><var name="$a"/></m>,
                 that <m><var name="$f"/></m> is close to <m><var name="$l"/></m>.
-                So
-                <me>
-                  \lim_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)=<var name="$l"/>
-                </me>.
+                So <m>\lim_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)=<var name="$l"/></m>.
               </p>
             </solution>
           </webwork>
@@ -1473,8 +1474,6 @@
               } until ($l != 0);
               @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
               @tabout = map{$f->eval(x => $_)} (@tabin);
-              $solgr = init_graph(-2, -abs($l) - 2, 2, abs($l) + 2, axes => [0,0], grid => [4, 2*abs($l) + 4], size => [282, 282]);
-              add_functions($solgr, "$f for x in &lt;-2,2> using color:blue and weight:2");
             </pg-code>
             <statement>
               <p>
@@ -1525,14 +1524,19 @@
               <p>
                 For a graphical approximation:
               </p>
-              <image pg-name="$solgr"/>
+              <image>
+                <latex-image syntax="PGtikz">
+                  \begin{axis}[grid=both]
+                    \addplot+[domain=-2:2] {$f};
+                    % Be sure to include some area above and below x-axis
+                    \addplot[mark=none] coordinates {(0,5) (0,-5)};
+                  \end{axis}
+                </latex-image>
+              </image>
               <p>
                 It appears that when <m>x</m> is close to <m><var name="$a"/></m>,
                 that <m><var name="$f"/></m> is close to <m><var name="$l"/></m>.
-                So
-                <me>
-                  \lim_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)=<var name="$l"/>
-                </me>.
+                So <m>\lim_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)=<var name="$l"/></m>.
               </p>
             </solution>
           </webwork>
@@ -1544,22 +1548,17 @@
               $a = 0;
               ($b,$c) = (-5..-1,1..5)[NchooseK(10,2)];
               if ($envir{problemSeed} == 1){
-                ($b,$c) = (1,3);
+                ($b,$c) = (-1,-3);
               };
-              $f = Formula("(x + $b)/(x^2 + $c x)")->reduce;
+              ($left,$right) = num_sort(0,$c);
+              # for graphing
+              $xmin = $left - 2;
+              $xmax = $right + 2;
+              @d = ($left - 0.01, $left + 0.01, $right - 0.01, $right + 0.01);
+              $f = Formula("(x - $b)/(x^2 - $c x)")->reduce;
               $l = Compute("DNE");
               @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
               @tabout = map{$f->eval(x => $_)} (@tabin);
-              $solgr = init_graph(-2, -25, 2, 25, axes => [0,0], grid => [4, 10], size => [282, 282]);
-              if(0 &lt; -$c){
-                add_functions($solgr, "$f for x in &lt;-2,-0.01> using color:blue and weight:2");
-                add_functions($solgr, "$f for x in &lt;0.01,-$c) using color:blue and weight:2");
-                add_functions($solgr, "$f for x in (-$c,2> using color:blue and weight:2");
-              } else {
-                add_functions($solgr, "$f for x in &lt;-2,$c) using color:blue and weight:2");
-                add_functions($solgr, "$f for x in ($c,-0.01> using color:blue and weight:2");
-                add_functions($solgr, "$f for x in &lt;0.01,2> using color:blue and weight:2");
-              };
             </pg-code>
             <statement>
               <p>
@@ -1610,14 +1609,27 @@
               <p>
                 For a graphical approximation:
               </p>
-              <image pg-name="$solgr"/>
+              <image>
+                <latex-image syntax="PGtikz">
+                  \begin{axis}[
+                      grid=both,
+                      xmin=$xmin,
+                      xmax=$xmax,
+                      ymin=-25,
+                      ymax=25,
+                    ]
+                    \addplot[firstcurvestyle, domain=$xmin:$d[0]] {$f};
+                    \addplot[firstcurvestyle, domain=$d[1]:$d[2]] {$f};
+                    \addplot[firstcurvestyle, domain=$d[3]:$xmax] {$f};
+                    \addplot[asymptote] coordinates {($left,-25) ($left,25)};
+                    \addplot[asymptote] coordinates {($right,-25) ($right,25)};
+                  \end{axis}
+                </latex-image>
+              </image>
               <p>
                 It appears that when <m>x</m> is close to <m><var name="$a"/></m>,
                 that <m><var name="$f"/></m> grows without bound.
-                So
-                <me>
-                  \lim_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)\text{ does not exist (DNE).}
-                </me>
+                So <m>\lim_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)</m> does not exist (DNE).
               </p>
             </solution>
           </webwork>
@@ -1631,8 +1643,12 @@
                 ($a,$b,$c) = (3,-1,1);
               };
               $f = Formula("(x^2 - ($a + $b)x + $a*$b)/(x^2 - ($a + $c)x + $a*$c)")->reduce;
+              ($left,$right) = num_sort($a,$c);
+              # for graphing
+              @d = ($c - 0.01, $c + 0.01);
               Context("Fraction");
               $l = Fraction(($a - $b)/($a - $c));
+              $lreal= ($a - $b)/($a - $c);
               @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
               @tabout = map{$f->eval(x => $_)} (@tabin);
               $xmin = -abs($a) - 2;
@@ -1641,16 +1657,6 @@
               $xmid2 = $c + 0.01;
               $ymin = -ceil(abs(Real($l))) - 2;
               $ymax = ceil(abs(Real($l))) + 2;
-              $solgr = init_graph($xmin, $ymin, $xmax, $ymax, axes => [0,0],grid => [$xmax - $xmin, $ymax - $ymin], size => [282,282]);
-              if ($a &lt; $c) {
-                add_functions($solgr, "$f for x in &lt;$xmin,$xmid1> using color:blue and weight:2");
-                add_functions($solgr, "$f for x in &lt;$xmid2,$c) using color:blue and weight:2");
-                add_functions($solgr, "$f for x in ($c,$xmax> using color:blue and weight:2");
-              }else{
-                add_functions($solgr, "$f for x in &lt;$xmin,$c) using color:blue and weight:2");
-                add_functions($solgr, "$f for x in ($c,$xmid1> using color:blue and weight:2");
-                add_functions($solgr, "$f for x in &lt;$xmid2,$xmax> using color:blue and weight:2");
-              };
             </pg-code>
             <statement>
               <p>
@@ -1701,14 +1707,26 @@
               <p>
                 For a graphical approximation:
               </p>
-              <image pg-name="$solgr"/>
+              <image>
+                <latex-image syntax="PGtikz">
+                  \begin{axis}[
+                      grid=both,
+                      xmin=$xmin,
+                      xmax=$xmax,
+                      ymin=$ymin,
+                      ymax=$ymax,
+                    ]
+                    \addplot[firstcurvestyle, domain=$xmin:$d[0]] {$f};
+                    \addplot[firstcurvestyle, domain=$d[1]:$xmax] {$f};
+                    \addplot[asymptote] coordinates {($c,$ymin) ($c,$ymax)};
+                    \addplot[hollowdot] coordinates {($a,$lreal)};
+                  \end{axis}
+                </latex-image>
+              </image>
               <p>
                 It appears that when <m>x</m> is close to <m><var name="$a"/></m>,
                 that <m><var name="$f"/></m> is close to <m><var name="$l"/></m>.
-                So
-                <me>
-                  \lim_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)=<var name="$l"/>
-                </me>.
+                So <m>\lim_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)=<var name="$l"/></m>.
               </p>
             </solution>
           </webwork>
@@ -1723,26 +1741,20 @@
                 ($a,$b,$c) = (-1,-7,-5);
               };
               $f = Formula("(x^2 - ($a + $b)x + $a*$b)/(x^2 - ($a + $c)x + $a*$c)")->reduce;
+              ($left,$right) = num_sort($a,$c);
+              # for graphing
+              @d = ($c - 0.01, $c + 0.01);
               Context("Fraction");
               $l = Fraction(($a - $b)/($a - $c));
+              $lreal = ($a - $b)/($a - $c);
               @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
               @tabout = map{$f->eval(x => $_)} (@tabin);
-              $xmin = -abs($a) - 2;
-              $xmax = abs($a) + 2;
+              $xmin = $left - 2;
+              $xmax = $right + 2;
               $xmid1 = $c - 0.01;
               $xmid2 = $c + 0.01;
               $ymin = -ceil(abs(Real($l))) - 2;
               $ymax = ceil(abs(Real($l))) + 2;
-              $solgr = init_graph($xmin, $ymin, $xmax, $ymax, axes => [0,0],grid => [$xmax - $xmin, $ymax - $ymin], size => [282,282]);
-              if ($a &lt; $c) {
-                add_functions($solgr, "$f for x in &lt;$xmin,$xmid1> using color:blue and weight:2");
-                add_functions($solgr, "$f for x in &lt;$xmid2,$c) using color:blue and weight:2");
-                add_functions($solgr, "$f for x in ($c,$xmax> using color:blue and weight:2");
-              } else {
-                add_functions($solgr, "$f for x in &lt;$xmin,$c) using color:blue and weight:2");
-                add_functions($solgr, "$f for x in ($c,$xmid1> using color:blue and weight:2");
-                add_functions($solgr, "$f for x in &lt;$xmid2,$xmax> using color:blue and weight:2");
-              };
             </pg-code>
             <statement>
               <p>
@@ -1793,14 +1805,26 @@
               <p>
                 For a graphical approximation:
               </p>
-              <image pg-name="$solgr"/>
+              <image>
+                <latex-image syntax="PGtikz">
+                  \begin{axis}[
+                      grid=both,
+                      xmin=$xmin,
+                      xmax=$xmax,
+                      ymin=$ymin,
+                      ymax=$ymax,
+                    ]
+                    \addplot[firstcurvestyle, domain=$xmin:$d[0]] {$f};
+                    \addplot[firstcurvestyle, domain=$d[1]:$xmax] {$f};
+                    \addplot[asymptote] coordinates {($c,$ymin) ($c,$ymax)};
+                    \addplot[hollowdot] coordinates {($a,$lreal)};
+                  \end{axis}
+                </latex-image>
+              </image>
               <p>
                 It appears that when <m>x</m> is close to <m><var name="$a"/></m>,
                 that <m><var name="$f"/></m> is close to <m><var name="$l"/></m>.
-                So
-                <me>
-                  \lim_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)=<var name="$l"/>
-                </me>.
+                So <m>\lim_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)=<var name="$l"/></m>.
               </p>
             </solution>
           </webwork>
@@ -1815,17 +1839,16 @@
               };
               $f = Formula("(x^2-($c+$b)x+$a*$b)/(x^2-(2*$a)x+($a)^2)")->reduce;
               $l = (($a-$c)*($a-$b) > 0) ? OneOf("DNE","inf") : OneOf("DNE","-inf");
+              # for graphing
+              @d = ($a - 0.1, $a + 0.1);
               @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
               @tabout = map{$f->eval(x => $_)} (@tabin);
               $xmin = -abs($a) - 2;
               $xmax = abs($a) + 2;
               $xmid1 = $a - 0.01;
               $xmid2 = $a + 0.01;
-              $ymin = -1000;
-              $ymax = 1000;
-              $solgr = init_graph($xmin,$ymin,$xmax,$ymax,axes => [0,0],grid => [$xmax-$xmin,10],size => [282,282]);
-              add_functions($solgr, "$f for x in &lt;$xmin,$xmid1> using color:blue and weight:2");
-              add_functions($solgr, "$f for x in &lt;$xmid2,$xmax> using color:blue and weight:2");
+              $ymin = -100;
+              $ymax = 100;
             </pg-code>
             <statement>
               <p>
@@ -1876,14 +1899,25 @@
               <p>
                 For a graphical approximation:
               </p>
-              <image pg-name="$solgr"/>
+              <image>
+                <latex-image syntax="PGtikz">
+                  \begin{axis}[
+                      grid=both,
+                      xmin=$xmin,
+                      xmax=$xmax,
+                      ymin=$ymin,
+                      ymax=$ymax,
+                    ]
+                    \addplot[firstcurvestyle, domain=$xmin:$d[0], samples=40] {$f};
+                    \addplot[firstcurvestyle, domain=$d[1]:$xmax, samples=40] {$f};
+                    \addplot[asymptote] coordinates {($a,$ymin) ($a,$ymax)};
+                  \end{axis}
+                </latex-image>
+              </image>
               <p>
                 It appears that when <m>x</m> is close to <m><var name="$a"/></m>,
                 that <m><var name="$f"/></m> grows without bound.
-                So
-                <me>
-                  \lim_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)\text{ does not exist (DNE).}
-                </me>
+                So <m>\lim_{x\to <var name="$a"/>}\left(<var name="$f"/>\right)</m> does not exist (DNE).
               </p>
             </solution>
           </webwork>
@@ -1910,11 +1944,6 @@
               @tabout = map{$f->eval(x => $_)} (@tabin);
               $xmin = -abs($a) - 2;
               $xmax = abs($a) + 2;
-              $ymin = min($a + $b,$c*$a + $d) - 2;
-              $ymax = max($a + $b,$c*$a + $d) + 2;
-              $solgr = init_graph($xmin, $ymin, $xmax, $ymax, axes => [0,0],grid => [$xmax - $xmin, $ymax - $ymin], size => [282,282]);
-              add_functions($solgr, "$f1 for x in &lt;$xmin,$a) using color:blue and weight:2");
-              add_functions($solgr, "$f2 for x in [$a,$xmax> using color:blue and weight:2");
             </pg-code>
             <statement>
               <p>
@@ -1965,14 +1994,22 @@
               <p>
                 For a graphical approximation:
               </p>
-              <image pg-name="$solgr"/>
+              <image>
+                <latex-image syntax="PGtikz">
+                  \begin{axis}[
+                      grid=both,
+                      xmin=$xmin,
+                      xmax=$xmax,
+                    ]
+                    \addplot[firstcurvestyle, domain=$xmin:$a, infiniteopen] {$f1};
+                    \addplot[firstcurvestyle, domain=$a:$xmax, closedinfinite] {$f2};
+                  \end{axis}
+                </latex-image>
+              </image>
               <p>
                 It appears that when <m>x</m> is close to <m><var name="$a"/></m>,
                 that <m>f(x)</m> approaches different values from the left and right.
-                So
-                <me>
-                  \lim_{x\to <var name="$a"/>}f(x)\text{ does not exist (DNE).}
-                </me>
+                So <m>\lim_{x\to <var name="$a"/>}f(x)</m> does not exist.
               </p>
             </solution>
           </webwork>
@@ -2001,11 +2038,6 @@
               @tabout = map{$f->eval(x => $_)} (@tabin);
               $xmin = -4;
               $xmax = 4;
-              $ymin = -abs($l) - 2;
-              $ymax = abs($l) + 2;
-              $solgr = init_graph($xmin, $ymin, $xmax, $ymax, axes => [0,0],grid => [$xmax - $xmin, $ymax - $ymin], size => [282,282]);
-              add_functions($solgr, "$f1 for x in &lt;$xmin,$a) using color:blue and weight:2");
-              add_functions($solgr, "$f2 for x in [$a,$xmax> using color:blue and weight:2");
             </pg-code>
             <statement>
               <p>
@@ -2056,14 +2088,24 @@
               <p>
                 For a graphical approximation:
               </p>
-              <image pg-name="$solgr"/>
+              <image>
+                <latex-image syntax="PGtikz">
+                  \begin{axis}[
+                      grid=both,
+                      xmin=$xmin,
+                      xmax=$xmax,
+                    ]
+                    \addplot[firstcurvestyle, domain=$xmin:$a, infiniteleft] {$f1};
+                    \addplot[firstcurvestyle, domain=$a:$xmax, infiniteright] {$f2};
+                    % Be sure to include some area above and below x-axis
+                    \addplot[mark=none] coordinates {(0,5) (0,-5)};
+                  \end{axis}
+                </latex-image>
+              </image>
               <p>
                 It appears that when <m>x</m> is close to <m><var name="$a"/></m>,
                 that <m>f(x)</m> approaches <var name="$l"/>.
-                So
-                <me>
-                  \lim_{x\to <var name="$a"/>}f(x)=<var name="$l"/>
-                </me>.
+                So <m>\lim_{x\to <var name="$a"/>}f(x)=<var name="$l"/></m>.
               </p>
             </solution>
           </webwork>
@@ -2087,11 +2129,6 @@
               @tabout = map{$f->eval(x => $_)} (@tabin);
               $xmin = -3;
               $xmax = 3;
-              $ymin = -3;
-              $ymax = 3;
-              $solgr = init_graph($xmin, $ymin, $xmax, $ymax, axes => [0,0],grid => [$xmax - $xmin, $ymax - $ymin], size => [282,282]);
-              add_functions($solgr, "$f1 for x in &lt;$xmin,$a) using color:blue and weight:2");
-              add_functions($solgr, "$f2 for x in [$a,$xmax> using color:blue and weight:2");
             </pg-code>
             <statement>
               <p>
@@ -2142,14 +2179,24 @@
               <p>
                 For a graphical approximation:
               </p>
-              <image pg-name="$solgr"/>
+              <image>
+                <latex-image syntax="PGtikz">
+                  \begin{axis}[
+                      grid=both,
+                      xmin=$xmin,
+                      xmax=$xmax,
+                    ]
+                    \addplot[firstcurvestyle, domain=$xmin:$a, infiniteleft] {cos(x*180/pi)};
+                    \addplot[firstcurvestyle, domain=$a:$xmax, infiniteright] {$f2};
+                    % Be sure to include some area above and below x-axis
+                    \addplot[mark=none] coordinates {(0,2) (0,-2)};
+                  \end{axis}
+                </latex-image>
+              </image>
               <p>
                 It appears that when <m>x</m> is close to <m><var name="$a"/></m>,
                 that <m>f(x)</m> approaches <var name="$l"/>.
-                So
-                <me>
-                  \lim_{x\to <var name="$a"/>}f(x)=<var name="$l"/>
-                </me>.
+                So <m>\lim_{x\to <var name="$a"/>}f(x)=<var name="$l"/></m>.
               </p>
             </solution>
           </webwork>
@@ -2163,7 +2210,8 @@
               if ($envir{problemSeed} == 1){
                 $a = Formula("pi/2")
               };
-              $f1=Formula("sin(x)")->reduce;$f2=Formula("cos(x)")->reduce;
+              $f1=Formula("sin(x)")->reduce;
+              $f2=Formula("cos(x)")->reduce;
               Context("PiecewiseFunction");
               Context()->flags->set(tolType=>"absolute",tolerance => 0.00001);
               $areal = $a->eval(x => 0);
@@ -2173,11 +2221,6 @@
               @tabout = map{$f->eval(x => $_->eval(x => 0))} (@tabin);
               $xmin = -1;
               $xmax = 3;
-              $ymin = -2;
-              $ymax = 2;
-              $solgr = init_graph($xmin, $ymin, $xmax, $ymax, axes => [0,0],grid => [$xmax - $xmin, $ymax - $ymin], size => [282,282]);
-              add_functions($solgr, "$f1 for x in &lt;$xmin,$areal) using color:blue and weight:2");
-              add_functions($solgr, "$f2 for x in [$areal,$xmax> using color:blue and weight:2");
             </pg-code>
             <statement>
               <p>
@@ -2229,14 +2272,24 @@
               <p>
                 For a graphical approximation:
               </p>
-              <image pg-name="$solgr"/>
+              <image>
+                <latex-image syntax="PGtikz">
+                  \begin{axis}[
+                      grid=both,
+                      xmin=$xmin,
+                      xmax=$xmax,
+                    ]
+                    \addplot[firstcurvestyle, domain=$xmin:$a, infiniteopen] {sin(x*180/pi)};
+                    \addplot[firstcurvestyle, domain=$a:$xmax, closedinfinite] {cos(x*180/pi)};
+                    % Be sure to include some area above and below x-axis
+                    \addplot[mark=none] coordinates {(0,2) (0,-2)};
+                  \end{axis}
+                </latex-image>
+              </image>
               <p>
                 It appears that when <m>x</m> is close to <m><var name="$a"/></m>,
                 that <m>f(x)</m> approaches different values from the left and right.
-                So
-                <me>
-                  \lim_{x\to <var name="$a"/>}f(x)\text{ does not exist (DNE).}
-                </me>
+                So <m>\lim_{x\to <var name="$a"/>}f(x)</m> does not exist.
               </p>
             </solution>
           </webwork>
@@ -2250,9 +2303,6 @@
               $l = 1;
               @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
               @tabout = map{$f->eval(x => $_)} (@tabin);
-              $solgr = init_graph(-2, -2, 2, 2, axes => [0,0], grid => [4,4], size => [282,282]);
-              add_functions($solgr,"$f for x in &lt;-2,0) using color:blue and weight:2");
-              add_functions($solgr,"$f for x in (0,2> using color:blue and weight:2");
             </pg-code>
             <statement>
               <p>
@@ -2303,12 +2353,21 @@
               <p>
                 For a graphical approximation:
               </p>
-              <image pg-name="$solgr"/>
+              <image>
+                <latex-image syntax="PGtikz">
+                  \begin{axis}[
+                      grid=both,
+                      ymin=-1,
+                      ymax=2,
+                    ]
+                    \addplot+[domain=-1.5:-0.001, infiniteopen] {(-x)^x};
+                    \addplot+[domain=0.001:1.5, openinfinite] {x^x};
+                  \end{axis}
+                </latex-image>
+              </image>
               <p>
-                It appears that when <m>x</m> is close to <m>0</m>, that <m>\lvert x \rvert^x</m> is close to <m>1</m>. So
-                <me>
-                  \lim_{x\to0}\lvert x\rvert^x=1
-                </me>.
+                It appears that when <m>x</m> is close to <m>0</m>, that <m>\lvert x \rvert^x</m> is close to <m>1</m>.
+                So <m>\lim_{x\to 0}\lvert x\rvert^x=1</m>.
               </p>
             </solution>
           </webwork>
@@ -2317,14 +2376,11 @@
         <exercise>
           <webwork>
             <pg-code>
-              $f = Formula("e^{-e^{1/x}}");
+              $f = Formula("e^(-e^(1/x))");
               $a = 0;
               $l = Compute("DNE");
               @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
               @tabout = map{$f->eval(x => $_)} (@tabin);
-              $solgr = init_graph(-2,-2,2,2,axes => [0,0],grid => [4,4],size => [282,282]);
-              add_functions($solgr, "$f for x in &lt;-2,-0.0001) using color:blue and weight:2");
-              add_functions($solgr, "$f for x in (0.0001,2> using color:blue and weight:2");
             </pg-code>
             <statement>
               <p>
@@ -2375,12 +2431,22 @@
               <p>
                 For a graphical approximation:
               </p>
-              <image pg-name="$solgr"/>
+              <image>
+                <latex-image syntax="PGtikz">
+                  \begin{axis}[
+                      grid=both,
+                      ymin=-2,
+                      ymax=2,
+                    ]
+                    \addplot[firstcurvestyle, domain=-2:-0.0001, infiniteopen] {e^(-e^(1/x))};
+                    \addplot[firstcurvestyle, domain=0.2:2, infiniteright] {e^(-e^(1/x))};
+                    \addplot[firstcurvestyle, -, domain=0.0001:0.2, openleft] {0};
+                  \end{axis}
+                </latex-image>
+              </image>
               <p>
-                It appears that when <m>x</m> is close to <m>0</m>, that <m>e^{-e^{1/x}}</m> approaches different values from the left and right. So
-                <me>
-                  \lim_{x\to0}e^{-e^{1/x}}\text{ does not exist (DNE).}
-                </me>
+                It appears that when <m>x</m> is close to <m>0</m>, that <m>e^{-e^{1/x}}</m> approaches different values from the left and right.
+                So <m>\lim_{x\to 0}e^{-e^{1/x}}</m> does not exist.
               </p>
             </solution>
           </webwork>
@@ -2398,33 +2464,8 @@
               $l = (abs($a) &lt;= 1) ? Real(1) : Compute("DNE");
               @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
               @tabout = map{f($_)} (@tabin);
-              $mag = max(int(log(f($a-0.1))/log(10)), int(log(f($a+0.1))/log(10)));
-              $mantissa = max(int(f($a-0.1)/10**$mag),int(f($a+0.1)/10**$mag)) + 2;
-              $ymax =  $mantissa * 10**$mag;
-              $ymin = -10**$mag;
-              $solgr = init_graph(-6,$ymin,6,$ymax,axes => [0,0],grid => [12,$mantissa + 1],size => [282,282]);
-              $solgr->lb('reset');
-              for my $i (1..5) {
-                $solgr->lb(new Label($i,0,$i,'black','center','top','large'));
-                $solgr->lb(new Label(-$i,0,-$i,'black','center','top','large'));
-              }
-              for my $i (1..$mantissa-1) {
-                $solgr->lb(new Label(0,$i*10**$mag,$i*10**$mag,'black','right','middle','large'));
-              }
-              for my $i (2..5) {
-                $solgr->moveTo($i,f($i));
-                $solgr->lineTo($i+1,f($i),'blue',2);
-                $solgr->stamps( open_circle($i+1,f($i),'blue') );
-                $solgr->stamps( closed_circle($i,f($i),'blue') );
-                $solgr->moveTo(-$i,f($i));
-                $solgr->lineTo(-$i-1,f($i),'blue',2);
-                $solgr->stamps( open_circle(-$i-1,f($i),'blue') );
-                $solgr->stamps( closed_circle(-$i,f($i),'blue') );
-              }
-              $solgr->moveTo(-2,1);
-              $solgr->lineTo(2,1,'blue',2);
-              $solgr->stamps( open_circle(-2,1,'blue') );
-              $solgr->stamps( open_circle(2,1,'blue') );
+              $ymax = f(abs($a)+0.5)+10;
+              $ymin = max(-10, -1*f(abs($a)+0.5));
             </pg-code>
             <statement>
               <p>
@@ -2478,7 +2519,27 @@
               <p>
                 For a graphical approximation:
               </p>
-              <image pg-name="$solgr"/>
+              <image>
+                <latex-image syntax="PGtikz">
+                  \begin{axis}[
+                      grid=both,
+                      xmin=$xmin,
+                      xmax=$xmax,
+                      ymin=$ymin,
+                      ymax=$ymax,
+                    ]
+                    \addplot[firstcurvestyle, open] coordinates {(-2,1) (2,1)};
+                    \addplot[firstcurvestyle, closedopen] coordinates {(2,2) (3,2)};
+                    \addplot[firstcurvestyle, closedopen] coordinates {(3,6) (4,6)};
+                    \addplot[firstcurvestyle, closedopen] coordinates {(4,24) (5,24)};
+                    \addplot[firstcurvestyle, closedopen] coordinates {(5,120) (6,120)};
+                    \addplot[firstcurvestyle, closedopen] coordinates {(-2,2) (-3,2)};
+                    \addplot[firstcurvestyle, closedopen] coordinates {(-3,6) (-4,6)};
+                    \addplot[firstcurvestyle, closedopen] coordinates {(-4,24) (-5,24)};
+                    \addplot[firstcurvestyle, closedopen] coordinates {(-5,120) (-6,120)};
+                  \end{axis}
+                </latex-image>
+              </image>
               <p>
                 It appears that when <m>x</m> is close to <m><var name="$a"/></m>, that <m>\big\lfloor\lvert x\rvert\big\rfloor !</m> approaches different values from the left and right. So
                 <me>
@@ -2501,33 +2562,6 @@
               $l = (abs($a) &lt;= 1) ? Real(1) : Compute("DNE");
               @tabin = ($a - 0.1, $a - 0.01, $a - 0.001, $a + 0.001, $a + 0.01, $a + 0.1);
               @tabout = map{f($_)} (@tabin);
-              $mag = max(int(log(f($a-0.1))/log(10)), int(log(f($a+0.1))/log(10)));
-              $mantissa = max(int(f($a-0.1)/10**$mag),int(f($a+0.1)/10**$mag)) + 2;
-              $ymax =  $mantissa * 10**$mag;
-              $ymin = -10**$mag;
-              $solgr = init_graph(-6,$ymin,6,$ymax,axes => [0,0],grid => [12,$mantissa + 1],size => [282,282]);
-              $solgr->lb('reset');
-              for my $i (1..5) {
-                $solgr->lb(new Label($i,0,$i,'black','center','top','large'));
-                $solgr->lb(new Label(-$i,0,-$i,'black','center','top','large'));
-              }
-              for my $i (1..$mantissa-1) {
-                $solgr->lb(new Label(0,$i*10**$mag,$i*10**$mag,'black','right','middle','large'));
-              }
-              for my $i (2..5) {
-                $solgr->moveTo($i,f($i));
-                $solgr->lineTo($i+1,f($i),'blue',2);
-                $solgr->stamps( open_circle($i+1,f($i),'blue') );
-                $solgr->stamps( closed_circle($i,f($i),'blue') );
-                $solgr->moveTo(-$i,f($i));
-                $solgr->lineTo(-$i-1,f($i),'blue',2);
-                $solgr->stamps( open_circle(-$i-1,f($i),'blue') );
-                $solgr->stamps( closed_circle(-$i,f($i),'blue') );
-              }
-              $solgr->moveTo(-2,1);
-              $solgr->lineTo(2,1,'blue',2);
-              $solgr->stamps( open_circle(-2,1,'blue') );
-              $solgr->stamps( open_circle(2,1,'blue') );
             </pg-code>
             <statement>
               <p>
@@ -2581,7 +2615,27 @@
               <p>
                 For a graphical approximation:
               </p>
-              <image pg-name="$solgr"/>
+              <image>
+                <latex-image syntax="PGtikz">
+                  \begin{axis}[
+                      grid=both,
+                      xmin=$xmin,
+                      xmax=$xmax,
+                      ymin=-1,
+                      ymax=3,
+                    ]
+                    \addplot[firstcurvestyle, open] coordinates {(-2,1) (2,1)};
+                    \addplot[firstcurvestyle, closedopen] coordinates {(2,2) (3,2)};
+                    \addplot[firstcurvestyle, closedopen] coordinates {(3,6) (4,6)};
+                    \addplot[firstcurvestyle, closedopen] coordinates {(4,24) (5,24)};
+                    \addplot[firstcurvestyle, closedopen] coordinates {(5,120) (6,120)};
+                    \addplot[firstcurvestyle, closedopen] coordinates {(-2,2) (-3,2)};
+                    \addplot[firstcurvestyle, closedopen] coordinates {(-3,6) (-4,6)};
+                    \addplot[firstcurvestyle, closedopen] coordinates {(-4,24) (-5,24)};
+                    \addplot[firstcurvestyle, closedopen] coordinates {(-5,120) (-6,120)};
+                  \end{axis}
+                </latex-image>
+              </image>
               <p>
                 It appears that when <m>x</m> is close to <m><var name="$a"/></m>, that <m>\big\lfloor\lvert x\rvert\big\rfloor !</m> is always equal to <m>1</m>. So
                 <me>
