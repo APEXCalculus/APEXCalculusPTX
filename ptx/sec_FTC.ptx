@@ -2744,7 +2744,7 @@
               $low = Formula("$low(x)");
               $high = Formula("$high(x)");
               $f = Formula("$f(t)");
-              $D = $high->D('x') * Formula("$f($high)") - $low->D('x') * Formula("$f($low)");
+              $D = $high->D('x') * $f->substitute(t=>$high) - $low->D('x') * $f->substitute(t=>$low);
               $D = $D->reduce;
             </pg-code>
             <statement>

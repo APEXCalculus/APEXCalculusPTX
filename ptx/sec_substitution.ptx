@@ -1504,8 +1504,8 @@
               if($envir{problemSeed}==1){$b=3;};
               Context("Fraction");
               $f = Formula("x/sqrt(x + $b)")->reduce;
-              $F = FormulaUpToConstant("2/3 (x - 2*$b) sqrt(x - $b)")->reduce;
-              $F->{limits} = [$b,$b+4];
+              $F = FormulaUpToConstant("2/3 (x - 2*$b) sqrt(x + $b)")->reduce;
+              $F->{limits} = [-$b,-$b+4];
             </pg-code>
             <statement>
               <p>
@@ -1750,7 +1750,7 @@
             </pg-code>
             <statement>
               <p>
-                <m>\ds \int \tan^2(<var name="$m"/>)\sec^2(x) \, dx</m>
+                <m>\ds \int \tan^{<var name="$m"/>}(x)\sec^2(x) \, dx</m>
               </p>
               <p>
                 <var name="$F" width="40"/>
@@ -3136,6 +3136,7 @@
               $numer = Formula("x - $h")->reduce;
               $quad = Formula("x^2 - (2*$h) x + (($h)^2+$k)")->reduce;
               $f = Formula("($numer)/(sqrt($quad))")->reduce;
+              Context()->variables->set(x => {limits => [sqrt(-$k)+$h,sqrt(-$k)+$h+4]});
               $F = FormulaUpToConstant("sqrt($quad)")->reduce;
             </pg-code>
             <statement>

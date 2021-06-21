@@ -768,14 +768,14 @@
               Context("Form")->variables->add(s=>"Real",t=>"Real",A=>"Real",B=>"Real",C=>"Real");
               Context()->reductions->set("(-x)+y" => 1);
               $f = Formula("(x+$b)/(x^2 - $r)")->reduce;
-              $template = Formula("s/(x-sqrt($r)) + t/(x+sqrt($r))")->reduce,
+              $template = Formula("s/(x-sqrt($r)) + t/(x+sqrt($r))");
               @answer = ();
               for my $s (A..C) {
                 for my $t (A..C) {
                   if ($s ne $t) {
                     for my $ss ("","-") {
                       for my $st ("","-") {
-                        push(@answer,$template->substitute(s=>Formula("$ss $s"),t=>Formula("$st $t"))->reduce);
+                        push(@answer,$template->substitute(s=>Formula("$ss $s"),t=>Formula("$st $t")));
                       }
                     }
                   }
@@ -1096,7 +1096,7 @@
               ($r,$s) = (-9..-1,1..9)[NchooseK(18,2)];
               ($A,$B) = (-3..-1,1..3)[NchooseK(6,2)];
               if($envir{problemSeed}==1){$r=1;$s=-2;$A=1;$B=-1;};
-              $f = Formula("(x^2-($r+$s+$A+$B)x+($r*$s-$A*$s-$B*$r))/(x^2-($r+$s)x+$r*$s)")->reduce;
+              $f = Formula("(x^2+($A+$B-$r-$s)x+($r*$s-$A*$s-$B*$r))/(x^2-($r+$s)x+$r*$s)")->reduce;
               Context("Fraction");
               $F = FormulaUpToConstant("x + $A ln(abs(x-$r)) + $B ln(abs(x-$s))")->reduce;
               $F->{test_at} = [[$r-0.25],[$r+0.25],[$s-0.25],[$s+0.25]];
