@@ -85,6 +85,9 @@ SERVER = "(https://webwork-ptx.aimath.org,anonymous,anonymous,anonymous,anonymou
 #SERVER = "(https://webwork.pcc.edu,orcca,orcca,anonymous,orcca)"
 #SERVER = http://localhost
 
+pg-macros:
+	$(PTX)/pretext/pretext -c pg-macros $(MAINFILE)
+
 webwork-representations:
 	-rm -r $(WWOUT) || :
 	install -d $(WWOUT)
@@ -106,8 +109,9 @@ html:
 	cp -a $(IMGOUT) $(HTMLOUT) || :
 	cp -a $(IMGSRC) $(HTMLOUT) || :
 	cp -a $(WWOUT)/*.png $(HTMLOUT)/images || :
+	cp -a $(WWOUT)/*.svg $(HTMLOUT)/images || :
 	cd $(HTMLOUT); \
-	xsltproc --xinclude --stringparam publisher $(PUBFILE) --stringparam exercise.inline.hint no --stringparam exercise.inline.answer no --stringparam exercise.inline.solution yes --stringparam exercise.divisional.hint no --stringparam exercise.divisional.answer no --stringparam exercise.divisional.solution no --stringparam html.knowl.exercise.inline no --stringparam html.knowl.example no $(PTXXSL)/pretext-html.xsl $(MAINFILE); \
+	xsltproc --xinclude --stringparam publisher $(PUBFILE) --stringparam exercise.inline.hint yes --stringparam exercise.inline.answer yes --stringparam exercise.inline.solution yes --stringparam exercise.divisional.hint yes --stringparam exercise.divisional.answer yes --stringparam exercise.divisional.solution yes --stringparam webwork.divisional.static no $(PTXXSL)/pretext-html.xsl $(MAINFILE); \
 
 images:
 	install -d $(OUTPUT)
