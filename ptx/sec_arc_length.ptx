@@ -151,13 +151,13 @@
 
     <p>
       In general, we can approximate the arc length of <m>y=f(x)</m> on <m>[a,b]</m> in the following manner.
-      Let <m>a=x_1 \lt x_2 \lt \ldots \lt x_n\lt x_{n+1}=b</m> be a partition of <m>[a,b]</m> into <m>n</m> subintervals.
+      Let <m>a=x_0 \lt x_2 \lt \ldots \lt x_n\lt x_{n}=b</m> be a partition of <m>[a,b]</m> into <m>n</m> subintervals.
       Let <m>\dx_i</m> represent the length of the
-      <m>i</m>th subinterval <m>[x_i,x_{i+1}]</m>.
+      <m>i</m>th subinterval <m>[x_{i-1},x_{i}]</m>.
     </p>
 
     <figure xml:id="fig_arcintro2">
-      <caption>Zooming in on the <m>i</m>th subinterval <m>[x_i,x_{i+1}</m>] of a partition of <m>[a,b]</m></caption>
+      <caption>Zooming in on the <m>i</m>th subinterval <m>[x_{i-1},x_{i}</m>] of a partition of <m>[a,b]</m></caption>
       <!-- START figures/fig_arcintrod.tex -->
       <image xml:id="img_arcintro2" width="47%">
         <description></description>
@@ -169,10 +169,10 @@
         axis on top,
         xtick=\empty,
         extra x ticks={.3,1.37},
-        extra x tick labels={$x_i$,$x_{i+1}$},
+        extra x tick labels={$x_{i-1}$,$x_{i}$},
         ytick=\empty,
         extra y ticks={.48,1},
-        extra y tick labels={$y_i$,$y_{i+1}$},
+        extra y tick labels={$y_{i-1}$,$y_{i}$},
         ymin=-.2,ymax=1.25,%
         xmin=-.1,xmax=1.6,%
         ]
@@ -508,7 +508,7 @@
 		      	xtick=\empty,
 			      ztick=\empty,
 			      extra x ticks={.5,.9,1.4,1.9},
-			      extra x tick labels={$a$,$x_i$,$x_{i+1}$,$b$},
+			      extra x tick labels={$a$,$x_{i-1}$,$x_{i}$,$b$},
 			      ymin=-1,ymax=1,
 			      xmin=.25,xmax=2.1,
 			      zmin=-.2,zmax=1.2
@@ -603,10 +603,10 @@
               label("$b$",(1.9,-.05,0),S);
 
               draw((.9,.05,0)--(.9,-.05,0),black+.2mm);
-              label("$x_i$",(.9,-.05,0),S);
+              label("$x_{i-1}$",(.9,-.05,0),S);
 
               draw((1.4,.05,0)--(1.4,-.05,0),black+.2mm);
-              label("$x_{i+1}$",(1.4,-.05,0),S);
+              label("$x_{i}$",(1.4,-.05,0),S);
 
               label(XY*"$\left.\rule{0pt}{40pt}\right\}\ R$",(1.4,.49,0),E,Embedded);
               label(XY*"$r\left\{\rule{0pt}{30pt}\right.$",(.85,.37,0),W,Embedded);
@@ -623,10 +623,10 @@
     <p>
       We begin as we have in the previous sections:
       we partition the interval <m>[a,b]</m> with <m>n</m> subintervals,
-      where the <m>i</m>th subinterval is <m>[x_i,x_{i+1}]</m>.
+      where the <m>i</m>th subinterval is <m>[x_{i-1},x_{i}]</m>.
       On each subinterval,
-      we can approximate the curve <m>y=f(x)</m> with a straight line that connects <m>f(x_i)</m> and
-      <m>f(x_{i+1})</m> as shown in <xref ref="fig_arc4a">Figure</xref>.
+      we can approximate the curve <m>y=f(x)</m> with a straight line that connects <m>f(x_{i-1})</m> and
+      <m>f(x_{i})</m> as shown in <xref ref="fig_arc4a">Figure</xref>.
       Revolving this line segment about the <m>x</m>-axis creates part of a cone
       (called a <em>frustum</em> of a cone)
       as shown in <xref ref="fig_arc4b_3D">Figure</xref>.
@@ -646,21 +646,21 @@
       The radii are just the function evaluated at the endpoints of the interval.
       That is,
       <me>
-        R = f(x_{i+1}) \text{ and }  r = f(x_i)
+        R = f(x_{i}) \text{ and }  r = f(x_{i-1})
       </me>.
     </p>
 
     <p>
       Thus the surface area of this sample frustum of the cone is approximately
       <me>
-        2\pi\frac{f(x_i)+f(x_{i+1})}2\sqrt{1+\fp(c_i)^2}\dx_i
+        2\pi\frac{f(x_{i-1})+f(x_{i})}2\sqrt{1+\fp(c_i)^2}\dx_i
       </me>.
     </p>
 
     <p>
       Since <m>f</m> is a continuous function,
       the Intermediate Value Theorem states there is some <m>d_i</m> in
-      <m>[x_i,x_{i+1}]</m> such that <m>\ds f(d_i) = \frac{f(x_i)+f(x_{i+1})}2</m>;
+      <m>[x_{i-1},x_{i}]</m> such that <m>\ds f(d_i) = \frac{f(x_{i-1})+f(x_{i})}2</m>;
       we can use this to rewrite the above equation as
       <me>
         2\pi f(d_i)\sqrt{1+\fp(c_i)^2}\dx_i
@@ -715,7 +715,7 @@
 
     <p>
       (When revolving <m>y=f(x)</m> about the <m>y</m>-axis,
-      the radii of the resulting frustum are <m>x_i</m> and <m>x_{i+1}</m>;
+      the radii of the resulting frustum are <m>x_{i-1}</m> and <m>x_{i}</m>;
       their average value is simply the midpoint of the interval.
       In the limit, this midpoint is just <m>x</m>.
       This gives the second part of <xref ref="thm_surface_area">Theorem</xref>.)
