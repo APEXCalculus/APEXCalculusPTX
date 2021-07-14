@@ -638,6 +638,129 @@
     </figure>
 
     <p>
+      We can also do implicit differentiation for functions of three variables.
+      In the same way that a level curve <m>f(x,y)=c</m> is used to implicitly define <m>y</m> as a function of <m>x</m>,
+      a level surface <m>f(x,y,z)=c</m> can be viewed as implicitly defining <m>z</m> as a function of <m>x</m> and <m>y</m>.
+    </p>
+
+    <p>
+      Suppose the equation <m>f(x,y,z)=c</m>, where <m>c</m> is a constant,
+      defines the function <m>z=g(x,y)</m>.
+      Since <m>f(x,y,z)</m> is constant, we have
+      <md>
+        <mrow>0 \amp = \frac{\partial}{\partial x}f(x,y,z) </mrow>
+        <mrow>  \amp = f_x(x,y,z)\plz{x}{x}+f_y(x,y,z)\plz{y}{x}+f_z(x,y,z)\plz{z}{x}</mrow>
+        <mrow>  \amp = f_x(x,y,z)(1)+f_y(x,y,z)(0)+f_z(x,y,z)\plz{z}{x}</mrow>
+      </md>.
+      Solving for <m>\plz{z}{x}</m> gives us
+      <me>
+        \plz{z}{x} = -\frac{f_x(x,y,z)}{f_z(x,y,z)}
+      </me>,
+      and similarly,
+      <me>
+        \plz{z}{y} = -\frac{f_y(x,y,z)}{f_z(x,y,z)}
+      </me>.
+    </p>
+
+    <p>
+      At this point you should be rightly confused by what we just did.
+      It appears to be chain rule, but shouldn't the derivative of <m>f(x,y,z)</m>
+      with respect to <m>x</m> be simply <m>f_x(x,y,z)</m>?
+      The catch here is that we are considering the variables <m>x,y,z</m> (viewed as coordinates in <m>\R^3</m>)
+      as functions of <m>x</m> and <m>y</m>, viewed as coordinates in <m>\R^2</m>.
+    </p>
+
+    <p>
+      One way to clarify this: let <m>f(x,y,z)=c</m>, where <m>x=s</m>, <m>y=t</m>,
+      and <m>z=g(s,t)</m> for some function <m>g</m>.
+      Then we are really doing the chain rule calculation
+      <md>
+        <mrow>0 \amp = \frac{\partial}{\partial s}f(x,y,z) </mrow>
+        <mrow>  \amp = f_x(x,y,z)\plz{x}{s}+f_y(x,y,z)\plz{y}{s}+f_z(x,y,z)\plz{z}{s}</mrow>
+        <mrow>  \amp = f_x(x,y,z)(1)+f_y(x,y,z)(0)+f_z(x,y,z)\plz{z}{s}</mrow>
+      </md>,
+      and solving for <m>\plz{z}{s}</m>.
+      But just as with implicit differentiation in two variables
+      (where we don't bother to assume <m>x=t</m> and <m>y=g(t)</m>),
+      we generally don't make the distinction between coordinates in <m>\R^2</m> or <m>\R^3</m>,
+      and write <m>x</m> and <m>y</m> in place of <m>s</m> and <m>t</m>.
+    </p>
+
+    <p>
+      In <xref ref="subsec-tangent-plane"/> we saw that we can use partial
+      derivatives to determine the equation of the tangent plane to a graph <m>z=f(x,y)</m>.
+      Using implicit differentiation, we can do the same for a level surface <m>f(x,y,z)=c</m>.
+    </p>
+    <example xml:id="ex_mchain6">
+      <title>Implicit Differentiation with three variables</title>
+      <statement>
+        <p>
+          Given that the equation
+          <men xml:id="eqn-implicit-three">
+            x^2yz^3-\sin(x-3z)+4xy^2-3yz=0
+          </men>
+          defines <m>z</m> implicitly as a function of <m>x</m> and <m>y</m>,
+          compute <m>\plz{z}{x}</m> and <m>\plz{z}{y}</m> using implicit differentiation.
+          Then, determine the equation of the tangent plane to the surface at the point <m>(3,0,1)</m>.
+        </p>
+      </statement>
+      <solution>
+        <p>
+          There are two ways to proceed. One is to use implicit differentiation as before,
+          but using partial derivatives. Whenever we differentiate a function of <m>z</m>,
+          we multiply by the appropriate partial derivative of <m>z</m>.
+          The other option is to use the formula derived above.
+          We will use the first method for the <m>x</m> derivative, and the second for <m>y</m>.
+        </p>
+        <p>
+          We first take the partial derivative of both sides of <xref ref="eqn-implicit-three"/> with respect to <m>x</m>:
+          <md>
+            <mrow>\frac{\partial}{\partial x}(x^2yz^3-\sin(x-3z)+4xy^2-3yz) \amp = 0</mrow>
+            <mrow>2xyz^3 + x^2y(3z^2)\plz{z}{x}-\cos(x-3z)\left(1-3\plz{z}{x}\right)+4y^2-3y\plz{z}{x} \amp = 0</mrow>
+          </md>.
+          Note that we treated <m>y</m> as a constant, since the derivative is with respect to <m>x</m>.
+          Next, we collect terms:
+          <me>
+            \plz{z}{x}\left(3x^2yz^2+3\cos(x-3z)-3y\right) = -2xyz^3+\cos(x-3z)-4y^2
+          </me>.
+          Lastly, we solve for <m>\plz{z}{x}</m>:
+          <me>
+            \plz{z}{x} = \frac{-2xyz^3+\cos(x-3z)-4y^2}{3x^2yz^2+3\cos(x-3z)-3y}
+          </me>.
+        </p>
+        <p>
+          For the <m>y</m> derivative, we will use the result given above.
+          Setting <m>f(x,y,z) = x^2yz^3-\sin(x-3z)+4xy^2-3yz</m>, we have <m>\plz{z}{y} = -\frac{f_y(x,y,z)}{f_z(x,y,z)}</m>.
+          Therefore,
+          <me>
+            \plz{z}{y} = -\frac{x^2z^3+8xy-3z}{3x^2yz^2+3\cos(x-3z)-3y}
+          </me>.
+          The second method certainly seems simpler!
+          The reader is invited to try each part with the other method, and compare answers.
+        </p>
+        <p>
+          Finally, we consider the problem of the tangent plane.
+          First, we check that the point <m>(3,0,1)</m> is indeed on the surface: <m>f(3,0,1)=0</m>,
+          as required. Next we note that <m>z=1</m> is given to us from this point.
+          So if <m>f(x,y,z)=c</m> implicitly defines the graph <m>z=g(x,y)</m>,
+          then we must have <m>g(3,0)=1</m>. Next, we have
+          <md>
+            <mrow>g_x(3,0) \amp = \plzoa{z}{x}{(3,0)} = \frac{0+1-0}{0+3-0}=\frac13 </mrow>
+            <mrow>g_y(3,0) \amp = \plzoa{z}{y}{(3,0)} = -\frac{9+0-3}{0+3-0} = -2</mrow>
+          </md>.
+          The equation of the tangent plane is therefore
+          <me>
+            z = g(3,0)+g_x(3,0)(x-3)+g_y(3,0)(y-0) = 1+\frac13(x-3)-2y
+          </me>.          
+        </p>
+      </solution>
+    </example>
+
+
+  </subsection>
+
+  <conclusion>
+    <p>
       In <xref ref="sec_partial_derivatives">Section</xref>
       we learned how partial derivatives give certain instantaneous rate of change information about a function <m>f(x,y)</m>.
       In that section,
@@ -654,8 +777,7 @@
       we'll see how the Multivariable Chain Rule informs our understanding of these
       <em>directional derivatives</em>.
     </p>
-  </subsection>
-
+  </conclusion>
   <exercises>
     <subexercises>
       <title>Terms and Concepts</title>
