@@ -598,17 +598,17 @@
         \foreach \x in {0,.25,...,4} {
             \draw (\x,-.1) -- (\x,.1);
           }
-        \draw (0,-.25) node { $0$};
-        \draw (1,-.25) node { $1$};
-        \draw (2,-.25) node { $2$};
-        \draw (3,-.25) node { $3$};
-        \draw (4,-.25) node { $4$};
+        \draw (0,-.25) node {\scriptsize $0$};
+        \draw (1,-.25) node {\scriptsize $1$};
+        \draw (2,-.25) node {\scriptsize $2$};
+        \draw (3,-.25) node {\scriptsize $3$};
+        \draw (4,-.25) node {\scriptsize $4$};
 
-        \draw (0,-.55) node { $x_1$};
-        \draw (1,-.55) node { $x_5$};
-        \draw (2,-.55) node { $x_9$};
-        \draw (3,-.55) node { $x_{13}$};
-        \draw (4,-.55) node { $x_{17}$};
+        \draw (0,-.55) node {\scriptsize $x_0$};
+        \draw (1,-.55) node {\scriptsize $x_4$};
+        \draw (2,-.55) node {\scriptsize $x_8$};
+        \draw (3,-.55) node {\scriptsize $x_{12}$};
+        \draw (4,-.55) node {\scriptsize $x_{16}$};
 
         \end{tikzpicture}
 
@@ -620,11 +620,11 @@
       <xref ref="fig_rie5">Figure</xref>
       shows a number line of <m>[0,4]</m> divided,
       or <em>partitioned</em>, into 16 equally spaced subintervals.
-      We denote <m>0</m> as <m>x_1</m>;
-      we have marked the values of <m>x_5</m>, <m>x_9</m>,
-      <m>x_{13}</m> and <m>x_{17}</m>.
+      We denote <m>0</m> as <m>x_0</m>;
+      we have marked the values of <m>x_4</m>, <m>x_8</m>,
+      <m>x_{12}</m> and <m>x_{16}</m>.
       We could mark them all, but the figure would get crowded.
-      While it is easy to figure that <m>x_{10} = 2.25</m>, in general,
+      While it is easy to figure that <m>x_{9} = 2.25</m>, in general,
       we want a method of determining the value of <m>x_i</m> without consulting the figure.
       Consider:
     </p>
@@ -634,12 +634,12 @@
       <latex-image>
 
       \begin{tikzpicture}
-      \draw (1.5,1) node {$\displaystyle x_i = x_1 + (i-1)\Delta x$};
+      \draw (1.5,1) node {$\displaystyle x_i = x_0 + i\Delta x$};
 
       \draw [firstcolor] (1,0) node [text width=32pt,align=center] (a) { \centering starting\\[-5pt] value};
       \draw [firstcolor,-&gt;] (a) -- (.95,.75);
 
-      \draw [firstcolor] (2,2.5) node [text width=60pt,align=center] (b) { \centering number of subintervals\\[-5pt] between $x_1$ and $x_i$};
+      \draw [firstcolor] (2,2.5) node [text width=120pt,align=center] (b) { \centering number of subintervals\\[-5pt] between $x_0$ and $x_i$};
       \draw [firstcolor,-&gt;] (b) -- (1.95,1.25);
 
       \draw [firstcolor] (3,0) node [text width=60pt,align=center] (c) { \centering subinterval\\[-5pt] size};
@@ -651,15 +651,15 @@
     </image>
 
     <p>
-      So <m>x_{10} = x_1 + 9(4/16) = 2.25</m>.
+      So <m>x_{9} = x_0 + 9(4/16) = 2.25</m>.
     </p>
 
     <p>
       If we had partitioned <m>[0,4]</m> into 100 equally spaced subintervals,
       each subinterval would have length <m>\Delta x=4/100 = 0.04</m>.
-      We could compute <m>x_{32}</m> as
+      We could compute <m>x_{31}</m> as
       <me>
-        x_{32} = x_1 + 31(4/100) = 1.24
+        x_{31} = x_0 + 31(4/100) = 1.24
       </me>.
     </p>
 
@@ -669,24 +669,24 @@
 
     <p>
       Given any subdivision of <m>[0,4]</m>,
-      the first subinterval is <m>[x_1,x_2]</m>;
-      the second is <m>[x_2,x_3]</m>;
-      the <m>i</m>th subinterval is <m>[x_i,x_{i+1}]</m>.
+      the first subinterval is <m>[x_0,x_1]</m>;
+      the second is <m>[x_1,x_2]</m>;
+      the <m>i</m>th subinterval is <m>[x_{i-1},x_{i}]</m>.
     </p>
 
     <p>
       When using the Left Hand Rule,
-      the height of the <m>i</m>th rectangle will be <m>f(x_i)</m>.
+      the height of the <m>i</m>th rectangle will be <m>f(x_{i-1})</m>.
     </p>
 
     <p>
       When using the Right Hand Rule,
-      the height of the <m>i</m>th rectangle will be <m>f(x_{i+1})</m>.
+      the height of the <m>i</m>th rectangle will be <m>f(x_{i})</m>.
     </p>
 
     <p>
       When using the Midpoint Rule,
-      the height of the <m>i</m>th rectangle will be <m>\ds f\left(\frac{x_i+x_{i+1}}2\right)</m>.
+      the height of the <m>i</m>th rectangle will be <m>\ds f\left(\frac{x_{i-1}+x_{i}}2\right)</m>.
     </p>
 
     <p>
@@ -699,21 +699,21 @@
         <li>
           <title>Left Hand Rule</title>
           <p>
-            <m>\ds \sum_{i=1}^{16} f(x_i)\Delta x</m>
+            <m>\ds \sum_{i=1}^{16} f(x_{i-1})\Delta x</m>
           </p>
         </li>
 
         <li>
           <title>Right Hand Rule</title>
           <p>
-            <m>\ds \sum_{i=1}^{16} f(x_{i+1})\Delta x</m>
+            <m>\ds \sum_{i=1}^{16} f(x_{i})\Delta x</m>
           </p>
         </li>
 
         <li>
           <title>Midpoint Rule</title>
           <p>
-            <m>\ds \sum_{i=1}^{16} f\left(\frac{x_i+x_{i+1}}2\right)\Delta x</m>
+            <m>\ds \sum_{i=1}^{16} f\left(\frac{x_{i-1}+x_{i}}2\right)\Delta x</m>
           </p>
         </li>
       </dl>
@@ -742,23 +742,22 @@
           using 16 equally spaced intervals and the Right Hand Rule,
           we can approximate the definite integral as
           <me>
-            \sum_{i=1}^{16}f(x_{i+1})\Delta x
+            \sum_{i=1}^{16}f(x_{i})\Delta x
           </me>.
         </p>
 
         <p>
           We have <m>\Delta x = 4/16 = 0.25</m>.
-          Since <m>x_i = 0+(i-1)\Delta x</m>, we have
-          <md>
-            <mrow>x_{i+1} \amp = 0 + \big((i+1)-1\big)\Delta x</mrow>
-            <mrow>\amp =  i\Delta x</mrow>
-          </md>
+          Since <m>x_i = 0+i\Delta x</m>, we have
+          <me>
+            x_{i} = 0 + i\Delta x = i\Delta x
+          </me>.
         </p>
 
         <p>
           Using the summation formulas, consider:
           <mdn>
-            <mrow number="no">\int_0^4 (4x-x^2)\, dx \amp \approx \sum_{i=1}^{16} f(x_{i+1})\Delta x</mrow>
+            <mrow number="no">\int_0^4 (4x-x^2)\, dx \amp \approx \sum_{i=1}^{16} f(x_{i})\Delta x</mrow>
             <mrow number="no">\amp = \sum_{i=1}^{16} f(i\Delta x) \Delta x</mrow>
             <mrow number="no">\amp = \sum_{i=1}^{16} \big(4i\Delta x - (i\Delta x)^2\big)\Delta x</mrow>
             <mrow number="no">\amp = \sum_{i=1}^{16} (4i\Delta x^2 - i^2\Delta x^3)</mrow>
@@ -826,7 +825,7 @@
           skipping from the original summand to the equivalent of Equation <xref ref="eq_rie7"/> to save space.
           Note that <m>\Delta x = 4/1000 = 0.004</m>.
           <md>
-            <mrow>\int_0^4 (4x-x^2)\, dx \amp \approx \sum_{i=1}^{1000} f(x_{i+1})\Delta x</mrow>
+            <mrow>\int_0^4 (4x-x^2)\, dx \amp \approx \sum_{i=1}^{1000} f(x_{i})\Delta x</mrow>
             <mrow>\amp = (4\Delta x^2)\sum_{i=1}^{1000} i - \Delta x^3 \sum_{i=1}^{1000} i^2</mrow>
             <mrow>\amp = (4\Delta x^2)\frac{1000\cdot 1001}{2} - \Delta x^3 \frac{1000(1001)(2001)}6</mrow>
             <mrow>\amp =10.666656</mrow>
@@ -884,17 +883,17 @@
       <title>Partition</title>
       <statement>
         <p>
-          A <term>partition</term> <m>\Delta x</m> of a closed interval <m>[a,b]</m> is a set of numbers <m>x_1</m>,
-          <m>x_2</m>,
-          <m>\ldots</m> <m>x_{n+1}</m> where
+          A <term>partition</term> <m>\Delta x</m> of a closed interval <m>[a,b]</m> is a set of numbers <m>x_0</m>,
+          <m>x_1</m>,
+          <m>\ldots</m> <m>x_{n}</m> where
           <me>
-            a=x_1 \lt  x_2 \lt  \ldots \lt  x_n \lt  x_{n+1}=b
+            a=x_0 \lt  x_1 \lt  \ldots \lt  x_{n-1} \lt  x_{n}=b
           </me>.
         </p>
 
         <p>
           The length of the <m>i</m>th subinterval,
-          <m>[x_i,x_{i+1}]</m>, is <m>\Delta x_i = x_{i+1}-x_i</m>.
+          <m>[x_{i-1},x_{i}]</m>, is <m>\Delta x_i = x_{i}-x_{i-1}</m>.
           If <m>[a,b]</m> is partitioned into subintervals of equal length,
           we let <m>\Delta x</m> represent the length of each subinterval.
         </p>
@@ -1015,29 +1014,29 @@
 
           <li>
             <p>
-              The <m>i</m>th term of an equally spaced partition is <m>x_i = a + (i-1)\Delta x</m>.
-              (Thus <m>x_1=a</m> and <m>x_{n+1} = b</m>.)
+              The <m>i</m>th term of an equally spaced partition is <m>x_i = a + i\Delta x</m>.
+              (Thus <m>x_0=a</m> and <m>x_{n} = b</m>.)
             </p>
           </li>
 
           <li>
             <p>
               The Left Hand Rule summation is:
-              <m>\ds \sum_{i=1}^n f(x_i)\Delta x</m>.
+              <m>\ds \sum_{i=1}^n f(x_{i-1})\Delta x</m>.
             </p>
           </li>
 
           <li>
             <p>
               The Right Hand Rule summation is:
-              <m>\ds \sum_{i=1}^n f(x_{i+1})\Delta x</m>.
+              <m>\ds \sum_{i=1}^n f(x_{i})\Delta x</m>.
             </p>
           </li>
 
           <li>
             <p>
               The Midpoint Rule summation is:
-              <m>\ds \sum_{i=1}^n f\left(\frac{x_i+x_{i+1}}{2}\right)\Delta x</m>.
+              <m>\ds \sum_{i=1}^n f\left(\frac{x_{i-1}+x_{i}}{2}\right)\Delta x</m>.
             </p>
           </li>
         </ol>
@@ -1061,24 +1060,24 @@
         <p>
           Following <xref ref="idea_riemann">Key Idea</xref>, we have
           <me>
-            \Delta x = \frac{3 - (-2)}{10} = 1/2  \text{ and }   x_i = (-2) + (1/2)(i-1) = i/2-5/2
+            \Delta x = \frac{3 - (-2)}{10} = 1/2  \text{ and }   x_i = (-2) + (1/2)(i) = i/2-2
           </me>.
         </p>
 
         <p>
           As we are using the Midpoint Rule,
-          we will also need <m>x_{i+1}</m> and <m>\ds \frac{x_i+x_{i+1}}2</m>.
-          Since <m>x_i = i/2-5/2</m>,<m>x_{i+1} = (i+1)/2 - 5/2 = i/2 -2</m>.
+          we will also need <m>x_{i-1}</m> and <m>\ds \frac{x_{i-1}+x_{i}}2</m>.
+          Since <m>x_i = i/2-2</m>,<m>x_{i-1} = (i-1)/2 - 2 = i/2 -5/2</m>.
           This gives
           <me>
-            \frac{x_i+x_{i+1}}2 = \frac{(i/2-5/2) + (i/2-2)}{2} = \frac{i-9/2}{2} = i/2 - 9/4
+            \frac{x_{i-1}+x_{i}}2 = \frac{(i/2-5/2) + (i/2-2)}{2} = \frac{i-9/2}{2} = i/2 - 9/4
           </me>.
         </p>
 
         <p>
           We now construct the Riemann sum and compute its value using summation formulas.
           <md>
-            <mrow>\int_{-2}^3 (5x+2)\, dx   \amp \approx \sum_{i=1}^{10} f\left(\frac{x_i+x_{i+1}}{2}\right)\Delta x</mrow>
+            <mrow>\int_{-2}^3 (5x+2)\, dx   \amp \approx \sum_{i=1}^{10} f\left(\frac{x_{i-1}+x_{i}}{2}\right)\Delta x</mrow>
             <mrow>\amp =  \sum_{i=1}^{10} f(i/2 - 9/4)\Delta x</mrow>
             <mrow>\amp =  \sum_{i=1}^{10} \big(5(i/2-9/4) + 2\big)\Delta x</mrow>
             <mrow>\amp =  \Delta x\sum_{i=1}^{10}\left[\left(\frac{5}{2}\right)i - \frac{37}{4}\right]</mrow>
@@ -1169,9 +1168,7 @@
         <p>
           Using <xref ref="idea_riemann">Key Idea</xref>,
           we know <m>\Delta x = \frac{4-0}{n} = 4/n</m>.
-          We also find <m>x_i = 0 + \Delta x(i-1) = 4(i-1)/n</m>.
-          The Right Hand Rule uses <m>x_{i+1}</m>,
-          which is <m>x_{i+1} = 4i/n</m>.
+          We also find <m>x_i = 0 + i\Delta x = 4i/n</m>.
         </p>
 
         <p>
@@ -1183,7 +1180,7 @@
           You should come back, though,
           and work through each step for full understanding.
           <md>
-            <mrow>\int_0^4(4x-x^2)\, dx \amp \approx \sum_{i=1}^n f(x_{i+1})\Delta x</mrow>
+            <mrow>\int_0^4(4x-x^2)\, dx \amp \approx \sum_{i=1}^n f(x_{i})\Delta x</mrow>
             <mrow>\amp = \sum_{i=1}^n f\left(\frac{4i}{n}\right) \Delta x</mrow>
             <mrow>\amp =  \sum_{i=1}^n \left[4\frac{4i}n-\left(\frac{4i}n\right)^2\right]\Delta x</mrow>
             <mrow>\amp =  \sum_{i=1}^n \left(\frac{16\Delta x}{n}\right)i - \sum_{i=1}^n \left(\frac{16\Delta x}{n^2}\right)i^2</mrow>
@@ -1275,15 +1272,14 @@
         <p>
           Following <xref ref="idea_riemann">Key Idea</xref>,
           we have <m>\Delta x = \frac{5-(-1)}{n} = 6/n</m>.
-          We have <m>x_i = (-1) + (i-1)\Delta x</m>;
-          as the Right Hand Rule uses <m>x_{i+1}</m>,
-          we have <m>x_{i+1} = (-1) + i\Delta x</m>.
+          We have <m>x_i = (-1) + i\Delta x</m>,
+          which is the right endpoint of the <m>i</m>th subinterval.
         </p>
 
         <p>
           The Riemann sum corresponding to the Right Hand Rule is (followed by simplifications):
           <md>
-            <mrow>\int_{-1}^5 x^3\, dx   \amp \approx \sum_{i=1}^n f(x_{i+1})\Delta x</mrow>
+            <mrow>\int_{-1}^5 x^3\, dx   \amp \approx \sum_{i=1}^n f(x_{i})\Delta x</mrow>
             <mrow>\amp = \sum_{i=1}^n f(-1+i\Delta x)\Delta x</mrow>
             <mrow>\amp = \sum_{i=1}^n (-1+i\Delta x)^3\Delta x</mrow>
             <mrow>\amp = \sum_{i=1}^n \big((i\Delta x)^3 -3(i\Delta x)^2 + 3i\Delta x -1\big)\Delta x  \text{ (now distribute \(\Delta x\)) }</mrow>
@@ -1350,7 +1346,7 @@
     <p>
       We have used limits to evaluate given definite integrals.
       Will this always work?
-      It can be shownn,
+      It can be shown,
       given not-very-restrictive conditions,
       that yes, it will always work <mdash/> this is the content of
       <xref ref="thm_riemann_sum"/> below.
@@ -1359,7 +1355,7 @@
     <p>
       The previous two examples demonstrated how an expression such as
       <me>
-        \sum_{i=1}^n f(x_{i+1})\Delta x
+        \sum_{i=1}^n f(x_{i})\Delta x
       </me>
       can be rewritten as an expression explicitly involving <m>n</m>,
       such as <m>32/3(1-1/n^2)</m>.
@@ -1382,21 +1378,21 @@
       <ul>
         <li>
           <p>
-            <m>\ds S_L(n) = \sum_{i=1}^n f(x_i)\Delta x</m>,
+            <m>\ds S_L(n) = \sum_{i=1}^n f(x_{i-1})\Delta x</m>,
             the sum of equally spaced rectangles formed using the Left Hand Rule,
           </p>
         </li>
 
         <li>
           <p>
-            <m>\ds S_R(n) = \sum_{i=1}^n f(x_{i+1})\Delta x</m>,
+            <m>\ds S_R(n) = \sum_{i=1}^n f(x_{i})\Delta x</m>,
             the sum of equally spaced rectangles formed using the Right Hand Rule, and
           </p>
         </li>
 
         <li>
           <p>
-            <m>\ds S_M(n) = \sum_{i=1}^n f\left(\frac{x_i+x_{i+1}}{2}\right)\Delta x</m>,
+            <m>\ds S_M(n) = \sum_{i=1}^n f\left(\frac{x_{i-1}+x_{i}}{2}\right)\Delta x</m>,
             the sum of equally spaced rectangles formed using the Midpoint Rule.
           </p>
         </li>
