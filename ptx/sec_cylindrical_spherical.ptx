@@ -10,6 +10,20 @@
       coordinates give us new ways of desribing surfaces and regions in space.
     </p>
 
+    <aside>
+      <p>
+        Both coordinate systems provide ways of extending polar coordinates in the plane to three dimensions.
+        The reader is warned that while conventions are fairly standard for cylindrical coordinates,
+        there are many different conventions for spherical coordinates.
+        Mathematics, physics, and engineering all use slightly different versions.
+        The definition presented in this text also differs from the usual mathematical definition.
+        Why add yet another competing standard?
+        The definition we present is slightly easier to work with,
+        and should also be more familiar,
+        since it corresponds to the coordinate system of latitude and longitude used to describe locations on the Earth.
+      </p>
+    </aside>
+
     <figure xml:id="vid-multint-cylindrical-intro">
       <caption>A triple integral that isn't easily performed in rectancular coordinates</caption>
       <video youtube="Ajd8uy3U4lA"/>
@@ -623,12 +637,13 @@
       a point <m>P</m> is identified with <m>(\rho,\theta,\varphi)</m>,
       where <m>\rho</m> is the distance from the origin to <m>P</m>,
       <m>\theta</m> is the same angle as would be used to describe <m>P</m> in the cylindrical coordinate system,
-      and <m>\varphi</m> is the angle between the positive <m>z</m>-axis and the ray from the origin to <m>P</m>;
+      and <m>\varphi</m> is the angle between the <m>xy</m>-plane and the ray from the origin to <m>P</m>;
       see <xref ref="fig_sphericalintro">Figure</xref>.
       So that each point in space that does not lie on the <m>z</m>-axis is defined uniquely,
       we will restrict <m>\rho \geq 0</m>,
-      <m>0 \leq \theta \leq 2\pi</m> and <m>0 \leq \varphi \leq \pi</m>.
+      <m>0 \leq \theta \leq 2\pi</m> and <m>-\pi/2 \leq \varphi \leq \pi/2</m>.
     </p>
+
     <aside>
       <p>
         The symbol <m>\rho</m> is the Greek letter <q>rho.</q>
@@ -636,6 +651,62 @@
         while <m>r</m> is used in the polar and cylindrical coordinate systems.
       </p>
     </aside>
+
+    <convention xml:id="convention-spherical">
+      <p>
+        Note that most mathematics textbooks define <m>\varphi</m> to be measured
+        from the positive <m>z</m>-axis, with values in <m>[0,\pi]</m>,
+        rather than from the <m>xy</m>-plane.
+      </p>
+
+      <p>
+        We have chosen our convention with a number of considerations in mind:
+        <ul>
+          <li>
+            <p>
+              The coordinates <m>(\rho,\theta,\varphi)</m> form a <term>right-handed</term>
+              coordinate system: one in which the orientation matches that of our usual <m>(x,y,z)</m>
+              coordinates, where the <q>right-hand rule</q> applies.
+              If <m>\varphi</m> is measured from the <m>z</m>-axis,
+              the order <m>(\rho, \varphi, \theta)</m> is needed to get a right-handed system.
+            </p>
+          </li>
+          <li>
+            <p>
+              Points of the form <m>(a,\alpha,0)</m> are the same in both cylindrical and spherical coordinates.
+            </p>
+          </li>
+          <li>
+            <p>
+              Some integration problems become slightly easier:
+              we will see soon that the volume element in spherical coordinates involves <m>\cos(\varphi)</m>,
+              which integrates to <m>\sin(\varphi)</m>.
+              In the usual convention, the volume element involves <m>\sin(\varphi)</m>,
+              which integrates to <m>-\cos(\varphi)</m> <ndash/> a source of many common sign errors.
+            </p>
+          </li>
+        </ul>
+      </p>
+
+      <p>
+        Students of Physics will encounter yet another convention.
+        In Physics, the variable <m>r</m> is preferred as the radial coordinate,
+        and spherical coordinates are given as <m>(r,\theta,\varphi)</m>;
+        however, in Physics, <m>\varphi</m> becomes the angle in the <m>xy</m>-plane,
+        while <m>\theta</m> is the angle measured from the positive <m>z</m>-axis.
+      </p>
+
+      <p>
+        Note that the angle in the <m>xy</m>-plane (<m>\theta</m>, in our case)
+        is known as the <term>azimuthal angle</term>.
+        Our angle <m>\varphi</m> is known as the <term>elevation angle</term>.
+        The angle used in other conventions that is measured from the positive <m>z</m>-axis
+        (often identified with the north pole) is known as the <term>polar angle</term>.
+        For further discussion, the <url href="https://en.wikipedia.org/wiki/Spherical_coordinate_system">Wikipedia article</url>
+        is quite useful.
+      </p>
+    </convention>
+
     <figure xml:id="fig_sphericalintro">
       <caption>Illustrating the principles behind spherical coordinates</caption>
       <image xml:id="img_sphericalintro_3D" width="47%">
@@ -675,9 +746,9 @@
 
           draw(arc((0,0,0),(.5,0,0),(.25,sqrt(3)/4,0)),Arrow3(size=2mm));
 
-          draw(arc((0,0,0),(0,0,0.5),(.5,sqrt(3)/2,1)*.5/1.414),Arrow3(size=2mm));
+          draw(arc((0,0,0),(0.25,sqrt(3)/4,0),(.5,sqrt(3)/2,1)*.5/1.414),Arrow3(size=2mm));
 
-          guide3 myarc=arc((0,0,0),(0,0,0.5),(.5,sqrt(3)/2,1)*.5/1.414);
+          guide3 myarc=arc((0,0,0),(0.25,sqrt(3)/4,0),(0.5,sqrt(3)/2,1)*.5/1.414);
 
           label("$\varphi$",myarc,NE);
 
@@ -690,7 +761,7 @@
 
           //label("$z$",(.5,sqrt(3)/2+.1,.5));
 
-          label("$\rho$",(.5,sqrt(3)/2,1)*.5+(0.05,0.05,-.05));
+          label("$\rho$",(.5,sqrt(3)/2,1)*.5+(0.0,0.0,.07));
 
           //draw(s,emissive(gray+opacity(.3)),meshpen=invisible);
 
@@ -705,6 +776,15 @@
       <video youtube="In5up-a1jMI"/>
     </figure>
 
+    <aside xml:id="vidnote-aside-conventions">
+      <p>
+        The videos used in this section (and later) were recorded for an earlier version of the textbook,
+        that used the polar angle instead of the elevation angle.
+        Some of the details will therefore differ from those presented in the text.
+        (The reader can consider this an opportunity to learn <mdash /> and compare <mdash /> both conventions.)
+      </p>
+    </aside>
+
     <p>
       The following Key Idea gives conversions to/from our three spatial coordinate systems.
     </p>
@@ -712,37 +792,45 @@
     <insight xml:id="idea_convert_coords">
       <title>Converting Between Rectangular, Cylindrical and Spherical Coordinates</title>
       <p>
-        <term>Rectangular and Cylindrical</term>
-        <md>
-          <mrow>\amp r^2 = x^2+y^2, \amp \amp \tan(\theta) = y/x,\amp  z\amp=z</mrow>
-          <mrow>\amp x=r\cos(\theta), \amp \amp y =r\sin(\theta),\amp  z\amp =z</mrow>
-        </md>
-      </p>
-
-      <p>
-        <term>Rectangular and Spherical</term>
-        <md>
-          <mrow>\amp \rho = \sqrt{x^2+y^2+z^2}, \amp \amp \tan(\theta) = y/x, \amp \amp \cos(\varphi) = z/\sqrt{x^2+y^2+z^2}</mrow>
-          <mrow>\amp x=\rho\sin(\varphi)\cos(\theta),\amp \amp y=\rho\sin(\varphi)\sin(\theta),\amp \amp z=\rho\cos(\varphi)</mrow>
-        </md>
-      </p>
-
-      <p>
-        <term>Cylindrical and Spherical </term>
-        <md>
-          <mrow>\amp \rho =\sqrt{r^2+z^2},\amp \amp  \theta = \theta,\amp \amp \tan(\varphi) = r/z</mrow>
-          <mrow>\amp r=\rho \sin(\varphi),\amp \amp  \theta = \theta,\amp \amp z=\rho\cos(\varphi)</mrow>
-        </md>
+        <ul>
+          <li>
+            <title>Rectangular and Cylindrical</title>
+            <p>
+              <md>
+                <mrow>\amp r^2 = x^2+y^2, \amp \amp \tan(\theta) = y/x,\amp  z\amp=z</mrow>
+                <mrow>\amp x=r\cos(\theta), \amp \amp y =r\sin(\theta),\amp  z\amp =z</mrow>
+              </md>
+            </p>
+          </li>
+          <li>
+            <title>Rectangular and Spherical</title>
+            <p>
+              <md>
+                <mrow>\amp \rho = \sqrt{x^2+y^2+z^2}, \amp \amp \tan(\theta) = y/x, \amp \amp \sin(\varphi) = z/\sqrt{x^2+y^2+z^2}</mrow>
+                <mrow>\amp x=\rho\cos(\varphi)\cos(\theta),\amp \amp y=\rho\cos(\varphi)\sin(\theta),\amp \amp z=\rho\sin(\varphi)</mrow>
+              </md>
+            </p>
+          </li>
+          <li>
+            <title>Cylindrical and Spherical </title>
+            <p>
+              <md>
+                <mrow>\amp \rho =\sqrt{r^2+z^2},\amp \amp  \theta = \theta,\amp \amp \tan(\varphi) = z/r</mrow>
+                <mrow>\amp r=\rho \cos(\varphi),\amp \amp  \theta = \theta,\amp \amp z=\rho\sin(\varphi)</mrow>
+              </md>
+            </p>
+          </li>
+        </ul>
       </p>
     </insight>
 
-    <aside>
+    <!-- <aside>
       <p>
         The role of <m>\theta</m> and <m>\varphi</m> in spherical coordinates differs between mathematicians and physicists.
         When reading about physics in spherical coordinates,
         be careful to note how that particular author uses these variables and recognize that these identities will may no longer be valid.
       </p>
-    </aside>
+    </aside> -->
 
     <example xml:id="ex_spherical4">
       <title>Converting between rectangular and spherical coordinates</title>
