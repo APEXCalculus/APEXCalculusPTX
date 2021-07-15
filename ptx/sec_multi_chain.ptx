@@ -646,6 +646,8 @@
     <p>
       Suppose the equation <m>f(x,y,z)=c</m>, where <m>c</m> is a constant,
       defines the function <m>z=g(x,y)</m>.
+      Then we can use the chain rule to compute the derivatives of <m>f(x,y,z)</m>
+      with respect to <m>x</m> and <m>y</m>, where we set <m>x=x</m>, <m>y=y</m>, and <m>z=g(x,y)</m>.
       Since <m>f(x,y,z)</m> is constant, we have
       <md>
         <mrow>0 \amp = \frac{\partial}{\partial x}f(x,y,z) </mrow>
@@ -662,29 +664,23 @@
       </me>.
     </p>
 
-    <p>
-      At this point you should be rightly confused by what we just did.
-      It appears to be chain rule, but shouldn't the derivative of <m>f(x,y,z)</m>
-      with respect to <m>x</m> be simply <m>f_x(x,y,z)</m>?
-      The catch here is that we are considering the variables <m>x,y,z</m> (viewed as coordinates in <m>\R^3</m>)
-      as functions of <m>x</m> and <m>y</m>, viewed as coordinates in <m>\R^2</m>.
-    </p>
+    <aside>
+      <p>
+        There is a subtlety in this calculation that can be quite confusing.
+        It appears to be chain rule, but shouldn't the derivative of <m>f(x,y,z)</m>
+        with respect to <m>x</m> be simply <m>f_x(x,y,z)</m>?
+        The catch here is that we are considering the variables <m>x,y,z</m> (viewed as coordinates in <m>\R^3</m>)
+        as functions of <m>x</m> and <m>y</m>, viewed as coordinates in <m>\R^2</m>.
+      </p>
 
-    <p>
-      One way to clarify this: let <m>f(x,y,z)=c</m>, where <m>x=s</m>, <m>y=t</m>,
-      and <m>z=g(s,t)</m> for some function <m>g</m>.
-      Then we are really doing the chain rule calculation
-      <md>
-        <mrow>0 \amp = \frac{\partial}{\partial s}f(x,y,z) </mrow>
-        <mrow>  \amp = f_x(x,y,z)\plz{x}{s}+f_y(x,y,z)\plz{y}{s}+f_z(x,y,z)\plz{z}{s}</mrow>
-        <mrow>  \amp = f_x(x,y,z)(1)+f_y(x,y,z)(0)+f_z(x,y,z)\plz{z}{s}</mrow>
-      </md>,
-      and solving for <m>\plz{z}{s}</m>.
-      But just as with implicit differentiation in two variables
-      (where we don't bother to assume <m>x=t</m> and <m>y=g(t)</m>),
-      we generally don't make the distinction between coordinates in <m>\R^2</m> or <m>\R^3</m>,
-      and write <m>x</m> and <m>y</m> in place of <m>s</m> and <m>t</m>.
-    </p>
+      <p>
+        In other words, the <m>x</m> and <m>y</m> in <m>g(x,y)</m> are not the same as the ones in <m>f(x,y,z)</m>!
+        If this is still confusing, try setting <m>x=s</m>, <m>y=t</m>, and <m>z=g(s,t)</m>,
+        and then applying the chain rule as usual, for derivatives of <m>f(x,y,z)</m>
+        with respect to <m>s</m> and <m>t</m>.
+        At the end, we can relabel <m>s</m> and <m>t</m> as <m>x</m> and <m>y</m>.
+      </p>
+    </aside>
 
     <p>
       In <xref ref="subsec-tangent-plane"/> we saw that we can use partial
@@ -751,7 +747,7 @@
           The equation of the tangent plane is therefore
           <me>
             z = g(3,0)+g_x(3,0)(x-3)+g_y(3,0)(y-0) = 1+\frac13(x-3)-2y
-          </me>.          
+          </me>.
         </p>
       </solution>
     </example>
