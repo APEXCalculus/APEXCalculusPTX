@@ -156,41 +156,8 @@
 
 <!-- figures in the margin -->
 <!-- load marginnote package -->
-<xsl:param name="latex.preamble.early" select="'\usepackage{marginnote}'"/>
+<xsl:param name="latex.preamble.early" select="'\usepackage{eso-pic}'"/>
 
-<!-- margin figures within a tcolorbox get shifted with xelatex -->
-<!-- this shifts them back into place -->
-<xsl:param name="latex.preamble.late" select="'
-\makeatletter&#xa;
-\def\pgfsys@hboxsynced#1{%&#xa;
-  {%&#xa;
-    \pgfsys@beginscope%&#xa;
-    \setbox\pgf@hbox=\hbox{%&#xa;
-      \hskip\pgf@pt@x%&#xa;
-      \raise\pgf@pt@y\hbox{%&#xa;
-        \pgf@pt@x=0pt%&#xa;
-        \pgf@pt@y=0pt%&#xa;
-        \special{pdf: content q}%&#xa;
-        \pgflowlevelsynccm%&#xa;
-        \pgfsys@invoke{q -1 0 0 -1 0 0 cm}%&#xa;
-        \special{pdf: content -1 0 0 -1 0 0 cm q}% translate to original coordinate system&#xa;
-        \pgfsys@invoke{0 J [] 0 d}% reset line cap and dash&#xa;
-        \wd#1=0pt%&#xa;
-        \ht#1=0pt%&#xa;
-        \dp#1=0pt%&#xa;
-        \box#1%&#xa;
-        \pgfsys@invoke{n Q Q Q}%&#xa;
-      }%&#xa;
-      \hss%&#xa;
-    }%&#xa;
-    \wd\pgf@hbox=0pt%&#xa;
-    \ht\pgf@hbox=0pt%&#xa;
-    \dp\pgf@hbox=0pt%&#xa;
-    \pgfsys@hbox\pgf@hbox%&#xa;
-    \pgfsys@endscope%&#xa;
-  }%&#xa;
-}&#xa;
-\makeatother'"/>
 
 <!-- we want images in margin to be the full margin width -->
 <xsl:template match="figure/image[not(ancestor::sidebyside) and (descendant::latex-image or descendant::asymptote) and not(ancestor::exercise)]">
@@ -207,7 +174,9 @@
 
 <!-- latex-image, asymptote, and tabular can all go in margin -->
 <xsl:template match="figure[not(ancestor::sidebyside) and not(ancestor::aside) and not(descendant::sidebyside) and (descendant::latex-image or descendant::asymptote or descendant::tabular) and not(ancestor::exercise)]">
-    <xsl:text>\marginnote{%&#xa;</xsl:text>
+    <xsl:text>%% margin figure %%&#xa;</xsl:text>
+    <xsl:text>\AddToShipoutPicture*{\put(427,\LenToUnit{0.5\paperheight}){%&#xa;</xsl:text>
+    <xsl:text>\begin{minipage}{\marginparwidth}&#xa;</xsl:text>
     <xsl:text>\begin{</xsl:text>
     <xsl:apply-templates select="." mode="environment-name"/>
     <xsl:text>}{</xsl:text>
@@ -232,7 +201,7 @@
     <xsl:apply-templates select="." mode="environment-name"/>
     <xsl:text>}%&#xa;</xsl:text>
     <xsl:apply-templates select="." mode="pop-footnote-text"/>
-    <xsl:text>}%&#xa;</xsl:text>
+    <xsl:text>\end{minipage}}}&#xa;</xsl:text>
     <xsl:text>\par&#xa;</xsl:text>
 </xsl:template>
 
@@ -240,27 +209,14 @@
 <!-- asides in the margin -->
 <!-- simple asides, with no styling available -->
 <xsl:template match="aside">
-    <xsl:text>\marginnote{&#xa;</xsl:text>
+    <xsl:text>%% margin note %%&#xa;</xsl:text>
+    <xsl:text>\AddToShipoutPicture*{\put(427,\LenToUnit{0.5\paperheight}){%&#xa;</xsl:text>
+    <xsl:text>\begin{minipage}{\marginparwidth}&#xa;</xsl:text>
     <xsl:apply-templates select="." mode="label"/>
     <xsl:apply-templates select="p|&FIGURE-LIKE;|sidebyside|image|tabular" />
-    <xsl:text>}%&#xa;</xsl:text>
+    <xsl:text>\end{minipage}}}%&#xa;</xsl:text>
     <xsl:text>\par&#xa;</xsl:text>
 </xsl:template>
-
-<!-- puts standard tcolorbox for aside into the margin -->
-<!-- <xsl:template match="aside">
-    <xsl:text>\marginnote{&#xa;</xsl:text>
-    <xsl:text>\begin{</xsl:text>
-    <xsl:value-of select="local-name(.)" />
-    <xsl:text>}</xsl:text>
-    <xsl:apply-templates select="." mode="block-options"/>
-    <xsl:text>%&#xa;</xsl:text>
-    <xsl:apply-templates select="p|&FIGURE-LIKE;|sidebyside" />
-    <xsl:text>\end{</xsl:text>
-    <xsl:value-of select="local-name(.)" />
-    <xsl:text>}&#xa;</xsl:text>
-    <xsl:text>}&#xa;</xsl:text>
-</xsl:template> -->
 
 
 <!-- now come all the options -->
@@ -273,9 +229,6 @@
 <!-- <xsl:param name="latex.print" select="'no'"/> -->
 <xsl:param name="latex.pageref" select="'no'"/>
 <!-- <xsl:param name="latex.sides" select="'one'"/> -->
-
-<!-- set toc depth -->
-<xsl:param name="toc.level" select="3"/>
 
 <!-- uncommenting these will omit videos -->
 <!-- <xsl:template match="video[starts-with(@xml:id, 'vid')]" />
