@@ -657,7 +657,7 @@
       <p>
         Let <m>\ds f(x) = \infser[0] a_nx^n</m> and
         <m>\ds g(x) = \infser[0] b_nx^n</m> converge absolutely for <m>\abs{x}\lt R</m>,
-        and let <m>h(x)</m> be continuous.
+        and let <m>h(x)</m> be a polynomial function.
             <idx><h>power series</h><h>algebra of</h></idx>
       </p>
 
@@ -684,6 +684,22 @@
       </p>
     </statement>
   </theorem>
+
+  <aside>
+    <p>
+      Note that we require <m>h(x)</m> to be a polynomial function in <xref ref="thm_series_alg"/>.
+      If we plug a function that is not polynomial into a power series,
+      the result will no longer be a power series.
+      If one is <em>very</em> careful about the centre and radius of convergence,
+      it is technically possible to substitute the Taylor series for a general function <m>h(x)</m>
+      into the Taylor series for <m>f(x)</m>, and the result will be the Taylor series for <m>f(h(x))</m>.
+    </p>
+
+    <p>
+      In practice, <m>h(x)</m> is typically a monomial function of the form <m>h(x)=ax^n</m>.
+      For anything more complicated, rearranging the power series into a standard form becomes a nightmare.
+    </p>
+  </aside>
 
   <figure xml:id="vid-seqseries-taylorseries-arctan">
     <caption>Deriving the Taylor series for <m>\arctan(x)</m> in <xref ref="idea_common_taylor">Key Idea</xref></caption>
@@ -743,7 +759,7 @@
     <statement>
       <p>
         Use <xref ref="thm_series_alg">Theorem</xref>
-        to create series for <m>y=\sin(x^2)</m> and <m>y=\ln(\sqrt{x})</m>.
+        to create series for <m>y=\sin(x^2)</m> and <m>y=x^3/(3+x^4)</m>.
       </p>
     </statement>
     <solution>
@@ -767,43 +783,161 @@
       </p>
 
       <p>
-        The Taylor expansion for <m>\ln(x)</m> given in <xref ref="idea_common_taylor">Key Idea</xref> is centered at <m>x=1</m>,
-        so we will center the series for
-        <m>\ln(\sqrt{x})</m> at <m>x=1</m> as well.
-        With
+        For <m>y=x^3/(3+x^4)</m>, we begin with the geometric series expansion
         <me>
-          \ln(x) = \infser(-1)^{n+1}\frac{(x-1)^n}{n} = (x-1)- \frac{(x-1)^2}{2} +\frac{(x-1)^3}{3}-\cdots
+          \frac{1}{1-x} = \sum_{n=0}^\infty x^n
+        </me>.
+        Note that we can write
+        <me>
+          \frac{1}{3+x^4} = \frac13\cdot\frac{1}{1+x^4/3} = \frac13 \cdot \frac{1}{1-(-x^4/3)}
+        </me>.
+        Substituting <m>-x^4/3</m> into the geometric series expansion, we get
+        <me>
+          \frac{1}{3+x^4} = \sum_{n=0}^\infty (-x^4/3)^n = \sum_{n=0}^\infty \frac{(-1^n)x^{4n}}{3^n}
+        </me>.
+        Finally, we can multiply both sides of the above equation by <m>x^3</m> to obtain
+        <me>
+          \frac{x^3}{3+x^4} = x^3\sum_{n=0}^\infty \frac{(-1^n)x^{4n}}{3^n} = \sum_{n=0}^\infty \frac{(-1)^nx^{4n+3}}{3^n}
+        </me>.
+      </p>
+    </solution>
+  </example>
+
+  <example xml:id="ex_ts9">
+    <title>A (somewhat foolish) combination of Taylor series</title>
+    <statement>
+      <p>
+        Discuss possible methods for obtaining a Taylor series expansion for <m>f(x)=\ln(\sqrt{x})</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        Since <m>f(x)</m> is a composition, our first instict might be to apply <xref ref="thm_series_alg"/>
+        to the problem. However, <m>\sqrt{x}</m> is not a polynomial function,
+        and neither <m>\ln(x)</m> nor <m>\sqrt{x}</m> have Maclaurin series expansions.
+      </p>
+
+      <p>
+        You might already see a simple way to proceed, but let us first consider the following:
+        <m>\sqrt{x}=(1+(x-1))^{1/2}</m> can be expanded as a binomial series centered at <m>x=1</m>.
+        We also know the Taylor series for <m>\ln(x)</m> at <m>x=1</m>, and note that <m>\sqrt{1}=1</m>,
+        so when <m>x</m> is near 1, so is <m>\sqrt{x}</m>.
+      </p>
+
+      <p>
+        What happens if we take the Taylor series
+        <me>
+          \ln(x) = \sum_{n=1}^\infty (-1)^{n+1}\frac{(x-1)^n}{n} = (x-1)-\frac{(x-1)^2}{2}+\frac{(x-1)^3}{3}-\cdots
+        </me>
+        and substitute in
+        <me>
+          \sqrt{x} = \sum_{n=0}^\infty \binom{1/2}{n}(x-1)^n = 1+\frac12(x-1)-\frac14(x-1)^2+\cdots
         </me>,
-        we substitute <m>\sqrt{x}</m> for <m>x</m> to obtain
+        where <m>\binom{1/2}{n}=\frac{1/2(1/2-1)\cdots (1/2-(n-1))}{n!}</m> denotes the binomial coefficient?
+      </p>
+
+      <p>
+        Short answer: a mess. We have to replace each occurence of <m>x-1</m>
+        in the power series for <m>\ln(x)</m> with <m>\sqrt{x}-1 = \frac12(x-1)-\frac14(x-1)^2+\frac{1}{16}(x-1)^3+\cdots</m>,
+        and then expand, and collect terms.
+        If we do this, keeping only terms up to <m>(x-1)^3</m>, we find:
         <md>
-          <mrow>\ln(\sqrt{x}) \amp = \infser(-1)^{n+1}\frac{(\sqrt{x}-1)^n}{n}</mrow>
-          <mrow> \amp = (\sqrt{x}-1)- \frac{(\sqrt{x}-1)^2}{2} +\frac{(\sqrt{x}-1)^3}{3}-\cdots</mrow>
+          <mrow>ln(\sqrt{x}) \amp = \left(\frac12(x-1)-\frac14(x-1)^2+\frac{1}{16}(x-1)^3+\cdots\right)</mrow>
+          <mrow> \amp \quad -\frac12\left(\frac12(x-1)-\frac14(x-1)^2+\frac{1}{16}(x-1)^3+\cdots\right)^2 </mrow>
+          <mrow> \amp \quad + \frac13\left(\frac12(x-1)-\frac14(x-1)^2+\frac{1}{16}(x-1)^3+\cdots\right)+\cdots</mrow>
+          <mrow> \amp = \frac12(x-1)-\frac14(x-2)^2+\frac16(x-1)^3-\cdots</mrow>
         </md>.
       </p>
 
       <p>
-        While this is not strictly a power series,
-        it is a series that allows us to study the function <m>\ln(\sqrt{x})</m>.
-        Since the interval of convergence of <m>\ln(x)</m> is <m>(0,2]</m>,
-        and the range of <m>\sqrt{x}</m> on <m>(0,4]</m> is <m>(0,2]</m>,
-        the interval of convergence of this series expansion of <m>\ln(\sqrt{x})</m> is <m>(0,4]</m>.
+        But of course, there was a better way all along:
+        <me>
+          \ln(\sqrt{x}) = \ln(x^{1/2}) = \frac12\ln(x)
+        </me>
+        using properties of the logarithm, and indeed,
+        the result above is the same as the one we would have obtained by simply multiplying the Taylor series for <m>\ln(x)</m> by <m>\frac12</m>.
+        Power series manipulation is a powerful technique, but one should not apply it blindly.
       </p>
-      <aside>
-        <p>
-          In <xref ref="ex_ts6">Example</xref>,
-          one could create a series for
-          <m>\ln(\sqrt{x})</m> by simply recognizing that
-          <md>
-            <mrow>\ln(\sqrt{x}) \amp = \ln(x^{1/2})</mrow>
-            <mrow>\amp = 1/2\ln(x)</mrow>
-          </md>,
-          and hence multiplying the Taylor series for <m>\ln(x)</m> by <m>1/2</m>.
-          This example was chosen to demonstrate other aspects of series,
-          such as the fact that the interval of convergence changes.
-        </p>
-      </aside>
     </solution>
   </example>
+
+  <example xml:id="ex_ts10">
+    <title>Using Taylor series to approximate a composition</title>
+    <statement>
+      <p>
+        Use Taylor series to determine a degree 5 Taylor polynomial approximation to <m>f(x)=e^{\sin(x)}</m>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        Here we want to apply <xref ref="thm_series_alg"/>, but <m>h(x)=\sin(x)</m> is not a polynomial.
+        However, we are interested in approximation, so we replace <m>\sin(x)</m>
+        by the Maclaurin polynomial
+        <me>
+          q(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!}
+        </me>.
+        The Maclaurin series for <m>f(x)=e^x</m> is given by
+        <me>
+          e^x = \sum_{n=0}^\infty \frac{x^n}{n!}
+        </me>.
+        Next, we substitute <m>q(x)</m> into the series for <m>e^x</m>.
+        The algebra gets <em>very</em> messy, but we can simplify things:
+        since we want the degree 5 approximation, there is no need to write down terms involving <m>x^6</m> or higher powers.
+        <md>
+          <mrow>e^{\sin(x)} \amp \approx 1 + q(x) + \frac{1}{2!}q(x)^2+\frac{1}{3!}q(x)^3+\frac{1}{4!}q(x)^4+\frac{1}{5!}q(x)^5</mrow>
+          <mrow> \amp = 1 + \left(x-\frac{x^3}{6}+\frac{x^5}{120}\right) + \frac12\left(x-\frac{x^3}{6}+\frac{x^5}{120}\right)</mrow>
+          <mrow>  \amp \quad + \frac{1}{6}\left(x-\frac{x^3}{6}+\frac{x^5}{120}\right)^3 + \frac{1}{24}\left(x-\frac{x^3}{6}+\frac{x^5}{120}\right)^4 </mrow>
+          <mrow>  \amp \quad\quad + \frac{1}{120}\left(x-\frac{x^3}{6}+\frac{x^5}{120}\right)^5</mrow>
+          <mrow>  \amp = 1+x-\frac{x^3}{6}+\frac{x^5}{120}+\frac12\left(x^2-\frac13x^4+\cdots\right)+\frac16\left(x^3-\frac12x^5+\cdots)</mrow>
+          <mrow>  \amp \quad + \frac{1}{24}\left(x^4+\cdots) + \frac{1}{120}\left(x^5+\cdots)</mrow>
+          <mrow>  \amp = 1+x+\frac12x^2-\frac18x^4-\frac{1}{15}x^5+\cdots</mrow>
+        </md>.
+      </p>
+      <p>
+        While the algebra is a bit of a mess, it is often less work than computing the Taylor polynomial directly,
+        as the derivatives of a composite function quickly get complicated.
+        The function <m>f(x)=e^{\sin(x)}</m> and its approximation are plotted in <xref ref="fig_tayseries1"/> below.
+        Note that our polynomial approximation is very good on <m>[-1,1]</m>.
+      </p>
+      <figure xml:id="fig_tayseries1">
+        <caption>A graph of <m>f(x)</m> and its degree 5 Maclaurin polynomial</caption>
+        <image xml:id="img_tayseries1">
+          <description></description>
+          <latex-image>
+
+          \begin{tikzpicture}
+
+          \begin{axis}[
+          axis on top,
+          ymin=-0.5,ymax=3,
+          xmin=-2.1,xmax=2.2
+          ]
+
+          \addplot [firstcurvestyle,-,domain=-2:2,samples=60] {exp(sin(deg(x)))} node [pos=.8,left] { $y=f(x)$};
+
+          \addplot [secondcurvestyle,-,domain=-2:2] {1+x+x^2/2-x^4/8-x^5/15} node [pos=0,below right] { $y=p_5(x)$};
+
+          \end{axis}
+
+          \end{tikzpicture}
+
+          </latex-image>
+        </image>
+
+      </figure>
+    </solution>
+  </example>
+
+  <p>
+    In the previous example, the reader might be left wondering why we would bother with all that algebra,
+    when the computer could have given us the result in seconds.
+    One reason is simply that it lets us see how these different pieces fit together.
+    Computing a Taylor polynomial by combining existing results will give the same polynomial as computing derivatives.
+    Also we see that we can compute an approximation by replacing both parts of a composition with approximations.
+    In the last couple of examples in this chapter, we see another reason:
+    often we have to define functions in terms of power series derived through integration,
+    or the solution of a differential equation, where there is no known function we can simply plug into the computer.
+  </p>
 
   <example xml:id="ex_ts7">
     <title>Using Taylor series to evaluate definite integrals</title>
@@ -1834,13 +1968,12 @@
               </pg-code>-->
               <statement>
                 <p>
-                  <m>\ds \int_0^{\pi^2/4} \cos\big(\sqrt{x}\big)\, dx</m>
+                  <m>\ds \int_0^{\sqrt[3]{\pi}} \cos\left(x^3\right)\, dx</m>
                 </p>
               </statement>
               <solution>
                 <p>
-                  <m>\ds \int_0^{\pi^2/4} \cos\big(\sqrt{x}\big)\, dx \approx \int_0^{\pi^2/4} \left(1-\frac x2+\frac{x^2}{24}-\frac{x^3}{720}\right)\, dx = 1.1412</m>. (Actual answer:
-                  <m>\pi-2</m>)
+                  <m>\ds \int_0^{\sqrt[3]{\pi}} \cos\big(x^3\big)\, dx \approx \int_0^{\pi^2/4} \left(1-\frac{x^6}{2!}+\frac{x^{12}}{4!}-\frac{x^{18}}{6!}\right)\, dx = 0.7864</m>.
                 </p>
               </solution>
           <!--</webwork>-->
