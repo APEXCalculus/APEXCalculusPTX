@@ -1509,94 +1509,172 @@
               </solution>
           <!--</webwork>-->
         </exercise>
+      </exercisegroup>
 
-        <exercise>
-          <!--<webwork>
-              <pg-code>
-              </pg-code>-->
+      <exercise>
+        <!--<webwork>
+            <pg-code>
+            </pg-code>-->
+            <introduction>
+              <p>
+                Given that <m>\ds \infser a_n</m> converges,
+                state which of the following series converges,
+                may converge, or does not converge.
+              </p>
+            </introduction>
+
+            <task>
               <statement>
                 <p>
-                  Given that <m>\ds \infser a_n</m> converges,
-                  state which of the following series converges,
-                  may converge, or does not converge.
-                </p>
-
-                <p>
-                  <ol>
-                    <li>
-                      <p>
-                        <m>\ds \infser \frac{a_n}n</m>
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \infser a_n a_{n+1}</m>
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \infser (a_n)^2</m>
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \infser na_n</m>
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>\ds \infser \frac{1}{a_n}</m>
-                      </p>
-                    </li>
-                  </ol>
+                  <m>\ds \infser \frac{a_n}n</m>
                 </p>
               </statement>
               <solution>
                 <p>
-                  <ol>
-                    <li>
-                      <p>
-                        Converges; use Direct Comparison Test as <m>\frac{a_n}{n}\lt n</m>.
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        Converges; since original series converges,
-                        we know <m>\lim_{n\to\infty}a_n = 0</m>.
-                        Thus for large <m>n</m>, <m>a_na_{n+1} \lt a_n</m>.
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        Converges; similar logic to part (b) so <m>(a_n)^2\lt a_n</m>.
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        May converge;
-                        certainly <m>na_n  \gt  a_n</m> but that does not mean it does not converge.
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        Does not converge, using logic from (b) and <m>n^{th}</m> Term Test.
-                      </p>
-                    </li>
-                  </ol>
+                  Converges; use Direct Comparison Test as <m>\frac{a_n}{n}\lt n</m>.
                 </p>
               </solution>
-          <!--</webwork>-->
-        </exercise>
+            </task>
 
-      </exercisegroup>
+            <task xml:id="task-series-intcomp1">
+              <statement>
+                <p>
+                  <m>\ds \infser a_n a_{n+1}</m>
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  Converges; since original series converges,
+                  we know <m>\lim_{n\to\infty}a_n = 0</m>.
+                  Thus for large <m>n</m>, <m>a_na_{n+1} \lt a_n</m>.
+                </p>
+              </solution>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  <m>\ds \infser (a_n)^2</m>
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  Converges; similar logic to  so <m>(a_n)^2\lt a_n</m>.
+                </p>
+              </solution>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  <m>\ds \infser na_n</m>
+                </p>
+              </statement>
+
+              <solution>
+                <p>
+                  May converge;
+                  certainly <m>na_n  \gt  a_n</m> but that does not mean it does not converge.
+                </p>
+              </solution>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  <m>\ds \infser \frac{1}{a_n}</m>
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  Does not converge, using logic from <xref ref="task-series-intcomp1" text="custom">part</xref> and <m>n^{th}</m> Term Test.
+                </p>
+              </solution>
+            </task>
+
+        <!--</webwork>-->
+      </exercise>
+
+      <exercise>
+        <introduction>
+          <p>
+            In this exercise, we explore an approximation method for series to which the
+            <xref ref="thm_integral_test" text="title"/> applies.
+          </p>
+        </introduction>
+        <task>
+          <statement>
+            <p>
+              Let <m>a(x)</m> be a function to which the
+              <xref ref="thm_integral_test" text="title"/> applies,
+              and for which the series <m>\infser a_n</m> converges.
+            </p>
+            <p>
+              Let <m>R_n = \sum_{n+1}^\infty a_n</m> denote the <term>remainder</term>;
+              that is, the difference between <m>\infser a_n</m> and the <m>n</m>th partial sum.
+              (Note that <m>R_n</m> is the size of the error that results if we approximate the series by the <m>n</m>th partial sum.)
+              Explain why we must have the following inequality:
+              <me>
+                \int_n^\infty a(x)\,dx \leq R_n \leq \int_{n+1}^\infty a(x)\,dx
+              </me>
+            </p>
+          </statement>
+          <hint>
+            <p>
+              Sketch a graph to represent <m>y=a(x)</m>. What property must <m>a(x)</m> have?
+              See if you can interpret <m>R_n</m> in terms of left and right handed Riemann sums.
+            </p>
+          </hint>
+          <solution>
+            <p>
+              Since the Integral Test applies, we know that <m>a(x)</m> must be a decreasing function.
+              The sum <m>R_n = a_{n+1}+a_{n+2}+\cdots</m> can be viewed as a right-endpoint Riemann sum
+              for the integral <m>\int_n^\infty a(x)\,dx</m>, and this must be an underestimate,
+              since <m>a(x)</m> is a decreasing function.
+              But <m>R_n</m> can also be viewed as a left-endpoint Riemann sum for the integral
+              <m>\int_{n+1}^\infty a(x)\,dx</m>, and this must be an overestimate.
+            </p>
+          </solution>
+        </task>
+        <task>
+          <statement>
+            <p>
+              Estimate the error involved in using the first 12 terms to approximate the series <m>\sum_{n=1}^\infty 1/n^4</m>.
+              What is the approximate value of the series?
+            </p>
+          </statement>
+          <solution>
+            <p>
+              For the first 12 terms, we take <m>n=12</m>.
+              We find:
+              <md>
+                <mrow>\int_{12}^\infty \frac{1}{x^4}\,dx \amp = \frac{1}{5184} \approx 0.000193</mrow>
+                <mrow>\int_{13}^\infty \frac{1}{x^4}\,dx \amp = \frac{1}{6591} \approx 0.000152</mrow>
+                <mrow>\sum_{1}^{12}\frac{1}{n^4} \amp \approx 1.082153</mrow>
+              </md>.
+            </p>
+          </solution>
+        </task>
+        <task>
+          <statement>
+            <p>
+              How many terms must we take to ensure that the <m>n</m>th partial sum approximation for
+              <m>\infser 1/n^4</m> is accurate to 5 decimal places?
+            </p>
+          </statement>
+          <solution>
+            <p>
+              We have
+              <me>
+                R_n\leq \int_n^\infty \frac{1}{x^4}\,dx = \frac{1}{3n^3}
+              </me>.
+              For 5 decimal places of accuracy, we need <m>R_n\leq 0.000005</m>.
+              Setting <m>0.000005=1/(3n^3)</m> and solving for <m>n</m> gives
+              <m>n\approx 40.55</m>, so we should take 41 terms.
+            </p>
+          </solution>
+        </task>
+      </exercise>
     </subexercises>
   </exercises>
 </section>

@@ -850,7 +850,7 @@
 				  <p>
 				    For spherical coordinates, we take <m>\rho\geq 0</m> and again accept the fact that our transformation is not one-to-one
 						(and the Jacobian is zero) when <m>\rho=0</m>.
-						Similarly, we generally allow <m>\theta\in [0,2\pi]</m> and <m>\varphi\in [0,\pi]</m>
+						Similarly, we generally allow <m>\theta\in [0,2\pi]</m> and <m>\varphi\in [-\pi/2,\pi/2]</m>
 						even though endpoints of these intervals might get sent to the same point.
 				  </p>
 				</li>
@@ -1080,7 +1080,7 @@
 						  <p>
 								The spherical coordinate transformation
 								<me>
-								  x = r\cos\theta\sin\varphi \quad y = r\sin\theta\sin\varphi \quad z = r\cos\varphi
+								  x = r\cos\theta\cos\varphi \quad y = r\sin\theta\cos\varphi \quad z = r\sin\varphi
 								</me>.
 						  </p>
 						</li>
@@ -1114,27 +1114,27 @@
 								the process is exactly the same. We form the derivative of the transformation,
 								given by the matrix of partial derivatives, and compute its determinant. We find:
 								<md>
-									<mrow>J_T(r,\varphi,\theta) \amp= \det\begin{bmatrix}
+									<mrow>J_T(r,\theta,\varphi) \amp= \det\begin{bmatrix}
 												x_\rho(\rho,\theta,\varphi) \amp x_\theta(\rho,\theta,\varphi) \amp x_\varphi(\rho,\theta,\varphi)\\
 												y_\rho(\rho,\theta,\varphi) \amp y_\theta(\rho,\theta,\varphi) \amp y_\varphi(\rho,\theta,\varphi)\\
 												z_\rho(\rho,\theta,\varphi) \amp z_\theta(\rho,\theta,\varphi) \amp z_\varphi(\rho,\theta,\varphi)
 												\end{bmatrix}</mrow>
 									<mrow>\amp = \det\begin{bmatrix}
-												\cos\theta\sin\varphi \amp -\rho\sin\theta\sin\varphi \amp \rho\cos\theta\cos\varphi\\
-												\sin\theta\sin\varphi \amp \rho\cos\theta\sin\varphi \amp \rho\sin\theta\cos\varphi\\
-												\cos\varphi \amp 0 \amp -\rho\sin\varphi\end{bmatrix}</mrow>
-								  <mrow>\amp = \rho\sin\theta\sin\varphi\begin{vmatrix}
-												\sin\theta\sin\varphi \amp \rho\sin\theta\cos\varphi\\
-												\cos\varphi \amp -\rho\sin\varphi
+												\cos\theta\cos\varphi \amp -\rho\sin\theta\cos\varphi \amp -\rho\cos\theta\sin\varphi\\
+												\sin\theta\cos\varphi \amp \rho\cos\theta\cos\varphi \amp -\rho\sin\theta\sin\varphi\\
+												\sin\varphi \amp 0 \amp \rho\cos\varphi\end{bmatrix}</mrow>
+								  <mrow>\amp = \rho\sin\theta\cos\varphi\begin{vmatrix}
+												\sin\theta\cos\varphi \amp -\rho\sin\theta\sin\varphi\\
+												\sin\varphi \amp \rho\cos\varphi
 												\end{vmatrix}</mrow>
-									<mrow>\amp\quad\quad + \rho\cos\theta\sin\varphi\begin{vmatrix}
-												\cos\theta\sin\varphi \amp \rho\cos\theta\cos\varphi\\
-												\cos\varphi \amp-\rho\sin\varphi
+									<mrow>\amp\quad\quad + \rho\cos\theta\cos\varphi\begin{vmatrix}
+												\cos\theta\cos\varphi \amp -\rho\cos\theta\sin\varphi\\
+												\sin\varphi \amp \rho\cos\varphi
 												\end{vmatrix}</mrow>
-								  <mrow>\amp=\rho\sin\theta\sin\varphi(-\rho\sin\theta(\sin^2\varphi+\cos^2\varphi)</mrow>
-									<mrow>\amp\quad\quad+\rho\cos\theta\sin\varphi(-\rho\cos\theta(\sin^2\varphi+\cos^2\varphi)</mrow>
-									<mrow>\amp=-\rho^2\sin^2\theta\sin\varphi-\rho^2\cos^2\theta\sin\varphi</mrow>
-									<mrow>\amp=-\rho^2\sin\theta</mrow>
+								  <mrow>\amp=\rho\sin\theta\cos\varphi(\rho\sin\theta(\cos^2\varphi+\sin^2\varphi)</mrow>
+									<mrow>\amp\quad\quad+\rho\cos\theta\cos\varphi(\rho\cos\theta(\cos^2\varphi+\sin^2\varphi)</mrow>
+									<mrow>\amp=\rho^2\sin^2\theta\cos\varphi+\rho^2\cos^2\theta\cos\varphi</mrow>
+									<mrow>\amp=\rho^2\cos\theta</mrow>
 								</md>.
 						  </p>
 						</li>
@@ -1145,14 +1145,8 @@
 
 		<p>
 			We computed the above <m>3\times 3</m> determinant using a cofactor expansion along the second column.
-			Except for the minus sign this is once again exactly the correction factor for the volume element in spherical coordinates,
+			This is once again exactly the correction factor for the volume element in spherical coordinates,
 			as given in <xref ref="thm_triple_int_spherical">Theorem</xref> in <xref ref="sec_cylindrical_spherical">Section</xref>.
-			In fact, we can account for the minus sign as simply an artifact of how the coordinates <m>(\rho,\theta,\varphi)</m>
-			are ordered in <xref ref="sec_cylindrical_spherical">Section</xref>.
-			Had we chosen the order <m>(\rho,\varphi,\theta)</m>,
-			the second and third columns in the determinant above would be switched,
-			and the minus sign disappears.
-			This is again related to the question of orientation discussed in the context of linear transformations above.
 		</p>
 
 		<figure xml:id="vid-transformation-spherical">
