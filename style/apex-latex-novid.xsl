@@ -65,10 +65,10 @@
     <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=blue!20, colframe=blue!75!black, colback=blue!5, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
-<!-- <xsl:template match="&ASIDE-LIKE;" mode="tcb-style">
-    <xsl:text>enhanced, colback=blue!3, colframe=blue!50!black,&#xa;</xsl:text>
+<xsl:template match="&ASIDE-LIKE;" mode="tcb-style">
+    <xsl:text>enhanced, colback=white, colframe=white,&#xa;</xsl:text>
     <xsl:text>coltitle=black, fonttitle=\bfseries, attach title to upper, after title={\space},</xsl:text>
-</xsl:template> -->
+</xsl:template>
 
 <xsl:template match="example" mode="tcb-style">
     <xsl:text>fonttitle=\normalfont\bfseries, colback=white, colframe=black, colbacktitle=white, coltitle=black,
@@ -94,7 +94,6 @@
 <xsl:param name="latex.geometry" select="'inner=1in,textheight=9in,textwidth=320pt,marginparwidth=150pt,marginparsep=20pt,bottom=1in,footskip=29pt'"/>
 
 <!-- apply exercise geometry -->
-
 <xsl:template match="exercises|appendix|solutions" mode="latex-division-heading">
     <!-- \newgeometry includes a \clearpage -->
     <xsl:apply-templates select="." mode="new-geometry"/>
@@ -123,6 +122,7 @@
     <xsl:text>}</xsl:text>
     <xsl:text>&#xa;</xsl:text>
 </xsl:template>
+
 
 <!-- define exercise geometry -->
 <xsl:template match="exercises|appendix|solutions" mode="new-geometry">
@@ -155,8 +155,18 @@
 </xsl:template>
 
 <!-- figures in the margin -->
-<!-- load marginnote package -->
-<xsl:param name="latex.preamble.early" select="'\usepackage{eso-pic}'"/>
+<xsl:param name="latex.preamble.late" select="'
+\newsavebox{\mymargbox}&#xa;
+\newcommand{\marginfig}[1]{%&#xa;
+\sbox{\mymargbox}{\vbox{%&#xa;
+       \linewidth=\marginparwidth%&#xa;
+       {#1}%&#xa;
+   }}&#xa;
+   \leftskip -325pt%&#xa;
+   \usebox{\mymargbox}&#xa;
+   \leftskip 325pt%&#xa;
+  \vspace*{-\ht\mymargbox}&#xa;
+  }'"/>
 
 
 <!-- we want images in margin to be the full margin width -->
@@ -174,9 +184,12 @@
 
 <!-- latex-image, asymptote, and tabular can all go in margin -->
 <xsl:template match="figure[not(ancestor::sidebyside) and not(ancestor::aside) and not(descendant::sidebyside) and (descendant::latex-image or descendant::asymptote or descendant::tabular) and not(ancestor::exercise)]">
-    <xsl:text>%% margin figure %%&#xa;</xsl:text>
-    <xsl:text>\AddToShipoutPicture*{\put(427,\LenToUnit{0.5\paperheight}){%&#xa;</xsl:text>
-    <xsl:text>\begin{minipage}{\marginparwidth}&#xa;</xsl:text>
+    <xsl:text>{&#xa;</xsl:text>
+    <xsl:text>&#xa;</xsl:text>
+    <xsl:if test="ancestor::example">
+      <xsl:text>\hskip0pt</xsl:text>
+    </xsl:if>
+    <xsl:text>\marginfig{%&#xa;</xsl:text>
     <xsl:text>\begin{</xsl:text>
     <xsl:apply-templates select="." mode="environment-name"/>
     <xsl:text>}{</xsl:text>
@@ -201,7 +214,9 @@
     <xsl:apply-templates select="." mode="environment-name"/>
     <xsl:text>}%&#xa;</xsl:text>
     <xsl:apply-templates select="." mode="pop-footnote-text"/>
-    <xsl:text>\end{minipage}}}&#xa;</xsl:text>
+    <xsl:text>}&#xa;</xsl:text>
+    <xsl:text>&#xa;</xsl:text>
+    <xsl:text>}&#xa;</xsl:text>
     <xsl:text>\par&#xa;</xsl:text>
 </xsl:template>
 
@@ -209,13 +224,27 @@
 <!-- asides in the margin -->
 <!-- simple asides, with no styling available -->
 <xsl:template match="aside">
-    <xsl:text>%% margin note %%&#xa;</xsl:text>
-    <xsl:text>\AddToShipoutPicture*{\put(427,\LenToUnit{0.5\paperheight}){%&#xa;</xsl:text>
-    <xsl:text>\begin{minipage}{\marginparwidth}&#xa;</xsl:text>
-    <xsl:apply-templates select="." mode="label"/>
-    <xsl:apply-templates select="p|&FIGURE-LIKE;|sidebyside|image|tabular" />
-    <xsl:text>\end{minipage}}}%&#xa;</xsl:text>
-    <xsl:text>\par&#xa;</xsl:text>
+    <xsl:text>{&#xa;</xsl:text>
+    <xsl:text>&#xa;</xsl:text>
+    <xsl:if test="ancestor::example">
+      <xsl:text>\hskip0pt</xsl:text>
+    </xsl:if>
+    <xsl:text>\marginfig{%&#xa;</xsl:text>
+    <xsl:text>\begin{</xsl:text>
+    <xsl:value-of select="local-name(.)" />
+    <xsl:text>}</xsl:text>
+    <xsl:apply-templates select="." mode="block-options"/>
+    <xsl:text>%&#xa;</xsl:text>
+    <!-- Coordinate with schema, since we enforce it here -->
+    <xsl:apply-templates select="p|blockquote|pre|image|video|program|console|tabular"/>
+    <xsl:text>\end{</xsl:text>
+    <xsl:value-of select="local-name(.)" />
+    <xsl:text>}&#xa;</xsl:text>
+    <xsl:apply-templates select="." mode="pop-footnote-text"/>
+    <xsl:text>}%&#xa;</xsl:text>
+    <xsl:text>&#xa;</xsl:text>
+    <xsl:text>}&#xa;</xsl:text>
+    <xsl:text>&#xa;</xsl:text>
 </xsl:template>
 
 <!-- now come all the options -->
