@@ -155,17 +155,34 @@
 </xsl:template>
 
 <!-- figures in the margin -->
+<xsl:param name="latex.preamble.early" select="'
+  \usepackage{xcoffins}&#xa;
+  \NewCoffin\Framex&#xa;
+  \NewCoffin\Theox
+  '"/>
+
 <xsl:param name="latex.preamble.late" select="'
-\newsavebox{\mymargbox}&#xa;
-\newcommand{\marginfig}[1]{%&#xa;
-\sbox{\mymargbox}{\vbox{%&#xa;
-       \linewidth=\marginparwidth%&#xa;
-       {#1}%&#xa;
-   }}&#xa;
-   \leftskip -325pt%&#xa;
-   \usebox{\mymargbox}&#xa;
-   \leftskip 325pt%&#xa;
-  \vspace*{-\ht\mymargbox}&#xa;
+  \newlength{\Hshift}&#xa;
+  \newlength{\Mshift}&#xa;
+  \newcommand*{\marginshift}{%&#xa;
+      \setlength{\Hshift}{5.5mm}&#xa;
+      \setlength{\Mshift}{\marginparsep}&#xa;
+      }&#xa;
+      &#xa;
+  \newcommand{\tcbmarginbox}[2]{%&#xa;
+      \marginshift&#xa;
+      \SetHorizontalCoffin\Framex{} %clear box Framex&#xa;
+      \SetVerticalCoffin\Theox{\marginparwidth}{#1}% fill box \Theox&#xa;
+      \JoinCoffins*\Framex[r,vc]\Theox[l,vc](\dimexpr\Mshift+\textwidth\relax,#2)%join boxes&#xa;
+      \noindent\TypesetCoffin\Framex(\Hshift,0pt)\\[-2\baselineskip] %typset assembly&#xa;
+  }&#xa;
+  &#xa;
+  \newcommand{\parmarginbox}[2]{%&#xa;
+      \marginshift&#xa;
+      \SetHorizontalCoffin\Framex{}&#xa;
+      \SetVerticalCoffin\Theox{\marginparwidth}{#1}&#xa;
+      \JoinCoffins*\Framex[r,vc]\Theox[l,vc](\dimexpr\Mshift+\textwidth\relax,#2)&#xa;
+      \noindent\TypesetCoffin\Framex(0mm,0pt)\\[-2\baselineskip]&#xa;
   }'"/>
 
 
@@ -184,67 +201,69 @@
 
 <!-- latex-image, asymptote, and tabular can all go in margin -->
 <xsl:template match="figure[not(ancestor::sidebyside) and not(ancestor::aside) and not(descendant::sidebyside) and (descendant::latex-image or descendant::asymptote or descendant::tabular or descendant::video) and not(ancestor::exercise)]">
-    <xsl:text>{&#xa;</xsl:text>
     <xsl:text>&#xa;</xsl:text>
-    <xsl:if test="ancestor::example">
-      <xsl:text>\hskip0pt</xsl:text>
-    </xsl:if>
-    <xsl:text>\marginfig{%&#xa;</xsl:text>
-    <xsl:text>\begin{</xsl:text>
-    <xsl:apply-templates select="." mode="environment-name"/>
-    <xsl:text>}{</xsl:text>
-    <xsl:apply-templates select="." mode="caption-full"/>
-    <xsl:text>}{</xsl:text>
-    <xsl:apply-templates select="." mode="latex-id"/>
-    <xsl:text>}{</xsl:text>
-    <xsl:if test="$b-latex-hardcode-numbers">
-        <xsl:apply-templates select="." mode="number"/>
-    </xsl:if>
-    <xsl:text>}%&#xa;</xsl:text>
-    <!-- images have margins and widths, so centering not needed -->
-    <!-- Eventually everything in a figure should control itself -->
-    <!-- or be flush left (or so)                                -->
-    <xsl:if test="self::figure and not(image)">
-        <xsl:text>\centering&#xa;</xsl:text>
-    </xsl:if>
-    <xsl:apply-templates select="*"/>
-    <!-- reserve space for the caption -->
-    <xsl:text>\tcblower&#xa;</xsl:text>
-    <xsl:text>\end{</xsl:text>
-    <xsl:apply-templates select="." mode="environment-name"/>
-    <xsl:text>}%&#xa;</xsl:text>
-    <xsl:apply-templates select="." mode="pop-footnote-text"/>
-    <xsl:text>}&#xa;</xsl:text>
-    <xsl:text>&#xa;</xsl:text>
-    <xsl:text>}&#xa;</xsl:text>
-    <xsl:text>\par&#xa;</xsl:text>
+    <xsl:choose>
+      <xsl:when test="ancestor::example">
+        <xsl:text>\tcbmarginbox{%&#xa;</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>\parmarginbox{%&#xa;</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
+        <xsl:text>\begin{</xsl:text>
+        <xsl:apply-templates select="." mode="environment-name"/>
+        <xsl:text>}{</xsl:text>
+        <xsl:apply-templates select="." mode="caption-full"/>
+        <xsl:text>}{</xsl:text>
+        <xsl:apply-templates select="." mode="latex-id"/>
+        <xsl:text>}{</xsl:text>
+        <xsl:if test="$b-latex-hardcode-numbers">
+            <xsl:apply-templates select="." mode="number"/>
+        </xsl:if>
+        <xsl:text>}%&#xa;</xsl:text>
+        <!-- images have margins and widths, so centering not needed -->
+        <!-- Eventually everything in a figure should control itself -->
+        <!-- or be flush left (or so)                                -->
+        <xsl:if test="self::figure and not(image)">
+            <xsl:text>\centering&#xa;</xsl:text>
+        </xsl:if>
+        <xsl:apply-templates select="*"/>
+        <!-- reserve space for the caption -->
+        <xsl:text>\tcblower&#xa;</xsl:text>
+        <xsl:text>\end{</xsl:text>
+        <xsl:apply-templates select="." mode="environment-name"/>
+        <xsl:text>}%&#xa;</xsl:text>
+        <xsl:apply-templates select="." mode="pop-footnote-text"/>
+        <xsl:text>}{0pt}&#xa;</xsl:text>
+        <xsl:text>&#xa;</xsl:text>
 </xsl:template>
 
 
 <!-- asides in the margin -->
 <!-- simple asides, with no styling available -->
 <xsl:template match="aside">
-    <xsl:text>{&#xa;</xsl:text>
     <xsl:text>&#xa;</xsl:text>
-    <xsl:if test="ancestor::example">
-      <xsl:text>\hskip0pt</xsl:text>
-    </xsl:if>
-    <xsl:text>\marginfig{%&#xa;</xsl:text>
-    <xsl:text>\begin{</xsl:text>
-    <xsl:value-of select="local-name(.)" />
-    <xsl:text>}</xsl:text>
-    <xsl:apply-templates select="." mode="block-options"/>
-    <xsl:text>%&#xa;</xsl:text>
-    <!-- Coordinate with schema, since we enforce it here -->
-    <xsl:apply-templates select="p|blockquote|pre|image|video|program|console|tabular"/>
-    <xsl:text>\end{</xsl:text>
-    <xsl:value-of select="local-name(.)" />
-    <xsl:text>}&#xa;</xsl:text>
-    <xsl:apply-templates select="." mode="pop-footnote-text"/>
-    <xsl:text>}%&#xa;</xsl:text>
-    <xsl:text>&#xa;</xsl:text>
-    <xsl:text>}&#xa;</xsl:text>
-    <xsl:text>&#xa;</xsl:text>
+    <xsl:choose>
+      <xsl:when test="ancestor::example">
+        <xsl:text>\tcbmarginbox{%&#xa;</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>\parmarginbox{%&#xa;</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
+        <xsl:text>\begin{</xsl:text>
+        <xsl:value-of select="local-name(.)" />
+        <xsl:text>}</xsl:text>
+        <xsl:apply-templates select="." mode="block-options"/>
+        <xsl:text>%&#xa;</xsl:text>
+        <!-- Coordinate with schema, since we enforce it here -->
+        <xsl:apply-templates select="p|blockquote|pre|image|video|program|console|tabular"/>
+        <xsl:text>\end{</xsl:text>
+        <xsl:value-of select="local-name(.)" />
+        <xsl:text>}&#xa;</xsl:text>
+        <xsl:apply-templates select="." mode="pop-footnote-text"/>
+        <xsl:text>}{0pt}%&#xa;</xsl:text>
+        <xsl:text>&#xa;</xsl:text>
 </xsl:template>
 
 <!-- video links in margin (skip thumbnail) -->
@@ -297,15 +316,19 @@
       </xsl:variable>
 
       <xsl:variable name="width-scale" select="substring-before($width-percentage,'%') div 100" />
-      <xsl:text>\setlength{\qrsize}{0.6\marginparwidth}</xsl:text>
-      <xsl:text>{&#xa;</xsl:text>
+      <xsl:text>\setlength{\qrsize}{0.6\marginparwidth}&#xa;</xsl:text>
       <xsl:text>&#xa;</xsl:text>
-      <xsl:text>\marginfig{%&#xa;</xsl:text>
+      <xsl:choose>
+        <xsl:when test="ancestor::example">
+          <xsl:text>\tcbmarginbox{%&#xa;</xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:text>\parmarginbox{%&#xa;</xsl:text>
+        </xsl:otherwise>
+      </xsl:choose>
       <xsl:text>\begin{tcolorbox}[qrstyle]%&#xa;</xsl:text>
-      <xsl:text>\hskip16pt</xsl:text>
       <xsl:apply-templates select="." mode="static-qr" />
       <xsl:text>\end{tcolorbox}%&#xa;</xsl:text>
-
 
       <xsl:variable name="the-caption">
           <xsl:apply-templates select="." mode="static-caption">
@@ -314,13 +337,11 @@
       </xsl:variable>
       <xsl:if test="not($the-caption ='')">
           <xsl:text>\begin{tcolorbox}[captionstyle]%&#xa;</xsl:text>
-          <xsl:text>\hskip-16pt\small </xsl:text>
+          <xsl:text>\small </xsl:text>
           <xsl:value-of select="$the-caption" />
           <xsl:text>\end{tcolorbox}%&#xa;</xsl:text>
       </xsl:if>
-      <xsl:text>}%&#xa;</xsl:text>
-      <xsl:text>&#xa;</xsl:text>
-      <xsl:text>}&#xa;</xsl:text>
+      <xsl:text>}{0pt}%&#xa;</xsl:text>
       <xsl:text>&#xa;</xsl:text>
     </xsl:template>
 
