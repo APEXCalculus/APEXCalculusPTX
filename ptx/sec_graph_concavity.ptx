@@ -38,19 +38,79 @@
       <title>Concave Up and Concave Down</title>
       <statement>
         <p>
-          Let <m>f</m> be differentiable on an interval <m>I</m>.
+          Let <m>f</m> be continuous on an interval <m>I</m>.
           The graph of <m>f</m> is <term>concave up</term>
-          on <m>I</m> if <m>\fp</m> is increasing.
+          on <m>I</m> if for any <m>a\lt b</m> in <m>I</m>,
+          <men xml:id="eqn-concave-up">
+            f\left(\frac{a+b}{2}\right) \lt \frac{f(a)+f(b)}{2}
+          </men>.
           The graph of <m>f</m> is <term>concave down</term>
-          on <m>I</m> if <m>\fp</m> is decreasing.
-          If <m>\fp</m> is constant then the graph of <m>f</m> is said to have
-          <term>no concavity</term>.
+          on <m>I</m> if for any <m>a\lt b</m> in <m>I</m>,
+          <men xml:id="eqn-concave-down">
+            f\left(\frac{a+b}{2}\right) \gt \frac{f(a)+f(b)}{2}
+          </men>.
               <idx><h>concavity</h></idx>
               <idx><h>concave up</h></idx>
               <idx><h>concave down</h></idx>
         </p>
       </statement>
     </definition>
+
+    <p>
+      Geometrically, the condition in <xref ref="eqn-concave-up"/>
+      states that a graph is concave up if the midpoint of the secant line from <m>(a,f(a))</m>
+      to <m>(b,f(b))</m> (and hence, the secant line itself) is above the graph <m>y=f(x)</m>.
+      Similarly, <xref ref="eqn-concave-down"/> states that the secant line lies below the graph.
+    </p>
+    <p>
+      In order for equality to hold instead of <xref ref="eqn-concave-up"/> or <xref ref="eqn-concave-down"/>,
+      the function would have to be of the form <m>f(x)=mx+c</m>,
+      in which case the graph is a straight line.
+      Straight lines are considered to have <term>no concavity</term>.
+    </p>
+
+    <figure xml:id="fig-concavity-definition">
+      <caption>Illustrating the nature of concave up and concave down</caption>
+      <sidebyside widths="47% 47%">
+        <figure xml:id="fig-concavity-defn1">
+          <caption>A graph that is concave up. Notice how the secant line lies above the graph.</caption>
+          <image xml:id="img-concavity-defn1">
+            <description></description>
+            <latex-image>
+              \begin{tikzpicture}
+                \begin{axis}[
+                    xmin=-1.5,xmax=2.5,
+                    ymin=-0.5,ymax=7,
+                  ]
+                  \addplot+[domain=-1.4:2.4] {x^2};
+                  \addplot+[secantline,-,domain=-1:2] {x+2};
+                  \addplot[soliddot] coordinates {(-1,1) (2,4)};
+                \end{axis}
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+        </figure>
+        <figure xml:id="fig-concavity-defn2">
+          <caption>A graph that is concave down. Notice how the secant line lies below the graph.</caption>
+          <image xml:id="img-concavity-defn2">
+            <description></description>
+            <latex-image>
+              \begin{tikzpicture}
+                \begin{axis}[
+                    xmin=-1.5,xmax=2.5,
+                    ymin=-0.5,ymax=7,
+                  ]
+                  \addplot+[domain=-1.4:2.3] {6-x^2};
+                  \addplot+[secantline,-,domain=-1:2] {-x+4};
+                  \addplot[soliddot] coordinates {(-1,5) (2,2)};
+                \end{axis}
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+        </figure>
+      </sidebyside>
+    </figure>
+
 
     <aside>
       <title>Loose Language</title>
@@ -59,6 +119,89 @@
         instead of <q>the graph of <m>f</m> is concave up</q> for simplicity.
       </p>
     </aside>
+
+    <p>
+      Consider a function <m>f</m> such that <m>f</m> is continuous on <m>[a,b]</m> and differentiable on <m>(a,b)</m>.
+      Note that <m>\frac{a+b}{2}</m> is the midpoint of the interval <m>[a,b]</m>.
+      By the <xref ref="thm_mvt" text="title"/>,
+      there must be a point <m>c_1</m> in <m>\left[a,\frac{a+b}{2}\right]</m> such that
+      <me>
+        \fp(c_1) = \frac{f\left(\frac{a+b}{2}\right)-f(a)}{\frac{a+b}{2}-a}=\frac{2}{b-a}\left(f\left(\frac{a+b}{2}\right)-f(a)\right)
+      </me>.
+      Similarly, there must be a point <m>c_2</m> in <m>\left[\frac{a+b}{2},b\right]</m> such that
+      <me>
+        \fp(c_2) = \frac{f(b)-f\left(\frac{a+b}{2}\right)}{b-\frac{a+b}{2}} = \frac{2}{b-a}\left(f(b)-f\left(\frac{a+b}{2}\right)\right)
+      </me>.
+      But then we have
+      <md>
+        <mrow>\fp(c_2)-\fp(c_1) \amp = \frac{2}{b-a}\left(f(b)-f\left(\frac{a+b}{2}\right)-f\left(\frac{a+b}{2}\right)+f(a)\right)</mrow>
+        <mrow>\amp = \frac{4}{b-a}\left(\frac{f(a)+f(b)}{2}-f\left(\frac{a+b}{2}\right)\right)</mrow>
+      </md>.
+    </p>
+
+    <p>
+      Now, let us suppose that <m>\fp(x)</m> is an increasing function on <m>(a,b)</m>.
+      In that case, <m>\fp(c_2)-\fp(c_1)\gt 0</m>, and since <m>b-a\gt 0</m>,
+      this implies that
+      <me>
+        \frac{f(a)+f(b)}{2}-f\left(\frac{a+b}{2}\right)\gt 0
+      </me>,
+      which, by <xref ref="def_concavity"/> means that the graph of <m>f</m> is concave up.
+    </p>
+
+    <p>
+      Similarly, if <m>\fp(x)</m> is a decreasing function on <m>(a,b)</m>,
+      then the graph of <m>f</m> will be concave down.
+      Using <xref ref="thm_incr_decr"/>, we arrive at the following theorem.
+    </p>
+
+    <theorem xml:id="thm-concave-derivative">
+      <statement>
+        <p>
+          Let <m>f</m> be a continuous function on <m>[a,b]</m> and differentiable on <m>(a,b)</m>.
+        </p>
+
+        <p>
+          <ol>
+            <li xml:id="thm_conc_up">
+              <p>
+                If <m>\fpp(c) \gt 0</m> for all <m>c</m> in <m>(a,b)</m>,
+                then <m>f</m> is concave up on <m>[a,b]</m>.
+              </p>
+            </li>
+            <li xml:id="thm_conc_down">
+              <p>
+                If <m>\fpp(c) \lt 0</m> for all <m>c</m> in <m>(a,b)</m>,
+                then <m>f</m> is concave down on <m>[a,b]</m>.
+              </p>
+            </li>
+            <li>
+              <p>
+                If <m>\fpp(c) =0</m> for all <m>c</m> in <m>(a,b)</m>,
+                then <m>f</m> is linear on <m>[a,b]</m>.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </theorem>
+
+    <aside>
+      <p>
+        As with <xref ref="thm_incr_decr"/>, <xref ref="thm-concave-derivative"/>
+        lets us conclude that the graph of a function is concave up (or down)
+        on a <em>closed</em> interval, assuming that the function is continuous on that interval.
+        Again, we follow the convention that when a problem asks us to give the intervals on which the graph is concave up or down,
+        we give <em>open</em> intervals, even if a closed interval is technically correct.
+      </p>
+      <p>
+        If a function has the same concavity on adjacent intervals <m>(a,b)</m> and <m>(b,c)</m>,
+        and the function is continuous at <m>b</m>,
+        we should combine the intervals, and state the result as <m>(a,c)</m>.
+        However, if <m>b</m> is a point of discontinuity, we must omit it from our intervals.
+      </p>
+    </aside>
+
     <p>
       The graph of a function <m>f</m> is <em>concave up</em>
       when <m> \fp </m>is <em>increasing.</em>

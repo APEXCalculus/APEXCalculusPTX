@@ -10,6 +10,20 @@
       coordinates give us new ways of desribing surfaces and regions in space.
     </p>
 
+    <aside>
+      <p>
+        Both coordinate systems provide ways of extending polar coordinates in the plane to three dimensions.
+        The reader is warned that while conventions are fairly standard for cylindrical coordinates,
+        there are many different conventions for spherical coordinates.
+        Mathematics, physics, and engineering all use slightly different versions.
+        The definition presented in this text also differs from the usual mathematical definition.
+        Why add yet another competing standard?
+        The definition we present is slightly easier to work with,
+        and should also be more familiar,
+        since it corresponds to the coordinate system of latitude and longitude used to describe locations on the Earth.
+      </p>
+    </aside>
+
     <figure xml:id="vid-multint-cylindrical-intro">
       <caption>A triple integral that isn't easily performed in rectancular coordinates</caption>
       <video youtube="Ajd8uy3U4lA"/>
@@ -623,12 +637,13 @@
       a point <m>P</m> is identified with <m>(\rho,\theta,\varphi)</m>,
       where <m>\rho</m> is the distance from the origin to <m>P</m>,
       <m>\theta</m> is the same angle as would be used to describe <m>P</m> in the cylindrical coordinate system,
-      and <m>\varphi</m> is the angle between the positive <m>z</m>-axis and the ray from the origin to <m>P</m>;
+      and <m>\varphi</m> is the angle between the <m>xy</m>-plane and the ray from the origin to <m>P</m>;
       see <xref ref="fig_sphericalintro">Figure</xref>.
       So that each point in space that does not lie on the <m>z</m>-axis is defined uniquely,
       we will restrict <m>\rho \geq 0</m>,
-      <m>0 \leq \theta \leq 2\pi</m> and <m>0 \leq \varphi \leq \pi</m>.
+      <m>0 \leq \theta \leq 2\pi</m> and <m>-\pi/2 \leq \varphi \leq \pi/2</m>.
     </p>
+
     <aside>
       <p>
         The symbol <m>\rho</m> is the Greek letter <q>rho.</q>
@@ -636,6 +651,62 @@
         while <m>r</m> is used in the polar and cylindrical coordinate systems.
       </p>
     </aside>
+
+    <convention xml:id="convention-spherical">
+      <p>
+        Note that most mathematics textbooks define <m>\varphi</m> to be measured
+        from the positive <m>z</m>-axis, with values in <m>[0,\pi]</m>,
+        rather than from the <m>xy</m>-plane.
+      </p>
+
+      <p>
+        We have chosen our convention with a number of considerations in mind:
+        <ul>
+          <li>
+            <p>
+              The coordinates <m>(\rho,\theta,\varphi)</m> form a <term>right-handed</term>
+              coordinate system: one in which the orientation matches that of our usual <m>(x,y,z)</m>
+              coordinates, where the <q>right-hand rule</q> applies.
+              If <m>\varphi</m> is measured from the <m>z</m>-axis,
+              the order <m>(\rho, \varphi, \theta)</m> is needed to get a right-handed system.
+            </p>
+          </li>
+          <li>
+            <p>
+              Points of the form <m>(a,\alpha,0)</m> are the same in both cylindrical and spherical coordinates.
+            </p>
+          </li>
+          <li>
+            <p>
+              Some integration problems become slightly easier:
+              we will see soon that the volume element in spherical coordinates involves <m>\cos(\varphi)</m>,
+              which integrates to <m>\sin(\varphi)</m>.
+              In the usual convention, the volume element involves <m>\sin(\varphi)</m>,
+              which integrates to <m>-\cos(\varphi)</m> <ndash/> a source of many common sign errors.
+            </p>
+          </li>
+        </ul>
+      </p>
+
+      <p>
+        Students of Physics will encounter yet another convention.
+        In Physics, the variable <m>r</m> is preferred as the radial coordinate,
+        and spherical coordinates are given as <m>(r,\theta,\varphi)</m>;
+        however, in Physics, <m>\varphi</m> becomes the angle in the <m>xy</m>-plane,
+        while <m>\theta</m> is the angle measured from the positive <m>z</m>-axis.
+      </p>
+
+      <p>
+        Note that the angle in the <m>xy</m>-plane (<m>\theta</m>, in our case)
+        is known as the <term>azimuthal angle</term>.
+        Our angle <m>\varphi</m> is known as the <term>elevation angle</term>.
+        The angle used in other conventions that is measured from the positive <m>z</m>-axis
+        (often identified with the north pole) is known as the <term>polar angle</term>.
+        For further discussion, the <url href="https://en.wikipedia.org/wiki/Spherical_coordinate_system">Wikipedia article</url>
+        is quite useful.
+      </p>
+    </convention>
+
     <figure xml:id="fig_sphericalintro">
       <caption>Illustrating the principles behind spherical coordinates</caption>
       <image xml:id="img_sphericalintro_3D" width="47%">
@@ -675,9 +746,9 @@
 
           draw(arc((0,0,0),(.5,0,0),(.25,sqrt(3)/4,0)),Arrow3(size=2mm));
 
-          draw(arc((0,0,0),(0,0,0.5),(.5,sqrt(3)/2,1)*.5/1.414),Arrow3(size=2mm));
+          draw(arc((0,0,0),(0.25,sqrt(3)/4,0),(.5,sqrt(3)/2,1)*.5/1.414),Arrow3(size=2mm));
 
-          guide3 myarc=arc((0,0,0),(0,0,0.5),(.5,sqrt(3)/2,1)*.5/1.414);
+          guide3 myarc=arc((0,0,0),(0.25,sqrt(3)/4,0),(0.5,sqrt(3)/2,1)*.5/1.414);
 
           label("$\varphi$",myarc,NE);
 
@@ -690,7 +761,7 @@
 
           //label("$z$",(.5,sqrt(3)/2+.1,.5));
 
-          label("$\rho$",(.5,sqrt(3)/2,1)*.5+(0.05,0.05,-.05));
+          label("$\rho$",(.5,sqrt(3)/2,1)*.5+(0.0,0.0,.07));
 
           //draw(s,emissive(gray+opacity(.3)),meshpen=invisible);
 
@@ -705,6 +776,15 @@
       <video youtube="In5up-a1jMI"/>
     </figure>
 
+    <aside xml:id="vidnote-aside-conventions">
+      <p>
+        The videos used in this section (and later) were recorded for an earlier version of the textbook,
+        that used the polar angle instead of the elevation angle.
+        Some of the details will therefore differ from those presented in the text.
+        (The reader can consider this an opportunity to learn <mdash /> and compare <mdash /> both conventions.)
+      </p>
+    </aside>
+
     <p>
       The following Key Idea gives conversions to/from our three spatial coordinate systems.
     </p>
@@ -712,37 +792,45 @@
     <insight xml:id="idea_convert_coords">
       <title>Converting Between Rectangular, Cylindrical and Spherical Coordinates</title>
       <p>
-        <term>Rectangular and Cylindrical</term>
-        <md>
-          <mrow>\amp r^2 = x^2+y^2, \amp \amp \tan(\theta) = y/x,\amp  z\amp=z</mrow>
-          <mrow>\amp x=r\cos(\theta), \amp \amp y =r\sin(\theta),\amp  z\amp =z</mrow>
-        </md>
-      </p>
-
-      <p>
-        <term>Rectangular and Spherical</term>
-        <md>
-          <mrow>\amp \rho = \sqrt{x^2+y^2+z^2}, \amp \amp \tan(\theta) = y/x, \amp \amp \cos(\varphi) = z/\sqrt{x^2+y^2+z^2}</mrow>
-          <mrow>\amp x=\rho\sin(\varphi)\cos(\theta),\amp \amp y=\rho\sin(\varphi)\sin(\theta),\amp \amp z=\rho\cos(\varphi)</mrow>
-        </md>
-      </p>
-
-      <p>
-        <term>Cylindrical and Spherical </term>
-        <md>
-          <mrow>\amp \rho =\sqrt{r^2+z^2},\amp \amp  \theta = \theta,\amp \amp \tan(\varphi) = r/z</mrow>
-          <mrow>\amp r=\rho \sin(\varphi),\amp \amp  \theta = \theta,\amp \amp z=\rho\cos(\varphi)</mrow>
-        </md>
+        <ul>
+          <li>
+            <title>Rectangular and Cylindrical</title>
+            <p>
+              <md>
+                <mrow>\amp r^2 = x^2+y^2, \amp \amp \tan(\theta) = y/x,\amp  z\amp=z</mrow>
+                <mrow>\amp x=r\cos(\theta), \amp \amp y =r\sin(\theta),\amp  z\amp =z</mrow>
+              </md>
+            </p>
+          </li>
+          <li>
+            <title>Rectangular and Spherical</title>
+            <p>
+              <md>
+                <mrow>\amp \rho = \sqrt{x^2+y^2+z^2}, \amp \amp \tan(\theta) = y/x, \amp \amp \sin(\varphi) = z/\sqrt{x^2+y^2+z^2}</mrow>
+                <mrow>\amp x=\rho\cos(\varphi)\cos(\theta),\amp \amp y=\rho\cos(\varphi)\sin(\theta),\amp \amp z=\rho\sin(\varphi)</mrow>
+              </md>
+            </p>
+          </li>
+          <li>
+            <title>Cylindrical and Spherical </title>
+            <p>
+              <md>
+                <mrow>\amp \rho =\sqrt{r^2+z^2},\amp \amp  \theta = \theta,\amp \amp \tan(\varphi) = z/r</mrow>
+                <mrow>\amp r=\rho \cos(\varphi),\amp \amp  \theta = \theta,\amp \amp z=\rho\sin(\varphi)</mrow>
+              </md>
+            </p>
+          </li>
+        </ul>
       </p>
     </insight>
 
-    <aside>
+    <!-- <aside>
       <p>
         The role of <m>\theta</m> and <m>\varphi</m> in spherical coordinates differs between mathematicians and physicists.
         When reading about physics in spherical coordinates,
         be careful to note how that particular author uses these variables and recognize that these identities will may no longer be valid.
       </p>
-    </aside>
+    </aside> -->
 
     <example xml:id="ex_spherical4">
       <title>Converting between rectangular and spherical coordinates</title>
@@ -751,7 +839,7 @@
           Convert the rectangular point
           <m>(2,-2,1)</m> to spherical coordinates,
           and convert the spherical point
-          <m>(6,\pi/3,\pi/2)</m> to rectangular and cylindrical coordinates.
+          <m>(6,\pi/3,0)</m> to rectangular and cylindrical coordinates.
         </p>
       </statement>
       <solution>
@@ -761,23 +849,23 @@
           we find <m>\rho = \sqrt{2^2+(-1)^2+1^2} = 3</m>.
           Using the same logic as in <xref ref="ex_cylindrical4">Example</xref>,
           we find <m>\theta = 7\pi/4</m>.
-          Finally, <m>\cos(\varphi) = 1/3</m>,
-          giving <m>\varphi = \cos^{-1}(1/3) \approx 1.23</m>,
-          or about <m>70.53^\circ</m>.
-          Thus the spherical coordinates are approximately <m>(3,7\pi/4,1.23)</m>.
+          Finally, <m>\sin(\varphi) = 1/3</m>,
+          giving <m>\varphi = \sin^{-1}(1/3) \approx 0.34</m>,
+          or about <m>19.47^\circ</m>.
+          Thus the spherical coordinates are approximately <m>(3,7\pi/4,0.34)</m>.
         </p>
 
         <p>
-          Converting the spherical point <m>(6,\pi/3,\pi/2)</m> to rectangular,
-          we have <m>x = 6\sin(\pi/2)\cos(\pi/3) = 3</m>,
-          <m>y = 6\sin(\pi/2)\sin(\pi/3) = 3\sqrt{3}</m> and <m>z = 6\cos(\pi/2) = 0</m>.
+          Converting the spherical point <m>(6,\pi/3,0)</m> to rectangular,
+          we have <m>x = 6\cos(0)\cos(\pi/3) = 3</m>,
+          <m>y = 6\cos(0)\sin(\pi/3) = 3\sqrt{3}</m> and <m>z = 6\sin(0) = 0</m>.
           Thus the rectangular coordinates are <m>(3,3\sqrt{3},0)</m>.
         </p>
 
         <p>
           To convert this spherical point to cylindrical,
-          we have <m>r = 6\sin(\pi/2) = 6</m>,
-          <m>\theta = \pi/3</m> and <m>z = 6\cos(\pi/2) =0</m>,
+          we have <m>r = 6\cos(0) = 6</m>,
+          <m>\theta = \pi/3</m> and <m>z = 6\sin(0) =0</m>,
           giving the cylindrical point <m>(6,\pi/3,0)</m>.
         </p>
       </solution>
@@ -788,7 +876,7 @@
       <statement>
         <p>
           Describe the surfaces <m>\rho=1</m>,
-          <m>\theta = \pi/3</m> and <m>\varphi = \pi/6</m>,
+          <m>\theta = \pi/3</m> and <m>\varphi = \pi/3</m>,
           given in spherical coordinates.
         </p>
       </statement>
@@ -805,7 +893,8 @@
         </p>
 
         <p>
-          The equation <m>\varphi=\pi/6</m> describes all points <m>P</m> in space where the ray from the origin to <m>P</m> makes an angle of <m>\pi/6</m> with the positive <m>z</m>-axis.
+          The equation <m>\varphi=\pi/3</m> describes all points <m>P</m>
+          in space where the ray from the origin to <m>P</m> makes an angle of <m>\pi/3</m> with the <m>xy</m>-plane.
           This describes a cone,
           with the positive <m>z</m>-axis its axis of symmetry, with point at the origin.
         </p>
@@ -909,7 +998,7 @@
 
 
 
-              label("$\varphi=\frac{\pi}{6}$",(1.5/sqrt(3)*cos(2pi/3),1.5/sqrt(3)*sin(2pi/3),1.5),E);
+              label("$\varphi=\frac{\pi}{3}$",(1.5/sqrt(3)*cos(2pi/3),1.5/sqrt(3)*sin(2pi/3),1.5),E);
               label("$\rho=1$",(1.1*cos(pi/200),1.1*sin(pi/200),-.9));
               label("$\theta=\frac{\pi}{3}$",(1.25,1.25*sqrt(3),1));
 
@@ -941,7 +1030,7 @@
       This wedge is approximately a rectangular solid when the change in each coordinate is small,
       giving a volume of about
       <me>
-        \Delta V \approx \Delta\rho\ \times\ \rho\Delta\varphi\ \times\ \rho\sin(\varphi)\Delta\theta
+        \Delta V \approx \Delta\rho\ \times\ \rho\Delta\varphi\ \times\ \rho\cos(\varphi)\Delta\theta
       </me>.
     </p>
 
@@ -1039,7 +1128,7 @@
           //
           draw((r1*cos(t1)*sin(p1),r1*sin(t1)*sin(p1),r1*cos(p1)) -- (0,0,0) -- (r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),r1*cos(p2)),black+.25mm+dashed);
 
-          draw(arc((0,0,0),(r1*cos(t1)*sin(p1)/2.5,r1*sin(t1)*sin(p1)/2.5,r1*cos(p1)/2.5),(r1*cos(t1)*sin(p2)/2.5,r1*sin(t1)*sin(p2)/2.5,r1*cos(p2)/2.5)),black+.25mm,Arrow3(size=1.5mm));
+          draw(arc((0,0,0),(r1*cos(t1)*sin(p2)/2.5,r1*sin(t1)*sin(p2)/2.5,r1*cos(p2)/2.5),(r1*cos(t1)*sin(p1)/2.5,r1*sin(t1)*sin(p1)/2.5,r1*cos(p1)/2.5)),black+.25mm,Arrow3(size=1.5mm));
 
           label("$\Delta\varphi$",.95*(r1*cos(t1)*sin((p1+p2)/2)/2,r1*sin(t1)*sin((p1+p2)/2)/2,r1*cos((p1+p2)/2)/2));
 
@@ -1083,7 +1172,7 @@
 
           draw((r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),r1*cos(p2)-.05) -- (r1*cos(t2)*sin(p2),r1*sin(t2)*sin(p2),r1*cos(p2)-.05),black+.25mm,Arrows3(size=1.5mm));
 
-          label("$\rho\sin(\varphi)\Delta\theta$",1.5*((r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),r1*cos(p2)-.05) + (r1*cos(t2)*sin(p2),r1*sin(t2)*sin(p2),r1*cos(p2)-.05)+(0,0,-.05))/2+(0,0,-.25),S);
+          label("$\rho\cos(\varphi)\Delta\theta$",1.5*((r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),r1*cos(p2)-.05) + (r1*cos(t2)*sin(p2),r1*sin(t2)*sin(p2),r1*cos(p2)-.05)+(0,0,-.05))/2+(0,0,-.25),S);
 
           draw(1.5*((r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),r1*cos(p2)-.05) + (r1*cos(t2)*sin(p2),r1*sin(t2)*sin(p2),r1*cos(p2)-.05)+(0,0,-.05))/2 + (0,0,-.25) -- 1.05((r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),r1*cos(p2)-.05) + (r1*cos(t2)*sin(p2),r1*sin(t2)*sin(p2),r1*cos(p2)-.05))/2+(0,0,-.01),black+.25mm+dashed,Arrow3(size=1.5mm));
 
@@ -1135,7 +1224,7 @@
           <m>\beta_1 \leq \theta \leq \beta_2</m> and <m>f_1(\theta,\varphi) \leq \rho \leq f_2(\theta,\varphi)</m>.
           Then <idx><h>integration</h><h>with spherical coordinates</h></idx>
           <me>
-            \iiint_D h(\rho,\theta,\varphi)\, dV = \int_{\alpha_1}^{\alpha_2}\int_{\beta_1}^{\beta_2}\int_{f_1(\theta,\varphi)}^{f_2(\theta,\varphi)} h(\rho,\theta,\varphi) \rho^2\sin(\varphi)\, d\rho\, d\theta\, d\varphi
+            \iiint_D h(\rho,\theta,\varphi)\, dV = \int_{\alpha_1}^{\alpha_2}\int_{\beta_1}^{\beta_2}\int_{f_1(\theta,\varphi)}^{f_2(\theta,\varphi)} h(\rho,\theta,\varphi) \rho^2\cos(\varphi)\, d\rho\, d\theta\, d\varphi
           </me>.
         </p>
       </statement>
@@ -1156,15 +1245,15 @@
           centered at the origin, has equation <m>\rho = r</m>.
           To obtain the full sphere,
           the bounds on <m>\theta</m> and <m>\varphi</m> are
-          <m>0\leq \theta \leq 2\pi</m> and <m>0 \leq \varphi \leq \pi</m>.
+          <m>0\leq \theta \leq 2\pi</m> and <m>-\pi/2 \leq \varphi \leq \pi/2</m>.
           This leads us to:
           <md>
             <mrow>V \amp = \iiint_D\, dV</mrow>
-            <mrow>\amp = \int_0^{\pi}\int_0^{2\pi}\int_0^r\big(\rho^2\sin(\varphi)\big)\, d\rho\, d\theta\, d\varphi</mrow>
-            <mrow>\amp = \int_0^\pi\int_0^{2\pi}\left(\frac13\rho^3\sin(\varphi)\Big|_0^r\right)\, d\theta\, d\varphi</mrow>
-            <mrow>\amp = \int_0^\pi\int_0^{2\pi} \left(\frac13r^3\sin(\varphi)\right)\, d\theta\, d\varphi</mrow>
-            <mrow>\amp = \int_0^\pi \left(\frac{2\pi}3r^3\sin(\varphi)\right)\, d\varphi</mrow>
-            <mrow>\amp = \left.\left(-\frac{2\pi}3r^3\cos(\varphi)\right)\right|_0^{\pi}</mrow>
+            <mrow>\amp = \int_{-\pi/2}^{\pi/2}\int_0^{2\pi}\int_0^r\big(\rho^2\cos(\varphi)\big)\, d\rho\, d\theta\, d\varphi</mrow>
+            <mrow>\amp = \int_{-pi/2}^{\pi/2}\int_0^{2\pi}\left(\frac13\rho^3\cos(\varphi)\Big|_0^r\right)\, d\theta\, d\varphi</mrow>
+            <mrow>\amp = \int_{-\pi/2}^{\pi/2}\int_0^{2\pi} \left(\frac13r^3\cos(\varphi)\right)\, d\theta\, d\varphi</mrow>
+            <mrow>\amp = \int_{-\pi/2}^{\pi/2} \left(\frac{2\pi}3r^3\cos(\varphi)\right)\, d\varphi</mrow>
+            <mrow>\amp = \left.\left(\frac{2\pi}3r^3\sin(\varphi)\right)\right|_{-\pi/2}^{\pi/2}</mrow>
             <mrow>\amp = \frac{4\pi}3r^3</mrow>
           </md>,
           the familiar formula for the volume of a sphere.
@@ -1183,7 +1272,7 @@
       <title>Finding the center of mass using spherical coordinates</title>
       <statement>
         <p>
-          Find the center of mass of the solid with constant density enclosed above by <m>\rho=4</m> and below by <m>\varphi = \pi/6</m>,
+          Find the center of mass of the solid with constant density enclosed above by <m>\rho=4</m> and below by <m>\varphi = \pi/3</m>,
           as illustrated in <xref ref="fig_spherical3">Figure</xref>.
         </p>
         <figure xml:id="fig_spherical3">
@@ -1298,7 +1387,7 @@
           to describe the full solid <m>D</m>,
           we use the following bounds:
           <m>0 \leq \rho \leq 4</m>,
-          <m>0 \leq \theta \leq 2\pi</m> and <m>0 \leq \varphi \leq \pi/6</m>.
+          <m>0 \leq \theta \leq 2\pi</m> and <m>0 \leq \varphi \leq \pi/3</m>.
           Since density <m>\delta</m> is constant,
           we assume <m>\delta =1</m>.
         </p>
@@ -1307,7 +1396,7 @@
           The mass of the solid:
           <md>
             <mrow>M \amp = \iiint_D\, dm = \iiint_D\, dV</mrow>
-            <mrow>\amp = \int_0^{\pi/6}\int_0^{2\pi}\int_0^4\big(\rho^2\sin(\varphi)\big)\, d\rho\, d\theta\, d\varphi</mrow>
+            <mrow>\amp = \int_0^{\pi/3}\int_0^{2\pi}\int_0^4\big(\rho^2\cos(\varphi)\big)\, d\rho\, d\theta\, d\varphi</mrow>
             <mrow>\amp = \frac{64}3\big(2-\sqrt{3}\big)\pi \approx 17.958</mrow>
           </md>.
         </p>
@@ -1315,12 +1404,12 @@
         <p>
           To compute <m>M_{yz}</m>, the integrand is <m>x</m>;
           using <xref ref="idea_convert_coords">Key Idea</xref>,
-          we have <m>x = \rho\sin(\varphi)\cos(\theta)</m>.
+          we have <m>x = \rho\cos(\varphi)\cos(\theta)</m>.
           This gives:
           <md>
             <mrow>M_{yz} \amp = \iiint_D x\, dm</mrow>
-            <mrow>\amp = \int_0^{\pi/6}\int_0^{2\pi}\int_0^4 \big((\rho\sin(\varphi)\cos(\theta))\rho^2\sin(\varphi)\big) \, d\rho\, d\theta\, d\varphi</mrow>
-            <mrow>\amp = \int_0^{\pi/6}\int_0^{2\pi}\int_0^4 \big(\rho^3\sin^2(\varphi)\cos(\theta)\big) \, d\rho\, d\theta\, d\varphi</mrow>
+            <mrow>\amp = \int_0^{\pi/3}\int_0^{2\pi}\int_0^4 \big((\rho\cos(\varphi)\cos(\theta))\rho^2\cos(\varphi)\big) \, d\rho\, d\theta\, d\varphi</mrow>
+            <mrow>\amp = \int_0^{\pi/3}\int_0^{2\pi}\int_0^4 \big(\rho^3\cos^2(\varphi)\cos(\theta)\big) \, d\rho\, d\theta\, d\varphi</mrow>
             <mrow>\amp =0</mrow>
           </md>,
           which we expected as we expect <m>\overline{x} = 0</m>.
@@ -1329,13 +1418,13 @@
         <p>
           To compute <m>M_{xz}</m>, the integrand is <m>y</m>;
           using <xref ref="idea_convert_coords">Key Idea</xref>,
-          we have <m>y = \rho\sin(\varphi)\sin(\theta)</m>.
+          we have <m>y = \rho\cos(\varphi)\sin(\theta)</m>.
           This gives:
           <md>
             <mrow>M_{xz} \amp = \iiint_D y\, dm</mrow>
-            <mrow>\amp = \int_0^{\pi/6}\int_0^{2\pi}\int_0^4 \big((\rho\sin(\varphi)\sin(\theta))\rho^2\sin(\varphi)\big) \, d\rho\, d\theta\, d\varphi</mrow>
-            <mrow>\amp = \int_0^{\pi/6}\int_0^{2\pi}\int_0^4 \big(\rho^3\sin^2(\varphi)\sin(\theta)\big) \, d\rho\, d\theta\, d\varphi</mrow>
-            <mrow>\amp =0</mrow>
+            <mrow>\amp = \int_0^{\pi/3}\int_0^{2\pi}\int_0^4 \big((\rho\cos(\varphi)\sin(\theta))\rho^2\cos(\varphi)\big) \, d\rho\, d\theta\, d\varphi</mrow>
+            <mrow>\amp = \int_0^{\pi/3}\int_0^{2\pi}\int_0^4 \big(\rho^3\cos^2(\varphi)\sin(\theta)\big) \, d\rho\, d\theta\, d\varphi</mrow>
+            <mrow>\amp = 0</mrow>
           </md>,
           which we also expected as we expect <m>\overline{y} = 0</m>.
         </p>
@@ -1343,12 +1432,12 @@
         <p>
           To compute <m>M_{xy}</m>, the integrand is <m>z</m>;
           using <xref ref="idea_convert_coords">Key Idea</xref>,
-          we have <m>z = \rho\cos(\varphi)</m>.
+          we have <m>z = \rho\sin(\varphi)</m>.
           This gives:
           <md>
             <mrow>M_{xy} \amp = \iiint_D z\, dm</mrow>
-            <mrow>\amp = \int_0^{\pi/6}\int_0^{2\pi}\int_0^4 \big((\rho\cos(\varphi))\rho^2\sin(\varphi)\big) \, d\rho\, d\theta\, d\varphi</mrow>
-            <mrow>\amp = \int_0^{\pi/6}\int_0^{2\pi}\int_0^4 \big(\rho^3\cos(\varphi)\sin(\varphi)\big) \, d\rho\, d\theta\, d\varphi</mrow>
+            <mrow>\amp = \int_0^{\pi/3}\int_0^{2\pi}\int_0^4 \big((\rho\sin(\varphi))\rho^2\cos(\varphi)\big) \, d\rho\, d\theta\, d\varphi</mrow>
+            <mrow>\amp = \int_0^{\pi/3}\int_0^{2\pi}\int_0^4 \big(\rho^3\sin(\varphi)\cos(\varphi)\big) \, d\rho\, d\theta\, d\varphi</mrow>
             <mrow>\amp =16\pi \approx 50.266</mrow>
           </md>.
         </p>
@@ -1526,7 +1615,7 @@
                   <p>
                     Cylindrical:
                     <m>(2\sqrt 2,\pi/4,1)</m> and <m>(2,5\pi/6,0)</m> Spherical:
-                    <m>(3,\pi/4,\cos^{-1}(1/3))</m> and <m>(2,5\pi/6,\pi/2)</m>
+                    <m>(3,\pi/4,\cos^{-1}(3))</m> and <m>(2,5\pi/6,0)</m>
                   </p>
                 </li>
 
@@ -1534,15 +1623,15 @@
                   <p>
                     Rectangular:
                     <m>(\sqrt 2,\sqrt 2,2)</m> and <m>(0,-3,-4)</m> Spherical:
-                    <m>(2\sqrt 2,\pi/4,\pi/4)</m> and <m>(5,3\pi/2,\pi-\tan^{-1}(3/4))</m>
+                    <m>(2\sqrt 2,\pi/4,\pi/4)</m> and <m>(5,3\pi/2,-\tan^{-1}(4/3))</m>
                   </p>
                 </li>
 
                 <li>
                   <p>
                     Rectangular:
-                    <m>(1,1,\sqrt{2})</m> and <m>(0,0,1)</m> Cylindrical:
-                    <m>(\sqrt{2},\pi/4,\sqrt{2})</m> and <m>(0,0,1)</m>
+                    <m>(1,1,\sqrt{2})</m> and <m>(1,0,0)</m> Cylindrical:
+                    <m>(\sqrt{2},\pi/4,\sqrt{2})</m> and <m>(1,0,0)</m>
                   </p>
                 </li>
               </ol>
@@ -1571,7 +1660,7 @@
                 <li>
                   <p>
                     Points in spherical coordinates:
-                    <m>(2,\pi/6,\pi/2)</m> and <m>(3,\pi,\pi)</m>
+                    <m>(2,\pi/6,0)</m> and <m>(3,\pi,-\pi/2)</m>
                   </p>
                 </li>
               </ol>
@@ -1591,7 +1680,7 @@
                   <p>
                     Rectangular:
                     <m>(0,0,1)</m> and <m>(-1,-\sqrt 3,0)</m> Spherical:
-                    <m>(1,\pi,0)</m> and <m>(2,4\pi/3,\pi/2)</m>
+                    <m>(1,\pi,\pi/2)</m> and <m>(2,4\pi/3,0)</m>
                   </p>
                 </li>
 
@@ -1648,7 +1737,7 @@
                 <li>
                   <p>
                     <m>2\leq\rho\leq3</m>, <m>0\leq \theta\leq2\pi</m>,
-                    <m>0\leq\varphi\leq \pi</m>
+                    <m>-\pi/2\leq\varphi\leq \pi/2</m>
                   </p>
                 </li>
               </ol>
@@ -1722,7 +1811,7 @@
                 <li>
                   <p>
                     <m>\rho=2</m>,
-                    <m>0\leq \theta\leq2\pi</m>, <m>\varphi = \pi/6</m>
+                    <m>0\leq \theta\leq2\pi</m>, <m>\varphi = \pi/3</m>
                   </p>
                 </li>
               </ol>
@@ -1936,7 +2025,7 @@
         <exercise>
           <statement>
             <p>
-              Cylindrical coordinates, integrating <m>h(\rho,\theta,\varphi)</m>:
+              Spherical coordinates, integrating <m>h(\rho,\theta,\varphi)</m>:
             </p>
             <image xml:id="img_13_07_ex_10_3D">
               <description></description>
@@ -2086,11 +2175,11 @@
                 // lines for phi length
                 //
 
-                draw(arc((0,0,0),.9*(0,0,r1),.95*(r1*cos(t1)*sin(p1),r1*sin(t1)*sin(p1),r1*cos(p1))),black+.25mm,Arrows3(size=1.5mm));
-                label("$\varphi_1$",.9*(r1*cos(t1)*sin(p1/2),r1*sin(t1)*sin(p1/2),r1*cos(p1/2)),S);
+                draw(arc((0,0,0),(r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),0),.95*(r1*cos(t1)*sin(p1),r1*sin(t1)*sin(p1),r1*cos(p1))),black+.25mm,Arrows3(size=1.5mm));
+label("$\varphi_2$",.8*(r1*cos(t1)*sin(pi/2-p1/2-.5),r1*sin(t1)*sin(pi/2-p1/2-.5),r1*cos(pi/2-p1/2-.5)),S);
 
-                label("$\varphi_2$",.68*(r1*cos(t1)*sin(p1+(p2-p1)/2),r1*sin(t1)*sin(p1+(p2-p1)/2),r1*cos(p1+(p2-p1)/2)),S);
-                draw(arc((0,0,0),.7*(0,0,r1),.7*(r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),r1*cos(p2))),black+.25mm,Arrows3(size=1.5mm));
+label("$\varphi_1$",.63*(r1*cos(t1)*sin(pi/2-p1-(p2-p1)/2),r1*sin(t1)*sin(pi/2-p1-(p2-p1)/2),r1*cos(pi/2-p1-(p2-p1)/2)),S);
+draw(arc((0,0,0),.8*(r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),0),.7*(r1*cos(t1)*sin(p2),r1*sin(t1)*sin(p2),r1*cos(p2))),black+.25mm,Arrows3(size=1.5mm));
               </asymptote>
             </image>
           </statement>
@@ -2222,7 +2311,7 @@
         <exercise>
           <statement>
             <p>
-              <m>\ds \int_0^{\pi/2}\int_0^{\pi/2}\int_0^{1} \rho^2\sin(\varphi)\, d\rho\, d\theta\, d\varphi</m>
+              <m>\ds \int_0^{\pi/2}\int_0^{\pi/2}\int_0^{1} \rho^2\cos(\varphi)\, d\rho\, d\theta\, d\varphi</m>
             </p>
           </statement>
           <answer>
@@ -2235,7 +2324,7 @@
         <exercise>
           <statement>
             <p>
-              <m>\ds \int_0^{\pi}\int_0^{\pi}\int_1^{1.1} \rho^2\sin(\varphi)\, d\rho\, d\theta\, d\varphi</m>
+              <m>\ds \int_{-\pi/2}^{\pi/2}\int_0^{\pi}\int_1^{1.1} \rho^2\cos(\varphi)\, d\rho\, d\theta\, d\varphi</m>
             </p>
           </statement>
           <answer>
@@ -2248,7 +2337,7 @@
         <exercise>
           <statement>
             <p>
-              <m>\ds \int_0^{\pi/4}\int_0^{2\pi}\int_0^{2} \rho^2\sin(\varphi)\, d\rho\, d\theta\, d\varphi</m>
+              <m>\ds \int_{\pi/4}^{\pi/2}\int_0^{2\pi}\int_0^{2} \rho^2\cos(\varphi)\, d\rho\, d\theta\, d\varphi</m>
             </p>
           </statement>
           <solution>
@@ -2258,7 +2347,7 @@
               some think of it as looking like an ice cream cone
               (see <xref ref="fig_spherical3">Figure</xref>).
               It describes a cone,
-              where the side makes an angle of <m>\pi/4</m> with the positive <m>z</m>-axis,
+              where the side makes an angle of <m>\pi/4</m> with the <m>xy</m>-plane,
               topped by the portion of the ball of radius 2, centered at the origin.
             </p>
           </solution>
@@ -2267,7 +2356,7 @@
         <exercise>
           <statement>
             <p>
-              <m>\ds \int_{\pi/6}^{\pi/4}\int_0^{2\pi}\int_0^{2} \rho^2\sin(\varphi)\, d\rho\, d\theta\, d\varphi</m>
+              <m>\ds \int_{\pi/4}^{\pi/3}\int_0^{2\pi}\int_0^{2} \rho^2\cos(\varphi)\, d\rho\, d\theta\, d\varphi</m>
             </p>
           </statement>
           <solution>
@@ -2276,9 +2365,9 @@
               <m>z=\sqrt{x^2+y^2}</m> and above by the sphere <m>x^2+y^2+z^2=4</m>,
               with the portion above the cone <m>z=\sqrt3\sqrt{x^2+y^2}</m> removed:
               it describes a cone,
-              where the side makes an angle of <m>\pi/4</m> with the positive <m>z</m>-axis,
+              where the side makes an angle of <m>\pi/4</m> with the <m>xy</m>-plane,
               topped by the portion of the ball of radius 2, centered at the origin,
-              with the inner cone with angle <m>\pi/6</m> removed,
+              with the inner cone with angle <m>\pi/3</m> removed,
               along with corresponding portion of the ball of radius 2.
             </p>
           </solution>
@@ -2287,7 +2376,7 @@
         <exercise>
           <statement>
             <p>
-              <m>\ds \int_{0}^{\pi/6}\int_0^{2\pi}\int_0^{\sec(\varphi)} \rho^2\sin(\varphi)\, d\rho\, d\theta\, d\varphi</m>
+              <m>\ds \int_{\pi/3}^{\pi/2}\int_0^{2\pi}\int_0^{\sec(\varphi)} \rho^2\cos(\varphi)\, d\rho\, d\theta\, d\varphi</m>
             </p>
           </statement>
           <solution>
@@ -2296,7 +2385,7 @@
               <m>z=\sqrt{3}\sqrt{x^2+y^2}</m> and above by the plane <m>z=1</m>:
               it describes a cone, with point at the origin,
               centered along the positive <m>z</m>-axis,
-              with height of 1 and base radius of <m>\tan(\pi/6) = 1/\sqrt{3}</m>.
+              with height of 1 and base radius of <m>\cot(\pi/3) = \tan(\pi/6) = 1/\sqrt{3}</m>.
             </p>
           </solution>
         </exercise>
@@ -2304,7 +2393,7 @@
         <exercise>
           <statement>
             <p>
-              <m>\ds \int_{0}^{\pi/6}\int_0^{2\pi}\int_0^{a\sec(\varphi)} \rho^2\sin(\varphi)\, d\rho\, d\theta\, d\varphi</m>
+              <m>\ds \int_{pi/3}^{\pi/2}\int_0^{2\pi}\int_0^{a\sec(\varphi)} \rho^2\cos(\varphi)\, d\rho\, d\theta\, d\varphi</m>
             </p>
           </statement>
           <solution>
@@ -2313,7 +2402,7 @@
               <m>z=\sqrt{3}\sqrt{x^2+y^2}</m> and above by the plane <m>z=a</m>:
               it describes a cone, with point at the origin,
               centered along the positive <m>z</m>-axis,
-              with height of <m>a</m> and base radius of <m>a\tan(\pi/6)</m>.
+              with height of <m>a</m> and base radius of <m>a\cot(\pi/3)</m>.
             </p>
           </solution>
         </exercise>
@@ -2531,7 +2620,7 @@
               the density is <m>\delta(\rho,\theta,\varphi) = 1</m>.
               Thus mass is
               <me>
-                \int_0^{\pi/2}\int_0^{2\pi}\int_{0}^{1} \rho^2\sin(\varphi)\, d\rho\, d\theta\, d\varphi = 2\pi/3
+                \int_0^{\pi/2}\int_0^{2\pi}\int_{0}^{1} \rho^2\cos(\varphi)\, d\rho\, d\theta\, d\varphi = 2\pi/3
               </me>.
             </p>
           </solution>
@@ -2550,7 +2639,7 @@
               the density is <m>\delta(\rho,\theta,\varphi) = \rho</m>.
               Thus mass is
               <me>
-                \int_0^{\pi}\int_0^{2\pi}\int_{4}^{5} (\rho)\rho^2\sin(\varphi)\, d\rho\, d\theta\, d\varphi = 369\pi
+                \int_{-\pi/2}^{\pi/2}\int_0^{2\pi}\int_{4}^{5} (\rho)\rho^2\cos(\varphi)\, d\rho\, d\theta\, d\varphi = 369\pi
               </me>.
             </p>
           </solution>
@@ -2559,17 +2648,17 @@
         <exercise>
           <statement>
             <p>
-              The conical region bounded above <m>z=\sqrt{x^2+y^2}</m> and below the sphere
+              The conical region bounded below by <m>z=\sqrt{x^2+y^2}</m> and above by the sphere
               <m>x^2+y^2+z^2=1</m> with density function <m>\delta(x,y,z) = z</m>.
             </p>
           </statement>
           <solution>
             <p>
               In spherical coordinates,
-              the density is <m>\delta(\rho,\theta,\varphi) = \rho\cos(\varphi)</m>.
+              the density is <m>\delta(\rho,\theta,\varphi) = \rho\sin(\varphi)</m>.
               Thus mass is
               <me>
-                \int_0^{\pi/4}\int_0^{2\pi}\int_{0}^{1} \big(\rho\cos(\varphi)\big)\rho^2\sin(\varphi)\, d\rho\, d\theta\, d\varphi = \pi/8
+                \int_{\pi/4}^{\pi/2}\int_0^{2\pi}\int_{0}^{1} \big(\rho\sin(\varphi)\big)\rho^2\sin(\varphi)\, d\rho\, d\theta\, d\varphi = \pi/8
               </me>.
             </p>
           </solution>
@@ -2578,16 +2667,16 @@
         <exercise xml:id="ex_13_07_ex_34">
           <statement>
             <p>
-              The cone bounded above <m>z=\sqrt{x^2+y^2}</m> and below the plane <m>z=1</m> with density function <m>\delta(x,y,z) = z</m>.
+              The cone that lies above the cone <m>z=\sqrt{x^2+y^2}</m> and below the plane <m>z=1</m> with density function <m>\delta(x,y,z) = z</m>.
             </p>
           </statement>
           <solution>
             <p>
               In spherical coordinates,
-              the density is <m>\delta(\rho,\theta,\varphi) = \rho\cos(\varphi)</m>.
+              the density is <m>\delta(\rho,\theta,\varphi) = \rho\sin(\varphi)</m>.
               Thus mass is
               <me>
-                \int_0^{\pi/4}\int_0^{2\pi}\int_{0}^{\sec(\varphi)} \big(\rho\cos(\varphi)\big)\rho^2\sin(\varphi)\, d\rho\, d\theta\, d\varphi = \pi/4
+                \int_{\pi/4}^{\pi/2}\int_0^{2\pi}\int_{0}^{\csc(\varphi)} \big(\rho\sin(\varphi)\big)\rho^2\cos(\varphi)\, d\rho\, d\theta\, d\varphi = \pi/4
               </me>.
             </p>
           </solution>
@@ -2619,7 +2708,7 @@
               the density is <m>\delta(\rho,\theta,\varphi) = 1</m>.
               Thus mass is
               <me>
-                \int_0^{\pi/2}\int_0^{2\pi}\int_{0}^{1} \rho^2\sin(\varphi)\, d\rho\, d\theta\, d\varphi = 2\pi/3
+                \int_0^{\pi/2}\int_0^{2\pi}\int_{0}^{1} \rho^2\cos(\varphi)\, d\rho\, d\theta\, d\varphi = 2\pi/3
               </me>.
             </p>
 
@@ -2643,7 +2732,7 @@
               the density is <m>\delta(\rho,\theta,\varphi) = \rho</m>.
               Thus mass is
               <me>
-                \int_0^{\pi}\int_0^{2\pi}\int_{4}^{5} (\rho)\rho^2\sin(\varphi)\, d\rho\, d\theta\, d\varphi = 369\pi
+                \int_{-\pi/2}^{\pi/2}\int_0^{2\pi}\int_{4}^{5} (\rho)\rho^2\cos(\varphi)\, d\rho\, d\theta\, d\varphi = 369\pi
               </me>.
             </p>
 
@@ -2664,10 +2753,10 @@
           <solution>
             <p>
               In spherical coordinates,
-              the density is <m>\delta(\rho,\theta,\varphi) = \rho\cos(\varphi)</m>.
+              the density is <m>\delta(\rho,\theta,\varphi) = \rho\sin(\varphi)</m>.
               Thus mass is
               <me>
-                \int_0^{\pi/4}\int_0^{2\pi}\int_{0}^{1} \big(\rho\cos(\varphi)\big)\rho^2\sin(\varphi)\, d\rho\, d\theta\, d\varphi = \pi/8
+                \int_{\pi/4}^{\pi/2}\int_0^{2\pi}\int_{0}^{1} \big(\rho\sin(\varphi)\big)\rho^2\cos(\varphi)\, d\rho\, d\theta\, d\varphi = \pi/8
               </me>.
             </p>
 
@@ -2688,10 +2777,10 @@
           <solution>
             <p>
               In spherical coordinates,
-              the density is <m>\delta(\rho,\theta,\varphi) = \rho\cos(\varphi)</m>.
+              the density is <m>\delta(\rho,\theta,\varphi) = \rho\sin(\varphi)</m>.
               Thus mass is
               <me>
-                \int_0^{\pi/4}\int_0^{2\pi}\int_{0}^{\sec(\varphi)} \big(\rho\cos(\varphi)\big)\rho^2\sin(\varphi)\, d\rho\, d\theta\, d\varphi = \pi/4
+                \int_{\pi/4}^{\pi/2}\int_0^{2\pi}\int_{0}^{\csc(\varphi)} \big(\rho\sin(\varphi)\big)\rho^2\cos(\varphi)\, d\rho\, d\theta\, d\varphi = \pi/4
               </me>.
             </p>
 
@@ -2731,7 +2820,7 @@
             </p>
 
             <p>
-              Spherical: <m>\int_0^\pi\int_0^{2\pi}\int_0^1 \rho^2\sin(\varphi)\, d\rho\, d\theta\, d\varphi</m>
+              Spherical: <m>\int_{-\pi/2}^{\pi/2}\int_0^{2\pi}\int_0^1 \rho^2\cos(\varphi)\, d\rho\, d\theta\, d\varphi</m>
             </p>
 
             <p>
@@ -2761,7 +2850,7 @@
             </p>
 
             <p>
-              Spherical: <m>\int_0^{\pi/4}\int_0^{2\pi}\int_0^{\sec(\varphi)} \rho^2\sin(\varphi)\, d\rho\, d\theta\, d\varphi + \int_{\pi/4}^{\pi/2}\int_0^{2\pi}\int_0^{\csc(\varphi)} \rho^2\sin(\varphi)\, d\rho\, d\theta\, d\varphi</m>
+              Spherical: <m>\int_{\pi/4}^{\pi/2}\int_0^{2\pi}\int_0^{\csc(\varphi)} \rho^2\cos(\varphi)\, d\rho\, d\theta\, d\varphi + \int_{\pi/4}^{\pi/2}\int_0^{2\pi}\int_0^{\csc(\varphi)} \rho^2\sin(\varphi)\, d\rho\, d\theta\, d\varphi</m>
             </p>
 
             <p>
@@ -2791,7 +2880,7 @@
             </p>
 
             <p>
-              Spherical: <m>\int_0^{\pi/4}\int_0^{2\pi}\int_0^{\sec(\varphi)} \rho^2\sin(\varphi)\, d\rho\, d\theta\, d\varphi</m>
+              Spherical: <m>\int_{\pi/4}^{\pi/2}\int_0^{2\pi}\int_0^{\csc(\varphi)} \rho^2\cos(\varphi)\, d\rho\, d\theta\, d\varphi</m>
             </p>
 
             <p>
@@ -2825,19 +2914,13 @@
             </p>
 
             <p>
-              Spherical: <m>\int _0^{\pi/4}\int _0^{\tan^{-1}(\sec(\theta))}\int _0^{\sec(\varphi)}\rho ^2 \sin (\varphi)\, d\rho\, d\varphi\, d\theta +</m>
-            </p>
-
-            <p>
-              <m>\int _0^{\pi/4}\int _{\tan^{-1}(\sec(\theta))}^{\pi/2}\int _0^{\sec(\theta)\csc(\varphi)}\rho ^2 \sin (\varphi)\, d\rho\, d\varphi\, d\theta +</m>
-            </p>
-
-            <p>
-              <m>\int _{\pi/4}^{\pi/2}\int _0^{\tan^{-1}(\csc(\theta))}\int _0^{\sec(\varphi)}\rho ^2 \sin (\varphi)\, d\rho\, d\varphi\, d\theta +</m>
-            </p>
-
-            <p>
-              <m>\int _{\pi/4}^{\pi/2}\int _{\tan^{-1}(\csc(\theta))}^{\pi/2}\int _0^{\csc(\theta)\csc(\varphi)}\rho ^2 \sin (\varphi)\, d\rho\, d\varphi\, d\theta</m>.
+              Spherical:
+              <md>
+                <mrow>\amp      \int_0^{\pi/4}\int_0^{\tan^{-1}(\sec(\theta))}\int_0^{\csc(\varphi)}\rho^2 \cos(\varphi)\, d\rho\, d\varphi\, d\theta</mrow>
+                <mrow>\amp\quad+\int_0^{\pi/4}\int_{\tan^{-1}(\sec(\theta))}^{\pi/2}\int_0^{\sec(\theta)\sec(\varphi)}\rho^2 \cos(\varphi)\, d\rho\, d\varphi\, d\theta</mrow>
+                <mrow>\amp\quad+\int_{\pi/4}^{\pi/2}\int_0^{\tan^{-1}(\csc(\theta))}\int_0^{\csc(\varphi)}\rho^2 \cos(\varphi)\, d\rho\, d\varphi\, d\theta</mrow>
+                <mrow>\amp\quad+\int_{\pi/4}^{\pi/2}\int_{\tan^{-1}(\csc(\theta))}^{\pi/2}\int_0^{\csc(\theta)\sec(\varphi)}\rho^2 \cos(\varphi)\, d\rho\, d\varphi\, d\theta</mrow>
+              </md>.
             </p>
 
             <p>

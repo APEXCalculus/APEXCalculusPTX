@@ -1198,6 +1198,59 @@
     </example>
 
     <p>
+      To understand why <xref ref="thm_gradient4"/> is true,
+      recall the method of implicit differentiation given in <xref ref="subsec-implicit-diff"/>.
+      A level surface <m>f(x,y,z)=0</m> can be viewed as defining <m>z=g(x,y)</m> implicitly.
+      We found that the partial derivatives of <m>z</m> with respect to <m>x</m> and <m>y</m> are then given by
+      <me>
+        \plz{z}{x} = g_x(x,y) = -\frac{f_x(x,y,z)}{f_z(x,y,z)}\quad \plz{z}{y} = g_y(x,y) = -\frac{f_y(x,y,z)}{f_z(x,y,z)}
+      </me>.
+      If we plug these values into the tangent plane equation
+      <me>
+        z = g(a,b)+g_x(a,b)(x-a)+g_y(a,b)(y-b)
+      </me>
+      we get, with <m>c=g(a,b)</m>,
+      <me>
+        z = c - \frac{f_x(a,b,c)}{f_z(a,b,c)}(x-a)-\frac{f_y(a,b,c)}{f_z(a,b,c)}(y-b)
+      </me>.
+      If we move everything to the left-hand side of the equation and multiply through by <m>f_z(a,b,c)</m>,
+      we get
+      <me>
+        f_x(a,b,c)(x-a)+f_y(a,b,c)(y-b)+f_z(a,b,c)(z-c)=0
+      </me>,
+      which is the equation of a plane with normal vector <m>\nabla f(a,b,c)</m>.
+    </p>
+
+    <example>
+      <title>Finding the tangent plane of a level surface</title>
+      <statement>
+        <p>
+          Determine the equation of the tangent plane to the level surface
+          <m>x^2yz^3-\sin(x-3z)+4xy^2-3yz=0</m> at the point <m>(3,0,1)</m>.
+          (Note that this is the same problem as <xref ref="ex_mchain6"/>.)
+        </p>
+      </statement>
+      <solution>
+        <p>
+          With <m>f(x,y,z)=x^2yz^3-\sin(x-3z)+4xy^2-3yz</m> we have
+          <md>
+            <mrow>f_x(x,y,z) \amp = 2xyz^3-\cos(x-3z)+4y^2 \amp f_x(3,0,1)\amp = -1</mrow>
+            <mrow>f_y(x,y,z) \amp = x^2z^3+8xy-3z \amp f_y(3,0,1)\amp = 6</mrow>
+            <mrow>f_z(x,y,z) \amp = 3x^2yz^2+3\cos(x-3z)-3y \amp f_z(3,0,1) \amp = 3</mrow>
+          </md>.
+        </p>
+        <p>
+          The equation of the tangent plane is therefore
+          <me>
+            -1(x-3)+6y+3(z-1)=0
+          </me>.
+          Note that solving for <m>z</m> gives <m>z=1+\frac13(x-3)-2y</m>,
+          which is the same result as <xref ref="ex_mchain6"/>.
+        </p>
+      </solution>
+    </example>
+
+    <p>
       Tangent lines and planes to surfaces have many uses,
       including the study of instantaneous rates of changes and making approximations.
       Normal lines also have many uses.
