@@ -156,34 +156,34 @@
 
 <!-- figures in the margin -->
 <xsl:param name="latex.preamble.early" select="'
-  \usepackage{xcoffins}&#xa;
-  \NewCoffin\Framex&#xa;
-  \NewCoffin\Theox
+\usepackage{xcoffins}&#xa;
+\NewCoffin\Framex&#xa;
+\NewCoffin\Theox
   '"/>
 
 <xsl:param name="latex.preamble.late" select="'
-  \newlength{\Hshift}&#xa;
-  \newlength{\Mshift}&#xa;
-  \newcommand*{\marginshift}{%&#xa;
-      \setlength{\Hshift}{5.5mm}&#xa;
-      \setlength{\Mshift}{\marginparsep}&#xa;
-      }&#xa;
-      &#xa;
-  \newcommand{\tcbmarginbox}[2]{%&#xa;
-      \marginshift&#xa;
-      \SetHorizontalCoffin\Framex{} %clear box Framex&#xa;
-      \SetVerticalCoffin\Theox{\marginparwidth}{#1}% fill box \Theox&#xa;
-      \JoinCoffins*\Framex[r,vc]\Theox[l,vc](\dimexpr\Mshift+\textwidth\relax,#2)%join boxes&#xa;
-      \noindent\TypesetCoffin\Framex(\Hshift,0pt)\\[-2\baselineskip] %typset assembly&#xa;
-  }&#xa;
-  &#xa;
-  \newcommand{\parmarginbox}[2]{%&#xa;
-      \marginshift&#xa;
-      \SetHorizontalCoffin\Framex{}&#xa;
-      \SetVerticalCoffin\Theox{\marginparwidth}{#1}&#xa;
-      \JoinCoffins*\Framex[r,vc]\Theox[l,vc](\dimexpr\Mshift+\textwidth\relax,#2)&#xa;
-      \noindent\TypesetCoffin\Framex(0mm,0pt)\\[-2\baselineskip]&#xa;
-  }'"/>
+\newlength{\Hshift}&#xa;
+\newlength{\Mshift}&#xa;
+\newcommand*{\marginshift}{%&#xa;
+    \setlength{\Hshift}{5.5mm}&#xa;
+    \setlength{\Mshift}{\marginparsep}&#xa;
+    }&#xa;
+    &#xa;
+\newcommand{\tcbmarginbox}[2]{%&#xa;
+    \marginshift&#xa;
+    \SetHorizontalCoffin\Framex{} %clear box Framex&#xa;
+    \SetVerticalCoffin\Theox{\marginparwidth}{#1}% fill box \Theox&#xa;
+    \JoinCoffins*\Framex[r,vc]\Theox[l,vc](\dimexpr\Mshift+\textwidth\relax,#2)%join boxes&#xa;
+    \noindent\TypesetCoffin\Framex(\Hshift,0pt)\\[-2\baselineskip] %typset assembly&#xa;
+}&#xa;
+&#xa;
+\newcommand{\parmarginbox}[2]{%&#xa;
+    \marginshift&#xa;
+    \SetHorizontalCoffin\Framex{}&#xa;
+    \SetVerticalCoffin\Theox{\marginparwidth}{#1}&#xa;
+    \JoinCoffins*\Framex[r,vc]\Theox[l,vc](\dimexpr\Mshift+\textwidth\relax,#2)&#xa;
+    \noindent\TypesetCoffin\Framex(0mm,0pt)\\[-2\baselineskip]&#xa;
+}'"/>
 
 
 <!-- we want images in margin to be the full margin width -->
