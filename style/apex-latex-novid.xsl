@@ -273,11 +273,6 @@
 <xsl:param name="exercise.divisional.answer" select="'no'"/>
 <xsl:param name="exercise.divisional.solution" select="'no'"/>
 
-<!-- print options -->
-<!-- <xsl:param name="latex.print" select="'no'"/> -->
-<xsl:param name="latex.pageref" select="'no'"/>
-<!-- <xsl:param name="latex.sides" select="'one'"/> -->
-
 <!-- uncommenting these will omit videos -->
 <xsl:template match="video[starts-with(@xml:id, 'vid')]" />
 <xsl:template match="figure[starts-with(@xml:id, 'vid')]" />

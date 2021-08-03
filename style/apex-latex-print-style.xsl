@@ -327,6 +327,8 @@
       <xsl:text>&#xa;</xsl:text>
       <xsl:choose>
         <xsl:when test="ancestor::example">
+          <xsl:text>(For a video solution, click or scan the QR code in the margin.)&#xa;</xsl:text>
+          <xsl:text>&#xa;</xsl:text>
           <xsl:text>\tcbmarginbox{%&#xa;</xsl:text>
         </xsl:when>
         <xsl:otherwise>
@@ -348,7 +350,7 @@
           <xsl:value-of select="$the-caption" />
           <xsl:text>\end{tcolorbox}%&#xa;</xsl:text>
       </xsl:if>
-      <xsl:text>}{0pt}%&#xa;</xsl:text>
+      <xsl:text>}{-1cm}%&#xa;</xsl:text>
       <xsl:text>&#xa;</xsl:text>
     </xsl:template>
 
@@ -358,10 +360,8 @@
 <xsl:param name="exercise.divisional.answer" select="'no'"/>
 <xsl:param name="exercise.divisional.solution" select="'no'"/>
 
-<!-- print options -->
-<!-- <xsl:param name="latex.print" select="'yes'"/> -->
-<xsl:param name="latex.pageref" select="'yes'"/>
-<!-- <xsl:param name="latex.sides" select="'two'"/> -->
+<!-- turn off page references so print matches electronic -->
+<xsl:param name="latex.pageref" select="'no'"/>
 
 <!-- uncommenting these will omit videos -->
 <!-- <xsl:template match="video[starts-with(@xml:id, 'vid')]" />
