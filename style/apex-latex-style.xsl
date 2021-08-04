@@ -320,7 +320,7 @@
       <xsl:text>&#xa;</xsl:text>
       <xsl:choose>
         <xsl:when test="ancestor::example">
-          <xsl:text>(For a video solution, click or scan the QR code in the margin.&#xa;)</xsl:text>
+          <xsl:text>(For a video solution, click or scan the QR code in the margin.)&#xa;</xsl:text>
           <xsl:text>&#xa;</xsl:text>
           <xsl:text>\tcbmarginbox{%&#xa;</xsl:text>
         </xsl:when>
