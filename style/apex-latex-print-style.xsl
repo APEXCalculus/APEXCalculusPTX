@@ -67,7 +67,7 @@
 
 <xsl:template match="&ASIDE-LIKE;" mode="tcb-style">
     <xsl:text>enhanced, colback=white, colframe=white,&#xa;</xsl:text>
-    <xsl:text>coltitle=black, fonttitle=\bfseries, attach title to upper, after title={\space},</xsl:text>
+    <xsl:text>coltitle=black, fonttitle=\bfseries, attach title to upper, after title={\space},left=1pt,</xsl:text>
 </xsl:template>
 
 <xsl:template match="example" mode="tcb-style">
