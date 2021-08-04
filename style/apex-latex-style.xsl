@@ -39,7 +39,7 @@
     <xsl:call-template name="xelatex-font-check">
         <xsl:with-param name="font-name" select="'Carlito-Regular'"/>
     </xsl:call-template>
-    <xsl:text>\setmainfont{Carlito-Regular}[Numbers=OldStyle]&#xa;</xsl:text>
+    <xsl:text>\setmainfont{Carlito-Regular}&#xa;</xsl:text>
 </xsl:template>
 
 
