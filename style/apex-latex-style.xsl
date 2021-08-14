@@ -174,6 +174,7 @@
   \setlength{\Hshift}{\dimexpr\Textw/2-\tcbtextwidth/2\relax}&#xa;
 }&#xa;
 \newcommand{\tcbmarginbox}[2]{%&#xa;
+  \par %start a new line&#xa;
   \marginshift&#xa;
   \SetHorizontalCoffin\Framex{} %clear box Framex&#xa;
   \SetVerticalCoffin\Theox{\marginparwidth}{#1}% fill box \Theox&#xa;
@@ -190,6 +191,7 @@
   \noindent\TypesetCoffin\Framex\\[-2\baselineskip] %typeset assembly&#xa;
 }&#xa;
 \newcommand{\parmarginbox}[2]{%&#xa;
+  \par %start a new line&#xa;
   \marginshift&#xa;
   \SetHorizontalCoffin\Framex{}&#xa;
   \SetVerticalCoffin\Theox{\marginparwidth}{#1}&#xa;
