@@ -306,7 +306,7 @@
 
   <!--TODO: review indexing on this theorem-->
   <theorem xml:id="thm_lim_continuous">
-    <title>Special Limits</title>
+    <title>Limits of Common Functions</title>
     <statement>
       <p>
         Let <m>c</m> be a real number in the domain of the given function and let
@@ -1518,15 +1518,15 @@
               %f = ($p => $u);
               %g = ($q => $t);
               $a = $p;
-              if (exists $Lf{$a} and exists $Lg{$a} and ($Lf{$a} > 0))
-                {$L=($Lf{$a})**($Lg{$a});}
+              if (exists $Lf{$a} and exists $Lg{$a})
+                {$L=$Lf{$a}*$Lg{$a}}
               else
                 {$L=Compute('not possible to know');}
               $showwork = '[@ explanation_box(message => "If it is not possible to determine the limit, state why not.") @]*';
             </pg-code>
             <statement>
               <p>
-                <m>\lim\limits_{x\to <var name="$a"/>}f(x)^{g(x)}</m>
+                <m>\lim\limits_{x\to <var name="$a"/>}\left(f(x)g(x)\right)</m>
               </p>
               <instruction>
                 If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
@@ -1542,7 +1542,6 @@
             </statement>
           </webwork>
         </exercise>
-
         <exercise>
           <webwork>
             <pg-code>
@@ -1604,15 +1603,15 @@
               %f = ($p => $u);
               %g = ($q => $t);
               $a = $p;
-              if (exists $Lf{$a} and exists $Lg{$a})
-                {$L=$Lf{$a}*$Lg{$a}}
+              if (exists $Lf{$a} and exists $Lg{5*$Lf{$a}} and ($Lg{5*$Lf{$a}} == $g{5*$Lf{$a}}))
+                {$L=$Lg{5*$Lf{$a}}}
               else
                 {$L=Compute('not possible to know');}
               $showwork = '[@ explanation_box(message => "If it is not possible to determine the limit, state why not.") @]*';
             </pg-code>
             <statement>
               <p>
-                <m>\lim\limits_{x\to <var name="$a"/>}\left(f(x)g(x)\right)</m>
+                <m>\lim\limits_{x\to <var name="$a"/>}g(5f(x))</m>
               </p>
               <instruction>
                 If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
@@ -1647,15 +1646,15 @@
               %f = ($p => $u);
               %g = ($q => $t);
               $a = $p;
-              if (exists $Lf{$a} and exists $Lg{5*$Lf{$a}} and ($Lg{5*$Lf{$a}} == $g{5*$Lf{$a}}))
-                {$L=$Lg{5*$Lf{$a}}}
+              if (exists $Lf{$a} and exists $Lg{$a} and ($Lf{$a} > 0))
+                {$L=($Lf{$a})**($Lg{$a});}
               else
                 {$L=Compute('not possible to know');}
               $showwork = '[@ explanation_box(message => "If it is not possible to determine the limit, state why not.") @]*';
             </pg-code>
             <statement>
               <p>
-                <m>\lim\limits_{x\to <var name="$a"/>}g(5f(x))</m>
+                <m>\lim\limits_{x\to <var name="$a"/>}5^{g(x)}</m>
               </p>
               <instruction>
                 If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
@@ -1671,6 +1670,7 @@
             </statement>
           </webwork>
         </exercise>
+
       </exercisegroup>
 
       <exercisegroup cols="2">

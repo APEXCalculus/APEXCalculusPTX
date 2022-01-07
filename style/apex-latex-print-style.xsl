@@ -156,6 +156,7 @@
 
 <!-- figures in the margin -->
 <xsl:param name="latex.preamble.early" select="'
+\raggedbottom
 \usepackage{xcoffins}&#xa;
 \NewCoffin\Framex&#xa;
 \NewCoffin\Theox&#xa;
@@ -164,33 +165,52 @@
   '"/>
 
 <xsl:param name="latex.preamble.late" select="'
+\newlength{\Textw} % save textwidth outside the boxes&#xa;
+\setlength{\Textw}{\textwidth}&#xa;
 \newlength{\Hshift}&#xa;
 \newlength{\Mshift}&#xa;
-\newcommand*{\marginshift}{%&#xa;
-    \checkoddpage&#xa;
-    \ifoddpage&#xa;
-    \setlength{\Hshift}{5.5mm}&#xa;
+\newcommand*{\calculateMshift}{%&#xa;
+  \checkoddpage&#xa;
+  \ifoddpage&#xa;
     \setlength{\Mshift}{\marginparsep}&#xa;
-    \else
-    \setlength{\Hshift}{-5.5mm}&#xa;
+  \else&#xa;
     \setlength{\Mshift}{\dimexpr-\marginparsep-\textwidth-\marginparwidth\relax}&#xa;
-    \fi}&#xa;
-    &#xa;
-\newcommand{\tcbmarginbox}[2]{%&#xa;
-    \marginshift&#xa;
-    \SetHorizontalCoffin\Framex{} %clear box Framex&#xa;
-    \SetVerticalCoffin\Theox{\marginparwidth}{#1}% fill box \Theox&#xa;
-    \JoinCoffins*\Framex[r,vc]\Theox[l,vc](\dimexpr\Mshift+\textwidth\relax,#2)%join boxes&#xa;
-    \noindent\TypesetCoffin\Framex(\Hshift,0pt)\\[-2\baselineskip] %typset assembly&#xa;
+  \fi&#xa;
 }&#xa;
-&#xa;
+
+\newcommand*{\calculateHshift}{%&#xa;
+  \checkoddpage&#xa;
+  \ifoddpage&#xa;
+    \setlength{\Hshift}{\dimexpr\Textw/2-\tcbtextwidth/2\relax}&#xa;
+  \else&#xa;
+    \setlength{\Hshift}{\dimexpr-\Textw/2+\tcbtextwidth/2\relax}&#xa;
+  \fi&#xa;
+}&#xa;
+\newcommand{\tcbmarginbox}[2]{%&#xa;
+  \par %start a new line&#xa;
+  \marginshift&#xa;
+  \SetHorizontalCoffin\Framex{} %clear box Framex&#xa;
+  \SetVerticalCoffin\Theox{\marginparwidth}{#1}% fill box \Theox&#xa;
+  \JoinCoffins*\Framex[r,vc]\Theox[l,vc](\dimexpr\Mshift+\textwidth\relax,#2)%join boxes&#xa;
+  \noindent\TypesetCoffin\Framex(\Hshift,0pt)\\[-2\baselineskip] %typset assembly&#xa;
+}&#xa;
+\newcommand{\listmarginbox}[2]{%&#xa;
+  \par %start a new line&#xa;
+  \calculateMshift&#xa;
+  \calculateHshift&#xa;
+  \SetHorizontalCoffin\Framex{\color{black}\rule{\tcbtextwidth}{0pt}} %clear box Framex&#xa;
+  \SetVerticalCoffin\Theox{\marginparwidth}{#1}% fill box \Theox&#xa;
+  \JoinCoffins*\Framex[r,vc]\Theox[l,vc](\dimexpr\Mshift+\Hshift-9mm\relax,#2)%join boxes&#xa;
+  \noindent\TypesetCoffin\Framex\\[-2\baselineskip] %typeset assembly&#xa;
+}&#xa;
 \newcommand{\parmarginbox}[2]{%&#xa;
-    \marginshift&#xa;
-    \SetHorizontalCoffin\Framex{}&#xa;
-    \SetVerticalCoffin\Theox{\marginparwidth}{#1}&#xa;
-    \JoinCoffins*\Framex[r,vc]\Theox[l,vc](\dimexpr\Mshift+\textwidth\relax,#2)&#xa;
-    \noindent\TypesetCoffin\Framex(0mm,0pt)\\[-2\baselineskip]&#xa;
-  }'"/>
+  \par %start a new line&#xa;
+  \marginshift&#xa;
+  \SetHorizontalCoffin\Framex{}&#xa;
+  \SetVerticalCoffin\Theox{\marginparwidth}{#1}&#xa;
+  \JoinCoffins*\Framex[r,vc]\Theox[l,vc](\dimexpr\Mshift+\textwidth\relax,#2)&#xa;
+  \noindent\TypesetCoffin\Framex(0mm,0pt)\\[-2\baselineskip]&#xa;
+}'"/>
 
 
 <!-- we want images in margin to be the full margin width -->
@@ -210,8 +230,11 @@
 <xsl:template match="figure[not(ancestor::sidebyside) and not(ancestor::aside) and not(descendant::sidebyside) and (descendant::latex-image or descendant::asymptote or descendant::tabular or descendant::video) and not(ancestor::exercise)]">
     <xsl:text>&#xa;</xsl:text>
     <xsl:choose>
-      <xsl:when test="ancestor::example">
+      <xsl:when test="ancestor::example and not(ancestor::ul or ancestor::ol)">
         <xsl:text>\tcbmarginbox{%&#xa;</xsl:text>
+      </xsl:when>
+      <xsl:when test="ancestor::example and (ancestor::ul or ancestor::ol)">
+        <xsl:text>\listmarginbox{%&#xa;</xsl:text>
       </xsl:when>
       <xsl:otherwise>
         <xsl:text>\parmarginbox{%&#xa;</xsl:text>
@@ -251,8 +274,11 @@
 <xsl:template match="aside">
     <xsl:text>&#xa;</xsl:text>
     <xsl:choose>
-      <xsl:when test="ancestor::example">
+      <xsl:when test="ancestor::example and not(ancestor::ul or ancestor::ol)">
         <xsl:text>\tcbmarginbox{%&#xa;</xsl:text>
+      </xsl:when>
+      <xsl:when test="ancestor::example and (ancestor::ul or ancestor::ol)">
+        <xsl:text>\listmarginbox{%&#xa;</xsl:text>
       </xsl:when>
       <xsl:otherwise>
         <xsl:text>\parmarginbox{%&#xa;</xsl:text>
