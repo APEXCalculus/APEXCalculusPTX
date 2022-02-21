@@ -1571,7 +1571,6 @@
               if ($b &lt; 0) {
                 $absb = abs($b);
                 $F->{limits} = [$absb**(1/$m)+1,$absb**(1/$m)+4];
-                $F->{test_at} = [[-$absb**(1/$m)-1],[-$absb**(1/$m)-2],[-$absb**(1/$m)-3]];
               }
             </pg-code>
             <statement>
@@ -2891,7 +2890,7 @@
               if($envir{problemSeed}==1){$a=4;$b=3;};
               Context("Fraction");
               Context()->flags->set(reduceConstantFunctions=>0);
-              Context()->variables->set(x => {limits => [-$b/$a,$b/$a]});
+              Context()->variables->set(x => {limits => [-$a/$b,$a/$b]});
               $f = Formula("1/sqrt($a^2 - $b^2 x^2)")->reduce;
               $F = FormulaUpToConstant("1/$b asin($b x/$a)")->reduce;
             </pg-code>
