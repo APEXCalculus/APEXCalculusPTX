@@ -1399,7 +1399,6 @@
         </exercise>
 
       </exercisegroup>
-      <exercisegroup cols="2">
 
       <exercise>
         <statement>
@@ -1421,50 +1420,48 @@
       </exercise>
 
   <!-- Exercise 17 -->
-        <exercise>
-          <webwork>
-              <pg-code>
-                $x0 = Compute("pi/6");
-                $x1 = Compute("5*pi/6");
-                $x2 = Compute("3*pi/2");
-              <!-- f(x0) > g(x0), but g(x2) > f(x2) -->
-                $f = Formula("sin(x)");
-                $g = Formula("cos(2x)");
-                $F = Formula("-cos(x)");
-                $G = Formula("sin(2x)/2");
-                $D1 = Formula("$F-$G");
-                $area1 = $D1->eval(x=>$x1) - $D1->eval(x=>$x0);
-                $D2 = Formula("-$D1");
-                $area2 = $D2->eval(x=>$x2) - $D2->eval(x=>$x1);
-                $area = $area1 + $area2;
-              </pg-code>
-              <statement>
-                <p>
-                  The functions <m>f(x) = \cos(2x)</m> and
-                  <m>g(x) = \sin(x)</m> intersect infinitely many times,
-                  forming an infinite number of repeated, enclosed regions.
-                  Find the areas of these regions.
-                </p>
+      <exercise>
+        <webwork>
+            <pg-code>
+              $x0 = Compute("pi/6");
+              $x1 = Compute("5*pi/6");
+              $x2 = Compute("3*pi/2");
+            <!-- f(x0) > g(x0), but g(x2) > f(x2) -->
+              $f = Formula("sin(x)");
+              $g = Formula("cos(2x)");
+              $F = Formula("-cos(x)");
+              $G = Formula("sin(2x)/2");
+              $D1 = Formula("$F-$G");
+              $area1 = $D1->eval(x=>$x1) - $D1->eval(x=>$x0);
+              $D2 = Formula("-$D1");
+              $area2 = $D2->eval(x=>$x2) - $D2->eval(x=>$x1);
+              $area = $area1 + $area2;
+            </pg-code>
+            <statement>
+              <p>
+                The functions <m>f(x) = \cos(2x)</m> and
+                <m>g(x) = \sin(x)</m> intersect infinitely many times,
+                forming an infinite number of repeated, enclosed regions.
+                Find the areas of these regions.
+              </p>
 
-                <p>
-                  Sum of repeated areas: <var name="$area" width="10"/>
-                </p>
-              <!-- 3sqrt(3)/2 + 3sqrt(3)/4 corresponding to the two non-symmetric areas-->
-              </statement>
-              <solution>
-                <p>
-                  On regions such as <m>[\pi/6,5\pi/6]</m>,
-                  the area is <m>3\sqrt{3}/2</m>.
-                  On regions such as <m>[-\pi/2,\pi/6]</m>,
-                  the area is <m>3\sqrt{3}/4</m>.
-                </p>
-              </solution>
-          </webwork>
-        </exercise>
+              <p>
+                Sum of repeated areas: <var name="$area" width="10"/>
+              </p>
+            <!-- 3sqrt(3)/2 + 3sqrt(3)/4 corresponding to the two non-symmetric areas-->
+            </statement>
+            <solution>
+              <p>
+                On regions such as <m>[\pi/6,5\pi/6]</m>,
+                the area is <m>3\sqrt{3}/2</m>.
+                On regions such as <m>[-\pi/2,\pi/6]</m>,
+                the area is <m>3\sqrt{3}/4</m>.
+              </p>
+            </solution>
+        </webwork>
+      </exercise>
 
-      </exercisegroup>
       <exercisegroup cols="2">
-
         <introduction>
           <p>
             In the following exercises, find the area of the enclosed region in two ways:
@@ -1930,133 +1927,130 @@
         </exercise>
 
       </exercisegroup>
-      <exercisegroup cols="2">
   <!-- Exercise 27 -->
-        <exercise xml:id="x07_01_ex_29">
-          <!-- <webwork>
-              <pg-code> -->
-              <!-- Trapezoidal Rule, n = 6 -->
-                <!-- $a = 0;
-                $b = 6;
-                $n = 5;
-                $delta_x = ($b - $a)/$n;
-                @y = (0, 4.9, 5.2, 7.3, 4.5, 0);
-                @coeffs = (1, 2, 2, 2, 2, 1);
-                $area = 0;
-                $size = scalar @y;
-                foreach $i (0..$size) {
-                    $area += $coeffs[$i] * $y[$i];
-                }
-                $area = $area*$delta_x/2;
-                $area_ft = $area * 100 * 100;
-                $area = NumberWithUnits("$area cm^2");
-                $area_ft = NumberWithUnits("$area_ft ft^2");
-              </pg-code> -->
-              <statement>
-                <p>
-                  Use the Trapezoidal Rule to approximate the area of the pictured lake whose lengths,
-                  in hundreds of feet,
-                  are measured in 100-foot increments.
-                </p>
-
-              <!-- START figures/fig_07_01_ex_29.tex -->
-                  <image xml:id="img_07_01_ex_29">
-                    <description></description>
-                    <latex-image>
-
-                    \begin{tikzpicture}[yscale=.6]
-
-                    \draw [firstcolor,thick,fill=firstcolor!15,smooth] plot coordinates {(0,1.)(0.1013,1.899)(0.3567,2.785)(0.6934,3.42)(1.039,3.569)(1.355,3.224)(1.646,2.705)(1.925,2.355)(2.2,2.473)(2.475,2.968)(2.75,3.529)(3.025,3.844)(3.3,3.709)(3.575,3.249)(3.85,2.651)(4.125,2.098)(4.389,1.661)(4.624,1.285)(4.807,0.9071)(4.921,0.4743)(4.958,0)(4.921,-0.4743)(4.807,-0.9071)(4.624,-1.279)(4.389,-1.625)(4.125,-1.986)(3.85,-2.401)(3.575,-2.843)(3.3,-3.233)(3.025,-3.487)(2.75,-3.536)(2.475,-3.397)(2.2,-3.111)(1.925,-2.718)(1.646,-2.263)(1.355,-1.792)(1.039,-1.352)(0.6934,-0.9844)(0.3567,-0.6744)(0.1013,-0.3653)(0,0)(0,1)};
-
-                    \draw (1,3.56) -- (1,-1.35) node [shift={(-3pt,0pt)},rotate=90,pos=.5] { 4.9};
-                    \draw (2,2.37) -- (2,-2.8) node [shift={(-3pt,0pt)},rotate=90,pos=.5] { 5.2};
-                    \draw (3,3.8) -- (3,-3.5) node [shift={(-3pt,0pt)},rotate=90,pos=.5] { 7.3};
-                    \draw (4,2.35) -- (4,-2.15) node [shift={(-3pt,0pt)},rotate=90,pos=.5] { 4.5};
-
-                    \end{tikzpicture}
-
-                    </latex-image>
-                  </image>
-                <!-- figures/fig_07_01_ex_29.tex END -->
-
-                <!-- <p>
-                  Area: <var name="$area_ft" width="20"/>
-                </p> -->
-     <!-- 262,800 ft^2 -->
-              </statement>
-              <answer>
-              <!-- This solution uses n = 6, but I don't see why that would be true. -->
+      <exercise xml:id="x07_01_ex_29">
+        <!-- <webwork>
+            <pg-code> -->
+            <!-- Trapezoidal Rule, n = 6 -->
+              <!-- $a = 0;
+              $b = 6;
+              $n = 5;
+              $delta_x = ($b - $a)/$n;
+              @y = (0, 4.9, 5.2, 7.3, 4.5, 0);
+              @coeffs = (1, 2, 2, 2, 2, 1);
+              $area = 0;
+              $size = scalar @y;
+              foreach $i (0..$size) {
+                  $area += $coeffs[$i] * $y[$i];
+              }
+              $area = $area*$delta_x/2;
+              $area_ft = $area * 100 * 100;
+              $area = NumberWithUnits("$area cm^2");
+              $area_ft = NumberWithUnits("$area_ft ft^2");
+            </pg-code> -->
+            <statement>
               <p>
-                219,000 ft<m>^2</m>
+                Use the Trapezoidal Rule to approximate the area of the pictured lake whose lengths,
+                in hundreds of feet,
+                are measured in 100-foot increments.
               </p>
 
-              </answer>
-          <!-- </webwork> -->
-        </exercise>
-  <!-- Exercise 28 -->
-        <exercise xml:id="x07_01_ex_30">
-          <!-- <webwork>
-              <pg-code> -->
-              <!-- Simpson's Rule, n = 6 -->
-                <!-- $a = 0;
-                $b = 6;
-                $n = 6;
-                $delta_x = ($b - $a)/$n;
-                @y = (0, 4.25, 6.6, 7.7, 6.45, 4.9, 0);
-                @coeffs = (1, 4, 2, 4, 2, 4, 1);
-                $area = 0;
-                $size = scalar @y;
-                foreach $i (0..$size) {
-                    $area += $coeffs[$i] * $y[$i];
-                }
-                $area = $area*$delta_x/3;
-                $area_ft = $area * 100 * 200;
-                $area = NumberWithUnits("$area cm^2");
-                $area_ft = NumberWithUnits("$area_ft ft^2");
-              </pg-code> -->
-              <statement>
-                <p>
-                  Use Simpson's Rule to approximate the area of the pictured lake whose lengths,
-                  in hundreds of feet,
-                  are measured in 200-foot increments.
-                </p>
+            <!-- START figures/fig_07_01_ex_29.tex -->
+                <image xml:id="img_07_01_ex_29">
+                  <description></description>
+                  <latex-image>
+
+                  \begin{tikzpicture}[yscale=.6]
+
+                  \draw [firstcolor,thick,fill=firstcolor!15,smooth] plot coordinates {(0,1.)(0.1013,1.899)(0.3567,2.785)(0.6934,3.42)(1.039,3.569)(1.355,3.224)(1.646,2.705)(1.925,2.355)(2.2,2.473)(2.475,2.968)(2.75,3.529)(3.025,3.844)(3.3,3.709)(3.575,3.249)(3.85,2.651)(4.125,2.098)(4.389,1.661)(4.624,1.285)(4.807,0.9071)(4.921,0.4743)(4.958,0)(4.921,-0.4743)(4.807,-0.9071)(4.624,-1.279)(4.389,-1.625)(4.125,-1.986)(3.85,-2.401)(3.575,-2.843)(3.3,-3.233)(3.025,-3.487)(2.75,-3.536)(2.475,-3.397)(2.2,-3.111)(1.925,-2.718)(1.646,-2.263)(1.355,-1.792)(1.039,-1.352)(0.6934,-0.9844)(0.3567,-0.6744)(0.1013,-0.3653)(0,0)(0,1)};
+
+                  \draw (1,3.56) -- (1,-1.35) node [shift={(-3pt,0pt)},rotate=90,pos=.5] { 4.9};
+                  \draw (2,2.37) -- (2,-2.8) node [shift={(-3pt,0pt)},rotate=90,pos=.5] { 5.2};
+                  \draw (3,3.8) -- (3,-3.5) node [shift={(-3pt,0pt)},rotate=90,pos=.5] { 7.3};
+                  \draw (4,2.35) -- (4,-2.15) node [shift={(-3pt,0pt)},rotate=90,pos=.5] { 4.5};
+
+                  \end{tikzpicture}
+
+                  </latex-image>
+                </image>
+              <!-- figures/fig_07_01_ex_29.tex END -->
+
+              <!-- <p>
+                Area: <var name="$area_ft" width="20"/>
+              </p> -->
+   <!-- 262,800 ft^2 -->
+            </statement>
+            <answer>
+            <!-- This solution uses n = 6, but I don't see why that would be true. -->
+            <p>
+              219,000 ft<m>^2</m>
+            </p>
+
+            </answer>
+        <!-- </webwork> -->
+      </exercise>
+<!-- Exercise 28 -->
+      <exercise xml:id="x07_01_ex_30">
+        <!-- <webwork>
+            <pg-code> -->
+            <!-- Simpson's Rule, n = 6 -->
+              <!-- $a = 0;
+              $b = 6;
+              $n = 6;
+              $delta_x = ($b - $a)/$n;
+              @y = (0, 4.25, 6.6, 7.7, 6.45, 4.9, 0);
+              @coeffs = (1, 4, 2, 4, 2, 4, 1);
+              $area = 0;
+              $size = scalar @y;
+              foreach $i (0..$size) {
+                  $area += $coeffs[$i] * $y[$i];
+              }
+              $area = $area*$delta_x/3;
+              $area_ft = $area * 100 * 200;
+              $area = NumberWithUnits("$area cm^2");
+              $area_ft = NumberWithUnits("$area_ft ft^2");
+            </pg-code> -->
+            <statement>
+              <p>
+                Use Simpson's Rule to approximate the area of the pictured lake whose lengths,
+                in hundreds of feet,
+                are measured in 200-foot increments.
+              </p>
 
 
-                <!-- START figures/fig_07_01_ex_30.tex -->
-                  <image xml:id="img_07_01_ex_30">
-                    <description></description>
-                    <latex-image>
+              <!-- START figures/fig_07_01_ex_30.tex -->
+                <image xml:id="img_07_01_ex_30">
+                  <description></description>
+                  <latex-image>
 
-                    \begin{tikzpicture}[yscale=.6]
+                  \begin{tikzpicture}[yscale=.6]
 
-                    \draw [firstcolor,thick,fill=firstcolor!15,smooth] plot coordinates {(0,2.)(0.1013,2.717)(0.3567,3.238)(0.6934,3.594)(1.039,3.818)(1.355,3.948)(1.646,4.035)(1.925,4.132)(2.2,4.28)(2.475,4.428)(2.75,4.471)(3.025,4.307)(3.305,3.88)(3.607,3.287)(3.952,2.652)(4.361,2.098)(4.815,1.661)(5.253,1.285)(5.614,0.9071)(5.843,0.4705)(5.938,-0.04167)(5.919,-0.6295)(5.807,-1.293)(5.624,-2.009)(5.389,-2.703)(5.125,-3.29)(4.849,-3.692)(4.562,-3.892)(4.243,-3.929)(3.871,-3.846)(3.432,-3.674)(2.956,-3.409)(2.484,-3.028)(2.057,-2.511)(1.692,-1.869)(1.363,-1.168)(1.039,-0.4819)(0.6934,0.1248)(0.3567,0.679)(0.1013,1.273)(0,2.)};
+                  \draw [firstcolor,thick,fill=firstcolor!15,smooth] plot coordinates {(0,2.)(0.1013,2.717)(0.3567,3.238)(0.6934,3.594)(1.039,3.818)(1.355,3.948)(1.646,4.035)(1.925,4.132)(2.2,4.28)(2.475,4.428)(2.75,4.471)(3.025,4.307)(3.305,3.88)(3.607,3.287)(3.952,2.652)(4.361,2.098)(4.815,1.661)(5.253,1.285)(5.614,0.9071)(5.843,0.4705)(5.938,-0.04167)(5.919,-0.6295)(5.807,-1.293)(5.624,-2.009)(5.389,-2.703)(5.125,-3.29)(4.849,-3.692)(4.562,-3.892)(4.243,-3.929)(3.871,-3.846)(3.432,-3.674)(2.956,-3.409)(2.484,-3.028)(2.057,-2.511)(1.692,-1.869)(1.363,-1.168)(1.039,-0.4819)(0.6934,0.1248)(0.3567,0.679)(0.1013,1.273)(0,2.)};
 
-                    \draw (1,3.8) -- (1,-.45) node [shift={(-3pt,0pt)},rotate=90,pos=.5] { 4.25};
-                    \draw (2,4.15) -- (2,-2.45) node [shift={(-3pt,0pt)},rotate=90,pos=.5] { 6.6};
-                    \draw (3,4.3) -- (3,-3.4) node [shift={(-3pt,0pt)},rotate=90,pos=.5] { 7.7};
-                    \draw (4,2.6) -- (4,-3.85) node [shift={(-3pt,0pt)},rotate=90,pos=.5] { 6.45};
-                    \draw (5,1.45) -- (5,-3.45) node [shift={(-3pt,0pt)},rotate=90,pos=.5] { 4.9};
+                  \draw (1,3.8) -- (1,-.45) node [shift={(-3pt,0pt)},rotate=90,pos=.5] { 4.25};
+                  \draw (2,4.15) -- (2,-2.45) node [shift={(-3pt,0pt)},rotate=90,pos=.5] { 6.6};
+                  \draw (3,4.3) -- (3,-3.4) node [shift={(-3pt,0pt)},rotate=90,pos=.5] { 7.7};
+                  \draw (4,2.6) -- (4,-3.85) node [shift={(-3pt,0pt)},rotate=90,pos=.5] { 6.45};
+                  \draw (5,1.45) -- (5,-3.45) node [shift={(-3pt,0pt)},rotate=90,pos=.5] { 4.9};
 
-                    \end{tikzpicture}
+                  \end{tikzpicture}
 
-                    </latex-image>
-                  </image>
-              <!-- figures/fig_07_01_ex_30.tex END -->
+                  </latex-image>
+                </image>
+            <!-- figures/fig_07_01_ex_30.tex END -->
 
-                <!-- <p>
-                  Area: <var name="$area_ft" width="20"/>
-                </p> -->
-     <!-- 623,333 ft^2 -->
-              </statement>
-              <answer>
-                <p>
-                  <m>623,333 \,\text{ft}^2</m>
-                </p>
-              </answer>
-          <!-- </webwork> -->
-        </exercise>
-
-      </exercisegroup>
+              <!-- <p>
+                Area: <var name="$area_ft" width="20"/>
+              </p> -->
+   <!-- 623,333 ft^2 -->
+            </statement>
+            <answer>
+              <p>
+                <m>623,333 \,\text{ft}^2</m>
+              </p>
+            </answer>
+        <!-- </webwork> -->
+      </exercise>
     </subexercises>
   </exercises>
 </section>
