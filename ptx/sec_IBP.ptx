@@ -1234,7 +1234,8 @@
         <exercise>
           <webwork>
             <pg-code>
-              $F = FormulaUpToConstant("2x+x*(ln(abs(x)))^2-2x*ln(abs(x))");
+              $F = FormulaUpToConstant("2x+x*(ln(x))^2-2x*ln(x)");
+              $F->{limits} = [1,5];
             </pg-code>
             <statement>
               <p>
@@ -1255,7 +1256,8 @@
               $f = Formula("(ln(x+$b))^2")->reduce;
               Context("Fraction");
               Context()->variables->set(x=>{limits=>[-$b,-$b+4]});
-              $F = FormulaUpToConstant("(x+$b)*(ln(x+$b)^2-2*ln(x+$b))")->reduce;
+              $F = FormulaUpToConstant("2(x+$b)+(x+$b)*ln(x+$b)^2-2*(x+$b)*ln(x+$b)")->reduce;
+              $F->{limits} = [-$b+1,-$b+5];
             </pg-code>
             <statement>
               <p>
