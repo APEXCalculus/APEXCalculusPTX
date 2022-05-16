@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This file provides the overall configuration for your PreTeXt
+    project. To edit the content of your document, open `source/main.ptx`
+    (default location).
+-->
+<project>
+  <targets>
+    <target name="html">
+      <format>html</format>
+      <source>ptx/apex.ptx</source>
+      <publication>publication/publication.ptx</publication>
+      <output-dir>output/html</output-dir>
+      <stringparam key="server" value="https://webwork-dev.uleth.ca"/>
+      <stringparam key="webwork.divisional.static" value="no"/>
+      <stringparam key="html.annotation" value="hypothesis"/>
+      <!-- <xsl>style/apex-html.xsl</xsl> -->
+    </target>
+    <target name="latex">
+      <format>latex</format>
+      <source>ptx/apex.ptx</source>
+      <publication>publication/publication.ptx</publication>
+      <output-dir>output/latex</output-dir>
+      <xsl>style/apex-latex-style.xsl</xsl>
+    </target>
+    <target name="pdf" pdf-method="pdflatex">
+      <format>pdf</format>
+      <source>ptx/apex.ptx</source>
+      <publication>publication/publication.ptx</publication>
+      <output-dir>output/pdf</output-dir>
+      <xsl>style/apex-latex-style.xsl</xsl>
+    </target>
+    <target name="subset">
+      <format>html</format>
+      <source>ptx/apex.ptx</source>
+      <publication>publication/publication.ptx</publication>
+      <output-dir>output/subset</output-dir>
+      <stringparam key="debug.skip-knowls" value="yes"/>
+      <!-- edit this to change the section/chapter/etc. to build -->
+      <xmlid-root>sec_conic_sections</xmlid-root>
+    </target>
+  </targets>
+  <executables>
+      <latex>latex</latex>
+      <pdflatex>pdflatex</pdflatex>
+      <xelatex>xelatex</xelatex>
+      <pdfsvg>pdf2svg</pdfsvg>
+      <asy>asy</asy>
+      <sage>sage</sage>
+      <pdfpng>convert</pdfpng>
+      <pdfeps>pdftops</pdfeps>
+      <pdfcrop>pdf-crop-margins</pdfcrop>
+      <pageres>pageres</pageres>
+      <node>node</node>
+      <liblouis>file2brl</liblouis>
+    </executables>
+</project>
