@@ -17,9 +17,9 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 
 <!-- next line will fail if this file is not in mathbook/user -->
-<xsl:import pretext-href="pretext-html.xsl"/>
+<xsl:import pretext-href="pretext-latex.xsl"/>
 
-<xsl:output method="text"/>
+<xsl:output method="text" />
 
 <!-- ########## -->
 <!-- Font Setup -->
@@ -50,19 +50,19 @@
 </xsl:template>
 
 <xsl:template match="insight" mode="tcb-style">
-    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=red!60!black!20, colframe=red!30!black!50, colback=white!95!red, coltitle=black, titlerule=-0.3pt,</xsl:text>
+    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
 <xsl:template match="&DEFINITION-LIKE;" mode="tcb-style">
-    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=yellow!90!black!30, colframe=yellow!95!black!60, colback=white!95!yellow, coltitle=black, titlerule=-0.3pt,</xsl:text>
+    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
 <xsl:template match="&THEOREM-LIKE;" mode="tcb-style">
-    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=green!60!black!20, colframe=green!30!black!50, colback=white!95!green, coltitle=black, titlerule=-0.3pt,</xsl:text>
+    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
 <xsl:template match="assemblage" mode="tcb-style">
-    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=blue!20, colframe=blue!75!black, colback=blue!5, coltitle=black, titlerule=-0.3pt,</xsl:text>
+    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
 <xsl:template match="&ASIDE-LIKE;" mode="tcb-style">
@@ -156,9 +156,12 @@
 
 <!-- figures in the margin -->
 <xsl:param name="latex.preamble.early" select="'
+\raggedbottom
 \usepackage{xcoffins}&#xa;
 \NewCoffin\Framex&#xa;
-\NewCoffin\Theox
+\NewCoffin\Theox&#xa;
+\usepackage{changepage}&#xa;
+\strictpagecheck
   '"/>
 
 <xsl:param name="latex.preamble.late" select="'
@@ -167,11 +170,21 @@
 \newlength{\Hshift}&#xa;
 \newlength{\Mshift}&#xa;
 \newcommand*{\calculateMshift}{%&#xa;
-  \setlength{\Mshift}{\marginparsep}&#xa;
+  \checkoddpage&#xa;
+  \ifoddpage&#xa;
+    \setlength{\Mshift}{\marginparsep}&#xa;
+  \else&#xa;
+    \setlength{\Mshift}{\dimexpr-\marginparsep-\textwidth-\marginparwidth\relax}&#xa;
+  \fi&#xa;
 }&#xa;
-&#xa;
+
 \newcommand*{\calculateHshift}{%&#xa;
-  \setlength{\Hshift}{\dimexpr\Textw/2-\tcbtextwidth/2\relax}&#xa;
+  \checkoddpage&#xa;
+  \ifoddpage&#xa;
+    \setlength{\Hshift}{\dimexpr\Textw/2-\tcbtextwidth/2\relax}&#xa;
+  \else&#xa;
+    \setlength{\Hshift}{\dimexpr-\Textw/2+\tcbtextwidth/2\relax}&#xa;
+  \fi&#xa;
 }&#xa;
 \newcommand{\tcbmarginbox}[2]{%&#xa;
   \par %start a new line&#xa;
@@ -365,8 +378,7 @@
       </xsl:if>
       <xsl:text>}{-1cm}%&#xa;</xsl:text>
       <xsl:text>&#xa;</xsl:text>
-  </xsl:template>
-
+    </xsl:template>
 
 <!-- now come all the options -->
 <!-- turn off hints, answers, and solutions for divisional exercises -->
@@ -375,6 +387,8 @@
 <xsl:param name="exercise.divisional.answer" select="'no'"/>
 <xsl:param name="exercise.divisional.solution" select="'no'"/> -->
 
+<!-- turn off page references so print matches electronic -->
+<xsl:param name="latex.pageref" select="'no'"/>
 
 <!-- uncommenting these will omit videos -->
 <!-- <xsl:template match="video[starts-with(@xml:id, 'vid')]" />
