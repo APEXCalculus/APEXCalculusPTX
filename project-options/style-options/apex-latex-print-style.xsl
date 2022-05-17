@@ -155,6 +155,9 @@
 </xsl:template>
 
 <!-- figures in the margin -->
+<!-- LaTeX code for margin box formatting thanks to Simon Dispa via
+https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin-items-when-using-parbox-false-in-a-tcolorbox -->
+
 <xsl:param name="latex.preamble.early" select="'
 \raggedbottom
 \usepackage{xcoffins}&#xa;
@@ -188,7 +191,8 @@
 }&#xa;
 \newcommand{\tcbmarginbox}[2]{%&#xa;
   \par %start a new line&#xa;
-  \marginshift&#xa;
+  \calculateMshift&#xa;
+  \calculateHshift&#xa;
   \SetHorizontalCoffin\Framex{} %clear box Framex&#xa;
   \SetVerticalCoffin\Theox{\marginparwidth}{#1}% fill box \Theox&#xa;
   \JoinCoffins*\Framex[r,vc]\Theox[l,vc](\dimexpr\Mshift+\textwidth\relax,#2)%join boxes&#xa;
@@ -205,7 +209,7 @@
 }&#xa;
 \newcommand{\parmarginbox}[2]{%&#xa;
   \par %start a new line&#xa;
-  \marginshift&#xa;
+  \calculateMshift&#xa;
   \SetHorizontalCoffin\Framex{}&#xa;
   \SetVerticalCoffin\Theox{\marginparwidth}{#1}&#xa;
   \JoinCoffins*\Framex[r,vc]\Theox[l,vc](\dimexpr\Mshift+\textwidth\relax,#2)&#xa;

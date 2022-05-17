@@ -9,7 +9,7 @@
 <!--NB: move this file from APEXCalculusPTX/style to mathbook/user !!!  -->
 
 <!DOCTYPE xsl:stylesheet [
-    <!ENTITY % entities SYSTEM "../xsl/entities.ent">
+    <!ENTITY % entities SYSTEM "entities.ent">
     %entities;
 ]>
 
@@ -17,9 +17,9 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 
 <!-- next line will fail if this file is not in mathbook/user -->
-<xsl:import href="../xsl/pretext-latex.xsl" />
+<xsl:import pretext-href="pretext-html.xsl"/>
 
-<xsl:output method="text" />
+<xsl:output method="text"/>
 
 <!-- ########## -->
 <!-- Font Setup -->
@@ -50,19 +50,19 @@
 </xsl:template>
 
 <xsl:template match="insight" mode="tcb-style">
-    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
+    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=red!60!black!20, colframe=red!30!black!50, colback=white!95!red, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
 <xsl:template match="&DEFINITION-LIKE;" mode="tcb-style">
-    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
+    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=yellow!90!black!30, colframe=yellow!95!black!60, colback=white!95!yellow, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
 <xsl:template match="&THEOREM-LIKE;" mode="tcb-style">
-    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
+    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=green!60!black!20, colframe=green!30!black!50, colback=white!95!green, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
 <xsl:template match="assemblage" mode="tcb-style">
-    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
+    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=blue!20, colframe=blue!75!black, colback=blue!5, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
 <xsl:template match="&ASIDE-LIKE;" mode="tcb-style">
@@ -155,13 +155,12 @@
 </xsl:template>
 
 <!-- figures in the margin -->
+<!-- LaTeX code for margin box formatting thanks to Simon Dispa via
+https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin-items-when-using-parbox-false-in-a-tcolorbox -->
 <xsl:param name="latex.preamble.early" select="'
-\raggedbottom
 \usepackage{xcoffins}&#xa;
 \NewCoffin\Framex&#xa;
-\NewCoffin\Theox&#xa;
-\usepackage{changepage}&#xa;
-\strictpagecheck
+\NewCoffin\Theox
   '"/>
 
 <xsl:param name="latex.preamble.late" select="'
@@ -170,25 +169,16 @@
 \newlength{\Hshift}&#xa;
 \newlength{\Mshift}&#xa;
 \newcommand*{\calculateMshift}{%&#xa;
-  \checkoddpage&#xa;
-  \ifoddpage&#xa;
-    \setlength{\Mshift}{\marginparsep}&#xa;
-  \else&#xa;
-    \setlength{\Mshift}{\dimexpr-\marginparsep-\textwidth-\marginparwidth\relax}&#xa;
-  \fi&#xa;
+  \setlength{\Mshift}{\marginparsep}&#xa;
 }&#xa;
-
+&#xa;
 \newcommand*{\calculateHshift}{%&#xa;
-  \checkoddpage&#xa;
-  \ifoddpage&#xa;
-    \setlength{\Hshift}{\dimexpr\Textw/2-\tcbtextwidth/2\relax}&#xa;
-  \else&#xa;
-    \setlength{\Hshift}{\dimexpr-\Textw/2+\tcbtextwidth/2\relax}&#xa;
-  \fi&#xa;
+  \setlength{\Hshift}{\dimexpr\Textw/2-\tcbtextwidth/2\relax}&#xa;
 }&#xa;
 \newcommand{\tcbmarginbox}[2]{%&#xa;
   \par %start a new line&#xa;
-  \marginshift&#xa;
+  \calculateMshift&#xa;
+  \calculateHshift&#xa;
   \SetHorizontalCoffin\Framex{} %clear box Framex&#xa;
   \SetVerticalCoffin\Theox{\marginparwidth}{#1}% fill box \Theox&#xa;
   \JoinCoffins*\Framex[r,vc]\Theox[l,vc](\dimexpr\Mshift+\textwidth\relax,#2)%join boxes&#xa;
@@ -205,7 +195,7 @@
 }&#xa;
 \newcommand{\parmarginbox}[2]{%&#xa;
   \par %start a new line&#xa;
-  \marginshift&#xa;
+  \calculateMshift&#xa;
   \SetHorizontalCoffin\Framex{}&#xa;
   \SetVerticalCoffin\Theox{\marginparwidth}{#1}&#xa;
   \JoinCoffins*\Framex[r,vc]\Theox[l,vc](\dimexpr\Mshift+\textwidth\relax,#2)&#xa;
@@ -378,16 +368,16 @@
       </xsl:if>
       <xsl:text>}{-1cm}%&#xa;</xsl:text>
       <xsl:text>&#xa;</xsl:text>
-    </xsl:template>
+  </xsl:template>
+
 
 <!-- now come all the options -->
 <!-- turn off hints, answers, and solutions for divisional exercises -->
-<xsl:param name="exercise.divisional.hint" select="'no'"/>
+<!-- Now controlled via publisher file! -->
+<!-- <xsl:param name="exercise.divisional.hint" select="'no'"/>
 <xsl:param name="exercise.divisional.answer" select="'no'"/>
-<xsl:param name="exercise.divisional.solution" select="'no'"/>
+<xsl:param name="exercise.divisional.solution" select="'no'"/> -->
 
-<!-- turn off page references so print matches electronic -->
-<xsl:param name="latex.pageref" select="'no'"/>
 
 <!-- uncommenting these will omit videos -->
 <!-- <xsl:template match="video[starts-with(@xml:id, 'vid')]" />
