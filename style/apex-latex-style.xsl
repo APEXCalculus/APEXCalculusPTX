@@ -17,7 +17,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 
 <!-- next line will fail if this file is not in mathbook/user -->
-<xsl:import pretext-href="pretext-html.xsl"/>
+<xsl:import pretext-href="pretext-latex.xsl"/>
 
 <xsl:output method="text"/>
 
