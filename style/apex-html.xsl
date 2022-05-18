@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 
 <!-- Thin layer on MathBook XML -->
-<xsl:import href="../../mathbook/xsl/pretext-html.xsl" />
+<xsl:import pretext-href="pretext-html.xsl"/>
 
 <!-- String parameters -->
 <!-- Note that all string parameters can now be controlled
@@ -10,8 +10,8 @@ in either the project.ptx manifest,
 or the publisher file.
 Retained for reference only. -->
 
-Include this style sheet if you want to omit solutions
-or omit videos.
+<!-- Include this style sheet if you want to omit solutions -->
+<!-- or omit videos. -->
 
 <!-- html layout options -->
 <!-- <xsl:param name="webwork.divisional.static" select="'no'"/> -->
