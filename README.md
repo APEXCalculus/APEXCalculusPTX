@@ -6,10 +6,37 @@ APEX Calculus was originally [written in LaTeX](https://github.com/APEXCalculus/
 
 To build the book, use of the [PreTeXt CLI](https://github.com/PreTeXtBook/pretext-cli) is recommended.
 
-Note however that due to some custom styling choices, building directly to PDF without first editing the intermediary LaTeX file is not recommended,
-as some hand editing is required for proper alignment of margin figures.
-(See also the `latex-youtube.txt` file for some recommended adjustments to the way YouTube links are handled in the PDF.)
+Preparation for generating APEX Calculus from source:
 
-Settings can be changed in the `project.ptx` file and the `publication/publication.ptx` file.
-Note that there are separate files for print-on-demand versions of the PDF.
-These should replace the existing files before building LaTeX output.
+Software requirements:
+- a recent LaTeX distribution
+- [Sage](https://www.sagemath.org/)
+- Python (version 3.10 or later)
+- the PreTeXt CLI (do `pip install pretextbook`)
+- [pdf2svg](https://github.com/jalios/pdf2svg-windows)
+- ImageMagick and pageres (installed as `pageres-cli` using node.js and npm) are recommended but not neeeded at this time
+
+Note that Asymptote compilation is done remotely, so Asymptote does not need to be installed locally.
+
+Configuration:
+
+- In the `project.ptx` file, change the URL for the WeBWorK server to your local server
+- In `publication/publication.ptx`, change the `baseurl` to the URL where your copy will be hosted
+
+To build HTML, run `pretext build html -d -w` for your first run. 
+The `-d` option generates all the images in the book; `-w` generates the WeBWorK exercises.
+If you haven't made any changes to these, you can use `pretext build html` on subsequent builds.
+
+To build PDF, run `pretext build latex`, or `pretext build latex -d -w` 
+if you need to build images or WeBWorK exercises. 
+
+**Do not build PDF directly.** APEX Calculus places figures in the margins in PDF.
+Unfortunately, we do not currently have a mechanism for setting the vertical placement
+of margin figures in the PreTeXt source, so these have to be adjusted by hand.
+Look in the LaTeX source for occurrences of `\listmarginbox`, `\parmarginbox` and `\tcbmarginbox`.
+Each such environment ends with either `{0pt}` or `{-1cm}`. 
+
+These values can be adjusted to ensure that items in the margins do not overlap.
+It is unfortunately a rather tedious process at the moment.
+
+At this time, EPUB generation is not fully supported.
