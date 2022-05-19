@@ -159,7 +159,6 @@
 https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin-items-when-using-parbox-false-in-a-tcolorbox -->
 
 <xsl:param name="latex.preamble.early" select="'
-\raggedbottom
 \usepackage{xcoffins}&#xa;
 \NewCoffin\Framex&#xa;
 \NewCoffin\Theox&#xa;
