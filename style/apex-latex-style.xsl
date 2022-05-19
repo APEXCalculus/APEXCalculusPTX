@@ -369,19 +369,4 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
       <xsl:text>}{-1cm}%&#xa;</xsl:text>
       <xsl:text>&#xa;</xsl:text>
   </xsl:template>
-
-
-<!-- now come all the options -->
-<!-- turn off hints, answers, and solutions for divisional exercises -->
-<!-- Now controlled via publisher file! -->
-<!-- <xsl:param name="exercise.divisional.hint" select="'no'"/>
-<xsl:param name="exercise.divisional.answer" select="'no'"/>
-<xsl:param name="exercise.divisional.solution" select="'no'"/> -->
-
-
-<!-- uncommenting these will omit videos -->
-<xsl:template match="video[starts-with(@xml:id, 'vid')]" />
-<xsl:template match="figure[starts-with(@xml:id, 'vid')]" />
-<xsl:template match="p[starts-with(@xml:id, 'vidint')]" />
-<xsl:template match="aside[starts-with(@xml:id, 'vidnote')]" />
 </xsl:stylesheet>
