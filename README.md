@@ -27,11 +27,15 @@ To build HTML, run `pretext build html -d -w` for your first run.
 The `-d` option generates all the images in the book; `-w` generates the WeBWorK exercises.
 If you haven't made any changes to these, you can use `pretext build html` on subsequent builds.
 
+To build a version without videos, run `pretext build html-novideo`
+
 To build PDF, run `pretext build latex`, or `pretext build latex -d -w`
 if you need to build images or WeBWorK exercises.
 
-If you want a black and white version for print-on-demand,
-replace the `project.ptx` file with the `project-options/project-print.ptx` file.
+The following variations are also available:
+- `pretext build latex-novideo`: omit videos
+- `pretext build latex-print`: black and white, for print on demand
+- `pretext build latex-print-novideo`: black and white, with no videos
 
 **Do not build PDF directly.** APEX Calculus places figures in the margins in PDF.
 Unfortunately, we do not currently have a mechanism for setting the vertical placement
@@ -41,9 +45,5 @@ Each such environment ends with either `{0pt}` or `{-1cm}`.
 
 These values can be adjusted to ensure that items in the margins do not overlap.
 It is unfortunately a rather tedious process at the moment.
-
-To omit videos in any version of the book, delete `video` from the line
-`<versions include="color video"/>` (or `<versions include="print video"/>`)
-in the publication file.
 
 At this time, EPUB generation is not fully supported.
