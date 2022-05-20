@@ -340,7 +340,6 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
 
       <xsl:variable name="width-scale" select="substring-before($width-percentage,'%') div 100" />
       <xsl:text>\setlength{\qrsize}{0.6\marginparwidth}&#xa;</xsl:text>
-      <xsl:text>&#xa;</xsl:text>
       <xsl:choose>
         <xsl:when test="ancestor::example">
           <xsl:text>(For a video solution, click or scan the QR code in the margin.)&#xa;</xsl:text>
