@@ -114,7 +114,7 @@
     \newcommand{\Hess}{\operatorname{Hess}}
   </macros>
 
-  <latex-image-preamble>
+  <latex-image-preamble component="color">
     \usepackage{pgfplots}
     \usepackage{tikz-cd}
     \usetikzlibrary{positioning,matrix,arrows,arrows.meta}
@@ -217,7 +217,110 @@
     \makeatother
   </latex-image-preamble>
 
-  <latex-image-preamble syntax="PGtikz">
+  <latex-image-preamble component="print">
+    \usepackage{pgfplots}
+    \usepackage{tikz-cd}
+    \usetikzlibrary{positioning,matrix,arrows,arrows.meta}
+
+    \usetikzlibrary{shapes,decorations,shadows,fadings}
+    \usepgfplotslibrary{fillbetween,decorations.softclip,polar}
+
+    \usepackage{tkz-euclide}
+    %\usetkzobj{all}
+    %%% uncomment above line if on TeXLive 2017 or earlier %%%
+
+    \colorlet{firstcolor}{black}
+    \colorlet{secondcolor}{black!50!white}
+    \colorlet{thirdcolor}{black!30!white}
+    \colorlet{treestump}{black!25!white}
+    \colorlet{treetop}{black!50!white}
+    \colorlet{yellowcolfill}{black!10!white}
+    \pgfplotsset{firstcurvestyle/.style={color=firstcolor,mark=none,thick,{Kite}-{Kite},solid,fill=firstcolor!50,fill=none}}
+    \pgfplotsset{secondcurvestyle/.style={color=secondcolor,mark=none,thick,{Kite}-{Kite},dashdotted,fill=secondcolor!50,fill=none}}
+    \pgfplotsset{thirdcurvestyle/.style={color=thirdcolor,mark=none,thick,{Kite}-{Kite},dashdotdotted,fill=thirdcolor!50,fill=none}}
+    \pgfplotsset{areastyle/.style={fill,opacity=0.5,draw=none}}\pgfplotsset{tangentline/.style={color=black,mark=none,thick,{Kite}-{Kite},solid}}
+    \pgfplotsset{tangentline/.style={color=black,mark=none,thick,{Kite}-{Kite},solid}}
+    \pgfplotsset{tangentlineseg/.style={color=black,mark=none,thick,-,solid}}
+    \pgfplotsset{lineseg/.style={color=black,mark=none,solid}}
+    \pgfplotsset{normalline/.style={color=black,mark=none,thick,{Kite}-{Kite},dashed}}
+    \pgfplotsset{normallineseg/.style={color=black,mark=none,thick,-,dashed}}
+    \pgfplotsset{secantline/.style={color=black,mark=none,thin,{Kite}-{Kite},dashed}}
+    \pgfplotsset{secantlineseg/.style={color=black,mark=none,thin,-,dashed}}
+    \pgfplotsset{asymptote/.style={color=black,mark=none,thick,{Kite}-{Kite},dashed}}
+    \pgfplotsset{guideline/.style={color=black,mark=none,-}}
+    \pgfplotsset{symmetryline/.style={color=black,mark=none,-,dashed}}
+    \pgfplotsset{openinterval/.style={color=black,mark=none,ultra thick,{Parenthesis}-{Parenthesis}}}
+    \pgfplotsset{closedinterval/.style={color=black,mark=none,ultra thick,{Bracket}-{Bracket}}}
+
+    \pgfplotscreateplotcyclelist{curvestylelist}{%
+      firstcurvestyle\\%
+      secondcurvestyle\\%
+      thirdcurvestyle\\%
+    }
+
+    %To disable arrows, edit these and the above lines accordingly
+    \pgfplotsset{leftarrow/.style={{Kite}-}}
+    \pgfplotsset{rightarrow/.style={-{Kite}}}
+
+    % Redefine these to be empty to turn off axis discontinuities
+    \pgfplotsset{xdiscontinuity/.style={axis x discontinuity=parallel}}
+    \pgfplotsset{ydiscontinuity/.style={axis y discontinuity=crunch}}
+
+    \pgfplotsset{hollowdot/.style={color=firstcolor,fill=white,only marks,mark=*}}
+    \pgfplotsset{soliddot/.style={color=firstcolor,fill=firstcolor,only marks,mark=*}}
+
+    \pgfplotsset{every axis/.append style = {
+      cycle list name = curvestylelist,
+      %tick label style = {font = \scriptsize},
+      axis x line = middle,
+      axis y line = middle,
+      xlabel = {$x$},
+      ylabel = {$y$},
+      %x label style = {font = \scriptsize},
+      %y label style = {font = \scriptsize},
+      minor x tick num = 1,
+      minor y tick num = 1,
+      %width = {ifthenelse(.9\linewidth>240pt,240pt,.9\linewidth)},
+      name=myplot,
+    }}
+
+    \pgfplotsset{numberline/.style = {
+      xmin=-10,xmax=10,
+      minor xtick={-11,-10,...,11},
+      xtick={-10,-5,...,10},
+      axis y line=none,
+      every axis x label/.style={at={(current axis.right of origin)},anchor=west},
+      y=15pt,
+      axis lines=middle,
+      enlarge x limits,
+      xlabel={},
+      grid=none,
+      clip=false,
+      axis background/.style={},
+    }}
+    %%temporary fix to get circles working right in TexLive 2019
+
+    \makeatletter
+    \def\pgfplots@install@path@replacements{%
+        \ifpgfplots@path@replace@ellipse
+            \let\tikz@do@circle=\pgfplots@path@@tikz@do@circle
+            \let\tikz@do@ellipse=\pgfplots@path@@tikz@do@circle
+            \expandafter\def\expandafter\pgfinterruptpicture\expandafter{\pgfinterruptpicture
+                \let\tikz@do@circle=\pgfplots@path@@tikz@do@circle@orig
+                \let\tikz@do@ellipse=\pgfplots@path@@tikz@do@ellipse@orig
+            }%
+        \fi
+    }%
+    \let\pgfplots@path@@tikz@do@circle@orig=\tikz@do@circle
+    \let\pgfplots@path@@tikz@do@ellipse@orig=\tikz@do@ellipse
+
+    \let\pgfplots@path@@tikz@do@circle@oldandbroken=\pgfplots@path@@tikz@do@circle
+    \def\pgfplots@path@@tikz@do@circle#1{\pgfplots@path@@tikz@do@circle@oldandbroken{#1}{#1}}
+    \def\pgfplots@path@@tikz@do@ellipse#1#2{\pgfplots@path@@tikz@do@circle@oldandbroken{#1}{#2}}
+    \makeatother
+  </latex-image-preamble>
+
+  <latex-image-preamble syntax="PGtikz" verison="color">
     \usepackage{pgfplots}
 
     \usetikzlibrary{arrows,arrows.meta}
@@ -327,7 +430,102 @@
     \makeatother
   </latex-image-preamble>
 
-  <asymptote-preamble>
+  <latex-image-preamble syntax="PGtikz" component="print">
+    \usepackage{pgfplots}
+    \usetikzlibrary{arrows,arrows.meta}
+
+    \colorlet{firstcolor}{black}
+    \colorlet{secondcolor}{black!50!white}
+    \colorlet{thirdcolor}{black!30!white}
+    \colorlet{treestump}{black!25!white}
+    \colorlet{treetop}{black!50!white}
+    \colorlet{yellowcolfill}{black!10!white}
+    \pgfplotsset{firstcurvestyle/.style={color=firstcolor,mark=none,thick,{Kite}-{Kite},solid,fill=firstcolor!50,fill=none}}
+    \pgfplotsset{secondcurvestyle/.style={color=secondcolor,mark=none,thick,{Kite}-{Kite},dashdotted,fill=secondcolor!50,fill=none}}
+    \pgfplotsset{thirdcurvestyle/.style={color=thirdcolor,mark=none,thick,{Kite}-{Kite},dashdotdotted,fill=thirdcolor!50,fill=none}}
+    \pgfplotsset{areastyle/.style={fill,opacity=0.5,draw=none}}\pgfplotsset{tangentline/.style={color=black,mark=none,thick,{Kite}-{Kite},solid}}
+    \pgfplotsset{tangentline/.style={color=black,mark=none,thick,{Kite}-{Kite},solid}}
+    \pgfplotsset{tangentlineseg/.style={color=black,mark=none,thick,-,solid}}
+    \pgfplotsset{lineseg/.style={color=black,mark=none,solid}}
+    \pgfplotsset{normalline/.style={color=black,mark=none,thick,{Kite}-{Kite},dashed}}
+    \pgfplotsset{normallineseg/.style={color=black,mark=none,thick,-,dashed}}
+    \pgfplotsset{secantline/.style={color=black,mark=none,thin,{Kite}-{Kite},dashed}}
+    \pgfplotsset{secantlineseg/.style={color=black,mark=none,thin,-,dashed}}
+    \pgfplotsset{asymptote/.style={color=black,mark=none,thick,{Kite}-{Kite},dashed}}
+    \pgfplotsset{guideline/.style={color=black,mark=none,-}}
+    \pgfplotsset{symmetryline/.style={color=black,mark=none,-,dashed}}
+    \pgfplotsset{openinterval/.style={color=black,mark=none,ultra thick,{Parenthesis}-{Parenthesis}}}
+    \pgfplotsset{closedinterval/.style={color=black,mark=none,ultra thick,{Bracket}-{Bracket}}}
+
+    \pgfplotscreateplotcyclelist{curvestylelist}{%
+      firstcurvestyle\\%
+      secondcurvestyle\\%
+      thirdcurvestyle\\%
+    }
+
+    %To disable arrows, edit these and the above lines accordingly
+    \pgfplotsset{leftarrow/.style={{Kite}-}}
+    \pgfplotsset{rightarrow/.style={-{Kite}}}
+
+    % Redefine these to be empty to turn off axis discontinuities
+    \pgfplotsset{xdiscontinuity/.style={axis x discontinuity=parallel}}
+    \pgfplotsset{ydiscontinuity/.style={axis y discontinuity=crunch}}
+
+    \pgfplotsset{hollowdot/.style={color=firstcolor,fill=white,only marks,mark=*}}
+    \pgfplotsset{soliddot/.style={color=firstcolor,fill=firstcolor,only marks,mark=*}}
+
+    \pgfplotsset{every axis/.append style = {
+      cycle list name = curvestylelist,
+      %tick label style = {font = \scriptsize},
+      axis x line = middle,
+      axis y line = middle,
+      xlabel = {$x$},
+      ylabel = {$y$},
+      %x label style = {font = \scriptsize},
+      %y label style = {font = \scriptsize},
+      minor x tick num = 1,
+      minor y tick num = 1,
+      %width = {ifthenelse(.9\linewidth>240pt,240pt,.9\linewidth)},
+      name=myplot,
+    }}
+
+    \pgfplotsset{numberline/.style = {
+      xmin=-10,xmax=10,
+      minor xtick={-11,-10,...,11},
+      xtick={-10,-5,...,10},
+      axis y line=none,
+      every axis x label/.style={at={(current axis.right of origin)},anchor=west},
+      y=15pt,
+      axis lines=middle,
+      enlarge x limits,
+      xlabel={},
+      grid=none,
+      clip=false,
+      axis background/.style={},
+    }}
+    %%temporary fix to get circles working right in TexLive 2019
+
+    \makeatletter
+    \def\pgfplots@install@path@replacements{%
+        \ifpgfplots@path@replace@ellipse
+            \let\tikz@do@circle=\pgfplots@path@@tikz@do@circle
+            \let\tikz@do@ellipse=\pgfplots@path@@tikz@do@circle
+            \expandafter\def\expandafter\pgfinterruptpicture\expandafter{\pgfinterruptpicture
+                \let\tikz@do@circle=\pgfplots@path@@tikz@do@circle@orig
+                \let\tikz@do@ellipse=\pgfplots@path@@tikz@do@ellipse@orig
+            }%
+        \fi
+    }%
+    \let\pgfplots@path@@tikz@do@circle@orig=\tikz@do@circle
+    \let\pgfplots@path@@tikz@do@ellipse@orig=\tikz@do@ellipse
+
+    \let\pgfplots@path@@tikz@do@circle@oldandbroken=\pgfplots@path@@tikz@do@circle
+    \def\pgfplots@path@@tikz@do@circle#1{\pgfplots@path@@tikz@do@circle@oldandbroken{#1}{#1}}
+    \def\pgfplots@path@@tikz@do@ellipse#1#2{\pgfplots@path@@tikz@do@circle@oldandbroken{#1}{#2}}
+    \makeatother
+  </latex-image-preamble>
+
+  <asymptote-preamble component="color">
     import graph3;
     bool incolor;
     incolor = true;
@@ -351,6 +549,32 @@
     pen curvepen=.4mm+bluepen;
     pen curvepen2=.4mm+redpen;
     pen darksurfacepen=rgb(.2,.2,1)+opacity(.7);
+  </asymptote-preamble>
+
+  <asymptote-preamble component="print">
+    import graph3;
+    bool incolor;
+    incolor = false;
+    pen apexmeshpen=rgb(0,0,0)+.2mm;
+    pen blackmeshpen=rgb(0,0,0);
+    material surfacepen=emissive(white+opacity(.6));
+    material surfacepen2=emissive(gray+opacity(1));
+    material simplesurfacepen=emissive(gray+opacity(.8));
+    material simplesurfacepen2=emissive(gray+opacity(.6));
+    material simplesurfacepen3=emissive(gray+opacity(.4));
+    pen bluepen=rgb(.1,.1,.1);
+    pen bluemeshpen=bluepen+.2mm;
+    pen bluecurvepen=bluepen+.4mm;
+    pen dotblue=rgb(.6,.6,.6);
+    pen redpen=rgb(.3,.3,.3);
+    pen redmeshpen=redpen+.2mm;
+    pen redmeshpen2=redpen+.2mm;
+    pen redcurvepen=redpen+.4mm;
+    pen greenmeshpen=rgb(.5,.5,.5)+.2mm;
+    pen greencurvepen=rgb(.5,.5,.5)+.4mm;
+    pen curvepen=.4mm+bluepen;
+    pen curvepen2=.4mm+redpen;
+    pen darksurfacepen=rgb(.1,.1,.1)+opacity(.7);
   </asymptote-preamble>
 
   <rename element="insight" xml:lang="en-US">Key Idea</rename>

@@ -9,7 +9,7 @@
 <!--NB: move this file from APEXCalculusPTX/style to mathbook/user !!!  -->
 
 <!DOCTYPE xsl:stylesheet [
-    <!ENTITY % entities SYSTEM "../xsl/entities.ent">
+    <!ENTITY % entities SYSTEM "entities.ent">
     %entities;
 ]>
 
@@ -17,7 +17,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 
 <!-- next line will fail if this file is not in mathbook/user -->
-<xsl:import href="../xsl/pretext-latex.xsl" />
+<xsl:import pretext-href="pretext-latex.xsl"/>
 
 <xsl:output method="text" />
 
@@ -155,8 +155,10 @@
 </xsl:template>
 
 <!-- figures in the margin -->
+<!-- LaTeX code for margin box formatting thanks to Simon Dispa via
+https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin-items-when-using-parbox-false-in-a-tcolorbox -->
+
 <xsl:param name="latex.preamble.early" select="'
-\raggedbottom
 \usepackage{xcoffins}&#xa;
 \NewCoffin\Framex&#xa;
 \NewCoffin\Theox&#xa;
@@ -188,7 +190,8 @@
 }&#xa;
 \newcommand{\tcbmarginbox}[2]{%&#xa;
   \par %start a new line&#xa;
-  \marginshift&#xa;
+  \calculateMshift&#xa;
+  \calculateHshift&#xa;
   \SetHorizontalCoffin\Framex{} %clear box Framex&#xa;
   \SetVerticalCoffin\Theox{\marginparwidth}{#1}% fill box \Theox&#xa;
   \JoinCoffins*\Framex[r,vc]\Theox[l,vc](\dimexpr\Mshift+\textwidth\relax,#2)%join boxes&#xa;
@@ -205,7 +208,7 @@
 }&#xa;
 \newcommand{\parmarginbox}[2]{%&#xa;
   \par %start a new line&#xa;
-  \marginshift&#xa;
+  \calculateMshift&#xa;
   \SetHorizontalCoffin\Framex{}&#xa;
   \SetVerticalCoffin\Theox{\marginparwidth}{#1}&#xa;
   \JoinCoffins*\Framex[r,vc]\Theox[l,vc](\dimexpr\Mshift+\textwidth\relax,#2)&#xa;
@@ -350,10 +353,9 @@
 
       <xsl:variable name="width-scale" select="substring-before($width-percentage,'%') div 100" />
       <xsl:text>\setlength{\qrsize}{0.6\marginparwidth}&#xa;</xsl:text>
-      <xsl:text>&#xa;</xsl:text>
       <xsl:choose>
         <xsl:when test="ancestor::example">
-          <xsl:text>(For a video solution, click or scan the QR code in the margin.)&#xa;</xsl:text>
+          <xsl:text>(For a video solution, use the QR code in the margin.)&#xa;</xsl:text>
           <xsl:text>&#xa;</xsl:text>
           <xsl:text>\tcbmarginbox{%&#xa;</xsl:text>
         </xsl:when>
@@ -379,19 +381,6 @@
       <xsl:text>}{-1cm}%&#xa;</xsl:text>
       <xsl:text>&#xa;</xsl:text>
     </xsl:template>
-
-<!-- now come all the options -->
-<!-- turn off hints, answers, and solutions for divisional exercises -->
-<xsl:param name="exercise.divisional.hint" select="'no'"/>
-<xsl:param name="exercise.divisional.answer" select="'no'"/>
-<xsl:param name="exercise.divisional.solution" select="'no'"/>
-
-<!-- turn off page references so print matches electronic -->
-<xsl:param name="latex.pageref" select="'no'"/>
-
-<!-- uncommenting these will omit videos -->
-<!-- <xsl:template match="video[starts-with(@xml:id, 'vid')]" />
-<xsl:template match="figure[starts-with(@xml:id, 'vid')]" />
-<xsl:template match="p[starts-with(@xml:id, 'vidint')]" />
-<xsl:template match="aside[starts-with(@xml:id, 'vidnote')]" /> -->
+  <!-- turn off page references so print matches electronic -->
+  <xsl:param name="latex.pageref" select="'no'"/>
 </xsl:stylesheet>

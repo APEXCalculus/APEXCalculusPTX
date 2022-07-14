@@ -3,7 +3,7 @@
 <section xml:id="sec_taylor_poly">
   <title>Taylor Polynomials</title>
 
-    <figure xml:id="vid_deriv_apps_taylor_poly_intro">
+    <figure xml:id="vid_deriv_apps_taylor_poly_intro" component="video">
       <caption>Video introduction to <xref ref="sec_taylor_poly"/></caption>
       <video youtube="SYJ2uGJCQdY"/>
     </figure>
@@ -84,7 +84,6 @@
           </row>
         </tabular>
       </table>
-
     </sidebyside>
 
     <p>
@@ -108,7 +107,7 @@
       </me>.
     </p>
 
-    <p>
+    <p component="taypoly-late">
       This is simply an initial-value problem.
       We can solve this using the techniques first described in <xref ref="sec_antider">Section</xref>.
       To keep <m>p_2(x)</m> as simple as possible,
@@ -118,7 +117,7 @@
       meaning <m>p_2</m> is a quadratic function.
     </p>
 
-    <p>
+    <p component="taypoly-late">
       If <m>p_2''(x) = 2</m>, then
       <m>p_2'(x) = 2x+C</m> for some constant <m>C</m>.
       Since we have determined that <m>p_2'(0) = 1</m>,
@@ -129,7 +128,28 @@
       This function is plotted with <m>f</m> in <xref ref="fig_taypolyintrob">Figure</xref>.
     </p>
 
-    <p>
+    <p component="taypoly-early">
+      Let's start with a general quadratic function
+      <me>
+        p(x) = a_0+a_1x+a_2x^2
+      </me>.
+      We find the following:
+      <md>
+        <mrow>p_2(x) \amp = a_0+a_1x+a_2x^2 \amp p_2(0)\amp=a_0</mrow>
+        <mrow>p_2\primeskip '(x) \amp = a_1+2a_2x\amp p_2\primeskip '(0) \amp = a_1</mrow>
+        <mrow>p_2\primeskip ''(x) \amp = 2a_2 \amp p_2\primeskip''(0) \amp = 2a_2</mrow>
+      </md>.
+      To get the desired properties above, we must have
+      <me>
+        a_0 = f(0) = 2,\, a_1 = \fp(0) = 1,\, 2a_2 = \fpp(0) = 2
+      </me>,
+      so <m>a_0=2</m>, <m>a_1=1</m>, and <m>a_2 = 2/2=1</m>, giving us the polynomial
+      <me>
+        p_2(x) = 2+x+x^2.
+      </me>
+    </p>
+
+    <p component="taypoly-late">
       We can repeat this approximation process by creating polynomials of
       higher degree that match more of the derivatives of <m>f</m> at <m>x=0</m>.
       In general, a polynomial of degree <m>n</m> can be created to match the
@@ -138,6 +158,16 @@
       shows <m>p_4(x)= -x^4/2-x^3/6+x^2+x+2</m>,
       whose first four derivatives at 0 match those of <m>f</m>. (Using the table in <xref ref="fig_taypolyintroa_2">Figure</xref>,
       start with <m>p_4^{(4)}(x)=-12</m> and solve the related initial-value problem.)
+    </p>
+
+    <p component="taypoly-early">
+      We can repeat this approximation process by creating polynomials of
+      higher degree that match more of the derivatives of <m>f</m> at <m>x=0</m>.
+      In general, a polynomial of degree <m>n</m> can be created to match the
+      first <m>n</m> derivatives of <m>f</m>.
+      <xref ref="fig_taypolyintrob">Figure</xref>
+      shows <m>p_4(x)= -x^4/2-x^3/6+x^2+x+2</m>,
+      whose first four derivatives at 0 match those of <m>f</m>.
     </p>
 
     <figure xml:id="fig_taypolyintrob">
@@ -166,6 +196,66 @@
         </latex-image>
       </image>
       <!-- figures/fig_taypolyintrob.tex END -->
+    </figure>
+
+    <p component="taypoly-early">
+      How do we ensure that the derivatives of our polynomial match those of
+      <m>f</m>? We simply begin with a polynomial of the desired degree,
+      compute its derivatives, and compare them to those of <m>f</m>!
+      Recall that each term in a polynomial consists of a power of <m>x</m>,
+      and a coefficient, like so: <m>a_nx^n</m>.
+      Our goal is to determine the value for each coefficient <m>a_n</m>
+      so that the derivatives of our polynomial match those of our function <m>f</m>.
+      If we take <m>k</m> derivatives of the term <m>a_nx^n</m>,
+      with <m>k\leq n</m>, we obtain
+      <me>
+        \frac{d^k}{dx^k}(a_nx^n)= n(n-1)\cdots (n-k+1)a_nx^{n-k}
+      </me>.
+    </p>
+
+    <p component="taypoly-early">
+      For <m>k\lt n</m>, the expression above vanishes when we set <m>x=0</m>.
+      However, for <m>n=k</m>, we obtain the constant value
+      <men xml:id="polyderiv">
+        \frac{d^k}{dx^k}(a_kx^k) = k\cdot (k-1)\cdots 2\cdot 1 a_k
+      </men>.
+      Consider a polynomial
+      <me>
+      p_n(x) = a_0+a_1x+\cdots +a_kx^k+\cdots +a_nx^n
+      </me>
+      of degree <m>n</m>. If we take <m>k</m> derivatives,
+      all of the terms involving powers of <m>x</m> less than <m>k</m> disappear,
+      and when we set <m>x=0</m>, all of the terms involving powers of <m>x</m>
+      larger than <m>k</m> disappear,
+      leaving us with the single constant given in
+      <xref ref="polyderiv">Equation</xref>.
+    </p>
+
+    <p component="taypoly-early">
+      Recalling the notation <m>k! = 1\cdot 2\cdot 3\cdots k</m>
+      for the product of the first <m>k</m> integers,
+      we have shown that
+      <me>
+        p_n^{(k)}(0) = k!a_k
+      </me>.
+      If we want the derivatives of <m>p_n</m> to agree with
+      some unknown function <m>f</m> when <m>x=0</m>, then we must have
+      <me>
+        a_k = \frac{f^{(k)}(0)}{k!}
+      </me>.
+    </p>
+
+    <aside component="taypoly-early">
+      <p>
+        The notation <m>k!</m> is read as <q><m>k</m> factorial</q>.
+        By convention, we also define <m>0!=1</m>,
+        mostly because it makes our formulas look a lot nicer.
+      </p>
+    </aside>
+
+    <figure xml:id="vid_deriv_apps_taylor_poly_determ_coeffs" component="video-taypoly-early">
+      <caption>Determining the coefficients of a Taylor polynomial</caption>
+      <video youtube="v8mPY7fu1e0"/>
     </figure>
 
     <p>
@@ -210,13 +300,28 @@
       <!-- figures/fig_taypolyintroc.tex END -->
     </figure>
 
-    <p>
+    <p component="taypoly-late">
       The polynomials we have created are examples of
       <em>Taylor polynomials</em>,
       named after the British mathematician Brook Taylor who made important discoveries about such functions.
       While we created the above Taylor polynomials by solving initial-value problems,
       it can be shown that Taylor polynomials follow a general pattern that make their formation much more direct.
       This is described in the following definition.
+    </p>
+
+    <p component="taypoly-early">
+      The polynomials we have created are examples of
+      <em>Taylor polynomials</em>,
+      named after the British mathematician Brook Taylor who made important
+      discoveries about such functions.
+      In the discussion above, we concentrated on evaluating the derivatives of
+      <m>f</m> at 0; however, there is nothing special about this point.
+      Just as we can consider the linear approximation of a function near any
+      point, so too can we determine a polynomial approximation about any value
+      <m>c</m> in the domain of <m>f</m>.
+      The only catch is that our polynomial will then be given in terms of
+      powers of <m>x-c</m>, rather than powers of <m>x</m>, as we see in the
+      following definition.
     </p>
 
     <definition xml:id="def_taypoly">
@@ -256,8 +361,22 @@
         </p>
       </statement>
     </definition>
+    <!--This aside is Sean's doing, from his version of APEX.-->
+    <aside component="taypoly-early">
+      <p>
+        <alert>Historical note:</alert> Colin Maclaurin was a Scottish
+        mathematician, born in 1698. He lived until 1746, and made a number of
+        contributions to the development of mathematics and physics.
+        His election as professor of mathematics at the University of Aberdeen
+        at the age of 19 made him the world's youngest professor, a record he
+        held until 2008! He was also a staunch foe of the Jacobite Rebellion,
+        and was instrumental in the defence of Edinburgh against the army of
+        Bonnie Prince Charlie. (For more details, see
+        <url href="https://en.wikipedia.org/wiki/Colin_Maclaurin" visual="en.wikipedia.org/wiki/Colin_Maclaurin">Wikipedia</url>.)
+      </p>
+    </aside>
 
-    <figure xml:id="vid_deriv_apps_taylor_poly_defn">
+    <figure xml:id="vid_deriv_apps_taylor_poly_defn" component="video">
       <caption>Video presentation of <xref ref="def_taypoly"/></caption>
       <video youtube="J-5vVJIGQp4"/>
     </figure>
@@ -288,7 +407,7 @@
         </p>
       </statement>
       <solution>
-        <video width="98%" youtube="ENf-Z2pLrJg" xml:id="vid_deriv_apps_taylor_poly_ex_1"/>
+        <video width="98%" youtube="ENf-Z2pLrJg" xml:id="vid_deriv_apps_taylor_poly_ex_1" component="video"/>
 
         <p>
           <ol>
@@ -384,7 +503,6 @@
 
                 \end{tikzpicture}
 
-
             </latex-image>
           </image>
       <!-- figures/fig_taypoly1b.tex END -->
@@ -418,7 +536,7 @@
         </p>
       </statement>
       <solution>
-        <video width="98%" youtube="6BeNQe0hl3k" xml:id="vid_deriv_apps_taylor_poly_ex_2"/>
+        <video width="98%" youtube="6BeNQe0hl3k" xml:id="vid_deriv_apps_taylor_poly_ex_2" component="video"/>
 
         <p>
           <ol>
@@ -663,7 +781,7 @@
       </p>
     </aside>
 
-    <p>
+    <p component="taypoly-late">
       We had the same problem when studying Numerical Integration.
       <xref ref="thm_numerical_error">Theorem</xref>
       provided bounds on the error when using,
@@ -673,6 +791,22 @@
       The following theorem gives similar bounds for Taylor
       (and hence Maclaurin)
       polynomials.
+    </p>
+
+    <p component="taypoly-early">
+      Although much of the content presented in Calculus concerns the search
+      for exact answers to problems such as integration and differentiation,
+      many practical applications of calculus involve attempts to find
+      <em>approximations</em>;
+      for example, using Newton's Method to approximate the zeros of a function,
+      or numerical integration to approximate the value of an integral that
+      cannot be solved exactly.
+      Whenever an approximation is used, one naturally wishes to know how good
+      the approximation is.
+      In other words, we look for a bound on the error introduced by working
+      with an approximation.
+      The following theorem gives bounds on the error introduced in using a
+      Taylor (and hence Maclaurin) polynomial to approximate a function.
     </p>
 
     <theorem xml:id="thm_taylorthm">
@@ -709,6 +843,30 @@
       </statement>
     </theorem>
 
+    <!--Another aside added by Sean-->
+    <aside component="taypoly-early">
+      <p>
+        One way of quantifying the extent to which one function approximates
+        another is using the <em>order</em> to which they agree.
+        We say that two functions <m>f</m> and
+        <m>g</m> <em>agree to order <m>n</m> at <m>c</m></em>
+        if <m>n</m> is the <em>largest</em> integer for which
+        <me>
+        \lim_{x\to c}\frac{f(x)-g(x)}{(x-c)^n}=0
+        </me>.
+        Taylor's Theorem tells us that a function and its degree
+        <m>n</m> Taylor polynomial agree to order <m>n</m>.
+        Roughly speaking, this means that their difference goes to zero faster
+        than the <m>n</m>th power of <m>x-c</m> as <m>x</m> approaches <m>c</m>.
+      </p>
+    </aside>
+
+    <figure xml:id="vid_deriv_apps_taylor_poly_taylors_thm" component="video">
+      <caption>Video presentation of <xref ref="thm_taylorthm"/></caption>
+      <video youtube="2IHECY8dFN0"/>
+    </figure>
+
+
     <p>
       The first part of Taylor's Theorem states that <m>f(x) = p_n(x) + R_n(x)</m>,
       where <m>p_n(x)</m> is the
@@ -740,7 +898,7 @@
         </p>
       </statement>
       <solution>
-        <video width="98%" youtube="TBV4-X7HoHk" xml:id="vid_deriv_apps_taylor_poly_err_est_ex"/>
+        <video width="98%" youtube="TBV4-X7HoHk" xml:id="vid_deriv_apps_taylor_poly_err_est_ex" component="video"/>
 
         <p>
           <ol>
@@ -835,7 +993,7 @@
         </p>
       </statement>
       <solution>
-        <video width="98%" youtube="zg1W9miUCB4" xml:id="vid_deriv_apps_taylor_poly_ex_4"/>
+        <video width="98%" youtube="zg1W9miUCB4" xml:id="vid_deriv_apps_taylor_poly_ex_4" component="video"/>
 
         <p>
           Following Taylor's theorem,
@@ -1302,12 +1460,20 @@
       polynomials.
     </p>
 
-    <p>
+    <p component="taypoly-late">
       Most of this chapter has been devoted to the study of infinite series.
       This section has taken a step back from this study,
       focusing instead on finite summation of terms.
       In the next section, we explore <em>Taylor Series</em>,
       where we represent a function with an infinite series.
+    </p>
+
+    <p component="taypoly-early">
+      We first learned of the derivative in the context of instantaneous rates
+      of change and slopes of tangent lines.
+      We furthered our understanding of the power of the derivative by studying
+      how it relates to the graph of a function
+      (leading to ideas of increasing/decreasing and concavity).
     </p>
 
   <exercises>
