@@ -1251,36 +1251,36 @@
               $a=non_zero_random(-3,3,1);
               $b=non_zero_random(-1,1,2);
               $n=random(2,5,1);
-              if($envir{problemSeed}==1){$a=-1;$b=1;$n=2;};
               $f=Formula("$b/(x-$a)^($n)")->reduce;
               $L[0]=($f->eval(x=>$a-1)>0)?Compute("inf"):Compute("-inf");
               $L[1]=($f->eval(x=>$a+1)>0)?Compute("inf"):Compute("-inf");
               for my$i(0,1){$ev[$i]=$L[$i]->cmp()->withPostFilter(AnswerHints(Compute("DNE")=> "Technically correct, but this question is asking for more specific information."));};
               $xmin=min(-1,$a-2);$xmax=max(1,$a+2);
-              $gr=init_graph($xmin,-50,$xmax,50,axes=>[0,0],size=>[400,240]);
-              $gr->lb(new Label($xmax,0,'x','black','right','bottom','large'));
-              $gr->h_ticks(0,"black",($xmin+1..$xmax-1));
-              $gr->v_ticks(0,"black",map{$_*10}(-5..5));
-              for my $i ($xmin+1..-1,1..$xmax-1) {
-                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
-              }
-              for my $i (map{$_*10}(-4..-1,1..4)) {
-                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
-              }
               $e=1/50**(1/$n);
               $below=$a-$e;
               $above=$a+$e;
-              add_functions($gr, "$f for x in &lt;$xmin,$below > using color:blue and weight:2");
-              add_functions($gr, "$f for x in &lt;$above,$xmax > using color:blue and weight:2");
-              $gr->moveTo($a,-50);
-              $gr->lineTo($a,50,'gray',1,'dashed');
               Context()->strings->add('does not exist'=>{alias=>'DNE'});
             </pg-code>
             <statement>
               <p>
                 <m>f(x) = <var name="$f"/></m> has the graph:
               </p>
-              <image pg-name="$gr"/>
+              <image>
+                <latex-image>
+                  \begin{tikzpicture}
+                    \begin{axis}[
+                      xmin = $xmin,
+                      xmax = $xmax,
+                      ymin = -50,
+                      ymax = 50,
+                    ]
+                      \addplot[firstcurvestyle, -{Kite}, domain=$xmin:$below, samples=100] {$b/(x-$a)^($n)};
+                      \addplot[firstcurvestyle, {Kite}-, domain=$above:$xmax, samples=100] {$b/(x-$a)^($n)};
+                      \addplot[asymptote,-] coordinates {($a,-50) ($a,50)};
+                    \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
                 If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
@@ -1313,7 +1313,6 @@
           <webwork>
             <pg-code>
               @a=(1..9)[NchooseK(9,2)];
-              if($envir{problemSeed}==1){@a=(3,5)};
               $f=Formula("1/((x-$a[0])(x-$a[1])^(2))")->reduce;
               $L[0]=($f->eval(x=>$a[0]-0.1)>0)?Compute("inf"):Compute("-inf");
               $L[1]=($f->eval(x=>$a[0]+0.1)>0)?Compute("inf"):Compute("-inf");
@@ -1322,37 +1321,36 @@
               for my$i(2,5){$L[$i]=($L[$i-2]==$L[$i-1])?$L[$i-2]:Compute("DNE");};
               for my$i(0..5){$ev[$i]=($L[$i]==Compute("DNE"))?$L[$i]->cmp():$L[$i]->cmp()->withPostFilter(AnswerHints(Compute("DNE")=> "Technically correct, but this question is asking for more specific information."));};
               $xmin=min(0,@a)-1;$xmax=max(@a)+1;
-              $gr=init_graph($xmin,-50,$xmax,50,axes=>[0,0],size=>[400,240]);
-              $gr->lb(new Label($xmax,0,'x','black','right','bottom','large'));
-              $gr->h_ticks(0,"black",($xmin+1..$xmax-1));
-              $gr->v_ticks(0,"black",map{$_*10}(-5..5));
-              for my $i ($xmin+1..-1,1..$xmax-1) {
-                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
-              }
-              for my $i (map{$_*10}(-4..-1,1..4)) {
-                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
-              }
-              $e[0]=1/(50*($a[1]-$a[0])^2)/2;
-              $e[1]=sqrt(1/(50*abs($a[1]-$a[0])))/2;
-              @e=($e[1],$e[0]) if ($a[0]>$a[1]);
-              $below[0]=min(@a)-$e[0];
-              $above[0]=min(@a)+$e[0];
-              $below[1]=max(@a)-$e[1];
-              $above[1]=max(@a)+$e[1];
-              add_functions($gr, "$f for x in &lt;$xmin,$below[0]> using color:blue and weight:2");
-              add_functions($gr, "$f for x in &lt;$above[0],$below[1]> using color:blue and weight:2");
-              add_functions($gr, "$f for x in &lt;$above[1],$xmax> using color:blue and weight:2");
-              $gr->moveTo($a[0],-50);
-              $gr->lineTo($a[0],50,'gray',1,'dashed');
-              $gr->moveTo($a[1],-50);
-              $gr->lineTo($a[1],50,'gray',1,'dashed');
+              @x = num_sort(
+                1/(50*($a[1]-$a[0])^2)/2 + $a[0],
+                -1/(50*($a[1]-$a[0])^2)/2 + $a[0],
+                sqrt(abs(1/(50*($a[1]-$a[0])))) + $a[1],
+                -sqrt(abs(1/(50*($a[1]-$a[0])))) + $a[1]
+              );
               Context()->strings->add('does not exist'=>{alias=>'DNE'});
             </pg-code>
             <statement>
               <p>
                 <m>f(x) = <var name="$f"/></m> has the graph:
               </p>
-              <image pg-name="$gr"/>
+              <image>
+                <latex-image>
+                  \begin{tikzpicture}
+                    \begin{axis}[
+                      xmin = $xmin,
+                      xmax = $xmax,
+                      ymin = -50,
+                      ymax = 50,
+                    ]
+                      \addplot[firstcurvestyle, -{Kite}, domain=$xmin:$x[0], samples=100] {1/((x-$a[0])*(x-$a[1])^(2))};
+                      \addplot[firstcurvestyle, {Kite}-{Kite}, domain=$x[1]:$x[2], samples=100] {1/((x-$a[0])*(x-$a[1])^(2))};
+                      \addplot[firstcurvestyle, {Kite}-, domain=$x[3]:$xmax, samples=100] {1/((x-$a[0])*(x-$a[1])^(2))};
+                      \addplot[asymptote,-] coordinates {($a[0],-50) ($a[0],50)};
+                      \addplot[asymptote,-] coordinates {($a[1],-50) ($a[1],50)};
+                    \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
                 If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
@@ -1418,31 +1416,32 @@
             <pg-code>
               $a=random(1,5,1);
               $b=random(-1,1,2);
-              if($envir{problemSeed}==1){$a=1;$b=1;};
               $f=Formula("$a/(e^($b*x)+1)")->reduce;
               $L[0]=($b>0)?$a:0;
               $L[1]=($b>0)?0:$a;
               $L[2]=$f->eval(x=>0);
               $L[3]=$f->eval(x=>0);
               $xmin=-11;$xmax=11;
-              $gr=init_graph($xmin,-1,$xmax,$a+1,axes=>[0,0],size=>[400,240]);
-              $gr->lb(new Label($xmax,0,'x','black','right','bottom','large'));
-              $gr->h_ticks(0,"black",(-10,-5,0,5,10));
-              $gr->v_ticks(0,"black", map{$_/2-1}(0..(2*$a+4)));
-              for my $i (-10,-5,5,10) {
-                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
-              }
-              for my $i (map{$_/2-1}(0..(2*$a+4))) {
-                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
-              }
-              add_functions($gr, "$f for x in &lt;$xmin,$xmax> using color:blue and weight:2");
               Context()->strings->add('does not exist'=>{alias=>'DNE'});
             </pg-code>
             <statement>
               <p>
                 <m>f(x) = <var name="$f"/></m> has the graph:
               </p>
-              <image pg-name="$gr"/>
+              <image>
+                <latex-image>
+                  \begin{tikzpicture}
+                    \begin{axis}[
+                      xmin = $xmin,
+                      xmax = $xmax,
+                      ymin = -1,
+                      ymax = $a+1,
+                    ]
+                      \addplot[firstcurvestyle, -, domain=$xmin:$xmax, smooth] {$a/(e^($b*x)+1)};
+                    \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
                 If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
@@ -1492,31 +1491,32 @@
             <pg-code>
               $a=random(1,5,1);
               $n=random(1,4,2);
-              if($envir{problemSeed}==1){$a=1;$n=2;};
               $f=Formula("x^($n)*sin($a pi x)")->reduce;
               $L[0]=Compute("DNE");
               $L[1]=Compute("DNE");
               $L[2]=0;
               $L[3]=0;
-              $xmin=-11;$xmax=11;
-              $gr=init_graph($xmin,-10**($n),$xmax,10**($n),axes=>[0,0],size=>[400,240]);
-              $gr->lb(new Label($xmax,0,'x','black','right','bottom','large'));
-              $gr->h_ticks(0,"black",(-10,-5,0,5,10));
-              $gr->v_ticks(0,"black",map{$_*10**($n)/2}(-2..2));
-              for my $i (-10,-5,5,10) {
-                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
-              }
-              for my $i (map{$_*10**($n)/2}(-1,1)) {
-                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
-              }
-              for my$i(-10..10){my$low=$i-0.5;my$high=$i+0.5;add_functions($gr, "$f for x in &lt;$low,$high> using color:blue and weight:2");};
+              $xmax = int(11/(2/$a))*(2/$a);
+              $xmin = -$xmax;
+              $samples = 1 + int(11/(2/$a))*80;
               Context()->strings->add('does not exist'=>{alias=>'DNE'});
             </pg-code>
             <statement>
               <p>
                 <m>f(x) = <var name="$f"/></m> has the graph:
               </p>
-              <image pg-name="$gr"/>
+              <image>
+                <latex-image>
+                  \begin{tikzpicture}
+                    \begin{axis}[
+                      xmin = $xmin,
+                      xmax = $xmax,
+                    ]
+                      \addplot[firstcurvestyle, -, domain=$xmin:$xmax, samples=$samples] {x^($n)*sin(deg($a*pi*x))};
+                    \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
                 If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
@@ -1565,31 +1565,33 @@
           <webwork>
             <pg-code>
               $a=random(1,5,1);
-              $f=list_random(Formula("sin($a x)")->reduce,Formula("cos($a x)")->reduce);
-              if($envir{problemSeed}==1){$f=Formula("cos(x)")};
+              $trigfun = list_random('sin','cos');
+              $f=Formula("$trigfun($a x)")->reduce;
               $L[0]=Compute("DNE");
               $L[1]=Compute("DNE");
-              $xmin=-14;$xmax=14;
-              $gr=init_graph($xmin,-1.2,$xmax,1.2,axes=>[0,0],size=>[400,240]);
-              $gr->lb(new Label($xmax,0,'x','black','right','bottom','large'));
-              $gr->h_ticks(0,"black",map{$_*pi()/2}(-8..8));
-              $gr->v_ticks(0,"black",map{$_/2}(-2..2));
-              for my $i (-4,-3,-2,2,3,4) {
-                $gr->lb(new Label($i*pi(),0,"${i}pi",'black','center','top','large'));
-              }
-              for my $i (map{$_/2}(-2,-1,1,2)) {
-                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
-              }
-              $gr->lb(new Label(-pi(),0,"-pi",'black','center','top','large'));
-              $gr->lb(new Label(pi(),0,"pi",'black','center','top','large'));
-              for my$i(-4..4){my$low=($i-0.5)*pi();my$high=($i+0.5)*pi();add_functions($gr, "$f for x in &lt;$low,$high> using color:blue and weight:2");};
+              $xmax = int(14/(2*pi/$a))*(2*pi/$a);
+              $xmin = -$xmax;
+              $samples = 1 + int(14/(2*pi/$a))*80;
               Context()->strings->add('does not exist'=>{alias=>'DNE'});
             </pg-code>
             <statement>
               <p>
                 <m>f(x) = <var name="$f"/></m> has the graph:
               </p>
-              <image pg-name="$gr"/>
+              <image>
+                <latex-image>
+                  \begin{tikzpicture}
+                    \begin{axis}[
+                      xmin = $xmin,
+                      xmax = $xmax,
+                      ymin = -1.2,
+                      ymax = 1.2,
+                    ]
+                      \addplot[firstcurvestyle, -, domain=$xmin:$xmax, samples=$samples] {$trigfun(deg($a*x))};
+                    \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
                 If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
@@ -1624,31 +1626,35 @@
               $b=random(1.5,2.5,0.1);
               $c=non_zero_random(-12,12,1);
               $n=random(-1,1,2);
-              if($envir{problemSeed}==1){$b=2;$c=10;$n=1;};
               $f=Formula("($b)^($n x)+$c")->reduce;
               $L[0]=($n>0)?$c:Compute("inf");
               $L[1]=($n>0)?Compute("inf"):$c;
               $xmin=-11;$xmax=11;
-              $gr=init_graph($xmin,-20,$xmax,20,axes=>[0,0],size=>[400,240]);
-              $gr->lb(new Label($xmax,0,'x','black','right','bottom','large'));
-              $gr->h_ticks(0,"black",(-10,-5,0,5,10));
-              $gr->v_ticks(0,"black",(-15,-10,-5,0,5,10,15));
-              for my $i (-10,-5,5,10) {
-                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
+              $start = $xmin;
+              $stop = log(20 - $c)/log($b) / $n;
+              if ($n &lt; 1) {
+                ($start,$stop) = ($stop,$xmax);
               }
-              for my $i (-15,-10,-5,0,5,10,15) {
-                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
-              }
-              $low=($n>0)?$xmin:ln(160-$c)/ln($b)/$n;
-              $high=($n>0)?ln(160-$c)/ln($b)/$n:$xmax;
-              add_functions($gr, "$f for x in &lt;$low,$high> using color:blue and weight:2");
               Context()->strings->add('does not exist'=>{alias=>'DNE'});
             </pg-code>
             <statement>
               <p>
                 <m>f(x) = <var name="$f"/></m> has the graph:
               </p>
-              <image pg-name="$gr"/>
+              <image>
+                <latex-image>
+                  \begin{tikzpicture}
+                    \begin{axis}[
+                      xmin = $xmin,
+                      xmax = $xmax,
+                      ymin = -20,
+                      ymax = 20,
+                    ]
+                      \addplot[firstcurvestyle, -, domain=$start:$stop, smooth] {$f};
+                    \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
                 If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.

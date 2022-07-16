@@ -791,27 +791,30 @@
               if($envir{problemSeed}==1){@x=(0,1,2);@y=(1,2,0);$z=1;$b=0;};
               $a=$x[1];
               $f=Formula("($y[1]-$y[0])/($x[1]-$x[0])*(x-$x[0])+$y[0]");
-              $g=Formula("($y[1]-$y[2])/($x[1]-$x[2])^2*(x-$x[2])^2+$y[2]");
+              $g=Formula("($y[1]-$y[2])/($x[1]-$x[2])**2*(x-$x[2])^2+$y[2]");
               $xmin=min(@x)-1;$xmax=max(0,@x)+1;
               $ymin=min(0,@y,$z)-1;$ymax=max(@y,$z)+1;
-              $gr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[400,240]);
-              $gr->lb('reset');
-              for my $i (1..$xmax-1) {
-                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
-              }
-              for my $i (1..$ymax-1) {
-                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
-              }
-              $gr->lb(new Label($xmax,0,'x','black','right','bottom','large'));
-              $gr->lb(new Label(0,$ymax,'y','black','left','top','large'));
-              add_functions($gr,"$f for x in [$x[0],$x[1]) using color:blue and weight:2");
-              add_functions($gr,"$g for x in ($x[1],$x[2]] using color:blue and weight:2");
-              $gr->stamps(closed_circle($x[1],$z,'blue'));
               @L=($y[1],$y[1],$y[1],$z);
               ($L[4],$L[5])=($b==0)?(Compute("DNE"),$y[0]):($y[2],Compute("DNE"));
             </pg-code>
             <statement>
-              <image pg-name="$gr"/>
+              <image>
+                <latex-image>
+                  \begin{tikzpicture}
+                    \begin{axis}[
+                      xmin = $xmin,
+                      xmax = $xmax,
+                      ymin = $ymin,
+                      ymax = $ymax,
+                    ]
+                      \addplot[firstcurvestyle, -, domain=$x[0]:$x[1]] {$f};
+                      \addplot[firstcurvestyle, -, domain=$x[1]:$x[2]] {$g};
+                      \addplot[soliddot] coordinates {($x[0],$y[0]) ($x[1],$z) ($x[2],$y[2])};
+                      \addplot[hollowdot] coordinates {($x[1],$y[1])};
+                    \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
                 If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
@@ -886,23 +889,27 @@
               $f=Formula("($y[1]-$y[0])/($x[1]-$x[0])*(x-$x[0])+$y[0]");
               $g=Formula("($z-$y[2])/($x[1]-$x[2])*(x-$x[2])+$y[2]");
               $xmin=min(0,@x)-1;$xmax=max(0,@x)+1;$ymin=min(0,@y,$z)-1;$ymax=max(0,@y,$z)+1;
-              $gr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[400,240]);
-              $gr->lb('reset');
-              for my $i (1..$xmax-1) {
-                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
-              }
-              for my $i (1..$ymax-1) {
-                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
-              }
-              $gr->lb(new Label($xmax,0,'x','black','right','bottom','large'));
-              $gr->lb(new Label(0,$ymax,'y','black','left','top','large'));
-              add_functions($gr,"$f for x in [$x[0],$x[1]) using color:blue and weight:2");
-              add_functions($gr,"$g for x in [$x[1],$x[2]] using color:blue and weight:2");
               @L=($y[1],$z,Compute("DNE"),$z);
               ($L[4],$L[5])=($b==0)?(Compute("DNE"),$y[0]):($y[2],Compute("DNE"));
             </pg-code>
             <statement>
-              <image pg-name="$gr"/>
+              <image>
+                <latex-image>
+                  \begin{tikzpicture}
+                    \begin{axis}[
+                      xmin = $xmin,
+                      xmax = $xmax,
+                      ymin = $ymin,
+                      ymax = $ymax,
+                    ]
+                      \addplot[firstcurvestyle, -, domain=$x[0]:$x[1]] {$f};
+                      \addplot[firstcurvestyle, -, domain=$x[1]:$x[2]] {$g};
+                      \addplot[soliddot] coordinates {($x[0],$y[0]) ($x[1],$z) ($x[2],$y[2])};
+                      \addplot[hollowdot] coordinates {($x[1],$y[1])};
+                    \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
                 If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
@@ -975,28 +982,32 @@
               if($envir{problemSeed}==1){@x=(0,1,2);@y=(0,Compute("inf"),0);$b=2;};
               $a=$x[1];
               $c=($b==$x[0])?$x[2]:$x[0];
-              $f=Formula("sec((x-$x[0])/($x[1]-$x[0])*pi/2)-1+$y[0]");
-              $g=Formula("sec((x-$x[2])/($x[1]-$x[2])*pi/2)-1+$y[2]");
+              $f=Formula("sec((x-$x[0])/($x[1]-$x[0])*90)-1+$y[0]");
+              $g=Formula("sec((x-$x[2])/($x[1]-$x[2])*90)-1+$y[2]");
               $xmin=min(0,@x)-1;$xmax=max(0,@x)+1;$ymin=-1;$ymax=max(0,$y[0],$y[2])+4;
-              $gr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[400,240]);
-              $gr->lb('reset');
-              for my $i (1..$xmax-1) {
-                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
-              }
-              for my $i (1..$ymax-1) {
-                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
-              }
-              $gr->lb(new Label($xmax,0,'x','black','right','bottom','large'));
-              $gr->lb(new Label(0,$ymax,'y','black','left','top','large'));
-              $xmidlow=$x[1]-0.1;$xmidhigh=$x[1]+0.1;
-              add_functions($gr,"$f for x in [$x[0],$xmidlow) using color:blue and weight:2");
-              add_functions($gr,"$g for x in ($xmidhigh,$x[2]] using color:blue and weight:2");
-              $gr->moveTo($x[1],$ymin);$gr->lineTo($x[1],$ymax,'gray',2,'dashed');
+              $xmidlow = asec($ymax + 1 - $y[0])/90*180/pi * ($x[1]-$x[0]) + $x[0];
+              $xmidhigh = asec($ymax + 1 - $y[2])/90*180/pi * ($x[1]-$x[2]) + $x[2];
               @L=(OneOf(Compute("DNE"),Compute("INF")),OneOf(Compute("DNE"),Compute("INF")),OneOf(Compute("DNE"),Compute("INF")),Compute("DNE"));
               ($L[4],$L[5])=($b==0)?(Compute("DNE"),Compute("DNE")):($y[2],$y[0]);
             </pg-code>
             <statement>
-              <image pg-name="$gr"/>
+              <image>
+                <latex-image>
+                  \begin{tikzpicture}
+                    \begin{axis}[
+                      xmin = $xmin,
+                      xmax = $xmax,
+                      ymin = $ymin,
+                      ymax = $ymax,
+                    ]
+                      \addplot[firstcurvestyle, -{Kite}, domain=$x[0]:$xmidlow] {$f};
+                      \addplot[firstcurvestyle, {Kite}-, domain=$xmidhigh:$x[2]] {$g};
+                      \addplot[asymptote, -] coordinates {($x[1],$ymin) ($x[1],$ymax)};
+                      \addplot[soliddot] coordinates {($x[0],$y[0]) ($x[2],$y[2])};
+                    \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
                 If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
@@ -1069,23 +1080,26 @@
               $f=Formula("($z-$y[0])/($x[1]-$x[0])*(x-$x[0])+$y[0]");
               $g=Formula("($y[2]-$y[1])/($x[2]-$x[1])^2*(x-$x[1])^2+$y[1]");
               $xmin=min(0,@x)-1;$xmax=max(0,@x)+1;$ymin=min(0,@y,$z,$w)-1;$ymax=max(0,@y,$z,$w)+1;
-              $gr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[400,240]);
-              $gr->lb('reset');
-              for my $i (1..$xmax-1) {
-                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
-              }
-              for my $i (1..$ymax-1) {
-                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
-              }
-              $gr->lb(new Label($xmax,0,'x','black','right','bottom','large'));
-              $gr->lb(new Label(0,$ymax,'y','black','left','top','large'));
-              add_functions($gr,"$f for x in [$x[0],$x[1]) using color:blue and weight:2");
-              add_functions($gr,"$g for x in ($x[1],$x[2]] using color:blue and weight:2");
-              $gr->stamps(closed_circle($x[1],$w,'blue'));
               @L=($z,$y[1],Compute("DNE"),$w);
             </pg-code>
             <statement>
-              <image pg-name="$gr"/>
+              <image>
+                <latex-image>
+                  \begin{tikzpicture}
+                    \begin{axis}[
+                      xmin = $xmin,
+                      xmax = $xmax,
+                      ymin = $ymin,
+                      ymax = $ymax,
+                    ]
+                      \addplot[firstcurvestyle, -, domain=$x[0]:$x[1]] {$f};
+                      \addplot[firstcurvestyle, -, domain=$x[1]:$x[2]] {$g};
+                      \addplot[soliddot] coordinates {($x[0],$y[0]) ($x[1],$w) ($x[2],$y[2])};
+                      \addplot[hollowdot] coordinates {($x[1],$y[1]) ($x[1],$z)};
+                    \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
                 If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
@@ -1142,22 +1156,25 @@
               $f=Formula("($y[0]-$y[1])/($x[0]-$x[1])^2*(x-$x[1])^2+$y[1]");
               $g=Formula("($y[2]-$y[1])/($x[2]-$x[1])*(x-$x[1])+$y[1]");
               $xmin=min(0,@x)-1;$xmax=max(0,@x)+1;$ymin=min(0,@y,0)-1;$ymax=max(0,@y,0)+1;
-              $gr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[400,240]);
-              $gr->lb('reset');
-              for my $i (1..$xmax-1) {
-                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
-              }
-              for my $i (1..$ymax-1) {
-                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
-              }
-              $gr->lb(new Label($xmax,0,'x','black','right','bottom','large'));
-              $gr->lb(new Label(0,$ymax,'y','black','left','top','large'));
-              add_functions($gr,"$f for x in [$x[0],$x[1]] using color:blue and weight:2");
-              add_functions($gr,"$g for x in [$x[1],$x[2]] using color:blue and weight:2");
               @L=($y[1],$y[1],$y[1],$y[1]);
             </pg-code>
             <statement>
-              <image pg-name="$gr"/>
+              <image>
+                <latex-image>
+                  \begin{tikzpicture}
+                    \begin{axis}[
+                      xmin = $xmin,
+                      xmax = $xmax,
+                      ymin = $ymin,
+                      ymax = $ymax,
+                    ]
+                      \addplot[firstcurvestyle, -, domain=$x[0]:$x[1]] {$f};
+                      \addplot[firstcurvestyle, -, domain=$x[1]:$x[2]] {$g};
+                      \addplot[soliddot] coordinates {($x[0],$y[0]) ($x[2],$y[2])};
+                    \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
                 If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
@@ -1214,26 +1231,29 @@
               $y[4]=list_random(-6..$y[3]-1,$y[3]+1..6);
               if($envir{problemSeed}==1){@x=(-4,0,4);@y=(-4,4,0,-4,4);};
               $a=$x[1];
-              $f=Formula("($y[1]-$y[0])/2*cos((x-$x[1])/($x[0]-$x[1])*pi)+($y[0]+$y[1])/2");
-              $g=Formula("($y[4]-$y[3])/2*cos((x-$x[2])/($x[1]-$x[2])*pi)+($y[3]+$y[4])/2");
+              $f=Formula("cos((x-$x[1])/($x[0]-$x[1])*180)*($y[1]-$y[0])/2+($y[0]+$y[1])/2");
+              $g=Formula("cos((x-$x[2])/($x[1]-$x[2])*180)*($y[4]-$y[3])/2+($y[3]+$y[4])/2");
               $xmin=min(0,@x)-1;$xmax=max(0,@x)+1;$ymin=min(0,@y)-1;$ymax=max(0,@y)+1;
-              $gr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],grid=>[$xmax-$xmin,$ymax-$ymin],size=>[400,240]);
-              $gr->lb('reset');
-              for my $i ($xmin+1..-1,1..$xmax-1) {
-                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
-              }
-              for my $i ($ymin+1..-1,1..$ymax-1) {
-                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
-              }
-              $gr->lb(new Label($xmax,0,'x','black','right','bottom','large'));
-              $gr->lb(new Label(0,$ymax,'y','black','left','top','large'));
-              add_functions($gr,"$f for x in [$x[0],$x[1]) using color:blue and weight:2");
-              add_functions($gr,"$g for x in ($x[1],$x[2]] using color:blue and weight:2");
-              $gr->stamps(closed_circle($x[1],$y[2],'blue'));
               @L=($y[1],$y[3],Compute("DNE"),$y[2]);
             </pg-code>
             <statement>
-              <image pg-name="$gr"/>
+              <image>
+                <latex-image>
+                  \begin{tikzpicture}
+                    \begin{axis}[
+                      xmin = $xmin,
+                      xmax = $xmax,
+                      ymin = $ymin,
+                      ymax = $ymax,
+                    ]
+                      \addplot[firstcurvestyle, -, domain=$x[0]:$x[1]] {cos((x-$x[1])/($x[0]-$x[1])*180)*($y[1]-$y[0])/2+($y[0]+$y[1])/2};
+                      \addplot[firstcurvestyle, -, domain=$x[1]:$x[2]] {$g};
+                      \addplot[soliddot] coordinates {($x[0],$y[0]) ($x[1],$y[2]) ($x[2],$y[4])};
+                      \addplot[hollowdot] coordinates {($x[1],$y[1]) ($x[1],$y[3])};
+                    \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
                 If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
@@ -1282,27 +1302,28 @@
           <webwork>
             <pg-code>
               Context()->strings->add('does not exist'=>{alias=>'DNE'});
-              $gr=init_graph(-5,-4,5,4,axes=>[0,0],grid=>[10,8],size=>[400,240]);
-              $gr->lb('reset');
-              for my $i (1..4) {
-                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
-                $gr->lb(new Label(-$i,0,-$i,'black','center','top','large'));
-              }
-              for my $i (1..3) {
-                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
-                $gr->lb(new Label(0,-$i,-$i,'black','right','middle','large'));
-              }
-              $gr->lb(new Label(5,0,'x','black','right','bottom','large'));
-              $gr->lb(new Label(0,4,'y','black','left','top','large'));
-              add_functions($gr,"x+4 for x in [-4,-2) using color:blue and weight:2");
-              add_functions($gr,"-x for x in (-2,0] using color:blue and weight:2");
-              add_functions($gr,"x for x in [0,2) using color:blue and weight:2");
-              add_functions($gr,"4-x for x in (2,4] using color:blue and weight:2");
-              $gr->stamps(closed_circle(-2,0,'blue'));
               @L=(2,2,2,0,2,2,2,Compute("DNE"));
             </pg-code>
             <statement>
-              <image pg-name="$gr"/>
+              <image>
+                <latex-image>
+                  \begin{tikzpicture}
+                    \begin{axis}[
+                      xmin = -5,
+                      xmax = 5,
+                      ymin = -4,
+                      ymax = 4,
+                    ]
+                      \addplot[firstcurvestyle, -, domain=-4:-2] {x+4};
+                      \addplot[firstcurvestyle, -, domain=-2:0] {-x};
+                      \addplot[firstcurvestyle, -, domain=0:2] {x};
+                      \addplot[firstcurvestyle, -, domain=2:4] {4-x};
+                      \addplot[soliddot] coordinates {(-4,0) (-2,0) (4,0)};
+                      \addplot[hollowdot] coordinates {(-2,2) (2,2)};
+                    \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
                 If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
@@ -1383,22 +1404,29 @@
           <webwork>
             <pg-code>
               Context()->strings->add('does not exist'=>{alias=>'DNE'});
-              $gr=init_graph(-5,-5,5,5,axes=>[0,0],grid=>[10,10],size=>[400,240]);
-              $gr->lb('reset');
-              for my $i (1..4) {
-                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
-                $gr->lb(new Label(-$i,0,-$i,'black','center','top','large'));
-                $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
-                $gr->lb(new Label(0,-$i,-$i,'black','right','middle','large'));
-              }
-              $gr->lb(new Label(5,0,'x','black','right','bottom','large'));
-              $gr->lb(new Label(0,5,'y','black','left','top','large'));
-              for my $i(-4..3) {$ip1=$i+1;add_functions($gr,"$i for x in [$i,$ip1) using color:blue and weight:2");};
               Context()->variables->are(a=>'Real');
               @L=(Formula("a-1"),Formula("a"),Compute("DNE"),Formula("a"));
             </pg-code>
             <statement>
-              <image pg-name="$gr"/>
+              <image>
+                <latex-image>
+                  \begin{tikzpicture}
+                    \begin{axis}[
+                      xmin = -5,
+                      xmax = 5,
+                      ymin = -5,
+                      ymax = 5,
+                    ]
+                      \foreach \i in {-4,...,3} {
+                        \addplot[firstcurvestyle,-, domain=\i:\i+1] {\i};
+                        \addplot[soliddot] coordinates {(\i,\i)};
+                        \addplot[hollowdot] coordinates {(\i+1,\i)};
+
+                      }
+                    \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
                 If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
