@@ -25,7 +25,7 @@ Configuration:
 
 To build HTML, run `pretext build html -g` for your first run.
 The `-g` option generates all images and WebWork representations.
-If you haven't made any changes to these, you can use `pretext build html` on subsequent builds speed up the process.
+If you haven't made any changes to these, you can use `pretext build html` on subsequent builds to speed up the process.
 
 To build a version without videos, run `pretext build html-novideo`
 
