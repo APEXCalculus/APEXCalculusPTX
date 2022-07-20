@@ -20,12 +20,12 @@ Note that Asymptote compilation is done remotely, so Asymptote does not need to 
 
 Configuration:
 
-- In the `project.ptx` file, change the URL for the WeBWorK server to your local server
-- In `publication/publication.ptx`, change the `baseurl` to the URL where your copy will be hosted
+- In `publication/publication.ptx`, change the `baseurl` to the URL where your copy will be hosted, and set the `webwork` server to your local server.
+- If you need a newer version of Pretext than included with PreTeXt CLI (or wish to set a custom stylesheet), add `<xsl>../pretext/xsl/pretext-html.xsl</xsl>` tags to `project.ptx` targets.
 
-To build HTML, run `pretext build html -d -w` for your first run.
-The `-d` option generates all the images in the book; `-w` generates the WeBWorK exercises.
-If you haven't made any changes to these, you can use `pretext build html` on subsequent builds.
+To build HTML, run `pretext build html -g` for your first run.
+The `-g` option generates all images and WebWork representations.
+If you haven't made any changes to these, you can use `pretext build html` on subsequent builds speed up the process.
 
 To build a version without videos, run `pretext build html-novideo`
 
