@@ -11,7 +11,7 @@ Preparation for generating APEX Calculus from source:
 Software requirements:
 - a recent LaTeX distribution
 - [Sage](https://www.sagemath.org/)
-- Python (version 3.10 or later)
+- Python (version 3.8 or later)
 - the PreTeXt CLI (do `pip install pretextbook`)
 - [pdf2svg](https://github.com/jalios/pdf2svg-windows)
 - ImageMagick and pageres (installed as `pageres-cli` using node.js and npm) are recommended but not neeeded at this time
