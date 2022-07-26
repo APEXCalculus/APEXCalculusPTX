@@ -11,7 +11,7 @@ Preparation for generating APEX Calculus from source:
 Software requirements:
 - a recent LaTeX distribution
 - [Sage](https://www.sagemath.org/)
-- Python (version 3.10 or later)
+- Python (version 3.8 or later)
 - the PreTeXt CLI (do `pip install pretextbook`)
 - [pdf2svg](https://github.com/jalios/pdf2svg-windows)
 - ImageMagick and pageres (installed as `pageres-cli` using node.js and npm) are recommended but not neeeded at this time
@@ -20,16 +20,20 @@ Note that Asymptote compilation is done remotely, so Asymptote does not need to 
 
 Configuration:
 
-- In the `project.ptx` file, change the URL for the WeBWorK server to your local server
-- In `publication/publication.ptx`, change the `baseurl` to the URL where your copy will be hosted
+- In `publication/publication.ptx`, change the `baseurl` to the URL where your copy will be hosted, and set the `webwork` server to your local server.
+- If you wish to set a custom stylesheet, place it in the `style` folder, and add `<xsl>style/custom-style.xsl</xsl>` tags to the appropriate targets in the `project.ptx` file, where you should of course replace `custom-style.xsl` with whatever you named your style file.
+- You can also use `<xsl>...</xsl>` tags in `project.ptx` to point to a newer version of one of the PreTeXt XSL files than the one that ships with the CLI. (This is not officially supported, so use with caution.)
 
-To build HTML, run `pretext build html -d -w` for your first run.
-The `-d` option generates all the images in the book; `-w` generates the WeBWorK exercises.
-If you haven't made any changes to these, you can use `pretext build html` on subsequent builds.
+To build HTML, run `pretext build html -g` for your first run.
+The `-g` option generates all images and WeBWorK representations.
+If you haven't made any changes to these, you can use `pretext build html` on subsequent builds to speed up the process.
+
+You can also generate individual components. Run `pretext generate --help` for suggestions on what is possible.
+For example, to build only Asymptote images for HTML, you can run `pretext generate -t html asymptote`.
 
 To build a version without videos, run `pretext build html-novideo`
 
-To build PDF, run `pretext build latex`, or `pretext build latex -d -w`
+To build PDF, run `pretext build latex`, or `pretext build latex -g`
 if you need to build images or WeBWorK exercises.
 
 The following variations are also available:
