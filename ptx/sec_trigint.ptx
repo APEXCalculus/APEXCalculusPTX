@@ -41,8 +41,12 @@
         <p>
           We have used substitution on problems similar to this problem in
           <xref ref="sec_substitution">Section</xref> .
-          If we let <m>u=\cos(x)</m>,
-          then <m>du=-\sin(x)\,dx</m>.
+          If we let <m>u=\sin(x)</m>,
+          then <m>du=\cos(x)\,dx</m>, and
+          <me>
+            \int \sin^3(x)\cos(x)\,dx = \int u^3 \,du = \frac{u^4}{4}+C = \frac14 \sin^4(x)+C
+          </me>.
+          But what if, for some reason, we wanted to let <m>u=\cos(x)</m> instead?
           Unfortunately,
           we have <m>\sin^3(x)</m> as part of our integrand, not just <m>\sin(x)</m>.
           The solution to this problem is to replace some of our powers of sine
@@ -50,7 +54,7 @@
           with expressions that involve cosine.
           We will use the Pythagorean Identity <m>\sin^2(x)=1-\cos^2(x)</m>.
           <md>
-            <mrow>\ds\int\sin^3(x) \cos(x) \, dx \amp =\int\sin(x)\cdot \sin^2(x) \cos(x) \, dx</mrow>
+            <mrow>\int\sin^3(x) \cos(x) \, dx \amp =\int\sin(x)\cdot \sin^2(x) \cos(x) \, dx</mrow>
             <mrow>\amp =\int\sin(x)\left(1-\cos^2(x)\right) \cos(x) \, dx</mrow>
           </md>.
         </p>
@@ -58,12 +62,24 @@
         <p>
           Now we let <m>u=\cos(x)</m> so that <m>-du=\sin(x)\,dx</m>.
           <md>
-            <mrow>\ds\int\sin^3(x) \cos(x) \, dx \amp =\int\sin(x)\left(1-\cos^2(x)\right) \cos(x) \, dx</mrow>
+            <mrow>\int\sin^3(x) \cos(x) \, dx \amp =\int\sin(x)\left(1-\cos^2(x)\right) \cos(x) \, dx</mrow>
             <mrow>\amp =\int -\left(1-u^2\right)u\,du</mrow>
             <mrow>\amp =\int -\left(u-u^3\right)\,du</mrow>
-            <mrow>\amp =\frac{u^2}{2}-\frac{u^4}{4}+C</mrow>
-            <mrow>\amp =\frac{\cos^2(x)}{2}-\frac{\cos^4(x)}{4}+C</mrow>
+            <mrow>\amp =-\frac{u^2}{2}+\frac{u^4}{4}+C</mrow>
+            <mrow>\amp =-\frac{\cos^2(x)}{2}+\frac{\cos^4(x)}{4}+C</mrow>
           </md>.
+        </p>
+
+        <p>
+          This looks like a very different answer, so you might wonder if we went wrong somewhere.
+          But in fact, the two answers are equivalent, in the sense that they differ by a constant!
+          (So the <q><m>+C</m></q> is different in each case, if you like.)
+          Notice that
+          <md>
+            <mrow>\frac14\sin^4(x) \amp = \frac14(1-\cos^2(x))^2</mrow>
+            <mrow> \amp = \frac14-\frac12\cos^2(x)+\frac14\cos^4(x)</mrow>
+          </md>,
+          so the difference between the two answers is the constant <m>\frac14</m> .
         </p>
       </solution>
     </example>
