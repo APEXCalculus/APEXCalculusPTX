@@ -335,8 +335,11 @@
             <li xml:id="thm_geom_series_a">
 
               <p>
-                The <m>n</m>th partial sum is:
-                <m>\ds S_n = \frac{1-r^{n+1}}{1-r}</m>.
+                For <m>r\neq 1</m>, the <m>n</m>th partial sum is:
+                <me>
+                  S_n = 1+r+r^2+\cdots + r^{n-1} = \frac{1-r^{n}}{1-r}
+                </me>.
+                When <m>r=1</m>, <m>S_n = n</m>.
               </p>
             </li>
 
@@ -363,13 +366,13 @@
           Consider the <m>n</m>th partial sum of the geometric series,
           <m>S_n=\sum_{i=0}^n r^i</m>:
           <md>
-            <mrow>S_n \amp = 1+r+r^2+\dots+r^{n-1}+r^n</mrow>
+            <mrow>S_n \amp = 1+r+r^2+\cdots+r^{n-2}+r^{n-1}</mrow>
             <intertext>Multiply both sides by <m>r</m>:</intertext>
-            <mrow>r\cdot S_n \amp = r+r^2+r^3+\dots+r^{n}+r^{n+1}</mrow>
+            <mrow>r\cdot S_n \amp = r+r^2+r^3+\dots+r^{n-1}+r^{n}</mrow>
             <intertext>Now subtract the second line from the first and solve for <m>S_n</m>:</intertext>
-            <mrow>S_n-r\cdot S_n \amp = 1-r^{n+1}</mrow>
-            <mrow>S_n(1-r) \amp = 1-r^{n+1}</mrow>
-            <mrow>S_n \amp = \frac{1-r^{n+1}}{1-r}</mrow>
+            <mrow>S_n-r\cdot S_n \amp = 1-r^n</mrow>
+            <mrow>S_n(1-r) \amp = 1-r^{n}</mrow>
+            <mrow>S_n \amp = \frac{1-r^{n}}{1-r}</mrow>
           </md>.
           We have shown <xref ref="thm_geom_series_a">Part</xref>
           of <xref ref="thm_geom_series" text="title"/>.
@@ -377,7 +380,7 @@
 
         <p>
           Now, examining the partial sums,
-          we consider four cases to determine when <m>S_n</m> converges:
+          we consider five cases to determine when <m>S_n</m> converges:
 
           <ol>
             <li>
@@ -391,29 +394,35 @@
 
             <li>
               <p>
-                If <m>\abs{r}\gt 1</m>, then <m>r^n \to \pm \infty</m>
-                (depending on the sign of <m>r</m>)
-                as <m>n \to \infty</m>.
-                We also have <m>1-r</m> a constant,
-                so <m>\inflim S_n</m> does not exist
-                (if <m>r \gt 0</m>,
-                the partial sums diverge to <m>\infty</m> and if <m>r \lt 0</m>,
-                the partial sums diverge to <m>-\infty</m>).
+                If <m>r \gt 1</m>, then <m>r^n \to \infty</m>
+                as <m>n \to \infty</m>, so
+                <me>
+                  S_n = \frac{1-r^n}{1-r}=\frac{r^n}{r-1}-\frac{1}{r-1}
+                </me>
+                diverges to infinity. (Note that <m>r-1</m> is a positive constant.)
+              </p>
+            </li>
+
+            <li>
+              <p>
+                If <m>r \lt -1</m>, then <m>r^n</m> will oscillate between large positive
+                and large negative values as <m>n</m> increases.
+                The same will be true of <m>S_n</m>, so <m>\inflim S_n</m> does not exist.
               </p>
             </li>
 
             <li>
               If <m>r=1</m>,
               then <m>S_n = \frac{1-1^{n+1}}{1-1}</m> is undefined.
-              However, examining <m>S_n = 1+r+r^2+\dots+r^{n-1}+r^n</m> for <m>r=1</m>,
-              we can see that the partial sums simplify to <m>S_n=n+1</m>.
-              Clearly this sequence diverges to <m>\infty</m>.
+              However, examining <m>S_n = 1+r+r^2+\dots+r^n</m> for <m>r=1</m>,
+              we can see that the partial sums simplify to <m>S_n=n</m>,
+              and this sequence diverges to <m>\infty</m>.
             </li>
 
             <li>
-              If <m>r=-1</m>, then <m>S_n = \frac{1-(-1)^{n+1}}{2}</m>.
-              For even values of <m>n</m>, the partial sums are always <m>1</m>.
-              For odd values of <m>n</m>, the partial sums are always <m>0</m>.
+              If <m>r=-1</m>, then <m>S_n = \frac{1-(-1)^{n}}{2}</m>.
+              For even values of <m>n</m>, the partial sums are always <m>0</m>.
+              For odd values of <m>n</m>, the partial sums are always <m>1</m>.
               So the sequence of partial sums diverges.
             </li>
           </ol>
