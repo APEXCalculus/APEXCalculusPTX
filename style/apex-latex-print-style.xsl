@@ -340,15 +340,15 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
                 <xsl:when test="contains($youtube, ' ')">
                   <xsl:variable name="visual-first">
                     <c>
-                      <xsl:text>www.youtube.com/</xsl:text>
+                      <xsl:text>youtube.com/</xsl:text>
                       <xsl:text>watch_videos?</xsl:text>
+                      <xsl:text>video_ids=</xsl:text>
                     </c>
                   </xsl:variable>
                   <xsl:apply-templates select="exsl:node-set($visual-first)/*" />
                   <xsl:text>&#xa;</xsl:text>
                   <xsl:variable name="visual-second">
-                    <c>
-                      <xsl:text>video_ids=</xsl:text>
+                    <c>                      
                       <xsl:value-of select="str:replace($youtube, ' ', ',')" />
                     </c>
                   </xsl:variable>
