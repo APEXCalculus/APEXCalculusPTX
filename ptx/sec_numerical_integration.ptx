@@ -2095,437 +2095,505 @@
 
         <introduction>
           <p>
-            In the following exercises, a definite integral is given.
-          </p>
-
-          <p>
-            <ol>
-              <li>
-                <p>
-                  Approximate the definite integral with the Trapezoidal Rule and <m>n=4</m>.
-                </p>
-              </li>
-
-              <li>
-                <p>
-                  Approximate the definite integral with Simpson's Rule and <m>n=4</m>.
-                </p>
-              </li>
-
-              <li>
-                <p>
-                  Find the exact value of the integral.
-                </p>
-              </li>
-            </ol>
+            In the following exercises,
+            approximate the definite integral with the Trapezoidal Rule and Simpson's Rule,
+            with <m>n=4</m>. Then find the exact value.
           </p>
         </introduction>
   <!-- Exercise 4       -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = -1;
-                $b = 1;
-                $n = 4;
-                $f = Formula("x^2");
-                $F = Formula("x^3/3");
-                $delta_x = ($b - $a)/$n;
-                @l = ();
-                $trap = 0;
-                $simp = 0;
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
+            <pg-code>
+              $a = -1;
+              $b = 1;
+              $n = 4;
+              $f = Formula("x^2");
+              $F = Formula("x^3/3");
+              $delta_x = ($b - $a)/$n;
+              @l = ();
+              $trap = 0;
+              $simp = 0;
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              $flip = 1;    <!--Gotta be a better way to do this, but enh -->
+              foreach $i (@l) {
+                $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
+                if ($flip == 1) {
+                  $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
+                  $flip = 0;
+                } else {
+                  $flip = 1;
                 }
-                $flip = 1;    <!--Gotta be a better way to do this, but enh -->
-                foreach $i (@l) {
-                  $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
-                  if ($flip == 1) {
-                    $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
-                    $flip = 0;
-                  } else {
-                    $flip = 1;
-                  }
-                }
-                $trap = $trap*$delta_x/2;
-                $simp = $simp*$delta_x/3;
-                $exact = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
+              }
+              $trap = $trap*$delta_x/2;
+              $simp = $simp*$delta_x/3;
+              $exact = $F->eval(x=>$b) - $F->eval(x=>$a);
+            </pg-code>
 
+            <introduction>
+              <p>
+                For the integral <m>\int_{-1}^1 x^2\, dx</m>:
+              </p>
+            </introduction>
+
+            <task>
               <statement>
                 <p>
-                  For the integral <m>\ds \int_{-1}^1 x^2\, dx</m>:
+                  Approximate using the trapezoidal rule: <var name="$trap" width="20"/><!-- 3/4 -->
                 </p>
-
-                <p>
-                  Approximate using the trapezoidal rule, and 4 rectangles: <var name="$trap" width="20"/>
-                </p>
-    <!-- 3/4 -->
-                <p>
-                  Approximate using Simpson's rule, and 4 rectangles: <var name="$simp" width="20"/>
-                </p>
-    <!-- 2/3 -->
-                <p>
-                  Find the exact value: <var name="$exact" width="20"/>
-                </p>
-    <!-- 2/3 -->
               </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Approximate using Simpson's rule: <var name="$simp" width="20"/><!-- 2/3 -->
+                </p>
+              </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Find the exact value: <var name="$exact" width="20"/><!-- 2/3 -->
+                </p>
+              </statement>
+            </task>
           </webwork>
         </exercise>
   <!-- Exercise 5 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 10;
-                $n = 4;
-                $f = Formula("5*x");
-                $F = Formula("5*x^2/2");
-                $delta_x = ($b - $a)/$n;
-                @l = ();
-                $trap = 0;
-                $simp = 0;
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
+            <pg-code>
+              $a = 0;
+              $b = 10;
+              $n = 4;
+              $f = Formula("5*x");
+              $F = Formula("5*x^2/2");
+              $delta_x = ($b - $a)/$n;
+              @l = ();
+              $trap = 0;
+              $simp = 0;
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              $flip = 1;
+              foreach $i (@l) {
+                $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
+                if ($flip == 1) {
+                  $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
+                  $flip = 0;
+                } else {
+                  $flip = 1;
                 }
-                $flip = 1;
-                foreach $i (@l) {
-                  $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
-                  if ($flip == 1) {
-                    $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
-                    $flip = 0;
-                  } else {
-                    $flip = 1;
-                  }
-                }
-                $trap = $trap*$delta_x/2;
-                $simp = $simp*$delta_x/3;
-                $exact = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
+              }
+              $trap = $trap*$delta_x/2;
+              $simp = $simp*$delta_x/3;
+              $exact = $F->eval(x=>$b) - $F->eval(x=>$a);
+            </pg-code>
 
+            <introduction>
+              <p>
+                For the integral <m>\int_{0}^{10} 5x\, dx</m>:
+              </p>
+            </introduction>
+
+            <task>
               <statement>
                 <p>
-                  For the integral <m>\ds \int_{0}^{10} 5x\, dx</m>:
+                  Approximate using the trapezoidal rule: <var name="$trap" width="20"/> <!-- 250 -->
                 </p>
-
-                <p>
-                  Approximate using the trapezoidal rule, and 4 rectangles: <var name="$trap" width="20"/>
-                </p>
-    <!-- 250 -->
-                <p>
-                  Approximate using Simpson's rule, and 4 rectangles: <var name="$simp" width="20"/>
-                </p>
-    <!-- 250 -->
-                <p>
-                  Find the exact value: <var name="$exact" width="20"/>
-                </p>
-    <!-- 250 -->
               </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Approximate using Simpson's rule: <var name="$simp" width="20"/> <!-- 250 -->
+                </p>
+              </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Find the exact value: <var name="$exact" width="20"/> <!-- 250 -->
+                </p>
+              </statement>
+            </task>
           </webwork>
         </exercise>
   <!-- Exercise 6 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = 0;
-                $b = pi;
-                $n = 4;
-                $f = Formula("sin(x)");
-                $F = Formula("-cos(x)");
-                $delta_x = ($b - $a)/$n;
-                @l = ();
-                $trap = 0;
-                $simp = 0;
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
+            <pg-code>
+              $a = 0;
+              $b = pi;
+              $n = 4;
+              $f = Formula("sin(x)");
+              $F = Formula("-cos(x)");
+              $delta_x = ($b - $a)/$n;
+              @l = ();
+              $trap = 0;
+              $simp = 0;
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              $flip = 1;
+              foreach $i (@l) {
+                $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
+                if ($flip == 1) {
+                  $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
+                  $flip = 0;
+                } else {
+                  $flip = 1;
                 }
-                $flip = 1;
-                foreach $i (@l) {
-                  $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
-                  if ($flip == 1) {
-                    $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
-                    $flip = 0;
-                  } else {
-                    $flip = 1;
-                  }
-                }
-                $trap = $trap*$delta_x/2;
-                $simp = $simp*$delta_x/3;
-                $exact = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
+              }
+              $trap = $trap*$delta_x/2;
+              $simp = $simp*$delta_x/3;
+              $exact = $F->eval(x=>$b) - $F->eval(x=>$a);
+            </pg-code>
 
+            <introduction>
+              <p>
+                For the integral <m>\int_{0}^{\pi} \sin(x) \, dx</m>:
+              </p>
+            </introduction>
+
+            <task>
               <statement>
                 <p>
-                  For the integral <m>\ds \int_{0}^{\pi} \sin(x) \, dx</m>:
+                  Approximate using the trapezoidal rule: <var name="$trap" width="20"/> <!-- 1/4*(1+sqrt(2))*pi -->
                 </p>
-
-                <p>
-                  Approximate using the trapezoidal rule, and 4 rectangles: <var name="$trap" width="20"/>
-                </p>
-    <!-- 1/4*(1+sqrt(2))*pi -->
-                <p>
-                  Approximate using Simpson's rule, and 4 rectangles: <var name="$simp" width="20"/>
-                </p>
-    <!-- 1/6*(1+2*sqrt(2))*pi -->
-                <p>
-                  Find the exact value: <var name="$exact" width="20"/>
-                </p>
-    <!-- 2 -->
               </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Approximate using Simpson's rule: <var name="$simp" width="20"/>  <!-- 1/6*(1+2*sqrt(2))*pi -->
+                </p>
+              </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Find the exact value: <var name="$exact" width="20"/> <!-- 2 -->
+                </p>
+              </statement>
+            </task>
           </webwork>
         </exercise>
   <!-- Exercise 7 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 4;
-                $n = 4;
-                $f = Formula("sqrt(x)");
-                $F = Formula("2/3*x^(3/2)");
-                $delta_x = ($b - $a)/$n;
-                @l = ();
-                $trap = 0;
-                $simp = 0;
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
+            <pg-code>
+              $a = 0;
+              $b = 4;
+              $n = 4;
+              $f = Formula("sqrt(x)");
+              $F = Formula("2/3*x^(3/2)");
+              $delta_x = ($b - $a)/$n;
+              @l = ();
+              $trap = 0;
+              $simp = 0;
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              $flip = 1;
+              foreach $i (@l) {
+                $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
+                if ($flip == 1) {
+                  $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
+                  $flip = 0;
+                } else {
+                  $flip = 1;
                 }
-                $flip = 1;
-                foreach $i (@l) {
-                  $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
-                  if ($flip == 1) {
-                    $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
-                    $flip = 0;
-                  } else {
-                    $flip = 1;
-                  }
-                }
-                $trap = $trap*$delta_x/2;
-                $simp = $simp*$delta_x/3;
-                $exact = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
+              }
+              $trap = $trap*$delta_x/2;
+              $simp = $simp*$delta_x/3;
+              $exact = $F->eval(x=>$b) - $F->eval(x=>$a);
+            </pg-code>
 
+            <introduction>
+              <p>
+                For the integral <m>\int_{0}^{4} \sqrt x\, dx</m>:
+              </p>
+            </introduction>
+
+            <task>
               <statement>
                 <p>
-                  For the integral <m>\ds \int_{0}^{4} \sqrt x\, dx</m>:
+                  Approximate using the trapezoidal rule: <var name="$trap" width="20"/> <!-- 2+sqrt(2)+sqrt(3) -->
                 </p>
-
-                <p>
-                  Approximate using the trapezoidal rule, and 4 rectangles: <var name="$trap" width="20"/>
-                </p>
-    <!-- 2+sqrt(2)+sqrt(3) -->
-                <p>
-                  Approximate using Simpson's rule, and 4 rectangles: <var name="$simp" width="20"/>
-                </p>
-    <!-- 2/3*(3+sqrt(2)+2*sqrt(3)) -->
-                <p>
-                  Find the exact value: <var name="$exact" width="20"/>
-                </p>
-    <!-- 16/3 -->
               </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Approximate using Simpson's rule: <var name="$simp" width="20"/> <!-- 2/3*(3+sqrt(2)+2*sqrt(3)) -->
+                </p>
+              </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Find the exact value: <var name="$exact" width="20"/> <!-- 16/3 -->
+                </p>
+              </statement>
+            </task>
           </webwork>
         </exercise>
   <!-- Exercise 8 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 3;
-                $n = 4;
-                $f = Formula("x^3+2x^2-5x+7");
-                $F = Formula("x^4/4+2x^3/3-5x^2/2+7x");
-                $delta_x = ($b - $a)/$n;
-                @l = ();
-                $trap = 0;
-                $simp = 0;
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
+            <pg-code>
+              $a = 0;
+              $b = 3;
+              $n = 4;
+              $f = Formula("x^3+2x^2-5x+7");
+              $F = Formula("x^4/4+2x^3/3-5x^2/2+7x");
+              $delta_x = ($b - $a)/$n;
+              @l = ();
+              $trap = 0;
+              $simp = 0;
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              $flip = 1;
+              foreach $i (@l) {
+                $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
+                if ($flip == 1) {
+                  $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
+                  $flip = 0;
+                } else {
+                  $flip = 1;
                 }
-                $flip = 1;
-                foreach $i (@l) {
-                  $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
-                  if ($flip == 1) {
-                    $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
-                    $flip = 0;
-                  } else {
-                    $flip = 1;
-                  }
-                }
-                $trap = $trap*$delta_x/2;
-                $simp = $simp*$delta_x/3;
-                $exact = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
+              }
+              $trap = $trap*$delta_x/2;
+              $simp = $simp*$delta_x/3;
+              $exact = $F->eval(x=>$b) - $F->eval(x=>$a);
+            </pg-code>
 
+            <introduction>
+              <p>
+                For the integral <m>\int_{0}^{3} (x^3+2x^2-5x+7)\, dx</m>:
+              </p>
+            </introduction>
+
+            <task>
               <statement>
                 <p>
-                  For the integral <m>\ds \int_{0}^{3} (x^3+2x^2-5x+7)\, dx</m>:
+                  Approximate using the trapezoidal rule: <var name="$trap" width="20"/> <!-- 38.5781 -->
                 </p>
-
-                <p>
-                  Approximate using the trapezoidal rule, and 4 rectangles: <var name="$trap" width="20"/>
-                </p>
-    <!-- 38.5781 -->
-                <p>
-                  Approximate using Simpson's rule, and 4 rectangles: <var name="$simp" width="20"/>
-                </p>
-    <!-- 147/4 -->
-                <p>
-                  Find the exact value: <var name="$exact" width="20"/>
-                </p>
-    <!-- 147/4 -->
               </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Approximate using Simpson's rule: <var name="$simp" width="20"/> <!-- 147/4 -->
+                </p>
+              </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Find the exact value: <var name="$exact" width="20"/> <!-- 147/4 -->
+                </p>
+              </statement>
+            </task>
           </webwork>
         </exercise>
   <!-- Exercise 9 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 1;
-                $n = 4;
-                $f = Formula("x^4");
-                $F = Formula("x^5/5");
-                $delta_x = ($b - $a)/$n;
-                @l = ();
-                $trap = 0;
-                $simp = 0;
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
+            <pg-code>
+              $a = 0;
+              $b = 1;
+              $n = 4;
+              $f = Formula("x^4");
+              $F = Formula("x^5/5");
+              $delta_x = ($b - $a)/$n;
+              @l = ();
+              $trap = 0;
+              $simp = 0;
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              $flip = 1;
+              foreach $i (@l) {
+                $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
+                if ($flip == 1) {
+                  $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
+                  $flip = 0;
+                } else {
+                  $flip = 1;
                 }
-                $flip = 1;
-                foreach $i (@l) {
-                  $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
-                  if ($flip == 1) {
-                    $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
-                    $flip = 0;
-                  } else {
-                    $flip = 1;
-                  }
-                }
-                $trap = $trap*$delta_x/2;
-                $simp = $simp*$delta_x/3;
-                $exact = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
+              }
+              $trap = $trap*$delta_x/2;
+              $simp = $simp*$delta_x/3;
+              $exact = $F->eval(x=>$b) - $F->eval(x=>$a);
+            </pg-code>
 
+            <introduction>
+              <p>
+                For the integral <m>\int_{0}^{1} x^4\, dx</m>:
+              </p>
+            </introduction>
+
+            <task>
               <statement>
                 <p>
-                  For the integral <m>\ds \int_{0}^{1} x^4\, dx</m>:
+                  Approximate using the trapezoidal rule: <var name="$trap" width="20"/> <!-- 0.2207 -->
                 </p>
-
-                <p>
-                  Approximate using the trapezoidal rule, and 4 rectangles: <var name="$trap" width="20"/>
-                </p>
-    <!-- 0.2207 -->
-                <p>
-                  Approximate using Simpson's rule, and 4 rectangles: <var name="$simp" width="20"/>
-                </p>
-    <!-- 0.2005 -->
-                <p>
-                  Find the exact value: <var name="$exact" width="20"/>
-                </p>
-    <!-- 1/5 -->
               </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Approximate using Simpson's rule: <var name="$simp" width="20"/> <!-- 0.2005 -->
+                </p>
+              </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Find the exact value: <var name="$exact" width="20"/>  <!-- 1/5 -->
+                </p>
+              </statement>
+            </task>
           </webwork>
         </exercise>
   <!-- Exercise 10 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 2*pi;
-                $n = 4;
-                $f = Formula("cos(x)");
-                $F = Formula("sin(x)");
-                $delta_x = ($b - $a)/$n;
-                @l = ();
-                $trap = 0;
-                $simp = 0;
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
+            <pg-code>
+              $a = 0;
+              $b = 2*pi;
+              $n = 4;
+              $f = Formula("cos(x)");
+              $F = Formula("sin(x)");
+              $delta_x = ($b - $a)/$n;
+              @l = ();
+              $trap = 0;
+              $simp = 0;
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              $flip = 1;
+              foreach $i (@l) {
+                $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
+                if ($flip == 1) {
+                  $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
+                  $flip = 0;
+                } else {
+                  $flip = 1;
                 }
-                $flip = 1;
-                foreach $i (@l) {
-                  $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
-                  if ($flip == 1) {
-                    $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
-                    $flip = 0;
-                  } else {
-                    $flip = 1;
-                  }
-                }
-                $trap = $trap*$delta_x/2;
-                $simp = $simp*$delta_x/3;
-                $exact = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
+              }
+              $trap = $trap*$delta_x/2;
+              $simp = $simp*$delta_x/3;
+              $exact = $F->eval(x=>$b) - $F->eval(x=>$a);
+            </pg-code>
 
+            <introduction>
+              <p>
+                For the integral <m>\int_{0}^{2\pi} \cos(x) \, dx</m>:
+              </p>
+            </introduction>
+
+            <task>
               <statement>
                 <p>
-                  For the integral <m>\ds \int_{0}^{2\pi} \cos(x) \, dx</m>:
+                  Approximate using the trapezoidal rule: <var name="$trap" width="20"/> <!-- 0 -->
                 </p>
-
-                <p>
-                  Approximate using the trapezoidal rule, and 4 rectangles: <var name="$trap" width="20"/>
-                </p>
-    <!-- 0 -->
-                <p>
-                  Approximate using Simpson's rule, and 4 rectangles: <var name="$simp" width="20"/>
-                </p>
-    <!-- 0 -->
-                <p>
-                  Find the exact value: <var name="$exact" width="20"/>
-                </p>
-    <!-- 0 -->
               </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Approximate using Simpson's rule: <var name="$simp" width="20"/> <!-- 0 -->
+                </p>
+              </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Find the exact value: <var name="$exact" width="20"/> <!-- 0 -->
+                </p>
+              </statement>
+            </task>
           </webwork>
         </exercise>
   <!-- Exercise 11 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = -3;
-                $b = 3;
-                $n = 4;
-                $f = Formula("sqrt(9-x^2)");
-                $F = Formula("1/2*(sqrt(9-x^2)*x + 9 *asin(x/3))");
-                $delta_x = ($b - $a)/$n;
-                @l = ();
-                $trap = 0;
-                $simp = 0;
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
+            <pg-code>
+              $a = -3;
+              $b = 3;
+              $n = 4;
+              $f = Formula("sqrt(9-x^2)");
+              $F = Formula("1/2*(sqrt(9-x^2)*x + 9 *asin(x/3))");
+              $delta_x = ($b - $a)/$n;
+              @l = ();
+              $trap = 0;
+              $simp = 0;
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              $flip = 1;
+              foreach $i (@l) {
+                $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
+                if ($flip == 1) {
+                  $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
+                  $flip = 0;
+                } else {
+                  $flip = 1;
                 }
-                $flip = 1;
-                foreach $i (@l) {
-                  $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
-                  if ($flip == 1) {
-                    $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
-                    $flip = 0;
-                  } else {
-                    $flip = 1;
-                  }
-                }
-                $trap = $trap*$delta_x/2;
-                $simp = $simp*$delta_x/3;
-                $exact = $F->eval(x=>$b) - $F->eval(x=>$a);
-              </pg-code>
+              }
+              $trap = $trap*$delta_x/2;
+              $simp = $simp*$delta_x/3;
+              $exact = $F->eval(x=>$b) - $F->eval(x=>$a);
+            </pg-code>
 
+            <introduction>
+              <p>
+                For the integral <m>\int_{-3}^{3} \sqrt{9-x^2} \, dx</m>:
+              </p>
+            </introduction>
+
+            <task>
               <statement>
                 <p>
-                  For the integral <m>\ds \int_{-3}^{3} \sqrt{9-x^2} \, dx</m>:
+                  Approximate using the trapezoidal rule: <var name="$trap" width="20"/>  <!-- 9/2*(1+sqrt(3)), 12.294 -->
                 </p>
-
-                <p>
-                  Approximate using the trapezoidal rule, and 4 rectangles: <var name="$trap" width="20"/>
-                </p>
-    <!-- 9/2*(1+sqrt(3)), 12.294 -->
-                <p>
-                  Approximate using Simpson's rule, and 4 rectangles: <var name="$simp" width="20"/>
-                </p>
-    <!-- 3+6*sqrt(3), 13.392 -->
-                <p>
-                  Find the exact value: <var name="$exact" width="20"/>
-                </p>
-    <!-- 9*pi/2, 14.137 -->
               </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Approximate using Simpson's rule: <var name="$simp" width="20"/>  <!-- 3+6*sqrt(3), 13.392 -->
+                </p>
+              </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Find the exact value: <var name="$exact" width="20"/>  <!-- 9*pi/2, 14.137 -->
+                </p>
+              </statement>
+            </task>
           </webwork>
         </exercise>
 
@@ -2542,370 +2610,417 @@
   <!-- Exercise 12 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 1;
-                $n = 6;
-                $f = Formula("cos(x^2)");
-                $delta_x = ($b - $a)/$n;
-                @l = ();
-                $trap = 0;
-                $simp = 0;
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
+            <pg-code>
+              $a = 0;
+              $b = 1;
+              $n = 6;
+              $f = Formula("cos(x^2)");
+              $delta_x = ($b - $a)/$n;
+              @l = ();
+              $trap = 0;
+              $simp = 0;
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              $flip = 1;
+              foreach $i (@l) {
+                $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
+                if ($flip == 1) {
+                  $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
+                  $flip = 0;
+                } else {
+                  $flip = 1;
                 }
-                $flip = 1;
-                foreach $i (@l) {
-                  $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
-                  if ($flip == 1) {
-                    $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
-                    $flip = 0;
-                  } else {
-                    $flip = 1;
-                  }
-                }
-                $trap = $trap*$delta_x/2;
-                $simp = $simp*$delta_x/3;
-              </pg-code>
+              }
+              $trap = $trap*$delta_x/2;
+              $simp = $simp*$delta_x/3;
+            </pg-code>
 
+            <introduction>
+              <p>
+                For the integral <m>\int_{0}^{1} \cos\big(x^2\big) \, dx</m>:
+              </p>
+            </introduction>
+
+            <task>
               <statement>
                 <p>
-                  Approximate the integral <m>\ds \int_{0}^{1} \cos\big(x^2\big) \, dx</m> using the Trapezoidal rule and Simpson's rule, with <m>n=6</m>.
+                  Approximate using the trapezoidal rule: <var name="$trap" width="20"/>  <!-- 0.9006 -->
                 </p>
-
-                <p>
-                  Trapezoidal rule: <var name="$trap" width="20"/>
-                </p>
-    <!-- 0.9006 -->
-                <p>
-                  Simpson's rule: <var name="$simp" width="20"/>
-                </p>
-    <!-- 0.90452 -->
               </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Approximate using Simpson's rule: <var name="$simp" width="20"/>  <!-- 0.90452 -->
+                </p>
+              </statement>
+            </task>
           </webwork>
         </exercise>
   <!-- Exercise 13 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = -1;
-                $b = 1;
-                $n = 6;
-                $f = Formula("e^(x^2)");
-                $delta_x = ($b - $a)/$n;
-                @l = ();
-                $trap = 0;
-                $simp = 0;
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
+            <pg-code>
+              $a = -1;
+              $b = 1;
+              $n = 6;
+              $f = Formula("e^(x^2)");
+              $delta_x = ($b - $a)/$n;
+              @l = ();
+              $trap = 0;
+              $simp = 0;
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              $flip = 1;
+              foreach $i (@l) {
+                $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
+                if ($flip == 1) {
+                  $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
+                  $flip = 0;
+                } else {
+                  $flip = 1;
                 }
-                $flip = 1;
-                foreach $i (@l) {
-                  $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
-                  if ($flip == 1) {
-                    $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
-                    $flip = 0;
-                  } else {
-                    $flip = 1;
-                  }
-                }
-                $trap = $trap*$delta_x/2;
-                $simp = $simp*$delta_x/3;
-              </pg-code>
+              }
+              $trap = $trap*$delta_x/2;
+              $simp = $simp*$delta_x/3;
+            </pg-code>
 
+            <introduction>
+              <p>
+                For the integral <m>\int_{-1}^{1} e^{x^2} \, dx</m>:
+              </p>
+            </introduction>
+
+            <task>
               <statement>
                 <p>
-                  Approximate the integral <m>\ds \int_{-1}^{1} e^{x^2} \, dx</m> using the Trapezoidal rule and Simpson's rule, with <m>n=6</m>.
+                  Approximate using the trapezoidal rule: <var name="$trap" width="20"/>  <!-- 3.0241 -->
                 </p>
-
-                <p>
-                  Trapezoidal rule: <var name="$trap" width="20"/>
-                </p>
-    <!-- 3.0241 -->
-                <p>
-                  Simpson's rule: <var name="$simp" width="20"/>
-                </p>
-    <!-- 2.9315 -->
               </statement>
-              <solution>
-                <p>
-                  Trapezoidal Rule: 	<m>3.0241</m>
-                </p>
+            </task>
 
+            <task>
+              <statement>
                 <p>
-                  Simpson's Rule: <m>2.9315</m>
+                  Approximate using Simpson's rule: <var name="$simp" width="20"/>  <!-- 2.9315 -->
                 </p>
-              </solution>
+              </statement>
+            </task>
           </webwork>
         </exercise>
   <!-- Exercise 14 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 5;
-                $n = 6;
-                $f = Formula("sqrt(x^2+1)");
-                $delta_x = ($b - $a)/$n;
-                @l = ();
-                $trap = 0;
-                $simp = 0;
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
+            <pg-code>
+              $a = 0;
+              $b = 5;
+              $n = 6;
+              $f = Formula("sqrt(x^2+1)");
+              $delta_x = ($b - $a)/$n;
+              @l = ();
+              $trap = 0;
+              $simp = 0;
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              $flip = 1;
+              foreach $i (@l) {
+                $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
+                if ($flip == 1) {
+                  $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
+                  $flip = 0;
+                } else {
+                  $flip = 1;
                 }
-                $flip = 1;
-                foreach $i (@l) {
-                  $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
-                  if ($flip == 1) {
-                    $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
-                    $flip = 0;
-                  } else {
-                    $flip = 1;
-                  }
-                }
-                $trap = $trap*$delta_x/2;
-                $simp = $simp*$delta_x/3;
-              </pg-code>
+              }
+              $trap = $trap*$delta_x/2;
+              $simp = $simp*$delta_x/3;
+            </pg-code>
 
+            <introduction>
+              <p>
+                For the integral <m>\int_{0}^{5} \sqrt{x^2+1} \, dx</m>:
+              </p>
+            </introduction>
+
+            <task>
               <statement>
                 <p>
-                  Approximate the integral <m>\ds \int_{0}^{5} \sqrt{x^2+1} \, dx</m> using the Trapezoidal rule and Simpson's rule, with <m>n=6</m>.
+                  Approximate using the trapezoidal rule: <var name="$trap" width="20"/>  <!-- 13.9604 -->
                 </p>
-
-                <p>
-                  Trapezoidal rule: <var name="$trap" width="20"/>
-                </p>
-    <!-- 13.9604 -->
-                <p>
-                  Simpson's rule: <var name="$simp" width="20"/>
-                </p>
-    <!-- 13.9066 -->
               </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Approximate using Simpson's rule: <var name="$simp" width="20"/>  <!-- 13.9066 -->
+                </p>
+              </statement>
+            </task>
           </webwork>
         </exercise>
   <!-- Exercise 15 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = 0;
-                $b = pi;
-                $n = 6;
-                $f = Formula("x*sin(x)");
-                $delta_x = ($b - $a)/$n;
-                @l = ();
-                $trap = 0;
-                $simp = 0;
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
+            <pg-code>
+              $a = 0;
+              $b = pi;
+              $n = 6;
+              $f = Formula("x*sin(x)");
+              $delta_x = ($b - $a)/$n;
+              @l = ();
+              $trap = 0;
+              $simp = 0;
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              $flip = 1;
+              foreach $i (@l) {
+                $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
+                if ($flip == 1) {
+                  $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
+                  $flip = 0;
+                } else {
+                  $flip = 1;
                 }
-                $flip = 1;
-                foreach $i (@l) {
-                  $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
-                  if ($flip == 1) {
-                    $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
-                    $flip = 0;
-                  } else {
-                    $flip = 1;
-                  }
-                }
-                $trap = $trap*$delta_x/2;
-                $simp = $simp*$delta_x/3;
-              </pg-code>
+              }
+              $trap = $trap*$delta_x/2;
+              $simp = $simp*$delta_x/3;
+            </pg-code>
 
+            <introduction>
+              <p>
+                For the integral <m>\int_{0}^{\pi} x\sin(x) \, dx</m>:
+              </p>
+            </introduction>
+
+            <task>
               <statement>
                 <p>
-                  Approximate the integral <m>\ds \int_{0}^{\pi} x\sin(x) \, dx</m> using the Trapezoidal rule and Simpson's rule, with <m>n=6</m>.
+                  Approximate using the trapezoidal rule: <var name="$trap" width="20"/>  <!-- 3.0695 -->
                 </p>
-
-                <p>
-                  Trapezoidal rule: <var name="$trap" width="20"/>
-                </p>
-    <!-- 3.0695 -->
-                <p>
-                  Simpson's rule: <var name="$simp" width="20"/>
-                </p>
-    <!-- 3.14295 -->
               </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Approximate using Simpson's rule: <var name="$simp" width="20"/>  <!-- 3.14295 -->
+                </p>
+              </statement>
+            </task>
           </webwork>
         </exercise>
   <!-- Exercise 16 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = 0;
-                $b = pi/2;
-                $n = 6;
-                $f = Formula("sqrt(cos(x))");
-                $delta_x = ($b - $a)/$n;
-                @l = ();
-                $trap = 0;
-                $simp = 0;
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
+            <pg-code>
+              $a = 0;
+              $b = pi/2;
+              $n = 6;
+              $f = Formula("sqrt(cos(x))");
+              $delta_x = ($b - $a)/$n;
+              @l = ();
+              $trap = 0;
+              $simp = 0;
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              $flip = 1;
+              foreach $i (@l) {
+                $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
+                if ($flip == 1) {
+                  $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
+                  $flip = 0;
+                } else {
+                  $flip = 1;
                 }
-                $flip = 1;
-                foreach $i (@l) {
-                  $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
-                  if ($flip == 1) {
-                    $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
-                    $flip = 0;
-                  } else {
-                    $flip = 1;
-                  }
-                }
-                $trap = $trap*$delta_x/2;
-                $simp = $simp*$delta_x/3;
-              </pg-code>
+              }
+              $trap = $trap*$delta_x/2;
+              $simp = $simp*$delta_x/3;
+            </pg-code>
 
+            <introduction>
+              <p>
+                For the integral <m>\int_{0}^{\pi/2} \sqrt{\cos(x) } \, dx</m>:
+              </p>
+            </introduction>
+
+            <task>
               <statement>
                 <p>
-                  Approximate the integral <m>\ds \int_{0}^{\pi/2} \sqrt{\cos(x) } \, dx</m> using the Trapezoidal rule and Simpson's rule, with <m>n=6</m>.
+                  Approximate using the trapezoidal rule: <var name="$trap" width="20"/>  <!-- 1.1703 -->
                 </p>
-
-                <p>
-                  Trapezoidal rule: <var name="$trap" width="20"/>
-                </p>
-    <!-- 1.1703 -->
-                <p>
-                  Simpson's rule: <var name="$simp" width="20"/>
-                </p>
-    <!-- 1.1873 -->
               </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Approximate using Simpson's rule: <var name="$simp" width="20"/>  <!-- 1.1873 -->
+                </p>
+              </statement>
+            </task>
           </webwork>
         </exercise>
   <!-- Exercise 17 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = 1;
-                $b = 4;
-                $n = 6;
-                $f = Formula("ln(x)");
-                $delta_x = ($b - $a)/$n;
-                @l = ();
-                $trap = 0;
-                $simp = 0;
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
+            <pg-code>
+              $a = 1;
+              $b = 4;
+              $n = 6;
+              $f = Formula("ln(x)");
+              $delta_x = ($b - $a)/$n;
+              @l = ();
+              $trap = 0;
+              $simp = 0;
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              $flip = 1;
+              foreach $i (@l) {
+                $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
+                if ($flip == 1) {
+                  $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
+                  $flip = 0;
+                } else {
+                  $flip = 1;
                 }
-                $flip = 1;
-                foreach $i (@l) {
-                  $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
-                  if ($flip == 1) {
-                    $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
-                    $flip = 0;
-                  } else {
-                    $flip = 1;
-                  }
-                }
-                $trap = $trap*$delta_x/2;
-                $simp = $simp*$delta_x/3;
-              </pg-code>
+              }
+              $trap = $trap*$delta_x/2;
+              $simp = $simp*$delta_x/3;
+            </pg-code>
 
+            <introduction>
+              <p>
+                For the integral <m>\int_{1}^{4} \ln(x) \, dx</m>:
+              </p>
+            </introduction>
+
+            <task>
               <statement>
                 <p>
-                  Approximate the integral <m>\ds \int_{1}^{4} \ln(x) \, dx</m> using the Trapezoidal rule and Simpson's rule, with <m>n=6</m>.
+                  Approximate using the trapezoidal rule: <var name="$trap" width="20"/>  <!-- 2.52971 -->
                 </p>
-
-                <p>
-                  Trapezoidal rule: <var name="$trap" width="20"/>
-                </p>
-    <!-- 2.52971 -->
-                <p>
-                  Simpson's rule: <var name="$simp" width="20"/>
-                </p>
-    <!-- 2.5447 -->
               </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Approximate using Simpson's rule: <var name="$simp" width="20"/>  <!-- 2.5447 -->
+                </p>
+              </statement>
+            </task>
           </webwork>
         </exercise>
   <!-- Exercise 18 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = -1;
-                $b = 1;
-                $n = 6;
-                $f = Formula("1/(sin(x)+2)");
-                $delta_x = ($b - $a)/$n;
-                @l = ();
-                $trap = 0;
-                $simp = 0;
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
+            <pg-code>
+              $a = -1;
+              $b = 1;
+              $n = 6;
+              $f = Formula("1/(sin(x)+2)");
+              $delta_x = ($b - $a)/$n;
+              @l = ();
+              $trap = 0;
+              $simp = 0;
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              $flip = 1;
+              foreach $i (@l) {
+                $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
+                if ($flip == 1) {
+                  $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
+                  $flip = 0;
+                } else {
+                  $flip = 1;
                 }
-                $flip = 1;
-                foreach $i (@l) {
-                  $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
-                  if ($flip == 1) {
-                    $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
-                    $flip = 0;
-                  } else {
-                    $flip = 1;
-                  }
-                }
-                $trap = $trap*$delta_x/2;
-                $simp = $simp*$delta_x/3;
-              </pg-code>
+              }
+              $trap = $trap*$delta_x/2;
+              $simp = $simp*$delta_x/3;
+            </pg-code>
 
+            <introduction>
+              <p>
+                For the integral <m>\int_{-1}^{1} \frac{1}{\sin(x) +2} \, dx</m>:
+              </p>
+            </introduction>
+
+            <task>
               <statement>
                 <p>
-                  Approximate the integral <m>\ds \int_{-1}^{1} \frac{1}{\sin(x) +2} \, dx</m> using the Trapezoidal rule and Simpson's rule, with <m>n=6</m>.
+                  Approximate using the trapezoidal rule: <var name="$trap" width="20"/>  <!-- 1.0803 -->
                 </p>
-
-                <p>
-                  Trapezoidal rule: <var name="$trap" width="20"/>
-                </p>
-    <!-- 1.0803 -->
-                <p>
-                  Simpson's rule: <var name="$simp" width="20"/>
-                </p>
-    <!-- 1.077 -->
               </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Approximate using Simpson's rule: <var name="$simp" width="20"/>  <!-- 1.077 -->
+                </p>
+              </statement>
+            </task>
           </webwork>
         </exercise>
   <!-- Exercise 19 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 6;
-                $n = 6;
-                $f = Formula("1/(sin(x)+2)");
-                $delta_x = ($b - $a)/$n;
-                @l = ();
-                $trap = 0;
-                $simp = 0;
-                foreach $i (0..$n-1) {
-                  push @l, $i*$delta_x + $a;
+            <pg-code>
+              $a = 0;
+              $b = 6;
+              $n = 6;
+              $f = Formula("1/(sin(x)+2)");
+              $delta_x = ($b - $a)/$n;
+              @l = ();
+              $trap = 0;
+              $simp = 0;
+              foreach $i (0..$n-1) {
+                push @l, $i*$delta_x + $a;
+              }
+              $flip = 1;
+              foreach $i (@l) {
+                $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
+                if ($flip == 1) {
+                  $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
+                  $flip = 0;
+                } else {
+                  $flip = 1;
                 }
-                $flip = 1;
-                foreach $i (@l) {
-                  $trap += $f->eval(x=>$i) + $f->eval(x=>($i + $delta_x));
-                  if ($flip == 1) {
-                    $simp += $f->eval(x=>$i) + 4*$f->eval(x=>($i + $delta_x)) + $f->eval(x=>($i+2*$delta_x));
-                    $flip = 0;
-                  } else {
-                    $flip = 1;
-                  }
-                }
-                $trap = $trap*$delta_x/2;
-                $simp = $simp*$delta_x/3;
-              </pg-code>
+              }
+              $trap = $trap*$delta_x/2;
+              $simp = $simp*$delta_x/3;
+            </pg-code>
 
+            <introduction>
+              <p>
+                For the integral <m>\int_{0}^{6} \frac{1}{\sin(x) +2} \, dx</m>:
+              </p>
+            </introduction>
+
+            <task>
               <statement>
                 <p>
-                  Approximate the integral <m>\ds \int_{0}^{6} \frac{1}{\sin(x) +2} \, dx</m> using the Trapezoidal rule and Simpson's rule, with <m>n=6</m>.
+                  Approximate using the trapezoidal rule: <var name="$trap" width="20"/>  <!-- 3.4682 -->
                 </p>
-
-                <p>
-                  Trapezoidal rule: <var name="$trap" width="20"/>
-                </p>
-    <!-- 3.4682 -->
-                <p>
-                  Simpson's rule: <var name="$simp" width="20"/>
-                </p>
-    <!-- 3.4985 -->
               </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Approximate using Simpson's rule: <var name="$simp" width="20"/>  <!-- 3.4985 -->
+                </p>
+              </statement>
+            </task>
           </webwork>
         </exercise>
 
@@ -2915,180 +3030,182 @@
         <introduction>
           <p>
             In the following exercises,
-            find <m>n</m> such that the error in approximating the given definite integral is less than <m>0.0001</m> when using:
-          </p>
-
-          <p>
-            <ol>
-              <li>
-                <p>
-                  the Trapezoidal Rule
-                </p>
-              </li>
-
-              <li>
-                <p>
-                  Simpson's Rule
-                </p>
-              </li>
-            </ol>
+            find <m>n</m> such that the error in approximating the given definite integral is less than <m>0.0001</m>
+            when using the Trapezoidal Rule and Simpson's Rule.
           </p>
         </introduction>
   <!-- Exercise 20 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = 0;
-                $b = pi;
-                $err = 0.0001;
-                $Mt = 1;
-                $Ms = 1;
-                $nt = sqrt(($b-$a)**3*$Mt/(12*$err));
-                $nt = int($nt + 0.5);
-                $ns = (($b-$a)**5*$Ms/(180*$err))**(1./4);
-                $ns = int($ns + .99999);
-                if ($ns%2==1) {     <!--Force even result -->
-                  $ns++;
-                }
-              </pg-code>
+            <pg-code>
+              $a = 0;
+              $b = pi;
+              $err = 0.0001;
+              $Mt = 1;
+              $Ms = 1;
+              $nt = sqrt(($b-$a)**3*$Mt/(12*$err));
+              $nt = int($nt + 0.5);
+              $ns = (($b-$a)**5*$Ms/(180*$err))**(1./4);
+              $ns = int($ns + .99999);
+              if ($ns%2==1) {     <!--Force even result -->
+                $ns++;
+              }
+            </pg-code>
 
+            <introduction>
+              <p>
+                For the integral <m>\int_{0}^{\pi} \sin(x) \, dx</m>:
+              </p>
+            </introduction>
+
+            <task>
               <statement>
                 <p>
-                  For the integral <m>\ds \int_{0}^{\pi} \sin(x) \, dx</m>,
-                  find <m>n</m> such that the error in approximating the given definite integral is less than <m>0.0001</m> when using:
+                  Trapezoid rule: <m>n  \gt = </m><var name="$nt" width="20"/> <!-- 161 -->
                 </p>
-
-                <p>
-                  Trapezoid rule: <m>n  \gt = </m><var name="$nt" width="20"/>
-                </p>
-     <!-- 161 -->
-                <p>
-                  Simpson's rule: <m>n  \gt = </m><var name="$ns" width="20"/>
-                </p>
-     <!-- 12 -->
               </statement>
               <solution>
                 <p>
-                  <ol>
-                    <li>
-                      <p>
-                        <m>n=161</m> (using <m>\max\big(\fpp(x)\big)=1</m>)
-                      </p>
-                    </li>
-
-                    <li>
-                      <p>
-                        <m>n=12</m>	(using <m>\max\big(f^{(4)}(x)\big)=1</m>)
-                      </p>
-                    </li>
-                  </ol>
+                  <m>n=161</m> (using <m>\max\big(\fpp(x)\big)=1</m>)
                 </p>
               </solution>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Simpson's rule: <m>n  \gt = </m><var name="$ns" width="20"/> <!-- 12 -->
+                </p>
+              </statement>
+              <solution>
+                <p>
+                  <m>n=12</m>	(using <m>\max\big(f^{(4)}(x)\big)=1</m>)
+                </p>
+              </solution>
+            </task>
           </webwork>
         </exercise>
   <!-- Exercise 21 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = 1;
-                $b = 4;
-                $err = 0.0001;
-                $Mt = 0.75;
-                $Ms = 105/16;
-                $nt = sqrt(($b-$a)**3*$Mt/(12*$err));
-                $nt = int($nt + 0.99999);
-                $ns = (($b-$a)**5*$Ms/(180*$err))**(1./4);
-                $ns = int($ns + .99999);
-                if ($ns%2==1) {     <!--Force even result -->
-                  $ns++;
-                }
-              </pg-code>
+            <pg-code>
+              $a = 1;
+              $b = 4;
+              $err = 0.0001;
+              $Mt = 0.75;
+              $Ms = 105/16;
+              $nt = sqrt(($b-$a)**3*$Mt/(12*$err));
+              $nt = int($nt + 0.99999);
+              $ns = (($b-$a)**5*$Ms/(180*$err))**(1./4);
+              $ns = int($ns + .99999);
+              if ($ns%2==1) {     <!--Force even result -->
+                $ns++;
+              }
+            </pg-code>
 
+            <introduction>
+              <p>
+                For the integral <m>\int_{1}^{4} \frac{1}{\sqrt x} \, dx</m>:
+              </p>
+            </introduction>
+
+            <task>
               <statement>
                 <p>
-                  For the integral <m>\ds \int_{1}^{4} \frac{1}{\sqrt x} \, dx</m>,
-                  find <m>n</m> such that the error in approximating the given definite integral is less than <m>0.0001</m> when using:
+                  Trapezoid rule: <m>n  \gt = </m><var name="$nt" width="20"/>  <!-- 130 -->
                 </p>
-
-                <p>
-                  Trapezoid rule: <m>n  \gt = </m><var name="$nt" width="20"/>
-                </p>
-     <!-- 130 -->
-                <p>
-                  Simpson's rule: <m>n  \gt = </m><var name="$ns" width="20"/>
-                </p>
-     <!-- 18 -->
               </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Simpson's rule: <m>n  \gt = </m><var name="$ns" width="20"/> <!-- 18 -->
+                </p>
+              </statement>
+            </task>
           </webwork>
         </exercise>
   <!-- Exercise 22 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = 0;
-                $b = pi;
-                $err = 0.0001;
-                $Mt = 38.1865;
-                $Ms = 804.2;
-                $nt = sqrt(($b-$a)**3*$Mt/(12*$err));
-                $nt = int($nt + 0.99999);
-                $ns = (($b-$a)**5*$Ms/(180*$err))**(1./4);
-                $ns = int($ns + .99999);
-                if ($ns%2==1) {     <!--Force even result -->
-                  $ns++;
-                }
-              </pg-code>
+            <pg-code>
+              $a = 0;
+              $b = pi;
+              $err = 0.0001;
+              $Mt = 38.1865;
+              $Ms = 804.2;
+              $nt = sqrt(($b-$a)**3*$Mt/(12*$err));
+              $nt = int($nt + 0.99999);
+              $ns = (($b-$a)**5*$Ms/(180*$err))**(1./4);
+              $ns = int($ns + .99999);
+              if ($ns%2==1) {     <!--Force even result -->
+                $ns++;
+              }
+            </pg-code>
 
+            <introduction>
+              <p>
+                For the integral <m>\int_{0}^{\pi} \cos\big(x^2\big) \, dx</m>:
+              </p>
+            </introduction>
+
+            <task>
               <statement>
                 <p>
-                  For the integral <m>\ds \int_{0}^{\pi} \cos\big(x^2\big) \, dx</m>,
-                  find <m>n</m> such that the error in approximating the given definite integral is less than <m>0.0001</m> when using:
+                  Trapezoid rule: <m>n  \gt = </m><var name="$nt" width="20"/>  <!-- 994 but orig sol'n said 1004 -->
                 </p>
-
-                <p>
-                  Trapezoid rule: <m>n  \gt = </m><var name="$nt" width="20"/>
-                </p>
-     <!-- 994 but orig sol'n said 1004 -->
-                <p>
-                  Simpson's rule: <m>n  \gt = </m><var name="$ns" width="20"/>
-                </p>
-     <!-- 62 -->
               </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Simpson's rule: <m>n  \gt = </m><var name="$ns" width="20"/> <!-- 62 -->
+                </p>
+              </statement>
+            </task>
           </webwork>
         </exercise>
   <!-- Exercise 23 -->
         <exercise>
           <webwork>
-              <pg-code>
-                $a = 0;
-                $b = 5;
-                $err = 0.0001;
-                $Mt = 300;
-                $Ms = 24;
-                $nt = sqrt(($b-$a)**3*$Mt/(12*$err));
-                $nt = int($nt + 0.99999);
-                $ns = (($b-$a)**5*$Ms/(180*$err))**(1./4);
-                $ns = int($ns + .99999);
-                if ($ns%2==1) {     <!--Force even result -->
-                  $ns++;
-                }
-              </pg-code>
+            <pg-code>
+              $a = 0;
+              $b = 5;
+              $err = 0.0001;
+              $Mt = 300;
+              $Ms = 24;
+              $nt = sqrt(($b-$a)**3*$Mt/(12*$err));
+              $nt = int($nt + 0.99999);
+              $ns = (($b-$a)**5*$Ms/(180*$err))**(1./4);
+              $ns = int($ns + .99999);
+              if ($ns%2==1) {     <!--Force even result -->
+                $ns++;
+              }
+            </pg-code>
 
+            <introduction>
+              <p>
+                For the integral <m>\int_{0}^{5} x^4 \, dx</m>:
+              </p>
+            </introduction>
+
+            <task>
               <statement>
                 <p>
-                  For the integral <m>\ds \int_{0}^{5} x^4 \, dx</m>,
-                  find <m>n</m> such that the error in approximating the given definite integral is less than <m>0.0001</m> when using:
+                  Trapezoid rule: <m>n  \gt = </m><var name="$nt" width="20"/>  <!-- 5591 -->
                 </p>
-
-                <p>
-                  Trapezoid rule: <m>n  \gt = </m><var name="$nt" width="20"/>
-                </p>
-     <!-- 5591 -->
-                <p>
-                  Simpson's rule: <m>n  \gt = </m><var name="$ns" width="20"/>
-                </p>
-     <!-- 46 -->
               </statement>
+            </task>
+
+            <task>
+              <statement>
+                <p>
+                  Simpson's rule: <m>n  \gt = </m><var name="$ns" width="20"/> <!-- 46 -->
+                </p>
+              </statement>
+            </task>
           </webwork>
         </exercise>
 
