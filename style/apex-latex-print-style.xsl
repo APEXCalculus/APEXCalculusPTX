@@ -231,8 +231,8 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
     <xsl:text>\end{image}%&#xa;</xsl:text>
 </xsl:template>
 
-<!-- latex-image, asymptote, and tabular can all go in margin -->
-<xsl:template match="figure[not(ancestor::sidebyside) and not(ancestor::aside) and not(descendant::sidebyside) and (descendant::latex-image or descendant::asymptote or descendant::tabular or descendant::video) and not(ancestor::exercise)]">
+<!-- move non-sidebyside figures to the margin -->
+<xsl:template match="figure[not(ancestor::sidebyside) and not(ancestor::aside) and not(descendant::sidebyside) and (descendant::latex-image or descendant::asymptote or descendant::video) and not(ancestor::exercise)]">
     <xsl:text>&#xa;</xsl:text>
     <xsl:choose>
       <xsl:when test="ancestor::example and not(ancestor::ul or ancestor::ol)">
@@ -269,10 +269,54 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
         <xsl:apply-templates select="." mode="environment-name"/>
         <xsl:text>}%&#xa;</xsl:text>
         <xsl:apply-templates select="." mode="pop-footnote-text"/>
-        <xsl:text>}{0pt}&#xa;</xsl:text>
+        <xsl:text>}{0cm}&#xa;</xsl:text>
         <xsl:text>&#xa;</xsl:text>
 </xsl:template>
 
+<!-- move tables to the margin -->
+<xsl:template match="table[not(ancestor::sidebyside) and not(ancestor::aside) and not(descendant::sidebyside) and not(ancestor::exercise)]">
+    <xsl:text>&#xa;</xsl:text>
+    <xsl:choose>
+      <xsl:when test="ancestor::example and not(ancestor::ul or ancestor::ol)">
+        <xsl:text>\tcbmarginbox{%&#xa;</xsl:text>
+      </xsl:when>
+      <xsl:when test="ancestor::example and (ancestor::ul or ancestor::ol)">
+        <xsl:text>\listmarginbox{%&#xa;</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>\parmarginbox{%&#xa;</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
+    <xsl:text>\begin{</xsl:text>
+    <xsl:apply-templates select="." mode="environment-name"/>
+    <xsl:text>}{</xsl:text>
+    <xsl:text>\textbf{</xsl:text>
+    <xsl:apply-templates select="." mode="title-full"/>
+    <xsl:text>}</xsl:text>
+    <xsl:text>}{</xsl:text>
+    <xsl:apply-templates select="." mode="latex-id"/>
+    <xsl:text>}{</xsl:text>
+    <xsl:if test="$b-latex-hardcode-numbers">
+        <xsl:apply-templates select="." mode="number"/>
+    </xsl:if>
+    <xsl:text>}%&#xa;</xsl:text>
+    <!-- A "list" has an introduction/conclusion, with a       -->
+    <!-- list of some type in-between, and these will all      -->
+    <!-- automatically word-wrap to fill the available width.  -->
+    <!-- TODO: process meta-data, then restrict contents -->
+    <!-- tabular, introduction|list|conclusion           -->
+    <xsl:apply-templates select="*"/>
+    <!-- subcaption always goes in lower part -->
+    <xsl:if test="ancestor::*[self::figure]">
+        <xsl:text>\tcblower&#xa;</xsl:text>
+    </xsl:if>
+    <xsl:text>\end{</xsl:text>
+    <xsl:apply-templates select="." mode="environment-name"/>
+    <xsl:text>}%&#xa;</xsl:text>
+    <xsl:apply-templates select="." mode="pop-footnote-text"/>
+    <xsl:text>}{0cm}&#xa;</xsl:text>
+    <xsl:text>&#xa;</xsl:text>
+</xsl:template>
 
 <!-- asides in the margin -->
 <!-- simple asides, with no styling available -->
@@ -300,7 +344,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
     <xsl:value-of select="local-name(.)" />
     <xsl:text>}&#xa;</xsl:text>
     <xsl:apply-templates select="." mode="pop-footnote-text"/>
-    <xsl:text>}{0pt}%&#xa;</xsl:text>
+    <xsl:text>}{0cm}%&#xa;</xsl:text>
     <xsl:text>&#xa;</xsl:text>
 </xsl:template>
 
@@ -348,7 +392,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
                   <xsl:apply-templates select="exsl:node-set($visual-first)/*" />
                   <xsl:text>&#xa;</xsl:text>
                   <xsl:variable name="visual-second">
-                    <c>                      
+                    <c>
                       <xsl:value-of select="str:replace($youtube, ' ', ',')" />
                     </c>
                   </xsl:variable>
@@ -405,7 +449,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
   </xsl:template>
 
   <!-- video solutions go in the margin -->
-  <xsl:template match="solution[descendant::video]">
+  <xsl:template match="solution[descendant::video and not(descendant::figure)]">
     <xsl:param name="b-original" />
     <xsl:param name="purpose" />
     <xsl:param name="b-component-heading"/>
@@ -419,11 +463,11 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
       <xsl:apply-templates>
           <xsl:with-param name="b-original" select="$b-original" />
       </xsl:apply-templates>
-      <xsl:text>}{-1cm}%&#xa;</xsl:text>
+      <xsl:text>}{0cm}%&#xa;</xsl:text>
       <xsl:text>&#xa;</xsl:text>
   </xsl:template>
 
-  <xsl:template match="video[ancestor::solution]">
+  <xsl:template match="video[ancestor::solution and not(ancestor::figure)]">
     <!-- scale to fit into a side-by-side -->
     <xsl:variable name="width-percentage">
         <xsl:choose>
