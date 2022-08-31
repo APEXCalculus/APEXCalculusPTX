@@ -9,17 +9,20 @@
 <!--NB: move this file from APEXCalculusPTX/style to mathbook/user !!!  -->
 
 <!DOCTYPE xsl:stylesheet [
-    <!ENTITY % entities SYSTEM "entities.ent">
+    <!ENTITY % entities SYSTEM "./core/entities.ent">
     %entities;
 ]>
 
 <!-- Identify as a stylesheet -->
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0"
+  xmlns:str="http://exslt.org/strings"
+  xmlns:exsl="http://exslt.org/common"
+>
 
-<!-- next line will fail if this file is not in mathbook/user -->
-<xsl:import pretext-href="pretext-latex.xsl"/>
+<!-- import official pretext-latex style sheet -->
+<xsl:import href="./core/pretext-latex.xsl"/>
 
-<xsl:output method="text" />
+<xsl:output method="text"/>
 
 <!-- ########## -->
 <!-- Font Setup -->
@@ -157,7 +160,6 @@
 <!-- figures in the margin -->
 <!-- LaTeX code for margin box formatting thanks to Simon Dispa via
 https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin-items-when-using-parbox-false-in-a-tcolorbox -->
-
 <xsl:param name="latex.preamble.early" select="'
 \usepackage{xcoffins}&#xa;
 \NewCoffin\Framex&#xa;
@@ -229,8 +231,8 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
     <xsl:text>\end{image}%&#xa;</xsl:text>
 </xsl:template>
 
-<!-- latex-image, asymptote, and tabular can all go in margin -->
-<xsl:template match="figure[not(ancestor::sidebyside) and not(ancestor::aside) and not(descendant::sidebyside) and (descendant::latex-image or descendant::asymptote or descendant::tabular or descendant::video) and not(ancestor::exercise)]">
+<!-- move non-sidebyside figures to the margin -->
+<xsl:template match="figure[not(ancestor::sidebyside) and not(ancestor::aside) and not(descendant::sidebyside) and (descendant::latex-image or descendant::asymptote or descendant::video) and not(ancestor::exercise)]">
     <xsl:text>&#xa;</xsl:text>
     <xsl:choose>
       <xsl:when test="ancestor::example and not(ancestor::ul or ancestor::ol)">
@@ -267,10 +269,54 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
         <xsl:apply-templates select="." mode="environment-name"/>
         <xsl:text>}%&#xa;</xsl:text>
         <xsl:apply-templates select="." mode="pop-footnote-text"/>
-        <xsl:text>}{0pt}&#xa;</xsl:text>
+        <xsl:text>}{0cm}&#xa;</xsl:text>
         <xsl:text>&#xa;</xsl:text>
 </xsl:template>
 
+<!-- move tables to the margin -->
+<xsl:template match="table[not(ancestor::sidebyside) and not(ancestor::aside) and not(descendant::sidebyside) and not(ancestor::exercise)]">
+    <xsl:text>&#xa;</xsl:text>
+    <xsl:choose>
+      <xsl:when test="ancestor::example and not(ancestor::ul or ancestor::ol)">
+        <xsl:text>\tcbmarginbox{%&#xa;</xsl:text>
+      </xsl:when>
+      <xsl:when test="ancestor::example and (ancestor::ul or ancestor::ol)">
+        <xsl:text>\listmarginbox{%&#xa;</xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>\parmarginbox{%&#xa;</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
+    <xsl:text>\begin{</xsl:text>
+    <xsl:apply-templates select="." mode="environment-name"/>
+    <xsl:text>}{</xsl:text>
+    <xsl:text>\textbf{</xsl:text>
+    <xsl:apply-templates select="." mode="title-full"/>
+    <xsl:text>}</xsl:text>
+    <xsl:text>}{</xsl:text>
+    <xsl:apply-templates select="." mode="latex-id"/>
+    <xsl:text>}{</xsl:text>
+    <xsl:if test="$b-latex-hardcode-numbers">
+        <xsl:apply-templates select="." mode="number"/>
+    </xsl:if>
+    <xsl:text>}%&#xa;</xsl:text>
+    <!-- A "list" has an introduction/conclusion, with a       -->
+    <!-- list of some type in-between, and these will all      -->
+    <!-- automatically word-wrap to fill the available width.  -->
+    <!-- TODO: process meta-data, then restrict contents -->
+    <!-- tabular, introduction|list|conclusion           -->
+    <xsl:apply-templates select="*"/>
+    <!-- subcaption always goes in lower part -->
+    <xsl:if test="ancestor::*[self::figure]">
+        <xsl:text>\tcblower&#xa;</xsl:text>
+    </xsl:if>
+    <xsl:text>\end{</xsl:text>
+    <xsl:apply-templates select="." mode="environment-name"/>
+    <xsl:text>}%&#xa;</xsl:text>
+    <xsl:apply-templates select="." mode="pop-footnote-text"/>
+    <xsl:text>}{0cm}&#xa;</xsl:text>
+    <xsl:text>&#xa;</xsl:text>
+</xsl:template>
 
 <!-- asides in the margin -->
 <!-- simple asides, with no styling available -->
@@ -287,23 +333,89 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
         <xsl:text>\parmarginbox{%&#xa;</xsl:text>
       </xsl:otherwise>
     </xsl:choose>
-        <xsl:text>\begin{</xsl:text>
-        <xsl:value-of select="local-name(.)" />
-        <xsl:text>}</xsl:text>
-        <xsl:apply-templates select="." mode="block-options"/>
-        <xsl:text>%&#xa;</xsl:text>
-        <!-- Coordinate with schema, since we enforce it here -->
-        <xsl:apply-templates select="p|blockquote|pre|image|video|program|console|tabular"/>
-        <xsl:text>\end{</xsl:text>
-        <xsl:value-of select="local-name(.)" />
-        <xsl:text>}&#xa;</xsl:text>
-        <xsl:apply-templates select="." mode="pop-footnote-text"/>
-        <xsl:text>}{0pt}%&#xa;</xsl:text>
-        <xsl:text>&#xa;</xsl:text>
+    <xsl:text>\begin{</xsl:text>
+    <xsl:value-of select="local-name(.)" />
+    <xsl:text>}</xsl:text>
+    <xsl:apply-templates select="." mode="block-options"/>
+    <xsl:text>%&#xa;</xsl:text>
+    <!-- Coordinate with schema, since we enforce it here -->
+    <xsl:apply-templates select="p|blockquote|pre|image|video|program|console|tabular"/>
+    <xsl:text>\end{</xsl:text>
+    <xsl:value-of select="local-name(.)" />
+    <xsl:text>}&#xa;</xsl:text>
+    <xsl:apply-templates select="." mode="pop-footnote-text"/>
+    <xsl:text>}{0cm}%&#xa;</xsl:text>
+    <xsl:text>&#xa;</xsl:text>
 </xsl:template>
 
-<!-- video links in margin (skip thumbnail) -->
-<xsl:template match="video">
+<!-- make YouTube static URLs fit in the margin -->
+<xsl:template match="video[@youtube|@youtubeplaylist]" mode="static-caption">
+    <xsl:param name="width-scale" />
+    <xsl:variable name="youtube">
+        <xsl:choose>
+            <xsl:when test="@youtubeplaylist">
+                <xsl:value-of select="normalize-space(@youtubeplaylist)"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="normalize-space(str:replace(@youtube, ',', ' '))" />
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    <xsl:choose>
+        <!-- author-supplied override -->
+        <xsl:when test="caption">
+            <xsl:apply-templates select="caption" />
+        </xsl:when>
+        <!-- identification, url for typing-in -->
+        <xsl:otherwise>
+            <xsl:text>YouTube: </xsl:text>
+            <xsl:choose>
+                <xsl:when test="@youtubeplaylist">
+                  <xsl:variable name="visual-url">
+                    <c>
+                      <xsl:text>www.youtube.com/</xsl:text>
+                      <xsl:text>playlist?list=</xsl:text>
+                      <xsl:value-of select="$youtube" />
+                    </c>
+                  </xsl:variable>
+                  <xsl:apply-templates select="exsl:node-set($visual-url)/*" />
+                    <xsl:text>%&#xa;</xsl:text>
+                </xsl:when>
+                <xsl:when test="contains($youtube, ' ')">
+                  <xsl:variable name="visual-first">
+                    <c>
+                      <xsl:text>youtube.com/</xsl:text>
+                      <xsl:text>watch_videos?</xsl:text>
+                      <xsl:text>video_ids=</xsl:text>
+                    </c>
+                  </xsl:variable>
+                  <xsl:apply-templates select="exsl:node-set($visual-first)/*" />
+                  <xsl:text>&#xa;</xsl:text>
+                  <xsl:variable name="visual-second">
+                    <c>
+                      <xsl:value-of select="str:replace($youtube, ' ', ',')" />
+                    </c>
+                  </xsl:variable>
+                  <xsl:apply-templates select="exsl:node-set($visual-second)/*" />
+                  <xsl:text>%&#xa;</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:variable name="visual-url">
+                    <c>
+                      <xsl:text>youtu.be/</xsl:text>
+                      <xsl:value-of select="$youtube" />
+                    </c>
+                  </xsl:variable>
+                  <xsl:apply-templates select="exsl:node-set($visual-url)/*" />
+                  <xsl:text>%&#xa;</xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+
+  <!-- video links in margin (skip thumbnail) -->
+  <xsl:template match="video">
     <!-- scale to fit into a side-by-side -->
     <xsl:variable name="width-percentage">
         <xsl:choose>
@@ -336,51 +448,58 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
     </xsl:if>
   </xsl:template>
 
-  <!-- also move videos not in a figure -->
-  <xsl:template match="video[not(ancestor::figure)]">
-      <!-- scale to fit into a side-by-side -->
-      <xsl:variable name="width-percentage">
-          <xsl:choose>
-              <xsl:when test="ancestor::sidebyside">
-                  <xsl:apply-templates select="." mode="get-width-percentage" />
-                  <xsl:text>&#xa;</xsl:text>
-              </xsl:when>
-              <xsl:otherwise>
-                  <xsl:text>100%</xsl:text>
-              </xsl:otherwise>
-          </xsl:choose>
-      </xsl:variable>
+  <!-- video solutions go in the margin -->
+  <xsl:template match="solution[descendant::video and not(descendant::figure)]">
+    <xsl:param name="b-original" />
+    <xsl:param name="purpose" />
+    <xsl:param name="b-component-heading"/>
 
-      <xsl:variable name="width-scale" select="substring-before($width-percentage,'%') div 100" />
-      <xsl:text>\setlength{\qrsize}{0.6\marginparwidth}&#xa;</xsl:text>
-      <xsl:choose>
-        <xsl:when test="ancestor::example">
-          <xsl:text>(For a video solution, use the QR code in the margin.)&#xa;</xsl:text>
-          <xsl:text>&#xa;</xsl:text>
-          <xsl:text>\tcbmarginbox{%&#xa;</xsl:text>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:text>\parmarginbox{%&#xa;</xsl:text>
-        </xsl:otherwise>
-      </xsl:choose>
-      <xsl:text>\begin{tcolorbox}[qrstyle]%&#xa;</xsl:text>
-      <xsl:apply-templates select="." mode="static-qr" />
-      <xsl:text>\end{tcolorbox}%&#xa;</xsl:text>
-
-      <xsl:variable name="the-caption">
-          <xsl:apply-templates select="." mode="static-caption">
-              <xsl:with-param name="width-scale" select="$width-scale" />
-          </xsl:apply-templates>
-      </xsl:variable>
-      <xsl:if test="not($the-caption ='')">
-          <xsl:text>\begin{tcolorbox}[captionstyle]%&#xa;</xsl:text>
-          <xsl:text>\small </xsl:text>
-          <xsl:value-of select="$the-caption" />
-          <xsl:text>\end{tcolorbox}%&#xa;</xsl:text>
-      </xsl:if>
-      <xsl:text>}{-1cm}%&#xa;</xsl:text>
+    <xsl:text>\tcbmarginbox{%&#xa;</xsl:text>
+      <xsl:apply-templates select="." mode="solution-heading">
+          <xsl:with-param name="b-original" select="$b-original" />
+          <xsl:with-param name="purpose" select="$purpose" />
+          <xsl:with-param name="b-component-heading" select="$b-component-heading"/>
+      </xsl:apply-templates>
+      <xsl:apply-templates>
+          <xsl:with-param name="b-original" select="$b-original" />
+      </xsl:apply-templates>
+      <xsl:text>}{0cm}%&#xa;</xsl:text>
       <xsl:text>&#xa;</xsl:text>
-    </xsl:template>
+  </xsl:template>
+
+  <xsl:template match="video[ancestor::solution and not(ancestor::figure)]">
+    <!-- scale to fit into a side-by-side -->
+    <xsl:variable name="width-percentage">
+        <xsl:choose>
+            <xsl:when test="ancestor::sidebyside">
+                <xsl:apply-templates select="." mode="get-width-percentage" />
+                <xsl:text>&#xa;</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:text>100%</xsl:text>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+
+    <xsl:variable name="width-scale" select="substring-before($width-percentage,'%') div 100" />
+    <xsl:text>\setlength{\qrsize}{0.6\marginparwidth}&#xa;</xsl:text>
+    <xsl:text>\begin{tcolorbox}[qrstyle,left=30pt]%&#xa;</xsl:text>
+    <xsl:apply-templates select="." mode="static-qr" />
+    <xsl:text>\end{tcolorbox}%&#xa;</xsl:text>
+
+    <xsl:variable name="the-caption">
+        <xsl:apply-templates select="." mode="static-caption">
+            <xsl:with-param name="width-scale" select="$width-scale" />
+        </xsl:apply-templates>
+    </xsl:variable>
+    <xsl:if test="not($the-caption ='')">
+        <xsl:text>\begin{tcolorbox}[captionstyle]%&#xa;</xsl:text>
+        <xsl:text>\small </xsl:text>
+        <xsl:value-of select="$the-caption" />
+        <xsl:text>\end{tcolorbox}%&#xa;</xsl:text>
+    </xsl:if>
+  </xsl:template>
+
   <!-- turn off page references so print matches electronic -->
   <xsl:param name="latex.pageref" select="'no'"/>
 </xsl:stylesheet>
