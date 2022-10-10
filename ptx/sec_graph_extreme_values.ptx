@@ -1718,7 +1718,7 @@
               $low = Formula("0");
               $high = Formula("pi");
               $f = Formula("e^x $trig(x)");
-              $a = ($trig eq 'cos') ? Formula("3pi/4") : Formula("pi/4");
+              $a = Formula("pi/4");
               $max = Compute("e^($a)/sqrt(2)");
               $min = Compute("-e^(pi)");
             </pg-code>
@@ -1818,10 +1818,11 @@
               $high = random(2,4,1);
               if($envir{problemSeed}==1){$d=3;$n=2;$m=1;$high=2;};
               $low = Compute("0");
-              $a = ($r/$n)^(1/($n-$r));
+              $md = $m*$d;
+              $mdn = $md - $n;
               $f = Formula("x^($n/$d) - x^$m")->reduce;
-              $max = Fraction(max($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>$a)));
-              $min = Fraction(min($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>$a)));
+              $max = max($f->substitute(x=>$low),$f->substitute(x=>$high),Formula("($mdn/$md) ($n/$md)^($n/$mdn)"));
+              $min = min($f->substitute(x=>$low),$f->substitute(x=>$high),Formula("($mdn/$md) ($n/$md)^($n/$mdn)"));
             </pg-code>
             <statement>
               <p>
