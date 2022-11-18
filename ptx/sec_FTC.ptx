@@ -2757,6 +2757,8 @@
               ($low,$high,$f) = ('e^','ln','sin','cos','sqrt')[NchooseK(5,3)];
               if($envir{problemSeed}==1){$low='ln';$high='e^';$f='sin';};
               Context()->variables->add(t=>'Real');
+              # interval where all these functions have positive output
+              Context()->variables->set(x=>{limits=>[1,pi/2]});
               $low = Formula("$low(x)");
               $high = Formula("$high(x)");
               $f = Formula("$f(t)");
