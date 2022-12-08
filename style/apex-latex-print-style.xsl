@@ -503,5 +503,6 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
   </xsl:template>
 
   <!-- turn off page references so print matches electronic -->
-  <xsl:param name="latex.pageref" select="'no'"/>
+  <!-- now in publication file -->
+  <!-- <xsl:param name="latex.pageref" select="'no'"/> -->
 </xsl:stylesheet>
