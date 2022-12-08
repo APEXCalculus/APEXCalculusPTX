@@ -94,7 +94,9 @@
 </xsl:template>
 
 <!-- use original APEX geometry definitions -->
-<xsl:param name="latex.geometry" select="'inner=1in,textheight=9in,textwidth=320pt,marginparwidth=150pt,marginparsep=20pt,bottom=1in,footskip=29pt'"/>
+<!-- <xsl:param name="latex.geometry" select="'inner=1in,textheight=9in,textwidth=320pt,marginparwidth=150pt,marginparsep=20pt,bottom=1in,footskip=29pt'"/> -->
+<!-- above is now set in the publication file -->
+
 
 <!-- apply exercise geometry -->
 <xsl:template match="exercises|appendix|solutions" mode="latex-division-heading">
