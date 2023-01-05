@@ -94,7 +94,9 @@
 </xsl:template>
 
 <!-- use original APEX geometry definitions -->
-<xsl:param name="latex.geometry" select="'inner=1in,textheight=9in,textwidth=320pt,marginparwidth=150pt,marginparsep=20pt,bottom=1in,footskip=29pt'"/>
+<!-- <xsl:param name="latex.geometry" select="'inner=1in,textheight=9in,textwidth=320pt,marginparwidth=150pt,marginparsep=20pt,bottom=1in,footskip=29pt'"/> -->
+<!-- above is now set in the publication file -->
+
 
 <!-- apply exercise geometry -->
 <xsl:template match="exercises|appendix|solutions" mode="latex-division-heading">
@@ -501,5 +503,6 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
   </xsl:template>
 
   <!-- turn off page references so print matches electronic -->
-  <xsl:param name="latex.pageref" select="'no'"/>
+  <!-- now in publication file -->
+  <!-- <xsl:param name="latex.pageref" select="'no'"/> -->
 </xsl:stylesheet>
