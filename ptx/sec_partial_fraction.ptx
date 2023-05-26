@@ -1060,10 +1060,10 @@
               ($A,$B,$C) = (-9..-1,1..9)[NchooseK(18,3)];
               if($envir{problemSeed}==1){$r=1;$s=-3;$m=-2;$n=3;$A=5;$B=2;$C=-1};
               Context()->noreduce('(-x)-y','(-x)+y');
-              $f = Formula("(($A*$m+$B*$m+$C*$m)x^2 + ($A*$m*(-$r-$s)+$B*($n-$m*$s)+$C*($n-$r*$m))x + ($A*$m*$r*$s-$B*$n*$s-$C*$r*$n))/((x-$r)(x-$s)($n + $m x))")->reduce;
+              $f = Formula("(($A+$B*$m+$C*$m)x^2 + ($A*$m*(-$r-$s)+$B*($n-$m*$s)+$C*($n-$r*$m))x + ($A*$m*$r*$s-$B*$n*$s-$C*$r*$n))/((x-$r)(x-$s)($n + $m x))")->reduce;
               Context("Fraction");
               $F = FormulaUpToConstant("$A ln(abs($m*x+$n)) + $B ln(abs(x-$r)) + $C ln(abs(x-$s)"))->reduce;
-              $F->{test_at} = [[-0.25],[0.25],[$r-0.25],[$r+0.25]];
+              $F->{test_at} = [[$s-0.1],[$s+0.1],[$r-0.1],[$r+0.1],[-$n/$m+0.1],[-$n/$m-0.1]];
             </pg-code>
             <statement>
               <p>
