@@ -861,14 +861,6 @@
             $width=Fraction($total,8);
             $l = FormulaWithUnits("$length ft");
             $w = FormulaWithUnits("$width ft");
-            $gr = init_graph(-1,-1,26,11, size=>[240,240*12/27]);
-            $gr->moveTo(12.5,10);
-            $gr->lineTo(12.5,0);
-            $gr->lineTo(25,0);
-            $gr->lineTo(25,10);
-            $gr->lineTo(0,10);
-            $gr->lineTo(0,0);
-            $gr->lineTo(12.5,0);
             $multians = MultiAnswer($l, $w)->with(
               singleResult => 1,
               checker => sub {
@@ -890,15 +882,14 @@
               adjacent, equally sized rectangular pens.
               What dimensions should these pens have to maximize the enclosed area?
             </p>
-            <image width="40%" pg-name="$gr"/>
-            <!-- <latex-image>
+            <latex-image>
               \begin{tikzpicture}
                 \draw [thick] (0,0) rectangle (3,2);
                 \draw [thick] (1.5,0) -&#x2D; (1.5,2);
               \end{tikzpicture}
-            </latex-image> -->
+            </latex-image>
             <instruction>
-              Enter the two dimensions for <em>one</em> of the two pens here.
+              Enter the two dimensions, one in each blank, for <em>one</em> of the two pens here. Use <c>ft</c> for feet.
             </instruction>
             <p>
               <var name="$multians" width="20"/>
@@ -1084,23 +1075,6 @@
                 }
               }
             );
-            $gr = init_graph(-$D/2-1,-$D/2-1,$D/2+1,$D/2+1, size=>[180,180]);
-            $gr->moveTo(-$w/2,$h/2);
-            $gr->lineTo($w/2,$h/2);
-            $gr->lineTo($w/2,-$h/2);
-            $gr->lineTo(-$w/2,$h/2);
-            $gr->lineTo(-$w/2,-$h/2);
-            $gr->lineTo($w/2,-$h/2);
-            $gr->lb( new Label(0,$h/2,'w','black','center','top','large'));
-            $gr->lb( new Label($w/2,0,'h','black','right','middle','large'));
-            $gr->lb( new Label(0,0,$D,'black','left','bottom','large'));
-            $xfunc = sub { my $t = shift();
-              return $D/2*cos($t); };
-            $yfunc = sub { my $t = shift();
-              return $D/2*sin($t); };
-            $fn = new Fun( $xfunc, $yfunc, $gr );
-            $fn->domain(0,6.2832);
-            $fn->color('black');
           </pg-code>
           <statement>
             <p>
@@ -1109,15 +1083,14 @@
               height <m>h</m>.
               that is, <m>S = kwh^2</m> for some constant <m>k</m>.
             </p>
-            <image width="30%" pg-name="$gr"/>
-              <!-- <latex-image>
-                \begin{tikzpicture}
-                  \draw [thick] (0,0) circle (1cm);
-                  \draw [thick] (-.6,.8) -&#x2D; node [pos=.5,right] { \(12\)} (.6,-.8);
-                  \draw [thick] (-.6,-.8) rectangle (.6,.8);
-                  \draw (.7,0) node { \(h\)} (0,.7) node { \(w\)};
-                \end{tikzpicture}
-              </latex-image> -->
+            <latex-image>
+              \begin{tikzpicture}
+                \draw [thick] (0,0) circle (1cm);
+                \draw [thick] (-.6,.8) -&#x2D; node [pos=.5,right] { \(12\)} (.6,-.8);
+                \draw [thick] (-.6,-.8) rectangle (.6,.8);
+                \draw (.7,0) node { \(h\)} (0,.7) node { \(w\)};
+              \end{tikzpicture}
+            </latex-image>
             <p>
               Given a circular log with diameter of <m><var name="$D"/></m> inches,
               what sized beam can be cut from the log with maximum strength?

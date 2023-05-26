@@ -954,20 +954,22 @@
       </exercise>
       <!--Exercise 7: Anti-aircraft gun-->
       <exercise xml:id="exer_04_02_ex_07">
-        <!--<webwork>
+        <webwork>
           <pg-code>
             Context()->flags->set(reduceConstants=>0);
-            $a = Compute("10000/5280*500/1^2*cos(atan(10000/5280/1))^2");
-            $a = NumberWithUnits("$a rad/hr");
-            $b = Compute("10000/5280*500/0.2^2*cos(atan(10000/5280/0.2))^2");
-            $b = NumberWithUnits("$b rad/hr");
-            $c = Compute("500/(10000/5280)");--> <!--Simplify the formula and get this as the limit>-->
-            <!-- $c = NumberWithUnits("$c rad/hr"); -->
-          <!-- </pg-code> -->
+            $spd = random(300,800,10);
+            $elev = random(5000,15000,100);
+            $a = Compute("($elev*$spd*5280)/(5280^2+$elev^2)");
+            $aU = NumberWithUnits("$a rad/hr");
+            $b = Compute("($elev*$spd*5280)/(1056^2+$elev^2)");
+            $bU = NumberWithUnits("$b rad/hr");
+            $c = Compute("$spd*5280/$elev"); <!--Simplify the formula and get this as the limit>-->
+            $cU = NumberWithUnits("$c rad/hr");
+          </pg-code>
           <statement>
             <p>
-              An F-22 aircraft is flying at <m>500\,\text{mph}</m>
-              with an elevation of <m>10{,}000\,\text{ft}</m> on a
+              An F-22 aircraft is flying at <m><var name="$spd"/>\,\text{mph}</m>
+              with an elevation of <m><var name="$elev"/>\,\text{ft}</m> on a
               straight-line path that will take it directly over an
               anti-aircraft gun.
             </p>
@@ -980,52 +982,66 @@
                     \draw [inner color=firstcolor,draw = white] (-10,-25pt) rectangle (180pt,70pt);
                   \end{scope}
                   \draw [top color=treestump, bottom color=white,draw=white] (0,0) rectangle (120pt,-15pt);
-                  \draw (0,0) -- (120pt,0);
-                  \draw [dashed] (12.5pt,0pt) node [xshift=22pt,yshift=4pt] { $\theta$} -- (105pt,35pt);
-                  \draw [ultra thick] (12.5pt,0) -- (18pt,4pt);
+                  \draw (0,0) &#45; (120pt,0);
+                  \draw [dashed] (12.5pt,0pt) node [xshift=22pt,yshift=4pt] { \(\theta\)} &#45; (105pt,35pt);
+                  \draw [ultra thick] (12.5pt,0) &#45; (18pt,4pt);
                   \filldraw [fill=white] (10pt,-2.5pt) rectangle (15pt,2.5pt);
-                  \draw [&lt;-&gt;] (15pt,-10pt) -- (110pt,-10pt) node [below,pos=.5] { $x$};
-                  \draw [&lt;-&gt;] (120pt,0pt) -- (120pt,35pt) node [right, pos=.5] { 10,000 ft};
+                  \draw [&lt;-&gt;] (15pt,-10pt) &#45; (110pt,-10pt) node [below,pos=.5] { \(x\)};
+                  \draw [&lt;-&gt;] (120pt,0pt) &#45; (120pt,35pt) node [right, pos=.5] { $elev ft};
                   \begin{scope}[shift={(105pt,35pt)}]
                     \draw [fill=black] (0,0) rectangle (10pt,2pt);
-                    \draw [very thick] (3pt,1pt) -- (6pt,-1.5pt) -- (5pt,0pt);
-                    \draw [very thick] (9pt,2pt) -- (9pt,4pt) -- (7pt,2pt);
+                    \draw [very thick] (3pt,1pt) &#45; (6pt,-1.5pt) &#45; (5pt,0pt);
+                    \draw [very thick] (9pt,2pt) &#45; (9pt,4pt) &#45; (7pt,2pt);
                   \end{scope}
                 \end{tikzpicture}
               </latex-image>
             </image>
             <p>
-              How fast must the gun be able to turn to accurately track the
+              How fast (in radians per second) must the gun be able to turn to accurately track the
               aircraft when the plane is:
               <ol>
                 <li>
                   <p>
                     <m>1</m> mile away?
                   </p>
-                  <!-- <p>
-                    <var name="$a" width="10"/>
-                  </p> -->
+                  <p>
+                    <var name="$aU" width="10"/>
+                  </p>
+                  <instruction>
+                    Use <c>rad/s</c> for radians per second.
+                  </instruction>
                 </li>
                 <li>
                   <p>
                     <m>1/5</m> mile away?
                   </p>
-                  <!-- <p>
-                    <var name="$b" width="10"/>
-                  </p> -->
+                  <p>
+                    <var name="$bU" width="10"/>
+                  </p>
+                  <instruction>
+                    Use <c>rad/s</c> for radians per second.
+                  </instruction>
                 </li>
                 <li>
                   <p>
                     Directly overhead?
                   </p>
-                  <!-- <p>
-                    <var name="$c" width="10"/>
-                  </p> -->
+                  <p>
+                    <var name="$cU" width="10"/>
+                  </p>
+                  <instruction>
+                    Use <c>rad/s</c> for radians per second.
+                  </instruction>
                 </li>
               </ol>
             </p>
           </statement>
-        <!-- </webwork> -->
+          <hint>
+            <p>
+              There are <m>5280</m> feet in one mile.
+            </p>
+          </hint>
+        </webwork>
       </exercise>
       <!--Exercise 8: Anti-aircraft gun 2-->
       <exercise>
@@ -1055,7 +1071,7 @@
               <ol>
                 <li>
                   <p>
-                    <m><var name="$aU[0]"/></m> feet away?
+                    <m><var name="$aU[0]"/></m> away?
                   </p>
                   <instruction>
                     Use <c>rad/s</c> for radians per second.
@@ -1066,7 +1082,7 @@
                 </li>
                 <li>
                   <p>
-                    <m><var name="$aU[1]"/></m> feet away?
+                    <m><var name="$aU[1]"/></m> away?
                   </p>
                   <instruction>
                     Use <c>rad/s</c> for radians per second.
@@ -1092,8 +1108,9 @@
         </webwork>
       </exercise>
       <!--Exercise 9: Ladder sliding down a house-->
+      <!-- not currently randomized -->
       <exercise>
-        <!-- <webwork>
+        <webwork>
           <pg-code>
             $f = Compute("x/sqrt(24^2-x^2)");
             $a = Compute($f->eval(x=>1));
@@ -1103,7 +1120,7 @@
             $c = Compute($f->eval(x=>23));
             $c = NumberWithUnits("$c ft/s");
             $d = Compute("inf");
-          </pg-code> -->
+          </pg-code>
           <statement>
             <p>
               A <quantity><mag>24</mag><unit base="foot"/></quantity> ladder
@@ -1137,43 +1154,56 @@
                   <p>
                     <m>1</m> foot from the house?
                   </p>
-                  <!-- <p>
+                  <p>
                     <var name="$a" width="20"/>
-                  </p> -->
+                  </p>
+                  <instruction>
+                    Use <c>ft/s</c> for feet per second.
+                  </instruction>
                 </li>
                 <li>
                   <p>
                     <m>10</m> feet from the house?
                   </p>
-                  <!-- <p>
+                  <p>
                     <var name="$b" width="20"/>
-                  </p> -->
+                  </p>
+                  <instruction>
+                    Use <c>ft/s</c> for feet per second.
+                  </instruction>
                 </li>
                 <li>
                   <p>
                     <m>23</m> feet from the house?
                   </p>
 
-                  <!-- <p>
+                  <p>
                     <var name="$c" width="20"/>
-                  </p> -->
+                  </p>
+                  <instruction>
+                    Use <c>ft/s</c> for feet per second.
+                  </instruction>
                 </li>
                 <li>
                   <p>
                     <m>24</m> feet from the house?
                   </p>
-                  <!-- <p>
+                  <p>
                     <var name="$d" width="20"/>
-                  </p> -->
+                  </p>
+                  <instruction>
+                    Use <c>ft/s</c> for feet per second.
+                  </instruction>
                 </li>
               </ol>
             </p>
           </statement>
-        <!-- </webwork> -->
+        </webwork>
       </exercise>
       <!--Exercise 10: Winch that boat in-->
+      <!-- not yet randomized -->
       <exercise>
-        <!-- <webwork>
+        <webwork>
           <pg-code>
             $f = Compute("30*sqrt(10^2+x^2)/x");
             $a = Compute($f->eval(x=>50));
@@ -1182,7 +1212,7 @@
             $b = NumberWithUnits("$b ft/min");
             $c = Compute($f->eval(x=>1));
             $c = NumberWithUnits("$c ft/min");
-          </pg-code> -->
+          </pg-code>
           <statement>
             <p>
               A boat is being pulled into a dock at a constant rate of
@@ -1217,33 +1247,49 @@
                   <p>
                     <m>50</m> feet out?
                   </p>
-                  <!-- <p>
+                  <p>
                     <var name="$a" width="20"/>
-                  </p> -->
+                  </p>
+                  <instruction>
+                    Use <c>ft/min</c> for feet per minute.
+                  </instruction>
                 </li>
                 <li>
                   <p>
                     <m>15</m> feet out?
                   </p>
-                  <!-- <p>
+                  <p>
                     <var name="$b" width="20"/>
-                  </p> -->
+                  </p>
+                  <instruction>
+                    Use <c>ft/min</c> for feet per minute.
+                  </instruction>
                 </li>
                 <li>
                   <p>
                     <m>1</m> foot from the dock?
                   </p>
-                  <!-- <p>
+                  <p>
                     <var name="$c" width="20"/>
-                  </p> -->
+                  </p>
+                  <instruction>
+                    Use <c>ft/min</c> for feet per minute.
+                  </instruction>
                 </li>
-                <!-- <li><p>What happens when the length of rope pulling in the boat is less than 10 feet long?</p> -->
-                  <!-- <p><var name="$d" width="10"/></p> -->
-                <!-- </li> -->
+                
+                <li>
+                  <p>
+                    What happens when the length of rope pulling in the boat is less than 10 feet long?
+                  </p>
+                  
+                  <p>
+                    <var form="essay"/>
+                  </p>
+                </li>
               </ol>
             </p>
           </statement>
-        <!-- </webwork> -->
+        </webwork>
       </exercise>
       <!--Exercise 11: Inverted cylindrical cone-->
       <exercise>
@@ -1307,8 +1353,9 @@
         </webwork>
       </exercise>
       <!--Exercise 12: Rope, pulley, man standing next to the weight and walking away-->
+      <!-- not yet randomized -->
       <exercise xml:id="exer_04_02_ex_12">
-        <!-- <webwork>
+        <webwork>
           <pg-code>
             $f = Compute("2x/sqrt(x^2+30^2)");
             $a = Compute($f->eval(x=>10));
@@ -1317,7 +1364,7 @@
             $b = NumberWithUnits("$b ft/s");
             $c = Compute("sqrt(60^2-30^2)");
             $c = NumberWithUnits("$c ft");
-          </pg-code> -->
+          </pg-code>
           <statement>
             <p>
               A rope, attached to a weight,
@@ -1358,17 +1405,23 @@
                   <p>
                     <m>10</m> feet?
                   </p>
-                  <!-- <p>
+                  <p>
                     <var name="$a" width="20"/>
-                  </p> -->
+                  </p>
+                  <instruction>
+                    Use <c>ft/s</c> for feet per second.
+                  </instruction>
                 </li>
                 <li>
                   <p>
                     <m>40</m> feet?
                   </p>
-                  <!-- <p>
+                  <p>
                     <var name="$b" width="20"/>
-                  </p> -->
+                  </p>
+                  <instruction>
+                    Use <c>ft/s</c> for feet per second.
+                  </instruction>
                 </li>
               </ol>
             </p>
@@ -1376,11 +1429,14 @@
               How far must the man walk to raise the weight all the way to
               the pulley?
             </p>
-            <!-- <p>
+            <p>
               <var name="$c" width="20"/>
-            </p> -->
+            </p>
+            <instruction>
+                    Use <c>ft</c> for feet.
+                  </instruction>
           </statement>
-        <!-- </webwork> -->
+        </webwork>
       </exercise>
       <!--Exercise 13: Same setup, but starting further away-->
       <exercise>
