@@ -108,6 +108,9 @@
     <xsl:apply-templates select="." mode="division-environment-name-suffix" />
     <xsl:text>}</xsl:text>
     <xsl:text>{</xsl:text>
+    <xsl:apply-templates select="." mode="type-name"/>
+    <xsl:text>}</xsl:text>
+    <xsl:text>{</xsl:text>
     <xsl:apply-templates select="." mode="title-full"/>
     <xsl:text>}</xsl:text>
     <xsl:text>{</xsl:text>
@@ -123,7 +126,7 @@
     <!-- subtitle here -->
     <xsl:text>}</xsl:text>
     <xsl:text>{</xsl:text>
-    <xsl:apply-templates select="." mode="latex-id" />
+    <xsl:apply-templates select="." mode="internal-id" />
     <xsl:text>}</xsl:text>
     <xsl:text>&#xa;</xsl:text>
 </xsl:template>
@@ -216,7 +219,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
     <xsl:text>{1</xsl:text>
     <xsl:text>}</xsl:text>
     <xsl:text>{0</xsl:text>
-    <xsl:text>}%&#xa;</xsl:text>
+    <xsl:text>}{}%&#xa;</xsl:text>
     <xsl:apply-templates select="." mode="image-inclusion" />
     <xsl:text>\end{image}%&#xa;</xsl:text>
 </xsl:template>
@@ -238,9 +241,11 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
         <xsl:text>\begin{</xsl:text>
         <xsl:apply-templates select="." mode="environment-name"/>
         <xsl:text>}{</xsl:text>
+        <xsl:apply-templates select="." mode="type-name"/>
+        <xsl:text>}{</xsl:text>
         <xsl:apply-templates select="." mode="caption-full"/>
         <xsl:text>}{</xsl:text>
-        <xsl:apply-templates select="." mode="latex-id"/>
+        <xsl:apply-templates select="." mode="internal-id"/>
         <xsl:text>}{</xsl:text>
         <xsl:if test="$b-latex-hardcode-numbers">
             <xsl:apply-templates select="." mode="number"/>
@@ -249,7 +254,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
         <!-- images have margins and widths, so centering not needed -->
         <!-- Eventually everything in a figure should control itself -->
         <!-- or be flush left (or so)                                -->
-        <xsl:if test="self::figure and not(image)">
+        <xsl:if test="self::figure and not(image or tabular)">
             <xsl:text>\centering&#xa;</xsl:text>
         </xsl:if>
         <xsl:apply-templates select="*"/>
@@ -280,11 +285,13 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
     <xsl:text>\begin{</xsl:text>
     <xsl:apply-templates select="." mode="environment-name"/>
     <xsl:text>}{</xsl:text>
+    <xsl:apply-templates select="." mode="type-name"/>
+    <xsl:text>}{</xsl:text>
     <xsl:text>\textbf{</xsl:text>
     <xsl:apply-templates select="." mode="title-full"/>
     <xsl:text>}</xsl:text>
     <xsl:text>}{</xsl:text>
-    <xsl:apply-templates select="." mode="latex-id"/>
+    <xsl:apply-templates select="." mode="internal-id"/>
     <xsl:text>}{</xsl:text>
     <xsl:if test="$b-latex-hardcode-numbers">
         <xsl:apply-templates select="." mode="number"/>
