@@ -179,7 +179,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
   '"/>
 
 <xsl:param name="latex.preamble.late" select="'
-\hypersetup{breaklinks=true&#xa;
+\hypersetup{breaklinks=true}&#xa;
 \newlength{\Textw} % save textwidth outside the boxes&#xa;
 \setlength{\Textw}{\textwidth}&#xa;
 \newlength{\Hshift}&#xa;
