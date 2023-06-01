@@ -27,7 +27,6 @@
 
 <!-- import official pretext-latex style sheet -->
 <xsl:import href="./core/pretext-latex.xsl"/>
-<!-- <xsl:import href="./core/pretext-assembly.xsl"/> -->
 
 <xsl:output method="text"/>
 
@@ -262,7 +261,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
         <!-- images have margins and widths, so centering not needed -->
         <!-- Eventually everything in a figure should control itself -->
         <!-- or be flush left (or so)                                -->
-        <xsl:if test="self::figure and not(image or tabular)">
+        <xsl:if test="self::figure and not(image)">
             <xsl:text>\centering&#xa;</xsl:text>
         </xsl:if>
         <xsl:apply-templates select="*"/>
