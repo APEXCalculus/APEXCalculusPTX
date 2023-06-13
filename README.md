@@ -44,7 +44,8 @@ The following variations are also available:
 **Do not build PDF directly.** APEX Calculus places figures in the margins in PDF.
 Unfortunately, we do not currently have a mechanism for setting the vertical placement
 of margin figures in the PreTeXt source, so these have to be adjusted by hand.
-Look in the LaTeX source for occurrences of `\listmarginbox`, `\parmarginbox` and `\tcbmarginbox`.
+Look in the LaTeX XML stylesheet files (in the style directory)
+for occurrences of `\listmarginbox`, `\parmarginbox` and `\tcbmarginbox`.
 Each such environment ends with either `{0pt}` or `{-1cm}`.
 
 These values can be adjusted to ensure that items in the margins do not overlap.
