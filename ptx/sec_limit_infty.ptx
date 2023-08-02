@@ -1324,7 +1324,10 @@
         <exercise label="ex-limit-infinity-use-graph-2">
           <webwork xml:id="webwork-ex-limit-infinity-use-graph-2">
             <pg-code>
-              @a=(1..9)[NchooseK(9,2)];
+              $a0 = non_zero_random(-2,3,1);
+              $b = random(1,2,1);
+              $a1 = $a0+$b;
+              @a = ($a0,$a1);
               $f=Formula("1/((x-$a[0])(x-$a[1])^(2))")->reduce;
               $L[0]=($f->eval(x=>$a[0]-0.1)>0)?Compute("inf"):Compute("-inf");
               $L[1]=($f->eval(x=>$a[0]+0.1)>0)?Compute("inf"):Compute("-inf");
