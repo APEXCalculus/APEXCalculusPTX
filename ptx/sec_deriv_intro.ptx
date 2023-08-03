@@ -2069,149 +2069,159 @@
       <exercise label="ex-deriv-intro-graph-approx-1">
         <webwork xml:id="webwork-ex-deriv-intro-graph-approx-1">
           <pg-code>
-            $gr = init_graph(-3,-2,3,4,axes=>[0,0],grid=>[6,6],size=>[400,240]);
-            $gr->lb('reset');
-            for my $i (-2,-1,1,2) {
-              $gr->lb(new Label($i,0,$i,'black','center','top','large'));
-            }
-            for my $i (-1,1,2,3) {
-              $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
-            }
-            add_functions($gr, "x^2-1 for x in &lt;-3,3> using color:blue and weight:2");
-            @approx=(
+              @approx=(
               Compute("-2")->with(tolType=>'absolute',tolerance=>0.4),
               Compute("0")->with(tolType=>'absolute',tolerance=>0.1),
               Compute("4")->with(tolType=>'absolute',tolerance=>2)
             );
+            $approx_list=List($approx[0],$approx[1],$approx[2]);
             $derivative=Formula("2x");
-            @slopes=(-2,0,4);
+            $slopes=List(-2,0,4);
             $showwork = '[@ explanation_box(message => "Show your work.") @]*';
           </pg-code>
-          <statement>
+          <introduction>
             <p>
               The graph of <m>f(x)=x^2-1</m> is shown.
             </p>
-            <image pg-name="$gr" width="47%"/>
-            <p>
-              <ol>
-                <li>
-                  <p>
-                    Use the graph to approximate the slope of the tangent line to <m>f</m> at <m>(-1,0)</m>, <m>(0,-1)</m>, and <m>(2,3)</m>.
-                  </p>
-                  <instruction>
-                    Enter the answers in the respective order.
-                  </instruction>
-                  <p>
-                    <var name="$approx[0]" width="10"/>
-                  </p>
-                  <p>
-                    <var name="$approx[1]" width="10"/>
-                  </p>
-                  <p>
-                    <var name="$approx[2]" width="10"/>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                    Using the definition of the derivative, find <m>\fp(x)</m>.
-                  </p>
-                  <p>
-                    <var name="$derivative" width="10"/>
-                  </p>
-                  <p>
-                    <var name="$showwork" data="pgml"/>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                    Use the derivative to find the slope of the tangent line at the points <m>(-1,0)</m>, <m>(0,-1)</m> and <m>(2,3)</m>.
-                  </p>
-                  <instruction>
-                    Enter the answers in the respective order.
-                  </instruction>
-                  <p>
-                    <var name="$slopes[0]" width="10"/>
-                  </p>
-                  <p>
-                    <var name="$slopes[1]" width="10"/>
-                  </p>
-                  <p>
-                    <var name="$slopes[2]" width="10"/>
-                  </p>
-                </li>
-              </ol>
-            </p>
-          </statement>
+            <image xml:id="img_02_01_ex_24" width="47%">
+              <description></description>
+              <latex-image>
+                \begin{tikzpicture}
+                \begin{axis}[
+                      ytick={-1,1,2,3},
+                      ymin=-1.3,ymax=3.5,%
+                      xmin=-2.1,xmax=2.1,%
+                      grid=major
+                ]
+                
+                \addplot [firstcurvestyle,domain=-2.1:2.1] {x^2-1};
+                
+                \end{axis}
+                \end{tikzpicture}
+              </latex-image>
+            </image>
+
+          </introduction>
+          <task>
+            <statement>
+              <p>
+                Use the graph to approximate the slope of the tangent line to <m>f</m> at <m>(-1,0)</m>, <m>(0,-1)</m>, and <m>(2,3)</m>.
+              </p>
+
+              <instruction>
+                Enter your answers as a comma-separated list of values.
+              </instruction>
+
+              <p>
+                <var name="$approx_list" width="10"/>
+              </p>
+            </statement>
+          </task>
+
+          <task>
+            <statement>
+              <p>
+                Using the definition of the derivative, find <m>\fp(x)</m>.
+              </p>
+              <p>
+                <var name="$derivative" width="10"/>
+              </p>
+              <p>
+                <var name="$showwork" data="pgml"/>
+              </p>
+            </statement>
+          </task>
+
+          <task>
+            <statement>
+              <p>
+                Use the derivative to find the slope of the tangent line at the points <m>(-1,0)</m>, <m>(0,-1)</m> and <m>(2,3)</m>.
+              </p>
+              <instruction>
+                Enter your answers as a comma-separated list of values.
+              </instruction>
+              <p>
+                <var name="$slopes" width="10"/>
+              </p>
+            </statement>
+          </task>
         </webwork>
       </exercise>
 
       <exercise label="ex-deriv-intro-graph-approx-2">
         <webwork xml:id="webwork-ex-deriv-intro-graph-approx-2">
           <pg-code>
-            $gr = init_graph(-1,-1,3,6,axes=>[0,0],grid=>[4,7],size=>[400,240]);
-            $gr->lb('reset');
-            for my $i (1,2) {
-              $gr->lb(new Label($i,0,$i,'black','center','top','large'));
-            }
-            for my $i (1..5) {
-              $gr->lb(new Label(0,$i,$i,'black','right','middle','large'));
-            }
-            add_functions($gr, "1/(x+1) for x in &lt;-0.85,3> using color:blue and weight:2");
             @approx=(
               Compute("-1")->with(tolType=>'absolute',tolerance=>0.2),
               Compute("-1/4")->with(tolType=>'absolute',tolerance=>0.1)
             );
+            $approx_list=List($approx[0],$approx[1]);
             $derivative=Formula("-1/(x+1)^2");
-            @slopes=(-1,'-1/4');
+            $slopes=List(-1,'-1/4');
             $showwork = '[@ explanation_box(message => "Show your work.") @]*';
           </pg-code>
-          <statement>
+          <introduction>
             <p>
               The graph of <m>f(x)=\frac{1}{x+1}</m> is shown.
             </p>
-            <image pg-name="$gr" width="47%"/>
+            <image xml:id="img_02_01_ex_25" width="47%">
+              <description></description>
+              <latex-image>
+                \begin{tikzpicture}
+                \begin{axis}[
+                      ytick={1,2,3,4,5},
+                      ymin=-.5,ymax=5.5,%
+                      xmin=-1.1,xmax=3.1,%
+                      grid=major
+                ]
+                
+                \addplot [firstcurvestyle,domain=-.9:3.1,samples=50] {1/(x+1)};
+                
+                \end{axis}
+                \end{tikzpicture}
+              </latex-image>
+            </image>
+          </introduction>
+
+          <task>
+            <statement>
+              <p>
+                Use the graph to approximate the slope of the tangent line to <m>f</m> at <m>(0,1)</m> and <m>(1,0.5)</m>.
+              </p>
+              <instruction>
+                Enter your answers as a comma-separated list of values.
+              </instruction>
+              <p>
+                <var name="$approx_list" width="10"/>
+              </p>
+            </statement>
+          </task>
+
+          <task>
             <p>
-              <ol>
-                <li>
-                  <p>
-                    Use the graph to approximate the slope of the tangent line to <m>f</m> at <m>(0,1)</m> and <m>(1,0.5)</m>.
-                  </p>
-                  <instruction>
-                    Enter the answers in the respective order.
-                  </instruction>
-                  <p>
-                    <var name="$approx[0]" width="10"/>
-                  </p>
-                  <p>
-                    <var name="$approx[1]" width="10"/>
-                  </p>
-                  <p>
-                    Using the definition of the derivative, find <m>\fp(x)</m>.
-                  </p>
-                  <p>
-                    <var name="$derivative" width="10"/>
-                  </p>
-                  <p>
-                    <var name="$showwork" data="pgml"/>
-                  </p>
-                </li>
-                <li>
-                  <p>
-                    Use the derivative to find the slope of the tangent line at the points <m>(0,1)</m> and <m>(1,0.5)</m>.
-                  </p>
-                  <instruction>
-                    Enter the answers in the respective order.
-                  </instruction>
-                  <p>
-                    <var name="$slopes[0]" width="10"/>
-                  </p>
-                  <p>
-                    <var name="$slopes[1]" width="10"/>
-                  </p>
-                </li>
-              </ol>
+              Using the definition of the derivative, find <m>\fp(x)</m>.
             </p>
-          </statement>
+            <p>
+              <var name="$derivative" width="10"/>
+            </p>
+            <p>
+              <var name="$showwork" data="pgml"/>
+            </p>
+          </task>
+
+          <task>
+            <statement>
+              <p>
+                Use the derivative to find the slope of the tangent line at the points <m>(0,1)</m> and <m>(1,0.5)</m>.
+              </p>
+              <instruction>
+                Enter your answers as a comma-separated list of values.
+              </instruction>
+              <p>
+                <var name="$slopes" width="10"/>
+              </p>
+            </statement>
+          </task>
         </webwork>
       </exercise>
 
@@ -2313,21 +2323,44 @@
       <exercisegroup cols="2" xml:id="exset-deriv-intro-graph-interpret">
         <introduction>
           <p>
-            Use the graph of the function to answer questions about it.
+            Use the graph of the function to answer the following questions.
+            <ol cols="2">
+              <li>
+                <p>
+                  Where is <m>g(x)\gt 0</m>?
+                </p>
+              </li>
+              <li>
+                <p>
+                  Where is <m>g(x)\lt 0</m>?
+                </p>
+              </li>
+              <li>
+                <p>
+                  Where is <m>g(x) = 0</m>?
+                </p>
+              </li>
+              <li>
+                <p>
+                  Where is <m>g'(x) \lt 0</m>?
+                </p>
+              </li>
+              <li>
+                <p>
+                  Where is <m>g'(x)  \gt  0</m>?
+                </p>
+              </li>
+              <li>
+                <p>
+                  Where is <m>g'(x) = 0</m>?
+                </p>
+              </li>
+            </ol>
           </p>
         </introduction>
         <exercise label="ex-deriv-intro-graph-interpret-1">
           <webwork xml:id="webwork-ex-deriv-intro-graph-interpret-1">
             <pg-code>
-              $gr = init_graph(-3,-5,3,5,axes=>[0,0],size=>[400,240]);
-              add_functions($gr, "-3*(x+1)^2+3 for x in &lt;-2.75,-1> using color:blue and weight:2");
-              add_functions($gr, "3*(x-1)^2-3 for x in &lt;1,2.75> using color:blue and weight:2");
-              add_functions($gr, "-3*sin(x*pi/2) for x in &lt;-1,1> using color:blue and weight:2");
-              $gr -> lb('reset');
-              $gr->h_ticks(0,"black",(-3..3));
-              $gr->v_ticks(0,"black",(-4..4));
-              for my$i(-2,-1,1,2){$gr->lb(new Label($i,0,$i,'black','center','top','large'));};
-              for my$i(-4..-1,1..4){$gr->lb(new Label(0,$i,$i,'black','right','middle','large'));};
               Context("Interval");
               $pos=Compute("(-2,0)U(2,inf)");
               $neg=Compute("(-inf,-2)U(0,2)");
@@ -2337,62 +2370,61 @@
               $fla=Compute("{-1,1}");
             </pg-code>
             <statement>
-              <image pg-name="$gr"/>
+              <image xml:id="img_02_01_ex_30">
+                <description></description>
+                <latex-image>
+                  \begin{tikzpicture}
+                  \begin{axis}[
+                  xtick={-2,-1,1,2},
+                  ymin=-5.5,ymax=5.5,%
+                  xmin=-3.1,xmax=3.1,%
+                  ]
+            
+                  \addplot [firstcurvestyle,domain=-3.1:3.1,samples=40] {(x-2)*x*(x+2)};
+                        
+                  \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 Answer using interval notation or set notation, as appropriate. If you need to write <m>\infty</m>, you may type <c>inf</c> or <c>infinity</c>.
                 If you need the union symbol, <m>\cup</m>, you may type the capital letter <c>U</c>.
               </instruction>
+              <instruction>
+                Enter the set on which <m>g(x) \gt 0</m> using interval notation.
+              </instruction>
               <p>
-                <ol cols="2">
-                  <li>
-                    <p>
-                      Where is <m>g(x)\gt0</m>?
-                    </p>
-                    <p>
-                      <var name="$pos" width="20"/>
-                    </p>
-                  </li>
-                  <li>
-                    <p>
-                      Where is <m>g(x)\lt0</m>?
-                    </p>
-                    <p>
-                      <var name="$neg" width="20"/>
-                    </p>
-                  </li>
-                  <li>
-                    <p>
-                      Where is <m>g(x) = 0</m>?
-                    </p>
-                    <p>
-                      <var name="$zer" width="20"/>
-                    </p>
-                  </li>
-                  <li>
-                    <p>
-                      Where is <m>g'(x) \lt 0</m>?
-                    </p>
-                    <p>
-                      <var name="$dec" width="20"/>
-                    </p>
-                  </li>
-                  <li>
-                    <p>
-                      Where is <m>g'(x)  \gt  0</m>?
-                    </p>
-                    <p>
-                      <var name="$inc" width="20"/>
-                    </p>
-                  </li>
-                  <li>
-                    <p>
-                      Where is <m>g'(x) = 0</m>?
-                    </p>
-                    <p>
-                      <var name="$fla" width="20"/>
-                    </p>
-                  </li>
-                </ol>
+                <var name="$pos" width="20"/>
+              </p>
+              <instruction>
+                Enter the set on which <m>g(x) \lt 0</m> using interval notation.
+              </instruction>
+              <p>
+                <var name="$neg" width="20"/>
+              </p>
+              <instruction>
+                Enter the set of points where <m>g(x) = 0</m> using the syntax <c>{a,b}</c>.
+              </instruction>
+              <p>
+                <var name="$zer" width="20"/>
+              </p>
+              <instruction>
+                Enter the set on which <m>g'(x) \lt 0</m> using interval notation.
+              </instruction>
+              <p>
+                <var name="$dec" width="20"/>
+              </p>
+              <instruction>
+                Enter the set on which <m>g'(x) \gt 0</m> using interval notation.
+              </instruction>
+              <p>
+                <var name="$inc" width="20"/>
+              </p>
+              <instruction>
+                Enter the set of points where <m>g(x) \gt 0</m> using the syntax <c>{a,b}</c>.
+              </instruction>
+              <p>
+                <var name="$fla" width="20"/>
               </p>
             </statement>
           </webwork>
@@ -2401,76 +2433,74 @@
         <exercise label="ex-deriv-intro-graph-interpret-2">
           <webwork xml:id="webwork-ex-deriv-intro-graph-interpret-2">
             <pg-code>
-              $gr = init_graph(-3,-10,3,5,axes=>[0,0],grid=>[6,15],size=>[400,240]);
-              add_functions($gr, "-2x^4+4*x^2+3*1.5^4-6*1.5^2 for x in &lt;-2,2> using color:blue and weight:2");
-              $gr -> lb('reset');
-              for my$i(-2,-1,1,2){$gr->lb(new Label($i,0,$i,'black','center','top','large'));};
-              for my$i(-9..-1,1..4){$gr->lb(new Label(0,$i,$i,'black','right','middle','large'));};
               Context("Interval");
-              $pos=Compute("(-1.5,1.5)");
-              $neg=Compute("(-inf,-1.5)U(1.5,inf)");
-              $zer=Compute("{-1.5,1.5}");
+              $pos=Compute("(-2,2)");
+              $neg=Compute("(-inf,-2)U(2,inf)");
+              $zer=Compute("{-2,2}");
               $dec=Compute("(-1,0)U(1,inf)");
               $inc=Compute("(-inf,-1)U(0,1)");
               $fla=Compute("{-1,0,1}");
             </pg-code>
             <statement>
-              <image pg-name="$gr"/>
+              <image xml:id="img_02_01_ex_31">
+                <description></description>
+                <latex-image>
+                  \begin{tikzpicture}
+                  \begin{axis}[
+                  xtick={-2,-1,1,2},
+                  ymin=-1,ymax=5,%
+                  xmin=-2.8,xmax=2.8,%
+                  ]
+            
+                  \addplot [firstcurvestyle,domain=-2.6:2.6,samples=50] {(-2)*(x^4/4-x^2/2)+4};
+           
+                   \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 Answer using interval notation or set notation, as appropriate. If you need to write <m>\infty</m>, you may type <c>inf</c> or <c>infinity</c>.
                 If you need the union symbol, <m>\cup</m>, you may type the capital letter <c>U</c>.
               </instruction>
+              <instruction>
+                Answer using interval notation or set notation, as appropriate. If you need to write <m>\infty</m>, you may type <c>inf</c> or <c>infinity</c>.
+                If you need the union symbol, <m>\cup</m>, you may type the capital letter <c>U</c>.
+              </instruction>
+              <instruction>
+                Enter the set on which <m>g(x) \gt 0</m> using interval notation.
+              </instruction>
               <p>
-                <ol cols="2">
-                  <li>
-                    <p>
-                      Where is <m>g(x)\gt0</m>?
-                    </p>
-                    <p>
-                      <var name="$pos" width="20"/>
-                    </p>
-                  </li>
-                  <li>
-                    <p>
-                      Where is <m>g(x)\lt0</m>?
-                    </p>
-                    <p>
-                      <var name="$neg" width="20"/>
-                    </p>
-                  </li>
-                  <li>
-                    <p>
-                      Where is <m>g(x) = 0</m>?
-                    </p>
-                    <p>
-                      <var name="$zer" width="20"/>
-                    </p>
-                  </li>
-                  <li>
-                    <p>
-                      Where is <m>g'(x) \lt 0</m>?
-                    </p>
-                    <p>
-                      <var name="$dec" width="20"/>
-                    </p>
-                  </li>
-                  <li>
-                    <p>
-                      Where is <m>g'(x)  \gt  0</m>?
-                    </p>
-                    <p>
-                      <var name="$inc" width="20"/>
-                    </p>
-                  </li>
-                  <li>
-                    <p>
-                      Where is <m>g'(x) = 0</m>?
-                    </p>
-                    <p>
-                      <var name="$fla" width="20"/>
-                    </p>
-                  </li>
-                </ol>
+                <var name="$pos" width="20"/>
+              </p>
+              <instruction>
+                Enter the set on which <m>g(x) \lt 0</m> using interval notation.
+              </instruction>
+              <p>
+                <var name="$neg" width="20"/>
+              </p>
+              <instruction>
+                Enter the set of points where <m>g(x) = 0</m> using the syntax <c>{a,b}</c>.
+              </instruction>
+              <p>
+                <var name="$zer" width="20"/>
+              </p>
+              <instruction>
+                Enter the set on which <m>g'(x) \lt 0</m> using interval notation.
+              </instruction>
+              <p>
+                <var name="$dec" width="20"/>
+              </p>
+              <instruction>
+                Enter the set on which <m>g'(x) \gt 0</m> using interval notation.
+              </instruction>
+              <p>
+                <var name="$inc" width="20"/>
+              </p>
+              <instruction>
+                Enter the set of points where <m>g(x) \gt 0</m> using the syntax <c>{a,b}</c>.
+              </instruction>
+              <p>
+                <var name="$fla" width="20"/>
               </p>
             </statement>
           </webwork>
@@ -2691,13 +2721,6 @@
       <exercise label="ex-deriv-intro-review-4">
         <webwork xml:id="webwork-ex-deriv-intro-review-4">
           <pg-code>
-            $gr = init_graph(-5,-1,1,4,axes=>[0,0],grid=>[6,5],size=>[400,240]);
-            add_functions($gr, "(x+3)^2 +1 for x in &lt;-5,-3) using color:blue and weight:2");
-            add_functions($gr, "-(x+3)^2 +3 for x in (-3,-1> using color:blue and weight:2");
-            $gr->stamps(closed_circle(-3,2,'blue'));
-            $gr -> lb('reset');
-            for my$i(-4..-1){$gr->lb(new Label($i,0,$i,'black','center','top','large'));};
-            for my$i(1..3){$gr->lb(new Label(0,$i,$i,'black','right','middle','large'));};
             @L=(1,3,Compute("DNE"));
             Context("Interval");
             $cont=Compute("(-inf,-3)U(-3,inf)");
@@ -2706,7 +2729,25 @@
             <p>
               Use the graph of <m>f(x)</m> provided to answer the following.
             </p>
-            <image pg-name="$gr" width="47%"/>
+            <image xml:id="img_02_01_ex_40">
+              <description></description>
+              <latex-image>
+                \begin{tikzpicture}
+                \begin{axis}[
+                      ymin=-1.1,ymax=3.1,%
+                      xmin=-5.1,xmax=0.5,%
+                ]
+                
+                \addplot [firstcurvestyle,domain=-5:-3] {(x+3)^2+1};
+                \addplot [firstcurvestyle,domain=-3:0.5] {-(x+3)^2+3};
+                \filldraw [fill=white] (axis cs:-3,1) circle (1.5pt);
+                \filldraw [fill=white] (axis cs:-3,3) circle (1.5pt);
+                \filldraw [fill=black] (axis cs:-3,2) circle (1.5pt);
+                
+                \end{axis}
+                \end{tikzpicture}
+              </latex-image>
+            </image>
             <instruction>
               If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
               If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
