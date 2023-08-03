@@ -110,6 +110,10 @@
       </me>.
     </p>
     <p>
+      Note that we are abusing notation somewhat:
+      when we write <m>F(x)+C</m> on the right-hand side,
+      we really mean the set of all such functions,
+      for each real number value of <m>C</m>.
       Let's analyze this indefinite integral notation.
           <idx><h>integration</h><h>notation</h></idx>
     </p>
@@ -123,31 +127,32 @@
         <description></description>
         <latex-image>
 
-        \begin{tikzpicture}[&gt;=latex]
+        \begin{tikzpicture}[&gt;=latex, node distance=6pt]
 
         \node[] (integral)
         {$\displaystyle\int$};
-        \node[above left of=integral, anchor=south east] (l1) {Integral symbol};
+        \node[above left=of integral, anchor=south east] (l1) {Integral symbol};
         \draw[-&gt;] (l1) edge [out=-90, in=180] (integral);
-        \node[right of=integral] (integrand)
+        \node[right=of integral] (integrand)
         {$\displaystyle f(x)$};
-        \node[below of=integrand, anchor=north east] (l2) {Integrand function};
+        \node[below=of integrand, anchor=north east] (l2) {Integrand function};
         \draw[-&gt;] (l2) edge [out=0, in=-90] (integrand);
-        \node[right of=integrand] (differential)
+        \node[right=of integrand] (dot) {$\cdot$};
+        \node[right=of dot] (differential)
         {$\displaystyle dx$};
-        \node[above of=differential, anchor=south west] (l3) {Differential of $x$};
+        \node[above=of differential, anchor=south west] (l3) {Differential of $x$};
         \draw[-&gt;] (l3) edge [out=-90, in=90] (differential);
-        \node[right of=differential] (equals)
+        \node[right=of differential] (equals)
         {$\displaystyle =$};
-        \node[right of=equals] (antiderivative)
+        \node[right=of equals] (antiderivative)
         {$\displaystyle F(x)$};
-        \node[below of=antiderivative, anchor=north west] (l4) {Any antiderivative of $f$};
+        \node[below=of antiderivative, anchor=north west] (l4) {Any antiderivative of $f$};
         \draw[-&gt;] (l4) edge [out=180, in=-90] (antiderivative);
-        \node[right of=antiderivative] (plus)
+        \node[right=of antiderivative] (plus)
         {$\displaystyle {+}$};
-        \node[right of=plus] (constant)
+        \node[right=of plus] (constant)
         {$\displaystyle C$};
-        \node[above right of=constant, anchor=south west] (l5) {Constant of integration};
+        \node[above right=of constant, anchor=south west] (l5) {Constant of integration};
         \draw[-&gt;] (l5) edge [out=-90, in=0] (constant);
 
         \end{tikzpicture}
@@ -176,6 +181,13 @@
       <q>find all antiderivatives of what follows,</q>
       and the function <m>f(x)</m> and <m>dx</m> are multiplied together;
       the <m>dx</m> does not <q>just sit there.</q>
+    </p>
+    <p>
+      Another way of looking at the notation is that it tells us that
+      <m>f(x)\,dx</m> is the differential of <m>F(x)</m>: <m>dF(x) = f(x)\,dx</m>,
+      confirming that <m>F'(x)=f(x)</m>, as required of an antiderivative.
+      The integral symbol can then be viewed as an instruction to <q>undo</q>
+      the differential and recover the antiderivative <m>F(x)</m>.
     </p>
     <p>
       Another important aspect of the <m>dx</m> is that it tells us which
@@ -1230,96 +1242,103 @@
       </exercisegroup>
 
       <exercise label="ex-antiderivatives-find-difference">
-        <statement>
+        <introduction>
           <p>
             Consider the two integrals, <m>\ds \int s^n\,ds</m> and
             <m>\ds \int s^n\,dn</m>.
-            <ol>
-              <li>
-                <p>
-                  What is the difference between these two indefinite integrals?
-                </p>
-              </li>
-              <li>
-                <p>
-                  Evaluate <m>\ds \int s^n\,ds</m>.
-                </p>
-              </li>
-              <li>
-                <p>
-                  Evaluate <m>\ds \int s^n\,dn</m>.
-                </p>
-              </li>
-            </ol>
           </p>
-        </statement>
-        <solution>
-          <p>
-            <ol>
-              <li>
-                <p>
-                  The indefinite integrals have different differentials,
-                  <ie/>, different variables of integration.
-                </p>
-              </li>
-              <li>
-                <p>
-                  <m>\frac{s^{n+1}}{n+1}+C</m>, <m>n\neq -1</m>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <m>\frac{s^{n}}{\ln s}+C</m>, <m>s>0</m>
-                </p>
-              </li>
-            </ol>
-          </p>
-        </solution>
+        </introduction>
+        <task label="ex-antiderivatives-find-difference-a">
+          <statement>
+            <p>
+              What is the difference between these two indefinite integrals?
+            </p>
+          </statement>
+          <solution>
+            <p>
+              The indefinite integrals have different differentials,
+              <ie/>, different variables of integration.
+            </p>
+          </solution>
+        </task>
+        <task label="ex-antiderivatives-find-difference-b">
+          <statement>
+            <p>
+              Evaluate <m>\ds \int s^n\,ds</m>.
+            </p>
+          </statement>
+          <solution>
+            <p>
+              <m>\frac{s^{n+1}}{n+1}+C</m>, <m>n\neq -1</m>
+            </p>
+          </solution>
+        </task>
+        <task label="ex-antiderivatives-find-difference-c">
+          <statement>
+            <p>
+              Evaluate <m>\ds \int s^n\,dn</m>.
+            </p>
+          </statement>
+          <solution>
+            <p>
+              <m>\frac{s^{n}}{\ln s}+C</m>, <m>s>0</m>
+            </p>
+          </solution>
+        </task>
       </exercise>
 
       <exercise label="ex-antiderivatives-log-abs">
-        <webwork xml:id="webwork-ex-antiderivatives-log-abs">
-          <statement>
+        <!-- <webwork xml:id="webwork-ex-antiderivatives-log-abs"> -->
+          <introduction>
             <p>
               This problem investigates why <xref ref="thm_indef_alg">Theorem</xref>
               states that <m>\ds \int \frac1x\,dx = \ln\abs{x} + C</m>.
-              <ol>
-                <li>
-                  <p>
-                    What is the domain of <m>y = \ln(x)</m>?
-                  </p>
-                </li>
-                <li>
-                  <p>
-                    Find <m>\lzoo{x}{\ln(x) }</m>.
-                  </p>
-                </li>
-                <li>
-                  <p>
-                    What is the domain of <m>y = \ln(-x)</m>?
-                  </p>
-                </li>
-                <li>
-                  <p>
-                    Find <m>\lzoo{x}{\ln(-x)}</m>.
-                  </p>
-                </li>
-                <li>
-                  <p>
-                    You should find that <m>1/x</m> has two types of antiderivatives,
-                    depending on whether <m>x \gt 0</m> or <m>x\lt 0</m>.
-                    In one expression, give a formula for
-                    <m>\ds \int \frac{1}{x}\, dx</m> that takes these different domains into account,
-                    and explain your answer.
-                  </p>
-                </li>
-              </ol>
             </p>
-            <p>
-              <var form="essay"/>
-            </p>
-          </statement>
-        </webwork>
+          </introduction>
+          <task label="ex-antiderivatives-log-abs-a">
+            <statement>
+              <p>
+                What is the domain of <m>y = \ln(x)</m>?
+              </p>
+            </statement>
+          </task>
+          <task label="ex-antiderivatives-log-abs-b">
+            <statement>
+              <p>
+                Find <m>\lzoo{x}{\ln(x) }</m>.
+              </p>
+            </statement>
+          </task>
+          <task label="ex-antiderivatives-log-abs-c">
+            <statement>
+              <p>
+                What is the domain of <m>y = \ln(-x)</m>?
+              </p>
+            </statement>
+          </task>
+          <task label="ex-antiderivatives-log-abs-d">
+            <statement>
+              <p>
+                Find <m>\lzoo{x}{\ln(-x)}</m>.
+              </p>
+            </statement>
+          </task>
+          <task label="ex-antiderivatives-log-abs-e">
+            <statement>
+              <p>
+                You should find that <m>1/x</m> has two types of antiderivatives,
+                depending on whether <m>x \gt 0</m> or <m>x\lt 0</m>.
+                In one expression, give a formula for
+                <m>\ds \int \frac{1}{x}\, dx</m> that takes these different domains into account,
+                and explain your answer.
+              </p>
+
+              <!-- <p>
+                <var form="essay"/>
+              </p> -->
+            </statement>
+          </task>
+        <!-- </webwork> -->
       </exercise>
 
       <exercisegroup xml:id="exset-antiderivatives-ivp">
