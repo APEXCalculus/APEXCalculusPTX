@@ -1077,30 +1077,6 @@
         <exercise label="ex-graph-extreme-values-identify-points-1">
           <webwork xml:id="webwork-ex-graph-extreme-values-identify-points-1">
             <pg-code>
-              $gr=init_graph(-0.5,-2.5,6.5,3.5,axes=>[0,0],size=>[282,282]);
-              $gr->lb('reset');
-              for my$i(2,4,6){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top','large'));};
-              for my$i(-2,2){$gr->moveTo(-0.04,$i);$gr->lineTo(0.04,$i,'black',2);$gr->lb(new Label(-0.05,$i,$i,'black','right','middle','large'));};
-              @x=(0.1,1,2,3,4,5,6);
-              @y=(-2,3,1,2,1,-1,2.5);
-              for my $i(0..2){
-                $left[$i]=Formula("(x-$x[2*$i+1])^2/($x[2*$i]-$x[2*$i+1])^2*($y[2*$i]-$y[2*$i+1])+$y[2*$i+1]");
-                $right[$i]=Formula("(x-$x[2*$i+1])^2/($x[2*$i+2]-$x[2*$i+1])^2*($y[2*$i+2]-$y[2*$i+1])+$y[2*$i+1]");
-                add_functions($gr,"$left[$i] for x in &lt;$x[2*$i],$x[2*$i+1]> using color:blue and weight:2");
-                add_functions($gr,"$right[$i] for x in &lt;$x[2*$i+1],$x[2*$i+2]> using color:blue and weight:2");
-              };
-              for my $i (0) {$gr->stamps(open_circle($x[$i],$y[$i],'blue'));
-                $gr->lb(new Label($x[$i],$y[$i],$ALPHABET[$i],'black','left','top','large'));
-              };
-              for my $i (3) {$gr->stamps(open_circle($x[$i],$y[$i],'blue'));
-                $gr->lb(new Label($x[$i],$y[$i],$ALPHABET[$i],'black','left','bottom','large'));
-              };
-              for my $i (1,4,6) {$gr->stamps(closed_circle($x[$i],$y[$i],'blue'));
-                $gr->lb(new Label($x[$i],$y[$i],$ALPHABET[$i],'black','left','bottom','large'));
-              };
-              for my $i (2,5) {$gr->stamps(closed_circle($x[$i],$y[$i],'blue'));
-                $gr->lb(new Label($x[$i],$y[$i],$ALPHABET[$i],'black','left','top','large'));
-              };
               for my $A ('A'..'G') {Context()->strings->add($A=>{})};
               $absmax = List("B");
               $absmin = List("None");
@@ -1108,7 +1084,30 @@
               $relmin = List("C","F");
             </pg-code>
             <statement>
-              <image pg-name="$gr"/>
+              <image xml:id="img_03_01_ex_06">
+                <description></description>
+                <latex-image>
+                  \begin{tikzpicture}
+                  \begin{axis}[
+                        ymin=-2.5,ymax=3.5,%
+                        xmin=-.5,xmax=6.5,%
+                  ]
+                  
+                  \draw [firstcurvestyle] (axis cs:.1,-2) parabola [bend at end] (axis cs:1,3) parabola (axis cs:2,1) parabola [bend at end] (axis cs:3,2) parabola (axis cs:4,1) parabola [bend at end] (axis cs:5,-1) parabola (axis cs:6,2.5);
+                  
+                  \draw [firstcolor] (axis cs: .1,-2) node [black,right] {\(A\)} circle (1.5pt) 
+                                          (axis cs:3,2) node [above,black] {\(D\)} circle (1.5pt);
+                  
+                  \draw [firstcolor,fill=firstcolor] 	(axis cs: 1,3) node [above,black] {\(B\)} circle (1.5pt) 
+                                (axis cs:2,1) node [below,black] {\(C\)} circle (1.5pt)
+                                (axis cs:4,1) node [right,black] {\(E\)} circle (1.5pt)
+                                (axis cs:5,-1) node [below,black] {\(F\)} circle (1.5pt)
+                                (axis cs:6,2.5) node [left,black] {\(G\)} circle (1.5pt);
+                  
+                  \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 Enter the <em>absolute maxima</em> points here, using commas to separate them if there is more than one. If there are none, enter <c>NONE</c>.
               </instruction>
@@ -1140,23 +1139,6 @@
         <exercise label="ex-graph-extreme-values-identify-points-2">
           <webwork xml:id="webwork-ex-graph-extreme-values-identify-points-2">
             <pg-code>
-              $gr=init_graph(-0.5,-2.5,5.5,2.5,axes=>[0,0],size=>[282,282]);
-              $gr->lb('reset');
-              for my$i(2,4){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top','large'));};
-              for my$i(-2,2){$gr->moveTo(-0.04,$i);$gr->lineTo(0.04,$i,'black',2);$gr->lb(new Label(-0.05,$i,$i,'black','right','middle','large'));};
-              @x=(1,2,3,4,5);
-              @y=(-2,1,2,1,-1);
-              $f[0]=Formula("(x-$x[0])^2/($x[1]-$x[0])^2*($y[1]-$y[0])+$y[0]");
-              $f[1]=Formula("(x-$x[1])/($x[2]-$x[1])*($y[2]-$y[1])+$y[1]");
-              $f[2]=Formula("(x-$x[3])^2/($x[2]-$x[3])^2*($y[2]-$y[3])+$y[3]");
-              $f[3]=Formula("(x-$x[3])/($x[4]-$x[3])*($y[4]-$y[3])+$y[3]");
-              for my $i(0..3) {add_functions($gr,"$f[$i] for x in &lt;$x[$i],$x[$i+1]> using color:blue and weight:2");};
-              for my $i (0,1,2) {$gr->stamps(closed_circle($x[$i],$y[$i],'blue'));
-                $gr->lb(new Label($x[$i],$y[$i],$ALPHABET[$i],'black','right','bottom','large'));
-              };
-              for my $i (3,4) {$gr->stamps(closed_circle($x[$i],$y[$i],'blue'));
-                $gr->lb(new Label($x[$i],$y[$i],$ALPHABET[$i],'black','left','bottom','large'));
-              };
               for my $A ('A'..'E') {Context()->strings->add($A=>{})};
               $absmax = List("C");
               $absmin = List("A");
@@ -1164,7 +1146,30 @@
               $relmin = List("A");
             </pg-code>
             <statement>
-              <image pg-name="$gr"/>
+              <image xml:id="img_03_01_ex_07">
+                <description></description>
+                <latex-image>
+                  \begin{tikzpicture}
+                  \begin{axis}[
+                        ymin=-2.5,ymax=2.5,%
+                        xmin=-.5,xmax=5.5,%
+                  ]
+                  
+                  \draw [firstcurvestyle] (axis cs:1,-2)	parabola 	(axis cs:2,1) 
+                                                                  -- 	(axis cs:3,2) 
+                                                            parabola [bend at end] (axis cs:4,1) 
+                                                            -- (axis cs:5,-1);
+                  
+                  \draw [firstcolor,fill=firstcolor] 	(axis cs: 1,-2) node [above,black] {\(A\)} circle (1.5pt) 
+                                (axis cs:2,1) node [left,black] {\(B\)} circle (1.5pt)
+                                (axis cs:3,2) node [above,black] {\(C\)} circle (1.5pt)
+                                (axis cs:4,1) node [right,black] {\(D\)} circle (1.5pt)
+                                (axis cs:5,-1) node [below,black] {\(E\)} circle (1.5pt);
+                  
+                  \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 Enter the absolute maxima points here, using commas to separate them if there is more than one. If there are none, enter <c>NONE</c>.
               </instruction>
@@ -1204,14 +1209,7 @@
         <exercise label="ex-graph-extreme-values-evaluate-fprime-1">
           <webwork xml:id="webwork-ex-graph-extreme-values-evaluate-fprime-1">
             <pg-code>
-              $gr=init_graph(-5.5,-0.5,5.5,2.5,axes=>[0,0],size=>[282,282]);
-              $gr->lb('reset');
-              for my$i(-5,5){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top','large'));};
-              for my$i(1,2){$gr->moveTo(-0.19,$i);$gr->lineTo(0.19,$i,'black',2);$gr->lb(new Label(-0.2,$i,$i,'black','right','middle','large'));};
               $f=Formula("2/(x^2+1)");
-              add_functions($gr,"$f for x in &lt;-5,5> using color:blue and weight:2");
-              $gr->stamps(closed_circle(0,2,'blue'));
-              $gr->lb(new Label(0,2,'(0,2)','black','left','bottom','large'));
               $zero=Real(0);
               $dne = String("DNE");
             </pg-code>
@@ -1219,7 +1217,23 @@
               <p>
                 <m>f(x) = <var name="$f"/></m>
               </p>
-              <image pg-name="$gr"/>
+              <image xml:id="img_03_01_ex_08">
+                <description></description>
+                <latex-image>
+                  \begin{tikzpicture}
+                  \begin{axis}[
+                        ymin=-.5,ymax=2.5,%
+                        xmin=-5.5,xmax=5.5,%
+                  ]
+                  
+                  \addplot [firstcurvestyle] {2/((x^2+1))};
+                  
+                  \draw [firstcolor,fill=firstcolor] 	(axis cs: 0,2) node [above right,black] {\((0,2)\)} circle (1.5pt);
+                  
+                  \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 Enter <m>f^{\prime}(0)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
               </instruction>
@@ -1233,16 +1247,7 @@
         <exercise label="ex-graph-extreme-values-evaluate-fprime-2">
           <webwork xml:id="webwork-ex-graph-extreme-values-evaluate-fprime-2">
             <pg-code>
-              $gr=init_graph(-4,-1,4,6.5,axes=>[0,0],size=>[282,282]);
-              $gr->lb('reset');
-              for my$i(-2,2){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top','large'));};
-              for my$i(2,4,6){$gr->moveTo(-0.19,$i);$gr->lineTo(0.19,$i,'black',2);$gr->lb(new Label(-0.2,$i,$i,'black','right','middle','large'));};
               $f=Formula("x^2*sqrt(6-x^2)");
-              add_functions($gr,"$f for x in &lt;-2.449489,2.449489> using color:blue and weight:2");
-              $gr->stamps(closed_circle(0,0,'blue'));
-              $gr->lb(new Label(0,0,'(0,0)','black','left','top','large'));
-              $gr->stamps(closed_circle(2,5.656854,'blue'));
-              $gr->lb(new Label(2,4*sqrt(2),'(2,4sqrt(2))','black','center','bottom','large'));
               $zero=Real(0);
               $dne = String("DNE");
             </pg-code>
@@ -1250,7 +1255,24 @@
               <p>
                 <m>f(x) = <var name="$f"/></m>
               </p>
-              <image pg-name="$gr"/>
+              <image xml:id="img_03_01_ex_09">
+                <description></description>
+                <latex-image>
+                  \begin{tikzpicture}
+                  \begin{axis}[
+                        ymin=-.9,ymax=6.5,%
+                        xmin=-3.5,xmax=3.5,%
+                  ]
+                  
+                  \addplot [firstcurvestyle,domain=-2.44948:2.449489743,samples=100] {x^2*sqrt(6-x^2)};
+                  
+                  \draw [firstcolor,fill=firstcolor] 	(axis cs: 0,0) node [below right,black] {\((0,0)\)} circle (1.5pt);
+                  \draw [firstcolor,fill=firstcolor] 	(axis cs: 2,5.66) node [left,black] {\((2,4\sqrt{2})\)} circle (1.5pt);
+                  
+                  \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 Enter <m>f^{\prime}(0)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
               </instruction>
@@ -1270,16 +1292,7 @@
         <exercise label="ex-graph-extreme-values-evaluate-fprime-3">
           <webwork xml:id="webwork-ex-graph-extreme-values-evaluate-fprime-3">
             <pg-code>
-              $gr=init_graph(-0.5,-1.4,6.5,1.4,axes=>[0,0],size=>[282,282]);
-              $gr->lb('reset');
-              for my$i(2,4,6){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top','large'));};
-              for my$i(-1,1){$gr->moveTo(-0.19,$i);$gr->lineTo(0.19,$i,'black',2);$gr->lb(new Label(-0.2,$i,$i,'black','right','middle','large'));};
               $f=Formula("sin(x)");
-              add_functions($gr,"$f for x in &lt;0,6.2831852> using color:blue and weight:2");
-              $gr->stamps(closed_circle(1.570796,1,'blue'));
-              $gr->lb(new Label(pi/2,1,'(pi/2,1)','black','left','bottom','large'));
-              $gr->stamps(closed_circle(4.712389,-1,'blue'));
-              $gr->lb(new Label(3*pi/2,-1,'(3pi/2,-1)','black','right','top','large'));
               $zero=Real(0);
               $dne = String("DNE");
             </pg-code>
@@ -1287,7 +1300,24 @@
               <p>
                 <m>f(x) = <var name="$f"/></m>
               </p>
-              <image pg-name="$gr"/>
+              <image xml:id="img_03_01_ex_10">
+                <description></description>
+                <latex-image>
+                  \begin{tikzpicture}
+                  \begin{axis}[
+                    ymin=-1.5,ymax=1.5,%
+                    xmin=-.5,xmax=6.5,%
+                  ]
+                  
+                  \addplot [firstcurvestyle,domain=0:6.28] {sin(deg(x))};
+                  
+                  \draw [firstcolor,fill=firstcolor] 	(axis cs: 1.57,1) node [above,black] {\((\pi/2,1)\)} circle (1.5pt);
+                  \draw [firstcolor,fill=firstcolor] 	(axis cs: 4.71,-1) node [below,black] {\((3\pi/2,-1)\)} circle (1.5pt);
+                  
+                  \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 Enter <m>f^{\prime}(\pi/2)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
               </instruction>
@@ -1307,18 +1337,7 @@
         <exercise label="ex-graph-extreme-values-evaluate-fprime-4">
           <webwork xml:id="webwork-ex-graph-extreme-values-evaluate-fprime-4">
             <pg-code>
-              $gr=init_graph(-2.5,-2,4.5,11,axes=>[0,0],size=>[282,282]);
-              $gr->lb('reset');
-              for my$i(-2,2,4){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top','large'));};
-              for my$i(5,10){$gr->moveTo(-0.09,$i);$gr->lineTo(0.09,$i,'black',2);$gr->lb(new Label(-0.1,$i,$i,'black','right','middle','large'));};
               $f=Formula("x^2*sqrt(4-x)");
-              add_functions($gr,"$f for x in &lt;-2,3.999999> using color:blue and weight:2");
-              $gr->stamps(closed_circle(0,0,'blue'));
-              $gr->lb(new Label(0,0,'(0,0)','black','left','top','large'));
-              $gr->stamps(closed_circle(16/5,512*sqrt(5)/125,'blue'));
-              $gr->lb(new Label(16/5,512*sqrt(5)/125,'(16/5,512sqrt(5)/125)','black','right','bottom','large'));
-              $gr->stamps(closed_circle(4,0,'blue'));
-              $gr->lb(new Label(4,0,'(4,0)','black','right','bottom','large'));
               $zero=Real(0);
               $dne = String("DNE");
             </pg-code>
@@ -1326,7 +1345,25 @@
               <p>
                 <m>f(x) = <var name="$f"/></m>
               </p>
-              <image pg-name="$gr"/>
+              <image xml:id="img_03_01_ex_11">
+                <description></description>
+                <latex-image>
+                  \begin{tikzpicture}
+                  \begin{axis}[
+                    ymin=-1.5,ymax=11,%
+                    xmin=-2.5,xmax=4.5,%
+                  ]
+                  
+                  \addplot [firstcurvestyle,domain=-2:4] {x^2*sqrt(4-x)};
+                  
+                  \draw [firstcolor,fill=firstcolor] 	(axis cs: 0,0) node [below right,black] {\((0,0)\)} circle (1.5pt);
+                  \draw [firstcolor,fill=firstcolor] 	(axis cs: 3.2,9.16) node [above,black] {\(\left(\frac{16}{5},\frac{512}{25\sqrt{5}}\right)\)} circle (1.5pt);
+                  \draw [firstcolor,fill=firstcolor] 	(axis cs: 4,0) node [above left,black] {\((4,0)\)} circle (1.5pt);
+                  
+                  \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 Enter <m>f^{\prime}(0)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
               </instruction>
@@ -1352,19 +1389,8 @@
         <exercise label="ex-graph-extreme-values-evaluate-fprime-5">
           <webwork xml:id="webwork-ex-graph-extreme-values-evaluate-fprime-5">
             <pg-code>
-              $gr=init_graph(-1,-0.5,11,6.5,axes=>[0,0],size=>[282,282]);
-              $gr->lb('reset');
-              for my$i(5,10){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top','large'));};
-              for my$i(2,4,6){$gr->moveTo(-0.09,$i);$gr->lineTo(0.09,$i,'black',2);$gr->lb(new Label(-0.1,$i,$i,'black','right','middle','large'));};
               Context()->flags->set(reduceConstants=>0);
               $f=Formula("1+(x-2)^(2/3)/x");
-              $g=Formula("1+(2-x)^(2/3)/x");
-              add_functions($gr,"$g for x in &lt;0.1,2> using color:blue and weight:2");
-              add_functions($gr,"$f for x in &lt;2,11> using color:blue and weight:2");
-              $gr->stamps(closed_circle(2,1,'blue'));
-              $gr->lb(new Label(2,1,'(2,1)','black','left','top','large'));
-              $gr->stamps(closed_circle(6,1+2**(1/3)/3,'blue'));
-              $gr->lb(new Label(6,1+2**(1/3)/3,'(6,1+cbrt(2)/3)','black','center','top','large'));
               $zero=Real(0);
               $dne = String("DNE");
             </pg-code>
@@ -1372,7 +1398,25 @@
               <p>
                 <m>f(x) = <var name="$f"/></m>
               </p>
-              <image pg-name="$gr"/>
+              <image xml:id="img_03_01_ex_12">
+                <description></description>
+                <latex-image>
+                  \begin{tikzpicture}
+                  \begin{axis}[
+                    ymin=-.5,ymax=6.5,%
+                    xmin=-1,xmax=11,%
+                  ]
+                  
+                  \addplot [firstcurvestyle,domain=.2:11,samples=100] {(((x-2)^2)^(1/3))/x+1};
+                  
+                  \draw [firstcolor,fill=firstcolor] 	(axis cs: 2,1) node [below,black] {\((2,1)\)} circle (1.5pt);
+                  \draw [firstcolor,fill=firstcolor] 	(axis cs: 6,1.42) node [above,black] {\(\left(6,1+\frac{\sqrt[3]{2}}{3}\right)\)} circle (1.5pt);
+                  
+                  \end{axis}
+                  \end{tikzpicture}
+
+                </latex-image>
+              </image>
               <instruction>
                 Enter <m>f^{\prime}(2)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
               </instruction>
@@ -1392,21 +1436,9 @@
         <exercise label="ex-graph-extreme-values-evaluate-fprime-6">
           <webwork xml:id="webwork-ex-graph-extreme-values-evaluate-fprime-6">
             <pg-code>
-              $gr=init_graph(-2.5,-0.5,2.5,3.5,axes=>[0,0],size=>[282,282]);
-              $gr->lb('reset');
-              for my$i(-2,2){$gr->moveTo($i,-0.04);$gr->lineTo($i,0.04,'black',2);$gr->lb(new Label($i,-0.05,$i,'black','center','top','large'));};
-              for my$i(1,2,3){$gr->moveTo(-0.09,$i);$gr->lineTo(0.09,$i,'black',2);$gr->lb(new Label(-0.1,$i,$i,'black','right','middle','large'));};
               Context()->flags->set(reduceConstants=>0);
               parser::Root->Enable;
               $f=Formula("root(3,x^4-2x^2+1)");
-              $g=Formula("-root(3,-(x^4-2x^2+1))");
-              add_functions($gr,"$f for x in &lt;-2.5,-1> using color:blue and weight:2");
-              add_functions($gr,"$g for x in &lt;-1,1> using color:blue and weight:2");
-              add_functions($gr,"$f for x in &lt;1,2.5> using color:blue and weight:2");
-              $gr->stamps(closed_circle(-1,0,'blue'));
-              $gr->lb(new Label(-1,0,'(-1,0)','black','left','top','large'));
-              $gr->stamps(closed_circle(1,0,'blue'));
-              $gr->lb(new Label(1,0,'(1,0)','black','left','top','large'));
               $zero=Real(0);
               $dne = String("DNE");
             </pg-code>
@@ -1414,7 +1446,28 @@
               <p>
                 <m>f(x) = <var name="$f"/></m>
               </p>
-              <image pg-name="$gr"/>
+              <image xml:id="img_03_01_ex_13">
+                <description></description>
+                <latex-image>
+                  \begin{tikzpicture}
+                  \begin{axis}[
+                  xtick={-2,-1,1,2},
+                  ymin=-.5,ymax=3.5,%
+                  xmin=-2.5,xmax=2.5,%
+                  ]
+                  
+                  \addplot [firstcurvestyle,domain=-2:-1,samples=25] {(x^4-2*x^2+1)^(1/3)};
+                  \addplot [firstcurvestyle,domain=-1:1,samples=50] {(x^4-2*x^2+1)^(1/3)};
+                  \addplot [firstcurvestyle,domain=1:2,samples=25] {(x^4-2*x^2+1)^(1/3)};
+                  
+                  \draw [firstcolor,fill=firstcolor] 	(axis cs: 1,0) node [above right,black] {\((1,0)\)} circle (1.5pt);
+                  \draw [firstcolor,fill=firstcolor] 	(axis cs: -1,0) node [above left,black] {\((-1,0)\)} circle (1.5pt);
+                  
+                  \end{axis}
+                  \end{tikzpicture}
+
+                </latex-image>
+              </image>
               <instruction>
                 Enter <m>f^{\prime}(-1)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
               </instruction>
@@ -1434,16 +1487,6 @@
         <exercise label="ex-graph-extreme-values-evaluate-fprime-7">
           <webwork xml:id="webwork-ex-graph-extreme-values-evaluate-fprime-7">
             <pg-code>
-              $gr=init_graph(-1.1,-0.6,1.1,1.1,axes=>[0,0],size=>[282,282]);
-              $gr->lb('reset');
-              for my$i(-1,-0.5,0.5,1){$gr->moveTo($i,-0.02);$gr->lineTo($i,0.02,'black',2);$gr->lb(new Label($i,-0.03,$i,'black','center','top','large'));};
-              for my$i(-0.5,0.5,1){$gr->moveTo(-0.04,$i);$gr->lineTo(0.04,$i,'black',2);$gr->lb(new Label(-0.05,$i,$i,'black','right','middle','large'));};
-              $f=Formula("x^2");
-              $g=Formula("x^5");
-              add_functions($gr,"$f for x in &lt;-1,0> using color:blue and weight:2");
-              add_functions($gr,"$g for x in &lt;0,1> using color:blue and weight:2");
-              $gr->stamps(closed_circle(0,0,'blue'));
-              $gr->lb(new Label(0,0,'(0,0)','black','left','top','large'));
               $zero=Real(0);
               $dne = String("DNE");
             </pg-code>
@@ -1451,7 +1494,24 @@
               <p>
                 <m>f(x) = \begin{cases}x^2,\amp x\leq0\\x^5,\amp x\gt0\end{cases}</m>
               </p>
-              <image pg-name="$gr"/>
+              <image xml:id="img_03_01_ex_14">
+                <description></description>
+                <latex-image>
+                  \begin{tikzpicture}
+                  \begin{axis}[
+                    ymin=-.5,ymax=1.1,%
+                    xmin=-1.1,xmax=1.1,%
+                  ]
+                  
+                  \addplot [firstcurvestyle,domain=-1:0] {x^2};
+                  \addplot [firstcurvestyle,domain=0:1] {x^5};
+                  
+                  \draw [firstcolor,fill=firstcolor] 	(axis cs: 0,0) node [below right,black] {\((0,0)\)} circle (1.5pt);
+                  
+                  \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 Enter <m>f^{\prime}(0)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
               </instruction>
@@ -1465,16 +1525,6 @@
         <exercise label="ex-graph-extreme-values-evaluate-fprime-8">
           <webwork xml:id="webwork-ex-graph-extreme-values-evaluate-fprime-8">
             <pg-code>
-              $gr=init_graph(-1.1,-0.6,1.1,1.1,axes=>[0,0],size=>[282,282]);
-              $gr->lb('reset');
-              for my$i(-1,-0.5,0.5,1){$gr->moveTo($i,-0.02);$gr->lineTo($i,0.02,'black',2);$gr->lb(new Label($i,-0.03,$i,'black','center','top','large'));};
-              for my$i(-0.5,0.5,1){$gr->moveTo(-0.04,$i);$gr->lineTo(0.04,$i,'black',2);$gr->lb(new Label(-0.05,$i,$i,'black','right','middle','large'));};
-              $f=Formula("x^2");
-              $g=Formula("x");
-              add_functions($gr,"$f for x in &lt;-1,0> using color:blue and weight:2");
-              add_functions($gr,"$g for x in &lt;0,1> using color:blue and weight:2");
-              $gr->stamps(closed_circle(0,0,'blue'));
-              $gr->lb(new Label(0,0,'(0,0)','black','left','top','large'));
               $zero=Real(0);
               $dne = String("DNE");
             </pg-code>
@@ -1482,7 +1532,24 @@
               <p>
                 <m>f(x) = \begin{cases}x^2,\amp x\leq0\\x,\amp x\gt0\end{cases}</m>
               </p>
-              <image pg-name="$gr"/>
+              <image xml:id="img_03_01_ex_15">
+                <description></description>
+                <latex-image>
+                  \begin{tikzpicture}
+                  \begin{axis}[
+                    ymin=-.5,ymax=1.1,%
+                    xmin=-1.1,xmax=1.1,%
+                  ]
+                  
+                  \addplot [firstcurvestyle,domain=-1:0] {x^2};
+                  \addplot [firstcurvestyle,domain=0:1] {x};
+                  
+                  \draw [firstcolor,fill=firstcolor] 	(axis cs: 0,0) node [below right,black] {\((0,0)\)} circle (1.5pt);
+                  
+                  \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <instruction>
                 Enter <m>f^{\prime}(0)</m>. If the derivative does not exist at the indicated point, enter <c>DNE</c> for <q>does not exist</q>.
               </instruction>
