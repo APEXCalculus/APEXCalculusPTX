@@ -2021,45 +2021,15 @@
         <exercise label="ex-polar-coordinates-two-ways-2">
           <webwork xml:id="webwork-ex-polar-coordinates-two-ways-2">
               <pg-code>
-                $gr = init_graph(-3.5,-3.5,3.5,3.5,size=>[400,400]);
-                $gr->moveTo(0,0); $gr->arrowTo(3.4,0,'black',1);
                 Context()->variables->are(t=>"Real");
-                $x = Formula("cos(t)");
-                $y = Formula("sin(t)");
-                $c[0] = new Fun( $x->perlFunction, $y->perlFunction, $gr );
-                $c[0]->domain(0,6.28318);
-                $c[0]->steps(90);
-                $c[0]->weight(1);
-                $c[0]->color('black');
-                $c[1] = new Fun( (2*$x)->perlFunction, (2*$y)->perlFunction, $gr );
-                $c[1]->domain(0,6.28318);
-                $c[1]->steps(90);
-                $c[1]->weight(1);
-                $c[1]->color('black');
-                $c[2] = new Fun( (3*$x)->perlFunction, (3*$y)->perlFunction, $gr );
-                $c[2]->domain(0,6.28318);
-                $c[2]->steps(90);
-                $c[2]->weight(1);
-                $c[2]->color('black');
-                for my$i(2,3,4,6,8,9,10,12,14,15,16,18,20,21,22)
-                  {$gr->moveTo(0,0); $gr->lineTo(3*cos($i*pi/12),3*sin($i*pi/12),'gray',1,'dashed');};
-                for my$i(1,2,3)
-                  {$gr->lb( new Label($i+0.04,0,$i,'black','left','top'));};
-                $gr->lb( new Label(0,0,'O','black','center','top'));
-                $gr->lb( new Label(2*cos(pi()/6),2*sin(pi()/6)-0.04,'A','black','center','top'));
-                $gr->lb( new Label(cos(-pi()/3),sin(-pi()/3)-0.04,'B','black','center','top'));
-                $gr->lb( new Label(2*cos(3*pi()/4),2*sin(3*pi()/4)-0.04,'C','black','center','top'));
-                $gr->lb( new Label(2.5*cos(pi()),2.5*sin(pi())-0.04,'D','black','center','top'));
-                $gr->stamps( closed_circle(2*cos(pi()/6),2*sin(pi()/6),'black') );
-                $gr->stamps( closed_circle(cos(-pi()/3),sin(-pi()/3),'black') );
-                $gr->stamps( closed_circle(2*cos(3*pi()/4),2*sin(3*pi()/4),'black') );
-                $gr->stamps( closed_circle(2.5*cos(pi()),2.5*sin(pi()),'black') );
-
-                @r=(2,1,2,2.5);
-                @s=map{-$_}(@r);
-                Context()->flags->set(reduceConstants=>0);
-                @t=(Formula("pi/6"),Formula("-pi/3"),Formula("(3pi)/4"),Formula("pi"));
-                @u=(Formula("(-5pi)/6"),Formula("(2pi)/3"),Formula("(-pi)/4"),Formula("0"));
+                @A=(Compute("(2,pi/6)"),Compute("(-2,-(5*pi)/6)"));
+                $Alist=List($A[0],$A[1]);
+                @B=(Compute("(1,-pi/3)"),Compute("(-1,(2*pi)/3)"));
+                $Blist=List($B[0],$B[1]);
+                @C=(Compute("(2,(3*pi)/4)"),Compute("(-2,-pi/4)"));
+                $Clist=List($C[0],$C[1]);
+                @D=(Compute("(5/2,pi)"),Compute("(5/2,-pi)"));
+                $Dlist=List($D[0],$D[1]);
               </pg-code>
               <statement>
                 <p>
@@ -2067,69 +2037,57 @@
                   where <m>-\pi\lt \theta\leq \pi</m>.
                 </p>
 
-                <image pg-name="$gr" width="47%"/>
+                <image xml:id="img_polar-two-ways-2">
+                  <description></description>
+                  <latex-image>
+                    \begin{tikzpicture}
+                    \draw [dashed,gray] (-3.1,0) -- (0,0);
+                    \draw[thick,->,>=stealth] (0,0) node [below] {$O$} -- (3.5,0) ;
+                    \filldraw (0,0) circle (1.5pt);
+                    \foreach \x in {1,2,3}
+                    {\draw (0,0) circle (\x cm);
+                    \draw (\x,0) node [below right] {\x};
+                    }
+                    \foreach \x in {30,45,60,90,120,135,150}
+                    {\draw [rotate=\x,dashed,gray] (-3.1,0) -- (3.1,0);
+                    }
+                    \filldraw (xyz polar cs: angle=30,radius=2) circle (2pt) node [above] {\(A\)}
+                          (xyz polar cs: angle=-60,radius=1)circle (2pt) node [below] {\(B\)}
+                          (xyz polar cs: angle=135,radius=2)circle (2pt) node [right] {\(C\)}
+                          (xyz polar cs: angle=180,radius=2.5)circle (2pt) node [below] {\(D\)};
+                    \end{tikzpicture}
+                  </latex-image>
+                </image>
 
-                <tabular>
-                  <col right="minor"/>
-                  <col halign="center"/>
-                  <col right="minor" halign="center"/>
-                  <col halign="center"/>
-                  <col halign="center"/>
-                  <row bottom="medium">
-                    <cell>Point</cell>
-                    <cell><m>(positive) r_1</m></cell>
-                    <cell><m>\theta_1</m></cell>
-                    <cell><m>r_2</m></cell>
-                    <cell><m>(negative) \theta_2</m></cell>
-                  </row>
-                  <row>
-                    <cell><m>A</m></cell>
-                    <cell><var name="$r[0]" width="5"/></cell>
-                    <cell><var name="$t[0]" width="5"/></cell>
-                    <cell><var name="$s[0]" width="5"/></cell>
-                    <cell><var name="$u[0]" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><m>B</m></cell>
-                    <cell><var name="$r[1]" width="5"/></cell>
-                    <cell><var name="$t[1]" width="5"/></cell>
-                    <cell><var name="$s[1]" width="5"/></cell>
-                    <cell><var name="$u[1]" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><m>C</m></cell>
-                    <cell><var name="$r[2]" width="5"/></cell>
-                    <cell><var name="$t[2]" width="5"/></cell>
-                    <cell><var name="$s[2]" width="5"/></cell>
-                    <cell><var name="$u[2]" width="5"/></cell>
-                  </row>
-                  <row>
-                    <cell><m>D</m></cell>
-                    <cell><var name="$r[3]" width="5"/></cell>
-                    <cell><var name="$t[3]" width="5"/></cell>
-                    <cell><var name="$s[3]" width="5"/></cell>
-                    <cell><var name="$u[3]" width="5"/></cell>
-                  </row>
-                </tabular>
+                <instruction>
+                  Enter two sets of coordinates for the point <m>A</m>. Separate your answers by a comma.
+                </instruction>
+                <p>
+                  <var name="$Alist" width="30"/>
+                </p>
 
+                <instruction>
+                  Enter two sets of coordinates for the point <m>B</m>. Separate your answers by a comma.
+                </instruction>
+                <p>
+                  <var name="$Blist" width="30"/>
+                </p>
+
+                <instruction>
+                  Enter two sets of coordinates for the point <m>C</m>. Separate your answers by a comma.
+                </instruction>
+                <p>
+                  <var name="$Clist" width="30"/>
+                </p>
+
+                <instruction>
+                  Enter two sets of coordinates for the point <m>D</m>. Separate your answers by a comma.
+                </instruction>
+                <p>
+                  <var name="$Dlist" width="30"/>
+                </p>
               </statement>
-              <solution>
-                <p>
-                  <m>A=P(2,\pi/6)</m> and <m>P(-2,-5\pi/6)</m>;
-                </p>
-
-                <p>
-                  <m>B=P(1,-\pi/3)</m> and <m>P(-1,2\pi/3)</m>;
-                </p>
-
-                <p>
-                  <m>C=P(2,3\pi/4)</m> and <m>P(-2,-\pi/4)</m>;
-                </p>
-
-                <p>
-                  <m>D=P(2.5,\pi)</m> and <m>P(2.5,-\pi)</m>;
-                </p>
-              </solution>
+              <!-- The previous provided "solution" was really just the answers -->
           </webwork>
         </exercise>
 
