@@ -1324,7 +1324,10 @@
         <exercise label="ex-limit-infinity-use-graph-2">
           <webwork xml:id="webwork-ex-limit-infinity-use-graph-2">
             <pg-code>
-              @a=(1..9)[NchooseK(9,2)];
+              $a0 = non_zero_random(-2,3,1);
+              $b = random(1,2,1);
+              $a1 = $a0+$b;
+              @a = ($a0,$a1);
               $f=Formula("1/((x-$a[0])(x-$a[1])^(2))")->reduce;
               $L[0]=($f->eval(x=>$a[0]-0.1)>0)?Compute("inf"):Compute("-inf");
               $L[1]=($f->eval(x=>$a[0]+0.1)>0)?Compute("inf"):Compute("-inf");
@@ -1333,11 +1336,12 @@
               for my$i(2,5){$L[$i]=($L[$i-2]==$L[$i-1])?$L[$i-2]:Compute("DNE");};
               for my$i(0..5){$ev[$i]=($L[$i]==Compute("DNE"))?$L[$i]->cmp():$L[$i]->cmp()->withPostFilter(AnswerHints(Compute("DNE")=> "Technically correct, but this question is asking for more specific information."));};
               $xmin=min(0,@a)-1;$xmax=max(@a)+1;
+              $d = abs($a[1]-$a[0]);
               @x = num_sort(
-                1/(50*($a[1]-$a[0])**2)/2 + $a[0],
-                -1/(50*($a[1]-$a[0])**2)/2 + $a[0],
-                sqrt(abs(1/(50*($a[1]-$a[0])))) + $a[1],
-                -sqrt(abs(1/(50*($a[1]-$a[0])))) + $a[1]
+                (sqrt($d*(25*$d**3+4))-5*$d**2)/(20*$d) + $a[0],
+                -(sqrt($d*(25*$d**3+4))-5*$d**2)/(20*$d) + $a[0],
+                sqrt(1/(50*$d)) + $a[1],
+                -sqrt(1/(50*$d)) + $a[1]
               );
               Context()->strings->add('does not exist'=>{alias=>'DNE'});
             </pg-code>
