@@ -118,7 +118,7 @@
     Of course, not every series converges.
     For instance, in part 1 of <xref ref="ex_ps1">Example</xref>,
     we recognized the series <m>\ds \infser[0] x^n</m> as a geometric series in <m>x</m>.
-    <xref ref="thm_geom_series">Theorem</xref>
+    <xref ref="thm_geom_series"/>
     states that this series converges only when <m>\abs{x}\lt 1</m>.
   </p>
 
@@ -173,7 +173,7 @@
   <p>
     The value of <m>R</m> is important when understanding a power series,
     hence it is given a name in the following definition.
-    Also, note that part 2 of <xref ref="thm_radius_converge">Theorem</xref>
+    Also, note that part 2 of <xref ref="thm_radius_converge"/>
     makes a statement about the interval <m>(c-R,c+R)</m>,
     but the not the endpoints of that interval.
     A series may/may not converge at these endpoints.
@@ -186,7 +186,7 @@
         <ol>
           <li>
             <p>
-              The number <m>R</m> given in <xref ref="thm_radius_converge">Theorem</xref>
+              The number <m>R</m> given in <xref ref="thm_radius_converge"/>
               is the <em>radius of convergence</em> of a given series.
               When a series converges for only <m>x=c</m>,
               we say the radius of convergence is 0, <ie/>, <m>R=0</m>.
@@ -218,22 +218,76 @@
     To find the values of <m>x</m> for which a given series converges,
     we will use the convergence tests we studied previously
     (especially the Ratio Test).
-    However, the tests all required that the terms of a series be positive.
-    The following theorem gives us a work-around to this problem.
+    All of our tests require a series with positive terms.
+    This isn't true of a power series, so we first consider absolute convergence.
   </p>
 
-  <theorem xml:id="thm_abs_power">
-    <title>The Radius of Convergence of a Series and Absolute Convergence</title>
-    <statement>
-      <p>
-        The series <m>\ds \infser[0] a_n(x-c)^n</m> and
-        <m>\ds \infser[0] \abs{a_n(x-c)^n}</m> have the same radius of convergence <m>R</m>.
-      </p>
-    </statement>
-  </theorem>
+  <p>
+    Given <m>\infser[0] a_n(x-c)^n</m>, we apply the ratio test to <m>\infser[0]\abs{a_n(x-c)^n}</m>.
+    We get
+    <me>
+      \lim_{n\to\infty}\frac{\abs{a_{n+1}(x-c)^{n+1}}}{\abs{a_n(x-c)^n}} = L\abs{x-c}
+    </me>,
+    where <m>L=\lim_{n\to\infty}\frac{\abs{a_{n+1}}}{\abs{a_n}}</m>.
+    It follows that the series converges absolutely (and therefore converges)
+    for any <m>x</m> such that <m>L\abs{x-c}\lt 1</m>.
+  </p>
 
   <p>
-    <xref ref="thm_abs_power">Theorem</xref>
+    On the other hand, suppose for some <m>x</m> that <m>L\abs{x-c}\gt 1</m>.
+    This implies that, for sufficiently large <m>n</m>, <m>\abs{a_{n+1}}\gt \abs{a_n}</m>.
+    This means that the terms of <m>\infser[0] a_n(x-c)^n</m> are growing in absolute value,
+    and therefore cannot converge to zero. This means that the series diverges, by <xref ref="thm_series_nth_term"/>.
+  </p>
+
+  <p>
+    From the above observations, it follows that <m>R=\frac{1}{L}</m> must be the radius of convergence.
+    To determine the interval of convergence, it remains to check the endpoints of the interval.
+  </p>
+
+  <insight xml:id="thm_abs_power">
+    <title>Determining the Radius and Interval of Convergence</title>
+    <statement>
+      <p>
+        Given the power series <m>\ds \infser[0] a_n(x-c)^n</m>,
+        the result of applying the ratio test to the series <m>\ds \infser[0]\abs{a_n (x_c)^n}</m>
+        is <m>L\abs{x-c}</m>, where <m>\ds L=\lim_{n\to\infty}\frac{\abs{a_{n+1}}}{\abs{a_n}}</m>.
+      </p>
+
+      <p>
+        <ol>
+          <li>
+            <p>
+              If <m>L=0</m>, then the power series converges for every <m>x</m>
+              by the ratio test, since <m>L\abs{x-c}=0\lt 1</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              If <m>L=\infty</m>, then power series only converges when <m>x=c</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              If <m>0\lt L\lt \infty</m>, then <m>R=1/L</m> is the radius of convergence:
+              by the ratio test, the series converges when <m>\abs{x-c}\lt R</m>.
+            </p>
+
+            <p>
+              To determine the interval of convergence, plug the endpoints (<m>c-R</m> and <m>c+R</m>)
+              into the power series, and test the resulting series for convergence.
+              If the series converges, we include the endpoint. If it diverges, we exclude the endpoint.
+            </p>
+          </li>
+        </ol>
+      </p>
+    </statement>
+  </insight>
+
+  <p>
+    <xref ref="thm_abs_power"/>
     allows us to find the radius of convergence <m>R</m> of a series by applying the Ratio Test
     (or any applicable test)
     to the absolute value of the terms of the series.
@@ -419,7 +473,7 @@
     <video youtube="qErrT8xRKts" label="vid-seqseries-powerseries-derivative"/>
   </figure>
   <p>
-    A few notes about <xref ref="thm_calc_power_series">Theorem</xref>:
+    A few notes about <xref ref="thm_calc_power_series"/>:
   </p>
 
   <p>
@@ -464,7 +518,7 @@
     <solution>
       <p>
         We find the derivative and indefinite integral of <m>f(x)</m>,
-        following <xref ref="thm_calc_power_series">Theorem</xref>.
+        following <xref ref="thm_calc_power_series"/>.
       </p>
 
       <p>
@@ -529,7 +583,7 @@
 
   <p>
     Recall that <m>\ds f(x) = \infser[0] x^n</m> in <xref ref="ex_ps3">Example</xref> is a geometric series.
-    According to <xref ref="thm_geom_series">Theorem</xref>,
+    According to <xref ref="thm_geom_series"/>,
     this series converges to <m>1/(1-x)</m> when <m>\abs{x}\lt 1</m>.
     Thus we can say
     <me>
@@ -709,7 +763,7 @@
           f(x)  = \infser[0] a_nx^n = a_0+a_1x+a_2x^2+a_3x^3+\cdots
         </me>
         for unknown coefficients <m>a_n</m>.
-        We can find <m>\fp(x)</m> using <xref ref="thm_calc_power_series">Theorem</xref>:
+        We can find <m>\fp(x)</m> using <xref ref="thm_calc_power_series"/>:
         <me>
           \fp(x) = \infser a_n\cdot n\cdot x^{n-1} = a_1+2a_2x+3a_3x^2+4a_4x^3\cdots
         </me>.
