@@ -2802,9 +2802,11 @@
         <exercise label="ex-FTC-part1-6">
           <webwork xml:id="webwork-ex-FTC-part1-6">
             <pg-code>
-              $b = non_zero_random(-9,9,1)
+              $b = non_zero_random(-9,9,1);
               ($low,$high) = ('e^','ln','sin','cos','sqrt')[NchooseK(5,2)];
               Context()->variables->add(t=>'Real');
+              $low = Formula("$low(x)");
+              $high = Formula("$high(x)");
               $f = Formula("sqrt(t^4+$b t^2)")->reduce;
               $D = $high->D('x') * $f->substitute(t=>$high) - $low->D('x') * $f->substitute(t=>$low);
               $D = $D->reduce;
