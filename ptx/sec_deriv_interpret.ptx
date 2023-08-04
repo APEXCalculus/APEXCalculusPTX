@@ -1116,15 +1116,15 @@
               $f=Formula("$a*(x-$h)^2+$k");
               $fp=$f->D('x');
               if ($a>0) {
-                $fleft  = $h - sqrt(5/$a - $k);
-                $fright = $h + sqrt(5/$a - $k);
+                $fleft  = $h - sqrt(5/$a - $k/$a);
+                $fright = $h + sqrt(5/$a - $k/$a);
                 @fpos = ('center','top');
                 $fpleft = $h-5/2/$a;
                 $fpright = $h+5/2/$a;
                 @fppos = ('left','top');
               } else {
-                $fleft  = $h - sqrt(-5/$a - $k);
-                $fright = $h + sqrt(-5/$a - $k);
+                $fleft  = $h - sqrt(-5/$a - $k/$a);
+                $fright = $h + sqrt(-5/$a - $k/$a);
                 @fpos = ('center','bottom');
                 $fpleft = $h+5/2/$a;
                 $fpright = $h-5/2/$a;
@@ -1173,16 +1173,13 @@
               if($envir{problemSeed}==1){$a=1;$r=0;$s=1;$t=2;};
               $f=Formula("$a*(x-$r)*(x-$s)*(x-$t)");
               $fp=$f->D('x');
-              @cp=(
-                ($r+$s+$t - sqrt(($r+$s+$t)**2 - 3*($r*$s+$r*$t+$s*$t)))/3,
-                ($r+$s+$t + sqrt(($r+$s+$t)**2 - 3*($r*$s+$r*$t+$s*$t)))/3
-              );
+              $xmin=$r-2;
+              $xmax=$t+2;
+              @cp=($xmin,$xmax);
               @cv;
               for $i (@cp) {
                 push(@cv, $f->eval(x=>$i));
               };
-              $xmin=$r-2;
-              $xmax=$t+2;
               $ymin=min(-5,map{Round($_)-1}(@cv));
               $ymax=max(5,map{Round($_)+1}(@cv));
               $infl=($r+$s+$t)/3;
@@ -1202,7 +1199,7 @@
                     xmin=$xmin,xmax=$xmax,%
                   ]
                   
-                  \addplot [firstcurvestyle,-,domain=$xmin:$xmax] {$a*(x-$r)*(x-$s)*(x-$t)};
+                  \addplot [firstcurvestyle,-,domain=$xmin:$xmax,samples=100] {$a*(x-$r)*(x-$s)*(x-$t)};
                   \addplot [secondcurvestyle,-,domain=$xmin:$xmax] {$a*(3*x^2-2*($r+$s+$t)*x+$r*$s+$r*$t+$s*$t)};
                   \addlegendentry{\(f(x)\)};
                   \addlegendentry{\(g(x)\)};
