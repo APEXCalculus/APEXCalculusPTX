@@ -1113,18 +1113,18 @@
               $k=non_zero_random(-2,2,1);
               $a=non_zero_random(-1,1,0.05);
               if($envir{problemSeed}==1){$a=0.25;$h=1;$k=2;};
-              $f=Formula("$a (x-$h)^2+$k");
+              $f=Formula("$a*(x-$h)^2+$k");
               $fp=$f->D('x');
               if ($a>0) {
-                $fleft  = $h - sqrt(5/$a - $k);
-                $fright = $h + sqrt(5/$a - $k);
+                $fleft  = $h - sqrt(5/$a - $k/$a);
+                $fright = $h + sqrt(5/$a - $k/$a);
                 @fpos = ('center','top');
                 $fpleft = $h-5/2/$a;
                 $fpright = $h+5/2/$a;
                 @fppos = ('left','top');
               } else {
-                $fleft  = $h - sqrt(-5/$a - $k);
-                $fright = $h + sqrt(-5/$a - $k);
+                $fleft  = $h - sqrt(-5/$a - $k/$a);
+                $fright = $h + sqrt(-5/$a - $k/$a);
                 @fpos = ('center','bottom');
                 $fpleft = $h+5/2/$a;
                 $fpright = $h-5/2/$a;
@@ -1134,31 +1134,30 @@
               $fright=min($fright,4);
               $fpleft=max($fpleft,-4);
               $fpright=min($fpright,4);
-              $gr=init_graph(-4,-5,4,5,axes=>[0,0],size=>[400,240]);
-              $gr->lb('reset');
-              for my$i(-3,-2,-1,1,2,3){
-                $gr->moveTo($i,-0.05);
-                $gr->lineTo($i,0.05,black,1);
-                $gr->lb(new Label($i,-0.1,$i,'black','center','top','large'));
-              };
-              for my$i(-4..-1,1..4){
-                $gr->moveTo(-0.05,$i);
-                $gr->lineTo(0.05,$i,black,1);
-                $gr->lb(new Label(-0.1,$i,$i,'black','right','middle','large'));
-              };
-              $gr->new_color("lightblue", 174,180,244);
-              $gr->new_color("darkred", 159,64,16);
-              add_functions($gr, "$fp for x in &lt;$fpleft,$fpright> using color:lightblue and weight:3");
-              $gr->lb(new Label($fpright-1,$fp->eval(x=>$fpright-1),'f','lightblue',@fppos,'large'));
-              add_functions($gr, "$f for x in &lt;$fleft,$fright> using color:darkred and weight:2");
-              $gr->lb(new Label($h,$k,'g','darkred',@fpos,'large'));
               $radio=RadioButtons([
                 math_ev3(f).' is the derivative of '.math_ev3(g).'.',
                 math_ev3(g).' is the derivative of '.math_ev3(f).'.'
               ],0);
             </pg-code>
             <statement>
-              <image pg-name="$gr"/>
+              <image xml:id="img_02_02_ex_15">
+                <description></description>
+                <latex-image>
+                  \begin{tikzpicture}
+                  \begin{axis}[
+                        ymin=-5.1,ymax=5.1,%
+                        xmin=-4.3,xmax=4.3,%
+                  ]
+                  
+                  \addplot [firstcurvestyle,-,domain=$fpleft:$fpright] {$fp};
+                  \addplot [secondcurvestyle,-,domain=$fleft:$fright] {$f};
+                  \addlegendentry{\(f(x)\)};
+                  \addlegendentry{\(g(x)\)};
+                  
+                  \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <p>
                 <var name="$radio" form="buttons"/>
               </p>
@@ -1172,53 +1171,43 @@
               ($r,$s,$t)=num_sort((-3..3)[NchooseK(7,3)]);
               $a=non_zero_random(-1,1,0.05);
               if($envir{problemSeed}==1){$a=1;$r=0;$s=1;$t=2;};
-              $f=Formula("$a(x-$r)(x-$s)(x-$t)");
+              $f=Formula("$a*(x-$r)*(x-$s)*(x-$t)");
               $fp=$f->D('x');
-              @cp=(
-                ($r+$s+$t - sqrt(($r+$s+$t)**2 - 3*($r*$s+$r*$t+$s*$t)))/3,
-                ($r+$s+$t + sqrt(($r+$s+$t)**2 - 3*($r*$s+$r*$t+$s*$t)))/3
-              );
+              $xmin=$r-2;
+              $xmax=$t+2;
+              @cp=($xmin,$xmax);
               @cv;
               for $i (@cp) {
                 push(@cv, $f->eval(x=>$i));
               };
-              $xmin=$r-2;
-              $xmax=$t+2;
               $ymin=min(-5,map{Round($_)-1}(@cv));
               $ymax=max(5,map{Round($_)+1}(@cv));
               $infl=($r+$s+$t)/3;
-              $gr=init_graph($xmin,$ymin,$xmax,$ymax,axes=>[0,0],size=>[400,240]);
-              $gr->lb('reset');
-              $gr->new_color("lightblue", 174,180,244);
-              $gr->new_color("darkred", 159,64,16);
-              for my$i(($xmin+1)..-1,1..($xmax-1)){
-                $gr->moveTo($i,-0.05);
-                $gr->lineTo($i,0.05,black,1);
-                $gr->lb(new Label($i,0,$i,'black','center','top','large'));
-              };
-              for my$i(($ymin+1)..-1,1..($ymax-1)){
-                $gr->moveTo(-0.05,$i);
-                $gr->lineTo(0.05,$i,black,1);
-                $gr->lb(new Label(-0.1,$i,$i,'black','right','middle','large'));
-              };
-              if ($a>0) {
-                @fpos=('right','bottom');
-                @fppos=('center','top');
-              } else {
-                @fpos=('left','bottom');
-                @fppos=('center','bottom');
-              }
-              add_functions($gr, "$f for x in &lt;$xmin,$xmax> using color:lightblue and weight:3");
-              $gr->lb(new Label($t,0,'f','lightblue',@fpos,'large'));
-              add_functions($gr, "$fp for x in &lt;$xmin,$xmax> using color:darkred and weight:2");
-              $gr->lb(new Label($infl,$fp->eval(x=>$infl),'g','darkred',@fppos,'large'));
+              $inflval=$fp->eval(x=>$infl);
               $radio=RadioButtons([
                 math_ev3(f).' is the derivative of '.math_ev3(g).'.',
                 math_ev3(g).' is the derivative of '.math_ev3(f).'.'
               ],1);
             </pg-code>
             <statement>
-              <image pg-name="$gr"/>
+              <image xml:id="img_02_02_ex_16">
+                <description></description>
+                <latex-image>
+                  \begin{tikzpicture}
+                  \begin{axis}[
+                    ymin=$ymin,ymax=$ymax,%
+                    xmin=$xmin,xmax=$xmax,%
+                  ]
+                  
+                  \addplot [firstcurvestyle,-,domain=$xmin:$xmax,samples=100] {$a*(x-$r)*(x-$s)*(x-$t)};
+                  \addplot [secondcurvestyle,-,domain=$xmin:$xmax] {$a*(3*x^2-2*($r+$s+$t)*x+$r*$s+$r*$t+$s*$t)};
+                  \addlegendentry{\(f(x)\)};
+                  \addlegendentry{\(g(x)\)};
+                  
+                  \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <p>
                 <var name="$radio" form="buttons"/>
               </p>
@@ -1229,25 +1218,32 @@
         <exercise label="ex-deriv-interpret-graph-3">
           <webwork xml:id="webwork-ex-deriv-interpret-graph-3">
             <pg-code>
-              $gr=init_graph(-5,-5,5,5,axes=>[0,0],size=>[400,240],grid=>[10,10]);
-              $gr->lb('reset');
-              $gr->new_color("lightblue", 174,180,244);
-              $gr->new_color("darkred", 159,64,16);
-              for my$i(-4..-1,1..4){$gr->moveTo($i,-0.05);$gr->lineTo($i,0.05,black,1);$gr->lb(new Label($i,-0.1,$i,'black','center','top','large'));};
-              for my$i(-4..-1,1..4){$gr->moveTo(-0.05,$i);$gr->lineTo(0.05,$i,black,1);$gr->lb(new Label(-0.1,$i,$i,'black','right','middle','large'));};
-              add_functions($gr, "1/x for x in &lt;-5,-0.2> using color:lightblue and weight:3");
-              add_functions($gr, "1/x for x in &lt;0.2,5> using color:lightblue and weight:3");
-              $gr->lb(new Label(1,1.2,'f','lightblue','left','bottom','large'));
-              add_functions($gr, "-1/x^2 for x in &lt;-5,-0.45> using color:darkred and weight:2");
-              add_functions($gr, "-1/x^2 for x in &lt;0.45,5> using color:darkred and weight:2");
-              $gr->lb(new Label(1,-1.2,'g','darkred','left','top','large'));
               $radio=RadioButtons([
                 math_ev3(f).' is the derivative of '.math_ev3(g).'.',
                 math_ev3(g).' is the derivative of '.math_ev3(f).'.'
               ],1);
             </pg-code>
             <statement>
-              <image pg-name="$gr"/>
+              <image xml:id="img_02_02_ex_17">
+                <description></description>
+                <latex-image>
+                  \begin{tikzpicture}
+                  \begin{axis}[
+                        ymin=-5.5,ymax=5.5,%
+                        xmin=-5.5,xmax=5.5,%
+                  ]
+                  
+                  \addplot [firstcurvestyle,-,domain=-5.5:-.182,samples=40] {1/x};
+                  \addplot [secondcurvestyle,-,domain=-5.5:-.426,samples=40] {-1/x^2};
+                  \addplot [firstcurvestyle,-,domain=.182:5.5,samples=40] {1/x};
+                  \addplot [secondcurvestyle,-,domain=.426:5.5,samples=40] {-1/x^2};
+                  \addlegendentry{\(f(x)\)};
+                  \addlegendentry{\(g(x)\)};
+                  
+                  \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <p>
                 <var name="$radio" form="buttons"/>
               </p>
@@ -1261,35 +1257,34 @@
               $h=random(-2,2,1);
               $p=random(2,4,1);
               if($envir{problemSeed}==1){$h=1;$p=2;};
-              $f=Formula("cos(pi/$p (x-$h))");
+              $f=Formula("cos((pi/$p)*(x-$h))");
               $fp=$f->D('x');
               $ymin=-max(int(pi/$p),1)-1;
               $ymax=max(int(pi/$p),1)+1;
-              $gr=init_graph(-4,$ymin,4,$ymax,axes=>[0,0],size=>[400,240]);
-              $gr->lb('reset');
-              $gr->new_color("lightblue", 174,180,244);
-              $gr->new_color("darkred", 159,64,16);
-              for my$i(-3..-1,1..3){
-                $gr->moveTo($i,-0.05);
-                $gr->lineTo($i,0.05,black,1);
-                $gr->lb(new Label($i,-0.1,$i,'black','center','top','large'));
-              };
-              for my$i($ymin+1..-1,1..$ymax-1){
-                $gr->moveTo(-0.05,$i);
-                $gr->lineTo(0.05,$i,black,1);
-                $gr->lb(new Label(-0.1,$i,$i,'black','right','middle','large'));
-              };
-              add_functions($gr, "$f for x in &lt;-4,4> using color:lightblue and weight:3");
-              $gr->lb(new Label($h,1,'f','lightblue','center','bottom','large'));
-              add_functions($gr, "$fp for x in &lt;-4,4> using color:darkred and weight:2");
-              $gr->lb(new Label($h-3*$p/2,-pi/$p,'g','darkred','center','top','large'));
               $radio=RadioButtons([
                 math_ev3(f).' is the derivative of '.math_ev3(g).'.',
                 math_ev3(g).' is the derivative of '.math_ev3(f).'.'
               ],1);
             </pg-code>
             <statement>
-              <image pg-name="$gr"/>
+              <image xml:id="img_02_02_ex_18">
+                <description></description>
+                <latex-image>
+                  \begin{tikzpicture}
+                  \begin{axis}[
+                        ymin=$ymin,ymax=$ymax,%
+                        xmin=-4,xmax=4,%
+                  ]
+                  
+                  \addplot [firstcurvestyle,-,domain=-4:4,samples=100] {cos(deg((3.14/$p)*(x-$h)))};
+                  \addplot [secondcurvestyle,-,domain=-4:4,samples=40] {-(3.14/$p)*sin(deg((3.14/$p)*(x-$h)))};
+                  \addlegendentry{\(f(x)\)};
+                  \addlegendentry{\(g(x)\)};
+                  
+                  \end{axis}
+                  \end{tikzpicture}
+                </latex-image>
+              </image>
               <p>
                 <var name="$radio" form="buttons"/>
               </p>
