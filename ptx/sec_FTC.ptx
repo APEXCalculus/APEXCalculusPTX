@@ -2745,7 +2745,7 @@
             </pg-code>
             <statement>
               <p>
-                <m>F(x) = \ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dt</m>
+                <m>F(x) = \ds\int_{<var name="$low"/>}^{<var name="$high"/>} (<var name="$f"/>)\, dt</m>
               </p>
               <p>
                 <var name="$D" width="30"/>
@@ -2771,6 +2771,47 @@
             <statement>
               <p>
                 <m>F(x) = \ds\int_{<var name="$low"/>}^{<var name="$high"/>} <var name="$f"/>\, dt</m>
+              </p>
+              <p>
+                <var name="$D" width="30"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <exercise label="ex-FTC-part1-5">
+          <webwork xml:id="webwork-ex-FTC-part1-5">
+            <pg-code>
+              $b = non_zero_random(-9,9,1);
+              $m = random(2,4,1);
+              Context()->variables->add(t=>'Real');
+              $low = random(1,9,1);
+              $high = Formula("x^$m");
+              $f = Formula("sin($b t^2)")->reduce;
+              $D = Formula("$m x^($m-1)sin($b x^(2*$m))")->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>F(x) = \ds\int_{<var name="$low"/>}^{<var name="$high"/>} (<var name="$f"/>)\, dt</m>
+              </p>
+              <p>
+                <var name="$D" width="30"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+        <exercise label="ex-FTC-part1-6">
+          <webwork xml:id="webwork-ex-FTC-part1-6">
+            <pg-code>
+              $b = non_zero_random(-9,9,1)
+              ($low,$high) = ('e^','ln','sin','cos','sqrt')[NchooseK(5,2)];
+              Context()->variables->add(t=>'Real');
+              $f = Formula("sqrt(t^4+$b t^2)")->reduce;
+              $D = $high->D('x') * $f->substitute(t=>$high) - $low->D('x') * $f->substitute(t=>$low);
+              $D = $D->reduce;
+            </pg-code>
+            <statement>
+              <p>
+                <m>F(x) = \ds\int_{<var name="$low"/>}^{<var name="$high"/>} (<var name="$f"/>)\, dt</m>
               </p>
               <p>
                 <var name="$D" width="30"/>
