@@ -1194,10 +1194,29 @@
         <exercise label="ex-arc-length-compute-1">
           <webwork xml:id="webwork-ex-arc-length-compute-1">
               <pg-code>
+                $f = Formula("x");
+                package my::Function::numeric;
+                our @ISA = ('Parser::Function::numeric');
+                sub sqrt {
+                  my $self = shift;
+                  my $value = $self->context->flag("setSqrt");
+                  return $value if $value;
+                  return $self->SUPER::sqrt(@_);
+                }
+                package main;
+                Context("Numeric");
+                Context()->functions->set(sqrt=>{class=>'my::Function::numeric'});
+                Context()->flags->set(reduceConstantFunctions=>0);
+                
+                $ans = Compute("sqrt(2)");
               </pg-code>
               <statement>
                 <p>
-                  <m>\ds f(x) = x</m> on <m>[0, 1]</m>.
+                  <m>\ds f(x) = <var name="$f"/></m> on <m>[0, 1]</m>.
+                </p>
+
+                <p>
+                  <var name="$ans" width="10"/>
                 </p>
               </statement>
               <solution>
@@ -1210,18 +1229,16 @@
 
         <exercise label="ex-arc-length-compute-2">
           <webwork xml:id="webwork-ex-arc-length-compute-2">
-              <pg-code>
+              <pg-code>                
               </pg-code>
               <statement>
                 <p>
                   <m>\ds f(x) = \sqrt{8}x</m> on <m>[-1, 1]</m>.
                 </p>
-              </statement>
-              <solution>
                 <p>
-                  <m>6</m>
+                  <var name="'6'" width="10"/>
                 </p>
-              </solution>
+              </statement>
           </webwork>
         </exercise>
 
@@ -1233,12 +1250,11 @@
                 <p>
                   <m>\ds f(x) = \frac13x^{3/2}-x^{1/2}</m> on <m>[0,1]</m>.
                 </p>
-              </statement>
-              <solution>
+
                 <p>
-                  <m>4/3</m>
+                  <var name="'10/3'" width="10"/>
                 </p>
-              </solution>
+              </statement>
           </webwork>
         </exercise>
 
@@ -1250,12 +1266,11 @@
                 <p>
                   <m>\ds f(x) = \frac1{12}x^{3}+\frac1x</m> on <m>[1,4]</m>.
                 </p>
-              </statement>
-              <solution>
+
                 <p>
-                  <m>6</m>
+                  <var name="'6'" width="10"/>
                 </p>
-              </solution>
+              </statement>
           </webwork>
         </exercise>
 
@@ -1265,14 +1280,12 @@
               </pg-code>
               <statement>
                 <p>
-                  <m>\ds f(x) = 2x^{3/2}-\frac16\sqrt{x}</m> on <m>[0,9]</m>.
+                  <m>\ds f(x) = 2x^{3/2}-\frac16\sqrt{x}</m> on <m>[1,4]</m>.
+                </p>
+                <p>
+                  <var name="'157/3'" width="10"/>
                 </p>
               </statement>
-              <solution>
-                <p>
-                  <m>109/2</m>
-                </p>
-              </solution>
           </webwork>
         </exercise>
 
@@ -1284,12 +1297,11 @@
                 <p>
                   <m>\ds f(x) = \cosh(x)</m> on <m>[-\ln(2) , \ln(2) ]</m>.
                 </p>
-              </statement>
-              <solution>
+
                 <p>
-                  <m>3/2</m>
+                  <var name="'3/2'" width="10"/>
                 </p>
-              </solution>
+              </statement>
           </webwork>
         </exercise>
 
@@ -1301,12 +1313,11 @@
                 <p>
                   <m>\ds f(x) = \frac12\big(e^x+e^{-x}\big)</m> on <m>[0, \ln(5) ]</m>.
                 </p>
-              </statement>
-              <solution>
+
                 <p>
-                  <m>12/5</m>
+                  <var name="'12/5'" width="10"/>
                 </p>
-              </solution>
+              </statement>
           </webwork>
         </exercise>
 
@@ -1318,47 +1329,44 @@
                 <p>
                   <m>\ds f(x) = \frac1{12}x^5+\frac1{5x^3}</m> on <m>[0.1, 1]</m>.
                 </p>
+
+                <var name="'79953333/400000'" width="10"/>
               </statement>
-              <solution>
-                <p>
-                  <m>79953333/400000 \approx 199.883</m>
-                </p>
-              </solution>
           </webwork>
         </exercise>
 
         <exercise label="ex-arc-length-compute-9">
-          <webwork xml:id="webwork-ex-arc-length-compute-9">
+          <!-- <webwork xml:id="webwork-ex-arc-length-compute-9">
               <pg-code>
-              </pg-code>
+              </pg-code> -->
               <statement>
                 <p>
                   <m>\ds f(x) = \ln\big(\sin(x) \big)</m> on <m>[\pi/6, \pi/2]</m>.
                 </p>
               </statement>
-              <solution>
+              <answer>
                 <p>
                   <m>-\ln(2-\sqrt{3}) \approx 1.31696</m>
                 </p>
-              </solution>
-          </webwork>
+              </answer>
+          <!-- </webwork> -->
         </exercise>
 
         <exercise label="ex-arc-length-compute-10">
-          <webwork xml:id="webwork-ex-arc-length-compute-10">
+          <!-- <webwork xml:id="webwork-ex-arc-length-compute-10">
               <pg-code>
-              </pg-code>
+              </pg-code> -->
               <statement>
                 <p>
                   <m>\ds f(x) = \ln\big(\cos(x) \big)</m> on <m>[0, \pi/4]</m>.
                 </p>
               </statement>
-              <solution>
+              <answer>
                 <p>
                   <m>\sinh^{-1}(1)</m>
                 </p>
-              </solution>
-          </webwork>
+              </answer>
+          <!-- </webwork> -->
         </exercise>
 
       </exercisegroup>
@@ -1373,143 +1381,105 @@
         </introduction>
 
         <exercise xml:id="ex_07_04_ex_13" label="ex-arclength-setup-1">
-          <webwork xml:id="webwork-ex-arclength-setup-1">
+          <!-- <webwork xml:id="webwork-ex-arclength-setup-1">
               <pg-code>
-              </pg-code>
+              </pg-code> -->
               <statement>
                 <p>
                   <m>\ds f(x) = x^2</m> on <m>[0, 1]</m>.
                 </p>
               </statement>
-              <solution>
+              <answer>
                 <p>
                   <m>\int_0^1 \sqrt{1+4x^2}\, dx</m>
                 </p>
-              </solution>
-          </webwork>
+              </answer>
+          <!-- </webwork> -->
         </exercise>
 
         <exercise label="ex-arclength-setup-2">
-          <webwork xml:id="webwork-ex-arclength-setup-2">
+          <!-- <webwork xml:id="webwork-ex-arclength-setup-2">
               <pg-code>
-              </pg-code>
+              </pg-code> -->
               <statement>
                 <p>
                   <m>\ds f(x) = x^{10}</m> on <m>[0, 1]</m>.
                 </p>
               </statement>
-              <solution>
+              <answer>
                 <p>
                   <m>\int_0^1 \sqrt{1+100x^{18}}\, dx</m>
                 </p>
-              </solution>
-          </webwork>
-        </exercise>
-
-        <exercise label="ex-arclength-setup-3">
-          <webwork xml:id="webwork-ex-arclength-setup-3">
-              <pg-code>
-              </pg-code>
-              <statement>
-                <p>
-                  <m>\ds f(x) = \sqrt{x}</m> on <m>[0, 1]</m>.
-                </p>
-              </statement>
-              <solution>
-                <p>
-                  <m>\int_0^1 \sqrt{1+\frac{1}{4x}}\, dx</m>
-                </p>
-              </solution>
-          </webwork>
+              </answer>
+          <!-- </webwork> -->
         </exercise>
 
         <exercise label="ex-arclength-setup-4">
-          <webwork xml:id="webwork-ex-arclength-setup-4">
+          <!-- <webwork xml:id="webwork-ex-arclength-setup-4">
               <pg-code>
-              </pg-code>
+              </pg-code> -->
               <statement>
                 <p>
                   <m>\ds f(x) = \ln(x)</m> on <m>[1, e]</m>.
                 </p>
               </statement>
-              <solution>
+              <answer>
                 <p>
                   <m>\int_1^e \sqrt{1+\frac1{x^2}}\, dx</m>
                 </p>
-              </solution>
-          </webwork>
-        </exercise>
-
-        <exercise label="ex-arclength-setup-5">
-          <webwork xml:id="webwork-ex-arclength-setup-5">
-              <pg-code>
-              </pg-code>
-              <statement>
-                <p>
-                  <m>\ds f(x) = \sqrt{1-x^2}</m> on <m>[-1, 1]</m>.
-                  (Note: this describes the top half of a circle with radius 1.)
-                </p>
-              </statement>
-              <solution>
-                <p>
-                  <m>\int_{-1}^1 \sqrt{1+\frac{x^2}{1-x^2}}\, dx</m>
-                </p>
-              </solution>
-          </webwork>
-        </exercise>
-
-        <exercise label="ex-arclength-setup-6">
-          <webwork xml:id="webwork-ex-arclength-setup-6">
-              <pg-code>
-              </pg-code>
-              <statement>
-                <p>
-                  <m>\ds f(x) = \sqrt{1-x^2/9}</m> on <m>[-3, 3]</m>.
-                  (Note: this describes the top half of an ellipse with a major axis of length 6 and a minor axis of length 2.)
-                </p>
-              </statement>
-              <solution>
-                <p>
-                  <m>\int_{-3}^3 \sqrt{1+\frac{x^2}{81-9x^2}}\, dx</m>
-                </p>
-              </solution>
-          </webwork>
+              </answer>
+          <!-- </webwork> -->
         </exercise>
 
         <exercise label="ex-arclength-setup-7">
-          <webwork xml:id="webwork-ex-arclength-setup-7">
+          <!-- <webwork xml:id="webwork-ex-arclength-setup-7">
               <pg-code>
-              </pg-code>
+              </pg-code> -->
               <statement>
                 <p>
                   <m>\ds f(x) = \frac1x</m> on <m>[1,2]</m>.
                 </p>
               </statement>
-              <solution>
+              <answer>
                 <p>
                   <m>\int_{1}^2 \sqrt{1+\frac1{x^4}}\, dx</m>
                 </p>
-              </solution>
-          </webwork>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+        
+        <exercise label="ex-arclength-setup-9">
+          <!-- <webwork xml:id="webwork-ex-arclength-setup-9">
+            <pg-code>
+            </pg-code> -->
+            <statement>
+              <p>
+                <m>\ds f(x) = cos(x)</m> on <m>[0,\pi/2]</m>.
+              </p>
+            </statement>
+            <answer>
+              <p>
+                <m>\int_0^{\pi/2}\sqrt{1+\sin^2(x)}\,dx</m>
+              </p>
+            </answer>
         </exercise>
 
         <exercise xml:id="ex_07_04_ex_20" label="ex-arclength-setup-8">
-          <webwork xml:id="webwork-ex-arclength-setup-8">
+          <!-- <webwork xml:id="webwork-ex-arclength-setup-8">
               <pg-code>
-              </pg-code>
+              </pg-code> -->
               <statement>
                 <p>
                   <m>\ds f(x) = \sec(x)</m> on <m>[-\pi/4,\pi/4]</m>.
                 </p>
               </statement>
-              <solution>
+              <answer>
                 <p>
                   <m>\int_{-\pi/4}^{\pi/4} \sqrt{1+\sec^2(x) \tan^2(x) }\, dx</m>
                 </p>
-              </solution>
-          </webwork>
+              </answer>
+          <!-- </webwork> -->
         </exercise>
-
       </exercisegroup>
       <exercisegroup cols="2" xml:id="exset-arc-length-simpsons">
 
@@ -1522,143 +1492,105 @@
         </introduction>
 
         <exercise label="ex-arc-length-simpsons-1">
-          <webwork xml:id="webwork-ex-arc-length-simpsons-1">
+          <!-- <webwork xml:id="webwork-ex-arc-length-simpsons-1">
               <pg-code>
-              </pg-code>
+              </pg-code> -->
               <statement>
                 <p>
                   <m>\ds f(x) = x^2</m> on <m>[0, 1]</m>.
                 </p>
               </statement>
-              <solution>
+              <answer>
                 <p>
                   <m>1.4790</m>
                 </p>
-              </solution>
-          </webwork>
+              </answer>
+          <!-- </webwork> -->
         </exercise>
 
         <exercise label="ex-arc-length-simpsons-2">
-          <webwork xml:id="webwork-ex-arc-length-simpsons-2">
+          <!-- <webwork xml:id="webwork-ex-arc-length-simpsons-2">
               <pg-code>
-              </pg-code>
+              </pg-code> -->
               <statement>
                 <p>
                   <m>\ds f(x) = x^{10}</m> on <m>[0, 1]</m>.
                 </p>
               </statement>
-              <solution>
+              <answer>
                 <p>
                   <m>1.8377</m>
                 </p>
-              </solution>
-          </webwork>
-        </exercise>
-
-        <exercise label="ex-arc-length-simpsons-3">
-          <webwork xml:id="webwork-ex-arc-length-simpsons-3">
-              <pg-code>
-              </pg-code>
-              <statement>
-                <p>
-                  <m>\ds f(x) = \sqrt{x}</m> on <m>[0, 1]</m>. (Note:
-                  <m>\fp(x)</m> is not defined at <m>x=0</m>.)
-                </p>
-              </statement>
-              <solution>
-                <p>
-                  Simpson's Rule fails, as it requires one to divide by 0.
-                  However, recognize the answer should be the same as for <m>y=x^2</m>; why?
-                </p>
-              </solution>
-          </webwork>
+              </answer>
+          <!-- </webwork> -->
         </exercise>
 
         <exercise label="ex-arc-length-simpsons-4">
-          <webwork xml:id="webwork-ex-arc-length-simpsons-4">
+          <!-- <webwork xml:id="webwork-ex-arc-length-simpsons-4">
               <pg-code>
-              </pg-code>
+              </pg-code> -->
               <statement>
                 <p>
                   <m>\ds f(x) = \ln(x)</m> on <m>[1, e]</m>.
                 </p>
               </statement>
-              <solution>
+              <answer>
                 <p>
                   <m>2.1300</m>
                 </p>
-              </solution>
-          </webwork>
-        </exercise>
-
-        <exercise label="ex-arc-length-simpsons-5">
-          <webwork xml:id="webwork-ex-arc-length-simpsons-5">
-              <pg-code>
-              </pg-code>
-              <statement>
-                <p>
-                  <m>\ds f(x) = \sqrt{1-x^2}</m> on <m>[-1, 1]</m>. (Note:
-                  <m>\fp(x)</m> is not defined at the endpoints.)
-                </p>
-              </statement>
-              <solution>
-                <p>
-                  Simpson's Rule fails.
-                </p>
-              </solution>
-          </webwork>
-        </exercise>
-
-        <exercise label="ex-arc-length-simpsons-6">
-          <webwork xml:id="webwork-ex-arc-length-simpsons-6">
-              <pg-code>
-              </pg-code>
-              <statement>
-                <p>
-                  <m>\ds f(x) = \sqrt{1-x^2/9}</m> on <m>[-3, 3]</m>. (Note:
-                  <m>\fp(x)</m> is not defined at the endpoints.)
-                </p>
-              </statement>
-              <solution>
-                <p>
-                  Simpson's Rule fails.
-                </p>
-              </solution>
-          </webwork>
+              </answer>
+          <!-- </webwork> -->
         </exercise>
 
         <exercise label="ex-arc-length-simpsons-7">
-          <webwork xml:id="webwork-ex-arc-length-simpsons-7">
+          <!-- <webwork xml:id="webwork-ex-arc-length-simpsons-7">
               <pg-code>
-              </pg-code>
+              </pg-code> -->
               <statement>
                 <p>
                   <m>\ds f(x) = \frac1x</m> on <m>[1,2]</m>.
                 </p>
               </statement>
-              <solution>
+              <answer>
                 <p>
                   <m>1.3254</m>
                 </p>
-              </solution>
-          </webwork>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise label="ex-arc-length-simpsons-9">
+          <!-- <webwork xml:id="webwork-ex-arc-length-simpsons-9">
+            <pg-code>
+            </pg-code> -->
+            <statement>
+              <p>
+                <m>\ds f(x) = \cos(x)</m> on <m>[0, \pi/2]</m>.
+              </p>
+            </statement>
+            <answer>
+              <p>
+                <m>1.00013</m>
+              </p>
+            </answer>
+          <!-- </webwork> -->
         </exercise>
 
         <exercise label="ex-arc-length-simpsons-8">
-          <webwork xml:id="webwork-ex-arc-length-simpsons-8">
+          <!-- <webwork xml:id="webwork-ex-arc-length-simpsons-8">
               <pg-code>
-              </pg-code>
+              </pg-code> -->
               <statement>
                 <p>
                   <m>\ds f(x) = \sec(x)</m> on <m>[-\pi/4,\pi/4]</m>.
                 </p>
               </statement>
-              <solution>
+              <answer>
                 <p>
                   <m>1.7625</m>
                 </p>
-              </solution>
-          </webwork>
+              </answer>
+          <!-- </webwork> -->
         </exercise>
 
         </exercisegroup>
@@ -1672,92 +1604,173 @@
         </introduction>
 
         <exercise label="ex-arc-length-surfarea-1">
-          <webwork xml:id="webwork-ex-arc-length-surfarea-1">
+          <!-- <webwork xml:id="webwork-ex-arc-length-surfarea-1">
               <pg-code>
-              </pg-code>
+              </pg-code> -->
               <statement>
                 <p>
                   The solid formed by revolving <m>y=2x</m> on <m>[0,1]</m> about the <m>x</m>-axis.
                 </p>
               </statement>
-              <solution>
+              <answer>
                 <p>
                   <m>2\pi\int_0^1 2x\sqrt{5}\, dx = 2\pi\sqrt{5}</m>
                 </p>
-              </solution>
-          </webwork>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+
+        <exercise label="ex-arc-length-surfarea-6">
+          <!-- <webwork xml:id="webwork-ex-arc-length-surfarea-1">
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  The solid formed by revolving <m>y=2x</m> on <m>[0,1]</m> about the <m>y</m>-axis.
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  <m>2\pi\int_0^1 x\sqrt{5}\, dx = \pi\sqrt{5}</m>
+                </p>
+              </answer>
+          <!-- </webwork> -->
         </exercise>
 
         <exercise label="ex-arc-length-surfarea-2">
-          <webwork xml:id="webwork-ex-arc-length-surfarea-2">
+          <!-- <webwork xml:id="webwork-ex-arc-length-surfarea-2">
               <pg-code>
-              </pg-code>
+              </pg-code> -->
               <statement>
                 <p>
                   The solid formed by revolving <m>y=x^2</m> on <m>[0,1]</m> about the <m>y</m>-axis.
                 </p>
               </statement>
-              <solution>
+              <answer>
                 <p>
                   <m>2\pi\int_0^1 x\sqrt{1+4x^2}\, dx = \pi/6(5\sqrt{5}-1)</m>
                 </p>
-              </solution>
-          </webwork>
+              </answer>
+          <!-- </webwork> -->
         </exercise>
 
         <exercise label="ex-arc-length-surfarea-3">
-          <webwork xml:id="webwork-ex-arc-length-surfarea-3">
+          <!-- <webwork xml:id="webwork-ex-arc-length-surfarea-3">
               <pg-code>
-              </pg-code>
+              </pg-code> -->
               <statement>
                 <p>
                   The solid formed by revolving <m>y=x^3</m> on <m>[0,1]</m> about the <m>x</m>-axis.
                 </p>
               </statement>
-              <solution>
+              <answer>
                 <p>
                   <m>2\pi\int_0^1 x^3\sqrt{1+9x^4}\, dx = \pi/27(10\sqrt{10}-1)</m>
                 </p>
-              </solution>
-          </webwork>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+      </exercisegroup>
+
+      <exercisegroup>
+        <introduction>
+          <p>
+            The following arc length and surface area problems lead to improper integrals.
+            Although the hypotheses of <xref ref="thm_arclength"/> and <xref ref="thm_surface_area"/>
+            are not satisfied, the improper integrals converge,
+            and formulas for arc length and surface area still give the correct result.
+          </p>
+        </introduction>
+
+        <exercise label="ex-arclength-setup-3">
+          <!-- <webwork xml:id="webwork-ex-arclength-setup-3">
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  Find the length of the curve <m>\ds f(x) = \sqrt{x}</m> on <m>[0, 1]</m>.
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  <m>\int_0^1 \sqrt{1+\frac{1}{4x}}\, dx</m>
+                </p>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+        
+        <exercise label="ex-arclength-setup-5">
+          <!-- <webwork xml:id="webwork-ex-arclength-setup-5">
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  Find the length of the curve
+                  <m>\ds f(x) = \sqrt{1-x^2}</m> on <m>[-1, 1]</m>.
+                  (Note: this describes the top half of a circle with radius 1.)
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  <m>\int_{-1}^1 \sqrt{1+\frac{x^2}{1-x^2}}\, dx</m>
+                </p>
+              </answer>
+          <!-- </webwork> -->
+        </exercise>
+        
+        <exercise label="ex-arclength-setup-6">
+          <!-- <webwork xml:id="webwork-ex-arclength-setup-6">
+              <pg-code>
+              </pg-code> -->
+              <statement>
+                <p>
+                  Find the length of the curve <m>\ds f(x) = \sqrt{1-x^2/9}</m> on <m>[-3, 3]</m>.
+                  (Note: this describes the top half of an ellipse with a major axis of length 6 and a minor axis of length 2.)
+                </p>
+              </statement>
+              <answer>
+                <p>
+                  <m>\int_{-3}^3 \sqrt{1+\frac{x^2}{81-9x^2}}\, dx</m>
+                </p>
+              </answer>
+          <!-- </webwork> -->
         </exercise>
 
         <exercise label="ex-arc-length-surfarea-4">
-          <webwork xml:id="webwork-ex-arc-length-surfarea-4">
+          <!-- <webwork xml:id="webwork-ex-arc-length-surfarea-4">
               <pg-code>
-              </pg-code>
+              </pg-code> -->
               <statement>
                 <p>
-                  The solid formed by revolving
+                  Find the surface area of the solid formed by revolving
                   <m>y=\sqrt{x}</m> on <m>[0,1]</m> about the <m>x</m>-axis.
                 </p>
               </statement>
-              <solution>
+              <answer>
                 <p>
                   <m>2\pi\int_0^1 \sqrt{x}\sqrt{1+1/(4x)}\, dx = \pi/6(5\sqrt{5}-1)</m>
                 </p>
-              </solution>
-          </webwork>
+              </answer>
+          <!-- </webwork> -->
         </exercise>
 
         <exercise label="ex-arc-length-surfarea-5">
-          <webwork xml:id="webwork-ex-arc-length-surfarea-5">
+          <!-- <webwork xml:id="webwork-ex-arc-length-surfarea-5">
               <pg-code>
-              </pg-code>
+              </pg-code> -->
               <statement>
                 <p>
-                  The sphere formed by revolving
+                  Find the surface area of the sphere formed by revolving
                   <m>y=\sqrt{1-x^2}</m> on <m>[-1,1]</m> about the <m>x</m>-axis.
                 </p>
               </statement>
-              <solution>
+              <answer>
                 <p>
                   <m>2\pi\int_0^1 \sqrt{1-x^2}\sqrt{1+x/(1-x^2)}\, dx = 4\pi</m>
                 </p>
-              </solution>
-          </webwork>
+              </answer>
+          <!-- </webwork> -->
         </exercise>
-
       </exercisegroup>
     </subexercises>
   </exercises>
