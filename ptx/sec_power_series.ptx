@@ -215,11 +215,12 @@
   </definition>
 
   <p>
-    To find the values of <m>x</m> for which a given series converges,
-    we will use the convergence tests we studied previously
-    (especially the Ratio Test).
-    All of our tests require a series with positive terms.
-    This isn't true of a power series, so we first consider absolute convergence.
+    The challenge, then, is to determine the value of <m>R</m>.
+    If <m>0\lt R\lt\infty</m>, we know the series converges on <m>(c-R,c+R)</m>,
+    and it remains to check the endpoints.
+    To determine convergence (and find the value of <m>R</m>) we will use the ratio test.
+    Since the ratio test requires positive terms,
+    and the terms in a power series can be negative, we must consider absolute convergence.
   </p>
 
   <p>
@@ -230,19 +231,19 @@
     </me>,
     where <m>L=\lim_{n\to\infty}\frac{\abs{a_{n+1}}}{\abs{a_n}}</m>.
     It follows that the series converges absolutely (and therefore converges)
-    for any <m>x</m> such that <m>L\abs{x-c}\lt 1</m>.
+    for any <m>x</m> such that <m>L\abs{x-c}\lt 1</m>;
+    that is, for <m>x</m> in <m>\left(c-\frac1L,c+\frac1L\right)</m>.
   </p>
 
   <p>
     On the other hand, suppose for some <m>x</m> that <m>L\abs{x-c}\gt 1</m>.
-    This implies that, for sufficiently large <m>n</m>, <m>\abs{a_{n+1}}\gt \abs{a_n}</m>.
+    Then, for sufficiently large <m>n</m>, <m>\abs{a_{n+1}}\gt \abs{a_n}</m>.
     This means that the terms of <m>\infser[0] a_n(x-c)^n</m> are growing in absolute value,
     and therefore cannot converge to zero. This means that the series diverges, by <xref ref="thm_series_nth_term"/>.
   </p>
 
   <p>
     From the above observations, it follows that <m>R=\frac{1}{L}</m> must be the radius of convergence.
-    To determine the interval of convergence, it remains to check the endpoints of the interval.
   </p>
 
   <insight xml:id="thm_abs_power">
@@ -250,8 +251,8 @@
     <statement>
       <p>
         Given the power series <m>\ds \infser[0] a_n(x-c)^n</m>,
-        the result of applying the ratio test to the series <m>\ds \infser[0]\abs{a_n (x_c)^n}</m>
-        is <m>L\abs{x-c}</m>, where <m>\ds L=\lim_{n\to\infty}\frac{\abs{a_{n+1}}}{\abs{a_n}}</m>.
+        apply the ratio test to the series <m>\ds \infser[0]\abs{a_n (x_c)^n}</m>.
+        The result will be <m>L\abs{x-c}</m>, where <m>\ds L=\lim_{n\to\infty}\frac{\abs{a_{n+1}}}{\abs{a_n}}</m>.
       </p>
 
       <p>
@@ -265,7 +266,7 @@
 
           <li>
             <p>
-              If <m>L=\infty</m>, then power series only converges when <m>x=c</m>.
+              If <m>L=\infty</m>, then power series converges only when <m>x=c</m>.
             </p>
           </li>
 
@@ -276,7 +277,7 @@
             </p>
 
             <p>
-              To determine the interval of convergence, plug the endpoints (<m>c-R</m> and <m>c+R</m>)
+              To determine the interval of convergence, plug the endpoints (<m>x=c-R</m> and <m>x=c+R</m>)
               into the power series, and test the resulting series for convergence.
               If the series converges, we include the endpoint. If it diverges, we exclude the endpoint.
             </p>
