@@ -433,4 +433,33 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
         <xsl:text></xsl:text> <!-- removed "true", so now this should make all exercises think they are part of unstructured divisions -->
     </xsl:if>
 </xsl:template>
+
+<!-- change numbering scheme when there are multiple answers to an exercise -->
+<xsl:template match="&SOLUTION-LIKE;" mode="serial-number">
+    <xsl:number format="a"/>
+</xsl:template>
+
+<xsl:template match="&SOLUTION-LIKE;|biblio/note" mode="non-singleton-number">
+    <xsl:variable name="the-number">
+        <xsl:apply-templates select="." mode="serial-number" />
+    </xsl:variable>
+    <xsl:choose>
+        <!-- non-singletons always of interest/use -->
+        <xsl:when test="not($the-number = 'a')">
+            <xsl:value-of select="$the-number" />
+        </xsl:when>
+        <!-- now being careful with "1" -->
+        <xsl:otherwise>
+            <xsl:variable name="elt-name" select="local-name(.)" />
+            <!-- We go to the parent, get all like children, then     -->
+            <!-- filter by name, since hints and answers, etc all mix -->
+            <xsl:variable name="siblings-and-self" select="parent::*/*[local-name(.) = $elt-name]" />
+            <!-- maybe "1" is interesting too -->
+            <!-- if not, no result whatsoever -->
+            <xsl:if test="count($siblings-and-self) > 1">
+                <xsl:value-of select="$the-number" />
+            </xsl:if>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
 </xsl:stylesheet>
