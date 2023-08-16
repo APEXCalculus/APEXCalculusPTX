@@ -422,7 +422,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
     <xsl:apply-templates>
         <xsl:with-param name="b-original" select="$b-original" />
     </xsl:apply-templates>
-    <xsl:text>}{0cm}%&#xa;</xsl:text>
+    <xsl:text>}{-1cm}%&#xa;</xsl:text>
     <xsl:text>&#xa;</xsl:text>
 </xsl:template>
 
@@ -436,7 +436,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
 
 <!-- change numbering scheme when there are multiple answers to an exercise -->
 <xsl:template match="&SOLUTION-LIKE;" mode="serial-number">
-    <xsl:number format="a"/>
+    <xsl:number format="(a)"/>
 </xsl:template>
 
 <xsl:template match="&SOLUTION-LIKE;|biblio/note" mode="non-singleton-number">
@@ -445,7 +445,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
     </xsl:variable>
     <xsl:choose>
         <!-- non-singletons always of interest/use -->
-        <xsl:when test="not($the-number = 'a')">
+        <xsl:when test="not($the-number = '(a)')">
             <xsl:value-of select="$the-number" />
         </xsl:when>
         <!-- now being careful with "1" -->
