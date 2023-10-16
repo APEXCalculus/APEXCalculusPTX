@@ -1690,7 +1690,8 @@
 
         <exercise label="ex-limit-continuity-use-graph-7">
           <webwork xml:id="webwork-ex-limit-continuity-use-graph-7">
-            <pg-code>
+            <!-- old pg-code gives wrong answer and no time to fix it -->
+            <!-- <pg-code>
               @b=(0,2,0,2,0,0,0,2,Compute("DNE"),2,0);
               for my$i(0..3){$f[$i]=Formula("($b[3*$i+1]-$b[3*$i])/2*(x-(2*$i-4))+$b[3*$i]");}
               @choices=('?','Yes.','No.');
@@ -1700,6 +1701,12 @@
                 else{$correct[$i]=$choices[1];};
                 $answer[$i]=PopUp(~~@choices,$correct[$i]);
               };
+              $showwork = '[@ explanation_box(message => "If not, state why it is not.") @]*';
+            </pg-code> -->
+            <pg-code>
+              $answer[1]=PopUp(['?','Yes.','No.'],2);
+              $answer[2]=PopUp(['?','Yes.','No.'],1);
+              $answer[3]=PopUp(['?','Yes.','No.'],2);
               $showwork = '[@ explanation_box(message => "If not, state why it is not.") @]*';
             </pg-code>
             <statement>
@@ -1803,7 +1810,8 @@
 
         <exercise label="ex-limit-continuity-point-1">
           <webwork xml:id="webwork-ex-limit-continuity-point-1">
-            <pg-code>
+            <!-- code seems to say both answers are 'yes' but yes is marked wrong in the second one -->
+            <!-- <pg-code>
               Context("PiecewiseFunction");
               @choices=('?',
                 'Yes.',
@@ -1811,6 +1819,11 @@
               );
               @answer=(PopUp(~~@choices,1),PopUp(~~@choices,1));
               $showwork = '[@ explanation_box(message => "If not, explain why not.") @]*';
+            </pg-code> -->
+            <pg-code>
+              $answer[1]=PopUp(['?','Yes.','No.'],1);
+              $answer[2]=PopUp(['?','Yes.','No.'],1);
+              $showwork = '[@ explanation_box(message => "If not, state why it is not.") @]*';
             </pg-code>
             <introduction>
               <p>
@@ -1850,7 +1863,8 @@
 
         <exercise label="ex-limit-continuity-point-2">
           <webwork xml:id="webwork-ex-limit-continuity-point-2">
-            <pg-code>
+            <!-- code here has the same problem as the last one -->
+            <!-- <pg-code>
               Context("PiecewiseFunction");
               #for my$i(0..3){$a[$i]=non_zero_random(-2,2,1)};
               #if($envir{problemSeed}==1){@a=(1,-1,1,-2)};
@@ -1865,6 +1879,18 @@
               $correct[1]=($left->eval(x=>1)==$right->eval(x=>1))?1:2;
               @answer=(PopUp(~~@choices,1),PopUp(~~@choices,$correct[1]));
               $showwork = '[@ explanation_box(message => "If not, explain why not.") @]*';
+            </pg-code> -->
+            <pg-code>
+              Context("PiecewiseFunction");
+              #for my$i(0..3){$a[$i]=non_zero_random(-2,2,1)};
+              #if($envir{problemSeed}==1){@a=(1,-1,1,-2)};
+              @a=(1,-1,1,-2);
+              $left=Formula("$a[0]x^3+$a[1]x^2")->reduce;
+              $right=Formula("$a[2]x+$a[3]")->reduce;
+              $f=PiecewiseFunction("x&lt;1" => "$left","x>=1"=>"$right");
+              $answer[1]=PopUp(['?','Yes.','No.'],1);
+              $answer[2]=PopUp(['?','Yes.','No.'],2);
+              $showwork = '[@ explanation_box(message => "If not, state why it is not.") @]*';
             </pg-code>
             <introduction>
               <p>
@@ -1904,7 +1930,8 @@
 
         <exercise label="ex-limit-continuity-point-3">
           <webwork xml:id="webwork-ex-limit-continuity-point-3">
-            <pg-code>
+            <!-- code doesn't work here either -->
+            <!-- <pg-code>
               #@a=map{$_-10}NchooseK(20,4);
               Context("PiecewiseFunction");
               #if($envir{problemSeed}==1){@a=(-1,-4,-2,10)};
@@ -1916,6 +1943,16 @@
               );
               @answer=(PopUp(~~@choices,1),PopUp(~~@choices,1));
               $showwork = '[@ explanation_box(message => "If not, explain why not.") @]*';
+            </pg-code> -->
+            <pg-code>
+              #@a=map{$_-10}NchooseK(20,4);
+              Context("PiecewiseFunction");
+              #if($envir{problemSeed}==1){@a=(-1,-4,-2,10)};
+              @a=(-1,-4,-2,10);
+              $f=PiecewiseFunction("x!=$a[0]" => Formula("(x^2-($a[0]+$a[1])x+($a[0]*$a[1]))/(x^2-($a[0]+$a[2])x+($a[0]*$a[2]))")->reduce,"x=$a[0]"=>Real(($a[0]-$a[1])/($a[0]-$a[2])));
+              $answer[1]=PopUp(['?','Yes.','No.'],1);
+              $answer[2]=PopUp(['?','Yes.','No.'],1);
+              $showwork = '[@ explanation_box(message => "If not, state why it is not.") @]*';
             </pg-code>
             <introduction>
               <p>
@@ -1955,7 +1992,8 @@
 
         <exercise label="ex-limit-continuity-point-4">
           <webwork xml:id="webwork-ex-limit-continuity-point-4">
-            <pg-code>
+            <!-- actually none of these work -->
+            <!-- <pg-code>
               #@a=map{$_-12}NchooseK(24,6);
               Context("PiecewiseFunction");
               #if($envir{problemSeed}==1){@a=(0,8,-8,3,5,0)};
@@ -1968,6 +2006,15 @@
               $correct[1]=($a[4]==($a[1]-$a[2])/($a[1]-$a[3]))?1:2;
               @answer=(PopUp(~~@choices,1),PopUp(~~@choices,$correct[1]));
               $showwork = '[@ explanation_box(message => "If not, explain why not.") @]*';
+            </pg-code> -->
+            <pg-code>
+              Context("PiecewiseFunction");
+              #if($envir{problemSeed}==1){@a=(0,8,-8,3,5,0)};
+              @a=(0,8,-8,3,5,0);
+              $f=PiecewiseFunction("x!=$a[1]" => Formula("(x^2-($a[1]+$a[2])x+($a[1]*$a[2]))/(x^2-($a[1]+$a[3])x+($a[1]*$a[3]))")->reduce,"x=$a[1]"=>$a[4]);
+              $answer[1]=PopUp(['?','Yes.','No.'],1);
+              $answer[2]=PopUp(['?','Yes.','No.'],2);
+              $showwork = '[@ explanation_box(message => "If not, state why it is not.") @]*';
             </pg-code>
             <introduction>
               <p>
