@@ -202,47 +202,87 @@
         </ol>
       </p>
 
-     <figure xml:id="fig_sketchline1">
+      <figure xml:id="fig_sketchline1">
         <caption>Number line for <m>f</m> in <xref ref="ex_sketch1"/></caption>
 
-        <tabular halign="center">
-          <row bottom="major">
-            <cell colspan="2" right="minor">
-              <line><m>\fp\gt0</m>,</line>
-              <line><m>f</m> incr;</line>
-              <line><m>\fpp\lt0</m>,</line>
-              <line><m>f</m> c. down</line></cell>
-            <cell colspan="2" right="minor">
-              <line><m>\fp\lt0</m>,</line>
-              <line><m>f</m> decr;</line>
-              <line><m>\fpp\lt0</m>,</line>
-              <line><m>f</m> c. down</line></cell>
-            <cell colspan="2" right="minor">
-              <line><m>\fp\lt0</m>,</line>
-              <line><m>f</m> decr;</line>
-              <line><m>\fpp\gt0</m>,</line>
-              <line><m>f</m> c. up</line></cell>
-            <cell colspan="2">
-              <line><m>\fp\gt0</m>,</line>
-              <line><m>f</m> incr;</line>
-              <line><m>\fpp\gt0</m>,</line>
-              <line><m>f</m> c. up</line></cell>
-          </row>
-          <row>
-            <cell></cell>
-            <cell colspan="2">
-              <line><m>\frac{1}{9}\left(10-\sqrt{37}\right)</m></line>
-              <line><m>\approx0.435</m></line></cell>
-            <cell colspan="2">
-              <line><m>\frac{10}{9}</m></line>
-              <line><m>\approx1.111</m></line></cell>
-            <cell colspan="2">
-              <line><m>\frac{1}{9}\left(10+\sqrt{37}\right)</m></line>
-              <line><m>\approx1.787</m></line></cell>
-            <cell></cell>
-          </row>
-        </tabular>
+        <image xml:id="img_sketchline1" width="75%">
+          <shortdescription>Number line showing intervals where f is increasing/decreasing and concave up/down</shortdescription>
+          <description>
+            <p>
+              A number line is shown, on which three points are marked.
+              The first point is marked as <m>\frac19(10-\sqrt{37})</m>, or approximately <m>0.435</m>;
+              it is a critical point of <m>f</m>, and a relative maximum.
+            </p>
 
+            <p>
+              The second point is marked as <m>\frac{10}{9}</m>, or approximately <m>1.111</m>;
+              it is an inflection point of <m>f</m>.
+            </p>
+
+            <p>
+              The last point is marked as <m>\frac19(10+\sqrt{37})</m>, or approximately <m>1.787</m>;
+              it is a critical point of <m>f</m>, and a relative minimum.
+            </p>
+
+            <p>
+              These points divide the number line into four intervals.
+              Above each interval, the signs of both <m>\fp</m> and <m>\fpp</m> are given,
+              along with whether <m>f</m> is increasing or decreasing, and concave up or down.
+            </p>
+
+            <p>
+              This information is as follows:
+              <ul>
+                <li>
+                  <p>
+                    For <m>x\lt 0.435</m>, <m>\fp\gt 0</m>, so <m>f</m> is increasing,
+                    and <m>\fpp\lt 0</m>, so <m>f</m> is concave down.
+                  </p>
+                </li>
+
+                <li>
+                  <p>
+                    For <m>0.435\lt x\lt 1.111</m>, <m>\fp\lt 0</m>, so <m>f</m> is decreasing,
+                    and <m>\fpp\lt 0</m>, so <m>f</m> is concave down.
+                  </p>
+                </li>
+
+                <li>
+                  <p>
+                    For <m>1.111\lt x\lt 1.787</m>, <m>\fp\lt 0</m>, so <m>f</m> is decreasing,
+                    and <m>\fpp\gt 0</m>, so <m>f</m> is concave up.
+                  </p>
+                </li>
+
+                <li>
+                  <p>
+                    For <m>x\gt 1.787</m>, <m>\ft\gt 0</m>, so <m>f</m> is increasing,
+                    and <m>\fpp\gt 0</m>, so <m>f</m> is concave up.
+                  </p>
+                </li>
+              </ul>
+            </p>
+          </description>
+          <latex-image>
+            \begin{tikzpicture}
+              \begin{axis}[numberline,
+                          xmin=0,xmax=2.222,
+                          xtick={10},
+                          minor xtick={{}},
+                          extra x ticks={0.435, 1.111, 1.787},
+                          extra x tick labels={\parbox{6em}{\centering \scriptsize $\frac{1}{9}\left(10-\sqrt{37}\right)$ $\approx0.435$},
+                            \parbox{2em}{\scriptsize $\frac{10}{9}\approx1.111$}, \parbox{6em}{\centering \scriptsize $\frac{1}{9}\left(10+\sqrt{37}\right)$ $\approx1.787$}},]
+                  \addplot[guideline] coordinates {(0.435,0) (0.435,2)};
+                  \addplot[guideline] coordinates {(1.111,0) (1.111,2)};
+                  \addplot[guideline] coordinates {(1.787,0) (1.787,2)};
+                  \addplot[mark=none] coordinates {(0.18,1.5)} node {\parbox{8em}{\centering \scriptsize  $\fp\gt 0$,\\ $f$ incr\\$\fpp\lt 0$,\\ $f$ c.\ down }};
+                  \addplot[mark=none] coordinates {(0.77,1.5)} node {\parbox{8em}{\centering \scriptsize  $\fp\lt 0$,\\ $f$ decr\\$\fpp\lt 0$,\\ $f$ c.\ down }};
+                  \addplot[mark=none] coordinates {(1.45,1.5)} node {\parbox{8em}{\centering \scriptsize  $\fp\lt 0$,\\ $f$ decr\\$\fpp\gt 0$,\\ $f$ c.\ up }};
+                  \addplot[mark=none] coordinates {(2.1,1.5)} node {\parbox{8em}{\centering \scriptsize  $\fp\gt 0$,\\ $f$ incr\\$\fpp\gt 0$,\\ $f$ c.\ up }};
+              \end{axis}
+            \end{tikzpicture}
+          </latex-image>
+        </image>
       </figure>
 
       <figure xml:id="fig_sketch1">
@@ -438,38 +478,68 @@
 
       <figure xml:id="fig_sketchline2">
         <caption>Number line for <m>f</m> in <xref ref="ex_sketch2">Example</xref></caption>
+        <image xml:id="img_sketchline2" width="67%">
+          <shortdescription>Number line showing intervals where f is increasing/decreasing and concave up/down</shortdescription>
+          <description>
+            <p>
+              On a number line there are three marked points: <m>-2</m>, <m>\frac12</m>, and <m>3</m>.
+              At <m>x=-2</m> and <m>x=3</m>, the graph of <m>f</m> has a vertical asymptote.
+              The point <m>x=\frac12</m> is a critical point of <m>f</m>, and a relative maximum.
+            </p>
 
-        <tabular halign="center">
-          <row bottom="major">
-            <cell colspan="2" right="minor">
-              <line><m>\fp\gt 0</m>,</line>
-              <line><m>f</m> incr;</line>
-              <line><m>\fpp\gt 0</m>,</line>
-              <line><m>f</m> c. up</line></cell>
-            <cell colspan="2" right="minor">
-              <line><m>\fp\gt0</m>,</line>
-              <line><m>f</m> incr;</line>
-              <line><m>\fpp\lt0</m>,</line>
-              <line><m>f</m> c. down</line></cell>
-            <cell colspan="2" right="minor">
-              <line><m>\fp\lt0</m>,</line>
-              <line><m>f</m> decr;</line>
-              <line><m>\fpp\lt0</m>,</line>
-              <line><m>f</m> c. down</line></cell>
-            <cell colspan="2">
-              <line><m>\fp\lt0</m>,</line>
-              <line><m>f</m> decr;</line>
-              <line><m>\fpp\gt0</m>,</line>
-              <line><m>f</m> c. up</line></cell>
-          </row>
-          <row>
-            <cell></cell>
-            <cell colspan="2"><m>-2</m></cell>
-            <cell colspan="2"><m>\frac{1}{2}</m></cell>
-            <cell colspan="2"><m>3</m></cell>
-            <cell></cell>
-          </row>
-        </tabular>
+            <p>
+              These three points divide the number line into four intervals.
+              Above each interval, the following information is indicated:
+              <ul>
+                <li>
+                  <p>
+                    For <m>x\lt -2</m>, <m>\fp\gt 0</m>, so <m>f</m> is increasing,
+                    and <m>\fpp\gt 0</m>, so <m>f</m> is concave up.
+                  </p>
+                </li>
+
+                <li>
+                  <p>
+                    For <m>-2\lt x\lt \frac12</m>, <m>\fp\gt 0</m>, so <m>f</m> is increasing,
+                    and <m>\fpp\lt 0</m>, so <m>f</m> is concave down.
+                  </p>
+                </li>
+
+                <li>
+                  <p>
+                    For <m>\frac12\lt x\lt 3</m>, <m>\fp\lt 0</m>, so <m>f</m> is decreasing,
+                    and <m>\fpp\lt 0</m>, so <m>f</m> is concave down.
+                  </p>
+                </li>
+
+                <li>
+                  <p>
+                    For <m>x\gt 3</m>, <m>\fp\lt 0</m>, so <m>f</m> is decreasing,
+                    and <m>\fpp\gt 0</m>, so <m>f</m> is concave up.
+                  </p>
+                </li>
+              </ul>
+            </p>
+          </description>
+          <latex-image>
+            \begin{tikzpicture}
+              \begin{axis}[numberline,
+                          xmin=0,xmax=2.222,
+                          minor xtick={{}},
+                          xtick={10},
+                          extra x ticks={0.435, 1.111, 1.787},
+                          extra x tick labels={\scriptsize $-2$, \scriptsize $\frac{1}{2}$, \scriptsize $3$},]
+                  \addplot[guideline] coordinates {(0.435,0) (0.435,2)};
+                  \addplot[guideline] coordinates {(1.111,0) (1.111,2)};
+                  \addplot[guideline] coordinates {(1.787,0) (1.787,2)};
+                  \addplot[mark=none] coordinates {(0.18,1.5)} node {\parbox{8em}{\centering \scriptsize  $\fp\gt 0$,\\ $f$ incr\\$\fpp\gt 0$,\\ $f$ c.\ up }};
+                  \addplot[mark=none] coordinates {(0.77,1.5)} node {\parbox{8em}{\centering \scriptsize  $\fp\gt 0$,\\ $f$ incr\\$\fpp\lt 0$,\\ $f$ c.\ down }};
+                  \addplot[mark=none] coordinates {(1.45,1.5)} node {\parbox{8em}{\centering \scriptsize  $\fp\lt 0$,\\ $f$ decr\\$\fpp\lt 0$,\\ $f$ c.\ down }};
+                  \addplot[mark=none] coordinates {(2.1,1.5)} node {\parbox{8em}{\centering \scriptsize  $\fp\lt 0$,\\ $f$ incr\\$\fpp\lt 0$,\\ $f$ c.\ down }};
+              \end{axis}
+            \end{tikzpicture}
+          </latex-image>
+        </image>
       </figure>
 
       <figure xml:id="fig_sketch2">
@@ -661,54 +731,100 @@
 
       <figure xml:id="fig_sketchline3">
         <caption>Number line for <m>f</m> in Example <xref ref="ex_sketch3">Example</xref></caption>
+          <image xml:id="img_sketchline3" width="90%">
+            <shortdescription>Number line showing intervals where f is increasing/decreasing and concave up/down</shortdescription>
+            <description>
+              <p>
+                A number line is shown, on which five points are marked.
+                The points are labeled, from left to right, as <m>-5.579</m>,
+                <m>-4</m>, <m>-1.305</m>, <m>0</m>, and <m>1.064</m>.
+                The points <m>x=-4</m> and <m>x=0</m> are the critical points of <m>f</m>.
+              </p>
 
-        <tabular halign="center">
-          <row bottom="major">
-            <cell colspan="2" right="minor">
-              <line><m>\fp\gt0</m>,</line>
-              <line><m>\fpp\gt0</m>;</line>
-              <line><m>f</m> incr,</line>
-              <line><m>f</m> c. up</line></cell>
-            <cell colspan="2" right="minor">
-              <line><m>\fp\gt0</m>,</line>
-              <line><m>\fpp\lt0</m>;</line>
-              <line><m>f</m> incr,</line>
-              <line><m>f</m> c. down</line></cell>
-            <cell colspan="2" right="minor">
-              <line><m>\fp\lt0</m>,</line>
-              <line><m>\fpp\lt0</m>;</line>
-              <line><m>f</m> decr,</line>
-              <line><m>f</m> c. down</line></cell>
-            <cell colspan="2" right="minor">
-              <line><m>\fp\lt0</m>,</line>
-              <line><m>\fpp\gt0</m>;</line>
-              <line><m>f</m> decr,</line>
-              <line><m>f</m> c. up</line></cell>
-            <cell colspan="2" right="minor">
-              <line><m>\fp\gt0</m>,</line>
-              <line><m>\fpp\gt0</m>;</line>
-              <line><m>f</m> incr,</line>
-              <line><m>f</m> c. up</line></cell>
-            <cell colspan="2">
-              <line><m>\fp\gt0</m>,</line>
-              <line><m>\fpp\lt0</m>;</line>
-              <line><m>f</m> incr,</line>
-              <line><m>f</m> c. down</line></cell>
-          </row>
-          <row>
-            <cell/>
-            <cell colspan="2"><m>-5.579</m></cell>
-            <cell colspan="2"><m>-4</m></cell>
-            <cell colspan="2"><m>-1.305</m></cell>
-            <cell colspan="2"><m>0</m></cell>
-            <cell colspan="2"><m>1.064</m></cell>
-            <cell/>
-          </row>
-        </tabular>
-      </figure>
+              <p>
+                The three decimal values are the possible inflection points of <m>f</m>,
+                which had to be approximated using software.
+                These points divide the number line into six intervals;
+                above each interval, the following information is indicated:
+              </p>
+
+              <p>
+                <ul>
+                  <li>
+                    <p>
+                      For <m>x\lt -5.579</m>, <m>\fp\gt 0</m>, so <m>f</m> is increasing,
+                      and <m>\fpp \gt 0</m>, so <m>f</m> is concave up.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      For <m>-5.579\lt x\lt -4</m>, <m>\fp\gt 0</m>, so <m>f</m> is increasing,
+                      and <m>\fpp \lt 0</m>, so <m>f</m> is concave down.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      For <m>-4\lt x\lt -1.305</m>, <m>\fp\lt 0</m>, so <m>f</m> is decreasing,
+                      and <m>\fpp \lt 0</m>, so <m>f</m> is concave down.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      For <m>-1.305\lt x\lt 0</m>, <m>\fp\lt 0</m>, so <m>f</m> is decreasing,
+                      and <m>\fpp \gt 0</m>, so <m>f</m> is concave up.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      For <m>0\lt x\lt 1.064</m>, <m>\fp\gt 0</m>, so <m>f</m> is increasing,
+                      and <m>\fpp \gt 0</m>, so <m>f</m> is concave up.
+                    </p>
+                  </li>
+
+                  <li>
+                    <p>
+                      For <m>x\gt 1.064</m>, <m>\fp\gt 0</m>, so <m>f</m> is increasing,
+                      and <m>\fpp \lt 0</m>, so <m>f</m> is concave down.
+                    </p>
+                  </li>
+                </ul>
+              </p>
+            </description>
+            <latex-image>
+              \begin{tikzpicture}
+                \begin{axis}[axis y line=none,
+                			x=18pt,
+                			y=20pt,
+			                xtick={10},
+			                xlabel={},
+                      ymax=2.5,
+                            xmin=-7,xmax=6,
+                            minor xtick={{}},
+                            extra x ticks={-5,-2.8,-0.6,1.3,3.2},
+                            extra x tick labels={\scriptsize $-5.579$,\scriptsize  $-4$,\scriptsize  $-1.305$,\scriptsize  $0$,\scriptsize  $1.064$},]
+                    \addplot[guideline] coordinates {(-5,0) (-5,2)};
+                    \addplot[guideline] coordinates {(-2.8,0) (-2.8,2)};
+                    \addplot[guideline] coordinates {(-0.6,0) (-0.6,2)};
+                    \addplot[guideline] coordinates {(1.3,0) (1.3,2)};
+                    \addplot[guideline] coordinates {(3.2,0) (3.2,2)};
+                    \addplot[mark=none] coordinates {(-6,1.2)} node {\parbox{8em}{\centering \scriptsize  $\fp\gt0$,\\ $f$ incr\\$\fpp\gt0$,\\ $f$ c.\ up }};
+                    \addplot[mark=none] coordinates {(-3.9,1.2)} node {\parbox{8em}{\centering \scriptsize  $\fp\gt0$,\\ $f$ incr\\$\fpp\lt0$,\\ $f$ c.\ down }};
+                    \addplot[mark=none] coordinates {(-1.7,1.2)} node {\parbox{8em}{\centering \scriptsize  $\fp\lt0$,\\ $f$ decr\\$\fpp\lt0$,\\ $f$ c.\ down }};
+                    \addplot[mark=none] coordinates {(0.4,1.2)} node {\parbox{8em}{\centering \scriptsize  $\fp\lt0$,\\ $f$ decr\\$\fpp\gt0$,\\ $f$ c.\ up }};
+                    \addplot[mark=none] coordinates {(2.3,1.2)} node {\parbox{8em}{\centering \scriptsize  $\fp\gt0$,\\ $f$ incr\\$\fpp\gt0$,\\ $f$ c.\ up }};
+                    \addplot[mark=none] coordinates {(4.4,1.2)} node {\parbox{8em}{\centering \scriptsize  $\fp\gt0$,\\ $f$ incr\\$\fpp\lt0$,\\ $f$ c.\ down }};
+                \end{axis}
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+        </figure>
         
 
-        <figure xml:id="fig_sketch3">
+      <figure xml:id="fig_sketch3">
         <caption>Sketching <m>f</m> in <xref ref="ex_sketch3">Example</xref></caption>
         <sidebyside widths="31% 31% 31%" valign="bottom" margins="0%">
           <figure xml:id="fig_sketch3a">
