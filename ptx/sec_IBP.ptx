@@ -1120,7 +1120,7 @@
               $m = random(2,9,1);
               if($envir{problemSeed}==1){$m = 2;};
               $f = Formula("tan^-1($m x)");
-              $F = FormulaUpToConstant("x*tan^-1($m x)-1/(2*$m)*ln($m^2x^2+1)")->reduce;
+              $F = FormulaUpToConstant("x*tan^-1($m x)-1/(2*$m)*ln($m^2x^2+1)")-&gt;reduce;
             </pg-code>
             <statement>
               <p>
@@ -1169,7 +1169,7 @@
         <exercise label="ex-int-by-parts-evaluate-17">
           <webwork xml:id="webwork-ex-int-by-parts-evaluate-17">
             <pg-code>
-              Context()->variables->set(x=>{limits=>[0,4]});
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[0,4]});
               $F = FormulaUpToConstant("1/2*x^2*ln(x)-x^2/4");
             </pg-code>
             <statement>
@@ -1188,10 +1188,10 @@
             <pg-code>
               $b = non_zero_random(-9,9,1);
               if($envir{problemSeed}==1){$b = -2;};
-              $f = Formula("(x+$b)ln(x)")->reduce;
+              $f = Formula("(x+$b)ln(x)")-&gt;reduce;
               Context("Fraction");
-              Context()->variables->set(x=>{limits=>[0,4]});
-              $F = FormulaUpToConstant("1/2*x^2*ln(x)-x^2/4 + $b x ln(x) - $b x")->reduce;
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[0,4]});
+              $F = FormulaUpToConstant("1/2*x^2*ln(x)-x^2/4 + $b x ln(x) - $b x")-&gt;reduce;
             </pg-code>
             <statement>
               <p>
@@ -1209,11 +1209,11 @@
             <pg-code>
               $b = non_zero_random(-9,9,1);
               if($envir{problemSeed}==1){$b = 1;};
-              $f = Formula("x ln(x-$b)")->reduce;
+              $f = Formula("x ln(x-$b)")-&gt;reduce;
               Context("Fraction");
-              Context()->variables->set(x=>{limits=>[$b,$b+4]});
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[$b,$b+4]});
               $frac = Fraction(($b)**2,2);
-              $F = FormulaUpToConstant("1/2 x^2 ln(x-$b) - 1/4 (x-$b)^2 - $b x - $frac ln(x-$b)")->reduce;
+              $F = FormulaUpToConstant("1/2 x^2 ln(x-$b) - 1/4 (x-$b)^2 - $b x - $frac ln(x-$b)")-&gt;reduce;
             </pg-code>
             <statement>
               <p>
@@ -1245,7 +1245,7 @@
         <exercise label="ex-int-by-parts-evaluate-21">
           <webwork xml:id="webwork-ex-int-by-parts-evaluate-21">
             <pg-code>
-              Context()->variables->set(x => {limits => [0,4]});
+              Context()-&gt;variables-&gt;set(x =&gt; {limits =&gt; [0,4]});
               $F = FormulaUpToConstant("1/3*x^3*ln(x) - x^3/9");
             </pg-code>
             <statement>
@@ -1263,7 +1263,7 @@
           <webwork xml:id="webwork-ex-int-by-parts-evaluate-22">
             <pg-code>
               $F = FormulaUpToConstant("2x+x*(ln(x))^2-2x*ln(x)");
-              $F->{limits} = [1,5];
+              $F-&gt;{limits} = [1,5];
             </pg-code>
             <statement>
               <p>
@@ -1281,11 +1281,11 @@
             <pg-code>
               $b = non_zero_random(-9,9,1);
               if($envir{problemSeed}==1){$b = 1;};
-              $f = Formula("(ln(x+$b))^2")->reduce;
+              $f = Formula("(ln(x+$b))^2")-&gt;reduce;
               Context("Fraction");
-              Context()->variables->set(x=>{limits=>[-$b,-$b+4]});
-              $F = FormulaUpToConstant("2(x+$b)+(x+$b)*ln(x+$b)^2-2*(x+$b)*ln(x+$b)")->reduce;
-              $F->{limits} = [-$b+1,-$b+5];
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[-$b,-$b+4]});
+              $F = FormulaUpToConstant("2(x+$b)+(x+$b)*ln(x+$b)^2-2*(x+$b)*ln(x+$b)")-&gt;reduce;
+              $F-&gt;{limits} = [-$b+1,-$b+5];
             </pg-code>
             <statement>
               <p>
@@ -1302,7 +1302,7 @@
           <webwork xml:id="webwork-ex-int-by-parts-evaluate-24">
             <pg-code>
               $F = FormulaUpToConstant("x*tan(x)+ln(abs(cos(x)))");
-              $F->{test_at} = [[pi/4],[3*pi/4],[5*pi/4],[7*pi/4]];
+              $F-&gt;{test_at} = [[pi/4],[3*pi/4],[5*pi/4],[7*pi/4]];
             </pg-code>
             <statement>
               <p>
@@ -1319,7 +1319,7 @@
           <webwork xml:id="webwork-ex-int-by-parts-evaluate-25">
             <pg-code>
               $F = FormulaUpToConstant("ln(abs(sin(x)))-x*cot(x)");
-              $F->{test_at} = [[pi/4],[3*pi/4],[5*pi/4],[7*pi/4]];
+              $F-&gt;{test_at} = [[pi/4],[3*pi/4],[5*pi/4],[7*pi/4]];
             </pg-code>
             <statement>
               <p>
@@ -1337,11 +1337,11 @@
             <pg-code>
               $b = non_zero_random(-9,9,1);
               if($envir{problemSeed}==1){$b = -2;};
-              $f = Formula("x sqrt(x+$b)")->reduce;
+              $f = Formula("x sqrt(x+$b)")-&gt;reduce;
               Context("Fraction");
-              Context()->variables->set(x=>{limits=>[-$b,-$b+4]});
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[-$b,-$b+4]});
               $frac = Fraction(2*$b,3);
-              $F = FormulaUpToConstant("(2/5 (x+$b)^2 - $frac (x+$b))sqrt(x+$b)")->reduce;
+              $F = FormulaUpToConstant("(2/5 (x+$b)^2 - $frac (x+$b))sqrt(x+$b)")-&gt;reduce;
             </pg-code>
             <statement>
               <p>
@@ -1359,10 +1359,10 @@
             <pg-code>
               $b = non_zero_random(2,9,1);
               if($envir{problemSeed}==1){$b = 2;};
-              $f = Formula("x sqrt(x^2-$b)")->reduce;
+              $f = Formula("x sqrt(x^2-$b)")-&gt;reduce;
               Context("Fraction");
-              Context()->variables->set(x=>{limits=>[sqrt($b),sqrt($b)+4]});
-              $F = FormulaUpToConstant("1/3(x^2-$b)^(3/2)")->reduce;
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[sqrt($b),sqrt($b)+4]});
+              $F = FormulaUpToConstant("1/3(x^2-$b)^(3/2)")-&gt;reduce;
             </pg-code>
             <statement>
               <p>
@@ -1437,7 +1437,7 @@
               $trig = list_random('sin','cos');
               if($envir{problemSeed}==1){$trig = 'sin';};
               $f = Formula("$trig(ln(x))");
-              Context()->variables->set(x=>{limits=>[0,4]});
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[0,4]});
               $F = FormulaUpToConstant("x/2*(sin(ln(x)) - cos(ln(x)))");
               $F = FormulaUpToConstant("x/2*(sin(ln(x)) + cos(ln(x)))") if ($trig eq 'cos');
             </pg-code>
@@ -1478,7 +1478,7 @@
               $trig = list_random('sin','cos');
               if($envir{problemSeed}==1){$trig = 'sin';};
               $f = Formula("$trig(sqrt(x))");
-              Context()->variables->set(x=>{limits=>[0,4]});
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[0,4]});
               $F = FormulaUpToConstant("2*sin(sqrt(x)) - 2*sqrt(x)*cos(sqrt(x))");
               $F = FormulaUpToConstant("2*cos(sqrt(x)) + 2*sqrt(x)*sin(sqrt(x))") if ($trig eq 'cos');
             </pg-code>
@@ -1497,7 +1497,7 @@
           <webwork xml:id="webwork-ex-int-by-parts-sub-first-4">
             <pg-code>
               $F = FormulaUpToConstant("x ln(sqrt(x)) - x/2");
-              Context()->variables->set(x=>{limits=>[0,4]});
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[0,4]});
             </pg-code>
             <statement>
               <p>
@@ -1514,7 +1514,7 @@
           <webwork xml:id="webwork-ex-int-by-parts-sub-first-5">
             <pg-code>
               $F = FormulaUpToConstant("2*sqrt(x)*e^sqrt(x)-2*e^sqrt(x)");
-              Context()->variables->set(x=>{limits=>[0,4]});
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[0,4]});
             </pg-code>
             <statement>
               <p>
@@ -1531,7 +1531,7 @@
           <webwork xml:id="webwork-ex-int-by-parts-sub-first-6">
               <pg-code>
                 $F = FormulaUpToConstant("x^2/2");
-                Context()->variables->set(x=>{limits=>[0,4]});
+                Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[0,4]});
               </pg-code>
               <statement>
                 <p>
@@ -1560,7 +1560,7 @@
               $b = list_random('\pi/2','\pi','3\pi/2','2\pi');
               if($envir{problemSeed}==1){$b = '\pi';};
               $F = Formula("sin(x)-x*cos(x)");
-              %r = ('\pi/2'=>'1','\pi'=>'pi','3\pi/2'=>'-1','2\pi'=>'-2pi');
+              %r = ('\pi/2'=&gt;'1','\pi'=&gt;'pi','3\pi/2'=&gt;'-1','2\pi'=&gt;'-2pi');
               $r = Compute($r{$b});
             </pg-code>
             <statement>
@@ -1581,7 +1581,7 @@
               if($envir{problemSeed}==1){$a=-1;$b=1;};
               $f = Formula("x e^(-x)");
               $F = Formula("-e^(-x)*(x+1)");
-              $r = Formula("-($b+1)e^(-$b)+($a+1)e^(-$a)")->reduce;
+              $r = Formula("-($b+1)e^(-$b)+($a+1)e^(-$a)")-&gt;reduce;
             </pg-code>
             <statement>
               <p>
@@ -1602,7 +1602,7 @@
               $a = '-'.$b;
               $f = Formula("x^2 sin(x)");
               $F = Formula("-x^2*cos(x)+2x*sin(x)+2*cos(x)");
-              $r = Formula("0")->reduce;
+              $r = Formula("0")-&gt;reduce;
             </pg-code>
             <statement>
               <p>
@@ -1623,10 +1623,10 @@
               $a = '-'.$b;
               $f = Formula("x^3 sin(x)");
               $F = Formula("-x^3*cos(x)+3x^2*sin(x)+6x*cos(x)-6*sin(x)");
-              $r = Formula("-pi^3/(32sqrt(2))+3pi^2/(8sqrt(2))+3pi/sqrt(2)-12/sqrt(2)")->reduce;
-              $r = Formula("-pi^3sqrt(3)/216+pi^2/12+pi sqrt(3)-6")->reduce if ($b eq '\pi/6');
-              $r = Formula("-pi^3/27+pi^2sqrt(3)/3+2pi-6*sqrt(3)")->reduce if ($b eq '\pi/3');
-              $r = Formula("3pi^2/2-12")->reduce if ($b eq '\pi/2');
+              $r = Formula("-pi^3/(32sqrt(2))+3pi^2/(8sqrt(2))+3pi/sqrt(2)-12/sqrt(2)")-&gt;reduce;
+              $r = Formula("-pi^3sqrt(3)/216+pi^2/12+pi sqrt(3)-6")-&gt;reduce if ($b eq '\pi/6');
+              $r = Formula("-pi^3/27+pi^2sqrt(3)/3+2pi-6*sqrt(3)")-&gt;reduce if ($b eq '\pi/3');
+              $r = Formula("3pi^2/2-12")-&gt;reduce if ($b eq '\pi/2');
             </pg-code>
             <statement>
               <p>
@@ -1645,7 +1645,7 @@
               $c = random(2,9,1);
               if($envir{problemSeed}==1){$c=2;};
               $a = 0;
-              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
               $b = Formula("sqrt(ln(2))");
               $f = Formula("x e^(x^2)");
               $F = Formula("1/2*e^(x^2)");
@@ -1669,7 +1669,7 @@
               $a = 0;
               $b = 1;
               $F = Formula("x^3*e^x-3*x^2*e^x+6*x*e^x-6*e^x");
-              $r = $F->eval(x=>$b) - $F->eval(x=>$a);
+              $r = $F-&gt;eval(x=&gt;$b) - $F-&gt;eval(x=&gt;$a);
             </pg-code>
             <statement>
               <p>

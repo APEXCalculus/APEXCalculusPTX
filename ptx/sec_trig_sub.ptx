@@ -121,7 +121,7 @@
             <figure xml:id="fig_trigsub_intro1">
               <caption/>
               <!-- START figures/fig_trigsub_intro1.tex -->
-              <image xml:id="img_trigsub_intro1">
+              <image>
                 <shortdescription>
                   Diagram showing trigonometric substitution with integrands containing square root of a^2-x^2.
                 </shortdescription>
@@ -132,7 +132,7 @@
                     opposite to the perpendicular is marked as <m>\theta</m>.
                   </p>
                 </description>
-                <latex-image>
+                <latex-image label="img_trigsub_intro1">
 
                   \begin{tikzpicture}
 
@@ -164,7 +164,7 @@
             <figure xml:id="fig_trigsub_intro3">
               <caption/>
               <!-- START figures/fig_trigsub_intro3.tex -->
-              <image xml:id="img_trigsub_intro3">
+              <image>
                 <shortdescription>
                   Diagram showing trigonometric substitution with integrands containing square root of x^2+a^2.
                 </shortdescription>
@@ -175,7 +175,7 @@
                     opposite to the perpendicular is marked as <m>\theta</m>.
                   </p>
                 </description>
-                <latex-image>
+                <latex-image label="img_trigsub_intro3">
 
                   \begin{tikzpicture}
 
@@ -211,7 +211,7 @@
             <figure xml:id="fig_trigsub_intro2">
               <caption/>
               <!-- START figures/fig_trigsub_intro2.tex -->
-              <image xml:id="img_trigsub_intro2">
+              <image>
                 <shortdescription>
                   Diagram showing trigonometric substitution with integrands containing square root of x^2-a^2.
                 </shortdescription>
@@ -222,7 +222,7 @@
                     is marked as <m>\theta</m>.
                   </p>
                 </description>
-                <latex-image>
+                <latex-image label="img_trigsub_intro2">
 
                   \begin{tikzpicture}
 
@@ -689,8 +689,8 @@
       <exercise label="TaC-trig-substitution-1">
         <webwork xml:id="webwork-TaC-trig-substitution-1">
           <pg-code>
-            Context()->strings->add('backward'=>{});
-            Context()->strings->add('backwards'=>{alias=>'backward'});
+            Context()-&gt;strings-&gt;add('backward'=&gt;{});
+            Context()-&gt;strings-&gt;add('backwards'=&gt;{alias=&gt;'backward'});
           </pg-code>
           <statement>
             <p>
@@ -706,7 +706,7 @@
           <pg-code>
             $m = random(2,9,1);
             if($envir{problemSeed}==1){$m=5;};
-            Context()->variables->add(theta=>['Real',TeX=>'\theta']);
+            Context()-&gt;variables-&gt;add(theta=&gt;['Real',TeX=&gt;'\theta']);
             $integrand = Formula("sqrt($m^2-x^2)");
             $answer = OneOf(Formula("$m*sin(theta)"),Formula("$m*cos(theta)"));
           </pg-code>
@@ -724,7 +724,7 @@
           <pg-code>
             $m = random(2,9,1);
             if($envir{problemSeed}==1){$m=9;};
-            Context()->variables->add(theta=>['Real',TeX=>'\theta']);
+            Context()-&gt;variables-&gt;add(theta=&gt;['Real',TeX=&gt;'\theta']);
             # Redefine tan() so the following equtaion is not an identity
             package my::Function::numeric;
             our @ISA = ('Parser::Function::numeric');
@@ -733,7 +733,7 @@
               return CORE::sin($x+2)/CORE::cos($x+2);
             }
             package main;
-            Context()->functions->set(tan => {class => 'my::Function::numeric'});
+            Context()-&gt;functions-&gt;set(tan =&gt; {class =&gt; 'my::Function::numeric'});
             $I = ImplicitEquation("tan(theta)^2+1=sec(theta)^2");
             $S = Formula("$m sec(theta)^2");
           </pg-code>
@@ -779,7 +779,7 @@
           </statement>
           <solution>
             <p>
-              Because we are considering <m>a>0</m> and <m>x=a\sin(\theta)</m>,
+              Because we are considering <m>a&gt;0</m> and <m>x=a\sin(\theta)</m>,
               which means <m>\theta = \sin^{-1}(x/a)</m>.
               The arcsine function has a domain of <m>-\pi/2\leq \theta \leq \pi/2</m>;
               on this domain, <m>\cos(\theta) \geq 0</m>,
@@ -838,7 +838,7 @@
           <webwork xml:id="webwork-ex-trig-sub-indefinite-3">
             <pg-code>
               Context("Fraction");
-              Context()->variables->set(x=>{limits=>[-1,1]});
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[-1,1]});
               $F = FormulaUpToConstant("1/2 asin(x) + x/2 sqrt(1 - x^2)");
             </pg-code>
             <statement>
@@ -856,7 +856,7 @@
           <webwork xml:id="webwork-ex-trig-sub-indefinite-4">
             <pg-code>
               Context("Fraction");
-              Context()->variables->set(x=>{limits=>[-3,3]});
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[-3,3]});
               $F = FormulaUpToConstant("9/2 asin(x/3) + x/2 sqrt(9 - x^2)");
             </pg-code>
             <statement>
@@ -874,9 +874,9 @@
           <webwork xml:id="webwork-ex-trig-sub-indefinite-5">
             <pg-code>
               Context("Fraction");
-              Context()->variables->set(x=>{limits=>[1,5]});
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[1,5]});
               $F = FormulaUpToConstant("1/2 x sqrt(x^2 - 1) - 1/2 ln(abs(x+sqrt(x^2 - 1)))");
-              $F->{test_at} = [-2,-3,-4];
+              $F-&gt;{test_at} = [-2,-3,-4];
             </pg-code>
             <statement>
               <p>
@@ -893,9 +893,9 @@
           <webwork xml:id="webwork-ex-trig-sub-indefinite-6">
             <pg-code>
               Context("Fraction");
-              Context()->variables->set(x=>{limits=>[4,9]});
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[4,9]});
               $F = FormulaUpToConstant("1/2 x sqrt(x^2 - 16) - 8 ln(abs(x/4 + sqrt(x^2 - 16)/4))");
-              $F->{test_at} = [-5,-6,-7];
+              $F-&gt;{test_at} = [-5,-6,-7];
             </pg-code>
             <statement>
               <p>
@@ -915,7 +915,7 @@
               if($envir{problemSeed}==1){$m=2;};
               Context("Fraction");
               $f = Formula("sqrt($m^2 x^2+1)");
-              $F = FormulaUpToConstant("x/2 sqrt($m^2 x^2+1)+1/(2*$m)*ln($m x + sqrt($m^2 x^2+1))")->reduce;
+              $F = FormulaUpToConstant("x/2 sqrt($m^2 x^2+1)+1/(2*$m)*ln($m x + sqrt($m^2 x^2+1))")-&gt;reduce;
             </pg-code>
             <statement>
               <p>
@@ -934,9 +934,9 @@
               $m = random(2,9,1);
               if($envir{problemSeed}==1){$m=3;};
               Context("Fraction");
-              Context()->variables->set(x=>{limits=>[-1/$m,1/$m]});
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[-1/$m,1/$m]});
               $f = Formula("sqrt(1 - $m^2 x^2)");
-              $F = FormulaUpToConstant("x/2 sqrt(1 - $m^2 x^2) + 1/(2*$m) asin($m x)")->reduce;
+              $F = FormulaUpToConstant("x/2 sqrt(1 - $m^2 x^2) + 1/(2*$m) asin($m x)")-&gt;reduce;
             </pg-code>
             <statement>
               <p>
@@ -955,10 +955,10 @@
               $m = random(2,9,1);
               if($envir{problemSeed}==1){$m=4;};
               Context("Fraction");
-              Context()->variables->set(x=>{limits=>[1/$m,1/$m+4]});
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[1/$m,1/$m+4]});
               $f = Formula("sqrt($m^2 x^2 - 1)");
-              $F = FormulaUpToConstant("x/2 sqrt($m^2 x^2 - 1) - 1/(2*$m) ln(abs($m x + sqrt($m^2 x^2 - 1)))")->reduce;
-              $F->{test_at} = [-1/$m-1,-1/$m-2,-1/$m-3];
+              $F = FormulaUpToConstant("x/2 sqrt($m^2 x^2 - 1) - 1/(2*$m) ln(abs($m x + sqrt($m^2 x^2 - 1)))")-&gt;reduce;
+              $F-&gt;{test_at} = [-1/$m-1,-1/$m-2,-1/$m-3];
             </pg-code>
             <statement>
               <p>
@@ -978,9 +978,9 @@
               $b = list_random(2,3,5,6,7,10,11,13,14,15);
               if($envir{problemSeed}==1){$a=8;$b=2};
               Context("Fraction");
-              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
               $f = Formula("$a/sqrt(x^2 + $b)");
-              $F = FormulaUpToConstant("$a ln(x/sqrt($b) + sqrt(x^2/$b + 1))")->reduce;
+              $F = FormulaUpToConstant("$a ln(x/sqrt($b) + sqrt(x^2/$b + 1))")-&gt;reduce;
             </pg-code>
             <statement>
               <p>
@@ -1000,10 +1000,10 @@
               $b = list_random(2,3,5,6,7,10,11,13,14,15);
               if($envir{problemSeed}==1){$a=3;$b=7};
               Context("Fraction");
-              Context()->variables->set(x=>{limits=>[-sqrt($b),sqrt($b)]});
-              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[-sqrt($b),sqrt($b)]});
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
               $f = Formula("$a/sqrt($b - x^2)");
-              $F = FormulaUpToConstant("$a asin(x/sqrt($b))")->reduce;
+              $F = FormulaUpToConstant("$a asin(x/sqrt($b))")-&gt;reduce;
             </pg-code>
             <statement>
               <p>
@@ -1023,11 +1023,11 @@
               $b = list_random(2,3,5,6,7,10,11,13,14,15);
               if($envir{problemSeed}==1){$a=5;$b=6};
               Context("Fraction");
-              Context()->variables->set(x=>{limits=>[sqrt($b),sqrt($b)+4]});
-              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[sqrt($b),sqrt($b)+4]});
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
               $f = Formula("$a/sqrt(x^2-$b)");
-              $F = FormulaUpToConstant("$a ln(abs(x/sqrt($b) + sqrt(x^2/$b - 1)))")->reduce;
-              $F->{test_at} = [-sqrt($b)-1,-sqrt($b)-2,-sqrt($b)-3];
+              $F = FormulaUpToConstant("$a ln(abs(x/sqrt($b) + sqrt(x^2/$b - 1)))")-&gt;reduce;
+              $F-&gt;{test_at} = [-sqrt($b)-1,-sqrt($b)-2,-sqrt($b)-3];
             </pg-code>
             <statement>
               <p>
@@ -1055,11 +1055,11 @@
               $b = list_random(2,3,5,6,7,10,11,13,14,15);
               if($envir{problemSeed}==1){$b=11};
               Context("Fraction");
-              Context()->variables->set(x=>{limits=>[sqrt($b),sqrt($b)+4]});
-              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[sqrt($b),sqrt($b)+4]});
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
               $f = Formula("sqrt(x^2-$b)/x");
-              $F = FormulaUpToConstant("sqrt(x^2 - $b) - sqrt($b) asec(x/sqrt($b))")->reduce;
-              $F->{test_at} = [-sqrt($b)-1,-sqrt($b)-2,-sqrt($b)-3];
+              $F = FormulaUpToConstant("sqrt(x^2 - $b) - sqrt($b) asec(x/sqrt($b))")-&gt;reduce;
+              $F-&gt;{test_at} = [-sqrt($b)-1,-sqrt($b)-2,-sqrt($b)-3];
             </pg-code>
             <statement>
               <p>
@@ -1095,11 +1095,11 @@
               $b = list_random(2,3,5,6,7,10,11,13,14,15);
               if($envir{problemSeed}==1){$b=3};
               Context("Fraction");
-              Context()->variables->set(x=>{limits=>[sqrt($b),sqrt($b)+4]});
-              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[sqrt($b),sqrt($b)+4]});
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
               $f = Formula("x/sqrt(x^2-$b)");
-              $F = FormulaUpToConstant("sqrt(x^2 - $b)")->reduce;
-              $F->{test_at} = [-sqrt($b)-1,-sqrt($b)-2,-sqrt($b)-3];
+              $F = FormulaUpToConstant("sqrt(x^2 - $b)")-&gt;reduce;
+              $F-&gt;{test_at} = [-sqrt($b)-1,-sqrt($b)-2,-sqrt($b)-3];
             </pg-code>
             <statement>
               <p>
@@ -1116,7 +1116,7 @@
           <webwork xml:id="webwork-ex-trig-sub-indefinite-16">
             <pg-code>
               Context("Fraction");
-              Context()->variables->set(x=>{limits=>[-1,1]});
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[-1,1]});
               $F = FormulaUpToConstant("1/8 asin(x) + x/8 sqrt(1-x^2) (2x^2 - 1)");
             </pg-code>
             <statement>
@@ -1136,9 +1136,9 @@
               $m = random(2,9,1);
               if($envir{problemSeed}==1){$m=3};
               Context("Fraction");
-              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
               $f = Formula("x/(x^2 + $m^2)^(3/2)");
-              $F = FormulaUpToConstant("-1/sqrt(x^2 + $m^2)")->reduce;
+              $F = FormulaUpToConstant("-1/sqrt(x^2 + $m^2)")-&gt;reduce;
             </pg-code>
             <statement>
               <p>
@@ -1158,14 +1158,14 @@
               $b = list_random(2,3,5,6,7,10,11,13,14,15);
               if($envir{problemSeed}==1){$a=5;$b=10;};
               Context("Fraction");
-              Context()->variables->set(x=>{limits=>[sqrt($b),sqrt($b)+4]});
-              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[sqrt($b),sqrt($b)+4]});
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
               $f = Formula("($a x^2)/sqrt(x^2 - $b)");
               $frac = Fraction($a,2);
-              ($num,$den) = $frac->value;
+              ($num,$den) = $frac-&gt;value;
               $frac2 = Fraction($a*$b,2);
-              $F = FormulaUpToConstant("($num x)/$den sqrt(x^2 - $b) + $frac2 ln(abs(x/sqrt($b) + sqrt(x^2/$b - 1)))")->reduce;
-              $F->{test_at} = [-sqrt($b)-1,-sqrt($b)-2,-sqrt($b)-3];
+              $F = FormulaUpToConstant("($num x)/$den sqrt(x^2 - $b) + $frac2 ln(abs(x/sqrt($b) + sqrt(x^2/$b - 1)))")-&gt;reduce;
+              $F-&gt;{test_at} = [-sqrt($b)-1,-sqrt($b)-2,-sqrt($b)-3];
             </pg-code>
             <statement>
               <p>
@@ -1185,11 +1185,11 @@
               $m = random(1,9,1);
               if($envir{problemSeed}==1){$h=-2;$m=3;};
               Context("Fraction");
-              Context()->flags->set(reduceConstantFunctions=>0);
-              $f = Formula("1/(x^2 - (2*$h) x + (($h)^2+$m^2))^2")->reduce;
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
+              $f = Formula("1/(x^2 - (2*$h) x + (($h)^2+$m^2))^2")-&gt;reduce;
               $frac = Fraction(1,2*$m**2);
               $frac2 = Fraction(1,2*$m**3);
-              $F = FormulaUpToConstant("$frac (x-$h)/(x^2 - (2*$h) x + (($h)^2+$m^2)) + $frac2 atan((x-$h)/$m) ")->reduce;
+              $F = FormulaUpToConstant("$frac (x-$h)/(x^2 - (2*$h) x + (($h)^2+$m^2)) + $frac2 atan((x-$h)/$m) ")-&gt;reduce;
             </pg-code>
             <statement>
               <p>
@@ -1206,7 +1206,7 @@
           <webwork xml:id="webwork-ex-trig-sub-indefinite-20">
             <pg-code>
               Context("Fraction");
-              Context()->variables->set(x=>{limits=>[-1,1]});
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[-1,1]});
               $F = FormulaUpToConstant("x/sqrt(1-x^2)-asin(x)");
             </pg-code>
             <statement>
@@ -1227,10 +1227,10 @@
               $b = list_random(2,3,5,6,7,10,11,13,14,15);
               if($envir{problemSeed}==1){$a=7;$b=5;};
               Context("Fraction");
-              Context()->variables->set(x=>{limits=>[-sqrt($b),sqrt($b)]});
-              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[-sqrt($b),sqrt($b)]});
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
               $f = Formula("sqrt($b - x^2)/($a x^2)");
-              $F = FormulaUpToConstant("-sqrt($b - x^2)/($a x) - 1/$a asin(x/sqrt($b))")->reduce;
+              $F = FormulaUpToConstant("-sqrt($b - x^2)/($a x) - 1/$a asin(x/sqrt($b))")-&gt;reduce;
             </pg-code>
             <statement>
               <p>
@@ -1249,10 +1249,10 @@
               $b = list_random(2,3,5,6,7,10,11,13,14,15);
               if($envir{problemSeed}==1){$b=3;};
               Context("Fraction");
-              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
               $f = Formula("x^2/sqrt(x^2 + $b)");
               $frac = Fraction($b,2);
-              $F = FormulaUpToConstant("x/2 sqrt(x^2 + $b) - $frac ln(x/sqrt(3) + sqrt(x^2/$b + 1))")->reduce;
+              $F = FormulaUpToConstant("x/2 sqrt(x^2 + $b) - $frac ln(x/sqrt(3) + sqrt(x^2/$b + 1))")-&gt;reduce;
             </pg-code>
             <statement>
               <p>
@@ -1297,7 +1297,7 @@
               $b = random(5,10,1);
               if($envir{problemSeed}==1){$b=8;};
               Context("Fraction");
-              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
               $arg = $b**2 - 16;
               ($sq,$nsq) = (1,$arg);
               while ($nsq % 4 == 0) {
@@ -1330,7 +1330,7 @@
               $b = random(1,10,1);
               if($envir{problemSeed}==1){$b=2;};
               Context("Fraction");
-              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
               $arg = $b**2 + 4;
               ($sq,$nsq) = (1,$arg);
               while ($nsq % 4 == 0) {
@@ -1363,7 +1363,7 @@
               $b = random(1,10,1);
               if($envir{problemSeed}==1){$b=1;};
               Context("Fraction");
-              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
               $frac = Fraction($b,$b**2 + 1);
               $answer = Formula("atan($b) + $frac");
             </pg-code>
@@ -1384,7 +1384,7 @@
               $b = random(1,2,1);
               if($envir{problemSeed}==1){$b=1;};
               Context("Fraction");
-              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
               $arg = 9 - $b**2;
               ($sq,$nsq) = (1,$arg);
               while ($nsq % 4 == 0) {

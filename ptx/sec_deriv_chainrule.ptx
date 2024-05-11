@@ -42,7 +42,7 @@
 
   <figure xml:id="fig_chain">
     <caption>A graph of <m>y=\cos(x^2)</m> and a tangent line at <m>\pi/2</m></caption>
-    <image xml:id="img_chain" width="47%">
+    <image width="47%">
       <shortdescription>
         A cosine wave with increasing frequency with a negatively sloped tangent line.
       </shortdescription>
@@ -54,7 +54,7 @@
           A tangent line to the point is drawn, sloping downward.
         </p>
       </description>
-      <latex-image>
+      <latex-image label="img_chain">
 
       \begin{tikzpicture}
       \begin{axis}[ymin=-1.5,ymax=1.5,
@@ -444,7 +444,7 @@
       <figure xml:id="fig_chain7">
         <caption><m>f(x) = \cos(x^2)</m> sketched along with its tangent line at <m>x=1</m></caption>
         <!-- START figures/fig_chain7.tex -->
-        <image xml:id="img_chain7" width="47%">
+        <image width="47%">
           <shortdescription>
             A wave with increasing frequency with a negatively sloped tangent line at x=1.
           </shortdescription>
@@ -456,7 +456,7 @@
               At the point <m>x=1</m>, there is a tangent line drawn. This line has a clear negative slope.
             </p>
           </description>
-          <latex-image>
+          <latex-image label="img_chain7">
 
           \begin{tikzpicture}
           \begin{axis}[xmin=-3.1,xmax=3.1,
@@ -863,7 +863,7 @@
       <figure xml:id="fig_chainrulegears">
         <caption>A series of gears to demonstrate the Chain Rule. Note how <m>\lz{y}{x} = \lz{y}{u}\cdot\lz{u}{x}</m></caption>
         <!-- START figures/fig_chainrule_gears.tex -->
-        <image xml:id="img_chainrulegears">
+        <image>
           <shortdescription>
             3 gears of various sizes demonstrating the chain rule.
           </shortdescription>
@@ -874,7 +874,7 @@
             <m>y</m> is connected to <m>u</m>, and it has 6 teeth. Below the connection is <m>\frac{dy}{du}=3</m>.
             To the right of the gears is the expression <m>\frac{dy}{dx} = 6</m>.
           </description>
-          <latex-image>
+          <latex-image label="img_chainrulegears">
 
           \begin{tikzpicture}[&gt;=latex]
 
@@ -1068,7 +1068,7 @@
           <!-- Intentionally not randomized because function used again later. -->
           <webwork xml:id="webwork-ex-deriv-chain-compute-2">
             <pg-code>
-              Context()->variables->are(t=>'Real');
+              Context()-&gt;variables-&gt;are(t=&gt;'Real');
               $fp=Formula("15(3t-2)^4");
             </pg-code>
             <statement>
@@ -1086,7 +1086,7 @@
           <!-- Intentionally not randomized because function used again later. -->
           <webwork xml:id="webwork-ex-deriv-chain-compute-3">
             <pg-code>
-              Context()->variables->are(theta=>['Real',TeX=>'\theta']);
+              Context()-&gt;variables-&gt;are(theta=&gt;['Real',TeX=&gt;'\theta']);
               $fp=Formula("3(sin(theta)+cos(theta))^2(cos(theta)-sin(theta))");
             </pg-code>
             <statement>
@@ -1103,11 +1103,11 @@
           </webwork>
         </exercise>
 
-        <exercise xml:id="exer_02_05_09"  label="ex-deriv-chain-compute-4">
+        <exercise xml:id="exer_02_05_09" label="ex-deriv-chain-compute-4">
           <!-- Intentionally not randomized because function used again later. -->
           <webwork xml:id="webwork-ex-deriv-chain-compute-4">
             <pg-code>
-              Context()->variables->are(t=>'Real');
+              Context()-&gt;variables-&gt;are(t=&gt;'Real');
               $fp=Formula("(6t+1)e^(3t^2+t-1)");
             </pg-code>
             <statement>
@@ -1130,9 +1130,9 @@
               $b = random(3,8,1);
               $pm = list_random('+','-');
               if($envir{problemSeed}==1){$fname='f';$x='x';$a=2;$b=3;$pm='+'};
-              Context()->variables->are($x=>'Real');
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
               $f=Formula("(ln($x)$pm $x^$a)^$b");
-              $fp=$f->D($x);
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1154,9 +1154,9 @@
               $n = random(2,5,1);
               $b = non_zero_random(-9,9,1);
               if($envir{problemSeed}==1){$fname='f';$x='x';$a=2;$n=3;$b=3};
-              Context()->variables->are($x=>'Real');
-              $f=Formula("$a^($x^$n+$b $x)")->reduce;
-              $fp=$f->D($x);
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
+              $f=Formula("$a^($x^$n+$b $x)")-&gt;reduce;
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1177,9 +1177,9 @@
               $pm = list_random('+','-');
               $n = random(3,6,1);
               if($envir{problemSeed}==1){$fname='f';$x='x';$pm='+';$n=4;};
-              Context()->variables->are($x=>'Real');
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
               $f=Formula("($x$pm 1/$x)^$n");
-              $fp=$f->D($x);
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1200,9 +1200,9 @@
               $trig= list_random('sin','cos');
               $a = random(2,9,1);
               if($envir{problemSeed}==1){$fname='f';$x='x';$trig='cos';$a=3;};
-              Context()->variables->are($x=>'Real');
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
               $f=Formula("$trig($a $x)");
-              $fp=$f->D($x);
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1223,9 +1223,9 @@
               $trig= list_random('tan','cot');
               $a = random(2,9,1);
               if($envir{problemSeed}==1){$fname='g';$x='x';$trig='tan';$a=5;};
-              Context()->variables->are($x=>'Real');
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
               $f=Formula("$trig($a $x)");
-              $fp=$f->D($x);
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1245,9 +1245,9 @@
               $trig= list_random('sin','cos','tan','cot');
               $a = non_zero_random(-9,9,1);
               if($envir{problemSeed}==1){$fname='h';$trig='tan';$a=4;};
-              Context()->variables->are(theta=>['Real',TeX=>'\theta']);
-              $f=Formula("$trig(theta^2+$a)")->reduce;
-              $fp=$f->D('theta');
+              Context()-&gt;variables-&gt;are(theta=&gt;['Real',TeX=&gt;'\theta']);
+              $f=Formula("$trig(theta^2+$a)")-&gt;reduce;
+              $fp=$f-&gt;D('theta');
             </pg-code>
             <statement>
               <p>
@@ -1272,9 +1272,9 @@
               $n = random(2,9,1);
               $m = random(1,4,1);
               if($envir{problemSeed}==1){$fname='g';$x='t';$trig='sin';$n=2;$m=1;};
-              Context()->variables->are($x=>'Real');
-              $f=Formula("$trig($x^$n+1/$x^$m)")->reduce;
-              $fp=$f->D($x);
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
+              $f=Formula("$trig($x^$n+1/$x^$m)")-&gt;reduce;
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1296,9 +1296,9 @@
               $n = random(3,9,1);
               $a = random(2,9,1);
               if($envir{problemSeed}==1){$fname='h';$x='t';$trig='sin';$n=4;$a=2;};
-              Context()->variables->are($x=>'Real');
-              $f=Formula("$trig^$n($a $x)")->reduce;
-              $fp=$f->D($x);
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
+              $f=Formula("$trig^$n($a $x)")-&gt;reduce;
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1320,9 +1320,9 @@
               $n = random(3,9,1);
               ($a,$b) = (-9..-2,2..9)[NchooseK(16,2)];
               if($envir{problemSeed}==1){$fname='p';$x='t';$trig='sin';$n=3;$a=3;$b=1;};
-              Context()->variables->are($x=>'Real');
-              $f=Formula("$trig^$n($x^2+$a $x + $b)")->reduce;
-              $fp=$f->D($x);
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
+              $f=Formula("$trig^$n($x^2+$a $x + $b)")-&gt;reduce;
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1342,9 +1342,9 @@
               $x = list_random('q','r','t','x','y','z');
               $trig= list_random('sin','cos','sec','csc');
               if($envir{problemSeed}==1){$fname='f';$x='x';$trig='cos';};
-              Context()->variables->are($x=>'Real');
-              $f=Formula("ln($trig($x))")->reduce;
-              $fp=$f->D($x);
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
+              $f=Formula("ln($trig($x))")-&gt;reduce;
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1364,9 +1364,9 @@
               $x = list_random('q','r','t','x','y','z');
               $n = random(2,9,1);
               if($envir{problemSeed}==1){$fname='f';$x='x';$n=2;};
-              Context()->variables->are($x=>'Real');
-              $f=Formula("ln($x^$n)")->reduce;
-              $fp=$f->D($x);
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
+              $f=Formula("ln($x^$n)")-&gt;reduce;
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1386,9 +1386,9 @@
               $x = list_random('q','r','t','x','y','z');
               $n = random(2,9,1);
               if($envir{problemSeed}==1){$fname='f';$x='x';$n=2;};
-              Context()->variables->are($x=>'Real');
-              $f=Formula("$n ln($x)")->reduce;
-              $fp=$f->D($x);
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
+              $f=Formula("$n ln($x)")-&gt;reduce;
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1408,10 +1408,10 @@
               $x = list_random('q','r','t','x','y','z');
               $b = random(2,9,1);
               if($envir{problemSeed}==1){$fname='g';$x='r';$b=4;};
-              Context()->variables->are($x=>'Real');
-              $f=Formula("$b^$x")->reduce;
-              Context()->flags->set(reduceConstantFunctions=>0);
-              $fp=$f->D($x);
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
+              $f=Formula("$b^$x")-&gt;reduce;
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1432,10 +1432,10 @@
               $b = random(2,9,1);
               $trig= list_random('sin','cos','sec','csc','tan','cot');
               if($envir{problemSeed}==1){$fname='g';$x='t';$b=5;$trig='cos'};
-              Context()->variables->are($x=>'Real');
-              $f=Formula("$b^($trig($x))")->reduce;
-              Context()->flags->set(reduceConstantFunctions=>0);
-              $fp=$f->D($x);
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
+              $f=Formula("$b^($trig($x))")-&gt;reduce;
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1455,10 +1455,10 @@
               $x = list_random('q','r','t','x','y','z');
               ($a,$b) = (2..20)[NchooseK(19,2)];
               if($envir{problemSeed}==1){$fname='g';$x='t';$b=15;$a=2;};
-              Context()->variables->are($x=>'Real');
-              Context()->flags->set(reduceConstants=>0);
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
+              Context()-&gt;flags-&gt;set(reduceConstants=&gt;0);
               $f=Formula("$b^$a");
-              $fp=$f->D($x);
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1478,10 +1478,10 @@
               $x = list_random('q','r','t','x','y','z','w');
               do {($a,$b) = (2..9)[NchooseK(8,2)];} until (gcd($a,$b) == 1);
               if($envir{problemSeed}==1){$fname='m';$x='w';$a=3;$b=2;};
-              Context()->variables->are($x=>'Real');
-              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
               $f=Formula("$a^$x/$b^$x");
-              $fp=$f->D($x);
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1501,10 +1501,10 @@
               $x = list_random('q','r','t','x','y','z','w');
               do {($a,$b) = (2..9)[NchooseK(8,2)];} until (gcd($a,$b) == 1);
               if($envir{problemSeed}==1){$fname='h';$x='t';$a=2;$b=3;};
-              Context()->variables->are($x=>'Real');
-              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
               $f=Formula("($a^$x+$b)/($b^$x+$a)");
-              $fp=$f->D($x);
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1525,10 +1525,10 @@
               do {($a,$b) = (2..9)[NchooseK(8,2)];} until (gcd($a,$b) == 1);
               $c = non_zero_random(-9,9,1);
               if($envir{problemSeed}==1){$fname='m';$x='w';$a=3;$b=2;$c=1;};
-              Context()->variables->are($x=>'Real');
-              Context()->flags->set(reduceConstantFunctions=>0);
-              $f=Formula("($a^$x+$c)/($b^$x)")->reduce;
-              $fp=$f->D($x);
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
+              $f=Formula("($a^$x+$c)/($b^$x)")-&gt;reduce;
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1549,10 +1549,10 @@
               do {($a,$b) = (2..9)[NchooseK(8,2)];} until (gcd($a,$b) == 1);
               $pm = list_random('+','-');
               if($envir{problemSeed}==1){$fname='f';$x='x';$a=3;$b=2;$pm='+';};
-              Context()->variables->are($x=>'Real');
-              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
               $f=Formula("($a^($x^2)$pm$x)/($b^($x^2))");
-              $fp=$f->D($x);
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1574,9 +1574,9 @@
               $trig = list_random('sin','cos','tan','cot');
               $a = random(2,9,1);
               if($envir{problemSeed}==1){$fname='f';$x='x';$n=2;$trig='sin';$a=5;};
-              Context()->variables->are($x=>'Real');
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
               $f=Formula("$x^$n $trig($a $x)");
-              $fp=$f->D($x);
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1597,9 +1597,9 @@
               ($m,$n,$p) = (2..6)[NchooseK(5,3)];
               ($a,$b,$c) = (1..9)[NchooseK(9,3)];
               if($envir{problemSeed}==1){$fname='f';$x='x';$m=5;$n=4;$p=3;$a=1;$b=3;$c=2;};
-              Context()->variables->are($x=>'Real');
-              $f=Formula("($x^2+$a $x)^$m($b $x^$n+$c $x)^$p")->reduce;
-              $fp=$f->D($x);
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
+              $f=Formula("($x^2+$a $x)^$m($b $x^$n+$c $x)^$p")-&gt;reduce;
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1623,9 +1623,9 @@
               $b=$b*random(-1,1,2);
               $d=$d*random(-1,1,2);
               if($envir{problemSeed}==1){$fname='g';$x='t';$m=2;$n=0;$a=1;$b=3;$c=5;$d=-7;};
-              Context()->variables->are($x=>'Real');
-              $f=Formula("$triga($a $x^$m + $b $x)$trigb($c $x + $d $x^$n)")->reduce->reduce;
-              $fp=$f->D($x);
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
+              $f=Formula("$triga($a $x^$m + $b $x)$trigb($c $x + $d $x^$n)")-&gt;reduce-&gt;reduce;
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1648,9 +1648,9 @@
               $b=$b*random(-1,1,2);
               $d=$d*random(-1,1,2);
               if($envir{problemSeed}==1){$fname='f';$x='x';$a=3;$b=4;$c=5;$d=-2;};
-              Context()->variables->are($x=>'Real');
-              $f=Formula("$triga($a $x + $b)$trigb($c + $d $x)")->reduce;
-              $fp=$f->D($x);
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
+              $f=Formula("$triga($a $x + $b)$trigb($c + $d $x)")-&gt;reduce;
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1672,9 +1672,9 @@
               $a = random(2,9,1);
               $n = random(2,3,1);
               if($envir{problemSeed}==1){$fname='g';$x='t';$a=5;$n=2;};
-              Context()->variables->are($x=>'Real');
-              $f=Formula("$trig(1/$x)e^($a $x^$n)")->reduce;
-              $fp=$f->D($x);
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
+              $f=Formula("$trig(1/$x)e^($a $x^$n)")-&gt;reduce;
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1698,9 +1698,9 @@
               $d=$d*random(-1,1,2);
               $n = random(2,4,1);
               if($envir{problemSeed}==1){$fname='f';$x='x';$a=4;$b=1;$c=5;$d=-9;$n=3;};
-              Context()->variables->are($x=>'Real');
-              $f=Formula("$trig($a $x + $b)/($c $x + $d)^$n")->reduce;
-              $fp=$f->D($x);
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
+              $f=Formula("$trig($a $x + $b)/($c $x + $d)^$n")-&gt;reduce;
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1722,9 +1722,9 @@
               ($a,$b,$c) = (1..9)[NchooseK(9,3)];
               $n = random(2,4,1);
               if($envir{problemSeed}==1){$fname='f';$x='x';$a=4;$b=1;$c=5;$n=2;};
-              Context()->variables->are($x=>'Real');
-              $f=Formula("($a $x + $b)^$n/$trig($c $x)")->reduce;
-              $fp=$f->D($x);
+              Context()-&gt;variables-&gt;are($x=&gt;'Real');
+              $f=Formula("($a $x + $b)^$n/$trig($c $x)")-&gt;reduce;
+              $fp=$f-&gt;D($x);
             </pg-code>
             <statement>
               <p>
@@ -1750,8 +1750,8 @@
           <!-- Intentionally not randomized because function used from earlier. -->
           <webwork xml:id="webwork-ex-deriv-chain-tangent-1">
             <pg-code>
-              Context("Numeric")->variables->add(y=>'Real');
-              parser::Assignment->Allow;
+              Context("Numeric")-&gt;variables-&gt;add(y=&gt;'Real');
+              parser::Assignment-&gt;Allow;
               $t=Formula("y=0");
               $n=Formula("x=0");
             </pg-code>
@@ -1779,9 +1779,9 @@
           <!-- Intentionally not randomized because function used from earlier. -->
           <webwork xml:id="webwork-ex-deriv-chain-tangent-2">
             <pg-code>
-              Context("Numeric")->variables->add(y=>'Real');
-              parser::Assignment->Allow;
-              Context()->flags->set(reduceConstants=>0);
+              Context("Numeric")-&gt;variables-&gt;add(y=&gt;'Real');
+              parser::Assignment-&gt;Allow;
+              Context()-&gt;flags-&gt;set(reduceConstants=&gt;0);
               $t=Formula("y=15(x-1)+1");
               $n=Formula("y=-1/15(x-1)+1");
             </pg-code>
@@ -1809,9 +1809,9 @@
           <!-- Intentionally not randomized because function used from earlier. -->
           <webwork xml:id="webwork-ex-deriv-chain-tangent-3">
             <pg-code>
-              Context("Numeric")->variables->add(y=>'Real');
-              parser::Assignment->Allow;
-              Context()->flags->set(reduceConstants=>0);
+              Context("Numeric")-&gt;variables-&gt;add(y=&gt;'Real');
+              parser::Assignment-&gt;Allow;
+              Context()-&gt;flags-&gt;set(reduceConstants=&gt;0);
               $t=Formula("y=-3(x - pi/2)+1");
               $n=Formula("y=1/3(x - pi/2)+1");
             </pg-code>
@@ -1839,9 +1839,9 @@
           <!-- Intentionally not randomized because function used from earlier. -->
           <webwork xml:id="webwork-ex-deriv-chain-tangent-4">
             <pg-code>
-              Context("Numeric")->variables->add(y=>'Real');
-              parser::Assignment->Allow;
-              Context()->flags->set(reduceConstants=>0);
+              Context("Numeric")-&gt;variables-&gt;add(y=&gt;'Real');
+              parser::Assignment-&gt;Allow;
+              Context()-&gt;flags-&gt;set(reduceConstants=&gt;0);
               $t=Formula("y=-5e(x+1)+e");
               $n=Formula("y=1/(5e)(x+1)+e");
             </pg-code>
@@ -1869,10 +1869,10 @@
       <exercise label="ex-deriv-chain-tangent-5">
         <webwork xml:id="webwork-ex-deriv-chain-tangent-5">
           <pg-code>
-            Context()->variables->add(k=>'Real');
+            Context()-&gt;variables-&gt;add(k=&gt;'Real');
             $f = Formula("ln(k x)");
             $d = Formula("1/x");
-            $showwork = '[@ explanation_box(message => "Show the work for both parts.") @]*';
+            $showwork = '[@ explanation_box(message =&gt; "Show the work for both parts.") @]*';
           </pg-code>
           <statement>
             <p>
@@ -1898,10 +1898,10 @@
       <exercise label="ex-deriv-chain-tangent-6">
         <webwork xml:id="webwork-ex-deriv-chain-tangent-6">
           <pg-code>
-            Context()->variables->add(k=>'Real');
+            Context()-&gt;variables-&gt;add(k=&gt;'Real');
             $f = Formula("ln(x^k)");
             $d = Formula("k/x");
-            $showwork = '[@ explanation_box(message => "Show the work for both parts.") @]*';
+            $showwork = '[@ explanation_box(message =&gt; "Show the work for both parts.") @]*';
           </pg-code>
           <statement>
             <p>
