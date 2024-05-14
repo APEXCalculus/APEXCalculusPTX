@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section xml:id="sec_planes">
+<section xml:id="sec_planes" label="sec_planes">
   <title>Planes</title>
   <introduction>
     <p>
@@ -14,9 +14,9 @@
       <caption>Illustrating defining a plane with a sheet of cardboard and a nail</caption>
 
       <!-- START figures/figplanes_intro_3D.asy -->
-      <image xml:id="img_planes_intro" width="47%">
-        <description></description>
-        <asymptote>
+      <image width="47%">
+        <description/>
+        <asymptote label="img_planes_intro">
 
 
 
@@ -205,9 +205,9 @@
           <caption>Sketching the plane in <xref ref="ex_planes1"/></caption>
 
           <!-- START figures/figplanes1_3D.asy -->
-          <image xml:id="img_planes1" width="47%">
-            <description></description>
-            <asymptote>
+          <image width="47%">
+            <description/>
+            <asymptote label="img_planes1">
 
 
 
@@ -361,9 +361,9 @@
           <caption>Sketching the plane in <xref ref="ex_planes2"/></caption>
 
           <!-- START figures/figplanes2_3D.asy -->
-          <image xml:id="img_planes2" width="47%">
-            <description></description>
-            <asymptote>
+          <image width="47%">
+            <description/>
+            <asymptote label="img_planes2">
 
 
 
@@ -447,9 +447,9 @@
           <caption>The line and plane in <xref ref="ex_planes3"/></caption>
 
           <!-- START figures/figplanes3_3D.asy -->
-          <image xml:id="img_planes3" width="47%">
-            <description></description>
-            <asymptote>
+          <image width="47%">
+            <description/>
+            <asymptote label="img_planes3">
 
 
 
@@ -581,9 +581,9 @@
           <caption>Graphing the planes and their line of intersection in <xref ref="ex_planes4"/></caption>
 
           <!-- START figures/figplanes4_3D.asy -->
-          <image xml:id="img_planes4" width="47%">
-            <description></description>
-            <asymptote>
+          <image width="47%">
+            <description/>
+            <asymptote label="img_planes4">
 
 
 
@@ -702,9 +702,9 @@
           <caption>Illustrating the intersection of a line and a plane in <xref ref="ex_planes5"/></caption>
 
           <!-- START figures/figplanes5_3D.asy -->
-          <image xml:id="img_planes5" width="47%">
-            <description></description>
-            <asymptote>
+          <image width="47%">
+            <description/>
+            <asymptote label="img_planes5">
 
 
 
@@ -795,9 +795,9 @@
       <caption>Illustrating finding the distance from a point to a plane</caption>
 
       <!-- START figures/figplanes_dist_3D.asy -->
-      <image xml:id="img_planes_dist" width="47%">
-        <description></description>
-        <asymptote>
+      <image width="47%">
+        <description/>
+        <asymptote label="img_planes_dist">
 
 
 
@@ -1010,35 +1010,35 @@
               <pg-code>
                 Context("Point");
                 $points=List("(-2,9,0),(2,9,3)");
-                $pev=$points->cmp(list_checker => sub {
+                $pev=$points-&gt;cmp(list_checker =&gt; sub {
                   my ($correct,$student,$ansHash,$value) = @_;
                   my $n = scalar(@$student);
                   my $score = 0;
                   my @errors = ();
                   my $i, $j;
                   for ($i = 0; $i &lt; $n; $i++) {
-                    my $ith = Value::List->NameForNumber($i+1);
-                    my $p = $student->[$i];   # i-th student answer
-                    if ($p->type ne "Point") {
+                    my $ith = Value::List-&gt;NameForNumber($i+1);
+                    my $p = $student-&gt;[$i];   # i-th student answer
+                    if ($p-&gt;type ne "Point") {
                        push(@errors,"Your $ith entry is not a point");
                        next;
                     }
                     for ($j = 0, $used = 0; $j &lt; $i; $j++) {
-                      if ($student->[$j]->type eq "Point" and $student->[$j] == $p) {
-                        push(@errors,"Your $ith point is the same as a previous one") unless $ansHash->{isPreview};
+                      if ($student-&gt;[$j]-&gt;type eq "Point" and $student-&gt;[$j] == $p) {
+                        push(@errors,"Your $ith point is the same as a previous one") unless $ansHash-&gt;{isPreview};
                         $used = 1; last;
                       }
                     }
                     if (!$used) {
-                      my ($a,$b,$c) = $p->value;
+                      my ($a,$b,$c) = $p-&gt;value;
                       if (3*($a+2)+5*($b-9)-4*$c==0) {$score++} else {
-                        push(@errors,"Your $ith point is not correct") unless $ansHash->{isPreview}
+                        push(@errors,"Your $ith point is not correct") unless $ansHash-&gt;{isPreview}
                       }
                     }
                   }
-                  if (!$ansHash->{isPreview}) {
+                  if (!$ansHash-&gt;{isPreview}) {
                     push(@errors,"You need to provide more points") if $i &lt; 2;
-                    push(@errors,"You have given too many points") if $score > 2 and $i != $score;
+                    push(@errors,"You have given too many points") if $score &gt; 2 and $i != $score;
                   }
                   return ($score,@errors);
                 });
@@ -1079,35 +1079,35 @@
               <pg-code>
                 Context("Point");
                 $points=List("(0,-2,6),(1,-2,6)");
-                $pev=$points->cmp(list_checker => sub {
+                $pev=$points-&gt;cmp(list_checker =&gt; sub {
                   my ($correct,$student,$ansHash,$value) = @_;
                   my $n = scalar(@$student);
                   my $score = 0;
                   my @errors = ();
                   my $i, $j;
                   for ($i = 0; $i &lt; $n; $i++) {
-                    my $ith = Value::List->NameForNumber($i+1);
-                    my $p = $student->[$i];   # i-th student answer
-                    if ($p->type ne "Point") {
+                    my $ith = Value::List-&gt;NameForNumber($i+1);
+                    my $p = $student-&gt;[$i];   # i-th student answer
+                    if ($p-&gt;type ne "Point") {
                        push(@errors,"Your $ith entry is not a point");
                        next;
                     }
                     for ($j = 0, $used = 0; $j &lt; $i; $j++) {
-                      if ($student->[$j]->type eq "Point" and $student->[$j] == $p) {
-                        push(@errors,"Your $ith point is the same as a previous one") unless $ansHash->{isPreview};
+                      if ($student-&gt;[$j]-&gt;type eq "Point" and $student-&gt;[$j] == $p) {
+                        push(@errors,"Your $ith point is the same as a previous one") unless $ansHash-&gt;{isPreview};
                         $used = 1; last;
                       }
                     }
                     if (!$used) {
-                      my ($a,$b,$c) = $p->value;
+                      my ($a,$b,$c) = $p-&gt;value;
                       if (4*($b+2)-($c-6)==0) {$score++} else {
-                        push(@errors,"Your $ith point is not correct") unless $ansHash->{isPreview}
+                        push(@errors,"Your $ith point is not correct") unless $ansHash-&gt;{isPreview}
                       }
                     }
                   }
-                  if (!$ansHash->{isPreview}) {
+                  if (!$ansHash-&gt;{isPreview}) {
                     push(@errors,"You need to provide more points") if $i &lt; 2;
-                    push(@errors,"You have given too many points") if $score > 2 and $i != $score;
+                    push(@errors,"You have given too many points") if $score &gt; 2 and $i != $score;
                   }
                   return ($score,@errors);
                 });
@@ -1166,39 +1166,39 @@
               <pg-code>
                 sub grouped {
                   my $op = shift;
-                  return 1 if ($op->{name} or $op->{isConstant});
-                  if ($op->{uop}) {return grouped($op->{op});};
+                  return 1 if ($op-&gt;{name} or $op-&gt;{isConstant});
+                  if ($op-&gt;{uop}) {return grouped($op-&gt;{op});};
                   my $context=Context();
-                  my $lft=$context->Package("Formula")->new($context,$op->{lop});
-                  my $rgt=$context->Package("Formula")->new($context,$op->{rop});
-                  return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
-                  if ($op->{bop} eq '+' or $op->{bop} eq '-') {
-                    return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
+                  my $lft=$context-&gt;Package("Formula")-&gt;new($context,$op-&gt;{lop});
+                  my $rgt=$context-&gt;Package("Formula")-&gt;new($context,$op-&gt;{rop});
+                  return 0 if (($lft-&gt;usesOneOf('x') and $rgt-&gt;usesOneOf('x')) or ($lft-&gt;usesOneOf('y') and $rgt-&gt;usesOneOf('y')) or ($lft-&gt;usesOneOf('z') and $rgt-&gt;usesOneOf('z')));
+                  if ($op-&gt;{bop} eq '+' or $op-&gt;{bop} eq '-') {
+                    return 0 unless (($lft-&gt;usesOneOf('x','y','z') and $rgt-&gt;usesOneOf('x','y','z')) or ($op-&gt;{lop}{name} and $op-&gt;{rop}{isConstant}) or ($op-&gt;{rop}{name} and $op-&gt;{lop}{isConstant}));
                   };
-                  return (grouped($op->{lop}) and grouped($op->{rop}));
+                  return (grouped($op-&gt;{lop}) and grouped($op-&gt;{rop}));
                 };
                 Context("ImplicitEquation");
-                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-                Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
+                Context()-&gt;variables-&gt;are(x=&gt;'Real',y=&gt;'Real',z=&gt;'Real');
+                Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[-100,100]},y=&gt;{limits=&gt;[-100,100]},z=&gt;{limits=&gt;[-100,100]});
                 $st=ImplicitEquation("2(y-3)+4(z-5)=0");
-                $stev=$st->cmp(checker=>sub{
+                $stev=$st-&gt;cmp(checker=&gt;sub{
                   my ( $correct, $student, $ansHash ) = @_;
-                  #return 0 if $ansHash->{isPreview} || $correct != $student;
+                  #return 0 if $ansHash-&gt;{isPreview} || $correct != $student;
                   my $context = Context();
-                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
+                  my $left=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{lop});
+                  my $right=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{rop});
+                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left-&gt;{tree}));
                   return $correct == $student;
                 });
                 $ge=ImplicitEquation("2y+4z=26");
-                $geev=$ge->cmp(checker=>sub{
+                $geev=$ge-&gt;cmp(checker=&gt;sub{
                   my ( $correct, $student, $ansHash ) = @_;
-                  return 0 if $ansHash->{isPreview} || $correct != $student;
+                  return 0 if $ansHash-&gt;{isPreview} || $correct != $student;
                   my $context = Context();
-                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                  Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
-                  Value::Error("Your answer is not in general form") unless $right->isConstant;
+                  my $left=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{lop});
+                  my $right=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{rop});
+                  Value::Error("Your answer is not in general form") unless ($left-&gt;eval(x=&gt;0,y=&gt;0,z=&gt;0)==0);
+                  Value::Error("Your answer is not in general form") unless $right-&gt;isConstant;
                   return $correct == $student;
                 });
               </pg-code>
@@ -1258,39 +1258,39 @@
               <pg-code>
                 sub grouped {
                   my $op = shift;
-                  return 1 if ($op->{name} or $op->{isConstant});
-                  if ($op->{uop}) {return grouped($op->{op});};
+                  return 1 if ($op-&gt;{name} or $op-&gt;{isConstant});
+                  if ($op-&gt;{uop}) {return grouped($op-&gt;{op});};
                   my $context=Context();
-                  my $lft=$context->Package("Formula")->new($context,$op->{lop});
-                  my $rgt=$context->Package("Formula")->new($context,$op->{rop});
-                  return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
-                  if ($op->{bop} eq '+' or $op->{bop} eq '-') {
-                    return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
+                  my $lft=$context-&gt;Package("Formula")-&gt;new($context,$op-&gt;{lop});
+                  my $rgt=$context-&gt;Package("Formula")-&gt;new($context,$op-&gt;{rop});
+                  return 0 if (($lft-&gt;usesOneOf('x') and $rgt-&gt;usesOneOf('x')) or ($lft-&gt;usesOneOf('y') and $rgt-&gt;usesOneOf('y')) or ($lft-&gt;usesOneOf('z') and $rgt-&gt;usesOneOf('z')));
+                  if ($op-&gt;{bop} eq '+' or $op-&gt;{bop} eq '-') {
+                    return 0 unless (($lft-&gt;usesOneOf('x','y','z') and $rgt-&gt;usesOneOf('x','y','z')) or ($op-&gt;{lop}{name} and $op-&gt;{rop}{isConstant}) or ($op-&gt;{rop}{name} and $op-&gt;{lop}{isConstant}));
                   };
-                  return (grouped($op->{lop}) and grouped($op->{rop}));
+                  return (grouped($op-&gt;{lop}) and grouped($op-&gt;{rop}));
                 };
                 Context("ImplicitEquation");
-                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-                Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
+                Context()-&gt;variables-&gt;are(x=&gt;'Real',y=&gt;'Real',z=&gt;'Real');
+                Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[-100,100]},y=&gt;{limits=&gt;[-100,100]},z=&gt;{limits=&gt;[-100,100]});
                 $st=ImplicitEquation("-5(x-5)+3(y-3)+2(z-8)=0");
-                $stev=$st->cmp(checker=>sub{
+                $stev=$st-&gt;cmp(checker=&gt;sub{
                   my ( $correct, $student, $ansHash ) = @_;
-                  #return 0 if $ansHash->{isPreview} || $correct != $student;
+                  #return 0 if $ansHash-&gt;{isPreview} || $correct != $student;
                   my $context = Context();
-                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
+                  my $left=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{lop});
+                  my $right=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{rop});
+                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left-&gt;{tree}));
                   return $correct == $student;
                 });
                 $ge=ImplicitEquation("-5x+3y+2z=0");
-                $geev=$ge->cmp(checker=>sub{
+                $geev=$ge-&gt;cmp(checker=&gt;sub{
                   my ( $correct, $student, $ansHash ) = @_;
-                  return 0 if $ansHash->{isPreview} || $correct != $student;
+                  return 0 if $ansHash-&gt;{isPreview} || $correct != $student;
                   my $context = Context();
-                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                  Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
-                  Value::Error("Your answer is not in general form") unless $right->isConstant;
+                  my $left=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{lop});
+                  my $right=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{rop});
+                  Value::Error("Your answer is not in general form") unless ($left-&gt;eval(x=&gt;0,y=&gt;0,z=&gt;0)==0);
+                  Value::Error("Your answer is not in general form") unless $right-&gt;isConstant;
                   return $correct == $student;
                 });
               </pg-code>
@@ -1358,39 +1358,39 @@
               <pg-code>
                 sub grouped {
                   my $op = shift;
-                  return 1 if ($op->{name} or $op->{isConstant});
-                  if ($op->{uop}) {return grouped($op->{op});};
+                  return 1 if ($op-&gt;{name} or $op-&gt;{isConstant});
+                  if ($op-&gt;{uop}) {return grouped($op-&gt;{op});};
                   my $context=Context();
-                  my $lft=$context->Package("Formula")->new($context,$op->{lop});
-                  my $rgt=$context->Package("Formula")->new($context,$op->{rop});
-                  return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
-                  if ($op->{bop} eq '+' or $op->{bop} eq '-') {
-                    return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
+                  my $lft=$context-&gt;Package("Formula")-&gt;new($context,$op-&gt;{lop});
+                  my $rgt=$context-&gt;Package("Formula")-&gt;new($context,$op-&gt;{rop});
+                  return 0 if (($lft-&gt;usesOneOf('x') and $rgt-&gt;usesOneOf('x')) or ($lft-&gt;usesOneOf('y') and $rgt-&gt;usesOneOf('y')) or ($lft-&gt;usesOneOf('z') and $rgt-&gt;usesOneOf('z')));
+                  if ($op-&gt;{bop} eq '+' or $op-&gt;{bop} eq '-') {
+                    return 0 unless (($lft-&gt;usesOneOf('x','y','z') and $rgt-&gt;usesOneOf('x','y','z')) or ($op-&gt;{lop}{name} and $op-&gt;{rop}{isConstant}) or ($op-&gt;{rop}{name} and $op-&gt;{lop}{isConstant}));
                   };
-                  return (grouped($op->{lop}) and grouped($op->{rop}));
+                  return (grouped($op-&gt;{lop}) and grouped($op-&gt;{rop}));
                 };
                 Context("ImplicitEquation");
-                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-                Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
+                Context()-&gt;variables-&gt;are(x=&gt;'Real',y=&gt;'Real',z=&gt;'Real');
+                Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[-100,100]},y=&gt;{limits=&gt;[-100,100]},z=&gt;{limits=&gt;[-100,100]});
                 $st=ImplicitEquation("3(x-5)+3(z-3)=0");
-                $stev=$st->cmp(checker=>sub{
+                $stev=$st-&gt;cmp(checker=&gt;sub{
                   my ( $correct, $student, $ansHash ) = @_;
-                  #return 0 if $ansHash->{isPreview} || $correct != $student;
+                  #return 0 if $ansHash-&gt;{isPreview} || $correct != $student;
                   my $context = Context();
-                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
+                  my $left=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{lop});
+                  my $right=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{rop});
+                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left-&gt;{tree}));
                   return $correct == $student;
                 });
                 $ge=ImplicitEquation("3x+3z=24");
-                $geev=$ge->cmp(checker=>sub{
+                $geev=$ge-&gt;cmp(checker=&gt;sub{
                   my ( $correct, $student, $ansHash ) = @_;
-                  return 0 if $ansHash->{isPreview} || $correct != $student;
+                  return 0 if $ansHash-&gt;{isPreview} || $correct != $student;
                   my $context = Context();
-                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                  Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
-                  Value::Error("Your answer is not in general form") unless $right->isConstant;
+                  my $left=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{lop});
+                  my $right=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{rop});
+                  Value::Error("Your answer is not in general form") unless ($left-&gt;eval(x=&gt;0,y=&gt;0,z=&gt;0)==0);
+                  Value::Error("Your answer is not in general form") unless $right-&gt;isConstant;
                   return $correct == $student;
                 });
               </pg-code>
@@ -1458,39 +1458,39 @@
               <pg-code>
                 sub grouped {
                   my $op = shift;
-                  return 1 if ($op->{name} or $op->{isConstant});
-                  if ($op->{uop}) {return grouped($op->{op});};
+                  return 1 if ($op-&gt;{name} or $op-&gt;{isConstant});
+                  if ($op-&gt;{uop}) {return grouped($op-&gt;{op});};
                   my $context=Context();
-                  my $lft=$context->Package("Formula")->new($context,$op->{lop});
-                  my $rgt=$context->Package("Formula")->new($context,$op->{rop});
-                  return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
-                  if ($op->{bop} eq '+' or $op->{bop} eq '-') {
-                    return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
+                  my $lft=$context-&gt;Package("Formula")-&gt;new($context,$op-&gt;{lop});
+                  my $rgt=$context-&gt;Package("Formula")-&gt;new($context,$op-&gt;{rop});
+                  return 0 if (($lft-&gt;usesOneOf('x') and $rgt-&gt;usesOneOf('x')) or ($lft-&gt;usesOneOf('y') and $rgt-&gt;usesOneOf('y')) or ($lft-&gt;usesOneOf('z') and $rgt-&gt;usesOneOf('z')));
+                  if ($op-&gt;{bop} eq '+' or $op-&gt;{bop} eq '-') {
+                    return 0 unless (($lft-&gt;usesOneOf('x','y','z') and $rgt-&gt;usesOneOf('x','y','z')) or ($op-&gt;{lop}{name} and $op-&gt;{rop}{isConstant}) or ($op-&gt;{rop}{name} and $op-&gt;{lop}{isConstant}));
                   };
-                  return (grouped($op->{lop}) and grouped($op->{rop}));
+                  return (grouped($op-&gt;{lop}) and grouped($op-&gt;{rop}));
                 };
                 Context("ImplicitEquation");
-                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-                Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
+                Context()-&gt;variables-&gt;are(x=&gt;'Real',y=&gt;'Real',z=&gt;'Real');
+                Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[-100,100]},y=&gt;{limits=&gt;[-100,100]},z=&gt;{limits=&gt;[-100,100]});
                 $st=ImplicitEquation("2(x-1)+(y-1)-3(z-1)=0");
-                $stev=$st->cmp(checker=>sub{
+                $stev=$st-&gt;cmp(checker=&gt;sub{
                   my ( $correct, $student, $ansHash ) = @_;
-                  #return 0 if $ansHash->{isPreview} || $correct != $student;
+                  #return 0 if $ansHash-&gt;{isPreview} || $correct != $student;
                   my $context = Context();
-                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
+                  my $left=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{lop});
+                  my $right=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{rop});
+                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left-&gt;{tree}));
                   return $correct == $student;
                 });
                 $ge=ImplicitEquation("2x+y-3z=0");
-                $geev=$ge->cmp(checker=>sub{
+                $geev=$ge-&gt;cmp(checker=&gt;sub{
                   my ( $correct, $student, $ansHash ) = @_;
-                  return 0 if $ansHash->{isPreview} || $correct != $student;
+                  return 0 if $ansHash-&gt;{isPreview} || $correct != $student;
                   my $context = Context();
-                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                  Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
-                  Value::Error("Your answer is not in general form") unless $right->isConstant;
+                  my $left=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{lop});
+                  my $right=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{rop});
+                  Value::Error("Your answer is not in general form") unless ($left-&gt;eval(x=&gt;0,y=&gt;0,z=&gt;0)==0);
+                  Value::Error("Your answer is not in general form") unless $right-&gt;isConstant;
                   return $correct == $student;
                 });
               </pg-code>
@@ -1557,39 +1557,39 @@
               <pg-code>
                 sub grouped {
                   my $op = shift;
-                  return 1 if ($op->{name} or $op->{isConstant});
-                  if ($op->{uop}) {return grouped($op->{op});};
+                  return 1 if ($op-&gt;{name} or $op-&gt;{isConstant});
+                  if ($op-&gt;{uop}) {return grouped($op-&gt;{op});};
                   my $context=Context();
-                  my $lft=$context->Package("Formula")->new($context,$op->{lop});
-                  my $rgt=$context->Package("Formula")->new($context,$op->{rop});
-                  return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
-                  if ($op->{bop} eq '+' or $op->{bop} eq '-') {
-                    return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
+                  my $lft=$context-&gt;Package("Formula")-&gt;new($context,$op-&gt;{lop});
+                  my $rgt=$context-&gt;Package("Formula")-&gt;new($context,$op-&gt;{rop});
+                  return 0 if (($lft-&gt;usesOneOf('x') and $rgt-&gt;usesOneOf('x')) or ($lft-&gt;usesOneOf('y') and $rgt-&gt;usesOneOf('y')) or ($lft-&gt;usesOneOf('z') and $rgt-&gt;usesOneOf('z')));
+                  if ($op-&gt;{bop} eq '+' or $op-&gt;{bop} eq '-') {
+                    return 0 unless (($lft-&gt;usesOneOf('x','y','z') and $rgt-&gt;usesOneOf('x','y','z')) or ($op-&gt;{lop}{name} and $op-&gt;{rop}{isConstant}) or ($op-&gt;{rop}{name} and $op-&gt;{lop}{isConstant}));
                   };
-                  return (grouped($op->{lop}) and grouped($op->{rop}));
+                  return (grouped($op-&gt;{lop}) and grouped($op-&gt;{rop}));
                 };
                 Context("ImplicitEquation");
-                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-                Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
+                Context()-&gt;variables-&gt;are(x=&gt;'Real',y=&gt;'Real',z=&gt;'Real');
+                Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[-100,100]},y=&gt;{limits=&gt;[-100,100]},z=&gt;{limits=&gt;[-100,100]});
                 $st=ImplicitEquation("4(x-5)-2(y-7)-2(z-3)=0");
-                $stev=$st->cmp(checker=>sub{
+                $stev=$st-&gt;cmp(checker=&gt;sub{
                   my ( $correct, $student, $ansHash ) = @_;
-                  #return 0 if $ansHash->{isPreview} || $correct != $student;
+                  #return 0 if $ansHash-&gt;{isPreview} || $correct != $student;
                   my $context = Context();
-                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
+                  my $left=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{lop});
+                  my $right=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{rop});
+                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left-&gt;{tree}));
                   return $correct == $student;
                 });
                 $ge=ImplicitEquation("4x-2y-2z=0");
-                $geev=$ge->cmp(checker=>sub{
+                $geev=$ge-&gt;cmp(checker=&gt;sub{
                   my ( $correct, $student, $ansHash ) = @_;
-                  return 0 if $ansHash->{isPreview} || $correct != $student;
+                  return 0 if $ansHash-&gt;{isPreview} || $correct != $student;
                   my $context = Context();
-                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                  Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
-                  Value::Error("Your answer is not in general form") unless $right->isConstant;
+                  my $left=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{lop});
+                  my $right=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{rop});
+                  Value::Error("Your answer is not in general form") unless ($left-&gt;eval(x=&gt;0,y=&gt;0,z=&gt;0)==0);
+                  Value::Error("Your answer is not in general form") unless $right-&gt;isConstant;
                   return $correct == $student;
                 });
               </pg-code>
@@ -1622,39 +1622,39 @@
               <pg-code>
                 sub grouped {
                   my $op = shift;
-                  return 1 if ($op->{name} or $op->{isConstant});
-                  if ($op->{uop}) {return grouped($op->{op});};
+                  return 1 if ($op-&gt;{name} or $op-&gt;{isConstant});
+                  if ($op-&gt;{uop}) {return grouped($op-&gt;{op});};
                   my $context=Context();
-                  my $lft=$context->Package("Formula")->new($context,$op->{lop});
-                  my $rgt=$context->Package("Formula")->new($context,$op->{rop});
-                  return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
-                  if ($op->{bop} eq '+' or $op->{bop} eq '-') {
-                    return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
+                  my $lft=$context-&gt;Package("Formula")-&gt;new($context,$op-&gt;{lop});
+                  my $rgt=$context-&gt;Package("Formula")-&gt;new($context,$op-&gt;{rop});
+                  return 0 if (($lft-&gt;usesOneOf('x') and $rgt-&gt;usesOneOf('x')) or ($lft-&gt;usesOneOf('y') and $rgt-&gt;usesOneOf('y')) or ($lft-&gt;usesOneOf('z') and $rgt-&gt;usesOneOf('z')));
+                  if ($op-&gt;{bop} eq '+' or $op-&gt;{bop} eq '-') {
+                    return 0 unless (($lft-&gt;usesOneOf('x','y','z') and $rgt-&gt;usesOneOf('x','y','z')) or ($op-&gt;{lop}{name} and $op-&gt;{rop}{isConstant}) or ($op-&gt;{rop}{name} and $op-&gt;{lop}{isConstant}));
                   };
-                  return (grouped($op->{lop}) and grouped($op->{rop}));
+                  return (grouped($op-&gt;{lop}) and grouped($op-&gt;{rop}));
                 };
                 Context("ImplicitEquation");
-                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-                Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
+                Context()-&gt;variables-&gt;are(x=&gt;'Real',y=&gt;'Real',z=&gt;'Real');
+                Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[-100,100]},y=&gt;{limits=&gt;[-100,100]},z=&gt;{limits=&gt;[-100,100]});
                 $st=ImplicitEquation("(x-5)+(y-7)+(z-3)=0");
-                $stev=$st->cmp(checker=>sub{
+                $stev=$st-&gt;cmp(checker=&gt;sub{
                   my ( $correct, $student, $ansHash ) = @_;
-                  #return 0 if $ansHash->{isPreview} || $correct != $student;
+                  #return 0 if $ansHash-&gt;{isPreview} || $correct != $student;
                   my $context = Context();
-                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
+                  my $left=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{lop});
+                  my $right=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{rop});
+                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left-&gt;{tree}));
                   return $correct == $student;
                 });
                 $ge=ImplicitEquation("x+y+z=15");
-                $geev=$ge->cmp(checker=>sub{
+                $geev=$ge-&gt;cmp(checker=&gt;sub{
                   my ( $correct, $student, $ansHash ) = @_;
-                  return 0 if $ansHash->{isPreview} || $correct != $student;
+                  return 0 if $ansHash-&gt;{isPreview} || $correct != $student;
                   my $context = Context();
-                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                  Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
-                  Value::Error("Your answer is not in general form") unless $right->isConstant;
+                  my $left=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{lop});
+                  my $right=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{rop});
+                  Value::Error("Your answer is not in general form") unless ($left-&gt;eval(x=&gt;0,y=&gt;0,z=&gt;0)==0);
+                  Value::Error("Your answer is not in general form") unless $right-&gt;isConstant;
                   return $correct == $student;
                 });
               </pg-code>
@@ -1687,39 +1687,39 @@
               <pg-code>
                 sub grouped {
                   my $op = shift;
-                  return 1 if ($op->{name} or $op->{isConstant});
-                  if ($op->{uop}) {return grouped($op->{op});};
+                  return 1 if ($op-&gt;{name} or $op-&gt;{isConstant});
+                  if ($op-&gt;{uop}) {return grouped($op-&gt;{op});};
                   my $context=Context();
-                  my $lft=$context->Package("Formula")->new($context,$op->{lop});
-                  my $rgt=$context->Package("Formula")->new($context,$op->{rop});
-                  return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
-                  if ($op->{bop} eq '+' or $op->{bop} eq '-') {
-                    return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
+                  my $lft=$context-&gt;Package("Formula")-&gt;new($context,$op-&gt;{lop});
+                  my $rgt=$context-&gt;Package("Formula")-&gt;new($context,$op-&gt;{rop});
+                  return 0 if (($lft-&gt;usesOneOf('x') and $rgt-&gt;usesOneOf('x')) or ($lft-&gt;usesOneOf('y') and $rgt-&gt;usesOneOf('y')) or ($lft-&gt;usesOneOf('z') and $rgt-&gt;usesOneOf('z')));
+                  if ($op-&gt;{bop} eq '+' or $op-&gt;{bop} eq '-') {
+                    return 0 unless (($lft-&gt;usesOneOf('x','y','z') and $rgt-&gt;usesOneOf('x','y','z')) or ($op-&gt;{lop}{name} and $op-&gt;{rop}{isConstant}) or ($op-&gt;{rop}{name} and $op-&gt;{lop}{isConstant}));
                   };
-                  return (grouped($op->{lop}) and grouped($op->{rop}));
+                  return (grouped($op-&gt;{lop}) and grouped($op-&gt;{rop}));
                 };
                 Context("ImplicitEquation");
-                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-                Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
+                Context()-&gt;variables-&gt;are(x=&gt;'Real',y=&gt;'Real',z=&gt;'Real');
+                Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[-100,100]},y=&gt;{limits=&gt;[-100,100]},z=&gt;{limits=&gt;[-100,100]});
                 $st=ImplicitEquation("4(x-4)+(y-1)+(z-1)=0");
-                $stev=$st->cmp(checker=>sub{
+                $stev=$st-&gt;cmp(checker=&gt;sub{
                   my ( $correct, $student, $ansHash ) = @_;
-                  #return 0 if $ansHash->{isPreview} || $correct != $student;
+                  #return 0 if $ansHash-&gt;{isPreview} || $correct != $student;
                   my $context = Context();
-                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
+                  my $left=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{lop});
+                  my $right=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{rop});
+                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left-&gt;{tree}));
                   return $correct == $student;
                 });
                 $ge=ImplicitEquation("4x+y+z=18");
-                $geev=$ge->cmp(checker=>sub{
+                $geev=$ge-&gt;cmp(checker=&gt;sub{
                   my ( $correct, $student, $ansHash ) = @_;
-                  return 0 if $ansHash->{isPreview} || $correct != $student;
+                  return 0 if $ansHash-&gt;{isPreview} || $correct != $student;
                   my $context = Context();
-                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                  Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
-                  Value::Error("Your answer is not in general form") unless $right->isConstant;
+                  my $left=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{lop});
+                  my $right=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{rop});
+                  Value::Error("Your answer is not in general form") unless ($left-&gt;eval(x=&gt;0,y=&gt;0,z=&gt;0)==0);
+                  Value::Error("Your answer is not in general form") unless $right-&gt;isConstant;
                   return $correct == $student;
                 });
               </pg-code>
@@ -1752,39 +1752,39 @@
               <pg-code>
                 sub grouped {
                   my $op = shift;
-                  return 1 if ($op->{name} or $op->{isConstant});
-                  if ($op->{uop}) {return grouped($op->{op});};
+                  return 1 if ($op-&gt;{name} or $op-&gt;{isConstant});
+                  if ($op-&gt;{uop}) {return grouped($op-&gt;{op});};
                   my $context=Context();
-                  my $lft=$context->Package("Formula")->new($context,$op->{lop});
-                  my $rgt=$context->Package("Formula")->new($context,$op->{rop});
-                  return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
-                  if ($op->{bop} eq '+' or $op->{bop} eq '-') {
-                    return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
+                  my $lft=$context-&gt;Package("Formula")-&gt;new($context,$op-&gt;{lop});
+                  my $rgt=$context-&gt;Package("Formula")-&gt;new($context,$op-&gt;{rop});
+                  return 0 if (($lft-&gt;usesOneOf('x') and $rgt-&gt;usesOneOf('x')) or ($lft-&gt;usesOneOf('y') and $rgt-&gt;usesOneOf('y')) or ($lft-&gt;usesOneOf('z') and $rgt-&gt;usesOneOf('z')));
+                  if ($op-&gt;{bop} eq '+' or $op-&gt;{bop} eq '-') {
+                    return 0 unless (($lft-&gt;usesOneOf('x','y','z') and $rgt-&gt;usesOneOf('x','y','z')) or ($op-&gt;{lop}{name} and $op-&gt;{rop}{isConstant}) or ($op-&gt;{rop}{name} and $op-&gt;{lop}{isConstant}));
                   };
-                  return (grouped($op->{lop}) and grouped($op->{rop}));
+                  return (grouped($op-&gt;{lop}) and grouped($op-&gt;{rop}));
                 };
                 Context("ImplicitEquation");
-                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-                Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
+                Context()-&gt;variables-&gt;are(x=&gt;'Real',y=&gt;'Real',z=&gt;'Real');
+                Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[-100,100]},y=&gt;{limits=&gt;[-100,100]},z=&gt;{limits=&gt;[-100,100]});
                 $st=ImplicitEquation("3(x+4)+8(y-7)-10(z-2)=0");
-                $stev=$st->cmp(checker=>sub{
+                $stev=$st-&gt;cmp(checker=&gt;sub{
                   my ( $correct, $student, $ansHash ) = @_;
-                  #return 0 if $ansHash->{isPreview} || $correct != $student;
+                  #return 0 if $ansHash-&gt;{isPreview} || $correct != $student;
                   my $context = Context();
-                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
+                  my $left=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{lop});
+                  my $right=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{rop});
+                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left-&gt;{tree}));
                   return $correct == $student;
                 });
                 $ge=ImplicitEquation("3x+8y-10z=24");
-                $geev=$ge->cmp(checker=>sub{
+                $geev=$ge-&gt;cmp(checker=&gt;sub{
                   my ( $correct, $student, $ansHash ) = @_;
-                  return 0 if $ansHash->{isPreview} || $correct != $student;
+                  return 0 if $ansHash-&gt;{isPreview} || $correct != $student;
                   my $context = Context();
-                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                  Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
-                  Value::Error("Your answer is not in general form") unless $right->isConstant;
+                  my $left=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{lop});
+                  my $right=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{rop});
+                  Value::Error("Your answer is not in general form") unless ($left-&gt;eval(x=&gt;0,y=&gt;0,z=&gt;0)==0);
+                  Value::Error("Your answer is not in general form") unless $right-&gt;isConstant;
                   return $correct == $student;
                 });
               </pg-code>
@@ -1818,39 +1818,39 @@
               <pg-code>
                 sub grouped {
                   my $op = shift;
-                  return 1 if ($op->{name} or $op->{isConstant});
-                  if ($op->{uop}) {return grouped($op->{op});};
+                  return 1 if ($op-&gt;{name} or $op-&gt;{isConstant});
+                  if ($op-&gt;{uop}) {return grouped($op-&gt;{op});};
                   my $context=Context();
-                  my $lft=$context->Package("Formula")->new($context,$op->{lop});
-                  my $rgt=$context->Package("Formula")->new($context,$op->{rop});
-                  return 0 if (($lft->usesOneOf('x') and $rgt->usesOneOf('x')) or ($lft->usesOneOf('y') and $rgt->usesOneOf('y')) or ($lft->usesOneOf('z') and $rgt->usesOneOf('z')));
-                  if ($op->{bop} eq '+' or $op->{bop} eq '-') {
-                    return 0 unless (($lft->usesOneOf('x','y','z') and $rgt->usesOneOf('x','y','z')) or ($op->{lop}{name} and $op->{rop}{isConstant}) or ($op->{rop}{name} and $op->{lop}{isConstant}));
+                  my $lft=$context-&gt;Package("Formula")-&gt;new($context,$op-&gt;{lop});
+                  my $rgt=$context-&gt;Package("Formula")-&gt;new($context,$op-&gt;{rop});
+                  return 0 if (($lft-&gt;usesOneOf('x') and $rgt-&gt;usesOneOf('x')) or ($lft-&gt;usesOneOf('y') and $rgt-&gt;usesOneOf('y')) or ($lft-&gt;usesOneOf('z') and $rgt-&gt;usesOneOf('z')));
+                  if ($op-&gt;{bop} eq '+' or $op-&gt;{bop} eq '-') {
+                    return 0 unless (($lft-&gt;usesOneOf('x','y','z') and $rgt-&gt;usesOneOf('x','y','z')) or ($op-&gt;{lop}{name} and $op-&gt;{rop}{isConstant}) or ($op-&gt;{rop}{name} and $op-&gt;{lop}{isConstant}));
                   };
-                  return (grouped($op->{lop}) and grouped($op->{rop}));
+                  return (grouped($op-&gt;{lop}) and grouped($op-&gt;{rop}));
                 };
                 Context("ImplicitEquation");
-                Context()->variables->are(x=>'Real',y=>'Real',z=>'Real');
-                Context()->variables->set(x=>{limits=>[-100,100]},y=>{limits=>[-100,100]},z=>{limits=>[-100,100]});
+                Context()-&gt;variables-&gt;are(x=&gt;'Real',y=&gt;'Real',z=&gt;'Real');
+                Context()-&gt;variables-&gt;set(x=&gt;{limits=&gt;[-100,100]},y=&gt;{limits=&gt;[-100,100]},z=&gt;{limits=&gt;[-100,100]});
                 $st=ImplicitEquation("x-1=0");
-                $stev=$st->cmp(checker=>sub{
+                $stev=$st-&gt;cmp(checker=&gt;sub{
                   my ( $correct, $student, $ansHash ) = @_;
-                  #return 0 if $ansHash->{isPreview} || $correct != $student;
+                  #return 0 if $ansHash-&gt;{isPreview} || $correct != $student;
                   my $context = Context();
-                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left->{tree}));
+                  my $left=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{lop});
+                  my $right=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{rop});
+                  Value::Error("Your answer is not in standard form") unless ($right == 0 and grouped($left-&gt;{tree}));
                   return $correct == $student;
                 });
                 $ge=ImplicitEquation("x=1");
-                $geev=$ge->cmp(checker=>sub{
+                $geev=$ge-&gt;cmp(checker=&gt;sub{
                   my ( $correct, $student, $ansHash ) = @_;
-                  return 0 if $ansHash->{isPreview} || $correct != $student;
+                  return 0 if $ansHash-&gt;{isPreview} || $correct != $student;
                   my $context = Context();
-                  my $left=$context->Package("Formula")->new($context,$student->{tree}{lop});
-                  my $right=$context->Package("Formula")->new($context,$student->{tree}{rop});
-                  Value::Error("Your answer is not in general form") unless ($left->eval(x=>0,y=>0,z=>0)==0);
-                  Value::Error("Your answer is not in general form") unless $right->isConstant;
+                  my $left=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{lop});
+                  my $right=$context-&gt;Package("Formula")-&gt;new($context,$student-&gt;{tree}{rop});
+                  Value::Error("Your answer is not in general form") unless ($left-&gt;eval(x=&gt;0,y=&gt;0,z=&gt;0)==0);
+                  Value::Error("Your answer is not in general form") unless $right-&gt;isConstant;
                   return $correct == $student;
                 });
               </pg-code>
@@ -1920,14 +1920,14 @@
           <webwork xml:id="webwork-ex-vectors-planes-intersection-2">
               <pg-code>
                 Context("Vector");
-                Context()->variables->are(t=>"Real");
-                $v=Compute("(1,3,3.5)+t&lt;20,2,-26>");
-                $vev=$v->cmp(checker=>sub{my($c,$st,$aH)=@_;
-                  $ds=Formula($st)->D('t')->reduce;
-                  if($ds->isConstant){$ds=Vector("$ds");}else{return 0;};
-                  $dc=$c->D('t')->reduce;$dc=Vector("$dc");$par=$ds->isParallel($dc);
-                  $sp=Formula($st)->eval(t=>0);$cp=$c->eval(t=>0);
-                  $tch=(($sp==$cp) or $dc->isParallel($sp-$cp));
+                Context()-&gt;variables-&gt;are(t=&gt;"Real");
+                $v=Compute("(1,3,3.5)+t&lt;20,2,-26&gt;");
+                $vev=$v-&gt;cmp(checker=&gt;sub{my($c,$st,$aH)=@_;
+                  $ds=Formula($st)-&gt;D('t')-&gt;reduce;
+                  if($ds-&gt;isConstant){$ds=Vector("$ds");}else{return 0;};
+                  $dc=$c-&gt;D('t')-&gt;reduce;$dc=Vector("$dc");$par=$ds-&gt;isParallel($dc);
+                  $sp=Formula($st)-&gt;eval(t=&gt;0);$cp=$c-&gt;eval(t=&gt;0);
+                  $tch=(($sp==$cp) or $dc-&gt;isParallel($sp-$cp));
                   return ($par and $tch);
                 });
               </pg-code>
@@ -1982,7 +1982,7 @@
           <webwork xml:id="webwork-ex-vectors-planes-intersect-line-2">
               <pg-code>
                 Context("Point");
-                Context()->strings->add('the entire line'=>{});
+                Context()-&gt;strings-&gt;add('the entire line'=&gt;{});
                 $point=Point("(3,1,1)");
               </pg-code>
 
@@ -2028,7 +2028,7 @@
           <webwork xml:id="webwork-ex-vectors-planes-intersect-line-4">
               <pg-code>
                 Context("Point");
-                Context()->strings->add('the entire line'=>{});
+                Context()-&gt;strings-&gt;add('the entire line'=&gt;{});
                 $point=Compute('the entire line');
               </pg-code>
 
@@ -2082,7 +2082,7 @@
         <exercise label="ex-vectors-planes-distance-2">
           <webwork xml:id="webwork-ex-vectors-planes-distance-2">
               <pg-code>
-                Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+                Context()-&gt;flags-&gt;set(reduceConstants=&gt;0,reduceConstantFunctions=&gt;0);
                 $distance=Formula("8/sqrt(21)");
               </pg-code>
 
@@ -2127,7 +2127,7 @@
         <exercise label="ex-vectors-planes-distance-4">
           <webwork xml:id="webwork-ex-vectors-planes-distance-4">
               <pg-code>
-                Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+                Context()-&gt;flags-&gt;set(reduceConstants=&gt;0,reduceConstantFunctions=&gt;0);
                 $distance=Formula("3");
               </pg-code>
 

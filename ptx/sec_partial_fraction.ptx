@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section xml:id="sec_partial_fraction">
+<section xml:id="sec_partial_fraction" label="sec_partial_fraction">
   <title>Partial Fraction Decomposition</title>
   <p>
     In this section we investigate the antiderivatives of rational functions.
@@ -646,7 +646,7 @@
       <exercise label="TaC-partial-fractions-1">
         <webwork xml:id="webwork-TaC-partial-fractions-1">
           <pg-code>
-            Context()->strings->add('rational'=>{});
+            Context()-&gt;strings-&gt;add('rational'=&gt;{});
             $rational = Compute("rational");
           </pg-code>
           <statement>
@@ -684,30 +684,30 @@
             <pg-code>
               $r = non_zero_random(-9,9,1);
               if($envir{problemSeed}==1){$r=-3};
-              Context("Form")->variables->add(s=>"Real",t=>"Real",A=>"Real",B=>"Real",C=>"Real");
-              Context()->reductions->set("(-x)+y" => 1);
-              $f = Formula("1/(x^2 + $r x)")->reduce;
-              $template = Formula("s/x + t/(x+$r)")->reduce,
+              Context("Form")-&gt;variables-&gt;add(s=&gt;"Real",t=&gt;"Real",A=&gt;"Real",B=&gt;"Real",C=&gt;"Real");
+              Context()-&gt;reductions-&gt;set("(-x)+y" =&gt; 1);
+              $f = Formula("1/(x^2 + $r x)")-&gt;reduce;
+              $template = Formula("s/x + t/(x+$r)")-&gt;reduce,
               @answer = ();
               for my $s (A..C) {
                 for my $t (A..C) {
                   if ($s ne $t) {
                     for my $ss ("","-") {
                       for my $st ("","-") {
-                        push(@answer,$template->substitute(s=>Formula("$ss $s"),t=>Formula("$st $t"))->reduce);
+                        push(@answer,$template-&gt;substitute(s=&gt;Formula("$ss $s"),t=&gt;Formula("$st $t"))-&gt;reduce);
                       }
                     }
                   }
                 }
               }
-              $evaluator = $answer[0]->cmp(
-                bypass_equivalence_test => 1,
-                checker=> sub {
+              $evaluator = $answer[0]-&gt;cmp(
+                bypass_equivalence_test =&gt; 1,
+                checker=&gt; sub {
                 my ($correct,$student,$ansHash) = @_;
                 for my $ans (@answer) {
-                  if ($ans->cmp->evaluate($student)->{score} == 1) {return 1};
+                  if ($ans-&gt;cmp-&gt;evaluate($student)-&gt;{score} == 1) {return 1};
                 }
-                Value->Error("Your answer should use paramaters A, B, and/or C.") unless ($student->usesOneOf(A..C));
+                Value-&gt;Error("Your answer should use paramaters A, B, and/or C.") unless ($student-&gt;usesOneOf(A..C));
                 return 0;
               });
             </pg-code>
@@ -732,30 +732,30 @@
               $r = random(1,9,1);
               ($a,$b) = (-9..-1,1..9)[NchooseK(18,2)];
               if($envir{problemSeed}==1){$r=3;$a=-1;$b=7};
-              Context("Form")->variables->add(s=>"Real",t=>"Real",A=>"Real",B=>"Real",C=>"Real");
-              Context()->reductions->set("(-x)+y" => 1);
-              $f = Formula("($a x+$b)/(x^2 - $r^2)")->reduce;
-              $template = Formula("s/(x-$r) + t/(x+$r)")->reduce,
+              Context("Form")-&gt;variables-&gt;add(s=&gt;"Real",t=&gt;"Real",A=&gt;"Real",B=&gt;"Real",C=&gt;"Real");
+              Context()-&gt;reductions-&gt;set("(-x)+y" =&gt; 1);
+              $f = Formula("($a x+$b)/(x^2 - $r^2)")-&gt;reduce;
+              $template = Formula("s/(x-$r) + t/(x+$r)")-&gt;reduce,
               @answer = ();
               for my $s (A..C) {
                 for my $t (A..C) {
                   if ($s ne $t) {
                     for my $ss ("","-") {
                       for my $st ("","-") {
-                        push(@answer,$template->substitute(s=>Formula("$ss $s"),t=>Formula("$st $t"))->reduce);
+                        push(@answer,$template-&gt;substitute(s=&gt;Formula("$ss $s"),t=&gt;Formula("$st $t"))-&gt;reduce);
                       }
                     }
                   }
                 }
               }
-              $evaluator = $answer[0]->cmp(
-                bypass_equivalence_test => 1,
-                checker=> sub {
+              $evaluator = $answer[0]-&gt;cmp(
+                bypass_equivalence_test =&gt; 1,
+                checker=&gt; sub {
                 my ($correct,$student,$ansHash) = @_;
                 for my $ans (@answer) {
-                  if ($ans->cmp->evaluate($student)->{score} == 1) {return 1};
+                  if ($ans-&gt;cmp-&gt;evaluate($student)-&gt;{score} == 1) {return 1};
                 }
-                Value->Error("Your answer should use paramaters A, B, and/or C.") unless ($student->usesOneOf(A..C));
+                Value-&gt;Error("Your answer should use paramaters A, B, and/or C.") unless ($student-&gt;usesOneOf(A..C));
                 return 0;
               });
             </pg-code>
@@ -780,9 +780,9 @@
               $r = list_random(2,3,5,6,7,10,11,13,14,15);
               $b = non_zero_random(-9,9,1);
               if($envir{problemSeed}==1){$r=7;$b=-3};
-              Context("Form")->variables->add(s=>"Real",t=>"Real",A=>"Real",B=>"Real",C=>"Real");
-              Context()->reductions->set("(-x)+y" => 1);
-              $f = Formula("(x+$b)/(x^2 - $r)")->reduce;
+              Context("Form")-&gt;variables-&gt;add(s=&gt;"Real",t=&gt;"Real",A=&gt;"Real",B=&gt;"Real",C=&gt;"Real");
+              Context()-&gt;reductions-&gt;set("(-x)+y" =&gt; 1);
+              $f = Formula("(x+$b)/(x^2 - $r)")-&gt;reduce;
               $template = Formula("s/(x-sqrt($r)) + t/(x+sqrt($r))");
               @answer = ();
               for my $s (A..C) {
@@ -790,20 +790,20 @@
                   if ($s ne $t) {
                     for my $ss ("","-") {
                       for my $st ("","-") {
-                        push(@answer,$template->substitute(s=>Formula("$ss $s"),t=>Formula("$st $t")));
+                        push(@answer,$template-&gt;substitute(s=&gt;Formula("$ss $s"),t=&gt;Formula("$st $t")));
                       }
                     }
                   }
                 }
               }
-              $evaluator = $answer[0]->cmp(
-                bypass_equivalence_test => 1,
-                checker=> sub {
+              $evaluator = $answer[0]-&gt;cmp(
+                bypass_equivalence_test =&gt; 1,
+                checker=&gt; sub {
                 my ($correct,$student,$ansHash) = @_;
                 for my $ans (@answer) {
-                  if ($ans->cmp->evaluate($student)->{score} == 1) {return 1};
+                  if ($ans-&gt;cmp-&gt;evaluate($student)-&gt;{score} == 1) {return 1};
                 }
-                Value->Error("Your answer should use paramaters A, B, and/or C.") unless ($student->usesOneOf(A..C));
+                Value-&gt;Error("Your answer should use paramaters A, B, and/or C.") unless ($student-&gt;usesOneOf(A..C));
                 return 0;
               });
             </pg-code>
@@ -828,10 +828,10 @@
               $r = random(2,9,1);
               ($a,$b) = (1..9)[NchooseK(9,2)];
               if($envir{problemSeed}==1){$r=7;$a=2;$b=5};
-              Context("Form")->variables->add(r=>"Real",s=>"Real",t=>"Real",A=>"Real",B=>"Real",C=>"Real");
-              Context()->reductions->set("(-x)+y" => 1);
-              $f = Formula("($a x + $b)/(x^3 + $r x)")->reduce;
-              $template = Formula("r/x + (s x + t)/(x^2 + $r)")->reduce,
+              Context("Form")-&gt;variables-&gt;add(r=&gt;"Real",s=&gt;"Real",t=&gt;"Real",A=&gt;"Real",B=&gt;"Real",C=&gt;"Real");
+              Context()-&gt;reductions-&gt;set("(-x)+y" =&gt; 1);
+              $f = Formula("($a x + $b)/(x^3 + $r x)")-&gt;reduce;
+              $template = Formula("r/x + (s x + t)/(x^2 + $r)")-&gt;reduce,
               @answer = ();
               for my $r (A..C) {
                 for my $s (A..C) {
@@ -842,21 +842,21 @@
                     for my $sr ("","-") {
                       for my $ss ("","-") {
                         for my $st ("","-") {
-                          push(@answer,$template->substitute(r=>Formula("$sr $r"), s=>Formula("$ss $s"),t=>Formula("$st $t"))->reduce);
+                          push(@answer,$template-&gt;substitute(r=&gt;Formula("$sr $r"), s=&gt;Formula("$ss $s"),t=&gt;Formula("$st $t"))-&gt;reduce);
                         }
                       }
                     }
                   }
                 }
               }
-              $evaluator = $answer[0]->cmp(
-                bypass_equivalence_test => 1,
-                checker=> sub {
+              $evaluator = $answer[0]-&gt;cmp(
+                bypass_equivalence_test =&gt; 1,
+                checker=&gt; sub {
                 my ($correct,$student,$ansHash) = @_;
                 for my $ans (@answer) {
-                  if ($ans->cmp->evaluate($student)->{score} == 1) {return 1};
+                  if ($ans-&gt;cmp-&gt;evaluate($student)-&gt;{score} == 1) {return 1};
                 }
-                Value->Error("Your answer should use paramaters A, B, and/or C.") unless ($student->usesOneOf(A..C));
+                Value-&gt;Error("Your answer should use paramaters A, B, and/or C.") unless ($student-&gt;usesOneOf(A..C));
                 return 0;
               });
             </pg-code>
@@ -892,9 +892,9 @@
               ($r,$s) = num_sort((-9..-1,1..9)[NchooseK(18,2)]);
               ($A,$B) = (1..9)[NchooseK(9,2)];
               if($envir{problemSeed}==1){$r=-5;$s=2;$A=4;$B=3;};
-              $f = Formula("(($A+$B)x-($A*$s+$B*$r))/(x^2 - ($r+$s)x + $r*$s)")->reduce;
-              $F = FormulaUpToConstant("$A ln(abs(x-$r)) + $B ln(abs(x-$s))")->reduce;
-              $F->{test_at} = [[$r-0.25],[$r+0.25],[$s-0.25],[$s+0.25]];
+              $f = Formula("(($A+$B)x-($A*$s+$B*$r))/(x^2 - ($r+$s)x + $r*$s)")-&gt;reduce;
+              $F = FormulaUpToConstant("$A ln(abs(x-$r)) + $B ln(abs(x-$s))")-&gt;reduce;
+              $F-&gt;{test_at} = [[$r-0.25],[$r+0.25],[$s-0.25],[$s+0.25]];
             </pg-code>
             <statement>
               <p>
@@ -914,9 +914,9 @@
               ($A,$B) = (-9..-1,1..9)[NchooseK(18,2)];
               if($envir{problemSeed}==1){$r=-1;$A=9;$B=-2;};
               $s = 0;
-              $f = Formula("(($A+$B)x-($A*$s+$B*$r))/(x^2 - ($r+$s)x + $r*$s)")->reduce;
-              $F = FormulaUpToConstant("$A ln(abs(x-$r)) + $B ln(abs(x-$s))")->reduce;
-              $F->{test_at} = [[$r-0.25],[$r+0.25],[$s-0.25],[$s+0.25]];
+              $f = Formula("(($A+$B)x-($A*$s+$B*$r))/(x^2 - ($r+$s)x + $r*$s)")-&gt;reduce;
+              $F = FormulaUpToConstant("$A ln(abs(x-$r)) + $B ln(abs(x-$s))")-&gt;reduce;
+              $F-&gt;{test_at} = [[$r-0.25],[$r+0.25],[$s-0.25],[$s+0.25]];
             </pg-code>
             <statement>
               <p>
@@ -938,13 +938,13 @@
               if($envir{problemSeed}==1){$r=-2;$c=3;$A=1;};
               $B = -$A;
               $s = -$r;
-              Context()->noreduce('(-x)/y');
-              $f = Formula("($A($r-$s))/($c x^2 - $c*($r+$s)x + $c*$r*$s)")->reduce;
+              Context()-&gt;noreduce('(-x)/y');
+              $f = Formula("($A($r-$s))/($c x^2 - $c*($r+$s)x + $c*$r*$s)")-&gt;reduce;
               Context("Fraction");
               $Afrac = Fraction($A,$c);
               $Bfrac = Fraction($B,$c);
-              $F = FormulaUpToConstant("$Afrac ln(abs(x-$r)) + $Bfrac ln(abs(x-$s))")->reduce;
-              $F->{test_at} = [[$r-0.25],[$r+0.25],[$s-0.25],[$s+0.25]];
+              $F = FormulaUpToConstant("$Afrac ln(abs(x-$r)) + $Bfrac ln(abs(x-$s))")-&gt;reduce;
+              $F-&gt;{test_at} = [[$r-0.25],[$r+0.25],[$s-0.25],[$s+0.25]];
             </pg-code>
             <statement>
               <p>
@@ -963,10 +963,10 @@
               $r = non_zero_random(-9,9,1);
               $m = list_random(-9..-2,2..9);
               if($envir{problemSeed}==1){$r=-1;$m=3;};
-              $f = Formula("((2*$m)x+(1-$m*$r))/($m x^2 + (1 - $r*$m)x - $r)")->reduce;
+              $f = Formula("((2*$m)x+(1-$m*$r))/($m x^2 + (1 - $r*$m)x - $r)")-&gt;reduce;
               Context("Fraction");
-              $F = FormulaUpToConstant("ln(abs(x-$r)) + ln(abs($m x + 1))")->reduce;
-              $F->{test_at} = [[$r-0.25],[$r+0.25],[$s-0.25],[$s+0.25]];
+              $F = FormulaUpToConstant("ln(abs(x-$r)) + ln(abs($m x + 1))")-&gt;reduce;
+              $F-&gt;{test_at} = [[$r-0.25],[$r+0.25],[$s-0.25],[$s+0.25]];
             </pg-code>
             <statement>
               <p>
@@ -985,10 +985,10 @@
               $r = non_zero_random(-9,9,1);
               ($A,$B) = (1..9)[NchooseK(9,2)];
               if($envir{problemSeed}==1){$r=-5;$A=1;$B=2;};
-              $f = Formula("($A x + ($B-$A*$r))/(x-$r)^2")->reduce;
+              $f = Formula("($A x + ($B-$A*$r))/(x-$r)^2")-&gt;reduce;
               Context("Fraction");
-              $F = FormulaUpToConstant("$A ln(abs(x-$r)) - $B/(x - $r)")->reduce;
-              $F->{test_at} = [[$r-0.25],[$r+0.25]];
+              $F = FormulaUpToConstant("$A ln(abs(x-$r)) - $B/(x - $r)")-&gt;reduce;
+              $F-&gt;{test_at} = [[$r-0.25],[$r+0.25]];
             </pg-code>
             <statement>
               <p>
@@ -1007,11 +1007,11 @@
               $r = non_zero_random(-9,9,1);
               ($A,$B) = (1..9)[NchooseK(9,2)];
               if($envir{problemSeed}==1){$r=-8;$A=-3;$B=4;};
-              Context()->noreduce('(-x)-y');
-              $f = Formula("($A x + ($B-$A*$r))/(x-$r)^2")->reduce;
+              Context()-&gt;noreduce('(-x)-y');
+              $f = Formula("($A x + ($B-$A*$r))/(x-$r)^2")-&gt;reduce;
               Context("Fraction");
-              $F = FormulaUpToConstant("$A ln(abs(x-$r)) - $B/(x - $r)")->reduce;
-              $F->{test_at} = [[$r-0.25],[$r+0.25]];
+              $F = FormulaUpToConstant("$A ln(abs(x-$r)) - $B/(x - $r)")-&gt;reduce;
+              $F-&gt;{test_at} = [[$r-0.25],[$r+0.25]];
             </pg-code>
             <statement>
               <p>
@@ -1030,10 +1030,10 @@
               $r = non_zero_random(-9,9,1);
               ($A,$B,$C) = (1..9)[NchooseK(9,3)];
               if($envir{problemSeed}==1){$r=-1;$A=7;$B=2;$C=5};
-              $f = Formula("(($A+$B)x^2 + (-2*$A*$r-$B*$r-$C)x + $A*($r)^2)/(x (x-$r)^2)")->reduce;
+              $f = Formula("(($A+$B)x^2 + (-2*$A*$r-$B*$r-$C)x + $A*($r)^2)/(x (x-$r)^2)")-&gt;reduce;
               Context("Fraction");
-              $F = FormulaUpToConstant("$A ln(abs(x)) + $B ln(abs(x-$r)) + $C/(x-$r)")->reduce;
-              $F->{test_at} = [[-0.25],[0.25],[$r-0.25],[$r+0.25]];
+              $F = FormulaUpToConstant("$A ln(abs(x)) + $B ln(abs(x-$r)) + $C/(x-$r)")-&gt;reduce;
+              $F-&gt;{test_at} = [[-0.25],[0.25],[$r-0.25],[$r+0.25]];
             </pg-code>
             <statement>
               <p>
@@ -1053,11 +1053,11 @@
               ($m,$n) = (-9..-2,2..9)[NchooseK(16,2)];
               ($A,$B,$C) = (-9..-1,1..9)[NchooseK(18,3)];
               if($envir{problemSeed}==1){$r=1;$s=-3;$m=-2;$n=3;$A=5;$B=2;$C=-1};
-              Context()->noreduce('(-x)-y','(-x)+y');
-              $f = Formula("(($A+$B*$m+$C*$m)x^2 + ($A*$m*(-$r-$s)+$B*($n-$m*$s)+$C*($n-$r*$m))x + ($A*$m*$r*$s-$B*$n*$s-$C*$r*$n))/((x-$r)(x-$s)($n + $m x))")->reduce;
+              Context()-&gt;noreduce('(-x)-y','(-x)+y');
+              $f = Formula("(($A+$B*$m+$C*$m)x^2 + ($A*$m*(-$r-$s)+$B*($n-$m*$s)+$C*($n-$r*$m))x + ($A*$m*$r*$s-$B*$n*$s-$C*$r*$n))/((x-$r)(x-$s)($n + $m x))")-&gt;reduce;
               Context("Fraction");
-              $F = FormulaUpToConstant("$A ln(abs($m*x+$n)) + $B ln(abs(x-$r)) + $C ln(abs(x-$s))")->reduce;
-              $F->{test_at} = [[$s-0.1],[$s+0.1],[$r-0.1],[$r+0.1],[-$n/$m+0.1],[-$n/$m-0.1]];
+              $F = FormulaUpToConstant("$A ln(abs($m*x+$n)) + $B ln(abs(x-$r)) + $C ln(abs(x-$s))")-&gt;reduce;
+              $F-&gt;{test_at} = [[$s-0.1],[$s+0.1],[$r-0.1],[$r+0.1],[-$n/$m+0.1],[-$n/$m-0.1]];
             </pg-code>
             <statement>
               <p>
@@ -1083,13 +1083,13 @@
               $s = ($pm1 - $B*$r)/$A;
               $t = -$C*$r*$s/$pm1;
               if($envir{problemSeed}==1){$m=5;$n=3;$p=7;$r=-1;$s=-1;$t=3;$A=-1;$B=2;$C=3};
-              $f = Formula("(($A*$n*$p+$B*$m*$p+$C*$m*$n)x^2 + ($A*($n*$t+$p*$s)+$B*($m*$t+$p*$r)+$C*($m*$s+$n*$r))x + ($A*$s*$t+$B*$r*$t+$C*$r*$s))/(($p x+$t)($m x+$r)($n x+$s))")->reduce;
+              $f = Formula("(($A*$n*$p+$B*$m*$p+$C*$m*$n)x^2 + ($A*($n*$t+$p*$s)+$B*($m*$t+$p*$r)+$C*($m*$s+$n*$r))x + ($A*$s*$t+$B*$r*$t+$C*$r*$s))/(($p x+$t)($m x+$r)($n x+$s))")-&gt;reduce;
               Context("Fraction");
               $a =Fraction($A,$m);
               $b =Fraction($B,$n);
               $c =Fraction($C,$p);
-              $F = FormulaUpToConstant("$a ln(abs($m x+$r)) + $b ln(abs($n x+$s)) + $c/($p x+$t)")->reduce;
-              $F->{test_at} = [[-$r/$m-0.1],[-$r/$m+0.1],[-$s/$n-0.1],[-$s/$n+0.1],[-$t/$p-0.1],[-$t/$p+0.1]];
+              $F = FormulaUpToConstant("$a ln(abs($m x+$r)) + $b ln(abs($n x+$s)) + $c/($p x+$t)")-&gt;reduce;
+              $F-&gt;{test_at} = [[-$r/$m-0.1],[-$r/$m+0.1],[-$s/$n-0.1],[-$s/$n+0.1],[-$t/$p-0.1],[-$t/$p+0.1]];
             </pg-code>
             <statement>
               <p>
@@ -1108,10 +1108,10 @@
               ($r,$s) = (-9..-1,1..9)[NchooseK(18,2)];
               ($A,$B) = (-3..-1,1..3)[NchooseK(6,2)];
               if($envir{problemSeed}==1){$r=1;$s=-2;$A=1;$B=-1;};
-              $f = Formula("(x^2+($A+$B-$r-$s)x+($r*$s-$A*$s-$B*$r))/(x^2-($r+$s)x+$r*$s)")->reduce;
+              $f = Formula("(x^2+($A+$B-$r-$s)x+($r*$s-$A*$s-$B*$r))/(x^2-($r+$s)x+$r*$s)")-&gt;reduce;
               Context("Fraction");
-              $F = FormulaUpToConstant("x + $A ln(abs(x-$r)) + $B ln(abs(x-$s))")->reduce;
-              $F->{test_at} = [[$r-0.25],[$r+0.25],[$s-0.25],[$s+0.25]];
+              $F = FormulaUpToConstant("x + $A ln(abs(x-$r)) + $B ln(abs(x-$s))")-&gt;reduce;
+              $F-&gt;{test_at} = [[$r-0.25],[$r+0.25],[$s-0.25],[$s+0.25]];
             </pg-code>
             <statement>
               <p>
@@ -1129,12 +1129,12 @@
             <pg-code>
               ($r,$s) = (-9..-1,1..9)[NchooseK(18,2)];
               if($envir{problemSeed}==1){$r=-4;$s=5;};
-              $f = Formula("x^3/(x^2-($r+$s)x+$r*$s)")->reduce;
+              $f = Formula("x^3/(x^2-($r+$s)x+$r*$s)")-&gt;reduce;
               Context("Fraction");
               $A = Fraction($r*($r**2+$s**2+$r*$s) - ($r+$s)*$r*$s, $r-$s);
               $B = Fraction(-$s*($r**2+$s**2+$r*$s) + ($r+$s)*$r*$s, $r-$s);
-              $F = FormulaUpToConstant("1/2 x^2 + ($r+$s) x + $A ln(abs(x-$r)) + $B ln(abs(x-$s))")->reduce;
-              $F->{test_at} = [[$r-0.25],[$r+0.25],[$s-0.25],[$s+0.25]];
+              $F = FormulaUpToConstant("1/2 x^2 + ($r+$s) x + $A ln(abs(x-$r)) + $B ln(abs(x-$s))")-&gt;reduce;
+              $F-&gt;{test_at} = [[$r-0.25],[$r+0.25],[$s-0.25],[$s+0.25]];
             </pg-code>
             <statement>
               <p>
@@ -1154,9 +1154,9 @@
               $k = random(1,5,1);
               $c = random(2,4,1);
               if($envir{problemSeed}==1){$h=1;$k=2;$c=2;};
-              $f = Formula("($c x^2+(-2*$h*$c) x+$c*(($h)^2+$k))/(x^2+(-2*$h) x+(($h)^2+$k))")->reduce;
+              $f = Formula("($c x^2+(-2*$h*$c) x+$c*(($h)^2+$k))/(x^2+(-2*$h) x+(($h)^2+$k))")-&gt;reduce;
               Context("Fraction");
-              $F = FormulaUpToConstant("$c x")->reduce;
+              $F = FormulaUpToConstant("$c x")-&gt;reduce;
             </pg-code>
             <statement>
               <p>
@@ -1175,14 +1175,14 @@
               $h = non_zero_random(-4,4,1);
               $k = list_random(2,3,5);
               if($envir{problemSeed}==1){$h=-1;$k=2;};
-              $f = Formula("1/(x^3+(-2*$h) x^2+(($h)^2+$k)x)")->reduce;
+              $f = Formula("1/(x^3+(-2*$h) x^2+(($h)^2+$k)x)")-&gt;reduce;
               Context("Fraction");
-              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
               $A = Fraction(1,($h)**2+$k);
               $B = -$A/2;
               $C = 2*$h*($A+$B);
-              $F = FormulaUpToConstant("$A ln(abs(x)) + $B ln(x^2+(-2*$h) x+(($h)^2+$k)) + $C/sqrt($k) atan((x-$h)/sqrt($k))")->reduce;
-              $F->{test_at} = [[-0.25],[0.25]];
+              $F = FormulaUpToConstant("$A ln(abs(x)) + $B ln(x^2+(-2*$h) x+(($h)^2+$k)) + $C/sqrt($k) atan((x-$h)/sqrt($k))")-&gt;reduce;
+              $F-&gt;{test_at} = [[-0.25],[0.25]];
             </pg-code>
             <statement>
               <p>
@@ -1202,12 +1202,12 @@
               $k = list_random(2,3,5,6);
               ($m,$b) = (-9..-1,1..9)[NchooseK(18,2)];
               if($envir{problemSeed}==1){$h=-2;$k=6;$m=-3;$b=-5;};
-              $f = Formula("(x^2+(-2*$h+$m) x+(($h)^2+$k+$b))/(x^2+(-2*$h) x+(($h)^2+$k))")->reduce;
+              $f = Formula("(x^2+(-2*$h+$m) x+(($h)^2+$k+$b))/(x^2+(-2*$h) x+(($h)^2+$k))")-&gt;reduce;
               Context("Fraction");
-              Context()->flags->set(reduceConstantFunctions=>0);
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
               $A = Fraction($m,2);
               $B = $b + 2*$A*$h;
-              $F = FormulaUpToConstant("x + $A ln(x^2+(-2*$h) x+(($h)^2+$k)) + $B/sqrt($k) atan((x-$h)/sqrt($k))")->reduce;
+              $F = FormulaUpToConstant("x + $A ln(x^2+(-2*$h) x+(($h)^2+$k)) + $B/sqrt($k) atan((x-$h)/sqrt($k))")-&gt;reduce;
             </pg-code>
             <statement>
               <p>
@@ -1228,11 +1228,11 @@
               do {$r = non_zero_random(-9,9,1);} until ($a*($r)**2 + $b*$r + $c != 0);
               $B = non_zero_random(-5,5,1);
               if($envir{problemSeed}==1){$a=3;$b=5;$c=-1;$r=-1;$B=2;};
-              $f = Formula("($a*(2+$B)x^2 + ($b-2*$a*$r+$B*$b)x + ($B*$c-$b*$r))/((x - $r)($a x^2 + $b x + $c))")->reduce;
+              $f = Formula("($a*(2+$B)x^2 + ($b-2*$a*$r+$B*$b)x + ($B*$c-$b*$r))/((x - $r)($a x^2 + $b x + $c))")-&gt;reduce;
               Context("Fraction");
-              Context()->flags->set(reduceConstantFunctions=>0);
-              $F = FormulaUpToConstant("ln(abs($a x^2 + $b x + $c)) + $B ln(abs(x-$r))")->reduce;
-              $F->{test_at} = [[$r-0.25],[$r+0.25],[-$b/(2*$a)],[6]];
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
+              $F = FormulaUpToConstant("ln(abs($a x^2 + $b x + $c)) + $B ln(abs(x-$r))")-&gt;reduce;
+              $F-&gt;{test_at} = [[$r-0.25],[$r+0.25],[-$b/(2*$a)],[6]];
             </pg-code>
             <statement>
               <p>
@@ -1254,11 +1254,11 @@
               $B = random(2,5,1);
               $C = non_zero_random(-5,5,1);
               if($envir{problemSeed}==1){$h=-3;$r=3;$A=2;$B=2;$C=-4;};
-              $f = Formula("(($A+2*$B)x^2 + (-2*$A*$h - 2*$B*$r + $C - 2*$B*$h)x + ($A*($h)**2 + $A - $r*$C + 2*$r*$B*$h))/((x-$r)(x^2+(-2*$h) x+(($h)^2+1)))")->reduce;
+              $f = Formula("(($A+2*$B)x^2 + (-2*$A*$h - 2*$B*$r + $C - 2*$B*$h)x + ($A*($h)**2 + $A - $r*$C + 2*$r*$B*$h))/((x-$r)(x^2+(-2*$h) x+(($h)^2+1)))")-&gt;reduce;
               Context("Fraction");
-              Context()->flags->set(reduceConstantFunctions=>0);
-              $F = FormulaUpToConstant("$A ln(abs(x-$r)) + $B ln(x^2+(-2*$h) x+(($h)^2+1)) + $C atan(x-$h)")->reduce;
-              $F->{test_at} = [[-0.25],[0.25]];
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
+              $F = FormulaUpToConstant("$A ln(abs(x-$r)) + $B ln(x^2+(-2*$h) x+(($h)^2+1)) + $C atan(x-$h)")-&gt;reduce;
+              $F-&gt;{test_at} = [[-0.25],[0.25]];
             </pg-code>
             <statement>
               <p>
@@ -1284,10 +1284,10 @@
               $C = Fraction(($c*$r - $k*$a*$r - $b*$k)/-$sqrtk/(($r)**2+$k));
               $B = ($b*$k - $C*$k*$sqrtk)/(-2*$r*$k);
               $A = $a - 2*$B;
-              $f = Formula("(($A+2*$B)x^2 + (-2*$B*$r + $C*$sqrtk)x + ($A*$k - $r*$C*$sqrtk))/((x-$r)(x^2+$k))")->reduce;
-              Context()->flags->set(reduceConstantFunctions=>0);
-              $F = FormulaUpToConstant("$A ln(abs(x-$r)) + $B ln(x^2+$k) + $C atan(x/$sqrtk)")->reduce;
-              $F->{test_at} = [[$r-0.25],[$r+0.25]];
+              $f = Formula("(($A+2*$B)x^2 + (-2*$B*$r + $C*$sqrtk)x + ($A*$k - $r*$C*$sqrtk))/((x-$r)(x^2+$k))")-&gt;reduce;
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
+              $F = FormulaUpToConstant("$A ln(abs(x-$r)) + $B ln(x^2+$k) + $C atan(x/$sqrtk)")-&gt;reduce;
+              $F-&gt;{test_at} = [[$r-0.25],[$r+0.25]];
             </pg-code>
             <statement>
               <p>
@@ -1313,10 +1313,10 @@
               Context("Fraction");
               $B = Fraction(1-$A,2);
               $C = Fraction($C,2);
-              $f = Formula("(($A+2*$B)x^2 + (-2*$A*$h - 2*$B*$r + $C*$sqrtk - 2*$B*$h)x + ($A*($h)**2 + $A*$k - $r*$C*$sqrtk + 2*$r*$B*$h))/((x-$r)(x^2+(-2*$h) x+(($h)^2+$k)))")->reduce;
-              Context()->flags->set(reduceConstantFunctions=>0);
-              $F = FormulaUpToConstant("$A ln(abs(x-$r)) + $B ln(x^2+(-2*$h) x+(($h)^2+$k)) + $C atan((x-$h)/$sqrtk)")->reduce;
-              $F->{test_at} = [[$r-0.25],[$r+0.25]];
+              $f = Formula("(($A+2*$B)x^2 + (-2*$A*$h - 2*$B*$r + $C*$sqrtk - 2*$B*$h)x + ($A*($h)**2 + $A*$k - $r*$C*$sqrtk + 2*$r*$B*$h))/((x-$r)(x^2+(-2*$h) x+(($h)^2+$k)))")-&gt;reduce;
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
+              $F = FormulaUpToConstant("$A ln(abs(x-$r)) + $B ln(x^2+(-2*$h) x+(($h)^2+$k)) + $C atan((x-$h)/$sqrtk)")-&gt;reduce;
+              $F-&gt;{test_at} = [[$r-0.25],[$r+0.25]];
             </pg-code>
             <statement>
               <p>
@@ -1340,10 +1340,10 @@
               $C = non_zero_random(-5,5,1);
               if($envir{problemSeed}==1){$h=1;$k=10;$r=9;$A=3;$B=3;$C=6;};
               Context("Fraction");
-              $f = Formula("(($A+2*$B)x^2 + (-2*$A*$h - 2*$B*$r + $C - 2*$B*$h)x + ($A*($h)**2 + $A*$k - $r*$C + 2*$r*$B*$h))/((x-$r)(x^2+(-2*$h) x+(($h)^2+$k)))")->reduce;
-              Context()->flags->set(reduceConstantFunctions=>0);
-              $F = FormulaUpToConstant("$A ln(abs(x-$r)) + $B ln(x^2+(-2*$h) x+(($h)^2+$k)) + $C/sqrt($k) atan((x-$h)/sqrt($k))")->reduce;
-              $F->{test_at} = [[$r-0.25],[$r+0.25]];
+              $f = Formula("(($A+2*$B)x^2 + (-2*$A*$h - 2*$B*$r + $C - 2*$B*$h)x + ($A*($h)**2 + $A*$k - $r*$C + 2*$r*$B*$h))/((x-$r)(x^2+(-2*$h) x+(($h)^2+$k)))")-&gt;reduce;
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
+              $F = FormulaUpToConstant("$A ln(abs(x-$r)) + $B ln(x^2+(-2*$h) x+(($h)^2+$k)) + $C/sqrt($k) atan((x-$h)/sqrt($k))")-&gt;reduce;
+              $F-&gt;{test_at} = [[$r-0.25],[$r+0.25]];
             </pg-code>
             <statement>
               <p>
@@ -1368,10 +1368,10 @@
               if($envir{problemSeed}==1){$h=-5;$k=2;$r=-2;$A=5;$B=1;$C=-12;};
               Context("Fraction");
               $B = Fraction($B,2);
-              $f = Formula("(($A+2*$B)x^2 + (-2*$A*$h - 2*$B*$r + $C - 2*$B*$h)x + ($A*($h)**2 + $A*$k - $r*$C + 2*$r*$B*$h))/((x-$r)(x^2+(-2*$h) x+(($h)^2+$k)))")->reduce;
-              Context()->flags->set(reduceConstantFunctions=>0);
-              $F = FormulaUpToConstant("$A ln(abs(x-$r)) + $B ln(x^2+(-2*$h) x+(($h)^2+$k)) + $C/sqrt($k) atan((x-$h)/sqrt($k))")->reduce;
-              $F->{test_at} = [[$r-0.25],[$r+0.25]];
+              $f = Formula("(($A+2*$B)x^2 + (-2*$A*$h - 2*$B*$r + $C - 2*$B*$h)x + ($A*($h)**2 + $A*$k - $r*$C + 2*$r*$B*$h))/((x-$r)(x^2+(-2*$h) x+(($h)^2+$k)))")-&gt;reduce;
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
+              $F = FormulaUpToConstant("$A ln(abs(x-$r)) + $B ln(x^2+(-2*$h) x+(($h)^2+$k)) + $C/sqrt($k) atan((x-$h)/sqrt($k))")-&gt;reduce;
+              $F-&gt;{test_at} = [[$r-0.25],[$r+0.25]];
             </pg-code>
             <statement>
               <p>
@@ -1401,8 +1401,8 @@
               ($A,$B) = (1..9)[NchooseK(9,2)];
               if($envir{problemSeed}==1){$r=-3;$s=-2;$A=3;$B=5;};
               Context("Fraction");
-              Context()->flags->set(reduceConstantFunctions=>0);
-              $f = Formula("(($A+$B)x-($A*$s+$B*$r))/((x-$r)(x-$s))")->reduce;
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
+              $f = Formula("(($A+$B)x-($A*$s+$B*$r))/((x-$r)(x-$s))")-&gt;reduce;
               $arg = Fraction(abs($b-$r)**$A * abs($b-$s)**$B * abs($a-$r)**(-$A) * abs($a-$s)**(-$B));
               $answer = Formula("ln($arg)");
             </pg-code>
@@ -1427,10 +1427,10 @@
               ($A,$B) = (-9..-1,1..9)[NchooseK(18,2)];
               if($envir{problemSeed}==1){$b=5;$r=-4;$m=3;$n=2;$A=5;$B=-1;};
               Context("Fraction");
-              Context()->flags->set(reduceConstantFunctions=>0);
-              $f = Formula("(($A*$m+$B)x+($A*$n-$B*$r))/(($m x + $n)(x-$r))")->reduce;
-              $F = Formula("$A ln(abs(x-$r)) + $B/$m ln(abs($m x+$n))")->reduce;
-              $answer = $F->eval(x=>$b) - $F->eval(x=>$a);
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
+              $f = Formula("(($A*$m+$B)x+($A*$n-$B*$r))/(($m x + $n)(x-$r))")-&gt;reduce;
+              $F = Formula("$A ln(abs(x-$r)) + $B/$m ln(abs($m x+$n))")-&gt;reduce;
+              $answer = $F-&gt;eval(x=&gt;$b) - $F-&gt;eval(x=&gt;$a);
             </pg-code>
             <statement>
               <p>
@@ -1454,10 +1454,10 @@
               $B = random(2,5,1);
               $C = non_zero_random(-5,5,1);
               if($envir{problemSeed}==1){$h=-2;$r=10;};
-              $f = Formula("(x^2 + (1-2*$h)x + (($h)^2+1-$r))/((x-$r)(x^2+(-2*$h) x+(($h)^2+1)))")->reduce;
+              $f = Formula("(x^2 + (1-2*$h)x + (($h)^2+1-$r))/((x-$r)(x^2+(-2*$h) x+(($h)^2+1)))")-&gt;reduce;
               Context("Fraction");
-              Context()->flags->set(reduceConstantFunctions=>0);
-              $F = Formula("ln(abs(x-$r)) + atan(x-$h)")->reduce;
+              Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
+              $F = Formula("ln(abs(x-$r)) + atan(x-$h)")-&gt;reduce;
               $frac=Fraction($b-$r,$a-$r);
               $Fb = Formula("atan($b-$h)");
               if ($b-$h == 0) {$Fb = 0;};
@@ -1491,7 +1491,7 @@
               $b = 1;
               $F = Formula("-(2x+1)/(2*(x+1)^2)");
               Context("Fraction");
-              $r = Fraction($F->eval(x=>$b) - $F->eval(x=>$a));
+              $r = Fraction($F-&gt;eval(x=&gt;$b) - $F-&gt;eval(x=&gt;$a));
             </pg-code>
             <statement>
               <p>

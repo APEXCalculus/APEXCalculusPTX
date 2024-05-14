@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section xml:id="sec_optimization">
+<section xml:id="sec_optimization" label="sec_optimization">
   <title>Optimization</title>
 
   <figure xml:id="vid_deriv_apps_opt_prod_sum" component="video">
@@ -59,7 +59,7 @@
         <caption>A sketch of the enclosure in <xref ref="ex_opt1"/>.
       </caption>
         <sidebyside widths="47% 47%" margins="0%">
-          <image xml:id="img_opt1b">
+          <image>
             <shortdescription>
               A rectangular enclosure with green grass and a fence with <m>x</m> and <m>y</m> dimensions.
             </shortdescription>
@@ -69,7 +69,7 @@
               </p>
             </description>
 
-            <latex-image>
+            <latex-image label="img_opt1b">
 
             \begin{tikzpicture}[&gt;=latex]
 
@@ -109,7 +109,7 @@
             </latex-image>
           </image>
 
-          <image xml:id="img_opt1b2">
+          <image>
             <shortdescription>
                A rectangle shape is drawn with sides labeled <m>x</m> and <m>y</m>.
             </shortdescription>
@@ -118,7 +118,7 @@
                 The 2-D plane rectangle has sides labeled <m>x</m> and <m>y</m>. The dimensions are both unknown.
               </p>
             </description>
-            <latex-image>
+            <latex-image label="img_opt1b2">
 
             \begin{tikzpicture}
             \draw [shift = {(150pt,0)}] (0,0) -- (80pt,0) node [pos=.5,below] {$x$} -- (80pt,50pt) node [pos=.5,right] {$y$} -- (0,50pt) -- cycle;
@@ -333,7 +333,7 @@
               <caption>A sketch of the enclosure in
                 <xref ref="ex_opt2"/></caption>
               <sidebyside widths="47% 47%" margins="0%">
-                <image xml:id="img_opt2a">
+                <image>
                   <shortdescription>
                     A rectangular fenced yard with one side not fenced.
                   </shortdescription>
@@ -342,7 +342,7 @@
                       A rectangular fenced yard with one side open for a stream. The dimensions are labeled <m>x</m> and <m>y</m> and are not provided.
                     </p>
                   </description>
-                  <latex-image>
+                  <latex-image label="img_opt2a">
 
                   \begin{tikzpicture}[&gt;=latex]
 
@@ -379,7 +379,7 @@
                   </latex-image>
                 </image>
 
-                <image xml:id="img_opt2b">
+                <image>
                   <shortdescription>
                     A rectangle shape is drawn below also not closed on one side.
                   </shortdescription>
@@ -389,7 +389,7 @@
                       The dimensions are unknown.
                     </p>
                   </description>
-                  <latex-image>
+                  <latex-image label="img_opt2b">
 
                   \begin{tikzpicture}
 
@@ -522,7 +522,7 @@
       <figure xml:id="fig_opt3b">
         <caption>Running a power line from the power station to an offshore
           facility with minimal cost in <xref ref="ex_opt3"/></caption>
-        <image xml:id="img_opt3b" width="47%">
+        <image width="47%">
           <shortdescription>
             a power line is ran from the power station to an offshore facility.
           </shortdescription>
@@ -535,7 +535,7 @@
               The hypotenuse of the triangle shows the distance between the station and offshore facility.
             </p>
           </description>
-          <latex-image>
+          <latex-image label="img_opt3b">
 
           \begin{tikzpicture}[&gt;=latex]
 
@@ -602,7 +602,7 @@
 
       <figure xml:id="fig_opt3c">
         <caption>Labeling unknown distances in <xref ref="ex_opt3"/></caption>
-        <image xml:id="img_opt3c" width="47%">
+        <image width="47%">
           <shortdescription>
             A power line is ran from the power station to an offshore facility with the distance run along
             the ground and the distance run underwater unknown.
@@ -619,7 +619,7 @@
               The hypotenuse of the right angle triangle measures underwater distance with the equation <msqrt>x^2-1000^2</msqrt>.
             </p>
           </description>
-          <latex-image>
+          <latex-image label="img_opt3c">
 
           \begin{tikzpicture}[&gt;=latex]
 
@@ -919,9 +919,9 @@
             $width=Fraction($total,8);
             $l = FormulaWithUnits("$length ft");
             $w = FormulaWithUnits("$width ft");
-            $multians = MultiAnswer($l, $w)->with(
-              singleResult => 1,
-              checker => sub {
+            $multians = MultiAnswer($l, $w)-&gt;with(
+              singleResult =&gt; 1,
+              checker =&gt; sub {
                 my ( $correct, $student, $self ) = @_;
                 my ( $stu1, $stu2 ) = @{$student};
                 my ( $cor1, $cor2 ) = @{$correct};
@@ -940,17 +940,17 @@
               adjacent, equally sized rectangular pens.
               What dimensions should these pens have to maximize the enclosed area?
             </p>
-            <image xml:id="img_04_03_ex_08" width="47%">
+            <image width="47%">
               <shortdescription>
                A rectangle divided into two parts.
               </shortdescription>
               <description>
                 A large rectangle divided into two equal rectangles.
               </description>
-              <latex-image>
+              <latex-image label="img_04_03_ex_08">
                 \begin{tikzpicture}
                   \draw [thick] (0,0) rectangle (3,2);
-                  \draw [thick] (1.5,0) -&#x2D; (1.5,2);
+                  \draw [thick] (1.5,0) -- (1.5,2);
                 \end{tikzpicture}
               </latex-image>
             </image>
@@ -971,12 +971,12 @@
         <webwork xml:id="webwork-ex-optimization-can-1">
           <pg-code>
             $V = NumberWithUnits("355 cm^3");
-            parser::Root->Enable;
+            parser::Root-&gt;Enable;
             $r = Compute("root(3,355/(2pi))");
             $h = Compute("root(3,1420/pi)");
             $rU = NumberWithUnits("$r cm");
             $hU = NumberWithUnits("$h cm");
-            $showwork = '[@ explanation_box(message => "Discuss whether or not your calculation suggests that a real world soda can is designed to minimize the materials cost.") @]*';
+            $showwork = '[@ explanation_box(message =&gt; "Discuss whether or not your calculation suggests that a real world soda can is designed to minimize the materials cost.") @]*';
           </pg-code>
           <statement>
             <p>
@@ -1011,12 +1011,12 @@
         <webwork xml:id="webwork-ex-optimization-can-2">
           <pg-code>
             $V = NumberWithUnits("206 in^3");
-            parser::Root->Enable;
+            parser::Root-&gt;Enable;
             $r = Compute("root(3,206/(2pi))");
             $h = Compute("root(3,824/pi)");
             $rU = NumberWithUnits("$r in");
             $hU = NumberWithUnits("$h in");
-            $showwork = '[@ explanation_box(message => "Discuss whether or not your calculation suggests that a #10 can is designed to minimize the materials cost.") @]*';
+            $showwork = '[@ explanation_box(message =&gt; "Discuss whether or not your calculation suggests that a #10 can is designed to minimize the materials cost.") @]*';
           </pg-code>
           <statement>
             <p>
@@ -1055,12 +1055,12 @@
         <webwork xml:id="webwork-ex-optimization-can-3">
           <pg-code>
             $V = NumberWithUnits("355 cm^3");
-            parser::Root->Enable;
+            parser::Root-&gt;Enable;
             $r = Compute("root(3,355/(4pi))");
             $h = Compute("root(3,5680/pi)");
             $rU = NumberWithUnits("$r cm");
             $hU = NumberWithUnits("$h cm");
-            $showwork = '[@ explanation_box(message => "Discuss whether or not your calculation suggests that a real world soda can is designed to minimize the materials cost.") @]*';
+            $showwork = '[@ explanation_box(message =&gt; "Discuss whether or not your calculation suggests that a real world soda can is designed to minimize the materials cost.") @]*';
           </pg-code>
           <statement>
             <p>
@@ -1127,9 +1127,9 @@
             $h = Compute("sqrt($D^2 - $w^2)");
             $wU = NumberWithUnits("$w in");
             $hU = NumberWithUnits("$h in");
-            $multians = MultiAnswer($wU, $hU)->with(
-              singleResult => 1,
-              checker => sub {
+            $multians = MultiAnswer($wU, $hU)-&gt;with(
+              singleResult =&gt; 1,
+              checker =&gt; sub {
                 my ( $correct, $student, $self ) = @_;
                 my ( $stu1, $stu2 ) = @{$student};
                 my ( $cor1, $cor2 ) = @{$correct};
@@ -1149,7 +1149,7 @@
               height <m>h</m>.
               that is, <m>S = kwh^2</m> for some constant <m>k</m>.
             </p>
-            <image xml:id="img_04_03_ex_13" width="47%">
+            <image width="47%">
               <shortdescription>
                 A circle with a rectangle divided diagonally inscribed inside it.
               </shortdescription>
@@ -1163,10 +1163,10 @@
                   longer side is labelled <m>h</m> which is the height.
                 </p>
               </description>
-              <latex-image>
+              <latex-image label="img_04_03_ex_13">
                 \begin{tikzpicture}
                   \draw [thick] (0,0) circle (1cm);
-                  \draw [thick] (-.6,.8) -&#x2D; node [pos=.5,right] { \(12\)} (.6,-.8);
+                  \draw [thick] (-.6,.8) -- node [pos=.5,right] { \(12\)} (.6,-.8);
                   \draw [thick] (-.6,-.8) rectangle (.6,.8);
                   \draw (.7,0) node { \(h\)} (0,.7) node { \(w\)};
                 \end{tikzpicture}
@@ -1196,9 +1196,9 @@
               ($x,$y) = (2,3,4,5,6)[NchooseK(5,2)];
               $ycost=random(30000,50000,5000);
               $xcost=$ycost + random(30000,50000,5000);
-            } until ($y - $ycost*$x/sqrt($xcost**2 - $ycost**2) > 0);
+            } until ($y - $ycost*$x/sqrt($xcost**2 - $ycost**2) &gt; 0);
             if($envir{problemSeed}==1){$x=2;$y=5;$xcost=80000;$ycost=50000};
-            Context("Currency")->flags->set(trimTrailingZeros=>1,tolerance=>1);
+            Context("Currency")-&gt;flags-&gt;set(trimTrailingZeros=&gt;1,tolerance=&gt;1);
             $xC = Currency($xcost);
             $yC = Currency($ycost);
             $g = Compute("50000");
@@ -1248,7 +1248,7 @@
               $xcost=$ycost + random(30000,50000,5000);
             } until ($y - $ycost*$x/sqrt($xcost**2 - $ycost**2) &lt; 0);
             if($envir{problemSeed}==1){$x=5;$y=2;$xcost=80000;$ycost=50000};
-            Context("Currency")->flags->set(trimTrailingZeros=>1,tolerance=>1);
+            Context("Currency")-&gt;flags-&gt;set(trimTrailingZeros=&gt;1,tolerance=&gt;1);
             $xC = Currency($xcost);
             $yC = Currency($ycost);
             $g = Compute("50000");
@@ -1361,9 +1361,9 @@
         <webwork xml:id="webwork-ex-optimization-inscribed-rectangle">
           <pg-code>
             $w = Compute("sqrt(2)");
-            $multians = MultiAnswer($w,$w)->with(
-              singleResult => 1,
-              checker => sub {
+            $multians = MultiAnswer($w,$w)-&gt;with(
+              singleResult =&gt; 1,
+              checker =&gt; sub {
                 my ( $correct, $student, $self ) = @_;
                 my ( $stu1, $stu2 ) = @{$student};
                 my ( $cor1, $cor2 ) = @{$correct};
