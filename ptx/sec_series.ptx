@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section xml:id="sec_series">
+<section xml:id="sec_series" label="sec_series">
   <title>Infinite Series</title>
   <introduction>
     <figure xml:id="vid-seqseries-series-intro" component="video">
-      <caption>Video introduction to <xref ref="sec_series">Section</xref></caption>
+      <caption>Video introduction to <xref ref="sec_series"/></caption>
       <video youtube="RV9LNPv20TA" label="vid-seqseries-series-intro"/>
     </figure>
     <p>
@@ -151,10 +151,7 @@
           </ol>
         </p>
       </statement>
-      <solution component="video">
-        <title>Video solution</title>
-        <video width="98%" youtube="NLXq_m8S2tw" xml:id="vid-seqseries-series-example-divergent" label="vid-seqseries-series-example-divergent" component="video"/>
-      </solution>
+
       <solution>
         <p>
           <ol>
@@ -164,7 +161,7 @@
                 <md>
                   <mrow>S_n \amp = a_1+a_2+a_3+\cdots+a_n</mrow>
                   <mrow>\amp = 1^2+2^2+3^2\cdots + n^2.</mrow>
-                  <intertext>By <xref ref="thm_summation">Theorem</xref>, this is</intertext>
+                  <intertext>By <xref ref="thm_summation"/>, this is</intertext>
                   <mrow>\amp = \frac{n(n+1)(2n+1)}{6}</mrow>
                 </md>.
                 Since <m>\lim\limits_{n\to\infty}S_n = \infty</m>,
@@ -173,7 +170,7 @@
                 <em>how</em> the series diverges:
                 it grows without bound.
 
-                A scatter plot of the sequences <m>\{a_n\}</m> and <m>\{S_n\}</m> is given in <xref ref="fig_series1a">Figure</xref>.
+                A scatter plot of the sequences <m>\{a_n\}</m> and <m>\{S_n\}</m> is given in <xref ref="fig_series1a"/>.
                 The terms of <m>\{a_n\}</m> are growing,
                 so the terms of the partial sums <m>\{S_n\}</m> are growing even faster,
                 illustrating that the series diverges.
@@ -198,18 +195,18 @@
                 we conclude that <m>\lim\limits_{n\to\infty}S_n</m> does not exist,
                 hence <m>\ds\infser (-1)^{n+1}</m> diverges.
 
-                A scatter plot of the sequence <m>\{b_n\}</m> and the partial sums <m>\{S_n\}</m> is given in <xref ref="fig_series1b">Figure</xref>.
+                A scatter plot of the sequence <m>\{b_n\}</m> and the partial sums <m>\{S_n\}</m> is given in <xref ref="fig_series1b"/>.
                 When <m>n</m> is odd,
                 <m>b_n = S_n</m> so the marks for <m>b_n</m> are drawn oversized to show they coincide.
               </p>
 
               <figure xml:id="fig_series1">
-                <caption>Scatter plots relating to <xref ref="ex_series1">Example</xref></caption>
+                <caption>Scatter plots relating to <xref ref="ex_series1"/></caption>
                 <sidebyside widths="47% 47%" valign="bottom" margins="0%">
                   <figure xml:id="fig_series1a">
                     <caption/>
               <!-- START figures/fig_series1a.tex -->
-                    <image xml:id="img_series1a">
+                    <image>
                       <shortdescription>Scatter plots of the sequence, and corresponding partial sums, for the first part of this example.</shortdescription>
                       <description>
                         <p>
@@ -218,7 +215,7 @@
                           As one might expect, the value of <m>S_n</m> grows much more rapidly than that of <m>a_n</m>.
                         </p>
                       </description>
-                      <latex-image>
+                      <latex-image label="img_series1a">
 
                       \begin{tikzpicture}
                       \begin{axis}[
@@ -228,17 +225,18 @@
                       xlabel={$n$}
                       ]
 
+                      \addplot [only marks,secondcolor,mark size={1.5pt},mark=square*,domain=1:10,samples=10] {x*(x+1)*(2*x+1)/6};
                       \addplot [only marks,firstcolor,mark size={1.5pt},domain=1:10,samples=10] {x^2};
-                      \addplot [only marks,secondcolor,mark size={1.5pt},domain=1:10,samples=10] {x*(x+1)*(2*x+1)/6};
-
+                      
                       \end{axis}
 
 
                       \node[shift={(0,-25pt)},draw] at (myplot.south)
                         {\begin{tikzpicture}
 
-                          \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] { $a_n$};
-                          \fill [secondcolor] (1,0) circle (1.5pt) node [right,black] { $S_n$};
+                          \fill [firstcolor] (0,0) circle (2pt) node [right,black] { $a_n$};
+                          \fill [secondcolor] (1,0) circle (0.1pt) node [right, black] { $S_n$};
+                          \draw [secondcolor] plot [only marks,mark=square*] coordinates {(1,0)};
 
                         \end{tikzpicture}};
 
@@ -252,7 +250,7 @@
                   <figure xml:id="fig_series1b">
                     <caption/>
               <!-- START figures/fig_series1b.tex -->
-                    <image xml:id="img_series1b">
+                    <image>
                       <shortdescription>Scatter plots of the sequence, and corresponding partial sums, for the second part of this example.</shortdescription>
                       <description>
                         <p>
@@ -266,7 +264,7 @@
                           When <m>n</m> is odd, <m>S_n=a_n</m>, so the dots for <m>b_n</m> and <m>S_n</m> overlap.
                         </p>
                       </description>
-                      <latex-image>
+                      <latex-image label="img_series1b">
 
                       \begin{tikzpicture}
 
@@ -277,8 +275,8 @@
                       xlabel={$n$}
                       ]
 
-                      \addplot [only marks,firstcolor,mark size={2.5pt},domain=1:10,samples=10] {(-1)^(x+1)};
-                      \addplot [only marks,secondcolor,mark size={1.5pt}] coordinates {(1,1)(2,0)(3,1)(4,0)(5,1)(6,0)(7,1)(8,0)(9,1)(10,0)};
+                      \addplot [only marks,firstcolor,mark size={1.5pt},domain=1:10,samples=10] {(-1)^(x+1)};
+                      \addplot [only marks,secondcolor,mark=square*,mark size={2.5pt}] coordinates {(1,1)(2,0)(3,1)(4,0)(5,1)(6,0)(7,1)(8,0)(9,1)(10,0)};
 
                       \end{axis}
 
@@ -287,8 +285,9 @@
                       \node[shift={(0,-15pt)},draw] at (myplot.south)
                         {\begin{tikzpicture}
 
-                          \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] { $b_n$};
-                          \fill [secondcolor] (1,0) circle (1.5pt) node [right,black] { $S_n$};
+                          \fill [firstcolor] (0,0) circle (2pt) node [right,black] { $b_n$};
+                          \fill [secondcolor] (1,0) circle (0.1pt) node [right, black] { $S_n$};
+                          \draw [secondcolor] plot [only marks,mark=square*] coordinates {(1,0)};
 
                         \end{tikzpicture}};
 
@@ -303,6 +302,10 @@
             </li>
           </ol>
         </p>
+      </solution>
+      <solution component="video">
+        <title>Video solution</title>
+        <video width="98%" youtube="NLXq_m8S2tw" xml:id="vid-seqseries-series-example-divergent" label="vid-seqseries-series-example-divergent" component="video"/>
       </solution>
     </example>
 
@@ -396,7 +399,7 @@
             <mrow>S_n(1-r) \amp = 1-r^{n}</mrow>
             <mrow>S_n \amp = \frac{1-r^{n}}{1-r}</mrow>
           </md>.
-          We have shown <xref ref="thm_geom_series_a">Part</xref>
+          We have shown <xref ref="thm_geom_series_a" text="local">Part</xref>
           of <xref ref="thm_geom_series" text="title"/>.
         </p>
 
@@ -460,7 +463,7 @@
       <video youtube="Js5qK6AecSM" label="vid-seqseries-series-geometric"/>
     </figure>
     <p>
-      According to <xref ref="thm_geom_series">Theorem</xref>,
+      According to <xref ref="thm_geom_series"/>,
       the series
       <me>
         \ds\infser[0] \frac{1}{2^n} =\infser[0] \left(\frac 12\right)^2= 1+\frac12+\frac14+\cdots
@@ -501,17 +504,14 @@
           </ol>
         </p>
       </statement>
-      <solution component="video">
-        <title>Video solution</title>
-        <video width="98%" youtube="9_AmxyiKVm8" xml:id="vid-seqseries-sequences-example-geometric" label="vid-seqseries-sequences-example-geometric" component="video"/>
-      </solution>
+
       <solution>
         <p>
           <ol>
             <li>
               <p>
                 Since <m>r=3/4\lt 1</m>, this series converges.
-                By <xref ref="thm_geom_series">Theorem</xref>, we have that
+                By <xref ref="thm_geom_series"/>, we have that
                 <me>
                   \infser[0] \left(\frac34\right)^n = \frac{1}{1-3/4} = 4
                 </me>.
@@ -521,12 +521,12 @@
                 <me>
                   \sum_{n=2}^\infty \left(\frac34\right)^n = 4 - 1 - \frac34 = \frac94
                 </me>.
-                This is illustrated in <xref ref="fig_series2a">Figure</xref>.
+                This is illustrated in <xref ref="fig_series2a"/>.
               </p>
               <figure xml:id="fig_series2a">
                 <caption>Scatter plots for the series in <xref ref="item_ex_ser2_1"/></caption>
             <!-- START figures/fig_series2a.tex -->
-                <image xml:id="img_series2a" width="47%">
+                <image width="47%">
                   <shortdescription>Scatter plots of the sequence, and corresponding partial sums, for the first part of this example.</shortdescription>
                   <description>
                     <p>
@@ -539,7 +539,7 @@
                       while the points in the plot for <m>S_n</m> show that the partial sums are increasing toward a value slightly larger than 2.
                     </p>
                   </description>
-                  <latex-image>
+                  <latex-image label="img_series2a">
 
                   \begin{tikzpicture}
 
@@ -551,9 +551,9 @@
                   xlabel={$n$}
                   ]
 
+                  \addplot [only marks,secondcolor,mark=square*,mark size={1.75pt}] coordinates {(2,0.5625)(3,0.9844)(4,1.301)(5,1.538)(6,1.716)(7,1.85)(8,1.95)(9,2.025)(10,2.081)};
                   \addplot [only marks,firstcolor,mark size={1.5pt},domain=2:10,samples=9] {(.75)^x};
-                  \addplot [only marks,secondcolor,mark size={1.5pt}] coordinates {(2,0.5625)(3,0.9844)(4,1.301)(5,1.538)(6,1.716)(7,1.85)(8,1.95)(9,2.025)(10,2.081)};
-
+                  
                   \end{axis}
 
 
@@ -561,8 +561,9 @@
                   \node[shift={(0,-10pt)},draw] at (myplot.south)
                     {\begin{tikzpicture}
 
-                      \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] { $a_n$};
-                      \fill [secondcolor] (1,0) circle (1.5pt) node [right,black] { $S_n$};
+                      \fill [firstcolor] (0,0) circle (2pt) node [right,black] { $a_n$};
+                      \fill [secondcolor] (1,0) circle (0.1pt) node [right, black] { $S_n$};
+                      \draw [secondcolor] plot [only marks,mark=square*] coordinates {(1,0)};
 
                     \end{tikzpicture}};
 
@@ -577,17 +578,17 @@
             <li>
               <p>
                 Since <m>\abs{r} = 1/2 \lt  1</m>,
-                this series converges, and by <xref ref="thm_geom_series">Theorem</xref>,
+                this series converges, and by <xref ref="thm_geom_series"/>,
                 <me>
                   \infser[0] \left(\frac{-1}{2}\right)^n = \frac{1}{1-(-1/2)} = \frac23
                 </me>.
-                The partial sums of this series are plotted in <xref ref="fig_series2b">Figure</xref>.
+                The partial sums of this series are plotted in <xref ref="fig_series2b"/>.
                 Note how the partial sums are not purely increasing as some of the terms of the sequence <m>\{(-1/2)^n\}</m> are negative.
               </p>
               <figure xml:id="fig_series2b">
                 <caption>Scatter plots for the series in <xref ref="item_ex_ser2_2"/></caption>
           <!-- START figures/fig_series2b.tex -->
-                <image xml:id="img_series2b" width="47%">
+                <image width="47%">
                   <shortdescription>Scatter plots of the sequence, and corresponding partial sums, for the second part of this example.</shortdescription>
                   <description>
                     <p>
@@ -600,7 +601,7 @@
                       but the oscillations get steadily smaller, and appear to settle down toward a common <m>y</m> value.
                     </p>
                   </description>
-                  <latex-image>
+                  <latex-image label="img_series2b">
 
                   \begin{tikzpicture}
 
@@ -613,7 +614,7 @@
                   ]
 
                   \addplot [only marks,firstcolor,mark size={1.5pt},domain=0:10,samples=11] {(-.5)^(x)};
-                  \addplot [only marks,secondcolor,mark size={1.5pt}] coordinates {(0,1.)(1,0.5)(2,0.75)(3,0.625)(4,0.6875)(5,0.6563)(6,0.6719)(7,0.6641)(8,0.668)(9,0.666)(10,0.667)};
+                  \addplot [only marks,secondcolor,mark=square*,mark size={1.5pt}] coordinates {(0,1.)(1,0.5)(2,0.75)(3,0.625)(4,0.6875)(5,0.6563)(6,0.6719)(7,0.6641)(8,0.668)(9,0.666)(10,0.667)};
 
                   \end{axis}
 
@@ -622,8 +623,9 @@
                   \node[shift={(0,15pt)},draw] at (myplot.south)
                     {\begin{tikzpicture}
 
-                      \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] { $a_n$};
-                      \fill [secondcolor] (1,0) circle (1.5pt) node [right,black] { $S_n$};
+                      \fill [firstcolor] (0,0) circle (2pt) node [right,black] { $a_n$};
+                      \fill [secondcolor] (1,0) circle (0.1pt) node [right, black] { $S_n$};
+                      \draw [secondcolor] plot [only marks,mark=square*] coordinates {(1,0)};
 
                     \end{tikzpicture}};
 
@@ -643,12 +645,12 @@
                   1+3+9+27 + 81+243+\cdots
                 </me>
                 to diverge.)
-                This is illustrated in <xref ref="fig_series2c">Figure</xref>.
+                This is illustrated in <xref ref="fig_series2c"/>.
               </p>
               <figure xml:id="fig_series2c">
                 <caption>Scatter plots for the series in <xref ref="item_ex_ser2_3"/></caption>
           <!-- START figures/fig_series2c.tex -->
-                <image xml:id="img_series2c" width="47%">
+                <image width="47%">
                   <shortdescription>Scatter plots of the sequence, and corresponding partial sums, for the third part of this example.</shortdescription>
                   <description>
                     <p>
@@ -656,7 +658,7 @@
                       Both plots follow curves that appear to be exponential in nature, with the points for <m>S_n</m> slightly above those for <m>a_n</m>.
                     </p>
                   </description>
-                  <latex-image>
+                  <latex-image label="img_series2c">
 
                   \begin{tikzpicture}
 
@@ -667,8 +669,8 @@
                   xlabel={$n$}
                   ]
 
+                  \addplot [only marks,secondcolor,mark=square*,mark size={1.75pt}] coordinates {(0,1)(1,3)(2,12)(3,39)(4,120)(5,363)(6,1092)};
                   \addplot [only marks,firstcolor,mark size={1.5pt},domain=0:6,samples=7] {3^(x)};
-                  \addplot [only marks,secondcolor,mark size={1.5pt}] coordinates {(0,1)(1,3)(2,12)(3,39)(4,120)(5,363)(6,1092)};
 
                   \end{axis}
 
@@ -677,8 +679,9 @@
                   \node[shift={(0,-20pt)},draw] at (myplot.south)
                     {\begin{tikzpicture}
 
-                      \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] { $a_n$};
-                      \fill [secondcolor] (1,0) circle (1.5pt) node [right,black] { $S_n$};
+                      \fill [firstcolor] (0,0) circle (2pt) node [right,black] { $a_n$};
+                      \fill [secondcolor] (1,0) circle (0.1pt) node [right, black] { $S_n$};
+                      \draw [secondcolor] plot [only marks,mark=square*] coordinates {(1,0)};
 
                     \end{tikzpicture}};
 
@@ -691,6 +694,10 @@
             </li>
           </ol>
         </p>
+      </solution>
+      <solution component="video">
+        <title>Video solution</title>
+        <video width="98%" youtube="9_AmxyiKVm8" xml:id="vid-seqseries-sequences-example-geometric" label="vid-seqseries-sequences-example-geometric" component="video"/>
       </solution>
     </example>
   </subsection>
@@ -757,8 +764,8 @@
 
     <aside>
       <p>
-        We will be able to prove <xref ref="thm_pseries">Theorem</xref>
-        in <xref ref="sec_int_comp_tests">Section</xref>.
+        We will be able to prove <xref ref="thm_pseries"/>
+        in <xref ref="sec_int_comp_tests"/>.
         This theorem assumes that <m>an+b\gt 0</m> for all <m>n</m>;
         if <m>an+b\lt 0</m>, <m>(an+b)^p</m> won't be defined when <m>p</m> is not an integer,
         and if <m>an+b=0</m> for some <m>n</m>,
@@ -815,17 +822,14 @@
           </ol>
         </p>
       </statement>
-      <solution component="video">
-        <title>Video solution</title>
-        <video width="98%" youtube="XYW0z0LMaJc" xml:id="vid-seqseries-series-pseries" label="vid-seqseries-series-pseries" component="video"/>
-      </solution>
+
       <solution>
         <p>
           <ol>
             <li>
               <p>
                 This is a <m>p</m>-series with <m>p=1</m>.
-                By <xref ref="thm_pseries">Theorem</xref>, this series diverges.
+                By <xref ref="thm_pseries"/>, this series diverges.
 
                 This series is a famous series,
                 called the <em>Harmonic Series</em>,
@@ -837,7 +841,7 @@
             <li>
               <p>
                 This is a <m>p</m>-series with <m>p=2</m>.
-                By <xref ref="thm_pseries">Theorem</xref>, it converges.
+                By <xref ref="thm_pseries"/>, it converges.
                 Note that the theorem does not give a formula by which we can determine
                 <em>what</em> the series converges to;
                 we just know it converges.
@@ -856,7 +860,7 @@
               <p>
                 This is not a <m>p</m>-series;
                 the definition does not allow for alternating signs.
-                Therefore we cannot apply <xref ref="thm_pseries">Theorem</xref>.
+                Therefore we cannot apply <xref ref="thm_pseries"/>.
                 (Another famous result states that this series,
                 the <em>Alternating Harmonic Series</em>,
                 converges to <m>\ln(2)</m>.)
@@ -880,6 +884,10 @@
           </ol>
         </p>
       </solution>
+      <solution component="video">
+        <title>Video solution</title>
+        <video width="98%" youtube="XYW0z0LMaJc" xml:id="vid-seqseries-series-pseries" label="vid-seqseries-series-pseries" component="video"/>
+      </solution>
     </example>
 
     <p>
@@ -900,10 +908,7 @@
               <idx><h>telescoping series</h></idx>
         </p>
       </statement>
-      <solution component="video">
-        <title>Video solution</title>
-        <video width="98%" youtube="ckj4xm6ZHgU" xml:id="vid-seqseries-series-telescoping1" label="vid-seqseries-series-telescoping1" component="video"/>
-      </solution>
+
       <solution>
         <p>
           It will help to write down some of the first few partial sums of this series.
@@ -921,13 +926,13 @@
           The sequence <m>\{S_n\}</m> converges,
           as <m>\lim\limits_{n\to\infty}S_n = \lim_{n\to\infty}\left(1-\frac1{n+1}\right) = 1</m>,
           and so we conclude that <m>\ds \infser \left(\frac1n-\frac1{n+1}\right) = 1</m>.
-          Partial sums of the series are plotted in <xref ref="fig_series3">Figure</xref>.
+          Partial sums of the series are plotted in <xref ref="fig_series3"/>.
         </p>
 
         <figure xml:id="fig_series3">
-          <caption>Scatter plots relating to the series of <xref ref="ex_series3">Example</xref></caption>
+          <caption>Scatter plots relating to the series of <xref ref="ex_series3"/></caption>
           <!-- START figures/fig_series3.tex -->
-          <image xml:id="img_series3" width="47%">
+          <image width="47%">
             <shortdescription>Scatter plots of the sequence, and corresponding partial sums, for this example.</shortdescription>
             <description>
               <p>
@@ -942,7 +947,7 @@
                 and then rise toward the line <m>y=1</m>.
               </p>
             </description>
-            <latex-image>
+            <latex-image label="img_series3">
 
             \begin{tikzpicture}
 
@@ -954,8 +959,8 @@
             xlabel={$n$}
             ]
 
+            \addplot [only marks,secondcolor,mark=square*,mark size={1.75pt},domain=1:10,samples=10] {1-1/(x+1)};
             \addplot [only marks,firstcolor,mark size={1.5pt},domain=1:10,samples=10] {1/x-1/(x+1)};
-            \addplot [only marks,secondcolor,mark size={1.5pt},domain=1:10,samples=10] {1-1/(x+1)};
 
             \end{axis}
 
@@ -964,8 +969,9 @@
             \node[shift={(0,-15pt)},draw] at (myplot.south)
               {\begin{tikzpicture}
 
-                \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] { $a_n$};
-                \fill [secondcolor] (1,0) circle (1.5pt) node [right,black] { $S_n$};
+                \fill [firstcolor] (0,0) circle (2pt) node [right,black] { $a_n$};
+                \fill [secondcolor] (1,0) circle (0.1pt) node [right, black] { $S_n$};
+                \draw [secondcolor] plot [only marks,mark=square*] coordinates {(1,0)};
 
 							\end{tikzpicture}};
 
@@ -976,10 +982,14 @@
           <!-- figures/fig_series3.tex END -->
         </figure>
       </solution>
+      <solution component="video">
+        <title>Video solution</title>
+        <video width="98%" youtube="ckj4xm6ZHgU" xml:id="vid-seqseries-series-telescoping1" label="vid-seqseries-series-telescoping1" component="video"/>
+      </solution>
     </example>
 
     <p>
-      The series in <xref ref="ex_series3">Example</xref>
+      The series in <xref ref="ex_series3"/>
       is an example of a <em>telescoping series</em>.
       Informally, a telescoping series is one in which most terms cancel with preceding or following terms,
       reducing the number of terms in each partial sum.
@@ -1020,10 +1030,7 @@
           </ol>
         </p>
       </statement>
-      <solution component="video">
-        <title>Video solution</title>
-        <video width="98%" youtube="BMn2QTtTdNQ" xml:id="vid-seqseries-series-telescoping2" label="vid-seqseries-series-telescoping2" component="video"/>
-      </solution>
+
       <solution>
         <p>
           <ol>
@@ -1033,7 +1040,7 @@
                 <me>
                   \frac2{n^2+2n} = \frac1n-\frac1{n+2}
                 </me>.
-                (See <xref ref="sec_partial_fraction">Section</xref>, Partial Fraction Decomposition,
+                (See <xref ref="sec_partial_fraction"/>, Partial Fraction Decomposition,
                 to recall how  this is done, if necessary.)
 
                 <!-- ToDo: Figure out how to format this.
@@ -1059,7 +1066,7 @@
                   \lim_{n\to\infty}S_n = \lim_{n\to\infty} \left(1+\frac12-\frac1{n+1}-\frac1{n+2}\right) = \frac32
                 </me>,
                 so <m> \infser \frac1{n^2+2n} = \frac32</m>.
-                This is illustrated in <xref ref="fig_series4a">Figure</xref>.
+                This is illustrated in <xref ref="fig_series4a"/>.
               </p>
             </li>
 
@@ -1085,7 +1092,7 @@
                 as <m>\lim\limits_{n\to\infty}S_n=\infty</m>.
                 Therefore  <m>\ds\infser  \ln\left(\frac{n+1}{n}\right)=\infty</m>;
                 the series diverges.
-                Note in <xref ref="fig_series4b">Figure</xref> how the sequence of partial sums grows slowly;
+                Note in <xref ref="fig_series4b"/> how the sequence of partial sums grows slowly;
                 after 100 terms, it is not yet over 5.
                 Graphically we may be fooled into thinking the series converges,
                 but our analysis above shows that it does not.
@@ -1095,24 +1102,24 @@
         </p>
 
         <figure xml:id="fig_series4">
-          <caption>Scatter plots relating to the series in <xref ref="ex_series4">Example</xref></caption>
+          <caption>Scatter plots relating to the series in <xref ref="ex_series4"/></caption>
           <sidebyside widths="47% 47%" valign="bottom" margins="0%">
 
             <figure xml:id="fig_series4a">
               <caption/>
         <!-- START figures/fig_series4a.tex -->
-              <image xml:id="img_series4a">
+              <image>
                 <shortdescription>Scatter plots of the sequence, and corresponding partial sums, for the first part of this example.</shortdescription>
                 <description>
                   <p>
                     The scatter plots given appear very similar to the previous example.
-                    Again, points plotted for the terms in the sequence <m>a_n</m>, 
+                    Again, points plotted for the terms in the sequence <m>a_n</m>,
                     which begin at <m>(1,2/3)</m>, descend toward the <m>n</m> axis,
                     while the points for the sequence of partial sums ascend from the same point,
                     in this case getting closer and closer to the line <m>y=3/2</m>.
                   </p>
                 </description>
-                <latex-image>
+                <latex-image label="img_series4a">
 
                 \begin{tikzpicture}
 
@@ -1124,8 +1131,8 @@
                 xlabel={$n$}
                 ]
 
+                \addplot [only marks,secondcolor,mark=square*,mark size={1.75pt},domain=1:10,samples=10] {1.5-1/(x+1)-1/(x+2)};
                 \addplot [only marks,firstcolor,mark size={1.5pt},domain=1:10,samples=10] {2/(x^2+2*x)};
-                \addplot [only marks,secondcolor,mark size={1.5pt},domain=1:10,samples=10] {1.5-1/(x+1)-1/(x+2)};
 
                 \end{axis}
 
@@ -1134,8 +1141,9 @@
                 \node[shift={(0,-17pt)},draw] at (myplot.south)
                   {\begin{tikzpicture}
 
-                    \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] { $a_n$};
-                    \fill [secondcolor] (1,0) circle (1.5pt) node [right,black] { $S_n$};
+                    \fill [firstcolor] (0,0) circle (2pt) node [right,black] { $a_n$};
+                    \fill [secondcolor] (1,0) circle (0.1pt) node [right, black] { $S_n$};
+                    \draw [secondcolor] plot [only marks,mark=square*] coordinates {(1,0)};
 
                   \end{tikzpicture}};
 
@@ -1149,7 +1157,7 @@
             <figure xml:id="fig_series4b">
               <caption/>
         <!-- START figures/fig_series4b.tex -->
-              <image xml:id="img_series4b">
+              <image>
                 <shortdescription>Scatter plots of the sequence, and corresponding partial sums, for the second part of this example.</shortdescription>
                 <description>
                   <p>
@@ -1157,11 +1165,11 @@
                     for <m>n=10,20,\ldots, 100</m>.
                     The points for the sequence <m>a_n</m> are all very close to the <m>n</m> axis.
                     The points for the sequence <m>S_n</m> of partial sums follow the graph <m>y=\ln(x+1)</m>;
-                    although this may appear to be bounded, we know that the value of the logarithm 
+                    although this may appear to be bounded, we know that the value of the logarithm
                     will eventually approach infinity, even if it does so very slowly.
                   </p>
                 </description>
-                <latex-image>
+                <latex-image label="img_series4b">
 
                 \begin{tikzpicture}
 
@@ -1173,7 +1181,7 @@
                 ]
 
                 \addplot [only marks,firstcolor,mark size={1.5pt},domain=10:100,samples=10] {ln((x+1)/x)};
-                \addplot [only marks,secondcolor,mark size={1.5pt},domain=10:100,samples=10] {ln(x+1)};
+                \addplot [only marks,secondcolor,mark=square*,mark size={1.5pt},domain=10:100,samples=10] {ln(x+1)};
 
                 \end{axis}
 
@@ -1182,8 +1190,9 @@
                 \node[shift={(0,-15pt)},draw] at (myplot.south)
                   {\begin{tikzpicture}
 
-                    \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] { $a_n$};
-                    \fill [secondcolor] (1,0) circle (1.5pt) node [right, black] { $S_n$};
+                    \fill [firstcolor] (0,0) circle (2pt) node [right,black] { $a_n$};
+                    \fill [secondcolor] (1,0) circle (0.1pt) node [right, black] { $S_n$};
+                    \draw [secondcolor] plot [only marks,mark=square*] coordinates {(1,0)};
 
                   \end{tikzpicture}};
 
@@ -1195,6 +1204,10 @@
             </figure>
           </sidebyside>
         </figure>
+      </solution>
+      <solution component="video">
+        <title>Video solution</title>
+        <video width="98%" youtube="BMn2QTtTdNQ" xml:id="vid-seqseries-series-telescoping2" label="vid-seqseries-series-telescoping2" component="video"/>
       </solution>
     </example>
 
@@ -1319,10 +1332,7 @@
           </ol>
         </p>
       </statement>
-      <solution component="video">
-        <title>Video solution</title>
-        <video width="98%" youtube="BMn2QTtTdNQ" xml:id="vid-seqseries-series-using-properties" label="vid-seqseries-series-using-properties" component="video"/>
-      </solution>
+
       <solution>
         <p>
           <ol>
@@ -1334,13 +1344,13 @@
                   <mrow>\amp = \infser\frac{(-1)^{n+1}}{n}-\infser\frac{(-1)^{n+1}}{n^2}</mrow>
                   <mrow>\amp = \ln(2) - \frac{\pi^2}{12}	\approx	-0.1293</mrow>
                 </md>.
-                This is illustrated in <xref ref="fig_series5a">Figure</xref>.
+                This is illustrated in <xref ref="fig_series5a"/>.
               </p>
             </li>
 
             <li>
               <p>
-                This looks very similar to the series that involves <m>e</m> in <xref ref="idea_famous_series">Key Idea</xref>.
+                This looks very similar to the series that involves <m>e</m> in <xref ref="idea_famous_series"/>.
                 Note, however,
                 that the series given in this example starts with <m>n=1</m> and not <m>n=0</m>.
                 The first term of the series in the Key Idea is <m>1/0! = 1</m>,
@@ -1349,18 +1359,18 @@
                   <mrow>\infser \frac{1000}{n!} \amp = 1000\cdot\infser \frac{1}{n!}</mrow>
                   <mrow>\amp = 1000\cdot (e-1) \approx  1718.28</mrow>
                 </md>.
-                This is illustrated in <xref ref="fig_series5b">Figure</xref>.
+                This is illustrated in <xref ref="fig_series5b"/>.
                 The graph shows how this particular series converges very rapidly.
               </p>
 
               <figure xml:id="fig_series5">
-                <caption>Scatter plots relating to the series in <xref ref="ex_series5">Example</xref></caption>
+                <caption>Scatter plots relating to the series in <xref ref="ex_series5"/></caption>
                 <sidebyside widths="47% 47%" valign="bottom" margins="0%">
 
                   <figure xml:id="fig_series5a">
                     <caption/>
               <!-- START figures/fig_series5a.tex -->
-                    <image xml:id="img_series5a">
+                    <image>
                       <shortdescription>Scatter plots of the sequence, and corresponding partial sums, for the first part of this example.</shortdescription>
                       <description>
                         <p>
@@ -1374,7 +1384,7 @@
                           also appear to oscillate, although they all have negative <m>y</m> coordinates.
                         </p>
                       </description>
-                      <latex-image>
+                      <latex-image label="img_series5a">
 
                       \begin{tikzpicture}
 
@@ -1387,7 +1397,7 @@
                       ]
 
                       \addplot [only marks,firstcolor,mark size={1.5pt},domain=5:50,samples=10] {((-1)^(x+1)*(x^2-x))/(x^3)};
-                      \addplot [only marks,secondcolor,mark size={1.5pt}] coordinates {(5,-0.05528)(10,-0.1723)(15,-0.09917)(20,-0.1525)(25,-0.1105)(30,-0.1452)(35,-0.1156)(40,-0.1414)(45,-0.1186)(50,-0.139)};
+                      \addplot [only marks,secondcolor,mark=square*,mark size={1.5pt}] coordinates {(5,-0.05528)(10,-0.1723)(15,-0.09917)(20,-0.1525)(25,-0.1105)(30,-0.1452)(35,-0.1156)(40,-0.1414)(45,-0.1186)(50,-0.139)};
 
                       \end{axis}
 
@@ -1396,8 +1406,9 @@
                       \node[shift={(0,0pt)},draw] at (myplot.south)
                         {\begin{tikzpicture}
 
-                          \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] { $a_n$};
-                          \fill [secondcolor] (1,0) circle (1.5pt) node [right,black] { $S_n$};
+                          \fill [firstcolor] (0,0) circle (2pt) node [right,black] { $a_n$};
+                          \fill [secondcolor] (1,0) circle (0.1pt) node [right, black] { $S_n$};
+                          \draw [secondcolor] plot [only marks,mark=square*] coordinates {(1,0)};
 
                         \end{tikzpicture}};
 
@@ -1411,7 +1422,7 @@
                   <figure xml:id="fig_series5b">
                     <caption/>
               <!-- START figures/fig_series5b.tex -->
-                    <image xml:id="img_series5b">
+                    <image>
                       <shortdescription>Scatter plots of the sequence, and corresponding partial sums, for the first part of this example.</shortdescription>
                       <description>
                         <p>
@@ -1420,7 +1431,7 @@
                           and as a result, we also see that the points in the plot for <m>S_n</m> quickly converge toward the limiting value.
                         </p>
                       </description>
-                      <latex-image>
+                      <latex-image label="img_series5b">
 
                       \begin{tikzpicture}
 
@@ -1431,8 +1442,8 @@
                       xlabel={$n$}
                       ]
 
+                      \addplot [only marks,secondcolor,mark=square*,mark size={1.75pt}] coordinates {(1,1000.)(2,1500.)(3,1667.)(4,1708.)(5,1717.)(6,1718.)(7,1718.)(8,1718.)(9,1718.)(10,1718.)};
                       \addplot [only marks,firstcolor,mark size={1.5pt}] coordinates {(1,1000.)(2,500.)(3,166.7)(4,41.67)(5,8.333)(6,1.389)(7,0.1984)(8,0.0248)(9,0.002756)(10,0.0002756)};
-                      \addplot [only marks,secondcolor,mark size={1.5pt}] coordinates {(1,1000.)(2,1500.)(3,1667.)(4,1708.)(5,1717.)(6,1718.)(7,1718.)(8,1718.)(9,1718.)(10,1718.)};
 
                       \end{axis}
 
@@ -1441,8 +1452,9 @@
                       \node[shift={(0,-25pt)},draw] at (myplot.south)
                         {\begin{tikzpicture}
 
-                          \fill [firstcolor] (0,0) circle (1.5pt) node [right,black] { $a_n$};
-                          \fill [secondcolor] (1,0) circle (1.5pt) node [right,black] { $S_n$};
+                          \fill [firstcolor] (0,0) circle (2pt) node [right,black] { $a_n$};
+                          \fill [secondcolor] (1,0) circle (0.1pt) node [right, black] { $S_n$};
+                          \draw [secondcolor] plot [only marks,mark=square*] coordinates {(1,0)};
 
                         \end{tikzpicture}};
 
@@ -1462,7 +1474,7 @@
                 we are adding <m>\ds \sum_{n=4}^\infty \frac{1}{n^2}</m>
                 (note  we start with <m>n=4</m>, not <m>n=1</m>).
                 This series will converge.
-                Using the formula from <xref ref="idea_famous_series">Key Idea</xref>,
+                Using the formula from <xref ref="idea_famous_series"/>,
                 we have the following:
                 <md>
                   <mrow>\infser \frac1{n^2} \amp = \sum_{n=1}^3 \frac1{n^2} +\sum_{n=4}^\infty \frac1{n^2}</mrow>
@@ -1475,6 +1487,10 @@
             </li>
           </ol>
         </p>
+      </solution>
+      <solution component="video">
+        <title>Video solution</title>
+        <video width="98%" youtube="BMn2QTtTdNQ" xml:id="vid-seqseries-series-using-properties" label="vid-seqseries-series-using-properties" component="video"/>
       </solution>
     </example>
 
@@ -1562,7 +1578,7 @@
       <em>Important!</em> This theorem <em>does not state</em>
       that if <m>\ds \lim_{n\to\infty} a_n = 0</m> then <m>\ds \sum_{n=1}^\infty a_n</m> converges.
       The standard example of this is the Harmonic Series,
-      as given in <xref ref="idea_famous_series">Key Idea</xref>.
+      as given in <xref ref="idea_famous_series"/>.
       The Harmonic Sequence, <m>\{1/n\}</m>, converges to 0;
       the Harmonic Series, <m>\ds \sum_{n=1}^\infty \frac1n</m>,
       diverges.
@@ -1570,13 +1586,13 @@
 
     <p>
       Looking back,
-      we can apply this theorem to the series in <xref ref="ex_series1">Example</xref>.
+      we can apply this theorem to the series in <xref ref="ex_series1"/>.
       In that example,
       the <m>n</m>th terms of both sequences do not converge to 0, therefore we can quickly conclude that each series diverges.
     </p>
 
     <p>
-      One can rewrite <xref ref="thm_series_nth_term">Theorem</xref>
+      One can rewrite <xref ref="thm_series_nth_term"/>
       to state <q>If a series converges,
       then the underlying sequence converges to 0.</q>
       While it is important to understand the truth of this statement,
@@ -2081,7 +2097,7 @@
         <introduction>
           <p>
             In the following exercises,
-            use <xref ref="thm_series_nth_term">Theorem</xref>
+            use <xref ref="thm_series_nth_term"/>
             to show the given series diverges.
           </p>
         </introduction>
@@ -2098,7 +2114,7 @@
               <solution>
                 <p>
                   <m>\lim\limits_{n\to\infty}a_n = 3</m>;
-                  by <xref ref="thm_series_nth_term">Theorem</xref> the series diverges.
+                  by <xref ref="thm_series_nth_term"/> the series diverges.
                 </p>
               </solution>
           <!--</webwork>-->
@@ -2116,7 +2132,7 @@
               <solution>
                 <p>
                   <m>\lim\limits_{n\to\infty}a_n = \infty</m>;
-                  by <xref ref="thm_series_nth_term">Theorem</xref> the series diverges.
+                  by <xref ref="thm_series_nth_term"/> the series diverges.
                 </p>
               </solution>
           <!--</webwork>-->
@@ -2134,7 +2150,7 @@
               <solution>
                 <p>
                   <m>\lim\limits_{n\to\infty}a_n = \infty</m>;
-                  by <xref ref="thm_series_nth_term">Theorem</xref> the series diverges.
+                  by <xref ref="thm_series_nth_term"/> the series diverges.
                 </p>
               </solution>
           <!--</webwork>-->
@@ -2152,7 +2168,7 @@
               <solution>
                 <p>
                   <m>\lim\limits_{n\to\infty}a_n = 1</m>;
-                  by <xref ref="thm_series_nth_term">Theorem</xref> the series diverges.
+                  by <xref ref="thm_series_nth_term"/> the series diverges.
                 </p>
               </solution>
           <!--</webwork>-->
@@ -2170,7 +2186,7 @@
               <solution>
                 <p>
                   <m>\lim\limits_{n\to\infty}a_n = 1/2</m>;
-                  by <xref ref="thm_series_nth_term">Theorem</xref> the series diverges.
+                  by <xref ref="thm_series_nth_term"/> the series diverges.
                 </p>
               </solution>
           <!--</webwork>-->
@@ -2188,7 +2204,7 @@
               <solution>
                 <p>
                   <m>\lim\limits_{n\to\infty}a_n = e</m>;
-                  by <xref ref="thm_series_nth_term">Theorem</xref> the series diverges.
+                  by <xref ref="thm_series_nth_term"/> the series diverges.
                 </p>
               </solution>
           <!--</webwork>-->
@@ -2300,8 +2316,8 @@
               </statement>
               <solution>
                 <p>
-                  Converges; by <xref ref="idea_famous_series">Key Idea</xref>
-            and <xref ref="thm_series_prop">Theorem</xref>,
+                  Converges; by <xref ref="idea_famous_series"/>
+            and <xref ref="thm_series_prop"/>,
             series converges to <m>10e</m>.
                 </p>
               </solution>
@@ -2353,7 +2369,7 @@
               </statement>
               <solution>
                 <p>
-                  Diverges; by <xref ref="thm_series_prop">Theorem</xref>
+                  Diverges; by <xref ref="thm_series_prop"/>
             this is half the Harmonic Series,
             which diverges by growing without bound.
             <q>Half of growing without bound</q>
@@ -2884,7 +2900,7 @@
         </exercise>
       </exercisegroup>
 
-      <exercise xml:id="x08_02_ex_24"  label="ex-series-harmonic-split">
+      <exercise xml:id="x08_02_ex_24" label="ex-series-harmonic-split">
         <!--<webwork xml:id="webwork-ex-series-harmonic-split">
             <pg-code>
             </pg-code>-->
@@ -2995,7 +3011,7 @@
               <p>
                 Using partial fractions,
                 we can show that <m>a_n = \frac14\left(\frac1{2n-1}+\frac{1}{2n+1}\right)</m>.
-                The series is effectively twice the sum of the odd terms of the Harmonic Series which was shown to diverge in <xref ref="x08_02_ex_24">Exercise</xref>.
+                The series is effectively twice the sum of the odd terms of the Harmonic Series which was shown to diverge in <xref ref="x08_02_ex_24"/>.
                 Thus this series diverges.
               </p>
             </solution>
