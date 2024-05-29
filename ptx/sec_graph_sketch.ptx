@@ -301,7 +301,7 @@
               \begin{tikzpicture}
               \begin{axis}[ymin=-5.5,ymax=10.9,xmin=-1.2,xmax=3.2,]
               \addplot[firstcurvestyle,leftarrow,domain=-1:0.435] {(5-6.4)/(0-0.435)*(x-0.435)+6.4};
-              \addplot[firstcurvestyle,-] coordinates {(0.435,6.4) (1.79,2.69)};
+              \addplot[firstcurvestyle] coordinates {(0.435,6.4) (1.79,2.69)};
               \addplot[firstcurvestyle,rightarrow,domain=1.79:2.7] {(5-6.4)/(0-0.435)*(x-1.79)+2.69};
               \addplot[soliddot] coordinates{(0.435,6.4) (1.11,4.55) (1.79,2.69)};
               \end{axis}
@@ -329,7 +329,7 @@
               \begin{tikzpicture}
               \begin{axis}[ymin=-5.5,ymax=10.9,xmin=-1.2,xmax=3.2,]
               \addplot[firstcurvestyle,leftarrow,domain=-0.8:0.435] {(x-0.435)^2/(0-0.435)^2*(5-6.4)  + 6.4};
-              \addplot[firstcurvestyle,-,domain=0.435:1.79] {(6.4-2.69)*6/(1.79-0.435)^3*((x-0.435)*(x-1.79)^2/2 - (x-1.79)^3/6)+2.69};
+              \addplot[firstcurvestyle,domain=0.435:1.79] {(6.4-2.69)*6/(1.79-0.435)^3*((x-0.435)*(x-1.79)^2/2 - (x-1.79)^3/6)+2.69};
               \addplot[firstcurvestyle,rightarrow,domain=1.79:2.8] {-(x-1.79)^2/(0-0.435)^2*(5-6.4)  + 2.69};
               \addplot[soliddot] coordinates{(0.435,6.4) (1.11,4.55) (1.79,2.69)};
               \end{axis}
@@ -356,7 +356,7 @@
               <latex-image label="img_sketch1c">
                 \begin{tikzpicture}
                 \begin{axis}[ymin=-5.5,ymax=10.9,xmin=-1.2,xmax=3.2,]
-                \addplot [firstcurvestyle,domain=-.6:2.8] {3*x^3-10*x^2+7*x+5};
+                \addplot [firstcurvestyle,infinite,domain=-.6:2.8] {3*x^3-10*x^2+7*x+5};
                 \addplot[soliddot] coordinates{(0.435,6.4) (1.11,4.55) (1.79,2.69)};
                 \end{axis}
                 \end{tikzpicture}
@@ -631,9 +631,9 @@
               <latex-image label="img_sketch2c">
                 \begin{tikzpicture}
                 \begin{axis}[ymin=-5.5,ymax=5.5,xmin=-5.2,xmax=5.2,]
-                \addplot [firstcurvestyle,domain=-5:-2.1] {((x-2)*(x+1))/((x-3)*(x+2))};
-                \addplot [firstcurvestyle,domain=-1.9:2.9] {((x-2)*(x+1))/((x-3)*(x+2))};
-                \addplot [firstcurvestyle,domain=3.1:5] {((x-2)*(x+1))/((x-3)*(x+2))};
+                \addplot [firstcurvestyle,infinite,domain=-5:-2.1] {((x-2)*(x+1))/((x-3)*(x+2))};
+                \addplot [firstcurvestyle,infinite,domain=-1.9:2.9] {((x-2)*(x+1))/((x-3)*(x+2))};
+                \addplot [firstcurvestyle,infinite,domain=3.1:5] {((x-2)*(x+1))/((x-3)*(x+2))};
                 \addplot [asymptote] coordinates {(-2,5.5) (-2,-5.5)};
                 \addplot [asymptote] coordinates {(3,5.5) (3,-5.5)};
                 \addplot [asymptote] coordinates {(-5.5,1) (5.5,1)};
@@ -873,10 +873,10 @@
               \begin{tikzpicture}
               \begin{axis}[ ymin=-3.1,ymax=8.1,xmin=-7.5,xmax=6.5,]
               \addplot[firstcurvestyle,leftarrow,domain=-7:-4] {(7.2-7.5)/(-5.579+4)*(x+4)+7.5};
-              \addplot[firstcurvestyle,-,domain=-4:-1.305] {(1.630-7.5)/(-1.305+4)*(x+4)+7.5};
-              \addplot[firstcurvestyle,-,domain=-1.305:-1] {(0-1.630)/(-1+1.305)*(x+1)};
-              \addplot[firstcurvestyle,-,domain=-1:0] {(-2.5-0)/(0+1)*(x+1)};
-              \addplot[firstcurvestyle,-,domain=0:1.064] {(-1.331+2.5)/(1.064-0)*(x-1.064)-1.331};
+              \addplot[firstcurvestyle,domain=-4:-1.305] {(1.630-7.5)/(-1.305+4)*(x+4)+7.5};
+              \addplot[firstcurvestyle,domain=-1.305:-1] {(0-1.630)/(-1+1.305)*(x+1)};
+              \addplot[firstcurvestyle,domain=-1:0] {(-2.5-0)/(0+1)*(x+1)};
+              \addplot[firstcurvestyle,domain=0:1.064] {(-1.331+2.5)/(1.064-0)*(x-1.064)-1.331};
               \addplot[firstcurvestyle,rightarrow,domain=1.064:5] {(0+1.331)/(2-1.064)*(x-2)};
               \addplot[asymptote,domain=-7.5:6.5] {5};
               \addplot[soliddot] coordinates{(0,-2.5) (-1,0) (2,0) (-5.579,7.2) (-1.305,1.630) (1.064,-1.331) (-4,7.5)};
@@ -905,10 +905,10 @@
               \begin{tikzpicture}
               \begin{axis}[ ymin=-3.1,ymax=8.1,xmin=-7.5,xmax=6.5,]
               \addplot[firstcurvestyle,leftarrow,domain=-7.5:-4] {7.5-0.3/(exp(-1/2/(-5.579+4)^2*(-5.579+4)^2) - 1)*(-1+exp(-1/2/(-5.579+4)^2*(x+4)^2))};
-              \addplot[firstcurvestyle,-,domain=-4:-1.305] {(1.630-7.5)/(-1.305+4)^2*(x+4)^2+7.5};
-              \addplot[firstcurvestyle,-,domain=-1.305:-1] {(0-1.630)/(-1+1.305)*(x+1)+0};
-              \addplot[firstcurvestyle,-,domain=-1:0] {2.5/(-1)^2*x^2-2.5};
-              \addplot[firstcurvestyle,-,domain=0:1.064] {(-1.331+2.5)/(1.064)^2*x^2-2.5};
+              \addplot[firstcurvestyle,domain=-4:-1.305] {(1.630-7.5)/(-1.305+4)^2*(x+4)^2+7.5};
+              \addplot[firstcurvestyle,domain=-1.305:-1] {(0-1.630)/(-1+1.305)*(x+1)+0};
+              \addplot[firstcurvestyle,domain=-1:0] {2.5/(-1)^2*x^2-2.5};
+              \addplot[firstcurvestyle,domain=0:1.064] {(-1.331+2.5)/(1.064)^2*x^2-2.5};
               \addplot[firstcurvestyle,rightarrow,domain=1.064:6] {4*(-1.331+2.5)/1.064 * sqrt(1.064+((1.331*1.064/4/(-1.331+2.5)+1.064)^2 - 1.064*2) / (1.064+2 - 2*(1.331*1.064/4/(-1.331+2.5)+1.064)))*sqrt(x+((1.331*1.064/4/(-1.331+2.5)+1.064)^2 - 1.064*2) / (1.064+2 - 2*(1.331*1.064/4/(-1.331+2.5)+1.064)))-(4*(-1.331+2.5)/1.064 * sqrt(1.064+((1.331*1.064/4/(-1.331+2.5)+1.064)^2 - 1.064*2) / (1.064+2 - 2*(1.331*1.064/4/(-1.331+2.5)+1.064))))*sqrt(2+((1.331*1.064/4/(-1.331+2.5)+1.064)^2 - 1.064*2) / (1.064+2 - 2*(1.331*1.064/4/(-1.331+2.5)+1.064)))};
               \addplot[asymptote,domain=-7.5:6.5] {5};
               \addplot[soliddot] coordinates{(0,-2.5) (-1,0) (2,0) (-5.579,7.2) (-1.305,1.630) (1.064,-1.331) (-4,7.5)};
@@ -938,7 +938,7 @@
                 \begin{tikzpicture}
                 \begin{axis}[ymin=-3.1,ymax=8.1,xmin=-7.5,xmax=6.5,]
                 \addplot [asymptote] coordinates {(-7.5,5) (6.5,5)};
-                \addplot [firstcurvestyle,domain=-7.5:6.5] {(5*(x-2)*(x+1))/(x^2+2*x+4)};
+                \addplot [firstcurvestyle,infinite,domain=-7.5:6.5] {(5*(x-2)*(x+1))/(x^2+2*x+4)};
                 \addplot [soliddot] coordinates {(-5.75,7.2) (-4., 7.5) (-1.31, 1.63) (-1,0) (0,-2.5) (1.064, -1.33) (2,0)};
                 \end{axis}
                 \end{tikzpicture}

@@ -52,8 +52,8 @@
                 ymin=-.1,
                 ymax=110,
               ]
-              \addplot[firstcurvestyle,domain=-1:-0.1] {1/x^2};
-              \addplot[firstcurvestyle,domain=0.1:1] {1/x^2};
+              \addplot[firstcurvestyle,infinite,domain=-1:-0.1] {1/x^2};
+              \addplot[firstcurvestyle,infinite,domain=0.1:1] {1/x^2};
             \end{axis}
           \end{tikzpicture}
         </latex-image>
@@ -226,8 +226,8 @@
                     ymin=-1,
                     ymax=110,
                   ]
-                  \addplot[firstcurvestyle,domain=0:0.9] {1/(x-1)^2};
-                  \addplot[firstcurvestyle,domain=1.1:2] {1/(x-1)^2};
+                  \addplot[firstcurvestyle,infinite,domain=0:0.9] {1/(x-1)^2};
+                  \addplot[firstcurvestyle,infinite,domain=1.1:2] {1/(x-1)^2};
                   \addplot[asymptote,rightarrow] coordinates {(1,1) (1,100)};
                 \end{axis}
               \end{tikzpicture}
@@ -499,7 +499,7 @@
                 ymin=-.2,
                 ymax=3.2,
               ]
-              \addplot+[domain=-1:2] {x+1};
+              \addplot+[infinite,domain=-1:2] {x+1};
               \addplot[hollowdot] coordinates {(1,2)};
             \end{axis}
           \end{tikzpicture}
@@ -704,7 +704,7 @@
                         ymin=-.2,
                         ymax=1.1,
                       ]
-                      \addplot+[domain=-84:84,samples=177] ({2*tan(x)},{-(cos(x))^2+1});
+                      \addplot+[infinite,domain=-84:84,samples=177] ({2*tan(x)},{-(cos(x))^2+1});
                       \addplot[asymptote] coordinates {(-21,1) (21,1)};
                     \end{axis}
                   \end{tikzpicture}
@@ -812,7 +812,7 @@
                     ymin=-1.1,
                     ymax=1.1,
                   ]
-                  \addplot+[domain=-87:87,samples=100] ({tan(x)},{sin(x)*cos(x)});
+                  \addplot+[infinite,domain=-87:87,samples=101] ({tan(x)},{sin(x)*cos(x)});
                 \end{axis}
               \end{tikzpicture}
             </latex-image>
@@ -841,7 +841,7 @@
                     ymin=-1.1,
                     ymax=1.1,
                   ]
-                  \addplot+[domain=-87:87,samples=100] ({tan(x)},{sin(x)});
+                  \addplot+[infinite,domain=-87:87,samples=101] ({tan(x)},{sin(x)});
                 \end{axis}
               \end{tikzpicture}
             </latex-image>
@@ -872,7 +872,7 @@
                     ymin=-.3,
                     ymax=1.1
                   ]
-                  \addplot+[domain=-20:20,samples=100] {func(x)};
+                  \addplot+[infinite,domain=-20:20,samples=101] {func(x)};
                 \end{axis}
               \end{tikzpicture}
             </latex-image>
@@ -1443,8 +1443,8 @@
                       ymin = -50,
                       ymax = 50,
                     ]
-                      \addplot[firstcurvestyle, -{Kite}, domain=$xmin:$below, samples=100] {$b/(x-$a)^($n)};
-                      \addplot[firstcurvestyle, {Kite}-, domain=$above:$xmax, samples=100] {$b/(x-$a)^($n)};
+                      \addplot[firstcurvestyle, infiniteright, domain=$xmin:$below, samples=101] {$b/(x-$a)^($n)};
+                      \addplot[firstcurvestyle, infiniteleft, domain=$above:$xmax, samples=101] {$b/(x-$a)^($n)};
                       \addplot[asymptote,-] coordinates {($a,-50) ($a,50)};
                     \end{axis}
                   \end{tikzpicture}
@@ -1535,9 +1535,9 @@
                       ymin = -50,
                       ymax = 50,
                     ]
-                      \addplot[firstcurvestyle, -{Kite}, domain=$xmin:$x[0], samples=100] {1/((x-$a[0])*(x-$a[1])^(2))};
-                      \addplot[firstcurvestyle, {Kite}-{Kite}, domain=$x[1]:$x[2], samples=100] {1/((x-$a[0])*(x-$a[1])^(2))};
-                      \addplot[firstcurvestyle, {Kite}-, domain=$x[3]:$xmax, samples=100] {1/((x-$a[0])*(x-$a[1])^(2))};
+                      \addplot[firstcurvestyle, infiniteright, domain=$xmin:$x[0], samples=101] {1/((x-$a[0])*(x-$a[1])^(2))};
+                      \addplot[firstcurvestyle, infinite, domain=$x[1]:$x[2], samples=101] {1/((x-$a[0])*(x-$a[1])^(2))};
+                      \addplot[firstcurvestyle, infiniteleft, domain=$x[3]:$xmax, samples=101] {1/((x-$a[0])*(x-$a[1])^(2))};
                       \addplot[asymptote,-] coordinates {($a[0],-50) ($a[0],50)};
                       \addplot[asymptote,-] coordinates {($a[1],-50) ($a[1],50)};
                     \end{axis}
@@ -1659,7 +1659,7 @@
                       ymin = -1,
                       ymax = $a+1,
                     ]
-                      \addplot[firstcurvestyle, -, domain=$xmin:$xmax, smooth] {$a/(e^($b*x)+1)};
+                      \addplot[firstcurvestyle, domain=$xmin:$xmax, smooth] {$a/(e^($b*x)+1)};
                     \end{axis}
                   \end{tikzpicture}
                 </latex-image>
@@ -1753,7 +1753,7 @@
                       xmin = $xmin,
                       xmax = $xmax,
                     ]
-                      \addplot[firstcurvestyle, -, domain=$xmin:$xmax, samples=$samples] {x^($n)*sin(deg($a*pi*x))};
+                      \addplot[firstcurvestyle, domain=$xmin:$xmax, samples=$samples] {x^($n)*sin(deg($a*pi*x))};
                     \end{axis}
                   \end{tikzpicture}
                 </latex-image>
@@ -1846,7 +1846,7 @@
                       ymin = -1.2,
                       ymax = 1.2,
                     ]
-                      \addplot[firstcurvestyle, -, domain=$xmin:$xmax, samples=$samples] {$trigfun(deg($a*x))};
+                      \addplot[firstcurvestyle, domain=$xmin:$xmax, samples=$samples] {$trigfun(deg($a*x))};
                     \end{axis}
                   \end{tikzpicture}
                 </latex-image>
@@ -1926,7 +1926,7 @@
                       ymin = -20,
                       ymax = 20,
                     ]
-                      \addplot[firstcurvestyle, -, domain=$start:$stop, smooth] {$f};
+                      \addplot[firstcurvestyle, domain=$start:$stop, smooth] {$f};
                     \end{axis}
                   \end{tikzpicture}
                 </latex-image>
