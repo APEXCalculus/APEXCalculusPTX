@@ -12,14 +12,6 @@
 
   <macros>
     \newcommand{\highlight}[1]{{\color{blue}{#1}}}
-    \newcommand{\apex}{\mbox{\hbox{A}\kern -1pt \lower -2pt\hbox{P}\kern -4pt \lower .7ex\hbox{E}\kern -1pt \hbox{X}}}
-    \newcommand{\colorlinecolor}{blue!95!black!30}
-    \newcommand{\bwlinecolor}{black!30}
-    \newcommand{\thelinecolor}{\colorlinecolor}
-    \newcommand{\colornamesuffix}{}
-    \newcommand{\linestyle}{[thick, \thelinecolor]}
-    \newcommand{\bmx}[1]{\left[\hskip -3pt\begin{array}{#1} }
-    \newcommand{\emx}{\end{array}\hskip -3pt\right]}
     \newcommand{\ds}{\displaystyle}
     \newcommand{\fp}{f'}
     \newcommand{\fpp}{f''}
@@ -134,10 +126,10 @@
     \colorlet{treestump}{brown}
     \colorlet{treetop}{green!50!black}
     \colorlet{yellowcolfill}{yellow}
-    \pgfplotsset{firstcurvestyle/.style={color=firstcolor,mark=none,thick,{Kite}-{Kite},solid,fill=firstcolor!50,fill=none}}
-    \pgfplotsset{secondcurvestyle/.style={color=secondcolor,mark=none,thick,{Kite}-{Kite},dashdotted,fill=secondcolor!50,fill=none}}
-    \pgfplotsset{thirdcurvestyle/.style={color=thirdcolor,mark=none,thick,{Kite}-{Kite},dashdotdotted,fill=thirdcolor!50,fill=none}}
-    \pgfplotsset{areastyle/.style={fill,opacity=0.5,draw=none}}\pgfplotsset{tangentline/.style={color=black,mark=none,thick,{Kite}-{Kite},solid}}
+    \pgfplotsset{firstcurvestyle/.style={color=firstcolor,mark=none,thick,-,solid,fill=firstcolor!50,fill=none}}
+    \pgfplotsset{secondcurvestyle/.style={color=secondcolor,mark=none,thick,-,dashdotted,fill=secondcolor!50,fill=none}}
+    \pgfplotsset{thirdcurvestyle/.style={color=thirdcolor,mark=none,thick,-,dashdotdotted,fill=thirdcolor!50,fill=none}}
+    \pgfplotsset{areastyle/.style={fill,opacity=0.5,draw=none}}
     \pgfplotsset{tangentline/.style={color=black,mark=none,thick,{Kite}-{Kite},solid}}
     \pgfplotsset{tangentlineseg/.style={color=black,mark=none,thick,-,solid}}
     \pgfplotsset{lineseg/.style={color=black,mark=none,solid}}
@@ -148,8 +140,8 @@
     \pgfplotsset{asymptote/.style={color=black,mark=none,thick,{Kite}-{Kite},dashed}}
     \pgfplotsset{guideline/.style={color=black,mark=none,-}}
     \pgfplotsset{symmetryline/.style={color=black,mark=none,-,dashed}}
-    \pgfplotsset{openinterval/.style={color=black,mark=none,ultra thick,{Circle[open]}-{Circle[open]}}}
-    \pgfplotsset{closedinterval/.style={color=black,mark=none,ultra thick,{Circle}-{Circle}}}
+    \pgfplotsset{openinterval/.style={color=black,mark=none,ultra thick,shorten &lt;=-2.4pt,shorten &gt;=-2.4pt,{Parenthesis}-{Parenthesis}}}
+    \pgfplotsset{closedinterval/.style={color=black,mark=none,ultra thick,shorten &lt;=-2.4pt,shorten &gt;=-2.4pt,{Bracket}-{Bracket}}}
 
     \pgfplotscreateplotcyclelist{curvestylelist}{%
       firstcurvestyle\\%
@@ -168,21 +160,21 @@
     \pgfplotsset{hollowdot/.style={color=firstcolor,fill=white,only marks,mark=*}}
     \pgfplotsset{soliddot/.style={color=firstcolor,fill=firstcolor,only marks,mark=*}}
 
-    \pgfplotsset{open/.style={firstcurvestyle,{Circle[open]}-{Circle[open]}}}
-    \pgfplotsset{openclosed/.style={firstcurvestyle,{Circle[open]}-{Circle}}}
-    \pgfplotsset{closed/.style={firstcurvestyle,{Circle}-{Circle}}}
-    \pgfplotsset{closedopen/.style={firstcurvestyle,{Circle}-{Circle[open]}}}
-    \pgfplotsset{infiniteopen/.style={firstcurvestyle,{Kite}-{Circle[open]}}}
-    \pgfplotsset{openinfinite/.style={firstcurvestyle,{Circle[open]}-{Kite}}}
-    \pgfplotsset{infiniteclosed/.style={firstcurvestyle,{Kite}-{Circle}}}
-    \pgfplotsset{closedinfinite/.style={firstcurvestyle,{Circle}-{Kite}}}
+    \pgfplotsset{open/.style={firstcurvestyle,shorten &lt;=-2.4pt,shorten &gt;=-2.4pt,{Circle[open]}-{Circle[open]}}}
+    \pgfplotsset{openclosed/.style={firstcurvestyle,shorten &lt;=-2.4pt,shorten &gt;=-2.4pt,{Circle[open]}-{Circle}}}
+    \pgfplotsset{closed/.style={firstcurvestyle,shorten &lt;=-2.4pt,shorten &gt;=-2.4pt,{Circle}-{Circle}}}
+    \pgfplotsset{closedopen/.style={firstcurvestyle,shorten &lt;=-2.4pt,shorten &gt;=-2.4pt,{Circle}-{Circle[open]}}}
+    \pgfplotsset{infiniteopen/.style={firstcurvestyle,shorten &gt;=-2.4pt,{Kite}-{Circle[open]}}}
+    \pgfplotsset{openinfinite/.style={firstcurvestyle,shorten &lt;=-2.4pt,{Circle[open]}-{Kite}}}
+    \pgfplotsset{infiniteclosed/.style={firstcurvestyle,shorten &gt;=-2.4pt,{Kite}-{Circle}}}
+    \pgfplotsset{closedinfinite/.style={firstcurvestyle,shorten &lt;=-2.4pt,{Circle}-{Kite}}}
     \pgfplotsset{infinite/.style={firstcurvestyle,{Kite}-{Kite}}}
     \pgfplotsset{infiniteleft/.style={firstcurvestyle,{Kite}-}}
     \pgfplotsset{infiniteright/.style={firstcurvestyle,-{Kite}}}
-    \pgfplotsset{openleft/.style={firstcurvestyle,{Circle[open]}-}}
-    \pgfplotsset{openright/.style={firstcurvestyle,-{Circle[open]}}}
-    \pgfplotsset{closedleft/.style={firstcurvestyle,{Circle}-}}
-    \pgfplotsset{closedright/.style={firstcurvestyle,-{Circle}}}
+    \pgfplotsset{openleft/.style={firstcurvestyle,shorten &lt;=-2.4pt,{Circle[open]}-}}
+    \pgfplotsset{openright/.style={firstcurvestyle,shorten &gt;=-2.4pt,-{Circle[open]}}}
+    \pgfplotsset{closedleft/.style={firstcurvestyle,shorten &lt;=-2.4pt,{Circle}-}}
+    \pgfplotsset{closedright/.style={firstcurvestyle,shorten &gt;=-2.4pt,-{Circle}}}
 
     \pgfplotsset{every axis/.append style = {
       cycle list name = curvestylelist,
@@ -253,10 +245,10 @@
     \colorlet{treestump}{black!25!white}
     \colorlet{treetop}{black!50!white}
     \colorlet{yellowcolfill}{black!10!white}
-    \pgfplotsset{firstcurvestyle/.style={color=firstcolor,mark=none,thick,{Kite}-{Kite},solid,fill=firstcolor!50,fill=none}}
-    \pgfplotsset{secondcurvestyle/.style={color=secondcolor,mark=none,thick,{Kite}-{Kite},dashdotted,fill=secondcolor!50,fill=none}}
-    \pgfplotsset{thirdcurvestyle/.style={color=thirdcolor,mark=none,thick,{Kite}-{Kite},dashdotdotted,fill=thirdcolor!50,fill=none}}
-    \pgfplotsset{areastyle/.style={fill,opacity=0.5,draw=none}}\pgfplotsset{tangentline/.style={color=black,mark=none,thick,{Kite}-{Kite},solid}}
+    \pgfplotsset{firstcurvestyle/.style={color=firstcolor,mark=none,thick,-,solid,fill=firstcolor!50,fill=none}}
+    \pgfplotsset{secondcurvestyle/.style={color=secondcolor,mark=none,thick,-,dashdotted,fill=secondcolor!50,fill=none}}
+    \pgfplotsset{thirdcurvestyle/.style={color=thirdcolor,mark=none,thick,-,dashdotdotted,fill=thirdcolor!50,fill=none}}
+    \pgfplotsset{areastyle/.style={fill,opacity=0.5,draw=none}}
     \pgfplotsset{tangentline/.style={color=black,mark=none,thick,{Kite}-{Kite},solid}}
     \pgfplotsset{tangentlineseg/.style={color=black,mark=none,thick,-,solid}}
     \pgfplotsset{lineseg/.style={color=black,mark=none,solid}}
@@ -267,8 +259,8 @@
     \pgfplotsset{asymptote/.style={color=black,mark=none,thick,{Kite}-{Kite},dashed}}
     \pgfplotsset{guideline/.style={color=black,mark=none,-}}
     \pgfplotsset{symmetryline/.style={color=black,mark=none,-,dashed}}
-    \pgfplotsset{openinterval/.style={color=black,mark=none,ultra thick,{Parenthesis}-{Parenthesis}}}
-    \pgfplotsset{closedinterval/.style={color=black,mark=none,ultra thick,{Bracket}-{Bracket}}}
+    \pgfplotsset{openinterval/.style={color=black,mark=none,ultra thick,shorten &lt;=-2.4pt,shorten &gt;=-2.4pt,{Parenthesis}-{Parenthesis}}}
+    \pgfplotsset{closedinterval/.style={color=black,mark=none,ultra thick,shorten &lt;=-2.4pt,shorten &gt;=-2.4pt,{Bracket}-{Bracket}}}
 
     \pgfplotscreateplotcyclelist{curvestylelist}{%
       firstcurvestyle\\%
@@ -284,24 +276,24 @@
     \pgfplotsset{xdiscontinuity/.style={axis x discontinuity=parallel}}
     \pgfplotsset{ydiscontinuity/.style={axis y discontinuity=crunch}}
 
-    \pgfplotsset{hollowdot/.style={color=firstcolor,fill=white,only marks,mark=*}}
-    \pgfplotsset{soliddot/.style={color=firstcolor,fill=firstcolor,only marks,mark=*}}
+    \pgfplotsset{hollowdot/.style={color=firstcolor,fill=white,only marks,mark size=2.4pt,mark=*}}
+    \pgfplotsset{soliddot/.style={color=firstcolor,fill=firstcolor,only marks,mark size=2.4pt,mark=*}}
 
-    \pgfplotsset{open/.style={firstcurvestyle,{Circle[open]}-{Circle[open]}}}
-    \pgfplotsset{openclosed/.style={firstcurvestyle,{Circle[open]}-{Circle}}}
-    \pgfplotsset{closed/.style={firstcurvestyle,{Circle}-{Circle}}}
-    \pgfplotsset{closedopen/.style={firstcurvestyle,{Circle}-{Circle[open]}}}
-    \pgfplotsset{infiniteopen/.style={firstcurvestyle,{Kite}-{Circle[open]}}}
-    \pgfplotsset{openinfinite/.style={firstcurvestyle,{Circle[open]}-{Kite}}}
-    \pgfplotsset{infiniteclosed/.style={firstcurvestyle,{Kite}-{Circle}}}
-    \pgfplotsset{closedinfinite/.style={firstcurvestyle,{Circle}-{Kite}}}
+    \pgfplotsset{open/.style={firstcurvestyle,shorten &lt;=-2.4pt,shorten &gt;=-2.4pt,{Circle[open]}-{Circle[open]}}}
+    \pgfplotsset{openclosed/.style={firstcurvestyle,shorten &lt;=-2.4pt,shorten &gt;=-2.4pt,{Circle[open]}-{Circle}}}
+    \pgfplotsset{closed/.style={firstcurvestyle,shorten &lt;=-2.4pt,shorten &gt;=-2.4pt,{Circle}-{Circle}}}
+    \pgfplotsset{closedopen/.style={firstcurvestyle,shorten &lt;=-2.4pt,shorten &gt;=-2.4pt,{Circle}-{Circle[open]}}}
+    \pgfplotsset{infiniteopen/.style={firstcurvestyle,shorten &gt;=-2.4pt,{Kite}-{Circle[open]}}}
+    \pgfplotsset{openinfinite/.style={firstcurvestyle,shorten &lt;=-2.4pt,{Circle[open]}-{Kite}}}
+    \pgfplotsset{infiniteclosed/.style={firstcurvestyle,shorten &gt;=-2.4pt,{Kite}-{Circle}}}
+    \pgfplotsset{closedinfinite/.style={firstcurvestyle,shorten &lt;=-2.4pt,{Circle}-{Kite}}}
     \pgfplotsset{infinite/.style={firstcurvestyle,{Kite}-{Kite}}}
     \pgfplotsset{infiniteleft/.style={firstcurvestyle,{Kite}-}}
     \pgfplotsset{infiniteright/.style={firstcurvestyle,-{Kite}}}
-    \pgfplotsset{openleft/.style={firstcurvestyle,{Circle[open]}-}}
-    \pgfplotsset{openright/.style={firstcurvestyle,-{Circle[open]}}}
-    \pgfplotsset{closedleft/.style={firstcurvestyle,{Circle}-}}
-    \pgfplotsset{closedright/.style={firstcurvestyle,-{Circle}}}
+    \pgfplotsset{openleft/.style={firstcurvestyle,shorten &lt;=-2.4pt,{Circle[open]}-}}
+    \pgfplotsset{openright/.style={firstcurvestyle,shorten &gt;=-2.4pt,-{Circle[open]}}}
+    \pgfplotsset{closedleft/.style={firstcurvestyle,shorten &lt;=-2.4pt,{Circle}-}}
+    \pgfplotsset{closedright/.style={firstcurvestyle,shorten &gt;=-2.4pt,-{Circle}}}
 
     \pgfplotsset{every axis/.append style = {
       cycle list name = curvestylelist,
@@ -379,6 +371,7 @@
     pen curvepen=.4mm+bluepen;
     pen curvepen2=.4mm+redpen;
     pen darksurfacepen=rgb(.2,.2,1)+opacity(.7);
+    currentlight.background=opacity(0.0);
   </asymptote-preamble>
 
   <asymptote-preamble component="print">
@@ -407,6 +400,5 @@
     pen darksurfacepen=rgb(.1,.1,.1)+opacity(.7);
   </asymptote-preamble>
 
-  <document-id>APEX-Calculus</document-id>
   <rename element="insight" xml:lang="en-US">Key Idea</rename>
 </docinfo>
