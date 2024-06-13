@@ -132,7 +132,7 @@
     <!-- subtitle here -->
     <xsl:text>}</xsl:text>
     <xsl:text>{</xsl:text>
-    <xsl:apply-templates select="." mode="internal-id" />
+    <xsl:apply-templates select="." mode="unique-id" />
     <xsl:text>}</xsl:text>
     <xsl:text>&#xa;</xsl:text>
 </xsl:template>
@@ -252,7 +252,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
         <xsl:text>}{</xsl:text>
         <xsl:apply-templates select="." mode="caption-full"/>
         <xsl:text>}{</xsl:text>
-        <xsl:apply-templates select="." mode="internal-id"/>
+        <xsl:apply-templates select="." mode="unique-id"/>
         <xsl:text>}{</xsl:text>
         <xsl:if test="$b-latex-hardcode-numbers">
             <xsl:apply-templates select="." mode="number"/>
@@ -378,7 +378,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
     <image width="60%" margins="0% 40%">
       <xsl:attribute name="pi:generated">
           <xsl:text>qrcode/</xsl:text>
-          <xsl:apply-templates select="." mode="visible-id-early"/>
+          <xsl:apply-templates select="." mode="assembly-id"/>
           <xsl:text>.png</xsl:text>
       </xsl:attribute>
     </image>
