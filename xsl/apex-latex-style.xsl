@@ -279,6 +279,21 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
     </xsl:if>
 </xsl:template>
 
+<!-- Adjust width of some tcolorboxes that aren't wide enough to fit their content -->
+
+<xsl:template match="theorem|definition|insight|figure">
+  <xsl:if test="@hstretch">
+    <xsl:text>&#xa;</xsl:text>
+    <xsl:text>{\tcbset{text width=</xsl:text>
+      <xsl:value-of select="@hstretch"/>
+    <xsl:text>pt}&#xa;</xsl:text>  
+  </xsl:if>
+  <xsl:apply-imports/>
+  <xsl:if test="@hstretch">
+    <xsl:text>}&#xa;</xsl:text>
+  </xsl:if>
+</xsl:template>
+
 <!-- asides in the margin -->
 <!-- simple asides, with no styling available -->
 <xsl:template match="aside">
