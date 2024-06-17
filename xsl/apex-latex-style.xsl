@@ -272,16 +272,25 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
         </xsl:otherwise>
       </xsl:choose>
     </xsl:if>
+    <xsl:if test="@hstretch">
+      <xsl:text>&#xa;</xsl:text>
+      <xsl:text>{\tcbset{text width=</xsl:text>
+        <xsl:value-of select="@hstretch"/>
+      <xsl:text>pt}&#xa;</xsl:text>  
+    </xsl:if>
     <xsl:apply-imports/>
     <xsl:if test="@vshift">
       <xsl:text>}{</xsl:text><xsl:value-of select="@vshift"/><xsl:text>cm}&#xa;</xsl:text>
       <xsl:text>&#xa;</xsl:text>
     </xsl:if>
+    <xsl:if test="@hstretch">
+      <xsl:text>}&#xa;</xsl:text>
+    </xsl:if>
 </xsl:template>
 
 <!-- Adjust width of some tcolorboxes that aren't wide enough to fit their content -->
 
-<xsl:template match="theorem|definition|insight|figure">
+<xsl:template match="definition|insight">
   <xsl:if test="@hstretch">
     <xsl:text>&#xa;</xsl:text>
     <xsl:text>{\tcbset{text width=</xsl:text>
