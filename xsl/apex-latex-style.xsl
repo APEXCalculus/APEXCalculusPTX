@@ -256,6 +256,29 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
   </xsl:choose> 
 </xsl:template>
 
+<!-- "aside" -->
+<!-- The assembalge template, applied to aside, to change a setting -->
+<xsl:template match="aside" mode="environment">
+    <!-- Names of various pieces use the element name -->
+    <xsl:variable name="environment-name">
+        <xsl:value-of select="local-name(.)"/>
+    </xsl:variable>
+    <xsl:text>%% </xsl:text>
+    <xsl:value-of select="$environment-name"/>
+    <xsl:text>: regular aside, but not breakable&#xa;</xsl:text>
+    <xsl:text>\tcbset{ </xsl:text>
+    <xsl:value-of select="$environment-name"/>
+    <xsl:text>style/.style={</xsl:text>
+    <xsl:apply-templates select="." mode="tcb-style"/>
+    <xsl:text>} }&#xa;</xsl:text>
+    <xsl:text>\newtcolorbox{</xsl:text>
+    <xsl:value-of select="$environment-name"/>
+    <xsl:text>}[3]{title={\notblank{#2}{#2}{}}, </xsl:text>
+    <xsl:text>phantomlabel={#3}, parbox=false, before upper app={\setlength{\parindent}{\normalparindent}}, </xsl:text>
+    <xsl:value-of select="$environment-name"/>
+    <xsl:text>style}&#xa;</xsl:text>
+</xsl:template>
+
 <!-- move vshift figures to the margin -->
 <xsl:template match="figure">
     <xsl:if test="@vshift">
@@ -290,7 +313,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
 
 <!-- Adjust width of some tcolorboxes that aren't wide enough to fit their content -->
 
-<xsl:template match="definition|insight">
+<xsl:template match="definition|theorem|insight">
   <xsl:if test="@hstretch">
     <xsl:text>&#xa;</xsl:text>
     <xsl:text>{\tcbset{text width=</xsl:text>
@@ -404,6 +427,24 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
         <xsl:with-param name="b-original" select="$b-original" />
     </xsl:apply-templates>
     <xsl:text>}{</xsl:text><xsl:value-of select="@vshift"/><xsl:text>cm}%&#xa;</xsl:text>
+    <xsl:text>&#xa;</xsl:text>
+</xsl:template>
+
+<!-- Solutions shouldn't be numbered when there's a video solution -->
+<xsl:template match="solution[ancestor::example and not(descendant::margin-video)]">
+  <xsl:param name="b-original" />
+  <xsl:param name="purpose" />
+  <xsl:param name="b-component-heading"/>
+
+    <!-- <xsl:apply-templates select="." mode="solution-heading">
+        <xsl:with-param name="b-original" select="$b-original" />
+        <xsl:with-param name="purpose" select="$purpose" />
+        <xsl:with-param name="b-component-heading" select="$b-component-heading"/>
+    </xsl:apply-templates> -->
+    <xsl:text>\noindent\textbf{\blocktitlefont Solution. } %&#xa;</xsl:text>
+    <xsl:apply-templates>
+        <xsl:with-param name="b-original" select="$b-original" />
+    </xsl:apply-templates>
     <xsl:text>&#xa;</xsl:text>
 </xsl:template>
 
