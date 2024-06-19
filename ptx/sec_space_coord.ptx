@@ -4104,7 +4104,7 @@
             </pg-code> -->
             <statement>
               <p>
-                Axes drawn in space must conform to the <fillin/> <fillin/> rule.
+                Axes drawn in space must conform to the <fillin/> rule.
               </p>
             </statement>
             <solution>
@@ -4143,9 +4143,6 @@
               <p>
                 In the plane,
                 the equation <m>x=2</m> defines a <var name="$line" evaluator="$lineevaluator" width="10"/>;
-              </p>
-
-              <p>
                 in space, <m>x=2</m> defines a <var name="$plane" evaluator="$planeevaluator" width="10"/>.
               </p>
             </statement>
@@ -4172,13 +4169,16 @@
 
       <exercise label="TaC-space-coordinates-4">
         <webwork xml:id="webwork-TaC-space-coordinates-4">
+            <pg-macros>parserPopUp.pl</pg-macros>
             <pg-code>
-              $surfaces=PopUp(['?','Elliptic Paraboloid','Elliptic Cone','Ellipsoid','Hyperboloid of One Sheet','Hyperboloid of Two Sheets','Hyperbolic Paraboloid'],6);
+              $surfaces=DropDown(['Elliptic Paraboloid','Elliptic Cone','Ellipsoid','Hyperboloid of One Sheet','Hyperboloid of Two Sheets','Hyperbolic Paraboloid'],5,showInStatic=&gt;0);
             </pg-code>
 
             <statement>
               <p>
                 Which quadric surface looks like a Pringles<!--<trademark/>-->(TM)<nbsp/>chip?
+              </p>
+              <p>
                 <var name="$surfaces" form="popup"/>
               </p>
             </statement>
@@ -4227,6 +4227,7 @@
       <title>Problems</title>
       <exercise label="ex-space-coordinates-distance">
         <webwork xml:id="webwork-ex-space-coordinates-distance">
+          <pg-macros>parserPopUp.pl</pg-macros>
             <pg-code>
               Context("Point");
               $A=Point("(1,4,2)");
@@ -4244,7 +4245,7 @@
               $magCA=Formula("sqrt(($CAcoords[0])^2+($CAcoords[1])^2+($CAcoords[2])^2)");
               ($a,$b,$c)=num_sort($magAB,$magBC,$magCA);
               $dodonot=(($a)**2+($b)**2==($c)**2)?'do':'do not';
-              $yn=PopUp(['?','do','do not'],$dodonot);
+              $yn=DropDown(['do','do not'],$dodonot,showInStatic=&gt;0);
             </pg-code>
 
             <statement>
@@ -4254,30 +4255,38 @@
                 Find the distances between each pair of points and determine if the triangle is a right triangle.
               </p>
 
-              <p>
-                <m>\left\lVert\overline{AB}\right\rVert=</m><var name="$magAB" width="10"/>
-              </p>
+              <instruction>Find the distance <m>\left\lVert\overline{AB}\right\rVert</m></instruction>
 
               <p>
-                <m>\left\lVert\overline{BC}\right\rVert=</m><var name="$magBC" width="10"/>
+                <var name="$magAB" width="10"/>
               </p>
 
-              <p>
-                <m>\left\lVert\overline{CA}\right\rVert=</m><var name="$magCA" width="10"/>
-              </p>
+              <instruction>Find the distance <m>\left\lVert\overline{BC}\right\rVert</m></instruction>
 
               <p>
-                The three points <var name="$yn" form="popup"/> form a right triangle.
+                <var name="$magBC" width="10"/>
+              </p>
+
+              <instruction>Find the distance <m>\left\lVert\overline{CA}\right\rVert</m></instruction>
+
+              <p>
+                <var name="$magCA" width="10"/>
+              </p>
+
+              <instruction>Use the drop-down to indicate whether or not the three points form a right triangle.</instruction>
+
+              <p>
+                <var name="$yn" form="popup"/>
               </p>
             </statement>
-            <solution>
+            <!-- <solution>
               <p>
                 <m>\norm{\overline{AB}} = \sqrt{6}</m>;
                 <m>\norm{\overline{BC}} = \sqrt{17}</m>;
                 <m>\norm{\overline{AC}} = \sqrt{11}</m>.
                 Yes, it is a right triangle as <m>\norm{\overline{AB}}^2+\norm{\overline{AC}}^2=\norm{\overline{BC}}^2</m>.
               </p>
-            </solution>
+            </solution> -->
         </webwork>
       </exercise>
 
@@ -4318,12 +4327,15 @@
                 </me>
               </p>
 
+              <instruction>Enter the center of the sphere.</instruction>
               <p>
-                Center at <var name="$center" width="10"/>.
+                <var name="$center" width="10"/>
               </p>
 
+              <instruction>Enter the radius of the sphere.</instruction>
+
               <p>
-                Radius of <var name="$radius" width="10"/>.
+                <var name="$radius" width="10"/>
               </p>
             </statement>
         </webwork>
@@ -4346,12 +4358,15 @@
                 </me>
               </p>
 
+              <instruction>Enter the center of the sphere.</instruction>
               <p>
-                Center at <var name="$center" width="10"/>.
+                <var name="$center" width="10"/>
               </p>
 
+              <instruction>Enter the radius of the sphere.</instruction>
+
               <p>
-                Radius of <var name="$radius" width="10"/>.
+                <var name="$radius" width="10"/>
               </p>
             </statement>
         </webwork>
