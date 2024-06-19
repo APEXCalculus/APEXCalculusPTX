@@ -313,7 +313,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
 
 <!-- Adjust width of some tcolorboxes that aren't wide enough to fit their content -->
 
-<xsl:template match="definition|theorem|insight">
+<xsl:template match="definition|theorem|insight|sidebyside">
   <xsl:if test="@hstretch">
     <xsl:text>&#xa;</xsl:text>
     <xsl:text>{\tcbset{text width=</xsl:text>
