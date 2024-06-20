@@ -570,7 +570,7 @@
 
     <p>
       We can also compute their cross products:
-      <md>
+      <md hskip="30" minisize="360">
         <mrow>{\nabla\times \vec F }\amp = {\left\langle \frac{\partial}{\partial y}\big(x^2\big)-\frac{\partial}{\partial z}\big(y^2+z\big),\frac{\partial}{\partial z}\big(x+\sin y\big)-\frac{\partial}{\partial x}\big(x^2\big),\frac{\partial}{\partial x}\big(y^2+z\big)-\frac{\partial}{\partial y}\big(x+\sin y\big)\right\rangle }</mrow>
         <mrow>\amp =\langle -1,-2x,-\cos y\rangle</mrow>
       </md>.
@@ -1226,6 +1226,75 @@
           <m>\divv \vec F = 0</m> and <m>\curl \vec F = \vec 0</m>.
         </p>
 
+        <figure xml:id="fig_vectorfield3" vshift="2">
+          <caption>A vector field representing a planar gravitational force</caption>
+              <image width="47%">
+                <description/>
+                <asymptote label="img_vectorfield3">
+    
+                  import graph;
+                  size(282,282);
+    
+                  // vector field F = ⟨ cos y, sin x ⟩
+    
+                  defaultpen(fontsize(8));
+    
+                  real f(real x) {return exp(x);}
+                  pair F(real x) {return (x,f(x));}
+    
+                  pair xbounds=(-1.1,1.1);
+                  pair ybounds=(-1.1,1.1);
+                  real[] myxchoice={-1,1};
+                  real[] myychoice={-1,1};
+    
+                  xaxis("",xbounds.x,xbounds.y,Ticks(myxchoice),arrow=Arrow(DefaultHead,size=4));
+                  yaxis("",ybounds.x,ybounds.y,Ticks(myychoice),arrow=Arrow(DefaultHead,size=4));
+    
+                  label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0));
+                  label("\phantom{$x$}",(xbounds.x-0.05*(xbounds.y-xbounds.x),0));
+                  label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x)));
+                  label("\phantom{$y$}",(0,ybounds.x-0.05*(ybounds.y-ybounds.x)));
+    
+                  pair a=(.3,.3);
+                  pair b=(1,1);
+    
+                  pair vectfunction(pair z) {if ((z.x==0) &amp;&amp; (z.y==0)) {return (0,0);}
+                  return (-z.x/(z.x^2+z.y^2)^(3/2),-z.y/(z.x^2+z.y^2)^(3/2));}
+                  path vector(pair t) {return -vectfunction(t)/2 -- vectfunction(t)/2;}
+    
+                  add(vectorfield(vector,a,b,2,2,bluepen));
+    
+                  pair aa=(-1,.3);
+                  pair bb=(-.3,1);
+    
+                  pair vectfunction(pair z) {if ((z.x==0) &amp;&amp; (z.y==0)) {return (0,0);}
+                  return (-z.x/(z.x^2+z.y^2)^(3/2),-z.y/(z.x^2+z.y^2)^(3/2));}
+                  path vectorb(pair t) {return -vectfunction(t)/2 -- vectfunction(t)/2;}
+    
+                  add(vectorfield(vectorb,aa,bb,2,2,bluepen));
+    
+                  pair aa=(-1,-1);
+                  pair bb=(-.3,-.3);
+    
+                  pair vectfunction(pair z) {if ((z.x==0) &amp;&amp; (z.y==0)) {return (0,0);}
+                  return (-z.x/(z.x^2+z.y^2)^(3/2),-z.y/(z.x^2+z.y^2)^(3/2));}
+                  path vectorb(pair t) {return -vectfunction(t)/2 -- vectfunction(t)/2;}
+    
+                  add(vectorfield(vectorb,aa,bb,2,2,bluepen));
+    
+                  pair aa=(.3,-1);
+                  pair bb=(1,-.3);
+    
+                  pair vectfunction(pair z) {if ((z.x==0) &amp;&amp; (z.y==0)) {return (0,0);}
+                  return (-z.x/(z.x^2+z.y^2)^(3/2),-z.y/(z.x^2+z.y^2)^(3/2));}
+                  path vectorb(pair t) {return -vectfunction(t)/2 -- vectfunction(t)/2;}
+    
+                  add(vectorfield(vectorb,aa,bb,2,2,bluepen));
+    
+                </asymptote>
+              </image>
+        </figure>
+
         <p>
           The analogous planar vector field is given in <xref ref="fig_vectorfield3"/>.
           Note how all arrows point to the origin,
@@ -1234,75 +1303,6 @@
         </p>
       </solution>
     </example>
-
-    <figure xml:id="fig_vectorfield3" vshift="-3">
-      <caption>A vector field representing a planar gravitational force</caption>
-          <image width="47%">
-            <description/>
-            <asymptote label="img_vectorfield3">
-
-              import graph;
-              size(282,282);
-
-              // vector field F = ⟨ cos y, sin x ⟩
-
-              defaultpen(fontsize(8));
-
-              real f(real x) {return exp(x);}
-              pair F(real x) {return (x,f(x));}
-
-              pair xbounds=(-1.1,1.1);
-              pair ybounds=(-1.1,1.1);
-              real[] myxchoice={-1,1};
-              real[] myychoice={-1,1};
-
-              xaxis("",xbounds.x,xbounds.y,Ticks(myxchoice),arrow=Arrow(DefaultHead,size=4));
-              yaxis("",ybounds.x,ybounds.y,Ticks(myychoice),arrow=Arrow(DefaultHead,size=4));
-
-              label("$x$",(xbounds.y+0.05*(xbounds.y-xbounds.x),0));
-              label("\phantom{$x$}",(xbounds.x-0.05*(xbounds.y-xbounds.x),0));
-              label("$y$",(0,ybounds.y+0.05*(ybounds.y-ybounds.x)));
-              label("\phantom{$y$}",(0,ybounds.x-0.05*(ybounds.y-ybounds.x)));
-
-              pair a=(.3,.3);
-              pair b=(1,1);
-
-              pair vectfunction(pair z) {if ((z.x==0) &amp;&amp; (z.y==0)) {return (0,0);}
-              return (-z.x/(z.x^2+z.y^2)^(3/2),-z.y/(z.x^2+z.y^2)^(3/2));}
-              path vector(pair t) {return -vectfunction(t)/2 -- vectfunction(t)/2;}
-
-              add(vectorfield(vector,a,b,2,2,bluepen));
-
-              pair aa=(-1,.3);
-              pair bb=(-.3,1);
-
-              pair vectfunction(pair z) {if ((z.x==0) &amp;&amp; (z.y==0)) {return (0,0);}
-              return (-z.x/(z.x^2+z.y^2)^(3/2),-z.y/(z.x^2+z.y^2)^(3/2));}
-              path vectorb(pair t) {return -vectfunction(t)/2 -- vectfunction(t)/2;}
-
-              add(vectorfield(vectorb,aa,bb,2,2,bluepen));
-
-              pair aa=(-1,-1);
-              pair bb=(-.3,-.3);
-
-              pair vectfunction(pair z) {if ((z.x==0) &amp;&amp; (z.y==0)) {return (0,0);}
-              return (-z.x/(z.x^2+z.y^2)^(3/2),-z.y/(z.x^2+z.y^2)^(3/2));}
-              path vectorb(pair t) {return -vectfunction(t)/2 -- vectfunction(t)/2;}
-
-              add(vectorfield(vectorb,aa,bb,2,2,bluepen));
-
-              pair aa=(.3,-1);
-              pair bb=(1,-.3);
-
-              pair vectfunction(pair z) {if ((z.x==0) &amp;&amp; (z.y==0)) {return (0,0);}
-              return (-z.x/(z.x^2+z.y^2)^(3/2),-z.y/(z.x^2+z.y^2)^(3/2));}
-              path vectorb(pair t) {return -vectfunction(t)/2 -- vectfunction(t)/2;}
-
-              add(vectorfield(vectorb,aa,bb,2,2,bluepen));
-
-            </asymptote>
-          </image>
-    </figure>
 
     <p>
       A function <m>f(x,y)</m> naturally induces a vector field,
