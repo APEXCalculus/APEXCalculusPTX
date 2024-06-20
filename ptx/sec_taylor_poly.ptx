@@ -288,7 +288,7 @@
       </me>.
     </p>
 
-    <aside component="taypoly-early" vshift="4">
+    <aside component="taypoly-early" vshift="1">
       <p>
         The notation <m>k!</m> is read as <q><m>k</m> factorial</q>.
         By convention, we also define <m>0!=1</m>,
@@ -414,7 +414,7 @@
       </statement>
     </definition>
     <!--This aside is Sean's doing, from his version of APEX.-->
-    <aside component="taypoly-early">
+    <aside component="taypoly-early" vshift="5">
       <p>
         <alert>Historical note:</alert> Colin Maclaurin was a Scottish
         mathematician, born in 1698. He lived until 1746, and made a number of
@@ -428,11 +428,15 @@
       </p>
     </aside>
 
-    <figure xml:id="vid_deriv_apps_taylor_poly_defn" component="video" vshift="1">
+    <figure xml:id="vid_deriv_apps_taylor_poly_defn" component="video-early" vshift="-3">
       <caption>Video presentation of <xref ref="def_taypoly"/></caption>
       <video youtube="J-5vVJIGQp4" label="vid_deriv_apps_taylor_poly_defn"/>
     </figure>
 
+    <figure xml:id="vid_deriv_apps_taylor_poly_defn" component="video-late" vshift="1">
+      <caption>Video presentation of <xref ref="def_taypoly"/></caption>
+      <video youtube="J-5vVJIGQp4" label="vid_deriv_apps_taylor_poly_defn"/>
+    </figure>
 
     <p>
       We will practice creating Taylor and Maclaurin polynomials in the
@@ -1097,7 +1101,53 @@
           A table of these values is given in <xref ref="fig_taypoly4a"/>.
         </p>
 
-        <figure xml:id="fig_taypoly4a" vshift="1.5">
+        <figure xml:id="fig_taypoly4a" vshift="1.5" component="taypoly-late">
+          <caption>A table of the derivatives of <m>f(x)=\cos(x)</m> evaluated at <m>x=0</m></caption>
+          <tabular>
+            <row>
+              <cell><m>f(x) = \cos(x)</m></cell>
+              <cell><m>f(0) = 1</m></cell>
+            </row>
+            <row>
+              <cell><m>\fp(x) = -\sin(x)</m></cell>
+              <cell><m>\fp(0) = 0</m></cell>
+            </row>
+            <row>
+              <cell><m>\fp'(x) = -\cos(x)</m></cell>
+              <cell><m>\fp'(0) = -1</m></cell>
+            </row>
+            <row>
+              <cell><m>\fp''(x) = \sin(x)</m></cell>
+              <cell><m>\fp''(0) = 0</m></cell>
+            </row>
+            <row>
+              <cell><m>f^{(4)}(x) = \cos(x)</m></cell>
+              <cell><m>f^{(4)}(0) = 1</m></cell>
+            </row>
+            <row>
+              <cell><m>f^{(5)}(x) = -\sin(x)</m></cell>
+              <cell><m>f^{(5)}(0) = 0</m></cell>
+            </row>
+            <row>
+              <cell><m>f^{(6)}(x) = -\cos(x)</m></cell>
+              <cell><m>f^{(6)}(0) = -1</m></cell>
+            </row>
+            <row>
+              <cell><m>f^{(7)}(x) = \sin(x)</m></cell>
+              <cell><m>f^{(7)}(0) = 0</m></cell>
+            </row>
+            <row>
+              <cell><m>f^{(8)}(x) = \cos(x)</m></cell>
+              <cell><m>f^{(8)}(0) = 1</m></cell>
+            </row>
+            <row>
+              <cell><m>f^{(9)}(x) = -\sin(x)</m></cell>
+              <cell><m>f^{(9)}(0) = 0</m></cell>
+            </row>
+          </tabular>
+        </figure>
+
+        <figure xml:id="fig_taypoly4a" vshift="0" component="taypoly-early">
           <caption>A table of the derivatives of <m>f(x)=\cos(x)</m> evaluated at <m>x=0</m></caption>
           <tabular>
             <row>
@@ -1180,7 +1230,56 @@
           Note how well the two functions agree on about <m>(-\pi,\pi)</m>.
         </p>
 
-        <figure xml:id="fig_taypoly4b" vshift="-2">
+        <figure xml:id="fig_taypoly4b" vshift="-2" component="taypoly-late">
+          <caption>A graph of <m>f(x)= \cos(x)</m> and its degree 8 Maclaurin
+          polynomial</caption>
+          <!-- START figures/fig_taypoly4.tex -->
+          <image width="47%">
+            <shortdescription>A graph of the cosine function is shown, along with its degree 8 Maclaurin polynomial approximation.</shortdescription>
+            <description>
+              <p>
+                The graph <m>y=\cos(x)</m> is given on the interval <m>[-5,5]</m>,
+                along with the graph of <m>p_8(x)</m>, the degree 8 Maclaurin polynomial approximation of <m>\cos(x)</m>.
+              </p>
+
+              <p>
+                The image illustrates how well the Maclaurin polynomials approximate the cosine function.
+                With a degree 8 polynomial, there is little to no visible difference between the graphs over the interval <m>(-\pi,\pi)</m>.
+              </p>
+            </description>
+            <latex-image label="img_taypoly4b">
+
+              \begin{tikzpicture}
+
+              \begin{axis}[
+              axis on top,
+              xtick={-5,-4,-3,-2,-1,1,2,3,4,5},
+              ymin=-1.5,ymax=1.5,
+              xmin=-5.5,xmax=5.5
+              ]
+
+              \addplot+[infinite,domain=-5:5,samples=101] {cos(deg(x))} node[pos=0.6, right] { $y=cos(x)$};
+              \addplot+[infinite,smooth] coordinates {(-5.,2.528)(-4.8,1.6)(-4.6,0.8894)(-4.4,0.343)(-4.2,-0.0768)(-4.,-0.
+              3968)(-3.8,-0.6355)(-3.6,-0.8052)(-3.4,-0.9146)(-3.2,-0.9695)(-3.,-0.
+              9748)(-2.8,-0.9345)(-2.6,-0.8532)(-2.4,-0.7357)(-2.2,-0.5878)(-2.,-0.
+              4159)(-1.8,-0.2271)(-1.6,-0.02917)(-1.4,0.17)(-1.2,0.3624)(-1.,0.5403)
+              (-0.8,0.6967)(-0.6,0.8253)(-0.4,0.9211)(-0.2,0.9801)(0,1.)(0.2,0.9801)
+              (0.4,0.9211)(0.6,0.8253)(0.8,0.6967)(1.,0.5403)(1.2,0.3624)(1.4,0.17)(
+              1.6,-0.02917)(1.8,-0.2271)(2.,-0.4159)(2.2,-0.5878)(2.4,-0.7357)(2.6,-
+              0.8532)(2.8,-0.9345)(3.,-0.9748)(3.2,-0.9695)(3.4,-0.9146)(3.6,-0.
+              8052)(3.8,-0.6355)(4.,-0.3968)(4.2,-0.0768)(4.4,0.343)(4.6,0.8894)(4.
+              8,1.6)(5.,2.528)}  node[pos=0.1,right] { $y=p_8(x)$} ;
+
+              \end{axis}
+
+              \end{tikzpicture}
+
+            </latex-image>
+          </image>
+          <!-- figures/fig_taypoly4.tex END -->
+        </figure>
+
+        <figure xml:id="fig_taypoly4b" vshift="-3.5" component="taypoly-early">
           <caption>A graph of <m>f(x)= \cos(x)</m> and its degree 8 Maclaurin
           polynomial</caption>
           <!-- START figures/fig_taypoly4.tex -->
@@ -1229,7 +1328,11 @@
           <!-- figures/fig_taypoly4.tex END -->
         </figure>
       </solution>
-      <solution component="video" vshift="5">
+      <solution component="video-late" vshift="4.5">
+        <title>Video solution</title>
+        <video width="98%" youtube="zg1W9miUCB4" xml:id="vid_deriv_apps_taylor_poly_ex_4" label="vid_deriv_apps_taylor_poly_ex_4" component="video"/>
+      </solution>
+      <solution component="video-early" vshift="3">
         <title>Video solution</title>
         <video width="98%" youtube="zg1W9miUCB4" xml:id="vid_deriv_apps_taylor_poly_ex_4" label="vid_deriv_apps_taylor_poly_ex_4" component="video"/>
       </solution>
@@ -1271,7 +1374,33 @@
                 This is done in <xref ref="fig_taypoly5a"/>.
               </p>
 
-              <figure xml:id="fig_taypoly5a" vshift="-3">
+              <figure xml:id="fig_taypoly5a" vshift="-3" component="taypoly-late">
+                <caption>A table of the derivatives of <m>f(x)=\sqrt{x}</m> evaluated at <m>x=4</m></caption>
+                <tabular>
+                  <row>
+                    <cell><m>f(x) = \sqrt{x}</m></cell>
+                    <cell><m>f(4) = 2</m></cell>
+                  </row>
+                  <row>
+                    <cell><m>\ds\fp(x) = \frac{1}{2\sqrt{x}}</m></cell>
+                    <cell><m>\ds\fp(4) = \frac{1}{4}</m></cell>
+                  </row>
+                  <row>
+                    <cell><m>\ds\fp'(x) = \frac{-1}{4x^{3/2}}</m></cell>
+                    <cell><m>\ds\fp'(4) = \frac{-1}{32}</m></cell>
+                  </row>
+                  <row>
+                    <cell><m>\ds\fp''(x) = \frac3{8x^{5/2}}</m></cell>
+                    <cell><m>\ds\fp''(4) = \frac{3}{256}</m></cell>
+                  </row>
+                  <row>
+                    <cell><m>\ds f^{(4)}(x) = \frac{-15}{16x^{7/2}}</m></cell>
+                    <cell><m>\ds f^{(4)}(4) = \frac{-15}{2048}</m></cell>
+                  </row>
+                </tabular>
+              </figure>
+
+              <figure xml:id="fig_taypoly5a" vshift="-4.5" component="taypoly-early">
                 <caption>A table of the derivatives of <m>f(x)=\sqrt{x}</m> evaluated at <m>x=4</m></caption>
                 <tabular>
                   <row>
