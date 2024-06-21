@@ -256,6 +256,13 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
   </xsl:choose> 
 </xsl:template>
 
+<!-- enable a few necessary page breaks to place images correctly -->
+<xsl:template match="pagebreak-latex">
+  <xsl:text>&#xa;</xsl:text>
+  <xsl:text>\pagebreak</xsl:text>
+  <xsl:text>&#xa;</xsl:text>
+</xsl:template>
+
 <!-- "aside" -->
 <!-- The assembalge template, applied to aside, to change a setting -->
 <xsl:template match="aside" mode="environment">
@@ -334,7 +341,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
       <xsl:when test="ancestor::example and not(ancestor::ul or ancestor::ol)">
         <xsl:text>\tcbmarginbox{%&#xa;</xsl:text>
       </xsl:when>
-      <xsl:when test="ancestor::example and (ancestor::ul or ancestor::ol)">
+      <xsl:when test="(ancestor::example or ancestor::theorem) and (ancestor::ul or ancestor::ol)">
         <xsl:text>\listmarginbox{%&#xa;</xsl:text>
       </xsl:when>
       <xsl:otherwise>
@@ -378,7 +385,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
 
   <!-- give video a new name so it escapes assembly -->
   <margin-video>
-    <image width="60%" margins="0% 40%">
+    <image width="40%" margins="2% 58%">
       <xsl:attribute name="pi:generated">
           <xsl:text>qrcode/</xsl:text>
           <xsl:apply-templates select="." mode="assembly-id"/>
