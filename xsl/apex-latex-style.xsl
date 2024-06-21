@@ -132,7 +132,7 @@
     <!-- subtitle here -->
     <xsl:text>}</xsl:text>
     <xsl:text>{</xsl:text>
-    <xsl:apply-templates select="." mode="internal-id" />
+    <xsl:apply-templates select="." mode="unique-id" />
     <xsl:text>}</xsl:text>
     <xsl:text>&#xa;</xsl:text>
 </xsl:template>
@@ -174,9 +174,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
 <xsl:param name="latex.preamble.early" select="'
 \usepackage{xcoffins}&#xa;
 \NewCoffin\Framex&#xa;
-\NewCoffin\Theox&#xa;
-\usepackage{changepage}&#xa;
-\strictpagecheck
+\NewCoffin\Theox
   '"/>
 
 <xsl:param name="latex.preamble.late" select="'
@@ -186,21 +184,11 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
 \newlength{\Hshift}&#xa;
 \newlength{\Mshift}&#xa;
 \newcommand*{\calculateMshift}{%&#xa;
-  \checkoddpage&#xa;
-  \ifoddpage&#xa;
-    \setlength{\Mshift}{\marginparsep}&#xa;
-  \else&#xa;
-    \setlength{\Mshift}{\dimexpr-\marginparsep-\textwidth-\marginparwidth\relax}&#xa;
-  \fi&#xa;
+  \setlength{\Mshift}{\marginparsep}&#xa;
 }&#xa;
-
+&#xa;
 \newcommand*{\calculateHshift}{%&#xa;
-  \checkoddpage&#xa;
-  \ifoddpage&#xa;
-    \setlength{\Hshift}{\dimexpr\Textw/2-\tcbtextwidth/2\relax}&#xa;
-  \else&#xa;
-    \setlength{\Hshift}{\dimexpr-\Textw/2+\tcbtextwidth/2\relax}&#xa;
-  \fi&#xa;
+  \setlength{\Hshift}{\dimexpr\Textw/2-\tcbtextwidth/2\relax}&#xa;
 }&#xa;
 \newcommand{\tcbmarginbox}[2]{%&#xa;
   \par %start a new line&#xa;
@@ -264,7 +252,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
         <xsl:text>}{</xsl:text>
         <xsl:apply-templates select="." mode="caption-full"/>
         <xsl:text>}{</xsl:text>
-        <xsl:apply-templates select="." mode="internal-id"/>
+        <xsl:apply-templates select="." mode="unique-id"/>
         <xsl:text>}{</xsl:text>
         <xsl:if test="$b-latex-hardcode-numbers">
             <xsl:apply-templates select="." mode="number"/>
@@ -390,7 +378,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
     <image width="60%" margins="0% 40%">
       <xsl:attribute name="pi:generated">
           <xsl:text>qrcode/</xsl:text>
-          <xsl:apply-templates select="." mode="visible-id-early"/>
+          <xsl:apply-templates select="." mode="assembly-id"/>
           <xsl:text>.png</xsl:text>
       </xsl:attribute>
     </image>
