@@ -219,109 +219,119 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
 
 
 <!-- we want images in margin to be the full margin width -->
-<xsl:template match="figure/image[not(ancestor::sidebyside) and (descendant::latex-image or descendant::asymptote) and not(ancestor::exercise)]">
-    <xsl:text>\begin{image}</xsl:text>
-    <xsl:text>{0</xsl:text>
-    <xsl:text>}</xsl:text>
-    <xsl:text>{1</xsl:text>
-    <xsl:text>}</xsl:text>
-    <xsl:text>{0</xsl:text>
-    <xsl:text>}{}%&#xa;</xsl:text>
-    <xsl:apply-templates select="." mode="image-inclusion" />
-    <xsl:text>\end{image}%&#xa;</xsl:text>
+<xsl:template match="image[not(ancestor::sidebyside) and (descendant::latex-image or descendant::asymptote) and not(ancestor::exercise)]">
+  <xsl:choose>
+    <xsl:when test="ancestor::figure/@vshift">
+      <xsl:text>\begin{image}</xsl:text>
+      <xsl:text>{0</xsl:text>
+      <xsl:text>}</xsl:text>
+      <xsl:text>{1</xsl:text>
+      <xsl:text>}</xsl:text>
+      <xsl:text>{0</xsl:text>
+      <xsl:text>}{}%&#xa;</xsl:text>
+      <xsl:apply-templates select="." mode="image-inclusion" />
+      <xsl:text>\end{image}%&#xa;</xsl:text>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:variable name="rtf-layout">
+        <xsl:apply-templates select="." mode="layout-parameters" />
+      </xsl:variable>
+      <xsl:variable name="layout" select="exsl:node-set($rtf-layout)" />
+      <xsl:text>\begin{image}</xsl:text>
+      <xsl:text>{</xsl:text>
+      <xsl:value-of select="$layout/left-margin div 100"/>
+      <xsl:text>}</xsl:text>
+      <xsl:text>{</xsl:text>
+      <xsl:value-of select="$layout/width div 100"/>
+      <xsl:text>}</xsl:text>
+      <xsl:text>{</xsl:text>
+      <xsl:value-of select="$layout/right-margin div 100"/>
+      <xsl:text>}</xsl:text>
+      <xsl:text>{</xsl:text>
+      <xsl:apply-templates select="." mode="vertical-adjustment"/>
+      <xsl:text>}%&#xa;</xsl:text>
+      <xsl:apply-templates select="." mode="image-inclusion" />
+      <xsl:text>\end{image}%&#xa;</xsl:text>
+    </xsl:otherwise>
+  </xsl:choose> 
 </xsl:template>
 
-<!-- move non-sidebyside figures to the margin -->
-<xsl:template match="figure[not(ancestor::sidebyside) and not(ancestor::aside) and not(descendant::sidebyside) and (descendant::latex-image or descendant::asymptote or descendant::margin-video or descendant::tabular) and not(ancestor::exercise)]">
-    <xsl:text>&#xa;</xsl:text>
-    <xsl:choose>
-      <xsl:when test="ancestor::example and not(ancestor::ul or ancestor::ol)">
-        <xsl:text>\tcbmarginbox{%&#xa;</xsl:text>
-      </xsl:when>
-      <xsl:when test="ancestor::example and (ancestor::ul or ancestor::ol)">
-        <xsl:text>\listmarginbox{%&#xa;</xsl:text>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:text>\parmarginbox{%&#xa;</xsl:text>
-      </xsl:otherwise>
-    </xsl:choose>
-        <xsl:text>\begin{</xsl:text>
-        <xsl:apply-templates select="." mode="environment-name"/>
-        <xsl:text>}{</xsl:text>
-        <xsl:apply-templates select="." mode="type-name"/>
-        <xsl:text>}{</xsl:text>
-        <xsl:apply-templates select="." mode="caption-full"/>
-        <xsl:text>}{</xsl:text>
-        <xsl:apply-templates select="." mode="unique-id"/>
-        <xsl:text>}{</xsl:text>
-        <xsl:if test="$b-latex-hardcode-numbers">
-            <xsl:apply-templates select="." mode="number"/>
-        </xsl:if>
-        <xsl:text>}%&#xa;</xsl:text>
-        <!-- images have margins and widths, so centering not needed -->
-        <!-- Eventually everything in a figure should control itself -->
-        <!-- or be flush left (or so)                                -->
-        <xsl:if test="self::figure and not(image)">
-            <xsl:text>\centering&#xa;</xsl:text>
-        </xsl:if>
-        <xsl:apply-templates select="*"/>
-        <!-- reserve space for the caption -->
-        <xsl:text>\tcblower&#xa;</xsl:text>
-        <xsl:text>\end{</xsl:text>
-        <xsl:apply-templates select="." mode="environment-name"/>
-        <xsl:text>}%&#xa;</xsl:text>
-        <xsl:apply-templates select="." mode="pop-footnote-text"/>
-        <xsl:text>}{0cm}&#xa;</xsl:text>
-        <xsl:text>&#xa;</xsl:text>
+<!-- enable a few necessary page breaks to place images correctly -->
+<xsl:template match="pagebreak-latex">
+  <xsl:text>&#xa;</xsl:text>
+  <xsl:text>\pagebreak</xsl:text>
+  <xsl:text>&#xa;</xsl:text>
 </xsl:template>
 
-<!-- move tables to the margin -->
-<!-- we don't need this as long as tabular is in a figure -->
-<!-- <xsl:template match="table[not(ancestor::sidebyside) and not(ancestor::aside) and not(descendant::sidebyside) and not(ancestor::exercise)]">
-    <xsl:text>&#xa;</xsl:text>
-    <xsl:choose>
-      <xsl:when test="ancestor::example and not(ancestor::ul or ancestor::ol)">
-        <xsl:text>\tcbmarginbox{%&#xa;</xsl:text>
-      </xsl:when>
-      <xsl:when test="ancestor::example and (ancestor::ul or ancestor::ol)">
-        <xsl:text>\listmarginbox{%&#xa;</xsl:text>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:text>\parmarginbox{%&#xa;</xsl:text>
-      </xsl:otherwise>
-    </xsl:choose>
-    <xsl:text>\begin{</xsl:text>
-    <xsl:apply-templates select="." mode="environment-name"/>
-    <xsl:text>}{</xsl:text>
-    <xsl:apply-templates select="." mode="type-name"/>
-    <xsl:text>}{</xsl:text>
-    <xsl:text>\textbf{</xsl:text>
-    <xsl:apply-templates select="." mode="title-full"/>
-    <xsl:text>}</xsl:text>
-    <xsl:text>}{</xsl:text>
-    <xsl:apply-templates select="." mode="internal-id"/>
-    <xsl:text>}{</xsl:text>
-    <xsl:if test="$b-latex-hardcode-numbers">
-        <xsl:apply-templates select="." mode="number"/>
+<!-- "aside" -->
+<!-- The assembalge template, applied to aside, to change a setting -->
+<xsl:template match="aside" mode="environment">
+    <!-- Names of various pieces use the element name -->
+    <xsl:variable name="environment-name">
+        <xsl:value-of select="local-name(.)"/>
+    </xsl:variable>
+    <xsl:text>%% </xsl:text>
+    <xsl:value-of select="$environment-name"/>
+    <xsl:text>: regular aside, but not breakable&#xa;</xsl:text>
+    <xsl:text>\tcbset{ </xsl:text>
+    <xsl:value-of select="$environment-name"/>
+    <xsl:text>style/.style={</xsl:text>
+    <xsl:apply-templates select="." mode="tcb-style"/>
+    <xsl:text>} }&#xa;</xsl:text>
+    <xsl:text>\newtcolorbox{</xsl:text>
+    <xsl:value-of select="$environment-name"/>
+    <xsl:text>}[3]{title={\notblank{#2}{#2}{}}, </xsl:text>
+    <xsl:text>phantomlabel={#3}, parbox=false, before upper app={\setlength{\parindent}{\normalparindent}}, </xsl:text>
+    <xsl:value-of select="$environment-name"/>
+    <xsl:text>style}&#xa;</xsl:text>
+</xsl:template>
+
+<!-- move vshift figures to the margin -->
+<xsl:template match="figure">
+    <xsl:if test="@vshift">
+      <xsl:text>&#xa;</xsl:text>
+      <xsl:choose>
+        <xsl:when test="ancestor::example and not(ancestor::ul or ancestor::ol)">
+          <xsl:text>\tcbmarginbox{%&#xa;</xsl:text>
+        </xsl:when>
+        <xsl:when test="ancestor::example and (ancestor::ul or ancestor::ol)">
+          <xsl:text>\listmarginbox{%&#xa;</xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:text>\parmarginbox{%&#xa;</xsl:text>
+        </xsl:otherwise>
+      </xsl:choose>
     </xsl:if>
-    <xsl:text>}%&#xa;</xsl:text> -->
-    <!-- A "list" has an introduction/conclusion, with a       -->
-    <!-- list of some type in-between, and these will all      -->
-    <!-- automatically word-wrap to fill the available width.  -->
-    <!-- TODO: process meta-data, then restrict contents -->
-    <!-- tabular, introduction|list|conclusion           -->
-    <!-- <xsl:apply-templates select="*"/> -->
-    <!-- subcaption always goes in lower part -->
-    <!-- <xsl:if test="ancestor::*[self::figure]">
-        <xsl:text>\tcblower&#xa;</xsl:text>
+    <xsl:if test="@hstretch">
+      <xsl:text>&#xa;</xsl:text>
+      <xsl:text>{\tcbset{text width=</xsl:text>
+        <xsl:value-of select="@hstretch"/>
+      <xsl:text>pt}&#xa;</xsl:text>  
     </xsl:if>
-    <xsl:text>\end{</xsl:text>
-    <xsl:apply-templates select="." mode="environment-name"/>
-    <xsl:text>}%&#xa;</xsl:text>
-    <xsl:apply-templates select="." mode="pop-footnote-text"/>
-    <xsl:text>}{0cm}&#xa;</xsl:text>
+    <xsl:apply-imports/>
+    <xsl:if test="@vshift">
+      <xsl:text>}{</xsl:text><xsl:value-of select="@vshift"/><xsl:text>cm}&#xa;</xsl:text>
+      <xsl:text>&#xa;</xsl:text>
+    </xsl:if>
+    <xsl:if test="@hstretch">
+      <xsl:text>}&#xa;</xsl:text>
+    </xsl:if>
+</xsl:template>
+
+<!-- Adjust width of some tcolorboxes that aren't wide enough to fit their content -->
+
+<xsl:template match="definition|theorem|insight|sidebyside">
+  <xsl:if test="@hstretch">
     <xsl:text>&#xa;</xsl:text>
-</xsl:template> -->
+    <xsl:text>{\tcbset{text width=</xsl:text>
+      <xsl:value-of select="@hstretch"/>
+    <xsl:text>pt}&#xa;</xsl:text>  
+  </xsl:if>
+  <xsl:apply-imports/>
+  <xsl:if test="@hstretch">
+    <xsl:text>}&#xa;</xsl:text>
+  </xsl:if>
+</xsl:template>
 
 <!-- asides in the margin -->
 <!-- simple asides, with no styling available -->
@@ -331,7 +341,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
       <xsl:when test="ancestor::example and not(ancestor::ul or ancestor::ol)">
         <xsl:text>\tcbmarginbox{%&#xa;</xsl:text>
       </xsl:when>
-      <xsl:when test="ancestor::example and (ancestor::ul or ancestor::ol)">
+      <xsl:when test="(ancestor::example or ancestor::theorem) and (ancestor::ul or ancestor::ol)">
         <xsl:text>\listmarginbox{%&#xa;</xsl:text>
       </xsl:when>
       <xsl:otherwise>
@@ -349,7 +359,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
     <xsl:value-of select="local-name(.)" />
     <xsl:text>}&#xa;</xsl:text>
     <xsl:apply-templates select="." mode="pop-footnote-text"/>
-    <xsl:text>}{0cm}%&#xa;</xsl:text>
+    <xsl:text>}{</xsl:text><xsl:value-of select="@vshift"/><xsl:text>cm}%&#xa;</xsl:text>
     <xsl:text>&#xa;</xsl:text>
 </xsl:template>
 
@@ -375,7 +385,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
 
   <!-- give video a new name so it escapes assembly -->
   <margin-video>
-    <image width="60%" margins="0% 40%">
+    <image width="40%" margins="2% 58%">
       <xsl:attribute name="pi:generated">
           <xsl:text>qrcode/</xsl:text>
           <xsl:apply-templates select="." mode="assembly-id"/>
@@ -414,15 +424,34 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
 
   <xsl:text>\tcbmarginbox{%&#xa;</xsl:text>
   <xsl:text>\centering&#xa;</xsl:text>
-    <xsl:apply-templates select="." mode="solution-heading">
+    <!-- <xsl:apply-templates select="." mode="solution-heading">
         <xsl:with-param name="b-original" select="$b-original" />
         <xsl:with-param name="purpose" select="$purpose" />
         <xsl:with-param name="b-component-heading" select="$b-component-heading"/>
-    </xsl:apply-templates>
+    </xsl:apply-templates> -->
+    <xsl:text>\noindent\textbf{\blocktitlefont Video solution}%&#xa;</xsl:text>
     <xsl:apply-templates>
         <xsl:with-param name="b-original" select="$b-original" />
     </xsl:apply-templates>
-    <xsl:text>}{-1cm}%&#xa;</xsl:text>
+    <xsl:text>}{</xsl:text><xsl:value-of select="@vshift"/><xsl:text>cm}%&#xa;</xsl:text>
+    <xsl:text>&#xa;</xsl:text>
+</xsl:template>
+
+<!-- Solutions shouldn't be numbered when there's a video solution -->
+<xsl:template match="solution[ancestor::example and not(descendant::margin-video)]">
+  <xsl:param name="b-original" />
+  <xsl:param name="purpose" />
+  <xsl:param name="b-component-heading"/>
+
+    <!-- <xsl:apply-templates select="." mode="solution-heading">
+        <xsl:with-param name="b-original" select="$b-original" />
+        <xsl:with-param name="purpose" select="$purpose" />
+        <xsl:with-param name="b-component-heading" select="$b-component-heading"/>
+    </xsl:apply-templates> -->
+    <xsl:text>\noindent\textbf{\blocktitlefont Solution. } %&#xa;</xsl:text>
+    <xsl:apply-templates>
+        <xsl:with-param name="b-original" select="$b-original" />
+    </xsl:apply-templates>
     <xsl:text>&#xa;</xsl:text>
 </xsl:template>
 

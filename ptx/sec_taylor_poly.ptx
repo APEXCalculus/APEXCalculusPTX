@@ -2,7 +2,7 @@
 <section xml:id="sec_taylor_poly" label="sec_taylor_poly">
   <title>Taylor Polynomials</title>
 
-    <figure xml:id="vid_deriv_apps_taylor_poly_intro" component="video">
+    <figure xml:id="vid_deriv_apps_taylor_poly_intro" component="video" vshift="-1">
       <caption>Video introduction to <xref ref="sec_taylor_poly"/></caption>
       <video youtube="SYJ2uGJCQdY" label="vid_deriv_apps_taylor_poly_intro"/>
     </figure>
@@ -179,7 +179,7 @@
       whose first four derivatives at 0 match those of <m>f</m>.
     </p>
 
-    <figure xml:id="fig_taypolyintrob">
+    <figure xml:id="fig_taypolyintrob" vshift="0">
       <caption>Plotting <m>f</m>, <m>p_2</m> and <m>p_4</m></caption>
       <!-- START figures/fig_taypolyintrob.tex -->
       <image width="47%">
@@ -219,23 +219,21 @@
           </p>
         </description>
         <latex-image label="img_taypolyintrob">
+          \begin{tikzpicture}
 
-      \begin{tikzpicture}
+          \begin{axis}[
+          axis on top,
+          ymin=-5.5,ymax=8.5,
+          xmin=-4.5,xmax=4.4
+          ]
 
-      \begin{axis}[
-      axis on top,
-      ymin=-5.5,ymax=8.5,
-      xmin=-4.5,xmax=4.4
-      ]
+          \addplot+ [infinite,domain=-4:3.2,samples=120] {exp(x)*sin(deg(x))*cos(deg(x))+2} node [pos=0.6,left] { $y=f(x)$};
+          \addplot+ [domain=-3:2] {x^2+x+2} node [pos=0.2, below left] { $y=p_2(x)$};
+          \addplot+ [domain=-2:2] {-x^4/2-x^3/6+x^2+x+2} node [pos=0.1, below left] { $y=p_4(x)$};
 
-      \addplot+ [infinite,domain=-4:3.2,samples=120] {exp(x)*sin(deg(x))*cos(deg(x))+2} node [pos=0.6,left] { $y=f(x)$};
-      \addplot+ [domain=-3:2] {x^2+x+2} node [pos=0.2, below left] { $y=p_2(x)$};
-      \addplot+ [domain=-2:2] {-x^4/2-x^3/6+x^2+x+2} node [pos=0.1, below left] { $y=p_4(x)$};
+          \end{axis}
 
-      \end{axis}
-
-      \end{tikzpicture}
-
+          \end{tikzpicture}
         </latex-image>
       </image>
       <!-- figures/fig_taypolyintrob.tex END -->
@@ -288,7 +286,7 @@
       </me>.
     </p>
 
-    <aside component="taypoly-early">
+    <aside component="taypoly-early" vshift="1">
       <p>
         The notation <m>k!</m> is read as <q><m>k</m> factorial</q>.
         By convention, we also define <m>0!=1</m>,
@@ -296,7 +294,7 @@
       </p>
     </aside>
 
-    <figure xml:id="vid_deriv_apps_taylor_poly_determ_coeffs" component="video">
+    <figure xml:id="vid_deriv_apps_taylor_poly_determ_coeffs" component="video" vshift="6">
       <caption>Determining the coefficients of a Taylor polynomial</caption>
       <video youtube="v8mPY7fu1e0" label="vid_deriv_apps_taylor_poly_determ_coeffs"/>
     </figure>
@@ -308,7 +306,9 @@
       <q>good</q> gets bigger and bigger.
       <xref ref="fig_taypolyintroc"/> shows <m>p_{13}(x)</m>;
       we can visually affirm that this polynomial approximates <m>f</m> very
-      well on <m>[-2,3]</m>. (The polynomial <m>p_{13}(x)</m> is not
+      well on <m>[-2,3]</m>. 
+      <pagebreak-latex component="taypoly-early"/>
+      (The polynomial <m>p_{13}(x)</m> is not
       particularly <q>nice</q>. It is
       <md>
         <mrow>\amp p_{13}(x)=\frac{16901x^{13}}{6227020800}+\frac{13x^{12}}{1209600}-\frac{1321x^{11}}{39916800}-\frac{779x^{10}}{1814400} -\frac{359x^9}{362880}</mrow>
@@ -316,7 +316,7 @@
       </md>.
     </p>
 
-    <figure xml:id="fig_taypolyintroc">
+    <figure xml:id="fig_taypolyintroc" vshift="-2">
       <caption>Plotting <m>f</m> and <m>p_{13}</m></caption>
       <!-- START figures/fig_taypolyintroc.tex -->
       <image width="47%">
@@ -414,7 +414,7 @@
       </statement>
     </definition>
     <!--This aside is Sean's doing, from his version of APEX.-->
-    <aside component="taypoly-early">
+    <aside component="taypoly-early" vshift="5">
       <p>
         <alert>Historical note:</alert> Colin Maclaurin was a Scottish
         mathematician, born in 1698. He lived until 1746, and made a number of
@@ -428,11 +428,15 @@
       </p>
     </aside>
 
-    <figure xml:id="vid_deriv_apps_taylor_poly_defn" component="video">
+    <figure xml:id="vid_deriv_apps_taylor_poly_defn" component="video-early" vshift="-3">
       <caption>Video presentation of <xref ref="def_taypoly"/></caption>
       <video youtube="J-5vVJIGQp4" label="vid_deriv_apps_taylor_poly_defn"/>
     </figure>
 
+    <figure xml:id="vid_deriv_apps_taylor_poly_defn" component="video-late" vshift="1">
+      <caption>Video presentation of <xref ref="def_taypoly"/></caption>
+      <video youtube="J-5vVJIGQp4" label="vid_deriv_apps_taylor_poly_defn"/>
+    </figure>
 
     <p>
       We will practice creating Taylor and Maclaurin polynomials in the
@@ -458,9 +462,7 @@
           </ol>
         </p>
       </statement>
-
       <solution>
-
         <p>
           <ol>
             <li>
@@ -471,32 +473,27 @@
                 as shown in <xref ref="fig_taypoly1a"/>.
               </p>
 
-              <figure xml:id="fig_taypoly1a">
+              <figure xml:id="fig_taypoly1a" vshift="-2">
                 <caption>The derivatives of <m>f(x)=e^x</m> evaluated at <m>x=0</m></caption>
                 <tabular>
                   <row>
                     <cell><m>f(x) = e^x</m></cell>
-                    <cell><m>\Rightarrow</m></cell>
                     <cell><m>f(0) = 1</m></cell>
                   </row>
                   <row>
                     <cell><m>\fp(x) = e^x</m></cell>
-                    <cell><m>\Rightarrow</m></cell>
                     <cell><m>\fp(0) = 1</m></cell>
                   </row>
                   <row>
                     <cell><m>\fp'(x) = e^x</m></cell>
-                    <cell><m>\Rightarrow</m></cell>
                     <cell><m>\fp'(0) = 1</m></cell>
                   </row>
                   <row>
                     <cell><m>\,\vdots</m></cell>
-                    <cell/>
                     <cell><m>\,\vdots</m></cell>
                   </row>
                   <row>
                     <cell><m>f\,^{(n)}(x) = e^x</m></cell>
-                    <cell><m>\Rightarrow</m></cell>
                     <cell><m>f\,^{(n)}(0) = 1</m></cell>
                   </row>
                 </tabular>
@@ -532,7 +529,7 @@
             </li>
           </ol>
         </p>
-        <figure xml:id="fig_taypoly1b">
+        <figure xml:id="fig_taypoly1b" vshift="-7">
           <caption>A plot of <m>f(x)=e^x</m> and its 5<m>^{th}</m> degree
           Maclaurin polynomial <m>p_5(x)</m></caption>
       <!-- START figures/fig_taypoly1b.tex -->
@@ -568,7 +565,7 @@
       <!-- figures/fig_taypoly1b.tex END -->
         </figure>
       </solution>
-      <solution component="video">
+      <solution component="video" vshift="0">
         <title>Video solution</title>
         <video width="98%" youtube="ENf-Z2pLrJg" xml:id="vid_deriv_apps_taylor_poly_ex_1" label="vid_deriv_apps_taylor_poly_ex_1" component="video"/>
       </solution>
@@ -599,9 +596,7 @@
           </ol>
         </p>
       </statement>
-
       <solution>
-
         <p>
           <ol>
             <li>
@@ -620,47 +615,39 @@
                 <m>1\cdot 2\cdot 3=3!</m>.
               </p>
 
-              <figure xml:id="fig_taypoly2a">
+              <figure xml:id="fig_taypoly2a" vshift="-7">
                 <caption>Derivatives of <m>\ln(x)</m> evaluated at <m>x=1</m></caption>
                 <tabular>
                   <row>
                     <cell><m>f(x) = \ln(x)</m></cell>
-                    <cell><m>\Rightarrow</m></cell>
                     <cell><m>f(1) = 0</m></cell>
                   </row>
                   <row>
                     <cell><m>\fp(x) = \frac{1}{x}</m></cell>
-                    <cell><m>\Rightarrow</m></cell>
                     <cell><m>\fp(1) = 1</m></cell>
                   </row>
                   <row>
                     <cell><m>\fp'(x) = -\frac{1}{x^2}</m></cell>
-                    <cell><m>\Rightarrow</m></cell>
                     <cell><m>\fp'(1) = -1</m></cell>
                   </row>
                   <row>
                     <cell><m>\fp''(x) = \frac{2}{x^3}</m></cell>
-                    <cell><m>\Rightarrow</m></cell>
                     <cell><m>\fp''(1) = 2</m></cell>
                   </row>
                   <row>
                     <cell><m>f^{(4)}(x) = -\frac{6}{x^4}</m></cell>
-                    <cell><m>\Rightarrow</m></cell>
                     <cell><m>f^{(4)}(1) = -6</m></cell>
                   </row>
                   <row>
                     <cell><m>\,\vdots</m></cell>
-                    <cell/>
                     <cell><m>\,\vdots</m></cell>
                   </row>
                   <row>
                     <cell><m>f^{(n)}(x) =</m></cell>
-                    <cell><m>\Rightarrow</m></cell>
                     <cell><m>f^{(n)}(1) =</m></cell>
                   </row>
                   <row>
                     <cell><m>\frac{(-1)^{n+1}(n-1)!}{x^n}</m></cell>
-                    <cell/>
                     <cell><m>\!\!(-1)^{n+1}(n-1)!</m></cell>
                   </row>
                 </tabular>
@@ -800,13 +787,13 @@
           </figure>
         </sidebyside>
       </solution>
-      <solution component="video">
+      <solution component="video" vshift="6">
         <title>Video solution</title>
         <video width="98%" youtube="6BeNQe0hl3k" xml:id="vid_deriv_apps_taylor_poly_ex_2" label="vid_deriv_apps_taylor_poly_ex_2" component="video"/>
       </solution>
     </example>
 
-    <aside>
+    <aside vshift="1">
       <p>
         As always in calculus, angles are measured
         in radians, so the <m>2</m> in <m>\cos(2)</m>
@@ -853,7 +840,7 @@
       how do we know how accurate the approximation is?
     </p>
 
-    <aside>
+    <aside vshift="-1">
       <p>
         Even though Taylor polynomials <em>could</em>
         be used in calculators and computers to calculate values of
@@ -929,7 +916,7 @@
     </theorem>
 
     <!--Another aside added by Sean-->
-    <aside component="taypoly-early">
+    <aside component="taypoly-early" vshift="5">
       <p>
         One way of quantifying the extent to which one function approximates
         another is using the <em>order</em> to which they agree.
@@ -946,7 +933,7 @@
       </p>
     </aside>
 
-    <figure xml:id="vid_deriv_apps_taylor_poly_taylors_thm" component="video">
+    <figure xml:id="vid_deriv_apps_taylor_poly_taylors_thm" component="video" vshift="-2">
       <caption>Video presentation of <xref ref="thm_taylorthm"/></caption>
       <video youtube="2IHECY8dFN0" label="vid_deriv_apps_taylor_poly_taylors_thm"/>
     </figure>
@@ -982,9 +969,7 @@
           as calculated in <xref ref="ex_taypoly2"/>.
         </p>
       </statement>
-
       <solution>
-
         <p>
           <ol>
             <li>
@@ -1059,7 +1044,7 @@
           </ol>
         </p>
       </solution>
-      <solution component="video">
+      <solution component="video" vshift="3">
         <title>Video solution</title>
         <video width="98%" youtube="TBV4-X7HoHk" xml:id="vid_deriv_apps_taylor_poly_err_est_ex" label="vid_deriv_apps_taylor_poly_err_est_ex" component="video"/>
       </solution>
@@ -1081,9 +1066,7 @@
           What is <m>p_n(2)</m>?
         </p>
       </statement>
-
       <solution>
-
         <p>
           Following Taylor's theorem,
           we need bounds on the size of the derivatives of <m>f(x)=\cos(x)</m>.
@@ -1118,57 +1101,93 @@
           A table of these values is given in <xref ref="fig_taypoly4a"/>.
         </p>
 
-        <figure xml:id="fig_taypoly4a">
+        <figure xml:id="fig_taypoly4a" vshift="1.5" component="taypoly-late">
           <caption>A table of the derivatives of <m>f(x)=\cos(x)</m> evaluated at <m>x=0</m></caption>
           <tabular>
             <row>
               <cell><m>f(x) = \cos(x)</m></cell>
-              <cell><m>\Rightarrow</m></cell>
               <cell><m>f(0) = 1</m></cell>
             </row>
             <row>
               <cell><m>\fp(x) = -\sin(x)</m></cell>
-              <cell><m>\Rightarrow</m></cell>
               <cell><m>\fp(0) = 0</m></cell>
             </row>
             <row>
               <cell><m>\fp'(x) = -\cos(x)</m></cell>
-              <cell><m>\Rightarrow</m></cell>
               <cell><m>\fp'(0) = -1</m></cell>
             </row>
             <row>
               <cell><m>\fp''(x) = \sin(x)</m></cell>
-              <cell><m>\Rightarrow</m></cell>
               <cell><m>\fp''(0) = 0</m></cell>
             </row>
             <row>
               <cell><m>f^{(4)}(x) = \cos(x)</m></cell>
-              <cell><m>\Rightarrow</m></cell>
               <cell><m>f^{(4)}(0) = 1</m></cell>
             </row>
             <row>
               <cell><m>f^{(5)}(x) = -\sin(x)</m></cell>
-              <cell><m>\Rightarrow</m></cell>
               <cell><m>f^{(5)}(0) = 0</m></cell>
             </row>
             <row>
               <cell><m>f^{(6)}(x) = -\cos(x)</m></cell>
-              <cell><m>\Rightarrow</m></cell>
               <cell><m>f^{(6)}(0) = -1</m></cell>
             </row>
             <row>
               <cell><m>f^{(7)}(x) = \sin(x)</m></cell>
-              <cell><m>\Rightarrow</m></cell>
               <cell><m>f^{(7)}(0) = 0</m></cell>
             </row>
             <row>
               <cell><m>f^{(8)}(x) = \cos(x)</m></cell>
-              <cell><m>\Rightarrow</m></cell>
               <cell><m>f^{(8)}(0) = 1</m></cell>
             </row>
             <row>
               <cell><m>f^{(9)}(x) = -\sin(x)</m></cell>
-              <cell><m>\Rightarrow</m></cell>
+              <cell><m>f^{(9)}(0) = 0</m></cell>
+            </row>
+          </tabular>
+        </figure>
+
+        <figure xml:id="fig_taypoly4a" vshift="3" component="taypoly-early">
+          <caption>A table of the derivatives of <m>f(x)=\cos(x)</m> evaluated at <m>x=0</m></caption>
+          <tabular>
+            <row>
+              <cell><m>f(x) = \cos(x)</m></cell>
+              <cell><m>f(0) = 1</m></cell>
+            </row>
+            <row>
+              <cell><m>\fp(x) = -\sin(x)</m></cell>
+              <cell><m>\fp(0) = 0</m></cell>
+            </row>
+            <row>
+              <cell><m>\fp'(x) = -\cos(x)</m></cell>
+              <cell><m>\fp'(0) = -1</m></cell>
+            </row>
+            <row>
+              <cell><m>\fp''(x) = \sin(x)</m></cell>
+              <cell><m>\fp''(0) = 0</m></cell>
+            </row>
+            <row>
+              <cell><m>f^{(4)}(x) = \cos(x)</m></cell>
+              <cell><m>f^{(4)}(0) = 1</m></cell>
+            </row>
+            <row>
+              <cell><m>f^{(5)}(x) = -\sin(x)</m></cell>
+              <cell><m>f^{(5)}(0) = 0</m></cell>
+            </row>
+            <row>
+              <cell><m>f^{(6)}(x) = -\cos(x)</m></cell>
+              <cell><m>f^{(6)}(0) = -1</m></cell>
+            </row>
+            <row>
+              <cell><m>f^{(7)}(x) = \sin(x)</m></cell>
+              <cell><m>f^{(7)}(0) = 0</m></cell>
+            </row>
+            <row>
+              <cell><m>f^{(8)}(x) = \cos(x)</m></cell>
+              <cell><m>f^{(8)}(0) = 1</m></cell>
+            </row>
+            <row>
+              <cell><m>f^{(9)}(x) = -\sin(x)</m></cell>
               <cell><m>f^{(9)}(0) = 0</m></cell>
             </row>
           </tabular>
@@ -1211,7 +1230,56 @@
           Note how well the two functions agree on about <m>(-\pi,\pi)</m>.
         </p>
 
-        <figure xml:id="fig_taypoly4b">
+        <figure xml:id="fig_taypoly4b" vshift="-2" component="taypoly-late">
+          <caption>A graph of <m>f(x)= \cos(x)</m> and its degree 8 Maclaurin
+          polynomial</caption>
+          <!-- START figures/fig_taypoly4.tex -->
+          <image width="47%">
+            <shortdescription>A graph of the cosine function is shown, along with its degree 8 Maclaurin polynomial approximation.</shortdescription>
+            <description>
+              <p>
+                The graph <m>y=\cos(x)</m> is given on the interval <m>[-5,5]</m>,
+                along with the graph of <m>p_8(x)</m>, the degree 8 Maclaurin polynomial approximation of <m>\cos(x)</m>.
+              </p>
+
+              <p>
+                The image illustrates how well the Maclaurin polynomials approximate the cosine function.
+                With a degree 8 polynomial, there is little to no visible difference between the graphs over the interval <m>(-\pi,\pi)</m>.
+              </p>
+            </description>
+            <latex-image label="img_taypoly4b">
+
+              \begin{tikzpicture}
+
+              \begin{axis}[
+              axis on top,
+              xtick={-5,-4,-3,-2,-1,1,2,3,4,5},
+              ymin=-1.5,ymax=1.5,
+              xmin=-5.5,xmax=5.5
+              ]
+
+              \addplot+[infinite,domain=-5:5,samples=101] {cos(deg(x))} node[pos=0.6, right] { $y=cos(x)$};
+              \addplot+[infinite,smooth] coordinates {(-5.,2.528)(-4.8,1.6)(-4.6,0.8894)(-4.4,0.343)(-4.2,-0.0768)(-4.,-0.
+              3968)(-3.8,-0.6355)(-3.6,-0.8052)(-3.4,-0.9146)(-3.2,-0.9695)(-3.,-0.
+              9748)(-2.8,-0.9345)(-2.6,-0.8532)(-2.4,-0.7357)(-2.2,-0.5878)(-2.,-0.
+              4159)(-1.8,-0.2271)(-1.6,-0.02917)(-1.4,0.17)(-1.2,0.3624)(-1.,0.5403)
+              (-0.8,0.6967)(-0.6,0.8253)(-0.4,0.9211)(-0.2,0.9801)(0,1.)(0.2,0.9801)
+              (0.4,0.9211)(0.6,0.8253)(0.8,0.6967)(1.,0.5403)(1.2,0.3624)(1.4,0.17)(
+              1.6,-0.02917)(1.8,-0.2271)(2.,-0.4159)(2.2,-0.5878)(2.4,-0.7357)(2.6,-
+              0.8532)(2.8,-0.9345)(3.,-0.9748)(3.2,-0.9695)(3.4,-0.9146)(3.6,-0.
+              8052)(3.8,-0.6355)(4.,-0.3968)(4.2,-0.0768)(4.4,0.343)(4.6,0.8894)(4.
+              8,1.6)(5.,2.528)}  node[pos=0.1,right] { $y=p_8(x)$} ;
+
+              \end{axis}
+
+              \end{tikzpicture}
+
+            </latex-image>
+          </image>
+          <!-- figures/fig_taypoly4.tex END -->
+        </figure>
+
+        <figure xml:id="fig_taypoly4b" vshift="-0.5" component="taypoly-early">
           <caption>A graph of <m>f(x)= \cos(x)</m> and its degree 8 Maclaurin
           polynomial</caption>
           <!-- START figures/fig_taypoly4.tex -->
@@ -1260,12 +1328,17 @@
           <!-- figures/fig_taypoly4.tex END -->
         </figure>
       </solution>
-      <solution component="video">
+      <solution component="video-late" vshift="4.5">
+        <title>Video solution</title>
+        <video width="98%" youtube="zg1W9miUCB4" xml:id="vid_deriv_apps_taylor_poly_ex_4" label="vid_deriv_apps_taylor_poly_ex_4" component="video"/>
+      </solution>
+      <solution component="video-early" vshift="6">
         <title>Video solution</title>
         <video width="98%" youtube="zg1W9miUCB4" xml:id="vid_deriv_apps_taylor_poly_ex_4" label="vid_deriv_apps_taylor_poly_ex_4" component="video"/>
       </solution>
     </example>
 
+    
     <example xml:id="ex_taypoly5">
       <title>Finding and using Taylor polynomials</title>
       <statement>
@@ -1302,32 +1375,53 @@
                 This is done in <xref ref="fig_taypoly5a"/>.
               </p>
 
-              <figure xml:id="fig_taypoly5a">
+              <figure xml:id="fig_taypoly5a" vshift="-3" component="taypoly-late">
                 <caption>A table of the derivatives of <m>f(x)=\sqrt{x}</m> evaluated at <m>x=4</m></caption>
                 <tabular>
                   <row>
                     <cell><m>f(x) = \sqrt{x}</m></cell>
-                    <cell><m>\Rightarrow</m></cell>
                     <cell><m>f(4) = 2</m></cell>
                   </row>
                   <row>
                     <cell><m>\ds\fp(x) = \frac{1}{2\sqrt{x}}</m></cell>
-                    <cell><m>\Rightarrow</m></cell>
                     <cell><m>\ds\fp(4) = \frac{1}{4}</m></cell>
                   </row>
                   <row>
                     <cell><m>\ds\fp'(x) = \frac{-1}{4x^{3/2}}</m></cell>
-                    <cell><m>\Rightarrow</m></cell>
                     <cell><m>\ds\fp'(4) = \frac{-1}{32}</m></cell>
                   </row>
                   <row>
                     <cell><m>\ds\fp''(x) = \frac3{8x^{5/2}}</m></cell>
-                    <cell><m>\Rightarrow</m></cell>
                     <cell><m>\ds\fp''(4) = \frac{3}{256}</m></cell>
                   </row>
                   <row>
                     <cell><m>\ds f^{(4)}(x) = \frac{-15}{16x^{7/2}}</m></cell>
-                    <cell><m>\Rightarrow</m></cell>
+                    <cell><m>\ds f^{(4)}(4) = \frac{-15}{2048}</m></cell>
+                  </row>
+                </tabular>
+              </figure>
+
+              <figure xml:id="fig_taypoly5a" vshift="-1.5" component="taypoly-early">
+                <caption>A table of the derivatives of <m>f(x)=\sqrt{x}</m> evaluated at <m>x=4</m></caption>
+                <tabular>
+                  <row>
+                    <cell><m>f(x) = \sqrt{x}</m></cell>
+                    <cell><m>f(4) = 2</m></cell>
+                  </row>
+                  <row>
+                    <cell><m>\ds\fp(x) = \frac{1}{2\sqrt{x}}</m></cell>
+                    <cell><m>\ds\fp(4) = \frac{1}{4}</m></cell>
+                  </row>
+                  <row>
+                    <cell><m>\ds\fp'(x) = \frac{-1}{4x^{3/2}}</m></cell>
+                    <cell><m>\ds\fp'(4) = \frac{-1}{32}</m></cell>
+                  </row>
+                  <row>
+                    <cell><m>\ds\fp''(x) = \frac3{8x^{5/2}}</m></cell>
+                    <cell><m>\ds\fp''(4) = \frac{3}{256}</m></cell>
+                  </row>
+                  <row>
+                    <cell><m>\ds f^{(4)}(x) = \frac{-15}{16x^{7/2}}</m></cell>
                     <cell><m>\ds f^{(4)}(4) = \frac{-15}{2048}</m></cell>
                   </row>
                 </tabular>
@@ -1380,7 +1474,7 @@
           </ol>
         </p>
 
-        <figure xml:id="fig_taypoly5b">
+        <figure xml:id="fig_taypoly5b" vshift="0">
           <caption>A graph of <m>f(x)=\sqrt{x}</m> and its degree 4 Taylor
           polynomial at <m>x=4</m></caption>
       <!-- START figures/fig_taypoly5.tex -->
@@ -1531,7 +1625,7 @@
           Note how similar they are near <m>x=0</m>.
         </p>
 
-        <figure xml:id="fig_taypoly6">
+        <figure xml:id="fig_taypoly6" vshift="0">
           <caption>A graph of <m>y=-1/(x-1)</m> and <m>y=p_3(x)</m> from
           <xref ref="ex_taypoly6"/></caption>
           <!-- START figures/fig_taypoly6.tex -->
@@ -1658,7 +1752,7 @@
             </p>
 
             <p>
-              <m>p_2(x)= </m><var name="$p" width="20"/>
+              <var name="$p" width="20"/>
             </p>
           </statement>
           <solution>
@@ -1685,7 +1779,7 @@
             </p>
 
             <p>
-              <m>\fpp'(0)=</m><var name="'30'" width="10"/>
+              <var name="'30'" width="10"/>
             </p>
           </statement>
           <solution>
@@ -1723,7 +1817,7 @@
               </p>
 
               <p>
-                <m>p_3(x)=</m><var name="$macpoly" width="20"/>
+                <var name="$macpoly" width="20"/>
               </p>
             </statement>
           </webwork>
@@ -1742,7 +1836,7 @@
               </p>
 
               <p>
-                <m>p_8(x)=</m><var name="$macpoly" width="30"/>
+                <var name="$macpoly" width="30"/>
               </p>
             </statement>
           </webwork>
@@ -1761,7 +1855,7 @@
               </p>
 
               <p>
-                <m>p_5(x)=</m><var name="$macpoly" width="30"/>
+                <var name="$macpoly" width="30"/>
               </p>
             </statement>
           </webwork>
@@ -1780,7 +1874,7 @@
               </p>
 
               <p>
-                <m>p_6(x)=</m><var name="$macpoly" width="30"/>
+                <var name="$macpoly" width="30"/>
               </p>
             </statement>
           </webwork>
@@ -1799,7 +1893,7 @@
               </p>
 
               <p>
-                <m>p_4(x)=</m><var name="$macpoly" width="30"/>
+                <var name="$macpoly" width="30"/>
               </p>
             </statement>
           </webwork>
@@ -1818,7 +1912,7 @@
               </p>
 
               <p>
-                <m>p_4(x)=</m><var name="$macpoly" width="30"/>
+                <var name="$macpoly" width="30"/>
               </p>
             </statement>
           </webwork>
@@ -1837,7 +1931,7 @@
               </p>
 
               <p>
-                <m>p_4(x)=</m><var name="$macpoly" width="30"/>
+                <var name="$macpoly" width="30"/>
               </p>
             </statement>
           </webwork>
@@ -1856,7 +1950,7 @@
               </p>
 
               <p>
-                <m>p_7(x)=</m><var name="$macpoly" width="30"/>
+                <var name="$macpoly" width="30"/>
               </p>
             </statement>
           </webwork>
@@ -1885,7 +1979,7 @@
               </p>
 
               <p>
-                <m>p_4(x)=</m><var name="$taypoly" width="30"/>
+                <var name="$taypoly" width="30"/>
               </p>
             </statement>
           </webwork>
@@ -1904,7 +1998,7 @@
               </p>
 
               <p>
-                <m>p_4(x)=</m><var name="$taypoly" width="30"/>
+                <var name="$taypoly" width="30"/>
               </p>
             </statement>
           </webwork>
@@ -1923,7 +2017,7 @@
               </p>
 
               <p>
-                <m>p_6(x)=</m><var name="$taypoly" width="40"/>
+                <var name="$taypoly" width="40"/>
               </p>
             </statement>
           </webwork>
@@ -1942,7 +2036,7 @@
               </p>
 
               <p>
-                <m>p_5(x)=</m><var name="$taypoly" width="35"/>
+                <var name="$taypoly" width="35"/>
               </p>
             </statement>
           </webwork>
@@ -1961,7 +2055,7 @@
               </p>
 
               <p>
-                <m>p_5(x)=</m><var name="$taypoly" width="35"/>
+                <var name="$taypoly" width="35"/>
               </p>
             </statement>
           </webwork>
@@ -1980,7 +2074,7 @@
               </p>
 
               <p>
-                <m>p_8(x)=</m><var name="$taypoly" width="40"/>
+                <var name="$taypoly" width="40"/>
               </p>
             </statement>
           </webwork>
@@ -1999,7 +2093,7 @@
               </p>
 
               <p>
-                <m>p_3(x)=</m><var name="$taypoly" width="30"/>
+                <var name="$taypoly" width="30"/>
               </p>
             </statement>
           </webwork>
@@ -2018,7 +2112,7 @@
               </p>
 
               <p>
-                <m>p_2(x)=</m><var name="$taypoly" width="25"/>
+                <var name="$taypoly" width="25"/>
               </p>
             </statement>
           </webwork>
