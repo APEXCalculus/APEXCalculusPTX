@@ -344,12 +344,11 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
 
 <xsl:template match="definition|theorem|insight|sidebyside|table">
   <xsl:if test="(@hskip) and ($b-latex-two-sides)">
-    <xsl:text>&#xa;\noindent\hskip-</xsl:text>
+    <xsl:text>&#xa;\medskip&#xa;\noindent\hskip-</xsl:text>
     <xsl:value-of select="@hskip"/>
     <xsl:text>pt\begin{minipage}{</xsl:text>
     <xsl:value-of select="@minisize"/>
     <xsl:text>pt}&#xa;</xsl:text>
-    <xsl:text>\medskip&#xa;</xsl:text>
   </xsl:if>
   <xsl:if test="@hstretch">
     <xsl:text>&#xa;</xsl:text>
@@ -362,8 +361,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
     <xsl:text>}&#xa;</xsl:text>
   </xsl:if>
   <xsl:if test="@hskip">
-    <xsl:text>\medskip&#xa;</xsl:text>
-    <xsl:text>\end{minipage}&#xa;&#xa;</xsl:text>
+    <xsl:text>\end{minipage}&#xa;\medskip&#xa;</xsl:text>
   </xsl:if>
 </xsl:template>
 
