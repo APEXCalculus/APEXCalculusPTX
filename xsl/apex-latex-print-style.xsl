@@ -349,7 +349,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
       <xsl:text>pt\begin{minipage}{</xsl:text>
       <xsl:value-of select="@minisize"/>
       <xsl:text>pt}&#xa;</xsl:text>
-      <xsl:text>\smallskip&#xa;</xsl:text>
+      <xsl:text>\medskip&#xa;</xsl:text>
     </xsl:if>
   <xsl:if test="@hstretch">
     <xsl:text>&#xa;</xsl:text>
@@ -362,7 +362,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
     <xsl:text>}&#xa;</xsl:text>
   </xsl:if>
   <xsl:if test="@hskip">
-    <xsl:text>\smallskip&#xa;</xsl:text>
+    <xsl:text>\medskip&#xa;</xsl:text>
     <xsl:text>\end{minipage}&#xa;&#xa;</xsl:text>
   </xsl:if>
 </xsl:template>
