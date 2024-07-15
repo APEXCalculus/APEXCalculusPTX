@@ -300,13 +300,6 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
 
 <!-- move vshift figures to the margin -->
   <xsl:template match="figure">
-    <xsl:if test="(@hskip) and ($b-latex-two-sides)">
-      <xsl:text>&#xa;\noindent\hskip-</xsl:text>
-      <xsl:value-of select="@hskip"/>
-      <xsl:text>pt\begin{minipage}{</xsl:text>
-      <xsl:value-of select="@minisize"/>
-      <xsl:text>pt}</xsl:text>
-    </xsl:if>
     <xsl:if test="@vshift">
       <xsl:text>&#xa;</xsl:text>
       <xsl:choose>
@@ -327,6 +320,11 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
         <xsl:value-of select="@hstretch"/>
       <xsl:text>pt}&#xa;</xsl:text>  
     </xsl:if>
+    <xsl:if test="(@hskip) and ($b-latex-two-sides)">
+    <xsl:text>\tcbset{enlarge left by=-</xsl:text>
+      <xsl:value-of select="@hskip"/>
+      <xsl:text>pt}&#xa;</xsl:text>  
+  </xsl:if>
     <xsl:apply-imports/>
     <xsl:if test="@vshift">
       <xsl:text>}{</xsl:text><xsl:value-of select="@vshift"/><xsl:text>cm}&#xa;</xsl:text>
@@ -335,33 +333,24 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
     <xsl:if test="@hstretch">
       <xsl:text>}&#xa;</xsl:text>
     </xsl:if>
-    <xsl:if test="@hskip">
-      <xsl:text>\end{minipage}&#xa;&#xa;</xsl:text>
-    </xsl:if>
 </xsl:template>
 
 <!-- Adjust width of some tcolorboxes that aren't wide enough to fit their content -->
 
 <xsl:template match="definition|theorem|insight|sidebyside|table">
-  <xsl:if test="(@hskip) and ($b-latex-two-sides)">
-    <xsl:text>&#xa;\medskip&#xa;\noindent\hskip-</xsl:text>
-    <xsl:value-of select="@hskip"/>
-    <xsl:text>pt\begin{minipage}{</xsl:text>
-    <xsl:value-of select="@minisize"/>
-    <xsl:text>pt}&#xa;</xsl:text>
-  </xsl:if>
   <xsl:if test="@hstretch">
-    <xsl:text>&#xa;</xsl:text>
     <xsl:text>{\tcbset{text width=</xsl:text>
       <xsl:value-of select="@hstretch"/>
     <xsl:text>pt}&#xa;</xsl:text>  
   </xsl:if>
+  <xsl:if test="(@hskip) and ($b-latex-two-sides)">
+    <xsl:text>\tcbset{enlarge left by=-</xsl:text>
+      <xsl:value-of select="@hskip"/>
+      <xsl:text>pt}&#xa;</xsl:text>  
+  </xsl:if>
   <xsl:apply-imports/>
   <xsl:if test="@hstretch">
     <xsl:text>}&#xa;</xsl:text>
-  </xsl:if>
-  <xsl:if test="@hskip">
-    <xsl:text>\end{minipage}&#xa;\medskip&#xa;</xsl:text>
   </xsl:if>
 </xsl:template>
 
@@ -502,9 +491,9 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
 </xsl:template>
 
 <!-- ensure exercises ignore subsection numbering -->
-<!-- shamelessly stolen from Oscar Levin -->
-<xsl:template match="book|article|part|chapter|appendix|section|subsection|subsubsection" mode="is-structured-division">
-    <xsl:if test="chapter|section|subsection|subsubsection">
+<!-- stolen from Oscar Levin and changed to fix headings -->
+<xsl:template match="appendix|section|subsection|subsubsection" mode="is-structured-division">
+    <xsl:if test="subsection|subsubsection">
         <xsl:text></xsl:text> <!-- removed "true", so now this should make all exercises think they are part of unstructured divisions -->
     </xsl:if>
 </xsl:template>
