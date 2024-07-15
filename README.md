@@ -6,17 +6,18 @@ APEX Calculus was originally [written in LaTeX](https://github.com/APEXCalculus/
 
 To build the book, use of the [PreTeXt CLI](https://github.com/PreTeXtBook/pretext-cli) is recommended.
 
+Note that the build time is quite long, and may exceed the time allowed using GitHub codespaces. 
+(If you're building on Windows, make sure your computer is not set to sleep after an hour!)
+
 Preparation for generating APEX Calculus from source:
 
 Software requirements:
 - a recent LaTeX distribution
-- [Sage](https://www.sagemath.org/)
 - Python (version 3.8 or later)
 - the PreTeXt CLI (do `pip install pretextbook`)
-- [pdf2svg](https://github.com/jalios/pdf2svg-windows)
-- ImageMagick
 
-Note that Asymptote compilation is done remotely by default, so Asymptote does not need to be installed locally.
+**Note**: ImageMagick may be needed, but can probably be avoided.
+Older versions of the PreTeXt CLI also require `pdf2svg` to build HTML, but soon this will not be required.
 
 Configuration:
 
@@ -37,13 +38,7 @@ The following variations are also available:
 - `pretext build latex-color-print`: in color, but two-sided layout for printing
 - `pretext build latex-color-print-novideo`: as above, but without QR codes for videos
 
-**Do not build PDF directly.** APEX Calculus places figures in the margins in PDF.
-Unfortunately, we do not currently have a mechanism for setting the vertical placement
-of margin figures in the PreTeXt source, so these have to be adjusted by hand.
-Look in the LaTeX source for occurrences of `\listmarginbox`, `\parmarginbox` and `\tcbmarginbox`.
-Each such environment ends with either `{0cm}` or `{-1cm}`.
-
-These values can be adjusted to ensure that items in the margins do not overlap.
-It is unfortunately a rather tedious process at the moment.
+**Do not build PDF directly.** Most of the PDF design is now automated,
+but you may need to adjust the placement of some figures, add page breaks, etc.
 
 At this time, EPUB generation is not fully supported.
