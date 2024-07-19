@@ -59,15 +59,15 @@
 </xsl:template>
 
 <xsl:template match="insight" mode="tcb-style">
-    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
+    <xsl:text>before upper app={\setparstyle}, fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
 <xsl:template match="&DEFINITION-LIKE;" mode="tcb-style">
-    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
+    <xsl:text>before upper app={\setparstyle}, fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
 <xsl:template match="&THEOREM-LIKE;" mode="tcb-style">
-    <xsl:text>fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
+    <xsl:text>before upper app={\setparstyle}, fonttitle=\normalfont\bfseries, colbacktitle=white, colframe=black, colback=white, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
 <xsl:template match="assemblage" mode="tcb-style">
@@ -80,6 +80,7 @@
 </xsl:template>
 
 <xsl:template match="example" mode="tcb-style">
+    <xsl:text>blockspacingstyle, after title={\space}, before upper ={\setparstyle}, &#xa; </xsl:text>
     <xsl:text>fonttitle=\normalfont\bfseries, colback=white, colframe=black, colbacktitle=white, coltitle=black,
       enhanced,
       breakable,
@@ -242,6 +243,15 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
 <xsl:template match="pagebreak-latex">
   <xsl:text>&#xa;</xsl:text>
   <xsl:text>\pagebreak</xsl:text>
+  <xsl:text>&#xa;</xsl:text>
+</xsl:template>
+
+<!-- and enable occasional enlarging of a page to avoid orphans -->
+<xsl:template match="enlarge-page">
+  <xsl:text>&#xa;</xsl:text>
+  <xsl:text>\enlargethispage{</xsl:text>
+    <xsl:value-of select="skipsize"/>
+  <xsl:text>\baselineskip}&#xa;</xsl:text>
   <xsl:text>&#xa;</xsl:text>
 </xsl:template>
 
