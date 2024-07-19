@@ -263,6 +263,15 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
   <xsl:text>&#xa;</xsl:text>
 </xsl:template>
 
+<!-- and enable occasional enlarging of a page to avoid orphans -->
+<xsl:template match="enlarge-page">
+  <xsl:text>&#xa;</xsl:text>
+  <xsl:text>\enlargethispage{</xsl:text>
+    <xsl:value-of select="skipsize"/>
+  <xsl:text>\baselineskip}&#xa;</xsl:text>
+  <xsl:text>&#xa;</xsl:text>
+</xsl:template>
+
 <!-- "aside" -->
 <!-- The assembalge template, applied to aside, to change a setting -->
 <xsl:template match="aside" mode="environment">
