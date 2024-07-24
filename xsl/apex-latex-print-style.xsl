@@ -335,7 +335,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
   </xsl:if>
 </xsl:template>
 
-<!-- fix this one damn display math that doesn't fit for 2 side printing -->
+<!-- fix this one darn display math that doesn't fit for 2 side printing -->
 <xsl:template match="md">
   <xsl:if test="(@hskip) and ($b-latex-two-sides)">
     <xsl:text>&#xa;&#xa;\noindent\hskip-</xsl:text>
