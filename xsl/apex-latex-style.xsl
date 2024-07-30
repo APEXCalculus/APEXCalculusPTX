@@ -79,6 +79,10 @@
     <xsl:text>coltitle=black, fonttitle=\bfseries, attach title to upper, after title={\space},left=1pt,</xsl:text>
 </xsl:template>
 
+<xsl:template match="figure|listing" mode="tcb-style">
+    <xsl:text>bwminimalstyle, middle=1ex, blockspacingstyle, fontlower=\blocktitlefont, after skip=12pt</xsl:text>
+</xsl:template>
+
 <xsl:template match="example" mode="tcb-style">
   <xsl:text>blockspacingstyle, after title={\space}, before upper ={\setparstyle},&#xa; </xsl:text>
     <xsl:text>fonttitle=\normalfont\bfseries, colback=white, colframe=black, colbacktitle=white, coltitle=black,
