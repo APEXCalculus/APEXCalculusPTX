@@ -80,7 +80,7 @@
 </xsl:template>
 
 <xsl:template match="figure" mode="tcb-style">
-    <xsl:text>bwminimalstyle, middle=1ex, blockspacingstyle, fontlower=\blocktitlefont, after skip=12pt</xsl:text>
+    <xsl:text>bwminimalstyle, middle=1ex, blockspacingstyle, fontlower=\blocktitlefont, after skip=\baselineskip</xsl:text>
 </xsl:template>
 
 <xsl:template match="example" mode="tcb-style">
