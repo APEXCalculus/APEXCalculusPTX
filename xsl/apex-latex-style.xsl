@@ -228,11 +228,11 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
   <xsl:choose>
     <xsl:when test="ancestor::figure/@vshift">
       <xsl:text>\begin{image}</xsl:text>
-      <xsl:text>{0</xsl:text>
+      <xsl:text>{0.02</xsl:text>
       <xsl:text>}</xsl:text>
-      <xsl:text>{1</xsl:text>
+      <xsl:text>{0.96</xsl:text>
       <xsl:text>}</xsl:text>
-      <xsl:text>{0</xsl:text>
+      <xsl:text>{0.02</xsl:text>
       <xsl:text>}{}%&#xa;</xsl:text>
       <xsl:apply-templates select="." mode="image-inclusion" />
       <xsl:text>\end{image}%&#xa;</xsl:text>
