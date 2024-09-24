@@ -888,19 +888,20 @@
         <exercise label="ex-deriv-inverse-evaluate-2">
           <webwork xml:id="webwork-ex-deriv-inverse-evaluate-2">
             <pg-code>
-              Context("Fraction");
-              ($h,$c,$x0) = (-9..-1,1..9)[NchooseK(18,3)];
+              Context("Fraction")-&gt;noreduce('(-x)-y', '(-x)+y');
+              ($h,$c,$x0) = random_subset(3, -9 .. -1, 1 .. 9);
               if($envir{problemSeed}==1){$h=1; $c=4; $x0=3;};
-              $f = Formula("x^2 - 2*$a x + $c")-&gt;reduce;
-              $y0 = $f-&gt;eval(x=&gt;$x0);
+              $f = Formula("x^2 - 2*$h x + $c")-&gt;reduce;
+              $y0 = $f-&gt;eval(x =&gt; $x0);
               $point = Point($x0,$y0);
               $fp = $f-&gt;D('x');
-              $fpx0 = $fp-&gt;eval(x=&gt;$x0);
+              $fpx0 = $fp-&gt;eval(x =&gt; $x0);
               $fipy0 = Fraction(1/$fpx0);
+              $sign = ($x0 &gt; $h) ? '\geq' : '\leq';
             </pg-code>
             <statement>
               <p>
-                The point <m><var name="$point"/></m> is on the graph of <m>f(x) = <var name="$f"/>, x\geq 1</m>.
+                The point <m><var name="$point"/></m> is on the graph of <m>f(x) = <var name="$f"/>, x <var name="$sign"/> <var name="$h"/></m>.
                 Find <m>\left(f^{-1}\right)'(<var name="$y0"/>)</m>.
               </p>
               <p>
