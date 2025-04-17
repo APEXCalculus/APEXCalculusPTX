@@ -339,6 +339,172 @@
       </solution>
     </example>
 
+    <exercise label="APEX_FTC_2_v1">
+      <statement>
+        <p>
+          <xref ref="thm_FTC1"/> states that if we have a continuous function <m>f</m>
+          defined on the interval <m>[a,b]</m>, then we can create a new function <m>g(x) = \int_a^x f(t)\,dt</m>.
+          In your own words, explain what <m>x</m> represents in this expression.
+          Illustrate your explanation with an example, and different values of <m>x</m>.
+        </p>
+      </statement>
+      <response/>
+    </exercise>
+
+    <exercise label="APEX_FTC_1_v1" xml:id="APEX_FTC_1_v1">
+      <introduction>
+        <p>
+          Let <m>F(x)=\int_0^x f(t)\,dt</m>, for <m>0\leq x\leq 4</m>,
+          where <m>f(x)</m> is the function whose graph is the upper semicircle of radius 1, with center at <m>(1,0)</m>,
+          followed by a line segment connecting the point <m>(2,0)</m> with the point <m>(4,1)</m>,
+          as shown in <xref ref="fig-PROTEUS-FTC-1"/>.
+        </p>
+
+        <figure xml:id="fig-PROTEUS-FTC-1">
+          <caption>The function <m>f(x)</m> used to define <m>F(x)</m> in <xref ref="APEX_FTC_1_v1"/></caption>
+          <image width="47%">
+            <shortdescription>A graph consisting of a semicircle from (0,0) to (2,0) and a line segment from (2,0) to (4,1)</shortdescription>
+            <latex-image label="img_PROTEUS-FTC-1">
+
+            \begin{tikzpicture}
+
+            \begin{axis}[
+            ymin=-0.5,ymax=1.5,
+            xmin=-0.3,xmax=4.3,
+            axis equal
+            ]
+
+            \addplot+ [domain=0:2,samples=100] {sqrt(2*x-x^2)};
+            \addplot [firstcurvestyle,domain=2:4] {0.5*(x-2)};
+
+            \end{axis}
+
+            \end{tikzpicture}
+
+            </latex-image>
+          </image>
+        </figure>
+
+      </introduction>
+
+      <task label="APEX_FTC_1_v1A">
+        <statement>
+          <p>
+            Explain how you would find the values <m>F(0)</m>, <m>F(1)</m>, <m>F'(1)</m>, and <m>F''(1)</m>
+          </p>
+        </statement>
+        <response/>
+      </task>
+
+      <task label="APEX_FTC_1_v1B">
+        <statement>
+          <p>
+            Explain how to find the value of <m>F(4)</m>, without evaluating an integral.
+          </p>
+        </statement>
+        <response/>
+      </task>
+
+      <task label="APEX_FTC_1_v1C">
+        <statement>
+          <p>
+            Is <m>F</m> differentiable on the interval <m>(0,4)</m>?
+            Is <m>F</m> twice differentiable on the interval <m>(0,4)</m>?
+            Explain your answers.
+          </p>
+        </statement>
+        <response/>
+      </task>
+    </exercise>
+
+    <exercise label="APEX_FTC_4_v2">
+      <title>What is so important about area under a curve?</title>
+      <introduction>
+        <p>
+          Area is a visual representation of the product of two quantities. 
+          When one quantity varies, the area becomes a sum of products (Riemann sums). 
+          Thus, the meaning of area depends on the units of the things you are multiplying.
+        </p>
+
+        <p>
+          Imagine a scenario where you move files on your computer from one folder to another, 
+          with the progress shown in the figures below. 
+        </p>
+
+        <sidebyside widths="47% 47%">
+          <figure xml:id="fig-PROTEUS-data-1">
+            <caption>Constant transfer rate</caption>
+            <image source="images/data-transfer-constant.png">
+              <shortdescription>Screenshot from a computer utility showing a constant rate of data transfer</shortdescription>
+              <description>
+                <p>
+                  The image is a screenshot from a computer utility, showing the rate at which data from a set of files is being transferred.
+                  At the top, we see that the transfer is 80% complete.
+                  Just below this, we see that we are copying item 4,450 from one folder to another.
+                  Below this is a graph. The vertical axis is labeled <q>Speed MB/s</q>.
+                  The horizontal axis is time, and it shows <q>elapsed time: 50s</q>.
+                </p>
+
+                <p>
+                  The graph consists of a rectangle, shaded dark green, indicating that the speed has remained constant at a rate labeled as 9.5 MB/s.
+                </p>
+              </description>
+              
+            </image>
+          </figure>
+          <figure xml:id="fig-PROTEUS-data-2">
+            <caption>Variable transfer rate</caption>
+            <image source="images/data-transfer-variable.png">
+              <shortdescription>Screenshot from a computer utility showing a variable rate of data transfer</shortdescription>
+              <description>
+                <p>
+                  The image is a screenshot from a computer utility, showing the rate at which data from a set of files is being transferred.
+                  At the top, we see that the transfer is 80% complete.
+                  Just below this, we see that we are copying item 4,450 from one folder to another.
+                  Below this is a graph. The vertical axis is labeled <q>Speed MB/s</q>.
+                  The horizontal axis is time, and it shows <q>elapsed time: 50s</q>.
+                </p>
+
+                <p>
+                  The graph consists of a region, shaded dark green, whose height varies over time,
+                  indicating a variable rate of data transfer.
+                </p>
+              </description>
+              
+            </image>
+          </figure>
+        </sidebyside>
+      </introduction>
+      
+      <task label="APEX_FTC_4_v2A">
+        <statement>
+          <p>
+            In <xref ref="fig-PROTEUS-data-1"/>, the dark green region forms a rectangle.
+            What are the units of the area of this rectangle, and what is the meaning of the area in this context?
+          </p>
+
+          <p>
+            Be specific, and refer to the elapsed time. Do not use an integral.
+          </p>
+        </statement>
+        <response/>
+      </task>
+      <task label="APEX_FTC_4_v2B">
+        <statement>
+          <p>
+            Let <m>r(t)</m> be the transfer rate (in MB/s) over time <m>t</m> (in seconds),
+            and let <m>D(t)</m> be the total data (in MB) transferred after <m>t</m> seconds.
+          </p>
+
+          <p>
+            Use the <xref ref="thm_FTC1"/> to express how <m>D(t)</m> and <m>r(t)</m> are related.
+            Use any known values from <xref ref="fig-PROTEUS-data-2"/> that are relevant.
+          </p>
+        </statement>
+        <response/>
+      </task>
+    </exercise>
+
     <p>
       What we have done in <xref ref="ex_ftc2"/>
       was more than finding a complicated way of computing an antiderivative.
@@ -851,6 +1017,18 @@
         </p>
       </solution>
     </example>
+
+    <exercise label="APEX_FTC_3_v1">
+      <statement>
+        <p>
+          Let <m>F(x) = \int_0^x \cos(t^2)\,dt</m>, and let <m>G(x) = \int_0^{x^2}\cos(t)\,dt</m>.
+          Compute <m>F'(x)</m> and <m>G'(x)</m> using the Fundamental Theorem of Calculus.
+          Is the chain rule required for either derivative?
+          If so, which one, and why?
+        </p>
+      </statement>
+      <response/>
+    </exercise>
 
     <p>
       Let's practice this once more.
