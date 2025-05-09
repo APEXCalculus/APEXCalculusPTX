@@ -166,7 +166,7 @@
 
     <p>
       The statement of <xref ref="thm_chain_rule"/> takes care to ensure
-      this problem does not arise, but our focus is more on the derivative result than
+      this problem does not arise. We will focus more on the derivative result than
       on the domain/range conditions.
     </p>
   </aside>
@@ -1034,90 +1034,86 @@
       That is, the rate at which the <m>u</m> gear makes a revolution is twice as fast as the rate at which the <m>x</m> gear makes a revolution.
     </p>
 
-    <sidebyside widths="47% 47%" margins="0%">
+    
+    <figure xml:id="fig_chainrulegears" vshift="0">
+      <caption>A series of gears to demonstrate the Chain Rule. Note how <m>\lz{y}{x} = \lz{y}{u}\cdot\lz{u}{x}</m></caption>
+      <!-- START figures/fig_chainrule_gears.tex -->
+      <image>
+        <shortdescription>
+          3 gears of various sizes demonstrating the chain rule.
+        </shortdescription>
+        <description>
+          Three gears, connected in the order <m>x,u,y</m>.
+          <m>x</m> is the largest gear, having 36 teeth. It is rotating counter-clockwise.
+          <m>u</m> is connected to <m>x</m>, and it has 18 teeth. To the left of the connection is <m>\frac{du}{dx} = 2</m>.
+          <m>y</m> is connected to <m>u</m>, and it has 6 teeth. Below the connection is <m>\frac{dy}{du}=3</m>.
+          To the right of the gears is the expression <m>\frac{dy}{dx} = 6</m>.
+        </description>
+        <latex-image label="img_chainrulegears">
 
-      <stack><!-- Old paragraphs title: -->
-        <p>
-          Using the terminology of calculus,
-          the rate of <m>u</m>-change, with respect to <m>x</m>,
-          is <m>\lz{u}{x} = 2</m>.
-        </p>
+        \begin{tikzpicture}[&gt;=latex]
 
-        <p>
-          Likewise, every revolution of <m>u</m> causes <m>3</m> revolutions of <m>y</m>:
-          <m>\lz{y}{u} = 3</m>.
-          How does <m>y</m> change with respect to <m>x</m>?
-          For each revolution of <m>x</m>,
-          <m>y</m> revolves <m>6</m> times; that is,
-          <me>
-            \frac{dy}{dx} = \frac{dy}{du}\cdot \frac{du}{dx} = 2\cdot 3 = 6
-          </me>.
-        </p>
+        \begin{scope}[shift={(0,-200pt)}]
+        \begin{scope}
+        \foreach \x in {0,1,2,...,35}
+        {%
+        \draw [rotate around={{\x*10}:(0,0)}] (60pt,0)--(65pt,0) arc (0:{4.}:65pt);
+        \draw [rotate around={{\x*10+4.}:(0,0)}] (65pt,0) -- (60pt,0) arc (0:6:60pt);
+        }
+        \draw [-&gt;] (40pt,0) arc (0:170:40pt);
+        \draw (0,0) node {$x$};
+        \end{scope}
 
-        <p>
-          We can then extend the <xref ref="thm_chain_rule" text="title"/> with more variables by adding more gears to the picture.
-        </p>
-      </stack>
+        \begin{scope}[shift={(4.5pt,-99pt)}]
+        \foreach \x in {0,1,2,...,17}
+        {%
+        \draw [rotate around={{\x*20}:(0,0)}] (30pt,0)--(35pt,0) arc (0:{9}:35pt);
+        \draw [rotate around={{\x*20+9}:(0,0)}] (35pt,0) -- (30pt,0) arc (0:11:30pt);
+        }
+        \draw [-&gt;] (0,25pt) arc (90:-80:25pt);
+        \draw (0,0) node {$u$};
+        \draw (45pt,-30pt) node {\small $\ds \frac{dy}{du} = 3$};
+        \draw (-50pt,30pt) node {\small $\ds \frac{du}{dx} = 2$};
+        \draw (60pt,40pt) node {\small $\ds \frac{dy}{dx} = 6$};
+        \end{scope}
 
-      <figure xml:id="fig_chainrulegears">
-        <caption>A series of gears to demonstrate the Chain Rule. Note how <m>\lz{y}{x} = \lz{y}{u}\cdot\lz{u}{x}</m></caption>
-        <!-- START figures/fig_chainrule_gears.tex -->
-        <image>
-          <shortdescription>
-            3 gears of various sizes demonstrating the chain rule.
-          </shortdescription>
-          <description>
-            Three gears, connected in the order <m>x,u,y</m>.
-            <m>x</m> is the largest gear, having 36 teeth. It is rotating counter-clockwise.
-            <m>u</m> is connected to <m>x</m>, and it has 18 teeth. To the left of the connection is <m>\frac{du}{dx} = 2</m>.
-            <m>y</m> is connected to <m>u</m>, and it has 6 teeth. Below the connection is <m>\frac{dy}{du}=3</m>.
-            To the right of the gears is the expression <m>\frac{dy}{dx} = 6</m>.
-          </description>
-          <latex-image label="img_chainrulegears">
+        \begin{scope}[shift={(53.5pt,-100pt)}]
+        \foreach \x in {0,1,2,...,5}
+        {%
+        \draw [rotate around={{\x*60}:(0,0)}] (10pt,0)--(15pt,0) arc (0:{29}:15pt);
+        \draw [rotate around={{\x*60+29}:(0,0)}] (15pt,0) -- (10pt,0) arc (0:31:10pt);
+        }
+        \draw [-&gt;] (0,-20pt) arc (-90:70:20pt);
+        \draw (0,0) node {$y$};
+        \end{scope}
+        \end{scope}
+        \end{tikzpicture}
 
-          \begin{tikzpicture}[&gt;=latex]
+        </latex-image>
+      </image>
+      <!-- figures/fig_chainrule_gears.tex END -->
+    </figure>
+    
+    <p>
+      Using the terminology of calculus,
+      the rate of <m>u</m>-change, with respect to <m>x</m>,
+      is <m>\lz{u}{x} = 2</m>.
+    </p>
 
-          \begin{scope}[shift={(0,-200pt)}]
-          \begin{scope}
-          \foreach \x in {0,1,2,...,35}
-          {%
-          \draw [rotate around={{\x*10}:(0,0)}] (60pt,0)--(65pt,0) arc (0:{4.}:65pt);
-          \draw [rotate around={{\x*10+4.}:(0,0)}] (65pt,0) -- (60pt,0) arc (0:6:60pt);
-          }
-          \draw [-&gt;] (40pt,0) arc (0:170:40pt);
-          \draw (0,0) node {$x$};
-          \end{scope}
+    <p>
+      Likewise, every revolution of <m>u</m> causes <m>3</m> revolutions of <m>y</m>:
+      <m>\lz{y}{u} = 3</m>.
+      How does <m>y</m> change with respect to <m>x</m>?
+      For each revolution of <m>x</m>,
+      <m>y</m> revolves <m>6</m> times; that is,
+      <me>
+        \frac{dy}{dx} = \frac{dy}{du}\cdot \frac{du}{dx} = 2\cdot 3 = 6
+      </me>.
+    </p>
 
-          \begin{scope}[shift={(4.5pt,-99pt)}]
-          \foreach \x in {0,1,2,...,17}
-          {%
-          \draw [rotate around={{\x*20}:(0,0)}] (30pt,0)--(35pt,0) arc (0:{9}:35pt);
-          \draw [rotate around={{\x*20+9}:(0,0)}] (35pt,0) -- (30pt,0) arc (0:11:30pt);
-          }
-          \draw [-&gt;] (0,25pt) arc (90:-80:25pt);
-          \draw (0,0) node {$u$};
-          \draw (45pt,-30pt) node {\small $\ds \frac{dy}{du} = 3$};
-          \draw (-50pt,30pt) node {\small $\ds \frac{du}{dx} = 2$};
-          \draw (60pt,40pt) node {\small $\ds \frac{dy}{dx} = 6$};
-          \end{scope}
-
-          \begin{scope}[shift={(53.5pt,-100pt)}]
-          \foreach \x in {0,1,2,...,5}
-          {%
-          \draw [rotate around={{\x*60}:(0,0)}] (10pt,0)--(15pt,0) arc (0:{29}:15pt);
-          \draw [rotate around={{\x*60+29}:(0,0)}] (15pt,0) -- (10pt,0) arc (0:31:10pt);
-          }
-          \draw [-&gt;] (0,-20pt) arc (-90:70:20pt);
-          \draw (0,0) node {$y$};
-          \end{scope}
-          \end{scope}
-          \end{tikzpicture}
-
-          </latex-image>
-        </image>
-        <!-- figures/fig_chainrule_gears.tex END -->
-      </figure>
-    </sidebyside>
+    <p>
+      We can then extend the <xref ref="thm_chain_rule" text="title"/> with more variables by adding more gears to the picture.
+    </p>
 
     <p>
       It is difficult to overstate the importance of the <xref ref="thm_chain_rule" text="title"/>.
