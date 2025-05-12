@@ -349,6 +349,13 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
     </xsl:if>
 </xsl:template>
 
+<!-- Override smallcaps styling for initialization and friends -->
+
+<xsl:template match="abbr|acro|init" mode="tex-macro-style">
+    <!-- <xsl:text>{\scshape #1}</xsl:text> -->
+    <xsl:text>{#1}</xsl:text>
+</xsl:template>
+
 <!-- Adjust width of some tcolorboxes that aren't wide enough to fit their content -->
 
 <xsl:template match="definition|theorem|insight|sidebyside|table">
