@@ -347,6 +347,13 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
   </xsl:if>
 </xsl:template>
 
+<!-- Override smallcaps styling for initialization and friends -->
+
+<xsl:template match="abbr|acro|init" mode="tex-macro-style">
+    <!-- <xsl:text>{\scshape #1}</xsl:text> -->
+    <xsl:text>{#1}</xsl:text>
+</xsl:template>
+
 <!-- asides in the margin -->
 <!-- simple asides, with no styling available -->
 <xsl:template match="aside">
