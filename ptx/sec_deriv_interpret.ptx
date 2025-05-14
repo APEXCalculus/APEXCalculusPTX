@@ -275,7 +275,7 @@
     </p>
   </subsection>
 
-  <subsection>
+  <subsection xml:id="subsec-derivative-motion">
     <title>The Derivative and Motion</title>
     <p>
       One of the most fundamental applications of the derivative is the study of motion.
@@ -779,43 +779,70 @@
     </p>
   </subsection>
 
-  <exercises>
-    <subexercises xml:id="TaC-deriv-interpret">
-      <title>Terms and Concepts</title>
-
-      <exercise label="TaC-deriv-interpret-1">
-        <webwork xml:id="webwork-TaC-deriv-interpret-1">
+  <reading-questions xml:id="TaC-deriv-interpret">
+    <exercise label="TaC-deriv-interpret-1">
+        <!-- <webwork xml:id="webwork-TaC-deriv-interpret-1">
           <pg-code>
             Context()-&gt;strings-&gt;add('velocity'=&gt;{});
             $velocity = Compute("velocity");
-          </pg-code>
+          </pg-code> -->
           <statement>
             <p>
               What is the instantaneous rate of change of position called?
             </p>
             <p>
-              <var name="$velocity" width="20"/>
+              <var width="20"/>
             </p>
+            <setup>
+              <var case="insensitive">
+                <condition string="velocity">
+                  <feedback>
+                    <p>
+                      Well done!
+                    </p>
+                  </feedback>
+                </condition>
+                <condition string="instantaneous velocity">
+                  <feedback>
+                    <p>
+                      Unless stated otherwise, <q>velocity</q> is assumed to be instantaneous.
+                    </p>
+                  </feedback>
+                </condition>
+                <condition string=".*">
+                  <feedback>
+                    <p>
+                      You may want to re-read the beginning of <xref ref="subsec-deriv-motion"/>.
+                    </p>
+                  </feedback>
+                </condition>
+              </var>
+            </setup>
+            <!-- <p>
+              <var name="$velocity" width="20"/>
+            </p> -->
           </statement>
-        </webwork>
+        <!-- </webwork> -->
       </exercise>
 
       <exercise label="TaC-deriv-interpret-2">
-        <webwork xml:id="webwork-TaC-deriv-interpret-2">
+        <!-- <webwork xml:id="webwork-TaC-deriv-interpret-2"> -->
           <statement>
             <p>
               Given a function <m>y=f(x)</m>,
               in your own words describe how to find the units of <m>\fp(x)</m>.
             </p>
-            <p>
+            <!-- <p>
               <var form="essay"/>
-            </p>
+            </p> -->
           </statement>
-        </webwork>
+          <response />
+          
+        <!-- </webwork> -->
       </exercise>
 
       <exercise label="TaC-deriv-interpret-3">
-        <webwork xml:id="webwork-TaC-deriv-interpret-3">
+        <!-- <webwork xml:id="webwork-TaC-deriv-interpret-3">
           <pg-code>
             Context()-&gt;strings-&gt;add('linear functions'=&gt;{});
             Context()-&gt;strings-&gt;add(
@@ -826,21 +853,44 @@
               'the linear functions'=&gt;{alias=&gt;'linear functions'},
             );
             $ans = Compute("linear functions");
-          </pg-code>
+          </pg-code> -->
           <statement>
             <p>
               What functions have a constant rate of change?
             </p>
             <p>
-              <var name="$ans" width="20"/>
+              <!-- <var name="$ans" width="20"/> -->
+               <fillin width="30" answer="linear functions"/>
             </p>
           </statement>
-        </webwork>
-      </exercise>
-    </subexercises>
+          <evaluation>
+            <evaluate>
 
-    <subexercises>
-      <title>Problems</title>
+            <test correct="yes">
+              <strcmp use-answer="yes" case="insensitive"/>
+            </test>
+
+            <test correct="yes">
+              <strcmp case="insensitive">linear</strcmp>
+            </test>
+
+            <test>
+              <strcmp use-answer="yes" strip="no" />
+              <feedback>
+                <p>
+                  Your answer includes the correct word but has extra text.
+                </p>
+              </feedback>
+            </test>
+          </evaluate>
+        </evaluation>
+        <!-- </webwork> -->
+      </exercise>
+  </reading-questions>
+
+  <exercises>
+    <!-- <subexercises>
+      <title>Problems</title> -->
 
       <exercise label="ex-deriv-interpret-1">
         <webwork xml:id="webwork-ex-deriv-interpret-1">
@@ -1481,103 +1531,6 @@
           </webwork>
         </exercise>
       </exercisegroup>
-    </subexercises>
-
-    <!-- <subexercises xml:id="exset-deriv-interpret-review">
-      <title>Review</title>
-
-      <exercisegroup cols="2">
-        <introduction>
-          <p>
-            Use the definition of the derivative to compute the derivative of <m>f</m>.
-          </p>
-        </introduction>
-
-        <exercise label="ex-deriv-interpret-review-1">
-          <webwork xml:id="webwork-ex-deriv-interpret-review-1">
-            <pg-code>
-              $answer = Formula("10x");
-              $showwork = '[@ explanation_box(message => "Show your work using the definition of the derivative.") @]*';
-            </pg-code>
-            <statement>
-              <p>
-                <m>f(x)=5x^2</m>
-              </p>
-              <p>
-                <var name="$answer" width="10"/>
-              </p>
-              <p>
-                <var name="$showwork" data="pgml"/>
-              </p>
-            </statement>
-          </webwork>
-        </exercise>
-
-        <exercise label="ex-deriv-interpret-review-2">
-          <webwork xml:id="webwork-ex-deriv-interpret-review-2">
-            <pg-code>
-              $answer = Formula("3(x-2)^2");
-              $showwork = '[@ explanation_box(message => "Show your work using the definition of the derivative.") @]*';
-            </pg-code>
-            <statement>
-              <p>
-                <m>f(x)=(x-2)^3</m>
-              </p>
-              <p>
-                <var name="$answer" width="10"/>
-              </p>
-              <p>
-                <var name="$showwork" data="pgml"/>
-              </p>
-            </statement>
-          </webwork>
-        </exercise>
-      </exercisegroup>
-
-      <exercisegroup cols="2">
-        <introduction>
-          <p>
-            Numerically approximate the derivative.
-          </p>
-        </introduction>
-        <exercise label="ex-deriv-interpret-review-3">
-          <webwork xml:id="webwork-ex-deriv-interpret-review-3">
-            <pg-code>
-              $ans=0;
-            </pg-code>
-            <statement>
-              <p>
-                <m>f'(\pi)</m> where <m>f(x) = \cos(x)</m>
-              </p>
-              <p>
-                <var name="$ans" width="10"/>
-              </p>
-            </statement>
-          </webwork>
-        </exercise>
-
-        <exercise label="ex-deriv-interpret-review-4">
-          <webwork xml:id="webwork-ex-deriv-interpret-review-4">
-            <pg-code>
-              $r=list_random([2,2],[3,2],[4,2],[5,2],[6,2],[7,2],[8,2],[9,2],[2,3],[3,3],[4,3],[2,5],[2,6]);
-              if($envir{problemSeed}==1){$r=[3,2];};
-              ($b,$n)=@{$r};
-              $a=$b**$n;
-              $f = ($n==2) ? '\sqrt{x}' : "\\sqrt[$n]{x}";
-              Context("Fraction");
-              $ans=Fraction(1,$n*($b)**($n-1));
-            </pg-code>
-            <statement>
-              <p>
-                <m>f'(<var name="$a"/>)</m> where <m>f(x) = <var name="$f"/></m>
-              </p>
-              <p>
-                <var name="$ans" width="10"/>
-              </p>
-            </statement>
-          </webwork>
-        </exercise>
-      </exercisegroup>
-    </subexercises> -->
+    <!-- </subexercises> -->
   </exercises>
 </section>
