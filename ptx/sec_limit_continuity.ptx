@@ -1596,12 +1596,15 @@
         </introduction>
         <exercise label="ex-limit-continuity-use-graph-1">
           <webwork xml:id="webwork-ex-limit-continuity-use-graph-1">
+            <pg-macros>
+              <macro-file>parserPopUp.pl</macro-file>
+            </pg-macros>
             <pg-code>
               $a=1;
               @b=(1,2,1,2,0.5,0);
               $left=Formula("(($b[1]-$b[0])/(1-0))*(x-0)+$b[0]");
               $right=Formula("(x-1)*(x-1.5)*$b[5]/((2-1)*(2-1.5))+(x-1)*(x-2)*$b[4]/((1.5-1)*(1.5-2))+(x-1.5)*(x-2)*$b[3]/((1-1.5)*(1-2))");
-              $answer=PopUp(['?','Yes.','No.'],2);
+              $answer=DropDown(['Yes.','No.'],1,showInStatic=&gt;0);
               $showwork = '[@ explanation_box(message =&gt; "If not, state why it is not.") @]*';
             </pg-code>
             <statement>
@@ -1649,12 +1652,15 @@
 
         <exercise label="ex-limit-continuity-use-graph-2">
           <webwork xml:id="webwork-ex-limit-continuity-use-graph-2">
+            <pg-macros>
+              <macro-file>parserPopUp.pl</macro-file>
+            </pg-macros>
             <pg-code>
               $a=1;
               @b=(0,1,2,2,1,0);
               $left=Formula("(($b[1]-$b[0])/(1-0))*(x-0)+$b[0]");
               $right=Formula("(($b[5]-$b[3])/(2-1))*(x-1)+$b[3]");
-              $answer=PopUp(['?','Yes.','No.'],2);
+              $answer=DropDown(['Yes.','No.'],1,showInStatic=&gt;0);
               $showwork = '[@ explanation_box(message =&gt; "If not, state why it is not.") @]*';
             </pg-code>
             <statement>
@@ -1702,6 +1708,9 @@
 
         <exercise label="ex-limit-continuity-use-graph-3">
           <webwork xml:id="webwork-ex-limit-continuity-use-graph-3">
+            <pg-macros>
+              <macro-file>parserPopUp.pl</macro-file>
+            </pg-macros>
             <pg-code>
               $a=1;
               @b=(0,Compute("INF"),Compute("DNE"),Compute("INF"),1,0);
@@ -1709,7 +1718,7 @@
               $right=Formula("-sec(x*90)-1");
               $lowmidx = acos(1/3.5)*2/pi;
               $highmidx = 2 - acos(1/3.5)*2/pi;
-              $answer=PopUp(['?','Yes.','No.'],2);
+              $answer=DropDown(['Yes.','No.'],1,showInStatic=&gt;0);
               $showwork = '[@ explanation_box(message =&gt; "If not, state why it is not.") @]*';
             </pg-code>
             <statement>
@@ -1757,13 +1766,16 @@
 
         <exercise label="ex-limit-continuity-use-graph-4">
           <webwork xml:id="webwork-ex-limit-continuity-use-graph-4">
+            <pg-macros>
+              <macro-file>parserPopUp.pl</macro-file>
+            </pg-macros>
             <pg-code>
               $a=0;
               ($b[1],$b[2],$b[3],$b[4]) = (0,0.5,1,1.5,2)[NchooseK(5,4)];
               for my $i(0,5) {$b[$i]=random(0,2,0.5)};
               $left=Formula("(($b[1]-$b[0])/(1-0))*(x-0)+$b[0]");
               $right=Formula("(x-1)*(x-1.5)*$b[5]/((2-1)*(2-1.5))+(x-1)*(x-2)*$b[4]/((1.5-1)*(1.5-2))+(x-1.5)*(x-2)*$b[3]/((1-1.5)*(1-2))");
-              $answer=PopUp(['?','Yes.','No.'],1);
+              $answer=DropDown(['Yes.','No.'],0,showInStatic=&gt;0);
               $showwork = '[@ explanation_box(message =&gt; "If not, state why it is not.") @]*';
             </pg-code>
             <statement>
@@ -1814,6 +1826,9 @@
 
         <exercise label="ex-limit-continuity-use-graph-5">
           <webwork xml:id="webwork-ex-limit-continuity-use-graph-5">
+            <pg-macros>
+              <macro-file>parserPopUp.pl</macro-file>
+            </pg-macros>
             <pg-code>
               $a=1;
               for my$i(0..5){$b[$i]=random(0,2,0.5)};
@@ -1821,7 +1836,7 @@
               $b[3] = $b[1];
               $right=Formula("(($b[1]-$b[0])/(1-2))*(x-2)+$b[0]");
               $left=Formula("(x-0.5)*(x-1)*$b[5]/((0-0.5)*(0-1))+(x-0)*(x-1)*$b[4]/((0.5-0)*(0.5-1))+(x-0)*(x-0.5)*$b[3]/((1-0)*(1-0.5))");
-              $answer=PopUp(['?','Yes.','No.'],1);
+              $answer=DropDown(['Yes.','No.'],0,showInStatic=&gt;0);
               $showwork = '[@ explanation_box(message =&gt; "If not, state why it is not.") @]*';
             </pg-code>
             <statement>
@@ -1869,11 +1884,14 @@
 
         <exercise label="ex-limit-continuity-use-graph-6">
           <webwork xml:id="webwork-ex-limit-continuity-use-graph-6">
+            <pg-macros>
+              <macro-file>parserPopUp.pl</macro-file>
+            </pg-macros>
             <pg-code>
               $a=4;
               ($b[1],$b[3]) = (-4..4)[NchooseK(9,2)];
               for my $i (0,4) {$b[$i]=random(-4,4,1)};
-              $answer=PopUp(['?','Yes.','No.'],1);
+              $answer=DropDown(['Yes.','No.'],0,showInStatic=&gt;0);
               $ymin=min($b[0],$b[1]-$b[0],$b[3],$b[4]-$b[3])-1;
               $ymax=max($b[0],$b[1]-$b[0],$b[3],$b[4]-$b[3])+1;
               $showwork = '[@ explanation_box(message =&gt; "If not, state why it is not.") @]*';
@@ -1924,15 +1942,18 @@
 
         <exercise label="ex-limit-continuity-use-graph-7">
           <webwork xml:id="webwork-ex-limit-continuity-use-graph-7">
+            <pg-macros>
+              <macro-file>parserPopUp.pl</macro-file>
+            </pg-macros>
             <pg-code>
               @b=(0,2,0,2,0,0,0,2,Compute("DNE"),2,0);
               for my$i(0..3){$f[$i]=Formula("($b[3*$i+1]-$b[3*$i])/2*(x-(2*$i-4))+$b[3*$i]");}
-              @choices=('?','Yes.','No.');
-              for my$i(0..2){if($b[3*$i+2]==Compute("DNE")){$correct[$i]=$choices[2];}
-                elsif($f[$i]->eval(x=>(2*$i-2))!=$f[$i+1]->eval(x=>(2*$i-2))){$correct[$i]=$choices[2];}
-                elsif($f[$i]->eval(x=>(2*$i-2))!=$b[3*$i+2]){$correct[$i]=$choices[2];}
-                else{$correct[$i]=$choices[1];};
-                $answer[$i]=PopUp(~~@choices,$correct[$i]);
+              @choices=('Yes.','No.');
+              for my$i(0..2){if($b[3*$i+2]==Compute("DNE")){$correct[$i]=1;}
+                elsif($f[$i]->eval(x=>(2*$i-2))!=$f[$i+1]->eval(x=>(2*$i-2))){$correct[$i]=1;}
+                elsif($f[$i]->eval(x=>(2*$i-2))!=$b[3*$i+2]){$correct[$i]=1;}
+                else{$correct[$i]=0;};
+                $answer[$i]=DropDown(~~@choices,$correct[$i],showInStatic=&gt;0);
               };
               $showwork = '[@ explanation_box(message => "If not, state why it is not.") @]*';
             </pg-code>
@@ -2003,11 +2024,14 @@
 
         <exercise label="ex-limit-continuity-use-graph-8">
           <webwork xml:id="webwork-ex-limit-continuity-use-graph-8">
+            <pg-macros>
+              <macro-file>parserPopUp.pl</macro-file>
+            </pg-macros>
             <pg-code>
               Context()-&gt;flags-&gt;set(reduceConstants=&gt;0);
               $a=Formula("3pi/2");
               $g=Formula("1+sin(x*180/pi)");
-              $answer=PopUp(['?','Yes.','No.'],1);
+              $answer=DropDown(['Yes.','No.'],0,showInStatic=&gt;0);
               $showwork = '[@ explanation_box(message =&gt; "If not, state why it is not.") @]*';
             </pg-code>
             <statement>
@@ -2069,13 +2093,15 @@
 
         <exercise label="ex-limit-continuity-point-1">
           <webwork xml:id="webwork-ex-limit-continuity-point-1">
+            <pg-macros>
+              <macro-file>parserPopUp.pl</macro-file>
+            </pg-macros>
             <pg-code>
               Context("PiecewiseFunction");
-              @choices=('?',
-                'Yes.',
+              @choices=('Yes.',
                 'No.'
               );
-              @answer=(PopUp(~~@choices,1),PopUp(~~@choices,1));
+              @answer=(DropDown(~~@choices,0,showInStatic=&gt;0),DropDown(~~@choices,0,showInStatic=&gt;0));
               $showwork = '[@ explanation_box(message => "If not, explain why not.") @]*';
             </pg-code>
             <introduction>
@@ -2116,6 +2142,9 @@
 
         <exercise label="ex-limit-continuity-point-2">
           <webwork xml:id="webwork-ex-limit-continuity-point-2">
+            <pg-macros>
+              <macro-file>parserPopUp.pl</macro-file>
+            </pg-macros>
             <pg-code>
               Context("PiecewiseFunction");
               #for my$i(0..3){$a[$i]=non_zero_random(-2,2,1)};
@@ -2124,12 +2153,11 @@
               $left=Formula("$a[0]x^3+$a[1]x^2")->reduce;
               $right=Formula("$a[2]x+$a[3]")->reduce;
               $f=PiecewiseFunction("x&lt;1" => "$left","x>=1"=>"$right");
-              @choices=('?',
-                'Yes.',
+              @choices=('Yes.',
                 'No.'
               );
-              $correct[1]=($left->eval(x=>1)==$right->eval(x=>1))?1:2;
-              @answer=(PopUp(~~@choices,1),PopUp(~~@choices,$correct[1]));
+              $correct[1]=($left->eval(x=>1)==$right->eval(x=>1))?0:1;
+              @answer=(DropDown(~~@choices,0,showInStatic=&gt;0),DropDown(~~@choices,$correct[1],showInStatic=&gt;0));
               $showwork = '[@ explanation_box(message => "If not, explain why not.") @]*';
             </pg-code>
             <introduction>
@@ -2170,17 +2198,19 @@
 
         <exercise label="ex-limit-continuity-point-3">
           <webwork xml:id="webwork-ex-limit-continuity-point-3">
+            <pg-macros>
+              <macro-file>parserPopUp.pl</macro-file>
+            </pg-macros>
             <pg-code>
               #@a=map{$_-10}NchooseK(20,4);
               Context("PiecewiseFunction");
               #if($envir{problemSeed}==1){@a=(-1,-4,-2,10)};
               @a=(-1,-4,-2,10);
               $f=PiecewiseFunction("x!=$a[0]" => Formula("(x^2-($a[0]+$a[1])x+($a[0]*$a[1]))/(x^2-($a[0]+$a[2])x+($a[0]*$a[2]))")->reduce,"x=$a[0]"=>Real(($a[0]-$a[1])/($a[0]-$a[2])));
-              @choices=('?',
-                'Yes.',
+              @choices=('Yes.',
                 'No.'
               );
-              @answer=(PopUp(~~@choices,1),PopUp(~~@choices,1));
+              @answer=(DropDown(~~@choices,0,showInStatic=&gt;0),DropDown(~~@choices,0,showInStatic=&gt;0));
               $showwork = '[@ explanation_box(message => "If not, explain why not.") @]*';
             </pg-code>
             <introduction>
@@ -2221,18 +2251,20 @@
 
         <exercise label="ex-limit-continuity-point-4">
           <webwork xml:id="webwork-ex-limit-continuity-point-4">
+            <pg-macros>
+              <macro-file>parserPopUp.pl</macro-file>
+            </pg-macros>
             <pg-code>
               #@a=map{$_-12}NchooseK(24,6);
               Context("PiecewiseFunction");
               #if($envir{problemSeed}==1){@a=(0,8,-8,3,5,0)};
               @a=(0,8,-8,3,5,0);
               $f=PiecewiseFunction("x!=$a[1]" => Formula("(x^2-($a[1]+$a[2])x+($a[1]*$a[2]))/(x^2-($a[1]+$a[3])x+($a[1]*$a[3]))")->reduce,"x=$a[1]"=>$a[4]);
-              @choices=('?',
-                'Yes.',
+              @choices=('Yes.',
                 'No.'
               );
-              $correct[1]=($a[4]==($a[1]-$a[2])/($a[1]-$a[3]))?1:2;
-              @answer=(PopUp(~~@choices,1),PopUp(~~@choices,$correct[1]));
+              $correct[1]=($a[4]==($a[1]-$a[2])/($a[1]-$a[3]))?0:1;
+              @answer=(DropDown(~~@choices,0,showInStatic=&gt;0),DropDown(~~@choices,$correct[1],showInStatic=&gt;0));
               $showwork = '[@ explanation_box(message => "If not, explain why not.") @]*';
             </pg-code>
             <introduction>
@@ -2606,7 +2638,7 @@
         </introduction>
 
         <exercise label="ex-limit-continuity-ivt-1">
-          <webwork xml:id="webwork-ex-limit-continuity-ivt-1">
+          <!-- <webwork xml:id="webwork-ex-limit-continuity-ivt-1"> -->
             <statement>
               <p>
                 Let <m>f</m> be continuous on <m>[1,5]</m> where
@@ -2614,20 +2646,22 @@
                 Does a value <m>1\lt c\lt 5</m> exist such that <m>f(c) = -9</m>?
                 Why/why not?
               </p>
-              <p>
+              <!-- <p>
                 <var form="essay"/>
-              </p>
+              </p> -->
             </statement>
+            <response />
+            
             <solution>
               <p>
                 Yes, by the Intermediate Value Theorem.
               </p>
             </solution>
-          </webwork>
+          <!-- </webwork> -->
         </exercise>
 
         <exercise label="ex-limit-continuity-ivt-2">
-          <webwork xml:id="webwork-ex-limit-continuity-ivt-2">
+          <!-- <webwork xml:id="webwork-ex-limit-continuity-ivt-2"> -->
             <statement>
               <p>
                 Let <m>g</m> be continuous on <m>[-3,7]</m> where
@@ -2635,10 +2669,12 @@
                 Does a value <m>-3\lt c\lt 7</m> exist such that <m>g(c) = 15</m>?
                 Why/why not?
               </p>
-              <p>
+              <!-- <p>
                 <var form="essay"/>
-              </p>
+              </p> -->
             </statement>
+            <response />
+            
             <solution>
               <p>
                 Yes, by the Intermediate Value Theorem.
@@ -2646,11 +2682,11 @@
                 exists in <m>(0,2)</m>, not just in <m>(-3,7)</m>.
               </p>
             </solution>
-          </webwork>
+          <!-- </webwork> -->
         </exercise>
 
         <exercise label="ex-limit-continuity-ivt-3">
-          <webwork xml:id="webwork-ex-limit-continuity-ivt-3">
+          <!-- <webwork xml:id="webwork-ex-limit-continuity-ivt-3"> -->
             <statement>
               <p>
                 Let <m>f</m> be continuous on <m>[-1,1]</m> where
@@ -2658,10 +2694,12 @@
                 Does a value <m>-1\lt c\lt 1</m> exist such that <m>f(c) = 11</m>?
                 Why/why not?
               </p>
-              <p>
+              <!-- <p>
                 <var form="essay"/>
-              </p>
+              </p> -->
             </statement>
+            <response />
+            
             <solution>
               <p>
                 We cannot say;
@@ -2669,11 +2707,11 @@
                 as 11 is outside this range, we do not know.
               </p>
             </solution>
-          </webwork>
+          <!-- </webwork> -->
         </exercise>
 
         <exercise label="ex-limit-continuity-ivt-4">
-          <webwork xml:id="webwork-ex-limit-continuity-ivt-4">
+          <!-- <webwork xml:id="webwork-ex-limit-continuity-ivt-4"> -->
             <statement>
               <p>
                 Let <m>h</m> be a function on <m>[-1,1]</m> where
@@ -2681,10 +2719,12 @@
                 Does a value <m>-1\lt c\lt 1</m> exist such that <m>h(c) = 0</m>?
                 Why/why not?
               </p>
-              <p>
+              <!-- <p>
                 <var form="essay"/>
-              </p>
+              </p> -->
             </statement>
+            <response />
+            
             <solution>
               <p>
                 We cannot say;
@@ -2692,7 +2732,7 @@
                 As we do know know if <m>h</m> is continuous, we cannot say.
               </p>
             </solution>
-          </webwork>
+          <!-- </webwork> -->
         </exercise>
       </exercisegroup>
 
@@ -2707,6 +2747,9 @@
 
         <exercise label="ex-limit-continuity-bisection-1">
           <webwork xml:id="webwork-ex-limit-continuity-bisection-1">
+            <pg-macros>
+              <macro-file>parserPopUp.pl</macro-file>
+            </pg-macros>
             <pg-code>
               Context("Interval");
               Context()-&gt;flags-&gt;set(tolType=&gt;'absolute',tolerance=&gt;0.00000005);
@@ -2721,7 +2764,7 @@
               $in[0]=Compute("[$l[0],$r[0]]");
               for my$i(1..7){$m[$i-1]=($l[$i-1]+$r[$i-1])/2;
                 ($l[$i],$r[$i])=($f-&gt;eval(x=&gt;$m[$i-1])&gt;0)?($l[$i-1],$m[$i-1]):($m[$i-1],$r[$i-1]);
-                $popup[$i-1]=($f-&gt;eval(x=&gt;$m[$i-1])&gt;0)?PopUp(['?','&lt;','&gt;'],'&gt;'):PopUp(['?','&lt;','&gt;'],'&lt;');
+                $popup[$i-1]=($f-&gt;eval(x=&gt;$m[$i-1])&gt;0)?DropDown(['+','-'],'1',showInStatic=&gt;0):DropDown(['+','-'],'0',showInStatic=&gt;0);
                 $in[$i]=Compute("[$l[$i],$r[$i]]");
               };
               $z=Real(($l[7]+$r[7])/2)-&gt;with(tolType=&gt;'absolute',tolerance=&gt;0.01);
@@ -2792,6 +2835,9 @@
 
         <exercise label="ex-limit-continuity-bisection-2">
           <webwork xml:id="webwork-ex-limit-continuity-bisection-2">
+            <pg-macros>
+              <macro-file>parserPopUp.pl</macro-file>
+            </pg-macros>
             <pg-code>
               Context("Interval");
               Context()-&gt;flags-&gt;set(tolType=&gt;'absolute',tolerance=&gt;0.00000005,reduceConstants=&gt;0);
@@ -2804,7 +2850,7 @@
               $in[0]=Compute("[$l[0],$r[0]]");
               for my$i(1..7){$m[$i-1]=($l[$i-1]+$r[$i-1])/2;
                 ($l[$i],$r[$i])=($f-&gt;eval(x=&gt;$m[$i-1])&gt;0)?($l[$i-1],$m[$i-1]):($m[$i-1],$r[$i-1]);
-                $popup[$i-1]=($f-&gt;eval(x=&gt;$m[$i-1])&gt;0)?PopUp(['?','&lt;','&gt;'],'&gt;'):PopUp(['?','&lt;','&gt;'],'&lt;');
+                $popup[$i-1]=($f-&gt;eval(x=&gt;$m[$i-1])&gt;0)?DropDown(['+','-'],'1',showInStatic=&gt;0):DropDown(['+','-'],'0',showInStatic=&gt;0);
                 $in[$i]=Compute("[$l[$i],$r[$i]]");
               };
               $z=Real(($l[7]+$r[7])/2)-&gt;with(tolType=&gt;'absolute',tolerance=&gt;0.01);
@@ -2875,6 +2921,9 @@
 
         <exercise label="ex-limit-continuity-bisection-3">
           <webwork xml:id="webwork-ex-limit-continuity-bisection-3">
+            <pg-macros>
+              <macro-file>parserPopUp.pl</macro-file>
+            </pg-macros>
             <pg-code>
               Context("Interval");
               Context()-&gt;flags-&gt;set(tolType=&gt;'absolute',tolerance=&gt;0.00000005);
@@ -2887,7 +2936,7 @@
               $in[0]=Compute("[$l[0],$r[0]]");
               for my$i(1..7){$m[$i-1]=($l[$i-1]+$r[$i-1])/2;
                 ($l[$i],$r[$i])=($f-&gt;eval(x=&gt;$m[$i-1])&gt;0)?($l[$i-1],$m[$i-1]):($m[$i-1],$r[$i-1]);
-                $popup[$i-1]=($f-&gt;eval(x=&gt;$m[$i-1])&gt;0)?PopUp(['?','&lt;','&gt;'],'&gt;'):PopUp(['?','&lt;','&gt;'],'&lt;');
+                $popup[$i-1]=($f-&gt;eval(x=&gt;$m[$i-1])&gt;0)?DropDown(['+','-'],'1',showInStatic=&gt;0):DropDown(['+','-'],'0',showInStatic=&gt;0);
                 $in[$i]=Compute("[$l[$i],$r[$i]]");
               };
               $z=Real(($l[7]+$r[7])/2)-&gt;with(tolType=&gt;'absolute',tolerance=&gt;0.01);
@@ -2958,6 +3007,9 @@
 
         <exercise label="ex-limit-continuity-bisection-4">
           <webwork xml:id="webwork-ex-limit-continuity-bisection-4">
+            <pg-macros>
+              <macro-file>parserPopUp.pl</macro-file>
+            </pg-macros>
             <pg-code>
               Context("Interval");
               Context()-&gt;flags-&gt;set(tolType=&gt;'absolute',tolerance=&gt;0.00000005);
@@ -2970,7 +3022,7 @@
               $in[0]=Compute("[$l[0],$r[0]]");
               for my$i(1..7){$m[$i-1]=($l[$i-1]+$r[$i-1])/2;
                 ($l[$i],$r[$i])=($f-&gt;eval(x=&gt;$m[$i-1])&lt;0)?($l[$i-1],$m[$i-1]):($m[$i-1],$r[$i-1]);
-                $popup[$i-1]=($f-&gt;eval(x=&gt;$m[$i-1])&gt;0)?PopUp(['?','&lt;','&gt;'],'&gt;'):PopUp(['?','&lt;','&gt;'],'&lt;');
+                $popup[$i-1]=($f-&gt;eval(x=&gt;$m[$i-1])&gt;0)?DropDown(['+','-'],'1',showInStatic=&gt;0):DropDown(['+','-'],'0',showInStatic=&gt;0);
                 $in[$i]=Compute("[$l[$i],$r[$i]]");
               };
               $z=Real(($l[7]+$r[7])/2)-&gt;with(tolType=&gt;'absolute',tolerance=&gt;0.01);

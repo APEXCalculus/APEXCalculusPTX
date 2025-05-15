@@ -1475,28 +1475,25 @@
         </pg-code> -->
         <statement>
           <p>
-            An expression of the form <m>\frac{0}{0}</m> is called <var width="25"/>.
+            An expression of the form <m>\frac{0}{0}</m> is called <fillin width="25" answer="indeterminate"/>.
             <!-- <var evaluator="$evaluator" name="$answer" width="13"/>. -->
           </p>
         </statement>
-        <setup>
-          <var case="insensitive">
-            <condition string="indeterminate">
+        <evaluation>
+          <evaluate>
+            <test correct="yes">
+              <strcmp case="insensitive">indeterminate</strcmp>
+            </test>
+            <test>
+              <strcmp case="insensitive">undefined</strcmp>
               <feedback>
                 <p>
-                  Well done!
+                  Yes, but there is a more specific answer.
                 </p>
               </feedback>
-            </condition>
-            <condition string=".*">
-              <feedback>
-                <p>
-                  See the discussion just above <xref ref="fig_sinx_over_x"/>.
-                </p>
-              </feedback>
-            </condition>
-          </var>
-        </setup>
+            </test>
+          </evaluate>
+        </evaluation>
       <!-- </webwork> -->
     </exercise>
 
@@ -1505,7 +1502,7 @@
         <!-- <pg-code>
           $limitequalsvalue = PopUp(['?','True','False'],2);
         </pg-code> -->
-        <statement corect="no">
+        <statement correct="no">
           <p>
             <!-- <var name="$limitequalsvalue" form="popup"/> -->
             The limit of <m>f(x)</m> as <m>x</m> approaches <m>5</m> is <m>f(5)</m>.
@@ -1565,27 +1562,28 @@
         <statement>
           <p>
             When <m>x</m> is near <m>0</m>,
-            <m>\dfrac{\sin(x)}{x}</m> is near the value <var width="10"/>.
+            <m>\dfrac{\sin(x)}{x}</m> is near the value <fillin width="10" answer="1"/>.
           </p>
           <!-- <p>
             <var name="1" width="10"/>
           </p> -->
         </statement>
-        <setup>
-          <var>
-            <condition number="1">
-              <feedback>Good!</feedback>
-            </condition>
-            <condition string=".*">
+        <evaluation>
+          <evaluate>
+            <test correct="yes">
+              <numcmp use-answer="yes" />
+            </test>
+
+            <test>
+              <numcmp value="0" />
               <feedback>
                 <p>
-                  You may want to review the introductory example from this section.
-                  (And make sure your calculator is not in degrees mode!)
+                  That is a reasonable guess, but no.
                 </p>
               </feedback>
-            </condition>
-          </var>
-        </setup>
+            </test>
+          </evaluate>
+        </evaluation>
         <solution>
           <p>
             Try values of <m>x</m> close to <m>0</m>, such as <m>0.0001</m>.
@@ -3151,7 +3149,7 @@
                   <cell><var name="$tableanswers" width="5"/></cell>
                   <cell><var name="$tableanswers" width="10"/></cell>
                 </row>
-                <row bottom="major">
+                <row>
                   <cell><var name="$tableanswers" width="5"/></cell>
                   <cell><var name="$tableanswers" width="10"/></cell>
                 </row>
@@ -3187,7 +3185,7 @@
                   <cell><m>0.01</m></cell>
                   <cell><m><var name="$tabout[2]"/></m></cell>
                 </row>
-                <row bottom="major">
+                <row>
                   <cell><m>0.1</m></cell>
                   <cell><m><var name="$tabout[3]"/></m></cell>
                 </row>
@@ -3271,7 +3269,7 @@
                   <cell><var name="$tableanswers" width="5"/></cell>
                   <cell><var name="$tableanswers" width="10"/></cell>
                 </row>
-                <row bottom="major">
+                <row>
                   <cell><var name="$tableanswers" width="5"/></cell>
                   <cell><var name="$tableanswers" width="10"/></cell>
                 </row>
@@ -3307,7 +3305,7 @@
                   <cell><m>0.01</m></cell>
                   <cell><m><var name="$tabout[2]"/></m></cell>
                 </row>
-                <row bottom="major">
+                <row>
                   <cell><m>0.1</m></cell>
                   <cell><m><var name="$tabout[3]"/></m></cell>
                 </row>
@@ -3394,7 +3392,7 @@
                   <cell><var name="$tableanswers" width="5"/></cell>
                   <cell><var name="$tableanswers" width="10"/></cell>
                 </row>
-                <row bottom="major">
+                <row>
                   <cell><var name="$tableanswers" width="5"/></cell>
                   <cell><var name="$tableanswers" width="10"/></cell>
                 </row>
@@ -3430,7 +3428,7 @@
                   <cell><m>0.01</m></cell>
                   <cell><m><var name="$tabout[2]"/></m></cell>
                 </row>
-                <row bottom="major">
+                <row>
                   <cell><m>0.1</m></cell>
                   <cell><m><var name="$tabout[3]"/></m></cell>
                 </row>
@@ -3515,7 +3513,7 @@
                   <cell><var name="$tableanswers" width="5"/></cell>
                   <cell><var name="$tableanswers" width="10"/></cell>
                 </row>
-                <row bottom="major">
+                <row>
                   <cell><var name="$tableanswers" width="5"/></cell>
                   <cell><var name="$tableanswers" width="10"/></cell>
                 </row>
@@ -3551,7 +3549,7 @@
                   <cell><m>0.01</m></cell>
                   <cell><m><var name="$tabout[2]"/></m></cell>
                 </row>
-                <row bottom="major">
+                <row>
                   <cell><m>0.1</m></cell>
                   <cell><m><var name="$tabout[3]"/></m></cell>
                 </row>
@@ -3642,7 +3640,7 @@
                   <cell><var name="$tableanswers" width="5"/></cell>
                   <cell><var name="$tableanswers" width="10"/></cell>
                 </row>
-                <row bottom="major">
+                <row>
                   <cell><var name="$tableanswers" width="5"/></cell>
                   <cell><var name="$tableanswers" width="10"/></cell>
                 </row>
@@ -3678,7 +3676,7 @@
                   <cell><m>0.01</m></cell>
                   <cell><m><var name="$tabout[2]"/></m></cell>
                 </row>
-                <row bottom="major">
+                <row>
                   <cell><m>0.1</m></cell>
                   <cell><m><var name="$tabout[3]"/></m></cell>
                 </row>
@@ -3759,7 +3757,7 @@
                   <cell><var name="$tableanswers" width="5"/></cell>
                   <cell><var name="$tableanswers" width="10"/></cell>
                 </row>
-                <row bottom="major">
+                <row>
                   <cell><var name="$tableanswers" width="5"/></cell>
                   <cell><var name="$tableanswers" width="10"/></cell>
                 </row>
@@ -3795,7 +3793,7 @@
                   <cell><m>0.01</m></cell>
                   <cell><m><var name="$tabout[2]"/></m></cell>
                 </row>
-                <row bottom="major">
+                <row>
                   <cell><m>0.1</m></cell>
                   <cell><m><var name="$tabout[3]"/></m></cell>
                 </row>
@@ -3877,7 +3875,7 @@
                   <cell><var name="$tableanswers" width="5"/></cell>
                   <cell><var name="$tableanswers" width="10"/></cell>
                 </row>
-                <row bottom="major">
+                <row>
                   <cell><var name="$tableanswers" width="5"/></cell>
                   <cell><var name="$tableanswers" width="10"/></cell>
                 </row>
@@ -3913,7 +3911,7 @@
                   <cell><m>0.01</m></cell>
                   <cell><m><var name="$tabout[2]"/></m></cell>
                 </row>
-                <row bottom="major">
+                <row>
                   <cell><m>0.1</m></cell>
                   <cell><m><var name="$tabout[3]"/></m></cell>
                 </row>
@@ -3995,7 +3993,7 @@
                   <cell><var name="$tableanswers" width="5"/></cell>
                   <cell><var name="$tableanswers" width="10"/></cell>
                 </row>
-                <row bottom="major">
+                <row>
                   <cell><var name="$tableanswers" width="5"/></cell>
                   <cell><var name="$tableanswers" width="10"/></cell>
                 </row>
@@ -4031,7 +4029,7 @@
                   <cell><m>0.01</m></cell>
                   <cell><m><var name="$tabout[2]"/></m></cell>
                 </row>
-                <row bottom="major">
+                <row>
                   <cell><m>0.1</m></cell>
                   <cell><m><var name="$tabout[3]"/></m></cell>
                 </row>
