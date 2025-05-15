@@ -791,37 +791,28 @@
               What is the instantaneous rate of change of position called?
             </p>
             <p>
-              <var width="20"/>
+              <fillin width="20" answer="velocity"/>
             </p>
-            <setup>
-              <var case="insensitive">
-                <condition string="velocity">
-                  <feedback>
-                    <p>
-                      Well done!
-                    </p>
-                  </feedback>
-                </condition>
-                <condition string="instantaneous velocity">
-                  <feedback>
-                    <p>
-                      Unless stated otherwise, <q>velocity</q> is assumed to be instantaneous.
-                    </p>
-                  </feedback>
-                </condition>
-                <condition string=".*">
-                  <feedback>
-                    <p>
-                      You may want to re-read the beginning of <xref ref="subsec-deriv-motion"/>.
-                    </p>
-                  </feedback>
-                </condition>
-              </var>
-            </setup>
+          </statement>
+          <evaluation>
+            <evaluate>
+              <test correct="yes">
+                <strcmp case="insensitive" use-answer="yes"/>
+              </test>
+              <test>
+                <strcmp use-answer="yes" strip="no" />
+                <feedback>
+                  <p>
+                    Your answer includes the correct word but has extra text.
+                    Unless stated otherwise, velocity is assumed to be instantaneous.
+                  </p>
+                </feedback>
+              </test>
+            </evaluate>
+          </evaluation>
             <!-- <p>
               <var name="$velocity" width="20"/>
             </p> -->
-          </statement>
         <!-- </webwork> -->
       </exercise>
 
@@ -866,24 +857,20 @@
           <evaluation>
             <evaluate>
 
-            <test correct="yes">
-              <strcmp use-answer="yes" case="insensitive"/>
-            </test>
+              <test correct="yes">
+                <strcmp case="insensitive">linear|linear functions?</strcmp>
+              </test>
 
-            <test correct="yes">
-              <strcmp case="insensitive">linear</strcmp>
-            </test>
-
-            <test>
-              <strcmp use-answer="yes" strip="no" />
-              <feedback>
-                <p>
-                  Your answer includes the correct word but has extra text.
-                </p>
-              </feedback>
-            </test>
-          </evaluate>
-        </evaluation>
+              <test>
+                <strcmp use-answer="yes" strip="no" />
+                <feedback>
+                  <p>
+                    Your answer includes the correct word but has extra text.
+                  </p>
+                </feedback>
+              </test>
+            </evaluate>
+          </evaluation>
         <!-- </webwork> -->
       </exercise>
   </reading-questions>
@@ -957,8 +944,11 @@
 
       <exercise label="ex-deriv-interpret-4">
         <webwork xml:id="webwork-ex-deriv-interpret-4">
+          <pg-macros>
+            <macro-file>parserPopUp.pl</macro-file>
+          </pg-macros>
           <pg-code>
-            $popup = PopUp(['?','f(10.1)','f(11)','f(20)'],1);
+            $popup = DropDown(['f(10.1)','f(11)','f(20)'],0,showInStatic=&gt;0);
             $showwork = '[@ explanation_box(message =&gt; "Explain your reasoning.") @]*';
           </pg-code>
           <statement>
@@ -1478,6 +1468,9 @@
 
         <exercise label="ex-deriv-interpret-graph-4">
           <webwork xml:id="webwork-ex-deriv-interpret-graph-4">
+            <pg-macros>
+              <macro-file>parserPopUp.pl</macro-file>
+            </pg-macros>
             <pg-macros>
               <macro-file>parserPopUp.pl</macro-file>
             </pg-macros>
