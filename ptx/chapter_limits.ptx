@@ -94,7 +94,7 @@
   </conclusion>
 
   <exercises xml:id="exercises-limits-review">
-    <title>Chapter review</title>
+    <title>Review exercises</title>
     
     <exercisegroup cols="2">
         <introduction>
@@ -434,32 +434,36 @@
       </exercise>
 
       <exercise label="ex-limit-continuity-review-3">
-        <webwork xml:id="webwork-ex-limit-continuity-review-3">
+        <!-- <webwork xml:id="webwork-ex-limit-continuity-review-3"> -->
             <statement>
               <p>
                 Give an example of a function <m>f</m> for which <m>\lim\limits_{x\to 0} f(x)</m> does not exist.
               </p>
-              <p>
+              <!-- <p>
                 <var form="essay"/>
-              </p>
+              </p> -->
             </statement>
-        </webwork>
+            <response />
+            
+        <!-- </webwork> -->
       </exercise>
 
       <exercise label="ex-limit-infinity-review-1">
-        <webwork xml:id="webwork-ex-limit-infinity-review-1">
+        <!-- <webwork xml:id="webwork-ex-limit-infinity-review-1"> -->
           <statement>
             <p>
               Use an <m>\varepsilon</m>-<m>\delta</m> proof to prove that <m>\lim\limits_{x\to 1}(5x-2)=3</m>.
             </p>
-            <p>
+            <!-- <p>
               <var form="essay"/>
-            </p>
+            </p> -->
           </statement>
+          <response />
+          
           <solution>
             <p>
               Let <m>\varepsilon \gt 0</m> be given.
-              We wish to find <m>\delta>0</m> such that when <m>\abs{x-1}\lt\delta</m>,
+              We wish to find <m>\delta\gt 0</m> such that when <m>\abs{x-1}\lt\delta</m>,
               <m>\abs{f(x)-3}\lt\varepsilon</m>.
             </p>
             <p>
@@ -490,7 +494,7 @@
               This is what we needed to prove.
             </p>
           </solution>
-        </webwork>
+        <!-- </webwork> -->
       </exercise>
 
       <exercise label="ex-limit-infinity-review-2">
@@ -565,6 +569,10 @@
 
       <exercise label="ex-limit-infinity-review-3">
         <webwork xml:id="webwork-ex-limit-infinity-review-3">
+          <pg-macros>
+            <macro-file>parserPopUp.pl</macro-file>
+          </pg-macros>
+            
           <pg-code>
             Context('Fraction')->noreduce('(-x)-y','(-x)+y');
             for my$i(0,3){$b[$i]=non_zero_random(-1,1,1);};
@@ -581,7 +589,7 @@
               $c = non_zero_random(-2,2,1);
               $f[1]=Formula("$b[3]*$n*x^2-($b[4]*$n+$b[3]*$m)*x+($b[4]*$m+$c)")->reduce;
             };
-            $yesno=PopUp(['?','yes','no'],$continuous);
+            $yesno=DropDown(['yes','no'],$continuous,showInStatic=&gt;0);
           </pg-code>
           <statement>
             <p>
@@ -674,6 +682,9 @@
               accurate to two decimal places,
               the root of <m>g(x) = <var name="$f"/></m> on <m>[<var name="$A"/>,<var name="$B"/>]</m>.
             </p>
+            <instruction>
+              Enter the approximation:
+            </instruction>
             <p>
               <var name="$r" width="10"/>
             </p>
