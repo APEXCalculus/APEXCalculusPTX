@@ -68,4 +68,30 @@
       Being able to do so opens up an incredible world of mathematics and applications.
     </p>
   </conclusion>
+
+  <exercises xml:id="exercises-derivapps-review">
+    <title>Review Exercises</title>
+    
+    <exercise label="review-antiderivatives-2">
+      <webwork xml:id="webwork-review-antiderivatives-2">
+        <pg-code>
+          $m = random(2,5,1);
+          $trig = list_random('sin','cos');
+          if($envir{problemSeed}==1){$m=2;$trig='sin';};
+          Context()->variables->add(dx=>"Real");
+          $f = Compute("x^$m e^x $trig(x)")->reduce;
+          $df = $f->D('x')->reduce;
+          $A = Formula("$df dx");
+        </pg-code>
+        <statement>
+          <p>
+            Given <m>y=<var name="$f"/></m>, find <m>dy</m>.
+          </p>
+          <p>
+            <var name="$A" width="20"/>
+          </p>
+        </statement>
+      </webwork>
+    </exercise>
+  </exercises>
 </chapter>
