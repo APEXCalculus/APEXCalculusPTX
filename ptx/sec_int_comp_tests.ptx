@@ -811,14 +811,46 @@
               <p>
                 In order to apply the Integral Test to a sequence <m>\{a_n\}</m>,
                 the function <m>a(n) = a_n</m> must be
-                <fillin/>, <fillin/><nbsp/>and <fillin/>.
+                <fillin mode="string" answer="continuous" width="20"/>, <fillin mode="string" answer="positive" width="20"/>, 
+                and <fillin mode="string" answer="increasing" width="20"/>.
               </p>
             </statement>
-            <answer>
-              <p>
-                continuous, positive and decreasing
-              </p>
-            </answer>
+
+            <evaluation>
+              <evaluate>
+                <test correct="yes">
+                  <jscmp><![CDATA[
+                    ["continuous","positive","increasing"].includes(ans)
+                    ]]></jscmp>
+                </test>
+              </evaluate>
+              <evaluate>
+                <test correct="yes">
+                  <jscmp><![CDATA[
+                    ["continuous","positive","increasing"].includes(ans) && !ans_array.slice(0,1).includes(ans)
+                    ]]></jscmp>
+                </test>
+                <test>
+                  <jscmp><![CDATA[
+                    ans_array.slice(0,1).includes(ans)
+                    ]]></jscmp>
+                  <feedback>You already gave that answer.</feedback>
+                </test>
+              </evaluate>
+              <evaluate>
+                <test correct="yes">
+                  <jscmp><![CDATA[
+                    ["continuous","positive","increasing"].includes(ans) && !ans_array.slice(0,2).includes(ans)
+                    ]]></jscmp>
+                </test>
+                <test>
+                  <jscmp><![CDATA[
+                    ans_array.slice(0,2).includes(ans)
+                    ]]></jscmp>
+                  <feedback>You already gave that answer.</feedback>
+                </test>
+              </evaluate>
+            </evaluation>
         <!--</webwork>-->
       </exercise>
 
@@ -826,16 +858,11 @@
         <!--<webwork xml:id="webwork-TaC-int-comp-tests-2">
             <pg-code>
             </pg-code>-->
-            <statement>
+            <statement correct="no">
               <p>
-                T/F: The Integral Test can be used to determine the sum of a convergent series.
+                The Integral Test can be used to determine the sum of a convergent series.
               </p>
             </statement>
-            <answer>
-              <p>
-                F
-              </p>
-            </answer>
         <!--</webwork>-->
       </exercise>
 
@@ -848,6 +875,8 @@
                 What test(s) in this section do not work well with factorials?
               </p>
             </statement>
+            <response />
+            
             <solution>
               <p>
                 The Integral Test
@@ -871,6 +900,8 @@
                 <m>\ds \infser[0] b_n</m> and <m>\ds \infser[0] c_n</m>?
               </p>
             </statement>
+            <response />
+            
             <solution>
               <p>
                 <m>\ds \infser[0] b_n</m> converges;
@@ -880,6 +911,7 @@
         <!--</webwork>-->
       </exercise>
     </subexercises>
+    
     <subexercises>
       <title>Problems</title>
       <exercisegroup cols="2" xml:id="exset-integral-test">
