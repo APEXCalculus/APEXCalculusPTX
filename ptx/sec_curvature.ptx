@@ -1064,14 +1064,32 @@
             </pg-code> -->
             <statement>
               <p>
-                It is common to describe position in terms of both <fillin/> and/or <fillin/>.
+                It is common to describe position in terms of both <fillin answer="time" mode="string" width="15"/> 
+                and/or <fillin answer="distance" mode="string" width="15"/>.
               </p>
             </statement>
-            <answer>
-              <p>
-                time and/or distance
-              </p>
-            </answer>
+            <evaluation>
+              <evaluate>
+                <test correct="yes">
+                  <jscmp><![CDATA[
+                    ["time","distance"].includes(ans)
+                    ]]></jscmp>
+                </test>
+              </evaluate>
+              <evaluate>
+                <test correct="yes">
+                  <jscmp><![CDATA[
+                    ["time","distance"].includes(ans) && !ans_array.slice(0,1).includes(ans)
+                    ]]></jscmp>
+                </test>
+                <test>
+                  <jscmp><![CDATA[
+                    ans_array.slice(0,1).includes(ans)
+                    ]]></jscmp>
+                  <feedback>You already gave that answer.</feedback>
+                </test>
+              </evaluate>
+            </evaluation>
         <!--</webwork>-->
       </exercise>
 
@@ -1082,14 +1100,16 @@
             <statement>
               <p>
                 A measure of the <q>curviness</q>
-                of a curve is <fillin/>.
+                of a curve is <fillin answer="curvature" width="20"/>.
               </p>
             </statement>
-            <answer>
-              <p>
-                curvature
-              </p>
-            </answer>
+            <evaluation>
+              <evaluate>
+                <test correct="yes">
+                  <strcmp use-answer="yes" case="insensitive"/>
+                </test>
+              </evaluate>
+            </evaluation>
         <!--</webwork>-->
       </exercise>
 
@@ -1102,6 +1122,8 @@
                 Give two shapes with constant curvature.
               </p>
             </statement>
+            <response />
+            
             <answer>
               <p>
                 Answers may include lines, circles, helixes
@@ -1120,10 +1142,11 @@
                 <q>osculating circle</q> is.
               </p>
             </statement>
+            <response />
+            
             <answer>
               <p>
-                Answers will vary;
-                they should mention the circle is tangent to the curve and has the same curvature as the curve at that point.
+                Answer should mention the circle is tangent to the curve and has the same curvature as the curve at that point.
               </p>
             </answer>
         <!--</webwork>-->
@@ -1135,9 +1158,20 @@
             </pg-code> -->
             <statement>
               <p>
-                Complete the identity: <m>\unittangentprime(s) = <fillin/>\unitnormal(s)</m>.
+                Rearrange the blocks to form a valid identity.
               </p>
             </statement>
+            <blocks layout="horizontal">
+              <block order="10" correct="yes"><m>\unittangentprime(s)</m></block>
+              <block order="2"><m>=</m></block>
+              <block order="3"><m>\kappa</m></block>
+              <block order="1"><m>\unitnormal(s)</m></block>
+              <block order="8" correct="no"><m>\\unittangentprime(t)</m></block>
+              <block order="6" correct="no"><m>\gamma</m></block>
+              <block order="7" correct="no"><m>\tau</m></block>
+              <block order="9" correct="no"><m>\pi</m></block>
+              <block order="5" correct="no"><m>\unitnormal(t)</m></block>
+            </blocks>
             <answer>
               <p>
                 <m>\kappa</m>
@@ -1157,6 +1191,8 @@
                 <m>a_\text{N}</m> affected by the curvature?
               </p>
             </statement>
+            <response />
+            
             <answer>
               <p>
                 <m>a_\text{T}</m> is not affected by curvature;
