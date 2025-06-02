@@ -31,7 +31,24 @@
 
         <!-- START figures/figsurfacearea_intro1_3D.asy -->
         <image>
-          <description/>
+          <shortdescription>A surface is plotted above a circular domain. A partition of the domain corresponds to a grid system on the surface.</shortdescription>
+          <description>
+            <p>
+              In space, a surface is plotted against a set of three-dimensional coordinate axes.
+              The surface appears to be a downward-opening elliptic paraboloid.
+            </p>
+
+            <p>
+              A domain is shown in the <m>xy</m> plane; it appears to be bounded by a circle of radius <m>1</m>,
+              centered at <m>(1,0,0)</m>.
+              The domain is divided into many small rectangles, illustrating a partition like the ones used to define the double integral.
+            </p>
+
+            <p>
+              The grid of rectangles in the domain corresponds to a grid of curves on the surface.
+              One of the rectangles in the domain is highlighted, along with the corresponding region on the surface.
+            </p>
+          </description>
           <asymptote label="img_sa_intro1_3D">
 
 
@@ -127,7 +144,21 @@
 
         <!-- START figures/figsurfacearea_intro2_3D.asy -->
         <image>
-          <description/>
+          <shortdescription>A zoomed-in view of a portion of the surface from the previous image, and one of the rectangular grid pieces.</shortdescription>
+          <description>
+            <p>
+              This image is a zoomed-in view of the rectangular region that was highlighted on the surface in <xref ref="fig_sa_intro1_3D"/>.
+              Below the surface, we see a single rectangle from the partition of the domain.
+              The sides of this rectangle are marked with lengths <m>\Delta x_i</m> and <m>\Delta y_j</m>.
+            </p>
+
+            <p>
+              The rectangle in the <m>xy</m> plane corresponds to a small, rectangular patch on the surface.
+              This patch is approximated by a piece of the tangent plane at one point,
+              spanned by vectors <m>\vec{u}</m> and <m>\vec{v}</m>.
+              These vectors are labeled, but the point is not.
+            </p>
+          </description>
           <asymptote label="img_sa_intro2_3D">
 
 
@@ -168,7 +199,7 @@
             //Draw the box in the plane and on the surface
             path3 pp=(.6,.4,0)--(.6,.6,0)--(.8,.6,0)--(.8,.4,0)--cycle;
             draw(pp,bluepen);
-            label("$\Delta y_i$",(.9,.5,0));label("$\Delta x_i$",(.7,.7,0));
+            label("$\Delta y_j$",(.9,.5,0));label("$\Delta x_i$",(.7,.7,0));
             path3 ppp=(.6,.4,2-.6^2)--(.6,.6,2-.6^2)--(.8,.6,2-.8^2)--(.8,.4,2-.8^2)--cycle;
             draw(ppp,bluepen);
             draw(surface(ppp),darksurfacepen,meshpen=p);
@@ -187,18 +218,19 @@
     we subdivide <m>R</m> into <m>n</m> subregions.
     Here we subdivide <m>R</m> into rectangles, as shown in the figure.
     One such subregion is outlined in the figure,
-    where the rectangle has dimensions <m>\dx_i</m> and <m>\dy_i</m>,
+    where the rectangle has dimensions <m>\dx_i</m> and <m>\dy_j</m>,
     along with its corresponding region on the surface.
   </p>
 
   <p>
     In part <xref ref="fig_sa_intro2_3D"/> of the figure, we zoom in on this portion of the surface.
-    When <m>\dx_i</m> and <m>\dy_i</m> are small,
-    the function is approximated well by the tangent plane at any point <m>(x_i,y_i)</m> in this subregion,
+    When <m>\dx_i</m> and <m>\dy_j</m> are small,
+    the function is approximated well by the tangent plane at any point <m>(x_i,y_j)</m> in this subregion,
     which is graphed in part <xref ref="fig_sa_intro2_3D"/>.
     In fact, the tangent plane approximates the function so well that in this figure,
     it is virtually indistinguishable from the surface itself!
-    Therefore we can approximate the surface area <m>S_i</m> of this region of the surface with the area <m>T_i</m> of the corresponding portion of the tangent plane.
+    Therefore we can approximate the surface area <m>S_{ij}</m> of this region of the surface with the area 
+    <m>T_{ij}</m> of the corresponding portion of the tangent plane.
   </p>
 
   <p>
@@ -213,33 +245,33 @@
   <p>
     The vector <m>\vec u</m> is tangent to the surface in the direction of <m>x</m>,
     therefore, from <xref ref="sec_multi_tangent"/>,
-    <m>\vec u</m> is parallel to <m>\la 1,0,f_x(x_i,y_i)\ra</m>.
+    <m>\vec u</m> is parallel to <m>\la 1,0,f_x(x_i,y_j)\ra</m>.
     The <m>x</m>-displacement of <m>\vec u</m> is <m>\dx_i</m>,
-    so we know that <m>\vec u = \dx_i\la 1,0,f_x(x_i,y_i)\ra</m>.
-    Similar logic shows that <m>\vec v = \dy_i\la 0,1,f_y(x_i,y_i)\ra</m>.
+    so we know that <m>\vec u = \dx_i\la 1,0,f_x(x_i,y_j)\ra</m>.
+    Similar logic shows that <m>\vec v = \dy_j\la 0,1,f_y(x_i,y_j)\ra</m>.
     Thus:
     <md>
-      <mrow>\text{surface area \(S_i\)}  \amp \approx \,\text{area of  \(T_i\)}</mrow>
+      <mrow>\text{surface area \(S_{ij}\)}  \amp \approx \,\text{area of  \(T_{ij}\)}</mrow>
       <mrow>\amp = \norm{\vec u\times \vec v}</mrow>
-      <mrow>\amp = \norm{\dx_i\la 1,0,f_x(x_i,y_i)\ra\times\dy_i\la 0,1,f_y(x_i,y_i)\ra}</mrow>
-      <mrow>\amp =\sqrt{1+f_x(x_i,y_i)^2+f_y(x_i,y_i)^2}\dx_i\dy_i</mrow>
+      <mrow>\amp = \norm{\dx_i\la 1,0,f_x(x_i,y_j)\ra\times\dy_j\la 0,1,f_y(x_i,y_j)\ra}</mrow>
+      <mrow>\amp =\sqrt{1+f_x(x_i,y_j)^2+f_y(x_i,y_j)^2}\dx_i\dy_j</mrow>
     </md>.
   </p>
 
   <p>
-    Note that <m>\dx_i\dy_i = \Delta A_i</m>,
-    the area of the <m>i</m>th subregion.
+    Note that <m>\dx_i\dy_j = \Delta A_{ij}</m>,
+    the area of the <m>i,j</m>th subregion.
   </p>
 
   <p>
     Summing up all <m>n</m> of the approximations to the surface area gives
     <me>
-      \text{surface area over \(R\)}  \approx \sum_{i=1}^n \sqrt{1+f_x(x_i,y_i)^2+f_y(x_i,y_i)^2}\Delta A_i
+      \text{surface area over \(R\)}  \approx \sum_{i=1}^m\sum_{j=1}^n \sqrt{1+f_x(x_i,y_j)^2+f_y(x_i,y_j)^2}\Delta A_{ij}
     </me>.
   </p>
 
   <p>
-    Once again take a limit as all of the <m>\dx_i</m> and <m>\dy_i</m> shrink to 0;
+    Once again take a limit as all of the <m>\dx_i</m> and <m>\dy_j</m> shrink to 0;
     this leads to a double integral.
   </p>
 
@@ -294,7 +326,25 @@
 
         <!-- START figures/figsurfacearea1_3D.asy -->
         <image width="47%">
-          <description/>
+          <shortdescription>A triangle drawn on a plane in space.</shortdescription>
+          <description>
+            <p>
+              Three-dimensional coordinate axes are drawn in space.
+              In the <m>xy</m> plane there is a triangle that illustrates the domain for this problem.
+              The triangle is bounded by the <m>x</m> and <m>y</m> axes, and the line from <m>(4,0,0)</m> to <m>(0,2,0)</m>.
+            </p>
+
+            <p>
+              This line also happens to be where the plane <m>z=4-x-2y</m> intersects the <m>xy</m> plane,
+              so it makes up one of the three sides of the triangle on the surface for this problem.
+              The other two sides are the intersections of <m>z=4-x-2y</m> with the <m>xz</m> and <m>yz</m> planes.
+            </p>
+
+            <p>
+              Also shown is a line illustrating the altitude of the triangle,
+              as measured within the plane <m>z=4-x-2y</m>.
+            </p>
+          </description>
           <asymptote label="img_surfacearea1">
 
 
@@ -339,7 +389,7 @@
             draw((4,0,0)--(0,2,0)--(0,0,0)--(4,0,0),bluepen+dashed+linewidth(2));
 
             //draw red line on plane
-            draw((0.8,1.6,0)--(0,0,4),redpen+linewidth(1));
+            //draw((0.8,1.6,0)--(0,0,4),redpen+linewidth(1));
 
           </asymptote>
         </image>
@@ -368,7 +418,8 @@
         we find the length of the base to be <m>\sqrt{20}</m>.
         We can find the height using our knowledge of vectors:
         let <m>\vec u</m> be the side in the <m>xz</m>-plane and let <m>\vec v</m> be the side in the <m>xy</m>-plane.
-        The height is then <m>\norm {\vec u - \proj{u}{v}} = 4\sqrt{6/5}</m>.
+        The height is then <m>\norm {\vec u - \proj{u}{v}} = 4\sqrt{6/5}</m>;
+        this is indicated by the additional line drawn in <xref ref="fig_surfacearea1"/>.
         Geometry states that the area is thus
         <me>
           \frac 12\cdot4\sqrt{6/5}\cdot\sqrt{20} = 4\sqrt{6}
@@ -480,7 +531,14 @@
 
         <!-- START figures/figsurfacearea3_3D.asy -->
         <image width="47%">
-          <description/>
+          <shortdescription>A downward-opening circular cone, with vertex on the z axis.</shortdescription>
+          <description>
+            <p>
+              A circular cone, with vertex on the <m>z</m> axis at a point <m>(0,0,h)</m>.
+              The cone opens downward toward the <m>xy</m> plane,
+              and ends at the <m>xy</m> plane with a circular base of radius <m>a</m>.
+            </p>
+          </description>
           <asymptote label="img_surfacearea3">
 
 
@@ -593,7 +651,24 @@
 
         <!-- START figures/figsurfacearea4_3D.asy -->
         <image width="47%">
-          <description/>
+          <shortdescription>A triangular region is shown on a trough-like surface</shortdescription>
+          <description>
+            <p>
+              The surface <m>z=f(x,y)</m> is a parabolic cylinder;
+              it curves upward, and has a downward slope relative to the <m>yz</m> plane.
+            </p>
+
+            <p>
+              The surface is plotted against the usual three-dimensional coordinate axes.
+              In the <m>xy</m> plane we see the triangular outline of the domain for this problem.
+              The vertices of this triangle are at <m>(4,4,0)</m>, <m>(4,-4,0)</m>, and <m>(0,0,0)</m>.
+            </p>
+
+            <p>
+              On the surface, the curves corresponding to the three sides of this triangle are shown,
+              illustrating the triangular region whose surface area is computed in this example.
+            </p>
+          </description>
           <asymptote label="img_surfacearea4">
 
 
@@ -857,7 +932,18 @@
 
                   <!-- START figures/fig13_05_ex_05_3D.asy -->
                   <image>
-                    <description/>
+                    <shortdescription>A bumpy surface with several peaks and valleys.</shortdescription>
+                    <description>
+                      <p>
+                        The surface <m>z=\sin(x)\cos(y)</m> is plotted over a rectangular domain.
+                        The domain is large enough that several of the peaks and valleys typical of this surface can be seen.
+                      </p>
+
+                      <p>
+                        Note that the image is somewhat decorative in this case:
+                        the formula for surface area can be applied to the given function without knowing the appearance of the surface.
+                      </p>
+                    </description>
                     <asymptote label="img_13_05_ex_05_3D">
 
 
@@ -929,7 +1015,17 @@
 
                   <!-- START figures/fig13_05_ex_06_3D.asy -->
                   <image>
-                    <description/>
+                    <shortdescription>A steep surface with a single peak, resembling a witch's hat.</shortdescription>
+                    <description>
+                      <p>
+                        The surface <m>z=\frac{1}{x^2+y^2+1}</m> has rotational symmetry about the <m>z</m> axis.
+                        It resembles a steep mountain with a smooth peak, or perhaps the hat of a witch.
+                      </p>
+
+                      <p>
+                        Again, the image is primarily decorative; it is sufficient to know the function and the region to determine the surface area.
+                      </p>
+                    </description>
                     <asymptote label="img_13_05_ex_06_3D">
 
 
@@ -1004,7 +1100,14 @@
 
                   <!-- START figures/fig13_05_ex_07_3D.asy -->
                   <image>
-                    <description/>
+                    <shortdescription>A saddle surface, with its saddle point at the origin in three dimensions.</shortdescription>
+                    <description>
+                      <p>
+                        A standard hyperbolic paraboloid, or saddle surface.
+                        The saddle point is at the origin.
+                        The surface curves upward along the <m>x</m> axis, and downward along the <m>y</m> axis.
+                      </p>
+                    </description>
                     <asymptote label="img_13_05_ex_07_3D">
 
 
@@ -1080,7 +1183,13 @@
 
                   <!-- START figures/fig13_05_ex_08_3D.asy -->
                   <image>
-                    <description/>
+                    <shortdescription>A mostly flat surface with a ridge along the y axis</shortdescription>
+                    <description>
+                      <p>
+                        A graph of the function <m>f(x,y) = \frac{1}{e^{x^2}+1}</m> in three dimensions.
+                        The surface is mostly flat, with a ridge along the <m>y</m> axis of height <m>1/2</m>.
+                      </p>
+                    </description>
                     <asymptote label="img_13_05_ex_08_3D">
 
 
