@@ -275,7 +275,7 @@
     </p>
   </subsection>
 
-  <subsection>
+  <subsection xml:id="subsec-derivative-motion">
     <title>The Derivative and Motion</title>
     <p>
       One of the most fundamental applications of the derivative is the study of motion.
@@ -782,40 +782,61 @@
   <exercises>
     <subexercises xml:id="TaC-deriv-interpret">
       <title>Terms and Concepts</title>
-
+    
       <exercise label="TaC-deriv-interpret-1">
-        <webwork xml:id="webwork-TaC-deriv-interpret-1">
+        <!-- <webwork xml:id="webwork-TaC-deriv-interpret-1">
           <pg-code>
             Context()-&gt;strings-&gt;add('velocity'=&gt;{});
             $velocity = Compute("velocity");
-          </pg-code>
+          </pg-code> -->
           <statement>
             <p>
               What is the instantaneous rate of change of position called?
             </p>
             <p>
-              <var name="$velocity" width="20"/>
+              <fillin width="20" answer="velocity"/>
             </p>
           </statement>
-        </webwork>
+          <evaluation>
+            <evaluate>
+              <test correct="yes">
+                <strcmp case="insensitive" use-answer="yes"/>
+              </test>
+              <test>
+                <strcmp use-answer="yes" strip="no" />
+                <feedback>
+                  <p>
+                    Your answer includes the correct word but has extra text.
+                    Unless stated otherwise, velocity is assumed to be instantaneous.
+                  </p>
+                </feedback>
+              </test>
+            </evaluate>
+          </evaluation>
+            <!-- <p>
+              <var name="$velocity" width="20"/>
+            </p> -->
+        <!-- </webwork> -->
       </exercise>
 
       <exercise label="TaC-deriv-interpret-2">
-        <webwork xml:id="webwork-TaC-deriv-interpret-2">
+        <!-- <webwork xml:id="webwork-TaC-deriv-interpret-2"> -->
           <statement>
             <p>
               Given a function <m>y=f(x)</m>,
               in your own words describe how to find the units of <m>\fp(x)</m>.
             </p>
-            <p>
+            <!-- <p>
               <var form="essay"/>
-            </p>
+            </p> -->
           </statement>
-        </webwork>
+          <response />
+          
+        <!-- </webwork> -->
       </exercise>
 
       <exercise label="TaC-deriv-interpret-3">
-        <webwork xml:id="webwork-TaC-deriv-interpret-3">
+        <!-- <webwork xml:id="webwork-TaC-deriv-interpret-3">
           <pg-code>
             Context()-&gt;strings-&gt;add('linear functions'=&gt;{});
             Context()-&gt;strings-&gt;add(
@@ -826,19 +847,36 @@
               'the linear functions'=&gt;{alias=&gt;'linear functions'},
             );
             $ans = Compute("linear functions");
-          </pg-code>
+          </pg-code> -->
           <statement>
             <p>
               What functions have a constant rate of change?
             </p>
             <p>
-              <var name="$ans" width="20"/>
+              <!-- <var name="$ans" width="20"/> -->
+               <fillin width="30" answer="linear functions"/>
             </p>
           </statement>
-        </webwork>
+          <evaluation>
+            <evaluate>
+
+              <test correct="yes">
+                <strcmp case="insensitive">linear|linear functions?</strcmp>
+              </test>
+
+              <test>
+                <strcmp use-answer="yes" strip="no" />
+                <feedback>
+                  <p>
+                    Your answer includes the correct word but has extra text.
+                  </p>
+                </feedback>
+              </test>
+            </evaluate>
+          </evaluation>
+        <!-- </webwork> -->
       </exercise>
     </subexercises>
-
     <subexercises>
       <title>Problems</title>
 
@@ -896,7 +934,8 @@
           </pg-code>
           <statement>
             <p>
-              Given <m>z(<var name="$a"/>)=<var name="$fa"/></m> and <m>z'(<var name="$a"/>) = <var name="$fpa"/></m>, approximate <m>z(<var name="$b"/>)</m>.
+              Given <m>z(<var name="$a"/>)=<var name="$fa"/></m> and <m>z'(<var name="$a"/>) = <var name="$fpa"/></m>, 
+              approximate <m>z(<var name="$b"/>)</m>.
             </p>
             <p>
               <var name="$ans" width="10"/>
@@ -907,8 +946,11 @@
 
       <exercise label="ex-deriv-interpret-4">
         <webwork xml:id="webwork-ex-deriv-interpret-4">
+          <pg-macros>
+            <macro-file>parserPopUp.pl</macro-file>
+          </pg-macros>
           <pg-code>
-            $popup = PopUp(['?','f(10.1)','f(11)','f(20)'],1);
+            $popup = DropDown(['f(10.1)','f(11)','f(20)'],0,showInStatic=&gt;0);
             $showwork = '[@ explanation_box(message =&gt; "Explain your reasoning.") @]*';
           </pg-code>
           <statement>
@@ -1115,7 +1157,7 @@
       </exercise>
 
       <exercise label="ex-deriv-interpret-10">
-        <webwork xml:id="webwork-ex-deriv-interpret-10">
+        <!-- <webwork xml:id="webwork-ex-deriv-interpret-10"> -->
           <introduction>
             <p>
               <m>P</m> is the profit, in thousands of dollars,
@@ -1127,10 +1169,12 @@
               <p>
                 What are the units of <m>P'(c)</m>?
               </p>
-              <p>
+              <!-- <p>
                 <var form="essay"/>
-              </p>
+              </p> -->
             </statement>
+            <response />
+            
             <solution>
               <p>
                 Thousands of dollars per car.
@@ -1142,10 +1186,12 @@
               <p>
                 What is likely true of <m>P(0)</m>?
               </p>
-              <p>
+              <!-- <p>
                 <var form="essay"/>
-              </p>
+              </p> -->
             </statement>
+            <response />
+            
             <solution>
               <p>
                 It is likely that <m>P(0)\lt 0</m>.
@@ -1153,11 +1199,11 @@
               </p>
             </solution>
           </task>
-        </webwork>
+        <!-- </webwork> -->
       </exercise>
 
       <exercise label="ex-deriv-interpret-11">
-        <webwork xml:id="webwork-ex-deriv-interpret-11">
+        <!-- <webwork xml:id="webwork-ex-deriv-interpret-11"> -->
           <introduction>
             <p>
               <m>T</m> is the temperature in degrees Fahrenheit,
@@ -1169,10 +1215,12 @@
               <p>
                 What are the units of <m>T'(h)</m>?
               </p>
-              <p>
+              <!-- <p>
                 <var form="essay"/>
-              </p>
+              </p> -->
             </statement>
+            <response />
+            
             <solution>
               <p>
                 Degrees Fahrenheit per hour.
@@ -1185,10 +1233,12 @@
                 Is <m>T'(8)</m> likely greater than or less than 0?
                 Why?
               </p>
-              <p>
+              <!-- <p>
                 <var form="essay"/>
-              </p>
+              </p> -->
             </statement>
+            <response />
+            
             <solution>
               <p>
                 It is likely that <m>T'(8) \gt 0</m> since at 8 in the morning,
@@ -1202,10 +1252,12 @@
                 Is <m>T(8)</m> likely greater than or less than 0?
                 Why?
               </p>
-              <p>
+              <!-- <p>
                 <var form="essay"/>
-              </p>
+              </p> -->
             </statement>
+            <response />
+            
             <solution>
               <p>
                 It is very likely that <m>T(8) \gt 0</m>,
@@ -1213,7 +1265,7 @@
               </p>
             </solution>
           </task>
-        </webwork>
+        <!-- </webwork> -->
       </exercise>
 
       <exercisegroup cols="2" xml:id="exset-deriv-interpret-graph">
@@ -1431,6 +1483,9 @@
             <pg-macros>
               <macro-file>parserPopUp.pl</macro-file>
             </pg-macros>
+            <pg-macros>
+              <macro-file>parserPopUp.pl</macro-file>
+            </pg-macros>
             <pg-code>
               $h=random(-2,2,1);
               $p=random(2,4,1);
@@ -1482,102 +1537,5 @@
         </exercise>
       </exercisegroup>
     </subexercises>
-
-    <!-- <subexercises xml:id="exset-deriv-interpret-review">
-      <title>Review</title>
-
-      <exercisegroup cols="2">
-        <introduction>
-          <p>
-            Use the definition of the derivative to compute the derivative of <m>f</m>.
-          </p>
-        </introduction>
-
-        <exercise label="ex-deriv-interpret-review-1">
-          <webwork xml:id="webwork-ex-deriv-interpret-review-1">
-            <pg-code>
-              $answer = Formula("10x");
-              $showwork = '[@ explanation_box(message => "Show your work using the definition of the derivative.") @]*';
-            </pg-code>
-            <statement>
-              <p>
-                <m>f(x)=5x^2</m>
-              </p>
-              <p>
-                <var name="$answer" width="10"/>
-              </p>
-              <p>
-                <var name="$showwork" data="pgml"/>
-              </p>
-            </statement>
-          </webwork>
-        </exercise>
-
-        <exercise label="ex-deriv-interpret-review-2">
-          <webwork xml:id="webwork-ex-deriv-interpret-review-2">
-            <pg-code>
-              $answer = Formula("3(x-2)^2");
-              $showwork = '[@ explanation_box(message => "Show your work using the definition of the derivative.") @]*';
-            </pg-code>
-            <statement>
-              <p>
-                <m>f(x)=(x-2)^3</m>
-              </p>
-              <p>
-                <var name="$answer" width="10"/>
-              </p>
-              <p>
-                <var name="$showwork" data="pgml"/>
-              </p>
-            </statement>
-          </webwork>
-        </exercise>
-      </exercisegroup>
-
-      <exercisegroup cols="2">
-        <introduction>
-          <p>
-            Numerically approximate the derivative.
-          </p>
-        </introduction>
-        <exercise label="ex-deriv-interpret-review-3">
-          <webwork xml:id="webwork-ex-deriv-interpret-review-3">
-            <pg-code>
-              $ans=0;
-            </pg-code>
-            <statement>
-              <p>
-                <m>f'(\pi)</m> where <m>f(x) = \cos(x)</m>
-              </p>
-              <p>
-                <var name="$ans" width="10"/>
-              </p>
-            </statement>
-          </webwork>
-        </exercise>
-
-        <exercise label="ex-deriv-interpret-review-4">
-          <webwork xml:id="webwork-ex-deriv-interpret-review-4">
-            <pg-code>
-              $r=list_random([2,2],[3,2],[4,2],[5,2],[6,2],[7,2],[8,2],[9,2],[2,3],[3,3],[4,3],[2,5],[2,6]);
-              if($envir{problemSeed}==1){$r=[3,2];};
-              ($b,$n)=@{$r};
-              $a=$b**$n;
-              $f = ($n==2) ? '\sqrt{x}' : "\\sqrt[$n]{x}";
-              Context("Fraction");
-              $ans=Fraction(1,$n*($b)**($n-1));
-            </pg-code>
-            <statement>
-              <p>
-                <m>f'(<var name="$a"/>)</m> where <m>f(x) = <var name="$f"/></m>
-              </p>
-              <p>
-                <var name="$ans" width="10"/>
-              </p>
-            </statement>
-          </webwork>
-        </exercise>
-      </exercisegroup>
-    </subexercises> -->
   </exercises>
 </section>

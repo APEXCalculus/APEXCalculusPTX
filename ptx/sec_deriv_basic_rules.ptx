@@ -729,9 +729,9 @@
   <exercises>
     <subexercises xml:id="TaC-deriv-basic">
       <title>Terms and Concepts</title>
-
+    
       <exercise label="TaC-deriv-basic-1">
-        <webwork xml:id="webwork-TaC-deriv-basic-1">
+        <!-- <webwork xml:id="webwork-TaC-deriv-basic-1">
           <pg-code>
             Context()-&gt;strings-&gt;add('the power rule'=&gt;{});
             Context()-&gt;strings-&gt;add(
@@ -739,17 +739,27 @@
               'power' =&gt; {alias =&gt; 'the power rule'}
             );
             $ans=Compute("the power rule");
-          </pg-code>
+          </pg-code> -->
           <statement>
             <p>
               What is the name of the rule which states that <m>\lzoo{x}{x^n} = nx^{n-1}</m>,
               where <m>n \gt 0</m> is an integer?
             </p>
             <p>
-              <var name="$ans" width="20"/>
+              <!-- <var name="$ans" width="20"/> -->
+               <fillin width="25" answer="the power rule"/>
             </p>
           </statement>
-        </webwork>
+          <evaluation>
+            <evaluate>
+
+              <test correct="yes">
+                <strcmp case="insensitive">power|power rule|the power rule</strcmp>
+              </test>
+
+            </evaluate>
+          </evaluation>
+        <!-- </webwork> -->
       </exercise>
 
       <exercise label="TaC-deriv-basic-2">
@@ -828,7 +838,7 @@
       </exercise>
 
       <exercise label="TaC-deriv-basic-5">
-        <webwork xml:id="webwork-TaC-deriv-basic-5">
+        <!-- <webwork xml:id="webwork-TaC-deriv-basic-5">
           <pg-code>
             $options = CheckboxList(
               [[
@@ -839,30 +849,76 @@
                 "${BM}e^{x^2}${EM}",
                 "${BM}\sqrt{x}${EM}"
               ]],[0,1,2,5]);
-          </pg-code>
+          </pg-code> -->
           <statement>
             <p>
               The derivative rules introduced in <xref ref="sec_basic_diff_rules"/>
               explain how to compute the derivative of which of the following functions?
             </p>
-            <p>
+            <!-- <p>
               <var name="$options" form="checkboxes"/>
-            </p>
+            </p> -->
           </statement>
-        </webwork>
+          <choices>
+            <choice correct="yes">
+              <statement>
+                <p>
+                  <m>f(x)=3x^2-x+17</m>
+                </p>
+              </statement>
+            </choice>
+            <choice correct="yes">
+              <statement>
+                <p>
+                  <m>f(x)=5\ln(x)</m>
+                </p>
+              </statement>
+            </choice>
+            <choice correct="yes">
+              <statement>
+                <p>
+                  <m>f(x)=\frac{3}{x^2}</m>
+                </p>
+              </statement>
+            </choice>
+            <choice correct="no">
+              <statement>
+                <p>
+                  <m>f(x) = \sin(x)\cos(x)</m>
+                </p>
+              </statement>
+            </choice>
+            <choice correct="no">
+              <statement>
+                <p>
+                  <m>f(x)=e^{x^2}</m>
+                </p>
+              </statement>
+            </choice>
+            <choice correct="yes">
+              <statement>
+                <p>
+                  <m>f(x)=\sqrt{x}</m>
+                </p>
+              </statement>
+            </choice>
+          </choices>
+        <!-- </webwork> -->
       </exercise>
 
       <exercise label="TaC-deriv-basic-6">
-        <webwork xml:id="webwork-TaC-deriv-basic-6">
+        <!-- <webwork xml:id="webwork-TaC-deriv-basic-6"> -->
           <statement>
             <p>
               Explain in your own words how to find the third derivative of a function <m>f(x)</m>.
             </p>
-            <p>
+            <!-- <p>
               <var form="essay"/>
-            </p>
+            </p> -->
           </statement>
-        </webwork>
+          <response />
+          
+        <!-- </webwork> -->
       </exercise>
 
       <exercise label="TaC-deriv-basic-7">
@@ -897,16 +953,18 @@
       </exercise>
 
       <exercise label="TaC-deriv-basic-8">
-        <webwork xml:id="webwork-TaC-deriv-basic-8">
+        <!-- <webwork xml:id="webwork-TaC-deriv-basic-8"> -->
           <statement>
             <p>
               Explain in your own words what the second derivative <q>means</q>.
             </p>
-            <p>
+            <!-- <p>
               <var form="essay"/>
-            </p>
+            </p> -->
           </statement>
-        </webwork>
+          <response />
+          
+        <!-- </webwork> -->
       </exercise>
 
       <exercise label="TaC-deriv-basic-9">
@@ -1031,9 +1089,8 @@
             </p>
           </statement>
         </webwork>
-      </exercise>
+      </exercise>      
     </subexercises>
-
     <subexercises>
       <title>Problems</title>
 
@@ -1991,62 +2048,5 @@
         </exercise>
       </exercisegroup>
     </subexercises>
-
-    <!-- <subexercises>
-      <title>Review</title>
-
-      <exercise label="ex-deriv-basic-review-1">
-        <webwork xml:id="webwork-ex-deriv-basic-review-1">
-          <pg-code>
-            $ans=1.1;
-          </pg-code>
-          <statement>
-            <p>
-              Given that <m>e^0=1</m>,
-              approximate the value of <m>e^{0.1}</m> using the tangent line to <m>f(x) = e^x</m> at <m>x=0</m>.
-            </p>
-            <p>
-              <var name="$ans" width="20"/>
-            </p>
-          </statement>
-          <solution>
-            <p>
-              The tangent line to <m>f(x) = e^x</m> at <m>x=0</m> is <m>y=x+1</m>;
-              thus <m>e^{0.1} \approx y(0.1) = 1.1</m>.
-            </p>
-          </solution>
-        </webwork>
-      </exercise>
-
-      <exercise label="ex-deriv-basic-review-2">
-        <webwork xml:id="webwork-ex-deriv-basic-review-2">
-          <pg-code>
-            ($n,$x0) = (3,4,5)[NchooseK(3,2)];
-            $dx = 0.1;
-            $x = $x0 + $dx;
-            $f = Formula("x^$n");
-            $df = $f->D('x');
-            $dfx0 = $df->eval(x=>$x0);
-            $fx0 = $f->eval(x=>$x0);
-            $answer = $fx0 + $dx*$dfx0;
-            $l = Formula("$dfx0(x-$x0)+$fx0");
-          </pg-code>
-          <statement>
-            <p>
-              Approximate the value of <m>(<var name="$x"/>)^{<var name="$n"/>}</m> using the tangent line to <m>f(x) = <var name="$f"/></m> at <m>x=<var name="$x0"/></m>.
-            </p>
-            <p>
-              <var name="$answer" width="20"/>
-            </p>
-          </statement>
-          <solution>
-            <p>
-              The tangent line to <m>f(x) = <var name="$f"/></m> at <m>x=<var name="$x0"/></m> is <m>y=<var name="l"/></m>;
-              thus <m>(<var name="$x"/>)^<var name="$n"/> \approx y(<var name="$x"/>) = <var name="$dfx0"/>(<var name="$dx"/>)+<var name="$fx0"/> = <var name="$answer"/></m>.
-            </p>
-          </solution>
-        </webwork>
-      </exercise>
-    </subexercises> -->
   </exercises>
 </section>

@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+  <exercises xml:id="exercises-limits-review">
+    <title>Review exercises</title>
+    
+    <exercisegroup cols="2">
+        <introduction>
+          <p>
+            Evaluate the limit.
+          </p>
+        </introduction>
+
+        <exercise label="ex-limit-onesided-review-1">
+          <webwork xml:id="webwork-ex-limit-onesided-review-1">
+            <pg-code>
+              ($a,$b,$c)=(-9..-1,1..9)[NchooseK(18,3)];
+              if($envir{problemSeed}==1){$a=-1;$b=-4;$c=4;};
+              $f=Formula("x^2-($a+$b)x+$a*$b")->reduce;
+              $g=Formula("x^2-($a+$c)x+$a*$c")->reduce;
+              $r=$f/$g;
+              Context("Fraction");
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
+              $L=Fraction($a-$b,$a-$c);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\lim\limits_{x\to <var name="$a"/>}<var name="$r"/></m>
+              </p>
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
+              <p>
+                <var name="$L" width="20"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+
+        <exercise>
+          <webwork>
+            <pg-code>
+              ($a,$b,$c)=(-9..-1,1..9)[NchooseK(18,3)];
+              if($envir{problemSeed}==1){$a=-4;$b=4;$c=8;};
+              $f=Formula("x^2-($a+$b)x+$a*$b")->reduce;
+              $g=Formula("x^2-($a+$c)x+$a*$c")->reduce;
+              $r=$f/$g;
+              Context("Fraction");
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
+              $L=Fraction($a-$b,$a-$c);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\lim\limits_{x\to <var name="$a"/>}<var name="$r"/></m>
+              </p>
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
+              <p>
+                <var name="$L" width="20"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+
+        <exercise label="ex-limit-onesided-review-2">
+          <webwork xml:id="webwork-ex-limit-onesided-review-2">
+            <pg-code>
+              @a=(-9..9)[NchooseK(19,4)];
+              if($envir{problemSeed}==1){@a=(-6,6,9,0)};
+              $f=Formula("x^2-($a[1]+$a[2])x+$a[1]*$a[2]")->reduce;
+              $g=Formula("x^2-($a[1]+$a[3])x+$a[1]*$a[3]")->reduce;
+              $r=$f/$g;
+              Context("Fraction");
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
+              $L=Fraction($a[0]-$a[2],$a[0]-$a[3]);
+            </pg-code>
+            <statement>
+              <p>
+                <m>\lim\limits_{x\to <var name="$a[0]"/>}<var name="$r"/></m>
+              </p>
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
+              <p>
+                <var name="$L" width="20"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+      </exercisegroup>
+
+      <exercisegroup cols="2">
+        <introduction>
+          <p>
+            Approximate the limit numerically.
+          </p>
+        </introduction>
+
+        <exercise label="ex-limit-onesided-review-3">
+          <webwork xml:id="webwork-ex-limit-onesided-review-3">
+            <pg-code>
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
+              ($a,$b,$c)=map{$_*random(-1,1,2)/10}NchooseK(99,3);
+              if($envir{problemSeed}==1){$a=0.4;$b=4;$c=0;};
+              $f=Formula("x^2-($a+$b)x+$a*$b")->reduce;
+              $g=Formula("x^2-($a+$c)x+$a*$c")->reduce;
+              $r=$f/$g;
+              $L=Real(($a-$b)/($a-$c));
+            </pg-code>
+            <statement>
+              <p>
+                <m>\lim\limits_{x\to <var name="$a"/>}<var name="$r"/></m>
+              </p>
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
+              <p>
+                <var name="$L" width="20"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+
+        <exercise label="ex-limit-onesided-review-4">
+          <webwork xml:id="webwork-ex-limit-onesided-review-4">
+            <pg-code>
+              Context()->strings->add('does not exist'=>{alias=>'DNE'});
+              ($a,$b,$c)=map{$_*random(-1,1,2)/10}NchooseK(99,3);
+              if($envir{problemSeed}==1){$a=0.2;$b=-6;$c=4;};
+              $f=Formula("x^2-($a+$b)x+$a*$b")->reduce;
+              $g=Formula("x^2-($a+$c)x+$a*$c")->reduce;
+              $r=$f/$g;
+              $L=Real(($a-$b)/($a-$c));
+            </pg-code>
+            <statement>
+              <p>
+                <m>\lim\limits_{x\to <var name="$a"/>}<var name="$r"/></m>
+              </p>
+              <instruction>
+                If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+                If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+              </instruction>
+              <p>
+                <var name="$L" width="20"/>
+              </p>
+            </statement>
+          </webwork>
+        </exercise>
+      </exercisegroup>
+
+      <exercise label="ex-limit-continuity-review-1">
+        <webwork xml:id="webwork-ex-limit-continuity-review-1">
+          <pg-code>
+            $a=random(-2,10,1);
+            $b=non_zero_random(-5,5,1);
+            if($envir{problemSeed}==1){$a=5;$b=-5;};
+            @f=(Formula("x^2+$b")->reduce,Formula("$a x")->reduce);
+            Context("PiecewiseFunction");
+            $g=PiecewiseFunction("x &lt; $a" => "$f[0]", "x >= $a" => "$f[1]");
+            @L=($f[0]->eval(x=>$a),$f[1]->eval(x=>$a));
+            $L[2]=($L[0]==$L[1])?$L[0]:Compute("DNE");
+            $L[3]=$g->eval(x=>$a);
+          </pg-code>
+          <introduction>
+            <p>
+              Evaluate the given limits of the piecewise defined function.
+            </p>
+            <p>
+              <m>f(x) =<var name="$g"/></m>
+            </p>
+            <instruction>
+              If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+              If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+            </instruction>
+          </introduction>
+
+          <task label="ex-limit-continuity-review-1a">
+            <statement>
+              <p>
+                <m>\lim\limits_{x\to <var name="$a"/>^-} f(x)</m>
+              </p>
+              <p>
+                <var name="$L[0]" width="10"/>
+              </p>
+            </statement>
+          </task>
+
+          <task label="ex-limit-continuity-review-1b">
+            <statement>
+              <p>
+                <m>\lim\limits_{x\to <var name="$a"/>^+} f(x)</m>
+              </p>
+              <p>
+                <var name="$L[1]" width="10"/>
+              </p>
+            </statement>
+          </task>
+
+          <task label="ex-limit-continuity-review-1c">
+            <statement>
+              <p>
+                <m>\lim\limits_{x\to <var name="$a"/>} f(x)</m>
+              </p>
+              <p>
+                <var name="$L[2]" width="10"/>
+              </p>
+            </statement>
+          </task>
+
+          <task label="ex-limit-continuity-review-1d">
+            <statement>
+              <p>
+                <m>f(<var name="$a"/>)</m>
+              </p>
+              <p>
+                <var name="$L[3]" width="10"/>
+              </p>
+            </statement>
+          </task>
+        </webwork>
+      </exercise>
+
+      <exercise label="ex-limit-continuity-review-2">
+        <webwork xml:id="webwork-ex-limit-continuity-review-2">
+          <pg-code>
+            $b=list_random(-9..6,6..9);
+            $c=non_zero_random(-5,5,1);
+            do{$a=non_zero_random(-5,5,0.1);}until($a!=$c);
+            if ($envir{problemSeed}==1){$a=-0.8;$b=9;$c=-5};
+            $f=Formula("(x^2-($a+$b)x+$a*$b)/(x^2-($a+$c)x+$a*$c)")->reduce;
+            $l=Real(($a-$b)/($a-$c));
+            @tabin=($a-0.1,$a-0.01,$a-0.001,$a+0.001,$a+0.01,$a+0.1);
+            @tabout=map{$f->eval(x=>$_)} @tabin;
+          </pg-code>
+          <introduction>
+            <p>
+              Numerically approximate the following limits.
+            </p>
+            <instruction>
+              If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+              If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+            </instruction>
+          </introduction>
+
+          <task label="ex-limit-continuity-review-2a">
+            <statement>
+              <p>
+                <m>\lim\limits_{x\to <var name="$a"/>^{+}}\left(<var name="$f"/>\right)</m>
+              </p>
+              <p>
+                <var name="$l" width="10"/>
+              </p>
+            </statement>
+          </task>
+
+          <task label="ex-limit-continuity-review-2b">
+            <statement>
+              <p>
+                <m>\lim\limits_{x\to <var name="$a"/>^{-}}\left(<var name="$f"/>\right)</m>
+              </p>
+              <p>
+                <var name="$l" width="10"/>
+              </p>
+            </statement>
+          </task>
+          <solution>
+            <p>
+              For a numerical approximation, make a table:
+            </p>
+            <tabular>
+              <row bottom="medium">
+                <cell><m>x</m></cell>
+                <cell><m>
+                  <var name="$f"/>
+                  </m></cell>
+              </row>
+              <row>
+                <cell><m>
+                  <var name="$tabin[0]"/>
+                  </m></cell>
+                <cell><m>
+                  <var name="$tabout[0]"/>
+                  </m></cell>
+              </row>
+              <row>
+                <cell><m>
+                  <var name="$tabin[1]"/>
+                  </m></cell>
+                <cell><m>
+                  <var name="$tabout[1]"/>
+                  </m></cell>
+              </row>
+              <row>
+                <cell><m>
+                  <var name="$tabin[2]"/>
+                  </m></cell>
+                <cell><m>
+                  <var name="$tabout[2]"/>
+                  </m></cell>
+              </row>
+              <row>
+                <cell><m>
+                  <var name="$tabin[3]"/>
+                  </m></cell>
+                <cell><m>
+                  <var name="$tabout[3]"/>
+                  </m></cell>
+              </row>
+              <row>
+                <cell><m>
+                  <var name="$tabin[4]"/>
+                  </m></cell>
+                <cell><m>
+                  <var name="$tabout[4]"/>
+                  </m></cell>
+              </row>
+              <row>
+                <cell><m>
+                  <var name="$tabin[5]"/>
+                  </m></cell>
+                <cell><m>
+                  <var name="$tabout[5]"/>
+                  </m></cell>
+              </row>
+            </tabular>
+            <p>
+              It appears that when <m>x</m> is close to <m><var name="$a"/></m>
+              (whether slightly above or slightly below),
+              that <m><var name="$f"/></m> is close to <m><var name="$l"/></m>.
+              So
+              <me>
+                \lim_{x\to <var name="$a"/>^{+}}\left(<var name="$f"/>\right)=\lim_{x\to <var name="$a"/>^{-}}\left(<var name="$f"/>\right)=<var name="$l"/>
+              </me>.
+            </p>
+          </solution>
+        </webwork>
+      </exercise>
+
+      <exercise label="ex-limit-continuity-review-3">
+        <!-- <webwork xml:id="webwork-ex-limit-continuity-review-3"> -->
+            <statement>
+              <p>
+                Give an example of a function <m>f</m> for which <m>\lim\limits_{x\to 0} f(x)</m> does not exist.
+              </p>
+              <!-- <p>
+                <var form="essay"/>
+              </p> -->
+            </statement>
+            <response />
+            
+        <!-- </webwork> -->
+      </exercise>
+
+      <exercise label="ex-limit-infinity-review-1">
+        <!-- <webwork xml:id="webwork-ex-limit-infinity-review-1"> -->
+          <statement>
+            <p>
+              Use an <m>\varepsilon</m>-<m>\delta</m> proof to prove that <m>\lim\limits_{x\to 1}(5x-2)=3</m>.
+            </p>
+            <!-- <p>
+              <var form="essay"/>
+            </p> -->
+          </statement>
+          <response />
+          
+          <solution>
+            <p>
+              Let <m>\varepsilon \gt 0</m> be given.
+              We wish to find <m>\delta\gt 0</m> such that when <m>\abs{x-1}\lt\delta</m>,
+              <m>\abs{f(x)-3}\lt\varepsilon</m>.
+            </p>
+            <p>
+              First, some preliminary investigation to find a suitable <m>\delta</m>.
+              Consider <m>\abs{f(x)-3}\lt\varepsilon</m>:
+              <md>
+                <mrow>\abs{f(x)-3}\amp\lt\varepsilon</mrow>
+                <mrow>\abs{(5x-2)-3}\amp\lt\varepsilon</mrow>
+                <mrow>\abs{5x-5}\amp\lt\varepsilon</mrow>
+                <mrow>\abs{x-1}\amp\lt\varepsilon/5</mrow>
+              </md>
+              Since we want to start with <m>\abs{x-1}\lt\delta</m>,
+              this suggests we let <m>\delta=\varepsilon/5</m>.
+            </p>
+            <p>
+              Now we can apply the definition.
+              <md>
+                <mrow>\abs{x-1}\amp\lt\delta</mrow>
+                <mrow>\abs{x-1}\amp\lt\varepsilon/5</mrow>
+                <mrow>-\varepsilon/5\lt x-1\amp\lt\varepsilon/5</mrow>
+                <mrow>-\varepsilon\lt 5(x-1)\amp\lt\varepsilon</mrow>
+                <mrow>-\varepsilon\lt 5x-5\amp\lt\varepsilon</mrow>
+                <mrow>-\varepsilon\lt (5x-2)-3\amp\lt\varepsilon</mrow>
+                <mrow>\abs{(5x-2)-3}\amp\lt\varepsilon</mrow>
+              </md>.
+              In other words,
+              <m>\abs{x-1}\lt\delta</m> implies <m>\abs{(5x-2)-3}\lt\varepsilon</m>.
+              This is what we needed to prove.
+            </p>
+          </solution>
+        <!-- </webwork> -->
+      </exercise>
+
+      <exercise label="ex-limit-infinity-review-2">
+        <webwork xml:id="webwork-ex-limit-infinity-review-2">
+          <pg-code>
+            $a=random(-9,9,1);
+            do{@L=(non_zero_random(-9,9,1),non_zero_random(-3,3,1));}until($L[0]!=$L[1]);
+            if($envir{problemSeed}==1){$a=2;@L=(3,-1)};
+            $L[2]=$L[0]+$L[1];
+            $L[3]=$L[0]*$L[1];
+            Context("Fraction");
+            $L[4]=Fraction($L[0]/$L[1]);
+            $L[5]=Fraction(($L[0])**($L[1]));
+            Context()->strings->add('does not exist'=>{alias=>'DNE'});
+          </pg-code>
+          <introduction>
+            <p>
+              Let <m>\lim\limits_{x\to<var name="$a"/>} f(x) = <var name="$L[0]"/></m> and <m>\lim\limits_{x\to<var name="$a"/>} g(x) = <var name="$L[1]"/></m>.
+              Evaluate the following limits.
+            </p>
+            <instruction>
+              If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+              If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+            </instruction>
+          </introduction>
+
+          <task label="ex-limit-infinity-review-2a">
+            <statement>
+              <p>
+                <m>\lim\limits_{x\to<var name="$a"/>}(f+g)(x)</m>
+              </p>
+              <p>
+                <var name="$L[2]" width="5"/>
+              </p>
+            </statement>
+          </task>
+
+          <task label="ex-limit-infinity-review-2b">
+            <statement>
+              <p>
+                <m>\lim\limits_{x\to<var name="$a"/>}(fg)(x)</m>
+              </p>
+              <p>
+                <var name="$L[3]" width="5"/>
+              </p>
+            </statement>
+          </task>
+
+          <task label="ex-limit-infinity-review-2c">
+            <statement>
+              <p>
+                <m>\lim\limits_{x\to<var name="$a"/>}(f/g)(x)</m>
+              </p>
+              <p>
+                <var name="$L[4]" width="5"/>
+              </p>
+            </statement>
+          </task>
+
+          <task label="ex-limit-infinity-review-2d">
+            <statement>
+              <p>
+                <m>\lim\limits_{x\to<var name="$a"/>}f(x)^{g(x)}</m>
+              </p>
+              <p>
+                <var name="$L[5]" width="5"/>
+              </p>
+            </statement>
+          </task>
+        </webwork>
+      </exercise>
+
+      <exercise label="ex-limit-infinity-review-3">
+        <webwork xml:id="webwork-ex-limit-infinity-review-3">
+          <pg-macros>
+            <macro-file>parserPopUp.pl</macro-file>
+          </pg-macros>
+            
+          <pg-code>
+            Context('Fraction')->noreduce('(-x)-y','(-x)+y');
+            for my$i(0,3){$b[$i]=non_zero_random(-1,1,1);};
+            for my$i(1,2,4){$b[$i]=non_zero_random(-5,5,1);};
+            do {$a=non_zero_random(-3,3,1)} until ($b[4] != $b[3]*$a);
+            $continuous=list_random('yes','no');
+            if($envir{problemSeed}==1){$a=3;@b=(1,1,-1,0,-1);$continuous='no'};
+            $b[5]=Fraction($b[0]*$a**2-($b[1]+$b[0]*$b[2])*$a+$b[1]*$b[2]-$b[3]*$a**2+$b[4]*$a, $b[4]-$b[3]*$a);
+            ($m,$n) = $b[5]->value;
+            $f[0]=Formula("$b[0]*x^2-($b[1]+$b[0]*$b[2])*x+$b[1]*$b[2]")->reduce;
+            if($continuous eq 'yes'){
+              $f[1]=Formula("$b[3]*$n*x^2-($b[4]*$n+$b[3]*$m)*x+$b[4]*$m")->reduce;
+            } else {
+              $c = non_zero_random(-2,2,1);
+              $f[1]=Formula("$b[3]*$n*x^2-($b[4]*$n+$b[3]*$m)*x+($b[4]*$m+$c)")->reduce;
+            };
+            $yesno=DropDown(['yes','no'],$continuous,showInStatic=&gt;0);
+          </pg-code>
+          <statement>
+            <p>
+              Let <m>f(x) = \begin{cases}<var name="$f[0]"/>\amp x\lt<var name="$a"/>\\<var name="$f[1]"/>\amp x\geq<var name="$a"/>\end{cases}</m>.
+            </p>
+            <p>
+              Is <m>f</m> continuous everywhere?
+              <var name="$yesno" form="popup"/>
+            </p>
+          </statement>
+        </webwork>
+      </exercise>
+
+      <exercise label="ex-limit-infinity-review-4">
+        <webwork xml:id="webwork-ex-limit-infinity-review-4">
+          <pg-code>
+            Context()->strings->add('does not exist'=>{alias=>'DNE'});
+          </pg-code>
+          <statement>
+            <p>
+              Find <m>\lim\limits_{x\to e} \ln(x)</m>.
+            </p>
+            <instruction>
+              If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+              If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+            </instruction>
+            <p>
+              <var name="'1'" width="10"/>
+            </p>
+          </statement>
+        </webwork>
+      </exercise>
+
+      <exercise label="ex-deriv-intro-review-1">
+        <webwork xml:id="webwork-ex-deriv-intro-review-1">
+          <pg-code>
+            ($r,$s,$t) = (-9..-1,1..9)[NchooseK(18,3)];
+            $t += non_zero_random(-0.5,0.5,0.1);
+            if($envir{problemSeed}==1){$r=-7;$s=5;$t=5.5;};
+            $b=-($r+$t);
+            $c=$r*$t;
+            $B=-($s+$t);
+            $C=$s*$t;
+            $f=Formula("(x^2+$b x+$c)/(x^2+$B x+$C)");
+            Context("Fraction");
+            $L=Fraction(($t-$r)/($t-$s));
+          </pg-code>
+          <statement>
+            <p>
+              Approximate <m>\displaystyle\lim_{x\to <var name="$t"/>}<var name="$f"/></m>.
+            </p>
+            <instruction>
+              If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+              If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+            </instruction>
+            <p>
+              <var name="$L" width="10"/>
+            </p>
+          </statement>
+        </webwork>
+      </exercise>
+
+      <exercise label="ex-deriv-intro-review-2">
+        <webwork xml:id="webwork-ex-deriv-intro-review-2">
+          <pg-code>
+            $a=non_zero_random(-4,4,1);
+            $low = int(($a)**2/3)+1;
+            $b=random($low,9,1);
+            $c=non_zero_random(-3,3,1);
+            if($envir{problemSeed}==1){$a=1;$b=1;$c=-1;};
+            $f=Formula("x^3+$a x^2+$b x + $c");
+            $fp=$f->D('x');
+            Context("Numeric")->flags->set(tolType=>'absolute',tolerance=>0.005);
+            $r=0;
+            do {
+              $r=$r-($f->eval(x=>$r))/($fp->eval(x=>$r));
+            } until ($r==$r-($f->eval(x=>$r))/($fp->eval(x=>$r)));
+            if ($r>0) {
+              $A=int($r*10)/10;
+              $B=$A+0.1;
+            } else {
+              $B=int($r*10)/10;
+              $A=$B-0.1;
+            };
+            $showwork = '[@ explanation_box(message => "Show the steps you used applying the Bisection Method.") @]*';
+          </pg-code>
+          <statement>
+            <p>
+              Use the Bisection Method to approximate,
+              accurate to two decimal places,
+              the root of <m>g(x) = <var name="$f"/></m> on <m>[<var name="$A"/>,<var name="$B"/>]</m>.
+            </p>
+            <instruction>
+              Enter the approximation:
+            </instruction>
+            <p>
+              <var name="$r" width="10"/>
+            </p>
+            <p>
+              <var name="$showwork" data="pgml"/>
+            </p>
+          </statement>
+        </webwork>
+      </exercise>
+
+      <exercise label="ex-deriv-intro-review-3">
+        <webwork xml:id="webwork-ex-deriv-intro-review-3">
+          <pg-code>
+            $a=random(1,9,1);
+            $b=list_random(2,3,5,6,7,11,13);
+            if($envir{problemSeed}==1){$a=1;$b=5;};
+            $f=Formula("1/(x^2-$a^2)");
+            $g=Formula("sqrt($b-x)");
+            $h=Formula("sqrt($b-x^2)");
+            Context("Interval");
+            Context()->flags->set(reduceConstantFunctions=>0);
+            @cont=(
+              List(Interval("(-inf,inf)")),
+              List(Interval("(-inf,-$a)"), Interval("(-$a,$a)"), Interval("($a,inf)")),
+              List(Interval("(-inf,$b]")),
+              List(Interval("[-sqrt($b),sqrt($b)]"))
+            );
+          </pg-code>
+          <introduction>
+            <p>
+              Give maximal intervals on which each of the following functions are continuous.
+            </p>
+            <instruction>
+              If there is more than one interval for an answer,
+              enter the intervals as a list separated by commas.
+            </instruction>
+          </introduction>
+          <task label="ex-deriv-intro-review-3a">
+            <statement>
+              <p>
+                <m>\dfrac{1}{e^x+1}</m>
+              </p>
+              <p>
+                <var name="$cont[0]" width="20"/>
+              </p>
+            </statement>
+          </task>
+          <task label="ex-deriv-intro-review-3b">
+            <statement>
+              <p>
+                <m><var name="$f"/></m>
+              </p>
+              <p>
+                <var name="$cont[1]" width="20"/>
+              </p>
+            </statement>
+          </task>
+          <task label="ex-deriv-intro-review-3c">
+            <statement>
+              <p>
+                <m><var name="$g"/></m>
+              </p>
+              <p>
+                <var name="$cont[2]" width="20"/>
+              </p>
+            </statement>
+          </task>
+          <task label="ex-deriv-intro-review-3d">
+            <statement>
+              <p>
+                <m><var name="$h"/></m>
+              </p>
+              <p>
+                <var name="$cont[3]" width="20"/>
+              </p>
+            </statement>
+          </task>
+        </webwork>
+      </exercise>
+
+      <exercise label="ex-deriv-intro-review-4">
+        <webwork xml:id="webwork-ex-deriv-intro-review-4">
+          <pg-code>
+            @L=(1,3,Compute("DNE"));
+            Context("Interval");
+            $cont=Compute("(-inf,-3)U(-3,inf)");
+          </pg-code>
+          <introduction>
+            <p>
+              Use the graph of <m>f(x)</m> provided to answer the following.
+            </p>
+            <image xml:id="img_02_01_ex_40" width="47%">
+              <description></description>
+              <latex-image>
+                \begin{tikzpicture}
+                \begin{axis}[
+                      ymin=-1.1,ymax=3.3,%
+                      xmin=-5.1,xmax=0.5,%
+                ]
+
+                \addplot [firstcurvestyle,domain=-4.5:-3] {(x+3)^2+1};
+                \addplot [firstcurvestyle,domain=-3:-1] {-(x+3)^2+3};
+                \filldraw [fill=white] (axis cs:-3,1) circle (2.4pt);
+                \filldraw [fill=white] (axis cs:-3,3) circle (2.4pt);
+                \filldraw [fill=black] (axis cs:-3,2) circle (2.4pt);
+
+                \end{axis}
+                \end{tikzpicture}
+              </latex-image>
+            </image>
+            <instruction>
+              If you need to enter <m>\infty</m>, you may type <c>infinity</c>, or just <c>INF</c>.
+              If the limit does not exist, you may type <c>does not exist</c>, or just <c>DNE</c>.
+            </instruction>
+          </introduction>
+          <task label="ex-deriv-intro-review-4a">
+            <statement>
+              <p>
+                <m>\lim\limits_{x\to-3^-} f(x)</m>
+              </p>
+              <p>
+                <var name="$L[0]" width="10"/>
+              </p>
+            </statement>
+          </task>
+          <task label="ex-deriv-intro-review-4b">
+            <statement>
+              <p>
+                <m>\lim\limits_{x\to-3^+} f(x)</m>
+              </p>
+              <p>
+                <var name="$L[1]" width="10"/>
+              </p>
+            </statement>
+          </task>
+          <task label="ex-deriv-intro-review-4c">
+            <statement>
+              <p>
+                <m>\lim\limits_{x\to-3} f(x)</m>
+              </p>
+              <p>
+                <var name="$L[2]" width="10"/>
+              </p>
+            </statement>
+          </task>
+          <task label="ex-deriv-intro-review-4d">
+            <statement>
+              <p>
+                Where is <m>f</m> continuous?
+              </p>
+              <instruction>
+                Answer using interval notation. If you need to write <m>\infty</m>, you may type <c>inf</c> or <c>infinity</c>.
+                If you need the union symbol, <m>\cup</m>, you may type the capital letter <c>U</c>.
+              </instruction>
+              <p>
+                <var name="$cont" width="15"/>
+              </p>
+            </statement>
+          </task>
+        </webwork>
+      </exercise>
+
+  </exercises>

@@ -820,6 +820,8 @@
                 Why is <m>\ds\infser \sin(n)</m> not an alternating series?
               </p>
             </statement>
+            <response />
+            
             <solution>
               <p>
                 The signs of the terms do not alternate;
@@ -836,14 +838,37 @@
             </pg-code>-->
             <statement>
               <p>
-                A series <m>\ds\infser (-1)^na_n</m> converges when <m>\{a_n\}</m> is <fillin/>, <fillin/><nbsp/>and <m>\lim\limits_{n\to\infty}a_n</m> =<fillin/>.
+                A series <m>\ds\infser (-1)^na_n</m> converges when <m>\{a_n\}</m> is <fillin mode="string" answer="positive" width="15"/>, 
+                <fillin mode="string" answer="decreasing" width="15"/><nbsp/>and <m>\lim\limits_{n\to\infty}a_n</m> =<fillin mode="string" answer="0" width="5"/>.
               </p>
             </statement>
-            <answer>
-              <p>
-                postive, decreasing, 0
-              </p>
-            </answer>
+            <evaluation>
+              <evaluate>
+                <test correct="yes">
+                  <jscmp><![CDATA[
+                    ["positive", "decreasing"].includes(ans)
+                    ]]></jscmp>
+                </test>
+              </evaluate>
+              <evaluate>
+                <test correct="yes">
+                  <jscmp><![CDATA[
+                    ["positive", "decreasing"].includes(ans) && !ans_array.slice(0,1).includes(ans)
+                    ]]></jscmp>
+                </test>
+                <test>
+                  <jscmp><![CDATA[
+                    ans_array.slice(0,1).includes(ans)
+                    ]]></jscmp>
+                  <feedback>You already gave that answer.</feedback>
+                </test>
+              </evaluate>
+              <evaluate>
+                <test correct="yes">
+                  <strcmp case="insensitive">0|zero</strcmp>
+                </test>
+              </evaluate>
+            </evaluation>
         <!--</webwork>-->
       </exercise>
 
@@ -857,6 +882,8 @@
                 <m>\ds \infser[0] a_n</m> converges but <m>\ds \infser[0] \abs{a_n}</m> does not.
               </p>
             </statement>
+            <response />
+            
             <answer>
               <p>
                 Many examples exist; one common example is <m>a_n = (-1)^n/n</m>.
@@ -871,14 +898,25 @@
             </pg-code>-->
             <statement>
               <p>
-                The sum of a <fillin/><nbsp/>convergent series can be changed by rearranging the order of its terms.
+                The sum of a <fillin mode="string" answer="conditionally" width="20"/><nbsp/>convergent 
+                series can be changed by rearranging the order of its terms.
               </p>
             </statement>
-            <answer>
-              <p>
-                conditionally
-              </p>
-            </answer>
+            <evaluation>
+              <evaluate>
+                <test correct="yes">
+                  <strcmp use-answer="yes" case="insensitive"/>
+                </test>
+                <test>
+                  <strcmp use-answer="yes" strip="no" />
+                  <feedback>
+                    <p>
+                      Your answer includes the correct word but has extra text.
+                    </p>
+                  </feedback>
+                </test>
+              </evaluate>
+            </evaluation>
         <!--</webwork>-->
       </exercise>
     </subexercises>

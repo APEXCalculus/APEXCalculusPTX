@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <exercises xml:id="exercises-chapter-graphbehavior">
+    <title>Review Exercises</title>
+    
+    <exercise label="ex-graph-MVT-review-1">
+        <webwork xml:id="webwork-ex-graph-MVT-review-1">
+          <pg-code>
+            ($b,$c) = (-9..-1,1..9)[NchooseK(18,2)];
+            ($l,$h) = (1..4)[NchooseK(4,2)];
+            if($envir{problemSeed}==1){$b=-3;$c=9;$l=3;$h=4};
+            $low = int(-$b/2) - $l;
+            $high = int(-$b/2) + $h;
+            $f = Formula("x^2+$b x+$c")->reduce;
+            Context("Fraction");
+            $max = Fraction(max($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>-$b/2)));
+            $min = Fraction(min($f->eval(x=>$low),$f->eval(x=>$high),$f->eval(x=>-$b/2)));
+          </pg-code>
+          <statement>
+            <p>
+              Find the extreme values of <m>f(x) = <var name="$f"/></m> on <m>[<var name="$low"/>,<var name="$high"/>]</m>.
+            </p>
+            <instruction>
+              Enter the maximimum value here, or enter <c>NONE</c> if there isn't one.
+            </instruction>
+            <p>
+              <var name="$max" width="10"/>
+            </p>
+            <instruction>
+              Enter the minimimum value here, or enter <c>NONE</c> if there isn't one.
+            </instruction>
+            <p>
+              <var name="$min" width="10"/>
+            </p>
+          </statement>
+        </webwork>
+      </exercise>
+
+      <exercise label="ex-graph-MVT-review-2">
+        <!-- <webwork xml:id="webwork-ex-graph-MVT-review-2"> -->
+          <statement>
+            <p>
+              Describe the critical points of <m>f(x) = \cos(x)</m>.
+            </p>
+            <!-- <p>
+              <var form="essay" />
+            </p> -->
+          </statement>
+          <response />
+          
+          <solution>
+            <p>
+              They are the multiples of <m>\pi</m> such as <m>0</m>, <m>\pm\pi</m>, <m>\pm 2\pi</m>, <m>\pm4\pi</m>, etc.
+            </p>
+          </solution>
+        <!-- </webwork> -->
+      </exercise>
+
+      <exercise label="ex-graph-MVT-review-3">
+        <!-- <webwork xml:id="webwork-ex-graph-MVT-review-3">
+          <pg-code>
+          </pg-code> -->
+          <statement>
+            <p>
+              Describe the critical points of <m>f(x) = \tan(x)</m>.
+            </p>
+            <!-- <p>
+              <var form="essay" />
+            </p> -->
+          </statement>
+          <response />
+          
+          <solution>
+            <p>
+              There aren't any critical points. Wherever <m>\tan(x)</m> is defined, its derivative is also defined and strictly positive.
+            </p>
+          </solution>
+        <!-- </webwork> -->
+      </exercise>
+
+      <exercise label="ex-graph-incr-decr-review-1">
+        <webwork xml:id="webwork-ex-graph-incr-decr-review-1">
+          <pg-code>
+            Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+            $c=Formula("1/2");
+          </pg-code>
+          <statement>
+            <p>
+              Consider <m>f(x) = x^2-3x+5</m> on <m>[-1,2]</m>;
+              find <m>c</m> guaranteed by the Mean Value Theorem.
+            </p>
+            <p>
+              <var name="$c" width="30"/>
+            </p>
+          </statement>
+        </webwork>
+      </exercise>
+
+      <exercise label="ex-graph-incr-decr-review-2">
+        <webwork xml:id="webwork-ex-graph-incr-decr-review-2">
+          <pg-code>
+            Context()->flags->set(reduceConstants=>0,reduceConstantFunctions=>0);
+            $c=Formula("acos(2/pi),-acos(2/pi)");
+          </pg-code>
+          <statement>
+            <p>
+              Consider <m>f(x) = \sin(x)</m> on <m>[-\pi/2,\pi/2]</m>;
+              find <m>c</m> guaranteed by the Mean Value Theorem.
+            </p>
+            <p>
+              <var name="$c" width="30"/>
+            </p>
+          </statement>
+        </webwork>
+      </exercise>
+
+      <exercise label="review-antiderivatives-1">
+        <statement>
+          <p>
+            Use information gained from the first and second derivatives to sketch <m>f(x) = \dfrac{1}{e^x+1}</m>.
+          </p>
+        </statement>
+      </exercise>
+  </exercises>

@@ -1228,6 +1228,8 @@
                 what two pieces of information are needed?
               </p>
             </statement>
+            <response />
+            
             <answer>
               <p>
                 A point on the line and the direction of the line.
@@ -1242,14 +1244,16 @@
             </pg-code> -->
             <statement>
               <p>
-                Two distinct lines in the plane can intersect or be <fillin/>.
+                Two distinct lines in the plane can intersect or be <fillin answer="parallel" width="15"/>.
               </p>
             </statement>
-            <answer>
-              <p>
-                parallel
-              </p>
-            </answer>
+            <evaluation>
+              <evaluate>
+                <test correct="yes">
+                  <strcmp use-answer="yes" case="insensitive"/>
+                </test>
+              </evaluate>
+            </evaluation>
         <!-- </webwork> -->
       </exercise>
 
@@ -1260,14 +1264,32 @@
             <statement>
               <p>
                 Two distinct lines in space can intersect,
-                be <fillin/> or be <fillin/>.
+                be <fillin answer="parallel" mode="string" width="15"/> or be <fillin answer="skew" mode="string" width="15"/>.
               </p>
             </statement>
-            <answer>
-              <p>
-                parallel, skew
-              </p>
-            </answer>
+            
+            <evaluation>
+              <evaluate>
+                <test correct="yes">
+                  <jscmp><![CDATA[
+                    ["parallel","skew"].includes(ans)
+                    ]]></jscmp>
+                </test>
+              </evaluate>
+              <evaluate>
+                <test correct="yes">
+                  <jscmp><![CDATA[
+                    ["parallel","skew"].includes(ans) && !ans_array.slice(0,1).includes(ans)
+                    ]]></jscmp>
+                </test>
+                <test>
+                  <jscmp><![CDATA[
+                    ans_array.slice(0,1).includes(ans)
+                    ]]></jscmp>
+                  <feedback>You already gave that answer.</feedback>
+                </test>
+              </evaluate>
+            </evaluation>
         <!-- </webwork> -->
       </exercise>
 
@@ -1280,14 +1302,12 @@
                 Use your own words to describe what it means for two lines in space to be skew.
               </p>
             </statement>
-            <answer>
-              <p>
-                Answers will vary
-              </p>
-            </answer>
+            <response />
+            
         <!-- </webwork> -->
       </exercise>
     </subexercises>
+    
     <subexercises>
       <title>Problems</title>
       <exercisegroup cols="2" xml:id="exset-vector-lines-parametric-symmetric">

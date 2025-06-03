@@ -397,14 +397,21 @@
             </pg-code>-->
             <statement>
               <p>
-                The Ratio Test is not effective when the terms of a sequence only contain <fillin/><nbsp/>functions.
+                The Ratio Test is not effective when the terms of a sequence only contain <fillin answer="algebraic" mode="string" width="15"/><nbsp/>functions.
               </p>
             </statement>
-            <answer>
-              <p>
-                algebraic, or polynomial.
-              </p>
-            </answer>
+            <evaluation>
+              <evaluate>
+                <test correct="yes">
+                  <strcmp case="insensitive">polynomial|algebraic|rational</strcmp>
+                </test>
+                <feedback>
+                  <p>
+                    <q>polynomial</q>, <q>rational</q>, or more generally, <q>algebraic</q> are all good answers here.
+                  </p>
+                </feedback>
+              </evaluate>
+            </evaluation>
         <!--</webwork>-->
       </exercise>
 
@@ -414,14 +421,33 @@
             </pg-code>-->
             <statement>
               <p>
-                The Ratio Test is most effective when the terms of a sequence contains <fillin/><nbsp/>and/or <fillin/><nbsp/>functions.
+                The Ratio Test is most effective when the terms of a sequence contains <fillin mode="string" answer="factorial" width="15"/>
+                and/or <fillin mode="string" answer="exponential" width="15"/><nbsp/>functions.
               </p>
             </statement>
-            <answer>
-              <p>
-                factorial and/or exponential
-              </p>
-            </answer>
+
+            <evaluation>
+              <evaluate>
+                <test correct="yes">
+                  <jscmp><![CDATA[
+                    ["factorial","exponential"].includes(ans)
+                    ]]></jscmp>
+                </test>
+              </evaluate>
+              <evaluate>
+                <test correct="yes">
+                  <jscmp><![CDATA[
+                    ["factorial","exponential"].includes(ans) && !ans_array.slice(0,1).includes(ans)
+                    ]]></jscmp>
+                </test>
+                <test>
+                  <jscmp><![CDATA[
+                    ans_array.slice(0,1).includes(ans)
+                    ]]></jscmp>
+                  <feedback>You already gave that answer.</feedback>
+                </test>
+              </evaluate>
+            </evaluation>
         <!--</webwork>-->
       </exercise>
 
@@ -434,6 +460,50 @@
                 What three convergence tests do not work well with terms containing factorials?
               </p>
             </statement>
+            <choices>
+              <choice correct="no">
+                <statement>
+                  <p>
+                    Test for divergence
+                  </p>
+                </statement>
+              </choice>
+              <choice correct="no">
+                <statement>
+                  <p>
+                    Comparison test
+                  </p>
+                </statement>
+              </choice>
+              <choice correct="yes">
+                <statement>
+                  <p>
+                    Limit comparison test
+                  </p>
+                </statement>
+              </choice>
+              <choice correct="yes">
+                <statement>
+                  <p>
+                    Integral test
+                  </p>
+                </statement>
+              </choice>
+              <choice correct="no">
+                <statement>
+                  <p>
+                    Ratio test
+                  </p>
+                </statement>
+              </choice>
+              <choice correct="yes">
+                <statement>
+                  <p>
+                    Root test
+                  </p>
+                </statement>
+              </choice>
+            </choices>
             <answer>
               <p>
                 Integral Test, Limit Comparison Test, and Root Test
@@ -448,14 +518,25 @@
             </pg-code>-->
             <statement>
               <p>
-                The Root Test works particularly well on series where each term is <fillin/><nbsp/>to a <fillin/>.
+                The Root Test works particularly well on series where each term is <fillin mode="string" width="30" answer="raised to a power"/>.
               </p>
             </statement>
-            <answer>
-              <p>
-                raised to a power
-              </p>
-            </answer>
+            <evaluation>
+              <evaluate>
+                <test correct="yes">
+                  <strcmp case="insensitive">a power|a power function|raised to a power</strcmp>
+                </test>
+                <test>
+                  <strcmp use-answer="yes" strip="no" />
+                  <feedback>
+                    <p>
+                      Your answer includes the correct words but has extra or missing text.
+                    </p>
+                  </feedback>
+                </test>
+              </evaluate>
+            </evaluation>
+
         <!--</webwork>-->
       </exercise>
     </subexercises>

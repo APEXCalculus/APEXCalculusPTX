@@ -354,6 +354,55 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
     <xsl:text>{#1}</xsl:text>
 </xsl:template>
 
+<!-- Change True/False formatting -->
+
+<xsl:template match="*[@exercise-interactive = 'truefalse']" mode="runestone-to-static">
+    <!-- metadata (idx, title) -->
+    <xsl:copy-of select="statement/preceding-sibling::*"/>
+    <!-- prompt, followed by ordered list of choices -->
+    <statement>
+      <p>True or False?</p>
+      <xsl:copy-of select="statement/node()"/>
+    </statement>
+    <!-- Hints are authored, not derived from problem formulation -->
+    <xsl:copy-of select="hint"/>
+    <!-- Any authored answers, not derived from problem formulation.  -->
+    <!-- *Before* automatic ones, so numbering matches interactive    -->
+    <!-- versions on authored ones.                                   -->
+    <xsl:copy-of select="answer"/>
+    <!-- the answer, simply "True" or "False" -->
+    <answer>
+        <xsl:choose>
+            <xsl:when test="statement/@correct = 'yes'">
+                <p>True.</p>
+            </xsl:when>
+            <xsl:when test="statement/@correct = 'no'">
+                <p>False.</p>
+            </xsl:when>
+            <xsl:otherwise/>
+        </xsl:choose>
+    </answer>
+    <!-- Any authored solutions, not derived from problem formulation. -->
+    <!-- *Before* automatic ones, so numbering matches interactive     -->
+    <!-- versions on authored ones.                                    -->
+    <xsl:copy-of select="solution"/>
+    <!-- Answer, as above, plus explication with feedback -->
+    <!-- TODO: experiment with a one-item "dl" for a slightly more       -->
+    <!--       appealing presentation, rather than a one-word paragraph. -->
+    <solution>
+        <xsl:choose>
+            <xsl:when test="statement/@correct = 'yes'">
+                <p>True.</p>
+            </xsl:when>
+            <xsl:when test="statement/@correct = 'no'">
+                <p>False.</p>
+            </xsl:when>
+            <xsl:otherwise/>
+        </xsl:choose>
+        <xsl:copy-of select="feedback/node()"/>
+    </solution>
+</xsl:template>
+
 <!-- asides in the margin -->
 <!-- simple asides, with no styling available -->
 <xsl:template match="aside">

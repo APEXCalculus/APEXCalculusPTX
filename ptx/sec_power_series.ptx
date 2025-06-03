@@ -831,10 +831,17 @@
             </pg-code>-->
             <statement>
               <p>
-                We adopt the convention that <m>x^0=</m><fillin/>,
+                We adopt the convention that <m>x^0=</m><fillin width="5" answer="1"/>,
                 regardless of the value of <m>x</m>.
               </p>
             </statement>
+            <evaluation>
+              <evaluate>
+                <test correct="yes">
+                  <numcmp use-answer="yes"/>
+                </test>
+              </evaluate>
+            </evaluation>
             <solution>
               <p>
                 We define <m>x^0=1</m> (even when <m>x=0</m>).
@@ -852,6 +859,8 @@
                 What is the difference between the radius of convergence and the interval of convergence?
               </p>
             </statement>
+            <response />
+            
             <solution>
               <p>
                 The radius of convergence is a <em>value</em>
@@ -890,15 +899,31 @@
             <statement>
               <p>
                 If the radius of convergence of
-                <m>\ds\infser[0] a_nx^n</m> is 5, what is the radius of convergence of <m>\ds\infser[0] (-1)^na_nx^n</m>?
+                <m>\ds\infser[0] a_nx^n</m> is <eval obj="myNum" />, 
+                then the radius of convergence of <m>\ds\infser[0] (-1)^na_nx^n</m> is <fillin width="5" mode="number" ansobj="myNum" />.
               </p>
             </statement>
-            <solution>
-              <p>
-                It is still 5, since radius of convergence is measured using absolute convergence.
-                However, it's possible that the endpoints of the interval of convergence might change.
-              </p>
-            </solution>
+            <setup seed="1234">
+              <setupScript>
+                v.myNum=RNG.randDiscrete(2, 12, 1);
+              </setupScript>
+            </setup>
+            <evaluation>
+              <evaluate>
+                <test correct="yes">
+                  <numcmp use-answer="yes" />
+                </test>
+                <test>
+                  <feedback>
+                    <p>
+                      The radius of convergence will not change, since it is measured using absolute convergence.
+                      However, it's possible that the endpoints of the interval of convergence might change.
+                    </p>
+                  </feedback>
+                </test>
+              </evaluate>
+            </evaluation>
+            
         <!--</webwork>-->
       </exercise>
     </subexercises>

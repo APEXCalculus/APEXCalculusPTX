@@ -4104,22 +4104,24 @@
             </pg-code> -->
             <statement>
               <p>
-                Axes drawn in space must conform to the <fillin/> rule.
+                Axes drawn in space must conform to the <fillin mode="string" answer="right hand" width="25"/> rule.
               </p>
             </statement>
-            <solution>
-              <p>
-                right hand
-              </p>
-            </solution>
+            <evaluation>
+              <evaluate>
+                <test correct="yes">
+                  <strcmp use-answer="yes" case="insensitive"/>
+                </test>
+              </evaluate>
+            </evaluation>
         <!-- </webwork> -->
       </exercise>
 
       <exercise label="TaC-space-coordinates-2">
-        <webwork xml:id="webwork-TaC-space-coordinates-2">
+        <!-- <webwork xml:id="webwork-TaC-space-coordinates-2"> -->
             <!-- <pg-macros><macro-file>contextArbitraryString.pl</macro-file></pg-macros> -->
 
-            <pg-code>
+            <!-- <pg-code>
               Context("ArbitraryString");
               $line=Compute("line");
               $plane=Compute("plane");
@@ -4137,16 +4139,28 @@
                 $student =~ s/^~~W+|~~W+$//g;
                 return uc($correct) eq uc($student);
               });
-            </pg-code>
+            </pg-code> -->
 
             <statement>
               <p>
                 In the plane,
-                the equation <m>x=2</m> defines a <var name="$line" evaluator="$lineevaluator" width="10"/>;
-                in space, <m>x=2</m> defines a <var name="$plane" evaluator="$planeevaluator" width="10"/>.
+                the equation <m>x=2</m> defines a <fillin answer="line" mode="text" width="10"/>;
+                in space, <m>x=2</m> defines a <fillin answer="plane" mode="text" width="10"/>.
               </p>
             </statement>
-        </webwork>
+            <evaluation>
+              <evaluate>
+                <test correct="yes">
+                  <strcmp use-answer="yes" case="insensitive"/>
+                </test>
+              </evaluate>
+              <evaluate>
+                <test correct="yes">
+                  <strcmp use-answer="yes" case="insensitive"/>
+                </test>
+              </evaluate>
+            </evaluation>
+        <!-- </webwork> -->
       </exercise>
 
       <exercise label="TaC-space-coordinates-3">
@@ -4155,36 +4169,87 @@
             </pg-code> -->
             <statement>
               <p>
-                In the plane, the equation <m>y=x^2</m> defines a <fillin/>;
-                in space, <m>y=x^2</m> defines a <fillin/>.
+                In the plane, the equation <m>y=x^2</m> defines a <fillin answer="curve" mode="string" width="10"/>;
+                in space, <m>y=x^2</m> defines a <fillin answer="surface" mode="string" width="10"/>.
               </p>
             </statement>
-            <solution>
-              <p>
-                curve (a parabola); surface (a cylinder)
-              </p>
-            </solution>
+            <evaluation>
+              <evaluate>
+                <test correct="yes">
+                  <strcmp case="insensitive">curve|parabola</strcmp>
+                </test>
+              </evaluate>
+              <evaluate>
+                <test correct="yes">
+                  <strcmp case="insensitive">surface|cylinder|parabolic cylinder</strcmp>
+                </test>
+              </evaluate>
+            </evaluation>
         <!-- </webwork> -->
       </exercise>
 
       <exercise label="TaC-space-coordinates-4">
-        <webwork xml:id="webwork-TaC-space-coordinates-4">
+        <!-- <webwork xml:id="webwork-TaC-space-coordinates-4">
             <pg-macros>
               <macro-file>parserPopUp.pl</macro-file>
             </pg-macros>
             <pg-code>
               $surfaces=DropDown(['Elliptic Paraboloid','Elliptic Cone','Ellipsoid','Hyperboloid of One Sheet','Hyperboloid of Two Sheets','Hyperbolic Paraboloid'],5,showInStatic=&gt;0);
-            </pg-code>
+            </pg-code> -->
 
             <statement>
               <p>
                 Which quadric surface looks like a Pringles<!--<trademark/>-->(TM)<nbsp/>chip?
               </p>
-              <p>
+              <!-- <p>
                 <var name="$surfaces" form="popup"/>
-              </p>
+              </p> -->
             </statement>
-        </webwork>
+            <choices>
+              <choice correct="no">
+                <statement>
+                  <p>
+                    Elliptic paraboloid
+                  </p>
+                </statement>
+              </choice>
+              <choice correct="no">
+                <statement>
+                  <p>
+                    Elliptic cone
+                  </p>
+                </statement>
+              </choice>
+              <choice correct="no">
+                <statement>
+                  <p>
+                    Ellipsoid
+                  </p>
+                </statement>
+              </choice>
+              <choice correct="no">
+                <statement>
+                  <p>
+                    Hyperboloid of one sheet
+                  </p>
+                </statement>
+              </choice>
+              <choice correct="no">
+                <statement>
+                  <p>
+                    Hyperboloid of two sheets
+                  </p>
+                </statement>
+              </choice>
+              <choice correct="yes">
+                <statement>
+                  <p>
+                    Hyperbolic paraboloid
+                  </p>
+                </statement>
+              </choice>
+            </choices>
+        <!-- </webwork> -->
       </exercise>
 
       <exercise label="TaC-space-coordinates-5">
@@ -4198,11 +4263,13 @@
                 what quadric surface is formed?
               </p>
             </statement>
-            <solution>
+            <response />
+            
+            <answer>
               <p>
-                a hyperboloid of two sheets
+                A hyperboloid of two sheets
               </p>
-            </solution>
+            </answer>
         <!-- </webwork> -->
       </exercise>
 
@@ -4217,14 +4284,17 @@
                 what quadric surface is formed?
               </p>
             </statement>
-            <solution>
+            <response />
+            
+            <answer>
               <p>
-                a hyperboloid of one sheet
+                A hyperboloid of one sheet
               </p>
-            </solution>
+            </answer>
         <!-- </webwork> -->
       </exercise>
     </subexercises>
+
     <subexercises>
       <title>Problems</title>
       <exercise label="ex-space-coordinates-distance">

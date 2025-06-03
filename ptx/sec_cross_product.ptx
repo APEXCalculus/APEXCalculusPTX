@@ -102,8 +102,8 @@
     <p>
       A convenient method of computing the cross product starts with forming a particular <m>3\times 3</m>
       <em>matrix</em>, or rectangular array.
-      The first row comprises the standard unit vectors <m>\vec i</m>,
-      <m>\vec j</m>, and <m>\vec k</m>.
+      The first row comprises the standard unit vectors <m>\veci</m>,
+      <m>\vecj</m>, and <m>\veck</m>.
       The second and third rows are the vectors <m>\vec u</m> and <m>\vec v</m>,
       respectively.
       Using <m>\vec u</m> and <m>\vec v</m> from <xref ref="ex_crossp1"/>,
@@ -135,9 +135,9 @@
           The image illustrates how to use the array given above, with the two repeated columns,
           to compute the cross product.
           From the top row, diagonal arrows are drawn down and to the right,
-          starting in the first three columns from <m>\vec i</m>, <m>\vec j</m>, and <m>vec k</m>.
+          starting in the first three columns from <m>\veci</m>, <m>\vecj</m>, and <m>vec k</m>.
           Diagonal arrows are also drawn down and to the left,
-          starting in the last three columns from <m>\vec k</m>, <m>\vec i</m>, and <m>\vec j</m>.
+          starting in the last three columns from <m>\veck</m>, <m>\veci</m>, and <m>\vecj</m>.
           (Recall that the last two columns are copies of the first two.)
         </p>
 
@@ -1380,14 +1380,16 @@
             </pg-code> -->
             <statement>
               <p>
-                The cross product of two vectors is a <fillin/>, not a scalar.
+                The cross product of two vectors is a <fillin answer="vector" mode="string" width="10"/>, not a scalar.
               </p>
             </statement>
-            <answer>
-              <p>
-                vector
-              </p>
-            </answer>
+            <evaluation>
+              <evaluate>
+                <test correct="yes">
+                  <strcmp use-answer="yes" case="insensitive"/>
+                </test>
+              </evaluate>
+            </evaluation>
         <!-- </webwork> -->
       </exercise>
 
@@ -1397,18 +1399,16 @@
             </pg-code> -->
             <statement>
               <p>
-                One can visualize the direction of <m>\vec u\times\vec v</m> using the
-              </p>
-
-              <p>
-                <fillin/> <fillin/> <fillin/>.
+                One can visualize the direction of <m>\vec u\times\vec v</m> using the <fillin mode="string" answer="right hand" width="30"/> rule.
               </p>
             </statement>
-            <answer>
-              <p>
-                right hand rule
-              </p>
-            </answer>
+            <evaluation>
+              <evaluate>
+                <test correct="yes">
+                  <strcmp case="insensitive">right hand|right-hand</strcmp>
+                </test>
+              </evaluate>
+            </evaluation>
         <!-- </webwork> -->
       </exercise>
 
@@ -1421,31 +1421,42 @@
                 Give a synonym for <q>orthogonal.</q>
               </p>
             </statement>
-            <answer>
+            <response />
+            
+            <solution>
               <p>
-                <q>Perpendicular</q> is one answer.
+                <q>Perpendicular</q> is one answer,
+                although we tend to use perpendicular to refer to lines,
+                and orthogonal to refer to vectors.
               </p>
-            </answer>
+              <p>
+                Note that the zero vector is orthogonal to any vector,
+                but it doesn't really make sense to say it is perpendicular.
+              </p>
+            </solution>
         <!-- </webwork> -->
       </exercise>
 
       <exercise label="TaC-cross-product-4">
-        <webwork xml:id="webwork-TaC-cross-product-4">
+        <!-- <webwork xml:id="webwork-TaC-cross-product-4">
+            <pg-macros>
+              <macro-file>parserPopUp.pl</macro-file>
+            </pg-macros>
+            
 
             <pg-code>
-              $true=PopUp(['?','True','False'],1);
-              $false=PopUp(['?','True','False'],2);
-            </pg-code>
+              $true=DropDown(['True','False'],0,showInStatic=&gt;0);
+              $false=DropDown(['True','False'],1,showInStatic=&gt;0);
+            </pg-code> -->
 
-            <statement>
+            <statement correct="yes">
               <p>
-                True or False?
                 A fundamental principle of the cross product is that
                 <m>\vec u\times\vec v</m> is orthogonal to <m>\vec u</m> and <m>\vec v</m>.
-                <var name="$true" form="popup"/>
+                <!-- <var name="$true" form="popup"/> -->
               </p>
             </statement>
-        </webwork>
+        <!-- </webwork> -->
       </exercise>
 
       <exercise label="TaC-cross-product-5">
@@ -1454,29 +1465,27 @@
             </pg-code> -->
             <statement>
               <p>
-                <fillin/> is a measure of the turning force applied to an object.
+                <fillin answer="Torque" width="15"/> is a measure of the turning force applied to an object.
               </p>
             </statement>
-            <answer>
-              <p>
-                Torque
-              </p>
-            </answer>
+            <evaluation>
+              <evaluate>
+                <test correct="yes">
+                  <strcmp use-answer="yes" case="insensitive"/>
+                </test>
+              </evaluate>
+            </evaluation>
+            
         <!-- </webwork> -->
       </exercise>
 
       <exercise label="TaC-cross-product-6">
-        <statement>
+        <statement correct="yes">
           <p>
-            T/F: If <m>\vec u</m> and <m>\vec v</m> are parallel,
+            If <m>\vec u</m> and <m>\vec v</m> are parallel,
             then <m>\vec u\times\vec v=\vec 0</m>.
           </p>
         </statement>
-        <answer>
-          <p>
-            T
-          </p>
-        </answer>
       </exercise>
 
     </subexercises>
