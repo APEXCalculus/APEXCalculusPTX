@@ -239,12 +239,19 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
 <xsl:template match="image[not(ancestor::sidebyside) and (descendant::latex-image or descendant::asymptote) and not(ancestor::exercise)]">
   <xsl:choose>
     <xsl:when test="ancestor::figure/@vshift">
+      <xsl:variable name="rtf-layout">
+        <xsl:apply-templates select="." mode="layout-parameters" />
+      </xsl:variable>
+      <xsl:variable name="layout" select="exsl:node-set($rtf-layout)" />
       <xsl:text>\begin{image}</xsl:text>
-      <xsl:text>{0.02</xsl:text>
+      <xsl:text>{</xsl:text>
+      <xsl:value-of select="($layout/left-margin div 50)-.50"/>
       <xsl:text>}</xsl:text>
-      <xsl:text>{0.96</xsl:text>
+      <xsl:text>{</xsl:text>
+      <xsl:value-of select="$layout/width div 50"/>
       <xsl:text>}</xsl:text>
-      <xsl:text>{0.02</xsl:text>
+      <xsl:text>{</xsl:text>
+      <xsl:value-of select="($layout/right-margin div 50)-.50"/>
       <xsl:text>}{}%&#xa;</xsl:text>
       <xsl:apply-templates select="." mode="image-inclusion" />
       <xsl:text>\end{image}%&#xa;</xsl:text>
