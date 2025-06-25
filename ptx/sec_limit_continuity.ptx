@@ -91,6 +91,17 @@
     </ol>
   </p>
 
+  <exercise label="APEX-PROTEUS-limit-continuous-1-v1" component="proteus">
+    <statement>
+      <p>
+        Describe the features you would expect to see in the graph of a continous function.
+        (You may find it easier to describe the features you would <em>not</em> expect to see.)
+      </p>
+    </statement>
+    <response />
+    
+  </exercise>
+
   <example xml:id="ex_contint1">
     <title>Finding intervals of continuity</title>
     <statement>
@@ -279,6 +290,66 @@
       </p>
     </solution>
   </example>
+
+  <exercise component="proteus">
+    <introduction>
+      <p>
+        The graph of a function <m>f(x)</m> is given below.
+        <image width="47%">
+          <shortdescription>Graph of a piecewise-defined function. It appears to be linear to the left of 2, and quadratic to the right of 2.</shortdescription>
+          <description>
+            <p>
+              The graph of a function <m>f(x)</m> is plotted against a set of <m>x</m> and <m>y</m> coordinate axes.
+            </p>
+            <p>
+              For <m>x\lt 2</m>, the graph is a line with positive slope. It intersects the <m>x</m> axis at <m>x=1</m>,
+              and ends at a hollow dot at the point <m>(2,1)</m>, indicating that the graph approaches this point, but does not reach it.
+            </p>
+            <p>
+              For <m>x\gt 2</m>, the graph appears to be a parabola.
+              Its vertex is at the point <m>(2,2)</m>. A solid dot indicates that this point is included in the graph.
+              The graph opens upward as <m>x</m> increases to the right of <m>2</m>.
+            </p>
+          </description>
+          <latex-image label="img-PROTEUS-piecewise-continuous">
+            \begin{tikzpicture}
+              \begin{axis}[
+                  xmin=-1.4,
+                  xmax=3.4,
+                  ymin=-2.4,
+                  ymax=3.4
+                ]
+                \addplot[firstcurvestyle,-] coordinates {(-1,-2) (2,1)};
+                \addplot[firstcurvestyle,-,domain=2:3] {(x-2)^2+2};
+                \addplot[soliddot] coordinates {(2,2)};
+                \addplot[hollowdot] coordinates {(2,1)};
+              \end{axis}
+            \end{tikzpicture}
+          </latex-image>
+        </image>
+      </p>
+    </introduction>
+    <task label="APEX-PROTEUS-limit-continuous-2a-v1">
+      <statement>
+        <p>
+          Is the function <m>f(x)</m> continuous at <m>x=2</m>?
+          Why or why not?
+        </p>
+      </statement>
+      <response />
+      
+    </task>
+    <task label="APEX-PROTEUS-limit-continuous-2a-v2">
+      <statement>
+        <p>
+          Is the function <m>g(x)=(x-2)f(x)</m> continuous at <m>x=2</m>?
+          Why or why not?
+        </p>
+      </statement>
+      <response />
+      
+    </task>
+  </exercise>
 
   <p>
     Our definition of continuity on an interval specifies the interval is an open interval.
@@ -659,6 +730,27 @@
     </statement>
   </theorem>
 
+  <p>
+    Note also that we can interpret <xref ref="thm_poly_rat"/> as telling us that polynomial
+    and rational functions are also continuous on their domains.
+  </p>
+
+  <exercise label="APEX-PROTEUS-limit-continuous-3-v1" component="proteus">
+    <statement>
+      <p>
+        Let <m>f(x) = \begin{cases}2x-3,\amp x\lt 2\\x^2-3,\amp x\geq 2\end{cases}</m>.
+        Explain how the procedure for demonstrating that <m>f</m> is continuous at <m>x=2</m>
+        differs from the procedure for demonstrating that <m>f</m> is continuous at <m>x=3</m>.
+      </p>
+    </statement>
+    <response />
+    <hint>
+      <p>
+        Can you use a theorem to do answer the second case without computing a limit?
+      </p>
+    </hint>
+  </exercise>
+
   <p xml:id="vidint_limit_con_using_prop" component="video">
     As the video example in <xref ref="vid_limit_con_using_prop"/> illustrates,
     the above theorems allow us to quickly construct new continuous functions from old ones.
@@ -995,6 +1087,35 @@
         </figure>
       </sidebyside>
     </figure>
+
+    <exercise label="APEX-PROTEUS-limit-continuity-4-v1" component="proteus">
+      <statement>
+        <p>
+          Match each function below to the type of discontinuity it exhibits.
+        </p>
+      </statement>
+      <cardsort>
+        <match>
+          <premise order="3"><m>f(x) = \dfrac{1}{e^x-1}</m></premise>
+          <premise order="6"><m>f(x) = \dfrac{x}{x^2-1}</m></premise>
+          <response>Infinite</response>
+        </match>
+        <match>
+          <premise order="1"><m>f(x) = \dfrac{x-1}{\abs{x-1}}</m></premise>
+          <premise order="5"><m>f(x) = \lfloor 2x\rfloor</m></premise>
+          <response>Jump</response>
+        </match>
+        <match>
+          <premise order="4"><m>f(x) = \dfrac{\sin(x)}{x}</m></premise>
+          <premise order="8"><m>f(x) = \dfrac{x^2-1}{x+1}</m></premise>
+          <response>Removable</response>
+        </match>
+        <match>
+          <premise order="2"><m>f(x) = \dfrac{1}{e^x+1}</m></premise>
+          <premise order="7"><m>f(x) = \dffrac{1}{x^2+4}</m></premise>
+        </match>        
+      </cardsort>
+    </exercise>
   </paragraphs>
 
   <paragraphs>
