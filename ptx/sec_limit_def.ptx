@@ -111,6 +111,23 @@
     </me>.
   </p>
 
+  <exercise label="APEX-PROTEUS-limit-def-1-v1" component="proteus">
+    <statement>
+      <p>
+        First, explain why the inequality <m>\abs{x}\lt 1</m>
+        is equivalent to <m>-1\lt x\lt 1</m>.
+        Then, explain why the two inequalities above are equivalent.
+      </p>
+    </statement>
+    <response />
+    <hint>
+      <p>
+        It might help to think in terms of points on a number line,
+        and to remember that <m>\abs{x-c}</m> computes the distance from <m>x</m> to <m>c</m>.
+      </p>
+    </hint>
+  </exercise>
+
   <p>
     Letting the symbol <q><m>\implies</m></q>
     represent the word <q>implies,</q>
@@ -158,6 +175,18 @@
       </p>
     </statement>
   </definition>
+
+  <exercise label="APEX-PROTEUS-limit-def-2-v1" component="proteus">
+    <statement>
+      <p>
+      When we say that <m>f</m> is defined on an inteval <m>I</m>
+      in <xref ref="def_limit"/>,
+      why do we add the caveat, <q>except possibly at <m>c</m></q>?
+      </p>
+    </statement>
+    <response />
+    
+  </exercise>
 
   <figure xml:id="vid_limit_defn_precise" component="video" vshift="-2">
     <caption>Video presentation of <xref ref="def_limit"/></caption>
@@ -454,6 +483,20 @@
     without using the <m>\varepsilon</m>-<m>\delta</m> definition.
   </p>
 
+  <aside>
+    <p>
+      At this point, you may well be wondering:
+      if using the <m>\varepsilon</m>-<m>\delta</m> definition is so hard,
+      why do we bother with it at all?
+    </p>
+
+    <p>
+      The answer is that all the theorems we will use in the next section can be proved using this definition.
+      Although we do not include these proofs in the book,
+      they are relatively straightforward, and arguably, easier than proofs involving specific functions.
+    </p>
+  </aside>
+
   <example xml:id="ex_compute_lim2">
     <title>Evaluating a limit using the definition</title>
     <statement>
@@ -707,7 +750,7 @@
       <p>
         We start our scratch-work by considering <m>\abs{f(x) - (-1)} \lt  \varepsilon</m>:
         <mdn>
-          <mrow number="no">\abs{f(x)-(-1)} \amp \lt  \varepsilon</mrow>
+          <mrow number="no">\abs{f(x)-(-1)} \amp \lt  \varepsilon </mrow>
           <mrow number="no">\abs{x^3-2x + 1}\amp \lt  \varepsilon \amp\amp  \text{(Now factor)}</mrow>
           <mrow number="no">\abs{(x-1)(x^2+x-1)}\amp \lt  \varepsilon</mrow>
           <mrow xml:id="eq_lim4">\abs{x-1}\amp\lt\frac{\varepsilon}{\abs{x^2+x-1}}</mrow>
@@ -775,6 +818,100 @@
       <video width="98%" youtube="--_Rq2GX9IY" label="vid_limit_defn_polynomial" component="video"/>
     </solution>
   </example>
+
+  <p component="proteus">
+    Once we get the hang of writing <m>\varepsilon</m>-<m>\delta</m> proofs, they tend to follow a particular script:
+    <ul>
+      <li>
+        <p>
+          Do some <q>backwards</q> work, to figure out how you need to define <m>\delta</m> in terms of <m>\varepsilon</m>,
+          but <em>don't include this work in your solution</em>!
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Begin with a declaration: <q>Let <m>\varepsilon\gt 0</m> be given.</q>
+          This sounds a little odd at first, but what we are saying is that you can give us any value for <m>\varepsilon</m> you want,
+          and we will show how to find a value of <m>\delta</m> that works with it.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Declare the value you're choosing for <m>\delta</m>, which is almost always in terms of <m>\varepsilon</m>.
+          (This is the value you figured out during the <q>backwards</q> work you did earlier.)
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Show that your value of <m>\delta</m> works as claimed.
+        </p>
+      </li>
+    </ul>
+    See if you can use this script to rearrange the blocks below into a valid proof.
+  </p>
+
+  <exercise label="APEX-PROTEUS-limit-def-3-v1" component="proteus">
+    <statement>
+      <p>
+        Rearrange the blocks below to form a valid proof of the statement
+        <me>
+          \lim_{x\to 2}(2x-3)=1
+        </me>.
+        Not all blocks are needed to form the proof.
+      </p>
+    </statement>
+    <blocks>
+      <block order="8">
+        <p>
+          Let <m>\varepsilon\gt 0</m> be given.
+        </p>
+      </block>
+      <block order="5" correct="no">
+        <p>
+          Let <m>\delta\gt 0</m> be given.
+        </p>
+      </block>
+      <block order="3" correct="no">
+        <p>
+          Let <m>\varepsilon \lt 0</m> be given.
+        </p>
+      </block>
+      <block order="1">
+        <p>
+          Let <m>\delta = \varepsilon/2</m>.
+        </p>
+      </block>
+      <block order="9" correct="no">
+        <p>
+          Suppose <m>\abs{(2x-3)-1}\lt \varepsilon</m>
+        </p>
+      </block>
+      <block order="2">
+        <p>
+          Suppose <m>\abs{x-2}\lt \delta</m>, so <m>2-\delta\lt x\lt 2+\delta</m>
+        </p>
+      </block>
+      <block order="4">
+        <p>
+          Then <m>2-\varepsilon/2\lt x\lt 2+\varepsilon/2</m>
+        </p>
+      </block>
+      <block order="7">
+        <p>
+          Therefore <m>4-\varepsilon\lt 2x \lt 4+\varepsilon</m>,
+          which implies that <m>-\varepsilon\lt 2x-4\lt\varepsilon</m>
+        </p>
+      </block>
+      <block order="10">
+        <p>
+          This gives <m>\abs{(2x-3)-1}\lt \varepsilon</m>, which is what we wanted to show.
+        </p>
+      </block>
+    </blocks>
+  </exercise>
 
   <p>
     We illustrate evaluating limits once more.
@@ -887,6 +1024,72 @@
     rarely are limits evaluated using the definition.
     Rather, the techniques of <xref ref="sec_limit_analytically"/> are employed.
   </p>
+
+  <p component="proteus">
+    We mentioned above that while the formal definition of the limit is difficult to use with specific limits,
+    it makes it straightforward to prove the theorems we will rely on in the next section.
+    To illustrate how this works, see if you can arrange the blocks below to form a proof of the fact that
+    the limit of a sum is the sum of the limits.
+  </p>
+
+  <exercise label="APEX-PROTEUS-limit-def-4-v1" component="proteus">
+    <statement>
+      <p>
+        Use the <m>\varepsilon</m>-<m>\delta</m> definition of the limit to prove that
+        if <m>\lim\limits_{x\to c}f(x)=L</m>, and <m>\lim\limits_{x\to c}g(x)=M</m>, then
+        <me>
+          \lim_{x\to c}(f(x)+g(x)) = L+M = \lim_{x\to c}f(x)+\lim_{x\to c}g(x)
+        </me>.
+      </p>
+    </statement>
+    <blocks>
+      <block order="5">
+        <p>
+          Let <m>\varepsilon\gt 0</m> be given.
+        </p>
+      </block>
+      <block order="1">
+        <p>
+          Since <m>\lim_{x\to c}f(x)=L</m>, there exists some <m>\delta_1</m>
+          such that whenever <m>\abs{x-c}\lt \delta_1</m>, <m>\abs{f(x)-L}\lt \varepsilon/2</m>.
+        </p>
+      </block>
+      <block order="4">
+        <p>
+          Similarly, since <m>\lim_{x\to c}g(x)=M</m>, there exists some <m>\delta_2</m>
+          such that whenever <m>\abs{x-c}\lt \delta_2</m>, <m>\abs{g(x)-M}\lt \varepsilon/2</m>.
+        </p>
+      </block>
+      <block order="2">
+        <p>
+          Let <m>\delta = \min\{\delta_1,\delta_2\}</m>, and suppose <m>\abs{x-c}\lt \delta</m>.
+        </p>
+      </block>
+      <block order="6">
+        <p>
+          Since <m>\abs{x-c}\lt\delta\leq \delta_1</m>, we know that <m>\abs{f(x)-L}\lt\varepsilon/2</m>,
+          and since <m>\abs{x-c}\lt\delta\leq \delta_22</m>, we know that <m>\abs{g(x)-M}\lt\varepsilon/2</m>.
+        </p>
+      </block>
+      <block order="3">
+        <p>
+          Therefore,
+          <md>
+            <mrow>\abs{(f(x)+g(x))-(L+M)}\amp =\abs{(f(x)-L)+(g(x)-M)}</mrow>
+            <mrow>\amp \leq \abs{f(x)-L}+\abs{g(x)-M}</mrow>
+            <mrow>\amp =\varepsilon/2+\varepsilon/2=\varepsilon</mrow>
+          </md>.          
+        </p>
+      </block>
+    </blocks>
+    <hint>
+      <p>
+        An important property of the absolute value is the triangle inequality:
+        for any real numbers <m>a</m> and <m>b</m>,
+        <m>\abs{a+b}\leq \abs{a}+\abs{b}</m>.
+      </p>
+    </hint>
+  </exercise>
 
   <exercises>
     <subexercises xml:id="TaC-limit-definition">

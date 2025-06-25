@@ -117,6 +117,24 @@
     </statement>
   </theorem>
 
+  <exercise label="APEX-PROTEUS-limit-analytic-1-v1" component="proteus">
+    <statement>
+      <p>
+        Notice how the requirements for the composition property are more complicated than the other properties.
+        Can you come up with an example where these requirements are not satisfied,
+        and <m>\lim_{x\to c}f(g(x))\neq K</m>?
+      </p>
+    </statement>
+    <response />
+    <hint>
+      <p>
+        First try to think of a function <m>g</m> such that <m>\lim_{x\to L}g(x)=K</m>, but <m>g(L)\neq K</m>.
+        What does the graph of such a function look like?
+        Now, what if <m>f(x)</m> is a constant function?
+      </p>
+    </hint>
+  </exercise>
+
   <figure xml:id="vid_limit_analytic_algebra" component="video" vshift="1">
     <caption>Video presentation of <xref ref="thm_limit_algebra"/> (three videos)</caption>
     <video youtube="da2vdsxd2Fs" label="vid_limit_analytic_algebra"/>
@@ -259,11 +277,52 @@
     </statement>
   </theorem>
 
+  <exercise label="APEX-PROTEUS-limit-analytic-3-v1" component="proteus">
+    <statement>
+      <p>
+        Let <m>p(x)=a_nx^n+\cdots + a_1x+a_0</m> be a polynomial function.
+      </p>
+      <p>
+        The cards on the right below contain the steps involved to demonstrate
+        Part 1 of <xref ref="thm_poly_rat"/>.
+        Label each step with the limit property from <xref ref="thm_limit_algebra"/>,
+        or basic mathematical notion,
+        used in that step.
+      </p>
+    </statement>
+    <cardsort>
+      <match>
+        <premise order="3">Definition of <m>p</m></premise>
+        <response><m>\lim\limits_{x\to c}p(x) = \lim\limits_{x\to c}\left(a_nx^n+\cdots + a_1x+a_0\right)</m></response>
+      </match>
+      <match>
+        <premise order="1">Sums</premise>
+        <response><m>= \lim\limits_{x\to c}(a_nx^n)+\cdots+\lim\limits_{x\to c}(a_1x)+\lim\limits_{x\to c}a_0</m></response>
+      </match>
+      <match>
+        <premise order="5">Scalar multiples</premise>
+        <response><m>=a_n\lim\limits_{x\to c}x^n+\cdots a_1\lim\limits_{x\to c}x + \lim\limits_{x\to c}a_0</m></response>
+      </match>
+      <match>
+        <premise order="2">Powers</premise>
+        <response><m>=a_n\left(\lim\limits_{x\to c}x\right)^n+\cdots + a_1\lim\limits_{x\to c}x+\lim\limits_{x\to c}a_0</m></response>
+      </match>
+      <match>
+        <premise order="4">Identity</premise>
+        <response><m>=a_nc^n+\cdots + a_1c+\lim\limits_{x\to c}a_0</m></response>
+      </match>
+      <match>
+        <premise order="6">Constants</premise>
+        <response><m>a_nc^n+\cdots +a_1c+a_0 = p(c)</m></response>
+      </match>
+      
+    </cardsort>
+  </exercise>
+
   <figure xml:id="vid_limit_analytic_imp_thms" component="video" vshift="2">
     <caption>Video presentation of <xref ref="thm_poly_rat"/> and <xref ref="thm_limit_allbut1"/></caption>
     <video youtube="NGoUHZESPso" label="vid_limit_analytic_imp_thms"/>
   </figure>
-
 
   <example xml:id="ex_limit_rat">
     <title>Finding a limit of a rational function</title>
@@ -306,6 +365,17 @@
     In <xref ref="sec_continuity"/>,
     we will give a formal name to these functions that behave <q>nicely.</q>
   </p>
+
+  <exercise label="APEX-PROTEUS-limit-analytic-2-v1" component="proteus">
+    <statement>
+      <p>
+        It probably seems like all the functions you're familiar with behave <q>nicely</q> in this sense.
+        So why consider limits at all? Give at least one example of a function where a limit cannot be evaluated in this way.
+      </p>
+    </statement>
+    <response />
+    
+  </exercise>
 
   <!--TODO: review indexing on this theorem-->
   <theorem xml:id="thm_lim_continuous">
@@ -889,6 +959,61 @@
     resulting in a limit of <m>1</m>.
   </p>
 
+  <exercise label="APEX-PROTEUS-limit-analytic-4-v1" component="proteus">
+    <statement>
+      <p>
+        Rearrange the blocks below to produce a valid demonstration of the limit
+        <me>
+          \lim_{x\to 0}\frac{\cos(x)-1}{x}
+        </me>.        
+      </p>
+    </statement>
+    <blocks>
+      <block>
+        <p>
+          <me>
+            \lim_{x\to 0}\frac{\cos(x)-1}{x} = \lim_{x\to 0}\frac{\cos(x)-1}{x}\cdot 1
+          </me>          
+        </p>
+      </block>
+      <block>
+        <p>
+          <me>
+            \lim_{x\to 0}\frac{\cos(x)-1}{x} = \lim_{x\to 0}\frac{\cos(x)-1}{x}\cdot\frac{\cos(x)+1}{\cos(x)+1}
+          </me>          
+        </p>
+      </block>
+      <block>
+        <p>
+          <me>
+            \lim_{x\to 0}\frac{\cos(x)-1}{x} = \lim_{x\to 0}\frac{\cos^2(x)-1}{x(\cos(x)+1)}
+          </me>          
+        </p>
+      </block>
+      <block>
+        <p>
+          <me>
+            \lim_{x\to 0}\frac{\cos(x)-1}{x} = \lim_{x\to 0}\frac{-\sin^2(x)}{x(\cos(x)+1)}
+          </me>          
+        </p>
+      </block>
+      <block>
+        <p>
+          <me>
+            \lim_{x\to 0}\frac{\cos(x)-1}{x} = \lim_{x\to 0}\frac{\sin(x)}{x}\cdot\lim_{x\to 0}\frac{-\sin(x)}{\cos(x)+1}
+          </me>          
+        </p>
+      </block>
+      <block>
+        <p>
+          <me>
+            \lim_{x\to 0}\frac{\cos(x)-1}{x} = 1\cdot \frac{-0}{1+1} = 0.
+          </me>          
+        </p>
+      </block>
+    </blocks>
+  </exercise>
+
   <p>
     The special limits stated in <xref ref="thm_special_limits"/>
     are called <em>indeterminate forms</em>;
@@ -1107,6 +1232,45 @@
       <video width="98%" youtube="vOW92eipOu4" label="vid_limit_analytic_alg_ex_2" component="video"/>
     </solution>
   </example>
+
+  <exercise label="APEX-PROTEUS-limit-analytic-5-v1" component="proteus">
+    <statement>
+      <p>
+        The cards on the left below contain limits of the form <m>0/0</m>.
+      </p>
+
+      <p>
+        The slots on the right contain limits of functions that <q>agree at all but one point</q>
+        with one of the functions on the left,
+        and for which the limit is no longer of the form <m>0/0</m>.
+      </p>
+
+      <p>
+        Match each limit on the left with the equivalent, simplified limit on the right.
+      </p>
+    </statement>
+    <cardsort>
+      <match>
+        <premise order="5"><m>\lim\limits_{x\to 1}\frac{x^2-5x+4}{x^2-1}</m></premise>
+        <response><m>\lim\limits_{x\to 1}\frac{x-4}{x+1}</m></response>
+      </match>
+      <match>
+        <premise order="2"><m>\lim\limits_{x\to 1}{x-1}{\sqrt[3]{x}-1}</m></premise>
+        <response><m>\lim\limits_{x\to 1}(x^{2/3}+x^{1/3}+1)</m></response>
+      </match>
+      <match>
+        <premise order="1"><m>\lim\limits_{x\to 1}\frac{x^2-3x+2}{x+1}</m></premise>
+      </match>
+      <match>
+        <premise order="4"><m>\lim\limits_{x\to 1}\frac{x^2-3x+2}{x-1}</m></premise>
+        <response><m>\lim\limits_{x\to 1}(x-2)</m></response>
+      </match>
+      <match>
+        <premise order="3"><m>\lim\limits_{x\to 1}\frac{x^3-1}{x^4-1}</m></premise>
+        <response><m>\lim\limits_{x\to 1}\frac{x^2+x+1}{x^3+x^2+x+1}</m></response>
+      </match>      
+    </cardsort>
+  </exercise>
 
   <p>
     We end this section by revisiting a limit first seen in

@@ -1,633 +1,653 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="sec_limit_intro" label="sec_limit_intro">
   <title>An Introduction To Limits</title>
-  <introduction>
-    <p>
-      We begin our study of <em>limits</em>
-      by considering examples that demonstrate key concepts that will be explained as we progress.
-    </p>
-    <figure xml:id="vid_limit_intro_limit_concept" component="video" vshift="-3">
-      <caption>The concept of a limit</caption>
-      <video youtube="rG3XVvFIZPY" label="vid_limit_intro_limit_concept"/>
-    </figure>
+  <p>
+    We begin our study of <em>limits</em>
+    by considering examples that demonstrate key concepts that will be explained as we progress.
+  </p>
+  <figure xml:id="vid_limit_intro_limit_concept" component="video" vshift="-3">
+    <caption>The concept of a limit</caption>
+    <video youtube="rG3XVvFIZPY" label="vid_limit_intro_limit_concept"/>
+  </figure>
 
 
-    <p>
-      Consider the function <m>y = \frac{\sin(x) }{x}</m>.
-      When <m>x</m> is near the value 1, what value (if any)
-      is <m>y</m> near?
-    </p>
+  <p>
+    Consider the function <m>y = \frac{\sin(x) }{x}</m>.
+    When <m>x</m> is near the value 1, what value (if any)
+    is <m>y</m> near?
+  </p>
 
-    <p>
-      While our question is not precisely formed
-      (what constitutes <q>near the value 1</q>?),
-      the answer does not seem difficult to find.
-      One might think first to look at a graph of this function to approximate the appropriate
-      <m>y</m> values.
-      Consider <xref ref="fig_zoom_sinx_over_x"/>,
-      where <m>y = \frac{\sin(x) }{x}</m> is graphed.
-      For values of <m>x</m> near 1, it seems that <m>y</m> takes on values near <m>0.85</m>.
-      In fact, when <m>x=1</m>, then <m>y=\frac{\sin(1) }{1} \approx 0.84</m>,
-      so it makes sense that when <m>x</m> is <q>near</q>
-      1, <m>y</m> will be <q>near</q> <m>0.84</m>.
-    </p>
+  <p>
+    While our question is not precisely formed
+    (what constitutes <q>near the value 1</q>?),
+    the answer does not seem difficult to find.
+    One might think first to look at a graph of this function to approximate the appropriate
+    <m>y</m> values.
+    Consider <xref ref="fig_zoom_sinx_over_x"/>,
+    where <m>y = \frac{\sin(x) }{x}</m> is graphed.
+    For values of <m>x</m> near 1, it seems that <m>y</m> takes on values near <m>0.85</m>.
+    In fact, when <m>x=1</m>, then <m>y=\frac{\sin(1) }{1} \approx 0.84</m>,
+    so it makes sense that when <m>x</m> is <q>near</q>
+    1, <m>y</m> will be <q>near</q> <m>0.84</m>.
+  </p>
 
-    <sidebyside widths="47% 47%" margins="0%" valign="bottom">
-      <figure xml:id="fig_sinx_over_x_full">
-        <caption><m>\sin(x)/x</m></caption>
-        <image>
-          <description>
-            <p>
-              Graph of <m>\sin(x)/x</m>, shown for <m>x</m> between
-              <m>-7</m> and <m>7</m>, and <m>y</m> between <m>0</m> and 
-              <m>1</m>. The <m>x</m> intercepts are at 
-              <m>x=-2\pi, -\pi, \pi</m>, and <m>2\pi</m>, and a <m>y</m> intercept is at <m>y = 1</m>. 
-              The graph has a downward curve for <m>-\pi \lt x \lt \pi</m> and an 
-              upward curve for <m>-2\pi \lt x \lt -\pi</m>, and 
-              <m>\pi \lt x \lt 2\pi</m>. The graph is undefined for <m>x = 0</m>.
-            </p>
-          </description>
-          <shortdescription>
-            Graph of sin(x)/x, shows values for the domain -7 &lt;=x &lt;=7,
-            undefined at x = 0. 
-          </shortdescription>
-          <latex-image label="img_sinx_over_x_full">
-            \begin{tikzpicture}[
-              declare function = {func(\x) = (\x != 0) * (sin(x*180/pi)/x) + (\x == 0) * (1);}
-            ]
-              \begin{axis}[
-                ymin=-0.25,
-                ymax=1.2,
-                xmin=-7,
-                xmax=7,
-              ]
-                \addplot+[infinite,domain=-7:7,samples=50] {func(x)};
-                \addplot[hollowdot] coordinates {(0,1)};
-              \end{axis}
-            \end{tikzpicture}
-          </latex-image>
-        </image>
-      </figure>
-
-      <figure xml:id="fig_zoom_sinx_over_x">
-        <caption><m>\sin(x)/x</m> near <m>x=1</m></caption>
-        <!-- START figures/sinx_over_x_1.tex -->
-        <image>
-          <description>
-            <p>
-              Graph of <m>\sin(x)/x</m> zoomed in on values where <m>x</m> is near <m>1</m>.
-              This view of the graph shows <m>x</m> from <m>0.5</m> to <m>1.5</m>. 
-              The graph has only a slight downward curve. It shows that for <m>x = 1</m>, 
-              <m>\sin(x)/x</m> is approximately <m>0.84</m>
-            </p>
-          </description>
-          <shortdescription> 
-            Graph of sin(x)/x zoomed in on values where x is near 1. Shows that for x = 1, 
-            sin(x)/x is approx. 0.84.
-          </shortdescription>
-          <latex-image label="img_zoom_sinx_over_x">
-            \begin{tikzpicture}
-              \begin{axis}[
-                xmin=.3,
-                xmax=1.6,
-                ymin=.4,
-                ymax=1.1,
-                xtick={0.5,1,1.5},
-                ytick={0.6,0.8,1},
-                xdiscontinuity,
-                ydiscontinuity,
-                grid=both,
-              ]
-                \addplot+[infinite,domain=0.5:1.5] {sin(x*180/pi)/x};
-              \end{axis}
-            \end{tikzpicture}
-          </latex-image>
-        </image>
-        <!-- figures/sinx_over_x_1.tex END -->
-      </figure>
-    </sidebyside>
-
-    <p>
-      Consider this same function again at a different value for <m>x</m>.
-      When <m>x</m> is near <m>0</m>, what value
-      (if any)
-      is <m>y</m> near?
-      By considering <xref ref="fig_sinx_over_x"/>,
-      one can see that it seems that <m>y</m> takes on values near <m>1</m>.
-      But what happens when <m>x=0</m>?
-      We have
-      <me>
-        y \rightarrow \frac{\sin(0) }{0} \rightarrow {\genfrac{}{}{0pt}{0}{\text{“}}{}}\frac{0}{0}{\genfrac{}{}{0pt}{0}{\text{”}}{}}
-      </me>.
-      The expression <m>0/0</m> has no value; it is
-
-          <idx><h>limit</h><h>indeterminate form</h></idx>
-          <idx><h>indeterminate form</h></idx>
-
-      <term>indeterminate</term>.
-      Such an expression gives no information about what is going on with the function nearby.
-      We cannot find out how <m>y</m> behaves near <m>x=0</m>
-      for this function simply by letting <m>x=0</m>.
-    </p>
-
-    <figure xml:id="fig_sinx_over_x" vshift="0">
-      <caption><m>\sin(x)/x</m> near <m>x=0</m></caption>
-      <!-- START figures/sinx_over_x_2.tex -->
-      <image width="47%">
+  <sidebyside widths="47% 47%" margins="0%" valign="bottom">
+    <figure xml:id="fig_sinx_over_x_full">
+      <caption><m>\sin(x)/x</m></caption>
+      <image>
         <description>
           <p>
-            Graph of <m>\sin(x)/x</m> zoomed in on values where <m>x</m> is near <m>0</m>.
-            The image shows the portion of the graph where <m>x</m> is from <m>-1</m> to <m>1</m>. 
-            The graph has a downward curve and is symmetric about <m>x=0</m>. 
-            The height of the graph approaches <m>y = 1</m> when <m>x</m> is near <m>0</m>. 
-            A hollow dot at the point <m>(0,1)</m> shows that the function is undefined when <m>x = 0</m>;
-            that is, <m>f(0) =</m> undefined.
+            Graph of <m>\sin(x)/x</m>, shown for <m>x</m> between
+            <m>-7</m> and <m>7</m>, and <m>y</m> between <m>0</m> and 
+            <m>1</m>. The <m>x</m> intercepts are at 
+            <m>x=-2\pi, -\pi, \pi</m>, and <m>2\pi</m>, and a <m>y</m> intercept is at <m>y = 1</m>. 
+            The graph has a downward curve for <m>-\pi \lt x \lt \pi</m> and an 
+            upward curve for <m>-2\pi \lt x \lt -\pi</m>, and 
+            <m>\pi \lt x \lt 2\pi</m>. The graph is undefined for <m>x = 0</m>.
           </p>
         </description>
-        <shortdescription> 
-          Graph of sin(x)/x zoomed in on values where x is near 0. Shows that when x = 0 
-          sin(x)/x is undefined.
+        <shortdescription>
+          Graph of sin(x)/x, shows values for the domain -7 &lt;=x &lt;=7,
+          undefined at x = 0. 
         </shortdescription>
-        <latex-image label="img_sinx_over_x_2">
+        <latex-image label="img_sinx_over_x_full">
           \begin{tikzpicture}[
             declare function = {func(\x) = (\x != 0) * (sin(x*180/pi)/x) + (\x == 0) * (1);}
           ]
             \begin{axis}[
-              xmin=-1.1,
-              xmax=1.2,
-              ymin=.75,
-              ymax=1.05,
-              ytick={.8,.9,1},
-              extra y ticks={.1,.3,...,.9},
-              extra y tick labels={},
+              ymin=-0.25,
+              ymax=1.2,
+              xmin=-7,
+              xmax=7,
             ]
-              \addplot+[infinite,domain=-1:1] {func(x)};
+              \addplot+[infinite,domain=-7:7,samples=50] {func(x)};
               \addplot[hollowdot] coordinates {(0,1)};
             \end{axis}
           \end{tikzpicture}
         </latex-image>
       </image>
-      <!-- figures/sinx_over_x_2.tex END -->
     </figure>
 
-    <p>
-      <em>Finding a limit</em> entails understanding how a function behaves near a particular value of
-      <m>x</m>.
-      Before continuing, it will be useful to establish some notation.
-      Let <m>y=f(x)</m>; that is,
-      let <m>y</m> be a function of <m>x</m> for some function <m>f</m>.
-      The expression <q>the limit of <m>y</m> as <m>x</m> approaches
-      <m>1</m></q> describes a number, often referred to as <m>L</m>,
-      that <m>y</m> nears as <m>x</m> nears <m>1</m>.
-      We write all this as
-      <me>
-        \lim_{x\to 1} y = \lim_{x\to 1} f(x) = L
-      </me>.
-      This is not a complete definition (that will come in the next section);
-      this is a pseudo-definition that will allow us to explore the idea of a limit.
-          <idx><h>limit</h><h>pseudo-definition</h></idx>
-    </p>
-
-    <p>
-      Above, where <m>f(x) = \sin(x)/x</m>, we approximated
-      <me>
-        \lim_{x\to 1} \frac{\sin(x) }{x} \approx 0.84 \quad \text{ and } \quad \lim_{x\to 0}\frac{\sin(x) }{x} \approx 1
-      </me>.
-      (We <em>approximated</em> these limits,
-      hence used the <q><m>\approx</m></q> symbol,
-      since we are working with the pseudo-definition of a limit,
-      not the actual definition.)
-    </p>
-    <figure xml:id="vid_limit_intro_sinxoverx" component="video" vshift="0">
-      <caption>Investigating <m>\sin(x)/x</m></caption>
-      <video youtube="__qzaSg4y1I" label="vid_limit_intro_sinxoverx"/>
-    </figure>
-
-
-    <p>
-      Once we have the true definition of a limit,
-      we will find limits <em>analytically</em>;
-      that is, exactly using a variety of mathematical tools.
-      For now, we will <em>approximate</em>
-      limits both graphically and numerically.
-      Graphing a function can provide a good approximation,
-      though often not very precise.
-      Numerical methods can provide a more accurate approximation.
-      We have already approximated limits graphically,
-      so we now turn our attention to numerical approximations.
-    </p>
-
-    <p>
-      Consider again <m>\lim_{x\to 1}\frac{\sin(x)}{x}</m>.
-      To approximate this limit numerically,
-      we can create a table of <m>x</m> and <m>f(x)</m> values where <m>x</m> is <q>near</q> <m>1</m>.
-      This is done in <xref ref="table_sinx_1"/>.
-    </p>
-
-    <p>
-      Notice that for values of <m>x</m> near <m>1</m>,
-      we have <m>\sin(x)/x</m> near <m>0.841</m>.
-      The <m>x=1</m> row is included,
-      but we stress the fact that when considering limits,
-      we are <em>not</em> concerned with the value of the function at that particular <m>x</m> value;
-      we are only concerned with the values of the function when <m>x</m> is <em>near</em> 1.
-    </p>
-
-    <figure xml:id="table_sinx_1" vshift="0">
-      <caption>Values of <m>\sin(x)/x</m> with <m>x</m> near <m>1</m></caption>
-      <tabular>
-        <row bottom="medium">
-          <cell><m>x</m></cell>
-          <cell><m>\sin(x)/x</m></cell>
-        </row>
-        <row>
-          <cell>0.9</cell>
-          <cell>0.870363</cell>
-        </row>
-        <row>
-          <cell>0.99</cell>
-          <cell>0.844471</cell>
-        </row>
-        <row>
-          <cell>0.999</cell>
-          <cell>0.841772</cell>
-        </row>
-        <row>
-          <cell><alert>1</alert></cell>
-          <cell><alert>0.841471</alert></cell>
-        </row>
-        <row>
-          <cell>1.001</cell>
-          <cell>0.841170</cell>
-        </row>
-        <row>
-          <cell>1.01</cell>
-          <cell>0.838447</cell>
-        </row>
-        <row>
-          <cell>1.1</cell>
-          <cell>0.810189</cell>
-        </row>
-      </tabular>
-    </figure>
-
-    <p>
-      Now approximate <m>\lim_{x\to 0} \frac{\sin(x)}{x}</m> numerically.
-      We already approximated the value of this limit as <m>1</m> graphically in
-      <xref ref="fig_sinx_over_x"/>.
-      <xref ref="table_sinx_2"/>
-      shows the value of <m>\sin(x)/x</m> for values of <m>x</m> near <m>0</m>.
-      Ten places after the decimal point are shown to highlight how close to <m>1</m> the value of
-      <m>\sin(x)/x</m> gets as <m>x</m> takes on values very near <m>0</m>.
-      We include the <m>x=0</m> row but again stress that we are not concerned with the value of our function at <m>x=0</m>,
-      only on the behavior of the function <em>near</em> <m>0</m>.
-    </p>
-
-    <figure xml:id="table_sinx_2" vshift="-3">
-      <caption>Values of <m>\sin(x)/x</m> with <m>x</m> near <m>0</m></caption>
-      <tabular>
-        <row bottom="medium">
-          <cell><m>x</m></cell>
-          <cell><m>\sin(x)/x</m></cell>
-        </row>
-        <row>
-          <cell>-0.1</cell>
-          <cell>0.9983341665</cell>
-        </row>
-        <row>
-          <cell>-0.01</cell>
-          <cell>0.9999833334</cell>
-        </row>
-        <row>
-          <cell>-0.001</cell>
-          <cell>0.9999998333</cell>
-        </row>
-        <row>
-          <cell><alert>0</alert></cell>
-          <cell><alert>not defined</alert></cell>
-        </row>
-        <row>
-          <cell>0.001</cell>
-          <cell>0.9999998333</cell>
-        </row>
-        <row>
-          <cell>0.01</cell>
-          <cell>0.9999833334</cell>
-        </row>
-        <row>
-          <cell>0.1</cell>
-          <cell>0.9983341665</cell>
-        </row>
-      </tabular>
-    </figure>
-
-    <p>
-      This numerical method gives confidence to say that <m>1</m> is a good approximation of
-      <m>\lim_{x\to 0} \frac{\sin(x)}{x}</m>; that is,
-      <me>
-        \lim_{x\to 0} \frac{\sin(x)}{x} \approx 1
-      </me>.
-    </p>
-
-    <p>
-      Later we will be able to prove that the limit is
-      <em>exactly</em> <m>1</m>.
-    </p>
-
-    <p>
-      We now consider several examples that allow us explore different aspects of the limit concept.
-    </p>
-
-    <example xml:id="ex_limit1">
-      <title>Approximating the value of a limit</title>
-      <statement>
-        <p>
-          Use graphical and numerical methods to approximate
-          <me>
-            \lim_{x\to 3} \frac{x^2-x-6}{6x^2-19x+3}
-          </me>.
-        </p>
-      </statement>
-      <solution>
-        <p>
-          To graphically approximate the limit, graph
-          <me>
-            y = \frac{x^2-x-6}{6x^2-19x+3}
-          </me>
-          on a small interval that contains <m>3</m>.
-          To numerically approximate the limit,
-          create a table of values where the <m>x</m> values are near <m>3</m>.
-          This is done in <xref ref="fig_limit1"/>
-          and <xref ref="table_limit1"/>, respectively.
-        </p>
-
-        <sidebyside widths="47% 47%" margins="0%" valign="bottom">
-          <figure xml:id="fig_limit1">
-            <caption>Graphically approximating a limit in <xref ref="ex_limit1"/></caption>
-            <!-- START figures/fig_limit1.tex -->
-            <image>
-              <description>
-                <p>
-                  Graph of <m>f(x)=\frac{x^2 - x - 6}{6x^2 - 19x + 3}</m>,
-                  zoomed on values near <m>x = 3</m>, and showing the portion of the graph
-                  for <m>x</m> from <m>2.5</m> to <m>3.5</m>.
-                </p>
-                <p>
-                  There is a slight upward curve to the graph. 
-                  The graph suggests that the limit of the function
-                  as <m>x</m> approaches <m>3</m> is <m>0.294</m>. The graph also
-                  shows that the function is undefined for <m>x = 3</m>.
-                </p>
-              </description>
-              <shortdescription>
-                Graph of the function for this example, which shows that when x = 3, f(x) is undefined,
-                but near 0.294.
-              </shortdescription>
-              <latex-image label="img_limit1">
-                \begin{tikzpicture}
-                  \begin{axis}[
-                    xmin=2.3,
-                    xmax=3.7,
-                    ymin=0.2,
-                    ymax=.35,
-                    xdiscontinuity,
-                    ydiscontinuity,
-                    extra y tick labels={},
-                    grid=both,
-                  ]
-                    \addplot+[infinite,domain=2.5:3.45] {(x^2 - x - 6)/(6*x^2 - 19*x + 3)};
-                    \addplot [hollowdot] coordinates{(3,0.294)};
-                  \end{axis}
-                \end{tikzpicture}
-              </latex-image>
-            </image>
-            <!-- figures/fig_limit1.tex END -->
-          </figure>
-
-          <figure xml:id="table_limit1">
-            <caption>Numerically approximating a limit in <xref ref="ex_limit1"/></caption>
-            <tabular>
-              <row bottom="medium">
-                <cell><m>x</m></cell>
-                <cell><m>\frac{x^2-x-6}{6x^2-19x+3}</m></cell>
-              </row>
-              <row>
-                <cell><m>2.9</m></cell>
-                <cell><m>0.29878</m></cell>
-              </row>
-              <row>
-                <cell><m>2.99</m></cell>
-                <cell><m>0.294569</m></cell>
-              </row>
-              <row>
-                <cell><m>2.999</m></cell>
-                <cell><m>0.294163</m></cell>
-              </row>
-              <row>
-                <cell><em>3</em></cell>
-                <cell><em>not defined</em></cell>
-              </row>
-              <row>
-                <cell><m>3.001</m></cell>
-                <cell><m>0.294073</m></cell>
-              </row>
-              <row>
-                <cell><m>3.01</m></cell>
-                <cell><m>0.293669</m></cell>
-              </row>
-              <row>
-                <cell><m>3.1</m></cell>
-                <cell><m>0.289773</m></cell>
-              </row>
-            </tabular>
-          </figure>
-        </sidebyside>
-
-        <p>
-          The graph shows that when <m>x</m> is near <m>3</m>,
-          the value of <m>y</m> is very near <m>0.3</m>.
-          By considering values of <m>x</m> near <m>3</m>,
-          we see that <m>y=0.294</m> is a better approximation.
-          The graph and the table imply that
-          <me>
-            \lim_{x\to 3} \frac{x^2-x-6}{6x^2-19x+3} \approx 0.294
-          </me>.
-        </p>
-      </solution>
-      <solution component="video" vshift="3">
-        <title>Video solution</title>
-        <video width="98%" youtube="eHx3LmrQZXM" label="vid_limit_intro_rational_func" component="video"/>
-      </solution>
-    </example>
-
-    <p>
-      This example may bring up a few questions about approximating limits
-      (and the nature of limits themselves).
-      <ol>
-        <li>
+    <figure xml:id="fig_zoom_sinx_over_x">
+      <caption><m>\sin(x)/x</m> near <m>x=1</m></caption>
+      <!-- START figures/sinx_over_x_1.tex -->
+      <image>
+        <description>
           <p>
-            If a graph does not produce as good an approximation as a table,
-            why bother with it?
+            Graph of <m>\sin(x)/x</m> zoomed in on values where <m>x</m> is near <m>1</m>.
+            This view of the graph shows <m>x</m> from <m>0.5</m> to <m>1.5</m>. 
+            The graph has only a slight downward curve. It shows that for <m>x = 1</m>, 
+            <m>\sin(x)/x</m> is approximately <m>0.84</m>
           </p>
-        </li>
-        <li>
-          <p>
-            How many values of <m>x</m> in a table are
-            <q>enough?</q> In the previous example,
-            could we have just used <m>x=3.001</m> and found a fine approximation?
-          </p>
-        </li>
-      </ol>
-    </p>
+        </description>
+        <shortdescription> 
+          Graph of sin(x)/x zoomed in on values where x is near 1. Shows that for x = 1, 
+          sin(x)/x is approx. 0.84.
+        </shortdescription>
+        <latex-image label="img_zoom_sinx_over_x">
+          \begin{tikzpicture}
+            \begin{axis}[
+              xmin=.3,
+              xmax=1.6,
+              ymin=.4,
+              ymax=1.1,
+              xtick={0.5,1,1.5},
+              ytick={0.6,0.8,1},
+              xdiscontinuity,
+              ydiscontinuity,
+              grid=both,
+            ]
+              \addplot+[infinite,domain=0.5:1.5] {sin(x*180/pi)/x};
+            \end{axis}
+          \end{tikzpicture}
+        </latex-image>
+      </image>
+      <!-- figures/sinx_over_x_1.tex END -->
+    </figure>
+  </sidebyside>
 
-    <p>
-      Graphs are useful since they give a visual understanding concerning the behavior of a function.
-      Sometimes a function may act <q>erratically</q>
-      near certain <m>x</m> values which is hard to discern numerically but very plain graphically
-      (see <xref ref="ex_no_limit3"/>).
-      Since graphing utilities are very accessible,
-      it makes sense to make proper use of them.
-    </p>
+  <p>
+    Consider this same function again at a different value for <m>x</m>.
+    When <m>x</m> is near <m>0</m>, what value
+    (if any)
+    is <m>y</m> near?
+    By considering <xref ref="fig_sinx_over_x"/>,
+    one can see that it seems that <m>y</m> takes on values near <m>1</m>.
+    But what happens when <m>x=0</m>?
+    We have
+    <me>
+      y \rightarrow \frac{\sin(0) }{0} \rightarrow {\genfrac{}{}{0pt}{0}{\text{“}}{}}\frac{0}{0}{\genfrac{}{}{0pt}{0}{\text{”}}{}}
+    </me>.
+    The expression <m>0/0</m> has no value; it is
 
-    <p>
-      Since tables and graphs are used only to
-      <em>approximate</em> the value of a limit,
-      there is not a firm answer to how many data points are <q>enough.</q>
-      Include enough so that a trend is clear, and use values
-      (when possible)
-      both less than and greater than the value in question.
-      In <xref ref="ex_limit1"/>,
-      we used both values less than and greater than <m>3</m>.
-      Had we used just <m>x=3.001</m>,
-      we might have been tempted to conclude that the limit had a value of <m>0.3</m>.
-      While this is not far off, we could do better.
-      Using values <q>on both sides of 3</q>
-      helps us identify trends.
-    </p>
+        <idx><h>limit</h><h>indeterminate form</h></idx>
+        <idx><h>indeterminate form</h></idx>
 
-    <example xml:id="ex_limit2">
-      <title>Approximating the value of a limit</title>
-      <statement>
+    <term>indeterminate</term>.
+    Such an expression gives no information about what is going on with the function nearby.
+    We cannot find out how <m>y</m> behaves near <m>x=0</m>
+    for this function simply by letting <m>x=0</m>.
+  </p>
+
+  <figure xml:id="fig_sinx_over_x" vshift="0">
+    <caption><m>\sin(x)/x</m> near <m>x=0</m></caption>
+    <!-- START figures/sinx_over_x_2.tex -->
+    <image width="47%">
+      <description>
         <p>
-          Graphically and numerically approximate the limit of
-          <m>f(x)</m> as <m>x</m> approaches <m>0</m>, where
-          <me>
-            f(x) = \begin{cases}x+1 \amp  x\lt  0 \\ -x^2+1 \amp  x \gt 0\end{cases}
-          </me>.
+          Graph of <m>\sin(x)/x</m> zoomed in on values where <m>x</m> is near <m>0</m>.
+          The image shows the portion of the graph where <m>x</m> is from <m>-1</m> to <m>1</m>. 
+          The graph has a downward curve and is symmetric about <m>x=0</m>. 
+          The height of the graph approaches <m>y = 1</m> when <m>x</m> is near <m>0</m>. 
+          A hollow dot at the point <m>(0,1)</m> shows that the function is undefined when <m>x = 0</m>;
+          that is, <m>f(0) =</m> undefined.
         </p>
-      </statement>
-      <solution>
-        <p>
-          Again we graph <m>f(x)</m> and create a table of its values near
-          <m>x=0</m> to approximate the limit.
-          Note that this is a piecewise defined function,
-          so it behaves differently on either side of <m>0</m>.
-          <xref ref="fig_limit2"/> shows a graph of <m>f(x)</m>,
-          and on either side of <m>0</m> it seems the <m>y</m> values approach <m>1</m>.
-          Note that <m>f(0)</m> is not actually defined,
-          as indicated in the graph with the open circle.
-        </p>
+      </description>
+      <shortdescription> 
+        Graph of sin(x)/x zoomed in on values where x is near 0. Shows that when x = 0 
+        sin(x)/x is undefined.
+      </shortdescription>
+      <latex-image label="img_sinx_over_x_2">
+        \begin{tikzpicture}[
+          declare function = {func(\x) = (\x != 0) * (sin(x*180/pi)/x) + (\x == 0) * (1);}
+        ]
+          \begin{axis}[
+            xmin=-1.1,
+            xmax=1.2,
+            ymin=.75,
+            ymax=1.05,
+            ytick={.8,.9,1},
+            extra y ticks={.1,.3,...,.9},
+            extra y tick labels={},
+          ]
+            \addplot+[infinite,domain=-1:1] {func(x)};
+            \addplot[hollowdot] coordinates {(0,1)};
+          \end{axis}
+        \end{tikzpicture}
+      </latex-image>
+    </image>
+    <!-- figures/sinx_over_x_2.tex END -->
+  </figure>
 
-        <sidebyside widths="47% 47%" margins="0%" valign="bottom">
-          <figure xml:id="fig_limit2">
-            <caption>Graphically approximating a limit in <xref ref="ex_limit2"/></caption>
-            <!-- START figures/fig_limit2.tex -->
-            <image>
-              <description>
-                <p>
-                  Graph of the piecewise-defined function in <xref ref="ex_limit2"/>.
-                  For values of <m>x \lt 0</m> the graph is straight
-                  with a slope of <m>1</m> and for values of <m>x \gt 0</m> the graph
-                  curves downward. A hollow dot at the point <m>(0,1)</m> shows that at <m>x = 0</m>,
-                  <m>f(x)</m> is undefined.
-                  However, both parts of the graph, for <m>x\lt 0</m> and for <m>x\gt 0</m>,
-                  get close to the point <m>(0,1)</m> as <m>x</m> gets close to <m>0</m>.
-                </p>
-              </description>
-              <shortdescription>
-                Graph of the piecewise function, shows that at x = 0, y is undefined,
-                but is near 1.
-              </shortdescription>
-              <latex-image label="img_limit2">
-                \begin{tikzpicture}[
-                  declare function = {func(\x) = (\x &lt; 0) * (x+1) + (\x &gt; 0) * (-x^2+1);}
+  <exercise label="APEX-PROTEUS-limit-intro-1-v1" component="proteus">
+    <statement>
+      <p>
+        How does the process of investigating the behavior of <m>f(x)=\sin(x)/x</m> near <m>x=0</m>
+        differ from doing the same near <m>x=1</m>?
+      </p>
+    </statement>
+    <response />
+    
+  </exercise>
+
+  <p>
+    <em>Finding a limit</em> entails understanding how a function behaves near a particular value of
+    <m>x</m>.
+    Before continuing, it will be useful to establish some notation.
+    Let <m>y=f(x)</m>; that is,
+    let <m>y</m> be a function of <m>x</m> for some function <m>f</m>.
+    The expression <q>the limit of <m>y</m> as <m>x</m> approaches
+    <m>1</m></q> describes a number, often referred to as <m>L</m>,
+    that <m>y</m> nears as <m>x</m> nears <m>1</m>.
+    We write all this as
+    <me>
+      \lim_{x\to 1} y = \lim_{x\to 1} f(x) = L
+    </me>.
+    This is not a complete definition (that will come in the next section);
+    this is a pseudo-definition that will allow us to explore the idea of a limit.
+        <idx><h>limit</h><h>pseudo-definition</h></idx>
+  </p>
+
+  <p>
+    Above, where <m>f(x) = \sin(x)/x</m>, we approximated
+    <me>
+      \lim_{x\to 1} \frac{\sin(x) }{x} \approx 0.84 \quad \text{ and } \quad \lim_{x\to 0}\frac{\sin(x) }{x} \approx 1
+    </me>.
+    (We <em>approximated</em> these limits,
+    hence used the <q><m>\approx</m></q> symbol,
+    since we are working with the pseudo-definition of a limit,
+    not the actual definition.)
+  </p>
+  <figure xml:id="vid_limit_intro_sinxoverx" component="video" vshift="0">
+    <caption>Investigating <m>\sin(x)/x</m></caption>
+    <video youtube="__qzaSg4y1I" label="vid_limit_intro_sinxoverx"/>
+  </figure>
+
+
+  <p>
+    Once we have the true definition of a limit,
+    we will find limits <em>analytically</em>;
+    that is, determining exact values using a variety of mathematical tools.
+    For now, we will <em>approximate</em>
+    limits both graphically and numerically.
+    Graphing a function can provide a good approximation,
+    though often not very precise.
+    Numerical methods can provide a more accurate approximation.
+    We have already approximated limits graphically,
+    so we now turn our attention to numerical approximations.
+  </p>
+
+  <p>
+    Consider again <m>\lim_{x\to 1}\frac{\sin(x)}{x}</m>.
+    To approximate this limit numerically,
+    we can create a table of <m>x</m> and <m>f(x)</m> values where <m>x</m> is <q>near</q> <m>1</m>.
+    This is done in <xref ref="table_sinx_1"/>.
+  </p>
+
+  <p>
+    Notice that for values of <m>x</m> near <m>1</m>,
+    we have <m>\sin(x)/x</m> near <m>0.841</m>.
+    The <m>x=1</m> row is included,
+    but we stress the fact that when considering limits,
+    we are <em>not</em> concerned with the value of the function at that particular <m>x</m> value;
+    we are only concerned with the values of the function when <m>x</m> is <em>near</em> 1.
+  </p>
+
+  <figure xml:id="table_sinx_1" vshift="0">
+    <caption>Values of <m>\sin(x)/x</m> with <m>x</m> near <m>1</m></caption>
+    <tabular>
+      <row bottom="medium">
+        <cell><m>x</m></cell>
+        <cell><m>\sin(x)/x</m></cell>
+      </row>
+      <row>
+        <cell>0.9</cell>
+        <cell>0.870363</cell>
+      </row>
+      <row>
+        <cell>0.99</cell>
+        <cell>0.844471</cell>
+      </row>
+      <row>
+        <cell>0.999</cell>
+        <cell>0.841772</cell>
+      </row>
+      <row>
+        <cell><alert>1</alert></cell>
+        <cell><alert>0.841471</alert></cell>
+      </row>
+      <row>
+        <cell>1.001</cell>
+        <cell>0.841170</cell>
+      </row>
+      <row>
+        <cell>1.01</cell>
+        <cell>0.838447</cell>
+      </row>
+      <row>
+        <cell>1.1</cell>
+        <cell>0.810189</cell>
+      </row>
+    </tabular>
+  </figure>
+
+  <p>
+    Now approximate <m>\lim_{x\to 0} \frac{\sin(x)}{x}</m> numerically.
+    We already approximated the value of this limit as <m>1</m> graphically in
+    <xref ref="fig_sinx_over_x"/>.
+    <xref ref="table_sinx_2"/>
+    shows the value of <m>\sin(x)/x</m> for values of <m>x</m> near <m>0</m>.
+    Ten places after the decimal point are shown to highlight how close to <m>1</m> the value of
+    <m>\sin(x)/x</m> gets as <m>x</m> takes on values very near <m>0</m>.
+    We include the <m>x=0</m> row but again stress that we are not concerned with the value of our function at <m>x=0</m>,
+    only on the behavior of the function <em>near</em> <m>0</m>.
+  </p>
+
+  <figure xml:id="table_sinx_2" vshift="-3">
+    <caption>Values of <m>\sin(x)/x</m> with <m>x</m> near <m>0</m></caption>
+    <tabular>
+      <row bottom="medium">
+        <cell><m>x</m></cell>
+        <cell><m>\sin(x)/x</m></cell>
+      </row>
+      <row>
+        <cell>-0.1</cell>
+        <cell>0.9983341665</cell>
+      </row>
+      <row>
+        <cell>-0.01</cell>
+        <cell>0.9999833334</cell>
+      </row>
+      <row>
+        <cell>-0.001</cell>
+        <cell>0.9999998333</cell>
+      </row>
+      <row>
+        <cell><alert>0</alert></cell>
+        <cell><alert>not defined</alert></cell>
+      </row>
+      <row>
+        <cell>0.001</cell>
+        <cell>0.9999998333</cell>
+      </row>
+      <row>
+        <cell>0.01</cell>
+        <cell>0.9999833334</cell>
+      </row>
+      <row>
+        <cell>0.1</cell>
+        <cell>0.9983341665</cell>
+      </row>
+    </tabular>
+  </figure>
+
+  <p>
+    This numerical method gives confidence to say that <m>1</m> is a good approximation of
+    <m>\lim_{x\to 0} \frac{\sin(x)}{x}</m>; that is,
+    <me>
+      \lim_{x\to 0} \frac{\sin(x)}{x} \approx 1
+    </me>.
+  </p>
+
+  <p>
+    Later we will be able to prove that the limit is
+    <em>exactly</em> <m>1</m>.
+  </p>
+
+  <exercise label="APEX-PROTEUS-limit-intro-2-v1" component="proteus">
+    <statement>
+      <p>
+        Why does it make sense to talk about the limit <m>\lim_{x\to 0}\dfrac{\sin(x)}{x}</m>
+        if <m>\dfrac{\sin(0)}{0}</m> is not defined?
+      </p>
+    </statement>
+    <response />
+    
+  </exercise>
+
+  <p>
+    We now consider several examples that allow us explore different aspects of the limit concept.
+  </p>
+
+  <example xml:id="ex_limit1">
+    <title>Approximating the value of a limit</title>
+    <statement>
+      <p>
+        Use graphical and numerical methods to approximate
+        <me>
+          \lim_{x\to 3} \frac{x^2-x-6}{6x^2-19x+3}
+        </me>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        To graphically approximate the limit, graph
+        <me>
+          y = \frac{x^2-x-6}{6x^2-19x+3}
+        </me>
+        on a small interval that contains <m>3</m>.
+        To numerically approximate the limit,
+        create a table of values where the <m>x</m> values are near <m>3</m>.
+        This is done in <xref ref="fig_limit1"/>
+        and <xref ref="table_limit1"/>, respectively.
+      </p>
+
+      <sidebyside widths="47% 47%" margins="0%" valign="bottom">
+        <figure xml:id="fig_limit1">
+          <caption>Graphically approximating a limit in <xref ref="ex_limit1"/></caption>
+          <!-- START figures/fig_limit1.tex -->
+          <image>
+            <description>
+              <p>
+                Graph of <m>f(x)=\frac{x^2 - x - 6}{6x^2 - 19x + 3}</m>,
+                zoomed on values near <m>x = 3</m>, and showing the portion of the graph
+                for <m>x</m> from <m>2.5</m> to <m>3.5</m>.
+              </p>
+              <p>
+                There is a slight upward curve to the graph. 
+                The graph suggests that the limit of the function
+                as <m>x</m> approaches <m>3</m> is <m>0.294</m>. The graph also
+                shows that the function is undefined for <m>x = 3</m>.
+              </p>
+            </description>
+            <shortdescription>
+              Graph of the function for this example, which shows that when x = 3, f(x) is undefined,
+              but near 0.294.
+            </shortdescription>
+            <latex-image label="img_limit1">
+              \begin{tikzpicture}
+                \begin{axis}[
+                  xmin=2.3,
+                  xmax=3.7,
+                  ymin=0.2,
+                  ymax=.35,
+                  xdiscontinuity,
+                  ydiscontinuity,
+                  extra y tick labels={},
+                  grid=both,
                 ]
-                  \begin{axis}[
-                    xmin=-1.1,
-                    xmax=1.2,
-                    ymin=-.1,
-                    ymax=1.1,
-                  ]
-                    \addplot+[infinite,domain=-1:1] {func(x)};
-                    \addplot[hollowdot] coordinates {(0,1)};
-                  \end{axis}
-                \end{tikzpicture}
-              </latex-image>
-            </image>
-            <!-- figures/fig_limit2.tex END -->
-          </figure>
+                  \addplot+[infinite,domain=2.5:3.45] {(x^2 - x - 6)/(6*x^2 - 19*x + 3)};
+                  \addplot [hollowdot] coordinates{(3,0.294)};
+                \end{axis}
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+          <!-- figures/fig_limit1.tex END -->
+        </figure>
 
-          <figure xml:id="table_limit2">
-            <caption>Numerically approximating a limit in <xref ref="ex_limit2"/></caption>
-            <tabular>
-              <row bottom="medium">
-                <cell><m>x</m></cell>
-                <cell><m>f(x)</m></cell>
-              </row>
-              <row>
-                <cell><m>-0.1</m></cell>
-                <cell><m>0.9</m></cell>
-              </row>
-              <row>
-                <cell><m>-0.01</m></cell>
-                <cell><m>0.99</m></cell>
-              </row>
-              <row>
-                <cell><m>-0.001</m></cell>
-                <cell><m>0.999</m></cell>
-              </row>
-              <row>
-                <cell><m>0.001</m></cell>
-                <cell><m>0.999999</m></cell>
-              </row>
-              <row>
-                <cell><m>0.01</m></cell>
-                <cell><m>0.9999</m></cell>
-              </row>
-              <row>
-                <cell><m>0.1</m></cell>
-                <cell><m>0.99</m></cell>
-              </row>
-            </tabular>
-          </figure>
-        </sidebyside>
+        <figure xml:id="table_limit1">
+          <caption>Numerically approximating a limit in <xref ref="ex_limit1"/></caption>
+          <tabular>
+            <row bottom="medium">
+              <cell><m>x</m></cell>
+              <cell><m>\frac{x^2-x-6}{6x^2-19x+3}</m></cell>
+            </row>
+            <row>
+              <cell><m>2.9</m></cell>
+              <cell><m>0.29878</m></cell>
+            </row>
+            <row>
+              <cell><m>2.99</m></cell>
+              <cell><m>0.294569</m></cell>
+            </row>
+            <row>
+              <cell><m>2.999</m></cell>
+              <cell><m>0.294163</m></cell>
+            </row>
+            <row>
+              <cell><em>3</em></cell>
+              <cell><em>not defined</em></cell>
+            </row>
+            <row>
+              <cell><m>3.001</m></cell>
+              <cell><m>0.294073</m></cell>
+            </row>
+            <row>
+              <cell><m>3.01</m></cell>
+              <cell><m>0.293669</m></cell>
+            </row>
+            <row>
+              <cell><m>3.1</m></cell>
+              <cell><m>0.289773</m></cell>
+            </row>
+          </tabular>
+        </figure>
+      </sidebyside>
 
+      <p>
+        The graph shows that when <m>x</m> is near <m>3</m>,
+        the value of <m>y</m> is very near <m>0.3</m>.
+        By considering values of <m>x</m> near <m>3</m>,
+        we see that <m>y=0.294</m> is a better approximation.
+        The graph and the table imply that
+        <me>
+          \lim_{x\to 3} \frac{x^2-x-6}{6x^2-19x+3} \approx 0.294
+        </me>.
+      </p>
+    </solution>
+    <solution component="video" vshift="3">
+      <title>Video solution</title>
+      <video width="98%" youtube="eHx3LmrQZXM" label="vid_limit_intro_rational_func" component="video"/>
+    </solution>
+  </example>
+
+  <p>
+    This example may bring up a few questions about approximating limits
+    (and the nature of limits themselves).
+    <ol>
+      <li>
         <p>
-          <xref ref="table_limit2"/>
-          shows values of <m>f(x)</m> for values of <m>x</m> near <m>0</m>.
-          It is clear that as <m>x</m> takes on values very near <m>0</m>,
-          <m>f(x)</m> takes on values very near <m>1</m>.
-          It turns out that if we let <m>x=0</m> for either <q>piece</q>
-          of <m>f(x)</m>, <m>1</m> is returned;
-          this is significant and we'll return to this idea later.
+          If a graph does not produce as good an approximation as a table,
+          why bother with it?
         </p>
-
+      </li>
+      <li>
         <p>
-          The graph and table allow us to say that <m>\lim_{x\to 0}f(x) \approx 1</m>;
-          in fact, we are probably very sure it <em>equals</em> 1.
+          How many values of <m>x</m> in a table are
+          <q>enough?</q> In the previous example,
+          could we have just used <m>x=3.001</m> and found a fine approximation?
         </p>
-      </solution>
-      <solution component="video" vshift="3">
-        <title>Video solution</title>
-        <video width="98%" youtube="7RAiKoLCpgU" label="vid_limit_intro_piecewise_func" component="video"/>
-      </solution>
-    </example>
-  </introduction>
+      </li>
+    </ol>
+  </p>
 
-  <subsection xml:id="subsec_nolimit3">
+  <p>
+    Graphs are useful since they give a visual understanding concerning the behavior of a function.
+    Sometimes a function may act <q>erratically</q>
+    near certain <m>x</m> values which is hard to discern numerically but very plain graphically
+    (see <xref ref="ex_no_limit3"/>).
+    Since graphing utilities are very accessible,
+    it makes sense to make proper use of them.
+  </p>
+
+  <p>
+    Since tables and graphs are used only to
+    <em>approximate</em> the value of a limit,
+    there is not a firm answer to how many data points are <q>enough.</q>
+    Include enough so that a trend is clear, and use values
+    (when possible)
+    both less than and greater than the value in question.
+    In <xref ref="ex_limit1"/>,
+    we used both values less than and greater than <m>3</m>.
+    Had we used just <m>x=3.001</m>,
+    we might have been tempted to conclude that the limit had a value of <m>0.3</m>.
+    While this is not far off, we could do better.
+    Using values <q>on both sides of 3</q>
+    helps us identify trends.
+  </p>
+
+  <example xml:id="ex_limit2">
+    <title>Approximating the value of a limit</title>
+    <statement>
+      <p>
+        Graphically and numerically approximate the limit of
+        <m>f(x)</m> as <m>x</m> approaches <m>0</m>, where
+        <me>
+          f(x) = \begin{cases}x+1 \amp  x\lt  0 \\ -x^2+1 \amp  x \gt 0\end{cases}
+        </me>.
+      </p>
+    </statement>
+    <solution>
+      <p>
+        Again we graph <m>f(x)</m> and create a table of its values near
+        <m>x=0</m> to approximate the limit.
+        Note that this is a piecewise defined function,
+        so it behaves differently on either side of <m>0</m>.
+        <xref ref="fig_limit2"/> shows a graph of <m>f(x)</m>,
+        and on either side of <m>0</m> it seems the <m>y</m> values approach <m>1</m>.
+        Note that <m>f(0)</m> is not actually defined,
+        as indicated in the graph with the open circle.
+      </p>
+
+      <sidebyside widths="47% 47%" margins="0%" valign="bottom">
+        <figure xml:id="fig_limit2">
+          <caption>Graphically approximating a limit in <xref ref="ex_limit2"/></caption>
+          <!-- START figures/fig_limit2.tex -->
+          <image>
+            <description>
+              <p>
+                Graph of the piecewise-defined function in <xref ref="ex_limit2"/>.
+                For values of <m>x \lt 0</m> the graph is straight
+                with a slope of <m>1</m> and for values of <m>x \gt 0</m> the graph
+                curves downward. A hollow dot at the point <m>(0,1)</m> shows that at <m>x = 0</m>,
+                <m>f(x)</m> is undefined.
+                However, both parts of the graph, for <m>x\lt 0</m> and for <m>x\gt 0</m>,
+                get close to the point <m>(0,1)</m> as <m>x</m> gets close to <m>0</m>.
+              </p>
+            </description>
+            <shortdescription>
+              Graph of the piecewise function, shows that at x = 0, y is undefined,
+              but is near 1.
+            </shortdescription>
+            <latex-image label="img_limit2">
+              \begin{tikzpicture}[
+                declare function = {func(\x) = (\x &lt; 0) * (x+1) + (\x &gt; 0) * (-x^2+1);}
+              ]
+                \begin{axis}[
+                  xmin=-1.1,
+                  xmax=1.2,
+                  ymin=-.1,
+                  ymax=1.1,
+                ]
+                  \addplot+[infinite,domain=-1:1] {func(x)};
+                  \addplot[hollowdot] coordinates {(0,1)};
+                \end{axis}
+              \end{tikzpicture}
+            </latex-image>
+          </image>
+          <!-- figures/fig_limit2.tex END -->
+        </figure>
+
+        <figure xml:id="table_limit2">
+          <caption>Numerically approximating a limit in <xref ref="ex_limit2"/></caption>
+          <tabular>
+            <row bottom="medium">
+              <cell><m>x</m></cell>
+              <cell><m>f(x)</m></cell>
+            </row>
+            <row>
+              <cell><m>-0.1</m></cell>
+              <cell><m>0.9</m></cell>
+            </row>
+            <row>
+              <cell><m>-0.01</m></cell>
+              <cell><m>0.99</m></cell>
+            </row>
+            <row>
+              <cell><m>-0.001</m></cell>
+              <cell><m>0.999</m></cell>
+            </row>
+            <row>
+              <cell><m>0.001</m></cell>
+              <cell><m>0.999999</m></cell>
+            </row>
+            <row>
+              <cell><m>0.01</m></cell>
+              <cell><m>0.9999</m></cell>
+            </row>
+            <row>
+              <cell><m>0.1</m></cell>
+              <cell><m>0.99</m></cell>
+            </row>
+          </tabular>
+        </figure>
+      </sidebyside>
+
+      <p>
+        <xref ref="table_limit2"/>
+        shows values of <m>f(x)</m> for values of <m>x</m> near <m>0</m>.
+        It is clear that as <m>x</m> takes on values very near <m>0</m>,
+        <m>f(x)</m> takes on values very near <m>1</m>.
+        It turns out that if we let <m>x=0</m> for either <q>piece</q>
+        of <m>f(x)</m>, <m>1</m> is returned;
+        this is significant and we'll return to this idea later.
+      </p>
+
+      <p>
+        The graph and table allow us to say that <m>\lim_{x\to 0}f(x) \approx 1</m>;
+        in fact, we are probably very sure it <em>equals</em> 1.
+      </p>
+    </solution>
+    <solution component="video" vshift="3">
+      <title>Video solution</title>
+      <video width="98%" youtube="7RAiKoLCpgU" label="vid_limit_intro_piecewise_func" component="video"/>
+    </solution>
+  </example>
+
+  <paragraphs xml:id="subsec_nolimit3">
     <title>Identifying When Limits Do Not Exist</title>
     <figure xml:id="vid_limit_intro_limit_dne" component="video" vshift="-2">
-      <caption>Video introduction for <xref ref="subsec_nolimit3"/></caption>
+      <caption>Discussing ways in which a limit can fail to exist</caption>
       <video youtube="DSIaDa_ABxo" label="vid_limit_intro_limit_dne"/>
     </figure>
 
@@ -1125,9 +1145,42 @@
         <video width="98%" youtube="gGvvFX5QyjE" label="vid_limit_intro_limit_oscillation" component="video"/>
       </solution>
     </example>
-  </subsection>
 
-  <subsection xml:id="sec_diff_quot_intro">
+    <exercise label="APEX-PROTEUS-limit-intro-3-v1" component="proteus">
+      <statement>
+        <p>
+          Match each limit on the left with the reason why it does not exist.
+        </p>
+      </statement>
+      <feedback>
+        <p>
+          If you're having trouble deciding, you might try graphing some of the functions.
+        </p>
+      </feedback>
+      <cardsort>
+        <match>
+          <premise order="5"><m>\lim\limits_{x\to 1}\frac{x-1}{\abs{x-1}}</m></premise>
+          <premise order="2"><m>\lim\limits_{x\to 2}f(x)</m>, where <m>f(x)=\begin{cases}x+4, \amp x\leq 2\\ 3x-2, \amp x\gt 2\end{cases}</m></premise>
+          <response>Different values approached from left and right</response>
+        </match>
+        <match>
+          <premise order="6"><m>\lim\limits_{x\to 2^+}\ln(x-2)</m></premise>
+          <premise order="1"><m>\lim\limits_{x\to 1}\frac{1}{x-1}</m></premise>
+          <response>The function grows without bound</response>
+        </match>
+        <match>
+          <premise order="4"><m>\lim\limits_{x\to 0}\cos\left(\frac{2}{x^3}\right)</m></premise>
+          <response>The function oscillates</response>
+        </match>
+        <match>
+          <premise order="3"><m>\lim\limits_{x\to 2}\frac{\tan(x-2)}{x^2}</m></premise>
+          <premise order="7"><m>\lim\limits_{x\to 1}f(x)</m>, where <m>f(x)=\begin{cases}\sin(x^2-1)+2x,\amp x\lt 0\\ 4x-1,\amp x\gt 0\end{cases}</m></premise>
+        </match>        
+      </cardsort>
+    </exercise>
+  </paragraphs>
+
+  <paragraphs xml:id="sec_diff_quot_intro">
     <title>Limits of Difference Quotients</title>
     <p>
       We have approximated limits of functions as <m>x</m> approached a particular number.
@@ -1137,7 +1190,7 @@
 
     </p>
     <figure xml:id="vid_limit_intro_limit_diff_quot" component="video" vshift="-3">
-      <caption>Video introduction to <xref ref="sec_diff_quot_intro"/></caption>
+      <caption>Introducing the difference quotient</caption>
       <video youtube="2NJmd0Jrt4U" label="vid_limit_intro_limit_diff_quot"/>
     </figure>
 
@@ -1432,12 +1485,40 @@
       find the work done by a variable force, and much more.
     </p>
 
+    <exercise label="APEX-PROTEUS-limit-intro-4-v1" component="proteus">
+      <statement>
+        <p>
+          In some calculus textbooks, a <q>definition</q> of the limit is given as follows:
+        </p>
+
+        <blockquote>
+          <p>
+            Let <m>f(x)</m> be a function defined on an open interval containing <m>c</m>,
+            but not possibly at <m>c</m>. We say that the <term>limit</term> of <m>f(x)</m> as <m>x</m> approaches <m>c</m> is <m>L</m>,
+            and write
+            <me>
+              \lim_{x\to c}f(x)=L
+            </me>,
+            if <m>f(x)</m> can be made arbitrarily close to <m>L</m> by choosing <m>x</m> sufficiently close, but not equal, to <m>c</m>.
+          </p>
+        </blockquote>
+
+        <p>
+          Can you think of any shortcomings with this definition?
+          Why wouldn't mathematicians consider this definition to be sufficient?
+          (In particular, why are we about to consider a more <q>precise</q> definition of the limit in the next section?)
+        </p>
+      </statement>
+      <response />
+      
+    </exercise>
+
     <p>
       In the next section we give the formal definition of the limit and begin our study of finding limits analytically.
       In the following exercises,
       we continue our introduction and approximate the value of limits.
     </p>
-  </subsection>
+  </paragraphs>
 
   <exercises>
     <subexercises xml:id="TaC-limit-intro">
