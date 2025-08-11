@@ -261,7 +261,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
 <xsl:template match="enlarge-page">
   <xsl:text>&#xa;</xsl:text>
   <xsl:text>\enlargethispage{</xsl:text>
-    <xsl:value-of select="skipsize"/>
+    <xsl:value-of select="@skipsize"/>
   <xsl:text>\baselineskip}&#xa;</xsl:text>
   <xsl:text>&#xa;</xsl:text>
 </xsl:template>
@@ -290,7 +290,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
 </xsl:template>
 
 <!-- move vshift figures to the margin -->
-<xsl:template match="figure">
+  <xsl:template match="figure">
     <xsl:if test="@vshift">
       <xsl:text>&#xa;</xsl:text>
       <xsl:choose>
@@ -322,43 +322,8 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
       <xsl:text>&#xa;</xsl:text>
     </xsl:if>
     <xsl:if test="@hstretch">
-      <xsl:text>}&#xa;&#xa;</xsl:text>
+      <xsl:text>}&#xa;</xsl:text>
     </xsl:if>
-</xsl:template>
-
-<!-- Adjust width of some tcolorboxes that aren't wide enough to fit their content -->
-
-<xsl:template match="definition|theorem|insight|sidebyside|table">
-  <xsl:if test="(@hstretch)">
-    <xsl:text>&#xa;</xsl:text>
-    <xsl:text>{\tcbset{text width=</xsl:text>
-      <xsl:value-of select="@hstretch"/>
-    <xsl:text>pt}&#xa;</xsl:text>  
-  </xsl:if>
-  <xsl:if test="(@hskip) and ($b-latex-two-sides)">
-    <xsl:text>\tcbset{enlarge left by=-</xsl:text>
-      <xsl:value-of select="@hskip"/>
-      <xsl:text>pt}&#xa;</xsl:text>  
-  </xsl:if>
-  <xsl:apply-imports/>
-  <xsl:if test="@hstretch">
-    <xsl:text>}&#xa;</xsl:text>
-  </xsl:if>
-</xsl:template>
-
-<!-- fix this one darn display math that doesn't fit for 2 side printing -->
-<xsl:template match="md">
-  <xsl:if test="(@hskip) and ($b-latex-two-sides)">
-    <xsl:text>&#xa;&#xa;\noindent\hskip-</xsl:text>
-    <xsl:value-of select="@hskip"/>
-    <xsl:text>pt\begin{minipage}{</xsl:text>
-    <xsl:value-of select="@minisize"/>
-    <xsl:text>pt}</xsl:text>
-  </xsl:if>
-  <xsl:apply-imports/>
-  <xsl:if test="@hskip">
-    <xsl:text>\end{minipage}&#xa;&#xa;</xsl:text>
-  </xsl:if>
 </xsl:template>
 
 <!-- Override smallcaps styling for initialization and friends -->
@@ -417,6 +382,41 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
     </solution>
 </xsl:template>
 
+
+<!-- Adjust width of some tcolorboxes that aren't wide enough to fit their content -->
+
+<xsl:template match="definition|theorem|insight|sidebyside|table">
+  <xsl:if test="@hstretch">
+    <xsl:text>{\tcbset{text width=</xsl:text>
+      <xsl:value-of select="@hstretch"/>
+    <xsl:text>pt}&#xa;</xsl:text>  
+  </xsl:if>
+  <xsl:if test="(@hskip) and ($b-latex-two-sides)">
+    <xsl:text>\tcbset{enlarge left by=-</xsl:text>
+      <xsl:value-of select="@hskip"/>
+      <xsl:text>pt}&#xa;</xsl:text>  
+  </xsl:if>
+  <xsl:apply-imports/>
+  <xsl:if test="@hstretch">
+    <xsl:text>}&#xa;</xsl:text>
+  </xsl:if>
+</xsl:template>
+
+<!-- fix this one darn display math that doesn't fit for 2 side printing -->
+<xsl:template match="md">
+  <xsl:if test="(@hskip) and ($b-latex-two-sides)">
+    <xsl:text>&#xa;&#xa;\noindent\hskip-</xsl:text>
+    <xsl:value-of select="@hskip"/>
+    <xsl:text>pt\begin{minipage}{</xsl:text>
+    <xsl:value-of select="@minisize"/>
+    <xsl:text>pt}</xsl:text>
+  </xsl:if>
+  <xsl:apply-imports/>
+  <xsl:if test="@hskip">
+    <xsl:text>\end{minipage}&#xa;&#xa;</xsl:text>
+  </xsl:if>
+</xsl:template>
+
 <!-- asides in the margin -->
 <!-- simple asides, with no styling available -->
 <xsl:template match="aside">
@@ -425,7 +425,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
       <xsl:when test="ancestor::example and not(ancestor::ul or ancestor::ol)">
         <xsl:text>\tcbmarginbox{%&#xa;</xsl:text>
       </xsl:when>
-      <xsl:when test="ancestor::example and (ancestor::ul or ancestor::ol)">
+      <xsl:when test="(ancestor::example or ancestor::theorem) and (ancestor::ul or ancestor::ol)">
         <xsl:text>\listmarginbox{%&#xa;</xsl:text>
       </xsl:when>
       <xsl:otherwise>
