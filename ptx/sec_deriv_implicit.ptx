@@ -1543,9 +1543,9 @@
             <pg-code>
               Context()-&gt;variables-&gt;add(y=&gt;'Real');
               $dydx=Formula("y/x");
-              #$a = random(5,15,1);
-              #if($envir{problemSeed}==1){$a=10;};
-              $a=10;
+              $a = random(5,15,1);
+              if($envir{problemSeed}==1){$a=10;};
+              #$a=10;
               @y=(random(-4.05,4.05,0.1),random(-4.05,4.05,0.1),random(-4.05,4.05,0.1),random(-4.05,4.05,0.1),random(-4.05,4.05,0.1));
               @x=map{$_/$a}(@y);
               @xy=map{[$x[$_],$y[$_]]}(0..4);
@@ -1571,11 +1571,11 @@
             <pg-code>
               Context()-&gt;variables-&gt;add(y=&gt;'Real');
               Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
-              #$m=list_random(2,3,5);
-              #$b=random(2,9,1);
-              #$c=random(4,9,1);
-              #if($envir{problemSeed}==1){$m=2;$b=2;$c=5;};
-              $m=2;$b=2;$c=5;
+              $m=list_random(2,3,5);
+              $b=random(2,9,1);
+              $c=random(4,9,1);
+              if($envir{problemSeed}==1){$m=2;$b=2;$c=5;};
+              #$m=2;$b=2;$c=5;
               $dydx=Formula("-(e^x x(x+$m) $b^(-y))/(ln($b))");
               @x=(random(-4,1,0.1),random(-4,1,0.1),random(-4,1,0.1),random(-4,1,0.1),random(-4,1,0.1));
               @y=map{ln($c-($_)**$m*exp($_))/ln($b)}(@x);
@@ -1601,11 +1601,11 @@
           <webwork xml:id="webwork-ex-deriv-implicit-compute-7">
             <pg-code>
               Context()-&gt;variables-&gt;add(y=&gt;'Real');
-              #$m = random(2,9,1);
-              #$trig = list_random('sin','cos','tan','cot','sec','csc');
-              #$c = random(10,90,10);
-              #if($envir{problemSeed}==1){$m=2;$trig='tan';$c=50;};
-              $m=2;$trig='tan';$c=50;
+              $m = random(2,9,1);
+              $trig = list_random('sin','cos','tan','cot','sec','csc');
+              $c = random(10,90,10);
+              if($envir{problemSeed}==1){$m=2;$trig='tan';$c=50;};
+              #$m=2;$trig='tan';$c=50;
               if ($trig eq 'sin') {$dydx=Formula("-$m tan(y)/x");};
               if ($trig eq 'cos') {$dydx=Formula("$m cot(y)/x");};
               if ($trig eq 'tan') {$dydx=Formula("-$m sin(y) cos(y)/x");};
@@ -1645,22 +1645,24 @@
               Context("Fraction");
               parser::Root-&gt;Enable;
               Context()-&gt;variables-&gt;add(y=&gt;'Real');
-              #($a,$b) = (2..5)[NchooseK(4,2)];
-              #$c = random(1,9,1);
-              #($m,$n,$p) = (2..5)[NchooseK(4,3)];
-              #if($envir{problemSeed}==1){$a=3;$b=2;$c=2;$m=2;$n=3;$p=4;};
-              $a=3;$b=2;$c=2;$m=2;$n=3;$p=4;
+              ($a,$b) = (2..5)[NchooseK(4,2)];
+              $c = random(1,9,1);
+              ($m,$n,$p) = (2..5)[NchooseK(4,3)];
+              if($envir{problemSeed}==1){$a=3;$b=2;$c=2;$m=2;$n=3;$p=4;};
+              #$a=3;$b=2;$c=2;$m=2;$n=3;$p=4;
               $w = ($c**(1/$p)/$a)**(1/$m);
               $left = Formula("($a x^$m + $b y^$n)^$p");
               $right = Formula("$c");
               $frac = Fraction(-$a*$m,$b*$n);
               $dydx=Formula("$frac x^($m-1) / y^($n-1)")-&gt;reduce;
-              @x=(random(-$w,$w,0.01),random(-$w,$w,0.01),random(-$w,$w,0.01),random(-$w,$w,0.01),random(-$w,$w,0.01));
-              if ($n % 2 == 1) {
-                @y=map{root($n,(root($p,$c) - $a*($_)**$m)/$b)}(@x);
-              } else {
-                @y=map{root($n,random(-1,1,2)*(root($p,$c) - $a*($_)**$m)/$b)}(@x);
-              }
+              do {
+                @x=(random(-$w,$w,0.01),random(-$w,$w,0.01),random(-$w,$w,0.01),random(-$w,$w,0.01),random(-$w,$w,0.01));
+                if ($n % 2 == 1) {
+                  @y=map{root($n,(root($p,$c) - $a*($_)**$m)/$b)}(@x);
+                } else {
+                  @y=map{random(-1,1,2)*root($n,(root($p,$c) - $a*($_)**$m)/$b)}(@x);
+                }
+              } until (!grep( /^0$/, @y ));
               @xy=map{[$x[$_],$y[$_]]}(0..4);
               $dydx-&gt;{test_points}=~~@xy;
               $showwork = '[@ explanation_box(message =&gt; "Show your work using implicit differentiation.") @]*';
@@ -1685,13 +1687,13 @@
               Context("Fraction");
               parser::Root-&gt;Enable;
               Context()-&gt;variables-&gt;add(y=&gt;'Real');
-              #$a = non_zero_random(-9,9,1);
-              #$b = random(100,200,5);
-              #$pm = list_random('+','-');
-              #$m = random(2,4,1);
-              #$n = random(2,4,1);
-              #if($envir{problemSeed}==1){$a=2;$b=200;$pm='-';$m=2;$n=2;};
-              $a=2;$b=200;$pm='-';$m=2;$n=2;
+              $a = non_zero_random(-9,9,1);
+              $b = random(100,200,5);
+              $pm = list_random('+','-');
+              $m = random(2,4,1);
+              $n = random(2,4,1);
+              if($envir{problemSeed}==1){$a=2;$b=200;$pm='-';$m=2;$n=2;};
+              #$a=2;$b=200;$pm='-';$m=2;$n=2;
               $left = Formula("(y^$m+$a y $pm x)^$n");
               $right = Formula("$b");
               $dydx=Formula("-($pm 1/($m y^($m-1)+$a))")-&gt;reduce-&gt;reduce;
@@ -1720,10 +1722,10 @@
             <pg-code>
               Context("Fraction");
               Context()-&gt;variables-&gt;add(y=&gt;'Real');
-              #($m,$n) = (1..2)[NchooseK(2,2)];
-              #$c = random(10,20,1);
-              #if($envir{problemSeed}==1){$m=2;$n=1;$c=17};
-              $m=2;$n=1;$c=17;
+              ($m,$n) = (1..2)[NchooseK(2,2)];
+              $c = random(10,20,1);
+              if($envir{problemSeed}==1){$m=2;$n=1;$c=17};
+              #$m=2;$n=1;$c=17;
               $left = Formula("(x^$m + y^$n)/(x^$n + y^$m)")-&gt;reduce;
               $right = Formula("$c");
               $dydx = Formula("(($n-$m) x^2 + $n x^($n-1) y^$n - $m x^($m-1) y^$m)/($n x^$n y^($n-1) + ($n-$m) y^2 - $m x^$m y^($m-1))")-&gt;reduce;
@@ -1773,9 +1775,9 @@
           <webwork xml:id="webwork-ex-deriv-implicit-compute-11">
             <pg-code>
               Context()-&gt;variables-&gt;add(y=&gt;'Real');
-              #($triga,$trigb) = ('sin','cos')[NchooseK(2,2)];
-              #if($envir{problemSeed}==1){$triga='sin';$trigb='cos';};
-              $triga='sin';$trigb='cos';
+              ($triga,$trigb) = ('sin','cos')[NchooseK(2,2)];
+              if($envir{problemSeed}==1){$triga='sin';$trigb='cos';};
+              #$triga='sin';$trigb='cos';
               $left = Formula("($triga(x)+y)/($trigb(y)+x)");
               $right = Formula("1");
               if ($triga eq 'sin') {
