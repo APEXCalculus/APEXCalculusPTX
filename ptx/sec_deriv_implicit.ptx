@@ -1602,24 +1602,20 @@
             <pg-code>
               Context()-&gt;variables-&gt;add(y=&gt;'Real');
               $m = random(2,9,1);
-              $trig = list_random('sin','cos','tan','cot','sec','csc');
-              $c = random(10,90,10);
+              $trig = list_random('sin','cos','tan','cot');
+              $c = random(1,9,1);
               if($envir{problemSeed}==1){$m=2;$trig='tan';$c=50;};
               #$m=2;$trig='tan';$c=50;
               if ($trig eq 'sin') {$dydx=Formula("-$m tan(y)/x");};
               if ($trig eq 'cos') {$dydx=Formula("$m cot(y)/x");};
               if ($trig eq 'tan') {$dydx=Formula("-$m sin(y) cos(y)/x");};
               if ($trig eq 'cot') {$dydx=Formula("$m sin(y) cos(y)/x");};
-              if ($trig eq 'sec') {$dydx=Formula("-$m cot(y)/x");};
-              if ($trig eq 'csc') {$dydx=Formula("$m tan(y)/x");};
               # need to avoid x==0
-              @x=(random(-3.9,3.9,0.2),random(-3.9,3.9,0.2),random(-3.9,3.9,0.2),random(-3.9,3.9,0.2),random(-3.9,3.9,0.2));
+              @x=(random(3,7,0.2),random(3,7,0.2),random(3,7,0.2),random(3,7,0.2),random(3,7,0.2));
               if ($trig eq 'sin') {@y=map{asin($c/($_)**$m)}(@x);};
               if ($trig eq 'cos') {@y=map{acos($c/($_)**$m)}(@x);};
               if ($trig eq 'tan') {@y=map{atan($c/($_)**$m)}(@x);};
               if ($trig eq 'cot') {@y=map{pi/2 - atan($c/($_)**$m)}(@x);};
-              if ($trig eq 'sec') {@y=map{acos(($_)**$m/$c)}(@x);};
-              if ($trig eq 'csc') {@y=map{asin(($_)**$m)/$c}(@x);};
               $left = Formula("x^$m $trig(y)");
               @xy=map{[$x[$_],$y[$_]]}(0..4);
               $dydx-&gt;{test_points}=~~@xy;
