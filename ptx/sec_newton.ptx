@@ -140,6 +140,42 @@
     </sidebyside>
   </figure>
 
+  <exercise label="APEX-PROTEUS-newton-1-v1" component="proteus">
+    <title>PROTEUS EXERCISE</title>
+    <statement>
+      <p>
+        Let <m>f(x)</m> be a function of <m>x</m> and let <m>x_0</m> be some <m>x</m>-value.
+        Match each expression on the left with its geometric meaning on the right. 
+      </p>
+    </statement>
+    <cardsort>
+      <match>
+        <premise><me>(x_0, f(x_0))</me></premise>
+        <response>A point on the graph of <m>f(x)</m>.</response>
+      </match>
+      <match>
+        <premise><me>f'(x_0)</me></premise>
+        <response>Slope of the tangent line passing through <m>(x_0, f(x_0))</m>.</response>
+      </match>
+      <match>
+        <premise><me>y = f'(x_0)(x-x_0)+f(x_0)</me></premise>
+        <response>Equation of the tangent line passing through <m>(x_0, f(x_0))</m>.</response>
+      </match>
+      <match>
+        <premise><me>0 = f'(x_0)(x-x_0)-f(x_0)</me></premise>
+        <response>First step in finding the <m>x</m>-intercept of a line (<em>setting <m>y=0</m></em>).</response>
+      </match>
+      <match>
+        <premise><me>x = x_0 - \dfrac{f(x_0)}{f'(x_0)}</me></premise>
+        <response>The (solved) <m>x</m>-intercept of the tangent line.</response>
+      </match>
+      <match>
+        <premise><me>x_1 = x_0 - \dfrac{f(x_0)}{f'(x_0)}</me></premise>
+        <response>First Approximation in Newton's Method.</response>
+      </match>
+    </cardsort>
+  </exercise>
+
   <p>
     We can use this <em>geometric</em>
     process to create an <em>algebraic</em> process.
@@ -484,6 +520,33 @@
     </solution>
   </example>
 
+  <exercise label="APEX-PROTEUS-newton-2-v1" component="proteus">
+    <title>PROTEUS EXERCISE</title>
+    <statement>
+        <p>
+          Select all situations where Newton's Method would be a reasonable tool.
+        </p>
+    </statement>
+    <choices randomize="yes">
+      <choice correct="yes">
+        <statement><p>Approximating the solution to <m>\cos(x)=x</m>.</p></statement>
+        <feedback><p>Correct—this equation cannot be solved algebraically but Newton's Method can approximate the solution.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>Finding the exact solution to <m>x^2=9</m>.</p></statement>
+        <feedback><p>Not needed—this equation has an exact solution, so Newton's Method is unnecessary.</p></feedback>
+      </choice>
+      <choice correct="yes">
+        <statement><p>Programming a calculator or computer to approximate roots efficiently.</p></statement>
+        <feedback><p>Correct—Newton's Method is fast and widely used in computational root finding.</p></feedback>
+      </choice>
+      <choice>
+        <statement><p>Estimating the slope of a tangent line at a point.</p></statement>
+        <feedback><p>No—Newton's Method uses tangent slopes, but its goal is to find roots, not slopes.</p></feedback>
+      </choice>
+    </choices>
+  </exercise>
+
   <p>
     If you know how to program,
     you can translate the following pseudocode into your favorite language to perform the computation in this problem.
@@ -591,139 +654,188 @@
       each successive approximation is twice as far from the true answer as the previous approximation.)
     </p>
 
-  <figure xml:id="fig_newt4">
-  <caption>Newton's Method fails to find a root of <m>f(x) = x^{1/3}</m>, regardless of the choice of <m>x_0</m>.</caption>
-    <sidebyside widths="31% 31% 31%" margins="0%">
-      <figure xml:id="fig_newt4a">
-        <caption/>
-        <image>
-          <shortdescription>
-            The graph illustrates the cube root function with initial guess x_0 as 0.1
-          </shortdescription>
-          <description>
-            <p>
-              The <m>y</m> axis represents function values <m>(-1,0,1)</m>, while the <m>x</m> axis represents values of <m>(-1,0,1)</m>.
-              The graph illustrates the cube root function, <m>f(x) = x^{1/3}</m>. It exhibits a curve that passes through the origin <m>(0,0)</m>
-              and extends into the positive and negative regions of the <m>x</m> axis.
-            </p>
-            <p>
-              It starts with an initial guess <m>x_0=0.1</m>. A tangent line is drawn at this point and intersects the <m>x</m> axis at the next
-              approximation, bringing it further from the root <m>x=0</m>.
-            </p>
-          </description>
-          <latex-image label="img_newt4a">
+    <figure xml:id="fig_newt4">
+    <caption>Newton's Method fails to find a root of <m>f(x) = x^{1/3}</m>, regardless of the choice of <m>x_0</m>.</caption>
+      <sidebyside widths="31% 31% 31%" margins="0%">
+        <figure xml:id="fig_newt4a">
+          <caption/>
+          <image>
+            <shortdescription>
+              The graph illustrates the cube root function with initial guess x_0 as 0.1
+            </shortdescription>
+            <description>
+              <p>
+                The <m>y</m> axis represents function values <m>(-1,0,1)</m>, while the <m>x</m> axis represents values of <m>(-1,0,1)</m>.
+                The graph illustrates the cube root function, <m>f(x) = x^{1/3}</m>. It exhibits a curve that passes through the origin <m>(0,0)</m>
+                and extends into the positive and negative regions of the <m>x</m> axis.
+              </p>
+              <p>
+                It starts with an initial guess <m>x_0=0.1</m>. A tangent line is drawn at this point and intersects the <m>x</m> axis at the next
+                approximation, bringing it further from the root <m>x=0</m>.
+              </p>
+            </description>
+            <latex-image label="img_newt4a">
 
-          \begin{tikzpicture}
-          \begin{axis}[
-          xtick={-1,1},
-          extra x ticks={.1,-.2},
-          extra x tick labels={$x_0$,$x_1$},
-          ymin=-1.6,ymax=1.6,%
-          xmin=-1.6,xmax=1.6%
-          ]
+            \begin{tikzpicture}
+            \begin{axis}[
+            xtick={-1,1},
+            extra x ticks={.1,-.2},
+            extra x tick labels={$x_0$,$x_1$},
+            ymin=-1.6,ymax=1.6,%
+            xmin=-1.6,xmax=1.6%
+            ]
 
-          \addplot+ [infinite,domain=-1.16:1.16] ({x^3},{x});
-          \addplot [tangentlineseg,domain = -.2:.1] {1.547*(x-.1)+.464};
-          \addplot [guideline] coordinates {(0.1,0) (0.1,0.464)};
-          \addplot [soliddot] coordinates {(.1,.464)};
+            \addplot+ [infinite,domain=-1.16:1.16] ({x^3},{x});
+            \addplot [tangentlineseg,domain = -.2:.1] {1.547*(x-.1)+.464};
+            \addplot [guideline] coordinates {(0.1,0) (0.1,0.464)};
+            \addplot [soliddot] coordinates {(.1,.464)};
 
-          \end{axis}
-          \end{tikzpicture}
+            \end{axis}
+            \end{tikzpicture}
 
-          </latex-image>
-        </image>
+            </latex-image>
+          </image>
 
-      </figure>
-      <figure xml:id="fig_newt4b">
-        <caption/>
-        <image>
-          <shortdescription>
-            The graph illustrates the cube root function with point x_1
-          </shortdescription>
-          <description>
-            <p>
-              The graph illustrates the cube root function, <m>f(x) = x^{1/3}</m>. It exhibits a curve that passes through the origin <m>(0,0)</m>
-              and extends into the positive and negative regions of the <m>x</m> axis.
-            </p>
-            <p>
-              Here <m>x_1</m> is twice as much as the initial guess bringing it more further from the root.
-              A tangent line is drawn at this point and intersects the <m>x</m> axis at the next
-              approximation, <m>x_2</m>.
-            </p>
-          </description>
-          <latex-image label="img_newt4b">
+        </figure>
+        <figure xml:id="fig_newt4b">
+          <caption/>
+          <image>
+            <shortdescription>
+              The graph illustrates the cube root function with point x_1
+            </shortdescription>
+            <description>
+              <p>
+                The graph illustrates the cube root function, <m>f(x) = x^{1/3}</m>. It exhibits a curve that passes through the origin <m>(0,0)</m>
+                and extends into the positive and negative regions of the <m>x</m> axis.
+              </p>
+              <p>
+                Here <m>x_1</m> is twice as much as the initial guess bringing it more further from the root.
+                A tangent line is drawn at this point and intersects the <m>x</m> axis at the next
+                approximation, <m>x_2</m>.
+              </p>
+            </description>
+            <latex-image label="img_newt4b">
 
-          \begin{tikzpicture}
-          \begin{axis}[
-          xtick={-1,1},
-          extra x ticks={.1,-.2,.4},
-          extra x tick labels={$x_0$, $x_1$,$x_2$},
-          ymin=-1.6,ymax=1.6,%
-          xmin=-1.6,xmax=1.6%
-          ]
+            \begin{tikzpicture}
+            \begin{axis}[
+            xtick={-1,1},
+            extra x ticks={.1,-.2,.4},
+            extra x tick labels={$x_0$, $x_1$,$x_2$},
+            ymin=-1.6,ymax=1.6,%
+            xmin=-1.6,xmax=1.6%
+            ]
 
-          \addplot+ [infinite,domain=-1.16:1.16]({x^3},{x});
-          \addplot [tangentlineseg,domain = -.2:.4] {.975*(x+.2)-.585};
-          \addplot [guideline] coordinates {(-0.2,0) (-0.2,-0.585)};
-          \addplot [soliddot] coordinates {(-.2,-.585)};
+            \addplot+ [infinite,domain=-1.16:1.16]({x^3},{x});
+            \addplot [tangentlineseg,domain = -.2:.4] {.975*(x+.2)-.585};
+            \addplot [guideline] coordinates {(-0.2,0) (-0.2,-0.585)};
+            \addplot [soliddot] coordinates {(-.2,-.585)};
 
-          \end{axis}
-          \end{tikzpicture}
+            \end{axis}
+            \end{tikzpicture}
 
-          </latex-image>
-        </image>
-      </figure>
+            </latex-image>
+          </image>
+        </figure>
 
-      <figure xml:id="fig_newt4c">
-        <caption/>
-        <image>
-          <shortdescription>
-            The graph illustrates the cube root function with point x_2
-          </shortdescription>
-          <description>
-            <p>
-              The graph illustrates the cube root function, <m>f(x) = x^{1/3}</m>. It exhibits a curve that passes through the origin <m>(0,0)</m>
-              and extends into the positive and negative regions of the <m>x</m> axis.
-            </p>
-            <p>
-              Here <m>x_2</m> is twice as much as the <m>x_1</m>bringing it even more further from the root.
-              A tangent line is drawn at this point and intersects the <m>x</m> axis at the next approximation,<m>x_3</m>.
-            </p>
+        <figure xml:id="fig_newt4c">
+          <caption/>
+          <image>
+            <shortdescription>
+              The graph illustrates the cube root function with point x_2
+            </shortdescription>
+            <description>
+              <p>
+                The graph illustrates the cube root function, <m>f(x) = x^{1/3}</m>. It exhibits a curve that passes through the origin <m>(0,0)</m>
+                and extends into the positive and negative regions of the <m>x</m> axis.
+              </p>
+              <p>
+                Here <m>x_2</m> is twice as much as the <m>x_1</m>bringing it even more further from the root.
+                A tangent line is drawn at this point and intersects the <m>x</m> axis at the next approximation,<m>x_3</m>.
+              </p>
 
-            <p>
-              Each successive approximation is twice as far from the true answer as the previous approximation.
-              This shows that Newton's Method doesn't work every time.
-            </p>
+              <p>
+                Each successive approximation is twice as far from the true answer as the previous approximation.
+                This shows that Newton's Method doesn't work every time.
+              </p>
 
-          </description>
-          <latex-image label="img_newt4c">
+            </description>
+            <latex-image label="img_newt4c">
 
-          \begin{tikzpicture}
-          \begin{axis}[
-          xtick={-1,1},
-          extra x ticks={.1,-.2,.4,-.8},
-          extra x tick labels={$x_0$,$x_1$,$x_2$,$x_3$},
-          ymin=-1.6,ymax=1.6,%
-          xmin=-1.6,xmax=1.6%
-          ]
+            \begin{tikzpicture}
+            \begin{axis}[
+            xtick={-1,1},
+            extra x ticks={.1,-.2,.4,-.8},
+            extra x tick labels={$x_0$,$x_1$,$x_2$,$x_3$},
+            ymin=-1.6,ymax=1.6,%
+            xmin=-1.6,xmax=1.6%
+            ]
 
-          \addplot+ [infinite,domain=-1.16:1.16] ({x^3},{x});
-          \addplot [tangentlineseg,domain = -.8:.4] {.614*(x-.4)+.737};
-          \addplot [guideline] coordinates {(0.4,0) (0.4,0.737)};
-          \addplot [soliddot] coordinates {(.4,.737)};
+            \addplot+ [infinite,domain=-1.16:1.16] ({x^3},{x});
+            \addplot [tangentlineseg,domain = -.8:.4] {.614*(x-.4)+.737};
+            \addplot [guideline] coordinates {(0.4,0) (0.4,0.737)};
+            \addplot [soliddot] coordinates {(.4,.737)};
 
-          \end{axis}
-          \end{tikzpicture}
+            \end{axis}
+            \end{tikzpicture}
 
-          </latex-image>
-        </image>
-      </figure>
-    </sidebyside>
-  </figure>
+            </latex-image>
+          </image>
+        </figure>
+      </sidebyside>
+    </figure>
 
     <p>
       There is no <q>fix</q> to this problem; Newton's Method simply will not work and another method must be used. (In this case the particular reason Newton's Method fails is that the tangent line is vertical at the root).
     </p>
+
+    <exercise label="APEX-PROTEUS-newton-3-v1" component="proteus">
+      <title>PROTEUS EXERCISE</title>
+      <statement>
+        <p>
+          Starting with an initial guess, <m>x_0</m>, suppose you compute the next value, <m>x_1</m>, 
+          in Newton's Method using the formula:
+          <me>x_{1} = x_{0} - \dfrac{f(x_{0})}{f'(x_{0})}</me>
+          Which of the following might be an indication that you have a <q>bad</q> initial guess?
+        </p>
+      </statement>
+      <choices randomize="yes">
+        <choice correct="yes">
+          <statement><p>When computing <m>f'(x_0)</m>, you get a value very close to zero.</p></statement>
+          <feedback>
+            <p>
+              Yes, a very small <m>f'(x_0)</m> (<ie/>, denominator in the formula) 
+              usually leads to the next approximation being very far from the root.
+            </p>
+          </feedback>
+        </choice>
+        <choice correct="yes">
+          <statement><p>The value of <m>x_1</m> is very far from <m>x_0</m>.</p></statement>
+          <feedback>
+            <p>
+              Yes, this is a bad sign since it indicates that tangent line passes 
+              through a point near a <q>peak</q> or <q>valley</q> of <m>f(x)</m>.
+            </p>
+          </feedback>
+        </choice>
+        <choice>
+          <statement><p>When computing <m>f'(x_1)</m> in the formula, you get a value near zero.</p></statement>
+          <feedback><p>Since <m>f'(x_1)</m> is not in the formula for <m>x=x_0</m>, it shouldn't be part of the calculation.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p>When computing <m>f(x_0)</m> in the formula, you get a value near zero.</p></statement>
+          <feedback><p>No, this is actually a good sign since <m>x_0</m> is near the root and Newton's method will likely converge.</p></feedback>
+        </choice>
+        <choice>
+          <statement><p>The value of <m>x_1</m> is very close to <m>x_0</m>.</p></statement>
+          <feedback>
+            <p>
+              No, this is a good sign since the only way this could happen is if <m>f(x_0)</m> is near zero, 
+              which means <m>x_0</m> is near the root and Newton's method will likely converge.
+            </p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
 
     <p>
       While Newton's Method does not always work,
