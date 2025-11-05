@@ -1554,18 +1554,26 @@
       <!--Exercise 11: Inverted cylindrical cone-->
       <exercise label="ex-related-rates-cone">
         <webwork xml:id="webwork-ex-related-rates-cone">
+          <pg-macros>
+              <macro-file>contextUnits.pl</macro-file>
+          </pg-macros>
           <pg-code>
-            ($depth, $diameter) = random_subset(2, 16 .. 32);
-            $rate = random(8,12,1);
-            @a=(1,random($depth-13,$depth-9,1),random($depth-7,$depth-1,1));
-            if($envir{problemSeed}==1){$depth=20; $diameter=10; $rate=10; $a[1]=10; $a[2]= 19;};
-            $depthU = NumberWithUnits("$depth ft");
-            $diameterU = NumberWithUnits("$diameter ft");
-            $rateU = NumberWithUnits("$rate ft^3/s");
-            @b = map{$rate * 4 / pi * $depth**2 / $diameter**2 / $_**2}(@a);
-            @bU = map{NumberWithUnits("$_ ft/s")}(@b);
+            # make $depth and $diameter two distinct numbers
+            ($depth, $diameter) = random_subset(2, 10 .. 30);
+            # the rate water is entering the tank
+            $rate = random(8, 12);
+            # the depths that water will be at when we ask how fast the water is rising
+            # the first depth will just be 1, and the other two should be no more than $depth
+            @a = (1, num_sort(random_subset(2, 2 .. $depth-1)));
+            Context("Units")-&gt;withUnitsFor('length', 'time');
+            $depthU = Compute("$depth ft");
+            $diameterU = Compute("$diameter ft");
+            $rateU = Compute("$rate ft^3/s");
+            # push the depths through the function that produces the rates
+            @b = map{$rate * 4 / pi * $depth**2 / $diameter**2 / $_**2} (@a);
+            @bU = map{Compute("$_ ft/s")} (@b);
             $T = pi/12 * $diameter**2 * $depth / $rate;
-            $TU = NumberWithUnits("$T s");
+            $TU = Compute("$T s");
           </pg-code>
           <introduction>
             <p>
