@@ -1882,8 +1882,8 @@
         <exercise label="ex-graph-extreme-values-find-1">
           <webwork xml:id="webwork-ex-graph-extreme-values-find-1">
             <pg-code>
-              ($b,$c) = (-9..-1,1..9)[NchooseK(18,2)];
-              ($l,$h) = (1..4)[NchooseK(4,2)];
+              ($b,$c) = random_subset(2,-9..-1,1..9);
+              ($l,$h) = random_subset(2,1..4);
               if($envir{problemSeed}==1){$b=1;$c=4;$l=1;$h=2};
               $low = int(-$b/2) - $l;
               $high = int(-$b/2) + $h;
@@ -1954,7 +1954,7 @@
               Context("Fraction-NoDecimals");
               $c = random(2,4,1);
               $trig = list_random('sin','cos');
-              ($lowd,$highd) = (3,4,6)[NchooseK(3,2)];
+              ($lowd,$highd) = random_subset(2,3,4,6);
               if ($trig eq 'sin') {
                 if (list_random(0,1)) {$low = Formula("pi/$lowd"); $high = Formula("(($highd-1)pi)/$highd")}
                 else {$low = Formula("(($lowd+1)pi)/$lowd"); $high = Formula("((2*$highd-1)pi)/$highd")}

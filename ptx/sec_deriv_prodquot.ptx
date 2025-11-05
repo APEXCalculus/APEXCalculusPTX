@@ -1261,7 +1261,7 @@
             <pg-code>
               $fname = list_random('f','g','h','j','k','p');
               $x = list_random('q','r','t','x','y','z');
-              ($a,$b) = (-9..-1,1..9)[NchooseK(18,2)];
+              ($a,$b) = random_subset(2,-9..-1,1..9);
               if($envir{problemSeed}==1){$fname='g';$x='x';$a=7;$b=-5;};
               Context()-&gt;variables-&gt;are($x =&gt; 'Real');
               $f = Formula("($x+$a)/($x+$b)")-&gt;reduce;
@@ -1401,7 +1401,7 @@
             <pg-code>
               $fname = list_random('f','g','h','j','k','p');
               $x = list_random('q','r','t','x','y','z');
-              ($a,$b,$c) = (3..9)[NchooseK(7,3)];
+              ($a,$b,$c) = random_subset(3,3..9);
               if($envir{problemSeed}==1){$fname='f';$x='x';$a=3;$b=8;$c=7;};
               Context()-&gt;variables-&gt;are($x =&gt; 'Real');
               $formula = Formula("($a $x^2 + $b $x + $c) e^($x)")-&gt;reduce;
@@ -1423,7 +1423,7 @@
             <pg-code>
               $fname = list_random('f','g','h','j','k','p');
               $x = list_random('q','r','t','x','y','z');
-              ($a,$b) = (3,5,7,9)[NchooseK(4,2)];
+              ($a,$b) = random_subset(2,3,5,7,9);
               $pm = list_random('+','-');
               if($envir{problemSeed}==1){$fname='g';$x='t';$a=5;$b=3;$pm='-';};
               Context()-&gt;variables-&gt;are($x =&gt; 'Real');
@@ -1446,8 +1446,8 @@
             <pg-code>
               $fname = list_random('f','g','h','j','k','p');
               $x = list_random('q','r','t','x','y','z');
-              ($a,$d) = (1..30)[NchooseK(30,2)];
-              ($b,$c,$e) = (-30..-1,1..30)[NchooseK(60,3)];
+              ($a,$d) = random_subset(2,1..30);
+              ($b,$c,$e) = random_subset(3,-30..-1,1..30);
               if($envir{problemSeed}==1){$fname='f';$x='x';$a=16;$b=24;$c=3;$d=7;$e=-1;};
               Context()-&gt;variables-&gt;are($x =&gt; 'Real');
               $formula = Formula("($a $x^3+$b $x^2 + $c $x) (($d $x + $e)/($a $x^3+$b $x^2 + $c $x))")-&gt;reduce;
@@ -1493,7 +1493,7 @@
               $fname = list_random('f','g','h','j','k','p');
               $x = list_random('q','r','t','x','y','z');
               $a = random(2,9,1);
-              ($triga,$trigb) = ('cos','sin','sec','csc','tan','cot')[NchooseK(6,2)];
+              ($triga,$trigb) = random_subset(2,'cos','sin','sec','csc','tan','cot');
               if($envir{problemSeed}==1){$fname='f';$x='x';$a=3;$triga='sin';$trigb='cos';};
               Context()-&gt;variables-&gt;are($x =&gt; 'Real');
               $formula = Formula("$triga($x)/($trigb($x) + $a)");
@@ -1541,7 +1541,7 @@
             <pg-code>
               $fname = list_random('f','g','h','j','k','p');
               $x = list_random('q','r','t','x','y','z');
-              ($triga,$trigb) = ('cos','sin','sec','csc','tan','cot')[NchooseK(6,2)];
+              ($triga,$trigb) = random_subset(2,'cos','sin','sec','csc','tan','cot');
               if($envir{problemSeed}==1){$fname='f';$x='x';$triga='cos';$trigb='tan';};
               Context()-&gt;variables-&gt;are($x =&gt; 'Real');
               $formula = Formula("$triga($x)/$x + $x/$trigb($x)");
@@ -1588,7 +1588,7 @@
             <pg-code>
               $fname = list_random('f','g','h','j','k','p');
               $x = list_random('q','r','t','x','y','z');
-              ($a,$b) = (2..9)[NchooseK(8,2)];
+              ($a,$b) = random_subset(2,2..9);
               $trig = list_random("sin($x)*cos($x)","sec($x)*csc($x)");
               $pm = list_random('+','-');
               if($envir{problemSeed}==1){$fname='g';$x='t';$a=4;$b=3;$trig="sin($x)*cos($x)";$pm='-';};
@@ -1613,8 +1613,8 @@
               $fname = list_random('f','g','h','j','k','p');
               $x = list_random('q','r','t','x','y','z');
               $n = random(2,3,1);
-              ($a,$b) = (-9..-1,1..9)[NchooseK(18,2)];
-              ($triga,$trigb) = ('sin','cos')[NchooseK(2,2)];
+              ($a,$b) = random_subset(2,-9..-1,1..9);
+              ($triga,$trigb) = random_subset(2,'sin','cos');
               if($envir{problemSeed}==1){$fname='h';$x='t';$n=2;$a=3;$b=2;$triga='sin';$trigb='cos';};
               Context()-&gt;variables-&gt;are($x =&gt; 'Real');
               $formula = Formula("($x^$n $triga($x)+$a)/($x^$n $trigb($x)+$b)")-&gt;reduce;
@@ -1827,7 +1827,7 @@
         <exercise label="ex-deriv-prodquot-tangent-4">
           <webwork xml:id="webwork-ex-deriv-prodquot-tangent-4">
             <pg-code>
-              ($a,$b) = (-9..-1,1..9)[NchooseK(18,2)];
+              ($a,$b) = random_subset(2,-9..-1,1..9);
               $trig = list_random('cos','sin');
               if($envir{problemSeed}==1){$a=-8;$b=1;$trig='cos'};
               Context("Fraction");
@@ -1881,7 +1881,7 @@
               Context("Fraction");
               Context()-&gt;noreduce('(-x)+y','(-x)-y');
               $a = non_zero_random(-9,9,1);
-              ($b,$c) = (-30..-1,1..30)[NchooseK(18,2)];
+              ($b,$c) = random_subset(2,-30..-1,1..30);
               if($envir{problemSeed}==1){$a=6;$b=-18;$c=-24;};
               $formula = Formula("$a x^2 + $b x + $c")-&gt;reduce;
               @x = (Fraction(-$b,2*$a));
@@ -1929,7 +1929,7 @@
             <pg-code>
               Context("Fraction");
               Context()-&gt;noreduce('(-x)+y','(-x)-y');
-              ($a,$b,$c) = (-3..-1,1..3)[NchooseK(6,3)];
+              ($a,$b,$c) = random_subset(3,-3..-1,1..3);
               if($envir{problemSeed}==1){$a=1;$b=1;$c=1;};
               $formula = Formula("($a x)/($b x + $c)")-&gt;reduce;
               $points = Compute("NONE");
@@ -1955,7 +1955,7 @@
             <pg-code>
               Context("Fraction");
               Context()-&gt;noreduce('(-x)+y','(-x)-y');
-              ($a,$b,$c) = (-3..-1,1..3)[NchooseK(6,3)];
+              ($a,$b,$c) = random_subset(3,-3..-1,1..3);
               if($envir{problemSeed}==1){$a=1;$b=1;$c=1;};
               $formula = Formula("($a x^2)/($b x + $c)")-&gt;reduce;
               @x = (Fraction(0),Fraction(-(2*$c)/$b));
@@ -2039,7 +2039,7 @@
         <exercise label="ex-deriv-prodquot-higher-4">
           <webwork xml:id="webwork-ex-deriv-prodquot-higher-4">
             <pg-code>
-              ($a,$b,$c,$d) = (-9..-1,1..9)[NchooseK(18,4)];
+              ($a,$b,$c,$d) = random_subset(4,-9..-1,1..9);
               $n = random(7,9,1);
               if($envir{problemSeed}==1){$a=-5;$b=2;$c=1;$d=-7;$n=8;};
               $formula = Formula("(x^3+$a x+$b)(x^2+$c x+$d)")-&gt;reduce;

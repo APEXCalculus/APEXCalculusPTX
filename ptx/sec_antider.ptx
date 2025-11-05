@@ -1040,7 +1040,7 @@
         <exercise label="ex-antiderivatives-evaluate-6">
           <webwork xml:id="webwork-ex-antiderivatives-evaluate-6">
             <pg-code>
-              ($a,$n) = (2..9)[NchooseK(8,2)];
+              ($a,$n) = random_subset(2,2..9);
               if($envir{problemSeed}==1){$a=3;$n=2};
               Context("Fraction");
               Context()-&gt;variables-&gt;are(t=&gt;"Real");
@@ -1061,7 +1061,7 @@
         <exercise label="ex-antiderivatives-evaluate-7">
           <webwork xml:id="webwork-ex-antiderivatives-evaluate-7">
             <pg-code>
-              ($a,$n) = (2..9)[NchooseK(8,2)];
+              ($a,$n) = random_subset(2,2..9);
               if($envir{problemSeed}==1){$a=3;$n=2};
               Context("Fraction");
               Context()-&gt;variables-&gt;are(t=&gt;"Real");
@@ -1213,7 +1213,7 @@
         <exercise label="ex-antiderivatives-evaluate-14">
           <webwork xml:id="webwork-ex-antiderivatives-evaluate-14">
             <pg-code>
-              ($b,$c) = (2..9)[NchooseK(8,2)];
+              ($b,$c) = random_subset(2,2..9);
               if($envir{problemSeed}==1){$b=5;$c=2};
               Context()-&gt;variables-&gt;are(t=&gt;'Real');
               $f = Formula("$b^t/$c");
@@ -1261,7 +1261,7 @@
           <webwork xml:id="webwork-ex-antiderivatives-evaluate-16">
             <pg-code>
               $m = random(2,5,1);
-              ($a,$b) = (-9..-1,1..9)[NchooseK(18,2)];
+              ($a,$b) = random_subset(2,-9..-1,1..9);
               if($envir{problemSeed}==1){$m=2;$a=3;$b=-2};
               Context("Fraction");
               Context()-&gt;variables-&gt;are(t=&gt;'Real');
@@ -1285,7 +1285,7 @@
         <exercise label="ex-antiderivatives-evaluate-17">
           <webwork xml:id="webwork-ex-antiderivatives-evaluate-17">
             <pg-code>
-              ($m,$n) = (2..9)[NchooseK(8,2)];
+              ($m,$n) = random_subset(2,2..9);
               if($envir{problemSeed}==1){$m=2;$n=3};
               $f = Formula("x^$m x^$n")-&gt;reduce;
               $F = FormulaUpToConstant("x^($m+$n+1)/($m+$n+1)")-&gt;reduce;
@@ -1304,7 +1304,7 @@
         <exercise label="ex-antiderivatives-evaluate-18">
           <webwork xml:id="webwork-ex-antiderivatives-evaluate-18">
             <pg-code>
-              ($b,$p) = ('pi','e','sqrt(2)')[NchooseK(3,2)];
+              ($b,$p) = random_subset(2,'pi','e','sqrt(2)');
               if($envir{problemSeed}==1){$b='e';$p='pi'};
               Context()-&gt;flags-&gt;set(reduceConstants=&gt;0);
               $f = Formula("$b^$p")-&gt;reduce;
@@ -1578,7 +1578,7 @@
         <exercise label="ex-antiderivatives-ivp-6">
           <webwork xml:id="webwork-ex-antiderivatives-ivp-6">
             <pg-code>
-              ($fpp,$fp0,$f0) = (2..9)[NchooseK(8,3)];
+              ($fpp,$fp0,$f0) = random_subset(3,2..9);
               if($envir{problemSeed}==1){$fpp=5;$fp0=7;$f0=3;};
               Context("Fraction");
               $a = Fraction($fpp,2);
@@ -1598,7 +1598,7 @@
         <exercise label="ex-antiderivatives-ivp-7">
           <webwork xml:id="webwork-ex-antiderivatives-ivp-7">
             <pg-code>
-              ($fpp,$fp0,$f0) = (-10..-2,2..10)[NchooseK(18,3)];
+              ($fpp,$fp0,$f0) = random_subset(3,-10..-2,2..10);
               if($envir{problemSeed}==1){$fpp=7;$fp0=-1;$f0=10;};
               Context("Fraction");
               $a = Fraction($fpp,6);
@@ -1623,7 +1623,7 @@
           <webwork xml:id="webwork-ex-antiderivatives-ivp-8">
             <pg-code>
               $fpp = random(2,9,1);
-              ($fp0,$f0) = (-10..-2,2..10)[NchooseK(18,2)];
+              ($fp0,$f0) = random_subset(2,-10..-2,2..10);
               if($envir{problemSeed}==1){$fpp=5;$fp0=3;$f0=5;};
               $f = Formula("$fpp e^x");
               $F = Formula("$f + ($fp0-$fpp)x + ($f0-$fpp)")-&gt;reduce;
@@ -1644,7 +1644,7 @@
             <pg-code>
               $trig = list_random('sin','cos');
               $x0 = list_random(0,'pi/2','pi');
-              ($fp0,$f0) = (2..9)[NchooseK(8,2)];
+              ($fp0,$f0) = random_subset(2,2..9);
               if($envir{problemSeed}==1){$trig='sin';$x0='pi';$fp0=2;$f0=4;};
               Context()-&gt;variables-&gt;are(theta=&gt;['Real',TeX=&gt;'\theta']);
               $x0 = Formula("$x0");
@@ -1675,7 +1675,7 @@
               $b = random(2,9,1);
               $trig = list_random('sin','cos');
               $c = list_random(1,-1);
-              ($fp0,$f0) = (-9..9)[NchooseK(19,2)];
+              ($fp0,$f0) = random_subset(2,-9..9);
               if($envir{problemSeed}==1){$a=24;$m=2;$b=2;$c=-1;$trig='cos';$fp0=5;$f0=0;};
               Context("Fraction");
               Context()-&gt;flags-&gt;set(reduceConstants=&gt;0);
@@ -1700,7 +1700,7 @@
           <webwork xml:id="webwork-ex-antiderivatives-ivp-11">
             <pg-code>
               $x0 = non_zero_random(-5,5,1);
-              ($fp0,$f0) = (-9..-1,1..9)[NchooseK(18,2)];
+              ($fp0,$f0) = random_subset(2,-9..-1,1..9);
               if($envir{problemSeed}==1){$x0=1;$fp0=5;$f0=0;};
               $F = Formula("$fp0 x + ($f0 - $fp0*$x0)")-&gt;reduce;
             </pg-code>

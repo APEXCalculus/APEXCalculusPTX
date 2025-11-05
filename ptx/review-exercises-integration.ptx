@@ -13,7 +13,7 @@
       <exercise label="ex-definite-integral-review-1">
         <webwork xml:id="webwork-ex-definite-integral-review-1">
           <pg-code>
-            ($b,$c,$d) = (-9..-1,1..9)[NchooseK(18,3)];
+            ($b,$c,$d) = random_subset(3,-9..-1,1..9);
             if($envir{problemSeed}==1){$b=-2;$c=7;$d=-9;};
             Context("Fraction");
             Context()->noreduce('(-x)+y');
@@ -37,7 +37,7 @@
       <exercise label="ex-definite-integral-review-2">
         <webwork xml:id="webwork-ex-definite-integral-review-2">
           <pg-code>
-            ($s,$t,$u) = ('sin','cos','tan','sec','cot','csc')[NchooseK(6,3)];
+            ($s,$t,$u) = random_subset(3,'sin','cos','tan','sec','cot','csc');
             $a = list_random(-1,1);
             $b = list_random(-1,1);
             $c = list_random(-1,1);
@@ -158,8 +158,8 @@
       <exercise label="ex-riemann-review-3">
         <webwork xml:id="webwork-ex-riemann-review-3">
           <pg-code>
-            ($a,$b,$c) = (-9..-1,1..9)[NchooseK(18,3)];
-            ($m,$n,$p) = num_sort((0..5)[NchooseK(6,3)]);
+            ($a,$b,$c) = random_subset(3,-9..-1,1..9);
+            ($m,$n,$p) = num_sort(random_subset(3,0..5));
             if($envir{problemSeed}==1){$a=4;$b=-5;$c=8;$m=5;$n=3;$p=0;};
             Context()->variables->add(t=>"Real");
             $f = Formula("$a t^$m + $b t^$n + $c t^$p")->reduce;
@@ -184,7 +184,7 @@
       <exercise label="ex-riemann-review-4">
         <webwork xml:id="webwork-ex-riemann-review-4">
           <pg-code>
-            ($b,$c) = (2..9)[NchooseK(8,2)];
+            ($b,$c) = random_subset(2,2..9);
             if($envir{problemSeed}==1){$b=8;$c=5;};
             Context()->variables->add(t=>"Real");
             $f = Formula("$c $b^t")->reduce;

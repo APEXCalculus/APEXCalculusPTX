@@ -122,7 +122,7 @@
       <exercise label="ex-deriv-basic-review-2">
         <webwork xml:id="webwork-ex-deriv-basic-review-2">
           <pg-code>
-            ($n,$x0) = (3,4,5)[NchooseK(3,2)];
+            ($n,$x0) = random_subset(2,[3,4,5]);
             $dx = 0.1;
             $x = $x0 + $dx;
             $f = Formula("x^$n");
@@ -425,7 +425,7 @@
             $a=random(1,9,1);
             $n=random(1,4,1);
             $trig=list_random('sin','cos','sec','csc','tan','cot');
-            ($b,$c,$d)=num_sort((2..9)[NchooseK(8,3)]);
+            ($b,$c,$d)=num_sort(random_subset(3,2..9));
             if($envir{problemSeed}==1){$a=2;$n=1;$trig='cot';$b=2;$c=3;$d=4;};
             $f = Formula("$a x^$n e^x $trig(x)")->reduce;
             $g = Formula("$b^x $c^x $d^x");
@@ -465,7 +465,7 @@
         <webwork xml:id="webwork-deriv-inverse-review-1">
           <pg-code>
             Context()->variables->add(y=>'Real');
-            ($m,$n) = (1..4)[NchooseK(4,2)];
+            ($m,$n) = random_subset(2,1..4);
             if($envir{problemSeed}==1){$m=1;$n=2};
             $left = Formula("x^2y^$m-y^$n x")->reduce;
             @y=(random(0.1,5,0.1),random(0.1,5,0.1),random(0.1,5,0.1),random(0.1,5,0.1),random(0.1,5,0.1));
@@ -493,7 +493,7 @@
             parser::Assignment->Allow;
             do {
               $n = random(2,4,1);
-              ($x0,$y0) = (-3..-1,1..3)[NchooseK(6,2)];
+              ($x0,$y0) = random_subset(2,[-3,-2,-1,1,2,3]);
               $pm=list_random('+','-');
             } until ($x0 != $n*$y0**($n-1) and $x0 != -$n*$y0**($n-1));
             if($envir{problemSeed}==1){$n=2;$x0=1;$y0=2;$pm='+'};
@@ -539,7 +539,7 @@
         <webwork xml:id="webwork-ex-graph-extreme-values-review-1">
           <pg-code>
             Context()->variables->add(y=>'Real');
-            ($m,$n) = (1..4)[NchooseK(4,2)];
+            ($m,$n) = random_subset(2,1..4);
             if($envir{problemSeed}==1){$m=1;$n=2};
             $left = Formula("x^2y^$m-y^$n x")->reduce;
             @y=(random(0.1,5,0.1),random(0.1,5,0.1),random(0.1,5,0.1),random(0.1,5,0.1),random(0.1,5,0.1));
@@ -567,7 +567,7 @@
             parser::Assignment->Allow;
             do {
               $n = random(2,4,1);
-              ($x0,$y0) = (-3..-1,1..3)[NchooseK(6,2)];
+              ($x0,$y0) = random_subset(2,[-3,-2,-1,1,2,3]);
               $pm=list_random('+','-');
             } until ($x0 != $n*$y0**($n-1) and $x0 != -$n*$y0**($n-1));
             if($envir{problemSeed}==1){$n=2;$x0=1;$y0=2;$pm='+'};

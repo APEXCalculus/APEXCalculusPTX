@@ -13,7 +13,7 @@
         <exercise label="ex-limit-onesided-review-1">
           <webwork xml:id="webwork-ex-limit-onesided-review-1">
             <pg-code>
-              ($a,$b,$c)=(-9..-1,1..9)[NchooseK(18,3)];
+              ($a,$b,$c)=random_subset(3,-9..-1,1..9);
               if($envir{problemSeed}==1){$a=-1;$b=-4;$c=4;};
               $f=Formula("x^2-($a+$b)x+$a*$b")->reduce;
               $g=Formula("x^2-($a+$c)x+$a*$c")->reduce;
@@ -40,7 +40,7 @@
         <exercise>
           <webwork>
             <pg-code>
-              ($a,$b,$c)=(-9..-1,1..9)[NchooseK(18,3)];
+              ($a,$b,$c)=random_subset(3,-9..-1,1..9);
               if($envir{problemSeed}==1){$a=-4;$b=4;$c=8;};
               $f=Formula("x^2-($a+$b)x+$a*$b")->reduce;
               $g=Formula("x^2-($a+$c)x+$a*$c")->reduce;
@@ -67,7 +67,7 @@
         <exercise label="ex-limit-onesided-review-2">
           <webwork xml:id="webwork-ex-limit-onesided-review-2">
             <pg-code>
-              @a=(-9..9)[NchooseK(19,4)];
+              @a= random_subset(4,-9..9);
               if($envir{problemSeed}==1){@a=(-6,6,9,0)};
               $f=Formula("x^2-($a[1]+$a[2])x+$a[1]*$a[2]")->reduce;
               $g=Formula("x^2-($a[1]+$a[3])x+$a[1]*$a[3]")->reduce;
@@ -103,7 +103,7 @@
           <webwork xml:id="webwork-ex-limit-onesided-review-3">
             <pg-code>
               Context()->strings->add('does not exist'=>{alias=>'DNE'});
-              ($a,$b,$c)=map{$_*random(-1,1,2)/10}NchooseK(99,3);
+              ($a,$b,$c)=map{$_*random(-1,1,2)/10}random_subset(3,1..99);
               if($envir{problemSeed}==1){$a=0.4;$b=4;$c=0;};
               $f=Formula("x^2-($a+$b)x+$a*$b")->reduce;
               $g=Formula("x^2-($a+$c)x+$a*$c")->reduce;
@@ -129,7 +129,7 @@
           <webwork xml:id="webwork-ex-limit-onesided-review-4">
             <pg-code>
               Context()->strings->add('does not exist'=>{alias=>'DNE'});
-              ($a,$b,$c)=map{$_*random(-1,1,2)/10}NchooseK(99,3);
+              ($a,$b,$c)=map{$_*random(-1,1,2)/10}random_subset(3,1..99);
               if($envir{problemSeed}==1){$a=0.2;$b=-6;$c=4;};
               $f=Formula("x^2-($a+$b)x+$a*$b")->reduce;
               $g=Formula("x^2-($a+$c)x+$a*$c")->reduce;
@@ -533,7 +533,7 @@
       <exercise label="ex-deriv-intro-review-1">
         <webwork xml:id="webwork-ex-deriv-intro-review-1">
           <pg-code>
-            ($r,$s,$t) = (-9..-1,1..9)[NchooseK(18,3)];
+            ($r,$s,$t) = random_subset(3,-9..-1,1..9);
             $t += non_zero_random(-0.5,0.5,0.1);
             if($envir{problemSeed}==1){$r=-7;$s=5;$t=5.5;};
             $b=-($r+$t);

@@ -2044,7 +2044,7 @@
             <pg-code>
               $b = list_random(-1,1);
               $low = random(-4,-1,1);
-              ($m,$n) = (3,5,7)[NchooseK(3,2)];
+              ($m,$n) = random_subset(2,3,5,7);
               if($envir{problemSeed}==1){$b=-1;$low=-1;};
               $high = -$low;
               Context("Fraction");
@@ -2164,8 +2164,8 @@
         <exercise label="ex-FTC-defint-evaluate-8">
           <webwork xml:id="webwork-ex-FTC-defint-evaluate-8">
             <pg-code>
-              ($low,$high) = num_sort((-4..-1)[NchooseK(4,2)]);
-              ($a,$b) = (-9..-1,1..9)[NchooseK(18,2)];
+              ($low,$high) = num_sort(random_subset(2,-4..-1));
+              ($a,$b) = random_subset(2,-9..-1,1..9);
               $m = random(2,5,1);
               if($envir{problemSeed}==1){$low=-2;$high=-1;$a=4,$b=-2;$m=3;};
               $f = Formula("$a + $b x^$m")-&gt;reduce;
@@ -2186,7 +2186,7 @@
         <exercise label="ex-FTC-defint-evaluate-9">
           <webwork xml:id="webwork-ex-FTC-defint-evaluate-9">
             <pg-code>
-              ($a,$b) = (-9..-1,1..9)[NchooseK(18,2)];
+              ($a,$b) = random_subset(2,-9..-1,1..9);
               if($envir{problemSeed}==1){$a=2;$b=-2;};
               $f = Formula("$a cos(x) + $b sin(x)")-&gt;reduce;
               $r = 2*$b;
@@ -2205,7 +2205,7 @@
         <exercise label="ex-FTC-defint-evaluate-10">
           <webwork xml:id="webwork-ex-FTC-defint-evaluate-10">
             <pg-code>
-              ($low,$high) = num_sort((1..4)[NchooseK(4,2)]);
+              ($low,$high) = num_sort(random_subset(2,1..4));
               if($envir{problemSeed}==1){$low=1;$high=4;};
               $f = Formula("e^x")-&gt;reduce;
               $r = Formula("e^$high - e^$low");
@@ -2224,7 +2224,7 @@
         <exercise label="ex-FTC-defint-evaluate-11">
           <webwork xml:id="webwork-ex-FTC-defint-evaluate-11">
             <pg-code>
-              ($low,$high) = num_sort((0,1,4,9,16,25)[NchooseK(6,2)]);
+              ($low,$high) = num_sort(random_subset(2,0,1,4,9,16,25));
               if($envir{problemSeed}==1){$low=0;$high=4;};
               Context()-&gt;variables-&gt;are(t=&gt;'Real');
               $f = Formula("sqrt(t)")-&gt;reduce;
@@ -2245,7 +2245,7 @@
         <exercise label="ex-FTC-defint-evaluate-12">
           <webwork xml:id="webwork-ex-FTC-defint-evaluate-12">
             <pg-code>
-              ($low,$high) = num_sort((1,4,9,16,25)[NchooseK(5,2)]);
+              ($low,$high) = num_sort(random_subset(2,1,4,9,16,25));
               if($envir{problemSeed}==1){$low=9;$high=25;};
               Context()-&gt;variables-&gt;are(t=&gt;'Real');
               $f = Formula("1/sqrt(t)")-&gt;reduce;
@@ -2267,7 +2267,7 @@
           <webwork xml:id="webwork-ex-FTC-defint-evaluate-13">
             <pg-code>
               $n = random(3,5,1);
-              ($low,$high) = num_sort((0**$n,1**$n,2**$n,3**$n,4**$n)[NchooseK(5,2)]);
+              ($low,$high) = num_sort(random_subset(2,0**$n,1**$n,2**$n,3**$n,4**$n));
               if($envir{problemSeed}==1){$n=3;$low=1;$high=8;};
               parser::Root-&gt;Enable;
               $f = Formula("root($n,x)")-&gt;reduce;
@@ -2453,7 +2453,7 @@
         <exercise label="ex-FTC-defint-evaluate-22">
           <webwork xml:id="webwork-ex-FTC-defint-evaluate-22">
             <pg-code>
-              ($low,$high) = num_sort((-9..-1)[NchooseK(9,2)]);
+              ($low,$high) = num_sort(random_subset(2,-9..-1));
               $c = random(2,9,1);
               if($envir{problemSeed}==1){$low=-10;$high=-5;$c=3;};
               $f = Formula("$c")-&gt;reduce;
@@ -3216,7 +3216,7 @@
         <exercise label="ex-FTC-part1-4">
           <webwork xml:id="webwork-ex-FTC-part1-4">
             <pg-code>
-              ($low,$high,$f) = ('e^','ln','sin','cos','sqrt')[NchooseK(5,3)];
+              ($low,$high,$f) = random_subset(3,'e^','ln','sin','cos','sqrt');
               if($envir{problemSeed}==1){$low='ln';$high='e^';$f='sin';};
               Context()-&gt;variables-&gt;add(t=&gt;'Real');
               # interval where all these functions have positive output
@@ -3262,7 +3262,7 @@
           <webwork xml:id="webwork-ex-FTC-part1-6">
             <pg-code>
               $b = non_zero_random(-9,9,1);
-              ($low,$high) = ('e^','ln','sin','cos','sqrt')[NchooseK(5,2)];
+              ($low,$high) = random_subset(2,'e^','ln','sin','cos','sqrt');
               Context()-&gt;variables-&gt;add(t=&gt;'Real');
               $low = Formula("$low(x)");
               $high = Formula("$high(x)");
