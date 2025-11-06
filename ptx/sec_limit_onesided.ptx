@@ -1214,8 +1214,8 @@
           <webwork xml:id="webwork-ex-limit-onesided-use-graph-1">
             <pg-code>
               Context()-&gt;strings-&gt;add('does not exist'=&gt;{alias=&gt;'DNE'});
-              @x=num_sort((0,(1..5)[NchooseK(5,2)]));
-              @y=NchooseK(5,3,1);
+              @x=num_sort((0,random_subset(2,1..5)));
+              @y=random_subset(3,1..5)
               $z=list_random(1..$y[1]-1,$y[1]+1..5);
               $b=list_random($x[0],$x[2]);
               if($envir{problemSeed}==1){@x=(0,1,2);@y=(1,2,0);$z=1;$b=0;};
@@ -1345,8 +1345,8 @@
           <webwork xml:id="webwork-ex-limit-onesided-use-graph-2">
             <pg-code>
               Context()-&gt;strings-&gt;add('does not exist'=&gt;{alias=&gt;'DNE'});
-              @x=num_sort((0,(1..5)[NchooseK(5,2)]));
-              @y=NchooseK(5,2,1);
+              @x=num_sort((0,random_subset(2,1..5)));
+              @y=random_subset(2,1..5);
               $y[2]=random(0,5,1);
               $z=list_random(1..$y[1]-1,$y[1]+1..5);
               $b=list_random($x[0],$x[2]);
@@ -1475,7 +1475,7 @@
           <webwork xml:id="webwork-ex-limit-onesided-use-graph-3">
             <pg-code>
               Context()-&gt;strings-&gt;add('does not exist'=&gt;{alias=&gt;'DNE'});
-              @x=num_sort((0,(1..5)[NchooseK(5,2)]));
+              @x=num_sort((0,random_subset(2,1..5)));
               $y[0]=random(0,5,1);
               $y[1]=Compute("inf");
               $y[2]=random(0,5,1);
@@ -1603,9 +1603,9 @@
           <webwork xml:id="webwork-ex-limit-onesided-use-graph-4">
             <pg-code>
               Context()-&gt;strings-&gt;add('does not exist'=&gt;{alias=&gt;'DNE'});
-              @x=num_sort((0,(1..5)[NchooseK(5,2)]));
-              @y=NchooseK(5,3,1);
-              ($w,$z)=(1..$y[1]-1,$y[1]+1..5)[NchooseK(4,2)];
+              @x=num_sort((0,random_subset(2,1..5)));
+              @y=random_subset(3,1..5);
+              ($w,$z)=random_subset(2,1..$y[1]-1,$y[1]+1..5);
               if($envir{problemSeed}==1){@x=(0,1,2);@y=(1,0,2);$z=2;$w=1;};
               $a=$x[1];
               $f=Formula("($z-$y[0])/($x[1]-$x[0])*(x-$x[0])+$y[0]");
@@ -1702,8 +1702,8 @@
           <webwork xml:id="webwork-ex-limit-onesided-use-graph-5">
             <pg-code>
               Context()-&gt;strings-&gt;add('does not exist'=&gt;{alias=&gt;'DNE'});
-              @x=num_sort((0,(1..5)[NchooseK(5,2)]));
-              @y=NchooseK(5,2,1);
+              @x=num_sort((0,random_subset(2,1..5)));
+              @y=random_subset(2,1..5);
               $y[2]=$y[0];
               if($envir{problemSeed}==1){@x=(0,1,2);@y=(0,2,0);};
               $a=$x[1];
@@ -1800,7 +1800,7 @@
               $x[0]=random(-6,-2,1);
               $x[1]=$x[0]+random(3,5,1);
               $x[2]=$x[1]+random(3,5,1);
-              ($y[1],$y[2],$y[3])=(-6..6)[NchooseK(13,3)];
+              ($y[1],$y[2],$y[3])=random_subset(3,-6..6);
               $y[0]=list_random(-6..$y[1]-1,$y[1]+1..6);
               $y[4]=list_random(-6..$y[3]-1,$y[3]+1..6);
               if($envir{problemSeed}==1){@x=(-4,0,4);@y=(-4,4,0,-4,4);};
@@ -2237,7 +2237,7 @@
             <pg-code>
               $a=random(-2,4,1);
               $b=non_zero_random(-2,2,1);
-              ($c,$d)=(-5..-1,1..5)[NchooseK(10,2)];
+              ($c,$d)=random_subset(2,-5..-1,1..5);
               if($envir{problemSeed}==1){$a=0;$b=2;$c=5;$d=-1;};
               @f=(Formula("$b x^2 + $c x+$d")-&gt;reduce,Formula("sin(x-$a)")-&gt;reduce);
               Context("PiecewiseFunction");
@@ -2306,7 +2306,7 @@
         <exercise label="ex-limit-onesided-piecewise-evaluate-3">
           <webwork xml:id="webwork-ex-limit-onesided-piecewise-evaluate-3">
             <pg-code>
-              ($a,$b)=num_sort((-5..-1,1..5)[NchooseK(10,2)]);
+              ($a,$b)=num_sort(random_subset(2,-5..-1,1..5));
               if($envir{problemSeed}==1){$a=-1;$b=1;};
               @f=(Formula("x^2 + ($a+1) x+(($a)^3+1-($a)^2-($a+1)*$a)")-&gt;reduce,Formula("x^3+1")-&gt;reduce,Formula("x^2 + ($b-1) x+(($b)^3+1-($b)^2-($b-1)*$b)")-&gt;reduce);
               Context("PiecewiseFunction");
@@ -2550,7 +2550,7 @@
           <webwork xml:id="webwork-ex-limit-onesided-piecewise-evaluate-6">
             <pg-code>
               $a=random(-3,3,1);
-              @y=(-2..2)[NchooseK(5,3)];
+              @y= random_subset(3,-2..2);
               if($envir{problemSeed}==1){$a=1;@y=(1,0,-1);};
               @f=(Formula("x+$y[0]")-&gt;reduce,Formula("x+$y[1]")-&gt;reduce,Formula("x+$y[2]")-&gt;reduce);
               Context("PiecewiseFunction");
@@ -2620,7 +2620,7 @@
           <webwork xml:id="webwork-ex-limit-onesided-piecewise-evaluate-7">
             <pg-code>
               $a=random(-3,3,1);
-              @y=(-5..5)[NchooseK(5,2)];
+              @y=random_subset(2,-5..5);
               if($envir{problemSeed}==1){$a=2;@y=(4,3);};
               @f=(Formula("x^2+($y[0]-2*$a)x+($y[0]-($a)^2-($y[0]-2*$a)*$a)")-&gt;reduce-&gt;reduce,Formula("x+($y[1]-$a)")-&gt;reduce,Formula("-x^2+$a*x+$y[0]")-&gt;reduce);
               Context("PiecewiseFunction");

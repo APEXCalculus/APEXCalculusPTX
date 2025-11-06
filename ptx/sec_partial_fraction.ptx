@@ -731,7 +731,7 @@
           <webwork xml:id="webwork-ex-partial-fractions-decompose-no-solve-2">
             <pg-code>
               $r = random(1,9,1);
-              ($a,$b) = (-9..-1,1..9)[NchooseK(18,2)];
+              ($a,$b) = random_subset(2,-9..-1,1..9);
               if($envir{problemSeed}==1){$r=3;$a=-1;$b=7};
               Context("Form")-&gt;variables-&gt;add(s=&gt;"Real",t=&gt;"Real",A=&gt;"Real",B=&gt;"Real",C=&gt;"Real");
               Context()-&gt;reductions-&gt;set("(-x)+y" =&gt; 1);
@@ -827,7 +827,7 @@
           <webwork xml:id="webwork-ex-partial-fractions-decompose-no-solve-4">
             <pg-code>
               $r = random(2,9,1);
-              ($a,$b) = (1..9)[NchooseK(9,2)];
+              ($a,$b) = random_subset(2,1..9);
               if($envir{problemSeed}==1){$r=7;$a=2;$b=5};
               Context("Form")-&gt;variables-&gt;add(r=&gt;"Real",s=&gt;"Real",t=&gt;"Real",A=&gt;"Real",B=&gt;"Real",C=&gt;"Real");
               Context()-&gt;reductions-&gt;set("(-x)+y" =&gt; 1);
@@ -890,8 +890,8 @@
         <exercise label="ex-partial-fractions-evaluate-1">
           <webwork xml:id="webwork-ex-partial-fractions-evaluate-1">
             <pg-code>
-              ($r,$s) = num_sort((-9..-1,1..9)[NchooseK(18,2)]);
-              ($A,$B) = (1..9)[NchooseK(9,2)];
+              ($r,$s) = num_sort(random_subset(2,-9..-1,1..9));
+              ($A,$B) = random_subset(2,1..9);
               if($envir{problemSeed}==1){$r=-5;$s=2;$A=4;$B=3;};
               $f = Formula("(($A+$B)x-($A*$s+$B*$r))/(x^2 - ($r+$s)x + $r*$s)")-&gt;reduce;
               $F = FormulaUpToConstant("$A ln(abs(x-$r)) + $B ln(abs(x-$s))")-&gt;reduce;
@@ -912,7 +912,7 @@
           <webwork xml:id="webwork-ex-partial-fractions-evaluate-2">
             <pg-code>
               $r = non_zero_random(-9,9,1);
-              ($A,$B) = (-9..-1,1..9)[NchooseK(18,2)];
+              ($A,$B) = random_subset(2,-9..-1,1..9);
               if($envir{problemSeed}==1){$r=-1;$A=9;$B=-2;};
               $s = 0;
               $f = Formula("(($A+$B)x-($A*$s+$B*$r))/(x^2 - ($r+$s)x + $r*$s)")-&gt;reduce;
@@ -984,7 +984,7 @@
           <webwork xml:id="webwork-ex-partial-fractions-evaluate-5">
             <pg-code>
               $r = non_zero_random(-9,9,1);
-              ($A,$B) = (1..9)[NchooseK(9,2)];
+              ($A,$B) = random_subset(2,1..9);
               if($envir{problemSeed}==1){$r=-5;$A=1;$B=2;};
               $f = Formula("($A x + ($B-$A*$r))/(x-$r)^2")-&gt;reduce;
               Context("Fraction");
@@ -1006,7 +1006,7 @@
           <webwork xml:id="webwork-ex-partial-fractions-evaluate-6">
             <pg-code>
               $r = non_zero_random(-9,9,1);
-              ($A,$B) = (1..9)[NchooseK(9,2)];
+              ($A,$B) = random_subset(2,1..9);
               if($envir{problemSeed}==1){$r=-8;$A=-3;$B=4;};
               Context()-&gt;noreduce('(-x)-y');
               $f = Formula("($A x + ($B-$A*$r))/(x-$r)^2")-&gt;reduce;
@@ -1029,7 +1029,7 @@
           <webwork xml:id="webwork-ex-partial-fractions-evaluate-7">
             <pg-code>
               $r = non_zero_random(-9,9,1);
-              ($A,$B,$C) = (1..9)[NchooseK(9,3)];
+              ($A,$B,$C) = random_subset(3,1..9);
               if($envir{problemSeed}==1){$r=-1;$A=7;$B=2;$C=5};
               $f = Formula("(($A+$B)x^2 + (-2*$A*$r-$B*$r-$C)x + $A*($r)^2)/(x (x-$r)^2)")-&gt;reduce;
               Context("Fraction");
@@ -1050,9 +1050,9 @@
         <exercise label="ex-partial-fractions-evaluate-8">
           <webwork xml:id="webwork-ex-partial-fractions-evaluate-8">
             <pg-code>
-              ($r,$s) = (-9..-1,1..9)[NchooseK(18,2)];
-              ($m,$n) = (-9..-2,2..9)[NchooseK(16,2)];
-              ($A,$B,$C) = (-9..-1,1..9)[NchooseK(18,3)];
+              ($r,$s) = random_subset(2,-9..-1,1..9);
+              ($m,$n) = random_subset(2,-9..-2,2..9);
+              ($A,$B,$C) = random_subset(3,-9..-1,1..9);
               if($envir{problemSeed}==1){$r=1;$s=-3;$m=-2;$n=3;$A=5;$B=2;$C=-1};
               Context()-&gt;noreduce('(-x)-y','(-x)+y');
               $f = Formula("(($A+$B*$m+$C*$m)x^2 + ($A*$m*(-$r-$s)+$B*($n-$m*$s)+$C*($n-$r*$m))x + ($A*$m*$r*$s-$B*$n*$s-$C*$r*$n))/((x-$r)(x-$s)($n + $m x))")-&gt;reduce;
@@ -1074,8 +1074,8 @@
         <exercise label="ex-partial-fractions-evaluate-9">
           <webwork xml:id="webwork-ex-partial-fractions-evaluate-9">
             <pg-code>
-              ($m,$n,$p) = (2..9)[NchooseK(8,3)];
-              ($A,$B,$C) = (1..3)[NchooseK(3,3)];
+              ($m,$n,$p) = random_subset(3,2..9);
+              ($A,$B,$C) = random_subset(3,1..3);
               $A = $A*random(-1,1,2);
               $B = $B*random(-1,1,2);
               $C = $C*random(-1,1,2);
@@ -1106,8 +1106,8 @@
         <exercise label="ex-partial-fractions-evaluate-10">
           <webwork xml:id="webwork-ex-partial-fractions-evaluate-10">
             <pg-code>
-              ($r,$s) = (-9..-1,1..9)[NchooseK(18,2)];
-              ($A,$B) = (-3..-1,1..3)[NchooseK(6,2)];
+              ($r,$s) = random_subset(2,-9..-1,1..9);
+              ($A,$B) = random_subset(2,-3..-1,1..3);
               if($envir{problemSeed}==1){$r=1;$s=-2;$A=1;$B=-1;};
               $f = Formula("(x^2+($A+$B-$r-$s)x+($r*$s-$A*$s-$B*$r))/(x^2-($r+$s)x+$r*$s)")-&gt;reduce;
               Context("Fraction");
@@ -1128,7 +1128,7 @@
         <exercise label="ex-partial-fractions-evaluate-11">
           <webwork xml:id="webwork-ex-partial-fractions-evaluate-11">
             <pg-code>
-              ($r,$s) = (-9..-1,1..9)[NchooseK(18,2)];
+              ($r,$s) = random_subset(2,-9..-1,1..9);
               if($envir{problemSeed}==1){$r=-4;$s=5;};
               $f = Formula("x^3/(x^2-($r+$s)x+$r*$s)")-&gt;reduce;
               Context("Fraction");
@@ -1201,7 +1201,7 @@
             <pg-code>
               $h = non_zero_random(-4,4,1);
               $k = list_random(2,3,5,6);
-              ($m,$b) = (-9..-1,1..9)[NchooseK(18,2)];
+              ($m,$b) = random_subset(2,-9..-1,1..9);
               if($envir{problemSeed}==1){$h=-2;$k=6;$m=-3;$b=-5;};
               $f = Formula("(x^2+(-2*$h+$m) x+(($h)^2+$k+$b))/(x^2+(-2*$h) x+(($h)^2+$k))")-&gt;reduce;
               Context("Fraction");
@@ -1225,7 +1225,7 @@
           <webwork xml:id="webwork-ex-partial-fractions-evaluate-15">
             <pg-code>
               $a = random(2,9,1);
-              ($b,$c) = (-9..-1,1..9)[NchooseK(18,2)];
+              ($b,$c) = random_subset(2,-9..-1,1..9);
               do {$r = non_zero_random(-9,9,1);} until ($a*($r)**2 + $b*$r + $c != 0);
               $B = non_zero_random(-5,5,1);
               if($envir{problemSeed}==1){$a=3;$b=5;$c=-1;$r=-1;$B=2;};
@@ -1278,7 +1278,7 @@
               $k = list_random(4,9,16,25);
               $r = non_zero_random(-9,9,1);
               $a = random(2,9,1);
-              ($b,$c) = (-9..-1,1..9)[NchooseK(18,2)];
+              ($b,$c) = random_subset(2,-9..-1,1..9);
               if($envir{problemSeed}==1){$k=9;$r=-1;$a=2;$b=1;$c=1;};
               $sqrtk = sqrt($k);
               Context("Fraction");
@@ -1398,8 +1398,8 @@
             <pg-code>
               $a = 1;
               $b = 2;
-              ($r,$s) = num_sort((-9..-1,3..9)[NchooseK(16,2)]);
-              ($A,$B) = (1..9)[NchooseK(9,2)];
+              ($r,$s) = num_sort(random_subset(2,-9..-1,3..9));
+              ($A,$B) = random_subset(2,1..9);
               if($envir{problemSeed}==1){$r=-3;$s=-2;$A=3;$B=5;};
               Context("Fraction");
               Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
@@ -1424,8 +1424,8 @@
               $a = 0;
               $b = random(2,9,1);
               $r = random(-9,-1,1);
-              ($m,$n) = (2..5)[NchooseK(4,2)];
-              ($A,$B) = (-9..-1,1..9)[NchooseK(18,2)];
+              ($m,$n) = random_subset(2,2..5);
+              ($A,$B) = random_subset(2,-9..-1,1..9);
               if($envir{problemSeed}==1){$b=5;$r=-4;$m=3;$n=2;$A=5;$B=-1;};
               Context("Fraction");
               Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);

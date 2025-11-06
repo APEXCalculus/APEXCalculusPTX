@@ -955,7 +955,7 @@
       <exercise label="ex-related-rates-puddle">
         <webwork xml:id="webwork-ex-related-rates-puddle">
           <pg-code>
-            ($rate,$depth) = (4..10)[NchooseK(7,2)];
+            ($rate,$depth) = random_subset(2,4..10);
             $a = random(1,4,1);
             if($envir{problemSeed}==1){$rate=5; $depth=10; $a=1;};
             Context()-&gt;flags-&gt;set(reduceConstants=&gt;0);
@@ -964,7 +964,7 @@
             @r=($a,$a*10,$a*100);
             @rU = map{NumberWithUnits("$_ cm")}(@r);
             Context("Fraction");
-            @f = map{Fraction(5*$rate,2*$_*$depth)}(@r);
+            @f = map{Fraction(5*$rate,$_*$depth)}(@r);
             @num = map{($_-&gt;value)[0]}(@f);
             @den = map{($_-&gt;value)[1]}(@f);
             @sU = map{NumberWithUnits("$num[$_]/($den[$_] pi) cm/s")}(0,1,2);
@@ -1554,18 +1554,26 @@
       <!--Exercise 11: Inverted cylindrical cone-->
       <exercise label="ex-related-rates-cone">
         <webwork xml:id="webwork-ex-related-rates-cone">
+          <pg-macros>
+              <macro-file>contextUnits.pl</macro-file>
+          </pg-macros>
           <pg-code>
-            ($depth,$diameter) = (10..30)[NchooseK(21,2)];
-            $rate = random(8,12,1);
-            @a=(1,random(8,15,1),random(18,25,1));
-            if($envir{problemSeed}==1){$depth=20; $diameter=10; $rate=10; $a[1]=10; $a[2]= 19;};
-            $depthU = NumberWithUnits("$depth ft");
-            $diameterU = NumberWithUnits("$diameter ft");
-            $rateU = NumberWithUnits("$rate ft^3/s");
-            @b = map{$rate * 4 / pi * $depth**2 / $diameter**2 / $_**2}(@a);
-            @bU = map{NumberWithUnits("$_ ft/s")}(@b);
+            # make $depth and $diameter two distinct numbers
+            ($depth, $diameter) = random_subset(2, 10 .. 30);
+            # the rate water is entering the tank
+            $rate = random(8, 12);
+            # the depths that water will be at when we ask how fast the water is rising
+            # the first depth will just be 1, and the other two should be no more than $depth
+            @a = (1, num_sort(random_subset(2, 2 .. $depth-1)));
+            Context("Units")-&gt;withUnitsFor('length', 'time');
+            $depthU = Compute("$depth ft");
+            $diameterU = Compute("$diameter ft");
+            $rateU = Compute("$rate ft^3/s");
+            # push the depths through the function that produces the rates
+            @b = map{$rate * 4 / pi * $depth**2 / $diameter**2 / $_**2} (@a);
+            @bU = map{Compute("$_ ft/s")} (@b);
             $T = pi/12 * $diameter**2 * $depth / $rate;
-            $TU = NumberWithUnits("$T s");
+            $TU = Compute("$T s");
           </pg-code>
           <introduction>
             <p>

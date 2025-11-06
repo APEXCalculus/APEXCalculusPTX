@@ -1577,7 +1577,7 @@
               $x = list_random('q','r','t','x','y','z');
               $trig= list_random('sin','cos');
               $n = random(3,9,1);
-              ($a,$b) = (-9..-2,2..9)[NchooseK(16,2)];
+              ($a,$b) = random_subset(2,-9..-2,2..9);
               if($envir{problemSeed}==1){$fname='p';$x='t';$trig='sin';$n=3;$a=3;$b=1;};
               Context()-&gt;variables-&gt;are($x=&gt;'Real');
               $f=Formula("$trig^$n($x^2+$a $x + $b)")-&gt;reduce;
@@ -1712,7 +1712,7 @@
             <pg-code>
               $fname = list_random('f','g','h','j','k','p');
               $x = list_random('q','r','t','x','y','z');
-              ($a,$b) = (2..20)[NchooseK(19,2)];
+              ($a,$b) = random_subset(2,2..20);
               if($envir{problemSeed}==1){$fname='g';$x='t';$b=15;$a=2;};
               Context()-&gt;variables-&gt;are($x=&gt;'Real');
               Context()-&gt;flags-&gt;set(reduceConstants=&gt;0);
@@ -1735,7 +1735,7 @@
             <pg-code>
               $fname = list_random('f','g','h','j','k','p','m');
               $x = list_random('q','r','t','x','y','z','w');
-              do {($a,$b) = (2..9)[NchooseK(8,2)];} until (gcd($a,$b) == 1);
+              do {($a,$b) = random_subset(2,2..9);} until (gcd($a,$b) == 1);
               if($envir{problemSeed}==1){$fname='m';$x='w';$a=3;$b=2;};
               Context()-&gt;variables-&gt;are($x=&gt;'Real');
               Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
@@ -1758,7 +1758,7 @@
             <pg-code>
               $fname = list_random('f','g','h','j','k','p','m');
               $x = list_random('q','r','t','x','y','z','w');
-              do {($a,$b) = (2..9)[NchooseK(8,2)];} until (gcd($a,$b) == 1);
+              do {($a,$b) = random_subset(2,2..9);} until (gcd($a,$b) == 1);
               if($envir{problemSeed}==1){$fname='h';$x='t';$a=2;$b=3;};
               Context()-&gt;variables-&gt;are($x=&gt;'Real');
               Context()-&gt;flags-&gt;set(reduceConstantFunctions=&gt;0);
@@ -1781,7 +1781,7 @@
             <pg-code>
               $fname = list_random('f','g','h','j','k','p','m');
               $x = list_random('q','r','t','x','y','z','w');
-              do {($a,$b) = (2..9)[NchooseK(8,2)];} until (gcd($a,$b) == 1);
+              do {($a,$b) = random_subset(2,2..9);} until (gcd($a,$b) == 1);
               $c = non_zero_random(-9,9,1);
               if($envir{problemSeed}==1){$fname='m';$x='w';$a=3;$b=2;$c=1;};
               Context()-&gt;variables-&gt;are($x=&gt;'Real');
@@ -1805,7 +1805,7 @@
             <pg-code>
               $fname = list_random('f','g','h','j','k','p','m');
               $x = list_random('q','r','t','x','y','z','w');
-              do {($a,$b) = (2..9)[NchooseK(8,2)];} until (gcd($a,$b) == 1);
+              do {($a,$b) = random_subset(2,2..9);} until (gcd($a,$b) == 1);
               $pm = list_random('+','-');
               if($envir{problemSeed}==1){$fname='f';$x='x';$a=3;$b=2;$pm='+';};
               Context()-&gt;variables-&gt;are($x=&gt;'Real');
@@ -1853,8 +1853,8 @@
             <pg-code>
               $fname = list_random('f','g','h','j','k','p','m');
               $x = list_random('q','r','t','x','y','z','w');
-              ($m,$n,$p) = (2..6)[NchooseK(5,3)];
-              ($a,$b,$c) = (1..9)[NchooseK(9,3)];
+              ($m,$n,$p) = random_subset(3,2..6);
+              ($a,$b,$c) = random_subset(3,1..9);
               if($envir{problemSeed}==1){$fname='f';$x='x';$m=5;$n=4;$p=3;$a=1;$b=3;$c=2;};
               Context()-&gt;variables-&gt;are($x=&gt;'Real');
               $f=Formula("($x^2+$a $x)^$m($b $x^$n+$c $x)^$p")-&gt;reduce;
@@ -1876,9 +1876,9 @@
             <pg-code>
               $fname = list_random('f','g','h','j','k','p','m');
               $x = list_random('q','r','t','x','y','z','w');
-              ($triga,$trigb) = ('sin','cos')[NchooseK(2,2)];
-              ($m,$n) = (0,2)[NchooseK(2,2)];
-              ($a,$b,$c,$d) = (1..9)[NchooseK(9,4)];
+              ($triga,$trigb) = random_subset(2,'sin','cos');
+              ($m,$n) = random_subset(2,0,2);
+              ($a,$b,$c,$d) = random_subset(4,1..9);
               $b=$b*random(-1,1,2);
               $d=$d*random(-1,1,2);
               if($envir{problemSeed}==1){$fname='g';$x='t';$m=2;$n=0;$a=1;$b=3;$c=5;$d=-7;};
@@ -1902,8 +1902,8 @@
             <pg-code>
               $fname = list_random('f','g','h','j','k','p','m');
               $x = list_random('q','r','t','x','y','z','w');
-              ($triga,$trigb) = ('sin','cos')[NchooseK(2,2)];
-              ($a,$b,$c,$d) = (1..9)[NchooseK(9,4)];
+              ($triga,$trigb) = random_subset(2,'sin','cos');
+              ($a,$b,$c,$d) = random_subset(4,1..9);
               $b=$b*random(-1,1,2);
               $d=$d*random(-1,1,2);
               if($envir{problemSeed}==1){$fname='f';$x='x';$a=3;$b=4;$c=5;$d=-2;};
@@ -1952,7 +1952,7 @@
               $fname = list_random('f','g','h','j','k','p','m');
               $x = list_random('q','r','t','x','y','z','w');
               $trig = list_random('sin','cos');
-              ($a,$b,$c,$d) = (1..9)[NchooseK(9,4)];
+              ($a,$b,$c,$d) = random_subset(4,1..9);
               $b=$b*random(-1,1,2);
               $d=$d*random(-1,1,2);
               $n = random(2,4,1);
@@ -1978,7 +1978,7 @@
               $fname = list_random('f','g','h','j','k','p','m');
               $x = list_random('q','r','t','x','y','z','w');
               $trig = list_random('sin','cos','tan','cot');
-              ($a,$b,$c) = (1..9)[NchooseK(9,3)];
+              ($a,$b,$c) = random_subset(3,1..9);
               $n = random(2,4,1);
               if($envir{problemSeed}==1){$fname='f';$x='x';$a=4;$b=1;$c=5;$n=2;};
               Context()-&gt;variables-&gt;are($x=&gt;'Real');
