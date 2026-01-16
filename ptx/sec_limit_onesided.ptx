@@ -1215,17 +1215,16 @@
             <pg-code>
               Context()-&gt;strings-&gt;add('does not exist'=&gt;{alias=&gt;'DNE'});
               @x=num_sort((0,random_subset(2,1..5)));
-              # y values used by function
               @y=random_subset(3,1..5);
-              # limit values (p from left and right, z is point)
-              ($p,$z)=random_subset(2,1..$y[1]-1,y[1]+1..5);
+              $z=list_random(1..$y[1]-1,$y[1]+1..5);
               $b=list_random($x[0],$x[2]);
+              if($envir{problemSeed}==1){@x=(0,1,2);@y=(1,2,0);$z=1;$b=0;};
               $a=$x[1];
-              $f=Formula("($p-$y[0])/($x[1]-$x[0])*(x-$x[0])+$y[0]");
-              $g=Formula("($p-$y[2])/($x[1]-$x[2])**2*(x-$x[2])**2+$y[2]");
+              $f=Formula("($y[1]-$y[0])/($x[1]-$x[0])*(x-$x[0])+$y[0]");
+              $g=Formula("($y[1]-$y[2])/($x[1]-$x[2])**2*(x-$x[2])^2+$y[2]");
               $xmin=min(@x)-1;$xmax=max(0,@x)+1;
               $ymin=min(0,@y,$z)-1;$ymax=max(@y,$z)+1;
-              @L=($p,$p,$p,$z);
+              @L=($y[1],$y[1],$y[1],$z);
               ($L[4],$L[5])=($b==0)?(Compute("DNE"),$y[0]):($y[2],Compute("DNE"));
             </pg-code>
             <introduction>
