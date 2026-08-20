@@ -59,15 +59,15 @@
 </xsl:template>
 
 <xsl:template match="insight" mode="tcb-style">
-    <xsl:text>before upper app={\setparstyle}, fonttitle=\normalfont\bfseries, before skip = \baselineskip, colbacktitle=red!60!black!20, colframe=red!30!black!50, colback=white!95!red, coltitle=black, titlerule=-0.3pt,</xsl:text>
+    <xsl:text>fonttitle=\normalfont\bfseries, before skip = \baselineskip, colbacktitle=red!60!black!20, colframe=red!30!black!50, colback=white!95!red, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
 <xsl:template match="&DEFINITION-LIKE;" mode="tcb-style">
-    <xsl:text>before upper app={\setparstyle}, fonttitle=\normalfont\bfseries, before skip = \baselineskip, colbacktitle=yellow!90!black!30, colframe=yellow!95!black!60, colback=white!95!yellow, coltitle=black, titlerule=-0.3pt,</xsl:text>
+    <xsl:text>fonttitle=\normalfont\bfseries, before skip = \baselineskip, colbacktitle=yellow!90!black!30, colframe=yellow!95!black!60, colback=white!95!yellow, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
 <xsl:template match="&THEOREM-LIKE;" mode="tcb-style">
-    <xsl:text>before upper app={\setparstyle}, fonttitle=\normalfont\bfseries, before skip = \baselineskip, colbacktitle=green!60!black!20, colframe=green!30!black!50, colback=white!95!green, coltitle=black, titlerule=-0.3pt,</xsl:text>
+    <xsl:text>fonttitle=\normalfont\bfseries, before skip = \baselineskip, colbacktitle=green!60!black!20, colframe=green!30!black!50, colback=white!95!green, coltitle=black, titlerule=-0.3pt,</xsl:text>
 </xsl:template>
 
 <xsl:template match="assemblage" mode="tcb-style">
@@ -84,7 +84,7 @@
 </xsl:template>
 
 <xsl:template match="example" mode="tcb-style">
-    <xsl:text>blockspacingstyle, after title={\space}, before upper ={\setparstyle}, &#xa; </xsl:text>
+    <xsl:text>blockspacingstyle, after title={\space}, &#xa; </xsl:text>
     <xsl:text>fonttitle=\normalfont\bfseries, colback=white, colframe=black, colbacktitle=white, coltitle=black,
       enhanced,
       breakable,
@@ -275,7 +275,7 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
     <xsl:text>}[3]{title={\notblank{#2}{#2}{}}, </xsl:text>
     <xsl:text>phantomlabel={#3}, parbox=false, before upper app={\setlength{\parindent}{\normalparindent}}, </xsl:text>
     <xsl:value-of select="$environment-name"/>
-    <xsl:text>style}&#xa;</xsl:text>
+    <xsl:text>style, before upper app={\ptxsetparstyle}}&#xa;</xsl:text>
 </xsl:template>
 
 <!-- move vshift figures to the margin -->
@@ -416,17 +416,20 @@ https://tex.stackexchange.com/questions/605955/can-i-avoid-indentation-of-margin
         <xsl:text>\parmarginbox{%&#xa;</xsl:text>
       </xsl:otherwise>
     </xsl:choose>
+    <xsl:apply-templates select="." mode="newpage"/>
+    <xsl:call-template name="begin-saved-footnotes"/>
     <xsl:text>\begin{</xsl:text>
     <xsl:value-of select="local-name(.)" />
     <xsl:text>}</xsl:text>
     <xsl:apply-templates select="." mode="block-options"/>
     <xsl:text>%&#xa;</xsl:text>
+    <xsl:apply-templates select="idx"/>
     <!-- Coordinate with schema, since we enforce it here -->
     <xsl:apply-templates select="p|blockquote|pre|image|video|program|console|tabular"/>
     <xsl:text>\end{</xsl:text>
     <xsl:value-of select="local-name(.)" />
     <xsl:text>}&#xa;</xsl:text>
-    <xsl:apply-templates select="." mode="pop-footnote-text"/>
+    <xsl:call-template name="end-saved-footnotes"/>
     <xsl:text>}{</xsl:text><xsl:value-of select="@vshift"/><xsl:text>cm}%&#xa;</xsl:text>
     <xsl:text>&#xa;</xsl:text>
 </xsl:template>
