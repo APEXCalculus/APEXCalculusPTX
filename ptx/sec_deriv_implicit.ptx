@@ -1717,14 +1717,14 @@
             <pg-code>
               Context("Fraction");
               Context()-&gt;variables-&gt;add(y=&gt;'Real');
-              ($m,$n) = random_subset(2,1..2);
+              $left1 = Formula("(x^2 + y)/(x + y^2)")-&gt;reduce;
+              $left2 = Formula("(x + y^2)/(x^2 + y)")-&gt;reduce;
+              $left = list_random($left1,$left2);
               $c = random(10,20,1);
-              if($envir{problemSeed}==1){$m=2;$n=1;$c=17};
-              #$m=2;$n=1;$c=17;
-              $left = Formula("(x^$m + y^$n)/(x^$n + y^$m)")-&gt;reduce;
+              if($envir{problemSeed}==1){$left=$left1;$c=17};
               $right = Formula("$c");
               $dydx = Formula("(($n-$m) x^2 + $n x^($n-1) y^$n - $m x^($m-1) y^$m)/($n x^$n y^($n-1) + ($n-$m) y^2 - $m x^$m y^($m-1))")-&gt;reduce;
-              @y=(random(-3.9,1.9,0.2),random(-3.9,1.9,0.2),random(-3.9,1.9,0.2),random(-3.9,1.9,0.2),random(-3.9,1.9,0.2));
+              @y=(random(-3.9,-1.9,0.2),random(-3.9,-1.9,0.2),random(-3.9,-1.9,0.2),random(-3.9,-1.9,0.2),random(-3.9,-1.9,0.2));
               if ($m == 2) {
                 @x=map{($c+(-1)**(random(-1,1,2))*sqrt($c**2 - 4*($_)*(1 - $c*($_))))/2}(@y);
               } else {
