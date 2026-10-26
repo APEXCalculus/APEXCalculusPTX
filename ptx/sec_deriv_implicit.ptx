@@ -1717,11 +1717,10 @@
             <pg-code>
               Context("Fraction");
               Context()-&gt;variables-&gt;add(y=&gt;'Real');
-              $left1 = Formula("(x^2 + y)/(x + y^2)")-&gt;reduce;
-              $left2 = Formula("(x + y^2)/(x^2 + y)")-&gt;reduce;
-              $left = list_random($left1,$left2);
+              ($m,$n) = random_subset(2,1..2);
               $c = random(10,20,1);
               if($envir{problemSeed}==1){$left=$left1;$c=17};
+              $left = Formula("(x^$m + y^$n)/(x^$n + y^$m)")-&gt;reduce;
               $right = Formula("$c");
               $dydx = Formula("(($n-$m) x^2 + $n x^($n-1) y^$n - $m x^($m-1) y^$m)/($n x^$n y^($n-1) + ($n-$m) y^2 - $m x^$m y^($m-1))")-&gt;reduce;
               @y=(random(-3.9,-1.9,0.2),random(-3.9,-1.9,0.2),random(-3.9,-1.9,0.2),random(-3.9,-1.9,0.2),random(-3.9,-1.9,0.2));
