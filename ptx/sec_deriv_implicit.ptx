@@ -1719,12 +1719,11 @@
               Context()-&gt;variables-&gt;add(y=&gt;'Real');
               ($m,$n) = random_subset(2,1..2);
               $c = random(10,20,1);
-              if($envir{problemSeed}==1){$m=2;$n=1;$c=17};
-              #$m=2;$n=1;$c=17;
+              if($envir{problemSeed}==1){$left=$left1;$c=17};
               $left = Formula("(x^$m + y^$n)/(x^$n + y^$m)")-&gt;reduce;
               $right = Formula("$c");
               $dydx = Formula("(($n-$m) x^2 + $n x^($n-1) y^$n - $m x^($m-1) y^$m)/($n x^$n y^($n-1) + ($n-$m) y^2 - $m x^$m y^($m-1))")-&gt;reduce;
-              @y=(random(-3.9,1.9,0.2),random(-3.9,1.9,0.2),random(-3.9,1.9,0.2),random(-3.9,1.9,0.2),random(-3.9,1.9,0.2));
+              @y=(random(-3.9,-1.9,0.2),random(-3.9,-1.9,0.2),random(-3.9,-1.9,0.2),random(-3.9,-1.9,0.2),random(-3.9,-1.9,0.2));
               if ($m == 2) {
                 @x=map{($c+(-1)**(random(-1,1,2))*sqrt($c**2 - 4*($_)*(1 - $c*($_))))/2}(@y);
               } else {

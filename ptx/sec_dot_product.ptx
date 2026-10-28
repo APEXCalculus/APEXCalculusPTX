@@ -47,37 +47,6 @@
     </statement>
   </definition>
 
-  <exercise label="APEX-PROTEUS-sec-11_3-dot-product-1-v1" component="proteus">
-    <title>PROTEUS EXERCISE</title>
-    <statement>
-      <p>
-        Match each dot product on the left with its value on the right.
-      </p>
-    </statement>
-    <cardsort>
-      <match>
-        <premise><m>\langle 2,-3\rangle\cdot \langle 4,1\rangle</m></premise>
-        <response><m>5</m></response>
-      </match>
-      <match>
-        <response><m>\langle 8,-3\rangle</m></response>
-      </match>
-      <match>
-        <premise><m>\langle 2, 3, -4\rangle\cdot \langle 5,-2,1\rangle</m></premise>
-        <response><m>0</m></response>
-      </match>
-      <match>
-        <response><m>\langle 10,-6,-4\rangle</m></response>
-      </match>
-      
-      <feedback>
-        <p>
-          Remember that the dot product is a <em>scalar</em>, not a vector.
-        </p>
-      </feedback>
-    </cardsort>
-  </exercise>
-
   <p>
     Note how this product of vectors returns a
     <em>scalar</em>, not another vector.
@@ -363,6 +332,81 @@
     </md>.
   </p>
 
+  
+  <exercise component="proteus" label="APEX-PROTEUS-sec-11_3-sign-sata-01">
+    <title>PROTEUS EXERCISE</title>
+    <statement>
+      <p>
+        Let <m>\vec u</m> and <m>\vec v</m> be nonzero vectors with <m>\vec u\cdot\vec v \lt 0</m>. 
+        Select all statements that must be true.
+      </p>
+    </statement>
+    <choices randomize="yes">
+      <choice correct="yes">
+        <statement><p>The angle between <m>\vec u</m> and <m>\vec v</m> is greater than <m>\pi/2</m>.</p></statement>
+        <feedback><p>Correct. In <m>\vec u\cdot\vec v=\norm{\vec u}\norm{\vec v}\cos(\theta)</m>, the magnitudes are positive, so the cosine must be negative.</p></feedback>
+      </choice>
+      <choice correct="yes">
+        <statement><p>The angle between <m>\vec u</m> and <m>-\vec v</m> is less than <m>\pi/2</m>.</p></statement>
+        <feedback><p>Correct. Reversing one vector makes the dot product positive. This includes angle zero if the original vectors point in opposite directions.</p></feedback>
+      </choice>
+      <choice correct="yes">
+        <statement><p>Multiplying either vector by a positive scalar preserves the negative sign of the dot product.</p></statement>
+        <feedback><p>Correct. Positive scaling changes length but preserves direction, and it multiplies the dot product by a positive number.</p></feedback>
+      </choice>
+      <choice correct="no">
+        <statement><p>The vectors must point in exactly opposite directions.</p></statement>
+        <feedback><p>Exactly opposite directions give a negative dot product, but so does any angle strictly between <m>\pi/2</m> and <m>\pi</m>.</p></feedback>
+      </choice>
+      <choice correct="no">
+        <statement><p>At least one of the two vectors has negative magnitude.</p></statement>
+        <feedback><p>Magnitudes are never negative. The negative sign comes from the cosine of the angle.</p></feedback>
+      </choice>
+    </choices>
+    <hint>
+      <p>
+        Use <m>\vec u\cdot\vec v=\norm{\vec u}\norm{\vec v}\cos(\theta)</m> with <m>0\le\theta\le\pi</m>. 
+        Distinguish the sign of the dot product from its numerical size.
+      </p>
+    </hint>
+  </exercise>
+
+  <exercise component="proteus" label="APEX-PROTEUS-sec-11_3-equal-lengths-sata-01">
+    <title>PROTEUS EXERCISE</title>
+    <statement>
+      <p>Two nonzero vectors satisfy <m>\norm{\vec u+\vec v}=\norm{\vec u-\vec v}</m>. Select all statements that must be true.</p>
+    </statement>
+    <choices randomize="yes">
+      <choice correct="yes">
+        <statement><p><m>\vec u\cdot\vec v=0</m>.</p></statement>
+        <feedback>
+          <p>
+            Correct. Squaring both lengths and expanding gives 
+            <m>\norm{\vec u}^2+2\vec u\cdot\vec v+\norm{\vec v}^2=\norm{\vec u}^2-2\vec u\cdot\vec v+\norm{\vec v}^2</m>, 
+            so the dot product is zero.
+          </p>
+        </feedback>
+      </choice>
+      <choice correct="yes">
+        <statement><p>The vectors <m>\vec u</m> and <m>\vec v</m> are perpendicular.</p></statement>
+        <feedback><p>Correct. For nonzero vectors, a zero dot product means that the angle is <m>\pi/2</m>.</p></feedback>
+      </choice>
+      <choice correct="yes">
+        <statement><p><m>\norm{\vec u+\vec v}^2=\norm{\vec u}^2+\norm{\vec v}^2</m>.</p></statement>
+        <feedback><p>Correct. The mixed term <m>2\vec u\cdot\vec v</m> vanishes. This is the Pythagorean relationship.</p></feedback>
+      </choice>
+      <choice correct="no">
+        <statement><p><m>\norm{\vec u}=\norm{\vec v}</m>.</p></statement>
+        <feedback><p>The condition forces perpendicular directions, not equal lengths. For example, <m>\vec u=\langle 2,0\rangle</m> and <m>\vec v=\langle 0,1\rangle</m> satisfy the condition.</p></feedback>
+      </choice>
+      <choice correct="no">
+        <statement><p><m>\vec u+\vec v=\vec u-\vec v</m>.</p></statement>
+        <feedback><p>Equal lengths do not imply equal vectors. This vector equation would force <m>2\vec v=\vec 0</m>, contradicting the assumption that <m>\vec v</m> is nonzero.</p></feedback>
+      </choice>
+    </choices>
+    <hint><p>Square the given equality and write each squared magnitude as a dot product of a vector with itself.</p></hint>
+  </exercise>
+
   <exercise label="APEX-PROTEUS-sec-11_3-dot-product-2-v1" component="proteus">
     <title>PROTEUS EXERCISE</title>
     <statement>
@@ -381,15 +425,15 @@
         <response>Nearly the same direction</response>
       </match>
       <match>
-        <premise><m>\dot vw = 1</m></premise>
+        <premise><m>\dotp vw = 1</m></premise>
         <response>Nearly perpendicular</response>
       </match>
       <match>
-        <premise><m>\dot vw = -13</m></premise>
+        <premise><m>\dotp vw = -13</m></premise>
         <response>Nearly opposite directions</response>
       </match>
       <match>
-        <premise><m>\dot vw = 18</m></premise>
+        <premise><m>\dotp vw = 18</m></premise>
         <response>Impossible</response>
       </match>
       
@@ -584,35 +628,35 @@
     We do a similar example next in the context of vectors in space.
   </p>
 
-    <example xml:id="ex_dotp3">
-      <title>Using the dot product to find angles</title>
-      <statement>
-        <p>
-          Let <m>\vec u = \la 1,1,1\ra</m>,
-          <m>\vec v = \la -1,3,-2\ra</m> and <m>\vec w = \la -5,1,4\ra</m>,
-          as illustrated in <xref ref="fig_dotp3"/>.
-          Find the angle between each pair of vectors.
-        </p>
-        
-        <figure xml:id="fig_dotp3" vshift="-1">
-          <caption>Vectors used in <xref ref="ex_dotp3"/></caption>
-          <!-- START figures/figdotp3_3D.asy -->
-          <image width="47%">
-            <shortdescription>
-              Graph showing three vectors drawn in space.
-            </shortdescription>
-            <description>
-              <p>
-                The <m>x</m> axis is drawn from <m>-5</m> to <m>5</m>,
-                the <m>y</m> axis is drawn from <m>0</m> to <m>4</m> and
-                the <m>z</m> axis is drawn from <m>-2</m> to <m>4</m>.
-                Three vectors <m>\vec u</m>, <m>\vec v</m> and <m>\vec w</m> are
-                shown all starting at the origin, along with separate hollow dashed
-                cuboids that represent their three axes values and its three sides.
-                The <m>\vec u</m> has value, <m>\vec v</m> has value and <m>\vec w</m> has value.
-              </p>
-            </description>
-            <asymptote label="img_dotp3">
+  <example xml:id="ex_dotp3">
+    <title>Using the dot product to find angles</title>
+    <statement>
+      <p>
+        Let <m>\vec u = \la 1,1,1\ra</m>,
+        <m>\vec v = \la -1,3,-2\ra</m> and <m>\vec w = \la -5,1,4\ra</m>,
+        as illustrated in <xref ref="fig_dotp3"/>.
+        Find the angle between each pair of vectors.
+      </p>
+      
+      <figure xml:id="fig_dotp3" vshift="-1">
+        <caption>Vectors used in <xref ref="ex_dotp3"/></caption>
+        <!-- START figures/figdotp3_3D.asy -->
+        <image width="47%">
+          <shortdescription>
+            Graph showing three vectors drawn in space.
+          </shortdescription>
+          <description>
+            <p>
+              The <m>x</m> axis is drawn from <m>-5</m> to <m>5</m>,
+              the <m>y</m> axis is drawn from <m>0</m> to <m>4</m> and
+              the <m>z</m> axis is drawn from <m>-2</m> to <m>4</m>.
+              Three vectors <m>\vec u</m>, <m>\vec v</m> and <m>\vec w</m> are
+              shown all starting at the origin, along with separate hollow dashed
+              cuboids that represent their three axes values and its three sides.
+              The <m>\vec u</m> has value, <m>\vec v</m> has value and <m>\vec w</m> has value.
+            </p>
+          </description>
+          <asymptote label="img_dotp3">
 
 
 
@@ -1280,6 +1324,48 @@
     </solution>
   </example>
 
+  <exercise component="proteus" label="APEX-PROTEUS-sec-11_3-projection-open-01">
+    <title>PROTEUS EXERCISE</title>
+    <statement>
+      <p>
+        Let <m>\vec u</m> and <m>\vec v</m> be nonzero vectors. 
+        A student claims, <q>If we replace <m>\vec v</m> by <m>-2\vec v</m>, 
+        the orthogonal projection of <m>\vec u</m> onto <m>\vec v</m> must reverse direction and double in length.</q>
+      </p>
+      <p>
+        Is the claim correct? Explain geometrically by considering the line spanned by the target vector, 
+        then verify your reasoning using the projection formula. 
+        Also explain what happens to the signed scalar component <m>\vec u\cdot(\vec v/\norm{\vec v})</m> 
+        when the target vector is replaced by <m>-2\vec v</m>.
+      </p>
+    </statement>
+    <response/>
+    <hint><p>Compare the lines spanned by <m>\vec v</m> and <m>-2\vec v</m>. In the projection formula, remember to change both the coefficient and the vector it multiplies.</p></hint>
+    <solution>
+      <p>
+        The claim is false. The vectors <m>\vec v</m> and <m>-2\vec v</m> span the same line through the origin. 
+        Dropping a perpendicular from the terminal point of <m>\vec u</m> to that line gives the same point, 
+        so the projection vector is unchanged.
+      </p>
+      <p>
+        Algebraically,
+        <md>
+          \operatorname{proj}_{-2\vec v}\vec u
+          =\frac{\vec u\cdot(-2\vec v)}{\norm{-2\vec v}^2}(-2\vec v)
+          =\frac{-2(\vec u\cdot\vec v)}{4\norm{\vec v}^2}(-2\vec v)
+          =\frac{\vec u\cdot\vec v}{\norm{\vec v}^2}\vec v
+          =\operatorname{proj}_{\vec v}\vec u
+        </md>.
+        The signed scalar component changes sign because the target unit vector reverses:
+        <md>
+          \frac{-2\vec v}{\|-2\vec v\|}=-\frac{\vec v}{\|\vec v\|}
+        </md>.
+         Thus the scalar component is negated (and remains zero if it was zero).
+         The projection vector stays the same because both the signed scalar component and the unit direction reverse.
+      </p>
+    </solution>
+  </exercise>
+
   <p>
     We can use the properties of the dot product found in <xref ref="thm_dot_product_properties"/>
     to rearrange the formula found in <xref ref="def_orthogonal_projection"/>:
@@ -1399,28 +1485,6 @@
       </md>.
     </p>
   </insight>
-
-  <exercise label="APEX-PROTEUS-sec-11_3-dot-product-3-v1" component="proteus">
-    <title>PROTEUS EXERCISE</title>
-    <statement>
-      <p>
-        Given a vector <m>\vec u</m> and a nonzero vector <m>\vec v</m>,
-        write <m>\vec u = \vec{p}+\vec{q}</m>, where <m>\vec p</m> is parallel to <m>\vec v</m>.
-      </p>
-
-      <p>
-        An important property of the projection is that <m>\vec{p}=\proj uv</m>
-        is the vector for which <m>\norm{\vec u - \vec p}</m> is as small as possible,
-        among all vectors <m>\vec p</m> parallel to <m>\vec v</m>.
-      </p>
-
-      <p>
-        Interpret <m>\norm{\vec u - \vec p}</m> as a distance,
-        and explain why it makes sense that this distance is minimized by <m>\proj uv</m>.
-      </p>
-    </statement>
-    <response/>
-  </exercise>
 
   <p>
     We illustrate the use of this equality in the following example.
@@ -1794,6 +1858,45 @@
         </p>
       </solution>
     </example>
+
+    <exercise component="proteus" label="APEX-PROTEUS-sec-11_3-work-cardsort-01">
+      <title>PROTEUS EXERCISE</title>
+      <statement>
+        <p>
+          An object moves along a straight horizontal track with nonzero displacement to the right. 
+          In each case below, a constant nonzero force acts throughout the motion. 
+          All forces have the same magnitude, and the displacement is the same in every case. 
+          Match each force direction with the work done by that force. Some responses do not match any case.
+        </p>
+      </statement>
+      <feedback>
+        <p>
+          Work is <m>W=\vec F\cdot\vec d=\norm{\vec F}\norm{\vec d}\cos(\theta)</m>. 
+          Only the force component along the displacement contributes. 
+          Compare signed work values, not their absolute values.
+        </p>
+      </feedback>
+      <cardsort>
+        <match>
+          <premise order="1">The force points directly to the right.</premise>
+          <response>The largest possible positive work for the given force magnitude and displacement</response>
+        </match>
+        <match>
+          <premise order="2">The force points upward and to the right, making an angle strictly between <m>0</m> and <m>\pi/2</m> with the displacement.</premise>
+          <response>Positive work, smaller than when the force points directly to the right</response>
+        </match>
+        <match>
+          <premise order="3">The force points directly upward.</premise>
+          <response>Zero work, despite a nonzero force and a nonzero displacement</response>
+        </match>
+        <match>
+          <premise order="4">The force points directly to the left.</premise>
+          <response>The most negative possible work for the given force magnitude and displacement</response>
+        </match>
+        <match><response>Work is undefined because the force and displacement are not parallel.</response></match>
+        <match><response>The largest possible positive work because the force is perpendicular to the displacement</response></match>
+      </cardsort>
+    </exercise>
 
     <p>
       The dot product is a powerful way of evaluating computations that depend on angles without actually using angles.
