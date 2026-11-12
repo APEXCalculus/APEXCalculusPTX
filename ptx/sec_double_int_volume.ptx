@@ -324,6 +324,67 @@
     to get a better approximation we can use more rectangles to approximate the region <m>R</m>.
   </p>
 
+  <exercise component="proteus" label="APEX-PROTEUS-sec14-2-volume-sum-mc-01">
+    <title>PROTEUS EXERCISE</title>
+    <statement>
+      <p>
+        Let <m>f</m> be continuous and nonnegative on a rectangular region <m>R</m> in the <m>xy</m>-plane. 
+        To approximate the volume below <m>z=f(x,y)</m> and above <m>R</m>, divide <m>R</m> into small rectangles.
+        One rectangle has area <m>\Delta A = \Delta x \Delta y</m> and contains a sample point <m>(x_i,y_j)</m>.
+      </p>
+      <p>
+        Which statement best explains the contribution <m>f(x_i,y_j)\Delta A</m> to the volume approximation?
+      </p>
+    </statement>
+    <choices randomize="yes">
+      <choice correct="yes">
+        <statement>
+          <p>
+            It is the volume of a small box whose base has area <m>\Delta A</m> and whose height is <m>f(x_i,y_j)</m>.
+          </p>
+        </statement>
+        <feedback>
+          <p>
+            Correct. Height times base area gives a box volume. 
+            Adding these volumes and taking a limit as the rectangles become arbitrarily small gives <m>\iint_R f(x,y)\,dA</m>.
+          </p>
+        </feedback>
+      </choice>
+      <choice correct="no">
+        <statement><p>It is the area of the piece of the curved surface above the rectangle.</p></statement>
+        <feedback>
+          <p>
+            The product is height times base area, so it measures volume. 
+            The area of a curved surface requires accounting for the surface's tilt.
+          </p>
+        </feedback>
+      </choice>
+      <choice correct="no">
+        <statement><p>It is the average height of the surface over the entire region <m>R</m>.</p></statement>
+        <feedback>
+          <p>
+            The value <m>f(x_i,y_j)</m> is a height at one sample point. 
+            Multiplying it by a small base area gives a volume contribution, not an average height over <m>R</m>.
+          </p>
+        </feedback>
+      </choice>
+      <choice correct="no">
+        <statement>
+          <p>
+            It is the volume of a box whose height is <m>\Delta A</m> and whose base has side lengths <m>x_i</m> and <m>y_j</m>.
+          </p>
+        </statement>
+        <feedback>
+          <p>
+            The sample coordinates locate a point in the rectangle; they are not the side lengths of its base. 
+            The base area is <m>\Delta A</m>, and the height is the function value.
+          </p>
+        </feedback>
+      </choice>
+    </choices>
+    <hint><p>Recall the formula for the volume of a rectangular box. Which factor describes the base, and which describes the height?</p></hint>
+  </exercise>
+
   <p>
     In general, each rectangle could have a different width <m>\dx_j</m> and height <m>\dy_k</m>,
     giving the <m>i</m>th rectangle an area <m>\Delta A_i = \dx_j\dy_k</m> and the
@@ -406,6 +467,41 @@
     <caption>Defining the double integral</caption>
     <video youtube="l7hGaXcsq9g" label="vid-multint-double-def"/>
   </figure>
+
+  <exercise component="proteus" label="APEX-PROTEUS-sec14-2-between-surfaces-sata-01">
+    <title>PROTEUS EXERCISE</title>
+    <statement>
+      <p>
+        Let <m>R</m> be a bounded region of positive area, and let <m>f</m> and <m>g</m> be continuous on <m>R</m>, 
+        with <m>f(x,y)\ge g(x,y)</m> everywhere on <m>R</m>. 
+        A solid lies above <m>z=g(x,y)</m> and below <m>z=f(x,y)</m>, with base region <m>R</m>.
+      </p>
+      <p>Select all statements that are true, without evaluating any integrals.</p>
+    </statement>
+    <choices randomize="yes">
+      <choice correct="yes">
+        <statement><p>The volume is <m>\displaystyle V=\iint_R\bigl(f(x,y)-g(x,y)\bigr)\,dA</m>.</p></statement>
+        <feedback><p>Correct. At each base point, the vertical height of the solid is the upper surface minus the lower surface.</p></feedback>
+      </choice>
+      <choice correct="yes">
+        <statement><p>Adding the same constant to both surface heights leaves the volume unchanged.</p></statement>
+        <feedback><p>Correct. Translating both surfaces vertically preserves their separation: <m>(f+c)-(g+c)=f-g</m>.</p></feedback>
+      </choice>
+      <choice correct="yes">
+        <statement><p>Raising only the upper surface by <m>3</m> units increases the volume by <m>3\operatorname{Area}(R)</m>.</p></statement>
+        <feedback><p>Correct. Every vertical column becomes three units taller. The added volume is <m>\iint_R3\,dA=3\operatorname{Area}(R)</m>.</p></feedback>
+      </choice>
+      <choice correct="no">
+        <statement><p>If both surfaces are below the <m>xy</m>-plane everywhere on <m>R</m>, the solid has negative volume.</p></statement>
+        <feedback><p>Geometric volume is nonnegative. The relevant height is <m>f-g\ge0</m>, regardless of whether the individual surface heights are positive or negative.</p></feedback>
+      </choice>
+      <choice correct="no">
+        <statement><p>The volume always equals <m>\displaystyle\iint_R f(x,y)\,dA</m>, because <m>f</m> describes the upper surface.</p></statement>
+        <feedback><p>The integrand must measure the separation between the surfaces. The expression <m>\iint_R f\,dA</m> uses height relative to <m>z=0</m> and does not generally account for the lower surface <m>z=g(x,y)</m>.</p></feedback>
+      </choice>
+    </choices>
+    <hint><p>Imagine a thin vertical column above one point of <m>R</m>. Its height depends on the difference between its top and bottom.</p></hint>
+  </exercise>
 
   <p>
     <xref ref="def_double_int"/> does not state how to find the signed volume,
@@ -1302,6 +1398,26 @@
       </p>
     </solution>
   </example>
+
+  <exercise component="proteus" label="APEX-PROTEUS-sec14-2-signed-volume-open-01">
+      <title>PROTEUS EXERCISE</title>
+      <statement>
+        <p>Let <m>R=[-1,1]\times[0,2]</m>. A student uses symmetry to conclude that</p>
+        <me>\iint_R x\,dA=0.</me>
+        <p>The student then claims, <q>The volume between the plane <m>z=x</m> and the <m>xy</m>-plane above <m>R</m> must be zero.</q></p>
+        <p>Explain why the integral is zero but the student's volume claim is incorrect. Write a double integral for the total geometric volume, and explain what its integrand measures. You do not need to evaluate it.</p>
+      </statement>
+      <response/>
+      <hint><p>Compare the heights at <m>(x,y)</m> and <m>(-x,y)</m>. Do contributions below the <m>xy</m>-plane subtract from a signed integral or from geometric volume?</p></hint>
+      <solution>
+        <p>The function <m>x</m> is positive on the right half of <m>R</m> and negative on the left half. Reflection across the <m>y</m>-axis pairs equal base areas with opposite function values, so the signed contributions cancel and <m>\iint_R x\,dA=0</m>.</p>
+        <p>The two parts of the solid both have positive geometric volume. At each base point, the vertical distance between <m>z=x</m> and <m>z=0</m> is <m>|x|</m>. Thus the total geometric volume is</p>
+        <me>V=\iint_R |x|\,dA=\int_0^2\int_{-1}^1 |x|\,dx\,dy.</me>
+        <p>Equivalently, split the region where the plane crosses <m>z=0</m> and use upper height minus lower height on each part:</p>
+        <me>V=\int_0^2\int_{-1}^0(-x)\,dx\,dy+\int_0^2\int_0^1 x\,dx\,dy.</me>
+        <p>A zero signed integral indicates cancellation here, not the absence of geometric volume.</p>
+      </solution>
+    </exercise>
 
   <figure xml:id="vid-multint-double-general-example" component="video" vshift="4">
     <caption>Evaluating a double integral over a general region</caption>
